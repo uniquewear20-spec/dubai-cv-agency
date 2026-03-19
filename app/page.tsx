@@ -301,13 +301,83 @@ const T: Record<Lang, Translations> = {
   },
 };
 
-const CARDS = [
-  { id: "1", name: "Amina Al-Mansoori", cat: "Hospitality", type: "Cinematic Visual", img: "/cv1.png", accent: "#D4AF37" },
-  { id: "2", name: "Khalid Al-Suwaidi", cat: "Management",  type: "ATS Professional", img: "/cv2.png", accent: "#94A3B8" },
-  { id: "3", name: "Arjun Mehta",       cat: "Tech",        type: "Cinematic Visual", img: "/cv3.png", accent: "#3B82F6" },
-  { id: "4", name: "Maya Patel",        cat: "Creative",    type: "ATS Professional", img: "/cv4.png", accent: "#C084FC" },
-  { id: "5", name: "Priya Nair",        cat: "Healthcare",  type: "Cinematic Visual", img: "/cv5.png", accent: "#34D399" },
-];
+const CAT_ACCENT: Record<string, string> = {
+  Hospitality: "#D4AF37",
+  Management:  "#94A3B8",
+  Tech:        "#3B82F6",
+  Creative:    "#C084FC",
+  Healthcare:  "#34D399",
+  Corporate:   "#60A5FA",
+};
+
+const ALL_CARDS = [
+  { id:"H01",  name:"Amina Al-Mansoori",  cat:"Hospitality", type:"Cinematic Visual" },
+  { id:"H02",  name:"Layla Hassan",        cat:"Hospitality", type:"Cinematic Visual" },
+  { id:"H03",  name:"Sofia Moretti",       cat:"Hospitality", type:"Cinematic Visual" },
+  { id:"H04",  name:"Noura Al-Ketbi",      cat:"Hospitality", type:"Cinematic Visual" },
+  { id:"H05",  name:"Camille Dupont",      cat:"Hospitality", type:"Cinematic Visual" },
+  { id:"H06",  name:"Fatima Al-Shamsi",    cat:"Hospitality", type:"ATS Professional" },
+  { id:"H07",  name:"Elena Petrova",       cat:"Hospitality", type:"ATS Professional" },
+  { id:"H08",  name:"Salma Benali",        cat:"Hospitality", type:"ATS Professional" },
+  { id:"H09",  name:"Hana Suzuki",         cat:"Hospitality", type:"ATS Professional" },
+  { id:"H10",  name:"Noor Al-Harbi",       cat:"Hospitality", type:"ATS Professional" },
+  { id:"M01",  name:"Khalid Al-Suwaidi",   cat:"Management",  type:"Cinematic Visual" },
+  { id:"M02",  name:"Jonas Richter",       cat:"Management",  type:"Cinematic Visual" },
+  { id:"M03",  name:"Rami Haddad",         cat:"Management",  type:"Cinematic Visual" },
+  { id:"M04",  name:"Owen Clarke",         cat:"Management",  type:"Cinematic Visual" },
+  { id:"M05",  name:"Tariq Aziz",          cat:"Management",  type:"Cinematic Visual" },
+  { id:"M06",  name:"Marta Kowalska",      cat:"Management",  type:"ATS Professional" },
+  { id:"M07",  name:"Liam OConnor",        cat:"Management",  type:"ATS Professional" },
+  { id:"M08",  name:"Anya Sokolova",       cat:"Management",  type:"ATS Professional" },
+  { id:"M09",  name:"Hugo Schneider",      cat:"Management",  type:"ATS Professional" },
+  { id:"M10",  name:"Freya Andersen",      cat:"Management",  type:"ATS Professional" },
+  { id:"T01",  name:"Arjun Mehta",         cat:"Tech",        type:"Cinematic Visual" },
+  { id:"T02",  name:"Chen Wei",            cat:"Tech",        type:"Cinematic Visual" },
+  { id:"T03",  name:"Michael Nguyen",      cat:"Tech",        type:"Cinematic Visual" },
+  { id:"T04",  name:"Jae-Hyun Kim",        cat:"Tech",        type:"Cinematic Visual" },
+  { id:"T05",  name:"Nikolai Volkov",      cat:"Tech",        type:"Cinematic Visual" },
+  { id:"T06",  name:"Lin Xia",             cat:"Tech",        type:"ATS Professional" },
+  { id:"T07",  name:"Ethan Brooks",        cat:"Tech",        type:"ATS Professional" },
+  { id:"T08",  name:"Min-ji Park",         cat:"Tech",        type:"ATS Professional" },
+  { id:"T09",  name:"Sander de Vries",     cat:"Tech",        type:"ATS Professional" },
+  { id:"T10",  name:"Rafael Costa",        cat:"Tech",        type:"ATS Professional" },
+  { id:"C01",  name:"Maya Patel",          cat:"Creative",    type:"Cinematic Visual" },
+  { id:"C02",  name:"Chloe Bennett",       cat:"Creative",    type:"Cinematic Visual" },
+  { id:"C03",  name:"Valentina Cruz",      cat:"Creative",    type:"Cinematic Visual" },
+  { id:"C04",  name:"Noah Laurent",        cat:"Creative",    type:"Cinematic Visual" },
+  { id:"C05",  name:"Zara Mbeki",          cat:"Creative",    type:"Cinematic Visual" },
+  { id:"C06",  name:"Beatriz Almeida",     cat:"Creative",    type:"ATS Professional" },
+  { id:"C07",  name:"Alejandro Rivera",    cat:"Creative",    type:"ATS Professional" },
+  { id:"C08",  name:"Eva Novak",           cat:"Creative",    type:"ATS Professional" },
+  { id:"C09",  name:"Siobhan Kelly",       cat:"Creative",    type:"ATS Professional" },
+  { id:"C10",  name:"Linh Tran",           cat:"Creative",    type:"ATS Professional" },
+  { id:"HC01", name:"Priya Nair",          cat:"Healthcare",  type:"Cinematic Visual" },
+  { id:"HC02", name:"Yara Abdelrahman",    cat:"Healthcare",  type:"Cinematic Visual" },
+  { id:"HC03", name:"Samira Rahman",       cat:"Healthcare",  type:"Cinematic Visual" },
+  { id:"HC04", name:"Nadine Farah",        cat:"Healthcare",  type:"Cinematic Visual" },
+  { id:"HC05", name:"Kenji Tanaka",        cat:"Healthcare",  type:"Cinematic Visual" },
+  { id:"HC06", name:"Aisha Khan",          cat:"Healthcare",  type:"ATS Professional" },
+  { id:"HC07", name:"Nia Okafor",          cat:"Healthcare",  type:"ATS Professional" },
+  { id:"HC08", name:"Mila Popescu",        cat:"Healthcare",  type:"ATS Professional" },
+  { id:"HC09", name:"Leila Saeed",         cat:"Healthcare",  type:"ATS Professional" },
+  { id:"HC10", name:"Amelia Wright",       cat:"Healthcare",  type:"ATS Professional" },
+  { id:"CO01", name:"Omar Al-Farsi",       cat:"Corporate",   type:"Cinematic Visual" },
+  { id:"CO02", name:"Yousef Al-Naqbi",     cat:"Corporate",   type:"Cinematic Visual" },
+  { id:"CO03", name:"Hassan El-Masri",     cat:"Corporate",   type:"Cinematic Visual" },
+  { id:"CO04", name:"Karim Nasser",        cat:"Corporate",   type:"Cinematic Visual" },
+  { id:"CO05", name:"Daniel Carter",       cat:"Corporate",   type:"Cinematic Visual" },
+  { id:"CO06", name:"Mateo Silva",         cat:"Corporate",   type:"ATS Professional" },
+  { id:"CO07", name:"Kofi Mensah",         cat:"Corporate",   type:"ATS Professional" },
+  { id:"CO08", name:"Zain Malik",          cat:"Corporate",   type:"ATS Professional" },
+  { id:"CO09", name:"Adam Nowak",          cat:"Corporate",   type:"ATS Professional" },
+  { id:"CO10", name:"Luca Romano",         cat:"Corporate",   type:"ATS Professional" },
+].map((c, i) => ({
+  ...c,
+  img: `/cv${(i % 14) + 1}.png`,
+  accent: CAT_ACCENT[c.cat] ?? "#D4AF37",
+}));
+
+const CARDS = ALL_CARDS;
 
 function wa(msg: string) {
   return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
@@ -440,6 +510,83 @@ function Modal({ state, onClose, t }: { state: ModalState; onClose: () => void; 
         </motion.div>
       </div>
     </AnimatePresence>
+  );
+}
+
+const CATEGORIES = ["All", "Hospitality", "Management", "Tech", "Creative", "Healthcare", "Corporate"];
+
+function PortfolioSection({ t, openModal }: { t: Translations; openModal: (c: typeof CARDS[0]) => void }) {
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [limit, setLimit] = useState(12);
+
+  const filtered = activeFilter === "All" ? CARDS : CARDS.filter((c) => c.cat === activeFilter);
+  const visible = filtered.slice(0, limit);
+  const remaining = filtered.length - visible.length;
+
+  return (
+    <>
+      <div className="mb-6 flex flex-wrap gap-2">
+        {CATEGORIES.map((cat) => {
+          const active = activeFilter === cat;
+          const accent = cat !== "All" ? (CAT_ACCENT[cat] ?? GOLD) : GOLD;
+          return (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => { setActiveFilter(cat); setLimit(12); }}
+              className={`h-9 rounded-full px-4 text-xs font-semibold transition ${active ? "text-black" : "border border-white/15 bg-white/5 text-white hover:bg-white/10"}`}
+              style={active ? { background: accent } : undefined}
+            >
+              {cat}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {visible.map((card, i) => (
+          <FadeIn key={card.id} delay={Math.min(0.03 * i, 0.3)}>
+            <div className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] transition-all hover:border-white/20">
+              <div className="relative aspect-[16/10] w-full overflow-hidden">
+                <div className="absolute inset-0 opacity-[0.12] transition-opacity group-hover:opacity-[0.22]">
+                  <Image src={card.img} alt={card.name} fill className="object-cover object-top" sizes="33vw" />
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center p-5">
+                  <div className="w-full max-w-xs rounded-2xl border border-white/10 bg-black/40 p-4 backdrop-blur-sm">
+                    <p className="text-xs font-semibold" style={{ color: card.accent }}>{card.cat}</p>
+                    <p className="mt-1 text-sm font-semibold text-white">{card.name}</p>
+                    <p className="mt-0.5 text-[11px] text-zinc-400">{card.type}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center justify-between px-5 py-4">
+                <p className="text-xs text-zinc-400">{card.cat}</p>
+                <button
+                  type="button"
+                  onClick={() => openModal(card)}
+                  className="inline-flex h-9 items-center rounded-full px-4 text-xs font-semibold text-white ring-1 ring-white/15 hover:ring-white/30"
+                  style={{ background: `${card.accent}18` }}
+                >
+                  {t.viewBtn}
+                </button>
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+
+      {remaining > 0 && (
+        <div className="mt-10 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setLimit((n) => n + 12)}
+            className="inline-flex h-11 items-center rounded-full border border-white/15 bg-white/5 px-8 text-sm font-semibold text-white hover:bg-white/10"
+          >
+            {t.loadMore} ({remaining})
+          </button>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -711,37 +858,8 @@ export default function Home() {
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">{t.portTitle}</h2>
             <p className="mt-2 text-sm text-zinc-400">{t.portSub}</p>
           </FadeIn>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {CARDS.map((card, i) => (
-              <FadeIn key={card.id} delay={0.05 * i}>
-                <div className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] transition-all hover:border-white/20">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden">
-                    <div className="absolute inset-0 opacity-[0.12] transition-opacity group-hover:opacity-[0.22]">
-                      <Image src={card.img} alt={card.name} fill className="object-cover object-top" sizes="33vw" />
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center p-5">
-                      <div className="w-full max-w-xs rounded-2xl border border-white/10 bg-black/40 p-4 backdrop-blur-sm">
-                        <p className="text-xs font-semibold" style={{ color: card.accent }}>{card.cat}</p>
-                        <p className="mt-1 text-sm font-semibold text-white">{card.name}</p>
-                        <p className="mt-0.5 text-[11px] text-zinc-400">{card.type}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between px-5 py-4">
-                    <p className="text-xs text-zinc-400">{card.cat}</p>
-                    <button
-                      type="button"
-                      onClick={() => openModal(card)}
-                      className="inline-flex h-9 items-center rounded-full px-4 text-xs font-semibold text-white ring-1 ring-white/15 hover:ring-white/30"
-                      style={{ background: `${card.accent}18` }}
-                    >
-                      {t.viewBtn}
-                    </button>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+
+          <PortfolioSection t={t} openModal={openModal} />
         </section>
 
         <section id="testimonials" className="py-14 sm:py-16">
