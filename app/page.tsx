@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
@@ -317,66 +318,66 @@ const ALL_CARDS: Array<{
   id: string; name: string; cat: string; type: string;
   role: string; region: string; img: string; accent: string;
 }> = [
-  { id:"001", name:"Amina Al-Mansoori",  cat:"Hospitality", type:"Modern / Creative",   role:"Luxury Hotel Director",          region:"Dubai, UAE",         img:"https://picsum.photos/seed/zdcv001/800/1100", accent:"#D4AF37" },
-  { id:"002", name:"Zaid Al-Harbi",      cat:"Executive",   type:"Executive / Premium", role:"CEO, Regional Operations",       region:"Riyadh, Saudi",      img:"https://picsum.photos/seed/zdcv002/800/1100", accent:"#60A5FA" },
-  { id:"003", name:"Fatima Al-Mansoori", cat:"Healthcare",  type:"Classic / ATS",       role:"Clinical Operations Director",   region:"Abu Dhabi, UAE",     img:"https://picsum.photos/seed/zdcv003/800/1100", accent:"#34D399" },
-  { id:"004", name:"Omar Al-Rashidi",    cat:"Finance",     type:"Executive / Premium", role:"Investment Banking VP",          region:"Dubai, UAE",         img:"https://picsum.photos/seed/zdcv004/800/1100", accent:"#F59E0B" },
-  { id:"005", name:"Noura Al-Ketbi",     cat:"Legal",       type:"Classic / ATS",       role:"General Counsel, DIFC",          region:"Dubai, UAE",         img:"https://picsum.photos/seed/zdcv005/800/1100", accent:"#A78BFA" },
-  { id:"006", name:"Khalid Al-Mazrouei",cat:"Tech",        type:"Modern / Creative",   role:"Chief Technology Officer",       region:"Abu Dhabi, UAE",     img:"https://picsum.photos/seed/zdcv006/800/1100", accent:"#3B82F6" },
-  { id:"007", name:"Sara Al-Suwaidi",    cat:"Marketing",   type:"Modern / Creative",   role:"Brand Strategy Director",        region:"Dubai, UAE",         img:"https://picsum.photos/seed/zdcv007/800/1100", accent:"#F472B6" },
-  { id:"008", name:"Rashed Al-Naqbi",    cat:"Aviation",    type:"Executive / Premium", role:"Airport Operations Director",    region:"Al Ain, UAE",        img:"https://picsum.photos/seed/zdcv008/800/1100", accent:"#818CF8" },
-  { id:"009", name:"Maryam Al-Hosani",   cat:"Creative",    type:"Modern / Creative",   role:"Senior Art Director",            region:"Sharjah, UAE",       img:"https://picsum.photos/seed/zdcv009/800/1100", accent:"#C084FC" },
-  { id:"010", name:"Yousef Al-Shamsi",   cat:"Oil & Gas",   type:"Executive / Premium", role:"Upstream Operations Director",   region:"Dubai, UAE",         img:"https://picsum.photos/seed/zdcv010/800/1100", accent:"#FB923C" },
-  { id:"011", name:"Nadia El-Sayed",     cat:"Hospitality", type:"Classic / ATS",       role:"Resort General Manager",         region:"Cairo, Egypt",       img:"https://picsum.photos/seed/zdcv011/800/1100", accent:"#D4AF37" },
-  { id:"012", name:"Hassan El-Masri",    cat:"Finance",     type:"Classic / ATS",       role:"Corporate Finance Manager",      region:"Beirut, Lebanon",    img:"https://picsum.photos/seed/zdcv012/800/1100", accent:"#F59E0B" },
-  { id:"013", name:"Yara Abdelrahman",   cat:"Healthcare",  type:"Modern / Creative",   role:"Pharmaceutical Affairs Lead",    region:"Amman, Jordan",      img:"https://picsum.photos/seed/zdcv013/800/1100", accent:"#34D399" },
-  { id:"014", name:"Tariq Aziz",         cat:"Oil & Gas",   type:"Classic / ATS",       role:"Petroleum Engineering Manager",  region:"Riyadh, Saudi",      img:"https://picsum.photos/seed/zdcv014/800/1100", accent:"#FB923C" },
-  { id:"015", name:"Layla Hassan",       cat:"Legal",       type:"Executive / Premium", role:"International Trade Lawyer",     region:"Dubai, UAE",         img:"https://picsum.photos/seed/zdcv015/800/1100", accent:"#A78BFA" },
-  { id:"016", name:"Sebastian Mueller",  cat:"Executive",   type:"Executive / Premium", role:"Managing Director EMEA",         region:"Frankfurt, Germany", img:"https://picsum.photos/seed/zdcv016/800/1100", accent:"#60A5FA" },
-  { id:"017", name:"Claire Dubois",      cat:"Creative",    type:"Modern / Creative",   role:"Motion Graphics Director",       region:"Paris, France",      img:"https://picsum.photos/seed/zdcv017/800/1100", accent:"#C084FC" },
-  { id:"018", name:"James Thornton",     cat:"Finance",     type:"Executive / Premium", role:"Private Equity Partner",         region:"London, UK",         img:"https://picsum.photos/seed/zdcv018/800/1100", accent:"#F59E0B" },
-  { id:"019", name:"Elena Petrova",      cat:"Tech",        type:"Classic / ATS",       role:"Cybersecurity Architect",        region:"Zurich, Switzerland",img:"https://picsum.photos/seed/zdcv019/800/1100", accent:"#3B82F6" },
-  { id:"020", name:"Marcus Vandenberg",  cat:"Marketing",   type:"Modern / Creative",   role:"Head of Brand Experience",       region:"Amsterdam, NL",      img:"https://picsum.photos/seed/zdcv020/800/1100", accent:"#F472B6" },
-  { id:"021", name:"Freya Andersen",     cat:"Executive",   type:"Executive / Premium", role:"Board Director, Sustainability", region:"Copenhagen, DK",     img:"https://picsum.photos/seed/zdcv021/800/1100", accent:"#60A5FA" },
-  { id:"022", name:"Jonas Richter",      cat:"Healthcare",  type:"Classic / ATS",       role:"Hospital Administrator",         region:"Munich, Germany",    img:"https://picsum.photos/seed/zdcv022/800/1100", accent:"#34D399" },
-  { id:"023", name:"Camille Dupont",     cat:"Hospitality", type:"Modern / Creative",   role:"F&B Operations Director",        region:"Lyon, France",       img:"https://picsum.photos/seed/zdcv023/800/1100", accent:"#D4AF37" },
-  { id:"024", name:"Nikolai Volkov",     cat:"Oil & Gas",   type:"Executive / Premium", role:"HSE Manager, Offshore",          region:"Oslo, Norway",       img:"https://picsum.photos/seed/zdcv024/800/1100", accent:"#FB923C" },
-  { id:"025", name:"Sofia Moretti",      cat:"Legal",       type:"Classic / ATS",       role:"Compliance & Regulatory Lead",   region:"Milan, Italy",       img:"https://picsum.photos/seed/zdcv025/800/1100", accent:"#A78BFA" },
-  { id:"026", name:"Owen Clarke",        cat:"Finance",     type:"Classic / ATS",       role:"Risk & Compliance Manager",      region:"Dublin, Ireland",    img:"https://picsum.photos/seed/zdcv026/800/1100", accent:"#F59E0B" },
-  { id:"027", name:"Marta Kowalska",     cat:"Tech",        type:"Modern / Creative",   role:"Platform Reliability Engineer",  region:"Warsaw, Poland",     img:"https://picsum.photos/seed/zdcv027/800/1100", accent:"#3B82F6" },
-  { id:"028", name:"Hugo Schneider",     cat:"Creative",    type:"Classic / ATS",       role:"Brand Identity Designer",        region:"Hamburg, Germany",   img:"https://picsum.photos/seed/zdcv028/800/1100", accent:"#C084FC" },
-  { id:"029", name:"Siobhan Kelly",      cat:"Marketing",   type:"Modern / Creative",   role:"Creative Campaign Strategist",   region:"Edinburgh, UK",      img:"https://picsum.photos/seed/zdcv029/800/1100", accent:"#F472B6" },
-  { id:"030", name:"Luca Romano",        cat:"Aviation",    type:"Classic / ATS",       role:"Cabin Crew Training Manager",    region:"Rome, Italy",        img:"https://picsum.photos/seed/zdcv030/800/1100", accent:"#818CF8" },
-  { id:"031", name:"Jordan Smith",       cat:"Executive",   type:"Executive / Premium", role:"Chief Financial Officer",        region:"New York, USA",      img:"https://picsum.photos/seed/zdcv031/800/1100", accent:"#60A5FA" },
-  { id:"032", name:"Elena Rodriguez",    cat:"Marketing",   type:"Modern / Creative",   role:"E-Commerce Growth Manager",      region:"Miami, USA",         img:"https://picsum.photos/seed/zdcv032/800/1100", accent:"#F472B6" },
-  { id:"033", name:"Daniel Carter",      cat:"Finance",     type:"Classic / ATS",       role:"Business Development Director",  region:"Toronto, Canada",    img:"https://picsum.photos/seed/zdcv033/800/1100", accent:"#F59E0B" },
-  { id:"034", name:"Valentina Cruz",     cat:"Creative",    type:"Modern / Creative",   role:"UX/UI Design Lead",              region:"Buenos Aires, AR",   img:"https://picsum.photos/seed/zdcv034/800/1100", accent:"#C084FC" },
-  { id:"035", name:"Mateo Silva",        cat:"Tech",        type:"Classic / ATS",       role:"Full-Stack Engineering Lead",    region:"Sao Paulo, Brazil",  img:"https://picsum.photos/seed/zdcv035/800/1100", accent:"#3B82F6" },
-  { id:"036", name:"Chloe Bennett",      cat:"Healthcare",  type:"Modern / Creative",   role:"Patient Experience Director",    region:"Vancouver, Canada",  img:"https://picsum.photos/seed/zdcv036/800/1100", accent:"#34D399" },
-  { id:"037", name:"Rafael Costa",       cat:"Hospitality", type:"Classic / ATS",       role:"Revenue & Yield Manager",        region:"Lisbon, Portugal",   img:"https://picsum.photos/seed/zdcv037/800/1100", accent:"#D4AF37" },
-  { id:"038", name:"Alejandro Rivera",   cat:"Oil & Gas",   type:"Executive / Premium", role:"Drilling Operations Manager",    region:"Houston, USA",       img:"https://picsum.photos/seed/zdcv038/800/1100", accent:"#FB923C" },
-  { id:"039", name:"Beatriz Almeida",    cat:"Legal",       type:"Classic / ATS",       role:"Corporate Counsel",              region:"Mexico City, MX",    img:"https://picsum.photos/seed/zdcv039/800/1100", accent:"#A78BFA" },
-  { id:"040", name:"Noah Laurent",       cat:"Aviation",    type:"Modern / Creative",   role:"Flight Operations Director",     region:"Montreal, Canada",   img:"https://picsum.photos/seed/zdcv040/800/1100", accent:"#818CF8" },
-  { id:"041", name:"Arjun Mehta",        cat:"Finance",     type:"Modern / Creative",   role:"Fintech Product Director",       region:"Mumbai, India",      img:"https://picsum.photos/seed/zdcv041/800/1100", accent:"#F59E0B" },
-  { id:"042", name:"Priya Nair",         cat:"Healthcare",  type:"Executive / Premium", role:"Clinical Operations Director",   region:"Singapore",          img:"https://picsum.photos/seed/zdcv042/800/1100", accent:"#34D399" },
-  { id:"043", name:"Wei Chen",           cat:"Tech",        type:"Modern / Creative",   role:"Machine Learning Engineer",      region:"Singapore",          img:"https://picsum.photos/seed/zdcv043/800/1100", accent:"#3B82F6" },
-  { id:"044", name:"Hana Suzuki",        cat:"Hospitality", type:"Executive / Premium", role:"Luxury Hotel GM",                region:"Tokyo, Japan",       img:"https://picsum.photos/seed/zdcv044/800/1100", accent:"#D4AF37" },
-  { id:"045", name:"Jae-Hyun Kim",       cat:"Executive",   type:"Executive / Premium", role:"VP Corporate Strategy",          region:"Seoul, South Korea", img:"https://picsum.photos/seed/zdcv045/800/1100", accent:"#60A5FA" },
-  { id:"046", name:"Lin Xia",            cat:"Marketing",   type:"Modern / Creative",   role:"Digital Marketing Director",     region:"Shanghai, China",    img:"https://picsum.photos/seed/zdcv046/800/1100", accent:"#F472B6" },
-  { id:"047", name:"Min-ji Park",        cat:"Creative",    type:"Modern / Creative",   role:"Content Strategy Director",      region:"Busan, South Korea", img:"https://picsum.photos/seed/zdcv047/800/1100", accent:"#C084FC" },
-  { id:"048", name:"Linh Tran",          cat:"Legal",       type:"Classic / ATS",       role:"International Trade Lawyer",     region:"Hanoi, Vietnam",     img:"https://picsum.photos/seed/zdcv048/800/1100", accent:"#A78BFA" },
-  { id:"049", name:"Kenji Tanaka",       cat:"Oil & Gas",   type:"Classic / ATS",       role:"Energy Sector Advisor",          region:"Osaka, Japan",       img:"https://picsum.photos/seed/zdcv049/800/1100", accent:"#FB923C" },
-  { id:"050", name:"Sander de Vries",    cat:"Aviation",    type:"Classic / ATS",       role:"Air Traffic Control Manager",    region:"Jakarta, Indonesia", img:"https://picsum.photos/seed/zdcv050/800/1100", accent:"#818CF8" },
-  { id:"051", name:"Michael Nguyen",     cat:"Tech",        type:"Classic / ATS",       role:"DevOps Engineering Lead",        region:"Ho Chi Minh, VN",    img:"https://picsum.photos/seed/zdcv051/800/1100", accent:"#3B82F6" },
-  { id:"052", name:"Maya Patel",         cat:"Creative",    type:"Modern / Creative",   role:"Brand Identity Director",        region:"Bangalore, India",   img:"https://picsum.photos/seed/zdcv052/800/1100", accent:"#C084FC" },
-  { id:"053", name:"Zara Mbeki",         cat:"Marketing",   type:"Modern / Creative",   role:"Head of Social Media",           region:"Singapore",          img:"https://picsum.photos/seed/zdcv053/800/1100", accent:"#F472B6" },
-  { id:"054", name:"Kofi Mensah",        cat:"Executive",   type:"Executive / Premium", role:"Chief Operations Officer",       region:"Accra, Ghana",       img:"https://picsum.photos/seed/zdcv054/800/1100", accent:"#60A5FA" },
-  { id:"055", name:"Nia Okafor",         cat:"Healthcare",  type:"Modern / Creative",   role:"Global Health Program Manager",  region:"Lagos, Nigeria",     img:"https://picsum.photos/seed/zdcv055/800/1100", accent:"#34D399" },
-  { id:"056", name:"Aisha Khan",         cat:"Finance",     type:"Classic / ATS",       role:"Treasury & Risk Analyst",        region:"Karachi, Pakistan",  img:"https://picsum.photos/seed/zdcv056/800/1100", accent:"#F59E0B" },
-  { id:"057", name:"Samira Rahman",      cat:"Hospitality", type:"Classic / ATS",       role:"Luxury Spa & Wellness Director", region:"Dhaka, Bangladesh",  img:"https://picsum.photos/seed/zdcv057/800/1100", accent:"#D4AF37" },
-  { id:"058", name:"Anya Sokolova",      cat:"Legal",       type:"Executive / Premium", role:"Chief Legal Officer",            region:"Almaty, Kazakhstan", img:"https://picsum.photos/seed/zdcv058/800/1100", accent:"#A78BFA" },
-  { id:"059", name:"Eva Novak",          cat:"Creative",    type:"Classic / ATS",       role:"Visual Identity Consultant",     region:"Prague, Czechia",    img:"https://picsum.photos/seed/zdcv059/800/1100", accent:"#C084FC" },
-  { id:"060", name:"Amelia Wright",      cat:"Aviation",    type:"Executive / Premium", role:"Flight Operations Director",     region:"Sydney, Australia",  img:"https://picsum.photos/seed/zdcv060/800/1100", accent:"#818CF8" },
+  { id:"001", name:"Amina Al-Mansoori",  cat:"Hospitality", type:"Modern / Creative",   role:"Luxury Hotel Director",          region:"Dubai, UAE",         img:"/cv1.png", accent:"#D4AF37" },
+  { id:"002", name:"Zaid Al-Harbi",      cat:"Executive",   type:"Executive / Premium", role:"CEO, Regional Operations",       region:"Riyadh, Saudi",      img:"/cv2.png", accent:"#60A5FA" },
+  { id:"003", name:"Fatima Al-Mansoori", cat:"Healthcare",  type:"Classic / ATS",       role:"Clinical Operations Director",   region:"Abu Dhabi, UAE",     img:"/cv3.png", accent:"#34D399" },
+  { id:"004", name:"Omar Al-Rashidi",    cat:"Finance",     type:"Executive / Premium", role:"Investment Banking VP",          region:"Dubai, UAE",         img:"/cv4.png", accent:"#F59E0B" },
+  { id:"005", name:"Noura Al-Ketbi",     cat:"Legal",       type:"Classic / ATS",       role:"General Counsel, DIFC",          region:"Dubai, UAE",         img:"/cv5.png", accent:"#A78BFA" },
+  { id:"006", name:"Khalid Al-Mazrouei",cat:"Tech",        type:"Modern / Creative",   role:"Chief Technology Officer",       region:"Abu Dhabi, UAE",     img:"/cv6.png", accent:"#3B82F6" },
+  { id:"007", name:"Sara Al-Suwaidi",    cat:"Marketing",   type:"Modern / Creative",   role:"Brand Strategy Director",        region:"Dubai, UAE",         img:"/cv7.png", accent:"#F472B6" },
+  { id:"008", name:"Rashed Al-Naqbi",    cat:"Aviation",    type:"Executive / Premium", role:"Airport Operations Director",    region:"Al Ain, UAE",        img:"/cv8.png", accent:"#818CF8" },
+  { id:"009", name:"Maryam Al-Hosani",   cat:"Creative",    type:"Modern / Creative",   role:"Senior Art Director",            region:"Sharjah, UAE",       img:"/cv9.png", accent:"#C084FC" },
+  { id:"010", name:"Yousef Al-Shamsi",   cat:"Oil & Gas",   type:"Executive / Premium", role:"Upstream Operations Director",   region:"Dubai, UAE",         img:"/cv10.png", accent:"#FB923C" },
+  { id:"011", name:"Nadia El-Sayed",     cat:"Hospitality", type:"Classic / ATS",       role:"Resort General Manager",         region:"Cairo, Egypt",       img:"/cv11.png", accent:"#D4AF37" },
+  { id:"012", name:"Hassan El-Masri",    cat:"Finance",     type:"Classic / ATS",       role:"Corporate Finance Manager",      region:"Beirut, Lebanon",    img:"/cv12.png", accent:"#F59E0B" },
+  { id:"013", name:"Yara Abdelrahman",   cat:"Healthcare",  type:"Modern / Creative",   role:"Pharmaceutical Affairs Lead",    region:"Amman, Jordan",      img:"/cv13.png", accent:"#34D399" },
+  { id:"014", name:"Tariq Aziz",         cat:"Oil & Gas",   type:"Classic / ATS",       role:"Petroleum Engineering Manager",  region:"Riyadh, Saudi",      img:"/cv14.png", accent:"#FB923C" },
+  { id:"015", name:"Layla Hassan",       cat:"Legal",       type:"Executive / Premium", role:"International Trade Lawyer",     region:"Dubai, UAE",         img:"/cv1.png", accent:"#A78BFA" },
+  { id:"016", name:"Sebastian Mueller",  cat:"Executive",   type:"Executive / Premium", role:"Managing Director EMEA",         region:"Frankfurt, Germany", img:"/cv2.png", accent:"#60A5FA" },
+  { id:"017", name:"Claire Dubois",      cat:"Creative",    type:"Modern / Creative",   role:"Motion Graphics Director",       region:"Paris, France",      img:"/cv3.png", accent:"#C084FC" },
+  { id:"018", name:"James Thornton",     cat:"Finance",     type:"Executive / Premium", role:"Private Equity Partner",         region:"London, UK",         img:"/cv4.png", accent:"#F59E0B" },
+  { id:"019", name:"Elena Petrova",      cat:"Tech",        type:"Classic / ATS",       role:"Cybersecurity Architect",        region:"Zurich, Switzerland",img:"/cv5.png", accent:"#3B82F6" },
+  { id:"020", name:"Marcus Vandenberg",  cat:"Marketing",   type:"Modern / Creative",   role:"Head of Brand Experience",       region:"Amsterdam, NL",      img:"/cv6.png", accent:"#F472B6" },
+  { id:"021", name:"Freya Andersen",     cat:"Executive",   type:"Executive / Premium", role:"Board Director, Sustainability", region:"Copenhagen, DK",     img:"/cv7.png", accent:"#60A5FA" },
+  { id:"022", name:"Jonas Richter",      cat:"Healthcare",  type:"Classic / ATS",       role:"Hospital Administrator",         region:"Munich, Germany",    img:"/cv8.png", accent:"#34D399" },
+  { id:"023", name:"Camille Dupont",     cat:"Hospitality", type:"Modern / Creative",   role:"F&B Operations Director",        region:"Lyon, France",       img:"/cv9.png", accent:"#D4AF37" },
+  { id:"024", name:"Nikolai Volkov",     cat:"Oil & Gas",   type:"Executive / Premium", role:"HSE Manager, Offshore",          region:"Oslo, Norway",       img:"/cv10.png", accent:"#FB923C" },
+  { id:"025", name:"Sofia Moretti",      cat:"Legal",       type:"Classic / ATS",       role:"Compliance & Regulatory Lead",   region:"Milan, Italy",       img:"/cv11.png", accent:"#A78BFA" },
+  { id:"026", name:"Owen Clarke",        cat:"Finance",     type:"Classic / ATS",       role:"Risk & Compliance Manager",      region:"Dublin, Ireland",    img:"/cv12.png", accent:"#F59E0B" },
+  { id:"027", name:"Marta Kowalska",     cat:"Tech",        type:"Modern / Creative",   role:"Platform Reliability Engineer",  region:"Warsaw, Poland",     img:"/cv13.png", accent:"#3B82F6" },
+  { id:"028", name:"Hugo Schneider",     cat:"Creative",    type:"Classic / ATS",       role:"Brand Identity Designer",        region:"Hamburg, Germany",   img:"/cv14.png", accent:"#C084FC" },
+  { id:"029", name:"Siobhan Kelly",      cat:"Marketing",   type:"Modern / Creative",   role:"Creative Campaign Strategist",   region:"Edinburgh, UK",      img:"/cv1.png", accent:"#F472B6" },
+  { id:"030", name:"Luca Romano",        cat:"Aviation",    type:"Classic / ATS",       role:"Cabin Crew Training Manager",    region:"Rome, Italy",        img:"/cv2.png", accent:"#818CF8" },
+  { id:"031", name:"Jordan Smith",       cat:"Executive",   type:"Executive / Premium", role:"Chief Financial Officer",        region:"New York, USA",      img:"/cv3.png", accent:"#60A5FA" },
+  { id:"032", name:"Elena Rodriguez",    cat:"Marketing",   type:"Modern / Creative",   role:"E-Commerce Growth Manager",      region:"Miami, USA",         img:"/cv4.png", accent:"#F472B6" },
+  { id:"033", name:"Daniel Carter",      cat:"Finance",     type:"Classic / ATS",       role:"Business Development Director",  region:"Toronto, Canada",    img:"/cv5.png", accent:"#F59E0B" },
+  { id:"034", name:"Valentina Cruz",     cat:"Creative",    type:"Modern / Creative",   role:"UX/UI Design Lead",              region:"Buenos Aires, AR",   img:"/cv6.png", accent:"#C084FC" },
+  { id:"035", name:"Mateo Silva",        cat:"Tech",        type:"Classic / ATS",       role:"Full-Stack Engineering Lead",    region:"Sao Paulo, Brazil",  img:"/cv7.png", accent:"#3B82F6" },
+  { id:"036", name:"Chloe Bennett",      cat:"Healthcare",  type:"Modern / Creative",   role:"Patient Experience Director",    region:"Vancouver, Canada",  img:"/cv8.png", accent:"#34D399" },
+  { id:"037", name:"Rafael Costa",       cat:"Hospitality", type:"Classic / ATS",       role:"Revenue & Yield Manager",        region:"Lisbon, Portugal",   img:"/cv9.png", accent:"#D4AF37" },
+  { id:"038", name:"Alejandro Rivera",   cat:"Oil & Gas",   type:"Executive / Premium", role:"Drilling Operations Manager",    region:"Houston, USA",       img:"/cv10.png", accent:"#FB923C" },
+  { id:"039", name:"Beatriz Almeida",    cat:"Legal",       type:"Classic / ATS",       role:"Corporate Counsel",              region:"Mexico City, MX",    img:"/cv11.png", accent:"#A78BFA" },
+  { id:"040", name:"Noah Laurent",       cat:"Aviation",    type:"Modern / Creative",   role:"Flight Operations Director",     region:"Montreal, Canada",   img:"/cv12.png", accent:"#818CF8" },
+  { id:"041", name:"Arjun Mehta",        cat:"Finance",     type:"Modern / Creative",   role:"Fintech Product Director",       region:"Mumbai, India",      img:"/cv13.png", accent:"#F59E0B" },
+  { id:"042", name:"Priya Nair",         cat:"Healthcare",  type:"Executive / Premium", role:"Clinical Operations Director",   region:"Singapore",          img:"/cv14.png", accent:"#34D399" },
+  { id:"043", name:"Wei Chen",           cat:"Tech",        type:"Modern / Creative",   role:"Machine Learning Engineer",      region:"Singapore",          img:"/cv1.png", accent:"#3B82F6" },
+  { id:"044", name:"Hana Suzuki",        cat:"Hospitality", type:"Executive / Premium", role:"Luxury Hotel GM",                region:"Tokyo, Japan",       img:"/cv2.png", accent:"#D4AF37" },
+  { id:"045", name:"Jae-Hyun Kim",       cat:"Executive",   type:"Executive / Premium", role:"VP Corporate Strategy",          region:"Seoul, South Korea", img:"/cv3.png", accent:"#60A5FA" },
+  { id:"046", name:"Lin Xia",            cat:"Marketing",   type:"Modern / Creative",   role:"Digital Marketing Director",     region:"Shanghai, China",    img:"/cv4.png", accent:"#F472B6" },
+  { id:"047", name:"Min-ji Park",        cat:"Creative",    type:"Modern / Creative",   role:"Content Strategy Director",      region:"Busan, South Korea", img:"/cv5.png", accent:"#C084FC" },
+  { id:"048", name:"Linh Tran",          cat:"Legal",       type:"Classic / ATS",       role:"International Trade Lawyer",     region:"Hanoi, Vietnam",     img:"/cv6.png", accent:"#A78BFA" },
+  { id:"049", name:"Kenji Tanaka",       cat:"Oil & Gas",   type:"Classic / ATS",       role:"Energy Sector Advisor",          region:"Osaka, Japan",       img:"/cv7.png", accent:"#FB923C" },
+  { id:"050", name:"Sander de Vries",    cat:"Aviation",    type:"Classic / ATS",       role:"Air Traffic Control Manager",    region:"Jakarta, Indonesia", img:"/cv8.png", accent:"#818CF8" },
+  { id:"051", name:"Michael Nguyen",     cat:"Tech",        type:"Classic / ATS",       role:"DevOps Engineering Lead",        region:"Ho Chi Minh, VN",    img:"/cv9.png", accent:"#3B82F6" },
+  { id:"052", name:"Maya Patel",         cat:"Creative",    type:"Modern / Creative",   role:"Brand Identity Director",        region:"Bangalore, India",   img:"/cv10.png", accent:"#C084FC" },
+  { id:"053", name:"Zara Mbeki",         cat:"Marketing",   type:"Modern / Creative",   role:"Head of Social Media",           region:"Singapore",          img:"/cv11.png", accent:"#F472B6" },
+  { id:"054", name:"Kofi Mensah",        cat:"Executive",   type:"Executive / Premium", role:"Chief Operations Officer",       region:"Accra, Ghana",       img:"/cv12.png", accent:"#60A5FA" },
+  { id:"055", name:"Nia Okafor",         cat:"Healthcare",  type:"Modern / Creative",   role:"Global Health Program Manager",  region:"Lagos, Nigeria",     img:"/cv13.png", accent:"#34D399" },
+  { id:"056", name:"Aisha Khan",         cat:"Finance",     type:"Classic / ATS",       role:"Treasury & Risk Analyst",        region:"Karachi, Pakistan",  img:"/cv14.png", accent:"#F59E0B" },
+  { id:"057", name:"Samira Rahman",      cat:"Hospitality", type:"Classic / ATS",       role:"Luxury Spa & Wellness Director", region:"Dhaka, Bangladesh",  img:"/cv1.png", accent:"#D4AF37" },
+  { id:"058", name:"Anya Sokolova",      cat:"Legal",       type:"Executive / Premium", role:"Chief Legal Officer",            region:"Almaty, Kazakhstan", img:"/cv2.png", accent:"#A78BFA" },
+  { id:"059", name:"Eva Novak",          cat:"Creative",    type:"Classic / ATS",       role:"Visual Identity Consultant",     region:"Prague, Czechia",    img:"/cv3.png", accent:"#C084FC" },
+  { id:"060", name:"Amelia Wright",      cat:"Aviation",    type:"Executive / Premium", role:"Flight Operations Director",     region:"Sydney, Australia",  img:"/cv4.png", accent:"#818CF8" },
 ];
 
 const CARDS = ALL_CARDS;
@@ -490,7 +491,7 @@ function Modal({ state, onClose, t }: { state: ModalState; onClose: () => void; 
             <div className="flex-1 overflow-y-auto p-4">
               <div className="overflow-hidden rounded-xl border" style={{ borderColor: `${GOLD}35` }}>
                 <div className="relative w-full" style={{ aspectRatio: "210 / 297" }}>
-                  <img src={state.img} alt={state.name} className="h-full w-full object-cover object-top" />
+                  <Image src={state.img} alt={state.name} fill className="object-contain" sizes="520px" priority />
                 </div>
               </div>
             </div>
@@ -551,7 +552,7 @@ function PortfolioSection({ t, openModal }: { t: Translations; openModal: (c: ty
             <div className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] transition-all hover:border-white/20">
               <div className="relative aspect-[16/10] w-full overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.22] transition-opacity duration-300 group-hover:opacity-[0.42]">
-                  <img src={card.img} alt={card.name} className="h-full w-full object-cover object-center" loading="lazy" />
+                  <Image src={card.img} alt={card.name} fill className="object-cover object-center" sizes="33vw" />
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center p-5">
                   <div className="w-full max-w-xs rounded-2xl border border-white/10 bg-black/40 p-4 backdrop-blur-sm">
