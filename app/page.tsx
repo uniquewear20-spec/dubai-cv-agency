@@ -325,12 +325,11 @@ const ALL_CARDS: Array<{
   { id:"005", name:"Khalid Al-Mazrouei",cat:"Tech",        type:"Modern / Creative",   role:"Chief Technology Officer",       region:"Abu Dhabi, UAE",     img:"/cv6.png", accent:"#3B82F6" },
   { id:"006", name:"Sara Al-Suwaidi",    cat:"Marketing",   type:"Modern / Creative",   role:"Brand Strategy Director",        region:"Dubai, UAE",         img:"/cv7.png", accent:"#F472B6" },
   { id:"007", name:"Rashed Al-Naqbi",    cat:"Aviation",    type:"Executive / Premium", role:"Airport Operations Director",    region:"Al Ain, UAE",        img:"/cv8.png", accent:"#818CF8" },
-  { id:"008", name:"Maryam Al-Hosani",   cat:"Creative",    type:"Modern / Creative",   role:"Senior Art Director",            region:"Sharjah, UAE",       img:"/cv9.png", accent:"#C084FC" },
-  { id:"009", name:"Yousef Al-Shamsi",   cat:"Oil & Gas",   type:"Executive / Premium", role:"Upstream Operations Director",   region:"Dubai, UAE",         img:"/cv10.png", accent:"#FB923C" },
-  { id:"010", name:"Nadia El-Sayed",     cat:"Hospitality", type:"Classic / ATS",       role:"Resort General Manager",         region:"Cairo, Egypt",       img:"/cv11.png", accent:"#D4AF37" },
-  { id:"011", name:"Hassan El-Masri",    cat:"Finance",     type:"Classic / ATS",       role:"Corporate Finance Manager",      region:"Beirut, Lebanon",    img:"/cv12.png", accent:"#F59E0B" },
-  { id:"012", name:"Yara Abdelrahman",   cat:"Healthcare",  type:"Modern / Creative",   role:"Pharmaceutical Affairs Lead",    region:"Amman, Jordan",      img:"/cv13.png", accent:"#34D399" },
-  { id:"013", name:"Tariq Aziz",         cat:"Oil & Gas",   type:"Classic / ATS",       role:"Petroleum Engineering Manager",  region:"Riyadh, Saudi",      img:"/cv14.png", accent:"#FB923C" },
+  { id:"008", name:"Yousef Al-Shamsi",   cat:"Oil & Gas",   type:"Executive / Premium", role:"Upstream Operations Director",   region:"Dubai, UAE",         img:"/cv10.png", accent:"#FB923C" },
+  { id:"009", name:"Nadia El-Sayed",     cat:"Hospitality", type:"Classic / ATS",       role:"Resort General Manager",         region:"Cairo, Egypt",       img:"/cv11.png", accent:"#D4AF37" },
+  { id:"010", name:"Hassan El-Masri",    cat:"Finance",     type:"Classic / ATS",       role:"Corporate Finance Manager",      region:"Beirut, Lebanon",    img:"/cv12.png", accent:"#F59E0B" },
+  { id:"011", name:"Yara Abdelrahman",   cat:"Healthcare",  type:"Modern / Creative",   role:"Pharmaceutical Affairs Lead",    region:"Amman, Jordan",      img:"/cv13.png", accent:"#34D399" },
+  { id:"012", name:"Tariq Aziz",         cat:"Oil & Gas",   type:"Classic / ATS",       role:"Petroleum Engineering Manager",  region:"Riyadh, Saudi",      img:"/cv14.png", accent:"#FB923C" },
 ];
 
 const CARDS = ALL_CARDS;
