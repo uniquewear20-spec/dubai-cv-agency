@@ -375,9 +375,9 @@ const ALL_CARDS = [
   { id:"058", name:"Chen Wei",             cat:"Tech",        type:"Modern / Creative",   role:"Machine Learning Engineer",       region:"Shenzhen, China"   },
   { id:"059", name:"Salma Benali",         cat:"Hospitality", type:"Classic / ATS",       role:"Luxury Spa & Wellness Director",  region:"Casablanca, MA"    },
   { id:"060", name:"Amelia Wright",        cat:"Aviation",    type:"Executive / Premium", role:"Flight Operations Director",      region:"Sydney, Australia" },
-].map((c, i) => ({
+].map((c) => ({
   ...c,
-  img: `/cv${(i % 14) + 1}.png`,
+  img: `https://i.pravatar.cc/400?u=zenith-${c.id}`,
   accent: CAT_ACCENT[c.cat] ?? "#D4AF37",
 }));
 
@@ -492,7 +492,7 @@ function Modal({ state, onClose, t }: { state: ModalState; onClose: () => void; 
             <div className="flex-1 overflow-y-auto p-4">
               <div className="overflow-hidden rounded-xl border" style={{ borderColor: `${GOLD}35` }}>
                 <div className="relative w-full" style={{ aspectRatio: "210 / 297" }}>
-                  <Image src={state.img} alt={state.name} fill className="object-contain" sizes="520px" priority />
+                  <Image src={state.img} alt={state.name} fill className="object-cover object-top" sizes="520px" priority />
                 </div>
               </div>
             </div>
@@ -552,8 +552,8 @@ function PortfolioSection({ t, openModal }: { t: Translations; openModal: (c: ty
           <FadeIn key={card.id} delay={Math.min(0.03 * i, 0.3)}>
             <div className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] transition-all hover:border-white/20">
               <div className="relative aspect-[16/10] w-full overflow-hidden">
-                <div className="absolute inset-0 opacity-[0.12] transition-opacity group-hover:opacity-[0.22]">
-                  <Image src={card.img} alt={card.name} fill className="object-cover object-top" sizes="33vw" />
+                <div className="absolute inset-0 opacity-[0.18] transition-opacity duration-300 group-hover:opacity-[0.35]">
+                  <Image src={card.img} alt={card.name} fill className="object-cover object-center" sizes="33vw" />
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center p-5">
                   <div className="w-full max-w-xs rounded-2xl border border-white/10 bg-black/40 p-4 backdrop-blur-sm">
