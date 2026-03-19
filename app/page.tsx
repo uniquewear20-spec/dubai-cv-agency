@@ -688,11 +688,16 @@ export default function Home() {
                       href={p.stripeUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className={`inline-flex h-12 w-full items-center justify-center rounded-full text-sm font-semibold transition ${p.highlight ? "text-black" : "border border-white/15 bg-white/5 text-white hover:bg-white/10"}`}
+                      className={`inline-flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-semibold transition ${p.highlight ? "text-black" : "border border-white/15 bg-white/5 text-white hover:bg-white/10"}`}
                       style={p.highlight ? { background: GOLD } : undefined}
                     >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                      </svg>
                       {t.choosePkg}
                     </a>
+                    <p className="mt-2 text-center text-[11px] text-zinc-500">Secure payment via Stripe</p>
                   </div>
                 </article>
               </FadeIn>
