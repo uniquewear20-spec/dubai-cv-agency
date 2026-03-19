@@ -18,7 +18,7 @@ const LANGS: { code: Lang; label: string }[] = [
 type Pkg = { name: string; price: string; badge: string; highlight: boolean; items: string[]; stripeUrl: string };
 type Faq = { q: string; a: string };
 type Why = { stat: string; statSub: string; title: string; sub: string; body: string };
-type Tm = { name: string; role: string; flag: string; text: string; highlight: string };
+type Tm = { name: string; role: string; flag: string; industry: string; stars: number; text: string; highlight: string };
 
 type Translations = {
   dir: "ltr" | "rtl";
@@ -132,8 +132,14 @@ const T: Record<Lang, Translations> = {
     testLabel: "Testimonials",
     testTitle: "Client Reviews",
     testimonials: [
-      { name: "Sara Al-Rashidi", role: "Finance Manager, Dubai",          flag: "🇦🇪", text: "I applied to 12 roles and got 9 callbacks in two weeks. The ATS CV passed every filter. The team understood the GCC market perfectly.", highlight: "9 callbacks in 2 weeks" },
-      { name: "James Okafor",   role: "Hospitality Director, Abu Dhabi", flag: "🇳🇬", text: "The Cinematic template was breathtaking. Every hiring manager mentioned my CV before the interview. Landed my dream role at a 5-star resort.", highlight: "5-star resort role" },
+      { name: "Sara Al-Rashidi",    role: "Finance Director",          flag: "🇦🇪", industry: "Finance",       stars: 5, text: "I applied to 12 roles and received 9 interview callbacks in under two weeks. The ATS-optimized CV passed every single recruiter filter I had been rejected by before. Zenith understood the DIFC market perfectly.", highlight: "9 callbacks in 2 weeks" },
+      { name: "James Okafor",       role: "Hospitality GM, Dubai Marina", flag: "🇳🇬", industry: "Hospitality",   stars: 5, text: "Every hiring manager I met mentioned my CV before the interview started. The Cinematic Visual layout was breathtaking. Landed my dream role at a 5-star resort and negotiated a 28% higher salary than the initial offer.", highlight: "+28% salary negotiated" },
+      { name: "Dr. Layla Al-Hosani",role: "Head of Cardiology, SEHA",   flag: "🇦🇪", industry: "Healthcare",    stars: 5, text: "I needed a CV that reflected both my clinical excellence and leadership. Zenith Dubai CV delivered a world-class executive design that helped me secure my department head position at one of Abu Dhabi's leading hospital networks.", highlight: "Department Head secured" },
+      { name: "Marcus Vandenberg",  role: "VP Engineering, ADNOC",      flag: "🇳🇱", industry: "Oil & Gas",     stars: 5, text: "The ATS Professional template passed the Fortune 500 filters I had struggled with for months. Within three weeks of the new CV, I had two competing offers from major energy firms in the region. The ROI on this service is extraordinary.", highlight: "2 competing offers in 3 weeks" },
+      { name: "Priya Nair",         role: "Cloud Architect, Singapore",  flag: "🇸🇬", industry: "Tech",          stars: 5, text: "Transitioning from India to Singapore is incredibly competitive. Zenith completely repositioned my profile for the APAC tech market. I doubled my interview rate and accepted an offer 40% above my previous package.", highlight: "40% salary increase" },
+      { name: "Captain Rashed Al-Bloushi", role: "Senior First Officer, Emirates", flag: "🇦🇪", industry: "Aviation", stars: 5, text: "Aviation CVs are a different discipline entirely. The Zenith team knew exactly what GCAA and airline HR departments look for. My application to Emirates was shortlisted within days. Highly professional and worth every dirham.", highlight: "Emirates shortlisted in days" },
+      { name: "Claire Beaumont",    role: "Private Banking Director",    flag: "🇬🇧", industry: "Finance",       stars: 5, text: "I relocated from London to DIFC and needed a CV that communicated ultra-high-net-worth client management at the right level. The Executive Premium design opened doors at two of the top private banks in Dubai within the first month.", highlight: "DIFC role landed in 4 weeks" },
+      { name: "Yousef Al-Qahtani",  role: "Operations Director, Aramco", flag: "🇸🇦", industry: "Oil & Gas",     stars: 5, text: "My previous CV had kept me at the same level for three years. After Zenith rebuilt my profile with a strategic Executive layout, I was promoted internally and then received an unsolicited offer from a competitor at a 35% uplift.", highlight: "+35% salary uplift" },
     ],
     faqLabel: "FAQ",
     faqTitle: "Quick Answers",
@@ -204,8 +210,14 @@ const T: Record<Lang, Translations> = {
     testLabel: "آراء العملاء",
     testTitle: "تقييمات العملاء",
     testimonials: [
-      { name: "سارة الراشدي", role: "مدير مالي، دبي",        flag: "🇦🇪", text: "تقدمت لـ 12 وظيفة وحصلت على 9 دعوات مقابلة خلال اسبوعين. اجتازت سيرتي الذاتية كل مرشح تلقائي.", highlight: "9 دعوات في اسبوعين" },
-      { name: "جيمس اوكافور",  role: "مدير الضيافة، ابوظبي", flag: "🇳🇬", text: "كان التصميم السينمائي مذهلا. حصلت على وظيفة احلامي في منتجع فاخر بدبي مارينا.", highlight: "وظيفة في منتجع 5 نجوم" },
+      { name: "سارة الراشدي",    role: "مدير مالي، دبي",               flag: "🇦🇪", industry: "المال",       stars: 5, text: "تقدمت لـ 12 وظيفة وحصلت على 9 دعوات مقابلة خلال اسبوعين. اجتازت سيرتي الذاتية كل مرشح تلقائي واحترافي. الفريق فهم سوق مركز دبي المالي تماما.", highlight: "9 دعوات في اسبوعين" },
+      { name: "جيمس اوكافور",    role: "مدير فندقي، دبي مارينا",       flag: "🇳🇬", industry: "الضيافة",     stars: 5, text: "التصميم السينمائي كان مذهلا. كل مدير قابلته ذكر سيرتي قبل المقابلة. حصلت على وظيفة احلامي وتفاوضت على راتب اعلى بـ 28%.", highlight: "+28% زيادة في الراتب" },
+      { name: "د. ليلى الحوسني", role: "رئيسة طب القلب، صحة",         flag: "🇦🇪", industry: "الرعاية الصحية", stars: 5, text: "احتجت سيرة ذاتية تعكس قيادتي الطبية. Zenith قدم تصميما تنفيذيا ساعدني على تامين منصب رئيس القسم في احد مستشفيات ابوظبي الرائدة.", highlight: "تامين منصب رئيس القسم" },
+      { name: "ماركوس فاندنبرغ",  role: "نائب رئيس الهندسة، ادنوك",    flag: "🇳🇱", industry: "النفط والغاز", stars: 5, text: "التصميم الاحترافي اجتاز فلاتر كبرى الشركات التي كنت اعاني منها لاشهر. خلال ثلاثة اسابيع حصلت على عرضين متنافسين من كبرى شركات الطاقة.", highlight: "عرضان متنافسان في 3 اسابيع" },
+      { name: "بريا ناير",        role: "مهندسة سحابية، سنغافورة",      flag: "🇸🇬", industry: "التقنية",     stars: 5, text: "الانتقال من الهند لسنغافورة تنافسي جدا. Zenith اعاد تموضع ملفي لسوق التقنية في آسيا. ضاعفت معدل المقابلات وقبلت عرضا بـ 40% فوق راتبي السابق.", highlight: "زيادة 40% في الراتب" },
+      { name: "الكابتن راشد البلوشي", role: "كابتن اول، طيران الامارات", flag: "🇦🇪", industry: "الطيران",   stars: 5, text: "السير الذاتية للطيران مختلفة تماما. فريق Zenith عرف بالضبط ما تبحث عنه شركات الطيران. تمت الموافقة على طلبي في طيران الامارات خلال ايام.", highlight: "القبول في طيران الامارات" },
+      { name: "كلير بومون",       role: "مدير المصرفية الخاصة، DIFC",   flag: "🇬🇧", industry: "المال",       stars: 5, text: "انتقلت من لندن لمركز دبي المالي وكنت بحاجة لسيرة تعكس ادارة العملاء الثريين. فتحت التصميم التنفيذي ابواب بنكين من اكبر بنوك دبي في شهر واحد.", highlight: "دور في DIFC خلال 4 اسابيع" },
+      { name: "يوسف القحطاني",    role: "مدير العمليات، ارامكو",        flag: "🇸🇦", industry: "النفط والغاز", stars: 5, text: "سيرتي السابقة ابقتني في نفس المستوى لثلاث سنوات. بعد ان اعاد Zenith بناء ملفي، ترقيت داخليا وتلقيت عرضا من منافس بزيادة 35%.", highlight: "+35% زيادة في الراتب" },
     ],
     faqLabel: "اسئلة شائعة",
     faqTitle: "اجابات سريعة",
@@ -276,8 +288,14 @@ const T: Record<Lang, Translations> = {
     testLabel: "Temoignages",
     testTitle: "Avis clients",
     testimonials: [
-      { name: "Sara Al-Rashidi", role: "Directrice Financiere, Dubai",    flag: "🇦🇪", text: "J'ai postule a 12 postes et obtenu 9 entretiens en deux semaines. Le CV ATS a passe tous les filtres. L'equipe a compris le marche CCG.", highlight: "9 entretiens en 2 semaines" },
-      { name: "James Okafor",   role: "Directeur Hotellerie, Abu Dhabi", flag: "🇳🇬", text: "Le modele Cinematique etait epoustouflant. J'ai decroche mon poste de reve dans un resort 5 etoiles a Dubai Marina.", highlight: "Poste en resort 5 etoiles" },
+      { name: "Sara Al-Rashidi",    role: "Directrice Financiere, Dubai",  flag: "🇦🇪", industry: "Finance",       stars: 5, text: "J'ai postule a 12 postes et obtenu 9 entretiens en deux semaines. Le CV ATS a passe tous les filtres des recruteurs du CCG. L'equipe a parfaitement compris les exigences du marche DIFC.", highlight: "9 entretiens en 2 semaines" },
+      { name: "James Okafor",       role: "DG Hotellerie, Dubai Marina",   flag: "🇳🇬", industry: "Hotellerie",    stars: 5, text: "Chaque recruteur que j'ai rencontre a mentionne mon CV avant meme que l'entretien commence. Le Visuel Cinematique etait exceptionnel. J'ai negocie un salaire 28% superieur a l'offre initiale.", highlight: "+28% de salaire negocie" },
+      { name: "Dr. Layla Al-Hosani",role: "Chef Cardiologie, SEHA",        flag: "🇦🇪", industry: "Sante",         stars: 5, text: "Zenith a su traduire mon excellence clinique en un design executif de haut vol. Ce CV m'a permis d'obtenir le poste de chef de departement dans l'un des principaux reseaux hospitaliers d'Abu Dhabi.", highlight: "Poste de chef de departement" },
+      { name: "Marcus Vandenberg",  role: "VP Ingenierie, ADNOC",          flag: "🇳🇱", industry: "Petrole & Gaz", stars: 5, text: "Le modele ATS Professionnel a passe les filtres des grands groupes qui me resistaient depuis des mois. En trois semaines, j'avais deux offres concurrentes de grandes societes energetiques de la region.", highlight: "2 offres en 3 semaines" },
+      { name: "Priya Nair",         role: "Architecte Cloud, Singapour",   flag: "🇸🇬", industry: "Tech",          stars: 5, text: "La transition Inde vers Singapour est tres competitive. Zenith a repositionne mon profil pour le marche tech APAC. J'ai double mon taux d'entretiens et accepte une offre 40% au-dessus de mon ancien package.", highlight: "+40% de package salarial" },
+      { name: "Cpt. Rashed Al-Bloushi", role: "Premier Officier, Emirates", flag: "🇦🇪", industry: "Aviation",    stars: 5, text: "Les CVs de l'aviation sont une discipline a part entiere. L'equipe Zenith savait exactement ce que recherchent les RH des compagnies aeriennes. Ma candidature chez Emirates a ete selectionnee en quelques jours.", highlight: "Selection Emirates en quelques jours" },
+      { name: "Claire Beaumont",    role: "Directrice Banque Privee, DIFC",flag: "🇬🇧", industry: "Finance",       stars: 5, text: "Je m'installais de Londres au DIFC et j'avais besoin d'un CV pour les clients ultra-patrimoniaux. Le design Executif Premium m'a ouvert les portes de deux des plus grandes banques privees de Dubai en un mois.", highlight: "Poste DIFC en 4 semaines" },
+      { name: "Yousef Al-Qahtani",  role: "Directeur Operations, Aramco",  flag: "🇸🇦", industry: "Petrole & Gaz", stars: 5, text: "Mon ancien CV m'avait maintenu au meme niveau pendant trois ans. Apres la refonte Zenith, j'ai ete promu en interne et recu une offre concurrente avec une hausse de 35% de mon salaire.", highlight: "+35% d'augmentation" },
     ],
     faqLabel: "FAQ",
     faqTitle: "Reponses rapides",
@@ -465,6 +483,129 @@ function Modal({ state, onClose, t }: { state: ModalState; onClose: () => void; 
         </motion.div>
       </div>
     </AnimatePresence>
+  );
+}
+
+function TestimonialsCarousel({ testimonials }: { testimonials: Tm[] }) {
+  const [active, setActive] = useState(0);
+  const total = testimonials.length;
+  const visibleCount = 2;
+  const pages = Math.ceil(total / visibleCount);
+  const currentPage = Math.floor(active / visibleCount);
+
+  const prev = () => setActive((a) => Math.max(0, a - visibleCount));
+  const next = () => setActive((a) => Math.min(total - visibleCount, a + visibleCount));
+
+  const visible = testimonials.slice(
+    currentPage * visibleCount,
+    currentPage * visibleCount + visibleCount
+  );
+
+  const INDUSTRY_COLORS: Record<string, string> = {
+    Finance: "#F59E0B", Hospitality: "#D4AF37", Healthcare: "#34D399",
+    "Oil & Gas": "#FB923C", Tech: "#3B82F6", Aviation: "#818CF8",
+    Marketing: "#F472B6", Executive: "#60A5FA", Legal: "#A78BFA",
+    "Petrole & Gaz": "#FB923C", Hotellerie: "#D4AF37", Sante: "#34D399",
+    "المال": "#F59E0B", "الضيافة": "#D4AF37", "الرعاية الصحية": "#34D399",
+    "النفط والغاز": "#FB923C", "التقنية": "#3B82F6", "الطيران": "#818CF8",
+  };
+
+  return (
+    <div>
+      <div className="grid gap-5 sm:grid-cols-2">
+        {visible.map((tm, i) => {
+          const accentColor = INDUSTRY_COLORS[tm.industry] ?? GOLD;
+          return (
+            <motion.div
+              key={tm.name}
+              initial={{ opacity: 0, y: 14, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
+              className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 flex flex-col"
+              style={{ boxShadow: `0 0 0 1px rgba(255,255,255,0.02), 0 24px 60px ${accentColor}0a` }}
+            >
+              <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full opacity-20"
+                style={{ background: `radial-gradient(circle, ${accentColor}55, transparent 70%)` }} />
+
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <span
+                  className="inline-flex items-center rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-wider"
+                  style={{ borderColor: `${accentColor}40`, background: `${accentColor}12`, color: accentColor }}
+                >
+                  {tm.industry}
+                </span>
+                <div className="flex items-center gap-0.5">
+                  {Array.from({ length: tm.stars }).map((_, si) => (
+                    <svg key={si} width="11" height="11" viewBox="0 0 14 14" fill={GOLD}>
+                      <path d="M7 1l1.5 4H13l-3.5 2.5 1.5 4L7 9l-4 2.5 1.5-4L1 5h4.5z" />
+                    </svg>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-3 py-1 text-[11px] font-semibold text-[#D4AF37] self-start">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill={GOLD}>
+                  <path d="M5 0l1.2 3.6H10L7 5.8l1.2 3.6L5 7.4 1.8 9.4 3 5.8 0 3.6h3.8z" />
+                </svg>
+                {tm.highlight}
+              </div>
+
+              <p className="flex-1 text-sm leading-7 text-zinc-200">"{tm.text}"</p>
+
+              <div className="mt-5 flex items-center gap-3 border-t border-white/8 pt-4">
+                <div
+                  className="grid h-11 w-11 shrink-0 place-items-center rounded-full border text-xl font-bold"
+                  style={{ borderColor: `${accentColor}35`, background: `${accentColor}12`, color: accentColor }}
+                >
+                  {tm.flag}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">{tm.name}</p>
+                  <p className="text-xs text-zinc-500">{tm.role}</p>
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      <div className="mt-8 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          {Array.from({ length: pages }).map((_, pi) => (
+            <button
+              key={pi}
+              type="button"
+              onClick={() => setActive(pi * visibleCount)}
+              className="h-1.5 rounded-full transition-all duration-300"
+              style={{
+                width: currentPage === pi ? "2rem" : "0.5rem",
+                background: currentPage === pi ? GOLD : "rgba(255,255,255,0.2)",
+              }}
+              aria-label={`Page ${pi + 1}`}
+            />
+          ))}
+        </div>
+        <div className="flex items-center gap-2">
+          <button type="button" onClick={prev} disabled={active === 0}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:bg-white/10 disabled:opacity-30"
+            aria-label="Previous">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button type="button" onClick={next} disabled={active + visibleCount >= total}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:bg-white/10 disabled:opacity-30"
+            aria-label="Next">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <span className="text-xs text-zinc-500 ms-1">
+            {currentPage + 1} / {pages}
+          </span>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -825,31 +966,23 @@ export default function Home() {
         </section>
 
         <section id="testimonials" className="py-14 sm:py-16">
-          <FadeIn className="mb-10">
+          <FadeIn className="mb-4">
             <p className="text-xs font-bold uppercase tracking-[0.18em]" style={{ color: GOLD }}>{t.testLabel}</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">{t.testTitle}</h2>
           </FadeIn>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {t.testimonials.map((tm, i) => (
-              <FadeIn key={tm.name} delay={0.08 * i}>
-                <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-                  <div className="mb-4 inline-flex items-center rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-3 py-1 text-[11px] font-semibold text-[#D4AF37]">
-                    {tm.highlight}
-                  </div>
-                  <p className="text-sm leading-7 text-zinc-200">"{tm.text}"</p>
-                  <div className="mt-5 flex items-center gap-3 border-t border-white/8 pt-4">
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#D4AF37]/25 text-lg" style={{ background: "rgba(212,175,55,0.10)" }}>
-                      {tm.flag}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white">{tm.name}</p>
-                      <p className="text-xs text-zinc-500">{tm.role}</p>
-                    </div>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+          <FadeIn delay={0.05} className="mb-10 flex items-center gap-3">
+            <div className="flex items-center gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <svg key={i} width="14" height="14" viewBox="0 0 14 14" fill={GOLD}>
+                  <path d="M7 1l1.5 4H13l-3.5 2.5 1.5 4L7 9l-4 2.5 1.5-4L1 5h4.5z" />
+                </svg>
+              ))}
+            </div>
+            <span className="text-sm font-semibold text-white">5.0</span>
+            <span className="text-xs text-zinc-500">200+ verified reviews</span>
+          </FadeIn>
+
+          <TestimonialsCarousel testimonials={t.testimonials} />
         </section>
 
         <section id="faq" className="py-14 sm:py-16">
