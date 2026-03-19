@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 const GOLD = "#D4AF37";
-const WA = "971000000000";
+const WA = "971502879462";
 
 type Lang = "en" | "ar" | "fr";
 
