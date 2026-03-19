@@ -7,7 +7,7 @@ const PAYMENT_LINKS = {
   ultimate: "https://buy.stripe.com/test_aFadR89jU6m75nx4CC0oM02"
 };
 
-const WHATSAPP_NUMBER = "971XXXXXXXXX"; // ضع رقمك هنا بدون أصفار أو علامة + (مثلاً 971501234567)
+const WHATSAPP_NUMBER = "971502879462"; // ضع رقمك هنا بدون أصفار أو علامة + (مثلاً 971501234567)
 
 export default function Home() {
   return (
