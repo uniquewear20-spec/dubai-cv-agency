@@ -1,5 +1,4 @@
 import React from 'react';
-import { MessageCircle } from 'lucide-react'; // تأكد من تثبيت lucide-react أو استخدم أيقونة عادية
 
 const PAYMENT_LINKS = {
   basic: "https://buy.stripe.com/test_eVq4gyeEe25R03d5GG0oM00",
@@ -7,7 +6,8 @@ const PAYMENT_LINKS = {
   ultimate: "https://buy.stripe.com/test_aFadR89jU6m75nx4CC0oM02"
 };
 
-const WHATSAPP_NUMBER = "971502879462"; // ضع رقمك هنا بدون أصفار أو علامة + (مثلاً 971501234567) 
+// ضاعف رقمك هنا بدلاً من الاصفار (مثلاً 971501234567)
+const WHATSAPP_NUMBER = "971XXXXXXXXX"; 
 
 export default function Home() {
   return (
@@ -44,15 +44,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Floating WhatsApp Button */}
+      {/* Floating WhatsApp Button (Pure SVG - No Import Needed) */}
       <a 
         href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi, I'm interested in a CV package!`}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50 flex items-center justify-center"
+        className="fixed bottom-8 right-8 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50 flex items-center justify-center w-16 h-16"
         aria-label="Contact on WhatsApp"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.38 8.38 0 0 1 3.8.9L21 3z"/></svg>
+        <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.38 8.38 0 0 1 3.8.9L21 3z"></path>
+        </svg>
       </a>
 
       <footer className="py-12 text-center text-slate-400 border-t bg-white">
