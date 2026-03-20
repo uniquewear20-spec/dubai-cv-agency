@@ -282,7 +282,7 @@ function ContactModal({ open, onClose, dark }: {
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-[90] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[90] flex items-start justify-center overflow-y-auto p-4 pt-6 sm:items-center">
           <motion.div className="absolute inset-0 backdrop-blur-md"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={handleClose} style={{ background: "rgba(0,0,0,0.78)" }} />
@@ -293,7 +293,7 @@ function ContactModal({ open, onClose, dark }: {
             animate={{ opacity: 1, scale: 1,    y: 0,  filter: "blur(0px)" }}
             exit={{   opacity: 0, scale: 0.96,  y: 10, filter: "blur(4px)" }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            style={{ background: modalBg, borderColor: `${GOLD}50`, maxHeight: "calc(100svh - 2rem)" }}>
+            style={{ background: modalBg, borderColor: `${GOLD}50` }}>
 
             {/* Gold top bar */}
             <div className="h-1 w-full"
@@ -321,7 +321,7 @@ function ContactModal({ open, onClose, dark }: {
             </div>
 
             {/* Scrollable body */}
-            <div className="overflow-y-auto px-6 py-5" style={{ maxHeight: "calc(100svh - 10rem)" }}>
+            <div className="overflow-y-auto px-6 py-5" style={{ maxHeight: "calc(100svh - 8rem)" }}>
 
               {/* SUCCESS */}
               {submitState === "success" && (
