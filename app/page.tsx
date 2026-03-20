@@ -3,12 +3,12 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon, Star, ChevronLeft, ChevronRight, Mail, X, Send } from "lucide-react";
-import { TestimonialsColumns } from "@/components/ui/testimonials-columns-1";
+import { Sun, Moon, Mail, X, Send, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import { TestimonialsColumns } from "../components/ui/testimonials-columns-1";
 
 // ─── CONTACT CONSTANTS ────────────────────────────────────────────────────────
 const CONTACT_EMAIL   = "info@zenithdubaicv.com";
-const WHATSAPP_NUMBER = "971502879462";
+const WHATSAPP_NUMBER = "971521442139";           // +971 52 144 2139
 const GOLD            = "#D4AF37";
 
 // ─── STRIPE PAYMENT LINKS ─────────────────────────────────────────────────────
@@ -25,6 +25,9 @@ type ContactForm = {
   message:     string;
 };
 
+// "idle" | "sending" | "success" | "error"
+type SubmitState = "idle" | "sending" | "success" | "error";
+
 const SUBJECT_OPTIONS = [
   "Basic Inquiry",
   "Professional CV",
@@ -32,7 +35,7 @@ const SUBJECT_OPTIONS = [
   "Other",
 ];
 
-// ─── TESTIMONIALS DATA (actual client names + "precisely" wording) ────────────
+// ─── TESTIMONIALS DATA ────────────────────────────────────────────────────────
 const TESTIMONIALS = [
   {
     name: "Sara Al-Rashidi", role: "Finance Director, Dubai", flag: "🇦🇪",
@@ -97,16 +100,10 @@ function waLink(msg: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 
-function buildMailto(form: ContactForm): string {
-  const subject = encodeURIComponent(`[${form.subject}] — from ${form.senderEmail}`);
-  const body    = encodeURIComponent(
-    `From: ${form.senderEmail}\n\n${form.message}\n\n---\nSent via Zenith Dubai CV website`
-  );
-  return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-}
-
 // ─── FADE-IN WRAPPER ──────────────────────────────────────────────────────────
-function FadeIn({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string }) {
+function FadeIn({ children, delay = 0, className }: {
+  children: React.ReactNode; delay?: number; className?: string;
+}) {
   return (
     <motion.div
       className={className}
@@ -123,17 +120,16 @@ function FadeIn({ children, delay = 0, className }: { children: React.ReactNode;
 // ─── DARK TOGGLE ──────────────────────────────────────────────────────────────
 function DarkToggle({ dark, onToggle }: { dark: boolean; onToggle: (v: boolean) => void }) {
   return (
-    <button
-      type="button"
-      onClick={() => onToggle(!dark)}
+    <button type="button" onClick={() => onToggle(!dark)}
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
       className="inline-flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-200 hover:opacity-80"
       style={{
         borderColor: dark ? "rgba(255,255,255,0.15)" : "rgba(212,175,55,0.50)",
         background:   dark ? "rgba(255,255,255,0.06)" : "rgba(212,175,55,0.08)",
-      }}
-    >
-      {dark ? <Sun size={15} color={GOLD} strokeWidth={2} /> : <Moon size={15} color={GOLD} strokeWidth={2} />}
+      }}>
+      {dark
+        ? <Sun  size={15} color={GOLD} strokeWidth={2} />
+        : <Moon size={15} color={GOLD} strokeWidth={2} />}
     </button>
   );
 }
@@ -141,49 +137,88 @@ function DarkToggle({ dark, onToggle }: { dark: boolean; onToggle: (v: boolean) 
 // ─── EMAIL ICON BUTTON (mobile nav) ──────────────────────────────────────────
 function EmailIconButton({ dark, onClick }: { dark: boolean; onClick: () => void }) {
   return (
-    <button
-      type="button" onClick={onClick} aria-label="Open contact form"
+    <button type="button" onClick={onClick} aria-label="Open contact form"
       className="inline-flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-200 hover:opacity-80"
       style={{
         borderColor: dark ? "rgba(255,255,255,0.15)" : "rgba(212,175,55,0.50)",
         background:   dark ? "rgba(255,255,255,0.06)" : "rgba(212,175,55,0.08)",
-      }}
-    >
+      }}>
       <Mail size={15} color={GOLD} strokeWidth={2} />
     </button>
   );
 }
 
 // ─── CONTACT FORM MODAL ───────────────────────────────────────────────────────
-function ContactModal({ open, onClose, dark }: { open: boolean; onClose: () => void; dark: boolean }) {
-  const [form, setForm] = useState<ContactForm>({ senderEmail: "", subject: SUBJECT_OPTIONS[0], message: "" });
-  const [sent, setSent] = useState(false);
+// Uses fetch() → /api/contact — NO mailto:, NO redirect, NO third-party service.
+// States: idle → sending (spinner) → success (check) | error (alert)
+function ContactModal({ open, onClose, dark }: {
+  open: boolean; onClose: () => void; dark: boolean;
+}) {
+  const [form, setForm]       = useState<ContactForm>({
+    senderEmail: "", subject: SUBJECT_OPTIONS[0], message: "",
+  });
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [errorMsg,    setErrorMsg]    = useState("");
 
+  // ── Theme tokens ─────────────────────────────────────────────────────────
   const border  = dark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.10)";
   const inputBg = dark ? "rgba(255,255,255,0.06)" : "#f9f7f2";
   const textHi  = dark ? "#ffffff"                : "#0f172a";
   const textSub = dark ? "#a1a1aa"                : "#64748b";
   const modalBg = dark ? "#0a0a0c"                : "#ffffff";
+  const inputStyle: React.CSSProperties = {
+    background: inputBg, borderColor: `${GOLD}40`, color: textHi, outline: "none",
+  };
 
-  const inputStyle: React.CSSProperties = { background: inputBg, borderColor: `${GOLD}40`, color: textHi, outline: "none" };
-
-  function handleSend() {
+  // ── Submit handler — silent fetch(), user never leaves the page ───────────
+  async function handleSubmit() {
     if (!form.senderEmail.trim() || !form.message.trim()) return;
-    window.location.href = buildMailto(form);
-    setSent(true);
+    setSubmitState("sending");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify(form),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMsg(data.error ?? "Something went wrong. Please try WhatsApp.");
+        setSubmitState("error");
+      } else {
+        setSubmitState("success");
+      }
+    } catch {
+      setErrorMsg("Network error. Please check your connection or use WhatsApp.");
+      setSubmitState("error");
+    }
   }
+
+  // ── Close + reset ─────────────────────────────────────────────────────────
   function handleClose() {
     onClose();
-    setTimeout(() => { setForm({ senderEmail: "", subject: SUBJECT_OPTIONS[0], message: "" }); setSent(false); }, 300);
+    setTimeout(() => {
+      setForm({ senderEmail: "", subject: SUBJECT_OPTIONS[0], message: "" });
+      setSubmitState("idle");
+      setErrorMsg("");
+    }, 320);
   }
+
+  const isBusy    = submitState === "sending";
+  const canSubmit = form.senderEmail.trim() && form.message.trim() && !isBusy;
 
   return (
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-[90] flex items-center justify-center p-4">
+          {/* Backdrop */}
           <motion.div className="absolute inset-0 backdrop-blur-md"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            onClick={handleClose} style={{ background: "rgba(0,0,0,0.75)" }} />
+            onClick={handleClose} style={{ background: "rgba(0,0,0,0.78)" }} />
+
+          {/* Panel */}
           <motion.div
             className="relative w-full max-w-md overflow-hidden rounded-3xl border shadow-2xl"
             initial={{ opacity: 0, scale: 0.94, y: 20, filter: "blur(8px)" }}
@@ -192,8 +227,9 @@ function ContactModal({ open, onClose, dark }: { open: boolean; onClose: () => v
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             style={{ background: modalBg, borderColor: `${GOLD}50` }}
           >
-            {/* Gold top bar */}
-            <div className="h-1 w-full" style={{ background: `linear-gradient(90deg, ${GOLD}, #f0d060, ${GOLD})` }} />
+            {/* Gold top accent bar */}
+            <div className="h-1 w-full"
+              style={{ background: `linear-gradient(90deg, ${GOLD}, #f0d060, ${GOLD})` }} />
 
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b"
@@ -204,8 +240,8 @@ function ContactModal({ open, onClose, dark }: { open: boolean; onClose: () => v
                   <Mail size={16} color={GOLD} strokeWidth={2} />
                 </div>
                 <div>
-                  <p className="text-sm font-bold" style={{ color: textHi }}>Email Inquiry</p>
-                  <p className="text-[11px]"        style={{ color: textSub }}>{CONTACT_EMAIL}</p>
+                  <p className="text-sm font-bold"  style={{ color: textHi }}>Email Inquiry</p>
+                  <p className="text-[11px]"         style={{ color: textSub }}>{CONTACT_EMAIL}</p>
                 </div>
               </div>
               <button type="button" onClick={handleClose}
@@ -218,61 +254,124 @@ function ContactModal({ open, onClose, dark }: { open: boolean; onClose: () => v
 
             {/* Body */}
             <div className="px-6 py-6">
-              {sent ? (
+
+              {/* ── SUCCESS STATE ─────────────────────────────────────────── */}
+              {submitState === "success" && (
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
                   className="flex flex-col items-center gap-4 py-6 text-center">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full"
                     style={{ background: `${GOLD}18`, border: `2px solid ${GOLD}` }}>
-                    <Send size={26} color={GOLD} />
+                    <CheckCircle size={28} color={GOLD} strokeWidth={1.8} />
                   </div>
-                  <p className="text-lg font-bold" style={{ color: textHi }}>Email Client Opened!</p>
-                  <p className="text-sm leading-6" style={{ color: textSub }}>
-                    Your message has been pre-filled. Hit{" "}
-                    <span style={{ color: GOLD }} className="font-semibold">Send</span> in your email app.
+                  <p className="text-lg font-bold" style={{ color: textHi }}>Message Sent!</p>
+                  <p className="text-sm leading-6 max-w-xs" style={{ color: textSub }}>
+                    Your inquiry has been delivered directly to our team. We&apos;ll reply to{" "}
+                    <span style={{ color: GOLD }} className="font-semibold">{form.senderEmail}</span>{" "}
+                    within 24 hours.
                   </p>
                   <button type="button" onClick={handleClose}
                     className="mt-2 inline-flex h-10 items-center rounded-full px-6 text-sm font-bold text-black transition hover:brightness-105"
-                    style={{ background: GOLD }}>Done</button>
+                    style={{ background: GOLD }}>
+                    Done
+                  </button>
                 </motion.div>
-              ) : (
-                <div className="flex flex-col gap-4">
+              )}
+
+              {/* ── ERROR STATE ───────────────────────────────────────────── */}
+              {submitState === "error" && (
+                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                  className="mb-4 flex items-start gap-3 rounded-2xl border px-4 py-3"
+                  style={{ borderColor: "rgba(239,68,68,0.35)", background: "rgba(239,68,68,0.07)" }}>
+                  <AlertCircle size={16} className="mt-0.5 shrink-0 text-red-400" />
                   <div>
-                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: textSub }}>Your Email Address</label>
-                    <input type="email" placeholder="you@example.com" value={form.senderEmail}
+                    <p className="text-xs font-semibold text-red-400">Delivery failed</p>
+                    <p className="mt-0.5 text-[11px]" style={{ color: textSub }}>{errorMsg}</p>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* ── FORM (shown in idle + error + sending states) ─────────── */}
+              {submitState !== "success" && (
+                <div className="flex flex-col gap-4">
+
+                  {/* Sender Email */}
+                  <div>
+                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider"
+                      style={{ color: textSub }}>Your Email Address</label>
+                    <input type="email" placeholder="you@example.com"
+                      value={form.senderEmail}
                       onChange={(e) => setForm((f) => ({ ...f, senderEmail: e.target.value }))}
-                      className="w-full rounded-xl border px-4 py-3 text-sm transition-all" style={{ ...inputStyle }}
+                      disabled={isBusy}
+                      className="w-full rounded-xl border px-4 py-3 text-sm transition-all disabled:opacity-60"
+                      style={{ ...inputStyle }}
                       onFocus={(e) => { (e.target as HTMLInputElement).style.boxShadow = `0 0 0 2px ${GOLD}50`; (e.target as HTMLInputElement).style.borderColor = GOLD; }}
                       onBlur={(e)  => { (e.target as HTMLInputElement).style.boxShadow = "none"; (e.target as HTMLInputElement).style.borderColor = `${GOLD}40`; }} />
                   </div>
+
+                  {/* Subject */}
                   <div>
-                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: textSub }}>Subject</label>
-                    <select value={form.subject} onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
-                      className="w-full rounded-xl border px-4 py-3 text-sm transition-all appearance-none cursor-pointer"
-                      style={{ ...inputStyle, backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23D4AF37' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 1rem center" }}
+                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider"
+                      style={{ color: textSub }}>Subject</label>
+                    <select value={form.subject}
+                      onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
+                      disabled={isBusy}
+                      className="w-full rounded-xl border px-4 py-3 text-sm transition-all appearance-none cursor-pointer disabled:opacity-60"
+                      style={{
+                        ...inputStyle,
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23D4AF37' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
+                        backgroundRepeat: "no-repeat", backgroundPosition: "right 1rem center",
+                      }}
                       onFocus={(e) => { (e.target as HTMLSelectElement).style.boxShadow = `0 0 0 2px ${GOLD}50`; (e.target as HTMLSelectElement).style.borderColor = GOLD; }}
                       onBlur={(e)  => { (e.target as HTMLSelectElement).style.boxShadow = "none"; (e.target as HTMLSelectElement).style.borderColor = `${GOLD}40`; }}>
                       {SUBJECT_OPTIONS.map((opt) => (
-                        <option key={opt} value={opt} style={{ background: dark ? "#0a0a0c" : "#fff", color: dark ? "#fff" : "#0f172a" }}>{opt}</option>
+                        <option key={opt} value={opt}
+                          style={{ background: dark ? "#0a0a0c" : "#fff", color: dark ? "#fff" : "#0f172a" }}>
+                          {opt}
+                        </option>
                       ))}
                     </select>
                   </div>
+
+                  {/* Message */}
                   <div>
-                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: textSub }}>Message</label>
-                    <textarea rows={5} placeholder="Tell us about your background, target role, and how we can help…"
-                      value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                      className="w-full rounded-xl border px-4 py-3 text-sm transition-all resize-none" style={{ ...inputStyle }}
+                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider"
+                      style={{ color: textSub }}>Message</label>
+                    <textarea rows={5}
+                      placeholder="Tell us about your background, target role, and how we can help…"
+                      value={form.message}
+                      onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                      disabled={isBusy}
+                      className="w-full rounded-xl border px-4 py-3 text-sm transition-all resize-none disabled:opacity-60"
+                      style={{ ...inputStyle }}
                       onFocus={(e) => { (e.target as HTMLTextAreaElement).style.boxShadow = `0 0 0 2px ${GOLD}50`; (e.target as HTMLTextAreaElement).style.borderColor = GOLD; }}
                       onBlur={(e)  => { (e.target as HTMLTextAreaElement).style.boxShadow = "none"; (e.target as HTMLTextAreaElement).style.borderColor = `${GOLD}40`; }} />
                   </div>
-                  <button type="button" onClick={handleSend}
-                    disabled={!form.senderEmail.trim() || !form.message.trim()}
-                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl text-sm font-bold text-black transition hover:brightness-105 disabled:opacity-40 disabled:cursor-not-allowed"
+
+                  {/* Submit button — 3 visual states: idle / sending / retry */}
+                  <button type="button" onClick={handleSubmit}
+                    disabled={!canSubmit}
+                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl text-sm font-bold text-black transition hover:brightness-105 disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{ background: GOLD, boxShadow: `0 0 0 1px rgba(212,175,55,0.35), 0 12px 40px rgba(212,175,55,0.22)` }}>
-                    <Send size={15} strokeWidth={2.2} />
-                    Send via Email Client
+                    {submitState === "sending" ? (
+                      <>
+                        <Loader2 size={15} className="animate-spin" strokeWidth={2.5} />
+                        Sending…
+                      </>
+                    ) : submitState === "error" ? (
+                      <>
+                        <Send size={15} strokeWidth={2.2} />
+                        Retry
+                      </>
+                    ) : (
+                      <>
+                        <Send size={15} strokeWidth={2.2} />
+                        Send Message
+                      </>
+                    )}
                   </button>
+
                   <p className="text-center text-[11px]" style={{ color: textSub }}>
-                    Opens your email app with the message pre-filled — then hit Send.
+                    Your message is sent silently — no email app opens.
                   </p>
                 </div>
               )}
@@ -293,7 +392,10 @@ export default function Home() {
     const saved = localStorage.getItem("zenith-theme");
     return saved !== null ? saved === "dark" : true;
   });
-  const handleSetDark = (v: boolean) => { setDark(v); localStorage.setItem("zenith-theme", v ? "dark" : "light"); };
+  const handleSetDark = (v: boolean) => {
+    setDark(v);
+    localStorage.setItem("zenith-theme", v ? "dark" : "light");
+  };
 
   // ── Contact modal ──────────────────────────────────────────────────────────
   const [modalOpen, setModalOpen] = useState(false);
@@ -311,9 +413,10 @@ export default function Home() {
   const navBg   = dark ? "rgba(5,5,5,0.88)"       : "rgba(255,255,255,0.92)";
 
   return (
-    <div className="min-h-screen w-full font-sans transition-colors duration-300 relative" style={{ background: bg, color: textHi }}>
+    <div className="min-h-screen w-full font-sans transition-colors duration-300 relative"
+      style={{ background: bg, color: textHi }}>
 
-      {/* Gold ambient glow — dark mode only */}
+      {/* Gold ambient glow — dark only */}
       {dark && (
         <div className="pointer-events-none fixed inset-0 -z-10"
           style={{ background: "radial-gradient(800px 400px at 20% 10%, rgba(212,175,55,0.09), transparent 60%)" }} />
@@ -325,11 +428,9 @@ export default function Home() {
       <header className="sticky top-0 z-40 border-b backdrop-blur-xl transition-colors duration-300"
         style={{ borderColor: border, background: navBg }}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
-
           <div className="text-xl font-black tracking-tighter italic" style={{ color: textHi }}>
             DUBAI <span style={{ color: GOLD }}>CV</span> AGENCY
           </div>
-
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
             {["services","process","pricing","testimonials"].map((id) => (
               <a key={id} href={`#${id}`} style={{ color: textSub }}
@@ -338,7 +439,6 @@ export default function Home() {
               </a>
             ))}
           </nav>
-
           <div className="flex items-center gap-2">
             <button type="button" onClick={openModal}
               className="hidden sm:inline-flex h-9 items-center gap-1.5 rounded-full border px-4 text-xs font-semibold transition hover:opacity-80"
@@ -363,7 +463,8 @@ export default function Home() {
               <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: GOLD }} />
               Dubai&apos;s Premium CV Agency — ATS + Cinematic Design
             </p>
-            <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight leading-tight" style={{ color: textHi }}>
+            <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight leading-tight"
+              style={{ color: textHi }}>
               GET HIRED IN <span className="italic" style={{ color: GOLD }}>DUBAI.</span>
             </h1>
             <p className="text-xl mb-10 max-w-2xl mx-auto leading-relaxed" style={{ color: textSub }}>
@@ -454,7 +555,8 @@ export default function Home() {
               { step: "04", title: "Refine", body: "Request revisions until you are 100% satisfied." },
             ].map((s, i) => (
               <FadeIn key={s.step} delay={0.07 * i}>
-                <div className="flex h-full flex-col rounded-3xl border p-6" style={{ borderColor: border, background: cardBg }}>
+                <div className="flex h-full flex-col rounded-3xl border p-6"
+                  style={{ borderColor: border, background: cardBg }}>
                   <p className="text-3xl font-black mb-3" style={{ color: GOLD }}>{s.step}</p>
                   <h3 className="text-base font-bold mb-2" style={{ color: textHi }}>{s.title}</h3>
                   <p className="text-sm leading-7" style={{ color: textSub }}>{s.body}</p>
@@ -473,7 +575,6 @@ export default function Home() {
             <h2 className="mt-2 text-3xl font-black tracking-tight" style={{ color: textHi }}>Packages</h2>
             <p className="mt-2 text-sm" style={{ color: textSub }}>Transparent pricing. Global-ready results.</p>
           </FadeIn>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
 
             {/* Basic — 179 AED */}
@@ -562,16 +663,11 @@ export default function Home() {
                 </a>
               </div>
             </FadeIn>
-
           </div>
         </section>
 
         {/* ════════════════════════════════════════════════════════════════════
-            TESTIMONIALS
-            — Vertical animated 3-column marquee via TestimonialsColumns
-            — dark prop flows in so cards invert instantly with the toggle
-            — mask-image fades cards at top/bottom edges (premium effect)
-            — Mobile: single column; Desktop (lg+): 3 columns
+            TESTIMONIALS — Vertical animated 3-column marquee
         ════════════════════════════════════════════════════════════════════ */}
         <TestimonialsColumns
           testimonials={TESTIMONIALS}
@@ -586,9 +682,15 @@ export default function Home() {
         <section className="py-16 px-6 max-w-4xl mx-auto text-center">
           <FadeIn>
             <div className="rounded-3xl border border-[#D4AF37]/25 p-10 sm:p-14"
-              style={{ background: dark ? "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(212,175,55,0.10), transparent 60%)" : "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(212,175,55,0.07), transparent 60%)" }}>
-              <h2 className="text-3xl font-black tracking-tight" style={{ color: textHi }}>Your Dream Role Is One CV Away</h2>
-              <p className="mt-4 text-base" style={{ color: textSub }}>Join 200+ professionals who landed roles across the GCC, Europe, and APAC.</p>
+              style={{ background: dark
+                ? "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(212,175,55,0.10), transparent 60%)"
+                : "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(212,175,55,0.07), transparent 60%)" }}>
+              <h2 className="text-3xl font-black tracking-tight" style={{ color: textHi }}>
+                Your Dream Role Is One CV Away
+              </h2>
+              <p className="mt-4 text-base" style={{ color: textSub }}>
+                Join 200+ professionals who landed roles across the GCC, Europe, and APAC.
+              </p>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a href={waLink("Hi! I am ready to get started. Help me choose the right CV package.")}
                   target="_blank" rel="noreferrer"
@@ -627,20 +729,21 @@ export default function Home() {
               className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-xs font-semibold transition hover:opacity-80"
               style={{ borderColor: "rgba(37,211,102,0.40)", background: "rgba(37,211,102,0.07)", color: "#25D366" }}>
               <svg viewBox="0 0 24 24" width="13" height="13" fill="none">
-                <path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="#25D366" strokeWidth="1.6" strokeLinejoin="round" />
-                <path d="M9.35 8.9c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.1.8 2.6.7 3.1.6.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3-.1-.2-.2-.3-.5-.4l-1.9-.9c-.2-.1-.4-.1-.6.1-.2.2-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5l.4-.5c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.5l-.8-2Z" fill="#25D366" />
+                <path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z"
+                  stroke="#25D366" strokeWidth="1.6" strokeLinejoin="round" />
+                <path d="M9.35 8.9c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.1.8 2.6.7 3.1.6.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3-.1-.2-.2-.3-.5-.4l-1.9-.9c-.2-.1-.4-.1-.6.1-.2.2-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5l.4-.5c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.5l-.8-2Z"
+                  fill="#25D366" />
               </svg>
               WhatsApp Us
             </a>
           </div>
         </footer>
-
       </main>
 
       {/* ════════════════════════════════════════════════════════════════════════
-          FLOATING BUTTONS
+          FLOATING BUTTONS — Gold email (above) + Green WhatsApp (below)
       ════════════════════════════════════════════════════════════════════════ */}
-      <button type="button" onClick={openModal} aria-label="Open email contact form" title={CONTACT_EMAIL}
+      <button type="button" onClick={openModal} aria-label="Open email contact form"
         className="fixed bottom-28 right-10 w-14 h-14 rounded-full hover:scale-110 transition-transform z-50 flex items-center justify-center"
         style={{ background: GOLD, boxShadow: `0 8px 32px rgba(212,175,55,0.40)` }}>
         <Mail size={22} color="#000" strokeWidth={2.2} />
@@ -651,8 +754,10 @@ export default function Home() {
         className="fixed bottom-10 right-10 w-14 h-14 rounded-full hover:scale-110 transition-transform z-50 flex items-center justify-center"
         style={{ background: "#25D366", boxShadow: "0 10px 40px rgba(37,211,102,0.4)" }}>
         <svg viewBox="0 0 24 24" width="28" height="28" fill="none">
-          <path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="white" strokeWidth="1.6" strokeLinejoin="round" />
-          <path d="M9.35 8.9c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.1.8 2.6.7 3.1.6.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3-.1-.2-.2-.3-.5-.4l-1.9-.9c-.2-.1-.4-.1-.6.1-.2.2-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5l.4-.5c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.5l-.8-2Z" fill="white" />
+          <path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z"
+            stroke="white" strokeWidth="1.6" strokeLinejoin="round" />
+          <path d="M9.35 8.9c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.1.8 2.6.7 3.1.6.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3-.1-.2-.2-.3-.5-.4l-1.9-.9c-.2-.1-.4-.1-.6.1-.2.2-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5l.4-.5c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.5l-.8-2Z"
+            fill="white" />
         </svg>
       </a>
 
