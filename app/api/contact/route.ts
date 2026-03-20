@@ -1,56 +1,109 @@
 // app/api/contact/route.ts
-// ─────────────────────────────────────────────────────────────────────────────
-// Silent background email submission — no mailto:, no redirect.
-// Uses Nodemailer with GoDaddy SMTP (smtpout.secureserver.net:465 SSL).
+// Accepts multipart/form-data with optional photo and CV file attachments.
+// Uses Nodemailer + GoDaddy SMTP (smtpout.secureserver.net:465 SSL).
 //
-// Required Vercel environment variables:
-//   SMTP_USER     → your full GoDaddy email  e.g. info@zenithdubaicv.com
-//   SMTP_PASS     → your GoDaddy email password
-//   CONTACT_TO    → recipient address         e.g. info@zenithdubaicv.com
-// ─────────────────────────────────────────────────────────────────────────────
+// Vercel environment variables required:
+//   SMTP_USER   → e.g. info@zenithdubaicv.com
+//   SMTP_PASS   → your GoDaddy email password
+//   CONTACT_TO  → recipient address (can be same as SMTP_USER)
 
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-// ── Lightweight input validation ──────────────────────────────────────────────
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }
 
-// ── POST /api/contact ─────────────────────────────────────────────────────────
+// Allowed MIME types
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const ALLOWED_CV_TYPES    = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
+
+// 5 MB limit per file
+const MAX_FILE_BYTES = 5 * 1024 * 1024;
+
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { senderEmail, subject, message } = body as {
-      senderEmail: string;
-      subject:     string;
-      message:     string;
-    };
+    // ── Parse multipart/form-data ─────────────────────────────────────────
+    const formData = await req.formData();
 
-    // ── Validate ──────────────────────────────────────────────────────────────
+    const senderEmail = (formData.get("senderEmail") as string | null)?.trim() ?? "";
+    const subject     = (formData.get("subject")     as string | null)?.trim() ?? "";
+    const message     = (formData.get("message")     as string | null)?.trim() ?? "";
+    const photoFile   =  formData.get("photo")   as File | null;
+    const cvFile      =  formData.get("cv")      as File | null;
+
+    // ── Validate required fields ──────────────────────────────────────────
     if (!senderEmail || !subject || !message) {
-      return NextResponse.json(
-        { error: "All fields are required." },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "All fields are required." }, { status: 400 });
     }
     if (!isValidEmail(senderEmail)) {
-      return NextResponse.json(
-        { error: "Invalid email address." },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid email address." }, { status: 400 });
     }
-    if (message.trim().length < 10) {
-      return NextResponse.json(
-        { error: "Message is too short." },
-        { status: 400 }
-      );
+    if (message.length < 10) {
+      return NextResponse.json({ error: "Message is too short." }, { status: 400 });
     }
 
-    // ── Pull credentials from environment ────────────────────────────────────
-    const smtpUser   = process.env.SMTP_USER;
-    const smtpPass   = process.env.SMTP_PASS;
-    const contactTo  = process.env.CONTACT_TO ?? smtpUser;
+    // ── Validate photo (optional) ─────────────────────────────────────────
+    if (photoFile && photoFile.size > 0) {
+      if (!ALLOWED_IMAGE_TYPES.includes(photoFile.type)) {
+        return NextResponse.json(
+          { error: "Photo must be JPEG, PNG, or WEBP." },
+          { status: 400 }
+        );
+      }
+      if (photoFile.size > MAX_FILE_BYTES) {
+        return NextResponse.json(
+          { error: "Photo must be under 5 MB." },
+          { status: 400 }
+        );
+      }
+    }
+
+    // ── Validate CV (optional) ────────────────────────────────────────────
+    if (cvFile && cvFile.size > 0) {
+      if (!ALLOWED_CV_TYPES.includes(cvFile.type)) {
+        return NextResponse.json(
+          { error: "CV must be a PDF or Word document (.pdf, .doc, .docx)." },
+          { status: 400 }
+        );
+      }
+      if (cvFile.size > MAX_FILE_BYTES) {
+        return NextResponse.json(
+          { error: "CV file must be under 5 MB." },
+          { status: 400 }
+        );
+      }
+    }
+
+    // ── Read file buffers ─────────────────────────────────────────────────
+    const attachments: nodemailer.Attachment[] = [];
+
+    if (photoFile && photoFile.size > 0) {
+      const buffer = Buffer.from(await photoFile.arrayBuffer());
+      attachments.push({
+        filename:    photoFile.name || "photo.jpg",
+        content:     buffer,
+        contentType: photoFile.type,
+      });
+    }
+
+    if (cvFile && cvFile.size > 0) {
+      const buffer = Buffer.from(await cvFile.arrayBuffer());
+      attachments.push({
+        filename:    cvFile.name || "cv.pdf",
+        content:     buffer,
+        contentType: cvFile.type,
+      });
+    }
+
+    // ── SMTP credentials ──────────────────────────────────────────────────
+    const smtpUser  = process.env.SMTP_USER;
+    const smtpPass  = process.env.SMTP_PASS;
+    const contactTo = process.env.CONTACT_TO ?? smtpUser;
 
     if (!smtpUser || !smtpPass) {
       console.error("[contact] SMTP_USER or SMTP_PASS env var is missing.");
@@ -60,30 +113,36 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ── Create Nodemailer transporter — GoDaddy SMTP SSL port 465 ────────────
+    // ── Nodemailer transporter — GoDaddy SMTP SSL ─────────────────────────
     const transporter = nodemailer.createTransport({
-      host:   "smtpout.secureserver.net",
-      port:   465,
-      secure: true,           // SSL — required for port 465
-      auth: {
-        user: smtpUser,
-        pass: smtpPass,
-      },
-      // GoDaddy sometimes needs a slightly longer timeout
+      host:              "smtpout.secureserver.net",
+      port:              465,
+      secure:            true,
+      auth:              { user: smtpUser, pass: smtpPass },
       connectionTimeout: 10_000,
       greetingTimeout:   10_000,
       socketTimeout:     15_000,
     });
 
-    // ── Build the email ───────────────────────────────────────────────────────
-    const mailOptions = {
-      from:    `"Zenith Dubai CV" <${smtpUser}>`,
-      to:      contactTo,
-      replyTo: senderEmail,           // ← reply goes straight to the client
-      subject: `[${subject}] New inquiry from ${senderEmail}`,
+    // ── Build attachment summary for HTML body ────────────────────────────
+    const attachmentSummary = attachments.length > 0
+      ? `<p style="color:#D4AF37;font-size:13px;margin:0 0 4px">
+           📎 ${attachments.length} attachment${attachments.length > 1 ? "s" : ""} included:
+           ${attachments.map((a) => `<strong>${a.filename}</strong>`).join(", ")}
+         </p>`
+      : `<p style="color:#52525b;font-size:12px;margin:0">No attachments</p>`;
+
+    // ── Send email ────────────────────────────────────────────────────────
+    await transporter.sendMail({
+      from:        `"Zenith Dubai CV" <${smtpUser}>`,
+      to:          contactTo,
+      replyTo:     senderEmail,
+      subject:     `[${subject}] New inquiry from ${senderEmail}`,
+      attachments,
       text: [
-        `From:    ${senderEmail}`,
-        `Subject: ${subject}`,
+        `From:        ${senderEmail}`,
+        `Subject:     ${subject}`,
+        `Attachments: ${attachments.map((a) => a.filename).join(", ") || "None"}`,
         ``,
         message,
         ``,
@@ -96,10 +155,9 @@ export async function POST(req: NextRequest) {
             <h2 style="color:#D4AF37;margin:0;font-size:20px">New CV Inquiry</h2>
             <p style="color:#a1a1aa;margin:4px 0 0;font-size:13px">Zenith Dubai CV — Website Contact Form</p>
           </div>
-
           <table style="width:100%;border-collapse:collapse;margin-bottom:24px">
             <tr>
-              <td style="padding:8px 0;color:#a1a1aa;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;width:90px">From</td>
+              <td style="padding:8px 0;color:#a1a1aa;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;width:110px">From</td>
               <td style="padding:8px 0;color:#ffffff;font-size:14px">
                 <a href="mailto:${senderEmail}" style="color:#D4AF37;text-decoration:none">${senderEmail}</a>
               </td>
@@ -108,31 +166,27 @@ export async function POST(req: NextRequest) {
               <td style="padding:8px 0;color:#a1a1aa;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em">Subject</td>
               <td style="padding:8px 0;color:#ffffff;font-size:14px">${subject}</td>
             </tr>
+            <tr>
+              <td style="padding:8px 0;color:#a1a1aa;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em">Files</td>
+              <td style="padding:8px 0;font-size:13px">${attachmentSummary}</td>
+            </tr>
           </table>
-
           <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px;margin-bottom:24px">
             <p style="color:#a1a1aa;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 12px">Message</p>
             <p style="color:#d4d4d8;font-size:14px;line-height:1.7;margin:0;white-space:pre-wrap">${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
           </div>
-
           <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:16px;text-align:center">
-            <p style="color:#52525b;font-size:11px;margin:0">Sent via Zenith Dubai CV website · zenithdubaicv.com</p>
+            <p style="color:#52525b;font-size:11px;margin:0">Sent via Zenith Dubai CV website</p>
           </div>
         </div>
       `,
-    };
+    });
 
-    // ── Send ──────────────────────────────────────────────────────────────────
-    await transporter.sendMail(mailOptions);
-
-    return NextResponse.json(
-      { success: true, message: "Email sent successfully." },
-      { status: 200 }
-    );
+    return NextResponse.json({ success: true }, { status: 200 });
 
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : "Unknown error";
-    console.error("[contact] sendMail failed:", message);
+    const msg = err instanceof Error ? err.message : "Unknown error";
+    console.error("[contact] sendMail failed:", msg);
     return NextResponse.json(
       { error: "Failed to send email. Please try WhatsApp instead." },
       { status: 500 }
@@ -140,7 +194,6 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// Block all other HTTP methods
 export async function GET() {
   return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
 }

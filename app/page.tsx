@@ -1,9 +1,9 @@
 // Updated Zenith Dubai CV - 20 March 2026
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon, Mail, X, Send, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import { Sun, Moon, Mail, X, Send, Loader2, CheckCircle, AlertCircle, Upload, FileText, ImageIcon, Trash2 } from "lucide-react";
 import { TestimonialsColumns } from "../components/ui/testimonials-columns-1";
 
 // ─── CONSTANTS ────────────────────────────────────────────────────────────────
@@ -18,8 +18,14 @@ const PAYMENT_LINKS = {
 };
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
-type ContactForm  = { senderEmail: string; subject: string; message: string };
-type SubmitState  = "idle" | "sending" | "success" | "error";
+type ContactForm = {
+  senderEmail: string;
+  subject:     string;
+  message:     string;
+  photo:       File | null;
+  cv:          File | null;
+};
+type SubmitState = "idle" | "sending" | "success" | "error";
 
 const SUBJECT_OPTIONS = ["Basic Inquiry", "Professional CV", "Ultimate Package", "Other"];
 
@@ -88,6 +94,12 @@ function waLink(msg: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 
+function formatBytes(bytes: number): string {
+  if (bytes < 1024)       return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
 // ─── FADE-IN ──────────────────────────────────────────────────────────────────
 function FadeIn({ children, delay = 0, className }: {
   children: React.ReactNode; delay?: number; className?: string;
@@ -118,15 +130,104 @@ function DarkToggle({ dark, onToggle }: { dark: boolean; onToggle: (v: boolean) 
   );
 }
 
+// ─── FILE UPLOAD ZONE ─────────────────────────────────────────────────────────
+function FileUploadZone({
+  label, hint, accept, icon: Icon, file, onFile, onClear, dark, disabled,
+}: {
+  label:    string;
+  hint:     string;
+  accept:   string;
+  icon:     React.ElementType;
+  file:     File | null;
+  onFile:   (f: File) => void;
+  onClear:  () => void;
+  dark:     boolean;
+  disabled: boolean;
+}) {
+  const inputRef  = useRef<HTMLInputElement>(null);
+  const [drag, setDrag] = useState(false);
+
+  const border  = file
+    ? `${GOLD}`
+    : drag
+      ? `${GOLD}80`
+      : dark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)";
+  const bg      = file
+    ? dark ? `${GOLD}10` : `${GOLD}08`
+    : drag
+      ? dark ? `${GOLD}08` : `${GOLD}05`
+      : dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)";
+  const textHi  = dark ? "#ffffff" : "#0f172a";
+  const textSub = dark ? "#a1a1aa" : "#64748b";
+
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault();
+    setDrag(false);
+    if (disabled) return;
+    const f = e.dataTransfer.files[0];
+    if (f) onFile(f);
+  }
+
+  return (
+    <div>
+      <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider"
+        style={{ color: textSub }}>{label}</label>
+
+      {file ? (
+        // ── File selected — show name + size + clear button ────────────────
+        <div className="flex items-center gap-3 rounded-xl border px-4 py-3"
+          style={{ borderColor: GOLD, background: bg }}>
+          <Icon size={18} color={GOLD} strokeWidth={1.8} className="shrink-0" />
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-xs font-semibold" style={{ color: textHi }}>{file.name}</p>
+            <p className="text-[10px]" style={{ color: textSub }}>{formatBytes(file.size)}</p>
+          </div>
+          <button type="button" onClick={onClear} disabled={disabled}
+            className="shrink-0 rounded-full p-1 transition hover:opacity-70 disabled:opacity-40"
+            style={{ color: textSub }} aria-label="Remove file">
+            <Trash2 size={13} />
+          </button>
+        </div>
+      ) : (
+        // ── Drop zone ──────────────────────────────────────────────────────
+        <div
+          className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed px-4 py-5 text-center transition-all"
+          style={{ borderColor: border, background: bg }}
+          onClick={() => !disabled && inputRef.current?.click()}
+          onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
+          onDragLeave={() => setDrag(false)}
+          onDrop={handleDrop}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && inputRef.current?.click()}
+          aria-label={`Upload ${label}`}
+        >
+          <Upload size={18} color={drag ? GOLD : textSub} strokeWidth={1.8} />
+          <div>
+            <p className="text-xs font-semibold" style={{ color: drag ? GOLD : textHi }}>
+              Click or drag &amp; drop
+            </p>
+            <p className="mt-0.5 text-[10px]" style={{ color: textSub }}>{hint}</p>
+          </div>
+        </div>
+      )}
+
+      <input ref={inputRef} type="file" accept={accept} className="hidden"
+        disabled={disabled}
+        onChange={(e) => { const f = e.target.files?.[0]; if (f) onFile(f); }} />
+    </div>
+  );
+}
+
 // ─── CONTACT MODAL ────────────────────────────────────────────────────────────
-// ✅ 100% fetch() based — zero mailto:, zero window.location, zero email app
-// Every email touchpoint on the page calls openModal() which leads here
 function ContactModal({ open, onClose, dark }: {
   open: boolean; onClose: () => void; dark: boolean;
 }) {
-  const [form, setForm]             = useState<ContactForm>({ senderEmail: "", subject: SUBJECT_OPTIONS[0], message: "" });
+  const [form, setForm] = useState<ContactForm>({
+    senderEmail: "", subject: SUBJECT_OPTIONS[0], message: "", photo: null, cv: null,
+  });
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
-  const [errorMsg, setErrorMsg]       = useState("");
+  const [errorMsg,    setErrorMsg]    = useState("");
 
   const border  = dark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.10)";
   const inputBg = dark ? "rgba(255,255,255,0.06)" : "#f9f7f2";
@@ -137,18 +238,23 @@ function ContactModal({ open, onClose, dark }: {
     background: inputBg, borderColor: `${GOLD}40`, color: textHi, outline: "none",
   };
 
-  // ── The ONLY email mechanism — fetch() to /api/contact, no redirect ────────
+  // ── Submit via FormData so files are included as multipart attachments ──
   async function handleSubmit() {
     if (!form.senderEmail.trim() || !form.message.trim()) return;
     setSubmitState("sending");
     setErrorMsg("");
+
     try {
-      const res  = await fetch("/api/contact", {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify(form),
-      });
+      const fd = new FormData();
+      fd.append("senderEmail", form.senderEmail.trim());
+      fd.append("subject",     form.subject);
+      fd.append("message",     form.message.trim());
+      if (form.photo) fd.append("photo", form.photo);
+      if (form.cv)    fd.append("cv",    form.cv);
+
+      const res  = await fetch("/api/contact", { method: "POST", body: fd });
       const data = await res.json();
+
       if (!res.ok) {
         setErrorMsg(data.error ?? "Something went wrong. Please try WhatsApp.");
         setSubmitState("error");
@@ -164,7 +270,7 @@ function ContactModal({ open, onClose, dark }: {
   function handleClose() {
     onClose();
     setTimeout(() => {
-      setForm({ senderEmail: "", subject: SUBJECT_OPTIONS[0], message: "" });
+      setForm({ senderEmail: "", subject: SUBJECT_OPTIONS[0], message: "", photo: null, cv: null });
       setSubmitState("idle");
       setErrorMsg("");
     }, 320);
@@ -187,14 +293,14 @@ function ContactModal({ open, onClose, dark }: {
             animate={{ opacity: 1, scale: 1,    y: 0,  filter: "blur(0px)" }}
             exit={{   opacity: 0, scale: 0.96,  y: 10, filter: "blur(4px)" }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            style={{ background: modalBg, borderColor: `${GOLD}50` }}>
+            style={{ background: modalBg, borderColor: `${GOLD}50`, maxHeight: "calc(100svh - 2rem)" }}>
 
             {/* Gold top bar */}
             <div className="h-1 w-full"
               style={{ background: `linear-gradient(90deg, ${GOLD}, #f0d060, ${GOLD})` }} />
 
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b"
+            <div className="flex items-center justify-between px-6 py-4 border-b"
               style={{ borderColor: border, background: dark ? `${GOLD}08` : `${GOLD}05` }}>
               <div className="flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-full"
@@ -214,28 +320,29 @@ function ContactModal({ open, onClose, dark }: {
               </button>
             </div>
 
-            {/* Body */}
-            <div className="px-6 py-6">
+            {/* Scrollable body */}
+            <div className="overflow-y-auto px-6 py-5" style={{ maxHeight: "calc(100svh - 10rem)" }}>
 
               {/* SUCCESS */}
               {submitState === "success" && (
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-                  className="flex flex-col items-center gap-4 py-6 text-center">
+                  className="flex flex-col items-center gap-4 py-8 text-center">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full"
                     style={{ background: `${GOLD}18`, border: `2px solid ${GOLD}` }}>
                     <CheckCircle size={28} color={GOLD} strokeWidth={1.8} />
                   </div>
                   <p className="text-lg font-bold" style={{ color: textHi }}>Message Sent!</p>
                   <p className="text-sm leading-6 max-w-xs" style={{ color: textSub }}>
-                    Your inquiry has been delivered directly to our team. We&apos;ll reply to{" "}
+                    Your inquiry
+                    {(form.photo || form.cv) && " and attachments have"}
+                    {!(form.photo || form.cv) && " has"}
+                    {" "}been delivered to our team. We&apos;ll reply to{" "}
                     <span style={{ color: GOLD }} className="font-semibold">{form.senderEmail}</span>{" "}
                     within 24 hours.
                   </p>
                   <button type="button" onClick={handleClose}
                     className="mt-2 inline-flex h-10 items-center rounded-full px-6 text-sm font-bold text-black transition hover:brightness-105"
-                    style={{ background: GOLD }}>
-                    Done
-                  </button>
+                    style={{ background: GOLD }}>Done</button>
                 </motion.div>
               )}
 
@@ -252,10 +359,11 @@ function ContactModal({ open, onClose, dark }: {
                 </motion.div>
               )}
 
-              {/* FORM — shown in idle, sending, and error states */}
+              {/* FORM */}
               {submitState !== "success" && (
                 <div className="flex flex-col gap-4">
 
+                  {/* Email */}
                   <div>
                     <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider"
                       style={{ color: textSub }}>Your Email Address</label>
@@ -268,6 +376,7 @@ function ContactModal({ open, onClose, dark }: {
                       onBlur={(e)  => { (e.target as HTMLInputElement).style.boxShadow = "none"; (e.target as HTMLInputElement).style.borderColor = `${GOLD}40`; }} />
                   </div>
 
+                  {/* Subject */}
                   <div>
                     <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider"
                       style={{ color: textSub }}>Subject</label>
@@ -286,10 +395,11 @@ function ContactModal({ open, onClose, dark }: {
                     </select>
                   </div>
 
+                  {/* Message */}
                   <div>
                     <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider"
                       style={{ color: textSub }}>Message</label>
-                    <textarea rows={5} disabled={isBusy}
+                    <textarea rows={4} disabled={isBusy}
                       placeholder="Tell us about your background, target role, and how we can help…"
                       value={form.message}
                       onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
@@ -299,6 +409,42 @@ function ContactModal({ open, onClose, dark }: {
                       onBlur={(e)  => { (e.target as HTMLTextAreaElement).style.boxShadow = "none"; (e.target as HTMLTextAreaElement).style.borderColor = `${GOLD}40`; }} />
                   </div>
 
+                  {/* Divider */}
+                  <div className="flex items-center gap-3">
+                    <div className="h-px flex-1" style={{ background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }} />
+                    <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: textSub }}>
+                      Attachments (optional)
+                    </span>
+                    <div className="h-px flex-1" style={{ background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }} />
+                  </div>
+
+                  {/* Photo upload */}
+                  <FileUploadZone
+                    label="Profile Photo"
+                    hint="JPEG, PNG or WEBP · max 5 MB"
+                    accept="image/jpeg,image/png,image/webp"
+                    icon={ImageIcon}
+                    file={form.photo}
+                    onFile={(f) => setForm((prev) => ({ ...prev, photo: f }))}
+                    onClear={() => setForm((prev) => ({ ...prev, photo: null }))}
+                    dark={dark}
+                    disabled={isBusy}
+                  />
+
+                  {/* CV upload */}
+                  <FileUploadZone
+                    label="Current CV (optional)"
+                    hint="PDF, DOC or DOCX · max 5 MB"
+                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    icon={FileText}
+                    file={form.cv}
+                    onFile={(f) => setForm((prev) => ({ ...prev, cv: f }))}
+                    onClear={() => setForm((prev) => ({ ...prev, cv: null }))}
+                    dark={dark}
+                    disabled={isBusy}
+                  />
+
+                  {/* Submit */}
                   <button type="button" onClick={handleSubmit} disabled={!canSubmit}
                     className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl text-sm font-bold text-black transition hover:brightness-105 disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{ background: GOLD, boxShadow: `0 0 0 1px rgba(212,175,55,0.35), 0 12px 40px rgba(212,175,55,0.22)` }}>
@@ -337,7 +483,6 @@ export default function Home() {
     localStorage.setItem("zenith-theme", v ? "dark" : "light");
   };
 
-  // Single modal state — every email button on the page sets this to true
   const [modalOpen, setModalOpen] = useState(false);
   const openModal  = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -376,13 +521,11 @@ export default function Home() {
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            {/* ✅ opens modal — no mailto */}
             <button type="button" onClick={openModal}
               className="hidden sm:inline-flex h-9 items-center gap-1.5 rounded-full border px-4 text-xs font-semibold transition hover:opacity-80"
               style={{ borderColor: `${GOLD}50`, background: `${GOLD}0d`, color: GOLD }}>
               <Mail size={12} strokeWidth={2.2} />Contact Us
             </button>
-            {/* ✅ mobile icon — opens modal */}
             <button type="button" onClick={openModal}
               className="sm:hidden inline-flex h-9 w-9 items-center justify-center rounded-full border transition-all hover:opacity-80"
               style={{ borderColor: "rgba(212,175,55,0.50)", background: "rgba(212,175,55,0.08)" }}
@@ -417,7 +560,6 @@ export default function Home() {
                 style={{ background: GOLD, boxShadow: `0 0 0 1px rgba(212,175,55,0.35), 0 16px 50px rgba(212,175,55,0.22)` }}>
                 See Packages
               </a>
-              {/* ✅ opens modal — no mailto */}
               <button type="button" onClick={openModal}
                 className="inline-flex h-12 items-center gap-2 rounded-full border px-8 text-sm font-bold transition hover:brightness-105"
                 style={{ borderColor: GOLD, background: `${GOLD}12`, color: GOLD, boxShadow: `0 0 0 1px ${GOLD}30` }}>
@@ -623,7 +765,6 @@ export default function Home() {
                   style={{ background: GOLD, boxShadow: `0 0 0 1px rgba(212,175,55,0.40), 0 18px 60px rgba(212,175,55,0.26)` }}>
                   Get Started on WhatsApp
                 </a>
-                {/* ✅ opens modal — no mailto */}
                 <button type="button" onClick={openModal}
                   className="inline-flex h-12 items-center gap-2 rounded-full border px-8 text-sm font-bold transition hover:brightness-105"
                   style={{ borderColor: GOLD, background: `${GOLD}12`, color: GOLD }}>
@@ -643,7 +784,6 @@ export default function Home() {
             Based in Dubai. Serving the World. — ATS + Cinematic Design
           </p>
           <div className="mt-6 flex items-center justify-center gap-4 flex-wrap">
-            {/* ✅ opens modal — no mailto */}
             <button type="button" onClick={openModal}
               className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-xs font-semibold transition hover:opacity-80"
               style={{ borderColor: `${GOLD}50`, background: `${GOLD}0d`, color: GOLD }}>
@@ -665,7 +805,6 @@ export default function Home() {
       </main>
 
       {/* ── FLOATING BUTTONS ── */}
-      {/* ✅ opens modal — no mailto */}
       <button type="button" onClick={openModal} aria-label="Open email contact form"
         className="fixed bottom-28 right-10 w-14 h-14 rounded-full hover:scale-110 transition-transform z-50 flex items-center justify-center"
         style={{ background: GOLD, boxShadow: `0 8px 32px rgba(212,175,55,0.40)` }}>
@@ -683,7 +822,6 @@ export default function Home() {
         </svg>
       </a>
 
-      {/* Single modal instance shared by all email buttons */}
       <ContactModal open={modalOpen} onClose={closeModal} dark={dark} />
     </div>
   );
