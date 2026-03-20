@@ -1,7 +1,4 @@
 // app/api/contact/route.ts
-// Accepts multipart/form-data with optional photo and CV file attachments.
-// Uses Nodemailer + GoDaddy SMTP (smtpout.secureserver.net:465 SSL).
-//
 // Vercel environment variables required:
 //   SMTP_USER   → e.g. info@zenithdubaicv.com
 //   SMTP_PASS   → your GoDaddy email password
@@ -9,32 +6,32 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+// ── Fix: Attachment lives in nodemailer/lib/mailer, not the top-level namespace
+import type Mail from "nodemailer/lib/mailer";
+
+type Attachment = Mail.Attachment;
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }
 
-// Allowed MIME types
 const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const ALLOWED_CV_TYPES    = [
   "application/pdf",
   "application/msword",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ];
-
-// 5 MB limit per file
-const MAX_FILE_BYTES = 5 * 1024 * 1024;
+const MAX_FILE_BYTES = 5 * 1024 * 1024; // 5 MB
 
 export async function POST(req: NextRequest) {
   try {
-    // ── Parse multipart/form-data ─────────────────────────────────────────
     const formData = await req.formData();
 
     const senderEmail = (formData.get("senderEmail") as string | null)?.trim() ?? "";
     const subject     = (formData.get("subject")     as string | null)?.trim() ?? "";
     const message     = (formData.get("message")     as string | null)?.trim() ?? "";
-    const photoFile   =  formData.get("photo")   as File | null;
-    const cvFile      =  formData.get("cv")      as File | null;
+    const photoFile   =  formData.get("photo") as File | null;
+    const cvFile      =  formData.get("cv")    as File | null;
 
     // ── Validate required fields ──────────────────────────────────────────
     if (!senderEmail || !subject || !message) {
@@ -56,10 +53,7 @@ export async function POST(req: NextRequest) {
         );
       }
       if (photoFile.size > MAX_FILE_BYTES) {
-        return NextResponse.json(
-          { error: "Photo must be under 5 MB." },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: "Photo must be under 5 MB." }, { status: 400 });
       }
     }
 
@@ -72,30 +66,25 @@ export async function POST(req: NextRequest) {
         );
       }
       if (cvFile.size > MAX_FILE_BYTES) {
-        return NextResponse.json(
-          { error: "CV file must be under 5 MB." },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: "CV file must be under 5 MB." }, { status: 400 });
       }
     }
 
-    // ── Read file buffers ─────────────────────────────────────────────────
-    const attachments: nodemailer.Attachment[] = [];
+    // ── Build attachments array ───────────────────────────────────────────
+    const attachments: Attachment[] = [];
 
     if (photoFile && photoFile.size > 0) {
-      const buffer = Buffer.from(await photoFile.arrayBuffer());
       attachments.push({
         filename:    photoFile.name || "photo.jpg",
-        content:     buffer,
+        content:     Buffer.from(await photoFile.arrayBuffer()),
         contentType: photoFile.type,
       });
     }
 
     if (cvFile && cvFile.size > 0) {
-      const buffer = Buffer.from(await cvFile.arrayBuffer());
       attachments.push({
         filename:    cvFile.name || "cv.pdf",
-        content:     buffer,
+        content:     Buffer.from(await cvFile.arrayBuffer()),
         contentType: cvFile.type,
       });
     }
@@ -113,7 +102,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ── Nodemailer transporter — GoDaddy SMTP SSL ─────────────────────────
+    // ── Nodemailer transporter — GoDaddy SMTP SSL port 465 ───────────────
     const transporter = nodemailer.createTransport({
       host:              "smtpout.secureserver.net",
       port:              465,
@@ -124,15 +113,12 @@ export async function POST(req: NextRequest) {
       socketTimeout:     15_000,
     });
 
-    // ── Build attachment summary for HTML body ────────────────────────────
+    // ── Attachment summary for HTML ───────────────────────────────────────
     const attachmentSummary = attachments.length > 0
-      ? `<p style="color:#D4AF37;font-size:13px;margin:0 0 4px">
-           📎 ${attachments.length} attachment${attachments.length > 1 ? "s" : ""} included:
-           ${attachments.map((a) => `<strong>${a.filename}</strong>`).join(", ")}
-         </p>`
-      : `<p style="color:#52525b;font-size:12px;margin:0">No attachments</p>`;
+      ? attachments.map((a) => `<strong>${String(a.filename)}</strong>`).join(", ")
+      : "None";
 
-    // ── Send email ────────────────────────────────────────────────────────
+    // ── Send ──────────────────────────────────────────────────────────────
     await transporter.sendMail({
       from:        `"Zenith Dubai CV" <${smtpUser}>`,
       to:          contactTo,
@@ -142,12 +128,12 @@ export async function POST(req: NextRequest) {
       text: [
         `From:        ${senderEmail}`,
         `Subject:     ${subject}`,
-        `Attachments: ${attachments.map((a) => a.filename).join(", ") || "None"}`,
-        ``,
+        `Attachments: ${attachments.map((a) => String(a.filename)).join(", ") || "None"}`,
+        "",
         message,
-        ``,
-        `─────────────────────────────`,
-        `Sent via Zenith Dubai CV website`,
+        "",
+        "─────────────────────────────",
+        "Sent via Zenith Dubai CV website",
       ].join("\n"),
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#0a0a0c;color:#e4e4e7;padding:32px;border-radius:16px;border:1px solid rgba(212,175,55,0.3)">
@@ -168,7 +154,7 @@ export async function POST(req: NextRequest) {
             </tr>
             <tr>
               <td style="padding:8px 0;color:#a1a1aa;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em">Files</td>
-              <td style="padding:8px 0;font-size:13px">${attachmentSummary}</td>
+              <td style="padding:8px 0;color:#D4AF37;font-size:13px">${attachmentSummary}</td>
             </tr>
           </table>
           <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px;margin-bottom:24px">
