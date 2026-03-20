@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon, Star, ChevronLeft, ChevronRight, Mail, X, Send } from "lucide-react";
+import { TestimonialsColumns } from "@/components/ui/testimonials-columns-1";
 
 // ─── CONTACT CONSTANTS ────────────────────────────────────────────────────────
 const CONTACT_EMAIL   = "info@zenithdubaicv.com";
@@ -18,69 +19,10 @@ const PAYMENT_LINKS = {
 };
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
-type Testimonial = {
-  name:      string;
-  role:      string;
-  flag:      string;
-  industry:  string;
-  stars:     number;
-  text:      string;
-  highlight: string;
-};
-
 type ContactForm = {
   senderEmail: string;
   subject:     string;
   message:     string;
-};
-
-// ─── TESTIMONIALS DATA ────────────────────────────────────────────────────────
-const TESTIMONIALS: Testimonial[] = [
-  {
-    name: "Sara Al-Rashidi", role: "Finance Director, Dubai", flag: "🇦🇪", industry: "Finance", stars: 5,
-    text: "I applied to 12 roles and received 9 interview callbacks in under two weeks. The ATS CV passed every recruiter filter. Zenith understood the DIFC market precisely.",
-    highlight: "9 callbacks in 2 weeks",
-  },
-  {
-    name: "James Okafor", role: "Hospitality GM, Dubai Marina", flag: "🇳🇬", industry: "Hospitality", stars: 5,
-    text: "Every hiring manager mentioned my CV before the interview. The Cinematic Visual was breathtaking. Landed my dream role and negotiated a 28% higher salary.",
-    highlight: "+28% salary negotiated",
-  },
-  {
-    name: "Captain Rashed Al-Bloushi", role: "Senior First Officer, Emirates", flag: "🇦🇪", industry: "Aviation", stars: 5,
-    text: "Aviation CVs are a different discipline. The Zenith team knew exactly what airline HR departments look for. My Emirates application was shortlisted within days.",
-    highlight: "Emirates shortlisted in days",
-  },
-  {
-    name: "Marcus Vandenberg", role: "VP Engineering, ADNOC", flag: "🇳🇱", industry: "Oil & Gas", stars: 5,
-    text: "The ATS Professional template passed Fortune 500 filters I had struggled with for months. Within three weeks I had two competing offers from major energy firms.",
-    highlight: "2 competing offers in 3 weeks",
-  },
-  {
-    name: "Priya Nair", role: "Cloud Architect, Singapore", flag: "🇸🇬", industry: "Tech", stars: 5,
-    text: "Transitioning from India to Singapore is incredibly competitive. Zenith repositioned my profile for the APAC tech market. I doubled my interview rate and accepted an offer 40% above my previous package.",
-    highlight: "40% salary increase",
-  },
-  {
-    name: "Dr. Layla Al-Hosani", role: "Head of Cardiology, SEHA", flag: "🇦🇪", industry: "Healthcare", stars: 5,
-    text: "I needed a CV that reflected both my clinical excellence and leadership. Zenith delivered a world-class executive design that helped me secure my department head position.",
-    highlight: "Department Head secured",
-  },
-  {
-    name: "Claire Beaumont", role: "Private Banking Director, DIFC", flag: "🇬🇧", industry: "Finance", stars: 5,
-    text: "Relocated from London to DIFC and needed a CV for ultra-high-net-worth client management. The Executive Premium design opened doors at two of the top private banks in Dubai.",
-    highlight: "DIFC role landed in 4 weeks",
-  },
-  {
-    name: "Yousef Al-Qahtani", role: "Operations Director, Aramco", flag: "🇸🇦", industry: "Oil & Gas", stars: 5,
-    text: "My previous CV kept me at the same level for three years. After Zenith rebuilt my profile, I was promoted internally and received an unsolicited offer at 35% uplift.",
-    highlight: "+35% salary uplift",
-  },
-];
-
-const INDUSTRY_COLORS: Record<string, string> = {
-  Finance: "#F59E0B", Hospitality: "#D4AF37", Healthcare: "#34D399",
-  "Oil & Gas": "#FB923C", Tech: "#3B82F6", Aviation: "#818CF8",
 };
 
 const SUBJECT_OPTIONS = [
@@ -90,12 +32,71 @@ const SUBJECT_OPTIONS = [
   "Other",
 ];
 
+// ─── TESTIMONIALS DATA (actual client names + "precisely" wording) ────────────
+const TESTIMONIALS = [
+  {
+    name: "Sara Al-Rashidi", role: "Finance Director, Dubai", flag: "🇦🇪",
+    industry: "Finance", stars: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&crop=face",
+    text: "I applied to 12 roles and received 9 interview callbacks in under two weeks. The ATS CV passed every recruiter filter. Zenith understood the DIFC market precisely.",
+    highlight: "9 callbacks in 2 weeks",
+  },
+  {
+    name: "James Okafor", role: "Hospitality GM, Dubai Marina", flag: "🇳🇬",
+    industry: "Hospitality", stars: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face",
+    text: "Every hiring manager mentioned my CV before the interview. The Cinematic Visual was breathtaking. Landed my dream role and negotiated a 28% higher salary.",
+    highlight: "+28% salary negotiated",
+  },
+  {
+    name: "Captain Rashed Al-Bloushi", role: "Senior First Officer, Emirates", flag: "🇦🇪",
+    industry: "Aviation", stars: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face",
+    text: "Aviation CVs are a different discipline. The Zenith team knew exactly what airline HR departments look for. My Emirates application was shortlisted within days.",
+    highlight: "Emirates shortlisted in days",
+  },
+  {
+    name: "Marcus Vandenberg", role: "VP Engineering, ADNOC", flag: "🇳🇱",
+    industry: "Oil & Gas", stars: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&h=120&fit=crop&crop=face",
+    text: "The ATS Professional template passed Fortune 500 filters I had struggled with for months. Within three weeks I had two competing offers from major energy firms.",
+    highlight: "2 competing offers in 3 weeks",
+  },
+  {
+    name: "Priya Nair", role: "Cloud Architect, Singapore", flag: "🇸🇬",
+    industry: "Tech", stars: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=face",
+    text: "Transitioning from India to Singapore is incredibly competitive. Zenith repositioned my profile for the APAC tech market. I doubled my interview rate and accepted an offer 40% above my previous package.",
+    highlight: "40% salary increase",
+  },
+  {
+    name: "Dr. Layla Al-Hosani", role: "Head of Cardiology, SEHA", flag: "🇦🇪",
+    industry: "Healthcare", stars: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=120&h=120&fit=crop&crop=face",
+    text: "I needed a CV that reflected both my clinical excellence and leadership. Zenith delivered a world-class executive design that helped me secure my department head position.",
+    highlight: "Department Head secured",
+  },
+  {
+    name: "Claire Beaumont", role: "Private Banking Director, DIFC", flag: "🇬🇧",
+    industry: "Finance", stars: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=120&h=120&fit=crop&crop=face",
+    text: "Relocated from London to DIFC and needed a CV for ultra-high-net-worth client management. The Executive Premium design opened doors at two of the top private banks in Dubai.",
+    highlight: "DIFC role landed in 4 weeks",
+  },
+  {
+    name: "Yousef Al-Qahtani", role: "Operations Director, Aramco", flag: "🇸🇦",
+    industry: "Oil & Gas", stars: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=120&h=120&fit=crop&crop=face",
+    text: "My previous CV kept me at the same level for three years. After Zenith rebuilt my profile, I was promoted internally and received an unsolicited offer at 35% uplift.",
+    highlight: "+35% salary uplift",
+  },
+];
+
 // ─── UTILITIES ────────────────────────────────────────────────────────────────
 function waLink(msg: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 
-// Builds a mailto: href that pre-fills the user's email client
 function buildMailto(form: ContactForm): string {
   const subject = encodeURIComponent(`[${form.subject}] — from ${form.senderEmail}`);
   const body    = encodeURIComponent(
@@ -119,17 +120,6 @@ function FadeIn({ children, delay = 0, className }: { children: React.ReactNode;
   );
 }
 
-// ─── STAR ROW ─────────────────────────────────────────────────────────────────
-function StarRow({ count, size = 13 }: { count: number; size?: number }) {
-  return (
-    <div className="flex items-center gap-0.5">
-      {Array.from({ length: count }).map((_, i) => (
-        <Star key={i} width={size} height={size} fill={GOLD} stroke="none" />
-      ))}
-    </div>
-  );
-}
-
 // ─── DARK TOGGLE ──────────────────────────────────────────────────────────────
 function DarkToggle({ dark, onToggle }: { dark: boolean; onToggle: (v: boolean) => void }) {
   return (
@@ -148,13 +138,11 @@ function DarkToggle({ dark, onToggle }: { dark: boolean; onToggle: (v: boolean) 
   );
 }
 
-// ─── EMAIL ICON BUTTON (header mobile) ───────────────────────────────────────
+// ─── EMAIL ICON BUTTON (mobile nav) ──────────────────────────────────────────
 function EmailIconButton({ dark, onClick }: { dark: boolean; onClick: () => void }) {
   return (
     <button
-      type="button"
-      onClick={onClick}
-      aria-label="Open contact form"
+      type="button" onClick={onClick} aria-label="Open contact form"
       className="inline-flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-200 hover:opacity-80"
       style={{
         borderColor: dark ? "rgba(255,255,255,0.15)" : "rgba(212,175,55,0.50)",
@@ -168,8 +156,8 @@ function EmailIconButton({ dark, onClick }: { dark: boolean; onClick: () => void
 
 // ─── CONTACT FORM MODAL ───────────────────────────────────────────────────────
 function ContactModal({ open, onClose, dark }: { open: boolean; onClose: () => void; dark: boolean }) {
-  const [form, setForm]     = useState<ContactForm>({ senderEmail: "", subject: SUBJECT_OPTIONS[0], message: "" });
-  const [sent, setSent]     = useState(false);
+  const [form, setForm] = useState<ContactForm>({ senderEmail: "", subject: SUBJECT_OPTIONS[0], message: "" });
+  const [sent, setSent] = useState(false);
 
   const border  = dark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.10)";
   const inputBg = dark ? "rgba(255,255,255,0.06)" : "#f9f7f2";
@@ -177,24 +165,15 @@ function ContactModal({ open, onClose, dark }: { open: boolean; onClose: () => v
   const textSub = dark ? "#a1a1aa"                : "#64748b";
   const modalBg = dark ? "#0a0a0c"                : "#ffffff";
 
-  // Shared input style
-  const inputStyle: React.CSSProperties = {
-    background:  inputBg,
-    borderColor: `${GOLD}40`,
-    color:       textHi,
-    outline:     "none",
-  };
+  const inputStyle: React.CSSProperties = { background: inputBg, borderColor: `${GOLD}40`, color: textHi, outline: "none" };
 
   function handleSend() {
     if (!form.senderEmail.trim() || !form.message.trim()) return;
-    // Open the user's mail client with pre-filled fields
     window.location.href = buildMailto(form);
     setSent(true);
   }
-
   function handleClose() {
     onClose();
-    // Reset after exit animation completes
     setTimeout(() => { setForm({ senderEmail: "", subject: SUBJECT_OPTIONS[0], message: "" }); setSent(false); }, 300);
   }
 
@@ -202,18 +181,9 @@ function ContactModal({ open, onClose, dark }: { open: boolean; onClose: () => v
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-[90] flex items-center justify-center p-4">
-
-          {/* Backdrop */}
-          <motion.div
-            className="absolute inset-0 backdrop-blur-md"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={handleClose}
-            style={{ background: "rgba(0,0,0,0.75)" }}
-          />
-
-          {/* Modal panel */}
+          <motion.div className="absolute inset-0 backdrop-blur-md"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={handleClose} style={{ background: "rgba(0,0,0,0.75)" }} />
           <motion.div
             className="relative w-full max-w-md overflow-hidden rounded-3xl border shadow-2xl"
             initial={{ opacity: 0, scale: 0.94, y: 20, filter: "blur(8px)" }}
@@ -222,33 +192,26 @@ function ContactModal({ open, onClose, dark }: { open: boolean; onClose: () => v
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             style={{ background: modalBg, borderColor: `${GOLD}50` }}
           >
-            {/* Gold top accent bar */}
+            {/* Gold top bar */}
             <div className="h-1 w-full" style={{ background: `linear-gradient(90deg, ${GOLD}, #f0d060, ${GOLD})` }} />
 
             {/* Header */}
-            <div
-              className="flex items-center justify-between px-6 py-5 border-b"
-              style={{ borderColor: border, background: dark ? `${GOLD}08` : `${GOLD}05` }}
-            >
+            <div className="flex items-center justify-between px-6 py-5 border-b"
+              style={{ borderColor: border, background: dark ? `${GOLD}08` : `${GOLD}05` }}>
               <div className="flex items-center gap-3">
-                <div
-                  className="flex h-9 w-9 items-center justify-center rounded-full"
-                  style={{ background: `${GOLD}18`, border: `1px solid ${GOLD}40` }}
-                >
+                <div className="flex h-9 w-9 items-center justify-center rounded-full"
+                  style={{ background: `${GOLD}18`, border: `1px solid ${GOLD}40` }}>
                   <Mail size={16} color={GOLD} strokeWidth={2} />
                 </div>
                 <div>
                   <p className="text-sm font-bold" style={{ color: textHi }}>Email Inquiry</p>
-                  <p className="text-[11px]" style={{ color: textSub }}>{CONTACT_EMAIL}</p>
+                  <p className="text-[11px]"        style={{ color: textSub }}>{CONTACT_EMAIL}</p>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={handleClose}
+              <button type="button" onClick={handleClose}
                 className="flex h-8 w-8 items-center justify-center rounded-full border transition hover:opacity-70"
                 style={{ borderColor: border, background: dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)", color: textHi }}
-                aria-label="Close"
-              >
+                aria-label="Close">
                 <X size={14} />
               </button>
             </div>
@@ -256,114 +219,60 @@ function ContactModal({ open, onClose, dark }: { open: boolean; onClose: () => v
             {/* Body */}
             <div className="px-6 py-6">
               {sent ? (
-                /* ── Success state ── */
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex flex-col items-center gap-4 py-6 text-center"
-                >
-                  <div
-                    className="flex h-16 w-16 items-center justify-center rounded-full"
-                    style={{ background: `${GOLD}18`, border: `2px solid ${GOLD}` }}
-                  >
+                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                  className="flex flex-col items-center gap-4 py-6 text-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full"
+                    style={{ background: `${GOLD}18`, border: `2px solid ${GOLD}` }}>
                     <Send size={26} color={GOLD} />
                   </div>
                   <p className="text-lg font-bold" style={{ color: textHi }}>Email Client Opened!</p>
                   <p className="text-sm leading-6" style={{ color: textSub }}>
-                    Your message has been pre-filled in your email client. Hit{" "}
-                    <span style={{ color: GOLD }} className="font-semibold">Send</span> there to deliver it to us.
+                    Your message has been pre-filled. Hit{" "}
+                    <span style={{ color: GOLD }} className="font-semibold">Send</span> in your email app.
                   </p>
-                  <button
-                    type="button"
-                    onClick={handleClose}
+                  <button type="button" onClick={handleClose}
                     className="mt-2 inline-flex h-10 items-center rounded-full px-6 text-sm font-bold text-black transition hover:brightness-105"
-                    style={{ background: GOLD }}
-                  >
-                    Done
-                  </button>
+                    style={{ background: GOLD }}>Done</button>
                 </motion.div>
               ) : (
-                /* ── Form state ── */
                 <div className="flex flex-col gap-4">
-
-                  {/* Sender Email */}
                   <div>
-                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: textSub }}>
-                      Your Email Address
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="you@example.com"
-                      value={form.senderEmail}
+                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: textSub }}>Your Email Address</label>
+                    <input type="email" placeholder="you@example.com" value={form.senderEmail}
                       onChange={(e) => setForm((f) => ({ ...f, senderEmail: e.target.value }))}
-                      className="w-full rounded-xl border px-4 py-3 text-sm transition-all"
-                      style={{
-                        ...inputStyle,
-                        boxShadow: form.senderEmail ? `0 0 0 2px ${GOLD}30` : "none",
-                      }}
+                      className="w-full rounded-xl border px-4 py-3 text-sm transition-all" style={{ ...inputStyle }}
                       onFocus={(e) => { (e.target as HTMLInputElement).style.boxShadow = `0 0 0 2px ${GOLD}50`; (e.target as HTMLInputElement).style.borderColor = GOLD; }}
-                      onBlur={(e)  => { (e.target as HTMLInputElement).style.boxShadow = form.senderEmail ? `0 0 0 2px ${GOLD}30` : "none"; (e.target as HTMLInputElement).style.borderColor = `${GOLD}40`; }}
-                    />
+                      onBlur={(e)  => { (e.target as HTMLInputElement).style.boxShadow = "none"; (e.target as HTMLInputElement).style.borderColor = `${GOLD}40`; }} />
                   </div>
-
-                  {/* Subject Select */}
                   <div>
-                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: textSub }}>
-                      Subject
-                    </label>
-                    <select
-                      value={form.subject}
-                      onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
+                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: textSub }}>Subject</label>
+                    <select value={form.subject} onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
                       className="w-full rounded-xl border px-4 py-3 text-sm transition-all appearance-none cursor-pointer"
                       style={{ ...inputStyle, backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23D4AF37' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 1rem center" }}
                       onFocus={(e) => { (e.target as HTMLSelectElement).style.boxShadow = `0 0 0 2px ${GOLD}50`; (e.target as HTMLSelectElement).style.borderColor = GOLD; }}
-                      onBlur={(e)  => { (e.target as HTMLSelectElement).style.boxShadow = "none"; (e.target as HTMLSelectElement).style.borderColor = `${GOLD}40`; }}
-                    >
+                      onBlur={(e)  => { (e.target as HTMLSelectElement).style.boxShadow = "none"; (e.target as HTMLSelectElement).style.borderColor = `${GOLD}40`; }}>
                       {SUBJECT_OPTIONS.map((opt) => (
-                        <option key={opt} value={opt} style={{ background: dark ? "#0a0a0c" : "#ffffff", color: dark ? "#fff" : "#0f172a" }}>
-                          {opt}
-                        </option>
+                        <option key={opt} value={opt} style={{ background: dark ? "#0a0a0c" : "#fff", color: dark ? "#fff" : "#0f172a" }}>{opt}</option>
                       ))}
                     </select>
                   </div>
-
-                  {/* Message Body */}
                   <div>
-                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: textSub }}>
-                      Message
-                    </label>
-                    <textarea
-                      rows={5}
-                      placeholder="Tell us about your background, target role, and how we can help…"
-                      value={form.message}
-                      onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                      className="w-full rounded-xl border px-4 py-3 text-sm transition-all resize-none"
-                      style={{
-                        ...inputStyle,
-                        boxShadow: form.message ? `0 0 0 2px ${GOLD}30` : "none",
-                      }}
+                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: textSub }}>Message</label>
+                    <textarea rows={5} placeholder="Tell us about your background, target role, and how we can help…"
+                      value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                      className="w-full rounded-xl border px-4 py-3 text-sm transition-all resize-none" style={{ ...inputStyle }}
                       onFocus={(e) => { (e.target as HTMLTextAreaElement).style.boxShadow = `0 0 0 2px ${GOLD}50`; (e.target as HTMLTextAreaElement).style.borderColor = GOLD; }}
-                      onBlur={(e)  => { (e.target as HTMLTextAreaElement).style.boxShadow = form.message ? `0 0 0 2px ${GOLD}30` : "none"; (e.target as HTMLTextAreaElement).style.borderColor = `${GOLD}40`; }}
-                    />
+                      onBlur={(e)  => { (e.target as HTMLTextAreaElement).style.boxShadow = "none"; (e.target as HTMLTextAreaElement).style.borderColor = `${GOLD}40`; }} />
                   </div>
-
-                  {/* Send button */}
-                  <button
-                    type="button"
-                    onClick={handleSend}
+                  <button type="button" onClick={handleSend}
                     disabled={!form.senderEmail.trim() || !form.message.trim()}
                     className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl text-sm font-bold text-black transition hover:brightness-105 disabled:opacity-40 disabled:cursor-not-allowed"
-                    style={{
-                      background: GOLD,
-                      boxShadow: `0 0 0 1px rgba(212,175,55,0.35), 0 12px 40px rgba(212,175,55,0.22)`,
-                    }}
-                  >
+                    style={{ background: GOLD, boxShadow: `0 0 0 1px rgba(212,175,55,0.35), 0 12px 40px rgba(212,175,55,0.22)` }}>
                     <Send size={15} strokeWidth={2.2} />
                     Send via Email Client
                   </button>
-
                   <p className="text-center text-[11px]" style={{ color: textSub }}>
-                    This opens your email app with your message pre-filled — then hit Send.
+                    Opens your email app with the message pre-filled — then hit Send.
                   </p>
                 </div>
               )}
@@ -372,102 +281,6 @@ function ContactModal({ open, onClose, dark }: { open: boolean; onClose: () => v
         </div>
       )}
     </AnimatePresence>
-  );
-}
-
-// ─── TESTIMONIALS — 4-COLUMN GRID ─────────────────────────────────────────────
-function TestimonialsSection({ dark }: { dark: boolean }) {
-  const [page, setPage] = useState(0);
-  const PER_PAGE   = 4;
-  const totalPages = Math.ceil(TESTIMONIALS.length / PER_PAGE);
-  const visible    = TESTIMONIALS.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE);
-
-  const border  = dark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.10)";
-  const cardBg  = dark ? "rgba(255,255,255,0.04)" : "#ffffff";
-  const textHi  = dark ? "#ffffff"                : "#111827";
-  const textSub = dark ? "#a1a1aa"                : "#6b7280";
-  const textMid = dark ? "#d4d4d8"                : "#374151";
-  const dotDim  = dark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.14)";
-
-  return (
-    <section id="testimonials" className="py-16 px-6 max-w-7xl mx-auto">
-      <FadeIn className="mb-3">
-        <p className="text-xs font-bold uppercase tracking-[0.18em]" style={{ color: GOLD }}>Testimonials</p>
-        <h2 className="mt-2 text-3xl font-black tracking-tight" style={{ color: textHi }}>Client Reviews</h2>
-      </FadeIn>
-      <FadeIn delay={0.05} className="mb-8 flex items-center gap-3">
-        <StarRow count={5} />
-        <span className="text-sm font-semibold" style={{ color: textHi }}>5.0</span>
-        <span className="text-xs" style={{ color: textSub }}>200+ verified reviews</span>
-      </FadeIn>
-
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {visible.map((tm, i) => {
-          const accent = INDUSTRY_COLORS[tm.industry] ?? GOLD;
-          return (
-            <motion.div
-              key={`${tm.name}-${page}`}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1], delay: i * 0.07 }}
-              className="relative flex flex-col overflow-hidden rounded-3xl border p-4"
-              style={{ borderColor: border, background: cardBg }}
-            >
-              <div className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full opacity-[0.14]"
-                style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }} />
-              <div className="mb-3 flex items-center justify-between">
-                <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider"
-                  style={{ borderColor: `${accent}40`, background: `${accent}14`, color: accent }}>
-                  {tm.industry}
-                </span>
-                <StarRow count={tm.stars} size={11} />
-              </div>
-              <div className="mb-3 inline-flex self-start items-center rounded-full border px-2.5 py-0.5 text-[10px] font-semibold"
-                style={{ borderColor: `${GOLD}35`, background: `${GOLD}10`, color: GOLD }}>
-                {tm.highlight}
-              </div>
-              <p className="flex-1 text-xs leading-[1.7]" style={{ color: textMid }}>&ldquo;{tm.text}&rdquo;</p>
-              <div className="mt-4 flex items-center gap-2.5 border-t pt-3"
-                style={{ borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }}>
-                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border text-base"
-                  style={{ borderColor: `${accent}35`, background: `${accent}12` }}>
-                  {tm.flag}
-                </div>
-                <div>
-                  <p className="text-xs font-semibold" style={{ color: textHi }}>{tm.name}</p>
-                  <p className="text-[10px]" style={{ color: textSub }}>{tm.role}</p>
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {totalPages > 1 && (
-        <div className="mt-8 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            {Array.from({ length: totalPages }).map((_, pi) => (
-              <button key={pi} type="button" onClick={() => setPage(pi)} aria-label={`Page ${pi + 1}`}
-                className="h-1.5 rounded-full transition-all duration-300"
-                style={{ width: page === pi ? "2rem" : "0.5rem", background: page === pi ? GOLD : dotDim }} />
-            ))}
-          </div>
-          <div className="flex items-center gap-2">
-            <button type="button" onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0}
-              aria-label="Previous" className="inline-flex h-10 w-10 items-center justify-center rounded-full border transition hover:opacity-80 disabled:opacity-30"
-              style={{ borderColor: border, background: cardBg, color: textHi }}>
-              <ChevronLeft size={16} />
-            </button>
-            <button type="button" onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))} disabled={page === totalPages - 1}
-              aria-label="Next" className="inline-flex h-10 w-10 items-center justify-center rounded-full border transition hover:opacity-80 disabled:opacity-30"
-              style={{ borderColor: border, background: cardBg, color: textHi }}>
-              <ChevronRight size={16} />
-            </button>
-            <span className="ml-1 text-xs" style={{ color: textSub }}>{page + 1} / {totalPages}</span>
-          </div>
-        </div>
-      )}
-    </section>
   );
 }
 
@@ -500,7 +313,7 @@ export default function Home() {
   return (
     <div className="min-h-screen w-full font-sans transition-colors duration-300 relative" style={{ background: bg, color: textHi }}>
 
-      {/* Gold ambient glow */}
+      {/* Gold ambient glow — dark mode only */}
       {dark && (
         <div className="pointer-events-none fixed inset-0 -z-10"
           style={{ background: "radial-gradient(800px 400px at 20% 10%, rgba(212,175,55,0.09), transparent 60%)" }} />
@@ -520,22 +333,19 @@ export default function Home() {
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
             {["services","process","pricing","testimonials"].map((id) => (
               <a key={id} href={`#${id}`} style={{ color: textSub }}
-                className="transition hover:opacity-70 capitalize">{id === "testimonials" ? "Reviews" : id.charAt(0).toUpperCase() + id.slice(1)}</a>
+                className="transition hover:opacity-70 capitalize">
+                {id === "testimonials" ? "Reviews" : id.charAt(0).toUpperCase() + id.slice(1)}
+              </a>
             ))}
           </nav>
 
           <div className="flex items-center gap-2">
-            {/* Contact Us — desktop */}
             <button type="button" onClick={openModal}
               className="hidden sm:inline-flex h-9 items-center gap-1.5 rounded-full border px-4 text-xs font-semibold transition hover:opacity-80"
               style={{ borderColor: `${GOLD}50`, background: `${GOLD}0d`, color: GOLD }}>
-              <Mail size={12} strokeWidth={2.2} />
-              Contact Us
+              <Mail size={12} strokeWidth={2.2} />Contact Us
             </button>
-            {/* Email icon — mobile */}
-            <div className="sm:hidden">
-              <EmailIconButton dark={dark} onClick={openModal} />
-            </div>
+            <div className="sm:hidden"><EmailIconButton dark={dark} onClick={openModal} /></div>
             <DarkToggle dark={dark} onToggle={handleSetDark} />
           </div>
         </div>
@@ -553,41 +363,29 @@ export default function Home() {
               <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: GOLD }} />
               Dubai&apos;s Premium CV Agency — ATS + Cinematic Design
             </p>
-
             <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight leading-tight" style={{ color: textHi }}>
               GET HIRED IN <span className="italic" style={{ color: GOLD }}>DUBAI.</span>
             </h1>
-
             <p className="text-xl mb-10 max-w-2xl mx-auto leading-relaxed" style={{ color: textSub }}>
               Professional CV writing and LinkedIn optimization tailored for the UAE&apos;s competitive job market.
             </p>
-
-            {/* Hero CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 flex-wrap">
-
-              {/* Primary */}
               <a href="#pricing"
                 className="inline-flex h-12 items-center rounded-full px-8 text-sm font-bold text-black hover:brightness-105 transition"
                 style={{ background: GOLD, boxShadow: `0 0 0 1px rgba(212,175,55,0.35), 0 16px 50px rgba(212,175,55,0.22)` }}>
                 See Packages
               </a>
-
-              {/* Email Inquiry — opens modal */}
               <button type="button" onClick={openModal}
                 className="inline-flex h-12 items-center gap-2 rounded-full border px-8 text-sm font-bold transition hover:brightness-105"
                 style={{ borderColor: GOLD, background: `${GOLD}12`, color: GOLD, boxShadow: `0 0 0 1px ${GOLD}30` }}>
-                <Mail size={15} strokeWidth={2} />
-                Email Inquiry
+                <Mail size={15} strokeWidth={2} />Email Inquiry
               </button>
-
-              {/* WhatsApp */}
               <a href={waLink("Hi! I want to upgrade my CV. Help me choose the right package.")}
                 target="_blank" rel="noreferrer"
                 className="inline-flex h-12 items-center rounded-full border px-8 text-sm font-bold transition hover:opacity-80"
                 style={{ borderColor: border, background: cardBg, color: textHi }}>
                 Chat on WhatsApp
               </a>
-
             </div>
           </FadeIn>
         </section>
@@ -711,9 +509,7 @@ export default function Home() {
               <div className="rounded-[40px] border-2 p-12 flex flex-col justify-between relative scale-105 z-10 shadow-2xl"
                 style={{ borderColor: GOLD, background: dark ? "rgba(212,175,55,0.07)" : "#fffdf5" }}>
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-1.5 rounded-full text-[10px] uppercase font-black tracking-widest text-black"
-                  style={{ background: GOLD }}>
-                  Most Popular
-                </div>
+                  style={{ background: GOLD }}>Most Popular</div>
                 <div>
                   <h3 className="text-xl font-bold mb-2" style={{ color: textHi }}>Professional</h3>
                   <p className="mb-8 text-sm" style={{ color: textSub }}>CV + Cover Letter</p>
@@ -772,8 +568,17 @@ export default function Home() {
 
         {/* ════════════════════════════════════════════════════════════════════
             TESTIMONIALS
+            — Vertical animated 3-column marquee via TestimonialsColumns
+            — dark prop flows in so cards invert instantly with the toggle
+            — mask-image fades cards at top/bottom edges (premium effect)
+            — Mobile: single column; Desktop (lg+): 3 columns
         ════════════════════════════════════════════════════════════════════ */}
-        <TestimonialsSection dark={dark} />
+        <TestimonialsColumns
+          testimonials={TESTIMONIALS}
+          dark={dark}
+          columns={3}
+          speed={40}
+        />
 
         {/* ════════════════════════════════════════════════════════════════════
             FINAL CTA
@@ -794,8 +599,7 @@ export default function Home() {
                 <button type="button" onClick={openModal}
                   className="inline-flex h-12 items-center gap-2 rounded-full border px-8 text-sm font-bold transition hover:brightness-105"
                   style={{ borderColor: GOLD, background: `${GOLD}12`, color: GOLD }}>
-                  <Mail size={15} strokeWidth={2} />
-                  Email Inquiry
+                  <Mail size={15} strokeWidth={2} />Email Inquiry
                 </button>
               </div>
             </div>
@@ -816,8 +620,7 @@ export default function Home() {
             <button type="button" onClick={openModal}
               className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-xs font-semibold transition hover:opacity-80"
               style={{ borderColor: `${GOLD}50`, background: `${GOLD}0d`, color: GOLD }}>
-              <Mail size={13} strokeWidth={2.2} />
-              {CONTACT_EMAIL}
+              <Mail size={13} strokeWidth={2.2} />{CONTACT_EMAIL}
             </button>
             <a href={waLink("Hi! I want to upgrade my CV. Help me choose the right package.")}
               target="_blank" rel="noreferrer"
@@ -835,10 +638,9 @@ export default function Home() {
       </main>
 
       {/* ════════════════════════════════════════════════════════════════════════
-          FLOATING BUTTONS — Gold Email (above) + Green WhatsApp (below)
+          FLOATING BUTTONS
       ════════════════════════════════════════════════════════════════════════ */}
-      <button type="button" onClick={openModal} aria-label="Open email contact form"
-        title={CONTACT_EMAIL}
+      <button type="button" onClick={openModal} aria-label="Open email contact form" title={CONTACT_EMAIL}
         className="fixed bottom-28 right-10 w-14 h-14 rounded-full hover:scale-110 transition-transform z-50 flex items-center justify-center"
         style={{ background: GOLD, boxShadow: `0 8px 32px rgba(212,175,55,0.40)` }}>
         <Mail size={22} color="#000" strokeWidth={2.2} />
@@ -854,11 +656,7 @@ export default function Home() {
         </svg>
       </a>
 
-      {/* ════════════════════════════════════════════════════════════════════════
-          CONTACT FORM MODAL
-      ════════════════════════════════════════════════════════════════════════ */}
       <ContactModal open={modalOpen} onClose={closeModal} dark={dark} />
-
     </div>
   );
 }
