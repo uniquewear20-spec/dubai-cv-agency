@@ -489,7 +489,7 @@ function Modal({ state, onClose, t }: { state: ModalState; onClose: () => void; 
 function TestimonialsCarousel({ testimonials }: { testimonials: Tm[] }) {
   const [active, setActive] = useState(0);
   const total = testimonials.length;
-  const visibleCount = 2;
+  const visibleCount = 4;
   const pages = Math.ceil(total / visibleCount);
   const currentPage = Math.floor(active / visibleCount);
 
@@ -512,7 +512,7 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Tm[] }) {
 
   return (
     <div>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {visible.map((tm, i) => {
           const accentColor = INDUSTRY_COLORS[tm.industry] ?? GOLD;
           return (
@@ -521,7 +521,7 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Tm[] }) {
               initial={{ opacity: 0, y: 14, filter: "blur(4px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
-              className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 flex flex-col"
+              className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-4 lg:p-5 flex flex-col"
               style={{ boxShadow: `0 0 0 1px rgba(255,255,255,0.02), 0 24px 60px ${accentColor}0a` }}
             >
               <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full opacity-20"
