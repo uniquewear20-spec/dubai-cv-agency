@@ -1,7 +1,9 @@
 // app/page.tsx — Zenith Dubai CV
 "use client";
-import React, { useState, useRef, useCallback, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useRef, useCallback, useEffect, useId } from "react";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 import {
   Sun, Moon, Mail, X, Send, Loader2, CheckCircle, AlertCircle,
   Upload, FileText, ImageIcon, Trash2, CreditCard, ArrowRight, Globe, LayoutGrid,
@@ -320,6 +322,61 @@ const ROUTES = [
 // ── Helpers ────────────────────────────────────────────────────────────────────
 const wl = (m:string) => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
 const fb = (b:number) => b<1024?`${b}B`:b<1048576?`${(b/1024).toFixed(1)}KB`:`${(b/1048576).toFixed(1)}MB`;
+
+// ── SparklesCore ──────────────────────────────────────────────────────────────
+function SparklesCore({
+  id, className, background="transparent", minSize=0.4, maxSize=1.2,
+  speed=1.2, particleColor="#C8A96E", particleDensity=60,
+}:{
+  id?:string; className?:string; background?:string; minSize?:number;
+  maxSize?:number; speed?:number; particleColor?:string; particleDensity?:number;
+}) {
+  const [init, setInit] = useState(false);
+  const controls = useAnimation();
+  const generatedId = useId();
+  useEffect(() => {
+    initParticlesEngine(async (engine) => { await loadSlim(engine); }).then(() => setInit(true));
+  }, []);
+  return (
+    <motion.div animate={controls} className={`opacity-0 ${className??""}`} style={{opacity:0}}>
+      {init && (
+        <Particles
+          id={id || generatedId}
+          className="h-full w-full"
+          particlesLoaded={async (container) => {
+            if (container) controls.start({ opacity: 1, transition: { duration: 1.5 } });
+          }}
+          options={{
+            background: { color: { value: background } },
+            fullScreen: { enable: false, zIndex: 1 },
+            fpsLimit: 60,
+            particles: {
+              color: { value: particleColor },
+              move: {
+                enable: true, speed: { min: 0.05, max: 0.4 },
+                direction: "none", random: true, straight: false,
+                outModes: { default: "out" },
+              },
+              number: {
+                density: { enable: true, width: 800, height: 200 },
+                value: particleDensity,
+              },
+              opacity: {
+                value: { min: 0.05, max: 0.55 },
+                animation: { enable: true, speed, sync: false, startValue: "random" },
+              },
+              size: {
+                value: { min: minSize, max: maxSize },
+              },
+              shape: { type: "circle" },
+            },
+            detectRetina: true,
+          }}
+        />
+      )}
+    </motion.div>
+  );
+}
 
 // ── Rise ──────────────────────────────────────────────────────────────────────
 function Rise({children,d=0,y=24,className=""}:{children:React.ReactNode;d?:number;y?:number;className?:string}){
@@ -886,7 +943,32 @@ export default function Home(){
             </h1>
           </Rise>
           {/* FIX: Improved hero subtitle readability — slightly higher opacity sub color */}
-          <Rise d={0.75} y={28}><p className="text-base sm:text-[17px] leading-[1.95] max-w-[520px] mb-14 mx-auto" style={{color:dark?"#9A8E84":sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("heroSub",lang)}</p></Rise>
+          <Rise d={0.75} y={28}><p className="text-base sm:text-[17px] leading-[1.95] max-w-[520px] mb-6 mx-auto" style={{color:dark?"#9A8E84":sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("heroSub",lang)}</p></Rise>
+
+          {/* ── Sparkles strip ── */}
+          <Rise d={0.85} y={16}>
+            <div className="relative w-[480px] max-w-full h-[72px] mx-auto mb-8">
+              {/* Left gradient fade */}
+              <div className="absolute inset-y-0 left-0 w-24 z-10 pointer-events-none"
+                style={{background:`linear-gradient(to right, ${dark?INK:ASH}, transparent)`}}/>
+              {/* Right gradient fade */}
+              <div className="absolute inset-y-0 right-0 w-24 z-10 pointer-events-none"
+                style={{background:`linear-gradient(to left, ${dark?INK:ASH}, transparent)`}}/>
+              {/* Gold hairline */}
+              <div className="absolute top-0 inset-x-12 h-px pointer-events-none"
+                style={{background:`linear-gradient(to right, transparent, ${G}80, transparent)`}}/>
+              {/* Sparkles */}
+              <SparklesCore
+                background="transparent"
+                minSize={0.3}
+                maxSize={1.0}
+                particleDensity={55}
+                className="w-full h-full"
+                particleColor={G}
+                speed={0.9}
+              />
+            </div>
+          </Rise>
           <Rise d={0.92} y={20}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="#pricing" className="flex items-center gap-3 px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-85" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif"}}>{tr("viewPkg",lang)} <ArrowRight size={13} strokeWidth={2}/></a>
