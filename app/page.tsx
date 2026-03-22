@@ -863,7 +863,7 @@ export default function Home(){
 
         {/* ══ HERO ══════════════════════════════════════════════════════════ */}
         <section className="relative min-h-[95vh] flex flex-col items-center justify-center px-8 text-center overflow-hidden">
-          <motion.div className="absolute top-16 left-1/2 -translate-x-1/2 w-px" initial={{height:0,opacity:0}} animate={{height:80,opacity:1}} transition={{duration:2,ease:[0.16,1,0.3,1],delay:0.4}} style={{background:`linear-gradient(to bottom,transparent,${G}50,transparent)`}}/>
+
           <Rise d={0.3} y={36}><p className="text-[10px] font-medium tracking-[0.42em] uppercase mb-10" style={{color:G,fontFamily:"sans-serif"}}>{tr("eyebrow",lang)}</p></Rise>
           <Rise d={0.55} y={44}>
             <h1 className="text-5xl sm:text-6xl lg:text-[88px] font-normal leading-[1.05] tracking-[-0.025em] mb-7 mx-auto" style={{color:hi,maxWidth:"860px"}}>
