@@ -338,13 +338,13 @@ function SparklesCore({
     initParticlesEngine(async (engine) => { await loadSlim(engine); }).then(() => setInit(true));
   }, []);
   return (
-    <motion.div animate={controls} className={`opacity-0 ${className??""}`} style={{opacity:0}}>
+    <motion.div animate={controls} className={`${className??""}`} style={{opacity:0}}>
       {init && (
         <Particles
           id={id || generatedId}
           className="h-full w-full"
           particlesLoaded={async (container) => {
-            if (container) controls.start({ opacity: 1, transition: { duration: 1.5 } });
+            if (container) controls.start({ opacity: 1, transition: { duration: 2 } });
           }}
           options={{
             background: { color: { value: background } },
@@ -353,20 +353,33 @@ function SparklesCore({
             particles: {
               color: { value: particleColor },
               move: {
-                enable: true, speed: { min: 0.05, max: 0.4 },
-                direction: "none", random: true, straight: false,
-                outModes: { default: "out" },
+                enable: true,
+                direction: "top",
+                speed: { min: speed * 0.3, max: speed * 1.2 },
+                random: true,
+                straight: false,
+                outModes: { default: "out", top: "out", bottom: "none" },
+                drift: 0.8,
               },
               number: {
-                density: { enable: true, width: 800, height: 200 },
+                density: { enable: true, width: 600, height: 100 },
                 value: particleDensity,
               },
               opacity: {
-                value: { min: 0.05, max: 0.55 },
-                animation: { enable: true, speed, sync: false, startValue: "random" },
+                value: { min: 0.0, max: 0.8 },
+                animation: {
+                  enable: true, speed: 0.8, sync: false,
+                  startValue: "random", destroy: "min",
+                },
               },
               size: {
                 value: { min: minSize, max: maxSize },
+                animation: { enable: false },
+              },
+              life: {
+                count: 0,
+                delay: { value: 0, sync: false },
+                duration: { value: 0, sync: false },
               },
               shape: { type: "circle" },
             },
@@ -689,7 +702,7 @@ export default function Home(){
     : "brightness(0) saturate(0) contrast(1)"; // Pure black in light mode — crisp on warm bg
 
   return(
-    <div key={lang} className="min-h-screen w-full transition-colors duration-700" dir={dir} style={{background:bg,color:hi,fontFamily:font}}>
+    <div key={lang} className="min-h-screen w-full overflow-x-hidden transition-colors duration-700" dir={dir} style={{background:bg,color:hi,fontFamily:font}}>
       {/* Grain overlay */}
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.022]" style={{backgroundImage:"url(\"data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",backgroundSize:"200px"}}/>
       {dark&&<div className="pointer-events-none fixed inset-0 -z-10" style={{background:`radial-gradient(ellipse 70% 50% at 50% -5%,${G}09,transparent 65%)`}}/>}
@@ -944,45 +957,49 @@ export default function Home(){
           </Rise>
           <Rise d={0.75} y={28}><p className="text-[15px] sm:text-[17px] leading-[1.95] w-full max-w-[480px] mb-6 mx-auto px-4 sm:px-0" style={{color:dark?"#9A8E84":sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("heroSub",lang)}</p></Rise>
 
-          {/* ── Ambient glow pulse — breathes from within the page ── */}
+          {/* ── Sparkles — erupt upward from glowing line like reference ── */}
           <Rise d={0.82} y={0}>
-            <div className="relative w-full max-w-[520px] mx-auto mb-8" style={{height:"80px"}}>
-              {/* Deep ambient glow — the heart of the effect */}
-              <div className="absolute inset-0 pointer-events-none" style={{
-                background:`radial-gradient(ellipse 70% 100% at 50% 100%, ${G}28 0%, ${G}10 40%, transparent 75%)`,
-                filter:"blur(8px)",
-              }}/>
-              {/* Hairline that glows */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none" style={{
-                width:"60%", height:"1px",
-                background:`linear-gradient(to right, transparent, ${G}90, transparent)`,
-                boxShadow:`0 0 12px 2px ${G}50`,
-              }}/>
-              {/* Pulse ring */}
-              <motion.div
-                className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none rounded-full"
-                style={{width:"180px",height:"1px",background:`linear-gradient(to right,transparent,${G}60,transparent)`}}
-                animate={{scaleX:[0.6,1,0.6],opacity:[0.3,0.8,0.3]}}
-                transition={{duration:3.5,repeat:Infinity,ease:"easeInOut"}}
-              />
-              {/* Sparkles — drifting upward like embers */}
+            <div className="relative w-full mx-auto mb-8" style={{height:"140px", maxWidth:"560px"}}>
+
+              {/* Particles erupting upward — dense at source, dispersing up */}
               <SparklesCore
                 background="transparent"
-                minSize={0.2}
-                maxSize={0.9}
-                particleDensity={40}
+                minSize={0.3}
+                maxSize={1.4}
+                particleDensity={120}
                 className="absolute inset-0 w-full h-full"
                 particleColor={G}
-                speed={0.6}
+                speed={1.4}
               />
-              {/* Fade edges so particles vanish naturally */}
-              <div className="absolute inset-0 pointer-events-none" style={{
-                background:`linear-gradient(to right, ${dark?INK:ASH} 0%, transparent 20%, transparent 80%, ${dark?INK:ASH} 100%)`,
-              }}/>
-              {/* Fade bottom into page */}
-              <div className="absolute bottom-0 inset-x-0 h-8 pointer-events-none" style={{
-                background:`linear-gradient(to top, ${dark?INK:ASH}, transparent)`,
-              }}/>
+
+              {/* Glowing source line — sits at bottom of container */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none"
+                style={{
+                  width: "75%", height: "1px",
+                  background: `linear-gradient(to right, transparent, ${G}, transparent)`,
+                  boxShadow: `0 0 18px 4px ${G}70, 0 0 40px 8px ${G}35`,
+                }}
+              />
+              {/* Secondary soft glow bloom below the line */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none"
+                style={{
+                  width: "60%", height: "60px",
+                  background: `radial-gradient(ellipse 100% 100% at 50% 100%, ${G}35 0%, ${G}12 50%, transparent 100%)`,
+                  filter: "blur(6px)",
+                  transform: "translateX(-50%)",
+                }}
+              />
+              {/* Fade top so particles vanish upward naturally */}
+              <div className="absolute top-0 inset-x-0 h-16 pointer-events-none"
+                style={{background: `linear-gradient(to bottom, ${dark?INK:ASH}, transparent)`}}
+              />
+              {/* Fade left/right edges */}
+              <div className="absolute inset-y-0 left-0 w-16 pointer-events-none"
+                style={{background: `linear-gradient(to right, ${dark?INK:ASH}, transparent)`}}
+              />
+              <div className="absolute inset-y-0 right-0 w-16 pointer-events-none"
+                style={{background: `linear-gradient(to left, ${dark?INK:ASH}, transparent)`}}
+              />
             </div>
           </Rise>
 
