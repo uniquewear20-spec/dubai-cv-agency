@@ -672,6 +672,7 @@ export default function Home(){
                 borderRadius: "8px",
                 filter: logoFilter,
                 transition: "filter 0.4s ease",
+                paddingTop: "4px",
               }}
             />
           </a>
@@ -1192,38 +1193,40 @@ export default function Home(){
               background: "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.10) 15%, rgba(212,175,55,0.55) 50%, rgba(212,175,55,0.10) 85%, transparent 100%)",
             }}/>
           )}
-          <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-8">
+          {/* Single horizontal row — logo · tagline · divider · email · whatsapp · divider · copyright */}
+          <div className="mx-auto max-w-6xl flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
 
-            {/* Brand — left side, original size */}
-            <div className="flex flex-col items-start gap-2.5">
+            {/* Logo + tagline inline */}
+            <div className="flex items-center gap-3">
               <img
                 src="/images/logo.png"
                 alt="Zenith Dubai CV"
                 style={{
-                  height: "48px",
+                  height: "36px",
                   width: "auto",
                   objectFit: "contain",
                   display: "block",
-                  borderRadius: "8px",
+                  borderRadius: "6px",
                   filter: logoFilter,
                   transition: "filter 0.4s ease",
-                  maxWidth: "180px",
+                  maxWidth: "140px",
                 }}
               />
-              <p className="text-[11px] tracking-[0.08em]" style={{
+              <span className="text-[10px] tracking-[0.08em]" style={{
                 color: dark ? "rgba(200,169,110,0.38)" : sub,
                 fontFamily: "sans-serif",
+                whiteSpace: "nowrap",
               }}>
                 {tr("tagline",lang)}
-              </p>
+              </span>
             </div>
 
             {/* Contact links */}
-            <div className="flex items-center gap-7">
+            <div className="flex items-center gap-6">
               <button
                 type="button"
                 onClick={()=>setModal(true)}
-                className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase"
+                className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase"
                 style={{
                   color: dark ? "rgba(200,169,110,0.32)" : `${hi}50`,
                   fontFamily: "sans-serif",
@@ -1244,14 +1247,15 @@ export default function Home(){
                   el.style.textShadow = "none";
                 }}
               >
-                <Mail size={11} strokeWidth={1.5}/>
+                <Mail size={10} strokeWidth={1.5}/>
                 {EM}
               </button>
+              <span style={{color: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.10)", fontSize:"10px"}}>·</span>
               <a
                 href={wlMsg}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase"
+                className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase"
                 style={{
                   color: dark ? "rgba(74,154,90,0.52)" : "#4A9A5A90",
                   fontFamily: "sans-serif",
@@ -1261,7 +1265,7 @@ export default function Home(){
                 onMouseEnter={e=>{(e.currentTarget as HTMLAnchorElement).style.color="#4A9A5A";}}
                 onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color = dark ? "rgba(74,154,90,0.52)" : "#4A9A5A90";}}
               >
-                <svg viewBox="0 0 24 24" width="11" height="11" fill="none">
+                <svg viewBox="0 0 24 24" width="10" height="10" fill="none">
                   <path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
                 </svg>
                 {tr("footerWA",lang)}
@@ -1272,6 +1276,7 @@ export default function Home(){
             <p className="text-[10px]" style={{
               color: dark ? "rgba(200,169,110,0.16)" : `${hi}28`,
               fontFamily: "sans-serif",
+              whiteSpace: "nowrap",
             }}>
               © {new Date().getFullYear()} Zenith Dubai CV
             </p>
