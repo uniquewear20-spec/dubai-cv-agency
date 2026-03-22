@@ -1273,9 +1273,9 @@ export default function Home(){
                 © {new Date().getFullYear()} Zenith Dubai CV
               </p>
               <span style={{color:dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
-              <a href="/privacy" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.25)":`${hi}40`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Privacy Policy</a>
+              <a href="/privacy-policy" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.25)":`${hi}40`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Privacy Policy</a>
               <span style={{color:dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
-              <a href="/terms" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.25)":`${hi}40`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Terms of Service</a>
+              <a href="/terms-of-service" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.25)":`${hi}40`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Terms of Service</a>
             </div>
 
           </div>
