@@ -819,36 +819,56 @@ export default function Home(){
               {tr("enquire",lang)}
             </button>
 
-            {/* Theme toggle */}
-            <button
-              type="button"
+            {/* Theme toggle — sliding pill */}
+            <div
               onClick={tog}
+              role="button"
               aria-label="Toggle theme"
-              className="flex items-center justify-center rounded-full"
+              tabIndex={0}
+              onKeyDown={e=>e.key==="Enter"&&tog()}
+              className="flex p-1 rounded-full cursor-pointer transition-all duration-300"
               style={{
-                border: dark ? "1px solid rgba(200,169,110,0.16)" : `1px solid ${bdr}`,
-                width: "32px",
-                height: "32px",
-                opacity: 0.45,
-                background: "transparent",
-                transition: "opacity 0.2s ease, border-color 0.25s ease",
-              }}
-              onMouseEnter={e=>{
-                const el = e.currentTarget as HTMLButtonElement;
-                el.style.opacity = "0.80";
-                el.style.borderColor = dark ? "rgba(200,169,110,0.38)" : bdr;
-              }}
-              onMouseLeave={e=>{
-                const el = e.currentTarget as HTMLButtonElement;
-                el.style.opacity = "0.45";
-                el.style.borderColor = dark ? "rgba(200,169,110,0.16)" : bdr;
+                width: "56px",
+                height: "28px",
+                background: dark ? "#0E0C0A" : "#FFFFFF",
+                border: dark ? "1px solid rgba(200,169,110,0.18)" : "1px solid rgba(0,0,0,0.10)",
+                flexShrink: 0,
               }}
             >
-              {dark
-                ? <Sun  size={12} color="#D4AF37" strokeWidth={1.5}/>
-                : <Moon size={12} color={hi}       strokeWidth={1.5}/>
-              }
-            </button>
+              <div className="flex justify-between items-center w-full">
+                {/* Moving knob */}
+                <div
+                  className="flex justify-center items-center rounded-full transition-all duration-300"
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    transform: dark ? "translateX(0)" : "translateX(28px)",
+                    background: dark ? "#1C1A17" : "#F0EBE3",
+                    flexShrink: 0,
+                  }}
+                >
+                  {dark
+                    ? <Moon size={11} strokeWidth={1.5} color={G}/>
+                    : <Sun  size={11} strokeWidth={1.5} color="#786860"/>
+                  }
+                </div>
+                {/* Idle icon */}
+                <div
+                  className="flex justify-center items-center rounded-full transition-all duration-300"
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    transform: dark ? "translateX(0)" : "translateX(-28px)",
+                    flexShrink: 0,
+                  }}
+                >
+                  {dark
+                    ? <Sun  size={11} strokeWidth={1.5} color="rgba(200,169,110,0.28)"/>
+                    : <Moon size={11} strokeWidth={1.5} color="rgba(0,0,0,0.20)"/>
+                  }
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>
