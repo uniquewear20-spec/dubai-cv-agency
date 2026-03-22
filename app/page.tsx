@@ -657,7 +657,7 @@ export default function Home(){
           }}/>
         )}
 
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-8" style={{height:"64px"}}>
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-8" style={{height:"76px"}}>
 
           {/* ── Logo ── */}
           <a href="#" className="flex items-center shrink-0" style={{lineHeight:0}}>
@@ -857,7 +857,7 @@ export default function Home(){
         </div>
       </header>
 
-      <main className="pt-[64px]">
+      <main className="pt-[76px]">
 
         {/* ══ HERO ══════════════════════════════════════════════════════════ */}
         <section className="relative min-h-[95vh] flex flex-col items-center justify-center px-8 text-center overflow-hidden">
@@ -1194,6 +1194,30 @@ export default function Home(){
           )}
           <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-8">
 
+            {/* Brand — left side, original size */}
+            <div className="flex flex-col items-start gap-2.5">
+              <img
+                src="/images/logo.png"
+                alt="Zenith Dubai CV"
+                style={{
+                  height: "48px",
+                  width: "auto",
+                  objectFit: "contain",
+                  display: "block",
+                  borderRadius: "8px",
+                  filter: logoFilter,
+                  transition: "filter 0.4s ease",
+                  maxWidth: "180px",
+                }}
+              />
+              <p className="text-[11px] tracking-[0.08em]" style={{
+                color: dark ? "rgba(200,169,110,0.38)" : sub,
+                fontFamily: "sans-serif",
+              }}>
+                {tr("tagline",lang)}
+              </p>
+            </div>
+
             {/* Contact links */}
             <div className="flex items-center gap-7">
               <button
@@ -1251,29 +1275,6 @@ export default function Home(){
             }}>
               © {new Date().getFullYear()} Zenith Dubai CV
             </p>
-
-            {/* Brand — right side */}
-            <div className="flex flex-col items-end gap-2.5">
-              <img
-                src="/images/logo.png"
-                alt="Zenith Dubai CV"
-                style={{
-                  height: "auto",
-                  width: "125px",
-                  objectFit: "contain",
-                  display: "block",
-                  borderRadius: "8px",
-                  filter: logoFilter,
-                  transition: "filter 0.4s ease",
-                }}
-              />
-              <p className="text-[11px] tracking-[0.08em]" style={{
-                color: dark ? "rgba(200,169,110,0.38)" : sub,
-                fontFamily: "sans-serif",
-              }}>
-                {tr("tagline",lang)}
-              </p>
-            </div>
 
           </div>
         </footer>
