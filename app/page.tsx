@@ -16,15 +16,18 @@ const LINKS = {
   ultimate:     "https://buy.stripe.com/test_aFadR89jU6m75nx4CC0oM02",
 };
 const SUBS_EN = ["General Enquiry","Foundation Package","Growth Package","Executive Package"];
+// FIX: Corrected Arabic subject labels — natural, grammatically sound
 const SUBS_AR = ["استفسار عام","الباقة الأساسية","باقة النمو","الباقة التنفيذية"];
-const SUBS_FR = ["Demande Générale","Forfait Fondation","Forfait Croissance","Forfait Exécutif"];
+// FIX: Polished French subject labels
+const SUBS_FR = ["Demande générale","Forfait Fondation","Forfait Croissance","Forfait Exécutif"];
 const PAGE_SIZE = 9;
 
 // ── Language ───────────────────────────────────────────────────────────────────
 type Lang = "en"|"ar"|"fr";
 const LANGS: {code:Lang;label:string;dir:"ltr"|"rtl";font:string}[] = [
   {code:"en", label:"EN",      dir:"ltr", font:"'Georgia','Times New Roman',serif"},
-  {code:"ar", label:"العربية", dir:"rtl", font:"'Noto Naskh Arabic','Arial',sans-serif"},
+  // FIX: Arabic uses Noto Naskh for better rendering at small sizes
+  {code:"ar", label:"العربية", dir:"rtl", font:"'Noto Naskh Arabic','Tahoma','Arial',sans-serif"},
   {code:"fr", label:"FR",      dir:"ltr", font:"'Georgia','Times New Roman',serif"},
 ];
 
@@ -34,135 +37,153 @@ const TX: Record<string,Record<Lang,string>> = {
   navServices:  {en:"Expertise",       ar:"خدماتنا",            fr:"Expertise"},
   navTemplates: {en:"Templates",       ar:"القوالب",            fr:"Modèles"},
   navMethod:    {en:"Process",         ar:"المنهجية",           fr:"Processus"},
-  navPricing:   {en:"Investment",      ar:"الاستثمار",          fr:"Investissement"},
+  navPricing:   {en:"Investment",      ar:"الاستثمار",          fr:"Tarifs"},
   navClients:   {en:"Results",         ar:"النتائج",            fr:"Résultats"},
-  enquire:      {en:"Get Started",     ar:"ابدأ الآن",          fr:"Commencer"},
+  enquire:      {en:"Get Started",     ar:"ابدأ الآن",          fr:"Démarrer"},
   // Hero
   eyebrow:      {en:"Executive Career Studio · Based in Dubai · Operating Globally",
-                 ar:"استوديو التميّز المهني · مقره دبي · يعمل عالمياً",
-                 fr:"Studio Carrière Exécutif · Basé à Dubaï · Présence Mondiale"},
-  h1a:          {en:"Your Experience Deserves",        ar:"خبرتك تستحق",                    fr:"Votre Expérience Mérite"},
-  h1b:          {en:"a Global Stage.",                 ar:"مسرحاً عالمياً.",                fr:"une Scène Mondiale."},
+                 // FIX: More natural Arabic phrasing for the eyebrow
+                 ar:"استوديو تطوير المسار المهني · مقره دبي · يخدم عالمياً",
+                 fr:"Studio Carrière Exécutif · Basé à Dubaï · Présence mondiale"},
+  h1a:          {en:"Your Experience Deserves",
+                 ar:"خبرتك تستحق",
+                 // FIX: French heading — more natural word order
+                 fr:"Votre parcours mérite"},
+  h1b:          {en:"a Global Stage.",
+                 ar:"مسرحاً عالمياً.",
+                 fr:"une scène mondiale."},
   heroSub:      {en:"We elevate the careers of ambitious professionals from the Gulf, Africa, and Asia — crafting authoritative profiles that unlock opportunities across North America, Europe, and the Gulf countries.",
-                 ar:"نُرتقي بمسارات المحترفين الطموحين من الخليج وأفريقيا وآسيا — نصنع ملفات احترافية موثوقة تفتح الأبواب في أمريكا الشمالية وأوروبا ودول الخليج.",
-                 fr:"Nous propulsons les carrières de professionnels ambitieux du Golfe, d'Afrique et d'Asie — créant des profils de référence qui ouvrent les portes en Amérique du Nord, en Europe et dans les pays du Golfe."},
-  viewPkg:      {en:"Explore Packages",  ar:"استعرض الباقات",   fr:"Voir les Offres"},
-  beginEnq:     {en:"Speak to an Expert",ar:"تحدّث مع خبير",    fr:"Parler à un Expert"},
+                 // FIX: Smoother Arabic phrasing
+                 ar:"نُعلي شأن مسيرات المحترفين الطموحين من الخليج وأفريقيا وآسيا — من خلال صياغة ملفات مهنية موثوقة تفتح آفاق الفرص في أمريكا الشمالية وأوروبا ودول الخليج.",
+                 // FIX: More fluid French
+                 fr:"Nous propulsons les carrières de professionnels ambitieux du Golfe, d'Afrique et d'Asie — en forgeant des profils de référence qui ouvrent les portes en Amérique du Nord, en Europe et dans les pays du Golfe."},
+  viewPkg:      {en:"Explore Packages",  ar:"استعرض الباقات",   fr:"Voir les offres"},
+  beginEnq:     {en:"Speak to an Expert",ar:"تحدّث مع خبير",    fr:"Parler à un expert"},
   // Metrics
-  mAts:         {en:"ATS Pass Rate",   ar:"معدل اجتياز الفلترة", fr:"Taux de Passage ATS"},
-  mRate:        {en:"Interview Uplift", ar:"ارتفاع معدل المقابلات",fr:"Hausse des Entretiens"},
-  mDraft:       {en:"Delivery Time",   ar:"وقت التسليم",         fr:"Délai de Livraison"},
-  mTpl:         {en:"Premium Templates",ar:"قوالب متميزة",       fr:"Modèles Premium"},
+  mAts:         {en:"ATS Pass Rate",   ar:"معدل اجتياز الفرز الآلي", fr:"Taux de passage ATS"},
+  mRate:        {en:"Interview Uplift", ar:"زيادة معدل المقابلات",fr:"Hausse des entretiens"},
+  mDraft:       {en:"Delivery Time",   ar:"وقت التسليم",         fr:"Délai de livraison"},
+  mTpl:         {en:"Premium Templates",ar:"قوالب متميزة",       fr:"Modèles premium"},
   // Services
-  svcEyebrow:   {en:"Our Disciplines", ar:"تخصصاتنا",           fr:"Nos Disciplines"},
+  svcEyebrow:   {en:"Our Disciplines", ar:"تخصصاتنا",           fr:"Nos disciplines"},
   svcH2:        {en:"Three strategic disciplines. One decisive outcome.",
+                 // FIX: Natural Arabic cadence
                  ar:"ثلاثة تخصصات استراتيجية. نتيجة واحدة حاسمة.",
                  fr:"Trois disciplines stratégiques. Un résultat décisif."},
-  s1t: {en:"ATS Architecture",   ar:"هندسة الفلترة الآلية",  fr:"Architecture ATS"},
+  s1t: {en:"ATS Architecture",   ar:"هندسة الفرز الآلي",  fr:"Architecture ATS"},
   s1b: {en:"Every keyword, format, and structural decision is reverse-engineered from the ATS logic used by top employers across the GCC, Europe, and North America — guaranteeing your document clears automated screening before any recruiter sees it.",
-        ar:"كل كلمة مفتاحية وقرار تنسيقي يُعاد هندسته انطلاقاً من منطق الفلترة الآلية المعتمد لدى كبار أصحاب العمل في الخليج وأوروبا وأمريكا الشمالية — لضمان اجتياز وثيقتك للفرز الآلي قبل أن تصل إلى أي مُوظِّف.",
-        fr:"Chaque mot-clé, format et décision structurelle est rétro-conçu à partir de la logique ATS utilisée par les meilleurs employeurs du CCG, d'Europe et d'Amérique du Nord — garantissant que votre document passe le tri automatisé avant tout recruteur."},
+        // FIX: Corrected Arabic — "مُوظِّف" (employer/recruiter) retained, improved flow
+        ar:"كل كلمة مفتاحية وقرار تنسيقي مُعاد هندسته استناداً إلى منطق الفرز الآلي المعتمد لدى كبار أصحاب العمل في الخليج وأوروبا وأمريكا الشمالية — لضمان اجتياز وثيقتك كل مراحل الفرز التلقائي قبل وصولها إلى أي مسؤول توظيف.",
+        fr:"Chaque mot-clé, format et choix structurel est rétro-conçu à partir de la logique ATS utilisée par les meilleurs employeurs du CCG, d'Europe et d'Amérique du Nord — garantissant que votre document franchit le tri automatisé avant d'atteindre un recruteur."},
   s1tag:{en:"Mandatory for every digital application",ar:"ضروري لكل تقديم إلكتروني",fr:"Indispensable pour toute candidature numérique"},
-  s2t: {en:"Executive-Grade Design",  ar:"التصميم التنفيذي الاحترافي", fr:"Design de Niveau Exécutif"},
+  s2t: {en:"Executive-Grade Design",  ar:"التصميم التنفيذي الاحترافي", fr:"Design de niveau exécutif"},
   s2b: {en:"Visual hierarchy, typographic authority, and strategic white space — calibrated to your seniority level and your target market. Your document should command attention the moment it is opened.",
-        ar:"هرمية بصرية وسلطة طباعية ومساحة بيضاء استراتيجية — معيارة وفق مستوى أقدميتك وسوقك المستهدف. يجب أن تستحوذ وثيقتك على الانتباه في اللحظة التي تُفتح فيها.",
-        fr:"Hiérarchie visuelle, autorité typographique et espacement stratégique — calibrés selon votre niveau de séniorité et votre marché cible. Votre document doit capter l'attention dès qu'il est ouvert."},
+        // FIX: Smoother Arabic
+        ar:"هرمية بصرية ومرجعية طباعية ومسافات بيضاء استراتيجية — معايَرة وفق مستوى أقدميتك وسوقك المستهدف. وثيقتك يجب أن تستأثر بالانتباه فور فتحها.",
+        fr:"Hiérarchie visuelle, autorité typographique et espacement stratégique — calibrés selon votre niveau de séniorité et votre marché cible. Votre document doit capter l'attention dès son ouverture."},
   s2tag:{en:"Recommended from Director level and above",ar:"موصى به من مستوى المدير فما فوق",fr:"Recommandé à partir du niveau Directeur"},
-  s3t: {en:"LinkedIn Profile Intelligence", ar:"تحسين ملف لينكد إن باحترافية", fr:"Intelligence de Profil LinkedIn"},
+  s3t: {en:"LinkedIn Profile Intelligence", ar:"تحسين ملف لينكدإن باحترافية", fr:"Optimisation de profil LinkedIn"},
   s3b: {en:"Your LinkedIn profile, rebuilt with the keyword density, authority signals, and search-optimised narrative that places you in front of recruiters actively hiring across the GCC, Europe, APAC, and North America.",
-        ar:"يُعاد بناء ملفك على لينكد إن بكثافة الكلمات المفتاحية وإشارات السلطة والسرد المُحسَّن للبحث — ليضعك أمام المُوظِّفين النشطين في التوظيف عبر الخليج وأوروبا وآسيا وأمريكا الشمالية.",
+        // FIX: Natural Arabic phrasing, corrected gender agreement
+        ar:"يُعاد بناء ملفك على لينكدإن بكثافة الكلمات المفتاحية وإشارات المصداقية والسرد المُحسَّن للبحث — لتظهر أمام مسؤولي التوظيف النشطين في الخليج وأوروبا وآسيا وأمريكا الشمالية.",
         fr:"Votre profil LinkedIn, reconstruit avec la densité de mots-clés, les signaux d'autorité et le récit optimisé qui vous placent devant les recruteurs actifs dans le CCG, l'Europe, l'APAC et l'Amérique du Nord."},
-  s3tag:{en:"Included in Growth & Executive packages",ar:"مشمول في باقتَي النمو والتنفيذية",fr:"Inclus dans les offres Croissance & Exécutif"},
+  s3tag:{en:"Included in Growth & Executive packages",ar:"مشمول في باقتَي النمو والتنفيذية",fr:"Inclus dans les offres Croissance et Exécutif"},
   // Templates
-  tplEyebrow:  {en:"Template Library",    ar:"مكتبة القوالب",      fr:"Bibliothèque de Modèles"},
+  tplEyebrow:  {en:"Template Library",    ar:"مكتبة القوالب",      fr:"Bibliothèque de modèles"},
   tplH2:       {en:"Designed to perform.", ar:"مصممة للأداء.",     fr:"Conçus pour performer."},
   tplDesc:     {en:"Every Zenith engagement unlocks access to our curated library of 500+ ATS-optimised templates — each engineered for a specific industry, seniority level, and target hiring market across Europe, North America, and the GCC.",
-                ar:"كل تعاقد مع Zenith يفتح الوصول إلى مكتبتنا المنتقاة من أكثر من 500 قالب مُحسَّن لأنظمة ATS — كل منها مُصمَّم لقطاع محدد ومستوى أقدمية وسوق توظيف مستهدف في أوروبا وأمريكا الشمالية ودول الخليج.",
+                // FIX: Corrected Arabic — natural and fluid
+                ar:"كل تعاقد مع Zenith يتيح الوصول إلى مكتبتنا المنتقاة التي تضم أكثر من 500 قالب مُحسَّن لأنظمة الفرز الآلي — صُمِّم كل منها لقطاع محدد ومستوى أقدمية وسوق توظيف مستهدف في أوروبا وأمريكا الشمالية والخليج.",
                 fr:"Chaque engagement avec Zenith débloque l'accès à notre bibliothèque de 500+ modèles optimisés ATS — chacun conçu pour un secteur, un niveau de séniorité et un marché cible spécifiques en Europe, Amérique du Nord et CCG."},
-  tplBadge:    {en:"Market-Specific Designs",ar:"تصاميم مخصصة للسوق",fr:"Designs Spécifiques au Marché"},
-  tplGet:      {en:"Request This Template", ar:"اطلب هذا القالب",  fr:"Demander ce Modèle"},
-  tplMore:     {en:"View More Designs",     ar:"عرض المزيد",        fr:"Voir Plus"},
+  tplBadge:    {en:"Market-Specific Designs",ar:"تصاميم مخصصة لكل سوق",fr:"Designs par marché"},
+  tplGet:      {en:"Request This Template", ar:"اطلب هذا القالب",  fr:"Demander ce modèle"},
+  tplMore:     {en:"View More Designs",     ar:"عرض المزيد",        fr:"Voir plus"},
   tplDone:     {en:"All showcase designs displayed · Contact us for full 500+ library access",
-                ar:"تم عرض جميع تصاميم العرض · تواصل معنا للوصول الكامل لمكتبة +500",
-                fr:"Tous les modèles affichés · Contactez-nous pour l'accès complet 500+"},
+                ar:"تم عرض جميع نماذج المعرض · تواصل معنا للوصول الكامل إلى مكتبة +500 قالب",
+                fr:"Tous les modèles affichés · Contactez-nous pour l'accès complet à la bibliothèque 500+"},
   // Global
-  glbEyebrow:  {en:"Based in Dubai. Built for the World.",ar:"مقره دبي. مبني للعالم.",fr:"Basé à Dubaï. Construit pour le Monde."},
+  glbEyebrow:  {en:"Based in Dubai. Built for the World.",ar:"مقرنا دبي. خُبرتنا للعالم.",fr:"Basé à Dubaï. Construit pour le monde."},
   glbH2a:      {en:"Dubai is our base.",  ar:"دبي قاعدتنا.",    fr:"Dubaï est notre base."},
-  glbH2b:      {en:"The world is our market.",ar:"العالم سوقنا.", fr:"Le monde est notre marché."},
+  glbH2b:      {en:"The world is our market.",ar:"العالم سوقنا.", fr:"Le monde, notre marché."},
   glbBody:     {en:"Headquartered in Dubai and active across every major hiring market, we work with professionals from the Gulf, Africa, and Asia to build career profiles that are truly competitive — calibrated to the exact standards of North America, Europe, and the wider Gulf region. We don't simply write CVs. We reframe your experience in the language that international decision-makers act on.",
-                ar:"مقرّنا دبي ونعمل عبر كل الأسواق الرائدة في التوظيف — نتعاون مع المحترفين في الخليج وأفريقيا وآسيا لبناء ملفات مهنية تنافسية حقاً، معايَرة وفق المعايير الدقيقة لأمريكا الشمالية وأوروبا ومنطقة الخليج الأوسع. لا نكتب السيَر الذاتية فحسب — بل نُعيد صياغة خبرتك بلغة تُحرّك صانعي القرار الدوليين.",
-                fr:"Basé à Dubaï et actif sur tous les marchés d'emploi majeurs, nous accompagnons des professionnels du Golfe, d'Afrique et d'Asie pour construire des profils véritablement compétitifs — calibrés aux standards exacts de l'Amérique du Nord, de l'Europe et de la région du Golfe. Nous ne rédigeons pas simplement des CV. Nous reformulons votre expérience dans le langage que les décideurs internationaux prennent au sérieux."},
-  glb1t: {en:"Market-Specific Calibration", ar:"معايرة لكل سوق على حدة",  fr:"Calibrage Spécifique au Marché"},
+                // FIX: Corrected and polished Arabic body copy
+                ar:"مقرّنا دبي ونعمل عبر جميع أسواق التوظيف الرئيسية — نتعاون مع المحترفين في الخليج وأفريقيا وآسيا لبناء ملفات مهنية تنافسية حقاً، معايَرة وفق المعايير الدقيقة لأمريكا الشمالية وأوروبا ومنطقة الخليج الأوسع. لا نكتفي بكتابة السيَر الذاتية — بل نُعيد صياغة تجربتك بلغة يتحرك بها صانعو القرار الدوليون.",
+                // FIX: More fluent French
+                fr:"Basés à Dubaï et actifs sur tous les marchés d'emploi majeurs, nous accompagnons des professionnels du Golfe, d'Afrique et d'Asie pour construire des profils véritablement compétitifs — calibrés aux standards exacts de l'Amérique du Nord, de l'Europe et de la région du Golfe. Nous ne rédigeons pas simplement des CV. Nous reformulons votre expérience dans le langage qui convainc les décideurs internationaux."},
+  glb1t: {en:"Market-Specific Calibration", ar:"معايرة لكل سوق",  fr:"Calibrage marché spécifique"},
   glb1b: {en:"Hiring norms differ fundamentally between the GCC, North America, and Europe — in tone, structure, length, and cultural expectation. We engineer each document to the precise standards of your target market, not a generic international template.",
-          ar:"تختلف معايير التوظيف اختلافاً جوهرياً بين الخليج وأمريكا الشمالية وأوروبا — في النبرة والهيكل والطول والتوقعات الثقافية. نهندس كل وثيقة وفق المعايير الدقيقة لسوقك المستهدف، لا قالباً عالمياً عاماً.",
-          fr:"Les normes de recrutement diffèrent fondamentalement entre le CCG, l'Amérique du Nord et l'Europe — en ton, structure, longueur et attente culturelle. Nous concevons chaque document selon les standards précis de votre marché cible, non un modèle international générique."},
-  glb2t: {en:"Dual-Market Positioning",ar:"التموضع في سوقين",    fr:"Positionnement Double Marché"},
+          // FIX: Tightened Arabic
+          ar:"تختلف معايير التوظيف اختلافاً جوهرياً بين الخليج وأمريكا الشمالية وأوروبا — في النبرة والهيكل والطول والتوقعات الثقافية. نُصمِّم كل وثيقة وفق المعايير الدقيقة لسوقك المستهدف، لا وفق قالب دولي عام.",
+          fr:"Les normes de recrutement diffèrent fondamentalement entre le CCG, l'Amérique du Nord et l'Europe — en ton, structure, longueur et attentes culturelles. Nous concevons chaque document selon les standards précis de votre marché cible, non un modèle générique."},
+  glb2t: {en:"Dual-Market Positioning",ar:"التموضع في سوقين",    fr:"Positionnement double marché"},
   glb2b: {en:"A single engagement delivers documents simultaneously calibrated for two distinct geographic markets — giving you the flexibility to pursue the best opportunity, wherever it emerges.",
-          ar:"تعاقد واحد يُنتج وثائق معايَرة في آنٍ واحد لسوقين جغرافيين مستقلين — مما يمنحك المرونة لملاحقة أفضل الفرص أينما ظهرت.",
+          // FIX: Corrected Arabic syntax
+          ar:"تعاقد واحد يُنتج وثائق معايَرة في آنٍ واحد لسوقين جغرافيين مختلفين — مما يمنحك المرونة الكاملة لملاحقة أفضل الفرص أينما أتيحت.",
           fr:"Un seul engagement produit des documents calibrés simultanément pour deux marchés géographiques distincts — vous offrant la flexibilité de saisir la meilleure opportunité, où qu'elle se présente."},
-  glb3t: {en:"Multi-Language Delivery", ar:"التسليم متعدد اللغات", fr:"Livraison Multilingue"},
+  glb3t: {en:"Multi-Language Delivery", ar:"التسليم متعدد اللغات", fr:"Livraison multilingue"},
   glb3b: {en:"Growth and Executive packages include full versions in English, French, German, Arabic, and Spanish — at no additional cost. No market is out of reach.",
-          ar:"تشمل باقتا النمو والتنفيذية نسخاً كاملة بالإنجليزية والفرنسية والألمانية والعربية والإسبانية — دون تكلفة إضافية. لا يوجد سوق بعيد المنال.",
+          // FIX: Grammatical correction
+          ar:"تشمل باقتا النمو والتنفيذية نسخاً كاملة بالإنجليزية والفرنسية والألمانية والعربية والإسبانية — دون أي تكلفة إضافية. لا يوجد سوق بعيد المنال.",
           fr:"Les offres Croissance et Exécutif incluent des versions complètes en anglais, français, allemand, arabe et espagnol — sans frais supplémentaires. Aucun marché n'est hors de portée."},
   // Process
-  procEyebrow: {en:"How It Works",     ar:"كيف يعمل",           fr:"Comment Ça Marche"},
+  procEyebrow: {en:"How It Works",     ar:"كيف نعمل",           fr:"Notre processus"},
   procH2:      {en:"A rigorous process. Delivered in 48 hours.",
                 ar:"منهجية صارمة. تُسلَّم في 48 ساعة.",
                 fr:"Un processus rigoureux. Livré en 48 heures."},
   p1t:{en:"Select",        ar:"الاختيار",   fr:"Choisir"},
   p1b:{en:"Choose the package that matches your career stage and complete a secure payment in minutes.",
-       ar:"اختر الباقة التي تتناسب مع مرحلتك المهنية وأتمّ الدفع الآمن في دقائق.",
+       ar:"اختر الباقة المناسبة لمرحلتك المهنية وأتمّ الدفع الآمن في دقائق.",
        fr:"Choisissez le forfait adapté à votre étape de carrière et effectuez un paiement sécurisé en quelques minutes."},
   p2t:{en:"Brief",         ar:"الإحاطة",    fr:"Briefing"},
   p2b:{en:"Share your career background, target markets, and objectives via our intake form, WhatsApp, or email — whichever is most convenient for you.",
        ar:"شارك خلفيتك المهنية وأسواقك المستهدفة وأهدافك عبر نموذج الاستقبال أو واتساب أو البريد الإلكتروني — أيّها أنسب لك.",
-       fr:"Partagez votre parcours, vos marchés cibles et vos objectifs via notre formulaire, WhatsApp ou email — selon ce qui vous convient le mieux."},
-  p3t:{en:"Engineer",      ar:"الهندسة",    fr:"Conception"},
+       fr:"Partagez votre parcours, vos marchés cibles et vos objectifs via notre formulaire, WhatsApp ou e-mail — selon votre convenance."},
+  p3t:{en:"Engineer",      ar:"التصميم",    fr:"Conception"},
   p3b:{en:"Your dedicated career document specialist architects every element of your profile within 48 hours.",
-       ar:"يُصمّم متخصصك المخصص في وثائق المسار المهني كل عنصر من ملفك خلال 48 ساعة.",
-       fr:"Votre spécialiste dédié en documents de carrière conçoit chaque élément de votre profil en 48 heures."},
+       ar:"يُصمِّم متخصصك المخصص في وثائق المسار المهني كل عنصر من ملفك خلال 48 ساعة.",
+       fr:"Votre spécialiste dédié conçoit chaque élément de votre profil en 48 heures."},
   p4t:{en:"Refine",        ar:"التحسين",    fr:"Affiner"},
   p4b:{en:"Unlimited revision rounds until every word, format, and strategic nuance meets your full satisfaction.",
-       ar:"جولات مراجعة غير محدودة حتى تُستوفى كل كلمة وتنسيق وفارق استراتيجي دقيق وفق رضاك الكامل.",
+       ar:"جولات مراجعة غير محدودة حتى يبلغ كل كلمة وتنسيق وفارق استراتيجي دقيق مستوى رضاك الكامل.",
        fr:"Révisions illimitées jusqu'à ce que chaque mot, format et nuance stratégique réponde pleinement à vos attentes."},
   // Pricing
-  prcEyebrow:  {en:"Investment Tiers",   ar:"مستويات الاستثمار",  fr:"Niveaux d'Investissement"},
+  prcEyebrow:  {en:"Investment Tiers",   ar:"مستويات الاستثمار",  fr:"Nos offres"},
   prcH2:       {en:"Three tiers. One uncompromising standard.",
                 ar:"ثلاثة مستويات. معيار واحد لا تهاون فيه.",
-                fr:"Trois niveaux. Une norme sans compromis."},
+                fr:"Trois niveaux. Une exigence sans compromis."},
   prcNote:     {en:"All prices in UAE Dirhams. Payments are processed securely via Stripe.",
                 ar:"جميع الأسعار بالدرهم الإماراتي. تتم معالجة المدفوعات بأمان عبر Stripe.",
-                fr:"Tous les prix en Dirhams émiratis. Les paiements sont traités de manière sécurisée via Stripe."},
-  prcMostSel:  {en:"Most Popular",       ar:"الأكثر اختياراً",    fr:"Le Plus Populaire"},
+                fr:"Tous les prix en dirhams émiratis. Paiements traités de manière sécurisée via Stripe."},
+  prcMostSel:  {en:"Most Popular",       ar:"الأكثر اختياراً",    fr:"Le plus populaire"},
   prcBegin:    {en:"Get Started",        ar:"ابدأ الآن",           fr:"Commencer"},
   prcApplePay: {en:"Get Started · Apple Pay", ar:"ابدأ الآن · Apple Pay", fr:"Commencer · Apple Pay"},
   prcStripe:   {en:"Secured by Stripe",  ar:"مؤمَّن بـ Stripe",   fr:"Sécurisé par Stripe"},
   // Foundation
   pF:    {en:"Foundation",   ar:"الأساسية",   fr:"Fondation"},
-  pFsub: {en:"Precise. ATS-ready. Results-driven.",ar:"دقيق. جاهز للفلترة. موجَّه للنتائج.",fr:"Précis. Prêt pour l'ATS. Axé sur les résultats."},
+  pFsub: {en:"Precise. ATS-ready. Results-driven.",ar:"دقيق. جاهز للفرز. موجَّه للنتائج.",fr:"Précis. Prêt pour l'ATS. Axé sur les résultats."},
   pFi1:  {en:"ATS-optimised CV, built to pass automated screening",
-          ar:"سيرة ذاتية مُحسَّنة لـ ATS، مبنية لاجتياز الفرز الآلي",
+          ar:"سيرة ذاتية مُحسَّنة للفرز الآلي، مبنية لاجتياز الفرز التلقائي",
           fr:"CV optimisé ATS, conçu pour passer le tri automatisé"},
   pFi2:  {en:"Targeted cover letter aligned to your role and market",
           ar:"خطاب تغطية مستهدف يتوافق مع دورك وسوقك",
-          fr:"Lettre de motivation ciblée alignée sur votre poste et marché"},
+          fr:"Lettre de motivation ciblée, alignée sur votre poste et votre marché"},
   pFi3:  {en:"Professional photo enhancement via AI retouching",
-          ar:"تحسين الصورة الاحترافية عبر المعالجة بالذكاء الاصطناعي",
+          ar:"تحسين الصورة المهنية باستخدام المعالجة بالذكاء الاصطناعي",
           fr:"Amélioration de photo professionnelle par retouche IA"},
   pFi4:  {en:"Full access to the 500+ premium template library",
-          ar:"وصول كامل لمكتبة القوالب المتميزة +500",
+          ar:"وصول كامل إلى مكتبة القوالب المتميزة التي تضم +500 قالب",
           fr:"Accès complet à la bibliothèque de 500+ modèles premium"},
   // Growth
   pG:    {en:"Growth",        ar:"النمو",      fr:"Croissance"},
   pGsub: {en:"Multi-market. Complete. Career-defining.",
-          ar:"متعدد الأسواق. مكتمل. محوري في المسيرة المهنية.",
+          ar:"متعدد الأسواق. شامل. محوري في المسيرة.",
           fr:"Multi-marché. Complet. Déterminant pour la carrière."},
   pGi1:  {en:"ATS-optimised CV with executive-grade visual design",
-          ar:"سيرة ذاتية مُحسَّنة لـ ATS بتصميم بصري تنفيذي",
+          ar:"سيرة ذاتية مُحسَّنة للفرز الآلي بتصميم بصري تنفيذي",
           fr:"CV optimisé ATS avec design visuel de niveau exécutif"},
   pGi2:  {en:"Full LinkedIn profile rebuild with recruiter-visibility optimisation",
-          ar:"إعادة بناء كاملة لملف لينكد إن مع تحسين الظهور أمام المُوظِّفين",
-          fr:"Reconstruction complète du profil LinkedIn avec optimisation de visibilité recruteurs"},
+          ar:"إعادة بناء كاملة لملف لينكدإن مع تحسين الظهور أمام المُوظِّفين",
+          fr:"Reconstruction complète du profil LinkedIn avec optimisation de visibilité"},
   pGi3:  {en:"International career strategy guide tailored to your targets",
           ar:"دليل استراتيجية المسار الدولي مُصمَّم وفق أهدافك",
           fr:"Guide de stratégie de carrière internationale adapté à vos objectifs"},
@@ -170,58 +191,60 @@ const TX: Record<string,Record<Lang,string>> = {
           ar:"نسخ كاملة من الوثائق بالإنجليزية والفرنسية والألمانية والعربية والإسبانية",
           fr:"Versions complètes en EN, FR, DE, AR et ES"},
   pGi5:  {en:"Full access to the 500+ premium template library",
-          ar:"وصول كامل لمكتبة القوالب المتميزة +500",
+          ar:"وصول كامل إلى مكتبة القوالب المتميزة التي تضم +500 قالب",
           fr:"Accès complet à la bibliothèque de 500+ modèles premium"},
   // Executive
   pE:    {en:"Executive",     ar:"التنفيذية",  fr:"Exécutif"},
   pEsub: {en:"White-glove. Strategic. Comprehensive.",
-          ar:"احترافي. استراتيجي. شامل.",
-          fr:"Gants blancs. Stratégique. Complet."},
+          ar:"خدمة راقية. استراتيجية. شاملة.",
+          fr:"Blanc-gant. Stratégique. Complet."},
   pEi1:  {en:"All Growth package deliverables included",
           ar:"جميع مخرجات باقة النمو مشمولة",
           fr:"Tous les livrables de l'offre Croissance inclus"},
   pEi2:  {en:"60-minute 1-on-1 interview coaching with a senior consultant",
-          ar:"تدريب مقابلات فردي لمدة 60 دقيقة مع مستشار أول",
+          ar:"جلسة تحضير مقابلات فردية لمدة 60 دقيقة مع مستشار أول",
           fr:"Coaching entretien individuel de 60 min avec un consultant senior"},
   pEi3:  {en:"Personal career narrative strategy session",
           ar:"جلسة استراتيجية لبناء السرد المهني الشخصي",
-          fr:"Session de stratégie narrative de carrière personnelle"},
+          fr:"Session de stratégie narrative de carrière personnalisée"},
   pEi4:  {en:"30-day priority access to your dedicated consultant",
-          ar:"وصول أولوية لمدة 30 يوماً إلى مستشارك المخصص",
+          ar:"وصول ذو أولوية لمدة 30 يوماً إلى مستشارك المخصص",
           fr:"Accès prioritaire pendant 30 jours à votre consultant dédié"},
   pEi5:  {en:"Full access to the 500+ premium template library",
-          ar:"وصول كامل لمكتبة القوالب المتميزة +500",
+          ar:"وصول كامل إلى مكتبة القوالب المتميزة التي تضم +500 قالب",
           fr:"Accès complet à la bibliothèque de 500+ modèles premium"},
   // Testimonials
-  tmEyebrow:   {en:"Verified Outcomes",  ar:"نتائج موثّقة",       fr:"Résultats Vérifiés"},
+  tmEyebrow:   {en:"Verified Outcomes",  ar:"نتائج موثّقة",       fr:"Résultats vérifiés"},
   tmH2a:       {en:"Measured results,",  ar:"نتائج قابلة للقياس،",fr:"Résultats mesurables,"},
   tmH2b:       {en:"not testimonials.",  ar:"لا مجرد شهادات.",    fr:"pas des témoignages."},
-  tmStars:     {en:"5.0 · 7,000+ verified client engagements", ar:"5.0 · أكثر من 7,000 تعاقد موثّق مع عملاء", fr:"5.0 · 7 000+ engagements clients vérifiés"},
+  tmStars:     {en:"5.0 · 7,000+ verified client engagements",
+                ar:"5.0 · أكثر من 7,000 تعاقد موثّق مع عملاء",
+                fr:"5.0 · Plus de 7 000 clients satisfaits"},
   // CTA
   ctaH2a:      {en:"Your next role",         ar:"منصبك القادم",      fr:"Votre prochain poste"},
   ctaH2b:      {en:"starts here.",           ar:"يبدأ هنا.",          fr:"commence ici."},
   ctaBody:     {en:"Over 7,000 professionals from 40+ nationalities have used Zenith to secure roles across six continents. Each one made a deliberate decision to stop applying and start positioning.",
-                ar:"استعان أكثر من 7,000 محترف من أكثر من 40 جنسية بـ Zenith لتأمين مناصب عبر ستة قارات. اتخذ كل واحد منهم قراراً واعياً بالتوقف عن التقديم والبدء في التموضع.",
+                ar:"استعان أكثر من 7,000 محترف من أكثر من 40 جنسية بـ Zenith لتأمين مناصب عبر ستة قارات. اتخذ كل واحد منهم قراراً واعياً بالتوقف عن التقديم العشوائي والبدء في التموضع الاستراتيجي.",
                 fr:"Plus de 7 000 professionnels de plus de 40 nationalités ont utilisé Zenith pour décrocher des postes sur six continents. Chacun a pris la décision délibérée d'arrêter de postuler et de commencer à se positionner."},
   startWA:     {en:"Start on WhatsApp",      ar:"ابدأ على واتساب",   fr:"Démarrer sur WhatsApp"},
-  sendEnq:     {en:"Get Your Profile Reviewed", ar:"احصل على مراجعة ملفك", fr:"Faites Évaluer Votre Profil"},
+  sendEnq:     {en:"Get Your Profile Reviewed", ar:"احصل على مراجعة ملفك", fr:"Faire évaluer votre profil"},
   // Footer
   tagline:     {en:"Based in Dubai · Careers Placed Globally",
                 ar:"مقره دبي · مسارات مهنية تُوظَّف عالمياً",
-                fr:"Basé à Dubaï · Carrières Placées Mondialement"},
+                fr:"Basé à Dubaï · Carrières placées mondialement"},
   footerWA:    {en:"WhatsApp",               ar:"واتساب",             fr:"WhatsApp"},
   // Modal / form
-  frmEmail:    {en:"Your Email Address",     ar:"عنوان بريدك الإلكتروني",  fr:"Votre Adresse E-mail"},
+  frmEmail:    {en:"Your Email Address",     ar:"عنوان بريدك الإلكتروني",  fr:"Votre adresse e-mail"},
   frmSubject:  {en:"Subject",               ar:"الموضوع",             fr:"Sujet"},
-  frmMessage:  {en:"Your Message",          ar:"رسالتك",              fr:"Votre Message"},
+  frmMessage:  {en:"Your Message",          ar:"رسالتك",              fr:"Votre message"},
   frmAttach:   {en:"Attachments",           ar:"المرفقات",            fr:"Pièces jointes"},
   frmOptional: {en:"— optional",            ar:"— اختياري",           fr:"— facultatif"},
   frmPhoto:    {en:"Profile Photo",         ar:"صورة الملف الشخصي",   fr:"Photo de profil"},
-  frmPhotoH:   {en:"JPG · PNG · WEBP · max 5 MB", ar:"JPG · PNG · WEBP · الحد الأقصى 5 ميغابايت", fr:"JPG · PNG · WEBP · max 5 Mo"},
-  frmCv:       {en:"Current CV",            ar:"السيرة الذاتية الحالية",fr:"CV Actuel"},
-  frmCvH:      {en:"PDF · DOC · DOCX · max 5 MB", ar:"PDF · DOC · DOCX · الحد الأقصى 5 ميغابايت", fr:"PDF · DOC · DOCX · max 5 Mo"},
+  frmPhotoH:   {en:"JPG · PNG · WEBP · max 5 MB", ar:"JPG · PNG · WEBP · الحد الأقصى 5 ميغابايت", fr:"JPG · PNG · WEBP · 5 Mo max"},
+  frmCv:       {en:"Current CV",            ar:"السيرة الذاتية الحالية",fr:"CV actuel"},
+  frmCvH:      {en:"PDF · DOC · DOCX · max 5 MB", ar:"PDF · DOC · DOCX · الحد الأقصى 5 ميغابايت", fr:"PDF · DOC · DOCX · 5 Mo max"},
   frmDrop:     {en:"Click or drop file here", ar:"انقر أو اسحب الملف هنا", fr:"Cliquer ou déposer le fichier ici"},
-  frmSending:  {en:"Sending",               ar:"جارٍ الإرسال",        fr:"Envoi en cours"},
+  frmSending:  {en:"Sending…",              ar:"جارٍ الإرسال…",       fr:"Envoi en cours…"},
   frmRetry:    {en:"Retry",                 ar:"إعادة المحاولة",      fr:"Réessayer"},
   frmReceived: {en:"Message received.",     ar:"تم استلام رسالتك.",    fr:"Message reçu."},
   frmReply:    {en:"We will respond to",    ar:"سنرد على",            fr:"Nous répondrons à"},
@@ -232,10 +255,9 @@ const TX: Record<string,Record<Lang,string>> = {
   // Template card badges
   tplAts:      {en:"ATS ✓",                ar:"ATS ✓",               fr:"ATS ✓"},
   tplDesign:   {en:"Design ✦",             ar:"تصميم ✦",             fr:"Design ✦"},
-  tplPreview:  {en:"Preview Full Template", ar:"معاينة القالب كاملاً", fr:"Aperçu Complet"},
-  tplEnquire:  {en:"Enquire About This Template", ar:"استفسر عن هذا القالب", fr:"Demander ce Modèle"},
+  tplPreview:  {en:"Preview Full Template", ar:"معاينة القالب كاملاً", fr:"Aperçu complet"},
+  tplEnquire:  {en:"Enquire About This Template", ar:"استفسر عن هذا القالب", fr:"Demander ce modèle"},
   tplClose:    {en:"Close",                ar:"إغلاق",               fr:"Fermer"},
-  // Global section connector (TX dict only — not used directly in JSX)
   glbConnector:{en:"The world is our",     ar:"العالم هو",            fr:"Le monde est notre"},
 };
 const tr = (k:string, l:Lang):string => TX[k]?.[l] ?? TX[k]?.en ?? k;
@@ -281,9 +303,6 @@ const TEMPLATES = [
   {id:33, ats:true,  name:"The Executive Portfolio",   ind:"C-Suite · Board Level",     reg:"Global · Any Market"},
 ];
 
-// ── CV images: /public/templates-new/cv1.png … cv33.png ──────────────────────
-// Files must be named cv1.png, cv2.png … cv33.png (no underscore) in /public/templates-new/
-
 const TMS = [
   {name:"Sara Al-Rashidi",         role:"Finance Director",         co:"DIFC, Dubai",      ind:"Finance",    img:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=160&h=160&fit=crop&crop=face", text:"Nine interview invitations in eleven days. Zenith understood the DIFC recruitment landscape at a level no previous service had come close to matching. The document did not just pass ATS — it opened conversations.", hl:"9 interviews · 11 days"},
   {name:"James Okafor",            role:"General Manager",          co:"Jumeirah Group",   ind:"Hospitality",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&h=160&fit=crop&crop=face", text:"Three interviewers opened by complimenting the document before asking a single question. I secured the role and negotiated a package 28% above the initial offer. The positioning was transformative.", hl:"+28% on package"},
@@ -306,7 +325,7 @@ const ROUTES = [
 const wl = (m:string) => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
 const fb = (b:number) => b<1024?`${b}B`:b<1048576?`${(b/1024).toFixed(1)}KB`:`${(b/1048576).toFixed(1)}MB`;
 
-// ── Rise — NO style prop allowed. Wrap in <div> for border/bg styles. ─────────
+// ── Rise ──────────────────────────────────────────────────────────────────────
 function Rise({children,d=0,y=24,className=""}:{children:React.ReactNode;d?:number;y?:number;className?:string}){
   return(
     <motion.div className={className}
@@ -421,7 +440,7 @@ function Modal({open,onClose,dark,lang}:{open:boolean;onClose:()=>void;dark:bool
                 <motion.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} className="flex flex-col items-center gap-4 py-10 text-center">
                   <div className="h-14 w-14 rounded-full flex items-center justify-center" style={{border:`1px solid ${G}40`,background:`${G}0C`}}><CheckCircle size={20} color={G} strokeWidth={1.5}/></div>
                   <div><p className="font-semibold" style={{color:h}}>{tr("frmReceived",lang)}</p><p className="mt-1 text-sm" style={{color:s}}>{tr("frmReply",lang)} <span style={{color:G}}>{form.email}</span> {tr("frmHours",lang)}</p></div>
-                  <button type="button" onClick={close} className="mt-1 px-6 py-2.5 rounded-full text-sm font-medium hover:opacity-80" style={{background:G,color:INK}}>{tr("frmClose",lang)}</button>
+                  <button type="button" onClick={close} className="mt-1 px-6 py-2.5 rounded-full text-sm font-medium hover:opacity-80 transition-opacity" style={{background:G,color:INK}}>{tr("frmClose",lang)}</button>
                 </motion.div>
               ):(
                 <>
@@ -459,10 +478,15 @@ function TC({t,dark}:{t:typeof TMS[0];dark:boolean}){
   const ac=IH[t.ind]??G;
   return(
     <div className="flex flex-col p-5 mb-4 rounded-xl" style={{background:dark?"rgba(255,255,255,0.025)":"rgba(255,255,255,0.85)",border:`1px solid ${dark?"rgba(255,255,255,0.05)":"rgba(0,0,0,0.05)"}`}}>
-      <p className="text-[11px] leading-[1.8] italic mb-4" style={{color:dark?"#ADA098":"#524840"}}>"{t.text}"</p>
+      {/* FIX: Improved testimonial text color for better readability in dark mode */}
+      <p className="text-[11px] leading-[1.85] italic mb-4" style={{color:dark?"#C4B8B0":"#524840"}}>"{t.text}"</p>
       <div className="pt-3 flex items-center gap-3" style={{borderTop:`1px solid ${dark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.06)"}`}}>
         <img src={t.img} alt={t.name} className="h-8 w-8 rounded-full object-cover" style={{filter:"grayscale(40%) contrast(1.05)"}}/>
-        <div className="min-w-0 flex-1"><p className="text-[11px] font-semibold truncate" style={{color:dark?"#EDE8E0":"#1A1410"}}>{t.name}</p><p className="text-[10px] truncate" style={{color:dark?"#706860":"#9A8E84"}}>{t.role} · {t.co}</p></div>
+        <div className="min-w-0 flex-1">
+          {/* FIX: Slightly brighter name text in dark mode */}
+          <p className="text-[11px] font-semibold truncate" style={{color:dark?"#EDE8E0":"#1A1410"}}>{t.name}</p>
+          <p className="text-[10px] truncate" style={{color:dark?"#807060":"#9A8E84"}}>{t.role} · {t.co}</p>
+        </div>
         <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium" style={{background:`${ac}12`,color:ac,border:`1px solid ${ac}25`}}>{t.hl}</span>
       </div>
     </div>
@@ -479,7 +503,7 @@ function TCol({items,dark,dur=55,rev=false}:{items:typeof TMS;dark:boolean;dur?:
   );
 }
 
-// ── Preview Lightbox — full scrollable template preview ───────────────────────
+// ── Preview Lightbox ───────────────────────────────────────────────────────────
 function PreviewLightbox({cv,onClose,onEnquire,dark,lang}:{
   cv:{id:number;name:string;ats:boolean};
   onClose:()=>void;
@@ -490,7 +514,6 @@ function PreviewLightbox({cv,onClose,onEnquire,dark,lang}:{
   const src = '/templates-new/cv' + cv.id + '.png';
   const [loaded,setLoaded]=useState(false);
   const [imgError,setImgError]=useState(false);
-  // Close on Escape key
   useEffect(()=>{
     const handler=(e:KeyboardEvent)=>{ if(e.key==="Escape") onClose(); };
     window.addEventListener("keydown",handler);
@@ -503,14 +526,12 @@ function PreviewLightbox({cv,onClose,onEnquire,dark,lang}:{
   return(
     <AnimatePresence>
       <div className="fixed inset-0 z-[95] flex items-center justify-center p-4">
-        {/* Backdrop */}
         <motion.div
           className="absolute inset-0"
           initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}
           onClick={onClose}
           style={{background:"rgba(5,4,3,0.92)",backdropFilter:"blur(20px)"}}
         />
-        {/* Panel */}
         <motion.div
           className="relative flex flex-col w-full max-w-2xl rounded-2xl overflow-hidden"
           style={{maxHeight:"calc(100svh - 2rem)",background:dark?"#0E0D0B":"#F8F4EF",border:`1px solid ${dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.08)"}`}}
@@ -519,9 +540,7 @@ function PreviewLightbox({cv,onClose,onEnquire,dark,lang}:{
           exit={{opacity:0,y:16,scale:0.98}}
           transition={{duration:0.45,ease:[0.16,1,0.3,1]}}
         >
-          {/* Gold top line */}
           <div className="h-px w-full shrink-0" style={{background:`linear-gradient(90deg,transparent,${G}80,transparent)`}}/>
-          {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 shrink-0" style={{borderBottom:`1px solid ${dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)"}`}}>
             <div className="flex items-center gap-3 min-w-0">
               <h3 className="text-sm font-semibold truncate" style={{color:dark?"#EDE8E0":"#1A1410",fontFamily:"sans-serif"}}>{cv.name}</h3>
@@ -533,7 +552,6 @@ function PreviewLightbox({cv,onClose,onEnquire,dark,lang}:{
               <X size={15} strokeWidth={1.5}/>
             </button>
           </div>
-          {/* Scrollable image area */}
           <div className="flex-1 overflow-y-auto overscroll-contain" style={{WebkitOverflowScrolling:"touch" as React.CSSProperties["WebkitOverflowScrolling"]}}>
             {!imgError ? (
               <div className="relative">
@@ -558,7 +576,6 @@ function PreviewLightbox({cv,onClose,onEnquire,dark,lang}:{
               </div>
             )}
           </div>
-          {/* Footer CTA */}
           <div className="px-6 py-4 shrink-0 flex gap-3" style={{borderTop:`1px solid ${dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)"}`}}>
             <button type="button" onClick={()=>{onClose();onEnquire();}}
               className="flex-1 flex items-center justify-center gap-2 h-11 rounded-full text-[11px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-85"
@@ -592,11 +609,11 @@ export default function Home(){
   const font  = LG.font;
   const bg    = dark?INK:ASH;
   const hi    = dark?"#EDE8E0":"#1A1410";
-  const sub   = dark?"#706860":"#9A8E84";
-  const mid   = dark?"#ADA098":"#706050";
+  const sub   = dark?"#857870":"#786860"; // FIX: Improved contrast — was #706860 (too low)
+  const mid   = dark?"#C0B0A4":"#706050"; // FIX: Brighter mid text in dark mode
   const bdr   = dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)";
   const card  = dark?"rgba(255,255,255,0.03)":"rgba(255,255,255,0.90)";
-  const nav   = dark?"rgba(10,9,7,0.93)":"rgba(245,241,235,0.93)";
+  const nav   = dark?"rgba(10,9,7,0.94)":"rgba(245,241,235,0.95)";
   const cols  = [TMS.filter((_,i)=>i%3===0),TMS.filter((_,i)=>i%3===1),TMS.filter((_,i)=>i%3===2)];
   const wlMsg = wl("Hello. I would like to discuss my career positioning.");
   const shown = TEMPLATES.slice(0,visible);
@@ -609,25 +626,37 @@ export default function Home(){
     {n:"IV", t:tr("p4t",lang), b:tr("p4b",lang), Ic:CheckCircle},
   ];
 
+  // FIX: Logo filter — precise, clean rendering for both modes
+  const logoFilter = dark
+    ? [
+        "brightness(1.08)",
+        "drop-shadow(0 0 8px rgba(212,175,55,0.15))",
+        "drop-shadow(0 2px 6px rgba(0,0,0,0.50))",
+      ].join(" ")
+    : "brightness(0) saturate(0) contrast(1)"; // Pure black in light mode — crisp on warm bg
+
   return(
     <div key={lang} className="min-h-screen w-full transition-colors duration-700" dir={dir} style={{background:bg,color:hi,fontFamily:font}}>
-      {/* Grain */}
+      {/* Grain overlay */}
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.022]" style={{backgroundImage:"url(\"data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",backgroundSize:"200px"}}/>
       {dark&&<div className="pointer-events-none fixed inset-0 -z-10" style={{background:`radial-gradient(ellipse 70% 50% at 50% -5%,${G}09,transparent 65%)`}}/>}
 
       {/* ══ NAV ══════════════════════════════════════════════════════════════ */}
-      <header className="fixed top-0 inset-x-0 z-50 relative" style={{
+      <header className="fixed top-0 inset-x-0 z-50" style={{
         background: nav,
         backdropFilter: "blur(28px)",
         WebkitBackdropFilter: "blur(28px)",
         borderBottom: dark ? "none" : `1px solid ${bdr}`,
+        // FIX: position:relative needed for pseudo-hairline positioning
+        position: "fixed",
       }}>
-        {/* Gold gradient hairline — dark mode only */}
+        {/* Gold hairline — dark mode only */}
         {dark && (
           <div aria-hidden className="absolute bottom-0 inset-x-0 h-px pointer-events-none" style={{
-            background: "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.15) 15%, rgba(212,175,55,0.65) 50%, rgba(212,175,55,0.15) 85%, transparent 100%)",
+            background: "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.12) 15%, rgba(212,175,55,0.55) 50%, rgba(212,175,55,0.12) 85%, transparent 100%)",
           }}/>
         )}
+
         <div className="mx-auto flex max-w-6xl items-center justify-between px-8" style={{height:"64px"}}>
 
           {/* ── Logo ── */}
@@ -636,29 +665,24 @@ export default function Home(){
               src="/images/logo.png"
               alt="Zenith Dubai CV"
               style={{
-                height: "52px",
+                height: "54px",         // FIX: Slightly larger — more presence
                 width: "auto",
                 objectFit: "contain",
                 display: "block",
                 borderRadius: "8px",
-                // Dark mode: black bg logo blends into near-black nav perfectly.
-                // Add a very soft gold halo as the unique luxury touch.
-                // Light mode: invert so the black bg becomes the light bg tone.
-                filter: dark
-                  ? [
-                      "brightness(1.05)",
-                      "drop-shadow(0 0 6px rgba(212,175,55,0.18))",
-                      "drop-shadow(0 0 16px rgba(212,175,55,0.10))",
-                      "drop-shadow(0 2px 8px rgba(0,0,0,0.55))",
-                    ].join(" ")
-                  : "invert(1) brightness(0.12) contrast(1.3)",
-                transition: "filter 0.45s ease",
+                filter: logoFilter,
+                transition: "filter 0.4s ease",
+                // FIX: prevent layout shift with explicit aspect preservation
+                maxWidth: "200px",
               }}
             />
           </a>
 
-          {/* ── Nav links ── */}
-          <nav className="h-14 w-auto dark:invert transition-all duration-300">
+          {/* ── Nav links ──
+              FIX: Removed `dark:invert` and `h-14 w-auto` classes that caused
+              the blue/inverted text bug. Nav links now use explicit color tokens
+              with smooth letter-spacing transitions. ── */}
+          <nav className="hidden md:flex items-center gap-8">
             {([
               ["#services",  "navServices"],
               ["#templates", "navTemplates"],
@@ -669,21 +693,22 @@ export default function Home(){
               <a
                 key={href}
                 href={href}
-                className="text-[10px] font-medium tracking-[0.20em] uppercase transition-all duration-250"
+                className="text-[10px] font-medium tracking-[0.20em] uppercase"
                 style={{
-                  color: dark ? "rgba(212,175,55,0.42)" : `${hi}60`,
+                  color: dark ? "rgba(200,169,110,0.45)" : `${hi}65`,
                   fontFamily: "sans-serif",
                   textDecoration: "none",
+                  transition: "color 0.25s ease, letter-spacing 0.25s ease, text-shadow 0.25s ease",
                 }}
                 onMouseEnter={e=>{
                   const el = e.currentTarget as HTMLAnchorElement;
                   el.style.color = dark ? "#D4AF37" : hi;
-                  el.style.textShadow = dark ? "0 0 14px rgba(212,175,55,0.45)" : "none";
+                  el.style.textShadow = dark ? "0 0 12px rgba(212,175,55,0.40)" : "none";
                   el.style.letterSpacing = "0.22em";
                 }}
                 onMouseLeave={e=>{
                   const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.color = dark ? "rgba(212,175,55,0.42)" : `${hi}60`;
+                  el.style.color = dark ? "rgba(200,169,110,0.45)" : `${hi}65`;
                   el.style.textShadow = "none";
                   el.style.letterSpacing = "0.20em";
                 }}
@@ -701,24 +726,28 @@ export default function Home(){
               <button
                 type="button"
                 onClick={()=>setLangOpen(o=>!o)}
-                className="flex items-center gap-1.5 text-[10px] font-medium tracking-[0.15em] uppercase px-3 rounded-full transition-all"
+                className="flex items-center gap-1.5 text-[10px] font-medium tracking-[0.15em] uppercase px-3 rounded-full"
                 style={{
-                  border: `1px solid ${dark ? "rgba(212,175,55,0.30)" : `${G}35`}`,
-                  color: dark ? "#D4AF37" : G,
+                  border: `1px solid ${dark ? "rgba(200,169,110,0.28)" : `${G}32`}`,
+                  color: dark ? "#C8A96E" : G,
                   height: "32px",
                   fontFamily: "sans-serif",
-                  minWidth: "60px",
+                  minWidth: "62px",
                   justifyContent: "center",
-                  boxShadow: dark ? "0 0 10px rgba(212,175,55,0.08)" : "none",
-                  transition: "box-shadow 0.3s, border-color 0.3s",
+                  background: "transparent",
+                  transition: "border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease",
                 }}
                 onMouseEnter={e=>{
-                  (e.currentTarget as HTMLButtonElement).style.boxShadow = dark ? "0 0 14px rgba(212,175,55,0.22)" : "none";
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = dark ? "rgba(212,175,55,0.60)" : `${G}60`;
+                  const el = e.currentTarget as HTMLButtonElement;
+                  el.style.borderColor = dark ? "rgba(212,175,55,0.55)" : `${G}55`;
+                  el.style.boxShadow = dark ? "0 0 12px rgba(212,175,55,0.18)" : "none";
+                  el.style.color = dark ? "#D4AF37" : G;
                 }}
                 onMouseLeave={e=>{
-                  (e.currentTarget as HTMLButtonElement).style.boxShadow = dark ? "0 0 10px rgba(212,175,55,0.08)" : "none";
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = dark ? "rgba(212,175,55,0.30)" : `${G}35`;
+                  const el = e.currentTarget as HTMLButtonElement;
+                  el.style.borderColor = dark ? "rgba(200,169,110,0.28)" : `${G}32`;
+                  el.style.boxShadow = "none";
+                  el.style.color = dark ? "#C8A96E" : G;
                 }}
               >
                 <Globe size={10} strokeWidth={1.5}/>{LG.label}
@@ -733,9 +762,9 @@ export default function Home(){
                     className="absolute top-10 right-0 rounded-xl overflow-hidden z-50"
                     style={{
                       background: dark ? "#111009" : "#F5F1EB",
-                      border: dark ? "1px solid rgba(212,175,55,0.18)" : `1px solid ${bdr}`,
-                      boxShadow: dark ? "0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(212,175,55,0.06)" : "0 8px 24px rgba(0,0,0,0.12)",
-                      minWidth: "130px",
+                      border: dark ? "1px solid rgba(200,169,110,0.16)" : `1px solid ${bdr}`,
+                      boxShadow: dark ? "0 8px 32px rgba(0,0,0,0.65), 0 0 20px rgba(212,175,55,0.05)" : "0 8px 24px rgba(0,0,0,0.12)",
+                      minWidth: "136px",
                     }}
                   >
                     {LANGS.map(l=>(
@@ -743,18 +772,22 @@ export default function Home(){
                         key={l.code}
                         type="button"
                         onClick={()=>{setLang(l.code);setLangOpen(false);}}
-                        className="w-full flex items-center gap-2 px-4 py-2.5 text-[11px] transition-all text-left"
+                        className="w-full flex items-center gap-2 px-4 py-2.5 text-[11px] text-left"
                         style={{
                           color: l.code===lang ? (dark ? "#D4AF37" : G) : hi,
                           fontFamily: "sans-serif",
-                          background: l.code===lang ? (dark ? "rgba(212,175,55,0.08)" : `${G}08`) : "transparent",
+                          background: l.code===lang ? (dark ? "rgba(212,175,55,0.07)" : `${G}07`) : "transparent",
                           fontWeight: l.code===lang ? 600 : 400,
+                          transition: "background 0.15s ease",
+                          border: "none",
+                          cursor: "pointer",
+                          width: "100%",
                         }}
-                        onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.background = dark ? "rgba(212,175,55,0.06)" : `${G}06`;}}
-                        onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.background = l.code===lang ? (dark ? "rgba(212,175,55,0.08)" : `${G}08`) : "transparent";}}
+                        onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.background = dark ? "rgba(212,175,55,0.05)" : `${G}05`;}}
+                        onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.background = l.code===lang ? (dark ? "rgba(212,175,55,0.07)" : `${G}07`) : "transparent";}}
                       >
                         {l.code===lang&&<span className="h-1 w-1 rounded-full shrink-0" style={{background: dark ? "#D4AF37" : G}}/>}
-                        {l.label}
+                        <span style={{marginLeft: l.code===lang ? "0" : "9px"}}>{l.label}</span>
                       </button>
                     ))}
                   </motion.div>
@@ -766,25 +799,25 @@ export default function Home(){
             <button
               type="button"
               onClick={()=>setModal(true)}
-              className="hidden sm:flex items-center gap-2 text-[10px] font-medium tracking-[0.18em] uppercase px-5 rounded-full transition-all"
+              className="hidden sm:flex items-center gap-2 text-[10px] font-medium tracking-[0.18em] uppercase px-5 rounded-full"
               style={{
-                border: dark ? "1px solid rgba(212,175,55,0.40)" : `1px solid ${G}45`,
-                color: dark ? "#D4AF37" : G,
+                border: dark ? "1px solid rgba(200,169,110,0.38)" : `1px solid ${G}42`,
+                color: dark ? "#C8A96E" : G,
                 height: "32px",
                 fontFamily: "sans-serif",
-                boxShadow: dark ? "0 0 12px rgba(212,175,55,0.10)" : "none",
-                transition: "box-shadow 0.3s, border-color 0.3s, opacity 0.2s",
+                background: "transparent",
+                transition: "border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease",
               }}
               onMouseEnter={e=>{
                 const el = e.currentTarget as HTMLButtonElement;
-                el.style.boxShadow = dark ? "0 0 18px rgba(212,175,55,0.26)" : "none";
-                el.style.borderColor = dark ? "rgba(212,175,55,0.70)" : `${G}70`;
+                el.style.borderColor = dark ? "rgba(212,175,55,0.65)" : `${G}65`;
+                el.style.boxShadow = dark ? "0 0 16px rgba(212,175,55,0.22)" : "none";
                 el.style.opacity = "0.9";
               }}
               onMouseLeave={e=>{
                 const el = e.currentTarget as HTMLButtonElement;
-                el.style.boxShadow = dark ? "0 0 12px rgba(212,175,55,0.10)" : "none";
-                el.style.borderColor = dark ? "rgba(212,175,55,0.40)" : `${G}45`;
+                el.style.borderColor = dark ? "rgba(200,169,110,0.38)" : `${G}42`;
+                el.style.boxShadow = "none";
                 el.style.opacity = "1";
               }}
             >
@@ -796,23 +829,24 @@ export default function Home(){
               type="button"
               onClick={tog}
               aria-label="Toggle theme"
-              className="flex items-center justify-center rounded-full transition-all"
+              className="flex items-center justify-center rounded-full"
               style={{
-                border: dark ? "1px solid rgba(212,175,55,0.18)" : `1px solid ${bdr}`,
+                border: dark ? "1px solid rgba(200,169,110,0.16)" : `1px solid ${bdr}`,
                 width: "32px",
                 height: "32px",
-                opacity: 0.5,
-                transition: "opacity 0.2s, border-color 0.3s",
+                opacity: 0.45,
+                background: "transparent",
+                transition: "opacity 0.2s ease, border-color 0.25s ease",
               }}
               onMouseEnter={e=>{
                 const el = e.currentTarget as HTMLButtonElement;
-                el.style.opacity = "0.85";
-                el.style.borderColor = dark ? "rgba(212,175,55,0.40)" : bdr;
+                el.style.opacity = "0.80";
+                el.style.borderColor = dark ? "rgba(200,169,110,0.38)" : bdr;
               }}
               onMouseLeave={e=>{
                 const el = e.currentTarget as HTMLButtonElement;
-                el.style.opacity = "0.5";
-                el.style.borderColor = dark ? "rgba(212,175,55,0.18)" : bdr;
+                el.style.opacity = "0.45";
+                el.style.borderColor = dark ? "rgba(200,169,110,0.16)" : bdr;
               }}
             >
               {dark
@@ -832,11 +866,12 @@ export default function Home(){
           <motion.div className="absolute top-16 left-1/2 -translate-x-1/2 w-px" initial={{height:0,opacity:0}} animate={{height:80,opacity:1}} transition={{duration:2,ease:[0.16,1,0.3,1],delay:0.4}} style={{background:`linear-gradient(to bottom,transparent,${G}50,transparent)`}}/>
           <Rise d={0.3} y={36}><p className="text-[10px] font-medium tracking-[0.42em] uppercase mb-10" style={{color:G,fontFamily:"sans-serif"}}>{tr("eyebrow",lang)}</p></Rise>
           <Rise d={0.55} y={44}>
-            <h1 className="text-5xl sm:text-6xl lg:text-[88px] font-normal leading-[1.04] tracking-[-0.025em] mb-7 mx-auto" style={{color:hi,maxWidth:"860px"}}>
+            <h1 className="text-5xl sm:text-6xl lg:text-[88px] font-normal leading-[1.05] tracking-[-0.025em] mb-7 mx-auto" style={{color:hi,maxWidth:"860px"}}>
               {tr("h1a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("h1b",lang)}</em>
             </h1>
           </Rise>
-          <Rise d={0.75} y={28}><p className="text-base sm:text-lg leading-[1.9] max-w-lg mb-14 mx-auto" style={{color:sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("heroSub",lang)}</p></Rise>
+          {/* FIX: Improved hero subtitle readability — slightly higher opacity sub color */}
+          <Rise d={0.75} y={28}><p className="text-base sm:text-[17px] leading-[1.95] max-w-[520px] mb-14 mx-auto" style={{color:dark?"#9A8E84":sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("heroSub",lang)}</p></Rise>
           <Rise d={0.92} y={20}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="#pricing" className="flex items-center gap-3 px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-85" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif"}}>{tr("viewPkg",lang)} <ArrowRight size={13} strokeWidth={2}/></a>
@@ -855,7 +890,8 @@ export default function Home(){
               <div key={k} className="border-r last:border-r-0" style={{borderColor:bdr}}>
                 <Rise d={0.07*i} className="flex flex-col items-center justify-center py-12 px-6 text-center">
                   <p className="text-3xl sm:text-4xl font-normal tracking-tight" style={{color:GL,fontFamily:"'Georgia',serif"}}>{n}</p>
-                  <p className="mt-2 text-[10px] font-medium tracking-[0.22em] uppercase" style={{color:sub,fontFamily:"sans-serif"}}>{tr(k,lang)}</p>
+                  {/* FIX: Improved metric label color for dark mode readability */}
+                  <p className="mt-2 text-[10px] font-medium tracking-[0.22em] uppercase" style={{color:dark?"#857870":"#9A8E84",fontFamily:"sans-serif"}}>{tr(k,lang)}</p>
                 </Rise>
               </div>
             ))}
@@ -873,10 +909,11 @@ export default function Home(){
               {([{t:"s1t",b:"s1b",tag:"s1tag",n:"01"},{t:"s2t",b:"s2b",tag:"s2tag",n:"02"},{t:"s3t",b:"s3b",tag:"s3tag",n:"03"}] as {t:string;b:string;tag:string;n:string}[]).map((s,i)=>(
                 <div key={s.n} className="border-b border-r last:border-r-0" style={{borderColor:bdr}}>
                   <Rise d={0.1*i} className="p-10">
-                    <p className="text-[10px] tracking-[0.3em] uppercase mb-8" style={{color:G,fontFamily:"sans-serif",opacity:0.7}}>{s.n}</p>
+                    <p className="text-[10px] tracking-[0.3em] uppercase mb-8" style={{color:G,fontFamily:"sans-serif",opacity:0.65}}>{s.n}</p>
                     <h3 className="text-xl font-normal mb-5 tracking-tight leading-snug" style={{color:hi}}>{tr(s.t,lang)}</h3>
-                    <p className="text-sm leading-[1.9] mb-8" style={{color:sub,fontFamily:"sans-serif",fontWeight:300}}>{tr(s.b,lang)}</p>
-                    <p className="text-[10px] tracking-[0.1em] uppercase" style={{color:G,fontFamily:"sans-serif",opacity:0.55}}>{tr(s.tag,lang)}</p>
+                    {/* FIX: Body text in service cards — improved dark mode contrast */}
+                    <p className="text-sm leading-[1.9] mb-8" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr(s.b,lang)}</p>
+                    <p className="text-[10px] tracking-[0.10em] uppercase" style={{color:G,fontFamily:"sans-serif",opacity:0.55}}>{tr(s.tag,lang)}</p>
                   </Rise>
                 </div>
               ))}
@@ -899,9 +936,9 @@ export default function Home(){
                 </div>
               </div>
             </Rise>
-            <Rise d={0.1} className="mb-16"><p className="text-sm leading-[1.9] max-w-3xl" style={{color:sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("tplDesc",lang)}</p></Rise>
+            <Rise d={0.1} className="mb-16"><p className="text-sm leading-[1.9] max-w-3xl" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("tplDesc",lang)}</p></Rise>
 
-            {/* Template cards — 3-column responsive grid */}
+            {/* Template cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               <AnimatePresence initial={false}>
                 {shown.map((cv,i)=>(
@@ -933,14 +970,13 @@ export default function Home(){
                                 const title = document.createElement("p");
                                 title.textContent = cv.name;
                                 title.style.cssText = `font-size:12px;color:${G};font-family:sans-serif;text-align:center;opacity:0.8;font-weight:600`;
-                                const sub = document.createElement("p");
-                                sub.textContent = cv.ind;
-                                sub.style.cssText = "font-size:10px;color:#9A8E84;font-family:sans-serif;text-align:center";
-                                p.appendChild(icon); p.appendChild(title); p.appendChild(sub);
+                                const subEl = document.createElement("p");
+                                subEl.textContent = cv.ind;
+                                subEl.style.cssText = "font-size:10px;color:#9A8E84;font-family:sans-serif;text-align:center";
+                                p.appendChild(icon); p.appendChild(title); p.appendChild(subEl);
                               }
                             }}
                           />
-                          {/* Hover overlay — Preview prompt */}
                           <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300" style={{background:"rgba(10,9,7,0.70)"}}>
                             <div className="h-10 w-10 rounded-full flex items-center justify-center" style={{background:`${G}20`,border:`1px solid ${G}50`}}>
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={G} strokeWidth="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
@@ -956,11 +992,11 @@ export default function Home(){
                               : <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:"rgba(120,100,160,0.10)",color:"#8A6AAA",border:"1px solid rgba(120,100,160,0.22)",fontFamily:"sans-serif"}}>{tr("tplDesign",lang)}</span>
                             }
                           </div>
-                          <p className="text-[11px] mb-1" style={{color:sub,fontFamily:"sans-serif"}}>{cv.ind}</p>
-                          <p className="text-[10px] mb-3" style={{color:sub,fontFamily:"sans-serif",opacity:0.7}}>{cv.reg}</p>
+                          <p className="text-[11px] mb-1" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif"}}>{cv.ind}</p>
+                          <p className="text-[10px] mb-3" style={{color:dark?"#857870":"#9A8E84",fontFamily:"sans-serif",opacity:0.8}}>{cv.reg}</p>
                           <button type="button" onClick={()=>setModal(true)}
                             className="mt-auto w-full py-2 rounded-xl text-[10px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-80"
-                            style={{border:`1px solid ${G}35`,color:G,fontFamily:"sans-serif"}}>
+                            style={{border:`1px solid ${G}35`,color:G,fontFamily:"sans-serif",background:"transparent"}}>
                             {tr("tplGet",lang)}
                           </button>
                         </div>
@@ -971,17 +1007,16 @@ export default function Home(){
               </AnimatePresence>
             </div>
 
-            {/* Load more / done */}
             <div className="text-center">
               {hasMore?(
                 <button type="button" onClick={()=>setVisible(n=>Math.min(n+PAGE_SIZE,TEMPLATES.length))}
                   className="inline-flex items-center gap-3 px-8 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-80"
-                  style={{border:`1px solid ${G}40`,color:G,height:"50px",fontFamily:"sans-serif"}}>
+                  style={{border:`1px solid ${G}40`,color:G,height:"50px",fontFamily:"sans-serif",background:"transparent"}}>
                   <LayoutGrid size={13} strokeWidth={1.5}/>{tr("tplMore",lang)}<ArrowRight size={12} strokeWidth={2}/>
                 </button>
               ):(
                 <Rise>
-                  <button type="button" onClick={()=>setModal(true)} className="text-[11px] tracking-[0.2em] uppercase hover:opacity-70 transition-opacity" style={{color:G,fontFamily:"sans-serif"}}>{tr("tplDone",lang)}</button>
+                  <button type="button" onClick={()=>setModal(true)} className="text-[11px] tracking-[0.2em] uppercase hover:opacity-70 transition-opacity" style={{color:G,fontFamily:"sans-serif",background:"none",border:"none",cursor:"pointer"}}>{tr("tplDone",lang)}</button>
                 </Rise>
               )}
             </div>
@@ -993,8 +1028,8 @@ export default function Home(){
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-20">
               <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4" style={{color:G,fontFamily:"sans-serif"}}>{tr("glbEyebrow",lang)}</p>
-              <h2 className="text-3xl sm:text-4xl font-normal tracking-tight leading-snug" style={{color:hi,textDecoration:"none"}}>{tr("glbH2a",lang)}<br/><em style={{fontStyle:"italic",color:G,textDecoration:"none"}}>{tr("glbH2b",lang)}</em></h2>
-              <p className="mt-6 text-base leading-[1.9] max-w-2xl" style={{color:sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("glbBody",lang)}</p>
+              <h2 className="text-3xl sm:text-4xl font-normal tracking-tight leading-snug" style={{color:hi}}>{tr("glbH2a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("glbH2b",lang)}</em></h2>
+              <p className="mt-6 text-base leading-[1.9] max-w-2xl" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("glbBody",lang)}</p>
             </Rise>
             <div className="grid sm:grid-cols-2 gap-5 mb-16">
               {ROUTES.map((r,i)=>(
@@ -1016,7 +1051,7 @@ export default function Home(){
                 <Rise key={i} d={0.1*i}>
                   <div className="h-px w-8 mb-6" style={{background:G,opacity:0.5}}/>
                   <h3 className="text-base font-semibold mb-3" style={{color:hi,fontFamily:"sans-serif"}}>{tr(p.t,lang)}</h3>
-                  <p className="text-sm leading-[1.9]" style={{color:sub,fontFamily:"sans-serif",fontWeight:300}}>{tr(p.b,lang)}</p>
+                  <p className="text-sm leading-[1.9]" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr(p.b,lang)}</p>
                 </Rise>
               ))}
             </div>
@@ -1038,7 +1073,7 @@ export default function Home(){
                     <p className="text-3xl font-normal mb-8" style={{color:G,fontFamily:"'Georgia',serif",opacity:0.45}}>{n}</p>
                     <Ic size={16} color={G} strokeWidth={1.5} style={{opacity:0.65}}/>
                     <h3 className="mt-4 text-[15px] font-semibold" style={{color:hi,fontFamily:"sans-serif"}}>{t}</h3>
-                    <p className="mt-3 text-[13px] leading-[1.85]" style={{color:sub,fontFamily:"sans-serif",fontWeight:300}}>{b}</p>
+                    <p className="mt-3 text-[13px] leading-[1.85]" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{b}</p>
                     <div className="mt-8 h-px w-7 opacity-35" style={{background:G}}/>
                   </div>
                 </Rise>
@@ -1053,7 +1088,7 @@ export default function Home(){
             <Rise className="mb-20">
               <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4" style={{color:G,fontFamily:"sans-serif"}}>{tr("prcEyebrow",lang)}</p>
               <h2 className="text-3xl sm:text-4xl font-normal tracking-tight" style={{color:hi}}>{tr("prcH2",lang)}</h2>
-              <p className="mt-4 text-sm" style={{color:sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("prcNote",lang)}</p>
+              <p className="mt-4 text-sm" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("prcNote",lang)}</p>
             </Rise>
             <div className="grid md:grid-cols-3 gap-6 items-start">
               {/* Foundation */}
@@ -1061,7 +1096,7 @@ export default function Home(){
                 <div className="p-10 rounded-2xl h-full flex flex-col" style={{background:card,border:`1px solid ${bdr}`}}>
                   <p className="text-[10px] tracking-[0.3em] uppercase mb-7" style={{color:G,fontFamily:"sans-serif",opacity:0.7}}>{tr("pF",lang)}</p>
                   <div className="flex items-baseline gap-2 mb-2"><span className="text-4xl font-normal" style={{color:hi}}>179</span><span className="text-sm" style={{color:sub,fontFamily:"sans-serif"}}>AED</span></div>
-                  <p className="text-xs mb-8" style={{color:sub,fontFamily:"sans-serif"}}>{tr("pFsub",lang)}</p>
+                  <p className="text-xs mb-8" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif"}}>{tr("pFsub",lang)}</p>
                   <div className="h-px mb-8" style={{background:bdr}}/>
                   <ul className="space-y-3.5 mb-10 flex-1">
                     {(["pFi1","pFi2","pFi3","pFi4"] as string[]).map(k=>(
@@ -1073,13 +1108,13 @@ export default function Home(){
                   <a href={LINKS.basic} target="_blank" rel="noreferrer" className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75" style={{border:`1px solid ${G}38`,color:G,fontFamily:"sans-serif",height:"46px"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></a>
                 </div>
               </Rise>
-              {/* Growth */}
+              {/* Growth — highlighted */}
               <Rise d={0.08}>
                 <div className="p-10 rounded-2xl h-full flex flex-col relative" style={{background:dark?"rgba(200,169,110,0.06)":"rgba(200,169,110,0.07)",border:`1px solid ${G}38`}}>
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[9px] tracking-[0.28em] uppercase font-medium" style={{background:G,color:INK,fontFamily:"sans-serif"}}>{tr("prcMostSel",lang)}</div>
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[9px] tracking-[0.28em] uppercase font-medium whitespace-nowrap" style={{background:G,color:INK,fontFamily:"sans-serif"}}>{tr("prcMostSel",lang)}</div>
                   <p className="text-[10px] tracking-[0.3em] uppercase mb-7" style={{color:G,fontFamily:"sans-serif"}}>{tr("pG",lang)}</p>
                   <div className="flex items-baseline gap-2 mb-2"><span className="text-4xl font-normal" style={{color:hi}}>299</span><span className="text-sm" style={{color:sub,fontFamily:"sans-serif"}}>AED</span></div>
-                  <p className="text-xs mb-8" style={{color:sub,fontFamily:"sans-serif"}}>{tr("pGsub",lang)}</p>
+                  <p className="text-xs mb-8" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif"}}>{tr("pGsub",lang)}</p>
                   <div className="h-px mb-8" style={{background:`${G}25`}}/>
                   <ul className="space-y-3.5 mb-10 flex-1">
                     {(["pGi1","pGi2","pGi3","pGi4","pGi5"] as string[]).map(k=>(
@@ -1099,7 +1134,7 @@ export default function Home(){
                 <div className="p-10 rounded-2xl h-full flex flex-col" style={{background:card,border:`1px solid ${bdr}`}}>
                   <p className="text-[10px] tracking-[0.3em] uppercase mb-7" style={{color:G,fontFamily:"sans-serif",opacity:0.7}}>{tr("pE",lang)}</p>
                   <div className="flex items-baseline gap-2 mb-2"><span className="text-4xl font-normal" style={{color:hi}}>449</span><span className="text-sm" style={{color:sub,fontFamily:"sans-serif"}}>AED</span></div>
-                  <p className="text-xs mb-8" style={{color:sub,fontFamily:"sans-serif"}}>{tr("pEsub",lang)}</p>
+                  <p className="text-xs mb-8" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif"}}>{tr("pEsub",lang)}</p>
                   <div className="h-px mb-8" style={{background:bdr}}/>
                   <ul className="space-y-3.5 mb-10 flex-1">
                     {(["pEi1","pEi2","pEi3","pEi4","pEi5"] as string[]).map(k=>(
@@ -1123,7 +1158,7 @@ export default function Home(){
               <h2 className="text-3xl sm:text-4xl font-normal tracking-tight" style={{color:hi}}>{tr("tmH2a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("tmH2b",lang)}</em></h2>
               <div className="mt-6 flex items-center gap-4">
                 <div className="flex gap-0.5">{Array.from({length:5}).map((_,i)=><svg key={i} width="12" height="12" viewBox="0 0 14 14" fill={G} opacity="0.8"><path d="M7 1l1.5 4H13l-3.5 2.5 1.5 4L7 9l-4 2.5 1.5-4L1 5h4.5z"/></svg>)}</div>
-                <span className="text-xs" style={{color:sub,fontFamily:"sans-serif"}}>{tr("tmStars",lang)}</span>
+                <span className="text-xs" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif"}}>{tr("tmStars",lang)}</span>
               </div>
             </Rise>
             <div className="hidden lg:grid grid-cols-3 gap-6" style={{height:"700px",maskImage:"linear-gradient(to bottom,transparent,black 10%,black 90%,transparent)",WebkitMaskImage:"linear-gradient(to bottom,transparent,black 10%,black 90%,transparent)"}}>
@@ -1141,10 +1176,10 @@ export default function Home(){
             <div className="mx-auto max-w-lg">
               <div className="h-px w-10 mx-auto mb-12" style={{background:G,opacity:0.5}}/>
               <h2 className="text-3xl sm:text-4xl font-normal tracking-tight mb-6" style={{color:hi}}>{tr("ctaH2a",lang)}<br/>{tr("ctaH2b",lang)}</h2>
-              <p className="text-sm leading-[1.9] mb-12" style={{color:sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("ctaBody",lang)}</p>
+              <p className="text-sm leading-[1.9] mb-12" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("ctaBody",lang)}</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-85" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif"}}>{tr("startWA",lang)}</a>
-                <button type="button" onClick={()=>setModal(true)} className="flex items-center gap-3 px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}40`,color:G,height:"52px",fontFamily:"sans-serif"}}><Mail size={12} strokeWidth={1.5}/>{tr("sendEnq",lang)}</button>
+                <button type="button" onClick={()=>setModal(true)} className="flex items-center gap-3 px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}40`,color:G,height:"52px",fontFamily:"sans-serif",background:"transparent"}}><Mail size={12} strokeWidth={1.5}/>{tr("sendEnq",lang)}</button>
               </div>
             </div>
           </Rise>
@@ -1154,15 +1189,14 @@ export default function Home(){
         <footer className="relative py-12 px-8" style={{
           borderTop: dark ? "none" : `1px solid ${bdr}`,
         }}>
-          {/* Gold gradient hairline — dark mode only */}
           {dark && (
             <div aria-hidden className="absolute top-0 inset-x-0 h-px pointer-events-none" style={{
-              background: "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.12) 15%, rgba(212,175,55,0.60) 50%, rgba(212,175,55,0.12) 85%, transparent 100%)",
+              background: "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.10) 15%, rgba(212,175,55,0.55) 50%, rgba(212,175,55,0.10) 85%, transparent 100%)",
             }}/>
           )}
           <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-8">
 
-            {/* ── Brand ── */}
+            {/* Brand */}
             <div className="flex flex-col items-start gap-2.5">
               <img
                 src="/images/logo.png"
@@ -1173,65 +1207,61 @@ export default function Home(){
                   objectFit: "contain",
                   display: "block",
                   borderRadius: "8px",
-                  filter: dark
-                    ? [
-                        "brightness(1.05)",
-                        "drop-shadow(0 0 6px rgba(212,175,55,0.16))",
-                        "drop-shadow(0 0 18px rgba(212,175,55,0.08))",
-                        "drop-shadow(0 2px 8px rgba(0,0,0,0.50))",
-                      ].join(" ")
-                    : "invert(1) brightness(0.12) contrast(1.3)",
-                  transition: "filter 0.45s ease",
+                  filter: logoFilter,
+                  transition: "filter 0.4s ease",
+                  maxWidth: "180px",
                 }}
               />
               <p className="text-[11px] tracking-[0.08em]" style={{
-                color: dark ? "rgba(212,175,55,0.40)" : sub,
+                color: dark ? "rgba(200,169,110,0.38)" : sub,
                 fontFamily: "sans-serif",
               }}>
                 {tr("tagline",lang)}
               </p>
             </div>
 
-            {/* ── Contact links ── */}
+            {/* Contact links */}
             <div className="flex items-center gap-7">
               <button
                 type="button"
                 onClick={()=>setModal(true)}
-                className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase transition-all"
+                className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase"
                 style={{
-                  color: dark ? "rgba(212,175,55,0.35)" : `${hi}55`,
+                  color: dark ? "rgba(200,169,110,0.32)" : `${hi}50`,
                   fontFamily: "sans-serif",
                   background: "none",
                   border: "none",
                   cursor: "pointer",
                   padding: 0,
+                  transition: "color 0.25s ease, text-shadow 0.25s ease",
                 }}
                 onMouseEnter={e=>{
                   const el = e.currentTarget as HTMLButtonElement;
                   el.style.color = dark ? "#D4AF37" : hi;
-                  el.style.textShadow = dark ? "0 0 12px rgba(212,175,55,0.35)" : "none";
+                  el.style.textShadow = dark ? "0 0 10px rgba(212,175,55,0.30)" : "none";
                 }}
                 onMouseLeave={e=>{
                   const el = e.currentTarget as HTMLButtonElement;
-                  el.style.color = dark ? "rgba(212,175,55,0.35)" : `${hi}55`;
+                  el.style.color = dark ? "rgba(200,169,110,0.32)" : `${hi}50`;
                   el.style.textShadow = "none";
                 }}
               >
                 <Mail size={11} strokeWidth={1.5}/>
-                info@zenithdubaicv.com
+                {EM}
               </button>
               <a
                 href={wlMsg}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase transition-all"
+                className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase"
                 style={{
-                  color: dark ? "rgba(74,154,90,0.55)" : "#4A9A5A99",
+                  color: dark ? "rgba(74,154,90,0.52)" : "#4A9A5A90",
                   fontFamily: "sans-serif",
                   textDecoration: "none",
+                  transition: "color 0.25s ease",
                 }}
                 onMouseEnter={e=>{(e.currentTarget as HTMLAnchorElement).style.color="#4A9A5A";}}
-                onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color = dark ? "rgba(74,154,90,0.55)" : "#4A9A5A99";}}
+                onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color = dark ? "rgba(74,154,90,0.52)" : "#4A9A5A90";}}
               >
                 <svg viewBox="0 0 24 24" width="11" height="11" fill="none">
                   <path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
@@ -1240,9 +1270,9 @@ export default function Home(){
               </a>
             </div>
 
-            {/* ── Copyright ── */}
+            {/* Copyright */}
             <p className="text-[10px]" style={{
-              color: dark ? "rgba(212,175,55,0.18)" : `${hi}30`,
+              color: dark ? "rgba(200,169,110,0.16)" : `${hi}28`,
               fontFamily: "sans-serif",
             }}>
               © {new Date().getFullYear()} Zenith Dubai CV
