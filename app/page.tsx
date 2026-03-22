@@ -666,7 +666,7 @@ export default function Home(){
               alt="Zenith Dubai CV"
               style={{
                 height: "auto",
-                width: "125px",
+                width: "100px",
                 objectFit: "contain",
                 display: "block",
                 borderRadius: "8px",
