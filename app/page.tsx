@@ -10,11 +10,7 @@ import {
 // ── Tokens ─────────────────────────────────────────────────────────────────────
 const G = "#C8A96E", GL = "#E2C98E", INK = "#0A0907", ASH = "#F5F1EB";
 const WA = "971502879462", EM = "info@zenithdubaicv.com";
-const LINKS = {
-  basic:        "https://buy.stripe.com/test_eVq4gyeEe25R03d5GG0oM00",
-  professional: "https://buy.stripe.com/test_aFa28q8fQcKv3fpglk0oM01",
-  ultimate:     "https://buy.stripe.com/test_aFadR89jU6m75nx4CC0oM02",
-};
+
 const SUBS_EN = ["General Enquiry","Foundation Package","Growth Package","Executive Package"];
 // FIX: Corrected Arabic subject labels — natural, grammatically sound
 const SUBS_AR = ["استفسار عام","الباقة الأساسية","باقة النمو","الباقة التنفيذية"];
@@ -1104,7 +1100,7 @@ export default function Home(){
                       </li>
                     ))}
                   </ul>
-                  <a href={LINKS.basic} target="_blank" rel="noreferrer" className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75" style={{border:`1px solid ${G}38`,color:G,fontFamily:"sans-serif",height:"46px"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></a>
+                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75" style={{border:`1px solid ${G}38`,color:G,fontFamily:"sans-serif",height:"46px",background:"transparent"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
                 </div>
               </Rise>
               {/* Growth — highlighted */}
@@ -1123,8 +1119,7 @@ export default function Home(){
                     ))}
                   </ul>
                   <div>
-                    <a href={LINKS.professional} target="_blank" rel="noreferrer" className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-85" style={{background:G,color:INK,fontFamily:"sans-serif",height:"46px"}}>{tr("prcApplePay",lang)}<ArrowRight size={12}/></a>
-                    <p className="mt-2 text-center text-[10px] opacity-30" style={{color:hi,fontFamily:"sans-serif"}}>{tr("prcStripe",lang)}</p>
+                    <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-85" style={{background:G,color:INK,fontFamily:"sans-serif",height:"46px"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
                   </div>
                 </div>
               </Rise>
@@ -1142,7 +1137,7 @@ export default function Home(){
                       </li>
                     ))}
                   </ul>
-                  <a href={LINKS.ultimate} target="_blank" rel="noreferrer" className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75" style={{border:`1px solid ${G}38`,color:G,fontFamily:"sans-serif",height:"46px"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></a>
+                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75" style={{border:`1px solid ${G}38`,color:G,fontFamily:"sans-serif",height:"46px",background:"transparent"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
                 </div>
               </Rise>
             </div>
@@ -1272,14 +1267,16 @@ export default function Home(){
               </a>
             </div>
 
-            {/* Copyright */}
-            <p className="text-[10px]" style={{
-              color: dark ? "rgba(200,169,110,0.16)" : `${hi}28`,
-              fontFamily: "sans-serif",
-              whiteSpace: "nowrap",
-            }}>
-              © {new Date().getFullYear()} Zenith Dubai CV
-            </p>
+            {/* Copyright + legal links */}
+            <div className="flex items-center gap-4">
+              <p className="text-[10px]" style={{color:dark?"rgba(200,169,110,0.16)":`${hi}28`,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>
+                © {new Date().getFullYear()} Zenith Dubai CV
+              </p>
+              <span style={{color:dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
+              <a href="/privacy" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.25)":`${hi}40`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Privacy Policy</a>
+              <span style={{color:dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
+              <a href="/terms" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.25)":`${hi}40`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Terms of Service</a>
+            </div>
 
           </div>
         </footer>
