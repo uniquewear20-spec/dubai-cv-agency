@@ -658,7 +658,7 @@ export default function Home(){
           </a>
 
           {/* ── Nav links ── */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="h-14 w-auto dark:invert transition-all duration-300">
             {([
               ["#services",  "navServices"],
               ["#templates", "navTemplates"],
