@@ -934,45 +934,62 @@ export default function Home(){
       <main className="pt-[76px]">
 
         {/* ══ HERO ══════════════════════════════════════════════════════════ */}
-        <section className="relative min-h-[95vh] flex flex-col items-center justify-center px-8 text-center overflow-hidden">
+        <section className="relative min-h-[95vh] flex flex-col items-center justify-center px-5 sm:px-8 text-center overflow-hidden">
 
-          <Rise d={0.3} y={36}><p className="text-[10px] font-medium tracking-[0.42em] uppercase mb-10" style={{color:G,fontFamily:"sans-serif"}}>{tr("eyebrow",lang)}</p></Rise>
+          <Rise d={0.3} y={36}><p className="text-[9px] sm:text-[10px] font-medium tracking-[0.28em] sm:tracking-[0.42em] uppercase mb-8 sm:mb-10 px-2" style={{color:G,fontFamily:"sans-serif"}}>{tr("eyebrow",lang)}</p></Rise>
           <Rise d={0.55} y={44}>
-            <h1 className="text-5xl sm:text-6xl lg:text-[88px] font-normal leading-[1.05] tracking-[-0.025em] mb-7 mx-auto" style={{color:hi,maxWidth:"860px"}}>
+            <h1 className="text-4xl sm:text-6xl lg:text-[88px] font-normal leading-[1.05] tracking-[-0.025em] mb-6 sm:mb-7 mx-auto px-2" style={{color:hi,maxWidth:"860px"}}>
               {tr("h1a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("h1b",lang)}</em>
             </h1>
           </Rise>
-          {/* FIX: Improved hero subtitle readability — slightly higher opacity sub color */}
-          <Rise d={0.75} y={28}><p className="text-base sm:text-[17px] leading-[1.95] max-w-[520px] mb-6 mx-auto" style={{color:dark?"#9A8E84":sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("heroSub",lang)}</p></Rise>
+          <Rise d={0.75} y={28}><p className="text-[15px] sm:text-[17px] leading-[1.95] w-full max-w-[480px] mb-6 mx-auto px-4 sm:px-0" style={{color:dark?"#9A8E84":sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("heroSub",lang)}</p></Rise>
 
-          {/* ── Sparkles strip ── */}
-          <Rise d={0.85} y={16}>
-            <div className="relative w-[480px] max-w-full h-[72px] mx-auto mb-8">
-              {/* Left gradient fade */}
-              <div className="absolute inset-y-0 left-0 w-24 z-10 pointer-events-none"
-                style={{background:`linear-gradient(to right, ${dark?INK:ASH}, transparent)`}}/>
-              {/* Right gradient fade */}
-              <div className="absolute inset-y-0 right-0 w-24 z-10 pointer-events-none"
-                style={{background:`linear-gradient(to left, ${dark?INK:ASH}, transparent)`}}/>
-              {/* Gold hairline */}
-              <div className="absolute top-0 inset-x-12 h-px pointer-events-none"
-                style={{background:`linear-gradient(to right, transparent, ${G}80, transparent)`}}/>
-              {/* Sparkles */}
+          {/* ── Ambient glow pulse — breathes from within the page ── */}
+          <Rise d={0.82} y={0}>
+            <div className="relative w-full max-w-[520px] mx-auto mb-8" style={{height:"80px"}}>
+              {/* Deep ambient glow — the heart of the effect */}
+              <div className="absolute inset-0 pointer-events-none" style={{
+                background:`radial-gradient(ellipse 70% 100% at 50% 100%, ${G}28 0%, ${G}10 40%, transparent 75%)`,
+                filter:"blur(8px)",
+              }}/>
+              {/* Hairline that glows */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none" style={{
+                width:"60%", height:"1px",
+                background:`linear-gradient(to right, transparent, ${G}90, transparent)`,
+                boxShadow:`0 0 12px 2px ${G}50`,
+              }}/>
+              {/* Pulse ring */}
+              <motion.div
+                className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none rounded-full"
+                style={{width:"180px",height:"1px",background:`linear-gradient(to right,transparent,${G}60,transparent)`}}
+                animate={{scaleX:[0.6,1,0.6],opacity:[0.3,0.8,0.3]}}
+                transition={{duration:3.5,repeat:Infinity,ease:"easeInOut"}}
+              />
+              {/* Sparkles — drifting upward like embers */}
               <SparklesCore
                 background="transparent"
-                minSize={0.3}
-                maxSize={1.0}
-                particleDensity={55}
-                className="w-full h-full"
+                minSize={0.2}
+                maxSize={0.9}
+                particleDensity={40}
+                className="absolute inset-0 w-full h-full"
                 particleColor={G}
-                speed={0.9}
+                speed={0.6}
               />
+              {/* Fade edges so particles vanish naturally */}
+              <div className="absolute inset-0 pointer-events-none" style={{
+                background:`linear-gradient(to right, ${dark?INK:ASH} 0%, transparent 20%, transparent 80%, ${dark?INK:ASH} 100%)`,
+              }}/>
+              {/* Fade bottom into page */}
+              <div className="absolute bottom-0 inset-x-0 h-8 pointer-events-none" style={{
+                background:`linear-gradient(to top, ${dark?INK:ASH}, transparent)`,
+              }}/>
             </div>
           </Rise>
+
           <Rise d={0.92} y={20}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="#pricing" className="flex items-center gap-3 px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-85" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif"}}>{tr("viewPkg",lang)} <ArrowRight size={13} strokeWidth={2}/></a>
-              <button type="button" onClick={()=>setModal(true)} className="flex items-center gap-3 px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}40`,color:G,height:"52px",fontFamily:"sans-serif"}}><Mail size={12} strokeWidth={1.5}/>{tr("beginEnq",lang)}</button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
+              <a href="#pricing" className="flex items-center justify-center gap-3 w-full sm:w-auto px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-85" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif"}}>{tr("viewPkg",lang)} <ArrowRight size={13} strokeWidth={2}/></a>
+              <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-center gap-3 w-full sm:w-auto px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}40`,color:G,height:"52px",fontFamily:"sans-serif"}}><Mail size={12} strokeWidth={1.5}/>{tr("beginEnq",lang)}</button>
             </div>
           </Rise>
           <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2" initial={{opacity:0}} animate={{opacity:0.2}} transition={{delay:2.5,duration:1.5}}>
