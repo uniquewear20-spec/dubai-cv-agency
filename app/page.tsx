@@ -665,15 +665,13 @@ export default function Home(){
               src="/images/logo.png"
               alt="Zenith Dubai CV"
               style={{
-                height: "54px",         // FIX: Slightly larger — more presence
-                width: "auto",
+                height: "auto",
+                width: "125px",
                 objectFit: "contain",
                 display: "block",
                 borderRadius: "8px",
                 filter: logoFilter,
                 transition: "filter 0.4s ease",
-                // FIX: prevent layout shift with explicit aspect preservation
-                maxWidth: "200px",
               }}
             />
           </a>
@@ -1196,30 +1194,6 @@ export default function Home(){
           )}
           <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-8">
 
-            {/* Brand */}
-            <div className="flex flex-col items-start gap-2.5">
-              <img
-                src="/images/logo.png"
-                alt="Zenith Dubai CV"
-                style={{
-                  height: "48px",
-                  width: "auto",
-                  objectFit: "contain",
-                  display: "block",
-                  borderRadius: "8px",
-                  filter: logoFilter,
-                  transition: "filter 0.4s ease",
-                  maxWidth: "180px",
-                }}
-              />
-              <p className="text-[11px] tracking-[0.08em]" style={{
-                color: dark ? "rgba(200,169,110,0.38)" : sub,
-                fontFamily: "sans-serif",
-              }}>
-                {tr("tagline",lang)}
-              </p>
-            </div>
-
             {/* Contact links */}
             <div className="flex items-center gap-7">
               <button
@@ -1277,6 +1251,29 @@ export default function Home(){
             }}>
               © {new Date().getFullYear()} Zenith Dubai CV
             </p>
+
+            {/* Brand — right side */}
+            <div className="flex flex-col items-end gap-2.5">
+              <img
+                src="/images/logo.png"
+                alt="Zenith Dubai CV"
+                style={{
+                  height: "auto",
+                  width: "125px",
+                  objectFit: "contain",
+                  display: "block",
+                  borderRadius: "8px",
+                  filter: logoFilter,
+                  transition: "filter 0.4s ease",
+                }}
+              />
+              <p className="text-[11px] tracking-[0.08em]" style={{
+                color: dark ? "rgba(200,169,110,0.38)" : sub,
+                fontFamily: "sans-serif",
+              }}>
+                {tr("tagline",lang)}
+              </p>
+            </div>
 
           </div>
         </footer>
