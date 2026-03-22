@@ -616,65 +616,216 @@ export default function Home(){
       {dark&&<div className="pointer-events-none fixed inset-0 -z-10" style={{background:`radial-gradient(ellipse 70% 50% at 50% -5%,${G}09,transparent 65%)`}}/>}
 
       {/* ══ NAV ══════════════════════════════════════════════════════════════ */}
-      <header className="fixed top-0 inset-x-0 z-50" style={{background:nav,borderBottom:`1px solid ${bdr}`,backdropFilter:"blur(24px)"}}>
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-8" style={{height:"60px"}}>
-          <div className="flex items-center">
+      <header className="fixed top-0 inset-x-0 z-50 relative" style={{
+        background: nav,
+        backdropFilter: "blur(28px)",
+        WebkitBackdropFilter: "blur(28px)",
+        borderBottom: dark ? "none" : `1px solid ${bdr}`,
+      }}>
+        {/* Gold gradient hairline — dark mode only */}
+        {dark && (
+          <div aria-hidden className="absolute bottom-0 inset-x-0 h-px pointer-events-none" style={{
+            background: "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.15) 15%, rgba(212,175,55,0.65) 50%, rgba(212,175,55,0.15) 85%, transparent 100%)",
+          }}/>
+        )}
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-8" style={{height:"64px"}}>
+
+          {/* ── Logo ── */}
+          <a href="#" className="flex items-center shrink-0" style={{lineHeight:0}}>
             <img
               src="/images/logo.png"
               alt="Zenith Dubai CV"
               style={{
-                height:"36px",
-                width:"auto",
-                objectFit:"contain",
-                display:"block",
-                filter: dark ? "invert(1) brightness(1.8)" : "none",
-                transition:"filter 0.3s",
+                height: "52px",
+                width: "auto",
+                objectFit: "contain",
+                display: "block",
+                borderRadius: "8px",
+                // Dark mode: black bg logo blends into near-black nav perfectly.
+                // Add a very soft gold halo as the unique luxury touch.
+                // Light mode: invert so the black bg becomes the light bg tone.
+                filter: dark
+                  ? [
+                      "brightness(1.05)",
+                      "drop-shadow(0 0 6px rgba(212,175,55,0.18))",
+                      "drop-shadow(0 0 16px rgba(212,175,55,0.10))",
+                      "drop-shadow(0 2px 8px rgba(0,0,0,0.55))",
+                    ].join(" ")
+                  : "invert(1) brightness(0.12) contrast(1.3)",
+                transition: "filter 0.45s ease",
               }}
             />
-          </div>
-          <nav className="hidden md:flex items-center gap-9">
-            {([["#services","navServices"],["#templates","navTemplates"],["#process","navMethod"],["#pricing","navPricing"],["#clients","navClients"]] as [string,string][]).map(([href,k])=>(
-              <a key={href} href={href} className="text-[10px] font-medium tracking-[0.18em] uppercase opacity-40 hover:opacity-80 transition-opacity" style={{color:hi,fontFamily:"sans-serif"}}>{tr(k,lang)}</a>
+          </a>
+
+          {/* ── Nav links ── */}
+          <nav className="hidden md:flex items-center gap-8">
+            {([
+              ["#services",  "navServices"],
+              ["#templates", "navTemplates"],
+              ["#process",   "navMethod"],
+              ["#pricing",   "navPricing"],
+              ["#clients",   "navClients"],
+            ] as [string,string][]).map(([href,k])=>(
+              <a
+                key={href}
+                href={href}
+                className="text-[10px] font-medium tracking-[0.20em] uppercase transition-all duration-250"
+                style={{
+                  color: dark ? "rgba(212,175,55,0.42)" : `${hi}60`,
+                  fontFamily: "sans-serif",
+                  textDecoration: "none",
+                }}
+                onMouseEnter={e=>{
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.color = dark ? "#D4AF37" : hi;
+                  el.style.textShadow = dark ? "0 0 14px rgba(212,175,55,0.45)" : "none";
+                  el.style.letterSpacing = "0.22em";
+                }}
+                onMouseLeave={e=>{
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.color = dark ? "rgba(212,175,55,0.42)" : `${hi}60`;
+                  el.style.textShadow = "none";
+                  el.style.letterSpacing = "0.20em";
+                }}
+              >
+                {tr(k,lang)}
+              </a>
             ))}
           </nav>
+
+          {/* ── Right controls ── */}
           <div className="flex items-center gap-2">
+
             {/* Lang switcher */}
             <div className="relative">
-              <button type="button" onClick={()=>setLangOpen(o=>!o)}
-                className="flex items-center gap-1.5 text-[10px] font-medium tracking-[0.15em] uppercase px-3 rounded-full transition-all hover:opacity-80"
-                style={{border:`1px solid ${G}35`,color:G,height:"32px",fontFamily:"sans-serif",minWidth:"58px",justifyContent:"center"}}>
+              <button
+                type="button"
+                onClick={()=>setLangOpen(o=>!o)}
+                className="flex items-center gap-1.5 text-[10px] font-medium tracking-[0.15em] uppercase px-3 rounded-full transition-all"
+                style={{
+                  border: `1px solid ${dark ? "rgba(212,175,55,0.30)" : `${G}35`}`,
+                  color: dark ? "#D4AF37" : G,
+                  height: "32px",
+                  fontFamily: "sans-serif",
+                  minWidth: "60px",
+                  justifyContent: "center",
+                  boxShadow: dark ? "0 0 10px rgba(212,175,55,0.08)" : "none",
+                  transition: "box-shadow 0.3s, border-color 0.3s",
+                }}
+                onMouseEnter={e=>{
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow = dark ? "0 0 14px rgba(212,175,55,0.22)" : "none";
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = dark ? "rgba(212,175,55,0.60)" : `${G}60`;
+                }}
+                onMouseLeave={e=>{
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow = dark ? "0 0 10px rgba(212,175,55,0.08)" : "none";
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = dark ? "rgba(212,175,55,0.30)" : `${G}35`;
+                }}
+              >
                 <Globe size={10} strokeWidth={1.5}/>{LG.label}
               </button>
               <AnimatePresence>
                 {langOpen&&(
-                  <motion.div initial={{opacity:0,y:-6,scale:0.97}} animate={{opacity:1,y:0,scale:1}} exit={{opacity:0,y:-4,scale:0.98}} transition={{duration:0.2,ease:[0.16,1,0.3,1]}}
-                    className="absolute top-10 right-0 rounded-xl overflow-hidden shadow-2xl z-50" style={{background:dark?"#141210":"#F5F1EB",border:`1px solid ${bdr}`,minWidth:"130px"}}>
+                  <motion.div
+                    initial={{opacity:0,y:-6,scale:0.97}}
+                    animate={{opacity:1,y:0,scale:1}}
+                    exit={{opacity:0,y:-4,scale:0.98}}
+                    transition={{duration:0.2,ease:[0.16,1,0.3,1]}}
+                    className="absolute top-10 right-0 rounded-xl overflow-hidden z-50"
+                    style={{
+                      background: dark ? "#111009" : "#F5F1EB",
+                      border: dark ? "1px solid rgba(212,175,55,0.18)" : `1px solid ${bdr}`,
+                      boxShadow: dark ? "0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(212,175,55,0.06)" : "0 8px 24px rgba(0,0,0,0.12)",
+                      minWidth: "130px",
+                    }}
+                  >
                     {LANGS.map(l=>(
-                      <button key={l.code} type="button" onClick={()=>{setLang(l.code);setLangOpen(false);}}
-                        className="w-full flex items-center gap-2 px-4 py-2.5 text-[11px] transition-all hover:opacity-70 text-left"
-                        style={{color:l.code===lang?G:hi,fontFamily:"sans-serif",background:l.code===lang?(dark?`${G}10`:`${G}08`):"transparent",fontWeight:l.code===lang?600:400}}>
-                        {l.code===lang&&<span className="h-1 w-1 rounded-full shrink-0" style={{background:G}}/>}{l.label}
+                      <button
+                        key={l.code}
+                        type="button"
+                        onClick={()=>{setLang(l.code);setLangOpen(false);}}
+                        className="w-full flex items-center gap-2 px-4 py-2.5 text-[11px] transition-all text-left"
+                        style={{
+                          color: l.code===lang ? (dark ? "#D4AF37" : G) : hi,
+                          fontFamily: "sans-serif",
+                          background: l.code===lang ? (dark ? "rgba(212,175,55,0.08)" : `${G}08`) : "transparent",
+                          fontWeight: l.code===lang ? 600 : 400,
+                        }}
+                        onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.background = dark ? "rgba(212,175,55,0.06)" : `${G}06`;}}
+                        onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.background = l.code===lang ? (dark ? "rgba(212,175,55,0.08)" : `${G}08`) : "transparent";}}
+                      >
+                        {l.code===lang&&<span className="h-1 w-1 rounded-full shrink-0" style={{background: dark ? "#D4AF37" : G}}/>}
+                        {l.label}
                       </button>
                     ))}
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
-            <button type="button" onClick={()=>setModal(true)}
-              className="hidden sm:flex items-center gap-2 text-[10px] font-medium tracking-[0.18em] uppercase px-5 rounded-full transition-all hover:opacity-80"
-              style={{border:`1px solid ${G}45`,color:G,height:"32px",fontFamily:"sans-serif"}}>
+
+            {/* CTA button */}
+            <button
+              type="button"
+              onClick={()=>setModal(true)}
+              className="hidden sm:flex items-center gap-2 text-[10px] font-medium tracking-[0.18em] uppercase px-5 rounded-full transition-all"
+              style={{
+                border: dark ? "1px solid rgba(212,175,55,0.40)" : `1px solid ${G}45`,
+                color: dark ? "#D4AF37" : G,
+                height: "32px",
+                fontFamily: "sans-serif",
+                boxShadow: dark ? "0 0 12px rgba(212,175,55,0.10)" : "none",
+                transition: "box-shadow 0.3s, border-color 0.3s, opacity 0.2s",
+              }}
+              onMouseEnter={e=>{
+                const el = e.currentTarget as HTMLButtonElement;
+                el.style.boxShadow = dark ? "0 0 18px rgba(212,175,55,0.26)" : "none";
+                el.style.borderColor = dark ? "rgba(212,175,55,0.70)" : `${G}70`;
+                el.style.opacity = "0.9";
+              }}
+              onMouseLeave={e=>{
+                const el = e.currentTarget as HTMLButtonElement;
+                el.style.boxShadow = dark ? "0 0 12px rgba(212,175,55,0.10)" : "none";
+                el.style.borderColor = dark ? "rgba(212,175,55,0.40)" : `${G}45`;
+                el.style.opacity = "1";
+              }}
+            >
               {tr("enquire",lang)}
             </button>
-            <button type="button" onClick={tog} aria-label="Toggle theme"
-              className="flex items-center justify-center rounded-full opacity-30 hover:opacity-60 transition-opacity"
-              style={{border:`1px solid ${bdr}`,width:"32px",height:"32px"}}>
-              {dark?<Sun size={12} color={hi} strokeWidth={1.5}/>:<Moon size={12} color={hi} strokeWidth={1.5}/>}
+
+            {/* Theme toggle */}
+            <button
+              type="button"
+              onClick={tog}
+              aria-label="Toggle theme"
+              className="flex items-center justify-center rounded-full transition-all"
+              style={{
+                border: dark ? "1px solid rgba(212,175,55,0.18)" : `1px solid ${bdr}`,
+                width: "32px",
+                height: "32px",
+                opacity: 0.5,
+                transition: "opacity 0.2s, border-color 0.3s",
+              }}
+              onMouseEnter={e=>{
+                const el = e.currentTarget as HTMLButtonElement;
+                el.style.opacity = "0.85";
+                el.style.borderColor = dark ? "rgba(212,175,55,0.40)" : bdr;
+              }}
+              onMouseLeave={e=>{
+                const el = e.currentTarget as HTMLButtonElement;
+                el.style.opacity = "0.5";
+                el.style.borderColor = dark ? "rgba(212,175,55,0.18)" : bdr;
+              }}
+            >
+              {dark
+                ? <Sun  size={12} color="#D4AF37" strokeWidth={1.5}/>
+                : <Moon size={12} color={hi}       strokeWidth={1.5}/>
+              }
             </button>
+
           </div>
         </div>
       </header>
 
-      <main className="pt-[60px]">
+      <main className="pt-[64px]">
 
         {/* ══ HERO ══════════════════════════════════════════════════════════ */}
         <section className="relative min-h-[95vh] flex flex-col items-center justify-center px-8 text-center overflow-hidden">
@@ -1000,31 +1151,103 @@ export default function Home(){
         </section>
 
         {/* ══ FOOTER ════════════════════════════════════════════════════════ */}
-        <footer className="border-t py-10 px-8" style={{borderColor:bdr}}>
-          <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div>
+        <footer className="relative py-12 px-8" style={{
+          borderTop: dark ? "none" : `1px solid ${bdr}`,
+        }}>
+          {/* Gold gradient hairline — dark mode only */}
+          {dark && (
+            <div aria-hidden className="absolute top-0 inset-x-0 h-px pointer-events-none" style={{
+              background: "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.12) 15%, rgba(212,175,55,0.60) 50%, rgba(212,175,55,0.12) 85%, transparent 100%)",
+            }}/>
+          )}
+          <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-8">
+
+            {/* ── Brand ── */}
+            <div className="flex flex-col items-start gap-2.5">
               <img
                 src="/images/logo.png"
                 alt="Zenith Dubai CV"
                 style={{
-                  height:"32px",
-                  width:"auto",
-                  objectFit:"contain",
-                  display:"block",
-                  filter: dark ? "invert(1) brightness(1.8)" : "none",
-                  transition:"filter 0.3s",
+                  height: "48px",
+                  width: "auto",
+                  objectFit: "contain",
+                  display: "block",
+                  borderRadius: "8px",
+                  filter: dark
+                    ? [
+                        "brightness(1.05)",
+                        "drop-shadow(0 0 6px rgba(212,175,55,0.16))",
+                        "drop-shadow(0 0 18px rgba(212,175,55,0.08))",
+                        "drop-shadow(0 2px 8px rgba(0,0,0,0.50))",
+                      ].join(" ")
+                    : "invert(1) brightness(0.12) contrast(1.3)",
+                  transition: "filter 0.45s ease",
                 }}
               />
-              <p className="mt-2 text-[11px]" style={{color:sub,fontFamily:"sans-serif"}}>{tr("tagline",lang)}</p>
+              <p className="text-[11px] tracking-[0.08em]" style={{
+                color: dark ? "rgba(212,175,55,0.40)" : sub,
+                fontFamily: "sans-serif",
+              }}>
+                {tr("tagline",lang)}
+              </p>
             </div>
-            <div className="flex items-center gap-6">
-              <button type="button" onClick={()=>setModal(true)} className="text-[10px] tracking-[0.15em] uppercase opacity-35 hover:opacity-65 transition-opacity flex items-center gap-2" style={{color:hi,fontFamily:"sans-serif"}}><Mail size={11} strokeWidth={1.5}/>{EM}</button>
-              <a href={wlMsg} target="_blank" rel="noreferrer" className="text-[10px] tracking-[0.15em] uppercase opacity-35 hover:opacity-65 transition-opacity flex items-center gap-2" style={{color:"#4A9A5A",fontFamily:"sans-serif"}}>
-                <svg viewBox="0 0 24 24" width="11" height="11" fill="none"><path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg>
+
+            {/* ── Contact links ── */}
+            <div className="flex items-center gap-7">
+              <button
+                type="button"
+                onClick={()=>setModal(true)}
+                className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase transition-all"
+                style={{
+                  color: dark ? "rgba(212,175,55,0.35)" : `${hi}55`,
+                  fontFamily: "sans-serif",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: 0,
+                }}
+                onMouseEnter={e=>{
+                  const el = e.currentTarget as HTMLButtonElement;
+                  el.style.color = dark ? "#D4AF37" : hi;
+                  el.style.textShadow = dark ? "0 0 12px rgba(212,175,55,0.35)" : "none";
+                }}
+                onMouseLeave={e=>{
+                  const el = e.currentTarget as HTMLButtonElement;
+                  el.style.color = dark ? "rgba(212,175,55,0.35)" : `${hi}55`;
+                  el.style.textShadow = "none";
+                }}
+              >
+                <Mail size={11} strokeWidth={1.5}/>
+                info@zenithdubaicv.com
+              </button>
+              <a
+                href={wlMsg}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase transition-all"
+                style={{
+                  color: dark ? "rgba(74,154,90,0.55)" : "#4A9A5A99",
+                  fontFamily: "sans-serif",
+                  textDecoration: "none",
+                }}
+                onMouseEnter={e=>{(e.currentTarget as HTMLAnchorElement).style.color="#4A9A5A";}}
+                onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color = dark ? "rgba(74,154,90,0.55)" : "#4A9A5A99";}}
+              >
+                <svg viewBox="0 0 24 24" width="11" height="11" fill="none">
+                  <path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+                </svg>
                 {tr("footerWA",lang)}
               </a>
             </div>
-            <p className="text-[10px] opacity-20" style={{color:hi,fontFamily:"sans-serif"}}>© {new Date().getFullYear()} Zenith Dubai CV</p>
+
+            {/* ── Copyright ── */}
+            <p className="text-[10px]" style={{
+              color: dark ? "rgba(212,175,55,0.18)" : `${hi}30`,
+              fontFamily: "sans-serif",
+            }}>
+              © {new Date().getFullYear()} Zenith Dubai CV
+            </p>
+
           </div>
         </footer>
       </main>
