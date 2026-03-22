@@ -1,9 +1,7 @@
 // app/page.tsx — Zenith Dubai CV
 "use client";
-import React, { useState, useRef, useCallback, useEffect, useId } from "react";
+import React, { useState, useRef, useCallback, useEffect, useId, useMemo } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
 import {
   Sun, Moon, Mail, X, Send, Loader2, CheckCircle, AlertCircle,
   Upload, FileText, ImageIcon, Trash2, CreditCard, ArrowRight, Globe, LayoutGrid,
@@ -323,71 +321,52 @@ const ROUTES = [
 const wl = (m:string) => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
 const fb = (b:number) => b<1024?`${b}B`:b<1048576?`${(b/1024).toFixed(1)}KB`:`${(b/1048576).toFixed(1)}MB`;
 
-// ── SparklesCore ──────────────────────────────────────────────────────────────
+// ── SparklesCore — pure Framer Motion, no external deps ──────────────────────
 function SparklesCore({
-  id, className, background="transparent", minSize=0.4, maxSize=1.2,
-  speed=1.2, particleColor="#C8A96E", particleDensity=60,
+  className, particleColor="#C8A96E", particleDensity=80, minSize=0.4, maxSize=1.4, speed=1,
 }:{
-  id?:string; className?:string; background?:string; minSize?:number;
-  maxSize?:number; speed?:number; particleColor?:string; particleDensity?:number;
+  className?:string; particleColor?:string; particleDensity?:number;
+  minSize?:number; maxSize?:number; speed?:number; background?:string; id?:string;
 }) {
-  const [init, setInit] = useState(false);
-  const controls = useAnimation();
-  const generatedId = useId();
-  useEffect(() => {
-    initParticlesEngine(async (engine) => { await loadSlim(engine); }).then(() => setInit(true));
-  }, []);
+  const count = Math.min(particleDensity, 120);
+  const particles = useMemo(() => Array.from({length: count}, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    size: minSize + Math.random() * (maxSize - minSize),
+    duration: (2 + Math.random() * 3) / speed,
+    delay: Math.random() * 4,
+    drift: (Math.random() - 0.5) * 30,
+    opacity: 0.3 + Math.random() * 0.7,
+  })), [count, minSize, maxSize, speed]);
+
   return (
-    <motion.div animate={controls} className={`${className??""}`} style={{opacity:0}}>
-      {init && (
-        <Particles
-          id={id || generatedId}
-          className="h-full w-full"
-          particlesLoaded={async (container) => {
-            if (container) controls.start({ opacity: 1, transition: { duration: 2 } });
+    <div className={`relative overflow-hidden ${className??""}`}>
+      {particles.map(p => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: p.size, height: p.size,
+            background: particleColor,
+            left: `${p.x}%`, bottom: 0,
+            boxShadow: `0 0 ${p.size * 2}px ${particleColor}80`,
           }}
-          options={{
-            background: { color: { value: background } },
-            fullScreen: { enable: false, zIndex: 1 },
-            fpsLimit: 60,
-            particles: {
-              color: { value: particleColor },
-              move: {
-                enable: true,
-                direction: "top",
-                speed: { min: speed * 0.3, max: speed * 1.2 },
-                random: true,
-                straight: false,
-                outModes: { default: "out", top: "out", bottom: "none" },
-                drift: 0.8,
-              },
-              number: {
-                density: { enable: true, width: 600, height: 100 },
-                value: particleDensity,
-              },
-              opacity: {
-                value: { min: 0.0, max: 0.8 },
-                animation: {
-                  enable: true, speed: 0.8, sync: false,
-                  startValue: "random", destroy: "min",
-                },
-              },
-              size: {
-                value: { min: minSize, max: maxSize },
-                animation: { enable: false },
-              },
-              life: {
-                count: 0,
-                delay: { value: 0, sync: false },
-                duration: { value: 0, sync: false },
-              },
-              shape: { type: "circle" },
-            },
-            detectRetina: true,
+          initial={{ y: 0, x: 0, opacity: 0 }}
+          animate={{
+            y: [0, -(80 + Math.random() * 60)],
+            x: [0, p.drift],
+            opacity: [0, p.opacity, p.opacity * 0.6, 0],
+          }}
+          transition={{
+            duration: p.duration,
+            delay: p.delay,
+            repeat: Infinity,
+            repeatDelay: Math.random() * 2,
+            ease: "easeOut",
           }}
         />
-      )}
-    </motion.div>
+      ))}
+    </div>
   );
 }
 
@@ -1316,7 +1295,7 @@ export default function Home(){
         </section>
 
         {/* ══ FOOTER ════════════════════════════════════════════════════════ */}
-        <footer className="relative py-12 px-8" style={{
+        <footer className="relative py-10 px-5 sm:px-8" style={{
           borderTop: dark ? "none" : `1px solid ${bdr}`,
         }}>
           {dark && (
@@ -1324,87 +1303,35 @@ export default function Home(){
               background: "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.10) 15%, rgba(212,175,55,0.55) 50%, rgba(212,175,55,0.10) 85%, transparent 100%)",
             }}/>
           )}
-          {/* Single horizontal row — logo · tagline · divider · email · whatsapp · divider · copyright */}
-          <div className="mx-auto max-w-6xl flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+          <div className="mx-auto max-w-6xl flex flex-col gap-6">
 
-            {/* Logo + tagline inline */}
-            <div className="flex items-center gap-3">
-              <img
-                src="/images/logo.png"
-                alt="Zenith Dubai CV"
-                style={{
-                  height: "36px",
-                  width: "auto",
-                  objectFit: "contain",
-                  display: "block",
-                  borderRadius: "6px",
-                  filter: logoFilter,
-                  transition: "filter 0.4s ease",
-                  maxWidth: "140px",
-                }}
-              />
-              <span className="text-[10px] tracking-[0.08em]" style={{
-                color: dark ? "rgba(200,169,110,0.38)" : sub,
-                fontFamily: "sans-serif",
-                whiteSpace: "nowrap",
-              }}>
-                {tr("tagline",lang)}
-              </span>
+            {/* Row 1 — logo + tagline + contact */}
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <img src="/images/logo.png" alt="Zenith Dubai CV" style={{height:"36px",width:"auto",objectFit:"contain",display:"block",borderRadius:"6px",filter:logoFilter,transition:"filter 0.4s ease",maxWidth:"140px"}}/>
+                <span className="text-[10px] tracking-[0.08em]" style={{color:dark?"rgba(200,169,110,0.38)":sub,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>{tr("tagline",lang)}</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <button type="button" onClick={()=>setModal(true)} className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase" style={{color:dark?"rgba(200,169,110,0.32)":`${hi}50`,fontFamily:"sans-serif",background:"none",border:"none",cursor:"pointer",padding:0,transition:"color 0.25s ease"}}
+                  onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"#D4AF37":hi;}}
+                  onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"rgba(200,169,110,0.32)":`${hi}50`;}}
+                ><Mail size={10} strokeWidth={1.5}/>{EM}</button>
+                <span style={{color:dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
+                <a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase" style={{color:dark?"rgba(74,154,90,0.52)":"#4A9A5A90",fontFamily:"sans-serif",textDecoration:"none",transition:"color 0.25s ease"}}
+                  onMouseEnter={e=>{(e.currentTarget as HTMLAnchorElement).style.color="#4A9A5A";}}
+                  onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color=dark?"rgba(74,154,90,0.52)":"#4A9A5A90";}}
+                >
+                  <svg viewBox="0 0 24 24" width="10" height="10" fill="none"><path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg>
+                  {tr("footerWA",lang)}
+                </a>
+              </div>
             </div>
 
-            {/* Contact links */}
-            <div className="flex items-center gap-6">
-              <button
-                type="button"
-                onClick={()=>setModal(true)}
-                className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase"
-                style={{
-                  color: dark ? "rgba(200,169,110,0.32)" : `${hi}50`,
-                  fontFamily: "sans-serif",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  padding: 0,
-                  transition: "color 0.25s ease, text-shadow 0.25s ease",
-                }}
-                onMouseEnter={e=>{
-                  const el = e.currentTarget as HTMLButtonElement;
-                  el.style.color = dark ? "#D4AF37" : hi;
-                  el.style.textShadow = dark ? "0 0 10px rgba(212,175,55,0.30)" : "none";
-                }}
-                onMouseLeave={e=>{
-                  const el = e.currentTarget as HTMLButtonElement;
-                  el.style.color = dark ? "rgba(200,169,110,0.32)" : `${hi}50`;
-                  el.style.textShadow = "none";
-                }}
-              >
-                <Mail size={10} strokeWidth={1.5}/>
-                {EM}
-              </button>
-              <span style={{color: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.10)", fontSize:"10px"}}>·</span>
-              <a
-                href={wlMsg}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase"
-                style={{
-                  color: dark ? "rgba(74,154,90,0.52)" : "#4A9A5A90",
-                  fontFamily: "sans-serif",
-                  textDecoration: "none",
-                  transition: "color 0.25s ease",
-                }}
-                onMouseEnter={e=>{(e.currentTarget as HTMLAnchorElement).style.color="#4A9A5A";}}
-                onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color = dark ? "rgba(74,154,90,0.52)" : "#4A9A5A90";}}
-              >
-                <svg viewBox="0 0 24 24" width="10" height="10" fill="none">
-                  <path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-                </svg>
-                {tr("footerWA",lang)}
-              </a>
-            </div>
+            {/* Divider */}
+            <div className="h-px" style={{background:bdr}}/>
 
-            {/* Copyright + legal links */}
-            <div className="flex items-center gap-4">
+            {/* Row 2 — copyright + legal links — wraps on mobile */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
               <p className="text-[10px]" style={{color:dark?"rgba(200,169,110,0.16)":`${hi}28`,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>
                 © {new Date().getFullYear()} Zenith Dubai CV
               </p>
