@@ -31,158 +31,212 @@ const LANGS: {code:Lang;label:string;dir:"ltr"|"rtl";font:string}[] = [
 // ── Full translation dictionary ────────────────────────────────────────────────
 const TX: Record<string,Record<Lang,string>> = {
   // Nav
-  navServices:  {en:"Services",        ar:"الخدمات",           fr:"Services"},
-  navTemplates: {en:"Templates",       ar:"القوالب",           fr:"Modèles"},
-  navMethod:    {en:"Method",          ar:"المنهجية",          fr:"Méthode"},
-  navPricing:   {en:"Investment",      ar:"الاستثمار",         fr:"Investissement"},
-  navClients:   {en:"Clients",         ar:"العملاء",           fr:"Clients"},
-  enquire:      {en:"Enquire",         ar:"استفسار",           fr:"Enquêter"},
+  navServices:  {en:"Expertise",       ar:"خدماتنا",            fr:"Expertise"},
+  navTemplates: {en:"Templates",       ar:"القوالب",            fr:"Modèles"},
+  navMethod:    {en:"Process",         ar:"المنهجية",           fr:"Processus"},
+  navPricing:   {en:"Investment",      ar:"الاستثمار",          fr:"Investissement"},
+  navClients:   {en:"Results",         ar:"النتائج",            fr:"Résultats"},
+  enquire:      {en:"Get Started",     ar:"ابدأ الآن",          fr:"Commencer"},
   // Hero
-  eyebrow:      {en:"Premier CV Studio · Dubai",    ar:"الاستوديو الأول للسيرة الذاتية · دبي",  fr:"Studio CV Premier · Dubaï"},
-  h1a:          {en:"From Local Talent",             ar:"من موهبة محلية",                         fr:"Du Talent Local"},
-  h1b:          {en:"to Global Opportunity.",        ar:"إلى فرصة عالمية.",                       fr:"à l'Opportunité Mondiale."},
-  heroSub:      {en:"We engineer bespoke career documents for professionals from Africa, the Middle East, and Asia — securing positions across Europe, the Americas, and APAC.",
-                 ar:"نصمم وثائق مهنية مخصصة للمحترفين من أفريقيا والشرق الأوسط وآسيا — لتأمين مناصب في أوروبا والأمريكيتين ومنطقة آسيا والمحيط الهادئ.",
-                 fr:"Nous concevons des documents de carrière sur mesure pour les professionnels d'Afrique, du Moyen-Orient et d'Asie — garantissant des postes en Europe, aux Amériques et en APAC."},
-  viewPkg:      {en:"View Packages",   ar:"عرض الباقات",       fr:"Voir les Offres"},
-  beginEnq:     {en:"Begin Enquiry",   ar:"ابدأ الاستفسار",    fr:"Commencer une Demande"},
+  eyebrow:      {en:"Executive Career Studio · Based in Dubai · Operating Globally",
+                 ar:"استوديو التميّز المهني · مقره دبي · يعمل عالمياً",
+                 fr:"Studio Carrière Exécutif · Basé à Dubaï · Présence Mondiale"},
+  h1a:          {en:"Your Experience Deserves",        ar:"خبرتك تستحق",                    fr:"Votre Expérience Mérite"},
+  h1b:          {en:"a Global Stage.",                 ar:"مسرحاً عالمياً.",                fr:"une Scène Mondiale."},
+  heroSub:      {en:"We elevate the careers of ambitious professionals from the Gulf, Africa, and Asia — crafting authoritative profiles that unlock opportunities across North America, Europe, and the Gulf countries.",
+                 ar:"نُرتقي بمسارات المحترفين الطموحين من الخليج وأفريقيا وآسيا — نصنع ملفات احترافية موثوقة تفتح الأبواب في أمريكا الشمالية وأوروبا ودول الخليج.",
+                 fr:"Nous propulsons les carrières de professionnels ambitieux du Golfe, d'Afrique et d'Asie — créant des profils de référence qui ouvrent les portes en Amérique du Nord, en Europe et dans les pays du Golfe."},
+  viewPkg:      {en:"Explore Packages",  ar:"استعرض الباقات",   fr:"Voir les Offres"},
+  beginEnq:     {en:"Speak to an Expert",ar:"تحدّث مع خبير",    fr:"Parler à un Expert"},
   // Metrics
-  mAts:         {en:"ATS Clearance",   ar:"اجتياز الفلترة",    fr:"Passage ATS"},
-  mRate:        {en:"Interview Rate",  ar:"معدل المقابلات",     fr:"Taux d'entretien"},
-  mDraft:       {en:"First Draft",     ar:"أول مسودة",          fr:"Premier brouillon"},
-  mTpl:         {en:"Templates",       ar:"قوالب",              fr:"Modèles"},
+  mAts:         {en:"ATS Pass Rate",   ar:"معدل اجتياز الفلترة", fr:"Taux de Passage ATS"},
+  mRate:        {en:"Interview Uplift", ar:"ارتفاع معدل المقابلات",fr:"Hausse des Entretiens"},
+  mDraft:       {en:"Delivery Time",   ar:"وقت التسليم",         fr:"Délai de Livraison"},
+  mTpl:         {en:"Premium Templates",ar:"قوالب متميزة",       fr:"Modèles Premium"},
   // Services
-  svcEyebrow:   {en:"What We Engineer",ar:"ما نُصمّمه",         fr:"Ce Que Nous Concevons"},
-  svcH2:        {en:"Three disciplines. One authoritative outcome.",
-                 ar:"ثلاثة تخصصات. نتيجة واحدة موثوقة.",
-                 fr:"Trois disciplines. Un résultat d'autorité."},
+  svcEyebrow:   {en:"Our Disciplines", ar:"تخصصاتنا",           fr:"Nos Disciplines"},
+  svcH2:        {en:"Three strategic disciplines. One decisive outcome.",
+                 ar:"ثلاثة تخصصات استراتيجية. نتيجة واحدة حاسمة.",
+                 fr:"Trois disciplines stratégiques. Un résultat décisif."},
   s1t: {en:"ATS Architecture",   ar:"هندسة الفلترة الآلية",  fr:"Architecture ATS"},
-  s1b: {en:"Every keyword and format decision is reverse-engineered against GCC and global ATS — ensuring your document is never filtered before human eyes see it.",
-        ar:"كل كلمة مفتاحية وقرار تنسيق مُعكوس الهندسة وفق أنظمة الفلترة الآلية في دول الخليج والعالم، لضمان وصول وثيقتك إلى العيون البشرية دون عوائق.",
-        fr:"Chaque mot-clé et décision de format est rétro-conçu selon les ATS — garantissant que votre document n'est jamais filtré avant d'être lu."},
-  s1tag:{en:"Essential for all digital applications",ar:"ضروري لجميع التقديمات الإلكترونية",fr:"Essentiel pour toutes les candidatures numériques"},
-  s2t: {en:"Executive Design",    ar:"التصميم التنفيذي",      fr:"Design Exécutif"},
-  s2b: {en:"Typography, hierarchy, and visual weight calibrated to your seniority and target market. A document that signals leadership before a recruiter reads a word.",
-        ar:"طباعة وهرمية وثقل بصري مُعاير وفق مستوى أقدميتك وسوقك المستهدف. وثيقة تُعلن القيادة قبل أن يقرأ أي مُوظِّف كلمة واحدة.",
-        fr:"Typographie, hiérarchie et poids visuel calibrés selon votre ancienneté et marché cible. Un document qui signale le leadership avant qu'un recruteur lise un mot."},
-  s2tag:{en:"Recommended: Director level and above",ar:"موصى به: مستوى المدير فما فوق",fr:"Recommandé : Niveau Directeur et supérieur"},
-  s3t: {en:"LinkedIn Intelligence", ar:"استخبارات لينكد إن",  fr:"Intelligence LinkedIn"},
-  s3b: {en:"Your profile rewritten with keyword density and authority signals that surface you for the searches that matter — GCC, Europe, APAC, and North America.",
-        ar:"يُعاد كتابة ملفك الشخصي بكثافة كلمات مفتاحية وإشارات سلطة تُظهرك في عمليات البحث المهمة — الخليج، أوروبا، آسيا والمحيط الهادئ، وأمريكا الشمالية.",
-        fr:"Votre profil réécrit avec une densité de mots-clés et des signaux d'autorité pour les recherches importantes — CCG, Europe, APAC et Amérique du Nord."},
-  s3tag:{en:"Included: Growth & Executive tiers",ar:"مشمول: خطتا النمو والتنفيذية",fr:"Inclus : Offres Croissance & Exécutif"},
+  s1b: {en:"Every keyword, format, and structural decision is reverse-engineered from the ATS logic used by top employers across the GCC, Europe, and North America — guaranteeing your document clears automated screening before any recruiter sees it.",
+        ar:"كل كلمة مفتاحية وقرار تنسيقي يُعاد هندسته انطلاقاً من منطق الفلترة الآلية المعتمد لدى كبار أصحاب العمل في الخليج وأوروبا وأمريكا الشمالية — لضمان اجتياز وثيقتك للفرز الآلي قبل أن تصل إلى أي مُوظِّف.",
+        fr:"Chaque mot-clé, format et décision structurelle est rétro-conçu à partir de la logique ATS utilisée par les meilleurs employeurs du CCG, d'Europe et d'Amérique du Nord — garantissant que votre document passe le tri automatisé avant tout recruteur."},
+  s1tag:{en:"Mandatory for every digital application",ar:"ضروري لكل تقديم إلكتروني",fr:"Indispensable pour toute candidature numérique"},
+  s2t: {en:"Executive-Grade Design",  ar:"التصميم التنفيذي الاحترافي", fr:"Design de Niveau Exécutif"},
+  s2b: {en:"Visual hierarchy, typographic authority, and strategic white space — calibrated to your seniority level and your target market. Your document should command attention the moment it is opened.",
+        ar:"هرمية بصرية وسلطة طباعية ومساحة بيضاء استراتيجية — معيارة وفق مستوى أقدميتك وسوقك المستهدف. يجب أن تستحوذ وثيقتك على الانتباه في اللحظة التي تُفتح فيها.",
+        fr:"Hiérarchie visuelle, autorité typographique et espacement stratégique — calibrés selon votre niveau de séniorité et votre marché cible. Votre document doit capter l'attention dès qu'il est ouvert."},
+  s2tag:{en:"Recommended from Director level and above",ar:"موصى به من مستوى المدير فما فوق",fr:"Recommandé à partir du niveau Directeur"},
+  s3t: {en:"LinkedIn Profile Intelligence", ar:"تحسين ملف لينكد إن باحترافية", fr:"Intelligence de Profil LinkedIn"},
+  s3b: {en:"Your LinkedIn profile, rebuilt with the keyword density, authority signals, and search-optimised narrative that places you in front of recruiters actively hiring across the GCC, Europe, APAC, and North America.",
+        ar:"يُعاد بناء ملفك على لينكد إن بكثافة الكلمات المفتاحية وإشارات السلطة والسرد المُحسَّن للبحث — ليضعك أمام المُوظِّفين النشطين في التوظيف عبر الخليج وأوروبا وآسيا وأمريكا الشمالية.",
+        fr:"Votre profil LinkedIn, reconstruit avec la densité de mots-clés, les signaux d'autorité et le récit optimisé qui vous placent devant les recruteurs actifs dans le CCG, l'Europe, l'APAC et l'Amérique du Nord."},
+  s3tag:{en:"Included in Growth & Executive packages",ar:"مشمول في باقتَي النمو والتنفيذية",fr:"Inclus dans les offres Croissance & Exécutif"},
   // Templates
-  tplEyebrow:  {en:"Template Library",  ar:"مكتبة القوالب",    fr:"Bibliothèque de Modèles"},
-  tplH2:       {en:"Premium designs.",  ar:"تصاميم متميزة.",   fr:"Designs premium."},
-  tplDesc:     {en:"Every Zenith package includes access to our exclusive library of over 500 ATS-optimised templates — engineered for Europe, Canada, the GCC, and the USA.",
-                ar:"تشمل كل باقة Zenith الوصول إلى مكتبتنا الحصرية التي تضم أكثر من 500 قالب مُحسَّن لأنظمة ATS — مُصمَّمة لأوروبا وكندا ودول الخليج والولايات المتحدة.",
-                fr:"Chaque forfait Zenith inclut l'accès à notre bibliothèque exclusive de plus de 500 modèles optimisés ATS — conçus pour l'Europe, le Canada, le CCG et les États-Unis."},
-  tplBadge:    {en:"Industry-Specific Blueprints",ar:"قوالب مخصصة للقطاعات",fr:"Plans Spécifiques au Secteur"},
-  tplGet:      {en:"Get This Template", ar:"احصل على هذا القالب",fr:"Obtenir ce Modèle"},
-  tplMore:     {en:"View More Designs", ar:"عرض المزيد من التصاميم",fr:"Voir Plus de Modèles"},
-  tplDone:     {en:"All designs shown · Enquire for 500+ full access",
-                ar:"تم عرض جميع التصاميم · استفسر للوصول الكامل لـ +500",
-                fr:"Tous les modèles affichés · Demandez l'accès complet à 500+"},
+  tplEyebrow:  {en:"Template Library",    ar:"مكتبة القوالب",      fr:"Bibliothèque de Modèles"},
+  tplH2:       {en:"Designed to perform.", ar:"مصممة للأداء.",     fr:"Conçus pour performer."},
+  tplDesc:     {en:"Every Zenith engagement unlocks access to our curated library of 500+ ATS-optimised templates — each engineered for a specific industry, seniority level, and target hiring market across Europe, North America, and the GCC.",
+                ar:"كل تعاقد مع Zenith يفتح الوصول إلى مكتبتنا المنتقاة من أكثر من 500 قالب مُحسَّن لأنظمة ATS — كل منها مُصمَّم لقطاع محدد ومستوى أقدمية وسوق توظيف مستهدف في أوروبا وأمريكا الشمالية ودول الخليج.",
+                fr:"Chaque engagement avec Zenith débloque l'accès à notre bibliothèque de 500+ modèles optimisés ATS — chacun conçu pour un secteur, un niveau de séniorité et un marché cible spécifiques en Europe, Amérique du Nord et CCG."},
+  tplBadge:    {en:"Market-Specific Designs",ar:"تصاميم مخصصة للسوق",fr:"Designs Spécifiques au Marché"},
+  tplGet:      {en:"Request This Template", ar:"اطلب هذا القالب",  fr:"Demander ce Modèle"},
+  tplMore:     {en:"View More Designs",     ar:"عرض المزيد",        fr:"Voir Plus"},
+  tplDone:     {en:"All showcase designs displayed · Contact us for full 500+ library access",
+                ar:"تم عرض جميع تصاميم العرض · تواصل معنا للوصول الكامل لمكتبة +500",
+                fr:"Tous les modèles affichés · Contactez-nous pour l'accès complet 500+"},
   // Global
-  glbEyebrow:  {en:"From Dubai, To the World",ar:"من دبي إلى العالم",fr:"De Dubaï, Vers le Monde"},
-  glbH2a:      {en:"Dubai is not the destination.",ar:"دبي ليست الوجهة.",fr:"Dubaï n'est pas la destination."},
-  glbH2b:      {en:"It is the platform.",ar:"إنها المنصة.",fr:"C'est la plateforme."},
-  glbBody:     {en:"Positioned at the intersection of Africa, Asia, and Europe, Dubai is the world's most strategically located talent gateway. We cross-calibrate your profile for multiple markets simultaneously.",
-                ar:"يقع دبي عند تقاطع أفريقيا وآسيا وأوروبا، ليكون أكثر بوابات المواهب الاستراتيجية في العالم. نُعاير ملفك الشخصي لأسواق متعددة في آنٍ واحد.",
-                fr:"Positionné à l'intersection de l'Afrique, de l'Asie et de l'Europe, Dubaï est la passerelle de talents la plus stratégique au monde. Nous calibrons votre profil pour plusieurs marchés simultanément."},
-  glb1t: {en:"Cultural Fluency",     ar:"الطلاقة الثقافية",   fr:"Fluidité Culturelle"},
-  glb1b: {en:"We calibrate tone and phrasing for the cultural norms of your target market — not just its ATS requirements.",
-          ar:"نُعاير النبرة والصياغة وفق الأعراف الثقافية لسوقك المستهدف — ليس فقط متطلبات الفلترة الآلية.",
-          fr:"Nous calibrons le ton et la formulation selon les normes culturelles de votre marché cible — pas seulement ses exigences ATS."},
-  glb2t: {en:"Dual-Market Documents",ar:"وثائق السوقين",       fr:"Documents Double Marché"},
-  glb2b: {en:"One engagement produces documents optimised for two geographic markets simultaneously — protecting your optionality.",
-          ar:"مشاركة واحدة تُنتج وثائق مُحسَّنة لسوقين جغرافيين في آنٍ واحد — لحماية خياراتك المستقبلية.",
-          fr:"Un seul engagement produit des documents optimisés pour deux marchés géographiques simultanément — protégeant votre flexibilité."},
-  glb3t: {en:"Language Versions",    ar:"النسخ اللغوية",       fr:"Versions Linguistiques"},
-  glb3b: {en:"Growth and Executive tiers include EN, FR, DE, and AR versions at no additional cost.",
-          ar:"تشمل خطتا النمو والتنفيذية نسخاً بالإنجليزية والفرنسية والألمانية والعربية دون تكلفة إضافية.",
-          fr:"Les offres Croissance et Exécutif incluent des versions EN, FR, DE et AR sans coût supplémentaire."},
+  glbEyebrow:  {en:"Based in Dubai. Built for the World.",ar:"مقره دبي. مبني للعالم.",fr:"Basé à Dubaï. Construit pour le Monde."},
+  glbH2a:      {en:"Dubai is our base.",  ar:"دبي قاعدتنا.",    fr:"Dubaï est notre base."},
+  glbH2b:      {en:"The world is our market.",ar:"العالم سوقنا.", fr:"Le monde est notre marché."},
+  glbBody:     {en:"Headquartered in Dubai and active across every major hiring market, we work with professionals from the Gulf, Africa, and Asia to build career profiles that are truly competitive — calibrated to the exact standards of North America, Europe, and the wider Gulf region. We don't simply write CVs. We reframe your experience in the language that international decision-makers act on.",
+                ar:"مقرّنا دبي ونعمل عبر كل الأسواق الرائدة في التوظيف — نتعاون مع المحترفين في الخليج وأفريقيا وآسيا لبناء ملفات مهنية تنافسية حقاً، معايَرة وفق المعايير الدقيقة لأمريكا الشمالية وأوروبا ومنطقة الخليج الأوسع. لا نكتب السيَر الذاتية فحسب — بل نُعيد صياغة خبرتك بلغة تُحرّك صانعي القرار الدوليين.",
+                fr:"Basé à Dubaï et actif sur tous les marchés d'emploi majeurs, nous accompagnons des professionnels du Golfe, d'Afrique et d'Asie pour construire des profils véritablement compétitifs — calibrés aux standards exacts de l'Amérique du Nord, de l'Europe et de la région du Golfe. Nous ne rédigeons pas simplement des CV. Nous reformulons votre expérience dans le langage que les décideurs internationaux prennent au sérieux."},
+  glb1t: {en:"Market-Specific Calibration", ar:"معايرة لكل سوق على حدة",  fr:"Calibrage Spécifique au Marché"},
+  glb1b: {en:"Hiring norms differ fundamentally between the GCC, North America, and Europe — in tone, structure, length, and cultural expectation. We engineer each document to the precise standards of your target market, not a generic international template.",
+          ar:"تختلف معايير التوظيف اختلافاً جوهرياً بين الخليج وأمريكا الشمالية وأوروبا — في النبرة والهيكل والطول والتوقعات الثقافية. نهندس كل وثيقة وفق المعايير الدقيقة لسوقك المستهدف، لا قالباً عالمياً عاماً.",
+          fr:"Les normes de recrutement diffèrent fondamentalement entre le CCG, l'Amérique du Nord et l'Europe — en ton, structure, longueur et attente culturelle. Nous concevons chaque document selon les standards précis de votre marché cible, non un modèle international générique."},
+  glb2t: {en:"Dual-Market Positioning",ar:"التموضع في سوقين",    fr:"Positionnement Double Marché"},
+  glb2b: {en:"A single engagement delivers documents simultaneously calibrated for two distinct geographic markets — giving you the flexibility to pursue the best opportunity, wherever it emerges.",
+          ar:"تعاقد واحد يُنتج وثائق معايَرة في آنٍ واحد لسوقين جغرافيين مستقلين — مما يمنحك المرونة لملاحقة أفضل الفرص أينما ظهرت.",
+          fr:"Un seul engagement produit des documents calibrés simultanément pour deux marchés géographiques distincts — vous offrant la flexibilité de saisir la meilleure opportunité, où qu'elle se présente."},
+  glb3t: {en:"Multi-Language Delivery", ar:"التسليم متعدد اللغات", fr:"Livraison Multilingue"},
+  glb3b: {en:"Growth and Executive packages include full versions in English, French, German, Arabic, and Spanish — at no additional cost. No market is out of reach.",
+          ar:"تشمل باقتا النمو والتنفيذية نسخاً كاملة بالإنجليزية والفرنسية والألمانية والعربية والإسبانية — دون تكلفة إضافية. لا يوجد سوق بعيد المنال.",
+          fr:"Les offres Croissance et Exécutif incluent des versions complètes en anglais, français, allemand, arabe et espagnol — sans frais supplémentaires. Aucun marché n'est hors de portée."},
   // Process
-  procEyebrow: {en:"The Method",       ar:"المنهجية",          fr:"La Méthode"},
-  procH2:      {en:"Four steps. Forty-eight hours.",ar:"أربع خطوات. ثمانية وأربعون ساعة.",fr:"Quatre étapes. Quarante-huit heures."},
-  p1t:{en:"Select",   ar:"الاختيار", fr:"Sélectionner"},
-  p1b:{en:"Choose your investment tier and complete a secure payment.",ar:"اختر مستوى استثمارك وأتمّ الدفع الآمن.",fr:"Choisissez votre niveau d'investissement et effectuez un paiement sécurisé."},
-  p2t:{en:"Brief",    ar:"الإحاطة",  fr:"Brief"},
-  p2b:{en:"Submit your career history via our intake form or WhatsApp.",ar:"أرسل تاريخك المهني عبر نموذج الاستقبال أو واتساب.",fr:"Soumettez votre parcours professionnel via notre formulaire ou WhatsApp."},
-  p3t:{en:"Engineer", ar:"الهندسة", fr:"Ingénierie"},
-  p3b:{en:"Your dedicated writer architects your document within 48 hours.",ar:"يُصمّم كاتبك المخصص وثيقتك خلال 48 ساعة.",fr:"Votre rédacteur dédié structure votre document en 48 heures."},
-  p4t:{en:"Refine",   ar:"التحسين", fr:"Affiner"},
-  p4b:{en:"Unlimited revisions until the output exceeds your expectations.",ar:"مراجعات غير محدودة حتى يتجاوز الناتج توقعاتك.",fr:"Révisions illimitées jusqu'à ce que le résultat dépasse vos attentes."},
+  procEyebrow: {en:"How It Works",     ar:"كيف يعمل",           fr:"Comment Ça Marche"},
+  procH2:      {en:"A rigorous process. Delivered in 48 hours.",
+                ar:"منهجية صارمة. تُسلَّم في 48 ساعة.",
+                fr:"Un processus rigoureux. Livré en 48 heures."},
+  p1t:{en:"Select",        ar:"الاختيار",   fr:"Choisir"},
+  p1b:{en:"Choose the package that matches your career stage and complete a secure payment in minutes.",
+       ar:"اختر الباقة التي تتناسب مع مرحلتك المهنية وأتمّ الدفع الآمن في دقائق.",
+       fr:"Choisissez le forfait adapté à votre étape de carrière et effectuez un paiement sécurisé en quelques minutes."},
+  p2t:{en:"Brief",         ar:"الإحاطة",    fr:"Briefing"},
+  p2b:{en:"Share your career background, target markets, and objectives via our intake form, WhatsApp, or email — whichever is most convenient for you.",
+       ar:"شارك خلفيتك المهنية وأسواقك المستهدفة وأهدافك عبر نموذج الاستقبال أو واتساب أو البريد الإلكتروني — أيّها أنسب لك.",
+       fr:"Partagez votre parcours, vos marchés cibles et vos objectifs via notre formulaire, WhatsApp ou email — selon ce qui vous convient le mieux."},
+  p3t:{en:"Engineer",      ar:"الهندسة",    fr:"Conception"},
+  p3b:{en:"Your dedicated career document specialist architects every element of your profile within 48 hours.",
+       ar:"يُصمّم متخصصك المخصص في وثائق المسار المهني كل عنصر من ملفك خلال 48 ساعة.",
+       fr:"Votre spécialiste dédié en documents de carrière conçoit chaque élément de votre profil en 48 heures."},
+  p4t:{en:"Refine",        ar:"التحسين",    fr:"Affiner"},
+  p4b:{en:"Unlimited revision rounds until every word, format, and strategic nuance meets your full satisfaction.",
+       ar:"جولات مراجعة غير محدودة حتى تُستوفى كل كلمة وتنسيق وفارق استراتيجي دقيق وفق رضاك الكامل.",
+       fr:"Révisions illimitées jusqu'à ce que chaque mot, format et nuance stratégique réponde pleinement à vos attentes."},
   // Pricing
-  prcEyebrow:  {en:"Investment Tiers",  ar:"مستويات الاستثمار", fr:"Niveaux d'Investissement"},
-  prcH2:       {en:"Three tiers. One standard of excellence.",ar:"ثلاثة مستويات. معيار واحد من التميز.",fr:"Trois niveaux. Une norme d'excellence."},
-  prcNote:     {en:"All prices in UAE Dirhams. Secure payment via Stripe.",ar:"جميع الأسعار بالدرهم الإماراتي. دفع آمن عبر Stripe.",fr:"Tous les prix en Dirhams émiratis. Paiement sécurisé via Stripe."},
-  prcMostSel:  {en:"Most Selected",    ar:"الأكثر اختياراً",   fr:"Le Plus Choisi"},
-  prcBegin:    {en:"Begin",            ar:"ابدأ",               fr:"Commencer"},
-  prcApplePay: {en:"Begin · Apple Pay",ar:"ابدأ · Apple Pay",  fr:"Commencer · Apple Pay"},
-  prcStripe:   {en:"Stripe-secured payment",ar:"دفع مؤمَّن بـ Stripe",fr:"Paiement sécurisé Stripe"},
+  prcEyebrow:  {en:"Investment Tiers",   ar:"مستويات الاستثمار",  fr:"Niveaux d'Investissement"},
+  prcH2:       {en:"Three tiers. One uncompromising standard.",
+                ar:"ثلاثة مستويات. معيار واحد لا تهاون فيه.",
+                fr:"Trois niveaux. Une norme sans compromis."},
+  prcNote:     {en:"All prices in UAE Dirhams. Payments are processed securely via Stripe.",
+                ar:"جميع الأسعار بالدرهم الإماراتي. تتم معالجة المدفوعات بأمان عبر Stripe.",
+                fr:"Tous les prix en Dirhams émiratis. Les paiements sont traités de manière sécurisée via Stripe."},
+  prcMostSel:  {en:"Most Popular",       ar:"الأكثر اختياراً",    fr:"Le Plus Populaire"},
+  prcBegin:    {en:"Get Started",        ar:"ابدأ الآن",           fr:"Commencer"},
+  prcApplePay: {en:"Get Started · Apple Pay", ar:"ابدأ الآن · Apple Pay", fr:"Commencer · Apple Pay"},
+  prcStripe:   {en:"Secured by Stripe",  ar:"مؤمَّن بـ Stripe",   fr:"Sécurisé par Stripe"},
   // Foundation
-  pF:    {en:"Foundation",  ar:"الأساسية",  fr:"Fondation"},
-  pFsub: {en:"Entry-level. Precise. Effective.",ar:"مستوى مبتدئ. دقيق. فعّال.",fr:"Niveau entrée. Précis. Efficace."},
-  pFi1:  {en:"ATS-engineered CV",          ar:"سيرة ذاتية مُهندَسة لـ ATS",       fr:"CV conçu pour ATS"},
-  pFi2:  {en:"Professional cover letter",  ar:"خطاب تغطية احترافي",               fr:"Lettre de motivation professionnelle"},
-  pFi3:  {en:"AI photo enhancement",       ar:"تحسين الصورة بالذكاء الاصطناعي",  fr:"Amélioration photo IA"},
-  pFi4:  {en:"Access to 500+ template library",ar:"الوصول لمكتبة +500 قالب",     fr:"Accès bibliothèque 500+ modèles"},
+  pF:    {en:"Foundation",   ar:"الأساسية",   fr:"Fondation"},
+  pFsub: {en:"Precise. ATS-ready. Results-driven.",ar:"دقيق. جاهز للفلترة. موجَّه للنتائج.",fr:"Précis. Prêt pour l'ATS. Axé sur les résultats."},
+  pFi1:  {en:"ATS-optimised CV, built to pass automated screening",
+          ar:"سيرة ذاتية مُحسَّنة لـ ATS، مبنية لاجتياز الفرز الآلي",
+          fr:"CV optimisé ATS, conçu pour passer le tri automatisé"},
+  pFi2:  {en:"Targeted cover letter aligned to your role and market",
+          ar:"خطاب تغطية مستهدف يتوافق مع دورك وسوقك",
+          fr:"Lettre de motivation ciblée alignée sur votre poste et marché"},
+  pFi3:  {en:"Professional photo enhancement via AI retouching",
+          ar:"تحسين الصورة الاحترافية عبر المعالجة بالذكاء الاصطناعي",
+          fr:"Amélioration de photo professionnelle par retouche IA"},
+  pFi4:  {en:"Full access to the 500+ premium template library",
+          ar:"وصول كامل لمكتبة القوالب المتميزة +500",
+          fr:"Accès complet à la bibliothèque de 500+ modèles premium"},
   // Growth
-  pG:    {en:"Growth",       ar:"النمو",      fr:"Croissance"},
-  pGsub: {en:"Comprehensive. Multi-market. Complete.",ar:"شامل. متعدد الأسواق. مكتمل.",fr:"Complet. Multi-marché. Achevé."},
-  pGi1:  {en:"ATS + Executive Design CV",    ar:"سيرة ذاتية ATS + تصميم تنفيذي",  fr:"CV ATS + Design Exécutif"},
-  pGi2:  {en:"LinkedIn profile intelligence",ar:"استخبارات ملف لينكد إن",         fr:"Intelligence profil LinkedIn"},
-  pGi3:  {en:"Career strategy e-book",       ar:"كتاب استراتيجية المسار المهني",   fr:"E-book stratégie de carrière"},
-  pGi4:  {en:"EN, FR, DE, AR versions",      ar:"نسخ EN، FR، DE، AR",             fr:"Versions EN, FR, DE, AR"},
-  pGi5:  {en:"Access to 500+ template library",ar:"الوصول لمكتبة +500 قالب",     fr:"Accès bibliothèque 500+ modèles"},
+  pG:    {en:"Growth",        ar:"النمو",      fr:"Croissance"},
+  pGsub: {en:"Multi-market. Complete. Career-defining.",
+          ar:"متعدد الأسواق. مكتمل. محوري في المسيرة المهنية.",
+          fr:"Multi-marché. Complet. Déterminant pour la carrière."},
+  pGi1:  {en:"ATS-optimised CV with executive-grade visual design",
+          ar:"سيرة ذاتية مُحسَّنة لـ ATS بتصميم بصري تنفيذي",
+          fr:"CV optimisé ATS avec design visuel de niveau exécutif"},
+  pGi2:  {en:"Full LinkedIn profile rebuild with recruiter-visibility optimisation",
+          ar:"إعادة بناء كاملة لملف لينكد إن مع تحسين الظهور أمام المُوظِّفين",
+          fr:"Reconstruction complète du profil LinkedIn avec optimisation de visibilité recruteurs"},
+  pGi3:  {en:"International career strategy guide tailored to your targets",
+          ar:"دليل استراتيجية المسار الدولي مُصمَّم وفق أهدافك",
+          fr:"Guide de stratégie de carrière internationale adapté à vos objectifs"},
+  pGi4:  {en:"Full document versions in EN, FR, DE, AR, and ES",
+          ar:"نسخ كاملة من الوثائق بالإنجليزية والفرنسية والألمانية والعربية والإسبانية",
+          fr:"Versions complètes en EN, FR, DE, AR et ES"},
+  pGi5:  {en:"Full access to the 500+ premium template library",
+          ar:"وصول كامل لمكتبة القوالب المتميزة +500",
+          fr:"Accès complet à la bibliothèque de 500+ modèles premium"},
   // Executive
-  pE:    {en:"Executive",    ar:"التنفيذية",  fr:"Exécutif"},
-  pEsub: {en:"Full-service. Strategic. White-glove.",ar:"خدمة كاملة. استراتيجي. احترافي.",fr:"Service complet. Stratégique. Gants blancs."},
-  pEi1:  {en:"All Growth deliverables",          ar:"جميع مخرجات خطة النمو",        fr:"Tous les livrables Croissance"},
-  pEi2:  {en:"60-minute interview coaching",     ar:"تدريب مقابلات 60 دقيقة",      fr:"Coaching entretien 60 minutes"},
-  pEi3:  {en:"Career narrative consultation",    ar:"استشارة السرد المهني",         fr:"Consultation narrative de carrière"},
-  pEi4:  {en:"30-day VIP priority support",      ar:"دعم VIP أولوية لمدة 30 يوماً",fr:"Support prioritaire VIP 30 jours"},
-  pEi5:  {en:"Access to 500+ template library",  ar:"الوصول لمكتبة +500 قالب",     fr:"Accès bibliothèque 500+ modèles"},
+  pE:    {en:"Executive",     ar:"التنفيذية",  fr:"Exécutif"},
+  pEsub: {en:"White-glove. Strategic. Comprehensive.",
+          ar:"احترافي. استراتيجي. شامل.",
+          fr:"Gants blancs. Stratégique. Complet."},
+  pEi1:  {en:"All Growth package deliverables included",
+          ar:"جميع مخرجات باقة النمو مشمولة",
+          fr:"Tous les livrables de l'offre Croissance inclus"},
+  pEi2:  {en:"60-minute 1-on-1 interview coaching with a senior consultant",
+          ar:"تدريب مقابلات فردي لمدة 60 دقيقة مع مستشار أول",
+          fr:"Coaching entretien individuel de 60 min avec un consultant senior"},
+  pEi3:  {en:"Personal career narrative strategy session",
+          ar:"جلسة استراتيجية لبناء السرد المهني الشخصي",
+          fr:"Session de stratégie narrative de carrière personnelle"},
+  pEi4:  {en:"30-day priority access to your dedicated consultant",
+          ar:"وصول أولوية لمدة 30 يوماً إلى مستشارك المخصص",
+          fr:"Accès prioritaire pendant 30 jours à votre consultant dédié"},
+  pEi5:  {en:"Full access to the 500+ premium template library",
+          ar:"وصول كامل لمكتبة القوالب المتميزة +500",
+          fr:"Accès complet à la bibliothèque de 500+ modèles premium"},
   // Testimonials
-  tmEyebrow:   {en:"Client Outcomes",  ar:"نتائج العملاء",     fr:"Résultats Clients"},
-  tmH2a:       {en:"Results, without", ar:"نتائج، دون",        fr:"Résultats, sans"},
-  tmH2b:       {en:"embellishment.",   ar:"مبالغة.",           fr:"embellissement."},
-  tmStars:     {en:"5.0 · 200+ verified engagements",ar:"5.0 · +200 تعامل موثوق", fr:"5.0 · 200+ engagements vérifiés"},
+  tmEyebrow:   {en:"Verified Outcomes",  ar:"نتائج موثّقة",       fr:"Résultats Vérifiés"},
+  tmH2a:       {en:"Measured results,",  ar:"نتائج قابلة للقياس،",fr:"Résultats mesurables,"},
+  tmH2b:       {en:"not testimonials.",  ar:"لا مجرد شهادات.",    fr:"pas des témoignages."},
+  tmStars:     {en:"5.0 · 7,000+ verified client engagements", ar:"5.0 · أكثر من 7,000 تعاقد موثّق مع عملاء", fr:"5.0 · 7 000+ engagements clients vérifiés"},
   // CTA
-  ctaH2a:      {en:"Your next position",      ar:"منصبك القادم",    fr:"Votre prochain poste"},
-  ctaH2b:      {en:"begins with a document.", ar:"يبدأ بوثيقة.",    fr:"commence par un document."},
-  ctaBody:     {en:"Over 200 professionals from 18 nationalities have used Zenith to secure roles across six continents. The common denominator was a decision to invest in positioning.",
-                ar:"استخدم أكثر من 200 محترف من 18 جنسية مختلفة خدمات Zenith لتأمين مناصب عبر ستة قارات. القاسم المشترك كان قراراً بالاستثمار في التموضع المهني.",
-                fr:"Plus de 200 professionnels de 18 nationalités ont utilisé Zenith pour décrocher des postes sur six continents. Le dénominateur commun était la décision d'investir dans le positionnement."},
-  startWA:     {en:"Start on WhatsApp",ar:"ابدأ على واتساب",    fr:"Commencer sur WhatsApp"},
-  sendEnq:     {en:"Send Enquiry",    ar:"إرسال الاستفسار",     fr:"Envoyer une Demande"},
+  ctaH2a:      {en:"Your next role",         ar:"منصبك القادم",      fr:"Votre prochain poste"},
+  ctaH2b:      {en:"starts here.",           ar:"يبدأ هنا.",          fr:"commence ici."},
+  ctaBody:     {en:"Over 7,000 professionals from 40+ nationalities have used Zenith to secure roles across six continents. Each one made a deliberate decision to stop applying and start positioning.",
+                ar:"استعان أكثر من 7,000 محترف من أكثر من 40 جنسية بـ Zenith لتأمين مناصب عبر ستة قارات. اتخذ كل واحد منهم قراراً واعياً بالتوقف عن التقديم والبدء في التموضع.",
+                fr:"Plus de 7 000 professionnels de plus de 40 nationalités ont utilisé Zenith pour décrocher des postes sur six continents. Chacun a pris la décision délibérée d'arrêter de postuler et de commencer à se positionner."},
+  startWA:     {en:"Start on WhatsApp",      ar:"ابدأ على واتساب",   fr:"Démarrer sur WhatsApp"},
+  sendEnq:     {en:"Get Your Profile Reviewed", ar:"احصل على مراجعة ملفك", fr:"Faites Évaluer Votre Profil"},
   // Footer
-  tagline:     {en:"Dubai · Global Career Intelligence",ar:"دبي · ذكاء مهني عالمي",fr:"Dubaï · Intelligence Carrière Mondiale"},
-  footerWA:    {en:"WhatsApp",        ar:"واتساب",              fr:"WhatsApp"},
+  tagline:     {en:"Based in Dubai · Careers Placed Globally",
+                ar:"مقره دبي · مسارات مهنية تُوظَّف عالمياً",
+                fr:"Basé à Dubaï · Carrières Placées Mondialement"},
+  footerWA:    {en:"WhatsApp",               ar:"واتساب",             fr:"WhatsApp"},
   // Modal / form
-  frmEmail:    {en:"Email Address",   ar:"البريد الإلكتروني",   fr:"Adresse e-mail"},
-  frmSubject:  {en:"Subject",         ar:"الموضوع",             fr:"Sujet"},
-  frmMessage:  {en:"Message",         ar:"الرسالة",             fr:"Message"},
-  frmAttach:   {en:"Attachments",     ar:"المرفقات",            fr:"Pièces jointes"},
-  frmOptional: {en:"— optional",      ar:"— اختياري",           fr:"— facultatif"},
-  frmPhoto:    {en:"Profile Photo",   ar:"صورة الملف الشخصي",   fr:"Photo de profil"},
+  frmEmail:    {en:"Your Email Address",     ar:"عنوان بريدك الإلكتروني",  fr:"Votre Adresse E-mail"},
+  frmSubject:  {en:"Subject",               ar:"الموضوع",             fr:"Sujet"},
+  frmMessage:  {en:"Your Message",          ar:"رسالتك",              fr:"Votre Message"},
+  frmAttach:   {en:"Attachments",           ar:"المرفقات",            fr:"Pièces jointes"},
+  frmOptional: {en:"— optional",            ar:"— اختياري",           fr:"— facultatif"},
+  frmPhoto:    {en:"Profile Photo",         ar:"صورة الملف الشخصي",   fr:"Photo de profil"},
   frmPhotoH:   {en:"JPG · PNG · WEBP · max 5 MB", ar:"JPG · PNG · WEBP · الحد الأقصى 5 ميغابايت", fr:"JPG · PNG · WEBP · max 5 Mo"},
-  frmCv:       {en:"Current CV",      ar:"السيرة الذاتية الحالية",fr:"CV Actuel"},
+  frmCv:       {en:"Current CV",            ar:"السيرة الذاتية الحالية",fr:"CV Actuel"},
   frmCvH:      {en:"PDF · DOC · DOCX · max 5 MB", ar:"PDF · DOC · DOCX · الحد الأقصى 5 ميغابايت", fr:"PDF · DOC · DOCX · max 5 Mo"},
-  frmDrop:     {en:"Click or drop here", ar:"انقر أو اسحب هنا",  fr:"Cliquer ou déposer ici"},
-  frmSending:  {en:"Sending",         ar:"جارٍ الإرسال",        fr:"Envoi en cours"},
-  frmRetry:    {en:"Retry",           ar:"إعادة المحاولة",      fr:"Réessayer"},
-  frmReceived: {en:"Received.",       ar:"تم الاستلام.",         fr:"Reçu."},
-  frmReply:    {en:"We respond to",   ar:"سنرد على",            fr:"Nous répondons à"},
-  frmHours:    {en:"within 24 hours.",ar:"خلال 24 ساعة.",        fr:"dans les 24 heures."},
-  frmClose:    {en:"Close",           ar:"إغلاق",               fr:"Fermer"},
-  frmErrNet:   {en:"Network error — please try WhatsApp.", ar:"خطأ في الشبكة — يرجى المحاولة عبر واتساب.", fr:"Erreur réseau — veuillez essayer WhatsApp."},
-  frmErrGen:   {en:"Something went wrong.", ar:"حدث خطأ ما.",     fr:"Quelque chose s'est mal passé."},
-  // Template card
-  tplAts:      {en:"ATS ✓",          ar:"ATS ✓",               fr:"ATS ✓"},
-  // Global section — literal connector
-  glbConnector:{en:"It is the",      ar:"إنها",                 fr:"C'est"},
+  frmDrop:     {en:"Click or drop file here", ar:"انقر أو اسحب الملف هنا", fr:"Cliquer ou déposer le fichier ici"},
+  frmSending:  {en:"Sending",               ar:"جارٍ الإرسال",        fr:"Envoi en cours"},
+  frmRetry:    {en:"Retry",                 ar:"إعادة المحاولة",      fr:"Réessayer"},
+  frmReceived: {en:"Message received.",     ar:"تم استلام رسالتك.",    fr:"Message reçu."},
+  frmReply:    {en:"We will respond to",    ar:"سنرد على",            fr:"Nous répondrons à"},
+  frmHours:    {en:"within 24 hours.",      ar:"خلال 24 ساعة.",        fr:"dans les 24 heures."},
+  frmClose:    {en:"Close",                 ar:"إغلاق",               fr:"Fermer"},
+  frmErrNet:   {en:"Network error — please reach us via WhatsApp.", ar:"خطأ في الشبكة — يرجى التواصل عبر واتساب.", fr:"Erreur réseau — contactez-nous via WhatsApp."},
+  frmErrGen:   {en:"Something went wrong. Please try again.", ar:"حدث خطأ ما. يرجى المحاولة مجدداً.", fr:"Une erreur s'est produite. Veuillez réessayer."},
+  // Template card badges
+  tplAts:      {en:"ATS ✓",                ar:"ATS ✓",               fr:"ATS ✓"},
+  tplDesign:   {en:"Design ✦",             ar:"تصميم ✦",             fr:"Design ✦"},
+  tplPreview:  {en:"Preview Full Template", ar:"معاينة القالب كاملاً", fr:"Aperçu Complet"},
+  tplEnquire:  {en:"Enquire About This Template", ar:"استفسر عن هذا القالب", fr:"Demander ce Modèle"},
+  tplClose:    {en:"Close",                ar:"إغلاق",               fr:"Fermer"},
+  // Global section connector (TX dict only — not used directly in JSX)
+  glbConnector:{en:"The world is our",     ar:"العالم هو",            fr:"Le monde est notre"},
 };
 const tr = (k:string, l:Lang):string => TX[k]?.[l] ?? TX[k]?.en ?? k;
 
@@ -192,60 +246,60 @@ type St  = "idle"|"sending"|"success"|"error";
 
 // ── Template data — 33 items ───────────────────────────────────────────────────
 const TEMPLATES = [
-  {id:1,  name:"The DIFC Leadership",       ind:"Finance · Banking",          reg:"Dubai · London · New York"},
-  {id:2,  name:"Urban Tech Professional",   ind:"Technology · Engineering",   reg:"GCC · Singapore · Toronto"},
-  {id:3,  name:"Editorial Creative",        ind:"Design · Media · Marketing", reg:"Europe · UK · Australia"},
-  {id:4,  name:"The Toronto Executive",     ind:"Operations · Consulting",    reg:"Canada · USA · UK"},
-  {id:5,  name:"Global Minimalist",         ind:"Engineering · IT",           reg:"Americas · APAC"},
-  {id:6,  name:"African Enterprise",        ind:"Sales · Management",         reg:"GCC · Africa · Europe"},
-  {id:7,  name:"Singapore Tech Expert",     ind:"Technology · Data Science",  reg:"Singapore · APAC · USA"},
-  {id:8,  name:"Paris Creative",            ind:"Creative · Marketing",       reg:"France · EU · Canada"},
-  {id:9,  name:"Riyadh C-Suite",            ind:"Finance · Executive",        reg:"KSA · GCC · London"},
-  {id:10, name:"London Financial",          ind:"Finance · Fintech",          reg:"UK · Europe · Dubai"},
-  {id:11, name:"Mumbai Corporate",          ind:"Operations · HR",            reg:"India · GCC · Singapore"},
-  {id:12, name:"New York Banking",          ind:"Investment Banking",         reg:"USA · Canada · London"},
-  {id:13, name:"Amsterdam Innovation",      ind:"Product · UX · Design",     reg:"Netherlands · EU · Remote"},
-  {id:14, name:"Sydney Modern",             ind:"Healthcare · Research",      reg:"Australia · NZ · Canada"},
-  {id:15, name:"Dubai Hospitality Elite",   ind:"Hospitality · Tourism",     reg:"UAE · GCC · Maldives"},
-  {id:16, name:"Lagos Rising",              ind:"Business · Entrepreneurship",reg:"Nigeria · UK · USA"},
-  {id:17, name:"Nairobi Leadership",        ind:"NGO · Development",          reg:"Kenya · East Africa · UN"},
-  {id:18, name:"Frankfurt Banking",         ind:"Finance · Insurance",        reg:"Germany · EU · Switzerland"},
-  {id:19, name:"Beirut Medical",            ind:"Healthcare · Medicine",      reg:"Lebanon · GCC · EU"},
-  {id:20, name:"Cairo Engineering",         ind:"Civil · Infrastructure",    reg:"Egypt · GCC · Europe"},
-  {id:21, name:"Kuala Lumpur Digital",      ind:"Digital · E-Commerce",      reg:"Malaysia · ASEAN · Australia"},
-  {id:22, name:"Hong Kong Finance",         ind:"Asset Management",           reg:"HK · Singapore · London"},
-  {id:23, name:"Doha Energy Leader",        ind:"Oil & Gas · Energy",        reg:"Qatar · GCC · USA"},
-  {id:24, name:"Brussels Policy",           ind:"Law · Policy · EU Affairs", reg:"Belgium · EU · Geneva"},
-  {id:25, name:"Johannesburg Executive",    ind:"Mining · Resources",         reg:"South Africa · GCC · London"},
-  {id:26, name:"Geneva International",      ind:"Diplomacy · International",  reg:"Switzerland · UN · Global"},
-  {id:27, name:"Jakarta Tech Startup",      ind:"Technology · Startup",      reg:"Indonesia · ASEAN · Remote"},
-  {id:28, name:"Casablanca Professional",   ind:"Finance · Consulting",      reg:"Morocco · France · GCC"},
-  {id:29, name:"Abu Dhabi Government",      ind:"Public Sector · Policy",    reg:"UAE · GCC · International"},
-  {id:30, name:"Seoul Innovation",          ind:"Technology · R&D",          reg:"South Korea · Japan · USA"},
-  {id:31, name:"Mexico City Operations",    ind:"Supply Chain · Logistics",  reg:"Mexico · USA · Latin America"},
-  {id:32, name:"Accra Global",              ind:"Development · Finance",     reg:"Ghana · UK · EU"},
-  {id:33, name:"The Executive Portfolio",   ind:"C-Suite · Board Level",     reg:"Global · Any Market"},
+  {id:1,  ats:true,  name:"The DIFC Leadership",       ind:"Finance · Banking",          reg:"Dubai · London · New York"},
+  {id:2,  ats:true,  name:"Urban Tech Professional",   ind:"Technology · Engineering",   reg:"GCC · Singapore · Toronto"},
+  {id:3,  ats:false, name:"Editorial Creative",        ind:"Design · Media · Marketing", reg:"Europe · UK · Australia"},
+  {id:4,  ats:true,  name:"The Toronto Executive",     ind:"Operations · Consulting",    reg:"Canada · USA · UK"},
+  {id:5,  ats:true,  name:"Global Minimalist",         ind:"Engineering · IT",           reg:"Americas · APAC"},
+  {id:6,  ats:true,  name:"African Enterprise",        ind:"Sales · Management",         reg:"GCC · Africa · Europe"},
+  {id:7,  ats:false, name:"Singapore Tech Expert",     ind:"Technology · Data Science",  reg:"Singapore · APAC · USA"},
+  {id:8,  ats:true,  name:"Paris Creative",            ind:"Creative · Marketing",       reg:"France · EU · Canada"},
+  {id:9,  ats:true,  name:"Riyadh C-Suite",            ind:"Finance · Executive",        reg:"KSA · GCC · London"},
+  {id:10, ats:true,  name:"London Financial",          ind:"Finance · Fintech",          reg:"UK · Europe · Dubai"},
+  {id:11, ats:true,  name:"Mumbai Corporate",          ind:"Operations · HR",            reg:"India · GCC · Singapore"},
+  {id:12, ats:true,  name:"New York Banking",          ind:"Investment Banking",         reg:"USA · Canada · London"},
+  {id:13, ats:false, name:"Amsterdam Innovation",      ind:"Product · UX · Design",     reg:"Netherlands · EU · Remote"},
+  {id:14, ats:true,  name:"Sydney Modern",             ind:"Healthcare · Research",      reg:"Australia · NZ · Canada"},
+  {id:15, ats:false, name:"Dubai Hospitality Elite",   ind:"Hospitality · Tourism",     reg:"UAE · GCC · Maldives"},
+  {id:16, ats:true,  name:"Lagos Rising",              ind:"Business · Entrepreneurship",reg:"Nigeria · UK · USA"},
+  {id:17, ats:true,  name:"Nairobi Leadership",        ind:"NGO · Development",          reg:"Kenya · East Africa · UN"},
+  {id:18, ats:true,  name:"Frankfurt Banking",         ind:"Finance · Insurance",        reg:"Germany · EU · Switzerland"},
+  {id:19, ats:true,  name:"Beirut Medical",            ind:"Healthcare · Medicine",      reg:"Lebanon · GCC · EU"},
+  {id:20, ats:true,  name:"Cairo Engineering",         ind:"Civil · Infrastructure",    reg:"Egypt · GCC · Europe"},
+  {id:21, ats:false, name:"Kuala Lumpur Digital",      ind:"Digital · E-Commerce",      reg:"Malaysia · ASEAN · Australia"},
+  {id:22, ats:true,  name:"Hong Kong Finance",         ind:"Asset Management",           reg:"HK · Singapore · London"},
+  {id:23, ats:true,  name:"Doha Energy Leader",        ind:"Oil & Gas · Energy",        reg:"Qatar · GCC · USA"},
+  {id:24, ats:true,  name:"Brussels Policy",           ind:"Law · Policy · EU Affairs", reg:"Belgium · EU · Geneva"},
+  {id:25, ats:true,  name:"Johannesburg Executive",    ind:"Mining · Resources",         reg:"South Africa · GCC · London"},
+  {id:26, ats:true,  name:"Geneva International",      ind:"Diplomacy · International",  reg:"Switzerland · UN · Global"},
+  {id:27, ats:false, name:"Jakarta Tech Startup",      ind:"Technology · Startup",      reg:"Indonesia · ASEAN · Remote"},
+  {id:28, ats:true,  name:"Casablanca Professional",   ind:"Finance · Consulting",      reg:"Morocco · France · GCC"},
+  {id:29, ats:true,  name:"Abu Dhabi Government",      ind:"Public Sector · Policy",    reg:"UAE · GCC · International"},
+  {id:30, ats:false, name:"Seoul Innovation",          ind:"Technology · R&D",          reg:"South Korea · Japan · USA"},
+  {id:31, ats:true,  name:"Mexico City Operations",    ind:"Supply Chain · Logistics",  reg:"Mexico · USA · Latin America"},
+  {id:32, ats:true,  name:"Accra Global",              ind:"Development · Finance",     reg:"Ghana · UK · EU"},
+  {id:33, ats:true,  name:"The Executive Portfolio",   ind:"C-Suite · Board Level",     reg:"Global · Any Market"},
 ];
 
 // ── CV images: /public/templates-new/cv1.png … cv33.png ──────────────────────
 // Files must be named cv1.png, cv2.png … cv33.png (no underscore) in /public/templates-new/
 
 const TMS = [
-  {name:"Sara Al-Rashidi",         role:"Finance Director",         co:"DIFC, Dubai",      ind:"Finance",    img:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=160&h=160&fit=crop&crop=face", text:"Nine interview callbacks in two weeks. Zenith understood the DIFC hiring landscape with a precision I had never encountered from any previous service.", hl:"9 callbacks · 2 weeks"},
-  {name:"James Okafor",            role:"General Manager",          co:"Jumeirah Group",   ind:"Hospitality",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&h=160&fit=crop&crop=face", text:"Every interviewer opened by complimenting the document itself. I secured the role and negotiated a salary 28% above the initial offer.", hl:"+28% salary"},
-  {name:"Capt. Rashed Al-Bloushi", role:"Senior First Officer",     co:"Emirates",         ind:"Aviation",   img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=160&h=160&fit=crop&crop=face", text:"Aviation HR is a specialised discipline. Zenith knew exactly what Emirates recruitment requires. I was shortlisted within days of submission.", hl:"Shortlisted in days"},
-  {name:"Marcus Vandenberg",       role:"VP Engineering",           co:"ADNOC, Abu Dhabi", ind:"Energy",     img:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=160&h=160&fit=crop&crop=face", text:"Two competing offers from major energy firms within three weeks. The ATS document passed every automated filter that had previously blocked me.", hl:"2 offers · 3 weeks"},
-  {name:"Priya Nair",              role:"Cloud Architect",          co:"Singapore",        ind:"Technology", img:"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=160&h=160&fit=crop&crop=face", text:"My interview rate doubled and I accepted an offer 40% above my previous compensation — a direct result of being repositioned for APAC.", hl:"+40% compensation"},
-  {name:"Dr. Layla Al-Hosani",     role:"Head of Cardiology",       co:"SEHA, Abu Dhabi",  ind:"Healthcare", img:"https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=160&h=160&fit=crop&crop=face", text:"A document that finally matched my clinical standing. The executive design secured my department leadership appointment within the month.", hl:"Department Head"},
-  {name:"Claire Beaumont",         role:"Private Banking Director", co:"DIFC, Dubai",      ind:"Finance",    img:"https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=160&h=160&fit=crop&crop=face", text:"Two of the most prestigious private banks in Dubai opened their doors within four weeks of using the Zenith executive portfolio.", hl:"DIFC · 4 weeks"},
-  {name:"Yousef Al-Qahtani",       role:"Operations Director",      co:"Aramco",           ind:"Energy",     img:"https://images.unsplash.com/photo-1560250097-0b93528c311a?w=160&h=160&fit=crop&crop=face", text:"Promoted internally and received an unsolicited external offer at 35% uplift — both within six weeks of the Zenith repositioning.", hl:"+35% uplift"},
+  {name:"Sara Al-Rashidi",         role:"Finance Director",         co:"DIFC, Dubai",      ind:"Finance",    img:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=160&h=160&fit=crop&crop=face", text:"Nine interview invitations in eleven days. Zenith understood the DIFC recruitment landscape at a level no previous service had come close to matching. The document did not just pass ATS — it opened conversations.", hl:"9 interviews · 11 days"},
+  {name:"James Okafor",            role:"General Manager",          co:"Jumeirah Group",   ind:"Hospitality",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&h=160&fit=crop&crop=face", text:"Three interviewers opened by complimenting the document before asking a single question. I secured the role and negotiated a package 28% above the initial offer. The positioning was transformative.", hl:"+28% on package"},
+  {name:"Capt. Rashed Al-Bloushi", role:"Senior First Officer",     co:"Emirates",         ind:"Aviation",   img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=160&h=160&fit=crop&crop=face", text:"Aviation HR operates within highly specific technical standards. Zenith knew precisely what Emirates recruitment evaluates at each stage. I was on the shortlist within days of submission — which had never happened with previous applications.", hl:"Shortlisted in 4 days"},
+  {name:"Marcus Vandenberg",       role:"VP Engineering",           co:"ADNOC, Abu Dhabi", ind:"Energy",     img:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=160&h=160&fit=crop&crop=face", text:"Two competing offers from major energy companies within three weeks. My previous CV had been failing automated screening entirely. The Zenith document cleared every filter and reached decision-makers directly.", hl:"2 competing offers"},
+  {name:"Priya Nair",              role:"Cloud Architect",          co:"Singapore",        ind:"Technology", img:"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=160&h=160&fit=crop&crop=face", text:"My interview rate tripled. I accepted a Singapore-based offer at 40% above my previous compensation. Zenith repositioned me for the APAC technology market in a way that made immediate, measurable impact.", hl:"+40% total compensation"},
+  {name:"Dr. Layla Al-Hosani",     role:"Head of Cardiology",       co:"SEHA, Abu Dhabi",  ind:"Healthcare", img:"https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=160&h=160&fit=crop&crop=face", text:"For the first time, my profile reflected the actual weight of my clinical experience. The executive design and precisely calibrated language secured my department leadership appointment within the month.", hl:"Department Head · 30 days"},
+  {name:"Claire Beaumont",         role:"Private Banking Director", co:"DIFC, Dubai",      ind:"Finance",    img:"https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=160&h=160&fit=crop&crop=face", text:"Two of the most selective private banks in the DIFC reached out within four weeks. Zenith understood what wealth management recruiters are actually looking for — and built a document that spoke directly to that.", hl:"2 DIFC banks · 4 weeks"},
+  {name:"Yousef Al-Qahtani",       role:"Operations Director",      co:"Aramco",           ind:"Energy",     img:"https://images.unsplash.com/photo-1560250097-0b93528c311a?w=160&h=160&fit=crop&crop=face", text:"An internal promotion and an unsolicited external offer at 35% uplift — both within six weeks of the Zenith repositioning. The career narrative they constructed framed my experience in a way I had never been able to articulate myself.", hl:"+35% · dual offer"},
 ];
 const IH: Record<string,string> = {Finance:"#B8962E",Hospitality:"#9A7A3A",Healthcare:"#4A8A6A",Energy:"#9A6A20",Technology:"#3A6A8A",Aviation:"#5A5090"};
 const ROUTES = [
-  {from:"Lagos · Nairobi · Cairo",     to:"London · Amsterdam · Paris",    label:"Africa → Europe"},
-  {from:"Dubai · Riyadh · Doha",       to:"Singapore · Hong Kong · Tokyo",  label:"GCC → APAC"},
-  {from:"Mumbai · Karachi · Dhaka",    to:"Toronto · New York · Boston",    label:"South Asia → Americas"},
-  {from:"Manila · Jakarta · Kuala L.", to:"Dubai · Abu Dhabi · Doha",       label:"SE Asia → GCC"},
+  {from:"Lagos · Nairobi · Cairo",          to:"London · Amsterdam · Paris",     label:"Africa → Europe"},
+  {from:"Dubai · Riyadh · Doha",            to:"Toronto · New York · Boston",    label:"GCC → North America"},
+  {from:"Mumbai · Karachi · Dhaka",         to:"London · Amsterdam · Frankfurt", label:"South Asia → Europe"},
+  {from:"Manila · Jakarta · Kuala Lumpur",  to:"Dubai · Abu Dhabi · Doha",       label:"SE Asia → GCC"},
 ];
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
@@ -425,6 +479,104 @@ function TCol({items,dark,dur=55,rev=false}:{items:typeof TMS;dark:boolean;dur?:
   );
 }
 
+// ── Preview Lightbox — full scrollable template preview ───────────────────────
+function PreviewLightbox({cv,onClose,onEnquire,dark,lang}:{
+  cv:{id:number;name:string;ats:boolean};
+  onClose:()=>void;
+  onEnquire:()=>void;
+  dark:boolean;
+  lang:Lang;
+}){
+  const src = '/templates-new/cv' + cv.id + '.png';
+  const [loaded,setLoaded]=useState(false);
+  const [imgError,setImgError]=useState(false);
+  // Close on Escape key
+  useEffect(()=>{
+    const handler=(e:KeyboardEvent)=>{ if(e.key==="Escape") onClose(); };
+    window.addEventListener("keydown",handler);
+    document.body.style.overflow="hidden";
+    return()=>{ window.removeEventListener("keydown",handler); document.body.style.overflow=""; };
+  },[onClose]);
+  const badgeBg = cv.ats ? `${G}15` : "rgba(120,100,160,0.10)";
+  const badgeColor = cv.ats ? G : "#8A6AAA";
+  const badgeBorder = cv.ats ? `1px solid ${G}30` : "1px solid rgba(120,100,160,0.22)";
+  return(
+    <AnimatePresence>
+      <div className="fixed inset-0 z-[95] flex items-center justify-center p-4">
+        {/* Backdrop */}
+        <motion.div
+          className="absolute inset-0"
+          initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}
+          onClick={onClose}
+          style={{background:"rgba(5,4,3,0.92)",backdropFilter:"blur(20px)"}}
+        />
+        {/* Panel */}
+        <motion.div
+          className="relative flex flex-col w-full max-w-2xl rounded-2xl overflow-hidden"
+          style={{maxHeight:"calc(100svh - 2rem)",background:dark?"#0E0D0B":"#F8F4EF",border:`1px solid ${dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.08)"}`}}
+          initial={{opacity:0,y:24,scale:0.97}}
+          animate={{opacity:1,y:0,scale:1}}
+          exit={{opacity:0,y:16,scale:0.98}}
+          transition={{duration:0.45,ease:[0.16,1,0.3,1]}}
+        >
+          {/* Gold top line */}
+          <div className="h-px w-full shrink-0" style={{background:`linear-gradient(90deg,transparent,${G}80,transparent)`}}/>
+          {/* Header */}
+          <div className="flex items-center justify-between px-6 py-4 shrink-0" style={{borderBottom:`1px solid ${dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)"}`}}>
+            <div className="flex items-center gap-3 min-w-0">
+              <h3 className="text-sm font-semibold truncate" style={{color:dark?"#EDE8E0":"#1A1410",fontFamily:"sans-serif"}}>{cv.name}</h3>
+              <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium" style={{background:badgeBg,color:badgeColor,border:badgeBorder,fontFamily:"sans-serif"}}>
+                {cv.ats ? "ATS ✓" : "Design ✦"}
+              </span>
+            </div>
+            <button type="button" onClick={onClose} className="shrink-0 ml-3 opacity-25 hover:opacity-60 transition-opacity" style={{color:dark?"#EDE8E0":"#1A1410"}}>
+              <X size={15} strokeWidth={1.5}/>
+            </button>
+          </div>
+          {/* Scrollable image area */}
+          <div className="flex-1 overflow-y-auto overscroll-contain" style={{WebkitOverflowScrolling:"touch" as React.CSSProperties["WebkitOverflowScrolling"]}}>
+            {!imgError ? (
+              <div className="relative">
+                {!loaded && (
+                  <div className="flex items-center justify-center" style={{height:"420px"}}>
+                    <Loader2 size={20} color={G} className="animate-spin" strokeWidth={1.5}/>
+                  </div>
+                )}
+                <img
+                  src={src}
+                  alt={cv.name}
+                  className="w-full h-auto block"
+                  style={{display:loaded?"block":"none",objectFit:"contain"}}
+                  onLoad={()=>setLoaded(true)}
+                  onError={()=>setImgError(true)}
+                />
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center gap-4 py-20" style={{color:dark?"#706860":"#9A8E84"}}>
+                <FileText size={36} strokeWidth={1} style={{opacity:0.3}}/>
+                <p className="text-sm" style={{fontFamily:"sans-serif"}}>{cv.name}</p>
+              </div>
+            )}
+          </div>
+          {/* Footer CTA */}
+          <div className="px-6 py-4 shrink-0 flex gap-3" style={{borderTop:`1px solid ${dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)"}`}}>
+            <button type="button" onClick={()=>{onClose();onEnquire();}}
+              className="flex-1 flex items-center justify-center gap-2 h-11 rounded-full text-[11px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-85"
+              style={{background:G,color:INK,fontFamily:"sans-serif"}}>
+              <Mail size={12} strokeWidth={2}/>{tr("tplEnquire",lang)}
+            </button>
+            <button type="button" onClick={onClose}
+              className="px-5 h-11 rounded-full text-[11px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-70"
+              style={{border:`1px solid ${dark?"rgba(255,255,255,0.12)":"rgba(0,0,0,0.12)"}`,color:dark?"#706860":"#9A8E84",fontFamily:"sans-serif"}}>
+              {tr("tplClose",lang)}
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  );
+}
+
 // ── ROOT ───────────────────────────────────────────────────────────────────────
 export default function Home(){
   const [dark,setDark]=useState(()=>{ if(typeof window==="undefined") return true; const s=localStorage.getItem("z-theme"); return s!==null?s==="dark":true; });
@@ -433,6 +585,7 @@ export default function Home(){
   const [lang,setLang]=useState<Lang>("en");
   const [langOpen,setLangOpen]=useState(false);
   const [visible,setVisible]=useState(PAGE_SIZE);
+  const [preview,setPreview]=useState<{id:number;name:string;ats:boolean}|null>(null);
 
   const LG    = LANGS.find(l=>l.code===lang)!;
   const dir   = LG.dir;
@@ -465,10 +618,19 @@ export default function Home(){
       {/* ══ NAV ══════════════════════════════════════════════════════════════ */}
       <header className="fixed top-0 inset-x-0 z-50" style={{background:nav,borderBottom:`1px solid ${bdr}`,backdropFilter:"blur(24px)"}}>
         <div className="mx-auto flex max-w-6xl items-center justify-between px-8" style={{height:"60px"}}>
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold tracking-[0.12em] uppercase" style={{fontFamily:"'Georgia',serif",color:hi}}>Zenith</span>
-            <div className="h-3 w-px opacity-20" style={{background:hi}}/>
-            <span className="text-[11px] tracking-[0.12em] uppercase" style={{color:G,fontFamily:"sans-serif"}}>Dubai CV</span>
+          <div className="flex items-center">
+            <img
+              src="/images/logo.png"
+              alt="Zenith Dubai CV"
+              style={{
+                height:"36px",
+                width:"auto",
+                objectFit:"contain",
+                display:"block",
+                filter: dark ? "invert(1) brightness(1.8)" : "none",
+                transition:"filter 0.3s",
+              }}
+            />
           </div>
           <nav className="hidden md:flex items-center gap-9">
             {([["#services","navServices"],["#templates","navTemplates"],["#process","navMethod"],["#pricing","navPricing"],["#clients","navClients"]] as [string,string][]).map(([href,k])=>(
@@ -595,7 +757,12 @@ export default function Home(){
                   <motion.div key={cv.id} initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.55,ease:[0.16,1,0.3,1],delay:(i%PAGE_SIZE)*0.04}}>
                     <GlowCard color={G} className="rounded-2xl h-full">
                       <div className="rounded-2xl overflow-hidden h-full flex flex-col" style={{background:card,border:`1px solid ${bdr}`}}>
-                        <div className="relative overflow-hidden" style={{height:"280px",background:dark?"rgba(200,169,110,0.05)":"rgba(200,169,110,0.06)"}}>
+                        <div
+                          className="relative overflow-hidden cursor-pointer"
+                          style={{height:"280px",background:dark?"rgba(200,169,110,0.05)":"rgba(200,169,110,0.06)"}}
+                          onClick={()=>setPreview({id:cv.id,name:cv.name,ats:cv.ats})}
+                          title={tr("tplPreview",lang)}
+                        >
                           <img
                             key={lang + cv.id}
                             src={'/templates-new/cv' + cv.id + '.png'}
@@ -608,7 +775,7 @@ export default function Home(){
                               img.style.display = "none";
                               const p = img.parentElement;
                               if(p){
-                                p.style.cssText = "height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px";
+                                p.style.cssText = "height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;cursor:pointer";
                                 const icon = document.createElement("div");
                                 icon.textContent = "📄";
                                 icon.style.cssText = "font-size:36px;opacity:0.2";
@@ -622,17 +789,29 @@ export default function Home(){
                               }
                             }}
                           />
-                          <div className="absolute inset-0 flex items-end opacity-0 hover:opacity-100 transition-opacity duration-300" style={{background:"linear-gradient(to top,rgba(10,9,7,0.85) 0%,transparent 55%)"}}>
-                            <button type="button" onClick={()=>setModal(true)} className="w-full m-4 py-2.5 rounded-xl text-[11px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-85" style={{background:G,color:INK,fontFamily:"sans-serif"}}>{tr("tplGet",lang)}</button>
+                          {/* Hover overlay — Preview prompt */}
+                          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300" style={{background:"rgba(10,9,7,0.70)"}}>
+                            <div className="h-10 w-10 rounded-full flex items-center justify-center" style={{background:`${G}20`,border:`1px solid ${G}50`}}>
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={G} strokeWidth="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                            </div>
+                            <p className="text-[10px] font-medium tracking-[0.18em] uppercase" style={{color:G,fontFamily:"sans-serif"}}>{tr("tplPreview",lang)}</p>
                           </div>
                         </div>
                         <div className="p-5 flex-1 flex flex-col">
                           <div className="flex items-start justify-between gap-3 mb-2">
                             <h3 className="text-sm font-semibold leading-tight" style={{color:hi,fontFamily:"sans-serif"}}>{cv.name}</h3>
-                            <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:`${G}15`,color:G,border:`1px solid ${G}30`,fontFamily:"sans-serif"}}>{tr("tplAts",lang)}</span>
+                            {cv.ats
+                              ? <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:`${G}15`,color:G,border:`1px solid ${G}30`,fontFamily:"sans-serif"}}>{tr("tplAts",lang)}</span>
+                              : <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:"rgba(120,100,160,0.10)",color:"#8A6AAA",border:"1px solid rgba(120,100,160,0.22)",fontFamily:"sans-serif"}}>{tr("tplDesign",lang)}</span>
+                            }
                           </div>
                           <p className="text-[11px] mb-1" style={{color:sub,fontFamily:"sans-serif"}}>{cv.ind}</p>
-                          <p className="text-[10px]" style={{color:sub,fontFamily:"sans-serif",opacity:0.7}}>{cv.reg}</p>
+                          <p className="text-[10px] mb-3" style={{color:sub,fontFamily:"sans-serif",opacity:0.7}}>{cv.reg}</p>
+                          <button type="button" onClick={()=>setModal(true)}
+                            className="mt-auto w-full py-2 rounded-xl text-[10px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-80"
+                            style={{border:`1px solid ${G}35`,color:G,fontFamily:"sans-serif"}}>
+                            {tr("tplGet",lang)}
+                          </button>
                         </div>
                       </div>
                     </GlowCard>
@@ -663,7 +842,7 @@ export default function Home(){
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-20">
               <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4" style={{color:G,fontFamily:"sans-serif"}}>{tr("glbEyebrow",lang)}</p>
-              <h2 className="text-3xl sm:text-4xl font-normal tracking-tight leading-snug" style={{color:hi}}>{tr("glbH2a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("glbH2b",lang)}</em></h2>
+              <h2 className="text-3xl sm:text-4xl font-normal tracking-tight leading-snug" style={{color:hi,textDecoration:"none"}}>{tr("glbH2a",lang)}<br/><em style={{fontStyle:"italic",color:G,textDecoration:"none"}}>{tr("glbH2b",lang)}</em></h2>
               <p className="mt-6 text-base leading-[1.9] max-w-2xl" style={{color:sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("glbBody",lang)}</p>
             </Rise>
             <div className="grid sm:grid-cols-2 gap-5 mb-16">
@@ -824,12 +1003,19 @@ export default function Home(){
         <footer className="border-t py-10 px-8" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
-              <div className="flex items-center gap-3">
-                <span className="text-sm font-semibold tracking-[0.12em] uppercase" style={{fontFamily:"'Georgia',serif",color:hi}}>Zenith</span>
-                <div className="h-3 w-px opacity-15" style={{background:hi}}/>
-                <span className="text-[11px] tracking-[0.12em] uppercase" style={{color:G,fontFamily:"sans-serif"}}>Dubai CV</span>
-              </div>
-              <p className="mt-1 text-[11px]" style={{color:sub,fontFamily:"sans-serif"}}>{tr("tagline",lang)}</p>
+              <img
+                src="/images/logo.png"
+                alt="Zenith Dubai CV"
+                style={{
+                  height:"32px",
+                  width:"auto",
+                  objectFit:"contain",
+                  display:"block",
+                  filter: dark ? "invert(1) brightness(1.8)" : "none",
+                  transition:"filter 0.3s",
+                }}
+              />
+              <p className="mt-2 text-[11px]" style={{color:sub,fontFamily:"sans-serif"}}>{tr("tagline",lang)}</p>
             </div>
             <div className="flex items-center gap-6">
               <button type="button" onClick={()=>setModal(true)} className="text-[10px] tracking-[0.15em] uppercase opacity-35 hover:opacity-65 transition-opacity flex items-center gap-2" style={{color:hi,fontFamily:"sans-serif"}}><Mail size={11} strokeWidth={1.5}/>{EM}</button>
@@ -851,6 +1037,17 @@ export default function Home(){
           <path d="M9.35 8.9c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.1.8 2.6.7 3.1.6.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3-.1-.2-.2-.3-.5-.4l-1.9-.9c-.2-.1-.4-.1-.6.1-.2.2-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5l.4-.5c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.5l-.8-2Z" fill="white"/>
         </svg>
       </a>
+
+      {/* Preview Lightbox */}
+      {preview&&(
+        <PreviewLightbox
+          cv={preview}
+          onClose={()=>setPreview(null)}
+          onEnquire={()=>setModal(true)}
+          dark={dark}
+          lang={lang}
+        />
+      )}
 
       <Modal open={modal} onClose={()=>setModal(false)} dark={dark} lang={lang}/>
     </div>
