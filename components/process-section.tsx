@@ -2,7 +2,7 @@
 
 import React from "react";
 import { CreditCard, FileText, Send, CheckCircle } from "lucide-react";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { GlowingEffect } from "./ui/glowing-effect";
 
 // ── Brand tokens ──────────────────────────────────────────────────────────────
 const G = "#C8A96E";
