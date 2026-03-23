@@ -359,18 +359,18 @@ function SparklesCore({
     const rand = (a:number,b:number) => a + Math.random()*(b-a);
 
     const mkP = (initY=false): P => {
-      const tier = Math.random() < 0.55 ? 0 : Math.random() < 0.75 ? 1 : 2;
-      const ml = rand(150, 320) / speed;
+      const tier = Math.random() < 0.60 ? 0 : Math.random() < 0.80 ? 1 : 2;
+      const ml = rand(120, 280) / speed;
       // Spawn at TOP (y near 0), fall downward
       const yStart = initY ? rand(0, h) : rand(-2, h*0.12);
       return {
         x: rand(0, w),
         y: yStart,
-        sz: tier===0 ? rand(0.2,0.5) : tier===1 ? rand(0.4,0.8) : rand(0.7,1.2),
-        vy: (tier===0 ? rand(0.12,0.25) : tier===1 ? rand(0.20,0.38) : rand(0.30,0.50)) * speed,
-        vx: (Math.random()-0.5) * (tier===0 ? 0.08 : 0.14),
+        sz: tier===0 ? rand(0.1,0.3) : tier===1 ? rand(0.2,0.45) : rand(0.35,0.65),
+        vy: (tier===0 ? rand(0.10,0.22) : tier===1 ? rand(0.18,0.32) : rand(0.26,0.44)) * speed,
+        vx: (Math.random()-0.5) * (tier===0 ? 0.06 : 0.10),
         op: initY ? rand(0, 0.6) : 0,
-        opTarget: tier===0 ? rand(0.25,0.50) : tier===1 ? rand(0.50,0.80) : rand(0.80,1.00),
+        opTarget: tier===0 ? rand(0.30,0.60) : tier===1 ? rand(0.55,0.85) : rand(0.85,1.00),
         life: initY ? rand(0, ml*0.5) : 0,
         maxLife: ml,
         tier,
@@ -381,7 +381,7 @@ function SparklesCore({
       w = canvas.offsetWidth; h = canvas.offsetHeight;
       if (!w || !h) return;
       canvas.width = w; canvas.height = h;
-      const n = Math.round(Math.min(particleDensity, 200) * (w/520));
+      const n = Math.round(Math.min(particleDensity, 350) * (w/520));
       pts = Array.from({length:n}, ()=>mkP(true));
     };
 
@@ -449,25 +449,24 @@ function SparklesCore({
 
         } else if (p.tier===1) {
           // Mid — dot + soft halo
-          const g1=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*4);
-          g1.addColorStop(0,`rgba(${cr},${cg},${cb},${op*0.3})`);
+          const g1=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*3);
+          g1.addColorStop(0,`rgba(${cr},${cg},${cb},${op*0.25})`);
           g1.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*4,0,Math.PI*2);
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*3,0,Math.PI*2);
           ctx.fillStyle=g1; ctx.fill();
           ctx.beginPath(); ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);
           ctx.fillStyle=`rgba(${cr},${cg},${cb},${op})`; ctx.fill();
 
         } else {
-          // Bright star — large halo + warm white core (like Acme reference)
-          const g2=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*8);
-          g2.addColorStop(0,  `rgba(${cr},${cg},${cb},${op*0.5})`);
-          g2.addColorStop(0.3,`rgba(${cr},${cg},${cb},${op*0.15})`);
+          // Bright star — tight halo + warm white core
+          const g2=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*6);
+          g2.addColorStop(0,  `rgba(${cr},${cg},${cb},${op*0.45})`);
+          g2.addColorStop(0.4,`rgba(${cr},${cg},${cb},${op*0.12})`);
           g2.addColorStop(1,  `rgba(${cr},${cg},${cb},0)`);
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*8,0,Math.PI*2);
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*6,0,Math.PI*2);
           ctx.fillStyle=g2; ctx.fill();
-          // Warm white pinpoint core
-          ctx.shadowColor=`rgba(255,240,180,${op})`; ctx.shadowBlur=p.sz*5;
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*0.8,0,Math.PI*2);
+          ctx.shadowColor=`rgba(255,240,180,${op})`; ctx.shadowBlur=p.sz*4;
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*0.9,0,Math.PI*2);
           ctx.fillStyle=`rgba(255,245,200,${op})`; ctx.fill();
         }
         ctx.restore();
@@ -1074,7 +1073,7 @@ export default function Home(){
           }}>
             <SparklesCore
               particleColor={G}
-              particleDensity={180}
+              particleDensity={280}
               speed={0.8}
               className="absolute inset-0 w-full h-full"
             />
