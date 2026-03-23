@@ -351,9 +351,9 @@ function SparklesCore({
     // Layer 1 = mid:        medium, moderate, mid opacity
     // Layer 2 = foreground: slightly larger, soft glow, fewest
     const LAYERS = [
-      { ratio: 0.50, szMin: 0.3, szMax: 0.7,  vyMin: 0.08, vyMax: 0.18, opMax: 0.30, vxRange: 0.06, glowR: 3.0 },
-      { ratio: 0.35, szMin: 0.6, szMax: 1.1,  vyMin: 0.15, vyMax: 0.30, opMax: 0.55, vxRange: 0.10, glowR: 4.5 },
-      { ratio: 0.15, szMin: 1.0, szMax: 1.8,  vyMin: 0.22, vyMax: 0.40, opMax: 0.80, vxRange: 0.08, glowR: 7.0 },
+      { ratio: 0.50, szMin: 0.3, szMax: 0.7,  vyMin: 0.08, vyMax: 0.18, opMax: 0.50, vxRange: 0.06, glowR: 3.0 },
+      { ratio: 0.35, szMin: 0.6, szMax: 1.1,  vyMin: 0.15, vyMax: 0.30, opMax: 0.80, vxRange: 0.10, glowR: 5.5 },
+      { ratio: 0.15, szMin: 1.0, szMax: 1.8,  vyMin: 0.22, vyMax: 0.40, opMax: 1.00, vxRange: 0.08, glowR: 9.0 },
     ];
 
     type P = {
@@ -418,17 +418,18 @@ function SparklesCore({
     const draw = () => {
       if (!w || !h) { animId = requestAnimationFrame(draw); return; }
 
-      breatheT += 0.006; // slow breathing clock
-      const breathe = 0.75 + 0.25 * Math.sin(breatheT); // oscillates 0.75–1.0
+      breatheT += 0.006;
+      const breathe = 0.75 + 0.25 * Math.sin(breatheT);
 
       ctx.clearRect(0, 0, w, h);
 
-      // ── 1. Ambient glow bloom from bottom centre (breathes) ───────────────
-      const bloomR = w * 0.52 * breathe;
+      // ── 1. Ambient glow bloom — radial, additive via screen blend ────────
+      // With mix-blend-mode:screen, dark areas are transparent, only light shows
+      const bloomR = w * 0.55 * breathe;
       const bloom = ctx.createRadialGradient(w/2, h, 0, w/2, h, bloomR);
-      bloom.addColorStop(0,    `rgba(${cr},${cg},${cb},${0.20 * breathe})`);
-      bloom.addColorStop(0.40, `rgba(${cr},${cg},${cb},${0.07 * breathe})`);
-      bloom.addColorStop(0.75, `rgba(${cr},${cg},${cb},${0.02 * breathe})`);
+      bloom.addColorStop(0,    `rgba(${cr},${cg},${cb},${0.45 * breathe})`);
+      bloom.addColorStop(0.35, `rgba(${cr},${cg},${cb},${0.18 * breathe})`);
+      bloom.addColorStop(0.70, `rgba(${cr},${cg},${cb},${0.05 * breathe})`);
       bloom.addColorStop(1,    `rgba(${cr},${cg},${cb},0)`);
       ctx.fillStyle = bloom;
       ctx.fillRect(0, 0, w, h);
@@ -553,7 +554,11 @@ function SparklesCore({
     <canvas
       ref={canvasRef}
       className={className}
-      style={{ display:"block", background:"transparent" }}
+      style={{
+        display: "block",
+        background: "transparent",
+        mixBlendMode: "screen",
+      }}
     />
   );
 }
@@ -1128,19 +1133,23 @@ export default function Home(){
             </p>
           </Rise>
 
-          {/* ── Premium glow field — NOT inside Rise so canvas sizes correctly ── */}
-          <div className="relative w-full mx-auto mb-6" style={{height:"160px", maxWidth:"640px"}}>
+          {/* ── Premium glow field — screen blend, emanates from page ── */}
+          <div className="relative w-full mx-auto mb-6" style={{
+            height: "160px",
+            maxWidth: "640px",
+            isolation: "isolate",
+          }}>
             <SparklesCore
               particleColor={G}
               particleDensity={72}
               speed={0.75}
               className="absolute inset-0 w-full h-full"
             />
-            {/* Top fade — field dissolves upward into page seamlessly */}
+            {/* Top fade — field melts into page above */}
             <div className="absolute top-0 inset-x-0 pointer-events-none" style={{
-              height:"60%",
-              background:`linear-gradient(to bottom, ${dark?INK:ASH} 0%, ${dark?"rgba(10,9,7,0.7)":"rgba(245,241,235,0.7)"} 50%, transparent 100%)`,
-              zIndex:2,
+              height: "65%",
+              background: `linear-gradient(to bottom, ${dark?INK:ASH} 0%, transparent 100%)`,
+              zIndex: 2,
             }}/>
             {/* Side fades */}
             <div className="absolute inset-y-0 left-0 w-20 pointer-events-none" style={{background:`linear-gradient(to right, ${dark?INK:ASH}, transparent)`, zIndex:2}}/>
