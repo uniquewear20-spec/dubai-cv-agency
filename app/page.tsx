@@ -646,8 +646,12 @@ function TC({t,dark}:{t:typeof TMS[0];dark:boolean}){
   const ac=IH[t.ind]??G;
   return(
     <div className="flex flex-col p-5 mb-4 rounded-xl" style={{background:dark?"rgba(255,255,255,0.025)":"rgba(255,255,255,0.85)",border:`1px solid ${dark?"rgba(255,255,255,0.05)":"rgba(0,0,0,0.05)"}`}}>
-      {/* FIX: Improved testimonial text color for better readability in dark mode */}
-      <p className="text-[11px] leading-[1.85] italic mb-4" style={{color:dark?"#C4B8B0":"#524840"}}>"{t.text}"</p>
+      <p className="text-[11px] leading-[1.85] mb-4" style={{
+        color: dark ? "#B8AEA8" : "#524840",
+        fontFamily: "sans-serif",
+        fontStyle: "italic",
+        fontWeight: 400,
+      }}>"{t.text}"</p>
       <div className="pt-3 flex items-center gap-3" style={{borderTop:`1px solid ${dark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.06)"}`}}>
         <img src={t.img} alt={t.name} className="h-8 w-8 rounded-full object-cover" style={{filter:"grayscale(40%) contrast(1.05)"}}/>
         <div className="min-w-0 flex-1">
