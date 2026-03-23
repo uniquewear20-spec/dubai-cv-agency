@@ -361,7 +361,8 @@ function SparklesCore({
     const mkP = (initY=false): P => {
       const tier = Math.random() < 0.55 ? 0 : Math.random() < 0.75 ? 1 : 2;
       const ml = rand(150, 320) / speed;
-      const yStart = initY ? rand(0, h) : rand(h*0.88, h+2);
+      // Spawn at TOP (y near 0), fall downward
+      const yStart = initY ? rand(0, h) : rand(-2, h*0.12);
       return {
         x: rand(0, w),
         y: yStart,
@@ -380,7 +381,7 @@ function SparklesCore({
       w = canvas.offsetWidth; h = canvas.offsetHeight;
       if (!w || !h) return;
       canvas.width = w; canvas.height = h;
-      const n = Math.round(Math.min(particleDensity, 160) * (w/520));
+      const n = Math.round(Math.min(particleDensity, 200) * (w/520));
       pts = Array.from({length:n}, ()=>mkP(true));
     };
 
@@ -393,7 +394,7 @@ function SparklesCore({
       // Fully clear — no background drawn, canvas stays transparent
       ctx.clearRect(0, 0, w, h);
 
-      // ── Glowing source line at bottom ──────────────────────────────────
+      // ── Glowing source line at TOP (like Acme) ─────────────────────────
       const lg = ctx.createLinearGradient(w*0.05, 0, w*0.95, 0);
       lg.addColorStop(0,    `rgba(${cr},${cg},${cb},0)`);
       lg.addColorStop(0.15, `rgba(${cr},${cg},${cb},${0.35*br})`);
@@ -402,8 +403,8 @@ function SparklesCore({
       lg.addColorStop(1,    `rgba(${cr},${cg},${cb},0)`);
 
       ctx.save();
-      // Thick soft glow
-      ctx.beginPath(); ctx.moveTo(w*0.05, h-0.5); ctx.lineTo(w*0.95, h-0.5);
+      // Thick soft glow — at y=1 (top)
+      ctx.beginPath(); ctx.moveTo(w*0.05, 1); ctx.lineTo(w*0.95, 1);
       ctx.strokeStyle = lg; ctx.lineWidth=4;
       ctx.shadowColor=`rgba(${cr},${cg},${cb},0.9)`; ctx.shadowBlur=20*br;
       ctx.globalAlpha=0.4; ctx.stroke();
@@ -411,8 +412,8 @@ function SparklesCore({
       ctx.lineWidth=1; ctx.shadowBlur=8*br; ctx.globalAlpha=br; ctx.stroke();
       ctx.restore();
 
-      // ── Subtle radial bloom behind particles (very low opacity) ────────
-      const bloom = ctx.createRadialGradient(w/2, h, 0, w/2, h, w*0.48*br);
+      // ── Radial bloom from TOP centre ───────────────────────────────────
+      const bloom = ctx.createRadialGradient(w/2, 0, 0, w/2, 0, w*0.48*br);
       bloom.addColorStop(0,   `rgba(${cr},${cg},${cb},${0.10*br})`);
       bloom.addColorStop(0.5, `rgba(${cr},${cg},${cb},${0.03*br})`);
       bloom.addColorStop(1,   `rgba(${cr},${cg},${cb},0)`);
@@ -423,20 +424,19 @@ function SparklesCore({
       for (let i=0; i<pts.length; i++) {
         const p = pts[i];
         p.life++;
-        p.y -= p.vy;
-        p.x += p.vx + Math.sin(p.life*0.025 + p.x)*0.06; // subtle sway
+        p.y += p.vy;  // DOWNWARD
+        p.x += p.vx + Math.sin(p.life*0.025 + p.x)*0.06;
 
         const prog = p.life/p.maxLife;
-        // Envelope: fast in (10%), hold (10-65%), slow fade out (65-100%)
         const env = prog<0.10 ? prog/0.10
                   : prog<0.65 ? 1.0
                   : 1-(prog-0.65)/0.35;
         p.op += (p.opTarget*env*br - p.op)*0.06;
 
-        // Height fade: fully gone by top 15% of canvas
-        const hFade = Math.max(0, Math.min(1, p.y/(h*0.15)));
+        // Height fade: fully gone by bottom 15% of canvas
+        const hFade = Math.max(0, Math.min(1, (h - p.y)/(h*0.15)));
 
-        if (p.life>=p.maxLife || p.y<-4) { pts[i]=mkP(false); continue; }
+        if (p.life>=p.maxLife || p.y > h+4) { pts[i]=mkP(false); continue; }
 
         const op = Math.max(0, p.op*hFade);
         if (op<0.008) continue;
@@ -1064,17 +1064,17 @@ export default function Home(){
             </p>
           </Rise>
 
-          {/* ── Sparkles — transparent canvas + CSS mask fade, like Acme demo ── */}
+          {/* ── Sparkles — line at top, particles fall down like Acme ── */}
           <div className="relative w-full mx-auto mb-6" style={{
             height: "160px",
             maxWidth: "640px",
-            // CSS mask: fade top (particles dissolve up) + fade sides
-            WebkitMaskImage: "radial-gradient(ellipse 80% 100% at 50% 100%, black 20%, transparent 100%)",
-            maskImage: "radial-gradient(ellipse 80% 100% at 50% 100%, black 20%, transparent 100%)",
+            // Mask: fade at bottom so particles dissolve into page
+            WebkitMaskImage: "radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)",
+            maskImage: "radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)",
           }}>
             <SparklesCore
               particleColor={G}
-              particleDensity={130}
+              particleDensity={180}
               speed={0.8}
               className="absolute inset-0 w-full h-full"
             />
