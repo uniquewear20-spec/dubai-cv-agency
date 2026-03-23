@@ -12,9 +12,7 @@ const G = "#C8A96E", GL = "#E2C98E", INK = "#0A0907", ASH = "#F5F1EB";
 const WA = "971502879462", EM = "info@zenithdubaicv.com";
 
 const SUBS_EN = ["General Enquiry","Foundation Package","Growth Package","Executive Package"];
-// FIX: Corrected Arabic subject labels — natural, grammatically sound
 const SUBS_AR = ["استفسار عام","الباقة الأساسية","باقة النمو","الباقة التنفيذية"];
-// FIX: Polished French subject labels
 const SUBS_FR = ["Demande générale","Forfait Fondation","Forfait Croissance","Forfait Exécutif"];
 const PAGE_SIZE = 9;
 
@@ -22,7 +20,6 @@ const PAGE_SIZE = 9;
 type Lang = "en"|"ar"|"fr";
 const LANGS: {code:Lang;label:string;dir:"ltr"|"rtl";font:string}[] = [
   {code:"en", label:"EN",      dir:"ltr", font:"'Georgia','Times New Roman',serif"},
-  // FIX: Arabic uses Noto Naskh for better rendering at small sizes
   {code:"ar", label:"العربية", dir:"rtl", font:"'Noto Naskh Arabic','Tahoma','Arial',sans-serif"},
   {code:"fr", label:"FR",      dir:"ltr", font:"'Georgia','Times New Roman',serif"},
 ];
@@ -37,63 +34,65 @@ const TX: Record<string,Record<Lang,string>> = {
   navClients:   {en:"Outcomes",        ar:"النتائج",             fr:"Résultats"},
   enquire:      {en:"Request Review",  ar:"طلب مراجعة",          fr:"Demander une revue"},
   // Hero
-  eyebrow:      {en:"Private Executive Positioning · Dubai · Global",
-                 ar:"تموضع تنفيذي خاص · دبي · عالمياً",
-                 fr:"Positionnement Exécutif Privé · Dubaï · Global"},
-  h1a:          {en:"Position Yourself",
-                 ar:"ضع نفسك",
-                 fr:"Positionnez-vous"},
-  h1b:          {en:"Where the World Looks First.",
-                 ar:"حيث ينظر العالم أولاً.",
-                 fr:"Là où le monde regarde en premier."},
-  heroSub:      {en:"We architect the professional identities of ambitious leaders from the Gulf, Africa, and Asia — engineering narratives that command attention across the world's most competitive markets.",
-                 ar:"نُصمِّم الهويات المهنية للقادة الطموحين من الخليج وأفريقيا وآسيا — نبني سرديات تستأثر بالانتباه في أكثر أسواق العالم تنافسية.",
-                 fr:"Nous architecturons les identités professionnelles des leaders ambitieux du Golfe, d'Afrique et d'Asie — en forgeant des récits qui commandent l'attention sur les marchés les plus compétitifs au monde."},
+  eyebrow:      {en:"Executive Career Studio · Based in Dubai · Operating Globally",
+                 ar:"استوديو تطوير المسار المهني · مقره دبي · يخدم عالمياً",
+                 fr:"Studio Carrière Exécutif · Basé à Dubaï · Présence mondiale"},
+  h1a:          {en:"Your Experience Deserves",
+                 ar:"خبرتك تستحق",
+                 fr:"Votre parcours mérite"},
+  h1b:          {en:"a Global Stage.",
+                 ar:"مسرحاً عالمياً.",
+                 fr:"une scène mondiale."},
+  heroSub:      {en:"We elevate the careers of ambitious professionals from the Gulf, Africa, and Asia — crafting authoritative profiles that unlock opportunities across North America, Europe, and the Gulf countries.",
+                 ar:"نُعلي شأن مسيرات المحترفين الطموحين من الخليج وأفريقيا وآسيا — من خلال صياغة ملفات مهنية موثوقة تفتح آفاق الفرص في أمريكا الشمالية وأوروبا ودول الخليج.",
+                 fr:"Nous propulsons les carrières de professionnels ambitieux du Golfe, d'Afrique et d'Asie — en forgeant des profils de référence qui ouvrent les portes en Amérique du Nord, en Europe et dans les pays du Golfe."},
   ctaPrimary:   {en:"Request Private Review", ar:"طلب مراجعة خاصة", fr:"Demander une revue privée"},
   ctaSecondary: {en:"View Outcomes",          ar:"عرض النتائج",      fr:"Voir les résultats"},
+  viewPkg:      {en:"Explore Packages",  ar:"استعرض الباقات",   fr:"Voir les offres"},
+  beginEnq:     {en:"Speak to an Expert",ar:"تحدّث مع خبير",    fr:"Parler à un expert"},
   // Scarcity
   scarcity:     {en:"Limited intake. Application-based.",
                  ar:"قبول محدود. بناءً على الطلب.",
                  fr:"Admission limitée. Sur candidature."},
   // Authority metrics
-  mAts:    {en:"ATS Clearance Rate",    ar:"معدل اجتياز الفرز الآلي", fr:"Taux de passage ATS"},
-  mRate:   {en:"Interview Uplift",      ar:"زيادة المقابلات",          fr:"Hausse des entretiens"},
-  mDraft:  {en:"Delivery",              ar:"التسليم",                  fr:"Livraison"},
-  mTpl:    {en:"Nationalities Served",  ar:"جنسية تخدمها",            fr:"Nationalités servies"},
-  mClients:{en:"Leaders Positioned",   ar:"قائد موضَّع",              fr:"Leaders positionnés"},
+  mAts:    {en:"ATS Pass Rate",         ar:"معدل اجتياز الفرز الآلي", fr:"Taux de passage ATS"},
+  mRate:   {en:"Interview Uplift",      ar:"زيادة معدل المقابلات",    fr:"Hausse des entretiens"},
+  mDraft:  {en:"Delivery Time",         ar:"وقت التسليم",             fr:"Délai de livraison"},
+  mTpl:    {en:"Premium Templates",     ar:"قوالب متميزة",            fr:"Modèles premium"},
+  mClients:{en:"Leaders Positioned",    ar:"قائد موضَّع",             fr:"Leaders positionnés"},
   mMarkets:{en:"Global Markets",        ar:"سوق عالمي",               fr:"Marchés mondiaux"},
-  // Disciplines (was Services)
-  svcEyebrow:   {en:"Strategic Disciplines", ar:"التخصصات الاستراتيجية", fr:"Disciplines stratégiques"},
-  svcH2:        {en:"Three disciplines. One outcome: dominance.",
-                 ar:"ثلاثة تخصصات. نتيجة واحدة: السيطرة.",
-                 fr:"Trois disciplines. Un résultat : la dominance."},
-  s1t: {en:"Executive Profile Architecture", ar:"هندسة الملف التنفيذي", fr:"Architecture de profil exécutif"},
-  s1b: {en:"Your professional document is not a CV. It is a strategic instrument — reverse-engineered from the exact screening logic of the world's most selective employers, built to clear every automated filter and land on the right desk.",
-        ar:"ملفك المهني ليس مجرد سيرة ذاتية. إنه أداة استراتيجية — مُعاد هندستها وفق منطق الفرز الدقيق لأكثر أصحاب العمل انتقائية في العالم، مصممة لاجتياز كل فلتر تلقائي والوصول إلى المكتب الصحيح.",
-        fr:"Votre document professionnel n'est pas un CV. C'est un instrument stratégique — rétro-conçu à partir de la logique de sélection exacte des employeurs les plus sélectifs au monde, conçu pour franchir chaque filtre automatisé et atterrir sur le bon bureau."},
-  s1tag:{en:"Foundation of every engagement", ar:"أساس كل تعاقد", fr:"Fondation de chaque engagement"},
-  s2t: {en:"LinkedIn Authority Positioning", ar:"تموضع السلطة على لينكدإن", fr:"Positionnement d'autorité LinkedIn"},
-  s2b: {en:"Recruiters decide in seconds. Your LinkedIn presence must communicate authority, credibility, and strategic intent before a single word is read. We rebuild it from the ground up — for the market you are targeting.",
-        ar:"يتخذ المسؤولون قراراتهم في ثوانٍ. يجب أن يُعبّر حضورك على لينكدإن عن السلطة والمصداقية والنية الاستراتيجية قبل قراءة كلمة واحدة. نُعيد بناءه من الصفر — للسوق التي تستهدفها.",
-        fr:"Les recruteurs décident en secondes. Votre présence LinkedIn doit communiquer autorité, crédibilité et intention stratégique avant qu'un seul mot ne soit lu. Nous le reconstruisons de zéro — pour le marché que vous ciblez."},
-  s2tag:{en:"Director level and above", ar:"مستوى المدير فما فوق", fr:"Niveau directeur et au-dessus"},
-  s3t: {en:"Global Career Strategy",  ar:"استراتيجية المسار العالمي", fr:"Stratégie de carrière mondiale"},
-  s3b: {en:"Ambition without positioning is noise. We build the complete strategic framework — market selection, narrative architecture, dual-market calibration, and multi-language delivery — to ensure you are not just applying, but positioning.",
-        ar:"الطموح بدون تموضع مجرد ضوضاء. نبني الإطار الاستراتيجي الكامل — اختيار السوق، هندسة السرد، المعايرة لسوقين، والتسليم متعدد اللغات — لضمان أنك لا تُقدّم طلباً فحسب، بل تتموضع.",
-        fr:"L'ambition sans positionnement n'est que du bruit. Nous construisons le cadre stratégique complet — sélection du marché, architecture narrative, calibrage double marché et livraison multilingue — pour vous assurer que vous ne postulez pas, mais vous positionnez."},
-  s3tag:{en:"Included in Growth & Executive", ar:"مشمول في النمو والتنفيذية", fr:"Inclus dans Croissance et Exécutif"},
+  // Disciplines
+  svcEyebrow:   {en:"Our Disciplines",       ar:"تخصصاتنا",                  fr:"Nos disciplines"},
+  svcH2:        {en:"Three strategic disciplines. One decisive outcome.",
+                 ar:"ثلاثة تخصصات استراتيجية. نتيجة واحدة حاسمة.",
+                 fr:"Trois disciplines stratégiques. Un résultat décisif."},
+  s1t: {en:"ATS Architecture",   ar:"هندسة الفرز الآلي",  fr:"Architecture ATS"},
+  s1b: {en:"Every keyword, format, and structural decision is reverse-engineered from the ATS logic used by top employers across the GCC, Europe, and North America — guaranteeing your document clears automated screening before any recruiter sees it.",
+        ar:"كل كلمة مفتاحية وقرار تنسيقي مُعاد هندسته استناداً إلى منطق الفرز الآلي المعتمد لدى كبار أصحاب العمل في الخليج وأوروبا وأمريكا الشمالية — لضمان اجتياز وثيقتك كل مراحل الفرز التلقائي قبل وصولها إلى أي مسؤول توظيف.",
+        fr:"Chaque mot-clé, format et choix structurel est rétro-conçu à partir de la logique ATS utilisée par les meilleurs employeurs du CCG, d'Europe et d'Amérique du Nord — garantissant que votre document franchit le tri automatisé avant d'atteindre un recruteur."},
+  s1tag:{en:"Mandatory for every digital application",ar:"ضروري لكل تقديم إلكتروني",fr:"Indispensable pour toute candidature numérique"},
+  s2t: {en:"Executive-Grade Design",  ar:"التصميم التنفيذي الاحترافي", fr:"Design de niveau exécutif"},
+  s2b: {en:"Visual hierarchy, typographic authority, and strategic white space — calibrated to your seniority level and your target market. Your document should command attention the moment it is opened.",
+        ar:"هرمية بصرية ومرجعية طباعية ومسافات بيضاء استراتيجية — معايَرة وفق مستوى أقدميتك وسوقك المستهدف. وثيقتك يجب أن تستأثر بالانتباه فور فتحها.",
+        fr:"Hiérarchie visuelle, autorité typographique et espacement stratégique — calibrés selon votre niveau de séniorité et votre marché cible. Votre document doit capter l'attention dès son ouverture."},
+  s2tag:{en:"Recommended from Director level and above",ar:"موصى به من مستوى المدير فما فوق",fr:"Recommandé à partir du niveau Directeur"},
+  s3t: {en:"LinkedIn Profile Intelligence", ar:"تحسين ملف لينكدإن باحترافية", fr:"Optimisation de profil LinkedIn"},
+  s3b: {en:"Your LinkedIn profile, rebuilt with the keyword density, authority signals, and search-optimised narrative that places you in front of recruiters actively hiring across the GCC, Europe, APAC, and North America.",
+        ar:"يُعاد بناء ملفك على لينكدإن بكثافة الكلمات المفتاحية وإشارات المصداقية والسرد المُحسَّن للبحث — لتظهر أمام مسؤولي التوظيف النشطين في الخليج وأوروبا وآسيا وأمريكا الشمالية.",
+        fr:"Votre profil LinkedIn, reconstruit avec la densité de mots-clés, les signaux d'autorité et le récit optimisé qui vous placent devant les recruteurs actifs dans le CCG, l'Europe, l'APAC et l'Amérique du Nord."},
+  s3tag:{en:"Included in Growth & Executive packages",ar:"مشمول في باقتَي النمو والتنفيذية",fr:"Inclus dans les offres Croissance et Exécutif"},
   // Templates
-  tplEyebrow:  {en:"Document Portfolio",   ar:"محفظة الوثائق",      fr:"Portfolio documentaire"},
-  tplH2:       {en:"Engineered to perform.", ar:"مُصمَّمة للأداء.",  fr:"Conçus pour performer."},
-  tplDesc:     {en:"Every engagement unlocks our curated library of 500+ ATS-optimised documents — each precision-engineered for a specific industry, seniority level, and target hiring market.",
-                ar:"كل تعاقد يتيح الوصول إلى مكتبتنا المنتقاة التي تضم أكثر من 500 وثيقة محسّنة — كل منها مُصمَّمة بدقة لقطاع محدد ومستوى أقدمية وسوق توظيف مستهدف.",
-                fr:"Chaque engagement débloque notre bibliothèque de 500+ documents optimisés — chacun conçu avec précision pour un secteur, un niveau de séniorité et un marché cible spécifiques."},
-  tplBadge:    {en:"Market-Calibrated",ar:"مُعايَرة للسوق",fr:"Calibré au marché"},
-  tplGet:      {en:"Request This Format", ar:"طلب هذا النموذج",  fr:"Demander ce format"},
-  tplMore:     {en:"View More",           ar:"عرض المزيد",        fr:"Voir plus"},
-  tplDone:     {en:"Full 500+ library available upon engagement",
-                ar:"المكتبة الكاملة +500 متاحة عند التعاقد",
-                fr:"Bibliothèque complète 500+ disponible à l'engagement"},
+  tplEyebrow:  {en:"Template Library",    ar:"مكتبة القوالب",      fr:"Bibliothèque de modèles"},
+  tplH2:       {en:"Designed to perform.", ar:"مصممة للأداء.",     fr:"Conçus pour performer."},
+  tplDesc:     {en:"Every Zenith engagement unlocks access to our curated library of 500+ ATS-optimised templates — each engineered for a specific industry, seniority level, and target hiring market across Europe, North America, and the GCC.",
+                ar:"كل تعاقد مع Zenith يتيح الوصول إلى مكتبتنا المنتقاة التي تضم أكثر من 500 قالب مُحسَّن لأنظمة الفرز الآلي — صُمِّم كل منها لقطاع محدد ومستوى أقدمية وسوق توظيف مستهدف في أوروبا وأمريكا الشمالية والخليج.",
+                fr:"Chaque engagement avec Zenith débloque l'accès à notre bibliothèque de 500+ modèles optimisés ATS — chacun conçu pour un secteur, un niveau de séniorité et un marché cible spécifiques en Europe, Amérique du Nord et CCG."},
+  tplBadge:    {en:"Market-Specific Designs",ar:"تصاميم مخصصة لكل سوق",fr:"Designs par marché"},
+  tplGet:      {en:"Request This Template", ar:"اطلب هذا القالب",  fr:"Demander ce modèle"},
+  tplMore:     {en:"View More Designs",     ar:"عرض المزيد",        fr:"Voir plus"},
+  tplDone:     {en:"All showcase designs displayed · Contact us for full 500+ library access",
+                ar:"تم عرض جميع نماذج المعرض · تواصل معنا للوصول الكامل إلى مكتبة +500 قالب",
+                fr:"Tous les modèles affichés · Contactez-nous pour l'accès complet à la bibliothèque 500+"},
   // Exclusivity section
   exclEyebrow: {en:"Not for everyone.",     ar:"ليس للجميع.",       fr:"Pas pour tout le monde."},
   exclH2a:     {en:"We work with",          ar:"نعمل مع",           fr:"Nous travaillons avec"},
@@ -104,225 +103,23 @@ const TX: Record<string,Record<Lang,string>> = {
   exclPt1:     {en:"Application-based intake", ar:"قبول قائم على الطلب", fr:"Admission sur candidature"},
   exclPt2:     {en:"Limited monthly engagements", ar:"تعاقدات شهرية محدودة", fr:"Engagements mensuels limités"},
   exclPt3:     {en:"Senior-level professionals only", ar:"للمحترفين رفيعي المستوى فقط", fr:"Professionnels de niveau senior uniquement"},
-  // Process
-  procEyebrow: {en:"The Method",     ar:"المنهجية",           fr:"La méthode"},
-  procH2:      {en:"Precise. Rigorous. Delivered in 48 hours.",
-                ar:"دقيق. صارم. يُسلَّم في 48 ساعة.",
-                fr:"Précis. Rigoureux. Livré en 48 heures."},
-  p1t:{en:"Apply",          ar:"التقديم",    fr:"Candidater"},
-  p1b:{en:"Select your engagement tier and submit your application. Our intake is selective — we confirm alignment before work begins.",
-       ar:"اختر مستوى تعاقدك وقدّم طلبك. قبولنا انتقائي — نؤكد التوافق قبل البدء.",
-       fr:"Sélectionnez votre niveau d'engagement et soumettez votre candidature. Notre processus est sélectif — nous confirmons l'alignement avant de commencer."},
-  p2t:{en:"Intelligence Brief", ar:"الإحاطة الاستخباراتية", fr:"Brief stratégique"},
-  p2b:{en:"Share your career intelligence — background, target markets, objectives. The more precise your brief, the more lethal your document.",
-       ar:"شارك معلوماتك المهنية — الخلفية والأسواق المستهدفة والأهداف. كلما كانت إحاطتك أدق، كانت وثيقتك أكثر تأثيراً.",
-       fr:"Partagez votre intelligence de carrière — parcours, marchés cibles, objectifs. Plus votre brief est précis, plus votre document est percutant."},
-  p3t:{en:"Architecture",    ar:"الهندسة",    fr:"Architecture"},
-  p3b:{en:"Your dedicated senior strategist architects every element — ATS logic, visual authority, narrative positioning — in 48 hours.",
-       ar:"يُصمِّم استراتيجيك الأول المخصص كل عنصر — منطق الفرز الآلي، السلطة البصرية، التموضع السردي — في 48 ساعة.",
-       fr:"Votre stratège senior dédié architecture chaque élément — logique ATS, autorité visuelle, positionnement narratif — en 48 heures."},
-  p4t:{en:"Command",         ar:"السيطرة",    fr:"Maîtrise"},
-  p4b:{en:"Unlimited refinement until every word, every format decision, and every strategic nuance is exactly right. Nothing ships until it is perfect.",
-       ar:"صقل غير محدود حتى تكون كل كلمة وكل قرار تنسيقي وكل فارق استراتيجي دقيق صحيحاً تماماً. لا شيء يُسلَّم حتى يصبح مثالياً.",
-       fr:"Raffinement illimité jusqu'à ce que chaque mot, chaque décision de format et chaque nuance stratégique soit exactement juste. Rien n'est livré tant que ce n'est pas parfait."},
-  // Pricing
-  prcEyebrow:  {en:"Engagement Tiers",  ar:"مستويات التعاقد",    fr:"Niveaux d'engagement"},
-  prcH2:       {en:"Three tiers. One standard: uncompromising.",
-                ar:"ثلاثة مستويات. معيار واحد: لا تهاون.",
-                fr:"Trois niveaux. Un standard : sans compromis."},
-  prcNote:     {en:"Priced in UAE Dirhams. Processed securely.",
-                ar:"بالدرهم الإماراتي. معالجة آمنة.",
-                fr:"En dirhams émiratis. Traitement sécurisé."},
-  prcMostSel:  {en:"Most Selected",     ar:"الأكثر اختياراً",    fr:"Le plus choisi"},
-  prcBegin:    {en:"Begin Engagement",  ar:"ابدأ التعاقد",        fr:"Commencer"},
-  prcApplePay: {en:"Begin · Apple Pay", ar:"ابدأ · Apple Pay",   fr:"Commencer · Apple Pay"},
-  prcStripe:   {en:"Secured by Stripe", ar:"مؤمَّن بـ Stripe",   fr:"Sécurisé par Stripe"},
-  // Foundation
-  pF:    {en:"Foundation",   ar:"الأساسية",   fr:"Fondation"},
-  pFsub: {en:"Precision-built. ATS-ready. Results-focused.",ar:"مبني بدقة. جاهز للفرز. موجَّه للنتائج.",fr:"Construit avec précision. Prêt ATS. Axé résultats."},
-  pFi1:  {en:"ATS-engineered document, built to clear automated screening",
-          ar:"وثيقة مُهندَسة للفرز الآلي، مبنية لاجتيازه",
-          fr:"Document conçu ATS, construit pour franchir le tri automatisé"},
-  pFi2:  {en:"Precision cover letter aligned to your target market",
-          ar:"خطاب تغطية دقيق يتوافق مع سوقك المستهدف",
-          fr:"Lettre de motivation précise alignée sur votre marché cible"},
-  pFi3:  {en:"Executive photo enhancement via AI precision retouching",
-          ar:"تحسين الصورة التنفيذية عبر المعالجة الدقيقة بالذكاء الاصطناعي",
-          fr:"Amélioration photo exécutive par retouche IA de précision"},
-  pFi4:  {en:"Full access to 500+ market-calibrated document library",
-          ar:"وصول كامل لمكتبة +500 وثيقة مُعايَرة للسوق",
-          fr:"Accès complet à la bibliothèque de 500+ documents calibrés"},
-  // Growth
-  pG:    {en:"Growth",        ar:"النمو",      fr:"Croissance"},
-  pGsub: {en:"Multi-market. Complete. Career-defining.",
-          ar:"متعدد الأسواق. شامل. محوري في المسيرة.",
-          fr:"Multi-marché. Complet. Déterminant."},
-  pGi1:  {en:"ATS-engineered document with executive visual authority",
-          ar:"وثيقة مُهندَسة للفرز الآلي بسلطة بصرية تنفيذية",
-          fr:"Document ATS avec autorité visuelle exécutive"},
-  pGi2:  {en:"Full LinkedIn authority rebuild — recruiter-visibility optimised",
-          ar:"إعادة بناء كاملة لسلطة لينكدإن — محسّن لظهور المُوظِّفين",
-          fr:"Reconstruction complète LinkedIn — visibilité recruteur optimisée"},
-  pGi3:  {en:"Global career strategy framework tailored to your targets",
-          ar:"إطار استراتيجية المسار العالمي مُصمَّم وفق أهدافك",
-          fr:"Cadre de stratégie de carrière mondiale adapté à vos cibles"},
-  pGi4:  {en:"Full document suite in EN, FR, DE, AR, and ES",
-          ar:"مجموعة وثائق كاملة بالإنجليزية والفرنسية والألمانية والعربية والإسبانية",
-          fr:"Suite complète EN, FR, DE, AR et ES"},
-  pGi5:  {en:"Full access to 500+ market-calibrated document library",
-          ar:"وصول كامل لمكتبة +500 وثيقة مُعايَرة",
-          fr:"Accès complet bibliothèque 500+ documents calibrés"},
-  // Executive
-  pE:    {en:"Executive",     ar:"التنفيذية",  fr:"Exécutif"},
-  pEsub: {en:"White-glove. Strategic. Total.",
-          ar:"خدمة راقية. استراتيجية. شاملة.",
-          fr:"Blanc-gant. Stratégique. Total."},
-  pEi1:  {en:"All Growth tier deliverables included",
-          ar:"جميع مخرجات مستوى النمو مشمولة",
-          fr:"Tous les livrables du niveau Croissance inclus"},
-  pEi2:  {en:"60-minute private interview strategy session",
-          ar:"جلسة استراتيجية مقابلات خاصة مدتها 60 دقيقة",
-          fr:"Session privée de stratégie d'entretien de 60 minutes"},
-  pEi3:  {en:"Personal career narrative architecture session",
-          ar:"جلسة هندسة السرد المهني الشخصي",
-          fr:"Session d'architecture narrative de carrière personnelle"},
-  pEi4:  {en:"30-day priority access to your senior strategist",
-          ar:"وصول ذو أولوية لمدة 30 يوماً لاستراتيجيك الأول",
-          fr:"Accès prioritaire 30 jours à votre stratège senior"},
-  pEi5:  {en:"Full access to 500+ market-calibrated document library",
-          ar:"وصول كامل لمكتبة +500 وثيقة مُعايَرة",
-          fr:"Accès complet bibliothèque 500+ documents calibrés"},
-  // Testimonials
-  tmEyebrow:   {en:"Verified Outcomes",  ar:"نتائج موثّقة",       fr:"Résultats vérifiés"},
-  tmH2a:       {en:"Transformations,",   ar:"تحولات،",            fr:"Transformations,"},
-  tmH2b:       {en:"not testimonials.",  ar:"لا مجرد شهادات.",    fr:"pas des témoignages."},
-  tmStars:     {en:"5.0 · 7,000+ professionals positioned globally",
-                ar:"5.0 · أكثر من 7,000 محترف موضَّع عالمياً",
-                fr:"5.0 · Plus de 7 000 professionnels positionnés"},
-  // CTA final
-  ctaH2a:      {en:"You've built the experience.",  ar:"لقد بنيت الخبرة.",      fr:"Vous avez construit l'expérience."},
-  ctaH2b:      {en:"Now position it where it matters.", ar:"الآن ضعها حيث يهم.", fr:"Maintenant, positionnez-la là où ça compte."},
-  ctaBody:     {en:"7,000+ professionals from 40+ nationalities chose to stop applying and start positioning. Each made one deliberate decision that changed everything.",
-                ar:"اختار أكثر من 7,000 محترف من أكثر من 40 جنسية التوقف عن التقديم والبدء في التموضع. اتخذ كل منهم قراراً واحداً واعياً غيّر كل شيء.",
-                fr:"7 000+ professionnels de 40+ nationalités ont choisi d'arrêter de postuler et de commencer à se positionner. Chacun a pris une décision délibérée qui a tout changé."},
-  ctaFinalBtn: {en:"Begin Your Positioning", ar:"ابدأ تموضعك", fr:"Commencer votre positionnement"},
-  startWA:     {en:"Begin on WhatsApp",      ar:"ابدأ على واتساب",   fr:"Commencer sur WhatsApp"},
-  sendEnq:     {en:"Request Private Review", ar:"طلب مراجعة خاصة",  fr:"Demander une revue privée"},
-  // Footer
-  tagline:     {en:"Built for professionals who refuse average.",
-                ar:"مبني للمحترفين الذين يرفضون العادي.",
-                fr:"Conçu pour les professionnels qui refusent la médiocrité."},
-  footerWA:    {en:"WhatsApp",               ar:"واتساب",             fr:"WhatsApp"},
-  // Modal / form
-  frmEmail:    {en:"Your Email Address",     ar:"عنوان بريدك الإلكتروني",  fr:"Votre adresse e-mail"},
-  frmSubject:  {en:"Subject",               ar:"الموضوع",             fr:"Sujet"},
-  frmMessage:  {en:"Your Message",          ar:"رسالتك",              fr:"Votre message"},
-  frmAttach:   {en:"Attachments",           ar:"المرفقات",            fr:"Pièces jointes"},
-  frmOptional: {en:"— optional",            ar:"— اختياري",           fr:"— facultatif"},
-  frmPhoto:    {en:"Profile Photo",         ar:"صورة الملف الشخصي",   fr:"Photo de profil"},
-  frmPhotoH:   {en:"JPG · PNG · WEBP · max 5 MB", ar:"JPG · PNG · WEBP · الحد الأقصى 5 ميغابايت", fr:"JPG · PNG · WEBP · 5 Mo max"},
-  frmCv:       {en:"Current CV / Profile",  ar:"السيرة الذاتية الحالية",fr:"CV / Profil actuel"},
-  frmCvH:      {en:"PDF · DOC · DOCX · max 5 MB", ar:"PDF · DOC · DOCX · الحد الأقصى 5 ميغابايت", fr:"PDF · DOC · DOCX · 5 Mo max"},
-  frmDrop:     {en:"Click or drop file here", ar:"انقر أو اسحب الملف هنا", fr:"Cliquer ou déposer ici"},
-  frmSending:  {en:"Sending…",              ar:"جارٍ الإرسال…",       fr:"Envoi en cours…"},
-  frmRetry:    {en:"Retry",                 ar:"إعادة المحاولة",      fr:"Réessayer"},
-  frmReceived: {en:"Request received.",     ar:"تم استلام طلبك.",      fr:"Demande reçue."},
-  frmReply:    {en:"We will respond to",    ar:"سنرد على",            fr:"Nous répondrons à"},
-  frmHours:    {en:"within 24 hours.",      ar:"خلال 24 ساعة.",        fr:"dans les 24 heures."},
-  frmClose:    {en:"Close",                 ar:"إغلاق",               fr:"Fermer"},
-  frmErrNet:   {en:"Network error — reach us via WhatsApp.", ar:"خطأ في الشبكة — تواصل عبر واتساب.", fr:"Erreur réseau — contactez-nous via WhatsApp."},
-  frmErrGen:   {en:"Something went wrong. Please try again.", ar:"حدث خطأ ما. يرجى المحاولة مجدداً.", fr:"Une erreur s'est produite. Veuillez réessayer."},
-  // Template card badges
-  tplAts:      {en:"ATS ✓",                ar:"ATS ✓",               fr:"ATS ✓"},
-  tplDesign:   {en:"Design ✦",             ar:"تصميم ✦",             fr:"Design ✦"},
-  tplPreview:  {en:"Preview Document",     ar:"معاينة الوثيقة",      fr:"Aperçu du document"},
-  tplEnquire:  {en:"Request This Format",  ar:"طلب هذا النموذج",     fr:"Demander ce format"},
-  tplClose:    {en:"Close",                ar:"إغلاق",               fr:"Fermer"},
-  glbConnector:{en:"The world is our",     ar:"العالم هو",            fr:"Le monde est notre"},
-};
-  // Hero
-  eyebrow:      {en:"Executive Career Studio · Based in Dubai · Operating Globally",
-                 // FIX: More natural Arabic phrasing for the eyebrow
-                 ar:"استوديو تطوير المسار المهني · مقره دبي · يخدم عالمياً",
-                 fr:"Studio Carrière Exécutif · Basé à Dubaï · Présence mondiale"},
-  h1a:          {en:"Your Experience Deserves",
-                 ar:"خبرتك تستحق",
-                 // FIX: French heading — more natural word order
-                 fr:"Votre parcours mérite"},
-  h1b:          {en:"a Global Stage.",
-                 ar:"مسرحاً عالمياً.",
-                 fr:"une scène mondiale."},
-  heroSub:      {en:"We elevate the careers of ambitious professionals from the Gulf, Africa, and Asia — crafting authoritative profiles that unlock opportunities across North America, Europe, and the Gulf countries.",
-                 // FIX: Smoother Arabic phrasing
-                 ar:"نُعلي شأن مسيرات المحترفين الطموحين من الخليج وأفريقيا وآسيا — من خلال صياغة ملفات مهنية موثوقة تفتح آفاق الفرص في أمريكا الشمالية وأوروبا ودول الخليج.",
-                 // FIX: More fluid French
-                 fr:"Nous propulsons les carrières de professionnels ambitieux du Golfe, d'Afrique et d'Asie — en forgeant des profils de référence qui ouvrent les portes en Amérique du Nord, en Europe et dans les pays du Golfe."},
-  viewPkg:      {en:"Explore Packages",  ar:"استعرض الباقات",   fr:"Voir les offres"},
-  beginEnq:     {en:"Speak to an Expert",ar:"تحدّث مع خبير",    fr:"Parler à un expert"},
-  // Metrics
-  mAts:         {en:"ATS Pass Rate",   ar:"معدل اجتياز الفرز الآلي", fr:"Taux de passage ATS"},
-  mRate:        {en:"Interview Uplift", ar:"زيادة معدل المقابلات",fr:"Hausse des entretiens"},
-  mDraft:       {en:"Delivery Time",   ar:"وقت التسليم",         fr:"Délai de livraison"},
-  mTpl:         {en:"Premium Templates",ar:"قوالب متميزة",       fr:"Modèles premium"},
-  // Services
-  svcEyebrow:   {en:"Our Disciplines", ar:"تخصصاتنا",           fr:"Nos disciplines"},
-  svcH2:        {en:"Three strategic disciplines. One decisive outcome.",
-                 // FIX: Natural Arabic cadence
-                 ar:"ثلاثة تخصصات استراتيجية. نتيجة واحدة حاسمة.",
-                 fr:"Trois disciplines stratégiques. Un résultat décisif."},
-  s1t: {en:"ATS Architecture",   ar:"هندسة الفرز الآلي",  fr:"Architecture ATS"},
-  s1b: {en:"Every keyword, format, and structural decision is reverse-engineered from the ATS logic used by top employers across the GCC, Europe, and North America — guaranteeing your document clears automated screening before any recruiter sees it.",
-        // FIX: Corrected Arabic — "مُوظِّف" (employer/recruiter) retained, improved flow
-        ar:"كل كلمة مفتاحية وقرار تنسيقي مُعاد هندسته استناداً إلى منطق الفرز الآلي المعتمد لدى كبار أصحاب العمل في الخليج وأوروبا وأمريكا الشمالية — لضمان اجتياز وثيقتك كل مراحل الفرز التلقائي قبل وصولها إلى أي مسؤول توظيف.",
-        fr:"Chaque mot-clé, format et choix structurel est rétro-conçu à partir de la logique ATS utilisée par les meilleurs employeurs du CCG, d'Europe et d'Amérique du Nord — garantissant que votre document franchit le tri automatisé avant d'atteindre un recruteur."},
-  s1tag:{en:"Mandatory for every digital application",ar:"ضروري لكل تقديم إلكتروني",fr:"Indispensable pour toute candidature numérique"},
-  s2t: {en:"Executive-Grade Design",  ar:"التصميم التنفيذي الاحترافي", fr:"Design de niveau exécutif"},
-  s2b: {en:"Visual hierarchy, typographic authority, and strategic white space — calibrated to your seniority level and your target market. Your document should command attention the moment it is opened.",
-        // FIX: Smoother Arabic
-        ar:"هرمية بصرية ومرجعية طباعية ومسافات بيضاء استراتيجية — معايَرة وفق مستوى أقدميتك وسوقك المستهدف. وثيقتك يجب أن تستأثر بالانتباه فور فتحها.",
-        fr:"Hiérarchie visuelle, autorité typographique et espacement stratégique — calibrés selon votre niveau de séniorité et votre marché cible. Votre document doit capter l'attention dès son ouverture."},
-  s2tag:{en:"Recommended from Director level and above",ar:"موصى به من مستوى المدير فما فوق",fr:"Recommandé à partir du niveau Directeur"},
-  s3t: {en:"LinkedIn Profile Intelligence", ar:"تحسين ملف لينكدإن باحترافية", fr:"Optimisation de profil LinkedIn"},
-  s3b: {en:"Your LinkedIn profile, rebuilt with the keyword density, authority signals, and search-optimised narrative that places you in front of recruiters actively hiring across the GCC, Europe, APAC, and North America.",
-        // FIX: Natural Arabic phrasing, corrected gender agreement
-        ar:"يُعاد بناء ملفك على لينكدإن بكثافة الكلمات المفتاحية وإشارات المصداقية والسرد المُحسَّن للبحث — لتظهر أمام مسؤولي التوظيف النشطين في الخليج وأوروبا وآسيا وأمريكا الشمالية.",
-        fr:"Votre profil LinkedIn, reconstruit avec la densité de mots-clés, les signaux d'autorité et le récit optimisé qui vous placent devant les recruteurs actifs dans le CCG, l'Europe, l'APAC et l'Amérique du Nord."},
-  s3tag:{en:"Included in Growth & Executive packages",ar:"مشمول في باقتَي النمو والتنفيذية",fr:"Inclus dans les offres Croissance et Exécutif"},
-  // Templates
-  tplEyebrow:  {en:"Template Library",    ar:"مكتبة القوالب",      fr:"Bibliothèque de modèles"},
-  tplH2:       {en:"Designed to perform.", ar:"مصممة للأداء.",     fr:"Conçus pour performer."},
-  tplDesc:     {en:"Every Zenith engagement unlocks access to our curated library of 500+ ATS-optimised templates — each engineered for a specific industry, seniority level, and target hiring market across Europe, North America, and the GCC.",
-                // FIX: Corrected Arabic — natural and fluid
-                ar:"كل تعاقد مع Zenith يتيح الوصول إلى مكتبتنا المنتقاة التي تضم أكثر من 500 قالب مُحسَّن لأنظمة الفرز الآلي — صُمِّم كل منها لقطاع محدد ومستوى أقدمية وسوق توظيف مستهدف في أوروبا وأمريكا الشمالية والخليج.",
-                fr:"Chaque engagement avec Zenith débloque l'accès à notre bibliothèque de 500+ modèles optimisés ATS — chacun conçu pour un secteur, un niveau de séniorité et un marché cible spécifiques en Europe, Amérique du Nord et CCG."},
-  tplBadge:    {en:"Market-Specific Designs",ar:"تصاميم مخصصة لكل سوق",fr:"Designs par marché"},
-  tplGet:      {en:"Request This Template", ar:"اطلب هذا القالب",  fr:"Demander ce modèle"},
-  tplMore:     {en:"View More Designs",     ar:"عرض المزيد",        fr:"Voir plus"},
-  tplDone:     {en:"All showcase designs displayed · Contact us for full 500+ library access",
-                ar:"تم عرض جميع نماذج المعرض · تواصل معنا للوصول الكامل إلى مكتبة +500 قالب",
-                fr:"Tous les modèles affichés · Contactez-nous pour l'accès complet à la bibliothèque 500+"},
-  // Global
+  // Global section
   glbEyebrow:  {en:"Based in Dubai. Built for the World.",ar:"مقرنا دبي. خُبرتنا للعالم.",fr:"Basé à Dubaï. Construit pour le monde."},
   glbH2a:      {en:"Dubai is our base.",  ar:"دبي قاعدتنا.",    fr:"Dubaï est notre base."},
   glbH2b:      {en:"The world is our market.",ar:"العالم سوقنا.", fr:"Le monde, notre marché."},
   glbBody:     {en:"Headquartered in Dubai and active across every major hiring market, we work with professionals from the Gulf, Africa, and Asia to build career profiles that are truly competitive — calibrated to the exact standards of North America, Europe, and the wider Gulf region. We don't simply write CVs. We reframe your experience in the language that international decision-makers act on.",
-                // FIX: Corrected and polished Arabic body copy
                 ar:"مقرّنا دبي ونعمل عبر جميع أسواق التوظيف الرئيسية — نتعاون مع المحترفين في الخليج وأفريقيا وآسيا لبناء ملفات مهنية تنافسية حقاً، معايَرة وفق المعايير الدقيقة لأمريكا الشمالية وأوروبا ومنطقة الخليج الأوسع. لا نكتفي بكتابة السيَر الذاتية — بل نُعيد صياغة تجربتك بلغة يتحرك بها صانعو القرار الدوليون.",
-                // FIX: More fluent French
                 fr:"Basés à Dubaï et actifs sur tous les marchés d'emploi majeurs, nous accompagnons des professionnels du Golfe, d'Afrique et d'Asie pour construire des profils véritablement compétitifs — calibrés aux standards exacts de l'Amérique du Nord, de l'Europe et de la région du Golfe. Nous ne rédigeons pas simplement des CV. Nous reformulons votre expérience dans le langage qui convainc les décideurs internationaux."},
   glb1t: {en:"Market-Specific Calibration", ar:"معايرة لكل سوق",  fr:"Calibrage marché spécifique"},
   glb1b: {en:"Hiring norms differ fundamentally between the GCC, North America, and Europe — in tone, structure, length, and cultural expectation. We engineer each document to the precise standards of your target market, not a generic international template.",
-          // FIX: Tightened Arabic
           ar:"تختلف معايير التوظيف اختلافاً جوهرياً بين الخليج وأمريكا الشمالية وأوروبا — في النبرة والهيكل والطول والتوقعات الثقافية. نُصمِّم كل وثيقة وفق المعايير الدقيقة لسوقك المستهدف، لا وفق قالب دولي عام.",
           fr:"Les normes de recrutement diffèrent fondamentalement entre le CCG, l'Amérique du Nord et l'Europe — en ton, structure, longueur et attentes culturelles. Nous concevons chaque document selon les standards précis de votre marché cible, non un modèle générique."},
   glb2t: {en:"Dual-Market Positioning",ar:"التموضع في سوقين",    fr:"Positionnement double marché"},
   glb2b: {en:"A single engagement delivers documents simultaneously calibrated for two distinct geographic markets — giving you the flexibility to pursue the best opportunity, wherever it emerges.",
-          // FIX: Corrected Arabic syntax
           ar:"تعاقد واحد يُنتج وثائق معايَرة في آنٍ واحد لسوقين جغرافيين مختلفين — مما يمنحك المرونة الكاملة لملاحقة أفضل الفرص أينما أتيحت.",
           fr:"Un seul engagement produit des documents calibrés simultanément pour deux marchés géographiques distincts — vous offrant la flexibilité de saisir la meilleure opportunité, où qu'elle se présente."},
   glb3t: {en:"Multi-Language Delivery", ar:"التسليم متعدد اللغات", fr:"Livraison multilingue"},
   glb3b: {en:"Growth and Executive packages include full versions in English, French, German, Arabic, and Spanish — at no additional cost. No market is out of reach.",
-          // FIX: Grammatical correction
           ar:"تشمل باقتا النمو والتنفيذية نسخاً كاملة بالإنجليزية والفرنسية والألمانية والعربية والإسبانية — دون أي تكلفة إضافية. لا يوجد سوق بعيد المنال.",
           fr:"Les offres Croissance et Exécutif incluent des versions complètes en anglais, français, allemand, arabe et espagnol — sans frais supplémentaires. Aucun marché n'est hors de portée."},
   // Process
@@ -420,12 +217,13 @@ const TX: Record<string,Record<Lang,string>> = {
   tmStars:     {en:"5.0 · 7,000+ verified client engagements",
                 ar:"5.0 · أكثر من 7,000 تعاقد موثّق مع عملاء",
                 fr:"5.0 · Plus de 7 000 clients satisfaits"},
-  // CTA
+  // CTA final
   ctaH2a:      {en:"Your next role",         ar:"منصبك القادم",      fr:"Votre prochain poste"},
   ctaH2b:      {en:"starts here.",           ar:"يبدأ هنا.",          fr:"commence ici."},
   ctaBody:     {en:"Over 7,000 professionals from 40+ nationalities have used Zenith to secure roles across six continents. Each one made a deliberate decision to stop applying and start positioning.",
                 ar:"استعان أكثر من 7,000 محترف من أكثر من 40 جنسية بـ Zenith لتأمين مناصب عبر ستة قارات. اتخذ كل واحد منهم قراراً واعياً بالتوقف عن التقديم العشوائي والبدء في التموضع الاستراتيجي.",
                 fr:"Plus de 7 000 professionnels de plus de 40 nationalités ont utilisé Zenith pour décrocher des postes sur six continents. Chacun a pris la décision délibérée d'arrêter de postuler et de commencer à se positionner."},
+  ctaFinalBtn: {en:"Begin Your Positioning", ar:"ابدأ تموضعك", fr:"Commencer votre positionnement"},
   startWA:     {en:"Start on WhatsApp",      ar:"ابدأ على واتساب",   fr:"Démarrer sur WhatsApp"},
   sendEnq:     {en:"Get Your Profile Reviewed", ar:"احصل على مراجعة ملفك", fr:"Faire évaluer votre profil"},
   // Footer
@@ -525,7 +323,7 @@ const ROUTES = [
 const wl = (m:string) => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
 const fb = (b:number) => b<1024?`${b}B`:b<1048576?`${(b/1024).toFixed(1)}KB`:`${(b/1048576).toFixed(1)}MB`;
 
-// ── SparklesCore — matches Acme demo: tiny particles, no bg, CSS masked ──────
+// ── SparklesCore ──────────────────────────────────────────────────────────────
 function SparklesCore({
   className, particleColor="#C8A96E", particleDensity=120, speed=1,
 }:{
@@ -538,7 +336,6 @@ function SparklesCore({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Use alpha:true explicitly so canvas is truly transparent
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
@@ -556,7 +353,7 @@ function SparklesCore({
       vy:number; vx:number;
       op:number; opTarget:number;
       life:number; maxLife:number;
-      tier:number; // 0=bg dust, 1=mid, 2=bright star
+      tier:number;
     };
 
     let pts: P[] = [];
@@ -565,7 +362,6 @@ function SparklesCore({
     const mkP = (initY=false): P => {
       const tier = Math.random() < 0.60 ? 0 : Math.random() < 0.80 ? 1 : 2;
       const ml = rand(120, 280) / speed;
-      // Spawn at TOP (y near 0), fall downward
       const yStart = initY ? rand(0, h) : rand(-2, h*0.12);
       return {
         x: rand(0, w),
@@ -595,10 +391,8 @@ function SparklesCore({
       breatheT += 0.005;
       const br = 0.78 + 0.22*Math.sin(breatheT);
 
-      // Fully clear — no background drawn, canvas stays transparent
       ctx.clearRect(0, 0, w, h);
 
-      // ── Glowing source line at TOP (like Acme) ─────────────────────────
       const lg = ctx.createLinearGradient(w*0.05, 0, w*0.95, 0);
       lg.addColorStop(0,    `rgba(${cr},${cg},${cb},0)`);
       lg.addColorStop(0.15, `rgba(${cr},${cg},${cb},${0.35*br})`);
@@ -607,16 +401,13 @@ function SparklesCore({
       lg.addColorStop(1,    `rgba(${cr},${cg},${cb},0)`);
 
       ctx.save();
-      // Thick soft glow — at y=1 (top)
       ctx.beginPath(); ctx.moveTo(w*0.05, 1); ctx.lineTo(w*0.95, 1);
       ctx.strokeStyle = lg; ctx.lineWidth=4;
       ctx.shadowColor=`rgba(${cr},${cg},${cb},0.9)`; ctx.shadowBlur=20*br;
       ctx.globalAlpha=0.4; ctx.stroke();
-      // Crisp bright core line
       ctx.lineWidth=1; ctx.shadowBlur=8*br; ctx.globalAlpha=br; ctx.stroke();
       ctx.restore();
 
-      // ── Radial bloom from TOP centre ───────────────────────────────────
       const bloom = ctx.createRadialGradient(w/2, 0, 0, w/2, 0, w*0.48*br);
       bloom.addColorStop(0,   `rgba(${cr},${cg},${cb},${0.10*br})`);
       bloom.addColorStop(0.5, `rgba(${cr},${cg},${cb},${0.03*br})`);
@@ -624,11 +415,10 @@ function SparklesCore({
       ctx.fillStyle = bloom;
       ctx.fillRect(0, 0, w, h);
 
-      // ── Particles ──────────────────────────────────────────────────────
       for (let i=0; i<pts.length; i++) {
         const p = pts[i];
         p.life++;
-        p.y += p.vy;  // DOWNWARD
+        p.y += p.vy;
         p.x += p.vx + Math.sin(p.life*0.025 + p.x)*0.06;
 
         const prog = p.life/p.maxLife;
@@ -637,7 +427,6 @@ function SparklesCore({
                   : 1-(prog-0.65)/0.35;
         p.op += (p.opTarget*env*br - p.op)*0.06;
 
-        // Height fade: fully gone by bottom 15% of canvas
         const hFade = Math.max(0, Math.min(1, (h - p.y)/(h*0.15)));
 
         if (p.life>=p.maxLife || p.y > h+4) { pts[i]=mkP(false); continue; }
@@ -647,12 +436,9 @@ function SparklesCore({
 
         ctx.save();
         if (p.tier===0) {
-          // Tiny dust — just a dot
           ctx.beginPath(); ctx.arc(p.x, p.y, p.sz, 0, Math.PI*2);
           ctx.fillStyle=`rgba(${cr},${cg},${cb},${op})`; ctx.fill();
-
         } else if (p.tier===1) {
-          // Mid — dot + soft halo
           const g1=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*3);
           g1.addColorStop(0,`rgba(${cr},${cg},${cb},${op*0.25})`);
           g1.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);
@@ -660,9 +446,7 @@ function SparklesCore({
           ctx.fillStyle=g1; ctx.fill();
           ctx.beginPath(); ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);
           ctx.fillStyle=`rgba(${cr},${cg},${cb},${op})`; ctx.fill();
-
         } else {
-          // Bright star — tight halo + warm white core
           const g2=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*6);
           g2.addColorStop(0,  `rgba(${cr},${cg},${cb},${op*0.45})`);
           g2.addColorStop(0.4,`rgba(${cr},${cg},${cb},${op*0.12})`);
@@ -855,7 +639,7 @@ function TC({t,dark}:{t:typeof TMS[0];dark:boolean}){
     <div className="flex flex-col p-5 mb-4 rounded-xl" style={{
       background: dark?"rgba(255,255,255,0.025)":"rgba(255,255,255,0.85)",
       border: `1px solid ${dark?"rgba(255,255,255,0.05)":"rgba(0,0,0,0.05)"}`,
-      color: quoteColor, // reset color for all children
+      color: quoteColor,
       fontFamily: "sans-serif",
     }}>
       <p style={{
@@ -1019,7 +803,6 @@ export default function Home(){
     ? ["brightness(1.08)","drop-shadow(0 0 8px rgba(212,175,55,0.15))","drop-shadow(0 2px 6px rgba(0,0,0,0.50))"].join(" ")
     : "brightness(0) saturate(0) contrast(1)";
 
-  // Authority numbers
   const AUTHORITY = [
     {n:"7,000+", k:tr("mClients",lang)},
     {n:"40+",    k:tr("mMarkets",lang)},
@@ -1111,7 +894,6 @@ export default function Home(){
         {/* ══ HERO ══════════════════════════════════════════════════════════ */}
         <section className="relative min-h-[96vh] flex flex-col items-center justify-center px-5 sm:px-8 text-center overflow-hidden">
 
-          {/* Scarcity badge — top */}
           <Rise d={0.15} y={16}>
             <div className="inline-flex items-center gap-2 mb-10 px-4 py-2 rounded-full" style={{border:`1px solid ${G}30`,background:dark?`${G}08`:`${G}06`}}>
               <div className="h-1.5 w-1.5 rounded-full animate-pulse" style={{background:G}}/>
@@ -1416,7 +1198,6 @@ export default function Home(){
         <section className="py-40 px-5 sm:px-8 border-t text-center" style={{borderColor:bdr}}>
           <Rise>
             <div className="mx-auto max-w-2xl">
-              {/* Gold line */}
               <div className="h-px w-12 mx-auto mb-16" style={{background:`linear-gradient(to right, transparent, ${G}, transparent)`,boxShadow:`0 0 12px ${G}60`}}/>
               <h2 className="text-3xl sm:text-[2.6rem] font-normal tracking-tight leading-[1.15] mb-6" style={{color:hi}}>
                 {tr("ctaH2a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("ctaH2b",lang)}</em>
@@ -1434,7 +1215,6 @@ export default function Home(){
                   {tr("startWA",lang)}
                 </a>
               </div>
-              {/* Footer statement */}
               <p className="mt-16 text-[10px] tracking-[0.28em] uppercase" style={{color:dark?"rgba(200,169,110,0.25)":"rgba(26,20,16,0.30)",fontFamily:"sans-serif"}}>{tr("tagline",lang)}</p>
             </div>
           </Rise>
