@@ -30,12 +30,216 @@ const LANGS: {code:Lang;label:string;dir:"ltr"|"rtl";font:string}[] = [
 // ── Full translation dictionary ────────────────────────────────────────────────
 const TX: Record<string,Record<Lang,string>> = {
   // Nav
-  navServices:  {en:"Expertise",       ar:"خدماتنا",            fr:"Expertise"},
-  navTemplates: {en:"Templates",       ar:"القوالب",            fr:"Modèles"},
-  navMethod:    {en:"Process",         ar:"المنهجية",           fr:"Processus"},
-  navPricing:   {en:"Investment",      ar:"الاستثمار",          fr:"Tarifs"},
-  navClients:   {en:"Results",         ar:"النتائج",            fr:"Résultats"},
-  enquire:      {en:"Get Started",     ar:"ابدأ الآن",          fr:"Démarrer"},
+  navServices:  {en:"Disciplines",     ar:"تخصصاتنا",            fr:"Disciplines"},
+  navTemplates: {en:"Portfolio",       ar:"المحفظة",             fr:"Portfolio"},
+  navMethod:    {en:"Method",          ar:"المنهجية",            fr:"Méthode"},
+  navPricing:   {en:"Investment",      ar:"الاستثمار",           fr:"Investissement"},
+  navClients:   {en:"Outcomes",        ar:"النتائج",             fr:"Résultats"},
+  enquire:      {en:"Request Review",  ar:"طلب مراجعة",          fr:"Demander une revue"},
+  // Hero
+  eyebrow:      {en:"Private Executive Positioning · Dubai · Global",
+                 ar:"تموضع تنفيذي خاص · دبي · عالمياً",
+                 fr:"Positionnement Exécutif Privé · Dubaï · Global"},
+  h1a:          {en:"Position Yourself",
+                 ar:"ضع نفسك",
+                 fr:"Positionnez-vous"},
+  h1b:          {en:"Where the World Looks First.",
+                 ar:"حيث ينظر العالم أولاً.",
+                 fr:"Là où le monde regarde en premier."},
+  heroSub:      {en:"We architect the professional identities of ambitious leaders from the Gulf, Africa, and Asia — engineering narratives that command attention across the world's most competitive markets.",
+                 ar:"نُصمِّم الهويات المهنية للقادة الطموحين من الخليج وأفريقيا وآسيا — نبني سرديات تستأثر بالانتباه في أكثر أسواق العالم تنافسية.",
+                 fr:"Nous architecturons les identités professionnelles des leaders ambitieux du Golfe, d'Afrique et d'Asie — en forgeant des récits qui commandent l'attention sur les marchés les plus compétitifs au monde."},
+  ctaPrimary:   {en:"Request Private Review", ar:"طلب مراجعة خاصة", fr:"Demander une revue privée"},
+  ctaSecondary: {en:"View Outcomes",          ar:"عرض النتائج",      fr:"Voir les résultats"},
+  // Scarcity
+  scarcity:     {en:"Limited intake. Application-based.",
+                 ar:"قبول محدود. بناءً على الطلب.",
+                 fr:"Admission limitée. Sur candidature."},
+  // Authority metrics
+  mAts:    {en:"ATS Clearance Rate",    ar:"معدل اجتياز الفرز الآلي", fr:"Taux de passage ATS"},
+  mRate:   {en:"Interview Uplift",      ar:"زيادة المقابلات",          fr:"Hausse des entretiens"},
+  mDraft:  {en:"Delivery",              ar:"التسليم",                  fr:"Livraison"},
+  mTpl:    {en:"Nationalities Served",  ar:"جنسية تخدمها",            fr:"Nationalités servies"},
+  mClients:{en:"Leaders Positioned",   ar:"قائد موضَّع",              fr:"Leaders positionnés"},
+  mMarkets:{en:"Global Markets",        ar:"سوق عالمي",               fr:"Marchés mondiaux"},
+  // Disciplines (was Services)
+  svcEyebrow:   {en:"Strategic Disciplines", ar:"التخصصات الاستراتيجية", fr:"Disciplines stratégiques"},
+  svcH2:        {en:"Three disciplines. One outcome: dominance.",
+                 ar:"ثلاثة تخصصات. نتيجة واحدة: السيطرة.",
+                 fr:"Trois disciplines. Un résultat : la dominance."},
+  s1t: {en:"Executive Profile Architecture", ar:"هندسة الملف التنفيذي", fr:"Architecture de profil exécutif"},
+  s1b: {en:"Your professional document is not a CV. It is a strategic instrument — reverse-engineered from the exact screening logic of the world's most selective employers, built to clear every automated filter and land on the right desk.",
+        ar:"ملفك المهني ليس مجرد سيرة ذاتية. إنه أداة استراتيجية — مُعاد هندستها وفق منطق الفرز الدقيق لأكثر أصحاب العمل انتقائية في العالم، مصممة لاجتياز كل فلتر تلقائي والوصول إلى المكتب الصحيح.",
+        fr:"Votre document professionnel n'est pas un CV. C'est un instrument stratégique — rétro-conçu à partir de la logique de sélection exacte des employeurs les plus sélectifs au monde, conçu pour franchir chaque filtre automatisé et atterrir sur le bon bureau."},
+  s1tag:{en:"Foundation of every engagement", ar:"أساس كل تعاقد", fr:"Fondation de chaque engagement"},
+  s2t: {en:"LinkedIn Authority Positioning", ar:"تموضع السلطة على لينكدإن", fr:"Positionnement d'autorité LinkedIn"},
+  s2b: {en:"Recruiters decide in seconds. Your LinkedIn presence must communicate authority, credibility, and strategic intent before a single word is read. We rebuild it from the ground up — for the market you are targeting.",
+        ar:"يتخذ المسؤولون قراراتهم في ثوانٍ. يجب أن يُعبّر حضورك على لينكدإن عن السلطة والمصداقية والنية الاستراتيجية قبل قراءة كلمة واحدة. نُعيد بناءه من الصفر — للسوق التي تستهدفها.",
+        fr:"Les recruteurs décident en secondes. Votre présence LinkedIn doit communiquer autorité, crédibilité et intention stratégique avant qu'un seul mot ne soit lu. Nous le reconstruisons de zéro — pour le marché que vous ciblez."},
+  s2tag:{en:"Director level and above", ar:"مستوى المدير فما فوق", fr:"Niveau directeur et au-dessus"},
+  s3t: {en:"Global Career Strategy",  ar:"استراتيجية المسار العالمي", fr:"Stratégie de carrière mondiale"},
+  s3b: {en:"Ambition without positioning is noise. We build the complete strategic framework — market selection, narrative architecture, dual-market calibration, and multi-language delivery — to ensure you are not just applying, but positioning.",
+        ar:"الطموح بدون تموضع مجرد ضوضاء. نبني الإطار الاستراتيجي الكامل — اختيار السوق، هندسة السرد، المعايرة لسوقين، والتسليم متعدد اللغات — لضمان أنك لا تُقدّم طلباً فحسب، بل تتموضع.",
+        fr:"L'ambition sans positionnement n'est que du bruit. Nous construisons le cadre stratégique complet — sélection du marché, architecture narrative, calibrage double marché et livraison multilingue — pour vous assurer que vous ne postulez pas, mais vous positionnez."},
+  s3tag:{en:"Included in Growth & Executive", ar:"مشمول في النمو والتنفيذية", fr:"Inclus dans Croissance et Exécutif"},
+  // Templates
+  tplEyebrow:  {en:"Document Portfolio",   ar:"محفظة الوثائق",      fr:"Portfolio documentaire"},
+  tplH2:       {en:"Engineered to perform.", ar:"مُصمَّمة للأداء.",  fr:"Conçus pour performer."},
+  tplDesc:     {en:"Every engagement unlocks our curated library of 500+ ATS-optimised documents — each precision-engineered for a specific industry, seniority level, and target hiring market.",
+                ar:"كل تعاقد يتيح الوصول إلى مكتبتنا المنتقاة التي تضم أكثر من 500 وثيقة محسّنة — كل منها مُصمَّمة بدقة لقطاع محدد ومستوى أقدمية وسوق توظيف مستهدف.",
+                fr:"Chaque engagement débloque notre bibliothèque de 500+ documents optimisés — chacun conçu avec précision pour un secteur, un niveau de séniorité et un marché cible spécifiques."},
+  tplBadge:    {en:"Market-Calibrated",ar:"مُعايَرة للسوق",fr:"Calibré au marché"},
+  tplGet:      {en:"Request This Format", ar:"طلب هذا النموذج",  fr:"Demander ce format"},
+  tplMore:     {en:"View More",           ar:"عرض المزيد",        fr:"Voir plus"},
+  tplDone:     {en:"Full 500+ library available upon engagement",
+                ar:"المكتبة الكاملة +500 متاحة عند التعاقد",
+                fr:"Bibliothèque complète 500+ disponible à l'engagement"},
+  // Exclusivity section
+  exclEyebrow: {en:"Not for everyone.",     ar:"ليس للجميع.",       fr:"Pas pour tout le monde."},
+  exclH2a:     {en:"We work with",          ar:"نعمل مع",           fr:"Nous travaillons avec"},
+  exclH2b:     {en:"those who intend to win.",ar:"من يعزم على الفوز.",fr:"ceux qui ont l'intention de gagner."},
+  exclBody:    {en:"Zenith operates on a limited-intake basis. We do not serve everyone — we serve professionals who are serious about their global trajectory and willing to invest in it. Our process is selective because results demand it.",
+                ar:"تعمل Zenith على أساس القبول المحدود. لا نخدم الجميع — نخدم المحترفين الجادين في مسارهم العالمي والمستعدين للاستثمار فيه. عمليتنا انتقائية لأن النتائج تستوجب ذلك.",
+                fr:"Zenith fonctionne sur une base d'admission limitée. Nous ne servons pas tout le monde — nous servons les professionnels qui prennent au sérieux leur trajectoire mondiale et sont prêts à y investir. Notre processus est sélectif parce que les résultats l'exigent."},
+  exclPt1:     {en:"Application-based intake", ar:"قبول قائم على الطلب", fr:"Admission sur candidature"},
+  exclPt2:     {en:"Limited monthly engagements", ar:"تعاقدات شهرية محدودة", fr:"Engagements mensuels limités"},
+  exclPt3:     {en:"Senior-level professionals only", ar:"للمحترفين رفيعي المستوى فقط", fr:"Professionnels de niveau senior uniquement"},
+  // Process
+  procEyebrow: {en:"The Method",     ar:"المنهجية",           fr:"La méthode"},
+  procH2:      {en:"Precise. Rigorous. Delivered in 48 hours.",
+                ar:"دقيق. صارم. يُسلَّم في 48 ساعة.",
+                fr:"Précis. Rigoureux. Livré en 48 heures."},
+  p1t:{en:"Apply",          ar:"التقديم",    fr:"Candidater"},
+  p1b:{en:"Select your engagement tier and submit your application. Our intake is selective — we confirm alignment before work begins.",
+       ar:"اختر مستوى تعاقدك وقدّم طلبك. قبولنا انتقائي — نؤكد التوافق قبل البدء.",
+       fr:"Sélectionnez votre niveau d'engagement et soumettez votre candidature. Notre processus est sélectif — nous confirmons l'alignement avant de commencer."},
+  p2t:{en:"Intelligence Brief", ar:"الإحاطة الاستخباراتية", fr:"Brief stratégique"},
+  p2b:{en:"Share your career intelligence — background, target markets, objectives. The more precise your brief, the more lethal your document.",
+       ar:"شارك معلوماتك المهنية — الخلفية والأسواق المستهدفة والأهداف. كلما كانت إحاطتك أدق، كانت وثيقتك أكثر تأثيراً.",
+       fr:"Partagez votre intelligence de carrière — parcours, marchés cibles, objectifs. Plus votre brief est précis, plus votre document est percutant."},
+  p3t:{en:"Architecture",    ar:"الهندسة",    fr:"Architecture"},
+  p3b:{en:"Your dedicated senior strategist architects every element — ATS logic, visual authority, narrative positioning — in 48 hours.",
+       ar:"يُصمِّم استراتيجيك الأول المخصص كل عنصر — منطق الفرز الآلي، السلطة البصرية، التموضع السردي — في 48 ساعة.",
+       fr:"Votre stratège senior dédié architecture chaque élément — logique ATS, autorité visuelle, positionnement narratif — en 48 heures."},
+  p4t:{en:"Command",         ar:"السيطرة",    fr:"Maîtrise"},
+  p4b:{en:"Unlimited refinement until every word, every format decision, and every strategic nuance is exactly right. Nothing ships until it is perfect.",
+       ar:"صقل غير محدود حتى تكون كل كلمة وكل قرار تنسيقي وكل فارق استراتيجي دقيق صحيحاً تماماً. لا شيء يُسلَّم حتى يصبح مثالياً.",
+       fr:"Raffinement illimité jusqu'à ce que chaque mot, chaque décision de format et chaque nuance stratégique soit exactement juste. Rien n'est livré tant que ce n'est pas parfait."},
+  // Pricing
+  prcEyebrow:  {en:"Engagement Tiers",  ar:"مستويات التعاقد",    fr:"Niveaux d'engagement"},
+  prcH2:       {en:"Three tiers. One standard: uncompromising.",
+                ar:"ثلاثة مستويات. معيار واحد: لا تهاون.",
+                fr:"Trois niveaux. Un standard : sans compromis."},
+  prcNote:     {en:"Priced in UAE Dirhams. Processed securely.",
+                ar:"بالدرهم الإماراتي. معالجة آمنة.",
+                fr:"En dirhams émiratis. Traitement sécurisé."},
+  prcMostSel:  {en:"Most Selected",     ar:"الأكثر اختياراً",    fr:"Le plus choisi"},
+  prcBegin:    {en:"Begin Engagement",  ar:"ابدأ التعاقد",        fr:"Commencer"},
+  prcApplePay: {en:"Begin · Apple Pay", ar:"ابدأ · Apple Pay",   fr:"Commencer · Apple Pay"},
+  prcStripe:   {en:"Secured by Stripe", ar:"مؤمَّن بـ Stripe",   fr:"Sécurisé par Stripe"},
+  // Foundation
+  pF:    {en:"Foundation",   ar:"الأساسية",   fr:"Fondation"},
+  pFsub: {en:"Precision-built. ATS-ready. Results-focused.",ar:"مبني بدقة. جاهز للفرز. موجَّه للنتائج.",fr:"Construit avec précision. Prêt ATS. Axé résultats."},
+  pFi1:  {en:"ATS-engineered document, built to clear automated screening",
+          ar:"وثيقة مُهندَسة للفرز الآلي، مبنية لاجتيازه",
+          fr:"Document conçu ATS, construit pour franchir le tri automatisé"},
+  pFi2:  {en:"Precision cover letter aligned to your target market",
+          ar:"خطاب تغطية دقيق يتوافق مع سوقك المستهدف",
+          fr:"Lettre de motivation précise alignée sur votre marché cible"},
+  pFi3:  {en:"Executive photo enhancement via AI precision retouching",
+          ar:"تحسين الصورة التنفيذية عبر المعالجة الدقيقة بالذكاء الاصطناعي",
+          fr:"Amélioration photo exécutive par retouche IA de précision"},
+  pFi4:  {en:"Full access to 500+ market-calibrated document library",
+          ar:"وصول كامل لمكتبة +500 وثيقة مُعايَرة للسوق",
+          fr:"Accès complet à la bibliothèque de 500+ documents calibrés"},
+  // Growth
+  pG:    {en:"Growth",        ar:"النمو",      fr:"Croissance"},
+  pGsub: {en:"Multi-market. Complete. Career-defining.",
+          ar:"متعدد الأسواق. شامل. محوري في المسيرة.",
+          fr:"Multi-marché. Complet. Déterminant."},
+  pGi1:  {en:"ATS-engineered document with executive visual authority",
+          ar:"وثيقة مُهندَسة للفرز الآلي بسلطة بصرية تنفيذية",
+          fr:"Document ATS avec autorité visuelle exécutive"},
+  pGi2:  {en:"Full LinkedIn authority rebuild — recruiter-visibility optimised",
+          ar:"إعادة بناء كاملة لسلطة لينكدإن — محسّن لظهور المُوظِّفين",
+          fr:"Reconstruction complète LinkedIn — visibilité recruteur optimisée"},
+  pGi3:  {en:"Global career strategy framework tailored to your targets",
+          ar:"إطار استراتيجية المسار العالمي مُصمَّم وفق أهدافك",
+          fr:"Cadre de stratégie de carrière mondiale adapté à vos cibles"},
+  pGi4:  {en:"Full document suite in EN, FR, DE, AR, and ES",
+          ar:"مجموعة وثائق كاملة بالإنجليزية والفرنسية والألمانية والعربية والإسبانية",
+          fr:"Suite complète EN, FR, DE, AR et ES"},
+  pGi5:  {en:"Full access to 500+ market-calibrated document library",
+          ar:"وصول كامل لمكتبة +500 وثيقة مُعايَرة",
+          fr:"Accès complet bibliothèque 500+ documents calibrés"},
+  // Executive
+  pE:    {en:"Executive",     ar:"التنفيذية",  fr:"Exécutif"},
+  pEsub: {en:"White-glove. Strategic. Total.",
+          ar:"خدمة راقية. استراتيجية. شاملة.",
+          fr:"Blanc-gant. Stratégique. Total."},
+  pEi1:  {en:"All Growth tier deliverables included",
+          ar:"جميع مخرجات مستوى النمو مشمولة",
+          fr:"Tous les livrables du niveau Croissance inclus"},
+  pEi2:  {en:"60-minute private interview strategy session",
+          ar:"جلسة استراتيجية مقابلات خاصة مدتها 60 دقيقة",
+          fr:"Session privée de stratégie d'entretien de 60 minutes"},
+  pEi3:  {en:"Personal career narrative architecture session",
+          ar:"جلسة هندسة السرد المهني الشخصي",
+          fr:"Session d'architecture narrative de carrière personnelle"},
+  pEi4:  {en:"30-day priority access to your senior strategist",
+          ar:"وصول ذو أولوية لمدة 30 يوماً لاستراتيجيك الأول",
+          fr:"Accès prioritaire 30 jours à votre stratège senior"},
+  pEi5:  {en:"Full access to 500+ market-calibrated document library",
+          ar:"وصول كامل لمكتبة +500 وثيقة مُعايَرة",
+          fr:"Accès complet bibliothèque 500+ documents calibrés"},
+  // Testimonials
+  tmEyebrow:   {en:"Verified Outcomes",  ar:"نتائج موثّقة",       fr:"Résultats vérifiés"},
+  tmH2a:       {en:"Transformations,",   ar:"تحولات،",            fr:"Transformations,"},
+  tmH2b:       {en:"not testimonials.",  ar:"لا مجرد شهادات.",    fr:"pas des témoignages."},
+  tmStars:     {en:"5.0 · 7,000+ professionals positioned globally",
+                ar:"5.0 · أكثر من 7,000 محترف موضَّع عالمياً",
+                fr:"5.0 · Plus de 7 000 professionnels positionnés"},
+  // CTA final
+  ctaH2a:      {en:"You've built the experience.",  ar:"لقد بنيت الخبرة.",      fr:"Vous avez construit l'expérience."},
+  ctaH2b:      {en:"Now position it where it matters.", ar:"الآن ضعها حيث يهم.", fr:"Maintenant, positionnez-la là où ça compte."},
+  ctaBody:     {en:"7,000+ professionals from 40+ nationalities chose to stop applying and start positioning. Each made one deliberate decision that changed everything.",
+                ar:"اختار أكثر من 7,000 محترف من أكثر من 40 جنسية التوقف عن التقديم والبدء في التموضع. اتخذ كل منهم قراراً واحداً واعياً غيّر كل شيء.",
+                fr:"7 000+ professionnels de 40+ nationalités ont choisi d'arrêter de postuler et de commencer à se positionner. Chacun a pris une décision délibérée qui a tout changé."},
+  ctaFinalBtn: {en:"Begin Your Positioning", ar:"ابدأ تموضعك", fr:"Commencer votre positionnement"},
+  startWA:     {en:"Begin on WhatsApp",      ar:"ابدأ على واتساب",   fr:"Commencer sur WhatsApp"},
+  sendEnq:     {en:"Request Private Review", ar:"طلب مراجعة خاصة",  fr:"Demander une revue privée"},
+  // Footer
+  tagline:     {en:"Built for professionals who refuse average.",
+                ar:"مبني للمحترفين الذين يرفضون العادي.",
+                fr:"Conçu pour les professionnels qui refusent la médiocrité."},
+  footerWA:    {en:"WhatsApp",               ar:"واتساب",             fr:"WhatsApp"},
+  // Modal / form
+  frmEmail:    {en:"Your Email Address",     ar:"عنوان بريدك الإلكتروني",  fr:"Votre adresse e-mail"},
+  frmSubject:  {en:"Subject",               ar:"الموضوع",             fr:"Sujet"},
+  frmMessage:  {en:"Your Message",          ar:"رسالتك",              fr:"Votre message"},
+  frmAttach:   {en:"Attachments",           ar:"المرفقات",            fr:"Pièces jointes"},
+  frmOptional: {en:"— optional",            ar:"— اختياري",           fr:"— facultatif"},
+  frmPhoto:    {en:"Profile Photo",         ar:"صورة الملف الشخصي",   fr:"Photo de profil"},
+  frmPhotoH:   {en:"JPG · PNG · WEBP · max 5 MB", ar:"JPG · PNG · WEBP · الحد الأقصى 5 ميغابايت", fr:"JPG · PNG · WEBP · 5 Mo max"},
+  frmCv:       {en:"Current CV / Profile",  ar:"السيرة الذاتية الحالية",fr:"CV / Profil actuel"},
+  frmCvH:      {en:"PDF · DOC · DOCX · max 5 MB", ar:"PDF · DOC · DOCX · الحد الأقصى 5 ميغابايت", fr:"PDF · DOC · DOCX · 5 Mo max"},
+  frmDrop:     {en:"Click or drop file here", ar:"انقر أو اسحب الملف هنا", fr:"Cliquer ou déposer ici"},
+  frmSending:  {en:"Sending…",              ar:"جارٍ الإرسال…",       fr:"Envoi en cours…"},
+  frmRetry:    {en:"Retry",                 ar:"إعادة المحاولة",      fr:"Réessayer"},
+  frmReceived: {en:"Request received.",     ar:"تم استلام طلبك.",      fr:"Demande reçue."},
+  frmReply:    {en:"We will respond to",    ar:"سنرد على",            fr:"Nous répondrons à"},
+  frmHours:    {en:"within 24 hours.",      ar:"خلال 24 ساعة.",        fr:"dans les 24 heures."},
+  frmClose:    {en:"Close",                 ar:"إغلاق",               fr:"Fermer"},
+  frmErrNet:   {en:"Network error — reach us via WhatsApp.", ar:"خطأ في الشبكة — تواصل عبر واتساب.", fr:"Erreur réseau — contactez-nous via WhatsApp."},
+  frmErrGen:   {en:"Something went wrong. Please try again.", ar:"حدث خطأ ما. يرجى المحاولة مجدداً.", fr:"Une erreur s'est produite. Veuillez réessayer."},
+  // Template card badges
+  tplAts:      {en:"ATS ✓",                ar:"ATS ✓",               fr:"ATS ✓"},
+  tplDesign:   {en:"Design ✦",             ar:"تصميم ✦",             fr:"Design ✦"},
+  tplPreview:  {en:"Preview Document",     ar:"معاينة الوثيقة",      fr:"Aperçu du document"},
+  tplEnquire:  {en:"Request This Format",  ar:"طلب هذا النموذج",     fr:"Demander ce format"},
+  tplClose:    {en:"Close",                ar:"إغلاق",               fr:"Fermer"},
+  glbConnector:{en:"The world is our",     ar:"العالم هو",            fr:"Le monde est notre"},
+};
   // Hero
   eyebrow:      {en:"Executive Career Studio · Based in Dubai · Operating Globally",
                  // FIX: More natural Arabic phrasing for the eyebrow
@@ -794,184 +998,82 @@ export default function Home(){
   const font  = LG.font;
   const bg    = dark?INK:ASH;
   const hi    = dark?"#EDE8E0":"#1A1410";
-  const sub   = dark?"#857870":"#786860"; // FIX: Improved contrast — was #706860 (too low)
-  const mid   = dark?"#C0B0A4":"#706050"; // FIX: Brighter mid text in dark mode
+  const sub   = dark?"#857870":"#786860";
+  const mid   = dark?"#C0B0A4":"#706050";
   const bdr   = dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)";
   const card  = dark?"rgba(255,255,255,0.03)":"rgba(255,255,255,0.90)";
-  const nav   = dark?"rgba(10,9,7,0.94)":"rgba(245,241,235,0.95)";
+  const nav   = dark?"rgba(10,9,7,0.96)":"rgba(245,241,235,0.97)";
   const cols  = [TMS.filter((_,i)=>i%3===0),TMS.filter((_,i)=>i%3===1),TMS.filter((_,i)=>i%3===2)];
-  const wlMsg = wl("Hello. I would like to discuss my career positioning.");
+  const wlMsg = wl("Hello. I would like to request a private review.");
   const shown = TEMPLATES.slice(0,visible);
   const hasMore = visible < TEMPLATES.length;
 
   const STEPS = [
-    {n:"I",  t:tr("p1t",lang), b:tr("p1b",lang), Ic:CreditCard},
-    {n:"II", t:tr("p2t",lang), b:tr("p2b",lang), Ic:FileText},
-    {n:"III",t:tr("p3t",lang), b:tr("p3b",lang), Ic:Send},
-    {n:"IV", t:tr("p4t",lang), b:tr("p4b",lang), Ic:CheckCircle},
+    {n:"I",   t:tr("p1t",lang), b:tr("p1b",lang), Ic:CreditCard},
+    {n:"II",  t:tr("p2t",lang), b:tr("p2b",lang), Ic:FileText},
+    {n:"III", t:tr("p3t",lang), b:tr("p3b",lang), Ic:Send},
+    {n:"IV",  t:tr("p4t",lang), b:tr("p4b",lang), Ic:CheckCircle},
   ];
 
-  // FIX: Logo filter — precise, clean rendering for both modes
   const logoFilter = dark
-    ? [
-        "brightness(1.08)",
-        "drop-shadow(0 0 8px rgba(212,175,55,0.15))",
-        "drop-shadow(0 2px 6px rgba(0,0,0,0.50))",
-      ].join(" ")
-    : "brightness(0) saturate(0) contrast(1)"; // Pure black in light mode — crisp on warm bg
+    ? ["brightness(1.08)","drop-shadow(0 0 8px rgba(212,175,55,0.15))","drop-shadow(0 2px 6px rgba(0,0,0,0.50))"].join(" ")
+    : "brightness(0) saturate(0) contrast(1)";
+
+  // Authority numbers
+  const AUTHORITY = [
+    {n:"7,000+", k:tr("mClients",lang)},
+    {n:"40+",    k:tr("mMarkets",lang)},
+    {n:"99.9%",  k:tr("mAts",lang)},
+    {n:"48h",    k:tr("mDraft",lang)},
+  ];
 
   return(
     <div key={lang} className="min-h-screen w-full overflow-x-hidden transition-colors duration-700" dir={dir} style={{background:bg,color:hi,fontFamily:font}}>
+
       {/* Grain overlay */}
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.022]" style={{backgroundImage:"url(\"data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",backgroundSize:"200px"}}/>
-      {dark&&<div className="pointer-events-none fixed inset-0 -z-10" style={{background:`radial-gradient(ellipse 70% 50% at 50% -5%,${G}09,transparent 65%)`}}/>}
+      <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.028]" style={{backgroundImage:"url(\"data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",backgroundSize:"200px"}}/>
+      {dark&&<div className="pointer-events-none fixed inset-0 -z-10" style={{background:`radial-gradient(ellipse 60% 40% at 50% -5%,${G}07,transparent 65%)`}}/>}
 
       {/* ══ NAV ══════════════════════════════════════════════════════════════ */}
-      <header className="fixed top-0 inset-x-0 z-50" style={{
-        background: nav,
-        backdropFilter: "blur(28px)",
-        WebkitBackdropFilter: "blur(28px)",
-        borderBottom: dark ? "none" : `1px solid ${bdr}`,
-        // FIX: position:relative needed for pseudo-hairline positioning
-        position: "fixed",
-      }}>
-        {/* Gold hairline — dark mode only */}
-        {dark && (
-          <div aria-hidden className="absolute bottom-0 inset-x-0 h-px pointer-events-none" style={{
-            background: "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.12) 15%, rgba(212,175,55,0.55) 50%, rgba(212,175,55,0.12) 85%, transparent 100%)",
-          }}/>
-        )}
+      <header className="fixed top-0 inset-x-0 z-50" style={{background:nav,backdropFilter:"blur(32px)",WebkitBackdropFilter:"blur(32px)",borderBottom:dark?"none":`1px solid ${bdr}`,position:"fixed"}}>
+        {dark&&<div aria-hidden className="absolute bottom-0 inset-x-0 h-px pointer-events-none" style={{background:"linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.08) 15%, rgba(212,175,55,0.45) 50%, rgba(212,175,55,0.08) 85%, transparent 100%)"}}/>}
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 sm:px-8" style={{height:"76px"}}>
 
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-8" style={{height:"76px"}}>
-
-          {/* ── Logo ── */}
           <a href="#" className="flex items-center shrink-0" style={{lineHeight:0}}>
-            <img
-              src="/images/logo.png"
-              alt="Zenith Dubai CV"
-              style={{
-                height: "auto",
-                width: "100px",
-                objectFit: "contain",
-                display: "block",
-                borderRadius: "8px",
-                filter: logoFilter,
-                transition: "filter 0.4s ease",
-                paddingTop: "4px",
-              }}
-            />
+            <img src="/images/logo.png" alt="Zenith Dubai CV" style={{height:"auto",width:"100px",objectFit:"contain",display:"block",borderRadius:"8px",filter:logoFilter,transition:"filter 0.4s ease",paddingTop:"4px"}}/>
           </a>
 
-          {/* ── Nav links ──
-              FIX: Removed `dark:invert` and `h-14 w-auto` classes that caused
-              the blue/inverted text bug. Nav links now use explicit color tokens
-              with smooth letter-spacing transitions. ── */}
           <nav className="hidden md:flex items-center gap-8">
-            {([
-              ["#services",  "navServices"],
-              ["#templates", "navTemplates"],
-              ["#process",   "navMethod"],
-              ["#pricing",   "navPricing"],
-              ["#clients",   "navClients"],
-            ] as [string,string][]).map(([href,k])=>(
-              <a
-                key={href}
-                href={href}
-                className="text-[10px] font-medium tracking-[0.20em] uppercase"
-                style={{
-                  color: dark ? "rgba(200,169,110,0.45)" : `${hi}65`,
-                  fontFamily: "sans-serif",
-                  textDecoration: "none",
-                  transition: "color 0.25s ease, letter-spacing 0.25s ease, text-shadow 0.25s ease",
-                }}
-                onMouseEnter={e=>{
-                  const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.color = dark ? "#D4AF37" : hi;
-                  el.style.textShadow = dark ? "0 0 12px rgba(212,175,55,0.40)" : "none";
-                  el.style.letterSpacing = "0.22em";
-                }}
-                onMouseLeave={e=>{
-                  const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.color = dark ? "rgba(200,169,110,0.45)" : `${hi}65`;
-                  el.style.textShadow = "none";
-                  el.style.letterSpacing = "0.20em";
-                }}
-              >
+            {([["#disciplines","navServices"],["#portfolio","navTemplates"],["#method","navMethod"],["#investment","navPricing"],["#outcomes","navClients"]] as [string,string][]).map(([href,k])=>(
+              <a key={href} href={href} className="text-[10px] font-medium tracking-[0.20em] uppercase" style={{color:dark?"rgba(200,169,110,0.40)":`${hi}60`,fontFamily:"sans-serif",textDecoration:"none",transition:"color 0.25s ease, letter-spacing 0.25s ease"}}
+                onMouseEnter={e=>{const el=e.currentTarget as HTMLAnchorElement;el.style.color=dark?"#D4AF37":hi;el.style.letterSpacing="0.22em";}}
+                onMouseLeave={e=>{const el=e.currentTarget as HTMLAnchorElement;el.style.color=dark?"rgba(200,169,110,0.40)":`${hi}60`;el.style.letterSpacing="0.20em";}}>
                 {tr(k,lang)}
               </a>
             ))}
           </nav>
 
-          {/* ── Right controls ── */}
           <div className="flex items-center gap-2">
-
-            {/* Lang switcher */}
+            {/* Lang */}
             <div className="relative">
-              <button
-                type="button"
-                onClick={()=>setLangOpen(o=>!o)}
-                className="flex items-center gap-1.5 text-[10px] font-medium tracking-[0.15em] uppercase px-3 rounded-full"
-                style={{
-                  border: `1px solid ${dark ? "rgba(200,169,110,0.28)" : `${G}32`}`,
-                  color: dark ? "#C8A96E" : G,
-                  height: "32px",
-                  fontFamily: "sans-serif",
-                  minWidth: "62px",
-                  justifyContent: "center",
-                  background: "transparent",
-                  transition: "border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease",
-                }}
-                onMouseEnter={e=>{
-                  const el = e.currentTarget as HTMLButtonElement;
-                  el.style.borderColor = dark ? "rgba(212,175,55,0.55)" : `${G}55`;
-                  el.style.boxShadow = dark ? "0 0 12px rgba(212,175,55,0.18)" : "none";
-                  el.style.color = dark ? "#D4AF37" : G;
-                }}
-                onMouseLeave={e=>{
-                  const el = e.currentTarget as HTMLButtonElement;
-                  el.style.borderColor = dark ? "rgba(200,169,110,0.28)" : `${G}32`;
-                  el.style.boxShadow = "none";
-                  el.style.color = dark ? "#C8A96E" : G;
-                }}
-              >
+              <button type="button" onClick={()=>setLangOpen(o=>!o)} className="flex items-center gap-1.5 text-[10px] font-medium tracking-[0.15em] uppercase px-3 rounded-full"
+                style={{border:`1px solid ${dark?"rgba(200,169,110,0.22)":`${G}28`}`,color:dark?"#C8A96E":G,height:"32px",fontFamily:"sans-serif",minWidth:"62px",justifyContent:"center",background:"transparent",transition:"border-color 0.25s ease, box-shadow 0.25s ease"}}
+                onMouseEnter={e=>{const el=e.currentTarget as HTMLButtonElement;el.style.borderColor=dark?"rgba(212,175,55,0.50)":`${G}50`;el.style.boxShadow=dark?"0 0 12px rgba(212,175,55,0.15)":"none";}}
+                onMouseLeave={e=>{const el=e.currentTarget as HTMLButtonElement;el.style.borderColor=dark?"rgba(200,169,110,0.22)":`${G}28`;el.style.boxShadow="none";}}>
                 <Globe size={10} strokeWidth={1.5}/>{LG.label}
               </button>
               <AnimatePresence>
                 {langOpen&&(
-                  <motion.div
-                    initial={{opacity:0,y:-6,scale:0.97}}
-                    animate={{opacity:1,y:0,scale:1}}
-                    exit={{opacity:0,y:-4,scale:0.98}}
-                    transition={{duration:0.2,ease:[0.16,1,0.3,1]}}
+                  <motion.div initial={{opacity:0,y:-6,scale:0.97}} animate={{opacity:1,y:0,scale:1}} exit={{opacity:0,y:-4,scale:0.98}} transition={{duration:0.2,ease:[0.16,1,0.3,1]}}
                     className="absolute top-10 right-0 rounded-xl overflow-hidden z-50"
-                    style={{
-                      background: dark ? "#111009" : "#F5F1EB",
-                      border: dark ? "1px solid rgba(200,169,110,0.16)" : `1px solid ${bdr}`,
-                      boxShadow: dark ? "0 8px 32px rgba(0,0,0,0.65), 0 0 20px rgba(212,175,55,0.05)" : "0 8px 24px rgba(0,0,0,0.12)",
-                      minWidth: "136px",
-                    }}
-                  >
+                    style={{background:dark?"#111009":"#F5F1EB",border:dark?"1px solid rgba(200,169,110,0.14)":`1px solid ${bdr}`,boxShadow:dark?"0 8px 32px rgba(0,0,0,0.65)":"0 8px 24px rgba(0,0,0,0.12)",minWidth:"136px"}}>
                     {LANGS.map(l=>(
-                      <button
-                        key={l.code}
-                        type="button"
-                        onClick={()=>{setLang(l.code);setLangOpen(false);}}
-                        className="w-full flex items-center gap-2 px-4 py-2.5 text-[11px] text-left"
-                        style={{
-                          color: l.code===lang ? (dark ? "#D4AF37" : G) : hi,
-                          fontFamily: "sans-serif",
-                          background: l.code===lang ? (dark ? "rgba(212,175,55,0.07)" : `${G}07`) : "transparent",
-                          fontWeight: l.code===lang ? 600 : 400,
-                          transition: "background 0.15s ease",
-                          border: "none",
-                          cursor: "pointer",
-                          width: "100%",
-                        }}
-                        onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.background = dark ? "rgba(212,175,55,0.05)" : `${G}05`;}}
-                        onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.background = l.code===lang ? (dark ? "rgba(212,175,55,0.07)" : `${G}07`) : "transparent";}}
-                      >
-                        {l.code===lang&&<span className="h-1 w-1 rounded-full shrink-0" style={{background: dark ? "#D4AF37" : G}}/>}
-                        <span style={{marginLeft: l.code===lang ? "0" : "9px"}}>{l.label}</span>
+                      <button key={l.code} type="button" onClick={()=>{setLang(l.code);setLangOpen(false);}} className="w-full flex items-center gap-2 px-4 py-2.5 text-[11px] text-left"
+                        style={{color:l.code===lang?(dark?"#D4AF37":G):hi,fontFamily:"sans-serif",background:l.code===lang?(dark?"rgba(212,175,55,0.07)":`${G}07`):"transparent",fontWeight:l.code===lang?600:400,transition:"background 0.15s ease",border:"none",cursor:"pointer",width:"100%"}}
+                        onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.background=dark?"rgba(212,175,55,0.05)":`${G}05`;}}
+                        onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.background=l.code===lang?(dark?"rgba(212,175,55,0.07)":`${G}07`):"transparent";}}>
+                        {l.code===lang&&<span className="h-1 w-1 rounded-full shrink-0" style={{background:dark?"#D4AF37":G}}/>}
+                        <span style={{marginLeft:l.code===lang?"0":"9px"}}>{l.label}</span>
                       </button>
                     ))}
                   </motion.div>
@@ -979,86 +1081,27 @@ export default function Home(){
               </AnimatePresence>
             </div>
 
-            {/* CTA button */}
-            <button
-              type="button"
-              onClick={()=>setModal(true)}
-              className="hidden sm:flex items-center gap-2 text-[10px] font-medium tracking-[0.18em] uppercase px-5 rounded-full"
-              style={{
-                border: dark ? "1px solid rgba(200,169,110,0.38)" : `1px solid ${G}42`,
-                color: dark ? "#C8A96E" : G,
-                height: "32px",
-                fontFamily: "sans-serif",
-                background: "transparent",
-                transition: "border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease",
-              }}
-              onMouseEnter={e=>{
-                const el = e.currentTarget as HTMLButtonElement;
-                el.style.borderColor = dark ? "rgba(212,175,55,0.65)" : `${G}65`;
-                el.style.boxShadow = dark ? "0 0 16px rgba(212,175,55,0.22)" : "none";
-                el.style.opacity = "0.9";
-              }}
-              onMouseLeave={e=>{
-                const el = e.currentTarget as HTMLButtonElement;
-                el.style.borderColor = dark ? "rgba(200,169,110,0.38)" : `${G}42`;
-                el.style.boxShadow = "none";
-                el.style.opacity = "1";
-              }}
-            >
+            {/* CTA */}
+            <button type="button" onClick={()=>setModal(true)} className="hidden sm:flex items-center gap-2 text-[10px] font-medium tracking-[0.18em] uppercase px-5 rounded-full"
+              style={{border:dark?"1px solid rgba(200,169,110,0.35)":`1px solid ${G}40`,color:dark?"#C8A96E":G,height:"32px",fontFamily:"sans-serif",background:"transparent",transition:"border-color 0.25s ease, box-shadow 0.25s ease"}}
+              onMouseEnter={e=>{const el=e.currentTarget as HTMLButtonElement;el.style.borderColor=dark?"rgba(212,175,55,0.65)":`${G}65`;el.style.boxShadow=dark?"0 0 16px rgba(212,175,55,0.20)":"none";}}
+              onMouseLeave={e=>{const el=e.currentTarget as HTMLButtonElement;el.style.borderColor=dark?"rgba(200,169,110,0.35)":`${G}40`;el.style.boxShadow="none";}}>
               {tr("enquire",lang)}
             </button>
 
-            {/* Theme toggle — sliding pill */}
-            <div
-              onClick={tog}
-              role="button"
-              aria-label="Toggle theme"
-              tabIndex={0}
-              onKeyDown={e=>e.key==="Enter"&&tog()}
+            {/* Theme pill */}
+            <div onClick={tog} role="button" aria-label="Toggle theme" tabIndex={0} onKeyDown={e=>e.key==="Enter"&&tog()}
               className="flex p-1 rounded-full cursor-pointer transition-all duration-300"
-              style={{
-                width: "56px",
-                height: "28px",
-                background: dark ? "#0E0C0A" : "#FFFFFF",
-                border: dark ? "1px solid rgba(200,169,110,0.18)" : "1px solid rgba(0,0,0,0.10)",
-                flexShrink: 0,
-              }}
-            >
+              style={{width:"56px",height:"28px",background:dark?"#0E0C0A":"#FFFFFF",border:dark?"1px solid rgba(200,169,110,0.16)":"1px solid rgba(0,0,0,0.10)",flexShrink:0}}>
               <div className="flex justify-between items-center w-full">
-                {/* Moving knob */}
-                <div
-                  className="flex justify-center items-center rounded-full transition-all duration-300"
-                  style={{
-                    width: "20px",
-                    height: "20px",
-                    transform: dark ? "translateX(0)" : "translateX(28px)",
-                    background: dark ? "#1C1A17" : "#F0EBE3",
-                    flexShrink: 0,
-                  }}
-                >
-                  {dark
-                    ? <Moon size={11} strokeWidth={1.5} color={G}/>
-                    : <Sun  size={11} strokeWidth={1.5} color="#786860"/>
-                  }
+                <div className="flex justify-center items-center rounded-full transition-all duration-300" style={{width:"20px",height:"20px",transform:dark?"translateX(0)":"translateX(28px)",background:dark?"#1C1A17":"#F0EBE3",flexShrink:0}}>
+                  {dark?<Moon size={11} strokeWidth={1.5} color={G}/>:<Sun size={11} strokeWidth={1.5} color="#786860"/>}
                 </div>
-                {/* Idle icon */}
-                <div
-                  className="flex justify-center items-center rounded-full transition-all duration-300"
-                  style={{
-                    width: "20px",
-                    height: "20px",
-                    transform: dark ? "translateX(0)" : "translateX(-28px)",
-                    flexShrink: 0,
-                  }}
-                >
-                  {dark
-                    ? <Sun  size={11} strokeWidth={1.5} color="rgba(200,169,110,0.28)"/>
-                    : <Moon size={11} strokeWidth={1.5} color="rgba(0,0,0,0.20)"/>
-                  }
+                <div className="flex justify-center items-center rounded-full transition-all duration-300" style={{width:"20px",height:"20px",transform:dark?"translateX(0)":"translateX(-28px)",flexShrink:0}}>
+                  {dark?<Sun size={11} strokeWidth={1.5} color="rgba(200,169,110,0.25)"/>:<Moon size={11} strokeWidth={1.5} color="rgba(0,0,0,0.18)"/>}
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </header>
@@ -1066,64 +1109,73 @@ export default function Home(){
       <main className="pt-[76px]">
 
         {/* ══ HERO ══════════════════════════════════════════════════════════ */}
-        <section className="relative min-h-[95vh] flex flex-col items-center justify-center px-5 sm:px-8 text-center overflow-hidden">
+        <section className="relative min-h-[96vh] flex flex-col items-center justify-center px-5 sm:px-8 text-center overflow-hidden">
 
-          <Rise d={0.3} y={36}><p className="text-[9px] sm:text-[10px] font-medium tracking-[0.28em] sm:tracking-[0.42em] uppercase mb-8 sm:mb-10 px-2" style={{color:G,fontFamily:"sans-serif"}}>{tr("eyebrow",lang)}</p></Rise>
-          <Rise d={0.55} y={44}>
-            <h1 className="text-4xl sm:text-6xl lg:text-[88px] font-normal leading-[1.05] tracking-[-0.025em] mb-6 sm:mb-7 mx-auto px-2" style={{color:hi,maxWidth:"860px"}}>
+          {/* Scarcity badge — top */}
+          <Rise d={0.15} y={16}>
+            <div className="inline-flex items-center gap-2 mb-10 px-4 py-2 rounded-full" style={{border:`1px solid ${G}30`,background:dark?`${G}08`:`${G}06`}}>
+              <div className="h-1.5 w-1.5 rounded-full animate-pulse" style={{background:G}}/>
+              <span className="text-[9px] font-medium tracking-[0.30em] uppercase" style={{color:G,fontFamily:"sans-serif"}}>{tr("scarcity",lang)}</span>
+            </div>
+          </Rise>
+
+          <Rise d={0.3} y={36}>
+            <p className="text-[9px] sm:text-[10px] font-medium tracking-[0.30em] sm:tracking-[0.42em] uppercase mb-8 px-2" style={{color:dark?"rgba(200,169,110,0.50)":"rgba(26,20,16,0.45)",fontFamily:"sans-serif"}}>{tr("eyebrow",lang)}</p>
+          </Rise>
+
+          <Rise d={0.5} y={44}>
+            <h1 className="text-4xl sm:text-6xl lg:text-[90px] font-normal leading-[1.04] tracking-[-0.03em] mb-7 mx-auto px-2" style={{color:hi,maxWidth:"880px"}}>
               {tr("h1a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("h1b",lang)}</em>
             </h1>
           </Rise>
-          <Rise d={0.75} y={28}>
-            <p className="text-[15px] sm:text-[17px] leading-[1.95] w-full max-w-[480px] mb-0 mx-auto px-4 sm:px-0 relative z-20" style={{color:dark?"#9A8E84":sub,fontFamily:"sans-serif",fontWeight:300}}>
+
+          <Rise d={0.68} y={28}>
+            <p className="text-[15px] sm:text-[17px] leading-[1.95] w-full max-w-[440px] mb-0 mx-auto px-4 sm:px-0" style={{color:dark?"#857870":sub,fontFamily:"sans-serif",fontWeight:300}}>
               {tr("heroSub",lang)}
             </p>
           </Rise>
 
-          {/* ── Sparkles — line at top, particles fall down like Acme ── */}
-          <div className="relative w-full mx-auto mb-6" style={{
-            height: "160px",
-            maxWidth: "640px",
-            // Mask: fade at bottom so particles dissolve into page
-            WebkitMaskImage: "radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)",
-            maskImage: "radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)",
-          }}>
-            <SparklesCore
-              particleColor={G}
-              particleDensity={280}
-              speed={0.8}
-              className="absolute inset-0 w-full h-full"
-            />
+          {/* Sparkles */}
+          <div className="relative w-full mx-auto mb-4" style={{height:"140px",maxWidth:"600px",WebkitMaskImage:"radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)",maskImage:"radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)"}}>
+            <SparklesCore particleColor={G} particleDensity={280} speed={0.8} className="absolute inset-0 w-full h-full"/>
           </div>
 
-          <Rise d={0.92} y={20}>
+          <Rise d={0.85} y={20}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
-              <a href="#pricing" className="flex items-center justify-center gap-3 w-full sm:w-auto px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-85" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif"}}>{tr("viewPkg",lang)} <ArrowRight size={13} strokeWidth={2}/></a>
-              <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-center gap-3 w-full sm:w-auto px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}40`,color:G,height:"52px",fontFamily:"sans-serif"}}><Mail size={12} strokeWidth={1.5}/>{tr("beginEnq",lang)}</button>
+              <button type="button" onClick={()=>setModal(true)}
+                className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-90"
+                style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif",boxShadow:`0 8px 32px ${G}30`}}>
+                {tr("ctaPrimary",lang)}
+              </button>
+              <a href="#outcomes"
+                className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70"
+                style={{border:`1px solid ${G}35`,color:G,height:"52px",fontFamily:"sans-serif"}}>
+                {tr("ctaSecondary",lang)} <ArrowRight size={12} strokeWidth={2}/>
+              </a>
             </div>
           </Rise>
-          <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2" initial={{opacity:0}} animate={{opacity:0.2}} transition={{delay:2.5,duration:1.5}}>
+
+          <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2" initial={{opacity:0}} animate={{opacity:0.15}} transition={{delay:2.5,duration:1.5}}>
             <motion.div className="w-px h-10" style={{background:hi}} animate={{scaleY:[1,0,1],transformOrigin:"top"}} transition={{duration:2.4,repeat:Infinity,ease:"easeInOut"}}/>
           </motion.div>
         </section>
 
-        {/* ══ METRICS ═══════════════════════════════════════════════════════ */}
+        {/* ══ AUTHORITY METRICS ═════════════════════════════════════════════ */}
         <section className="border-y" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4">
-            {([{n:"99.9%",k:"mAts"},{n:"3×",k:"mRate"},{n:"48h",k:"mDraft"},{n:"500+",k:"mTpl"}] as {n:string;k:string}[]).map(({n,k},i)=>(
+            {AUTHORITY.map(({n,k},i)=>(
               <div key={k} className="border-r last:border-r-0" style={{borderColor:bdr}}>
                 <Rise d={0.07*i} className="flex flex-col items-center justify-center py-12 px-6 text-center">
                   <p className="text-3xl sm:text-4xl font-normal tracking-tight" style={{color:GL,fontFamily:"'Georgia',serif"}}>{n}</p>
-                  {/* FIX: Improved metric label color for dark mode readability */}
-                  <p className="mt-2 text-[10px] font-medium tracking-[0.22em] uppercase" style={{color:dark?"#857870":"#9A8E84",fontFamily:"sans-serif"}}>{tr(k,lang)}</p>
+                  <p className="mt-2 text-[10px] font-medium tracking-[0.22em] uppercase" style={{color:dark?"#857870":"#9A8E84",fontFamily:"sans-serif"}}>{k}</p>
                 </Rise>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ══ SERVICES ══════════════════════════════════════════════════════ */}
-        <section id="services" className="py-32 px-8">
+        {/* ══ DISCIPLINES ═══════════════════════════════════════════════════ */}
+        <section id="disciplines" className="py-32 px-5 sm:px-8">
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-20">
               <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4" style={{color:G,fontFamily:"sans-serif"}}>{tr("svcEyebrow",lang)}</p>
@@ -1132,12 +1184,17 @@ export default function Home(){
             <div className="grid sm:grid-cols-3" style={{borderTop:`1px solid ${bdr}`}}>
               {([{t:"s1t",b:"s1b",tag:"s1tag",n:"01"},{t:"s2t",b:"s2b",tag:"s2tag",n:"02"},{t:"s3t",b:"s3b",tag:"s3tag",n:"03"}] as {t:string;b:string;tag:string;n:string}[]).map((s,i)=>(
                 <div key={s.n} className="border-b border-r last:border-r-0" style={{borderColor:bdr}}>
-                  <Rise d={0.1*i} className="p-10">
-                    <p className="text-[10px] tracking-[0.3em] uppercase mb-8" style={{color:G,fontFamily:"sans-serif",opacity:0.65}}>{s.n}</p>
+                  <Rise d={0.1*i} className="p-10 group">
+                    <div className="flex items-center gap-3 mb-8">
+                      <p className="text-[10px] tracking-[0.3em] uppercase" style={{color:G,fontFamily:"sans-serif",opacity:0.55}}>{s.n}</p>
+                      <div className="flex-1 h-px" style={{background:`linear-gradient(to right, ${G}40, transparent)`}}/>
+                    </div>
                     <h3 className="text-xl font-normal mb-5 tracking-tight leading-snug" style={{color:hi}}>{tr(s.t,lang)}</h3>
-                    {/* FIX: Body text in service cards — improved dark mode contrast */}
-                    <p className="text-sm leading-[1.9] mb-8" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr(s.b,lang)}</p>
-                    <p className="text-[10px] tracking-[0.10em] uppercase" style={{color:G,fontFamily:"sans-serif",opacity:0.55}}>{tr(s.tag,lang)}</p>
+                    <p className="text-sm leading-[1.9] mb-8" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr(s.b,lang)}</p>
+                    <div className="flex items-center gap-2">
+                      <div className="h-px w-4" style={{background:G,opacity:0.4}}/>
+                      <p className="text-[10px] tracking-[0.10em] uppercase" style={{color:G,fontFamily:"sans-serif",opacity:0.45}}>{tr(s.tag,lang)}</p>
+                    </div>
                   </Rise>
                 </div>
               ))}
@@ -1145,8 +1202,39 @@ export default function Home(){
           </div>
         </section>
 
-        {/* ══ CV TEMPLATES ══════════════════════════════════════════════════ */}
-        <section id="templates" className="py-32 px-8 border-t" style={{borderColor:bdr}}>
+        {/* ══ EXCLUSIVITY BLOCK ═════════════════════════════════════════════ */}
+        <section className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
+          <div className="mx-auto max-w-6xl">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <Rise>
+                <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-6" style={{color:G,fontFamily:"sans-serif"}}>{tr("exclEyebrow",lang)}</p>
+                <h2 className="text-3xl sm:text-4xl font-normal tracking-tight leading-snug mb-8" style={{color:hi}}>
+                  {tr("exclH2a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("exclH2b",lang)}</em>
+                </h2>
+                <p className="text-base leading-[1.9] max-w-lg" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("exclBody",lang)}</p>
+              </Rise>
+              <Rise d={0.15}>
+                <div className="flex flex-col gap-4">
+                  {[tr("exclPt1",lang), tr("exclPt2",lang), tr("exclPt3",lang)].map((pt,i)=>(
+                    <div key={i} className="flex items-center gap-5 p-6 rounded-2xl" style={{background:dark?`${G}06`:`${G}07`,border:`1px solid ${G}20`}}>
+                      <div className="shrink-0 h-8 w-8 rounded-full flex items-center justify-center" style={{background:`${G}15`,border:`1px solid ${G}30`}}>
+                        <CheckCircle size={14} color={G} strokeWidth={1.5}/>
+                      </div>
+                      <p className="text-sm font-medium" style={{color:hi,fontFamily:"sans-serif"}}>{pt}</p>
+                    </div>
+                  ))}
+                  <button type="button" onClick={()=>setModal(true)} className="mt-4 flex items-center justify-center gap-3 px-8 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-85"
+                    style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif",boxShadow:`0 8px 32px ${G}28`}}>
+                    {tr("ctaPrimary",lang)} <ArrowRight size={12} strokeWidth={2}/>
+                  </button>
+                </div>
+              </Rise>
+            </div>
+          </div>
+        </section>
+
+        {/* ══ DOCUMENT PORTFOLIO ════════════════════════════════════════════ */}
+        <section id="portfolio" className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-6">
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -1160,48 +1248,20 @@ export default function Home(){
                 </div>
               </div>
             </Rise>
-            <Rise d={0.1} className="mb-16"><p className="text-sm leading-[1.9] max-w-3xl" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("tplDesc",lang)}</p></Rise>
-
-            {/* Template cards */}
+            <Rise d={0.1} className="mb-16"><p className="text-sm leading-[1.9] max-w-3xl" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("tplDesc",lang)}</p></Rise>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               <AnimatePresence initial={false}>
                 {shown.map((cv,i)=>(
                   <motion.div key={cv.id} initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.55,ease:[0.16,1,0.3,1],delay:(i%PAGE_SIZE)*0.04}}>
                     <GlowCard color={G} className="rounded-2xl h-full">
                       <div className="rounded-2xl overflow-hidden h-full flex flex-col" style={{background:card,border:`1px solid ${bdr}`}}>
-                        <div
-                          className="relative overflow-hidden cursor-pointer"
-                          style={{height:"280px",background:dark?"rgba(200,169,110,0.05)":"rgba(200,169,110,0.06)"}}
-                          onClick={()=>setPreview({id:cv.id,name:cv.name,ats:cv.ats})}
-                          title={tr("tplPreview",lang)}
-                        >
-                          <img
-                            key={lang + cv.id}
-                            src={'/templates-new/cv' + cv.id + '.png'}
-                            alt={cv.name}
-                            loading="lazy"
+                        <div className="relative overflow-hidden cursor-pointer" style={{height:"280px",background:dark?"rgba(200,169,110,0.04)":"rgba(200,169,110,0.05)"}}
+                          onClick={()=>setPreview({id:cv.id,name:cv.name,ats:cv.ats})} title={tr("tplPreview",lang)}>
+                          <img key={lang+cv.id} src={'/templates-new/cv'+cv.id+'.png'} alt={cv.name} loading="lazy"
                             className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
-                            style={{filter:dark?"brightness(0.92) contrast(1.05)":"none",display:"block"}}
-                            onError={(e)=>{
-                              const img = e.currentTarget;
-                              img.style.display = "none";
-                              const p = img.parentElement;
-                              if(p){
-                                p.style.cssText = "height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;cursor:pointer";
-                                const icon = document.createElement("div");
-                                icon.textContent = "📄";
-                                icon.style.cssText = "font-size:36px;opacity:0.2";
-                                const title = document.createElement("p");
-                                title.textContent = cv.name;
-                                title.style.cssText = `font-size:12px;color:${G};font-family:sans-serif;text-align:center;opacity:0.8;font-weight:600`;
-                                const subEl = document.createElement("p");
-                                subEl.textContent = cv.ind;
-                                subEl.style.cssText = "font-size:10px;color:#9A8E84;font-family:sans-serif;text-align:center";
-                                p.appendChild(icon); p.appendChild(title); p.appendChild(subEl);
-                              }
-                            }}
-                          />
-                          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300" style={{background:"rgba(10,9,7,0.70)"}}>
+                            style={{filter:dark?"brightness(0.90) contrast(1.05)":"none",display:"block"}}
+                            onError={(e)=>{const img=e.currentTarget;img.style.display="none";const p=img.parentElement;if(p){p.style.cssText="height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;cursor:pointer";const icon=document.createElement("div");icon.textContent="📄";icon.style.cssText="font-size:36px;opacity:0.2";const title=document.createElement("p");title.textContent=cv.name;title.style.cssText=`font-size:12px;color:${G};font-family:sans-serif;text-align:center;opacity:0.8;font-weight:600`;const subEl=document.createElement("p");subEl.textContent=cv.ind;subEl.style.cssText="font-size:10px;color:#9A8E84;font-family:sans-serif;text-align:center";p.appendChild(icon);p.appendChild(title);p.appendChild(subEl);}}}/>
+                          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300" style={{background:"rgba(10,9,7,0.72)"}}>
                             <div className="h-10 w-10 rounded-full flex items-center justify-center" style={{background:`${G}20`,border:`1px solid ${G}50`}}>
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={G} strokeWidth="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
                             </div>
@@ -1212,15 +1272,13 @@ export default function Home(){
                           <div className="flex items-start justify-between gap-3 mb-2">
                             <h3 className="text-sm font-semibold leading-tight" style={{color:hi,fontFamily:"sans-serif"}}>{cv.name}</h3>
                             {cv.ats
-                              ? <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:`${G}15`,color:G,border:`1px solid ${G}30`,fontFamily:"sans-serif"}}>{tr("tplAts",lang)}</span>
-                              : <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:"rgba(120,100,160,0.10)",color:"#8A6AAA",border:"1px solid rgba(120,100,160,0.22)",fontFamily:"sans-serif"}}>{tr("tplDesign",lang)}</span>
-                            }
+                              ?<span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:`${G}15`,color:G,border:`1px solid ${G}28`,fontFamily:"sans-serif"}}>{tr("tplAts",lang)}</span>
+                              :<span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:"rgba(120,100,160,0.10)",color:"#8A6AAA",border:"1px solid rgba(120,100,160,0.22)",fontFamily:"sans-serif"}}>{tr("tplDesign",lang)}</span>}
                           </div>
-                          <p className="text-[11px] mb-1" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif"}}>{cv.ind}</p>
-                          <p className="text-[10px] mb-3" style={{color:dark?"#857870":"#9A8E84",fontFamily:"sans-serif",opacity:0.8}}>{cv.reg}</p>
-                          <button type="button" onClick={()=>setModal(true)}
-                            className="mt-auto w-full py-2 rounded-xl text-[10px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-80"
-                            style={{border:`1px solid ${G}35`,color:G,fontFamily:"sans-serif",background:"transparent"}}>
+                          <p className="text-[11px] mb-1" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif"}}>{cv.ind}</p>
+                          <p className="text-[10px] mb-3" style={{color:dark?"#6A6058":"#9A8E84",fontFamily:"sans-serif",opacity:0.8}}>{cv.reg}</p>
+                          <button type="button" onClick={()=>setModal(true)} className="mt-auto w-full py-2 rounded-xl text-[10px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-80"
+                            style={{border:`1px solid ${G}30`,color:G,fontFamily:"sans-serif",background:"transparent"}}>
                             {tr("tplGet",lang)}
                           </button>
                         </div>
@@ -1230,60 +1288,20 @@ export default function Home(){
                 ))}
               </AnimatePresence>
             </div>
-
             <div className="text-center">
-              {hasMore?(
-                <button type="button" onClick={()=>setVisible(n=>Math.min(n+PAGE_SIZE,TEMPLATES.length))}
-                  className="inline-flex items-center gap-3 px-8 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-80"
-                  style={{border:`1px solid ${G}40`,color:G,height:"50px",fontFamily:"sans-serif",background:"transparent"}}>
-                  <LayoutGrid size={13} strokeWidth={1.5}/>{tr("tplMore",lang)}<ArrowRight size={12} strokeWidth={2}/>
-                </button>
-              ):(
-                <Rise>
-                  <button type="button" onClick={()=>setModal(true)} className="text-[11px] tracking-[0.2em] uppercase hover:opacity-70 transition-opacity" style={{color:G,fontFamily:"sans-serif",background:"none",border:"none",cursor:"pointer"}}>{tr("tplDone",lang)}</button>
-                </Rise>
-              )}
+              {hasMore
+                ?<button type="button" onClick={()=>setVisible(n=>Math.min(n+PAGE_SIZE,TEMPLATES.length))}
+                    className="inline-flex items-center gap-3 px-8 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-80"
+                    style={{border:`1px solid ${G}40`,color:G,height:"50px",fontFamily:"sans-serif",background:"transparent"}}>
+                    <LayoutGrid size={13} strokeWidth={1.5}/>{tr("tplMore",lang)}<ArrowRight size={12} strokeWidth={2}/>
+                  </button>
+                :<Rise><button type="button" onClick={()=>setModal(true)} className="text-[11px] tracking-[0.2em] uppercase hover:opacity-70 transition-opacity" style={{color:G,fontFamily:"sans-serif",background:"none",border:"none",cursor:"pointer"}}>{tr("tplDone",lang)}</button></Rise>}
             </div>
           </div>
         </section>
 
-        {/* ══ GLOBAL ════════════════════════════════════════════════════════ */}
-        <section id="global" className="py-32 px-8 border-t" style={{borderColor:bdr}}>
-          <div className="mx-auto max-w-6xl">
-            <Rise className="mb-20">
-              <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4" style={{color:G,fontFamily:"sans-serif"}}>{tr("glbEyebrow",lang)}</p>
-              <h2 className="text-3xl sm:text-4xl font-normal tracking-tight leading-snug" style={{color:hi}}>{tr("glbH2a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("glbH2b",lang)}</em></h2>
-              <p className="mt-6 text-base leading-[1.9] max-w-2xl" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("glbBody",lang)}</p>
-            </Rise>
-            <div className="grid sm:grid-cols-2 gap-5 mb-16">
-              {ROUTES.map((r,i)=>(
-                <Rise key={i} d={0.08*i}>
-                  <div className="p-7 rounded-xl flex items-start gap-5" style={{background:card,border:`1px solid ${bdr}`}}>
-                    <Globe size={16} color={G} strokeWidth={1.5} className="shrink-0 mt-0.5" style={{opacity:0.7}}/>
-                    <div>
-                      <p className="text-[10px] font-medium tracking-[0.2em] uppercase mb-2" style={{color:G,fontFamily:"sans-serif"}}>{r.label}</p>
-                      <p className="text-sm" style={{color:hi}}>{r.from}</p>
-                      <div className="flex items-center gap-2 my-1.5"><div className="h-px flex-1" style={{background:`${G}30`}}/><ArrowRight size={10} color={G} strokeWidth={2} style={{opacity:0.5}}/><div className="h-px flex-1" style={{background:`${G}30`}}/></div>
-                      <p className="text-sm" style={{color:hi}}>{r.to}</p>
-                    </div>
-                  </div>
-                </Rise>
-              ))}
-            </div>
-            <div className="grid sm:grid-cols-3 gap-8 pt-8 border-t" style={{borderColor:bdr}}>
-              {([{t:"glb1t",b:"glb1b"},{t:"glb2t",b:"glb2b"},{t:"glb3t",b:"glb3b"}] as {t:string;b:string}[]).map((p,i)=>(
-                <Rise key={i} d={0.1*i}>
-                  <div className="h-px w-8 mb-6" style={{background:G,opacity:0.5}}/>
-                  <h3 className="text-base font-semibold mb-3" style={{color:hi,fontFamily:"sans-serif"}}>{tr(p.t,lang)}</h3>
-                  <p className="text-sm leading-[1.9]" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr(p.b,lang)}</p>
-                </Rise>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ══ PROCESS ═══════════════════════════════════════════════════════ */}
-        <section id="process" className="py-32 px-8 border-t" style={{borderColor:bdr}}>
+        {/* ══ METHOD ════════════════════════════════════════════════════════ */}
+        <section id="method" className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-20">
               <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4" style={{color:G,fontFamily:"sans-serif"}}>{tr("procEyebrow",lang)}</p>
@@ -1292,13 +1310,13 @@ export default function Home(){
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {STEPS.map(({n,t,b,Ic},i)=>(
                 <Rise key={n} d={0.08*i}>
-                  <div className="group p-8 rounded-xl h-full relative transition-all duration-500" style={{background:card,border:`1px solid ${bdr}`}}>
-                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{boxShadow:`0 0 0 1px ${G}25`}}/>
-                    <p className="text-3xl font-normal mb-8" style={{color:G,fontFamily:"'Georgia',serif",opacity:0.45}}>{n}</p>
-                    <Ic size={16} color={G} strokeWidth={1.5} style={{opacity:0.65}}/>
+                  <div className="group p-8 rounded-2xl h-full relative transition-all duration-500" style={{background:card,border:`1px solid ${bdr}`}}>
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{boxShadow:`0 0 0 1px ${G}22,0 0 40px ${G}08`}}/>
+                    <p className="text-3xl font-normal mb-8" style={{color:G,fontFamily:"'Georgia',serif",opacity:0.35}}>{n}</p>
+                    <Ic size={16} color={G} strokeWidth={1.5} style={{opacity:0.6}}/>
                     <h3 className="mt-4 text-[15px] font-semibold" style={{color:hi,fontFamily:"sans-serif"}}>{t}</h3>
-                    <p className="mt-3 text-[13px] leading-[1.85]" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{b}</p>
-                    <div className="mt-8 h-px w-7 opacity-35" style={{background:G}}/>
+                    <p className="mt-3 text-[13px] leading-[1.85]" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{b}</p>
+                    <div className="mt-8 h-px w-6 opacity-30" style={{background:G}}/>
                   </div>
                 </Rise>
               ))}
@@ -1306,40 +1324,41 @@ export default function Home(){
           </div>
         </section>
 
-        {/* ══ PRICING ═══════════════════════════════════════════════════════ */}
-        <section id="pricing" className="py-32 px-8 border-t" style={{borderColor:bdr}}>
+        {/* ══ INVESTMENT ════════════════════════════════════════════════════ */}
+        <section id="investment" className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-20">
               <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4" style={{color:G,fontFamily:"sans-serif"}}>{tr("prcEyebrow",lang)}</p>
               <h2 className="text-3xl sm:text-4xl font-normal tracking-tight" style={{color:hi}}>{tr("prcH2",lang)}</h2>
-              <p className="mt-4 text-sm" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("prcNote",lang)}</p>
+              <p className="mt-4 text-sm" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("prcNote",lang)}</p>
             </Rise>
             <div className="grid md:grid-cols-3 gap-6 items-start">
               {/* Foundation */}
               <Rise d={0}>
                 <div className="p-10 rounded-2xl h-full flex flex-col" style={{background:card,border:`1px solid ${bdr}`}}>
-                  <p className="text-[10px] tracking-[0.3em] uppercase mb-7" style={{color:G,fontFamily:"sans-serif",opacity:0.7}}>{tr("pF",lang)}</p>
+                  <p className="text-[10px] tracking-[0.3em] uppercase mb-7" style={{color:G,fontFamily:"sans-serif",opacity:0.65}}>{tr("pF",lang)}</p>
                   <div className="flex items-baseline gap-2 mb-2"><span className="text-4xl font-normal" style={{color:hi}}>179</span><span className="text-sm" style={{color:sub,fontFamily:"sans-serif"}}>AED</span></div>
-                  <p className="text-xs mb-8" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif"}}>{tr("pFsub",lang)}</p>
+                  <p className="text-xs mb-8" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif"}}>{tr("pFsub",lang)}</p>
                   <div className="h-px mb-8" style={{background:bdr}}/>
                   <ul className="space-y-3.5 mb-10 flex-1">
                     {(["pFi1","pFi2","pFi3","pFi4"] as string[]).map(k=>(
                       <li key={k} className="flex items-start gap-3 text-sm" style={{color:mid,fontFamily:"sans-serif",fontWeight:300}}>
-                        <div className="mt-2 h-1 w-1 rounded-full shrink-0" style={{background:G,opacity:0.5}}/>{tr(k,lang)}
+                        <div className="mt-2 h-1 w-1 rounded-full shrink-0" style={{background:G,opacity:0.45}}/>{tr(k,lang)}
                       </li>
                     ))}
                   </ul>
-                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75" style={{border:`1px solid ${G}38`,color:G,fontFamily:"sans-serif",height:"46px",background:"transparent"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
+                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75"
+                    style={{border:`1px solid ${G}35`,color:G,fontFamily:"sans-serif",height:"46px",background:"transparent"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
                 </div>
               </Rise>
-              {/* Growth — highlighted */}
+              {/* Growth */}
               <Rise d={0.08}>
-                <div className="p-10 rounded-2xl h-full flex flex-col relative" style={{background:dark?"rgba(200,169,110,0.06)":"rgba(200,169,110,0.07)",border:`1px solid ${G}38`}}>
+                <div className="p-10 rounded-2xl h-full flex flex-col relative" style={{background:dark?"rgba(200,169,110,0.055)":"rgba(200,169,110,0.07)",border:`1px solid ${G}35`}}>
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[9px] tracking-[0.28em] uppercase font-medium whitespace-nowrap" style={{background:G,color:INK,fontFamily:"sans-serif"}}>{tr("prcMostSel",lang)}</div>
                   <p className="text-[10px] tracking-[0.3em] uppercase mb-7" style={{color:G,fontFamily:"sans-serif"}}>{tr("pG",lang)}</p>
                   <div className="flex items-baseline gap-2 mb-2"><span className="text-4xl font-normal" style={{color:hi}}>299</span><span className="text-sm" style={{color:sub,fontFamily:"sans-serif"}}>AED</span></div>
-                  <p className="text-xs mb-8" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif"}}>{tr("pGsub",lang)}</p>
-                  <div className="h-px mb-8" style={{background:`${G}25`}}/>
+                  <p className="text-xs mb-8" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif"}}>{tr("pGsub",lang)}</p>
+                  <div className="h-px mb-8" style={{background:`${G}22`}}/>
                   <ul className="space-y-3.5 mb-10 flex-1">
                     {(["pGi1","pGi2","pGi3","pGi4","pGi5"] as string[]).map(k=>(
                       <li key={k} className="flex items-start gap-3 text-sm" style={{color:mid,fontFamily:"sans-serif",fontWeight:300}}>
@@ -1347,41 +1366,41 @@ export default function Home(){
                       </li>
                     ))}
                   </ul>
-                  <div>
-                    <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-85" style={{background:G,color:INK,fontFamily:"sans-serif",height:"46px"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
-                  </div>
+                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-88"
+                    style={{background:G,color:INK,fontFamily:"sans-serif",height:"46px",boxShadow:`0 6px 24px ${G}28`}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
                 </div>
               </Rise>
               {/* Executive */}
               <Rise d={0.16}>
                 <div className="p-10 rounded-2xl h-full flex flex-col" style={{background:card,border:`1px solid ${bdr}`}}>
-                  <p className="text-[10px] tracking-[0.3em] uppercase mb-7" style={{color:G,fontFamily:"sans-serif",opacity:0.7}}>{tr("pE",lang)}</p>
+                  <p className="text-[10px] tracking-[0.3em] uppercase mb-7" style={{color:G,fontFamily:"sans-serif",opacity:0.65}}>{tr("pE",lang)}</p>
                   <div className="flex items-baseline gap-2 mb-2"><span className="text-4xl font-normal" style={{color:hi}}>449</span><span className="text-sm" style={{color:sub,fontFamily:"sans-serif"}}>AED</span></div>
-                  <p className="text-xs mb-8" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif"}}>{tr("pEsub",lang)}</p>
+                  <p className="text-xs mb-8" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif"}}>{tr("pEsub",lang)}</p>
                   <div className="h-px mb-8" style={{background:bdr}}/>
                   <ul className="space-y-3.5 mb-10 flex-1">
                     {(["pEi1","pEi2","pEi3","pEi4","pEi5"] as string[]).map(k=>(
                       <li key={k} className="flex items-start gap-3 text-sm" style={{color:mid,fontFamily:"sans-serif",fontWeight:300}}>
-                        <div className="mt-2 h-1 w-1 rounded-full shrink-0" style={{background:G,opacity:0.5}}/>{tr(k,lang)}
+                        <div className="mt-2 h-1 w-1 rounded-full shrink-0" style={{background:G,opacity:0.45}}/>{tr(k,lang)}
                       </li>
                     ))}
                   </ul>
-                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75" style={{border:`1px solid ${G}38`,color:G,fontFamily:"sans-serif",height:"46px",background:"transparent"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
+                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75"
+                    style={{border:`1px solid ${G}35`,color:G,fontFamily:"sans-serif",height:"46px",background:"transparent"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
                 </div>
               </Rise>
             </div>
           </div>
         </section>
 
-        {/* ══ TESTIMONIALS ══════════════════════════════════════════════════ */}
-        <section id="clients" className="py-32 px-8 border-t" style={{borderColor:bdr}}>
+        {/* ══ OUTCOMES / TESTIMONIALS ═══════════════════════════════════════ */}
+        <section id="outcomes" className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-20">
               <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4" style={{color:G,fontFamily:"sans-serif"}}>{tr("tmEyebrow",lang)}</p>
               <h2 className="text-3xl sm:text-4xl font-normal tracking-tight" style={{color:hi}}>{tr("tmH2a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("tmH2b",lang)}</em></h2>
               <div className="mt-6 flex items-center gap-4">
-                <div className="flex gap-0.5">{Array.from({length:5}).map((_,i)=><svg key={i} width="12" height="12" viewBox="0 0 14 14" fill={G} opacity="0.8"><path d="M7 1l1.5 4H13l-3.5 2.5 1.5 4L7 9l-4 2.5 1.5-4L1 5h4.5z"/></svg>)}</div>
-                <span className="text-xs" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif"}}>{tr("tmStars",lang)}</span>
+                <div className="flex gap-0.5">{Array.from({length:5}).map((_,i)=><svg key={i} width="12" height="12" viewBox="0 0 14 14" fill={G} opacity="0.75"><path d="M7 1l1.5 4H13l-3.5 2.5 1.5 4L7 9l-4 2.5 1.5-4L1 5h4.5z"/></svg>)}</div>
+                <span className="text-xs" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif"}}>{tr("tmStars",lang)}</span>
               </div>
             </Rise>
             <div className="hidden lg:grid grid-cols-3 gap-6" style={{height:"700px",maskImage:"linear-gradient(to bottom,transparent,black 10%,black 90%,transparent)",WebkitMaskImage:"linear-gradient(to bottom,transparent,black 10%,black 90%,transparent)"}}>
@@ -1393,94 +1412,84 @@ export default function Home(){
           </div>
         </section>
 
-        {/* ══ CTA ═══════════════════════════════════════════════════════════ */}
-        <section className="py-32 px-8 border-t text-center" style={{borderColor:bdr}}>
+        {/* ══ CLOSING CTA ═══════════════════════════════════════════════════ */}
+        <section className="py-40 px-5 sm:px-8 border-t text-center" style={{borderColor:bdr}}>
           <Rise>
-            <div className="mx-auto max-w-lg">
-              <div className="h-px w-10 mx-auto mb-12" style={{background:G,opacity:0.5}}/>
-              <h2 className="text-3xl sm:text-4xl font-normal tracking-tight mb-6" style={{color:hi}}>{tr("ctaH2a",lang)}<br/>{tr("ctaH2b",lang)}</h2>
-              <p className="text-sm leading-[1.9] mb-12" style={{color:dark?"#9A8E84":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("ctaBody",lang)}</p>
+            <div className="mx-auto max-w-2xl">
+              {/* Gold line */}
+              <div className="h-px w-12 mx-auto mb-16" style={{background:`linear-gradient(to right, transparent, ${G}, transparent)`,boxShadow:`0 0 12px ${G}60`}}/>
+              <h2 className="text-3xl sm:text-[2.6rem] font-normal tracking-tight leading-[1.15] mb-6" style={{color:hi}}>
+                {tr("ctaH2a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("ctaH2b",lang)}</em>
+              </h2>
+              <p className="text-base leading-[1.9] mb-14 max-w-lg mx-auto" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("ctaBody",lang)}</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-85" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif"}}>{tr("startWA",lang)}</a>
-                <button type="button" onClick={()=>setModal(true)} className="flex items-center gap-3 px-9 text-[11px] font-medium tracking-[0.15em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}40`,color:G,height:"52px",fontFamily:"sans-serif",background:"transparent"}}><Mail size={12} strokeWidth={1.5}/>{tr("sendEnq",lang)}</button>
+                <button type="button" onClick={()=>setModal(true)}
+                  className="flex items-center justify-center gap-3 w-full sm:w-auto px-12 text-[11px] font-medium tracking-[0.20em] uppercase rounded-full transition-all hover:opacity-90"
+                  style={{background:G,color:INK,height:"56px",fontFamily:"sans-serif",boxShadow:`0 12px 40px ${G}32`,fontSize:"11px"}}>
+                  {tr("ctaFinalBtn",lang)}
+                </button>
+                <a href={wlMsg} target="_blank" rel="noreferrer"
+                  className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70"
+                  style={{border:`1px solid ${G}35`,color:G,height:"56px",fontFamily:"sans-serif"}}>
+                  {tr("startWA",lang)}
+                </a>
               </div>
+              {/* Footer statement */}
+              <p className="mt-16 text-[10px] tracking-[0.28em] uppercase" style={{color:dark?"rgba(200,169,110,0.25)":"rgba(26,20,16,0.30)",fontFamily:"sans-serif"}}>{tr("tagline",lang)}</p>
             </div>
           </Rise>
         </section>
 
         {/* ══ FOOTER ════════════════════════════════════════════════════════ */}
-        <footer className="relative py-10 px-5 sm:px-8" style={{
-          borderTop: dark ? "none" : `1px solid ${bdr}`,
-        }}>
-          {dark && (
-            <div aria-hidden className="absolute top-0 inset-x-0 h-px pointer-events-none" style={{
-              background: "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.10) 15%, rgba(212,175,55,0.55) 50%, rgba(212,175,55,0.10) 85%, transparent 100%)",
-            }}/>
-          )}
+        <footer className="relative py-10 px-5 sm:px-8" style={{borderTop:`1px solid ${bdr}`}}>
+          {dark&&<div aria-hidden className="absolute top-0 inset-x-0 h-px pointer-events-none" style={{background:"linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.08) 15%, rgba(212,175,55,0.45) 50%, rgba(212,175,55,0.08) 85%, transparent 100%)"}}/>}
           <div className="mx-auto max-w-6xl flex flex-col gap-6">
-
-            {/* Row 1 — logo + tagline + contact */}
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <img src="/images/logo.png" alt="Zenith Dubai CV" style={{height:"36px",width:"auto",objectFit:"contain",display:"block",borderRadius:"6px",filter:logoFilter,transition:"filter 0.4s ease",maxWidth:"140px"}}/>
-                <span className="text-[10px] tracking-[0.08em]" style={{color:dark?"rgba(200,169,110,0.38)":sub,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>{tr("tagline",lang)}</span>
+                <span className="text-[10px] tracking-[0.08em]" style={{color:dark?"rgba(200,169,110,0.32)":sub,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>{tr("tagline",lang)}</span>
               </div>
               <div className="flex items-center gap-4">
-                <button type="button" onClick={()=>setModal(true)} className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase" style={{color:dark?"rgba(200,169,110,0.32)":`${hi}50`,fontFamily:"sans-serif",background:"none",border:"none",cursor:"pointer",padding:0,transition:"color 0.25s ease"}}
+                <button type="button" onClick={()=>setModal(true)} className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase"
+                  style={{color:dark?"rgba(200,169,110,0.28)":`${hi}45`,fontFamily:"sans-serif",background:"none",border:"none",cursor:"pointer",padding:0,transition:"color 0.25s ease"}}
                   onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"#D4AF37":hi;}}
-                  onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"rgba(200,169,110,0.32)":`${hi}50`;}}
-                ><Mail size={10} strokeWidth={1.5}/>{EM}</button>
-                <span style={{color:dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
-                <a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase" style={{color:dark?"rgba(74,154,90,0.52)":"#4A9A5A90",fontFamily:"sans-serif",textDecoration:"none",transition:"color 0.25s ease"}}
+                  onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"rgba(200,169,110,0.28)":`${hi}45`;}}>
+                  <Mail size={10} strokeWidth={1.5}/>{EM}
+                </button>
+                <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
+                <a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase"
+                  style={{color:dark?"rgba(74,154,90,0.45)":"#4A9A5A80",fontFamily:"sans-serif",textDecoration:"none",transition:"color 0.25s ease"}}
                   onMouseEnter={e=>{(e.currentTarget as HTMLAnchorElement).style.color="#4A9A5A";}}
-                  onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color=dark?"rgba(74,154,90,0.52)":"#4A9A5A90";}}
-                >
+                  onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color=dark?"rgba(74,154,90,0.45)":"#4A9A5A80";}}>
                   <svg viewBox="0 0 24 24" width="10" height="10" fill="none"><path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg>
                   {tr("footerWA",lang)}
                 </a>
               </div>
             </div>
-
-            {/* Divider */}
             <div className="h-px" style={{background:bdr}}/>
-
-            {/* Row 2 — copyright + legal links — wraps on mobile */}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-              <p className="text-[10px]" style={{color:dark?"rgba(200,169,110,0.16)":`${hi}28`,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>
-                © {new Date().getFullYear()} Zenith Dubai CV
-              </p>
-              <span style={{color:dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
-              <a href="/privacy" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.25)":`${hi}40`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Privacy Policy</a>
-              <span style={{color:dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
-              <a href="/terms" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.25)":`${hi}40`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Terms of Service</a>
-              <span style={{color:dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
-              <a href="/refund" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.25)":`${hi}40`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Refund Policy</a>
+              <p className="text-[10px]" style={{color:dark?"rgba(200,169,110,0.14)":`${hi}25`,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>© {new Date().getFullYear()} Zenith Dubai CV</p>
+              <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
+              <a href="/privacy" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.22)":`${hi}38`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Privacy Policy</a>
+              <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
+              <a href="/terms" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.22)":`${hi}38`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Terms of Service</a>
+              <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
+              <a href="/refund" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.22)":`${hi}38`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Refund Policy</a>
             </div>
-
           </div>
         </footer>
       </main>
 
       {/* FAB */}
-      <button type="button" onClick={()=>setModal(true)} aria-label="Enquire" className="fixed bottom-24 right-7 h-12 w-12 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40" style={{background:G,boxShadow:`0 6px 28px ${G}40`}}><Mail size={15} color={INK} strokeWidth={2}/></button>
-      <a href={`https://wa.me/${WA}?text=${encodeURIComponent("Hello. I would like to discuss my career positioning.")}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="fixed bottom-8 right-7 h-12 w-12 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40" style={{background:"#25D366",boxShadow:"0 6px 28px rgba(37,211,102,0.32)"}}>
+      <button type="button" onClick={()=>setModal(true)} aria-label="Request Review" className="fixed bottom-24 right-7 h-12 w-12 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40" style={{background:G,boxShadow:`0 6px 28px ${G}40`}}><Mail size={15} color={INK} strokeWidth={2}/></button>
+      <a href={`https://wa.me/${WA}?text=${encodeURIComponent("Hello. I would like to request a private review.")}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="fixed bottom-8 right-7 h-12 w-12 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40" style={{background:"#25D366",boxShadow:"0 6px 28px rgba(37,211,102,0.32)"}}>
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
           <path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="white" strokeWidth="1.6" strokeLinejoin="round"/>
           <path d="M9.35 8.9c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.1.8 2.6.7 3.1.6.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3-.1-.2-.2-.3-.5-.4l-1.9-.9c-.2-.1-.4-.1-.6.1-.2.2-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5l.4-.5c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.5l-.8-2Z" fill="white"/>
         </svg>
       </a>
 
-      {/* Preview Lightbox */}
-      {preview&&(
-        <PreviewLightbox
-          cv={preview}
-          onClose={()=>setPreview(null)}
-          onEnquire={()=>setModal(true)}
-          dark={dark}
-          lang={lang}
-        />
-      )}
-
+      {preview&&<PreviewLightbox cv={preview} onClose={()=>setPreview(null)} onEnquire={()=>setModal(true)} dark={dark} lang={lang}/>}
       <Modal open={modal} onClose={()=>setModal(false)} dark={dark} lang={lang}/>
     </div>
   );
