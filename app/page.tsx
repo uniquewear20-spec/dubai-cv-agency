@@ -644,22 +644,35 @@ function Modal({open,onClose,dark,lang}:{open:boolean;onClose:()=>void;dark:bool
 // ── Testimonial card + column ──────────────────────────────────────────────────
 function TC({t,dark}:{t:typeof TMS[0];dark:boolean}){
   const ac=IH[t.ind]??G;
+  const quoteColor  = dark ? "#A09A94" : "#524840";
+  const nameColor   = dark ? "#D8D0C8" : "#1A1410";
+  const metaColor   = dark ? "#6A6058" : "#9A8E84";
   return(
-    <div className="flex flex-col p-5 mb-4 rounded-xl" style={{background:dark?"rgba(255,255,255,0.025)":"rgba(255,255,255,0.85)",border:`1px solid ${dark?"rgba(255,255,255,0.05)":"rgba(0,0,0,0.05)"}`}}>
-      <p className="text-[11px] leading-[1.85] mb-4" style={{
-        color: dark ? "#B8AEA8" : "#524840",
+    <div className="flex flex-col p-5 mb-4 rounded-xl" style={{
+      background: dark?"rgba(255,255,255,0.025)":"rgba(255,255,255,0.85)",
+      border: `1px solid ${dark?"rgba(255,255,255,0.05)":"rgba(0,0,0,0.05)"}`,
+      color: quoteColor, // reset color for all children
+      fontFamily: "sans-serif",
+    }}>
+      <p style={{
+        fontSize:"11px", lineHeight:"1.85", marginBottom:"16px",
+        color: quoteColor,
         fontFamily: "sans-serif",
         fontStyle: "italic",
         fontWeight: 400,
       }}>"{t.text}"</p>
-      <div className="pt-3 flex items-center gap-3" style={{borderTop:`1px solid ${dark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.06)"}`}}>
-        <img src={t.img} alt={t.name} className="h-8 w-8 rounded-full object-cover" style={{filter:"grayscale(40%) contrast(1.05)"}}/>
-        <div className="min-w-0 flex-1">
-          {/* FIX: Slightly brighter name text in dark mode */}
-          <p className="text-[11px] font-semibold truncate" style={{color:dark?"#EDE8E0":"#1A1410"}}>{t.name}</p>
-          <p className="text-[10px] truncate" style={{color:dark?"#807060":"#9A8E84"}}>{t.role} · {t.co}</p>
+      <div style={{borderTop:`1px solid ${dark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.06)"}`,paddingTop:"12px",display:"flex",alignItems:"center",gap:"12px"}}>
+        <img src={t.img} alt={t.name} className="h-8 w-8 rounded-full object-cover shrink-0" style={{filter:"grayscale(40%) contrast(1.05)"}}/>
+        <div style={{minWidth:0,flex:1}}>
+          <p style={{fontSize:"11px",fontWeight:600,color:nameColor,fontFamily:"sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{t.name}</p>
+          <p style={{fontSize:"10px",color:metaColor,fontFamily:"sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{t.role} · {t.co}</p>
         </div>
-        <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium" style={{background:`${ac}12`,color:ac,border:`1px solid ${ac}25`}}>{t.hl}</span>
+        <span style={{
+          flexShrink:0, borderRadius:"9999px",
+          padding:"2px 8px", fontSize:"9px", fontWeight:500,
+          background:`${ac}18`, color:ac, border:`1px solid ${ac}30`,
+          fontFamily:"sans-serif", whiteSpace:"nowrap",
+        }}>{t.hl}</span>
       </div>
     </div>
   );
