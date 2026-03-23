@@ -321,9 +321,9 @@ const ROUTES = [
 const wl = (m:string) => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
 const fb = (b:number) => b<1024?`${b}B`:b<1048576?`${(b/1024).toFixed(1)}KB`:`${(b/1048576).toFixed(1)}MB`;
 
-// ── SparklesCore — 3-layer premium glow field, canvas-based ──────────────────
+// ── SparklesCore — matches Acme demo: tiny particles, no bg, CSS masked ──────
 function SparklesCore({
-  className, particleColor="#C8A96E", particleDensity=70, speed=1,
+  className, particleColor="#C8A96E", particleDensity=120, speed=1,
 }:{
   className?:string; particleColor?:string; particleDensity?:number;
   speed?:number; background?:string; id?:string; minSize?:number; maxSize?:number;
@@ -333,10 +333,11 @@ function SparklesCore({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+
+    // Use alpha:true explicitly so canvas is truly transparent
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    // Parse base gold color
     const hex = particleColor.replace("#","");
     const cr = parseInt(hex.substring(0,2),16);
     const cg = parseInt(hex.substring(2,4),16);
@@ -344,221 +345,151 @@ function SparklesCore({
 
     let animId: number;
     let w = 0, h = 0;
-    let breatheT = 0; // global breathing timer
-
-    // ── Layer definitions ──────────────────────────────────────────────────
-    // Layer 0 = background: tiny, very slow, very faint
-    // Layer 1 = mid:        medium, moderate, mid opacity
-    // Layer 2 = foreground: slightly larger, soft glow, fewest
-    const LAYERS = [
-      { ratio: 0.50, szMin: 0.3, szMax: 0.7,  vyMin: 0.08, vyMax: 0.18, opMax: 0.50, vxRange: 0.06, glowR: 3.0 },
-      { ratio: 0.35, szMin: 0.6, szMax: 1.1,  vyMin: 0.15, vyMax: 0.30, opMax: 0.80, vxRange: 0.10, glowR: 5.5 },
-      { ratio: 0.15, szMin: 1.0, szMax: 1.8,  vyMin: 0.22, vyMax: 0.40, opMax: 1.00, vxRange: 0.08, glowR: 9.0 },
-    ];
+    let breatheT = 0;
 
     type P = {
-      x: number; y: number; sz: number;
-      vy: number; vx: number;           // base velocities
-      vyWave: number; vxWave: number;   // subtle wave drift
-      waveFreq: number; wavePhase: number;
-      op: number; opMax: number;
-      life: number; maxLife: number;
-      layer: number; glowR: number;
-      spawnBand: number;                // 0=bottom 60% denser, 1=full height
+      x:number; y:number; sz:number;
+      vy:number; vx:number;
+      op:number; opTarget:number;
+      life:number; maxLife:number;
+      tier:number; // 0=bg dust, 1=mid, 2=bright star
     };
 
-    let particles: P[] = [];
+    let pts: P[] = [];
+    const rand = (a:number,b:number) => a + Math.random()*(b-a);
 
-    const rand = (min: number, max: number) => min + Math.random() * (max - min);
-
-    const spawnP = (layer: number, randomY = false): P => {
-      const L = LAYERS[layer];
-      // Bottom-biased spawn: 70% of particles spawn in bottom 40% of canvas
-      const bottomBias = Math.random() < 0.70;
-      const spawnY = randomY
-        ? (bottomBias ? rand(h * 0.60, h) : rand(0, h))
-        : rand(h * 0.85, h + 4);
-
-      const maxLife = rand(200, 380) / speed;
+    const mkP = (initY=false): P => {
+      const tier = Math.random() < 0.55 ? 0 : Math.random() < 0.75 ? 1 : 2;
+      const ml = rand(150, 320) / speed;
+      const yStart = initY ? rand(0, h) : rand(h*0.88, h+2);
       return {
         x: rand(0, w),
-        y: spawnY,
-        sz: rand(L.szMin, L.szMax),
-        vy: rand(L.vyMin, L.vyMax) * speed,
-        vx: (Math.random() - 0.5) * L.vxRange * speed,
-        vyWave: rand(0.005, 0.015) * speed,
-        vxWave: rand(0.003, 0.010) * speed,
-        waveFreq: rand(0.008, 0.020),
-        wavePhase: rand(0, Math.PI * 2),
-        op: randomY ? rand(0, L.opMax * 0.8) : 0,
-        opMax: L.opMax,
-        life: randomY ? rand(0, maxLife * 0.5) : 0,
-        maxLife,
-        layer,
-        glowR: L.glowR,
-        spawnBand: bottomBias ? 0 : 1,
+        y: yStart,
+        sz: tier===0 ? rand(0.2,0.5) : tier===1 ? rand(0.4,0.8) : rand(0.7,1.2),
+        vy: (tier===0 ? rand(0.12,0.25) : tier===1 ? rand(0.20,0.38) : rand(0.30,0.50)) * speed,
+        vx: (Math.random()-0.5) * (tier===0 ? 0.08 : 0.14),
+        op: initY ? rand(0, 0.6) : 0,
+        opTarget: tier===0 ? rand(0.25,0.50) : tier===1 ? rand(0.50,0.80) : rand(0.80,1.00),
+        life: initY ? rand(0, ml*0.5) : 0,
+        maxLife: ml,
+        tier,
       };
     };
 
     const init = () => {
-      w = canvas.offsetWidth;
-      h = canvas.offsetHeight;
+      w = canvas.offsetWidth; h = canvas.offsetHeight;
       if (!w || !h) return;
-      canvas.width = w;
-      canvas.height = h;
-
-      particles = [];
-      const total = Math.round(Math.min(particleDensity, 90) * Math.max(0.6, w / 520));
-      LAYERS.forEach((_, li) => {
-        const count = Math.round(total * LAYERS[li].ratio);
-        for (let i = 0; i < count; i++) particles.push(spawnP(li, true));
-      });
+      canvas.width = w; canvas.height = h;
+      const n = Math.round(Math.min(particleDensity, 160) * (w/520));
+      pts = Array.from({length:n}, ()=>mkP(true));
     };
 
     const draw = () => {
       if (!w || !h) { animId = requestAnimationFrame(draw); return; }
 
-      breatheT += 0.006;
-      const breathe = 0.75 + 0.25 * Math.sin(breatheT);
+      breatheT += 0.005;
+      const br = 0.78 + 0.22*Math.sin(breatheT);
 
+      // Fully clear — no background drawn, canvas stays transparent
       ctx.clearRect(0, 0, w, h);
 
-      // ── 1. Ambient glow bloom — radial, additive via screen blend ────────
-      // With mix-blend-mode:screen, dark areas are transparent, only light shows
-      const bloomR = w * 0.55 * breathe;
-      const bloom = ctx.createRadialGradient(w/2, h, 0, w/2, h, bloomR);
-      bloom.addColorStop(0,    `rgba(${cr},${cg},${cb},${0.45 * breathe})`);
-      bloom.addColorStop(0.35, `rgba(${cr},${cg},${cb},${0.18 * breathe})`);
-      bloom.addColorStop(0.70, `rgba(${cr},${cg},${cb},${0.05 * breathe})`);
-      bloom.addColorStop(1,    `rgba(${cr},${cg},${cb},0)`);
+      // ── Glowing source line at bottom ──────────────────────────────────
+      const lg = ctx.createLinearGradient(w*0.05, 0, w*0.95, 0);
+      lg.addColorStop(0,    `rgba(${cr},${cg},${cb},0)`);
+      lg.addColorStop(0.15, `rgba(${cr},${cg},${cb},${0.35*br})`);
+      lg.addColorStop(0.50, `rgba(${cr},${cg},${cb},${0.85*br})`);
+      lg.addColorStop(0.85, `rgba(${cr},${cg},${cb},${0.35*br})`);
+      lg.addColorStop(1,    `rgba(${cr},${cg},${cb},0)`);
+
+      ctx.save();
+      // Thick soft glow
+      ctx.beginPath(); ctx.moveTo(w*0.05, h-0.5); ctx.lineTo(w*0.95, h-0.5);
+      ctx.strokeStyle = lg; ctx.lineWidth=4;
+      ctx.shadowColor=`rgba(${cr},${cg},${cb},0.9)`; ctx.shadowBlur=20*br;
+      ctx.globalAlpha=0.4; ctx.stroke();
+      // Crisp bright core line
+      ctx.lineWidth=1; ctx.shadowBlur=8*br; ctx.globalAlpha=br; ctx.stroke();
+      ctx.restore();
+
+      // ── Subtle radial bloom behind particles (very low opacity) ────────
+      const bloom = ctx.createRadialGradient(w/2, h, 0, w/2, h, w*0.48*br);
+      bloom.addColorStop(0,   `rgba(${cr},${cg},${cb},${0.10*br})`);
+      bloom.addColorStop(0.5, `rgba(${cr},${cg},${cb},${0.03*br})`);
+      bloom.addColorStop(1,   `rgba(${cr},${cg},${cb},0)`);
       ctx.fillStyle = bloom;
       ctx.fillRect(0, 0, w, h);
 
-      // ── 2. Glowing source line (breathes) ─────────────────────────────────
-      const lineOp = breathe;
-      const lg = ctx.createLinearGradient(w*0.05, 0, w*0.95, 0);
-      lg.addColorStop(0,    `rgba(${cr},${cg},${cb},0)`);
-      lg.addColorStop(0.20, `rgba(${cr},${cg},${cb},${0.40 * lineOp})`);
-      lg.addColorStop(0.50, `rgba(${cr},${cg},${cb},${0.90 * lineOp})`);
-      lg.addColorStop(0.80, `rgba(${cr},${cg},${cb},${0.40 * lineOp})`);
-      lg.addColorStop(1,    `rgba(${cr},${cg},${cb},0)`);
+      // ── Particles ──────────────────────────────────────────────────────
+      for (let i=0; i<pts.length; i++) {
+        const p = pts[i];
+        p.life++;
+        p.y -= p.vy;
+        p.x += p.vx + Math.sin(p.life*0.025 + p.x)*0.06; // subtle sway
 
-      // Outer glow pass
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(w*0.05, h-1); ctx.lineTo(w*0.95, h-1);
-      ctx.strokeStyle = lg;
-      ctx.lineWidth = 3;
-      ctx.shadowColor = `rgba(${cr},${cg},${cb},0.6)`;
-      ctx.shadowBlur = 18 * breathe;
-      ctx.globalAlpha = 0.5;
-      ctx.stroke();
-      // Inner bright core
-      ctx.lineWidth = 1;
-      ctx.shadowBlur = 8;
-      ctx.globalAlpha = lineOp;
-      ctx.stroke();
-      ctx.restore();
+        const prog = p.life/p.maxLife;
+        // Envelope: fast in (10%), hold (10-65%), slow fade out (65-100%)
+        const env = prog<0.10 ? prog/0.10
+                  : prog<0.65 ? 1.0
+                  : 1-(prog-0.65)/0.35;
+        p.op += (p.opTarget*env*br - p.op)*0.06;
 
-      // ── 3. Draw particles — back to front (layer 0→2) ────────────────────
-      for (let li = 0; li < 3; li++) {
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-          if (p.layer !== li) continue;
+        // Height fade: fully gone by top 15% of canvas
+        const hFade = Math.max(0, Math.min(1, p.y/(h*0.15)));
 
-          // Physics: upward + sinusoidal horizontal drift
-          p.life++;
-          p.y -= p.vy + p.vyWave * Math.sin(p.life * p.waveFreq + p.wavePhase);
-          p.x += p.vx + p.vxWave * Math.cos(p.life * p.waveFreq * 0.7 + p.wavePhase);
+        if (p.life>=p.maxLife || p.y<-4) { pts[i]=mkP(false); continue; }
 
-          const prog = p.life / p.maxLife;
+        const op = Math.max(0, p.op*hFade);
+        if (op<0.008) continue;
 
-          // Opacity envelope: quick fade-in, long hold, slow fade-out
-          // Also multiply by global breathe for the "breathing glow" effect
-          let targetOp: number;
-          if      (prog < 0.12) targetOp = (prog / 0.12) * p.opMax;
-          else if (prog < 0.65) targetOp = p.opMax;
-          else                  targetOp = p.opMax * (1 - (prog - 0.65) / 0.35);
-          p.op += (targetOp - p.op) * 0.05; // smooth lerp
-          const finalOp = p.op * breathe;
+        ctx.save();
+        if (p.tier===0) {
+          // Tiny dust — just a dot
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.sz, 0, Math.PI*2);
+          ctx.fillStyle=`rgba(${cr},${cg},${cb},${op})`; ctx.fill();
 
-          // Density fade: particles near top of canvas fade out more
-          const heightFade = Math.min(1, p.y / (h * 0.5));
+        } else if (p.tier===1) {
+          // Mid — dot + soft halo
+          const g1=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*4);
+          g1.addColorStop(0,`rgba(${cr},${cg},${cb},${op*0.3})`);
+          g1.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*4,0,Math.PI*2);
+          ctx.fillStyle=g1; ctx.fill();
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);
+          ctx.fillStyle=`rgba(${cr},${cg},${cb},${op})`; ctx.fill();
 
-          if (p.life >= p.maxLife || p.y < -6) {
-            particles[i] = spawnP(li, false);
-            continue;
-          }
-
-          const op = finalOp * heightFade;
-          if (op <= 0.01) continue;
-
-          ctx.save();
-
-          // Layer 0 — background: just a soft dot, no glow
-          if (li === 0) {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.sz, 0, Math.PI*2);
-            ctx.fillStyle = `rgba(${cr},${cg},${cb},${op})`;
-            ctx.fill();
-
-          // Layer 1 — mid: dot with subtle glow halo
-          } else if (li === 1) {
-            // Halo
-            const h1 = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.sz * p.glowR);
-            h1.addColorStop(0, `rgba(${cr},${cg},${cb},${op * 0.4})`);
-            h1.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
-            ctx.beginPath(); ctx.arc(p.x, p.y, p.sz * p.glowR, 0, Math.PI*2);
-            ctx.fillStyle = h1; ctx.fill();
-            // Core
-            ctx.beginPath(); ctx.arc(p.x, p.y, p.sz, 0, Math.PI*2);
-            ctx.fillStyle = `rgba(${cr},${cg},${cb},${op})`; ctx.fill();
-
-          // Layer 2 — foreground: rich glow, slight gold-white blend
-          } else {
-            // Wide soft halo
-            const h2 = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.sz * p.glowR);
-            h2.addColorStop(0,   `rgba(${cr},${cg},${cb},${op * 0.55})`);
-            h2.addColorStop(0.4, `rgba(${cr},${cg},${cb},${op * 0.20})`);
-            h2.addColorStop(1,   `rgba(${cr},${cg},${cb},0)`);
-            ctx.beginPath(); ctx.arc(p.x, p.y, p.sz * p.glowR, 0, Math.PI*2);
-            ctx.fillStyle = h2; ctx.fill();
-            // Bright core with shadow glow
-            ctx.shadowColor = `rgba(${cr},${cg},${cb},${op * 0.9})`;
-            ctx.shadowBlur = p.sz * 6;
-            ctx.beginPath(); ctx.arc(p.x, p.y, p.sz, 0, Math.PI*2);
-            ctx.fillStyle = `rgba(255,248,220,${op})`; // warm white core
-            ctx.fill();
-          }
-
-          ctx.restore();
+        } else {
+          // Bright star — large halo + warm white core (like Acme reference)
+          const g2=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*8);
+          g2.addColorStop(0,  `rgba(${cr},${cg},${cb},${op*0.5})`);
+          g2.addColorStop(0.3,`rgba(${cr},${cg},${cb},${op*0.15})`);
+          g2.addColorStop(1,  `rgba(${cr},${cg},${cb},0)`);
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*8,0,Math.PI*2);
+          ctx.fillStyle=g2; ctx.fill();
+          // Warm white pinpoint core
+          ctx.shadowColor=`rgba(255,240,180,${op})`; ctx.shadowBlur=p.sz*5;
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*0.8,0,Math.PI*2);
+          ctx.fillStyle=`rgba(255,245,200,${op})`; ctx.fill();
         }
+        ctx.restore();
       }
 
       animId = requestAnimationFrame(draw);
     };
 
-    // ResizeObserver — fires when element gets real dimensions (works inside motion wrappers)
-    const ro = new ResizeObserver(() => {
-      const nw = canvas.offsetWidth, nh = canvas.offsetHeight;
-      if (nw > 0 && nh > 0 && (nw !== w || nh !== h)) init();
+    const ro = new ResizeObserver(()=>{
+      const nw=canvas.offsetWidth, nh=canvas.offsetHeight;
+      if (nw>0&&nh>0&&(nw!==w||nh!==h)) init();
     });
     ro.observe(canvas);
-    init();
-    draw();
-
-    return () => { cancelAnimationFrame(animId); ro.disconnect(); };
+    init(); draw();
+    return ()=>{ cancelAnimationFrame(animId); ro.disconnect(); };
   }, [particleColor, particleDensity, speed]);
 
   return (
     <canvas
       ref={canvasRef}
       className={className}
-      style={{
-        display: "block",
-        background: "transparent",
-        mixBlendMode: "screen",
-      }}
+      style={{ display:"block", background:"transparent" }}
     />
   );
 }
@@ -1133,27 +1064,20 @@ export default function Home(){
             </p>
           </Rise>
 
-          {/* ── Premium glow field — screen blend, emanates from page ── */}
+          {/* ── Sparkles — transparent canvas + CSS mask fade, like Acme demo ── */}
           <div className="relative w-full mx-auto mb-6" style={{
             height: "160px",
             maxWidth: "640px",
-            isolation: "isolate",
+            // CSS mask: fade top (particles dissolve up) + fade sides
+            WebkitMaskImage: "radial-gradient(ellipse 80% 100% at 50% 100%, black 20%, transparent 100%)",
+            maskImage: "radial-gradient(ellipse 80% 100% at 50% 100%, black 20%, transparent 100%)",
           }}>
             <SparklesCore
               particleColor={G}
-              particleDensity={72}
-              speed={0.75}
+              particleDensity={130}
+              speed={0.8}
               className="absolute inset-0 w-full h-full"
             />
-            {/* Top fade — field melts into page above */}
-            <div className="absolute top-0 inset-x-0 pointer-events-none" style={{
-              height: "65%",
-              background: `linear-gradient(to bottom, ${dark?INK:ASH} 0%, transparent 100%)`,
-              zIndex: 2,
-            }}/>
-            {/* Side fades */}
-            <div className="absolute inset-y-0 left-0 w-20 pointer-events-none" style={{background:`linear-gradient(to right, ${dark?INK:ASH}, transparent)`, zIndex:2}}/>
-            <div className="absolute inset-y-0 right-0 w-20 pointer-events-none" style={{background:`linear-gradient(to left, ${dark?INK:ASH}, transparent)`, zIndex:2}}/>
           </div>
 
           <Rise d={0.92} y={20}>
