@@ -321,14 +321,15 @@ const ROUTES = [
 const wl = (m:string) => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
 const fb = (b:number) => b<1024?`${b}B`:b<1048576?`${(b/1024).toFixed(1)}KB`:`${(b/1048576).toFixed(1)}MB`;
 
-// ── SparklesCore — canvas-based, zero deps, works everywhere ─────────────────
+// ── SparklesCore — canvas-based, ResizeObserver-safe, premium effect ─────────
 function SparklesCore({
-  className, particleColor="#C8A96E", particleDensity=80, speed=1,
+  className, particleColor="#C8A96E", particleDensity=70, speed=1,
 }:{
   className?:string; particleColor?:string; particleDensity?:number;
   speed?:number; background?:string; id?:string; minSize?:number; maxSize?:number;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -336,109 +337,130 @@ function SparklesCore({
     if (!ctx) return;
 
     let animId: number;
-    let w = canvas.offsetWidth;
-    let h = canvas.offsetHeight;
-    canvas.width = w;
-    canvas.height = h;
+    let w = 0, h = 0;
 
-    // Parse gold color to rgba
+    // Parse hex color once
     const hex = particleColor.replace("#","");
-    const r = parseInt(hex.substring(0,2),16);
-    const g = parseInt(hex.substring(2,4),16);
-    const b = parseInt(hex.substring(4,6),16);
+    const cr = parseInt(hex.substring(0,2),16);
+    const cg = parseInt(hex.substring(2,4),16);
+    const cb = parseInt(hex.substring(4,6),16);
 
-    type Particle = {x:number;y:number;size:number;speedY:number;speedX:number;opacity:number;opacitySpeed:number;life:number;maxLife:number};
+    type P = {x:number;y:number;sz:number;vy:number;vx:number;op:number;life:number;maxLife:number};
 
-    const spawn = (): Particle => {
-      const maxLife = (80 + Math.random() * 120) / speed;
+    let particles: P[] = [];
+
+    const spawn = (randomY = false): P => {
+      const maxLife = (120 + Math.random() * 160) / speed;
       return {
         x: Math.random() * w,
-        y: h,
-        size: 0.4 + Math.random() * 1.4,
-        speedY: (0.4 + Math.random() * 0.8) * speed,
-        speedX: (Math.random() - 0.5) * 0.4,
-        opacity: 0,
-        opacitySpeed: 0.02 + Math.random() * 0.02,
-        life: 0,
+        y: randomY ? Math.random() * h : h,
+        sz: 0.3 + Math.random() * 1.2,
+        vy: (0.25 + Math.random() * 0.55) * speed,
+        vx: (Math.random() - 0.5) * 0.25,
+        op: randomY ? Math.random() * 0.5 : 0,
+        life: randomY ? Math.random() * maxLife : 0,
         maxLife,
       };
     };
 
-    const count = Math.min(particleDensity, 100);
-    const particles: Particle[] = Array.from({length: count}, () => {
-      const p = spawn();
-      p.y = Math.random() * h; // stagger initial positions
-      p.life = Math.random() * p.maxLife;
-      p.opacity = Math.random() * 0.6;
-      return p;
-    });
+    const init = () => {
+      w = canvas.offsetWidth;
+      h = canvas.offsetHeight;
+      if (!w || !h) return;
+      canvas.width = w;
+      canvas.height = h;
+      const count = Math.round(Math.min(particleDensity, 100) * (w / 560));
+      particles = Array.from({length: count}, () => spawn(true));
+    };
 
     const draw = () => {
+      if (!w || !h) { animId = requestAnimationFrame(draw); return; }
       ctx.clearRect(0, 0, w, h);
 
-      // Glow bloom at bottom
-      const grad = ctx.createRadialGradient(w/2, h, 0, w/2, h, w*0.55);
-      grad.addColorStop(0, `rgba(${r},${g},${b},0.18)`);
-      grad.addColorStop(0.5, `rgba(${r},${g},${b},0.06)`);
-      grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
-      ctx.fillStyle = grad;
+      // ── Radial glow bloom rising from bottom centre ──
+      const bloom = ctx.createRadialGradient(w/2, h, 0, w/2, h, w * 0.5);
+      bloom.addColorStop(0,   `rgba(${cr},${cg},${cb},0.22)`);
+      bloom.addColorStop(0.45,`rgba(${cr},${cg},${cb},0.08)`);
+      bloom.addColorStop(1,   `rgba(${cr},${cg},${cb},0)`);
+      ctx.fillStyle = bloom;
       ctx.fillRect(0, 0, w, h);
 
-      // Glowing line at bottom
-      const lineGrad = ctx.createLinearGradient(w*0.1, 0, w*0.9, 0);
-      lineGrad.addColorStop(0, `rgba(${r},${g},${b},0)`);
-      lineGrad.addColorStop(0.3, `rgba(${r},${g},${b},0.7)`);
-      lineGrad.addColorStop(0.5, `rgba(${r},${g},${b},1)`);
-      lineGrad.addColorStop(0.7, `rgba(${r},${g},${b},0.7)`);
-      lineGrad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      // ── Glowing source line ──
+      const lg = ctx.createLinearGradient(w*0.08, 0, w*0.92, 0);
+      lg.addColorStop(0,   `rgba(${cr},${cg},${cb},0)`);
+      lg.addColorStop(0.25,`rgba(${cr},${cg},${cb},0.55)`);
+      lg.addColorStop(0.5, `rgba(${cr},${cg},${cb},0.95)`);
+      lg.addColorStop(0.75,`rgba(${cr},${cg},${cb},0.55)`);
+      lg.addColorStop(1,   `rgba(${cr},${cg},${cb},0)`);
+      ctx.save();
       ctx.beginPath();
-      ctx.moveTo(w*0.1, h-1);
-      ctx.lineTo(w*0.9, h-1);
-      ctx.strokeStyle = lineGrad;
+      ctx.moveTo(w*0.08, h-1);
+      ctx.lineTo(w*0.92, h-1);
+      ctx.strokeStyle = lg;
       ctx.lineWidth = 1;
-      ctx.shadowColor = `rgba(${r},${g},${b},0.9)`;
-      ctx.shadowBlur = 12;
+      ctx.shadowColor = `rgba(${cr},${cg},${cb},1)`;
+      ctx.shadowBlur = 14;
       ctx.stroke();
-      ctx.shadowBlur = 0;
+      // Second pass — brighter core
+      ctx.lineWidth = 0.5;
+      ctx.shadowBlur = 6;
+      ctx.stroke();
+      ctx.restore();
 
-      // Particles
-      particles.forEach((p, i) => {
-        p.life += 1;
-        p.y -= p.speedY;
-        p.x += p.speedX;
+      // ── Particles ──
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.life++;
+        p.y -= p.vy;
+        p.x += p.vx;
 
-        // Fade in then out based on life
-        const progress = p.life / p.maxLife;
-        if (progress < 0.2) p.opacity = Math.min(p.opacity + p.opacitySpeed, 0.9);
-        else p.opacity = Math.max(0, 0.9 * (1 - (progress - 0.2) / 0.8));
+        const prog = p.life / p.maxLife;
+        // Fade in fast (0–15%), hold (15–60%), fade out slow (60–100%)
+        if (prog < 0.15)      p.op = (prog / 0.15) * 0.85;
+        else if (prog < 0.60) p.op = 0.85;
+        else                  p.op = 0.85 * (1 - (prog - 0.60) / 0.40);
 
-        if (p.life >= p.maxLife || p.y < -5) {
-          particles[i] = spawn();
-          return;
+        if (p.life >= p.maxLife || p.y < -4) {
+          particles[i] = spawn(false);
+          continue;
         }
 
+        // Soft glow dot — two passes for depth
+        ctx.save();
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r},${g},${b},${p.opacity})`;
-        ctx.shadowColor = `rgba(${r},${g},${b},${p.opacity * 0.8})`;
-        ctx.shadowBlur = p.size * 3;
+        ctx.arc(p.x, p.y, p.sz * 2.5, 0, Math.PI*2);
+        const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.sz * 2.5);
+        glow.addColorStop(0, `rgba(${cr},${cg},${cb},${p.op * 0.35})`);
+        glow.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
+        ctx.fillStyle = glow;
         ctx.fill();
-        ctx.shadowBlur = 0;
-      });
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.sz, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${cr},${cg},${cb},${p.op})`;
+        ctx.fill();
+        ctx.restore();
+      }
 
       animId = requestAnimationFrame(draw);
     };
 
+    // ResizeObserver — fires when element actually has dimensions (fixes Rise wrapper issue)
+    const ro = new ResizeObserver(() => {
+      const nw = canvas.offsetWidth;
+      const nh = canvas.offsetHeight;
+      if (nw > 0 && nh > 0 && (nw !== w || nh !== h)) {
+        init();
+      }
+    });
+    ro.observe(canvas);
+    init();
     draw();
 
-    const onResize = () => {
-      w = canvas.offsetWidth;
-      h = canvas.offsetHeight;
-      canvas.width = w;
-      canvas.height = h;
+    return () => {
+      cancelAnimationFrame(animId);
+      ro.disconnect();
     };
-    window.addEventListener("resize", onResize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", onResize); };
   }, [particleColor, particleDensity, speed]);
 
   return (
@@ -1014,24 +1036,27 @@ export default function Home(){
               {tr("h1a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("h1b",lang)}</em>
             </h1>
           </Rise>
-          <Rise d={0.75} y={28}><p className="text-[15px] sm:text-[17px] leading-[1.95] w-full max-w-[480px] mb-6 mx-auto px-4 sm:px-0" style={{color:dark?"#9A8E84":sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("heroSub",lang)}</p></Rise>
-
-          {/* ── Sparkles — gold particles erupt from glowing line ── */}
-          <Rise d={0.82} y={0}>
-            <div className="relative w-full mx-auto mb-8" style={{height:"130px", maxWidth:"560px", background:"transparent"}}>
-              <SparklesCore
-                particleColor={G}
-                particleDensity={90}
-                speed={1.2}
-                className="absolute inset-0 w-full h-full"
-              />
-              {/* Fade top — particles dissolve upward */}
-              <div className="absolute top-0 inset-x-0 h-12 pointer-events-none" style={{background:`linear-gradient(to bottom, ${dark?INK:ASH}, transparent)`}}/>
-              {/* Fade left/right edges */}
-              <div className="absolute inset-y-0 left-0 w-12 pointer-events-none" style={{background:`linear-gradient(to right, ${dark?INK:ASH}, transparent)`}}/>
-              <div className="absolute inset-y-0 right-0 w-12 pointer-events-none" style={{background:`linear-gradient(to left, ${dark?INK:ASH}, transparent)`}}/>
-            </div>
+          <Rise d={0.75} y={28}>
+            <p className="text-[15px] sm:text-[17px] leading-[1.95] w-full max-w-[480px] mb-0 mx-auto px-4 sm:px-0 relative z-20" style={{color:dark?"#9A8E84":sub,fontFamily:"sans-serif",fontWeight:300}}>
+              {tr("heroSub",lang)}
+            </p>
           </Rise>
+
+          {/* ── Sparkles — NOT inside Rise so canvas measures correctly ── */}
+          <div className="relative w-full mx-auto mb-6" style={{height:"140px", maxWidth:"600px"}}>
+            {/* Canvas — z-10, behind text */}
+            <SparklesCore
+              particleColor={G}
+              particleDensity={65}
+              speed={0.85}
+              className="absolute inset-0 w-full h-full"
+            />
+            {/* Top fade — particles dissolve upward into page */}
+            <div className="absolute top-0 inset-x-0 pointer-events-none" style={{height:"55%", background:`linear-gradient(to bottom, ${dark?INK:ASH} 0%, transparent 100%)`, zIndex:15}}/>
+            {/* Edge fades */}
+            <div className="absolute inset-y-0 left-0 w-16 pointer-events-none" style={{background:`linear-gradient(to right, ${dark?INK:ASH}, transparent)`, zIndex:15}}/>
+            <div className="absolute inset-y-0 right-0 w-16 pointer-events-none" style={{background:`linear-gradient(to left, ${dark?INK:ASH}, transparent)`, zIndex:15}}/>
+          </div>
 
           <Rise d={0.92} y={20}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
