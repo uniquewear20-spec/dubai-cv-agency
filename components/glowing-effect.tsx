@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
-import { cn } from "@/lib/utils";
+
+// ── cn inlined — no @/lib/utils dependency ────────────────────────────────────
+function cn(...classes: (string | undefined | null | false)[]): string {
+  return classes.filter(Boolean).join(" ");
+}
 
 interface GlowingEffectProps {
   blur?: number;

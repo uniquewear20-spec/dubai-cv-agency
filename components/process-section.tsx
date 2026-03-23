@@ -1,15 +1,14 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import { CreditCard, FileText, Send, CheckCircle } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { cn } from "@/lib/utils";
 
-// ── Tokens matching Zenith brand ──────────────────────────────────────────────
+// ── Brand tokens ──────────────────────────────────────────────────────────────
 const G = "#C8A96E";
 const GL = "#E2C98E";
 
-// ── Step data ────────────────────────────────────────────────────────────────
+// ── Step data ─────────────────────────────────────────────────────────────────
 const STEPS = [
   {
     numeral: "I",
@@ -41,7 +40,7 @@ const STEPS = [
   },
 ];
 
-// ── Individual step card ──────────────────────────────────────────────────────
+// ── Step card ─────────────────────────────────────────────────────────────────
 interface StepCardProps {
   numeral: string;
   title: string;
@@ -53,16 +52,10 @@ interface StepCardProps {
 function StepCard({ numeral, title, description, Icon, index }: StepCardProps) {
   return (
     <div
-      className={cn(
-        "group relative rounded-2xl h-full",
-        "transition-transform duration-500 ease-out",
-        "hover:-translate-y-1"
-      )}
-      style={{
-        animationDelay: `${index * 120}ms`,
-      }}
+      className="group relative rounded-2xl h-full transition-transform duration-500 ease-out hover:-translate-y-1"
+      style={{ animationDelay: `${index * 120}ms` }}
     >
-      {/* GlowingEffect border trail */}
+      {/* Glowing border trail */}
       <GlowingEffect
         spread={28}
         proximity={80}
@@ -74,15 +67,14 @@ function StepCard({ numeral, title, description, Icon, index }: StepCardProps) {
 
       {/* Card surface */}
       <div
-        className="relative z-10 h-full rounded-2xl overflow-hidden flex flex-col p-8"
+        className="relative z-10 h-full rounded-2xl flex flex-col p-8"
         style={{
           background:
-            "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.015) 100%)",
+            "linear-gradient(135deg, rgba(255,255,255,0.032) 0%, rgba(255,255,255,0.014) 100%)",
           border: "1px solid rgba(255,255,255,0.07)",
-          backdropFilter: "blur(4px)",
         }}
       >
-        {/* Subtle top-edge shimmer */}
+        {/* Top shimmer */}
         <div
           className="absolute top-0 inset-x-0 h-px pointer-events-none"
           style={{
@@ -103,24 +95,24 @@ function StepCard({ numeral, title, description, Icon, index }: StepCardProps) {
           {numeral}
         </p>
 
-        {/* Icon */}
+        {/* Icon pill */}
         <div
           className="mb-5 flex items-center justify-center w-10 h-10 rounded-xl"
           style={{
-            background: `${G}12`,
+            background: `${G}18`,
             border: `1px solid ${G}22`,
           }}
         >
           <Icon
             size={17}
             strokeWidth={1.5}
-            style={{ color: G, opacity: 0.75 }}
+            style={{ color: G, opacity: 0.8 }}
           />
         </div>
 
         {/* Title */}
         <h3
-          className="text-lg font-semibold mb-3 tracking-tight"
+          className="text-[15px] font-semibold mb-3 tracking-tight"
           style={{
             color: "#EDE8E0",
             fontFamily: "sans-serif",
@@ -132,14 +124,16 @@ function StepCard({ numeral, title, description, Icon, index }: StepCardProps) {
         {/* Divider */}
         <div
           className="mb-4 h-px w-8"
-          style={{ background: `linear-gradient(to right, ${G}50, transparent)` }}
+          style={{
+            background: `linear-gradient(to right, ${G}50, transparent)`,
+          }}
         />
 
         {/* Description */}
         <p
           className="text-[13px] leading-[1.85] flex-1"
           style={{
-            color: "rgba(200,185,170,0.65)",
+            color: "rgba(200,185,170,0.60)",
             fontFamily: "sans-serif",
             fontWeight: 300,
           }}
@@ -147,7 +141,7 @@ function StepCard({ numeral, title, description, Icon, index }: StepCardProps) {
           {description}
         </p>
 
-        {/* Bottom accent */}
+        {/* Hover bottom accent */}
         <div
           className="mt-8 h-px w-6 opacity-0 group-hover:opacity-30 transition-opacity duration-500"
           style={{ background: G }}
@@ -157,40 +151,14 @@ function StepCard({ numeral, title, description, Icon, index }: StepCardProps) {
   );
 }
 
-// ── Section header ────────────────────────────────────────────────────────────
-function SectionHeader() {
-  return (
-    <div className="mb-16">
-      <p
-        className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4"
-        style={{ color: G, fontFamily: "sans-serif" }}
-      >
-        The Method
-      </p>
-      <h2
-        className="text-3xl sm:text-4xl font-normal tracking-tight"
-        style={{
-          color: "#EDE8E0",
-          fontFamily: "'Georgia', 'Times New Roman', serif",
-        }}
-      >
-        Precise. Rigorous.{" "}
-        <em style={{ fontStyle: "italic", color: GL }}>
-          Delivered in 48 hours.
-        </em>
-      </h2>
-    </div>
-  );
-}
-
-// ── Main export ───────────────────────────────────────────────────────────────
+// ── Section ───────────────────────────────────────────────────────────────────
 export function ProcessSection() {
   return (
     <section
       className="relative py-32 px-5 sm:px-8 overflow-hidden"
       style={{ background: "#0A0907" }}
     >
-      {/* Atmospheric background radial */}
+      {/* Ambient radial at top */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -199,7 +167,7 @@ export function ProcessSection() {
         }}
       />
 
-      {/* Grain texture */}
+      {/* Grain */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.025]"
         style={{
@@ -210,27 +178,31 @@ export function ProcessSection() {
       />
 
       <div className="relative mx-auto max-w-6xl">
-        <SectionHeader />
+        {/* Header */}
+        <div className="mb-16">
+          <p
+            className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4"
+            style={{ color: G, fontFamily: "sans-serif" }}
+          >
+            The Method
+          </p>
+          <h2
+            className="text-3xl sm:text-4xl font-normal tracking-tight"
+            style={{ color: "#EDE8E0" }}
+          >
+            Precise. Rigorous.{" "}
+            <em style={{ fontStyle: "italic", color: GL }}>
+              Delivered in 48 hours.
+            </em>
+          </h2>
+        </div>
 
-        {/* Responsive grid: 1 col mobile → 2 col md → 4 col lg */}
+        {/* Grid: 1 col → 2 col sm → 4 col lg */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {STEPS.map((step, i) => (
             <StepCard key={step.numeral} {...step} index={i} />
           ))}
         </div>
-
-        {/* Connector line (desktop only) */}
-        <div
-          className="hidden lg:block absolute pointer-events-none"
-          style={{
-            top: "calc(50% + 20px)",
-            left: "calc(12.5% + 20px)",
-            right: "calc(12.5% + 20px)",
-            height: "1px",
-            background: `linear-gradient(to right, transparent, ${G}18, ${G}25, ${G}18, transparent)`,
-            zIndex: 0,
-          }}
-        />
       </div>
     </section>
   );
