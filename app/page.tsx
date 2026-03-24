@@ -82,17 +82,22 @@ const TX: Record<string,Record<Lang,string>> = {
         fr:"Votre profil LinkedIn, reconstruit avec la densité de mots-clés, les signaux d'autorité et le récit optimisé qui vous placent devant les recruteurs actifs dans le CCG, l'Europe, l'APAC et l'Amérique du Nord."},
   s3tag:{en:"Included in Growth & Executive packages",ar:"مشمول في باقتَي النمو والتنفيذية",fr:"Inclus dans les offres Croissance et Exécutif"},
   // Templates
-  tplEyebrow:  {en:"Template Library",    ar:"مكتبة القوالب",      fr:"Bibliothèque de modèles"},
-  tplH2:       {en:"Designed to perform.", ar:"مصممة للأداء.",     fr:"Conçus pour performer."},
-  tplDesc:     {en:"Every Zenith engagement unlocks access to our curated library of 500+ ATS-optimised templates — each engineered for a specific industry, seniority level, and target hiring market across Europe, North America, and the GCC.",
-                ar:"كل تعاقد مع Zenith يتيح الوصول إلى مكتبتنا المنتقاة التي تضم أكثر من 500 قالب مُحسَّن لأنظمة الفرز الآلي — صُمِّم كل منها لقطاع محدد ومستوى أقدمية وسوق توظيف مستهدف في أوروبا وأمريكا الشمالية والخليج.",
-                fr:"Chaque engagement avec Zenith débloque l'accès à notre bibliothèque de 500+ modèles optimisés ATS — chacun conçu pour un secteur, un niveau de séniorité et un marché cible spécifiques en Europe, Amérique du Nord et CCG."},
+  tplEyebrow:  {en:"Document Portfolio",     ar:"محفظة الوثائق",       fr:"Portfolio documentaire"},
+  tplH2:       {en:"Engineered to perform.", ar:"مُصمَّمة للأداء.",    fr:"Conçus pour performer."},
+
+  // ── CHANGE 2: Rephrased tplDesc — 3000+, differentiates ATS vs Premium Design ──
+  tplDesc: {
+    en: "Every Zenith engagement unlocks our vault of 3,000+ precision-engineered documents — spanning two distinct collections: ATS-Optimised profiles, calibrated to defeat automated screening across the GCC, Europe, and North America; and Premium Design editions, crafted for executives who demand visual authority the moment the page is opened.",
+    ar: "كل تعاقد مع Zenith يفتح أمامك مخزوننا الذي يضم أكثر من 3,000 وثيقة مُهندَسة بدقة — موزّعة على مجموعتين متمايزتين: ملفات مُحسَّنة لأنظمة الفرز الآلي، معايَرة لاجتياز الفرز التلقائي في الخليج وأوروبا وأمريكا الشمالية؛ وإصدارات التصميم المتميز، صُنعت للتنفيذيين الذين يطلبون سلطة بصرية منذ اللحظة الأولى لفتح الصفحة.",
+    fr: "Chaque engagement avec Zenith débloque notre vault de 3 000+ documents conçus avec précision — répartis en deux collections distinctes : des profils optimisés ATS, calibrés pour franchir le tri automatisé dans le CCG, l'Europe et l'Amérique du Nord ; et des éditions Premium Design, créées pour les cadres qui exigent une autorité visuelle dès l'ouverture de la page.",
+  },
+
   tplBadge:    {en:"Market-Specific Designs",ar:"تصاميم مخصصة لكل سوق",fr:"Designs par marché"},
   tplGet:      {en:"Request This Template", ar:"اطلب هذا القالب",  fr:"Demander ce modèle"},
   tplMore:     {en:"View More Designs",     ar:"عرض المزيد",        fr:"Voir plus"},
-  tplDone:     {en:"All showcase designs displayed · Contact us for full 500+ library access",
-                ar:"تم عرض جميع نماذج المعرض · تواصل معنا للوصول الكامل إلى مكتبة +500 قالب",
-                fr:"Tous les modèles affichés · Contactez-nous pour l'accès complet à la bibliothèque 500+"},
+  tplDone:     {en:"All showcase designs displayed · Contact us for full 3,000+ library access",
+                ar:"تم عرض جميع نماذج المعرض · تواصل معنا للوصول الكامل إلى مكتبة +3,000 وثيقة",
+                fr:"Tous les modèles affichés · Contactez-nous pour l'accès complet à la bibliothèque 3 000+"},
   // Exclusivity section
   exclEyebrow: {en:"Not for everyone.",     ar:"ليس للجميع.",       fr:"Pas pour tout le monde."},
   exclH2a:     {en:"We work with",          ar:"نعمل مع",           fr:"Nous travaillons avec"},
@@ -167,9 +172,9 @@ const TX: Record<string,Record<Lang,string>> = {
   pFi3:  {en:"Professional photo enhancement via AI retouching",
           ar:"تحسين الصورة المهنية باستخدام المعالجة بالذكاء الاصطناعي",
           fr:"Amélioration de photo professionnelle par retouche IA"},
-  pFi4:  {en:"Full access to the 500+ premium template library",
-          ar:"وصول كامل إلى مكتبة القوالب المتميزة التي تضم +500 قالب",
-          fr:"Accès complet à la bibliothèque de 500+ modèles premium"},
+  pFi4:  {en:"Full access to the 3,000+ premium document library",
+          ar:"وصول كامل إلى مكتبة الوثائق المتميزة التي تضم +3,000 وثيقة",
+          fr:"Accès complet à la bibliothèque de 3 000+ documents premium"},
   // Growth
   pG:    {en:"Growth",        ar:"النمو",      fr:"Croissance"},
   pGsub: {en:"Multi-market. Complete. Career-defining.",
@@ -187,9 +192,9 @@ const TX: Record<string,Record<Lang,string>> = {
   pGi4:  {en:"Full document versions in EN, FR, DE, AR, and ES",
           ar:"نسخ كاملة من الوثائق بالإنجليزية والفرنسية والألمانية والعربية والإسبانية",
           fr:"Versions complètes en EN, FR, DE, AR et ES"},
-  pGi5:  {en:"Full access to the 500+ premium template library",
-          ar:"وصول كامل إلى مكتبة القوالب المتميزة التي تضم +500 قالب",
-          fr:"Accès complet à la bibliothèque de 500+ modèles premium"},
+  pGi5:  {en:"Full access to the 3,000+ premium document library",
+          ar:"وصول كامل إلى مكتبة الوثائق المتميزة التي تضم +3,000 وثيقة",
+          fr:"Accès complet à la bibliothèque de 3 000+ documents premium"},
   // Executive
   pE:    {en:"Executive",     ar:"التنفيذية",  fr:"Exécutif"},
   pEsub: {en:"White-glove. Strategic. Comprehensive.",
@@ -207,9 +212,9 @@ const TX: Record<string,Record<Lang,string>> = {
   pEi4:  {en:"30-day priority access to your dedicated consultant",
           ar:"وصول ذو أولوية لمدة 30 يوماً إلى مستشارك المخصص",
           fr:"Accès prioritaire pendant 30 jours à votre consultant dédié"},
-  pEi5:  {en:"Full access to the 500+ premium template library",
-          ar:"وصول كامل إلى مكتبة القوالب المتميزة التي تضم +500 قالب",
-          fr:"Accès complet à la bibliothèque de 500+ modèles premium"},
+  pEi5:  {en:"Full access to the 3,000+ premium document library",
+          ar:"وصول كامل إلى مكتبة الوثائق المتميزة التي تضم +3,000 وثيقة",
+          fr:"Accès complet à la bibliothèque de 3 000+ documents premium"},
   // Testimonials
   tmEyebrow:   {en:"Verified Outcomes",  ar:"نتائج موثّقة",       fr:"Résultats vérifiés"},
   tmH2a:       {en:"Measured results,",  ar:"نتائج قابلة للقياس،",fr:"Résultats mesurables,"},
@@ -251,8 +256,8 @@ const TX: Record<string,Record<Lang,string>> = {
   frmErrNet:   {en:"Network error — please reach us via WhatsApp.", ar:"خطأ في الشبكة — يرجى التواصل عبر واتساب.", fr:"Erreur réseau — contactez-nous via WhatsApp."},
   frmErrGen:   {en:"Something went wrong. Please try again.", ar:"حدث خطأ ما. يرجى المحاولة مجدداً.", fr:"Une erreur s'est produite. Veuillez réessayer."},
   // Template card badges
-  tplAts:      {en:"ATS ✓",                ar:"ATS ✓",               fr:"ATS ✓"},
-  tplDesign:   {en:"Design ✦",             ar:"تصميم ✦",             fr:"Design ✦"},
+  tplAts:      {en:"ATS-Optimized",         ar:"ATS مُحسَّن",         fr:"ATS Optimisé"},
+  tplDesign:   {en:"Premium Design",        ar:"تصميم متميز",         fr:"Design Premium"},
   tplPreview:  {en:"Preview Full Template", ar:"معاينة القالب كاملاً", fr:"Aperçu complet"},
   tplEnquire:  {en:"Enquire About This Template", ar:"استفسر عن هذا القالب", fr:"Demander ce modèle"},
   tplClose:    {en:"Close",                ar:"إغلاق",               fr:"Fermer"},
@@ -264,42 +269,47 @@ const tr = (k:string, l:Lang):string => TX[k]?.[l] ?? TX[k]?.en ?? k;
 type Fm = {email:string;subject:string;message:string;photo:File|null;cv:File|null};
 type St  = "idle"|"sending"|"success"|"error";
 
-// ── Template data — 33 items ───────────────────────────────────────────────────
+// ── CHANGE 1: Classification logic ────────────────────────────────────────────
+// IDs 1, 5, 9, 21 → ats: true (ATS-Optimized)
+// All other IDs   → ats: false (Premium Design)
+const ATS_IDS = new Set([1, 5, 9, 21]);
+
 const TEMPLATES = [
-  {id:1,  ats:true,  name:"The DIFC Leadership",       ind:"Finance · Banking",          reg:"Dubai · London · New York"},
-  {id:2,  ats:true,  name:"Urban Tech Professional",   ind:"Technology · Engineering",   reg:"GCC · Singapore · Toronto"},
-  {id:3,  ats:false, name:"Editorial Creative",        ind:"Design · Media · Marketing", reg:"Europe · UK · Australia"},
-  {id:4,  ats:true,  name:"The Toronto Executive",     ind:"Operations · Consulting",    reg:"Canada · USA · UK"},
-  {id:5,  ats:true,  name:"Global Minimalist",         ind:"Engineering · IT",           reg:"Americas · APAC"},
-  {id:6,  ats:true,  name:"African Enterprise",        ind:"Sales · Management",         reg:"GCC · Africa · Europe"},
-  {id:7,  ats:false, name:"Singapore Tech Expert",     ind:"Technology · Data Science",  reg:"Singapore · APAC · USA"},
-  {id:8,  ats:true,  name:"Paris Creative",            ind:"Creative · Marketing",       reg:"France · EU · Canada"},
-  {id:9,  ats:true,  name:"Riyadh C-Suite",            ind:"Finance · Executive",        reg:"KSA · GCC · London"},
-  {id:10, ats:true,  name:"London Financial",          ind:"Finance · Fintech",          reg:"UK · Europe · Dubai"},
-  {id:11, ats:true,  name:"Mumbai Corporate",          ind:"Operations · HR",            reg:"India · GCC · Singapore"},
-  {id:12, ats:true,  name:"New York Banking",          ind:"Investment Banking",         reg:"USA · Canada · London"},
-  {id:13, ats:false, name:"Amsterdam Innovation",      ind:"Product · UX · Design",     reg:"Netherlands · EU · Remote"},
-  {id:14, ats:true,  name:"Sydney Modern",             ind:"Healthcare · Research",      reg:"Australia · NZ · Canada"},
-  {id:15, ats:false, name:"Dubai Hospitality Elite",   ind:"Hospitality · Tourism",     reg:"UAE · GCC · Maldives"},
-  {id:16, ats:true,  name:"Lagos Rising",              ind:"Business · Entrepreneurship",reg:"Nigeria · UK · USA"},
-  {id:17, ats:true,  name:"Nairobi Leadership",        ind:"NGO · Development",          reg:"Kenya · East Africa · UN"},
-  {id:18, ats:true,  name:"Frankfurt Banking",         ind:"Finance · Insurance",        reg:"Germany · EU · Switzerland"},
-  {id:19, ats:true,  name:"Beirut Medical",            ind:"Healthcare · Medicine",      reg:"Lebanon · GCC · EU"},
-  {id:20, ats:true,  name:"Cairo Engineering",         ind:"Civil · Infrastructure",    reg:"Egypt · GCC · Europe"},
-  {id:21, ats:false, name:"Kuala Lumpur Digital",      ind:"Digital · E-Commerce",      reg:"Malaysia · ASEAN · Australia"},
-  {id:22, ats:true,  name:"Hong Kong Finance",         ind:"Asset Management",           reg:"HK · Singapore · London"},
-  {id:23, ats:true,  name:"Doha Energy Leader",        ind:"Oil & Gas · Energy",        reg:"Qatar · GCC · USA"},
-  {id:24, ats:true,  name:"Brussels Policy",           ind:"Law · Policy · EU Affairs", reg:"Belgium · EU · Geneva"},
-  {id:25, ats:true,  name:"Johannesburg Executive",    ind:"Mining · Resources",         reg:"South Africa · GCC · London"},
-  {id:26, ats:true,  name:"Geneva International",      ind:"Diplomacy · International",  reg:"Switzerland · UN · Global"},
-  {id:27, ats:false, name:"Jakarta Tech Startup",      ind:"Technology · Startup",      reg:"Indonesia · ASEAN · Remote"},
-  {id:28, ats:true,  name:"Casablanca Professional",   ind:"Finance · Consulting",      reg:"Morocco · France · GCC"},
-  {id:29, ats:true,  name:"Abu Dhabi Government",      ind:"Public Sector · Policy",    reg:"UAE · GCC · International"},
-  {id:30, ats:false, name:"Seoul Innovation",          ind:"Technology · R&D",          reg:"South Korea · Japan · USA"},
-  {id:31, ats:true,  name:"Mexico City Operations",    ind:"Supply Chain · Logistics",  reg:"Mexico · USA · Latin America"},
-  {id:32, ats:true,  name:"Accra Global",              ind:"Development · Finance",     reg:"Ghana · UK · EU"},
-  {id:33, ats:true,  name:"The Executive Portfolio",   ind:"C-Suite · Board Level",     reg:"Global · Any Market"},
-];
+  {id:1,  name:"The DIFC Leadership",       ind:"Finance · Banking",          reg:"Dubai · London · New York"},
+  {id:2,  name:"Urban Tech Professional",   ind:"Technology · Engineering",   reg:"GCC · Singapore · Toronto"},
+  {id:3,  name:"Editorial Creative",        ind:"Design · Media · Marketing", reg:"Europe · UK · Australia"},
+  {id:4,  name:"The Toronto Executive",     ind:"Operations · Consulting",    reg:"Canada · USA · UK"},
+  {id:5,  name:"Global Minimalist",         ind:"Engineering · IT",           reg:"Americas · APAC"},
+  {id:6,  name:"African Enterprise",        ind:"Sales · Management",         reg:"GCC · Africa · Europe"},
+  {id:7,  name:"Singapore Tech Expert",     ind:"Technology · Data Science",  reg:"Singapore · APAC · USA"},
+  {id:8,  name:"Paris Creative",            ind:"Creative · Marketing",       reg:"France · EU · Canada"},
+  {id:9,  name:"Riyadh C-Suite",            ind:"Finance · Executive",        reg:"KSA · GCC · London"},
+  {id:10, name:"London Financial",          ind:"Finance · Fintech",          reg:"UK · Europe · Dubai"},
+  {id:11, name:"Mumbai Corporate",          ind:"Operations · HR",            reg:"India · GCC · Singapore"},
+  {id:12, name:"New York Banking",          ind:"Investment Banking",         reg:"USA · Canada · London"},
+  {id:13, name:"Amsterdam Innovation",      ind:"Product · UX · Design",     reg:"Netherlands · EU · Remote"},
+  {id:14, name:"Sydney Modern",             ind:"Healthcare · Research",      reg:"Australia · NZ · Canada"},
+  {id:15, name:"Dubai Hospitality Elite",   ind:"Hospitality · Tourism",     reg:"UAE · GCC · Maldives"},
+  {id:16, name:"Lagos Rising",              ind:"Business · Entrepreneurship",reg:"Nigeria · UK · USA"},
+  {id:17, name:"Nairobi Leadership",        ind:"NGO · Development",          reg:"Kenya · East Africa · UN"},
+  {id:18, name:"Frankfurt Banking",         ind:"Finance · Insurance",        reg:"Germany · EU · Switzerland"},
+  {id:19, name:"Beirut Medical",            ind:"Healthcare · Medicine",      reg:"Lebanon · GCC · EU"},
+  {id:20, name:"Cairo Engineering",         ind:"Civil · Infrastructure",    reg:"Egypt · GCC · Europe"},
+  {id:21, name:"Kuala Lumpur Digital",      ind:"Digital · E-Commerce",      reg:"Malaysia · ASEAN · Australia"},
+  {id:22, name:"Hong Kong Finance",         ind:"Asset Management",           reg:"HK · Singapore · London"},
+  {id:23, name:"Doha Energy Leader",        ind:"Oil & Gas · Energy",        reg:"Qatar · GCC · USA"},
+  {id:24, name:"Brussels Policy",           ind:"Law · Policy · EU Affairs", reg:"Belgium · EU · Geneva"},
+  {id:25, name:"Johannesburg Executive",    ind:"Mining · Resources",         reg:"South Africa · GCC · London"},
+  {id:26, name:"Geneva International",      ind:"Diplomacy · International",  reg:"Switzerland · UN · Global"},
+  {id:27, name:"Jakarta Tech Startup",      ind:"Technology · Startup",      reg:"Indonesia · ASEAN · Remote"},
+  {id:28, name:"Casablanca Professional",   ind:"Finance · Consulting",      reg:"Morocco · France · GCC"},
+  {id:29, name:"Abu Dhabi Government",      ind:"Public Sector · Policy",    reg:"UAE · GCC · International"},
+  {id:30, name:"Seoul Innovation",          ind:"Technology · R&D",          reg:"South Korea · Japan · USA"},
+  {id:31, name:"Mexico City Operations",    ind:"Supply Chain · Logistics",  reg:"Mexico · USA · Latin America"},
+  {id:32, name:"Accra Global",              ind:"Development · Finance",     reg:"Ghana · UK · EU"},
+  {id:33, name:"The Executive Portfolio",   ind:"C-Suite · Board Level",     reg:"Global · Any Market"},
+// CHANGE 1: Derive ats flag at runtime from ATS_IDS set
+].map(cv => ({ ...cv, ats: ATS_IDS.has(cv.id) }));
 
 const TMS = [
   {name:"Sara Al-Rashidi",         role:"Finance Director",         co:"DIFC, Dubai",      ind:"Finance",    img:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=160&h=160&fit=crop&crop=face", text:"Nine interview invitations in eleven days. Zenith understood the DIFC recruitment landscape at a level no previous service had come close to matching. The document did not just pass ATS — it opened conversations.", hl:"9 interviews · 11 days"},
@@ -312,12 +322,6 @@ const TMS = [
   {name:"Yousef Al-Qahtani",       role:"Operations Director",      co:"Aramco",           ind:"Energy",     img:"https://images.unsplash.com/photo-1560250097-0b93528c311a?w=160&h=160&fit=crop&crop=face", text:"An internal promotion and an unsolicited external offer at 35% uplift — both within six weeks of the Zenith repositioning. The career narrative they constructed framed my experience in a way I had never been able to articulate myself.", hl:"+35% · dual offer"},
 ];
 const IH: Record<string,string> = {Finance:"#B8962E",Hospitality:"#9A7A3A",Healthcare:"#4A8A6A",Energy:"#9A6A20",Technology:"#3A6A8A",Aviation:"#5A5090"};
-const ROUTES = [
-  {from:"Lagos · Nairobi · Cairo",          to:"London · Amsterdam · Paris",     label:"Africa → Europe"},
-  {from:"Dubai · Riyadh · Doha",            to:"Toronto · New York · Boston",    label:"GCC → North America"},
-  {from:"Mumbai · Karachi · Dhaka",         to:"London · Amsterdam · Frankfurt", label:"South Asia → Europe"},
-  {from:"Manila · Jakarta · Kuala Lumpur",  to:"Dubai · Abu Dhabi · Doha",       label:"SE Asia → GCC"},
-];
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 const wl = (m:string) => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
@@ -331,163 +335,62 @@ function SparklesCore({
   speed?:number; background?:string; id?:string; minSize?:number; maxSize?:number;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
-
     const hex = particleColor.replace("#","");
     const cr = parseInt(hex.substring(0,2),16);
     const cg = parseInt(hex.substring(2,4),16);
     const cb = parseInt(hex.substring(4,6),16);
-
     let animId: number;
     let w = 0, h = 0;
     let breatheT = 0;
-
-    type P = {
-      x:number; y:number; sz:number;
-      vy:number; vx:number;
-      op:number; opTarget:number;
-      life:number; maxLife:number;
-      tier:number;
-    };
-
+    type P = { x:number; y:number; sz:number; vy:number; vx:number; op:number; opTarget:number; life:number; maxLife:number; tier:number; };
     let pts: P[] = [];
     const rand = (a:number,b:number) => a + Math.random()*(b-a);
-
     const mkP = (initY=false): P => {
       const tier = Math.random() < 0.60 ? 0 : Math.random() < 0.80 ? 1 : 2;
       const ml = rand(120, 280) / speed;
       const yStart = initY ? rand(0, h) : rand(-2, h*0.12);
-      return {
-        x: rand(0, w),
-        y: yStart,
-        sz: tier===0 ? rand(0.1,0.3) : tier===1 ? rand(0.2,0.45) : rand(0.35,0.65),
-        vy: (tier===0 ? rand(0.10,0.22) : tier===1 ? rand(0.18,0.32) : rand(0.26,0.44)) * speed,
-        vx: (Math.random()-0.5) * (tier===0 ? 0.06 : 0.10),
-        op: initY ? rand(0, 0.6) : 0,
-        opTarget: tier===0 ? rand(0.30,0.60) : tier===1 ? rand(0.55,0.85) : rand(0.85,1.00),
-        life: initY ? rand(0, ml*0.5) : 0,
-        maxLife: ml,
-        tier,
-      };
+      return { x:rand(0,w), y:yStart, sz:tier===0?rand(0.1,0.3):tier===1?rand(0.2,0.45):rand(0.35,0.65), vy:(tier===0?rand(0.10,0.22):tier===1?rand(0.18,0.32):rand(0.26,0.44))*speed, vx:(Math.random()-0.5)*(tier===0?0.06:0.10), op:initY?rand(0,0.6):0, opTarget:tier===0?rand(0.30,0.60):tier===1?rand(0.55,0.85):rand(0.85,1.00), life:initY?rand(0,ml*0.5):0, maxLife:ml, tier };
     };
-
-    const init = () => {
-      w = canvas.offsetWidth; h = canvas.offsetHeight;
-      if (!w || !h) return;
-      canvas.width = w; canvas.height = h;
-      const n = Math.round(Math.min(particleDensity, 350) * (w/520));
-      pts = Array.from({length:n}, ()=>mkP(true));
-    };
-
+    const init = () => { w=canvas.offsetWidth; h=canvas.offsetHeight; if(!w||!h) return; canvas.width=w; canvas.height=h; const n=Math.round(Math.min(particleDensity,350)*(w/520)); pts=Array.from({length:n},()=>mkP(true)); };
     const draw = () => {
-      if (!w || !h) { animId = requestAnimationFrame(draw); return; }
-
-      breatheT += 0.005;
-      const br = 0.78 + 0.22*Math.sin(breatheT);
-
-      ctx.clearRect(0, 0, w, h);
-
-      const lg = ctx.createLinearGradient(w*0.05, 0, w*0.95, 0);
-      lg.addColorStop(0,    `rgba(${cr},${cg},${cb},0)`);
-      lg.addColorStop(0.15, `rgba(${cr},${cg},${cb},${0.35*br})`);
-      lg.addColorStop(0.50, `rgba(${cr},${cg},${cb},${0.85*br})`);
-      lg.addColorStop(0.85, `rgba(${cr},${cg},${cb},${0.35*br})`);
-      lg.addColorStop(1,    `rgba(${cr},${cg},${cb},0)`);
-
-      ctx.save();
-      ctx.beginPath(); ctx.moveTo(w*0.05, 1); ctx.lineTo(w*0.95, 1);
-      ctx.strokeStyle = lg; ctx.lineWidth=4;
-      ctx.shadowColor=`rgba(${cr},${cg},${cb},0.9)`; ctx.shadowBlur=20*br;
-      ctx.globalAlpha=0.4; ctx.stroke();
-      ctx.lineWidth=1; ctx.shadowBlur=8*br; ctx.globalAlpha=br; ctx.stroke();
-      ctx.restore();
-
-      const bloom = ctx.createRadialGradient(w/2, 0, 0, w/2, 0, w*0.48*br);
-      bloom.addColorStop(0,   `rgba(${cr},${cg},${cb},${0.10*br})`);
-      bloom.addColorStop(0.5, `rgba(${cr},${cg},${cb},${0.03*br})`);
-      bloom.addColorStop(1,   `rgba(${cr},${cg},${cb},0)`);
-      ctx.fillStyle = bloom;
-      ctx.fillRect(0, 0, w, h);
-
-      for (let i=0; i<pts.length; i++) {
-        const p = pts[i];
-        p.life++;
-        p.y += p.vy;
-        p.x += p.vx + Math.sin(p.life*0.025 + p.x)*0.06;
-
-        const prog = p.life/p.maxLife;
-        const env = prog<0.10 ? prog/0.10
-                  : prog<0.65 ? 1.0
-                  : 1-(prog-0.65)/0.35;
-        p.op += (p.opTarget*env*br - p.op)*0.06;
-
-        const hFade = Math.max(0, Math.min(1, (h - p.y)/(h*0.15)));
-
-        if (p.life>=p.maxLife || p.y > h+4) { pts[i]=mkP(false); continue; }
-
-        const op = Math.max(0, p.op*hFade);
-        if (op<0.008) continue;
-
+      if(!w||!h){animId=requestAnimationFrame(draw);return;}
+      breatheT+=0.005; const br=0.78+0.22*Math.sin(breatheT);
+      ctx.clearRect(0,0,w,h);
+      const lg=ctx.createLinearGradient(w*0.05,0,w*0.95,0);
+      lg.addColorStop(0,`rgba(${cr},${cg},${cb},0)`); lg.addColorStop(0.15,`rgba(${cr},${cg},${cb},${0.35*br})`); lg.addColorStop(0.50,`rgba(${cr},${cg},${cb},${0.85*br})`); lg.addColorStop(0.85,`rgba(${cr},${cg},${cb},${0.35*br})`); lg.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);
+      ctx.save(); ctx.beginPath(); ctx.moveTo(w*0.05,1); ctx.lineTo(w*0.95,1); ctx.strokeStyle=lg; ctx.lineWidth=4; ctx.shadowColor=`rgba(${cr},${cg},${cb},0.9)`; ctx.shadowBlur=20*br; ctx.globalAlpha=0.4; ctx.stroke(); ctx.lineWidth=1; ctx.shadowBlur=8*br; ctx.globalAlpha=br; ctx.stroke(); ctx.restore();
+      const bloom=ctx.createRadialGradient(w/2,0,0,w/2,0,w*0.48*br); bloom.addColorStop(0,`rgba(${cr},${cg},${cb},${0.10*br})`); bloom.addColorStop(0.5,`rgba(${cr},${cg},${cb},${0.03*br})`); bloom.addColorStop(1,`rgba(${cr},${cg},${cb},0)`); ctx.fillStyle=bloom; ctx.fillRect(0,0,w,h);
+      for(let i=0;i<pts.length;i++){
+        const p=pts[i]; p.life++; p.y+=p.vy; p.x+=p.vx+Math.sin(p.life*0.025+p.x)*0.06;
+        const prog=p.life/p.maxLife; const env=prog<0.10?prog/0.10:prog<0.65?1.0:1-(prog-0.65)/0.35;
+        p.op+=(p.opTarget*env*br-p.op)*0.06;
+        const hFade=Math.max(0,Math.min(1,(h-p.y)/(h*0.15)));
+        if(p.life>=p.maxLife||p.y>h+4){pts[i]=mkP(false);continue;}
+        const op=Math.max(0,p.op*hFade); if(op<0.008) continue;
         ctx.save();
-        if (p.tier===0) {
-          ctx.beginPath(); ctx.arc(p.x, p.y, p.sz, 0, Math.PI*2);
-          ctx.fillStyle=`rgba(${cr},${cg},${cb},${op})`; ctx.fill();
-        } else if (p.tier===1) {
-          const g1=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*3);
-          g1.addColorStop(0,`rgba(${cr},${cg},${cb},${op*0.25})`);
-          g1.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*3,0,Math.PI*2);
-          ctx.fillStyle=g1; ctx.fill();
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);
-          ctx.fillStyle=`rgba(${cr},${cg},${cb},${op})`; ctx.fill();
-        } else {
-          const g2=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*6);
-          g2.addColorStop(0,  `rgba(${cr},${cg},${cb},${op*0.45})`);
-          g2.addColorStop(0.4,`rgba(${cr},${cg},${cb},${op*0.12})`);
-          g2.addColorStop(1,  `rgba(${cr},${cg},${cb},0)`);
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*6,0,Math.PI*2);
-          ctx.fillStyle=g2; ctx.fill();
-          ctx.shadowColor=`rgba(255,240,180,${op})`; ctx.shadowBlur=p.sz*4;
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*0.9,0,Math.PI*2);
-          ctx.fillStyle=`rgba(255,245,200,${op})`; ctx.fill();
-        }
+        if(p.tier===0){ctx.beginPath();ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);ctx.fillStyle=`rgba(${cr},${cg},${cb},${op})`;ctx.fill();}
+        else if(p.tier===1){const g1=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*3);g1.addColorStop(0,`rgba(${cr},${cg},${cb},${op*0.25})`);g1.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);ctx.beginPath();ctx.arc(p.x,p.y,p.sz*3,0,Math.PI*2);ctx.fillStyle=g1;ctx.fill();ctx.beginPath();ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);ctx.fillStyle=`rgba(${cr},${cg},${cb},${op})`;ctx.fill();}
+        else{const g2=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*6);g2.addColorStop(0,`rgba(${cr},${cg},${cb},${op*0.45})`);g2.addColorStop(0.4,`rgba(${cr},${cg},${cb},${op*0.12})`);g2.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);ctx.beginPath();ctx.arc(p.x,p.y,p.sz*6,0,Math.PI*2);ctx.fillStyle=g2;ctx.fill();ctx.shadowColor=`rgba(255,240,180,${op})`;ctx.shadowBlur=p.sz*4;ctx.beginPath();ctx.arc(p.x,p.y,p.sz*0.9,0,Math.PI*2);ctx.fillStyle=`rgba(255,245,200,${op})`;ctx.fill();}
         ctx.restore();
       }
-
-      animId = requestAnimationFrame(draw);
+      animId=requestAnimationFrame(draw);
     };
-
-    const ro = new ResizeObserver(()=>{
-      const nw=canvas.offsetWidth, nh=canvas.offsetHeight;
-      if (nw>0&&nh>0&&(nw!==w||nh!==h)) init();
-    });
-    ro.observe(canvas);
-    init(); draw();
-    return ()=>{ cancelAnimationFrame(animId); ro.disconnect(); };
-  }, [particleColor, particleDensity, speed]);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className={className}
-      style={{ display:"block", background:"transparent" }}
-    />
-  );
+    const ro=new ResizeObserver(()=>{const nw=canvas.offsetWidth,nh=canvas.offsetHeight;if(nw>0&&nh>0&&(nw!==w||nh!==h))init();});
+    ro.observe(canvas); init(); draw();
+    return()=>{cancelAnimationFrame(animId);ro.disconnect();};
+  },[particleColor,particleDensity,speed]);
+  return <canvas ref={canvasRef} className={className} style={{display:"block",background:"transparent"}}/>;
 }
 
 // ── Rise ──────────────────────────────────────────────────────────────────────
 function Rise({children,d=0,y=24,className=""}:{children:React.ReactNode;d?:number;y?:number;className?:string}){
   return(
-    <motion.div className={className}
-      initial={{opacity:0,y}} whileInView={{opacity:1,y:0}}
-      viewport={{once:true,margin:"-5% 0px"}}
-      transition={{duration:1.1,ease:[0.16,1,0.3,1],delay:d}}>
+    <motion.div className={className} initial={{opacity:0,y}} whileInView={{opacity:1,y:0}} viewport={{once:true,margin:"-5% 0px"}} transition={{duration:1.1,ease:[0.16,1,0.3,1],delay:d}}>
       {children}
     </motion.div>
   );
@@ -495,29 +398,26 @@ function Rise({children,d=0,y=24,className=""}:{children:React.ReactNode;d?:numb
 
 // ── GlowCard ──────────────────────────────────────────────────────────────────
 function GlowCard({color=G,children,className=""}:{color?:string;children:React.ReactNode;className?:string}){
-  const ref = useRef<HTMLDivElement>(null);
-  const ang = useRef(0), op = useRef(0), raf = useRef<number|null>(null);
-  const lerp = (a:number,b:number,t:number)=>a+(b-a)*t;
-  const onMove = useCallback((e:PointerEvent)=>{
+  const ref=useRef<HTMLDivElement>(null);
+  const ang=useRef(0),op=useRef(0),raf=useRef<number|null>(null);
+  const lerp=(a:number,b:number,t:number)=>a+(b-a)*t;
+  const onMove=useCallback((e:PointerEvent)=>{
     const el=ref.current; if(!el) return;
     const r=el.getBoundingClientRect();
-    const dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2);
+    const dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
     if(Math.sqrt(dx*dx+dy*dy)>280) return;
     const tgt=Math.atan2(dy,dx)*(180/Math.PI);
     if(raf.current) cancelAnimationFrame(raf.current);
-    const step=()=>{ ang.current=lerp(ang.current,tgt,0.12); el.style.setProperty("--ga",`${ang.current}deg`); if(Math.abs(ang.current-tgt)>0.5) raf.current=requestAnimationFrame(step); };
+    const step=()=>{ang.current=lerp(ang.current,tgt,0.12);el.style.setProperty("--ga",`${ang.current}deg`);if(Math.abs(ang.current-tgt)>0.5)raf.current=requestAnimationFrame(step);};
     raf.current=requestAnimationFrame(step);
   },[]);
-  const onEnter=useCallback(()=>{ const el=ref.current; if(!el) return; const s=()=>{ op.current=lerp(op.current,1,0.14); el.style.setProperty("--go",String(op.current)); if(op.current<0.97) requestAnimationFrame(s); }; requestAnimationFrame(s); },[]);
-  const onLeave=useCallback(()=>{ const el=ref.current; if(!el) return; const s=()=>{ op.current=lerp(op.current,0,0.10); el.style.setProperty("--go",String(op.current)); if(op.current>0.01) requestAnimationFrame(s); else el.style.setProperty("--go","0"); }; requestAnimationFrame(s); },[]);
-  useEffect(()=>{ window.addEventListener("pointermove",onMove); return()=>{ window.removeEventListener("pointermove",onMove); if(raf.current) cancelAnimationFrame(raf.current); }; },[onMove]);
+  const onEnter=useCallback(()=>{const el=ref.current;if(!el)return;const s=()=>{op.current=lerp(op.current,1,0.14);el.style.setProperty("--go",String(op.current));if(op.current<0.97)requestAnimationFrame(s);};requestAnimationFrame(s);},[]);
+  const onLeave=useCallback(()=>{const el=ref.current;if(!el)return;const s=()=>{op.current=lerp(op.current,0,0.10);el.style.setProperty("--go",String(op.current));if(op.current>0.01)requestAnimationFrame(s);else el.style.setProperty("--go","0");};requestAnimationFrame(s);},[]);
+  useEffect(()=>{window.addEventListener("pointermove",onMove);return()=>{window.removeEventListener("pointermove",onMove);if(raf.current)cancelAnimationFrame(raf.current);};},[onMove]);
   return(
-    <div ref={ref} className={`relative ${className}`} onPointerEnter={onEnter} onPointerLeave={onLeave}
-      style={{"--gc":color,"--ga":"0deg","--go":"0"} as React.CSSProperties}>
-      <div aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit]"
-        style={{padding:"1px",background:"conic-gradient(from var(--ga),transparent 0deg,var(--gc) 60deg,transparent 120deg)",WebkitMask:"linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)",WebkitMaskComposite:"xor",maskComposite:"exclude",opacity:"var(--go)",borderRadius:"inherit",zIndex:1}}/>
-      <div aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit]"
-        style={{boxShadow:"0 0 40px 12px var(--gc)",opacity:"calc(var(--go)*0.12)",zIndex:0,borderRadius:"inherit"}}/>
+    <div ref={ref} className={`relative ${className}`} onPointerEnter={onEnter} onPointerLeave={onLeave} style={{"--gc":color,"--ga":"0deg","--go":"0"} as React.CSSProperties}>
+      <div aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit]" style={{padding:"1px",background:"conic-gradient(from var(--ga),transparent 0deg,var(--gc) 60deg,transparent 120deg)",WebkitMask:"linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)",WebkitMaskComposite:"xor",maskComposite:"exclude",opacity:"var(--go)",borderRadius:"inherit",zIndex:1}}/>
+      <div aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit]" style={{boxShadow:"0 0 40px 12px var(--gc)",opacity:"calc(var(--go)*0.12)",zIndex:0,borderRadius:"inherit"}}/>
       <div className="relative z-[2]">{children}</div>
     </div>
   );
@@ -527,7 +427,7 @@ function GlowCard({color=G,children,className=""}:{color?:string;children:React.
 function UZ({label,hint,accept,Ic,file,onFile,onClear,dark,busy,dropLabel="Click or drop here"}:{label:string;hint:string;accept:string;Ic:React.ElementType;file:File|null;onFile:(f:File)=>void;onClear:()=>void;dark:boolean;busy:boolean;dropLabel?:string}){
   const inp=useRef<HTMLInputElement>(null);
   const [drag,setDrag]=useState(false);
-  const s=dark?"#80746A":"#9A8E84", h=dark?"#EDE8E0":"#1A1410";
+  const s=dark?"#80746A":"#9A8E84",h=dark?"#EDE8E0":"#1A1410";
   return(
     <div>
       <label className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em]" style={{color:s}}>{label}</label>
@@ -556,27 +456,27 @@ function UZ({label,hint,accept,Ic,file,onFile,onClear,dark,busy,dropLabel="Click
 
 // ── Modal ──────────────────────────────────────────────────────────────────────
 function Modal({open,onClose,dark,lang}:{open:boolean;onClose:()=>void;dark:boolean;lang:Lang}){
-  const subs = lang==="ar"?SUBS_AR:lang==="fr"?SUBS_FR:SUBS_EN;
+  const subs=lang==="ar"?SUBS_AR:lang==="fr"?SUBS_FR:SUBS_EN;
   const [form,setForm]=useState<Fm>({email:"",subject:subs[0],message:"",photo:null,cv:null});
   const [st,setSt]=useState<St>("idle");
   const [err,setErr]=useState("");
   const mbg=dark?"#0E0D0B":"#F8F4EF";
   const bd=dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)";
-  const h=dark?"#EDE8E0":"#1A1410", s=dark?"#80746A":"#9A8E84";
+  const h=dark?"#EDE8E0":"#1A1410",s=dark?"#80746A":"#9A8E84";
   const iS:React.CSSProperties={background:dark?"rgba(255,255,255,0.04)":"rgba(0,0,0,0.03)",borderColor:dark?"rgba(255,255,255,0.09)":"rgba(0,0,0,0.09)",color:h,outline:"none"};
   async function submit(){
     if(!form.email.trim()||!form.message.trim()) return;
-    setSt("sending"); setErr("");
+    setSt("sending");setErr("");
     try{
       const fd=new FormData();
-      fd.append("senderEmail",form.email.trim()); fd.append("subject",form.subject); fd.append("message",form.message.trim());
-      if(form.photo) fd.append("photo",form.photo); if(form.cv) fd.append("cv",form.cv);
-      const res=await fetch("/api/contact",{method:"POST",body:fd}); const d=await res.json();
+      fd.append("senderEmail",form.email.trim());fd.append("subject",form.subject);fd.append("message",form.message.trim());
+      if(form.photo)fd.append("photo",form.photo);if(form.cv)fd.append("cv",form.cv);
+      const res=await fetch("/api/contact",{method:"POST",body:fd});const d=await res.json();
       res.ok?setSt("success"):(setErr(d.error??tr("frmErrGen",lang)),setSt("error"));
     }catch{setErr(tr("frmErrNet",lang));setSt("error");}
   }
   function close(){onClose();setTimeout(()=>{setForm({email:"",subject:subs[0],message:"",photo:null,cv:null});setSt("idle");setErr("");},350);}
-  const busy=st==="sending", can=!!form.email.trim()&&!!form.message.trim()&&!busy;
+  const busy=st==="sending",can=!!form.email.trim()&&!!form.message.trim()&&!busy;
   return(
     <AnimatePresence>
       {open&&(
@@ -632,35 +532,19 @@ function Modal({open,onClose,dark,lang}:{open:boolean;onClose:()=>void;dark:bool
 // ── Testimonial card + column ──────────────────────────────────────────────────
 function TC({t,dark}:{t:typeof TMS[0];dark:boolean}){
   const ac=IH[t.ind]??G;
-  const quoteColor  = dark ? "#A09A94" : "#524840";
-  const nameColor   = dark ? "#D8D0C8" : "#1A1410";
-  const metaColor   = dark ? "#6A6058" : "#9A8E84";
+  const quoteColor=dark?"#A09A94":"#524840";
+  const nameColor=dark?"#D8D0C8":"#1A1410";
+  const metaColor=dark?"#6A6058":"#9A8E84";
   return(
-    <div className="flex flex-col p-5 mb-4 rounded-xl" style={{
-      background: dark?"rgba(255,255,255,0.025)":"rgba(255,255,255,0.85)",
-      border: `1px solid ${dark?"rgba(255,255,255,0.05)":"rgba(0,0,0,0.05)"}`,
-      color: quoteColor,
-      fontFamily: "sans-serif",
-    }}>
-      <p style={{
-        fontSize:"11px", lineHeight:"1.85", marginBottom:"16px",
-        color: quoteColor,
-        fontFamily: "sans-serif",
-        fontStyle: "italic",
-        fontWeight: 400,
-      }}>"{t.text}"</p>
+    <div className="flex flex-col p-5 mb-4 rounded-xl" style={{background:dark?"rgba(255,255,255,0.025)":"rgba(255,255,255,0.85)",border:`1px solid ${dark?"rgba(255,255,255,0.05)":"rgba(0,0,0,0.05)"}`,color:quoteColor,fontFamily:"sans-serif"}}>
+      <p style={{fontSize:"11px",lineHeight:"1.85",marginBottom:"16px",color:quoteColor,fontFamily:"sans-serif",fontStyle:"italic",fontWeight:400}}>"{t.text}"</p>
       <div style={{borderTop:`1px solid ${dark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.06)"}`,paddingTop:"12px",display:"flex",alignItems:"center",gap:"12px"}}>
         <img src={t.img} alt={t.name} className="h-8 w-8 rounded-full object-cover shrink-0" style={{filter:"grayscale(40%) contrast(1.05)"}}/>
         <div style={{minWidth:0,flex:1}}>
           <p style={{fontSize:"11px",fontWeight:600,color:nameColor,fontFamily:"sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{t.name}</p>
           <p style={{fontSize:"10px",color:metaColor,fontFamily:"sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{t.role} · {t.co}</p>
         </div>
-        <span style={{
-          flexShrink:0, borderRadius:"9999px",
-          padding:"2px 8px", fontSize:"9px", fontWeight:500,
-          background:`${ac}18`, color:ac, border:`1px solid ${ac}30`,
-          fontFamily:"sans-serif", whiteSpace:"nowrap",
-        }}>{t.hl}</span>
+        <span style={{flexShrink:0,borderRadius:"9999px",padding:"2px 8px",fontSize:"9px",fontWeight:500,background:`${ac}18`,color:ac,border:`1px solid ${ac}30`,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>{t.hl}</span>
       </div>
     </div>
   );
@@ -677,87 +561,54 @@ function TCol({items,dark,dur=55,rev=false}:{items:typeof TMS;dark:boolean;dur?:
 }
 
 // ── Preview Lightbox ───────────────────────────────────────────────────────────
-function PreviewLightbox({cv,onClose,onEnquire,dark,lang}:{
-  cv:{id:number;name:string;ats:boolean};
-  onClose:()=>void;
-  onEnquire:()=>void;
-  dark:boolean;
-  lang:Lang;
-}){
-  const src = '/templates-new/cv' + cv.id + '.png';
+function PreviewLightbox({cv,onClose,onEnquire,dark,lang}:{cv:{id:number;name:string;ats:boolean};onClose:()=>void;onEnquire:()=>void;dark:boolean;lang:Lang;}){
+  const src='/templates-new/cv'+cv.id+'.png';
   const [loaded,setLoaded]=useState(false);
   const [imgError,setImgError]=useState(false);
   useEffect(()=>{
-    const handler=(e:KeyboardEvent)=>{ if(e.key==="Escape") onClose(); };
+    const handler=(e:KeyboardEvent)=>{if(e.key==="Escape")onClose();};
     window.addEventListener("keydown",handler);
     document.body.style.overflow="hidden";
-    return()=>{ window.removeEventListener("keydown",handler); document.body.style.overflow=""; };
+    return()=>{window.removeEventListener("keydown",handler);document.body.style.overflow="";};
   },[onClose]);
-  const badgeBg = cv.ats ? `${G}15` : "rgba(120,100,160,0.10)";
-  const badgeColor = cv.ats ? G : "#8A6AAA";
-  const badgeBorder = cv.ats ? `1px solid ${G}30` : "1px solid rgba(120,100,160,0.22)";
+  const badgeBg=cv.ats?`${G}15`:"rgba(120,100,160,0.10)";
+  const badgeColor=cv.ats?G:"#8A6AAA";
+  const badgeBorder=cv.ats?`1px solid ${G}30`:"1px solid rgba(120,100,160,0.22)";
   return(
     <AnimatePresence>
       <div className="fixed inset-0 z-[95] flex items-center justify-center p-4">
-        <motion.div
-          className="absolute inset-0"
-          initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}
-          onClick={onClose}
-          style={{background:"rgba(5,4,3,0.92)",backdropFilter:"blur(20px)"}}
-        />
-        <motion.div
-          className="relative flex flex-col w-full max-w-2xl rounded-2xl overflow-hidden"
+        <motion.div className="absolute inset-0" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} onClick={onClose} style={{background:"rgba(5,4,3,0.92)",backdropFilter:"blur(20px)"}}/>
+        <motion.div className="relative flex flex-col w-full max-w-2xl rounded-2xl overflow-hidden"
           style={{maxHeight:"calc(100svh - 2rem)",background:dark?"#0E0D0B":"#F8F4EF",border:`1px solid ${dark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.08)"}`}}
-          initial={{opacity:0,y:24,scale:0.97}}
-          animate={{opacity:1,y:0,scale:1}}
-          exit={{opacity:0,y:16,scale:0.98}}
-          transition={{duration:0.45,ease:[0.16,1,0.3,1]}}
-        >
+          initial={{opacity:0,y:24,scale:0.97}} animate={{opacity:1,y:0,scale:1}} exit={{opacity:0,y:16,scale:0.98}} transition={{duration:0.45,ease:[0.16,1,0.3,1]}}>
           <div className="h-px w-full shrink-0" style={{background:`linear-gradient(90deg,transparent,${G}80,transparent)`}}/>
           <div className="flex items-center justify-between px-6 py-4 shrink-0" style={{borderBottom:`1px solid ${dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)"}`}}>
             <div className="flex items-center gap-3 min-w-0">
               <h3 className="text-sm font-semibold truncate" style={{color:dark?"#EDE8E0":"#1A1410",fontFamily:"sans-serif"}}>{cv.name}</h3>
+              {/* CHANGE 3: Badge uses new label text from tplAts / tplDesign keys */}
               <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium" style={{background:badgeBg,color:badgeColor,border:badgeBorder,fontFamily:"sans-serif"}}>
-                {cv.ats ? "ATS ✓" : "Design ✦"}
+                {cv.ats ? tr("tplAts",lang) : tr("tplDesign",lang)}
               </span>
             </div>
-            <button type="button" onClick={onClose} className="shrink-0 ml-3 opacity-25 hover:opacity-60 transition-opacity" style={{color:dark?"#EDE8E0":"#1A1410"}}>
-              <X size={15} strokeWidth={1.5}/>
-            </button>
+            <button type="button" onClick={onClose} className="shrink-0 ml-3 opacity-25 hover:opacity-60 transition-opacity" style={{color:dark?"#EDE8E0":"#1A1410"}}><X size={15} strokeWidth={1.5}/></button>
           </div>
           <div className="flex-1 overflow-y-auto overscroll-contain" style={{WebkitOverflowScrolling:"touch" as React.CSSProperties["WebkitOverflowScrolling"]}}>
-            {!imgError ? (
+            {!imgError?(
               <div className="relative">
-                {!loaded && (
-                  <div className="flex items-center justify-center" style={{height:"420px"}}>
-                    <Loader2 size={20} color={G} className="animate-spin" strokeWidth={1.5}/>
-                  </div>
-                )}
-                <img
-                  src={src}
-                  alt={cv.name}
-                  className="w-full h-auto block"
-                  style={{display:loaded?"block":"none",objectFit:"contain"}}
-                  onLoad={()=>setLoaded(true)}
-                  onError={()=>setImgError(true)}
-                />
+                {!loaded&&<div className="flex items-center justify-center" style={{height:"420px"}}><Loader2 size={20} color={G} className="animate-spin" strokeWidth={1.5}/></div>}
+                <img src={src} alt={cv.name} className="w-full h-auto block" style={{display:loaded?"block":"none",objectFit:"contain"}} onLoad={()=>setLoaded(true)} onError={()=>setImgError(true)}/>
               </div>
-            ) : (
+            ):(
               <div className="flex flex-col items-center justify-center gap-4 py-20" style={{color:dark?"#706860":"#9A8E84"}}>
-                <FileText size={36} strokeWidth={1} style={{opacity:0.3}}/>
-                <p className="text-sm" style={{fontFamily:"sans-serif"}}>{cv.name}</p>
+                <FileText size={36} strokeWidth={1} style={{opacity:0.3}}/><p className="text-sm" style={{fontFamily:"sans-serif"}}>{cv.name}</p>
               </div>
             )}
           </div>
           <div className="px-6 py-4 shrink-0 flex gap-3" style={{borderTop:`1px solid ${dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)"}`}}>
-            <button type="button" onClick={()=>{onClose();onEnquire();}}
-              className="flex-1 flex items-center justify-center gap-2 h-11 rounded-full text-[11px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-85"
-              style={{background:G,color:INK,fontFamily:"sans-serif"}}>
+            <button type="button" onClick={()=>{onClose();onEnquire();}} className="flex-1 flex items-center justify-center gap-2 h-11 rounded-full text-[11px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-85" style={{background:G,color:INK,fontFamily:"sans-serif"}}>
               <Mail size={12} strokeWidth={2}/>{tr("tplEnquire",lang)}
             </button>
-            <button type="button" onClick={onClose}
-              className="px-5 h-11 rounded-full text-[11px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-70"
-              style={{border:`1px solid ${dark?"rgba(255,255,255,0.12)":"rgba(0,0,0,0.12)"}`,color:dark?"#706860":"#9A8E84",fontFamily:"sans-serif"}}>
+            <button type="button" onClick={onClose} className="px-5 h-11 rounded-full text-[11px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-70" style={{border:`1px solid ${dark?"rgba(255,255,255,0.12)":"rgba(0,0,0,0.12)"}`,color:dark?"#706860":"#9A8E84",fontFamily:"sans-serif"}}>
               {tr("tplClose",lang)}
             </button>
           </div>
@@ -769,7 +620,7 @@ function PreviewLightbox({cv,onClose,onEnquire,dark,lang}:{
 
 // ── ROOT ───────────────────────────────────────────────────────────────────────
 export default function Home(){
-  const [dark,setDark]=useState(()=>{ if(typeof window==="undefined") return true; const s=localStorage.getItem("z-theme"); return s!==null?s==="dark":true; });
+  const [dark,setDark]=useState(()=>{if(typeof window==="undefined")return true;const s=localStorage.getItem("z-theme");return s!==null?s==="dark":true;});
   const tog=()=>{const n=!dark;setDark(n);localStorage.setItem("z-theme",n?"dark":"light");};
   const [modal,setModal]=useState(false);
   const [lang,setLang]=useState<Lang>("en");
@@ -777,55 +628,44 @@ export default function Home(){
   const [visible,setVisible]=useState(PAGE_SIZE);
   const [preview,setPreview]=useState<{id:number;name:string;ats:boolean}|null>(null);
 
-  const LG    = LANGS.find(l=>l.code===lang)!;
-  const dir   = LG.dir;
-  const font  = LG.font;
-  const bg    = dark?INK:ASH;
-  const hi    = dark?"#EDE8E0":"#1A1410";
-  const sub   = dark?"#857870":"#786860";
-  const mid   = dark?"#C0B0A4":"#706050";
-  const bdr   = dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)";
-  const card  = dark?"rgba(255,255,255,0.03)":"rgba(255,255,255,0.90)";
-  const nav   = dark?"rgba(10,9,7,0.96)":"rgba(245,241,235,0.97)";
-  const cols  = [TMS.filter((_,i)=>i%3===0),TMS.filter((_,i)=>i%3===1),TMS.filter((_,i)=>i%3===2)];
-  const wlMsg = wl("Hello. I would like to request a private review.");
-  const shown = TEMPLATES.slice(0,visible);
-  const hasMore = visible < TEMPLATES.length;
+  const LG=LANGS.find(l=>l.code===lang)!;
+  const dir=LG.dir;
+  const font=LG.font;
+  const bg=dark?INK:ASH;
+  const hi=dark?"#EDE8E0":"#1A1410";
+  const sub=dark?"#857870":"#786860";
+  const mid=dark?"#C0B0A4":"#706050";
+  const bdr=dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)";
+  const card=dark?"rgba(255,255,255,0.03)":"rgba(255,255,255,0.90)";
+  const nav=dark?"rgba(10,9,7,0.96)":"rgba(245,241,235,0.97)";
+  const cols=[TMS.filter((_,i)=>i%3===0),TMS.filter((_,i)=>i%3===1),TMS.filter((_,i)=>i%3===2)];
+  const wlMsg=wl("Hello. I would like to request a private review.");
+  const shown=TEMPLATES.slice(0,visible);
+  const hasMore=visible<TEMPLATES.length;
 
-  const STEPS = [
-    {n:"I",   t:tr("p1t",lang), b:tr("p1b",lang), Ic:CreditCard},
-    {n:"II",  t:tr("p2t",lang), b:tr("p2b",lang), Ic:FileText},
-    {n:"III", t:tr("p3t",lang), b:tr("p3b",lang), Ic:Send},
-    {n:"IV",  t:tr("p4t",lang), b:tr("p4b",lang), Ic:CheckCircle},
+  const STEPS=[
+    {n:"I",  t:tr("p1t",lang),b:tr("p1b",lang),Ic:CreditCard},
+    {n:"II", t:tr("p2t",lang),b:tr("p2b",lang),Ic:FileText},
+    {n:"III",t:tr("p3t",lang),b:tr("p3b",lang),Ic:Send},
+    {n:"IV", t:tr("p4t",lang),b:tr("p4b",lang),Ic:CheckCircle},
   ];
 
-  const logoFilter = dark
-    ? ["brightness(1.08)","drop-shadow(0 0 8px rgba(212,175,55,0.15))","drop-shadow(0 2px 6px rgba(0,0,0,0.50))"].join(" ")
-    : "brightness(0) saturate(0) contrast(1)";
-
-  const AUTHORITY = [
-    {n:"7,000+", k:tr("mClients",lang)},
-    {n:"40+",    k:tr("mMarkets",lang)},
-    {n:"99.9%",  k:tr("mAts",lang)},
-    {n:"48h",    k:tr("mDraft",lang)},
-  ];
+  const logoFilter=dark?["brightness(1.08)","drop-shadow(0 0 8px rgba(212,175,55,0.15))","drop-shadow(0 2px 6px rgba(0,0,0,0.50))"].join(" "):"brightness(0) saturate(0) contrast(1)";
+  const AUTHORITY=[{n:"7,000+",k:tr("mClients",lang)},{n:"40+",k:tr("mMarkets",lang)},{n:"99.9%",k:tr("mAts",lang)},{n:"48h",k:tr("mDraft",lang)}];
 
   return(
     <div key={lang} className="min-h-screen w-full overflow-x-hidden transition-colors duration-700" dir={dir} style={{background:bg,color:hi,fontFamily:font}}>
 
-      {/* Grain overlay */}
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.028]" style={{backgroundImage:"url(\"data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",backgroundSize:"200px"}}/>
       {dark&&<div className="pointer-events-none fixed inset-0 -z-10" style={{background:`radial-gradient(ellipse 60% 40% at 50% -5%,${G}07,transparent 65%)`}}/>}
 
-      {/* ══ NAV ══════════════════════════════════════════════════════════════ */}
+      {/* NAV */}
       <header className="fixed top-0 inset-x-0 z-50" style={{background:nav,backdropFilter:"blur(32px)",WebkitBackdropFilter:"blur(32px)",borderBottom:dark?"none":`1px solid ${bdr}`,position:"fixed"}}>
         {dark&&<div aria-hidden className="absolute bottom-0 inset-x-0 h-px pointer-events-none" style={{background:"linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.08) 15%, rgba(212,175,55,0.45) 50%, rgba(212,175,55,0.08) 85%, transparent 100%)"}}/>}
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 sm:px-8" style={{height:"76px"}}>
-
           <a href="#" className="flex items-center shrink-0" style={{lineHeight:0}}>
             <img src="/images/logo.png" alt="Zenith Dubai CV" style={{height:"auto",width:"100px",objectFit:"contain",display:"block",borderRadius:"8px",filter:logoFilter,transition:"filter 0.4s ease",paddingTop:"4px"}}/>
           </a>
-
           <nav className="hidden md:flex items-center gap-8">
             {([["#disciplines","navServices"],["#portfolio","navTemplates"],["#method","navMethod"],["#investment","navPricing"],["#outcomes","navClients"]] as [string,string][]).map(([href,k])=>(
               <a key={href} href={href} className="text-[10px] font-medium tracking-[0.20em] uppercase" style={{color:dark?"rgba(200,169,110,0.40)":`${hi}60`,fontFamily:"sans-serif",textDecoration:"none",transition:"color 0.25s ease, letter-spacing 0.25s ease"}}
@@ -835,9 +675,7 @@ export default function Home(){
               </a>
             ))}
           </nav>
-
           <div className="flex items-center gap-2">
-            {/* Lang */}
             <div className="relative">
               <button type="button" onClick={()=>setLangOpen(o=>!o)} className="flex items-center gap-1.5 text-[10px] font-medium tracking-[0.15em] uppercase px-3 rounded-full"
                 style={{border:`1px solid ${dark?"rgba(200,169,110,0.22)":`${G}28`}`,color:dark?"#C8A96E":G,height:"32px",fontFamily:"sans-serif",minWidth:"62px",justifyContent:"center",background:"transparent",transition:"border-color 0.25s ease, box-shadow 0.25s ease"}}
@@ -863,16 +701,12 @@ export default function Home(){
                 )}
               </AnimatePresence>
             </div>
-
-            {/* CTA */}
             <button type="button" onClick={()=>setModal(true)} className="hidden sm:flex items-center gap-2 text-[10px] font-medium tracking-[0.18em] uppercase px-5 rounded-full"
               style={{border:dark?"1px solid rgba(200,169,110,0.35)":`1px solid ${G}40`,color:dark?"#C8A96E":G,height:"32px",fontFamily:"sans-serif",background:"transparent",transition:"border-color 0.25s ease, box-shadow 0.25s ease"}}
               onMouseEnter={e=>{const el=e.currentTarget as HTMLButtonElement;el.style.borderColor=dark?"rgba(212,175,55,0.65)":`${G}65`;el.style.boxShadow=dark?"0 0 16px rgba(212,175,55,0.20)":"none";}}
               onMouseLeave={e=>{const el=e.currentTarget as HTMLButtonElement;el.style.borderColor=dark?"rgba(200,169,110,0.35)":`${G}40`;el.style.boxShadow="none";}}>
               {tr("enquire",lang)}
             </button>
-
-            {/* Theme pill */}
             <div onClick={tog} role="button" aria-label="Toggle theme" tabIndex={0} onKeyDown={e=>e.key==="Enter"&&tog()}
               className="flex p-1 rounded-full cursor-pointer transition-all duration-300"
               style={{width:"56px",height:"28px",background:dark?"#0E0C0A":"#FFFFFF",border:dark?"1px solid rgba(200,169,110,0.16)":"1px solid rgba(0,0,0,0.10)",flexShrink:0}}>
@@ -891,58 +725,40 @@ export default function Home(){
 
       <main className="pt-[76px]">
 
-        {/* ══ HERO ══════════════════════════════════════════════════════════ */}
+        {/* HERO */}
         <section className="relative min-h-[96vh] flex flex-col items-center justify-center px-5 sm:px-8 text-center overflow-hidden">
-
           <Rise d={0.15} y={16}>
             <div className="inline-flex items-center gap-2 mb-10 px-4 py-2 rounded-full" style={{border:`1px solid ${G}30`,background:dark?`${G}08`:`${G}06`}}>
               <div className="h-1.5 w-1.5 rounded-full animate-pulse" style={{background:G}}/>
               <span className="text-[9px] font-medium tracking-[0.30em] uppercase" style={{color:G,fontFamily:"sans-serif"}}>{tr("scarcity",lang)}</span>
             </div>
           </Rise>
-
           <Rise d={0.3} y={36}>
             <p className="text-[9px] sm:text-[10px] font-medium tracking-[0.30em] sm:tracking-[0.42em] uppercase mb-8 px-2" style={{color:dark?"rgba(200,169,110,0.50)":"rgba(26,20,16,0.45)",fontFamily:"sans-serif"}}>{tr("eyebrow",lang)}</p>
           </Rise>
-
           <Rise d={0.5} y={44}>
             <h1 className="text-4xl sm:text-6xl lg:text-[90px] font-normal leading-[1.04] tracking-[-0.03em] mb-7 mx-auto px-2" style={{color:hi,maxWidth:"880px"}}>
               {tr("h1a",lang)}<br/><em style={{fontStyle:"italic",color:G}}>{tr("h1b",lang)}</em>
             </h1>
           </Rise>
-
           <Rise d={0.68} y={28}>
-            <p className="text-[15px] sm:text-[17px] leading-[1.95] w-full max-w-[440px] mb-0 mx-auto px-4 sm:px-0" style={{color:dark?"#857870":sub,fontFamily:"sans-serif",fontWeight:300}}>
-              {tr("heroSub",lang)}
-            </p>
+            <p className="text-[15px] sm:text-[17px] leading-[1.95] w-full max-w-[440px] mb-0 mx-auto px-4 sm:px-0" style={{color:dark?"#857870":sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("heroSub",lang)}</p>
           </Rise>
-
-          {/* Sparkles */}
           <div className="relative w-full mx-auto mb-4" style={{height:"140px",maxWidth:"600px",WebkitMaskImage:"radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)",maskImage:"radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)"}}>
             <SparklesCore particleColor={G} particleDensity={280} speed={0.8} className="absolute inset-0 w-full h-full"/>
           </div>
-
           <Rise d={0.85} y={20}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
-              <button type="button" onClick={()=>setModal(true)}
-                className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-90"
-                style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif",boxShadow:`0 8px 32px ${G}30`}}>
-                {tr("ctaPrimary",lang)}
-              </button>
-              <a href="#outcomes"
-                className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70"
-                style={{border:`1px solid ${G}35`,color:G,height:"52px",fontFamily:"sans-serif"}}>
-                {tr("ctaSecondary",lang)} <ArrowRight size={12} strokeWidth={2}/>
-              </a>
+              <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-90" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif",boxShadow:`0 8px 32px ${G}30`}}>{tr("ctaPrimary",lang)}</button>
+              <a href="#outcomes" className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}35`,color:G,height:"52px",fontFamily:"sans-serif"}}>{tr("ctaSecondary",lang)} <ArrowRight size={12} strokeWidth={2}/></a>
             </div>
           </Rise>
-
           <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2" initial={{opacity:0}} animate={{opacity:0.15}} transition={{delay:2.5,duration:1.5}}>
             <motion.div className="w-px h-10" style={{background:hi}} animate={{scaleY:[1,0,1],transformOrigin:"top"}} transition={{duration:2.4,repeat:Infinity,ease:"easeInOut"}}/>
           </motion.div>
         </section>
 
-        {/* ══ AUTHORITY METRICS ═════════════════════════════════════════════ */}
+        {/* AUTHORITY METRICS */}
         <section className="border-y" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4">
             {AUTHORITY.map(({n,k},i)=>(
@@ -956,7 +772,7 @@ export default function Home(){
           </div>
         </section>
 
-        {/* ══ DISCIPLINES ═══════════════════════════════════════════════════ */}
+        {/* DISCIPLINES */}
         <section id="disciplines" className="py-32 px-5 sm:px-8">
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-20">
@@ -984,7 +800,7 @@ export default function Home(){
           </div>
         </section>
 
-        {/* ══ EXCLUSIVITY BLOCK ═════════════════════════════════════════════ */}
+        {/* EXCLUSIVITY */}
         <section className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -997,16 +813,13 @@ export default function Home(){
               </Rise>
               <Rise d={0.15}>
                 <div className="flex flex-col gap-4">
-                  {[tr("exclPt1",lang), tr("exclPt2",lang), tr("exclPt3",lang)].map((pt,i)=>(
+                  {[tr("exclPt1",lang),tr("exclPt2",lang),tr("exclPt3",lang)].map((pt,i)=>(
                     <div key={i} className="flex items-center gap-5 p-6 rounded-2xl" style={{background:dark?`${G}06`:`${G}07`,border:`1px solid ${G}20`}}>
-                      <div className="shrink-0 h-8 w-8 rounded-full flex items-center justify-center" style={{background:`${G}15`,border:`1px solid ${G}30`}}>
-                        <CheckCircle size={14} color={G} strokeWidth={1.5}/>
-                      </div>
+                      <div className="shrink-0 h-8 w-8 rounded-full flex items-center justify-center" style={{background:`${G}15`,border:`1px solid ${G}30`}}><CheckCircle size={14} color={G} strokeWidth={1.5}/></div>
                       <p className="text-sm font-medium" style={{color:hi,fontFamily:"sans-serif"}}>{pt}</p>
                     </div>
                   ))}
-                  <button type="button" onClick={()=>setModal(true)} className="mt-4 flex items-center justify-center gap-3 px-8 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-85"
-                    style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif",boxShadow:`0 8px 32px ${G}28`}}>
+                  <button type="button" onClick={()=>setModal(true)} className="mt-4 flex items-center justify-center gap-3 px-8 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-85" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif",boxShadow:`0 8px 32px ${G}28`}}>
                     {tr("ctaPrimary",lang)} <ArrowRight size={12} strokeWidth={2}/>
                   </button>
                 </div>
@@ -1015,7 +828,7 @@ export default function Home(){
           </div>
         </section>
 
-        {/* ══ DOCUMENT PORTFOLIO ════════════════════════════════════════════ */}
+        {/* DOCUMENT PORTFOLIO */}
         <section id="portfolio" className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-6">
@@ -1024,13 +837,23 @@ export default function Home(){
                   <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4" style={{color:G,fontFamily:"sans-serif"}}>{tr("tplEyebrow",lang)}</p>
                   <h2 className="text-3xl sm:text-4xl font-normal tracking-tight leading-snug" style={{color:hi}}><em style={{fontStyle:"italic",color:G}}>{tr("tplH2",lang)}</em></h2>
                 </div>
+                {/* CHANGE 2: Badge updated to 3,000+ */}
                 <div className="flex-shrink-0 flex items-center gap-3 rounded-2xl px-5 py-3" style={{background:dark?`${G}0C`:`${G}08`,border:`1px solid ${G}30`}}>
                   <LayoutGrid size={16} color={G} strokeWidth={1.5}/>
-                  <div><p className="text-base font-semibold leading-none" style={{color:G,fontFamily:"sans-serif"}}>500+</p><p className="text-[10px] mt-0.5" style={{color:sub,fontFamily:"sans-serif"}}>{tr("tplBadge",lang)}</p></div>
+                  <div>
+                    <p className="text-base font-semibold leading-none" style={{color:G,fontFamily:"sans-serif"}}>3,000+</p>
+                    <p className="text-[10px] mt-0.5" style={{color:sub,fontFamily:"sans-serif"}}>{tr("tplBadge",lang)}</p>
+                  </div>
                 </div>
               </div>
             </Rise>
-            <Rise d={0.1} className="mb-16"><p className="text-sm leading-[1.9] max-w-3xl" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("tplDesc",lang)}</p></Rise>
+            {/* CHANGE 2: New rephrased description paragraph */}
+            <Rise d={0.1} className="mb-16">
+              <p className="text-sm leading-[1.9] max-w-3xl" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>
+                {tr("tplDesc",lang)}
+              </p>
+            </Rise>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               <AnimatePresence initial={false}>
                 {shown.map((cv,i)=>(
@@ -1053,14 +876,20 @@ export default function Home(){
                         <div className="p-5 flex-1 flex flex-col">
                           <div className="flex items-start justify-between gap-3 mb-2">
                             <h3 className="text-sm font-semibold leading-tight" style={{color:hi,fontFamily:"sans-serif"}}>{cv.name}</h3>
-                            {cv.ats
-                              ?<span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:`${G}15`,color:G,border:`1px solid ${G}28`,fontFamily:"sans-serif"}}>{tr("tplAts",lang)}</span>
-                              :<span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:"rgba(120,100,160,0.10)",color:"#8A6AAA",border:"1px solid rgba(120,100,160,0.22)",fontFamily:"sans-serif"}}>{tr("tplDesign",lang)}</span>}
+                            {/* CHANGE 3: Conditional badge — ATS-Optimized vs Premium Design */}
+                            {cv.ats ? (
+                              <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:`${G}15`,color:G,border:`1px solid ${G}28`,fontFamily:"sans-serif"}}>
+                                {tr("tplAts",lang)}
+                              </span>
+                            ) : (
+                              <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:"rgba(120,100,160,0.10)",color:"#8A6AAA",border:"1px solid rgba(120,100,160,0.22)",fontFamily:"sans-serif"}}>
+                                {tr("tplDesign",lang)}
+                              </span>
+                            )}
                           </div>
                           <p className="text-[11px] mb-1" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif"}}>{cv.ind}</p>
                           <p className="text-[10px] mb-3" style={{color:dark?"#6A6058":"#9A8E84",fontFamily:"sans-serif",opacity:0.8}}>{cv.reg}</p>
-                          <button type="button" onClick={()=>setModal(true)} className="mt-auto w-full py-2 rounded-xl text-[10px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-80"
-                            style={{border:`1px solid ${G}30`,color:G,fontFamily:"sans-serif",background:"transparent"}}>
+                          <button type="button" onClick={()=>setModal(true)} className="mt-auto w-full py-2 rounded-xl text-[10px] font-medium tracking-[0.15em] uppercase transition-all hover:opacity-80" style={{border:`1px solid ${G}30`,color:G,fontFamily:"sans-serif",background:"transparent"}}>
                             {tr("tplGet",lang)}
                           </button>
                         </div>
@@ -1072,9 +901,7 @@ export default function Home(){
             </div>
             <div className="text-center">
               {hasMore
-                ?<button type="button" onClick={()=>setVisible(n=>Math.min(n+PAGE_SIZE,TEMPLATES.length))}
-                    className="inline-flex items-center gap-3 px-8 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-80"
-                    style={{border:`1px solid ${G}40`,color:G,height:"50px",fontFamily:"sans-serif",background:"transparent"}}>
+                ?<button type="button" onClick={()=>setVisible(n=>Math.min(n+PAGE_SIZE,TEMPLATES.length))} className="inline-flex items-center gap-3 px-8 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-80" style={{border:`1px solid ${G}40`,color:G,height:"50px",fontFamily:"sans-serif",background:"transparent"}}>
                     <LayoutGrid size={13} strokeWidth={1.5}/>{tr("tplMore",lang)}<ArrowRight size={12} strokeWidth={2}/>
                   </button>
                 :<Rise><button type="button" onClick={()=>setModal(true)} className="text-[11px] tracking-[0.2em] uppercase hover:opacity-70 transition-opacity" style={{color:G,fontFamily:"sans-serif",background:"none",border:"none",cursor:"pointer"}}>{tr("tplDone",lang)}</button></Rise>}
@@ -1082,7 +909,7 @@ export default function Home(){
           </div>
         </section>
 
-        {/* ══ METHOD ════════════════════════════════════════════════════════ */}
+        {/* METHOD */}
         <section id="method" className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-20">
@@ -1106,7 +933,7 @@ export default function Home(){
           </div>
         </section>
 
-        {/* ══ INVESTMENT ════════════════════════════════════════════════════ */}
+        {/* INVESTMENT */}
         <section id="investment" className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-20">
@@ -1115,25 +942,16 @@ export default function Home(){
               <p className="mt-4 text-sm" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("prcNote",lang)}</p>
             </Rise>
             <div className="grid md:grid-cols-3 gap-6 items-start">
-              {/* Foundation */}
               <Rise d={0}>
                 <div className="p-10 rounded-2xl h-full flex flex-col" style={{background:card,border:`1px solid ${bdr}`}}>
                   <p className="text-[10px] tracking-[0.3em] uppercase mb-7" style={{color:G,fontFamily:"sans-serif",opacity:0.65}}>{tr("pF",lang)}</p>
                   <div className="flex items-baseline gap-2 mb-2"><span className="text-4xl font-normal" style={{color:hi}}>179</span><span className="text-sm" style={{color:sub,fontFamily:"sans-serif"}}>AED</span></div>
                   <p className="text-xs mb-8" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif"}}>{tr("pFsub",lang)}</p>
                   <div className="h-px mb-8" style={{background:bdr}}/>
-                  <ul className="space-y-3.5 mb-10 flex-1">
-                    {(["pFi1","pFi2","pFi3","pFi4"] as string[]).map(k=>(
-                      <li key={k} className="flex items-start gap-3 text-sm" style={{color:mid,fontFamily:"sans-serif",fontWeight:300}}>
-                        <div className="mt-2 h-1 w-1 rounded-full shrink-0" style={{background:G,opacity:0.45}}/>{tr(k,lang)}
-                      </li>
-                    ))}
-                  </ul>
-                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75"
-                    style={{border:`1px solid ${G}35`,color:G,fontFamily:"sans-serif",height:"46px",background:"transparent"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
+                  <ul className="space-y-3.5 mb-10 flex-1">{(["pFi1","pFi2","pFi3","pFi4"] as string[]).map(k=>(<li key={k} className="flex items-start gap-3 text-sm" style={{color:mid,fontFamily:"sans-serif",fontWeight:300}}><div className="mt-2 h-1 w-1 rounded-full shrink-0" style={{background:G,opacity:0.45}}/>{tr(k,lang)}</li>))}</ul>
+                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75" style={{border:`1px solid ${G}35`,color:G,fontFamily:"sans-serif",height:"46px",background:"transparent"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
                 </div>
               </Rise>
-              {/* Growth */}
               <Rise d={0.08}>
                 <div className="p-10 rounded-2xl h-full flex flex-col relative" style={{background:dark?"rgba(200,169,110,0.055)":"rgba(200,169,110,0.07)",border:`1px solid ${G}35`}}>
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[9px] tracking-[0.28em] uppercase font-medium whitespace-nowrap" style={{background:G,color:INK,fontFamily:"sans-serif"}}>{tr("prcMostSel",lang)}</div>
@@ -1141,40 +959,25 @@ export default function Home(){
                   <div className="flex items-baseline gap-2 mb-2"><span className="text-4xl font-normal" style={{color:hi}}>299</span><span className="text-sm" style={{color:sub,fontFamily:"sans-serif"}}>AED</span></div>
                   <p className="text-xs mb-8" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif"}}>{tr("pGsub",lang)}</p>
                   <div className="h-px mb-8" style={{background:`${G}22`}}/>
-                  <ul className="space-y-3.5 mb-10 flex-1">
-                    {(["pGi1","pGi2","pGi3","pGi4","pGi5"] as string[]).map(k=>(
-                      <li key={k} className="flex items-start gap-3 text-sm" style={{color:mid,fontFamily:"sans-serif",fontWeight:300}}>
-                        <div className="mt-2 h-1 w-1 rounded-full shrink-0" style={{background:G}}/>{tr(k,lang)}
-                      </li>
-                    ))}
-                  </ul>
-                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-88"
-                    style={{background:G,color:INK,fontFamily:"sans-serif",height:"46px",boxShadow:`0 6px 24px ${G}28`}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
+                  <ul className="space-y-3.5 mb-10 flex-1">{(["pGi1","pGi2","pGi3","pGi4","pGi5"] as string[]).map(k=>(<li key={k} className="flex items-start gap-3 text-sm" style={{color:mid,fontFamily:"sans-serif",fontWeight:300}}><div className="mt-2 h-1 w-1 rounded-full shrink-0" style={{background:G}}/>{tr(k,lang)}</li>))}</ul>
+                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-88" style={{background:G,color:INK,fontFamily:"sans-serif",height:"46px",boxShadow:`0 6px 24px ${G}28`}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
                 </div>
               </Rise>
-              {/* Executive */}
               <Rise d={0.16}>
                 <div className="p-10 rounded-2xl h-full flex flex-col" style={{background:card,border:`1px solid ${bdr}`}}>
                   <p className="text-[10px] tracking-[0.3em] uppercase mb-7" style={{color:G,fontFamily:"sans-serif",opacity:0.65}}>{tr("pE",lang)}</p>
                   <div className="flex items-baseline gap-2 mb-2"><span className="text-4xl font-normal" style={{color:hi}}>449</span><span className="text-sm" style={{color:sub,fontFamily:"sans-serif"}}>AED</span></div>
                   <p className="text-xs mb-8" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif"}}>{tr("pEsub",lang)}</p>
                   <div className="h-px mb-8" style={{background:bdr}}/>
-                  <ul className="space-y-3.5 mb-10 flex-1">
-                    {(["pEi1","pEi2","pEi3","pEi4","pEi5"] as string[]).map(k=>(
-                      <li key={k} className="flex items-start gap-3 text-sm" style={{color:mid,fontFamily:"sans-serif",fontWeight:300}}>
-                        <div className="mt-2 h-1 w-1 rounded-full shrink-0" style={{background:G,opacity:0.45}}/>{tr(k,lang)}
-                      </li>
-                    ))}
-                  </ul>
-                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75"
-                    style={{border:`1px solid ${G}35`,color:G,fontFamily:"sans-serif",height:"46px",background:"transparent"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
+                  <ul className="space-y-3.5 mb-10 flex-1">{(["pEi1","pEi2","pEi3","pEi4","pEi5"] as string[]).map(k=>(<li key={k} className="flex items-start gap-3 text-sm" style={{color:mid,fontFamily:"sans-serif",fontWeight:300}}><div className="mt-2 h-1 w-1 rounded-full shrink-0" style={{background:G,opacity:0.45}}/>{tr(k,lang)}</li>))}</ul>
+                  <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all hover:opacity-75" style={{border:`1px solid ${G}35`,color:G,fontFamily:"sans-serif",height:"46px",background:"transparent"}}>{tr("prcBegin",lang)}<ArrowRight size={12}/></button>
                 </div>
               </Rise>
             </div>
           </div>
         </section>
 
-        {/* ══ OUTCOMES / TESTIMONIALS ═══════════════════════════════════════ */}
+        {/* OUTCOMES */}
         <section id="outcomes" className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
           <div className="mx-auto max-w-6xl">
             <Rise className="mb-20">
@@ -1194,7 +997,7 @@ export default function Home(){
           </div>
         </section>
 
-        {/* ══ CLOSING CTA ═══════════════════════════════════════════════════ */}
+        {/* CLOSING CTA */}
         <section className="py-40 px-5 sm:px-8 border-t text-center" style={{borderColor:bdr}}>
           <Rise>
             <div className="mx-auto max-w-2xl">
@@ -1204,23 +1007,15 @@ export default function Home(){
               </h2>
               <p className="text-base leading-[1.9] mb-14 max-w-lg mx-auto" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("ctaBody",lang)}</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button type="button" onClick={()=>setModal(true)}
-                  className="flex items-center justify-center gap-3 w-full sm:w-auto px-12 text-[11px] font-medium tracking-[0.20em] uppercase rounded-full transition-all hover:opacity-90"
-                  style={{background:G,color:INK,height:"56px",fontFamily:"sans-serif",boxShadow:`0 12px 40px ${G}32`,fontSize:"11px"}}>
-                  {tr("ctaFinalBtn",lang)}
-                </button>
-                <a href={wlMsg} target="_blank" rel="noreferrer"
-                  className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70"
-                  style={{border:`1px solid ${G}35`,color:G,height:"56px",fontFamily:"sans-serif"}}>
-                  {tr("startWA",lang)}
-                </a>
+                <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-center gap-3 w-full sm:w-auto px-12 text-[11px] font-medium tracking-[0.20em] uppercase rounded-full transition-all hover:opacity-90" style={{background:G,color:INK,height:"56px",fontFamily:"sans-serif",boxShadow:`0 12px 40px ${G}32`,fontSize:"11px"}}>{tr("ctaFinalBtn",lang)}</button>
+                <a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}35`,color:G,height:"56px",fontFamily:"sans-serif"}}>{tr("startWA",lang)}</a>
               </div>
               <p className="mt-16 text-[10px] tracking-[0.28em] uppercase" style={{color:dark?"rgba(200,169,110,0.25)":"rgba(26,20,16,0.30)",fontFamily:"sans-serif"}}>{tr("tagline",lang)}</p>
             </div>
           </Rise>
         </section>
 
-        {/* ══ FOOTER ════════════════════════════════════════════════════════ */}
+        {/* FOOTER */}
         <footer className="relative py-10 px-5 sm:px-8" style={{borderTop:`1px solid ${bdr}`}}>
           {dark&&<div aria-hidden className="absolute top-0 inset-x-0 h-px pointer-events-none" style={{background:"linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.08) 15%, rgba(212,175,55,0.45) 50%, rgba(212,175,55,0.08) 85%, transparent 100%)"}}/>}
           <div className="mx-auto max-w-6xl flex flex-col gap-6">
@@ -1230,17 +1025,9 @@ export default function Home(){
                 <span className="text-[10px] tracking-[0.08em]" style={{color:dark?"rgba(200,169,110,0.32)":sub,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>{tr("tagline",lang)}</span>
               </div>
               <div className="flex items-center gap-4">
-                <button type="button" onClick={()=>setModal(true)} className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase"
-                  style={{color:dark?"rgba(200,169,110,0.28)":`${hi}45`,fontFamily:"sans-serif",background:"none",border:"none",cursor:"pointer",padding:0,transition:"color 0.25s ease"}}
-                  onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"#D4AF37":hi;}}
-                  onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"rgba(200,169,110,0.28)":`${hi}45`;}}>
-                  <Mail size={10} strokeWidth={1.5}/>{EM}
-                </button>
+                <button type="button" onClick={()=>setModal(true)} className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase" style={{color:dark?"rgba(200,169,110,0.28)":`${hi}45`,fontFamily:"sans-serif",background:"none",border:"none",cursor:"pointer",padding:0,transition:"color 0.25s ease"}} onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"#D4AF37":hi;}} onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"rgba(200,169,110,0.28)":`${hi}45`;}}><Mail size={10} strokeWidth={1.5}/>{EM}</button>
                 <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
-                <a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase"
-                  style={{color:dark?"rgba(74,154,90,0.45)":"#4A9A5A80",fontFamily:"sans-serif",textDecoration:"none",transition:"color 0.25s ease"}}
-                  onMouseEnter={e=>{(e.currentTarget as HTMLAnchorElement).style.color="#4A9A5A";}}
-                  onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color=dark?"rgba(74,154,90,0.45)":"#4A9A5A80";}}>
+                <a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase" style={{color:dark?"rgba(74,154,90,0.45)":"#4A9A5A80",fontFamily:"sans-serif",textDecoration:"none",transition:"color 0.25s ease"}} onMouseEnter={e=>{(e.currentTarget as HTMLAnchorElement).style.color="#4A9A5A";}} onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color=dark?"rgba(74,154,90,0.45)":"#4A9A5A80";}}>
                   <svg viewBox="0 0 24 24" width="10" height="10" fill="none"><path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg>
                   {tr("footerWA",lang)}
                 </a>
