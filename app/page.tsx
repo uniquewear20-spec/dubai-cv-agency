@@ -7,7 +7,7 @@ import {
   Upload, FileText, ImageIcon, Trash2, CreditCard, ArrowRight,
   Globe, LayoutGrid, ArrowUpRight,
 } from "lucide-react";
-import { SocialMarquee } from "@/components/sections/social-marquee";
+import { SocialMarquee, SOCIALS } from "@/components/sections/social-marquee";
 
 // ── Tokens ──────────────────────────────────────────────────────────────────
 const G = "#C8A96E", GL = "#E2C98E", INK = "#0A0907", ASH = "#F7F3EE";
@@ -243,7 +243,6 @@ function CountUp({ value, suffix = "" }: { value: string; suffix?: string }) {
     if (isNaN(num)) { setDisplay(value); return; }
     const prefix = value.match(/^[^0-9]*/)?.[0] ?? "";
     const sfx = value.match(/[^0-9.]+$/)?.[0] ?? "";
-    let start = 0;
     const duration = 1800;
     const startTime = performance.now();
     const tick = (now: number) => {
@@ -523,13 +522,16 @@ export default function Home() {
   const font = LG.font;
 
   // Theme tokens
-  const bg = dark ? INK : ASH;
-  const hi = dark ? "#EDE8E0" : "#1A1410";
-  const sub = dark ? "#7A6E66" : "#8A7E74";
-  const mid = dark ? "#B8A89C" : "#6A5A50";
-  const bdr = dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+  const bg   = dark ? INK : ASH;
+  const hi   = dark ? "#EDE8E0" : "#1A1410";
+  const sub  = dark ? "#7A6E66" : "#8A7E74";
+  const mid  = dark ? "#B8A89C" : "#6A5A50";
+  const bdr  = dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
   const card = dark ? "rgba(255,255,255,0.025)" : "rgba(255,255,255,0.92)";
-  const nav = dark ? "rgba(10,9,7,0.97)" : "rgba(247,243,238,0.97)";
+  const nav  = dark ? "rgba(10,9,7,0.97)" : "rgba(247,243,238,0.97)";
+
+  // Social link colour (theme-aware, matches SocialMarquee's dotColor logic)
+  const socialLinkColor = dark ? `${G}55` : `${G}70`;
 
   const cols = [TMS.filter((_, i) => i % 3 === 0), TMS.filter((_, i) => i % 3 === 1), TMS.filter((_, i) => i % 3 === 2)];
   const wlMsg = wl("Hello. I would like to request a private review.");
@@ -639,38 +641,27 @@ export default function Home() {
 
         {/* ── HERO ─────────────────────────────────────────────────────────── */}
         <section className="relative min-h-[98vh] flex flex-col items-center justify-center px-5 sm:px-8 text-center overflow-hidden">
-
-          {/* Scarcity tag */}
           <Reveal d={0.1} y={12}>
             <div className="inline-flex items-center gap-2 mb-12 px-4 py-1.5 rounded-full" style={{ border: `1px solid ${G}22`, background: dark ? `${G}06` : `${G}04` }}>
               <span className="h-1 w-1 rounded-full animate-pulse" style={{ background: G }} />
               <span className="text-[8px] font-medium tracking-[0.35em] uppercase" style={{ color: dark ? `${G}80` : G, fontFamily: "sans-serif" }}>{tr("scarcity", lang)}</span>
             </div>
           </Reveal>
-
-          {/* Main headline */}
           <Reveal d={0.3} y={40}>
             <h1 className="font-normal leading-[1.0] tracking-[-0.035em] mb-8 mx-auto" style={{ fontSize: "clamp(44px, 8vw, 96px)", color: hi, maxWidth: "900px" }}>
               {tr("h1a", lang)}<br />
               <em style={{ fontStyle: "italic", color: G }}>{tr("h1b", lang)}</em>
             </h1>
           </Reveal>
-
-          {/* Gold line */}
           <Reveal d={0.55} y={0} className="w-full max-w-xs mb-10 mx-auto">
             <GoldLine />
           </Reveal>
-
-          {/* Sub */}
           <Reveal d={0.65} y={20}>
             <p className="text-[15px] sm:text-[17px] leading-[2.0] max-w-[420px] mx-auto mb-0 px-4 sm:px-0" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300 }}>
               {tr("heroSub", lang)}
             </p>
           </Reveal>
-
           <div style={{ height: "48px" }} />
-
-          {/* CTAs */}
           <Reveal d={0.8} y={16}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full px-4 sm:px-0">
               <button type="button" onClick={() => setModal(true)}
@@ -680,13 +671,11 @@ export default function Home() {
               </button>
               <a href="#outcomes"
                 className="flex items-center justify-center gap-2 w-full sm:w-auto px-10 text-[10px] font-medium tracking-[0.22em] uppercase rounded-full transition-all duration-300 hover:opacity-65"
-                style={{ border: `1px solid ${G}28`, color: dark ? `${G}60` : G, height: "50px", fontFamily: "sans-serif,", width: "272px" }}>
+                style={{ border: `1px solid ${G}28`, color: dark ? `${G}60` : G, height: "50px", fontFamily: "sans-serif" }}>
                 {tr("ctaSecondary", lang)} <ArrowRight size={11} strokeWidth={1.5} />
               </a>
             </div>
           </Reveal>
-
-          {/* Scroll indicator */}
           <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2" initial={{ opacity: 0 }} animate={{ opacity: dark ? 0.12 : 0.2 }} transition={{ delay: 2.5, duration: 1.5 }}>
             <motion.div className="w-px h-10" style={{ background: hi }} animate={{ scaleY: [1, 0, 1], transformOrigin: "top" }} transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }} />
           </motion.div>
@@ -707,6 +696,50 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        {/* ── SOCIAL LINKS (moved from SocialMarquee bottom strip) ─────────── */}
+        <div style={{ borderBottom: `1px solid ${bdr}`, transition: "border-color 0.7s ease, background 0.7s ease" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: "32px",
+              padding: "22px 24px",
+              maxWidth: "1152px",
+              margin: "0 auto",
+            }}
+          >
+            {SOCIALS.map((s) => (
+              <a
+                key={s.id}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={s.name}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  textDecoration: "none",
+                  color: socialLinkColor,
+                  fontFamily: "sans-serif",
+                  fontSize: "10px",
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase" as const,
+                  transition: "color 0.25s ease",
+                  padding: "4px 0",
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = GL; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = socialLinkColor; }}
+              >
+                <span style={{ color: "inherit", display: "flex" }}>{s.icon}</span>
+                {s.name}
+              </a>
+            ))}
+          </div>
+        </div>
 
         {/* ── DISCIPLINES ─────────────────────────────────────────────────── */}
         <section id="disciplines" className="py-40 px-5 sm:px-8">
@@ -791,7 +824,6 @@ export default function Home() {
             <Reveal d={0.1} className="mb-16">
               <p className="text-sm leading-[2.0] max-w-2xl" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300 }}>{tr("tplDesc", lang)}</p>
             </Reveal>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
               <AnimatePresence initial={false}>
                 {shown.map((cv, i) => (
@@ -830,7 +862,6 @@ export default function Home() {
                 ))}
               </AnimatePresence>
             </div>
-
             <div className="text-center">
               {hasMore
                 ? <button type="button" onClick={() => setVisible(n => Math.min(n + PAGE_SIZE, TEMPLATES.length))}
@@ -882,7 +913,6 @@ export default function Home() {
               <p className="mt-4 text-[11px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("prcNote", lang)}</p>
             </Reveal>
             <div className="grid md:grid-cols-3 gap-5 items-start">
-              {/* Foundation */}
               <Reveal d={0}>
                 <div className="p-10 rounded-2xl h-full flex flex-col" style={{ background: card, border: `1px solid ${bdr}` }}>
                   <p className="text-[9px] tracking-[0.35em] uppercase mb-8" style={{ color: dark ? `${G}45` : `${G}70`, fontFamily: "sans-serif" }}>{tr("pF", lang)}</p>
@@ -901,8 +931,6 @@ export default function Home() {
                   </button>
                 </div>
               </Reveal>
-
-              {/* Growth — featured */}
               <Reveal d={0.08}>
                 <div className="p-10 rounded-2xl h-full flex flex-col relative" style={{ background: dark ? "rgba(200,169,110,0.045)" : "rgba(200,169,110,0.065)", border: `1px solid ${G}30` }}>
                   <div className="absolute top-0 inset-x-0 h-px rounded-full" style={{ background: `linear-gradient(to right,transparent,${G}50,transparent)` }} />
@@ -922,8 +950,6 @@ export default function Home() {
                   </button>
                 </div>
               </Reveal>
-
-              {/* Executive */}
               <Reveal d={0.16}>
                 <div className="p-10 rounded-2xl h-full flex flex-col" style={{ background: card, border: `1px solid ${bdr}` }}>
                   <p className="text-[9px] tracking-[0.35em] uppercase mb-8" style={{ color: dark ? `${G}45` : `${G}70`, fontFamily: "sans-serif" }}>{tr("pE", lang)}</p>
@@ -970,7 +996,7 @@ export default function Home() {
         </section>
 
         {/* ── SOCIAL MARQUEE ──────────────────────────────────────────────── */}
-        <SocialMarquee dark={dark}/>
+        <SocialMarquee dark={dark} />
 
         {/* ── CLOSING CTA ─────────────────────────────────────────────────── */}
         <section className="py-48 px-5 sm:px-8 text-center" style={{ borderTop: `1px solid ${bdr}` }}>
@@ -1027,7 +1053,7 @@ export default function Home() {
           <div className="h-px" style={{ background: bdr }} />
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <p className="text-[9px]" style={{ color: dark ? `${G}10` : `${hi}20`, fontFamily: "sans-serif", whiteSpace: "nowrap" }}>© {new Date().getFullYear()} Zenith Dubai CV</p>
-            {[["Privacy Policy", "/privacy"], ["Terms of Service", "/terms"], ["Refund Policy", "/refund"]].map(([label, href], i, arr) => (
+            {[["Privacy Policy", "/privacy"], ["Terms of Service", "/terms"], ["Refund Policy", "/refund"]].map(([label, href]) => (
               <React.Fragment key={href}>
                 <span style={{ color: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)", fontSize: "9px" }}>·</span>
                 <a href={href} className="text-[9px] transition-opacity hover:opacity-60" style={{ color: dark ? `${G}18` : `${hi}30`, fontFamily: "sans-serif", textDecoration: "none", whiteSpace: "nowrap" }}>{label}</a>

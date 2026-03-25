@@ -9,8 +9,8 @@ const GL  = "#E2C98E";
 const INK = "#0A0907";
 const ASH = "#F7F3EE";
 
-// ── Social platform data ───────────────────────────────────────────────────────
-const SOCIALS = [
+// ── Social platform data (exported so page.tsx can render the links strip) ────
+export const SOCIALS = [
   {
     id: "linkedin",
     name: "LinkedIn",
@@ -270,7 +270,6 @@ export function SocialMarquee({ dark = true }: SocialMarqueeProps) {
   const bottomRule    = dark
     ? `linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%)`
     : `linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.06) 50%, transparent 100%)`;
-  const dotColor      = dark ? `${G}55` : `${G}70`;
 
   const transition = "background 0.7s ease, color 0.7s ease";
 
@@ -393,51 +392,6 @@ export function SocialMarquee({ dark = true }: SocialMarqueeProps) {
           <SocialCard key={s.id} s={s} dark={dark} />
         ))}
       </Marquee>
-
-      {/* Bottom CTA strip */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "32px",
-          marginTop: "60px",
-          padding: "0 24px",
-          flexWrap: "wrap",
-        }}
-      >
-        {SOCIALS.map((s) => (
-          <a
-            key={s.id + "-dot"}
-            href={s.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={s.name}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              textDecoration: "none",
-              color: dotColor,
-              fontFamily: "sans-serif",
-              fontSize: "10px",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              transition: "color 0.25s ease",
-              padding: "4px 0",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = GL;
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = dotColor;
-            }}
-          >
-            <span style={{ color: "inherit", display: "flex" }}>{s.icon}</span>
-            {s.name}
-          </a>
-        ))}
-      </div>
 
       {/* Bottom rule */}
       <div
