@@ -959,4 +959,4 @@ export default function Home(){
       <Modal open={modal} onClose={()=>setModal(false)} dark={dark} lang={lang}/>
     </div>
   );
-}
+} 
