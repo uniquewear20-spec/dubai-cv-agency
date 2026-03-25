@@ -1,12 +1,13 @@
 // app/page.tsx — Zenith Dubai CV
 "use client";
-import React, { useState, useRef, useCallback, useEffect, useId } from "react";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import React, { useState, useRef, useCallback, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Sun, Moon, Mail, X, Send, Loader2, CheckCircle, AlertCircle,
   Upload, FileText, ImageIcon, Trash2, CreditCard, ArrowRight, Globe, LayoutGrid,
 } from "lucide-react";
 import { SocialMarquee } from "@/components/sections/social-marquee";
+
 // ── Tokens ─────────────────────────────────────────────────────────────────────
 const G = "#C8A96E", GL = "#E2C98E", INK = "#0A0907", ASH = "#F5F1EB";
 const WA = "971502879462", EM = "info@zenithdubaicv.com";
@@ -26,43 +27,28 @@ const LANGS: {code:Lang;label:string;dir:"ltr"|"rtl";font:string}[] = [
 
 // ── Full translation dictionary ────────────────────────────────────────────────
 const TX: Record<string,Record<Lang,string>> = {
-  // Nav
   navServices:  {en:"Disciplines",     ar:"تخصصاتنا",            fr:"Disciplines"},
   navTemplates: {en:"Portfolio",       ar:"المحفظة",             fr:"Portfolio"},
   navMethod:    {en:"Method",          ar:"المنهجية",            fr:"Méthode"},
   navPricing:   {en:"Investment",      ar:"الاستثمار",           fr:"Investissement"},
   navClients:   {en:"Outcomes",        ar:"النتائج",             fr:"Résultats"},
   enquire:      {en:"Request Review",  ar:"طلب مراجعة",          fr:"Demander une revue"},
-  // Hero
   eyebrow:      {en:"Executive Career Studio · Based in Dubai · Operating Globally",
                  ar:"استوديو تطوير المسار المهني · مقره دبي · يخدم عالمياً",
                  fr:"Studio Carrière Exécutif · Basé à Dubaï · Présence mondiale"},
-  h1a:          {en:"Your Experience Deserves",
-                 ar:"خبرتك تستحق",
-                 fr:"Votre parcours mérite"},
-  h1b:          {en:"a Global Stage.",
-                 ar:"مسرحاً عالمياً.",
-                 fr:"une scène mondiale."},
+  h1a:          {en:"Your Experience Deserves", ar:"خبرتك تستحق", fr:"Votre parcours mérite"},
+  h1b:          {en:"a Global Stage.", ar:"مسرحاً عالمياً.", fr:"une scène mondiale."},
   heroSub:      {en:"We elevate the careers of ambitious professionals from the Gulf, Africa, and Asia — crafting authoritative profiles that unlock opportunities across North America, Europe, and the Gulf countries.",
                  ar:"نُعلي شأن مسيرات المحترفين الطموحين من الخليج وأفريقيا وآسيا — من خلال صياغة ملفات مهنية موثوقة تفتح آفاق الفرص في أمريكا الشمالية وأوروبا ودول الخليج.",
                  fr:"Nous propulsons les carrières de professionnels ambitieux du Golfe, d'Afrique et d'Asie — en forgeant des profils de référence qui ouvrent les portes en Amérique du Nord, en Europe et dans les pays du Golfe."},
   ctaPrimary:   {en:"Request Private Review", ar:"طلب مراجعة خاصة", fr:"Demander une revue privée"},
-  ctaSecondary: {en:"View Outcomes",          ar:"عرض النتائج",      fr:"Voir les résultats"},
-  viewPkg:      {en:"Explore Packages",  ar:"استعرض الباقات",   fr:"Voir les offres"},
-  beginEnq:     {en:"Speak to an Expert",ar:"تحدّث مع خبير",    fr:"Parler à un expert"},
-  // Scarcity
-  scarcity:     {en:"Limited intake. Application-based.",
-                 ar:"قبول محدود. بناءً على الطلب.",
-                 fr:"Admission limitée. Sur candidature."},
-  // Authority metrics
-  mAts:    {en:"ATS Pass Rate",         ar:"معدل اجتياز الفرز الآلي", fr:"Taux de passage ATS"},
-  mRate:   {en:"Interview Uplift",      ar:"زيادة معدل المقابلات",    fr:"Hausse des entretiens"},
-  mDraft:  {en:"Delivery Time",         ar:"وقت التسليم",             fr:"Délai de livraison"},
-  mTpl:    {en:"Premium Templates",     ar:"قوالب متميزة",            fr:"Modèles premium"},
-  mClients:{en:"Leaders Positioned",    ar:"قائد موضَّع",             fr:"Leaders positionnés"},
-  mMarkets:{en:"Global Markets",        ar:"سوق عالمي",               fr:"Marchés mondiaux"},
-  // Disciplines
-  svcEyebrow:   {en:"Our Disciplines",       ar:"تخصصاتنا",                  fr:"Nos disciplines"},
+  ctaSecondary: {en:"View Outcomes", ar:"عرض النتائج", fr:"Voir les résultats"},
+  scarcity:     {en:"Limited intake. Application-based.", ar:"قبول محدود. بناءً على الطلب.", fr:"Admission limitée. Sur candidature."},
+  mAts:    {en:"ATS Pass Rate",      ar:"معدل اجتياز الفرز الآلي", fr:"Taux de passage ATS"},
+  mDraft:  {en:"Delivery Time",      ar:"وقت التسليم",             fr:"Délai de livraison"},
+  mClients:{en:"Leaders Positioned", ar:"قائد موضَّع",             fr:"Leaders positionnés"},
+  mMarkets:{en:"Global Markets",     ar:"سوق عالمي",               fr:"Marchés mondiaux"},
+  svcEyebrow:   {en:"Our Disciplines", ar:"تخصصاتنا", fr:"Nos disciplines"},
   svcH2:        {en:"Three strategic disciplines. One decisive outcome.",
                  ar:"ثلاثة تخصصات استراتيجية. نتيجة واحدة حاسمة.",
                  fr:"Trois disciplines stratégiques. Un résultat décisif."},
@@ -71,7 +57,7 @@ const TX: Record<string,Record<Lang,string>> = {
         ar:"كل كلمة مفتاحية وقرار تنسيقي مُعاد هندسته استناداً إلى منطق الفرز الآلي المعتمد لدى كبار أصحاب العمل في الخليج وأوروبا وأمريكا الشمالية — لضمان اجتياز وثيقتك كل مراحل الفرز التلقائي قبل وصولها إلى أي مسؤول توظيف.",
         fr:"Chaque mot-clé, format et choix structurel est rétro-conçu à partir de la logique ATS utilisée par les meilleurs employeurs du CCG, d'Europe et d'Amérique du Nord — garantissant que votre document franchit le tri automatisé avant d'atteindre un recruteur."},
   s1tag:{en:"Mandatory for every digital application",ar:"ضروري لكل تقديم إلكتروني",fr:"Indispensable pour toute candidature numérique"},
-  s2t: {en:"Executive-Grade Design",  ar:"التصميم التنفيذي الاحترافي", fr:"Design de niveau exécutif"},
+  s2t: {en:"Executive-Grade Design", ar:"التصميم التنفيذي الاحترافي", fr:"Design de niveau exécutif"},
   s2b: {en:"Visual hierarchy, typographic authority, and strategic white space — calibrated to your seniority level and your target market. Your document should command attention the moment it is opened.",
         ar:"هرمية بصرية ومرجعية طباعية ومسافات بيضاء استراتيجية — معايَرة وفق مستوى أقدميتك وسوقك المستهدف. وثيقتك يجب أن تستأثر بالانتباه فور فتحها.",
         fr:"Hiérarchie visuelle, autorité typographique et espacement stratégique — calibrés selon votre niveau de séniorité et votre marché cible. Votre document doit capter l'attention dès son ouverture."},
@@ -81,187 +67,110 @@ const TX: Record<string,Record<Lang,string>> = {
         ar:"يُعاد بناء ملفك على لينكدإن بكثافة الكلمات المفتاحية وإشارات المصداقية والسرد المُحسَّن للبحث — لتظهر أمام مسؤولي التوظيف النشطين في الخليج وأوروبا وآسيا وأمريكا الشمالية.",
         fr:"Votre profil LinkedIn, reconstruit avec la densité de mots-clés, les signaux d'autorité et le récit optimisé qui vous placent devant les recruteurs actifs dans le CCG, l'Europe, l'APAC et l'Amérique du Nord."},
   s3tag:{en:"Included in Growth & Executive packages",ar:"مشمول في باقتَي النمو والتنفيذية",fr:"Inclus dans les offres Croissance et Exécutif"},
-  // Templates
-  tplEyebrow:  {en:"Document Portfolio",     ar:"محفظة الوثائق",       fr:"Portfolio documentaire"},
-  tplH2:       {en:"Engineered to perform.", ar:"مُصمَّمة للأداء.",    fr:"Conçus pour performer."},
-
-  // ── CHANGE 2: Rephrased tplDesc — 3000+, differentiates ATS vs Premium Design ──
+  tplEyebrow:  {en:"Document Portfolio",     ar:"محفظة الوثائق",    fr:"Portfolio documentaire"},
+  tplH2:       {en:"Engineered to perform.", ar:"مُصمَّمة للأداء.", fr:"Conçus pour performer."},
   tplDesc: {
-    en: "Every Zenith engagement unlocks our vault of 3,000+ precision-engineered documents — spanning two distinct collections: ATS-Optimised profiles, calibrated to defeat automated screening across the GCC, Europe, and North America; and Premium Design editions, crafted for executives who demand visual authority the moment the page is opened.",
-    ar: "كل تعاقد مع Zenith يفتح أمامك مخزوننا الذي يضم أكثر من 3,000 وثيقة مُهندَسة بدقة — موزّعة على مجموعتين متمايزتين: ملفات مُحسَّنة لأنظمة الفرز الآلي، معايَرة لاجتياز الفرز التلقائي في الخليج وأوروبا وأمريكا الشمالية؛ وإصدارات التصميم المتميز، صُنعت للتنفيذيين الذين يطلبون سلطة بصرية منذ اللحظة الأولى لفتح الصفحة.",
-    fr: "Chaque engagement avec Zenith débloque notre vault de 3 000+ documents conçus avec précision — répartis en deux collections distinctes : des profils optimisés ATS, calibrés pour franchir le tri automatisé dans le CCG, l'Europe et l'Amérique du Nord ; et des éditions Premium Design, créées pour les cadres qui exigent une autorité visuelle dès l'ouverture de la page.",
+    en:"Every Zenith engagement unlocks our vault of 3,000+ precision-engineered documents — spanning two distinct collections: ATS-Optimised profiles, calibrated to defeat automated screening across the GCC, Europe, and North America; and Premium Design editions, crafted for executives who demand visual authority the moment the page is opened.",
+    ar:"كل تعاقد مع Zenith يفتح أمامك مخزوننا الذي يضم أكثر من 3,000 وثيقة مُهندَسة بدقة — موزّعة على مجموعتين متمايزتين: ملفات مُحسَّنة لأنظمة الفرز الآلي، معايَرة لاجتياز الفرز التلقائي في الخليج وأوروبا وأمريكا الشمالية؛ وإصدارات التصميم المتميز، صُنعت للتنفيذيين الذين يطلبون سلطة بصرية منذ اللحظة الأولى لفتح الصفحة.",
+    fr:"Chaque engagement avec Zenith débloque notre vault de 3 000+ documents conçus avec précision — répartis en deux collections distinctes : des profils optimisés ATS, calibrés pour franchir le tri automatisé dans le CCG, l'Europe et l'Amérique du Nord ; et des éditions Premium Design, créées pour les cadres qui exigent une autorité visuelle dès l'ouverture de la page.",
   },
-
   tplBadge:    {en:"Market-Specific Designs",ar:"تصاميم مخصصة لكل سوق",fr:"Designs par marché"},
-  tplGet:      {en:"Request This Template", ar:"اطلب هذا القالب",  fr:"Demander ce modèle"},
-  tplMore:     {en:"View More Designs",     ar:"عرض المزيد",        fr:"Voir plus"},
+  tplGet:      {en:"Request This Template",  ar:"اطلب هذا القالب",   fr:"Demander ce modèle"},
+  tplMore:     {en:"View More Designs",      ar:"عرض المزيد",         fr:"Voir plus"},
   tplDone:     {en:"All showcase designs displayed · Contact us for full 3,000+ library access",
                 ar:"تم عرض جميع نماذج المعرض · تواصل معنا للوصول الكامل إلى مكتبة +3,000 وثيقة",
                 fr:"Tous les modèles affichés · Contactez-nous pour l'accès complet à la bibliothèque 3 000+"},
-  // Exclusivity section
   exclEyebrow: {en:"Not for everyone.",     ar:"ليس للجميع.",       fr:"Pas pour tout le monde."},
   exclH2a:     {en:"We work with",          ar:"نعمل مع",           fr:"Nous travaillons avec"},
   exclH2b:     {en:"those who intend to win.",ar:"من يعزم على الفوز.",fr:"ceux qui ont l'intention de gagner."},
   exclBody:    {en:"Zenith operates on a limited-intake basis. We do not serve everyone — we serve professionals who are serious about their global trajectory and willing to invest in it. Our process is selective because results demand it.",
                 ar:"تعمل Zenith على أساس القبول المحدود. لا نخدم الجميع — نخدم المحترفين الجادين في مسارهم العالمي والمستعدين للاستثمار فيه. عمليتنا انتقائية لأن النتائج تستوجب ذلك.",
                 fr:"Zenith fonctionne sur une base d'admission limitée. Nous ne servons pas tout le monde — nous servons les professionnels qui prennent au sérieux leur trajectoire mondiale et sont prêts à y investir. Notre processus est sélectif parce que les résultats l'exigent."},
-  exclPt1:     {en:"Application-based intake", ar:"قبول قائم على الطلب", fr:"Admission sur candidature"},
-  exclPt2:     {en:"Limited monthly engagements", ar:"تعاقدات شهرية محدودة", fr:"Engagements mensuels limités"},
-  exclPt3:     {en:"Senior-level professionals only", ar:"للمحترفين رفيعي المستوى فقط", fr:"Professionnels de niveau senior uniquement"},
-  // Global section
-  glbEyebrow:  {en:"Based in Dubai. Built for the World.",ar:"مقرنا دبي. خُبرتنا للعالم.",fr:"Basé à Dubaï. Construit pour le monde."},
-  glbH2a:      {en:"Dubai is our base.",  ar:"دبي قاعدتنا.",    fr:"Dubaï est notre base."},
-  glbH2b:      {en:"The world is our market.",ar:"العالم سوقنا.", fr:"Le monde, notre marché."},
-  glbBody:     {en:"Headquartered in Dubai and active across every major hiring market, we work with professionals from the Gulf, Africa, and Asia to build career profiles that are truly competitive — calibrated to the exact standards of North America, Europe, and the wider Gulf region. We don't simply write CVs. We reframe your experience in the language that international decision-makers act on.",
-                ar:"مقرّنا دبي ونعمل عبر جميع أسواق التوظيف الرئيسية — نتعاون مع المحترفين في الخليج وأفريقيا وآسيا لبناء ملفات مهنية تنافسية حقاً، معايَرة وفق المعايير الدقيقة لأمريكا الشمالية وأوروبا ومنطقة الخليج الأوسع. لا نكتفي بكتابة السيَر الذاتية — بل نُعيد صياغة تجربتك بلغة يتحرك بها صانعو القرار الدوليون.",
-                fr:"Basés à Dubaï et actifs sur tous les marchés d'emploi majeurs, nous accompagnons des professionnels du Golfe, d'Afrique et d'Asie pour construire des profils véritablement compétitifs — calibrés aux standards exacts de l'Amérique du Nord, de l'Europe et de la région du Golfe. Nous ne rédigeons pas simplement des CV. Nous reformulons votre expérience dans le langage qui convainc les décideurs internationaux."},
-  glb1t: {en:"Market-Specific Calibration", ar:"معايرة لكل سوق",  fr:"Calibrage marché spécifique"},
-  glb1b: {en:"Hiring norms differ fundamentally between the GCC, North America, and Europe — in tone, structure, length, and cultural expectation. We engineer each document to the precise standards of your target market, not a generic international template.",
-          ar:"تختلف معايير التوظيف اختلافاً جوهرياً بين الخليج وأمريكا الشمالية وأوروبا — في النبرة والهيكل والطول والتوقعات الثقافية. نُصمِّم كل وثيقة وفق المعايير الدقيقة لسوقك المستهدف، لا وفق قالب دولي عام.",
-          fr:"Les normes de recrutement diffèrent fondamentalement entre le CCG, l'Amérique du Nord et l'Europe — en ton, structure, longueur et attentes culturelles. Nous concevons chaque document selon les standards précis de votre marché cible, non un modèle générique."},
-  glb2t: {en:"Dual-Market Positioning",ar:"التموضع في سوقين",    fr:"Positionnement double marché"},
-  glb2b: {en:"A single engagement delivers documents simultaneously calibrated for two distinct geographic markets — giving you the flexibility to pursue the best opportunity, wherever it emerges.",
-          ar:"تعاقد واحد يُنتج وثائق معايَرة في آنٍ واحد لسوقين جغرافيين مختلفين — مما يمنحك المرونة الكاملة لملاحقة أفضل الفرص أينما أتيحت.",
-          fr:"Un seul engagement produit des documents calibrés simultanément pour deux marchés géographiques distincts — vous offrant la flexibilité de saisir la meilleure opportunité, où qu'elle se présente."},
-  glb3t: {en:"Multi-Language Delivery", ar:"التسليم متعدد اللغات", fr:"Livraison multilingue"},
-  glb3b: {en:"Growth and Executive packages include full versions in English, French, German, Arabic, and Spanish — at no additional cost. No market is out of reach.",
-          ar:"تشمل باقتا النمو والتنفيذية نسخاً كاملة بالإنجليزية والفرنسية والألمانية والعربية والإسبانية — دون أي تكلفة إضافية. لا يوجد سوق بعيد المنال.",
-          fr:"Les offres Croissance et Exécutif incluent des versions complètes en anglais, français, allemand, arabe et espagnol — sans frais supplémentaires. Aucun marché n'est hors de portée."},
-  // Process
-  procEyebrow: {en:"How It Works",     ar:"كيف نعمل",           fr:"Notre processus"},
-  procH2:      {en:"A rigorous process. Delivered in 48 hours.",
-                ar:"منهجية صارمة. تُسلَّم في 48 ساعة.",
-                fr:"Un processus rigoureux. Livré en 48 heures."},
-  p1t:{en:"Select",        ar:"الاختيار",   fr:"Choisir"},
+  exclPt1:     {en:"Application-based intake",        ar:"قبول قائم على الطلب",           fr:"Admission sur candidature"},
+  exclPt2:     {en:"Limited monthly engagements",     ar:"تعاقدات شهرية محدودة",          fr:"Engagements mensuels limités"},
+  exclPt3:     {en:"Senior-level professionals only", ar:"للمحترفين رفيعي المستوى فقط",   fr:"Professionnels de niveau senior uniquement"},
+  procEyebrow: {en:"How It Works",  ar:"كيف نعمل",  fr:"Notre processus"},
+  procH2:      {en:"A rigorous process. Delivered in 48 hours.", ar:"منهجية صارمة. تُسلَّم في 48 ساعة.", fr:"Un processus rigoureux. Livré en 48 heures."},
+  p1t:{en:"Select",   ar:"الاختيار", fr:"Choisir"},
   p1b:{en:"Choose the package that matches your career stage and complete a secure payment in minutes.",
        ar:"اختر الباقة المناسبة لمرحلتك المهنية وأتمّ الدفع الآمن في دقائق.",
        fr:"Choisissez le forfait adapté à votre étape de carrière et effectuez un paiement sécurisé en quelques minutes."},
-  p2t:{en:"Brief",         ar:"الإحاطة",    fr:"Briefing"},
+  p2t:{en:"Brief",    ar:"الإحاطة", fr:"Briefing"},
   p2b:{en:"Share your career background, target markets, and objectives via our intake form, WhatsApp, or email — whichever is most convenient for you.",
        ar:"شارك خلفيتك المهنية وأسواقك المستهدفة وأهدافك عبر نموذج الاستقبال أو واتساب أو البريد الإلكتروني — أيّها أنسب لك.",
        fr:"Partagez votre parcours, vos marchés cibles et vos objectifs via notre formulaire, WhatsApp ou e-mail — selon votre convenance."},
-  p3t:{en:"Engineer",      ar:"التصميم",    fr:"Conception"},
+  p3t:{en:"Engineer", ar:"التصميم", fr:"Conception"},
   p3b:{en:"Your dedicated career document specialist architects every element of your profile within 48 hours.",
        ar:"يُصمِّم متخصصك المخصص في وثائق المسار المهني كل عنصر من ملفك خلال 48 ساعة.",
        fr:"Votre spécialiste dédié conçoit chaque élément de votre profil en 48 heures."},
-  p4t:{en:"Refine",        ar:"التحسين",    fr:"Affiner"},
+  p4t:{en:"Refine",   ar:"التحسين", fr:"Affiner"},
   p4b:{en:"Unlimited revision rounds until every word, format, and strategic nuance meets your full satisfaction.",
        ar:"جولات مراجعة غير محدودة حتى يبلغ كل كلمة وتنسيق وفارق استراتيجي دقيق مستوى رضاك الكامل.",
        fr:"Révisions illimitées jusqu'à ce que chaque mot, format et nuance stratégique réponde pleinement à vos attentes."},
-  // Pricing
-  prcEyebrow:  {en:"Investment Tiers",   ar:"مستويات الاستثمار",  fr:"Nos offres"},
-  prcH2:       {en:"Three tiers. One uncompromising standard.",
-                ar:"ثلاثة مستويات. معيار واحد لا تهاون فيه.",
-                fr:"Trois niveaux. Une exigence sans compromis."},
+  prcEyebrow:  {en:"Investment Tiers",   ar:"مستويات الاستثمار", fr:"Nos offres"},
+  prcH2:       {en:"Three tiers. One uncompromising standard.", ar:"ثلاثة مستويات. معيار واحد لا تهاون فيه.", fr:"Trois niveaux. Une exigence sans compromis."},
   prcNote:     {en:"All prices in UAE Dirhams. Payments are processed securely via Stripe.",
                 ar:"جميع الأسعار بالدرهم الإماراتي. تتم معالجة المدفوعات بأمان عبر Stripe.",
                 fr:"Tous les prix en dirhams émiratis. Paiements traités de manière sécurisée via Stripe."},
-  prcMostSel:  {en:"Most Popular",       ar:"الأكثر اختياراً",    fr:"Le plus populaire"},
-  prcBegin:    {en:"Get Started",        ar:"ابدأ الآن",           fr:"Commencer"},
-  prcApplePay: {en:"Get Started · Apple Pay", ar:"ابدأ الآن · Apple Pay", fr:"Commencer · Apple Pay"},
-  prcStripe:   {en:"Secured by Stripe",  ar:"مؤمَّن بـ Stripe",   fr:"Sécurisé par Stripe"},
-  // Foundation
-  pF:    {en:"Foundation",   ar:"الأساسية",   fr:"Fondation"},
-  pFsub: {en:"Precise. ATS-ready. Results-driven.",ar:"دقيق. جاهز للفرز. موجَّه للنتائج.",fr:"Précis. Prêt pour l'ATS. Axé sur les résultats."},
-  pFi1:  {en:"ATS-optimised CV, built to pass automated screening",
-          ar:"سيرة ذاتية مُحسَّنة للفرز الآلي، مبنية لاجتياز الفرز التلقائي",
-          fr:"CV optimisé ATS, conçu pour passer le tri automatisé"},
-  pFi2:  {en:"Targeted cover letter aligned to your role and market",
-          ar:"خطاب تغطية مستهدف يتوافق مع دورك وسوقك",
-          fr:"Lettre de motivation ciblée, alignée sur votre poste et votre marché"},
-  pFi3:  {en:"Professional photo enhancement via AI retouching",
-          ar:"تحسين الصورة المهنية باستخدام المعالجة بالذكاء الاصطناعي",
-          fr:"Amélioration de photo professionnelle par retouche IA"},
-  pFi4:  {en:"Full access to the 3,000+ premium document library",
-          ar:"وصول كامل إلى مكتبة الوثائق المتميزة التي تضم +3,000 وثيقة",
-          fr:"Accès complet à la bibliothèque de 3 000+ documents premium"},
-  // Growth
-  pG:    {en:"Growth",        ar:"النمو",      fr:"Croissance"},
-  pGsub: {en:"Multi-market. Complete. Career-defining.",
-          ar:"متعدد الأسواق. شامل. محوري في المسيرة.",
-          fr:"Multi-marché. Complet. Déterminant pour la carrière."},
-  pGi1:  {en:"ATS-optimised CV with executive-grade visual design",
-          ar:"سيرة ذاتية مُحسَّنة للفرز الآلي بتصميم بصري تنفيذي",
-          fr:"CV optimisé ATS avec design visuel de niveau exécutif"},
-  pGi2:  {en:"Full LinkedIn profile rebuild with recruiter-visibility optimisation",
-          ar:"إعادة بناء كاملة لملف لينكدإن مع تحسين الظهور أمام المُوظِّفين",
-          fr:"Reconstruction complète du profil LinkedIn avec optimisation de visibilité"},
-  pGi3:  {en:"International career strategy guide tailored to your targets",
-          ar:"دليل استراتيجية المسار الدولي مُصمَّم وفق أهدافك",
-          fr:"Guide de stratégie de carrière internationale adapté à vos objectifs"},
-  pGi4:  {en:"Full document versions in EN, FR, DE, AR, and ES",
-          ar:"نسخ كاملة من الوثائق بالإنجليزية والفرنسية والألمانية والعربية والإسبانية",
-          fr:"Versions complètes en EN, FR, DE, AR et ES"},
-  pGi5:  {en:"Full access to the 3,000+ premium document library",
-          ar:"وصول كامل إلى مكتبة الوثائق المتميزة التي تضم +3,000 وثيقة",
-          fr:"Accès complet à la bibliothèque de 3 000+ documents premium"},
-  // Executive
-  pE:    {en:"Executive",     ar:"التنفيذية",  fr:"Exécutif"},
-  pEsub: {en:"White-glove. Strategic. Comprehensive.",
-          ar:"خدمة راقية. استراتيجية. شاملة.",
-          fr:"Blanc-gant. Stratégique. Complet."},
-  pEi1:  {en:"All Growth package deliverables included",
-          ar:"جميع مخرجات باقة النمو مشمولة",
-          fr:"Tous les livrables de l'offre Croissance inclus"},
-  pEi2:  {en:"60-minute 1-on-1 interview coaching with a senior consultant",
-          ar:"جلسة تحضير مقابلات فردية لمدة 60 دقيقة مع مستشار أول",
-          fr:"Coaching entretien individuel de 60 min avec un consultant senior"},
-  pEi3:  {en:"Personal career narrative strategy session",
-          ar:"جلسة استراتيجية لبناء السرد المهني الشخصي",
-          fr:"Session de stratégie narrative de carrière personnalisée"},
-  pEi4:  {en:"30-day priority access to your dedicated consultant",
-          ar:"وصول ذو أولوية لمدة 30 يوماً إلى مستشارك المخصص",
-          fr:"Accès prioritaire pendant 30 jours à votre consultant dédié"},
-  pEi5:  {en:"Full access to the 3,000+ premium document library",
-          ar:"وصول كامل إلى مكتبة الوثائق المتميزة التي تضم +3,000 وثيقة",
-          fr:"Accès complet à la bibliothèque de 3 000+ documents premium"},
-  // Testimonials
-  tmEyebrow:   {en:"Verified Outcomes",  ar:"نتائج موثّقة",       fr:"Résultats vérifiés"},
-  tmH2a:       {en:"Measured results,",  ar:"نتائج قابلة للقياس،",fr:"Résultats mesurables,"},
-  tmH2b:       {en:"not testimonials.",  ar:"لا مجرد شهادات.",    fr:"pas des témoignages."},
-  tmStars:     {en:"5.0 · 7,000+ verified client engagements",
-                ar:"5.0 · أكثر من 7,000 تعاقد موثّق مع عملاء",
-                fr:"5.0 · Plus de 7 000 clients satisfaits"},
-  // CTA final
-  ctaH2a:      {en:"Your next role",         ar:"منصبك القادم",      fr:"Votre prochain poste"},
-  ctaH2b:      {en:"starts here.",           ar:"يبدأ هنا.",          fr:"commence ici."},
+  prcMostSel:  {en:"Most Popular",  ar:"الأكثر اختياراً", fr:"Le plus populaire"},
+  prcBegin:    {en:"Get Started",   ar:"ابدأ الآن",        fr:"Commencer"},
+  pF:    {en:"Foundation", ar:"الأساسية",  fr:"Fondation"},
+  pFsub: {en:"Precise. ATS-ready. Results-driven.", ar:"دقيق. جاهز للفرز. موجَّه للنتائج.", fr:"Précis. Prêt pour l'ATS. Axé sur les résultats."},
+  pFi1:  {en:"ATS-optimised CV, built to pass automated screening", ar:"سيرة ذاتية مُحسَّنة للفرز الآلي، مبنية لاجتياز الفرز التلقائي", fr:"CV optimisé ATS, conçu pour passer le tri automatisé"},
+  pFi2:  {en:"Targeted cover letter aligned to your role and market", ar:"خطاب تغطية مستهدف يتوافق مع دورك وسوقك", fr:"Lettre de motivation ciblée, alignée sur votre poste et votre marché"},
+  pFi3:  {en:"Professional photo enhancement via AI retouching", ar:"تحسين الصورة المهنية باستخدام المعالجة بالذكاء الاصطناعي", fr:"Amélioration de photo professionnelle par retouche IA"},
+  pFi4:  {en:"Full access to the 3,000+ premium document library", ar:"وصول كامل إلى مكتبة الوثائق المتميزة التي تضم +3,000 وثيقة", fr:"Accès complet à la bibliothèque de 3 000+ documents premium"},
+  pG:    {en:"Growth",     ar:"النمو",       fr:"Croissance"},
+  pGsub: {en:"Multi-market. Complete. Career-defining.", ar:"متعدد الأسواق. شامل. محوري في المسيرة.", fr:"Multi-marché. Complet. Déterminant pour la carrière."},
+  pGi1:  {en:"ATS-optimised CV with executive-grade visual design", ar:"سيرة ذاتية مُحسَّنة للفرز الآلي بتصميم بصري تنفيذي", fr:"CV optimisé ATS avec design visuel de niveau exécutif"},
+  pGi2:  {en:"Full LinkedIn profile rebuild with recruiter-visibility optimisation", ar:"إعادة بناء كاملة لملف لينكدإن مع تحسين الظهور أمام المُوظِّفين", fr:"Reconstruction complète du profil LinkedIn avec optimisation de visibilité"},
+  pGi3:  {en:"International career strategy guide tailored to your targets", ar:"دليل استراتيجية المسار الدولي مُصمَّم وفق أهدافك", fr:"Guide de stratégie de carrière internationale adapté à vos objectifs"},
+  pGi4:  {en:"Full document versions in EN, FR, DE, AR, and ES", ar:"نسخ كاملة من الوثائق بالإنجليزية والفرنسية والألمانية والعربية والإسبانية", fr:"Versions complètes en EN, FR, DE, AR et ES"},
+  pGi5:  {en:"Full access to the 3,000+ premium document library", ar:"وصول كامل إلى مكتبة الوثائق المتميزة التي تضم +3,000 وثيقة", fr:"Accès complet à la bibliothèque de 3 000+ documents premium"},
+  pE:    {en:"Executive",  ar:"التنفيذية", fr:"Exécutif"},
+  pEsub: {en:"White-glove. Strategic. Comprehensive.", ar:"خدمة راقية. استراتيجية. شاملة.", fr:"Blanc-gant. Stratégique. Complet."},
+  pEi1:  {en:"All Growth package deliverables included", ar:"جميع مخرجات باقة النمو مشمولة", fr:"Tous les livrables de l'offre Croissance inclus"},
+  pEi2:  {en:"60-minute 1-on-1 interview coaching with a senior consultant", ar:"جلسة تحضير مقابلات فردية لمدة 60 دقيقة مع مستشار أول", fr:"Coaching entretien individuel de 60 min avec un consultant senior"},
+  pEi3:  {en:"Personal career narrative strategy session", ar:"جلسة استراتيجية لبناء السرد المهني الشخصي", fr:"Session de stratégie narrative de carrière personnalisée"},
+  pEi4:  {en:"30-day priority access to your dedicated consultant", ar:"وصول ذو أولوية لمدة 30 يوماً إلى مستشارك المخصص", fr:"Accès prioritaire pendant 30 jours à votre consultant dédié"},
+  pEi5:  {en:"Full access to the 3,000+ premium document library", ar:"وصول كامل إلى مكتبة الوثائق المتميزة التي تضم +3,000 وثيقة", fr:"Accès complet à la bibliothèque de 3 000+ documents premium"},
+  tmEyebrow:   {en:"Verified Outcomes", ar:"نتائج موثّقة",        fr:"Résultats vérifiés"},
+  tmH2a:       {en:"Measured results,", ar:"نتائج قابلة للقياس،", fr:"Résultats mesurables,"},
+  tmH2b:       {en:"not testimonials.", ar:"لا مجرد شهادات.",     fr:"pas des témoignages."},
+  tmStars:     {en:"5.0 · 7,000+ verified client engagements", ar:"5.0 · أكثر من 7,000 تعاقد موثّق مع عملاء", fr:"5.0 · Plus de 7 000 clients satisfaits"},
+  ctaH2a:      {en:"Your next role",          ar:"منصبك القادم",   fr:"Votre prochain poste"},
+  ctaH2b:      {en:"starts here.",            ar:"يبدأ هنا.",       fr:"commence ici."},
   ctaBody:     {en:"Over 7,000 professionals from 40+ nationalities have used Zenith to secure roles across six continents. Each one made a deliberate decision to stop applying and start positioning.",
                 ar:"استعان أكثر من 7,000 محترف من أكثر من 40 جنسية بـ Zenith لتأمين مناصب عبر ستة قارات. اتخذ كل واحد منهم قراراً واعياً بالتوقف عن التقديم العشوائي والبدء في التموضع الاستراتيجي.",
                 fr:"Plus de 7 000 professionnels de plus de 40 nationalités ont utilisé Zenith pour décrocher des postes sur six continents. Chacun a pris la décision délibérée d'arrêter de postuler et de commencer à se positionner."},
-  ctaFinalBtn: {en:"Begin Your Positioning", ar:"ابدأ تموضعك", fr:"Commencer votre positionnement"},
-  startWA:     {en:"Start on WhatsApp",      ar:"ابدأ على واتساب",   fr:"Démarrer sur WhatsApp"},
+  ctaFinalBtn: {en:"Begin Your Positioning", ar:"ابدأ تموضعك",    fr:"Commencer votre positionnement"},
+  startWA:     {en:"Start on WhatsApp",       ar:"ابدأ على واتساب", fr:"Démarrer sur WhatsApp"},
   sendEnq:     {en:"Get Your Profile Reviewed", ar:"احصل على مراجعة ملفك", fr:"Faire évaluer votre profil"},
-  // Footer
-  tagline:     {en:"Based in Dubai · Careers Placed Globally",
-                ar:"مقره دبي · مسارات مهنية تُوظَّف عالمياً",
-                fr:"Basé à Dubaï · Carrières placées mondialement"},
-  footerWA:    {en:"WhatsApp",               ar:"واتساب",             fr:"WhatsApp"},
-  // Modal / form
-  frmEmail:    {en:"Your Email Address",     ar:"عنوان بريدك الإلكتروني",  fr:"Votre adresse e-mail"},
-  frmSubject:  {en:"Subject",               ar:"الموضوع",             fr:"Sujet"},
-  frmMessage:  {en:"Your Message",          ar:"رسالتك",              fr:"Votre message"},
-  frmAttach:   {en:"Attachments",           ar:"المرفقات",            fr:"Pièces jointes"},
-  frmOptional: {en:"— optional",            ar:"— اختياري",           fr:"— facultatif"},
-  frmPhoto:    {en:"Profile Photo",         ar:"صورة الملف الشخصي",   fr:"Photo de profil"},
+  tagline:     {en:"Based in Dubai · Careers Placed Globally", ar:"مقره دبي · مسارات مهنية تُوظَّف عالمياً", fr:"Basé à Dubaï · Carrières placées mondialement"},
+  footerWA:    {en:"WhatsApp", ar:"واتساب", fr:"WhatsApp"},
+  frmEmail:    {en:"Your Email Address",    ar:"عنوان بريدك الإلكتروني", fr:"Votre adresse e-mail"},
+  frmSubject:  {en:"Subject",              ar:"الموضوع",                fr:"Sujet"},
+  frmMessage:  {en:"Your Message",         ar:"رسالتك",                 fr:"Votre message"},
+  frmAttach:   {en:"Attachments",          ar:"المرفقات",               fr:"Pièces jointes"},
+  frmOptional: {en:"— optional",           ar:"— اختياري",              fr:"— facultatif"},
+  frmPhoto:    {en:"Profile Photo",        ar:"صورة الملف الشخصي",      fr:"Photo de profil"},
   frmPhotoH:   {en:"JPG · PNG · WEBP · max 5 MB", ar:"JPG · PNG · WEBP · الحد الأقصى 5 ميغابايت", fr:"JPG · PNG · WEBP · 5 Mo max"},
-  frmCv:       {en:"Current CV",            ar:"السيرة الذاتية الحالية",fr:"CV actuel"},
+  frmCv:       {en:"Current CV",           ar:"السيرة الذاتية الحالية", fr:"CV actuel"},
   frmCvH:      {en:"PDF · DOC · DOCX · max 5 MB", ar:"PDF · DOC · DOCX · الحد الأقصى 5 ميغابايت", fr:"PDF · DOC · DOCX · 5 Mo max"},
   frmDrop:     {en:"Click or drop file here", ar:"انقر أو اسحب الملف هنا", fr:"Cliquer ou déposer le fichier ici"},
-  frmSending:  {en:"Sending…",              ar:"جارٍ الإرسال…",       fr:"Envoi en cours…"},
-  frmRetry:    {en:"Retry",                 ar:"إعادة المحاولة",      fr:"Réessayer"},
-  frmReceived: {en:"Message received.",     ar:"تم استلام رسالتك.",    fr:"Message reçu."},
-  frmReply:    {en:"We will respond to",    ar:"سنرد على",            fr:"Nous répondrons à"},
-  frmHours:    {en:"within 24 hours.",      ar:"خلال 24 ساعة.",        fr:"dans les 24 heures."},
-  frmClose:    {en:"Close",                 ar:"إغلاق",               fr:"Fermer"},
+  frmSending:  {en:"Sending…",             ar:"جارٍ الإرسال…",          fr:"Envoi en cours…"},
+  frmRetry:    {en:"Retry",                ar:"إعادة المحاولة",          fr:"Réessayer"},
+  frmReceived: {en:"Message received.",    ar:"تم استلام رسالتك.",       fr:"Message reçu."},
+  frmReply:    {en:"We will respond to",   ar:"سنرد على",                fr:"Nous répondrons à"},
+  frmHours:    {en:"within 24 hours.",     ar:"خلال 24 ساعة.",           fr:"dans les 24 heures."},
+  frmClose:    {en:"Close",               ar:"إغلاق",                   fr:"Fermer"},
   frmErrNet:   {en:"Network error — please reach us via WhatsApp.", ar:"خطأ في الشبكة — يرجى التواصل عبر واتساب.", fr:"Erreur réseau — contactez-nous via WhatsApp."},
   frmErrGen:   {en:"Something went wrong. Please try again.", ar:"حدث خطأ ما. يرجى المحاولة مجدداً.", fr:"Une erreur s'est produite. Veuillez réessayer."},
-  // Template card badges
-  tplAts:      {en:"ATS-Optimized",         ar:"ATS مُحسَّن",         fr:"ATS Optimisé"},
-  tplDesign:   {en:"Premium Design",        ar:"تصميم متميز",         fr:"Design Premium"},
+  tplAts:      {en:"ATS-Optimized",         ar:"ATS مُحسَّن",  fr:"ATS Optimisé"},
+  tplDesign:   {en:"Premium Design",        ar:"تصميم متميز",  fr:"Design Premium"},
   tplPreview:  {en:"Preview Full Template", ar:"معاينة القالب كاملاً", fr:"Aperçu complet"},
   tplEnquire:  {en:"Enquire About This Template", ar:"استفسر عن هذا القالب", fr:"Demander ce modèle"},
-  tplClose:    {en:"Close",                ar:"إغلاق",               fr:"Fermer"},
-  glbConnector:{en:"The world is our",     ar:"العالم هو",            fr:"Le monde est notre"},
+  tplClose:    {en:"Close", ar:"إغلاق", fr:"Fermer"},
 };
 const tr = (k:string, l:Lang):string => TX[k]?.[l] ?? TX[k]?.en ?? k;
 
@@ -269,9 +178,6 @@ const tr = (k:string, l:Lang):string => TX[k]?.[l] ?? TX[k]?.en ?? k;
 type Fm = {email:string;subject:string;message:string;photo:File|null;cv:File|null};
 type St  = "idle"|"sending"|"success"|"error";
 
-// ── CHANGE 1: Classification logic ────────────────────────────────────────────
-// IDs 1, 5, 9, 21 → ats: true (ATS-Optimized)
-// All other IDs   → ats: false (Premium Design)
 const ATS_IDS = new Set([1, 5, 9, 21]);
 
 const TEMPLATES = [
@@ -308,7 +214,6 @@ const TEMPLATES = [
   {id:31, name:"Mexico City Operations",    ind:"Supply Chain · Logistics",  reg:"Mexico · USA · Latin America"},
   {id:32, name:"Accra Global",              ind:"Development · Finance",     reg:"Ghana · UK · EU"},
   {id:33, name:"The Executive Portfolio",   ind:"C-Suite · Board Level",     reg:"Global · Any Market"},
-// CHANGE 1: Derive ats flag at runtime from ATS_IDS set
 ].map(cv => ({ ...cv, ats: ATS_IDS.has(cv.id) }));
 
 const TMS = [
@@ -328,12 +233,7 @@ const wl = (m:string) => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
 const fb = (b:number) => b<1024?`${b}B`:b<1048576?`${(b/1024).toFixed(1)}KB`:`${(b/1048576).toFixed(1)}MB`;
 
 // ── SparklesCore ──────────────────────────────────────────────────────────────
-function SparklesCore({
-  className, particleColor="#C8A96E", particleDensity=120, speed=1,
-}:{
-  className?:string; particleColor?:string; particleDensity?:number;
-  speed?:number; background?:string; id?:string; minSize?:number; maxSize?:number;
-}) {
+function SparklesCore({className,particleColor="#C8A96E",particleDensity=120,speed=1}:{className?:string;particleColor?:string;particleDensity?:number;speed?:number;background?:string;id?:string;minSize?:number;maxSize?:number;}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -347,7 +247,7 @@ function SparklesCore({
     let animId: number;
     let w = 0, h = 0;
     let breatheT = 0;
-    type P = { x:number; y:number; sz:number; vy:number; vx:number; op:number; opTarget:number; life:number; maxLife:number; tier:number; };
+    type P = { x:number;y:number;sz:number;vy:number;vx:number;op:number;opTarget:number;life:number;maxLife:number;tier:number; };
     let pts: P[] = [];
     const rand = (a:number,b:number) => a + Math.random()*(b-a);
     const mkP = (initY=false): P => {
@@ -362,16 +262,16 @@ function SparklesCore({
       breatheT+=0.005; const br=0.78+0.22*Math.sin(breatheT);
       ctx.clearRect(0,0,w,h);
       const lg=ctx.createLinearGradient(w*0.05,0,w*0.95,0);
-      lg.addColorStop(0,`rgba(${cr},${cg},${cb},0)`); lg.addColorStop(0.15,`rgba(${cr},${cg},${cb},${0.35*br})`); lg.addColorStop(0.50,`rgba(${cr},${cg},${cb},${0.85*br})`); lg.addColorStop(0.85,`rgba(${cr},${cg},${cb},${0.35*br})`); lg.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);
-      ctx.save(); ctx.beginPath(); ctx.moveTo(w*0.05,1); ctx.lineTo(w*0.95,1); ctx.strokeStyle=lg; ctx.lineWidth=4; ctx.shadowColor=`rgba(${cr},${cg},${cb},0.9)`; ctx.shadowBlur=20*br; ctx.globalAlpha=0.4; ctx.stroke(); ctx.lineWidth=1; ctx.shadowBlur=8*br; ctx.globalAlpha=br; ctx.stroke(); ctx.restore();
-      const bloom=ctx.createRadialGradient(w/2,0,0,w/2,0,w*0.48*br); bloom.addColorStop(0,`rgba(${cr},${cg},${cb},${0.10*br})`); bloom.addColorStop(0.5,`rgba(${cr},${cg},${cb},${0.03*br})`); bloom.addColorStop(1,`rgba(${cr},${cg},${cb},0)`); ctx.fillStyle=bloom; ctx.fillRect(0,0,w,h);
+      lg.addColorStop(0,`rgba(${cr},${cg},${cb},0)`);lg.addColorStop(0.15,`rgba(${cr},${cg},${cb},${0.35*br})`);lg.addColorStop(0.50,`rgba(${cr},${cg},${cb},${0.85*br})`);lg.addColorStop(0.85,`rgba(${cr},${cg},${cb},${0.35*br})`);lg.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);
+      ctx.save();ctx.beginPath();ctx.moveTo(w*0.05,1);ctx.lineTo(w*0.95,1);ctx.strokeStyle=lg;ctx.lineWidth=4;ctx.shadowColor=`rgba(${cr},${cg},${cb},0.9)`;ctx.shadowBlur=20*br;ctx.globalAlpha=0.4;ctx.stroke();ctx.lineWidth=1;ctx.shadowBlur=8*br;ctx.globalAlpha=br;ctx.stroke();ctx.restore();
+      const bloom=ctx.createRadialGradient(w/2,0,0,w/2,0,w*0.48*br);bloom.addColorStop(0,`rgba(${cr},${cg},${cb},${0.10*br})`);bloom.addColorStop(0.5,`rgba(${cr},${cg},${cb},${0.03*br})`);bloom.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);ctx.fillStyle=bloom;ctx.fillRect(0,0,w,h);
       for(let i=0;i<pts.length;i++){
-        const p=pts[i]; p.life++; p.y+=p.vy; p.x+=p.vx+Math.sin(p.life*0.025+p.x)*0.06;
-        const prog=p.life/p.maxLife; const env=prog<0.10?prog/0.10:prog<0.65?1.0:1-(prog-0.65)/0.35;
+        const p=pts[i];p.life++;p.y+=p.vy;p.x+=p.vx+Math.sin(p.life*0.025+p.x)*0.06;
+        const prog=p.life/p.maxLife;const env=prog<0.10?prog/0.10:prog<0.65?1.0:1-(prog-0.65)/0.35;
         p.op+=(p.opTarget*env*br-p.op)*0.06;
         const hFade=Math.max(0,Math.min(1,(h-p.y)/(h*0.15)));
         if(p.life>=p.maxLife||p.y>h+4){pts[i]=mkP(false);continue;}
-        const op=Math.max(0,p.op*hFade); if(op<0.008) continue;
+        const op=Math.max(0,p.op*hFade);if(op<0.008) continue;
         ctx.save();
         if(p.tier===0){ctx.beginPath();ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);ctx.fillStyle=`rgba(${cr},${cg},${cb},${op})`;ctx.fill();}
         else if(p.tier===1){const g1=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*3);g1.addColorStop(0,`rgba(${cr},${cg},${cb},${op*0.25})`);g1.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);ctx.beginPath();ctx.arc(p.x,p.y,p.sz*3,0,Math.PI*2);ctx.fillStyle=g1;ctx.fill();ctx.beginPath();ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);ctx.fillStyle=`rgba(${cr},${cg},${cb},${op})`;ctx.fill();}
@@ -381,7 +281,7 @@ function SparklesCore({
       animId=requestAnimationFrame(draw);
     };
     const ro=new ResizeObserver(()=>{const nw=canvas.offsetWidth,nh=canvas.offsetHeight;if(nw>0&&nh>0&&(nw!==w||nh!==h))init();});
-    ro.observe(canvas); init(); draw();
+    ro.observe(canvas);init();draw();
     return()=>{cancelAnimationFrame(animId);ro.disconnect();};
   },[particleColor,particleDensity,speed]);
   return <canvas ref={canvasRef} className={className} style={{display:"block",background:"transparent"}}/>;
@@ -402,7 +302,7 @@ function GlowCard({color=G,children,className=""}:{color?:string;children:React.
   const ang=useRef(0),op=useRef(0),raf=useRef<number|null>(null);
   const lerp=(a:number,b:number,t:number)=>a+(b-a)*t;
   const onMove=useCallback((e:PointerEvent)=>{
-    const el=ref.current; if(!el) return;
+    const el=ref.current;if(!el) return;
     const r=el.getBoundingClientRect();
     const dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
     if(Math.sqrt(dx*dx+dy*dy)>280) return;
@@ -585,14 +485,13 @@ function PreviewLightbox({cv,onClose,onEnquire,dark,lang}:{cv:{id:number;name:st
           <div className="flex items-center justify-between px-6 py-4 shrink-0" style={{borderBottom:`1px solid ${dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.07)"}`}}>
             <div className="flex items-center gap-3 min-w-0">
               <h3 className="text-sm font-semibold truncate" style={{color:dark?"#EDE8E0":"#1A1410",fontFamily:"sans-serif"}}>{cv.name}</h3>
-              {/* CHANGE 3: Badge uses new label text from tplAts / tplDesign keys */}
               <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium" style={{background:badgeBg,color:badgeColor,border:badgeBorder,fontFamily:"sans-serif"}}>
                 {cv.ats ? tr("tplAts",lang) : tr("tplDesign",lang)}
               </span>
             </div>
             <button type="button" onClick={onClose} className="shrink-0 ml-3 opacity-25 hover:opacity-60 transition-opacity" style={{color:dark?"#EDE8E0":"#1A1410"}}><X size={15} strokeWidth={1.5}/></button>
           </div>
-          <div className="flex-1 overflow-y-auto overscroll-contain" style={{WebkitOverflowScrolling:"touch" as React.CSSProperties["WebkitOverflowScrolling"]}}>
+          <div className="flex-1 overflow-y-auto overscroll-contain">
             {!imgError?(
               <div className="relative">
                 {!loaded&&<div className="flex items-center justify-center" style={{height:"420px"}}><Loader2 size={20} color={G} className="animate-spin" strokeWidth={1.5}/></div>}
@@ -660,7 +559,7 @@ export default function Home(){
       {dark&&<div className="pointer-events-none fixed inset-0 -z-10" style={{background:`radial-gradient(ellipse 60% 40% at 50% -5%,${G}07,transparent 65%)`}}/>}
 
       {/* NAV */}
-      <header className="fixed top-0 inset-x-0 z-50" style={{background:nav,backdropFilter:"blur(32px)",WebkitBackdropFilter:"blur(32px)",borderBottom:dark?"none":`1px solid ${bdr}`,position:"fixed"}}>
+      <header className="fixed top-0 inset-x-0 z-50" style={{background:nav,backdropFilter:"blur(32px)",WebkitBackdropFilter:"blur(32px)",borderBottom:dark?"none":`1px solid ${bdr}`}}>
         {dark&&<div aria-hidden className="absolute bottom-0 inset-x-0 h-px pointer-events-none" style={{background:"linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.08) 15%, rgba(212,175,55,0.45) 50%, rgba(212,175,55,0.08) 85%, transparent 100%)"}}/>}
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 sm:px-8" style={{height:"76px"}}>
           <a href="#" className="flex items-center shrink-0" style={{lineHeight:0}}>
@@ -837,7 +736,6 @@ export default function Home(){
                   <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-4" style={{color:G,fontFamily:"sans-serif"}}>{tr("tplEyebrow",lang)}</p>
                   <h2 className="text-3xl sm:text-4xl font-normal tracking-tight leading-snug" style={{color:hi}}><em style={{fontStyle:"italic",color:G}}>{tr("tplH2",lang)}</em></h2>
                 </div>
-                {/* CHANGE 2: Badge updated to 3,000+ */}
                 <div className="flex-shrink-0 flex items-center gap-3 rounded-2xl px-5 py-3" style={{background:dark?`${G}0C`:`${G}08`,border:`1px solid ${G}30`}}>
                   <LayoutGrid size={16} color={G} strokeWidth={1.5}/>
                   <div>
@@ -847,13 +745,11 @@ export default function Home(){
                 </div>
               </div>
             </Rise>
-            {/* CHANGE 2: New rephrased description paragraph */}
             <Rise d={0.1} className="mb-16">
               <p className="text-sm leading-[1.9] max-w-3xl" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>
                 {tr("tplDesc",lang)}
               </p>
             </Rise>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               <AnimatePresence initial={false}>
                 {shown.map((cv,i)=>(
@@ -876,7 +772,6 @@ export default function Home(){
                         <div className="p-5 flex-1 flex flex-col">
                           <div className="flex items-start justify-between gap-3 mb-2">
                             <h3 className="text-sm font-semibold leading-tight" style={{color:hi,fontFamily:"sans-serif"}}>{cv.name}</h3>
-                            {/* CHANGE 3: Conditional badge — ATS-Optimized vs Premium Design */}
                             {cv.ats ? (
                               <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium mt-0.5" style={{background:`${G}15`,color:G,border:`1px solid ${G}28`,fontFamily:"sans-serif"}}>
                                 {tr("tplAts",lang)}
@@ -997,6 +892,9 @@ export default function Home(){
           </div>
         </section>
 
+        {/* SOCIAL MARQUEE */}
+        <SocialMarquee />
+
         {/* CLOSING CTA */}
         <section className="py-40 px-5 sm:px-8 border-t text-center" style={{borderColor:bdr}}>
           <Rise>
@@ -1007,55 +905,46 @@ export default function Home(){
               </h2>
               <p className="text-base leading-[1.9] mb-14 max-w-lg mx-auto" style={{color:dark?"#857870":"#786860",fontFamily:"sans-serif",fontWeight:300}}>{tr("ctaBody",lang)}</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-center gap-3 w-full sm:w-auto px-12 text-[11px] font-medium tracking-[0.20em] uppercase rounded-full transition-all hover:opacity-90" style={{background:G,color:INK,height:"56px",fontFamily:"sans-serif",boxShadow:`0 12px 40px ${G}32`,fontSize:"11px"}}>{tr("ctaFinalBtn",lang)}</button>
+                <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-center gap-3 w-full sm:w-auto px-12 text-[11px] font-medium tracking-[0.20em] uppercase rounded-full transition-all hover:opacity-90" style={{background:G,color:INK,height:"56px",fontFamily:"sans-serif",boxShadow:`0 12px 40px ${G}32`}}>{tr("ctaFinalBtn",lang)}</button>
                 <a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}35`,color:G,height:"56px",fontFamily:"sans-serif"}}>{tr("startWA",lang)}</a>
               </div>
               <p className="mt-16 text-[10px] tracking-[0.28em] uppercase" style={{color:dark?"rgba(200,169,110,0.25)":"rgba(26,20,16,0.30)",fontFamily:"sans-serif"}}>{tr("tagline",lang)}</p>
             </div>
           </Rise>
-        </section>{/* OUTCOMES */}
-        <section id="outcomes" className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
-          {/* ... الكثير من الكود هنا ... */}
-          {/* ... انزل حتى تجد إغلاق السكشن أدناه ... */}
         </section>
 
-        {/* ◄◄◄ الصق الكود هنا في هذا الفراغ بالضبط ►►► */}
-        <SocialMarquee />
+      </main>
 
-        {/* CLOSING CTA */}
-        <section className="py-40 px-5 sm:px-8 border-t text-center" style={{borderColor:bdr}}>
-
-        {/* FOOTER */}
-        <footer className="relative py-10 px-5 sm:px-8" style={{borderTop:`1px solid ${bdr}`}}>
-          {dark&&<div aria-hidden className="absolute top-0 inset-x-0 h-px pointer-events-none" style={{background:"linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.08) 15%, rgba(212,175,55,0.45) 50%, rgba(212,175,55,0.08) 85%, transparent 100%)"}}/>}
-          <div className="mx-auto max-w-6xl flex flex-col gap-6">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <img src="/images/logo.png" alt="Zenith Dubai CV" style={{height:"36px",width:"auto",objectFit:"contain",display:"block",borderRadius:"6px",filter:logoFilter,transition:"filter 0.4s ease",maxWidth:"140px"}}/>
-                <span className="text-[10px] tracking-[0.08em]" style={{color:dark?"rgba(200,169,110,0.32)":sub,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>{tr("tagline",lang)}</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <button type="button" onClick={()=>setModal(true)} className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase" style={{color:dark?"rgba(200,169,110,0.28)":`${hi}45`,fontFamily:"sans-serif",background:"none",border:"none",cursor:"pointer",padding:0,transition:"color 0.25s ease"}} onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"#D4AF37":hi;}} onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"rgba(200,169,110,0.28)":`${hi}45`;}}><Mail size={10} strokeWidth={1.5}/>{EM}</button>
-                <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
-                <a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase" style={{color:dark?"rgba(74,154,90,0.45)":"#4A9A5A80",fontFamily:"sans-serif",textDecoration:"none",transition:"color 0.25s ease"}} onMouseEnter={e=>{(e.currentTarget as HTMLAnchorElement).style.color="#4A9A5A";}} onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color=dark?"rgba(74,154,90,0.45)":"#4A9A5A80";}}>
-                  <svg viewBox="0 0 24 24" width="10" height="10" fill="none"><path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg>
-                  {tr("footerWA",lang)}
-                </a>
-              </div>
+      {/* FOOTER */}
+      <footer className="relative py-10 px-5 sm:px-8" style={{borderTop:`1px solid ${bdr}`}}>
+        {dark&&<div aria-hidden className="absolute top-0 inset-x-0 h-px pointer-events-none" style={{background:"linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.08) 15%, rgba(212,175,55,0.45) 50%, rgba(212,175,55,0.08) 85%, transparent 100%)"}}/>}
+        <div className="mx-auto max-w-6xl flex flex-col gap-6">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <img src="/images/logo.png" alt="Zenith Dubai CV" style={{height:"36px",width:"auto",objectFit:"contain",display:"block",borderRadius:"6px",filter:logoFilter,transition:"filter 0.4s ease",maxWidth:"140px"}}/>
+              <span className="text-[10px] tracking-[0.08em]" style={{color:dark?"rgba(200,169,110,0.32)":sub,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>{tr("tagline",lang)}</span>
             </div>
-            <div className="h-px" style={{background:bdr}}/>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-              <p className="text-[10px]" style={{color:dark?"rgba(200,169,110,0.14)":`${hi}25`,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>© {new Date().getFullYear()} Zenith Dubai CV</p>
+            <div className="flex items-center gap-4">
+              <button type="button" onClick={()=>setModal(true)} className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase" style={{color:dark?"rgba(200,169,110,0.28)":`${hi}45`,fontFamily:"sans-serif",background:"none",border:"none",cursor:"pointer",padding:0,transition:"color 0.25s ease"}} onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"#D4AF37":hi;}} onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.color=dark?"rgba(200,169,110,0.28)":`${hi}45`;}}><Mail size={10} strokeWidth={1.5}/>{EM}</button>
               <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
-              <a href="/privacy" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.22)":`${hi}38`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Privacy Policy</a>
-              <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
-              <a href="/terms" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.22)":`${hi}38`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Terms of Service</a>
-              <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
-              <a href="/refund" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.22)":`${hi}38`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Refund Policy</a>
+              <a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase" style={{color:dark?"rgba(74,154,90,0.45)":"#4A9A5A80",fontFamily:"sans-serif",textDecoration:"none",transition:"color 0.25s ease"}} onMouseEnter={e=>{(e.currentTarget as HTMLAnchorElement).style.color="#4A9A5A";}} onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.color=dark?"rgba(74,154,90,0.45)":"#4A9A5A80";}}>
+                <svg viewBox="0 0 24 24" width="10" height="10" fill="none"><path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg>
+                {tr("footerWA",lang)}
+              </a>
             </div>
           </div>
-        </footer>
-      </main>
+          <div className="h-px" style={{background:bdr}}/>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p className="text-[10px]" style={{color:dark?"rgba(200,169,110,0.14)":`${hi}25`,fontFamily:"sans-serif",whiteSpace:"nowrap"}}>© {new Date().getFullYear()} Zenith Dubai CV</p>
+            <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
+            <a href="/privacy" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.22)":`${hi}38`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Privacy Policy</a>
+            <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
+            <a href="/terms" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.22)":`${hi}38`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Terms of Service</a>
+            <span style={{color:dark?"rgba(255,255,255,0.07)":"rgba(0,0,0,0.10)",fontSize:"10px"}}>·</span>
+            <a href="/refund" className="text-[10px] transition-opacity hover:opacity-70" style={{color:dark?"rgba(200,169,110,0.22)":`${hi}38`,fontFamily:"sans-serif",textDecoration:"none",whiteSpace:"nowrap"}}>Refund Policy</a>
+          </div>
+        </div>
+      </footer>
 
       {/* FAB */}
       <button type="button" onClick={()=>setModal(true)} aria-label="Request Review" className="fixed bottom-24 right-7 h-12 w-12 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40" style={{background:G,boxShadow:`0 6px 28px ${G}40`}}><Mail size={15} color={INK} strokeWidth={2}/></button>
