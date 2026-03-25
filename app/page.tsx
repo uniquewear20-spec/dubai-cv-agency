@@ -680,7 +680,7 @@ export default function Home() {
               </button>
               <a href="#outcomes"
                 className="flex items-center justify-center gap-2 w-full sm:w-auto px-10 text-[10px] font-medium tracking-[0.22em] uppercase rounded-full transition-all duration-300 hover:opacity-65"
-                style={{ border: `1px solid ${G}28`, color: dark ? `${G}60` : G, height: "50px", fontFamily: "sans-serif" }}>
+                style={{ border: `1px solid ${G}28`, color: dark ? `${G}60` : G, height: "50px", fontFamily: "sans-serif,", width: "272px" }}>
                 {tr("ctaSecondary", lang)} <ArrowRight size={11} strokeWidth={1.5} />
               </a>
             </div>
