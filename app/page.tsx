@@ -650,7 +650,7 @@ export default function Home(){
           <Rise d={0.85} y={20}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
               <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-90" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif",boxShadow:`0 8px 32px ${G}30`}}>{tr("ctaPrimary",lang)}</button>
-              <a href="#outcomes" className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}35`,color:G,height:"52px",fontFamily:"sans-serif",width: 272px;}}>{tr("ctaSecondary",lang)} <ArrowRight size={12} strokeWidth={2}/></a>
+              <a href="#outcomes" className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}35`,color:G,height:"52px",fontFamily:"sans-serif",width:"272px"}}>{tr("ctaSecondary",lang)} <ArrowRight size={12} strokeWidth={2}/></a>
             </div>
           </Rise>
           <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2" initial={{opacity:0}} animate={{opacity:0.15}} transition={{delay:2.5,duration:1.5}}>
