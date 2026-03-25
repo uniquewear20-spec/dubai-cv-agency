@@ -2,6 +2,9 @@
 
 import { useRef, useState, useEffect, CSSProperties } from "react";
 
+const DARK_BG = "#0A0907";
+const LIGHT_BG = "#F7F3EE";
+
 interface MarqueeProps {
   children: React.ReactNode;
   speed?: number;
@@ -11,6 +14,7 @@ interface MarqueeProps {
   className?: string;
   gap?: number;
   style?: CSSProperties;
+  dark?: boolean;
 }
 
 export function Marquee({
@@ -21,6 +25,7 @@ export function Marquee({
   fade = true,
   className = "",
   gap = 24,
+  dark = true,
 }: MarqueeProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [duration, setDuration] = useState(0);
@@ -32,16 +37,14 @@ export function Marquee({
     if (!el) return;
 
     const measure = () => {
-      const totalWidth = el.scrollWidth / 3; // لأننا نكرر 3 مرات
+      const totalWidth = el.scrollWidth / 3;
       setTranslateX(totalWidth);
       setDuration(totalWidth / speed);
     };
 
     measure();
-
     const ro = new ResizeObserver(measure);
     ro.observe(el);
-
     return () => ro.disconnect();
   }, [speed, children]);
 
@@ -51,17 +54,16 @@ export function Marquee({
     animationDirection: reverse ? "reverse" : "normal",
   };
 
+  // Use the actual page background colour so the fade dissolves into it correctly
+  const fadeBg = dark ? DARK_BG : LIGHT_BG;
+  const maskImage = `linear-gradient(to right, ${fadeBg} 0%, transparent 8%, transparent 92%, ${fadeBg} 100%)`;
+
   return (
     <div
       className={`relative overflow-hidden ${className}`}
       style={
         fade
-          ? {
-              maskImage:
-                "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-            }
+          ? { maskImage, WebkitMaskImage: maskImage }
           : undefined
       }
       onMouseEnter={() => pauseOnHover && setPaused(true)}
@@ -70,18 +72,10 @@ export function Marquee({
       <div
         ref={trackRef}
         className="flex w-max marquee-track"
-        style={{
-          gap: `${gap}px`,
-          ...animStyle,
-        }}
+        style={{ gap: `${gap}px`, ...animStyle }}
       >
-        {/* كرر 3 مرات لعمل seamless حقيقي */}
         {[...Array(3)].map((_, i) => (
-          <div
-            key={i}
-            className="flex shrink-0"
-            style={{ gap: `${gap}px` }}
-          >
+          <div key={i} className="flex shrink-0" style={{ gap: `${gap}px` }}>
             {children}
           </div>
         ))}
@@ -92,7 +86,6 @@ export function Marquee({
           from { transform: translateX(0); }
           to   { transform: translateX(-${translateX}px); }
         }
-
         .marquee-track {
           animation-name: marquee-scroll;
           animation-timing-function: linear;

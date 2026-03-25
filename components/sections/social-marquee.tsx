@@ -1,452 +1,149 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { Marquee } from "@/components/ui/marquee";
+import { Marquee } from "@/components/ui/marquee"; // adjust path if needed
 
-// ── Brand tokens (matches Zenith page.tsx exactly) ─────────────────────────────
-const G  = "#C8A96E";   // gold
-const GL = "#E2C98E";   // gold light
-const INK = "#0A0907";  // near-black
+// ── Brand gold (matches page.tsx) ────────────────────────────────────────────
+const G = "#C8A96E";
 
-// ── Social platform data ───────────────────────────────────────────────────────
-// SVG icons are inlined so there is no dependency on specific lucide versions
-// that may or may not include every brand icon.
-const SOCIALS = [
+// ── Social platform data ──────────────────────────────────────────────────────
+const PLATFORMS = [
   {
-    id: "linkedin",
-    name: "LinkedIn",
-    handle: "@zenithdubaicv",
-    tagline: "Executive positioning, global reach",
-    href: "https://www.linkedin.com/company/zenith-dubai-uae",
+    name: "Google",
+    handle: "5.0 · 7,000+ reviews",
     icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+      </svg>
+    ),
+  },
+  {
+    name: "Trustpilot",
+    handle: "Excellent · 4.9",
+    icon: (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="#00B67A">
+        <path d="M12 2l2.9 8.9H23l-7 5.1 2.7 8.2L12 19l-6.7 5.2 2.7-8.2-7-5.1h8.1z"/>
+      </svg>
+    ),
+  },
+  {
+    name: "LinkedIn",
+    handle: "Top Career Service",
+    icon: (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="#0A66C2">
         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
       </svg>
     ),
-    colorAccent: "#0A66C2",
   },
   {
-    id: "instagram",
     name: "Instagram",
-    handle: "@zenith.dubai.cv",
-    tagline: "Behind the craft, beyond the CV",
-    href: "https://www.instagram.com/zenithdubaicv?igsh=ZG84NWttZjA3dTkx&utm_source=qr",
+    handle: "@zenithdubaicv",
     icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="url(#ig-grad)">
+        <defs>
+          <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#F58529"/>
+            <stop offset="50%" stopColor="#DD2A7B"/>
+            <stop offset="100%" stopColor="#8134AF"/>
+          </linearGradient>
+        </defs>
         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
       </svg>
     ),
-    colorAccent: "#E1306C",
   },
   {
-    id: "facebook",
-    name: "Facebook",
-    handle: "Zenith Dubai CV",
-    tagline: "Community of global professionals",
-    href: "https://www.facebook.com/profile.php?id=61576464566311",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
-        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-      </svg>
-    ),
-    colorAccent: "#1877F2",
-  },
-  {
-    id: "x",
-    name: "X (Twitter)",
-    handle: "@zenithdubaicv",
-    tagline: "Insights from the executive frontier",
-    href: "https://x.com/ZenithDubai_CV",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-      </svg>
-    ),
-    colorAccent: "#E7E7E7",
-  },
-  {
-    id: "tiktok",
     name: "TikTok",
     handle: "@zenithdubaicv",
-    tagline: "Career transformation, documented",
-    href: "https://tiktok.com/@zenithdubai?_r=1&_t=ZS-94z6PW9xSm9",
     icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
-        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.69a8.27 8.27 0 0 0 4.83 1.56V6.79a4.85 4.85 0 0 1-1.07-.1z"/>
+      <svg viewBox="0 0 24 24" width="18" height="18">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.29 6.29 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" fill="currentColor"/>
       </svg>
     ),
-    colorAccent: "#69C9D0",
   },
   {
-    id: "youtube",
-    name: "YouTube",
-    handle: "@ZenithDUBAI",
-    tagline: "Executive career strategy & insights",
-    href: "https://www.youtube.com/@ZenithDUBAI",
+    name: "WhatsApp",
+    handle: "+971 50 287 9462",
     icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
-        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="#25D366">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
       </svg>
     ),
-    colorAccent: "#FF0000",
   },
 ];
 
-// ── Glow card for each social platform ────────────────────────────────────────
-function SocialCard({ s }: { s: typeof SOCIALS[0] }) {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <a
-      ref={ref}
-      href={s.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        width: "clamp(200px, 22vw, 280px)",
-        flexShrink: 0,
-        padding: "28px 28px 24px",
-        borderRadius: "20px",
-        textDecoration: "none",
-        position: "relative",
-        overflow: "hidden",
-        cursor: "pointer",
-        // Glass card
-        background: hovered
-          ? "linear-gradient(135deg, rgba(200,169,110,0.09) 0%, rgba(255,255,255,0.04) 100%)"
-          : "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%)",
-        border: hovered
-          ? `1px solid ${G}55`
-          : "1px solid rgba(255,255,255,0.07)",
-        boxShadow: hovered
-          ? `0 0 0 1px ${G}20, 0 12px 48px rgba(200,169,110,0.12), 0 4px 16px rgba(0,0,0,0.40)`
-          : "0 4px 24px rgba(0,0,0,0.30)",
-        transform: hovered ? "translateY(-4px) scale(1.015)" : "translateY(0) scale(1)",
-        transition:
-          "transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.45s ease, border-color 0.3s ease, background 0.3s ease",
-        minHeight: "160px",
-      }}
-    >
-      {/* Ambient top-edge shimmer */}
-      <div
-        aria-hidden
-        style={{
-          position: "absolute",
-          top: 0,
-          left: "20%",
-          right: "20%",
-          height: "1px",
-          background: `linear-gradient(90deg, transparent, ${G}${hovered ? "55" : "30"}, transparent)`,
-          transition: "opacity 0.3s ease",
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Icon + platform name row */}
-      <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "20px" }}>
-        {/* Icon halo */}
-        <div
-          style={{
-            width: "44px",
-            height: "44px",
-            borderRadius: "12px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
-            background: hovered
-              ? `linear-gradient(135deg, ${G}22, ${G}0A)`
-              : `${G}10`,
-            border: `1px solid ${G}${hovered ? "35" : "18"}`,
-            color: GL,
-            boxShadow: hovered ? `0 0 20px ${G}25` : "none",
-            transition: "all 0.35s ease",
-          }}
-        >
-          {s.icon}
-        </div>
-
-        {/* Name + handle */}
-        <div>
-          <p
-            style={{
-              fontFamily: "'Georgia', 'Times New Roman', serif",
-              fontSize: "13px",
-              fontWeight: 600,
-              color: hovered ? GL : "#D8D0C8",
-              letterSpacing: "0.02em",
-              lineHeight: 1.2,
-              transition: "color 0.3s ease",
-              margin: 0,
-            }}
-          >
-            {s.name}
-          </p>
-          <p
-            style={{
-              fontFamily: "sans-serif",
-              fontSize: "10px",
-              color: `${G}80`,
-              letterSpacing: "0.06em",
-              marginTop: "2px",
-              margin: "2px 0 0",
-            }}
-          >
-            {s.handle}
-          </p>
-        </div>
-      </div>
-
-      {/* Tagline */}
-      <p
-        style={{
-          fontFamily: "sans-serif",
-          fontSize: "11px",
-          lineHeight: "1.7",
-          color: "rgba(200,185,170,0.55)",
-          fontWeight: 300,
-          margin: 0,
-          fontStyle: "italic",
-        }}
-      >
-        {s.tagline}
-      </p>
-
-      {/* Bottom "Follow" prompt */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "6px",
-          marginTop: "18px",
-          opacity: hovered ? 1 : 0,
-          transform: hovered ? "translateY(0)" : "translateY(4px)",
-          transition: "opacity 0.3s ease, transform 0.35s ease",
-        }}
-      >
-        <div
-          style={{
-            width: "16px",
-            height: "1px",
-            background: G,
-          }}
-        />
-        <span
-          style={{
-            fontFamily: "sans-serif",
-            fontSize: "9px",
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            color: G,
-            fontWeight: 500,
-          }}
-        >
-          Follow
-        </span>
-      </div>
-    </a>
-  );
+// ── Types ─────────────────────────────────────────────────────────────────────
+interface SocialMarqueeProps {
+  dark?: boolean;
 }
 
-// ── Main section export ────────────────────────────────────────────────────────
-export function SocialMarquee() {
-  return (
-    <section
+// ── Component ─────────────────────────────────────────────────────────────────
+export function SocialMarquee({ dark = true }: SocialMarqueeProps) {
+  // Resolved design tokens — all transitions match the site's 0.7s ease
+  const cardBg     = dark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.03)";
+  const cardBorder = dark ? "rgba(200,169,110,0.10)"  : "rgba(0,0,0,0.08)";
+  const labelColor = dark ? G                          : "#1A1410";
+  const handleColor= dark ? "rgba(200,169,110,0.45)"  : "rgba(26,20,16,0.45)";
+  const sectionBorder = dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+
+  const transition = "background 0.7s ease, border-color 0.7s ease, color 0.7s ease, box-shadow 0.7s ease";
+
+  const cards = PLATFORMS.map((p) => (
+    <div
+      key={p.name}
+      className="flex items-center gap-3 rounded-2xl px-5 py-3 shrink-0"
       style={{
-        position: "relative",
-        background: INK,
-        overflow: "hidden",
-        paddingTop: "100px",
-        paddingBottom: "100px",
+        background: cardBg,
+        border: `1px solid ${cardBorder}`,
+        transition,
+        // Subtle gold glow on dark, none on light
+        boxShadow: dark ? `0 0 0 0.5px rgba(200,169,110,0.06) inset` : "none",
       }}
     >
-      {/* Grain texture overlay */}
+      {/* Icon wrapper */}
       <div
-        aria-hidden
+        className="flex items-center justify-center h-9 w-9 rounded-xl shrink-0"
         style={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-          opacity: 0.025,
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-          backgroundSize: "200px",
-        }}
-      />
-
-      {/* Ambient top radial glow */}
-      <div
-        aria-hidden
-        style={{
-          position: "absolute",
-          top: "-60px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "700px",
-          height: "280px",
-          background: `radial-gradient(ellipse at 50% 0%, ${G}09, transparent 70%)`,
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Horizontal rule top */}
-      <div
-        aria-hidden
-        style={{
-          position: "absolute",
-          top: 0,
-          inset: "0 0 auto",
-          height: "1px",
-          background: `linear-gradient(90deg, transparent 0%, ${G}30 20%, ${G}60 50%, ${G}30 80%, transparent 100%)`,
-        }}
-      />
-
-      {/* Section header */}
-      <div
-        style={{
-          textAlign: "center",
-          marginBottom: "56px",
-          padding: "0 24px",
+          background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
+          border: `1px solid ${cardBorder}`,
+          color: dark ? G : "#1A1410",
+          transition,
         }}
       >
-        {/* Eyebrow */}
-        <p
-          style={{
-            fontFamily: "sans-serif",
-            fontSize: "10px",
-            fontWeight: 500,
-            letterSpacing: "0.38em",
-            textTransform: "uppercase",
-            color: G,
-            marginBottom: "16px",
-          }}
-        >
-          Our Presence
-        </p>
-
-        {/* Headline */}
-        <h2
-          style={{
-            fontFamily: "'Georgia', 'Times New Roman', serif",
-            fontWeight: 400,
-            fontSize: "clamp(28px, 4vw, 46px)",
-            lineHeight: 1.1,
-            letterSpacing: "-0.025em",
-            color: "#EDE8E0",
-            margin: "0 auto 16px",
-            maxWidth: "560px",
-          }}
-        >
-          Where the Conversation{" "}
-          <em style={{ fontStyle: "italic", color: G }}>Begins.</em>
-        </h2>
-
-        {/* Subheading */}
-        <p
-          style={{
-            fontFamily: "sans-serif",
-            fontSize: "14px",
-            lineHeight: 1.9,
-            fontWeight: 300,
-            color: "rgba(180,165,148,0.70)",
-            maxWidth: "400px",
-            margin: "0 auto",
-          }}
-        >
-          Follow our channels for executive career intelligence, market insights, and client transformations — delivered daily.
-        </p>
-
-        {/* Gold rule */}
-        <div
-          style={{
-            width: "32px",
-            height: "1px",
-            background: `linear-gradient(to right, transparent, ${G}, transparent)`,
-            margin: "28px auto 0",
-            boxShadow: `0 0 8px ${G}50`,
-          }}
-        />
+        {p.icon}
       </div>
 
-      {/* ── Marquee row 1 — left to right ──────────────────────────────────── */}
-      <Marquee
-        speed={32}
-        pauseOnHover
-        fade
-        gap={20}
-        // style={{ paddingBottom: "20px" } as React.CSSProperties}
-        className="pb-5" // استخدمنا كلاس Tailwind بدلاً من style
-      >
-        {SOCIALS.map((s) => (
-          <SocialCard key={s.id} s={s} />
-        ))}
+      {/* Text */}
+      <div>
+        <p
+          className="text-[11px] font-semibold leading-none mb-1"
+          style={{ color: labelColor, fontFamily: "sans-serif", transition }}
+        >
+          {p.name}
+        </p>
+        <p
+          className="text-[9px] leading-none"
+          style={{ color: handleColor, fontFamily: "sans-serif", transition }}
+        >
+          {p.handle}
+        </p>
+      </div>
+    </div>
+  ));
+
+  return (
+    <section
+      className="py-16"
+      style={{
+        borderTop: `1px solid ${sectionBorder}`,
+        borderBottom: `1px solid ${sectionBorder}`,
+        transition,
+      }}
+    >
+      <Marquee speed={32} gap={16} dark={dark} pauseOnHover>
+        {cards}
       </Marquee>
-
-      {/* ── Marquee row 2 — right to left (reverse) ────────────────────────── */}
-      
-
-      {/* Bottom CTA strip */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "32px",
-          marginTop: "60px",
-          padding: "0 24px",
-          flexWrap: "wrap",
-        }}
-      >
-        {SOCIALS.map((s) => (
-          <a
-            key={s.id + "-dot"}
-            href={s.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={s.name}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              textDecoration: "none",
-              color: `${G}55`,
-              fontFamily: "sans-serif",
-              fontSize: "10px",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              transition: "color 0.25s ease",
-              padding: "4px 0",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = GL;
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = `${G}55`;
-            }}
-          >
-            <span style={{ color: "inherit", display: "flex" }}>{s.icon}</span>
-            {s.name}
-          </a>
-        ))}
-      </div>
-
-      {/* Bottom rule */}
-      <div
-        aria-hidden
-        style={{
-          position: "absolute",
-          bottom: 0,
-          inset: "auto 0 0",
-          height: "1px",
-          background: `linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%)`,
-        }}
-      />
     </section>
   );
 }
