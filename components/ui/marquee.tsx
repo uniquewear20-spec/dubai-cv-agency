@@ -2,9 +2,6 @@
 
 import { useRef, useState, useEffect, CSSProperties } from "react";
 
-const DARK_BG = "#0A0907";
-const LIGHT_BG = "#F7F3EE";
-
 interface MarqueeProps {
   children: React.ReactNode;
   speed?: number;
@@ -54,9 +51,10 @@ export function Marquee({
     animationDirection: reverse ? "reverse" : "normal",
   };
 
-  // Use the actual page background colour so the fade dissolves into it correctly
-  const fadeBg = dark ? DARK_BG : LIGHT_BG;
-  const maskImage = `linear-gradient(to right, ${fadeBg} 0%, transparent 8%, transparent 92%, ${fadeBg} 100%)`;
+  // Mask: transparent at edges = hidden, black/opaque in centre = visible.
+  // This is standard for marquee edge-fade and works on any background colour.
+  const maskImage =
+    "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)";
 
   return (
     <div
