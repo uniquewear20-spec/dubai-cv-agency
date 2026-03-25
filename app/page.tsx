@@ -644,13 +644,13 @@ export default function Home(){
           <Rise d={0.68} y={28}>
             <p className="text-[15px] sm:text-[17px] leading-[1.95] w-full max-w-[440px] mb-0 mx-auto px-4 sm:px-0" style={{color:dark?"#857870":sub,fontFamily:"sans-serif",fontWeight:300}}>{tr("heroSub",lang)}</p>
           </Rise>
-          <div className="relative w-full mx-auto mb-4" style={{height:"140px",maxWidth:"600px",WebkitMaskImage:"radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)",maskImage:"radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)"}}>
-            <SparklesCore particleColor={G} particleDensity={280} speed={0.8} className="absolute inset-0 w-full h-full"/>
+          <div className="relative w-full mx-auto mb-4" style={{height:"40px",maxWidth:"600px",WebkitMaskImage:"radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)",maskImage:"radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%)"}}>
+            {/* <SparklesCore particleColor={G} particleDensity={280} speed={0.8} className="absolute inset-0 w-full h-full"/> */}
           </div>
           <Rise d={0.85} y={20}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
               <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-90" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif",boxShadow:`0 8px 32px ${G}30`}}>{tr("ctaPrimary",lang)}</button>
-              <a href="#outcomes" className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}35`,color:G,height:"52px",fontFamily:"sans-serif"}}>{tr("ctaSecondary",lang)} <ArrowRight size={12} strokeWidth={2}/></a>
+              <a href="#outcomes" className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}35`,color:G,height:"52px",fontFamily:"sans-serif",width: 272px;}}>{tr("ctaSecondary",lang)} <ArrowRight size={12} strokeWidth={2}/></a>
             </div>
           </Rise>
           <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2" initial={{opacity:0}} animate={{opacity:0.15}} transition={{delay:2.5,duration:1.5}}>
