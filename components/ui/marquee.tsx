@@ -10,7 +10,7 @@ interface MarqueeProps {
   fade?: boolean;
   className?: string;
   gap?: number;
-  style?: CSSProperties; // أضف هذا السطر هنا
+  style?: CSSProperties;
 }
 
 export function Marquee({
@@ -24,6 +24,7 @@ export function Marquee({
 }: MarqueeProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [duration, setDuration] = useState(0);
+  const [translateX, setTranslateX] = useState(0);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
@@ -31,14 +32,16 @@ export function Marquee({
     if (!el) return;
 
     const measure = () => {
-      // The track holds two copies; we animate one full copy width
-      const halfWidth = el.scrollWidth / 2;
-      setDuration(halfWidth / speed);
+      const totalWidth = el.scrollWidth / 3; // لأننا نكرر 3 مرات
+      setTranslateX(totalWidth);
+      setDuration(totalWidth / speed);
     };
 
     measure();
+
     const ro = new ResizeObserver(measure);
     ro.observe(el);
+
     return () => ro.disconnect();
   }, [speed, children]);
 
@@ -72,25 +75,29 @@ export function Marquee({
           ...animStyle,
         }}
       >
-        {/* Original set */}
-        <div className="flex shrink-0" style={{ gap: `${gap}px` }}>
-          {children}
-        </div>
-        {/* Duplicate for seamless loop */}
-        <div className="flex shrink-0" aria-hidden style={{ gap: `${gap}px` }}>
-          {children}
-        </div>
+        {/* كرر 3 مرات لعمل seamless حقيقي */}
+        {[...Array(3)].map((_, i) => (
+          <div
+            key={i}
+            className="flex shrink-0"
+            style={{ gap: `${gap}px` }}
+          >
+            {children}
+          </div>
+        ))}
       </div>
 
       <style>{`
         @keyframes marquee-scroll {
           from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          to   { transform: translateX(-${translateX}px); }
         }
+
         .marquee-track {
           animation-name: marquee-scroll;
           animation-timing-function: linear;
           animation-iteration-count: infinite;
+          will-change: transform;
         }
       `}</style>
     </div>
