@@ -652,6 +652,10 @@ export default function Home(){
               <button type="button" onClick={()=>setModal(true)} className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-90" style={{background:G,color:INK,height:"52px",fontFamily:"sans-serif",boxShadow:`0 8px 32px ${G}30`}}>{tr("ctaPrimary",lang)}</button>
               <a href="#outcomes" className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 text-[11px] font-medium tracking-[0.18em] uppercase rounded-full transition-all hover:opacity-70" style={{border:`1px solid ${G}35`,color:G,height:"52px",fontFamily:"sans-serif",width:"272px"}}>{tr("ctaSecondary",lang)} <ArrowRight size={12} strokeWidth={2}/></a>
             </div>
+            {/* ══ المكان الجديد للماركي ══ */}
+            <div className="mt-12 w-full max-w-4xl mx-auto overflow-hidden">
+               <SocialMarquee />
+            </div>
           </Rise>
           <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2" initial={{opacity:0}} animate={{opacity:0.15}} transition={{delay:2.5,duration:1.5}}>
             <motion.div className="w-px h-10" style={{background:hi}} animate={{scaleY:[1,0,1],transformOrigin:"top"}} transition={{duration:2.4,repeat:Infinity,ease:"easeInOut"}}/>
@@ -893,8 +897,7 @@ export default function Home(){
           </div>
         </section>
 
-        {/* SOCIAL MARQUEE */}
-        <SocialMarquee />
+
 
         {/* CLOSING CTA */}
         <section className="py-40 px-5 sm:px-8 border-t text-center" style={{borderColor:bdr}}>
