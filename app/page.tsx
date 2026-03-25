@@ -970,7 +970,7 @@ export default function Home() {
         </section>
 
         {/* ── SOCIAL MARQUEE ──────────────────────────────────────────────── */}
-        <SocialMarquee />
+        <SocialMarquee dark={dark}/>
 
         {/* ── CLOSING CTA ─────────────────────────────────────────────────── */}
         <section className="py-48 px-5 sm:px-8 text-center" style={{ borderTop: `1px solid ${bdr}` }}>
