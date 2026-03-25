@@ -4,12 +4,13 @@ import { useRef, useState, useEffect, CSSProperties } from "react";
 
 interface MarqueeProps {
   children: React.ReactNode;
-  speed?: number;          // px per second — default 40
+  speed?: number;
   pauseOnHover?: boolean;
   reverse?: boolean;
-  fade?: boolean;          // gradient fade edges
+  fade?: boolean;
   className?: string;
-  gap?: number;            // gap between items in px — default 24
+  gap?: number;
+  style?: CSSProperties; // أضف هذا السطر هنا
 }
 
 export function Marquee({

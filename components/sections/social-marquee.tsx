@@ -367,7 +367,8 @@ export function SocialMarquee() {
         pauseOnHover
         fade
         gap={20}
-        style={{ paddingBottom: "20px" } as React.CSSProperties}
+        // style={{ paddingBottom: "20px" } as React.CSSProperties}
+        className="pb-5" // استخدمنا كلاس Tailwind بدلاً من style
       >
         {SOCIALS.map((s) => (
           <SocialCard key={s.id} s={s} />
