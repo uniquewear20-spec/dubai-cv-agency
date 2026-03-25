@@ -6,7 +6,7 @@ import {
   Sun, Moon, Mail, X, Send, Loader2, CheckCircle, AlertCircle,
   Upload, FileText, ImageIcon, Trash2, CreditCard, ArrowRight, Globe, LayoutGrid,
 } from "lucide-react";
-
+import { SocialMarquee } from "@/components/sections/social-marquee";
 // ── Tokens ─────────────────────────────────────────────────────────────────────
 const G = "#C8A96E", GL = "#E2C98E", INK = "#0A0907", ASH = "#F5F1EB";
 const WA = "971502879462", EM = "info@zenithdubaicv.com";
@@ -1013,7 +1013,17 @@ export default function Home(){
               <p className="mt-16 text-[10px] tracking-[0.28em] uppercase" style={{color:dark?"rgba(200,169,110,0.25)":"rgba(26,20,16,0.30)",fontFamily:"sans-serif"}}>{tr("tagline",lang)}</p>
             </div>
           </Rise>
+        </section>{/* OUTCOMES */}
+        <section id="outcomes" className="py-32 px-5 sm:px-8 border-t" style={{borderColor:bdr}}>
+          {/* ... الكثير من الكود هنا ... */}
+          {/* ... انزل حتى تجد إغلاق السكشن أدناه ... */}
         </section>
+
+        {/* ◄◄◄ الصق الكود هنا في هذا الفراغ بالضبط ►►► */}
+        <SocialMarquee />
+
+        {/* CLOSING CTA */}
+        <section className="py-40 px-5 sm:px-8 border-t text-center" style={{borderColor:bdr}}>
 
         {/* FOOTER */}
         <footer className="relative py-10 px-5 sm:px-8" style={{borderTop:`1px solid ${bdr}`}}>
