@@ -557,6 +557,8 @@ export default function Home() {
   // Social link colour (theme-aware, matches SocialMarquee's dotColor logic)
   const socialLinkColor = dark ? `${G}55` : `${G}70`;
 
+
+
   const cols = [TMS.filter((_, i) => i % 3 === 0), TMS.filter((_, i) => i % 3 === 1), TMS.filter((_, i) => i % 3 === 2)];
   const wlMsg = wl("Hello. I would like to request a private review.");
   const shown = TEMPLATES.slice(0, visible);
@@ -751,7 +753,7 @@ export default function Home() {
                   fontFamily: "sans-serif",
                   fontSize: "10px",
                   letterSpacing: "0.18em",
-                  textTransform: "uppercase" as const,
+                  textTransform: "uppercase" as React.CSSProperties["textTransform"],
                   transition: "color 0.25s ease",
                   padding: "4px 0",
                 }}

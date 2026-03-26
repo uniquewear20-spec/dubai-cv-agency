@@ -24,73 +24,76 @@ export function Marquee({
   gap = 24,
   dark = true,
 }: MarqueeProps) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [duration, setDuration] = useState(0);
-  const [translateX, setTranslateX] = useState(0);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const [copyWidth, setCopyWidth] = useState(0);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
+    const inner = innerRef.current;
+    if (!inner) return;
 
     const measure = () => {
-      const totalWidth = el.scrollWidth / 3;
-      setTranslateX(totalWidth);
-      setDuration(totalWidth / speed);
+      const firstCopy = inner.children[0] as HTMLElement | undefined;
+      if (firstCopy) {
+        // Width of one set of children + the gap that follows it
+        setCopyWidth(firstCopy.scrollWidth + gap);
+      }
     };
 
-    measure();
+    // Delay slightly so fonts/images have settled
+    const id = setTimeout(measure, 50);
     const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [speed, children]);
+    ro.observe(inner);
+    return () => { clearTimeout(id); ro.disconnect(); };
+  }, [gap, children]);
 
-  const animStyle: CSSProperties = {
-    animationDuration: duration > 0 ? `${duration}s` : "0s",
-    animationPlayState: paused ? "paused" : "running",
-    animationDirection: reverse ? "reverse" : "normal",
-  };
+  const duration = copyWidth > 0 ? copyWidth / speed : 0;
+  const keyframeName = "zenith-marquee";
 
-  // Mask: transparent at edges = hidden, black/opaque in centre = visible.
-  // This is standard for marquee edge-fade and works on any background colour.
+  const animStyle: CSSProperties =
+    duration > 0
+      ? {
+          animationName: keyframeName,
+          animationDuration: `${duration}s`,
+          animationTimingFunction: "linear",
+          animationIterationCount: "infinite",
+          animationPlayState: paused ? "paused" : "running",
+          animationDirection: reverse ? "reverse" : "normal",
+          willChange: "transform",
+        }
+      : {};
+
   const maskImage =
     "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)";
 
   return (
     <div
       className={`relative overflow-hidden ${className}`}
-      style={
-        fade
-          ? { maskImage, WebkitMaskImage: maskImage }
-          : undefined
-      }
+      style={fade ? { maskImage, WebkitMaskImage: maskImage } : undefined}
       onMouseEnter={() => pauseOnHover && setPaused(true)}
       onMouseLeave={() => pauseOnHover && setPaused(false)}
     >
-      <div
-        ref={trackRef}
-        className="flex w-max marquee-track"
-        style={{ gap: `${gap}px`, ...animStyle }}
-      >
-        {[...Array(3)].map((_, i) => (
-          <div key={i} className="flex shrink-0" style={{ gap: `${gap}px` }}>
+      {copyWidth > 0 && (
+        <style>{`
+          @keyframes ${keyframeName} {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-${copyWidth}px); }
+          }
+        `}</style>
+      )}
+
+      {/* 4 copies — one full cycle scrolls exactly one copy width, then loops */}
+      <div ref={innerRef} className="flex w-max" style={animStyle}>
+        {[0, 1, 2, 3].map((idx) => (
+          <div
+            key={idx}
+            className="flex shrink-0"
+            style={{ gap: `${gap}px`, paddingRight: `${gap}px` }}
+          >
             {children}
           </div>
         ))}
       </div>
-
-      <style>{`
-        @keyframes marquee-scroll {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-${translateX}px); }
-        }
-        .marquee-track {
-          animation-name: marquee-scroll;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
-          will-change: transform;
-        }
-      `}</style>
     </div>
   );
 }

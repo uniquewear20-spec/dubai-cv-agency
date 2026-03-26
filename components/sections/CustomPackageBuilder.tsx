@@ -6,39 +6,94 @@ import { Check, ArrowRight, Sparkles, ChevronDown } from "lucide-react";
 // ── Tokens (mirrors page.tsx) ────────────────────────────────────────────────
 const G = "#C8A96E", GL = "#E2C98E", INK = "#0A0907";
 
+// ── i18n ─────────────────────────────────────────────────────────────────────
+type Lang = "en" | "ar" | "fr";
+
+const CPB_TX: Record<string, Record<Lang, string>> = {
+  eyebrow:      { en: "À la carte",                          ar: "بالقطعة",                              fr: "À la carte" },
+  heading:      { en: "Create Your Custom",                   ar: "أنشئ باقتك",                           fr: "Créez votre forfait" },
+  headingEm:    { en: "Career Package.",                      ar: "المهنية المخصصة.",                      fr: "carrière sur mesure." },
+  subtext:      { en: "Select only what you need. Bundle discounts are applied automatically — the more you choose, the more you save.", ar: "اختر ما تحتاجه فقط. تُطبَّق خصومات الباقات تلقائياً — كلما اخترت أكثر، وفّرت أكثر.", fr: "Choisissez uniquement ce dont vous avez besoin. Les remises sont appliquées automatiquement — plus vous choisissez, plus vous économisez." },
+  quickBundles: { en: "Quick bundles",                        ar: "باقات سريعة",                           fr: "Forfaits rapides" },
+  yourSelection:{ en: "Your selection",                       ar: "اختيارك",                              fr: "Votre sélection" },
+  noServices:   { en: "No services selected yet.",            ar: "لم يتم اختيار خدمات بعد.",              fr: "Aucun service sélectionné." },
+  subtotal:     { en: "Subtotal",                             ar: "المجموع الجزئي",                        fr: "Sous-total" },
+  total:        { en: "Total",                                ar: "الإجمالي",                              fr: "Total" },
+  requestPkg:   { en: "Request This Package",                 ar: "اطلب هذه الباقة",                      fr: "Demander ce forfait" },
+  selectAbove:  { en: "Select services above",                ar: "اختر الخدمات أعلاه",                   fr: "Sélectionnez des services" },
+  notSure:      { en: "Not sure what to choose?",             ar: "لست متأكداً مما تختار؟",               fr: "Pas sûr de votre choix ?" },
+  growthNudge:  { en: "Most clients choose our Growth Package.", ar: "معظم العملاء يختارون باقة النمو.",   fr: "La plupart choisissent notre offre Croissance." },
+  bundleSavings:{ en: "Bundle savings",                       ar: "وفر مع الباقات",                       fr: "Économies forfait" },
+  youSave:      { en: "You save",                             ar: "توفر",                                  fr: "Vous économisez" },
+  aed:          { en: "AED",                                  ar: "AED",                                  fr: "AED" },
+  // Discount labels
+  disc10:       { en: "10% bundle discount applied",          ar: "خصم 10% على الباقة مطبَّق",            fr: "Remise forfait 10% appliquée" },
+  disc15:       { en: "15% bundle discount applied",          ar: "خصم 15% على الباقة مطبَّق",            fr: "Remise forfait 15% appliquée" },
+  disc20:       { en: "20% bundle discount applied",          ar: "خصم 20% على الباقة مطبَّق",            fr: "Remise forfait 20% appliquée" },
+  // Category labels
+  catDocument:  { en: "Documents",                            ar: "الوثائق",                              fr: "Documents" },
+  catDigital:   { en: "Digital Presence",                     ar: "الحضور الرقمي",                        fr: "Présence numérique" },
+  catApps:      { en: "Job Applications",                     ar: "طلبات التوظيف",                        fr: "Candidatures" },
+  catCoaching:  { en: "Coaching & Strategy",                  ar: "التدريب والاستراتيجية",                 fr: "Coaching & Stratégie" },
+  // Service labels
+  svcCvAts:     { en: "CV Writing (ATS Optimised)",           ar: "كتابة السيرة الذاتية (محسَّنة للفرز)", fr: "Rédaction CV (optimisé ATS)" },
+  svcCvDesign:  { en: "Executive CV Design",                  ar: "تصميم السيرة الذاتية التنفيذية",       fr: "Design CV Exécutif" },
+  svcCover:     { en: "Cover Letter",                         ar: "خطاب التغطية",                         fr: "Lettre de motivation" },
+  svcLinkedin:  { en: "LinkedIn Makeover",                    ar: "تجديد لينكدإن",                        fr: "Refonte LinkedIn" },
+  svcApps5:     { en: "Job Applications (5)",                 ar: "طلبات التوظيف (5)",                    fr: "Candidatures (5)" },
+  svcApps10:    { en: "Job Applications (10)",                ar: "طلبات التوظيف (10)",                   fr: "Candidatures (10)" },
+  svcApps30:    { en: "Job Applications (30)",                ar: "طلبات التوظيف (30)",                   fr: "Candidatures (30)" },
+  svcCoaching:  { en: "Interview Coaching (60 min)",          ar: "تدريب المقابلات (60 دقيقة)",           fr: "Coaching entretien (60 min)" },
+  svcStrategy:  { en: "Career Strategy Session",              ar: "جلسة استراتيجية المسار المهني",        fr: "Session stratégie de carrière" },
+  svcBranding:  { en: "Portfolio / Personal Branding Kit",    ar: "ملف / مجموعة العلامة الشخصية",        fr: "Portfolio / Kit personal branding" },
+  // Preset labels & tags
+  preJobHunter: { en: "Job Hunter",     ar: "باحث عن عمل",       fr: "Chercheur d'emploi" },
+  preJobTag:    { en: "Fast track to interviews", ar: "مسار سريع للمقابلات", fr: "Accès rapide aux entretiens" },
+  preIntl:      { en: "International",  ar: "دولي",              fr: "International" },
+  preIntlTag:   { en: "Global market ready", ar: "جاهز للسوق الدولي", fr: "Prêt pour le marché mondial" },
+  preUpgrade:   { en: "Career Upgrade", ar: "ترقية مهنية",       fr: "Mise à niveau carrière" },
+  preUpgradeTag:{ en: "Full positioning reset", ar: "إعادة تموضع كاملة", fr: "Repositionnement complet" },
+  // Note labels
+  notePopular:  { en: "Most popular",  ar: "الأكثر طلباً",       fr: "Le plus populaire" },
+  noteCampaign: { en: "Full campaign", ar: "حملة كاملة",          fr: "Campagne complète" },
+  noteTailored: { en: "Tailored per role", ar: "مخصص لكل دور",   fr: "Personnalisé par rôle" },
+};
+
+const t = (k: string, l: Lang): string => CPB_TX[k]?.[l] ?? CPB_TX[k]?.en ?? k;
+
 // ── Service definitions ──────────────────────────────────────────────────────
 export interface Service {
   id: string;
-  label: string;
+  labelKey: string;
   price: number;
   category: "document" | "digital" | "coaching" | "applications";
-  note?: string;
+  noteKey?: string;
 }
 
 const SERVICES: Service[] = [
-  { id: "cv-ats",       label: "CV Writing (ATS Optimised)",       price: 149, category: "document" },
-  { id: "cv-design",    label: "Executive CV Design",               price: 99,  category: "document" },
-  { id: "cover-letter", label: "Cover Letter",                      price: 79,  category: "document" },
-  { id: "linkedin",     label: "LinkedIn Makeover",                 price: 149, category: "digital" },
-  { id: "apps-5",       label: "Job Applications (5)",              price: 79,  category: "applications", note: "Tailored per role" },
-  { id: "apps-10",      label: "Job Applications (10)",             price: 119, category: "applications", note: "Most popular" },
-  { id: "apps-30",      label: "Job Applications (30)",             price: 199, category: "applications", note: "Full campaign" },
-  { id: "coaching",     label: "Interview Coaching (60 min)",       price: 199, category: "coaching" },
-  { id: "strategy",     label: "Career Strategy Session",           price: 149, category: "coaching" },
-  { id: "branding",     label: "Portfolio / Personal Branding Kit", price: 149, category: "digital" },
+  { id: "cv-ats",       labelKey: "svcCvAts",     price: 149, category: "document" },
+  { id: "cv-design",    labelKey: "svcCvDesign",   price: 99,  category: "document" },
+  { id: "cover-letter", labelKey: "svcCover",      price: 79,  category: "document" },
+  { id: "linkedin",     labelKey: "svcLinkedin",   price: 149, category: "digital" },
+  { id: "apps-5",       labelKey: "svcApps5",      price: 79,  category: "applications", noteKey: "noteTailored" },
+  { id: "apps-10",      labelKey: "svcApps10",     price: 119, category: "applications", noteKey: "notePopular" },
+  { id: "apps-30",      labelKey: "svcApps30",     price: 199, category: "applications", noteKey: "noteCampaign" },
+  { id: "coaching",     labelKey: "svcCoaching",   price: 199, category: "coaching" },
+  { id: "strategy",     labelKey: "svcStrategy",   price: 149, category: "coaching" },
+  { id: "branding",     labelKey: "svcBranding",   price: 149, category: "digital" },
 ];
 
 // ── Preset combos ────────────────────────────────────────────────────────────
 interface Preset {
-  label: string;
+  labelKey: string;
+  tagKey: string;
   ids: string[];
-  tag: string;
 }
 
 const PRESETS: Preset[] = [
-  { label: "Job Hunter",     ids: ["cv-ats", "cover-letter", "apps-10"], tag: "Fast track to interviews" },
-  { label: "International",  ids: ["cv-ats", "linkedin", "cv-design"],   tag: "Global market ready" },
-  { label: "Career Upgrade", ids: ["cv-ats", "linkedin", "coaching"],    tag: "Full positioning reset" },
+  { labelKey: "preJobHunter", tagKey: "preJobTag",    ids: ["cv-ats", "cover-letter", "apps-10"] },
+  { labelKey: "preIntl",      tagKey: "preIntlTag",   ids: ["cv-ats", "linkedin", "cv-design"] },
+  { labelKey: "preUpgrade",   tagKey: "preUpgradeTag",ids: ["cv-ats", "linkedin", "coaching"] },
 ];
 
 // ── Discount logic ────────────────────────────────────────────────────────────
@@ -49,27 +104,18 @@ function getDiscount(count: number): number {
   return 0;
 }
 
-// ── Category label map ────────────────────────────────────────────────────────
-const CAT_LABELS: Record<Service["category"], string> = {
-  document: "Documents",
-  digital: "Digital Presence",
-  applications: "Job Applications",
-  coaching: "Coaching & Strategy",
-};
-
 // ── Props ─────────────────────────────────────────────────────────────────────
 interface Props {
   dark: boolean;
-  lang?: "en" | "ar" | "fr";
+  lang?: Lang;
   onEnquire?: (selected: string[], total: number) => void;
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
-export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
+export default function CustomPackageBuilder({ dark, lang = "en", onEnquire }: Props) {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [activePreset, setActivePreset] = useState<string | null>(null);
   const [justAdded, setJustAdded] = useState<string | null>(null);
-  const growthRef = useRef<HTMLElement | null>(null);
 
   // Theme tokens
   const hi   = dark ? "#EDE8E0" : "#1A1410";
@@ -87,7 +133,6 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
   const total = subtotal - savings;
   const hasSelection = selected.size > 0;
 
-  // Toggle single service
   const toggle = useCallback((id: string) => {
     setSelected(prev => {
       const next = new Set(prev);
@@ -98,25 +143,29 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
     setActivePreset(null);
   }, []);
 
-  // Apply preset
   const applyPreset = useCallback((preset: Preset) => {
     setSelected(new Set(preset.ids));
-    setActivePreset(preset.label);
+    setActivePreset(preset.labelKey);
   }, []);
 
-  // Scroll to growth package
   const scrollToGrowth = useCallback(() => {
     const el = document.getElementById("investment");
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
-  // Group services by category
   const categories = Array.from(new Set(SERVICES.map(s => s.category))) as Service["category"][];
 
+  const catLabelMap: Record<Service["category"], string> = {
+    document:     t("catDocument", lang),
+    digital:      t("catDigital", lang),
+    applications: t("catApps", lang),
+    coaching:     t("catCoaching", lang),
+  };
+
   const discountLabel =
-    discount === 0.20 ? "20% bundle discount applied" :
-    discount === 0.15 ? "15% bundle discount applied" :
-    discount === 0.10 ? "10% bundle discount applied" : null;
+    discount === 0.20 ? t("disc20", lang) :
+    discount === 0.15 ? t("disc15", lang) :
+    discount === 0.10 ? t("disc10", lang) : null;
 
   return (
     <section
@@ -138,21 +187,20 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
             className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5"
             style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}
           >
-            À la carte
+            {t("eyebrow", lang)}
           </p>
           <h2
             className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15] mb-5"
             style={{ color: hi }}
           >
-            Create Your Custom<br />
-            <em style={{ fontStyle: "italic", color: G }}>Career Package.</em>
+            {t("heading", lang)}<br />
+            <em style={{ fontStyle: "italic", color: G }}>{t("headingEm", lang)}</em>
           </h2>
           <p
             className="text-sm leading-[2.0] max-w-lg"
             style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300 }}
           >
-            Select only what you need. Bundle discounts are applied automatically —
-            the more you choose, the more you save.
+            {t("subtext", lang)}
           </p>
         </motion.div>
 
@@ -168,11 +216,11 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
             className="text-[9px] font-medium tracking-[0.28em] uppercase mb-4"
             style={{ color: sub, fontFamily: "sans-serif" }}
           >
-            Quick bundles
+            {t("quickBundles", lang)}
           </p>
           <div className="flex flex-wrap gap-3">
             {PRESETS.map((preset, i) => {
-              const isActive = activePreset === preset.label;
+              const isActive = activePreset === preset.labelKey;
               const presetTotal = SERVICES
                 .filter(s => preset.ids.includes(s.id))
                 .reduce((a, s) => a + s.price, 0);
@@ -181,7 +229,7 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
 
               return (
                 <motion.button
-                  key={preset.label}
+                  key={preset.labelKey}
                   type="button"
                   onClick={() => applyPreset(preset)}
                   initial={{ opacity: 0, x: -12 }}
@@ -204,28 +252,20 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                       border: `1px solid ${isActive ? G : `${G}25`}`,
                     }}
                   >
-                    <Check
-                      size={9}
-                      strokeWidth={2.5}
-                      color={isActive ? INK : `${G}60`}
-                    />
+                    <Check size={9} strokeWidth={2.5} color={isActive ? INK : `${G}60`} />
                   </div>
                   <div>
                     <p
                       className="text-[11px] font-semibold"
                       style={{ color: isActive ? (dark ? GL : G) : hi, fontFamily: "sans-serif" }}
                     >
-                      {preset.label}
+                      {t(preset.labelKey, lang)}
                     </p>
                     <p className="text-[9px]" style={{ color: sub, fontFamily: "sans-serif" }}>
-                      {preset.tag} · {presetFinal} AED
+                      {t(preset.tagKey, lang)} · {presetFinal} {t("aed", lang)}
                     </p>
                   </div>
-                  <ArrowRight
-                    size={10}
-                    strokeWidth={1.5}
-                    style={{ color: `${G}50`, marginLeft: "auto" }}
-                  />
+                  <ArrowRight size={10} strokeWidth={1.5} style={{ color: `${G}50`, marginLeft: "auto" }} />
                 </motion.button>
               );
             })}
@@ -251,10 +291,10 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                     className="text-[9px] font-medium tracking-[0.30em] uppercase mb-4"
                     style={{ color: dark ? `${G}40` : `${G}70`, fontFamily: "sans-serif" }}
                   >
-                    {CAT_LABELS[cat]}
+                    {catLabelMap[cat]}
                   </p>
                   <div className="flex flex-col gap-2">
-                    {catServices.map((svc, si) => {
+                    {catServices.map((svc) => {
                       const isSelected = selected.has(svc.id);
                       const isNew = justAdded === svc.id;
 
@@ -268,13 +308,9 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                           transition={{ duration: 0.3 }}
                           className="group w-full flex items-center gap-4 px-5 py-4 rounded-xl text-left transition-all duration-300"
                           style={{
-                            background: isSelected
-                              ? (dark ? `${G}08` : `${G}07`)
-                              : card,
+                            background: isSelected ? (dark ? `${G}08` : `${G}07`) : card,
                             border: `1px solid ${isSelected ? `${G}35` : bdr}`,
-                            boxShadow: isSelected
-                              ? `0 0 0 1px ${G}15, 0 2px 16px ${G}08`
-                              : "none",
+                            boxShadow: isSelected ? `0 0 0 1px ${G}15, 0 2px 16px ${G}08` : "none",
                           }}
                           onMouseEnter={e => {
                             if (!isSelected) (e.currentTarget as HTMLButtonElement).style.background = cardHover;
@@ -315,14 +351,14 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                                 transition: "color 0.25s ease",
                               }}
                             >
-                              {svc.label}
+                              {t(svc.labelKey, lang)}
                             </p>
-                            {svc.note && (
+                            {svc.noteKey && (
                               <p
                                 className="text-[10px] mt-0.5"
                                 style={{ color: sub, fontFamily: "sans-serif" }}
                               >
-                                {svc.note}
+                                {t(svc.noteKey, lang)}
                               </p>
                             )}
                           </div>
@@ -337,7 +373,7 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                                 transition: "color 0.25s ease",
                               }}
                             >
-                              {svc.price} <span className="text-[9px] font-normal">AED</span>
+                              {svc.price} <span className="text-[9px] font-normal">{t("aed", lang)}</span>
                             </p>
                           </div>
                         </motion.button>
@@ -363,17 +399,14 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
               }}
             >
               {/* Gold top line */}
-              <div
-                className="h-px w-full"
-                style={{ background: `linear-gradient(90deg,transparent,${G}55,transparent)` }}
-              />
+              <div className="h-px w-full" style={{ background: `linear-gradient(90deg,transparent,${G}55,transparent)` }} />
 
               <div className="p-7">
                 <p
                   className="text-[9px] font-medium tracking-[0.35em] uppercase mb-6"
                   style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}
                 >
-                  Your selection
+                  {t("yourSelection", lang)}
                 </p>
 
                 {/* Selected list */}
@@ -388,7 +421,7 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                         className="text-[11px] leading-relaxed"
                         style={{ color: dark ? "rgba(200,169,110,0.20)" : "rgba(200,169,110,0.45)", fontFamily: "sans-serif", fontStyle: "italic" }}
                       >
-                        No services selected yet.
+                        {t("noServices", lang)}
                       </motion.p>
                     ) : (
                       selectedServices.map(svc => (
@@ -403,21 +436,12 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                           style={{ borderBottom: `1px solid ${G}12` }}
                         >
                           <div className="flex items-center gap-2 min-w-0">
-                            <div
-                              className="shrink-0 h-1 w-1 rounded-full"
-                              style={{ background: G, opacity: 0.6 }}
-                            />
-                            <p
-                              className="text-[11px] truncate"
-                              style={{ color: dark ? "#C0B0A0" : "#5A4E44", fontFamily: "sans-serif" }}
-                            >
-                              {svc.label}
+                            <div className="shrink-0 h-1 w-1 rounded-full" style={{ background: G, opacity: 0.6 }} />
+                            <p className="text-[11px] truncate" style={{ color: dark ? "#C0B0A0" : "#5A4E44", fontFamily: "sans-serif" }}>
+                              {t(svc.labelKey, lang)}
                             </p>
                           </div>
-                          <p
-                            className="shrink-0 text-[11px] ml-3"
-                            style={{ color: mid, fontFamily: "sans-serif" }}
-                          >
+                          <p className="shrink-0 text-[11px] ml-3" style={{ color: mid, fontFamily: "sans-serif" }}>
                             {svc.price}
                           </p>
                         </motion.div>
@@ -438,17 +462,11 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.35 }}
                     >
-                      <p
-                        className="text-[10px]"
-                        style={{ color: sub, fontFamily: "sans-serif" }}
-                      >
-                        Subtotal
+                      <p className="text-[10px]" style={{ color: sub, fontFamily: "sans-serif" }}>
+                        {t("subtotal", lang)}
                       </p>
-                      <p
-                        className="text-[11px] line-through opacity-40"
-                        style={{ color: hi, fontFamily: "sans-serif" }}
-                      >
-                        {subtotal} AED
+                      <p className="text-[11px] line-through opacity-40" style={{ color: hi, fontFamily: "sans-serif" }}>
+                        {subtotal} {t("aed", lang)}
                       </p>
                     </motion.div>
                   )}
@@ -463,18 +481,12 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                     >
                       <div className="flex items-center gap-2">
                         <Sparkles size={9} color={G} strokeWidth={1.5} />
-                        <p
-                          className="text-[10px] font-medium"
-                          style={{ color: G, fontFamily: "sans-serif" }}
-                        >
+                        <p className="text-[10px] font-medium" style={{ color: G, fontFamily: "sans-serif" }}>
                           {discountLabel}
                         </p>
                       </div>
-                      <p
-                        className="text-[11px] font-semibold"
-                        style={{ color: G, fontFamily: "sans-serif" }}
-                      >
-                        −{savings} AED
+                      <p className="text-[11px] font-semibold" style={{ color: G, fontFamily: "sans-serif" }}>
+                        −{savings} {t("aed", lang)}
                       </p>
                     </motion.div>
                   )}
@@ -484,7 +496,7 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                       className="text-[10px] font-medium tracking-[0.20em] uppercase"
                       style={{ color: sub, fontFamily: "sans-serif" }}
                     >
-                      Total
+                      {t("total", lang)}
                     </p>
                     <div className="text-right">
                       <motion.p
@@ -498,11 +510,8 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                         {hasSelection ? total : "—"}
                       </motion.p>
                       {hasSelection && (
-                        <p
-                          className="text-[9px] mt-0.5"
-                          style={{ color: sub, fontFamily: "sans-serif" }}
-                        >
-                          AED
+                        <p className="text-[9px] mt-0.5" style={{ color: sub, fontFamily: "sans-serif" }}>
+                          {t("aed", lang)}
                         </p>
                       )}
                     </div>
@@ -523,7 +532,7 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                           border: `1px solid ${G}18`,
                         }}
                       >
-                        You save {savings} AED
+                        {t("youSave", lang)} {savings} {t("aed", lang)}
                       </motion.p>
                     )}
                   </AnimatePresence>
@@ -544,7 +553,7 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                     cursor: hasSelection ? "pointer" : "not-allowed",
                   }}
                 >
-                  <span>{hasSelection ? "Request This Package" : "Select services above"}</span>
+                  <span>{hasSelection ? t("requestPkg", lang) : t("selectAbove", lang)}</span>
                   <ArrowRight size={11} strokeWidth={hasSelection ? 2 : 1.5} />
                 </button>
 
@@ -554,7 +563,7 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                     className="text-[10px] leading-relaxed text-center"
                     style={{ color: dark ? "rgba(200,169,110,0.28)" : "rgba(200,169,110,0.55)", fontFamily: "sans-serif" }}
                   >
-                    Not sure what to choose?{" "}
+                    {t("notSure", lang)}{" "}
                     <button
                       type="button"
                       onClick={scrollToGrowth}
@@ -569,7 +578,7 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                         padding: 0,
                       }}
                     >
-                      Most clients choose our Growth Package.
+                      {t("growthNudge", lang)}
                     </button>
                   </p>
                 </div>
@@ -589,7 +598,7 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                 className="text-[8px] font-medium tracking-[0.28em] uppercase mb-3"
                 style={{ color: sub, fontFamily: "sans-serif" }}
               >
-                Bundle savings
+                {t("bundleSavings", lang)}
               </p>
               <div className="flex items-center gap-1">
                 {[
@@ -606,22 +615,14 @@ export default function CustomPackageBuilder({ dark, onEnquire }: Props) {
                       key={tier.n}
                       className="flex-1 flex flex-col items-center gap-1 py-2 rounded-lg transition-all duration-300"
                       style={{
-                        background: active
-                          ? (dark ? `${G}12` : `${G}10`)
-                          : "transparent",
+                        background: active ? (dark ? `${G}12` : `${G}10`) : "transparent",
                         border: `1px solid ${active ? `${G}30` : "transparent"}`,
                       }}
                     >
-                      <p
-                        className="text-[9px] font-semibold"
-                        style={{ color: active ? G : sub, fontFamily: "sans-serif" }}
-                      >
+                      <p className="text-[9px] font-semibold" style={{ color: active ? G : sub, fontFamily: "sans-serif" }}>
                         {tier.label}
                       </p>
-                      <p
-                        className="text-[8px]"
-                        style={{ color: active ? G : dark ? "rgba(200,169,110,0.20)" : "rgba(200,169,110,0.35)", fontFamily: "sans-serif" }}
-                      >
+                      <p className="text-[8px]" style={{ color: active ? G : dark ? "rgba(200,169,110,0.20)" : "rgba(200,169,110,0.35)", fontFamily: "sans-serif" }}>
                         {tier.discount}
                       </p>
                     </div>
