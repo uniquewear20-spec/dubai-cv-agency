@@ -8,7 +8,7 @@ import {
   Globe, LayoutGrid, ArrowUpRight,
 } from "lucide-react";
 import { SocialMarquee, SOCIALS } from "@/components/sections/social-marquee";
-
+import CustomPackageBuilder from "@/components/sections/CustomPackageBuilder";
 // ── Tokens ──────────────────────────────────────────────────────────────────
 const G = "#C8A96E", GL = "#E2C98E", INK = "#0A0907", ASH = "#F7F3EE";
 const WA = "971502879462", EM = "info@zenithdubaicv.com";
@@ -115,26 +115,31 @@ const TX: Record<string, Record<Lang, string>> = {
   prcH2:      { en: "Three tiers.\nOne standard.", ar: "ثلاثة مستويات.\nمعيار واحد.", fr: "Trois niveaux.\nUne seule exigence." },
   prcNote:    { en: "All prices in UAE Dirhams. Processed via Stripe.", ar: "جميع الأسعار بالدرهم الإماراتي. عبر Stripe.", fr: "Tous les prix en dirhams émiratis. Via Stripe." },
   prcBegin:   { en: "Begin",   ar: "ابدأ", fr: "Commencer" },
-  pF:    { en: "Foundation", ar: "الأساسية",  fr: "Fondation" },
-  pFsub: { en: "Precise. ATS-ready. Results-driven.", ar: "دقيق. جاهز للفرز. موجَّه للنتائج.", fr: "Précis. Prêt ATS. Axé sur les résultats." },
-  pFi1:  { en: "ATS-optimised CV", ar: "سيرة ذاتية مُحسَّنة للفرز الآلي", fr: "CV optimisé ATS" },
-  pFi2:  { en: "Targeted cover letter", ar: "خطاب تغطية مستهدف", fr: "Lettre de motivation ciblée" },
-  pFi3:  { en: "Professional photo enhancement", ar: "تحسين الصورة المهنية", fr: "Amélioration de photo" },
-  pFi4:  { en: "Full 3,000+ document library access", ar: "وصول كامل لمكتبة +3,000 وثيقة", fr: "Accès bibliothèque 3 000+ documents" },
-  pG:    { en: "Growth",     ar: "النمو",      fr: "Croissance" },
-  pGsub: { en: "Multi-market. Complete. Career-defining.", ar: "متعدد الأسواق. شامل. محوري في المسيرة.", fr: "Multi-marché. Complet. Déterminant." },
-  pGi1:  { en: "Executive-grade CV with premium design", ar: "سيرة ذاتية تنفيذية بتصميم متميز", fr: "CV exécutif design premium" },
-  pGi2:  { en: "Full LinkedIn profile rebuild", ar: "إعادة بناء كاملة لملف لينكدإن", fr: "Reconstruction complète LinkedIn" },
-  pGi3:  { en: "International career strategy guide", ar: "دليل استراتيجية المسار الدولي", fr: "Guide de stratégie internationale" },
-  pGi4:  { en: "Full document versions: EN, FR, DE, AR, ES", ar: "نسخ كاملة: EN, FR, DE, AR, ES", fr: "Versions complètes : EN, FR, DE, AR, ES" },
-  pGi5:  { en: "Full 3,000+ document library access", ar: "وصول كامل لمكتبة +3,000 وثيقة", fr: "Accès bibliothèque 3 000+ documents" },
-  pE:    { en: "Executive",  ar: "التنفيذية", fr: "Exécutif" },
-  pEsub: { en: "White-glove. Strategic. Comprehensive.", ar: "خدمة راقية. استراتيجية. شاملة.", fr: "Gants blancs. Stratégique. Complet." },
-  pEi1:  { en: "All Growth deliverables", ar: "جميع مخرجات باقة النمو", fr: "Tous les livrables Croissance" },
-  pEi2:  { en: "60-min 1-on-1 interview coaching", ar: "60 دقيقة تحضير مقابلات", fr: "60 min coaching entretien individuel" },
-  pEi3:  { en: "Career narrative strategy session", ar: "جلسة استراتيجية السرد المهني", fr: "Session de stratégie narrative" },
-  pEi4:  { en: "30-day priority access to your consultant", ar: "30 يوماً وصول أولوية لمستشارك", fr: "30 jours d'accès prioritaire consultant" },
-  pEi5:  { en: "Full 3,000+ document library access", ar: "وصول كامل لمكتبة +3,000 وثيقة", fr: "Accès bibliothèque 3 000+ documents" },
+  pF:    { en: "Global Entry",    ar: "المدخل العالمي",        fr: "Entrée Globale" },
+  pFsub: { en: "Land interviews faster. ATS-cleared, market-ready.", ar: "احصل على مقابلات أسرع. جاهز للفرز وللسوق.", fr: "Décrochez des entretiens plus vite." },
+  pG:    { en: "Growth",          ar: "النمو",                 fr: "Croissance" },
+  pGsub: { en: "Complete positioning across every market you're targeting.", ar: "تموضع شامل في كل سوق تستهدفه.", fr: "Positionnement complet sur vos marchés cibles." },
+  pE:    { en: "Elite",           ar: "النخبة",                fr: "Élite" },
+  pEsub: { en: "Total career transformation. White-glove. Board-ready.", ar: "تحويل مهني كامل. خدمة راقية. جاهز للمجلس.", fr: "Transformation de carrière totale. Prêt pour les conseils d'administration." },
+  // FOUNDATION ITEMS (outcome-focused rewrite)
+  pFi1:  { en: "ATS-optimised CV that clears automated screening", ar: "سيرة ذاتية تجتاز الفرز الآلي", fr: "CV optimisé ATS qui passe le screening" },
+  pFi2:  { en: "Targeted cover letter written for your role", ar: "خطاب تغطية مكتوب لوظيفتك", fr: "Lettre de motivation ciblée pour votre poste" },
+  pFi3:  { en: "Professional photo retouching included", ar: "تحسين الصورة المهنية مشمول", fr: "Retouche photo professionnelle incluse" },
+  pFi4:  { en: "Full 3,000+ document library unlocked", ar: "فتح مكتبة +3,000 وثيقة كاملة", fr: "Bibliothèque 3 000+ documents débloquée" },
+  // GROWTH ITEMS
+  pGi1:  { en: "Executive CV with premium visual design", ar: "سيرة تنفيذية بتصميم بصري متميز", fr: "CV exécutif avec design visuel premium" },
+  pGi2:  { en: "Full LinkedIn rebuild for maximum recruiter visibility", ar: "إعادة بناء كاملة للينكدإن لأقصى ظهور", fr: "Reconstruction LinkedIn complète pour maximiser la visibilité" },
+  pGi3:  { en: "International market entry strategy guide", ar: "دليل استراتيجية دخول السوق الدولي", fr: "Guide de stratégie d'entrée sur les marchés internationaux" },
+  pGi4:  { en: "Multilingual versions: EN, FR, DE, AR, ES", ar: "نسخ متعددة اللغات: EN, FR, DE, AR, ES", fr: "Versions multilingues : EN, FR, DE, AR, ES" },
+  pGi5:  { en: "Full 3,000+ document library unlocked", ar: "فتح مكتبة +3,000 وثيقة كاملة", fr: "Bibliothèque 3 000+ documents débloquée" },
+  // ELITE ITEMS
+  pEi1:  { en: "Everything in Growth, elevated", ar: "كل شيء في النمو، مُحسَّن", fr: "Tout ce qui est dans Croissance, en mieux" },
+  pEi2:  { en: "60-min 1-on-1 interview coaching session", ar: "60 دقيقة تدريب مقابلات فردي", fr: "60 min de coaching entretien individuel" },
+  pEi3:  { en: "Personal career narrative strategy session", ar: "جلسة استراتيجية السرد المهني الشخصي", fr: "Session de stratégie narrative personnelle" },
+  pEi4:  { en: "30-day priority direct access to your consultant", ar: "30 يوماً وصول مباشر لمستشارك", fr: "30 jours d'accès direct prioritaire à votre consultant" },
+  pEi5:  { en: "Full 3,000+ document library unlocked", ar: "فتح مكتبة +3,000 وثيقة كاملة", fr: "Bibliothèque 3 000+ documents débloquée" },
+  // NEW key for "Most Popular" badge
+  pGBadge: { en: "Most Popular", ar: "الأكثر طلباً", fr: "Le plus populaire" },
 
   // Testimonials
   tmEyebrow: { en: "Verified outcomes",    ar: "نتائج موثّقة",         fr: "Résultats vérifiés" },
@@ -916,7 +921,7 @@ export default function Home() {
               <Reveal d={0}>
                 <div className="p-10 rounded-2xl h-full flex flex-col" style={{ background: card, border: `1px solid ${bdr}` }}>
                   <p className="text-[9px] tracking-[0.35em] uppercase mb-8" style={{ color: dark ? `${G}45` : `${G}70`, fontFamily: "sans-serif" }}>{tr("pF", lang)}</p>
-                  <div className="flex items-baseline gap-1.5 mb-1.5"><span className="text-[40px] font-normal leading-none" style={{ color: hi }}>179</span><span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span></div>
+                  <div className="flex items-baseline gap-1.5 mb-1.5"><span className="text-[40px] font-normal leading-none" style={{ color: hi }}>199</span><span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span></div>
                   <p className="text-[11px] mb-8" style={{ color: dark ? "#5A5450" : "#9A8E84", fontFamily: "sans-serif" }}>{tr("pFsub", lang)}</p>
                   <div className="h-px mb-8" style={{ background: bdr }} />
                   <ul className="space-y-3 mb-10 flex-1">
@@ -934,8 +939,15 @@ export default function Home() {
               <Reveal d={0.08}>
                 <div className="p-10 rounded-2xl h-full flex flex-col relative" style={{ background: dark ? "rgba(200,169,110,0.045)" : "rgba(200,169,110,0.065)", border: `1px solid ${G}30` }}>
                   <div className="absolute top-0 inset-x-0 h-px rounded-full" style={{ background: `linear-gradient(to right,transparent,${G}50,transparent)` }} />
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-4 py-1 rounded-full"
+                    style={{ background: G, fontFamily: "sans-serif" }}>
+                    <span className="h-1 w-1 rounded-full animate-pulse" style={{ background: INK, opacity: 0.6 }} />
+                    <span className="text-[8px] font-semibold tracking-[0.28em] uppercase" style={{ color: INK }}>
+                      {tr("pGBadge", lang)}
+                    </span>
+                  </div>
                   <p className="text-[9px] tracking-[0.35em] uppercase mb-8" style={{ color: G, fontFamily: "sans-serif" }}>{tr("pG", lang)}</p>
-                  <div className="flex items-baseline gap-1.5 mb-1.5"><span className="text-[40px] font-normal leading-none" style={{ color: hi }}>299</span><span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span></div>
+                  <div className="flex items-baseline gap-1.5 mb-1.5"><span className="text-[40px] font-normal leading-none" style={{ color: hi }}>349</span><span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span></div>
                   <p className="text-[11px] mb-8" style={{ color: dark ? "#5A5450" : "#9A8E84", fontFamily: "sans-serif" }}>{tr("pGsub", lang)}</p>
                   <div className="h-px mb-8" style={{ background: `${G}20` }} />
                   <ul className="space-y-3 mb-10 flex-1">
@@ -953,7 +965,7 @@ export default function Home() {
               <Reveal d={0.16}>
                 <div className="p-10 rounded-2xl h-full flex flex-col" style={{ background: card, border: `1px solid ${bdr}` }}>
                   <p className="text-[9px] tracking-[0.35em] uppercase mb-8" style={{ color: dark ? `${G}45` : `${G}70`, fontFamily: "sans-serif" }}>{tr("pE", lang)}</p>
-                  <div className="flex items-baseline gap-1.5 mb-1.5"><span className="text-[40px] font-normal leading-none" style={{ color: hi }}>449</span><span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span></div>
+                  <div className="flex items-baseline gap-1.5 mb-1.5"><span className="text-[40px] font-normal leading-none" style={{ color: hi }}>599</span><span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span></div>
                   <p className="text-[11px] mb-8" style={{ color: dark ? "#5A5450" : "#9A8E84", fontFamily: "sans-serif" }}>{tr("pEsub", lang)}</p>
                   <div className="h-px mb-8" style={{ background: bdr }} />
                   <ul className="space-y-3 mb-10 flex-1">
@@ -971,7 +983,16 @@ export default function Home() {
             </div>
           </div>
         </section>
-
+        <CustomPackageBuilder
+        dark={dark}
+        lang={lang}
+        onEnquire={(services, total) => {
+        // Pre-fill the modal with selected services summary
+        setModal(true);
+        // Optionally: you can extend Modal to accept a prefilledMessage prop
+        // and pass: Custom package: ${services.join(", ")} — Total: ${total} AED
+        }}
+        />
         {/* ── OUTCOMES ────────────────────────────────────────────────────── */}
         <section id="outcomes" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}>
           <div className="mx-auto max-w-6xl">
