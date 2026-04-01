@@ -568,7 +568,7 @@ function LinkedInMarqueeRow({
           repeat: Infinity,
           repeatType: "loop" as const,
           duration: reverse ? 38 : 44,
-          ease: "linear",
+          ease: "linear" as const,
         },
       },
     },
