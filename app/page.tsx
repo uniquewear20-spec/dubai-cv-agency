@@ -1,7 +1,11 @@
 // app/page.tsx — Zenith Dubai CV · Reimagined
 "use client";
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useInView,
+} from "framer-motion";
 import {
   Sun, Moon, Mail, X, Send, Loader2, CheckCircle, AlertCircle,
   Upload, FileText, ImageIcon, Trash2, CreditCard, ArrowRight,
@@ -31,16 +35,21 @@ const SOCIALS = [
     icon: <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> },
 ];
 
-const SUBS_EN = ["General Enquiry", "Foundation", "Growth", "Executive"];
-const SUBS_AR = ["استفسار عام", "الأساسية", "النمو", "التنفيذية"];
-const SUBS_FR = ["Demande générale", "Fondation", "Croissance", "Exécutif"];
+const SUBS_EN = ["General Enquiry", "Foundation", "Growth", "Executive", "Apex"];
+const SUBS_AR = ["استفسار عام", "الأساسية", "النمو", "التنفيذية", "أبيكس"];
+const SUBS_FR = ["Demande générale", "Fondation", "Croissance", "Exécutif", "Apex"];
 const PAGE_SIZE = 9;
+
+// ── LinkedIn profile images for the marquee (20 images, split 0–9 / 10–19) ──
+const LI_IMAGES = Array.from({ length: 20 }, (_, i) => `/team/img${i + 1}.png`);
+const LI_ROW_A = LI_IMAGES.slice(0, 10);
+const LI_ROW_B = LI_IMAGES.slice(10, 20);
 
 // ── Language ─────────────────────────────────────────────────────────────────
 type Lang = "en" | "ar" | "fr";
 const LANGS: { code: Lang; label: string; dir: "ltr" | "rtl"; font: string }[] = [
   { code: "en", label: "EN", dir: "ltr", font: "'Georgia','Times New Roman',serif" },
-  { code: "ar", label: "ع", dir: "rtl", font: "'Noto Naskh Arabic','Tahoma',sans-serif" },
+  { code: "ar", label: "ع",  dir: "rtl", font: "'Noto Naskh Arabic','Tahoma',sans-serif" },
   { code: "fr", label: "FR", dir: "ltr", font: "'Georgia','Times New Roman',serif" },
 ];
 
@@ -107,48 +116,68 @@ const TX: Record<string, Record<Lang, string>> = {
   p3b: { en: "Your dedicated specialist architects every element within 48 hours. No templates. No shortcuts.", ar: "يُصمِّم متخصصك المخصص كل عنصر خلال 48 ساعة. لا قوالب جاهزة.", fr: "Votre spécialiste dédié conçoit chaque élément en 48 heures. Aucun modèle." },
   p4t: { en: "Refine",   ar: "التحسين", fr: "Affiner" },
   p4b: { en: "Unlimited revisions until every word, format, and strategic nuance is precise.", ar: "مراجعات غير محدودة حتى تكون كل كلمة وتنسيق ونبرة دقيقة.", fr: "Révisions illimitées jusqu'à ce que chaque mot et nuance soit précis." },
+  // ── Investment ──
   prcEyebrow: { en: "Investment tiers",   ar: "مستويات الاستثمار", fr: "Niveaux d'investissement" },
-  prcH2:      { en: "Three tiers.\nOne standard.", ar: "ثلاثة مستويات.\nمعيار واحد.", fr: "Trois niveaux.\nUne seule exigence." },
+  prcH2:      { en: "Four tiers.\nOne standard.", ar: "أربعة مستويات.\nمعيار واحد.", fr: "Quatre niveaux.\nUne seule exigence." },
   prcNote:    { en: "All prices in UAE Dirhams. Processed via Stripe.", ar: "جميع الأسعار بالدرهم الإماراتي. عبر Stripe.", fr: "Tous les prix en dirhams émiratis. Via Stripe." },
   prcBegin:   { en: "Begin",   ar: "ابدأ", fr: "Commencer" },
-  pF:    { en: "Foundation",    ar: "الأساسية",        fr: "Fondation" },
+  // Foundation
+  pF:    { en: "Foundation",    ar: "الأساسية",  fr: "Fondation" },
   pFsub: { en: "Precise. Optimized. Built for Results.", ar: "دقيق. محسَّن. مبني للنتائج.", fr: "Précis. Optimisé. Conçu pour les résultats." },
-  pFi1:  { en: "ATS-optimized or Executive-grade CV with refined design",          ar: "سيرة ذاتية محسَّنة للفرز الآلي أو تنفيذية بتصميم متقن",       fr: "CV optimisé ATS ou Executive avec design soigné" },
-  pFi2:  { en: "Professionally crafted resume tailored to industry/goals",         ar: "سيرة ذاتية محترفة مصمَّمة لصناعتك وأهدافك",                   fr: "CV professionnel adapté à votre secteur et objectifs" },
-  pFi3:  { en: "Access to our high-performance resume builder",                    ar: "وصول إلى منشئ السيرة الذاتية عالي الأداء",                     fr: "Accès à notre générateur de CV haute performance" },
-  pFi4:  { en: "Strategic submission to 5 relevant job opportunities",             ar: "تقديم استراتيجي لـ 5 فرص عمل ذات صلة",                        fr: "Soumission stratégique à 5 opportunités d'emploi ciblées" },
-  pFi5:  { en: "Tailored cover letter aligned with target positions",              ar: "خطاب تغطية مُخصَّص يتوافق مع الوظائف المستهدفة",              fr: "Lettre de motivation personnalisée selon vos cibles" },
-  pFi6:  { en: "LinkedIn profile photo enhancement",                               ar: "تحسين صورة الملف الشخصي على لينكدإن",                          fr: "Amélioration de la photo de profil LinkedIn" },
-  pFi7:  { en: "Full access to our 3,000+ premium document library",              ar: "وصول كامل إلى مكتبة الوثائق المتميزة +3,000",                 fr: "Accès complet à notre bibliothèque 3 000+ documents premium" },
+  pFi1:  { en: "ATS-optimized or Executive-grade CV with refined design",         ar: "سيرة ذاتية محسَّنة للفرز أو تنفيذية بتصميم متقن",            fr: "CV optimisé ATS ou Executive avec design soigné" },
+  pFi2:  { en: "Professionally crafted resume tailored to industry and goals",    ar: "سيرة ذاتية محترفة مصمَّمة لصناعتك وأهدافك",                 fr: "CV professionnel adapté à votre secteur et objectifs" },
+  pFi3:  { en: "Strategic submission to 5 relevant job opportunities",            ar: "تقديم استراتيجي لـ 5 فرص عمل ذات صلة",                     fr: "Soumission stratégique à 5 opportunités d'emploi ciblées" },
+  pFi4:  { en: "Tailored cover letter aligned with target roles",                 ar: "خطاب تغطية مُخصَّص يتوافق مع الأدوار المستهدفة",            fr: "Lettre de motivation personnalisée selon vos cibles" },
+  pFi5:  { en: "LinkedIn profile photo enhancement",                              ar: "تحسين صورة الملف الشخصي على لينكدإن",                       fr: "Amélioration de la photo de profil LinkedIn" },
+  pFi6:  { en: "Full access to 3,000+ premium document library",                 ar: "وصول كامل إلى مكتبة الوثائق المتميزة +3,000",              fr: "Accès complet à notre bibliothèque 3 000+ documents premium" },
+  // Growth
   pG:      { en: "Growth",    ar: "النمو",    fr: "Croissance" },
   pGsub:   { en: "Expand Your Reach. Elevate Your Positioning. Compete Globally.", ar: "وسِّع نطاقك. ارفع مستوى تموضعك. تنافس عالمياً.", fr: "Élargissez votre portée. Élevez votre positionnement. Compétez mondialement." },
   pGBadge: { en: "Most Popular", ar: "الأكثر طلباً", fr: "Le plus populaire" },
-  pGi1:  { en: "Dual-format strategy: ATS-optimized and Executive-grade CVs",     ar: "استراتيجية ثنائية الشكل: سيرة محسَّنة للفرز وأخرى تنفيذية",   fr: "Stratégie double format : CV ATS-optimisé et Executive" },
-  pGi2:  { en: "High-impact resume designed for competitive markets",             ar: "سيرة ذاتية عالية التأثير لأسواق تنافسية",                       fr: "CV à fort impact conçu pour les marchés compétitifs" },
-  pGi3:  { en: "Access to our advanced resume builder platform",                  ar: "وصول إلى منصة منشئ السيرة الذاتية المتقدمة",                   fr: "Accès à notre plateforme avancée de création de CV" },
-  pGi4:  { en: "Strategic applications to 10 targeted job opportunities",         ar: "طلبات استراتيجية لـ 10 فرص عمل مستهدفة",                      fr: "Candidatures stratégiques à 10 opportunités ciblées" },
-  pGi5:  { en: "Tailored cover letter customized to your role",                   ar: "خطاب تغطية مُخصَّص لدورك المهني",                              fr: "Lettre de motivation sur mesure pour votre rôle" },
-  pGi6:  { en: "LinkedIn profile photo enhancement",                              ar: "تحسين صورة الملف الشخصي على لينكدإن",                          fr: "Amélioration de la photo de profil LinkedIn" },
-  pGi7:  { en: "Complete LinkedIn profile & keyword optimization",                ar: "تحسين كامل لملف لينكدإن والكلمات المفتاحية",                   fr: "Optimisation complète du profil LinkedIn & mots-clés" },
-  pGi8:  { en: "International career strategy guide",                             ar: "دليل استراتيجية المسار المهني الدولي",                          fr: "Guide de stratégie de carrière internationale" },
-  pGi9:  { en: "Multi-language CV versions: EN, FR, DE, AR, ES",                 ar: "نسخ متعددة اللغات: EN, FR, DE, AR, ES",                        fr: "Versions multilingues : EN, FR, DE, AR, ES" },
-  pGi10: { en: "Full access to our 3,000+ premium document library",             ar: "وصول كامل إلى مكتبة الوثائق المتميزة +3,000",                 fr: "Accès complet à notre bibliothèque 3 000+ documents premium" },
+  pGi1:  { en: "Dual-format strategy (ATS + Executive)",                          ar: "استراتيجية ثنائية الشكل (فرز + تنفيذية)",                    fr: "Stratégie double format (ATS + Executive)" },
+  pGi2:  { en: "High-impact resume for competitive markets",                      ar: "سيرة ذاتية عالية التأثير للأسواق التنافسية",                 fr: "CV à fort impact pour les marchés compétitifs" },
+  pGi3:  { en: "Strategic applications to 10 targeted job opportunities",         ar: "طلبات استراتيجية لـ 10 فرص عمل مستهدفة",                   fr: "Candidatures stratégiques à 10 opportunités ciblées" },
+  pGi4:  { en: "Tailored cover letter",                                           ar: "خطاب تغطية مُخصَّص",                                        fr: "Lettre de motivation sur mesure" },
+  pGi5:  { en: "LinkedIn photo enhancement",                                      ar: "تحسين صورة لينكدإن",                                         fr: "Amélioration de la photo LinkedIn" },
+  pGi6:  { en: "Full LinkedIn profile optimization (content + keywords)",         ar: "تحسين كامل لملف لينكدإن (المحتوى + الكلمات المفتاحية)",     fr: "Optimisation complète du profil LinkedIn (contenu + mots-clés)" },
+  pGi7:  { en: "International career strategy guide",                             ar: "دليل استراتيجية المسار المهني الدولي",                       fr: "Guide de stratégie de carrière internationale" },
+  pGi8:  { en: "Free eBook: 2026 Strategic Roadmap",                             ar: "كتاب إلكتروني مجاني: خارطة طريق 2026",                      fr: "eBook gratuit : Feuille de route stratégique 2026" },
+  pGi9:  { en: "Access to 3,000+ premium document library",                      ar: "وصول إلى مكتبة الوثائق المتميزة +3,000",                   fr: "Accès à la bibliothèque 3 000+ documents premium" },
+  // Executive
   pE:    { en: "Executive",   ar: "التنفيذية",  fr: "Exécutif" },
   pEsub: { en: "Elite Positioning. Strategic Advantage. Total Career Upgrade.", ar: "تموضع نخبوي. ميزة استراتيجية. ترقية مهنية كاملة.", fr: "Positionnement élite. Avantage stratégique. Mise à niveau totale." },
-  pEi1:  { en: "ATS & Executive CVs crafted for senior leadership",               ar: "سيرة ذاتية للفرز الآلي وأخرى تنفيذية للقيادة العليا",          fr: "CVs ATS & Executive conçus pour la direction senior" },
-  pEi2:  { en: "Executive-standard resume for leadership roles",                  ar: "سيرة ذاتية بمعايير تنفيذية لأدوار القيادة",                    fr: "CV standard exécutif pour les rôles de direction" },
-  pEi3:  { en: "Access to our advanced resume development system",                ar: "وصول إلى نظام تطوير السيرة الذاتية المتقدم",                   fr: "Accès à notre système avancé de développement de CV" },
-  pEi4:  { en: "Strategic submission to 30 high-potential job opportunities",     ar: "تقديم استراتيجي لـ 30 فرصة عمل عالية الإمكانات",             fr: "Soumission stratégique à 30 opportunités à fort potentiel" },
-  pEi5:  { en: "High-conversion, tailored cover letter",                          ar: "خطاب تغطية مُخصَّص عالي التحويل",                              fr: "Lettre de motivation sur mesure à haute conversion" },
-  pEi6:  { en: "LinkedIn profile photo enhancement",                              ar: "تحسين صورة الملف الشخصي على لينكدإن",                          fr: "Amélioration de la photo de profil LinkedIn" },
-  pEi7:  { en: "Full LinkedIn transformation & personal branding",                ar: "تحويل كامل للينكدإن والعلامة الشخصية",                         fr: "Transformation LinkedIn complète & personal branding" },
-  pEi8:  { en: "International mobility & career strategy guide",                  ar: "دليل التنقل الدولي واستراتيجية المسار المهني",                  fr: "Guide de mobilité internationale & stratégie de carrière" },
-  pEi9:  { en: "Multi-language CV versions: EN, FR, DE, AR, ES",                 ar: "نسخ متعددة اللغات: EN, FR, DE, AR, ES",                        fr: "Versions multilingues : EN, FR, DE, AR, ES" },
-  pEi10: { en: "Executive portfolio & compelling elevator pitch",                 ar: "ملف تنفيذي وعرض موجز مقنع",                                    fr: "Portfolio exécutif & elevator pitch convaincant" },
-  pEi11: { en: "60-minute 1-on-1 interview coaching session",                     ar: "60 دقيقة تدريب مقابلات فردي",                                  fr: "60 min de coaching entretien individuel" },
-  pEi12: { en: "Personalized career narrative strategy session",                  ar: "جلسة استراتيجية السرد المهني الشخصي",                          fr: "Session de stratégie narrative personnelle" },
-  pEi13: { en: "30-day priority access to your dedicated consultant",             ar: "30 يوماً وصول أولوية لمستشارك المخصص",                        fr: "30 jours d'accès prioritaire à votre consultant dédié" },
-  pEi14: { en: "Full access to our 3,000+ premium document library",             ar: "وصول كامل إلى مكتبة الوثائق المتميزة +3,000",                 fr: "Accès complet à notre bibliothèque 3 000+ documents premium" },
+  pEi1:  { en: "Dual-format strategy",                                            ar: "استراتيجية ثنائية الشكل",                                   fr: "Stratégie double format" },
+  pEi2:  { en: "High-impact resume",                                              ar: "سيرة ذاتية عالية التأثير",                                  fr: "CV à fort impact" },
+  pEi3:  { en: "Strategic submission to 30 high-potential opportunities",         ar: "تقديم استراتيجي لـ 30 فرصة عمل عالية الإمكانات",          fr: "Soumission stratégique à 30 opportunités à fort potentiel" },
+  pEi4:  { en: "Tailored cover letter",                                           ar: "خطاب تغطية مُخصَّص",                                        fr: "Lettre de motivation sur mesure" },
+  pEi5:  { en: "LinkedIn photo enhancement",                                      ar: "تحسين صورة لينكدإن",                                         fr: "Amélioration de la photo LinkedIn" },
+  pEi6:  { en: "Full LinkedIn transformation and personal branding",              ar: "تحويل كامل للينكدإن والعلامة الشخصية",                      fr: "Transformation LinkedIn complète & personal branding" },
+  pEi7:  { en: "International mobility guide",                                    ar: "دليل التنقل الدولي",                                         fr: "Guide de mobilité internationale" },
+  pEi8:  { en: "Multi-language CV versions (EN, FR, DE, AR, ES)",                ar: "نسخ متعددة اللغات (EN, FR, DE, AR, ES)",                    fr: "Versions multilingues (EN, FR, DE, AR, ES)" },
+  pEi9:  { en: "Executive portfolio and elevator pitch",                          ar: "ملف تنفيذي وعرض موجز",                                      fr: "Portfolio exécutif & elevator pitch" },
+  pEi10: { en: "60-minute 1:1 interview coaching session",                        ar: "جلسة تدريب مقابلات 1:1 لمدة 60 دقيقة",                    fr: "60 min de coaching entretien individuel" },
+  pEi11: { en: "Free eBook: 2026 Strategic Roadmap",                             ar: "كتاب إلكتروني مجاني: خارطة طريق 2026",                      fr: "eBook gratuit : Feuille de route 2026" },
+  pEi12: { en: "Full access to 3,000+ library",                                  ar: "وصول كامل إلى مكتبة +3,000",                               fr: "Accès complet à la bibliothèque 3 000+" },
+  // Apex
+  pA:    { en: "Apex",        ar: "أبيكس",      fr: "Apex" },
+  pAsub: { en: "Apex Positioning. Strategic Advantage. End-to-End Career Transformation.", ar: "تموضع أبيكس. ميزة استراتيجية. تحول مهني شامل.", fr: "Positionnement Apex. Avantage stratégique. Transformation de carrière de bout en bout." },
+  pABadge: { en: "Ultimate", ar: "النخبة", fr: "Ultime" },
+  pAi1:  { en: "Dual-format strategy",                                            ar: "استراتيجية ثنائية الشكل",                                   fr: "Stratégie double format" },
+  pAi2:  { en: "High-impact resume",                                              ar: "سيرة ذاتية عالية التأثير",                                  fr: "CV à fort impact" },
+  pAi3:  { en: "Unlimited strategic job submissions",                             ar: "تقديمات وظيفية استراتيجية غير محدودة",                      fr: "Candidatures stratégiques illimitées" },
+  pAi4:  { en: "Tailored cover letter",                                           ar: "خطاب تغطية مُخصَّص",                                        fr: "Lettre de motivation sur mesure" },
+  pAi5:  { en: "LinkedIn photo enhancement",                                      ar: "تحسين صورة لينكدإن",                                         fr: "Amélioration de la photo LinkedIn" },
+  pAi6:  { en: "Full LinkedIn transformation",                                    ar: "تحويل كامل للينكدإن",                                       fr: "Transformation LinkedIn complète" },
+  pAi7:  { en: "International mobility guide",                                    ar: "دليل التنقل الدولي",                                         fr: "Guide de mobilité internationale" },
+  pAi8:  { en: "Multi-language CV versions",                                      ar: "نسخ متعددة اللغات",                                         fr: "Versions multilingues" },
+  pAi9:  { en: "Executive portfolio and elevator pitch",                          ar: "ملف تنفيذي وعرض موجز",                                      fr: "Portfolio exécutif & elevator pitch" },
+  pAi10: { en: "60-minute 1:1 interview coaching session",                        ar: "جلسة تدريب مقابلات 1:1 لمدة 60 دقيقة",                    fr: "60 min de coaching entretien individuel" },
+  pAi11: { en: "Free eBook: 2026 Strategic Roadmap",                             ar: "كتاب إلكتروني مجاني: خارطة طريق 2026",                      fr: "eBook gratuit : Feuille de route 2026" },
+  pAi12: { en: "Free eBook: Interview Tips",                                      ar: "كتاب إلكتروني مجاني: نصائح المقابلات",                     fr: "eBook gratuit : Conseils entretien" },
+  pAi13: { en: "Personalized career narrative strategy session",                  ar: "جلسة استراتيجية السرد المهني الشخصي",                       fr: "Session de stratégie narrative personnelle" },
+  pAi14: { en: "30-day priority access to dedicated consultant",                  ar: "30 يوماً وصول أولوية لمستشارك المخصص",                     fr: "30 jours d'accès prioritaire à votre consultant dédié" },
+  pAi15: { en: "Full access to 3,000+ premium document library",                 ar: "وصول كامل إلى مكتبة الوثائق المتميزة +3,000",              fr: "Accès complet à la bibliothèque 3 000+ documents premium" },
+  // outcomes
   tmEyebrow: { en: "Verified outcomes",    ar: "نتائج موثّقة",         fr: "Résultats vérifiés" },
   tmH2a:     { en: "Measured results,",   ar: "نتائج قابلة للقياس،", fr: "Résultats mesurables," },
   tmH2b:     { en: "not testimonials.",   ar: "لا مجرد شهادات.",      fr: "pas des témoignages." },
@@ -179,6 +208,8 @@ const TX: Record<string, Record<Lang, string>> = {
   frmClose:    { en: "Close",                ar: "إغلاق",                   fr: "Fermer" },
   frmErrNet:   { en: "Network error — contact us via WhatsApp.", ar: "خطأ في الشبكة — تواصل عبر واتساب.", fr: "Erreur réseau — contactez-nous via WhatsApp." },
   frmErrGen:   { en: "Something went wrong. Please try again.", ar: "حدث خطأ. يرجى المحاولة مجدداً.", fr: "Une erreur s'est produite. Veuillez réessayer." },
+  // LinkedIn marquee eyebrow
+  liEyebrow:   { en: "LinkedIn · AI-Enhanced Profiles", ar: "لينكدإن · ملفات شخصية بالذكاء الاصطناعي", fr: "LinkedIn · Profils améliorés par IA" },
 };
 const tr = (k: string, l: Lang): string => TX[k]?.[l] ?? TX[k]?.en ?? k;
 
@@ -239,7 +270,7 @@ const IH: Record<string, string> = { Finance: "#B8962E", Hospitality: "#9A7A3A",
 const wl = (m: string) => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
 const fb = (b: number) => b < 1024 ? `${b}B` : b < 1048576 ? `${(b / 1024).toFixed(1)}KB` : `${(b / 1048576).toFixed(1)}MB`;
 
-// ── Animated number counter ───────────────────────────────────────────────────
+// ── CountUp ───────────────────────────────────────────────────────────────────
 function CountUp({ value, suffix = "" }: { value: string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
@@ -264,7 +295,7 @@ function CountUp({ value, suffix = "" }: { value: string; suffix?: string }) {
   return <span ref={ref}>{display}{suffix}</span>;
 }
 
-// ── Reveal animation ──────────────────────────────────────────────────────────
+// ── Reveal ────────────────────────────────────────────────────────────────────
 function Reveal({ children, d = 0, y = 20, className = "" }: { children: React.ReactNode; d?: number; y?: number; className?: string }) {
   return (
     <motion.div className={className}
@@ -277,7 +308,7 @@ function Reveal({ children, d = 0, y = 20, className = "" }: { children: React.R
   );
 }
 
-// ── Gold line draw ────────────────────────────────────────────────────────────
+// ── GoldLine ──────────────────────────────────────────────────────────────────
 function GoldLine({ className = "" }: { className?: string }) {
   return (
     <motion.div className={`h-px ${className}`}
@@ -511,6 +542,188 @@ function PreviewLightbox({ cv, onClose, onEnquire, dark, lang }: { cv: { id: num
   );
 }
 
+// ── LinkedIn Marquee Row ───────────────────────────────────────────────────────
+// Mathematically seamless: we render 4 copies of the original set; animation
+// translates exactly -25% (one full copy-width), then loops. No visible reset.
+function LinkedInMarqueeRow({
+  images,
+  reverse = false,
+  dark,
+}: {
+  images: string[];
+  reverse?: boolean;
+  dark: boolean;
+}) {
+  // Quadruple the images so the strip is wide enough to scroll seamlessly
+  const allImages = [...images, ...images, ...images, ...images];
+  const ITEM_W = 192; // px per card (w-48)
+  const GAP = 16;     // gap between cards
+  const COPY_W = images.length * (ITEM_W + GAP); // width of one set = 25% of total strip
+
+  const marqueeVariants = {
+    animate: {
+      x: reverse ? [0, COPY_W] : [0, -COPY_W],
+      transition: {
+        x: {
+          repeat: Infinity,
+          repeatType: "loop" as const,
+          duration: reverse ? 38 : 44,
+          ease: "linear",
+        },
+      },
+    },
+  };
+
+  const maskImage =
+    "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)";
+
+  return (
+    <div
+      className="relative overflow-hidden"
+      style={{ maskImage, WebkitMaskImage: maskImage }}
+    >
+      <motion.div
+        className="flex"
+        style={{ gap: `${GAP}px`, willChange: "transform" }}
+        variants={marqueeVariants}
+        animate="animate"
+      >
+        {allImages.map((src, i) => (
+          <div
+            key={i}
+            className="shrink-0 rounded-xl overflow-hidden"
+            style={{
+              width: `${ITEM_W}px`,
+              height: "240px",
+              background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.04)",
+              border: `1px solid ${dark ? "rgba(200,169,110,0.08)" : "rgba(200,169,110,0.12)"}`,
+            }}
+          >
+            <img
+              src={src}
+              alt=""
+              aria-hidden
+              loading="lazy"
+              className="w-full h-full object-cover object-top"
+              style={{
+                filter: dark
+                  ? "grayscale(100%) contrast(1.05) brightness(0.82)"
+                  : "grayscale(80%) contrast(1.02) brightness(0.96)",
+                transition: "filter 0.4s ease",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLImageElement).style.filter =
+                  "grayscale(0%) contrast(1.02) brightness(1.02)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLImageElement).style.filter = dark
+                  ? "grayscale(100%) contrast(1.05) brightness(0.82)"
+                  : "grayscale(80%) contrast(1.02) brightness(0.96)";
+              }}
+            />
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+// ── Investment Tier Card ──────────────────────────────────────────────────────
+interface TierCardProps {
+  featured?: boolean;
+  badge?: { text: string; ink?: boolean };
+  eyebrow: string;
+  price: number;
+  subtitle: string;
+  items: string[];
+  dark: boolean;
+  bdr: string;
+  card: string;
+  sub: string;
+  mid: string;
+  hi: string;
+  onBegin: () => void;
+  beginLabel: string;
+}
+
+function TierCard({
+  featured = false,
+  badge,
+  eyebrow,
+  price,
+  subtitle,
+  items,
+  dark,
+  bdr,
+  card,
+  sub,
+  mid,
+  hi,
+  onBegin,
+  beginLabel,
+}: TierCardProps) {
+  const borderColor = featured ? `${G}35` : bdr;
+  const bgColor = featured
+    ? dark
+      ? "rgba(200,169,110,0.045)"
+      : "rgba(200,169,110,0.065)"
+    : card;
+
+  return (
+    <div className="relative flex flex-col h-full rounded-2xl p-7" style={{ background: bgColor, border: `1px solid ${borderColor}` }}>
+      {/* Highlight line for featured */}
+      {featured && (
+        <div className="absolute top-0 inset-x-0 h-px rounded-full" style={{ background: `linear-gradient(to right,transparent,${G}55,transparent)` }} />
+      )}
+      {/* Badge */}
+      {badge && (
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 rounded-full" style={{ background: badge.ink ? G : dark ? `${G}18` : `${G}15`, border: badge.ink ? "none" : `1px solid ${G}30`, fontFamily: "sans-serif" }}>
+          {badge.ink && <span className="h-1 w-1 rounded-full animate-pulse" style={{ background: INK, opacity: 0.6 }} />}
+          <span className="text-[8px] font-semibold tracking-[0.28em] uppercase" style={{ color: badge.ink ? INK : G }}>{badge.text}</span>
+        </div>
+      )}
+      {/* Tier label */}
+      <p className="text-[9px] tracking-[0.35em] uppercase mb-6" style={{ color: featured ? G : dark ? `${G}45` : `${G}70`, fontFamily: "sans-serif" }}>{eyebrow}</p>
+      {/* Price */}
+      <div className="flex items-baseline gap-1.5 mb-1.5">
+        <span className="text-[36px] font-normal leading-none" style={{ color: hi }}>{price}</span>
+        <span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span>
+      </div>
+      {/* Subtitle */}
+      <p className="text-[11px] mb-6" style={{ color: dark ? "#5A5450" : "#9A8E84", fontFamily: "sans-serif" }}>{subtitle}</p>
+      {/* Divider */}
+      <div className="h-px mb-6" style={{ background: featured ? `${G}20` : bdr }} />
+      {/* Items */}
+      <ul className="space-y-2.5 mb-8 flex-1">
+        {items.map((item, idx) => (
+          <li key={idx} className="flex items-start gap-2.5 text-[11px]" style={{ color: mid, fontFamily: "sans-serif", fontWeight: 300 }}>
+            <div className="mt-[6px] h-[3px] w-[3px] rounded-full shrink-0" style={{ background: G, opacity: featured ? 1 : 0.4 }} />
+            {item}
+          </li>
+        ))}
+      </ul>
+      {/* CTA */}
+      <button
+        type="button"
+        onClick={onBegin}
+        className="flex items-center justify-between w-full px-4 rounded-full text-[10px] tracking-[0.18em] uppercase font-medium transition-all"
+        style={{
+          border: featured ? "none" : `1px solid ${G}28`,
+          background: featured ? G : "transparent",
+          color: featured ? INK : dark ? `${G}55` : G,
+          fontFamily: "sans-serif",
+          height: "42px",
+          boxShadow: featured ? `0 5px 20px ${G}25` : "none",
+        }}
+        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = "0.82"; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = "1"; }}
+      >
+        {beginLabel}<ArrowRight size={11} />
+      </button>
+    </div>
+  );
+}
+
 // ── ROOT ──────────────────────────────────────────────────────────────────────
 export default function Home() {
   const [dark, setDark] = useState(() => { if (typeof window === "undefined") return true; const s = localStorage.getItem("z-theme"); return s !== null ? s === "dark" : true; });
@@ -556,6 +769,46 @@ export default function Home() {
   const logoFilter = dark
     ? ["brightness(1.05)", "drop-shadow(0 0 6px rgba(200,169,110,0.12))", "drop-shadow(0 2px 4px rgba(0,0,0,0.45))"].join(" ")
     : "brightness(0) saturate(0) contrast(1)";
+
+  // ── Investment tier data ──────────────────────────────────────────────────
+  const TIERS = [
+    {
+      key: "foundation",
+      eyebrow: tr("pF", lang),
+      price: 179,
+      subtitle: tr("pFsub", lang),
+      featured: false,
+      badge: undefined as { text: string; ink?: boolean } | undefined,
+      items: ["pFi1","pFi2","pFi3","pFi4","pFi5","pFi6"].map(k => tr(k, lang)),
+    },
+    {
+      key: "growth",
+      eyebrow: tr("pG", lang),
+      price: 299,
+      subtitle: tr("pGsub", lang),
+      featured: true,
+      badge: { text: tr("pGBadge", lang), ink: true } as { text: string; ink?: boolean },
+      items: ["pGi1","pGi2","pGi3","pGi4","pGi5","pGi6","pGi7","pGi8","pGi9"].map(k => tr(k, lang)),
+    },
+    {
+      key: "executive",
+      eyebrow: tr("pE", lang),
+      price: 449,
+      subtitle: tr("pEsub", lang),
+      featured: false,
+      badge: undefined as { text: string; ink?: boolean } | undefined,
+      items: ["pEi1","pEi2","pEi3","pEi4","pEi5","pEi6","pEi7","pEi8","pEi9","pEi10","pEi11","pEi12"].map(k => tr(k, lang)),
+    },
+    {
+      key: "apex",
+      eyebrow: tr("pA", lang),
+      price: 899,
+      subtitle: tr("pAsub", lang),
+      featured: false,
+      badge: { text: tr("pABadge", lang), ink: false } as { text: string; ink?: boolean },
+      items: ["pAi1","pAi2","pAi3","pAi4","pAi5","pAi6","pAi7","pAi8","pAi9","pAi10","pAi11","pAi12","pAi13","pAi14","pAi15"].map(k => tr(k, lang)),
+    },
+  ];
 
   return (
     <div key={lang} className="min-h-screen w-full overflow-x-hidden" dir={dir} style={{ background: bg, color: hi, fontFamily: font, transition: "background 0.7s ease, color 0.4s ease" }}>
@@ -734,12 +987,32 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── TEAM MARQUEE (replaces old Exclusivity section) ── */}
-        <TeamMarqueeSection
-          dark={dark}
-          lang={lang}
-          onEnquire={() => setModal(true)}
-        />
+        {/* ── TEAM MARQUEE ── */}
+        <TeamMarqueeSection dark={dark} lang={lang} onEnquire={() => setModal(true)} />
+
+        {/* ── LINKEDIN IMAGE MARQUEE ── */}
+        <section
+          className="py-20 overflow-hidden"
+          style={{ borderTop: `1px solid ${bdr}`, borderBottom: `1px solid ${bdr}` }}
+        >
+          {/* Eyebrow label */}
+          <Reveal className="text-center mb-10 px-5">
+            <p
+              className="text-[9px] font-medium tracking-[0.40em] uppercase"
+              style={{ color: dark ? `${G}40` : G, fontFamily: "sans-serif" }}
+            >
+              {tr("liEyebrow", lang)}
+            </p>
+          </Reveal>
+
+          {/* Row A — left to right */}
+          <LinkedInMarqueeRow images={LI_ROW_A} reverse={false} dark={dark} />
+
+          {/* Row B — right to left (opposite direction) */}
+          <div className="mt-4">
+            <LinkedInMarqueeRow images={LI_ROW_B} reverse={true} dark={dark} />
+          </div>
+        </section>
 
         {/* ── DOCUMENT PORTFOLIO ── */}
         <section id="portfolio" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}>
@@ -840,9 +1113,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── INVESTMENT ── */}
+        {/* ── INVESTMENT — 4-TIER AUTHORITATIVE GRID ── */}
         <section id="investment" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}>
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-[1400px]">
             <Reveal className="mb-24">
               <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}>{tr("prcEyebrow", lang)}</p>
               <h2 className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15]" style={{ color: hi }}>
@@ -852,84 +1125,34 @@ export default function Home() {
               </h2>
               <p className="mt-4 text-[11px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("prcNote", lang)}</p>
             </Reveal>
-            <div className="grid md:grid-cols-3 gap-5 items-start">
-              <Reveal d={0}>
-                <div className="p-10 rounded-2xl h-full flex flex-col" style={{ background: card, border: `1px solid ${bdr}` }}>
-                  <p className="text-[9px] tracking-[0.35em] uppercase mb-8" style={{ color: dark ? `${G}45` : `${G}70`, fontFamily: "sans-serif" }}>{tr("pF", lang)}</p>
-                  <div className="flex items-baseline gap-1.5 mb-1.5">
-                    <span className="text-[40px] font-normal leading-none" style={{ color: hi }}>179</span>
-                    <span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span>
-                  </div>
-                  <p className="text-[11px] mb-8" style={{ color: dark ? "#5A5450" : "#9A8E84", fontFamily: "sans-serif" }}>{tr("pFsub", lang)}</p>
-                  <div className="h-px mb-8" style={{ background: bdr }} />
-                  <ul className="space-y-3 mb-10 flex-1">
-                    {(["pFi1", "pFi2", "pFi3", "pFi4", "pFi5", "pFi6", "pFi7"] as string[]).map(k => (
-                      <li key={k} className="flex items-start gap-3 text-[12px]" style={{ color: mid, fontFamily: "sans-serif", fontWeight: 300 }}>
-                        <div className="mt-[7px] h-[3px] w-[3px] rounded-full shrink-0" style={{ background: G, opacity: 0.4 }} />{tr(k, lang)}
-                      </li>
-                    ))}
-                  </ul>
-                  <button type="button" onClick={() => setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[10px] tracking-[0.18em] uppercase font-medium transition-all hover:opacity-70" style={{ border: `1px solid ${G}28`, color: dark ? `${G}55` : G, fontFamily: "sans-serif", height: "44px", background: "transparent" }}>
-                    {tr("prcBegin", lang)}<ArrowRight size={11} />
-                  </button>
-                </div>
-              </Reveal>
-              <Reveal d={0.08}>
-                <div className="p-10 rounded-2xl h-full flex flex-col relative" style={{ background: dark ? "rgba(200,169,110,0.045)" : "rgba(200,169,110,0.065)", border: `1px solid ${G}30` }}>
-                  <div className="absolute top-0 inset-x-0 h-px rounded-full" style={{ background: `linear-gradient(to right,transparent,${G}50,transparent)` }} />
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-4 py-1 rounded-full" style={{ background: G, fontFamily: "sans-serif" }}>
-                    <span className="h-1 w-1 rounded-full animate-pulse" style={{ background: INK, opacity: 0.6 }} />
-                    <span className="text-[8px] font-semibold tracking-[0.28em] uppercase" style={{ color: INK }}>{tr("pGBadge", lang)}</span>
-                  </div>
-                  <p className="text-[9px] tracking-[0.35em] uppercase mb-8" style={{ color: G, fontFamily: "sans-serif" }}>{tr("pG", lang)}</p>
-                  <div className="flex items-baseline gap-1.5 mb-1.5">
-                    <span className="text-[40px] font-normal leading-none" style={{ color: hi }}>299</span>
-                    <span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span>
-                  </div>
-                  <p className="text-[11px] mb-8" style={{ color: dark ? "#5A5450" : "#9A8E84", fontFamily: "sans-serif" }}>{tr("pGsub", lang)}</p>
-                  <div className="h-px mb-8" style={{ background: `${G}20` }} />
-                  <ul className="space-y-3 mb-10 flex-1">
-                    {(["pGi1", "pGi2", "pGi3", "pGi4", "pGi5", "pGi6", "pGi7", "pGi8", "pGi9", "pGi10"] as string[]).map(k => (
-                      <li key={k} className="flex items-start gap-3 text-[12px]" style={{ color: mid, fontFamily: "sans-serif", fontWeight: 300 }}>
-                        <div className="mt-[7px] h-[3px] w-[3px] rounded-full shrink-0" style={{ background: G }} />{tr(k, lang)}
-                      </li>
-                    ))}
-                  </ul>
-                  <button type="button" onClick={() => setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[10px] tracking-[0.18em] uppercase font-medium transition-all hover:opacity-88" style={{ background: G, color: INK, fontFamily: "sans-serif", height: "44px", boxShadow: `0 5px 20px ${G}25` }}>
-                    {tr("prcBegin", lang)}<ArrowRight size={11} />
-                  </button>
-                </div>
-              </Reveal>
-              <Reveal d={0.16}>
-                <div className="p-10 rounded-2xl h-full flex flex-col" style={{ background: card, border: `1px solid ${bdr}` }}>
-                  <p className="text-[9px] tracking-[0.35em] uppercase mb-8" style={{ color: dark ? `${G}45` : `${G}70`, fontFamily: "sans-serif" }}>{tr("pE", lang)}</p>
-                  <div className="flex items-baseline gap-1.5 mb-1.5">
-                    <span className="text-[40px] font-normal leading-none" style={{ color: hi }}>449</span>
-                    <span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span>
-                  </div>
-                  <p className="text-[11px] mb-8" style={{ color: dark ? "#5A5450" : "#9A8E84", fontFamily: "sans-serif" }}>{tr("pEsub", lang)}</p>
-                  <div className="h-px mb-8" style={{ background: bdr }} />
-                  <ul className="space-y-3 mb-10 flex-1">
-                    {(["pEi1", "pEi2", "pEi3", "pEi4", "pEi5", "pEi6", "pEi7", "pEi8", "pEi9", "pEi10", "pEi11", "pEi12", "pEi13", "pEi14"] as string[]).map(k => (
-                      <li key={k} className="flex items-start gap-3 text-[12px]" style={{ color: mid, fontFamily: "sans-serif", fontWeight: 300 }}>
-                        <div className="mt-[7px] h-[3px] w-[3px] rounded-full shrink-0" style={{ background: G, opacity: 0.4 }} />{tr(k, lang)}
-                      </li>
-                    ))}
-                  </ul>
-                  <button type="button" onClick={() => setModal(true)} className="flex items-center justify-between w-full px-5 rounded-full text-[10px] tracking-[0.18em] uppercase font-medium transition-all hover:opacity-70" style={{ border: `1px solid ${G}28`, color: dark ? `${G}55` : G, fontFamily: "sans-serif", height: "44px", background: "transparent" }}>
-                    {tr("prcBegin", lang)}<ArrowRight size={11} />
-                  </button>
-                </div>
-              </Reveal>
+
+            {/* 4-column grid: 1 col → 2 col (md) → 4 col (lg) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-start">
+              {TIERS.map((tier, i) => (
+                <Reveal key={tier.key} d={0.07 * i}>
+                  <TierCard
+                    featured={tier.featured}
+                    badge={tier.badge}
+                    eyebrow={tier.eyebrow}
+                    price={tier.price}
+                    subtitle={tier.subtitle}
+                    items={tier.items}
+                    dark={dark}
+                    bdr={bdr}
+                    card={card}
+                    sub={sub}
+                    mid={mid}
+                    hi={hi}
+                    onBegin={() => setModal(true)}
+                    beginLabel={tr("prcBegin", lang)}
+                  />
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
 
-        <CustomPackageBuilder
-          dark={dark}
-          lang={lang}
-          onEnquire={(services, total) => { setModal(true); }}
-        />
+        <CustomPackageBuilder dark={dark} lang={lang} onEnquire={(services, total) => { setModal(true); }} />
 
         {/* ── OUTCOMES ── */}
         <section id="outcomes" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}>
