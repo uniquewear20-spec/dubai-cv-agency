@@ -11,11 +11,36 @@ const INK = "#0A0907";
 type Lang = "en" | "ar" | "fr";
 
 const TX: Record<string, Record<Lang, string>> = {
-  eyebrow:    { en: "AI Profile Photography",           ar: "تصوير الملف الشخصي بالذكاء الاصطناعي",  fr: "Photographie IA" },
-  heading:    { en: "Let your image\nspeak.",           ar: "دع صورتك\nتتحدث عنك.",                  fr: "Laissez votre image\nparler pour vous." },
-  subheading: { en: "Designed to position you for global opportunities.", ar: "مصمَّمة لتضعك في المسار الصحيح نحو الفرص العالمية.", fr: "Conçues pour vous positionner face aux opportunités mondiales." },
-  cta:      { en: "Request Profile Enhancement", ar: "طلب تحسين صورة الملف", fr: "Demander l'amélioration du profil" },
-  caption:  { en: "Every profile engineered to attract — before a single word is read.", ar: "كل صورة ملف مُهندَسة لتجذب — قبل قراءة كلمة واحدة.", fr: "Chaque profil conçu pour attirer — avant qu'un mot ne soit lu." },
+  // ── Eyebrow: upgraded to identity/authority language ──
+  eyebrow: {
+    en: "AI-Enhanced Executive Identity",
+    ar: "هوية تنفيذية مُحسَّنة بالذكاء الاصطناعي",
+    fr: "Identité Exécutive Augmentée par l'IA",
+  },
+  // ── Heading: "Your Image, Engineered for Authority." ──
+  heading: {
+    en: "Your Image,\nEngineered for Authority.",
+    ar: "صورتك\nمُهندَسة للسلطة.",
+    fr: "Votre image,\ncalibrée pour l'autorité.",
+  },
+  // ── Subheading: compressed, premium, one line ──
+  subheading: {
+    en: "AI-enhanced profile photography that positions you for global opportunity — before a word is read.",
+    ar: "تصوير الملف الشخصي بالذكاء الاصطناعي — يُموضعك للفرص العالمية قبل قراءة أي كلمة.",
+    fr: "Photographie de profil améliorée par IA — vous positionne avant qu'un mot ne soit lu.",
+  },
+  // ── CTA: identity/transformation language ──
+  cta: {
+    en: "Engineer My Executive Image",
+    ar: "هندسة صورتي التنفيذية",
+    fr: "Architecturer mon image",
+  },
+  // ── Caption: sharp, single thought ──
+  caption: {
+    en: "Before a single word is read — your image commands.",
+    ar: "قبل قراءة كلمة واحدة — صورتك تتحدث.",
+    fr: "Avant qu'un mot soit lu — votre image s'impose.",
+  },
 };
 const tr = (k: string, l: Lang) => TX[k]?.[l] ?? TX[k]?.en ?? k;
 
@@ -75,15 +100,51 @@ export default function TeamMarqueeSection({ dark, lang, onEnquire }: { dark: bo
   return (
     <section className="py-40 overflow-hidden" style={{ background: bg }}>
       <div className="mx-auto max-w-6xl px-5 mb-16">
-        <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: G }}>{tr("eyebrow", lang)}</p>
+        {/* Eyebrow */}
+        <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: G }}>
+          {tr("eyebrow", lang)}
+        </p>
+
+        {/* Heading — split on \n to produce line break */}
         <h2 className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15] mb-6" style={{ color: hi }}>
-          {tr("heading", lang).split("\n").map((l, i) => <React.Fragment key={i}>{i > 0 && <br />}{l}</React.Fragment>)}
+          {tr("heading", lang).split("\n").map((line, i) => (
+            <React.Fragment key={i}>
+              {i > 0 && <br />}
+              {i === 1
+                ? <em style={{ fontStyle: "italic", color: G }}>{line}</em>
+                : line}
+            </React.Fragment>
+          ))}
         </h2>
-        <button onClick={onEnquire} className="px-10 h-[50px] rounded-full text-[10px] uppercase font-medium tracking-widest" style={{ background: G, color: INK }}>{tr("cta", lang)}</button>
+
+        {/* Subheading — one tight sentence */}
+        <p className="text-sm leading-[2.0] max-w-lg mb-8" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300 }}>
+          {tr("subheading", lang)}
+        </p>
+
+        {/* CTA — identity/transformation language */}
+        <button
+          onClick={onEnquire}
+          className="px-10 h-[50px] rounded-full text-[10px] uppercase font-medium tracking-widest transition-all hover:opacity-90"
+          style={{ background: G, color: INK }}
+        >
+          {tr("cta", lang)}
+        </button>
+
+        {/* Caption — sharp closing thought */}
+        <p className="mt-6 text-[9px] tracking-[0.20em] uppercase" style={{ color: dark ? `${G}30` : `${G}55`, fontFamily: "sans-serif" }}>
+          {tr("caption", lang)}
+        </p>
       </div>
+
+      {/* Marquee rows */}
       <div className="space-y-5">
-        <Marquee speed={55} pauseOnHover fade dark={dark}>{rowA.map(c => <ProfilePhotoCard key={c.image} card={c} dark={dark} />)}</Marquee>
-        <Marquee speed={50} pauseOnHover reverse fade dark={dark}>{rowB.map(c => <ProfilePhotoCard key={c.image} card={c} dark={dark} />)}</Marquee>
+        <Marquee speed={55} pauseOnHover fade dark={dark}>
+          {rowA.map(c => <ProfilePhotoCard key={c.image} card={c} dark={dark} />)}
+        </Marquee>
+        <Marquee speed={50} pauseOnHover reverse fade dark={dark}>
+          {rowB.map(c => <ProfilePhotoCard key={c.image} card={c} dark={dark} />)}
+        </Marquee>
       </div>
     </section>
   );
