@@ -990,29 +990,8 @@ export default function Home() {
         {/* ── TEAM MARQUEE ── */}
         <TeamMarqueeSection dark={dark} lang={lang} onEnquire={() => setModal(true)} />
 
-        {/* ── LINKEDIN IMAGE MARQUEE ── */}
-        <section
-          className="py-20 overflow-hidden"
-          style={{ borderTop: `1px solid ${bdr}`, borderBottom: `1px solid ${bdr}` }}
-        >
-          {/* Eyebrow label */}
-          <Reveal className="text-center mb-10 px-5">
-            <p
-              className="text-[9px] font-medium tracking-[0.40em] uppercase"
-              style={{ color: dark ? `${G}40` : G, fontFamily: "sans-serif" }}
-            >
-              {tr("liEyebrow", lang)}
-            </p>
-          </Reveal>
-
-          {/* Row A — left to right */}
-          <LinkedInMarqueeRow images={LI_ROW_A} reverse={false} dark={dark} />
-
-          {/* Row B — right to left (opposite direction) */}
-          <div className="mt-4">
-            <LinkedInMarqueeRow images={LI_ROW_B} reverse={true} dark={dark} />
-          </div>
-        </section>
+        
+       
 
         {/* ── DOCUMENT PORTFOLIO ── */}
         <section id="portfolio" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}>
