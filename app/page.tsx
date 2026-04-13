@@ -39,16 +39,17 @@ const SUBS_AR = ["استفسار عام", "الأساسية", "النمو", "ا�
 const SUBS_FR = ["Demande générale", "Fondation", "Croissance", "Exécutif", "Apex"];
 const PAGE_SIZE = 9;
 
-const LI_IMAGES = Array.from({ length: 20 }, (_, i) => `/team/img${i + 1}.png`);
-const LI_ROW_A = LI_IMAGES.slice(0, 10);
-const LI_ROW_B = LI_IMAGES.slice(10, 20);
-
 type Lang = "en" | "ar" | "fr";
 const LANGS: { code: Lang; label: string; dir: "ltr" | "rtl"; font: string }[] = [
   { code: "en", label: "EN", dir: "ltr", font: "'Georgia','Times New Roman',serif" },
-  { code: "ar", label: "ع",  dir: "rtl", font: "'Noto Naskh Arabic','Tahoma',sans-serif" },
+  { code: "ar", label: "ع",  dir: "rtl", font: "'Noto Naskh Arabic','IBM Plex Sans Arabic','Tahoma',sans-serif" },
   { code: "fr", label: "FR", dir: "ltr", font: "'Georgia','Times New Roman',serif" },
 ];
+
+// ── RTL helper: returns CSS logical properties based on direction ──
+const rtl = (lang: Lang) => lang === "ar";
+const textAlign = (lang: Lang): React.CSSProperties => ({ textAlign: rtl(lang) ? "right" : "left" });
+const flexDir = (lang: Lang): React.CSSProperties => ({ flexDirection: rtl(lang) ? "row-reverse" : "row" });
 
 // ── Translations ─────────────────────────────────────────────────────────────
 const TX: Record<string, Record<Lang, string>> = {
@@ -59,7 +60,6 @@ const TX: Record<string, Record<Lang, string>> = {
   navClients:   { en: "Outcomes",     ar: "النتائج",    fr: "Résultats" },
   enquire:      { en: "Apply",        ar: "تقدّم",       fr: "Postuler" },
 
-  // ── HERO — h1a/h1b kept exactly as original per user instruction ──
   h1a: { en: "We Don't Write CVs.", ar: "لا نكتب سيرًا ذاتية.", fr: "Nous n'écrivons pas de CVs." },
   h1b: { en: "We Engineer Careers.", ar: "نبني مسارات مهنية.", fr: "Nous architecturons des carrières." },
   heroSub: {
@@ -68,18 +68,15 @@ const TX: Record<string, Record<Lang, string>> = {
     fr: "Positionnement de carrière de précision pour les professionnels qui aspirent à diriger.",
   },
 
-  // ── CTAs — upgraded to identity/strategic language ──
   ctaPrimary:   { en: "Enter Executive Tier",             ar: "ادخل المستوى التنفيذي",      fr: "Accéder au niveau Exécutif" },
   ctaSecondary: { en: "View Outcomes",                    ar: "استعرض النتائج",              fr: "Voir les résultats" },
   scarcity:     { en: "By application only · Limited intake", ar: "بالطلب فقط · قبول محدود", fr: "Sur candidature uniquement · Admissions limitées" },
 
-  // ── METRICS ──
   mAts:     { en: "ATS Clearance",       ar: "اجتياز الفرز الآلي",  fr: "Taux de passage ATS" },
   mDraft:   { en: "48h Delivery",        ar: "تسليم خلال 48 ساعة",  fr: "Livraison 48h" },
   mClients: { en: "Careers Launched",    ar: "مسار مهني مُطلَق",    fr: "Carrières positionnées" },
   mMarkets: { en: "Global Markets",      ar: "سوق عالمي",           fr: "Marchés actifs" },
 
-  // ── DISCIPLINES ──
   svcEyebrow: { en: "The Architecture",  ar: "الهيكل",              fr: "L'Architecture" },
   svcH2: {
     en: "Built to position.\nDesigned to perform.",
@@ -96,7 +93,6 @@ const TX: Record<string, Record<Lang, string>> = {
   s3b:   { en: "A full strategic repositioning of how you're perceived, articulated, and remembered — for professionals targeting markets where reputation precedes every application.", ar: "إعادة تموضع استراتيجية كاملة لكيف تُرى وتُتذكر — لمن تسبق سمعتهم كل طلب توظيف.", fr: "Un repositionnement complet de votre image — pour les professionnels où la réputation précède toute candidature." },
   s3tag: { en: "Executive engagement only",            ar: "الباقة التنفيذية فقط",               fr: "Mission Exécutif uniquement" },
 
-  // ── PORTFOLIO ──
   tplEyebrow: { en: "The Library",                   ar: "المكتبة",                         fr: "La Bibliothèque" },
   tplH2:      { en: "3,000+ documents. Zero templates.", ar: "أكثر من 3,000 وثيقة. لا قوالب جاهزة.", fr: "3 000+ documents. Zéro modèle générique." },
   tplDesc: {
@@ -114,7 +110,6 @@ const TX: Record<string, Record<Lang, string>> = {
   tplEnquire: { en: "Enquire about this document",     ar: "استفسر عن هذه الوثيقة",           fr: "Demander ce document" },
   tplClose:   { en: "Close",                           ar: "إغلاق",                            fr: "Fermer" },
 
-  // ── PROCESS ──
   procEyebrow: { en: "The Method",        ar: "المنهجية",             fr: "La Méthode" },
   procH2:      { en: "Four Steps. 48 Hours. Unlimited Precision.", ar: "أربع خطوات. 48 ساعة. دقة لا حدود لها.", fr: "Quatre étapes. 48 heures. Précision sans limite." },
   p1t: { en: "Select",   ar: "الاختيار", fr: "Choisir" },
@@ -126,13 +121,11 @@ const TX: Record<string, Record<Lang, string>> = {
   p4t: { en: "Refine",   ar: "التحسين",  fr: "Affiner" },
   p4b: { en: "Unlimited revisions until every detail is exact.", ar: "مراجعات غير محدودة حتى يكون كل تفصيل دقيقاً.", fr: "Révisions illimitées jusqu'à ce que chaque détail soit exact." },
 
-  // ── INVESTMENT ──
   prcEyebrow: { en: "Choose Your Tier",    ar: "اختر مستواك",          fr: "Choisissez Votre Niveau" },
   prcH2:      { en: "Four tiers.\nOne standard of excellence.", ar: "أربعة مستويات.\nمعيار واحد من التميز.", fr: "Quatre niveaux.\nUne seule exigence d'excellence." },
   prcNote:    { en: "All prices in UAE Dirhams. Processed via Stripe.", ar: "جميع الأسعار بالدرهم الإماراتي. عبر Stripe.", fr: "Tous les prix en dirhams émiratis. Via Stripe." },
   prcBegin:   { en: "Enter This Tier",     ar: "الدخول لهذا المستوى", fr: "Accéder" },
 
-  // Foundation
   pF:    { en: "Foundation",    ar: "الأساسية",  fr: "Fondation" },
   pFsub: { en: "ATS-cleared. Professionally positioned.", ar: "محسَّن للفرز. موضَّع باحترافية.", fr: "Certifié ATS. Positionné professionnellement." },
   pFi1:  { en: "ATS-optimized or Executive-grade CV with refined design",         ar: "سيرة ذاتية محسَّنة للفرز أو تنفيذية بتصميم متقن",            fr: "CV optimisé ATS ou Executive avec design soigné" },
@@ -142,7 +135,6 @@ const TX: Record<string, Record<Lang, string>> = {
   pFi5:  { en: "LinkedIn profile photo enhancement",                              ar: "تحسين صورة الملف الشخصي على لينكدإن",                       fr: "Amélioration de la photo de profil LinkedIn" },
   pFi6:  { en: "Full access to 3,000+ premium document library",                 ar: "وصول كامل إلى مكتبة الوثائق المتميزة",                     fr: "Accès complet à notre bibliothèque 3 000+ documents" },
 
-  // Growth
   pG:      { en: "Growth",    ar: "النمو",    fr: "Croissance" },
   pGsub:   { en: "Full-spectrum positioning for competitive markets.", ar: "تموضع شامل للأسواق التنافسية.", fr: "Positionnement complet pour marchés compétitifs." },
   pGBadge: { en: "Most Popular", ar: "الأكثر طلباً", fr: "Le plus populaire" },
@@ -156,7 +148,6 @@ const TX: Record<string, Record<Lang, string>> = {
   pGi8:  { en: "Free eBook: 2026 Strategic Roadmap",                             ar: "كتاب إلكتروني مجاني: خارطة طريق 2026",                      fr: "eBook gratuit : Feuille de route stratégique 2026" },
   pGi9:  { en: "Access to 3,000+ premium document library",                      ar: "وصول إلى مكتبة الوثائق المتميزة",                          fr: "Accès à la bibliothèque 3 000+ documents" },
 
-  // Executive
   pE:    { en: "Executive",   ar: "التنفيذية",  fr: "Exécutif" },
   pEsub: { en: "Strategic identity for decision-makers and global markets.", ar: "هوية استراتيجية لصانعي القرار والأسواق العالمية.", fr: "Identité stratégique pour les décideurs et marchés mondiaux." },
   pEi1:  { en: "Dual-format strategy",                                            ar: "استراتيجية ثنائية الشكل",                                   fr: "Stratégie double format" },
@@ -172,7 +163,6 @@ const TX: Record<string, Record<Lang, string>> = {
   pEi11: { en: "Free eBook: 2026 Strategic Roadmap",                             ar: "كتاب إلكتروني مجاني: خارطة طريق 2026",                      fr: "eBook gratuit : Feuille de route 2026" },
   pEi12: { en: "Full access to 3,000+ library",                                  ar: "وصول كامل إلى مكتبة 3,000+",                               fr: "Accès complet à la bibliothèque 3 000+" },
 
-  // Apex
   pA:    { en: "Apex",        ar: "أبيكس",      fr: "Apex" },
   pAsub: { en: "Total career transformation. Unlimited access. Priority service.", ar: "تحول مهني كامل. وصول غير محدود. خدمة أولوية.", fr: "Transformation totale. Accès illimité. Service prioritaire." },
   pABadge: { en: "Ultimate", ar: "النخبة", fr: "Ultime" },
@@ -192,20 +182,17 @@ const TX: Record<string, Record<Lang, string>> = {
   pAi14: { en: "30-day priority access to dedicated consultant",                  ar: "30 يوماً وصول أولوية لمستشارك المخصص",                     fr: "30 jours d'accès prioritaire à votre consultant dédié" },
   pAi15: { en: "Full access to 3,000+ premium document library",                 ar: "وصول كامل إلى مكتبة الوثائق المتميزة",                     fr: "Accès complet à la bibliothèque 3 000+ documents" },
 
-  // ── OUTCOMES ──
   tmEyebrow: { en: "The Record",             ar: "السجل",                fr: "Le Bilan" },
   tmH2a:     { en: "Results that speak",     ar: "نتائج تتحدث",          fr: "Des résultats qui parlent" },
   tmH2b:     { en: "before we do.",          ar: "قبلنا.",                fr: "avant nous." },
   tmStars:   { en: "5.0 · 7,000+ engagements globally", ar: "5.0 · أكثر من 7,000 تعاقد عالمياً", fr: "5.0 · 7 000+ missions mondiales" },
 
-  // ── CLOSING CTA ──
   ctaH2a:      { en: "Your next role",              ar: "منصبك القادم",    fr: "Votre prochain poste" },
   ctaH2b:      { en: "begins here.",                ar: "يبدأ هنا.",        fr: "commence ici." },
   ctaBody:     { en: "7,000+ professionals. 40+ markets. Six continents. One decision.", ar: "أكثر من 7,000 محترف. 40+ سوق. ستة قارات. قرار واحد.", fr: "7 000+ professionnels. 40+ marchés. Six continents. Une décision." },
   ctaFinalBtn: { en: "Begin Positioning Strategy", ar: "ابدأ استراتيجية التموضع", fr: "Lancer ma stratégie de positionnement" },
   startWA:     { en: "Continue on WhatsApp",        ar: "المتابعة عبر واتساب", fr: "Continuer sur WhatsApp" },
 
-  // ── FORM ──
   sendEnq:     { en: "Submit",    ar: "إرسال",   fr: "Envoyer" },
   tagline:     { en: "Based in Dubai · Careers Placed Globally", ar: "مقره دبي · مسارات مهنية عالمياً", fr: "Basé à Dubaï · Carrières placées mondialement" },
   footerWA:    { en: "WhatsApp",  ar: "واتساب",  fr: "WhatsApp" },
@@ -228,7 +215,6 @@ const TX: Record<string, Record<Lang, string>> = {
   frmErrNet:   { en: "Network error — contact us via WhatsApp.", ar: "خطأ في الشبكة — تواصل عبر واتساب.", fr: "Erreur réseau — contactez-nous via WhatsApp." },
   frmErrGen:   { en: "Something went wrong. Please try again.", ar: "حدث خطأ. يرجى المحاولة مجدداً.", fr: "Une erreur s'est produite. Veuillez réessayer." },
 
-  // ── AI Photography (Team Marquee) ──
   liEyebrow: { en: "Your Image, Engineered for Authority.", ar: "صورتك مُهندَسة للسلطة.", fr: "Votre image, calibrée pour l'autorité." },
 };
 const tr = (k: string, l: Lang): string => TX[k]?.[l] ?? TX[k]?.en ?? k;
@@ -289,6 +275,10 @@ const IH: Record<string, string> = { Finance: "#B8962E", Hospitality: "#9A7A3A",
 const wl = (m: string) => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
 const fb = (b: number) => b < 1024 ? `${b}B` : b < 1048576 ? `${(b / 1024).toFixed(1)}KB` : `${(b / 1048576).toFixed(1)}MB`;
 
+// ── RTL-Aware CSS class helpers ───────────────────────────────────────────────
+// These replace all hardcoded left/right with logical properties
+const isRTL = (lang: Lang) => lang === "ar";
+
 // ── CountUp ───────────────────────────────────────────────────────────────────
 function CountUp({ value, suffix = "" }: { value: string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -330,7 +320,7 @@ function GoldLine({ className = "" }: { className?: string }) {
   return (
     <motion.div className={`h-px ${className}`}
       style={{ background: `linear-gradient(to right, transparent, ${G}, transparent)`, boxShadow: `0 0 8px ${G}50` }}
-      initial={{ scaleX: 0, transformOrigin: "left" }}
+      initial={{ scaleX: 0, transformOrigin: "center" }}
       whileInView={{ scaleX: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.2 }} />
@@ -363,17 +353,17 @@ function GlowCard({ color = G, children, className = "" }: { color?: string; chi
   );
 }
 
-function UZ({ label, hint, accept, Ic, file, onFile, onClear, dark, busy, dropLabel = "Click or drop file" }: { label: string; hint: string; accept: string; Ic: React.ElementType; file: File | null; onFile: (f: File) => void; onClear: () => void; dark: boolean; busy: boolean; dropLabel?: string }) {
+function UZ({ label, hint, accept, Ic, file, onFile, onClear, dark, busy, dropLabel = "Click or drop file", lang }: { label: string; hint: string; accept: string; Ic: React.ElementType; file: File | null; onFile: (f: File) => void; onClear: () => void; dark: boolean; busy: boolean; dropLabel?: string; lang: Lang }) {
   const inp = useRef<HTMLInputElement>(null);
   const [drag, setDrag] = useState(false);
   const s = dark ? "#70645A" : "#9A8E84", h = dark ? "#EDE8E0" : "#1A1410";
   return (
     <div>
-      <label className="mb-1.5 block text-[9px] font-medium uppercase tracking-[0.22em]" style={{ color: s }}>{label}</label>
+      <label className="mb-1.5 block text-[9px] font-medium uppercase tracking-[0.22em]" style={{ color: s, textAlign: isRTL(lang) ? "right" : "left" }}>{label}</label>
       {file ? (
-        <div className="flex items-center gap-3 rounded-xl border px-4 py-3" style={{ borderColor: `${G}45`, background: dark ? `${G}07` : `${G}05` }}>
+        <div className="flex items-center gap-3 rounded-xl border px-4 py-3" style={{ borderColor: `${G}45`, background: dark ? `${G}07` : `${G}05`, flexDirection: isRTL(lang) ? "row-reverse" : "row" }}>
           <Ic size={13} color={G} strokeWidth={1.5} className="shrink-0" />
-          <div className="min-w-0 flex-1"><p className="truncate text-xs" style={{ color: h }}>{file.name}</p><p className="text-[9px]" style={{ color: s }}>{fb(file.size)}</p></div>
+          <div className="min-w-0 flex-1" style={{ textAlign: isRTL(lang) ? "right" : "left" }}><p className="truncate text-xs" style={{ color: h }}>{file.name}</p><p className="text-[9px]" style={{ color: s }}>{fb(file.size)}</p></div>
           <button type="button" onClick={onClear} disabled={busy} className="opacity-25 hover:opacity-50 p-1" style={{ color: s }}><Trash2 size={11} /></button>
         </div>
       ) : (
@@ -401,7 +391,7 @@ function Modal({ open, onClose, dark, lang }: { open: boolean; onClose: () => vo
   const mbg = dark ? "#0C0B09" : "#F8F4EF";
   const bd = dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)";
   const h = dark ? "#EDE8E0" : "#1A1410", s = dark ? "#70645A" : "#9A8E84";
-  const iS: React.CSSProperties = { background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.025)", borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)", color: h, outline: "none" };
+  const iS: React.CSSProperties = { background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.025)", borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)", color: h, outline: "none", textAlign: isRTL(lang) ? "right" : "left", direction: isRTL(lang) ? "rtl" : "ltr" };
   async function submit() {
     if (!form.email.trim() || !form.message.trim()) return;
     setSt("sending"); setErr("");
@@ -418,7 +408,7 @@ function Modal({ open, onClose, dark, lang }: { open: boolean; onClose: () => vo
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-[90] flex items-start justify-center overflow-y-auto p-4 pt-10 sm:items-center">
+        <div className="fixed inset-0 z-[90] flex items-start justify-center overflow-y-auto p-4 pt-10 sm:items-center" dir={isRTL(lang) ? "rtl" : "ltr"}>
           <motion.div className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={close} style={{ background: "rgba(5,4,3,0.92)", backdropFilter: "blur(20px)" }} />
           <motion.div className="relative w-full max-w-[400px] rounded-2xl overflow-hidden"
             initial={{ opacity: 0, y: 24, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 12 }}
@@ -426,7 +416,7 @@ function Modal({ open, onClose, dark, lang }: { open: boolean; onClose: () => vo
             style={{ background: mbg, border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}` }}>
             <div className="h-px w-full" style={{ background: `linear-gradient(90deg,transparent,${G}70,transparent)` }} />
             <div className="flex items-center justify-between px-7 py-5 border-b" style={{ borderColor: bd }}>
-              <div>
+              <div style={{ textAlign: isRTL(lang) ? "right" : "left" }}>
                 <p className="text-[9px] font-medium uppercase tracking-[0.32em]" style={{ color: G }}>{tr("enquire", lang)}</p>
                 <p className="mt-0.5 text-[11px]" style={{ color: s }}>{EM}</p>
               </div>
@@ -441,25 +431,25 @@ function Modal({ open, onClose, dark, lang }: { open: boolean; onClose: () => vo
                 </motion.div>
               ) : (
                 <>
-                  {st === "error" && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-start gap-2.5 rounded-xl px-4 py-3" style={{ background: "rgba(160,40,40,0.06)", border: "1px solid rgba(160,40,40,0.12)" }}><AlertCircle size={11} className="mt-0.5 shrink-0" style={{ color: "#A03232" }} /><p className="text-[10px]" style={{ color: s }}>{err}</p></motion.div>}
+                  {st === "error" && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-start gap-2.5 rounded-xl px-4 py-3" style={{ background: "rgba(160,40,40,0.06)", border: "1px solid rgba(160,40,40,0.12)", flexDirection: isRTL(lang) ? "row-reverse" : "row" }}><AlertCircle size={11} className="mt-0.5 shrink-0" style={{ color: "#A03232" }} /><p className="text-[10px]" style={{ color: s, textAlign: isRTL(lang) ? "right" : "left" }}>{err}</p></motion.div>}
                   <div>
-                    <label className="mb-1.5 block text-[9px] font-medium uppercase tracking-[0.22em]" style={{ color: s }}>{tr("frmEmail", lang)}</label>
+                    <label className="mb-1.5 block text-[9px] font-medium uppercase tracking-[0.22em]" style={{ color: s, textAlign: isRTL(lang) ? "right" : "left" }}>{tr("frmEmail", lang)}</label>
                     <input type="email" placeholder="name@company.com" value={form.email} disabled={busy} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} className="w-full rounded-xl border px-4 py-2.5 text-sm disabled:opacity-40 transition-all" style={iS} onFocus={e => { (e.target as HTMLInputElement).style.borderColor = `${G}55`; }} onBlur={e => { (e.target as HTMLInputElement).style.borderColor = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"; }} />
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-[9px] font-medium uppercase tracking-[0.22em]" style={{ color: s }}>{tr("frmSubject", lang)}</label>
-                    <select value={form.subject} disabled={busy} onChange={e => setForm(p => ({ ...p, subject: e.target.value }))} className="w-full rounded-xl border px-4 py-2.5 text-sm appearance-none cursor-pointer disabled:opacity-40" style={{ ...iS, backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23C8A96E' stroke-width='1.3' fill='none'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 1rem center" }} onFocus={e => { (e.target as HTMLSelectElement).style.borderColor = `${G}55`; }} onBlur={e => { (e.target as HTMLSelectElement).style.borderColor = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"; }}>
+                    <label className="mb-1.5 block text-[9px] font-medium uppercase tracking-[0.22em]" style={{ color: s, textAlign: isRTL(lang) ? "right" : "left" }}>{tr("frmSubject", lang)}</label>
+                    <select value={form.subject} disabled={busy} onChange={e => setForm(p => ({ ...p, subject: e.target.value }))} className="w-full rounded-xl border px-4 py-2.5 text-sm appearance-none cursor-pointer disabled:opacity-40" style={{ ...iS, backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23C8A96E' stroke-width='1.3' fill='none'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: isRTL(lang) ? "left 1rem center" : "right 1rem center" }} onFocus={e => { (e.target as HTMLSelectElement).style.borderColor = `${G}55`; }} onBlur={e => { (e.target as HTMLSelectElement).style.borderColor = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"; }}>
                       {subs.map(o => <option key={o} value={o} style={{ background: dark ? "#0C0B09" : "#F8F4EF", color: h }}>{o}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-[9px] font-medium uppercase tracking-[0.22em]" style={{ color: s }}>{tr("frmMessage", lang)}</label>
-                    <textarea rows={4} disabled={busy} placeholder="Your current role, target markets, and career objective…" value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))} className="w-full rounded-xl border px-4 py-2.5 text-sm resize-none disabled:opacity-40 transition-all" style={iS} onFocus={e => { (e.target as HTMLTextAreaElement).style.borderColor = `${G}55`; }} onBlur={e => { (e.target as HTMLTextAreaElement).style.borderColor = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"; }} />
+                    <label className="mb-1.5 block text-[9px] font-medium uppercase tracking-[0.22em]" style={{ color: s, textAlign: isRTL(lang) ? "right" : "left" }}>{tr("frmMessage", lang)}</label>
+                    <textarea rows={4} disabled={busy} placeholder={isRTL(lang) ? "دورك الحالي، الأسواق المستهدفة، والهدف المهني…" : "Your current role, target markets, and career objective…"} value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))} className="w-full rounded-xl border px-4 py-2.5 text-sm resize-none disabled:opacity-40 transition-all" style={iS} onFocus={e => { (e.target as HTMLTextAreaElement).style.borderColor = `${G}55`; }} onBlur={e => { (e.target as HTMLTextAreaElement).style.borderColor = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"; }} />
                   </div>
                   <div className="h-px" style={{ background: bd }} />
-                  <p className="text-[9px] uppercase tracking-[0.22em] -mb-1" style={{ color: s }}>{tr("frmAttach", lang)} <span className="opacity-35">{tr("frmOptional", lang)}</span></p>
-                  <UZ label={tr("frmPhoto", lang)} hint={tr("frmPhotoH", lang)} dropLabel={tr("frmDrop", lang)} accept="image/jpeg,image/png,image/webp" Ic={ImageIcon} file={form.photo} onFile={f => setForm(p => ({ ...p, photo: f }))} onClear={() => setForm(p => ({ ...p, photo: null }))} dark={dark} busy={busy} />
-                  <UZ label={tr("frmCv", lang)} hint={tr("frmCvH", lang)} dropLabel={tr("frmDrop", lang)} accept=".pdf,.doc,.docx" Ic={FileText} file={form.cv} onFile={f => setForm(p => ({ ...p, cv: f }))} onClear={() => setForm(p => ({ ...p, cv: null }))} dark={dark} busy={busy} />
+                  <p className="text-[9px] uppercase tracking-[0.22em] -mb-1" style={{ color: s, textAlign: isRTL(lang) ? "right" : "left" }}>{tr("frmAttach", lang)} <span className="opacity-35">{tr("frmOptional", lang)}</span></p>
+                  <UZ label={tr("frmPhoto", lang)} hint={tr("frmPhotoH", lang)} dropLabel={tr("frmDrop", lang)} accept="image/jpeg,image/png,image/webp" Ic={ImageIcon} file={form.photo} onFile={f => setForm(p => ({ ...p, photo: f }))} onClear={() => setForm(p => ({ ...p, photo: null }))} dark={dark} busy={busy} lang={lang} />
+                  <UZ label={tr("frmCv", lang)} hint={tr("frmCvH", lang)} dropLabel={tr("frmDrop", lang)} accept=".pdf,.doc,.docx" Ic={FileText} file={form.cv} onFile={f => setForm(p => ({ ...p, cv: f }))} onClear={() => setForm(p => ({ ...p, cv: null }))} dark={dark} busy={busy} lang={lang} />
                   <button type="button" onClick={submit} disabled={!can} className="flex h-11 w-full items-center justify-center gap-2 rounded-full text-xs font-medium tracking-wider transition-all hover:opacity-85 disabled:opacity-20 disabled:cursor-not-allowed mt-1" style={{ background: G, color: INK }}>
                     {busy ? <><Loader2 size={12} className="animate-spin" />{tr("frmSending", lang)}</> : st === "error" ? <><Send size={12} />{tr("frmRetry", lang)}</> : <><Send size={12} />{tr("sendEnq", lang)}</>}
                   </button>
@@ -473,14 +463,14 @@ function Modal({ open, onClose, dark, lang }: { open: boolean; onClose: () => vo
   );
 }
 
-function TC({ t, dark }: { t: typeof TMS[0]; dark: boolean }) {
+function TC({ t, dark, lang }: { t: typeof TMS[0]; dark: boolean; lang: Lang }) {
   const ac = IH[t.ind] ?? G;
   return (
     <div className="flex flex-col p-5 mb-3 rounded-xl" style={{ background: dark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.88)", border: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`, fontFamily: "sans-serif" }}>
-      <p style={{ fontSize: "11px", lineHeight: "1.9", marginBottom: "14px", color: dark ? "#8A847E" : "#5A4E44", fontStyle: "italic", fontWeight: 400 }}>"{t.text}"</p>
-      <div style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`, paddingTop: "11px", display: "flex", alignItems: "center", gap: "10px" }}>
+      <p style={{ fontSize: "11px", lineHeight: "1.9", marginBottom: "14px", color: dark ? "#8A847E" : "#5A4E44", fontStyle: "italic", fontWeight: 400, textAlign: isRTL(lang) ? "right" : "left", direction: isRTL(lang) ? "rtl" : "ltr" }}>"{t.text}"</p>
+      <div style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`, paddingTop: "11px", display: "flex", alignItems: "center", gap: "10px", flexDirection: isRTL(lang) ? "row-reverse" : "row" }}>
         <img src={t.img} alt={t.name} className="h-7 w-7 rounded-full object-cover shrink-0" style={{ filter: "grayscale(50%) contrast(1.05)" }} />
-        <div style={{ minWidth: 0, flex: 1 }}>
+        <div style={{ minWidth: 0, flex: 1, textAlign: isRTL(lang) ? "right" : "left" }}>
           <p style={{ fontSize: "10px", fontWeight: 600, color: dark ? "#C8C0B8" : "#1A1410", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{t.name}</p>
           <p style={{ fontSize: "9px", color: dark ? "#5A5450" : "#9A8E84", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{t.role} · {t.co}</p>
         </div>
@@ -490,12 +480,12 @@ function TC({ t, dark }: { t: typeof TMS[0]; dark: boolean }) {
   );
 }
 
-function TCol({ items, dark, dur = 55, rev = false }: { items: typeof TMS; dark: boolean; dur?: number; rev?: boolean }) {
+function TCol({ items, dark, dur = 55, rev = false, lang }: { items: typeof TMS; dark: boolean; dur?: number; rev?: boolean; lang: Lang }) {
   const doubled = [...items, ...items];
   return (
     <div className="overflow-hidden">
       <motion.div animate={{ y: rev ? ["0%", "50%"] : ["0%", "-50%"] }} transition={{ duration: dur, ease: "linear", repeat: Infinity, repeatType: "loop" }}>
-        {doubled.map((tm, i) => <TC key={`${tm.name}-${i}`} t={tm} dark={dark} />)}
+        {doubled.map((tm, i) => <TC key={`${tm.name}-${i}`} t={tm} dark={dark} lang={lang} />)}
       </motion.div>
     </div>
   );
@@ -513,7 +503,7 @@ function PreviewLightbox({ cv, onClose, onEnquire, dark, lang }: { cv: { id: num
   }, [onClose]);
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[95] flex items-center justify-center p-4">
+      <div className="fixed inset-0 z-[95] flex items-center justify-center p-4" dir={isRTL(lang) ? "rtl" : "ltr"}>
         <motion.div className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} style={{ background: "rgba(5,4,3,0.94)", backdropFilter: "blur(24px)" }} />
         <motion.div className="relative flex flex-col w-full max-w-xl rounded-2xl overflow-hidden"
           style={{ maxHeight: "calc(100svh - 2rem)", background: dark ? "#0C0B09" : "#F8F4EF", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}` }}
@@ -526,7 +516,7 @@ function PreviewLightbox({ cv, onClose, onEnquire, dark, lang }: { cv: { id: num
                 {cv.ats ? tr("tplAts", lang) : tr("tplDesign", lang)}
               </span>
             </div>
-            <button type="button" onClick={onClose} className="shrink-0 ml-3 opacity-20 hover:opacity-50 transition-opacity" style={{ color: dark ? "#EDE8E0" : "#1A1410" }}><X size={14} strokeWidth={1.5} /></button>
+            <button type="button" onClick={onClose} className="shrink-0 opacity-20 hover:opacity-50 transition-opacity" style={{ color: dark ? "#EDE8E0" : "#1A1410", marginInlineStart: "12px" }}><X size={14} strokeWidth={1.5} /></button>
           </div>
           <div className="flex-1 overflow-y-auto overscroll-contain">
             {!imgError ? (
@@ -540,7 +530,7 @@ function PreviewLightbox({ cv, onClose, onEnquire, dark, lang }: { cv: { id: num
               </div>
             )}
           </div>
-          <div className="px-6 py-4 shrink-0 flex gap-3" style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}` }}>
+          <div className="px-6 py-4 shrink-0 flex gap-3" style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`, flexDirection: isRTL(lang) ? "row-reverse" : "row" }}>
             <button type="button" onClick={() => { onClose(); onEnquire(); }} className="flex-1 flex items-center justify-center gap-2 h-10 rounded-full text-[10px] font-medium tracking-[0.16em] uppercase transition-all hover:opacity-85" style={{ background: G, color: INK, fontFamily: "sans-serif" }}>
               <Mail size={11} strokeWidth={2} />{tr("tplEnquire", lang)}
             </button>
@@ -551,33 +541,6 @@ function PreviewLightbox({ cv, onClose, onEnquire, dark, lang }: { cv: { id: num
         </motion.div>
       </div>
     </AnimatePresence>
-  );
-}
-
-function LinkedInMarqueeRow({ images, reverse = false, dark }: { images: string[]; reverse?: boolean; dark: boolean }) {
-  const allImages = [...images, ...images, ...images, ...images];
-  const ITEM_W = 192;
-  const GAP = 16;
-  const COPY_W = images.length * (ITEM_W + GAP);
-  const marqueeVariants = {
-    animate: {
-      x: reverse ? [0, COPY_W] : [0, -COPY_W],
-      transition: {
-        x: { repeat: Infinity, repeatType: "loop" as const, duration: reverse ? 38 : 44, ease: "linear" as const },
-      },
-    },
-  };
-  const maskImage = "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)";
-  return (
-    <div className="relative overflow-hidden" style={{ maskImage, WebkitMaskImage: maskImage }}>
-      <motion.div className="flex" style={{ gap: `${GAP}px`, willChange: "transform" }} variants={marqueeVariants} animate="animate">
-        {allImages.map((src, i) => (
-          <div key={i} className="shrink-0 rounded-xl overflow-hidden" style={{ width: `${ITEM_W}px`, height: "240px", background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.04)", border: `1px solid ${dark ? "rgba(200,169,110,0.08)" : "rgba(200,169,110,0.12)"}` }}>
-            <img src={src} alt="" aria-hidden loading="lazy" className="w-full h-full object-cover object-top" style={{ filter: dark ? "grayscale(100%) contrast(1.05) brightness(0.82)" : "grayscale(80%) contrast(1.02) brightness(0.96)", transition: "filter 0.4s ease" }} onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.filter = "grayscale(0%) contrast(1.02) brightness(1.02)"; }} onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.filter = dark ? "grayscale(100%) contrast(1.05) brightness(0.82)" : "grayscale(80%) contrast(1.02) brightness(0.96)"; }} />
-          </div>
-        ))}
-      </motion.div>
-    </div>
   );
 }
 
@@ -596,13 +559,14 @@ interface TierCardProps {
   hi: string;
   onBegin: () => void;
   beginLabel: string;
+  lang: Lang;
 }
 
-function TierCard({ featured = false, badge, eyebrow, price, subtitle, items, dark, bdr, card, sub, mid, hi, onBegin, beginLabel }: TierCardProps) {
+function TierCard({ featured = false, badge, eyebrow, price, subtitle, items, dark, bdr, card, sub, mid, hi, onBegin, beginLabel, lang }: TierCardProps) {
   const borderColor = featured ? `${G}35` : bdr;
   const bgColor = featured ? dark ? "rgba(200,169,110,0.045)" : "rgba(200,169,110,0.065)" : card;
   return (
-    <div className="relative flex flex-col h-full rounded-2xl p-7" style={{ background: bgColor, border: `1px solid ${borderColor}` }}>
+    <div className="relative flex flex-col h-full rounded-2xl p-7" style={{ background: bgColor, border: `1px solid ${borderColor}`, textAlign: isRTL(lang) ? "right" : "left" }}>
       {featured && <div className="absolute top-0 inset-x-0 h-px rounded-full" style={{ background: `linear-gradient(to right,transparent,${G}55,transparent)` }} />}
       {badge && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 rounded-full" style={{ background: badge.ink ? G : dark ? `${G}18` : `${G}15`, border: badge.ink ? "none" : `1px solid ${G}30`, fontFamily: "sans-serif" }}>
@@ -611,15 +575,15 @@ function TierCard({ featured = false, badge, eyebrow, price, subtitle, items, da
         </div>
       )}
       <p className="text-[9px] tracking-[0.35em] uppercase mb-6" style={{ color: featured ? G : dark ? `${G}45` : `${G}70`, fontFamily: "sans-serif" }}>{eyebrow}</p>
-      <div className="flex items-baseline gap-1.5 mb-1.5">
+      <div className="flex items-baseline gap-1.5 mb-1.5" style={{ flexDirection: isRTL(lang) ? "row-reverse" : "row", justifyContent: isRTL(lang) ? "flex-end" : "flex-start" }}>
         <span className="text-[36px] font-normal leading-none" style={{ color: hi }}>{price}</span>
         <span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span>
       </div>
       <p className="text-[11px] mb-6" style={{ color: dark ? "#5A5450" : "#9A8E84", fontFamily: "sans-serif" }}>{subtitle}</p>
       <div className="h-px mb-6" style={{ background: featured ? `${G}20` : bdr }} />
-      <ul className="space-y-2.5 mb-8 flex-1">
+      <ul className="space-y-2.5 mb-8 flex-1" style={{ paddingInlineStart: 0, listStyle: "none" }}>
         {items.map((item, idx) => (
-          <li key={idx} className="flex items-start gap-2.5 text-[11px]" style={{ color: mid, fontFamily: "sans-serif", fontWeight: 300 }}>
+          <li key={idx} className="flex items-start gap-2.5 text-[11px]" style={{ color: mid, fontFamily: "sans-serif", fontWeight: 300, flexDirection: isRTL(lang) ? "row-reverse" : "row", textAlign: isRTL(lang) ? "right" : "left" }}>
             <div className="mt-[6px] h-[3px] w-[3px] rounded-full shrink-0" style={{ background: G, opacity: featured ? 1 : 0.4 }} />
             {item}
           </li>
@@ -627,10 +591,10 @@ function TierCard({ featured = false, badge, eyebrow, price, subtitle, items, da
       </ul>
       <button type="button" onClick={onBegin}
         className="flex items-center justify-between w-full px-4 rounded-full text-[10px] tracking-[0.18em] uppercase font-medium transition-all"
-        style={{ border: featured ? "none" : `1px solid ${G}28`, background: featured ? G : "transparent", color: featured ? INK : dark ? `${G}55` : G, fontFamily: "sans-serif", height: "42px", boxShadow: featured ? `0 5px 20px ${G}25` : "none" }}
+        style={{ border: featured ? "none" : `1px solid ${G}28`, background: featured ? G : "transparent", color: featured ? INK : dark ? `${G}55` : G, fontFamily: "sans-serif", height: "42px", boxShadow: featured ? `0 5px 20px ${G}25` : "none", flexDirection: isRTL(lang) ? "row-reverse" : "row" }}
         onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = "0.82"; }}
         onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = "1"; }}>
-        {beginLabel}<ArrowRight size={11} />
+        {beginLabel}<ArrowRight size={11} style={{ transform: isRTL(lang) ? "scaleX(-1)" : "none" }} />
       </button>
     </div>
   );
@@ -646,9 +610,18 @@ export default function Home() {
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [preview, setPreview] = useState<{ id: number; name: string; ats: boolean } | null>(null);
 
+  // Close language dropdown when clicking outside
+  useEffect(() => {
+    if (!langOpen) return;
+    const handler = (e: MouseEvent) => setLangOpen(false);
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
+  }, [langOpen]);
+
   const LG = LANGS.find(l => l.code === lang)!;
   const dir = LG.dir;
   const font = LG.font;
+  const isAr = isRTL(lang);
 
   const bg   = dark ? INK : ASH;
   const hi   = dark ? "#EDE8E0" : "#1A1410";
@@ -721,10 +694,62 @@ export default function Home() {
     },
   ];
 
+  // ── RTL-aware arrow icon (mirrors for Arabic) ──
+  const ArrowIcon = () => <ArrowRight size={11} strokeWidth={1.5} style={{ transform: isAr ? "scaleX(-1)" : "none" }} />;
+
   return (
     <div key={lang} className="min-h-screen w-full overflow-x-hidden" dir={dir} style={{ background: bg, color: hi, fontFamily: font, transition: "background 0.7s ease, color 0.4s ease" }}>
 
-      <div className="pointer-events-none fixed inset-0 z-0" style={{ opacity: dark ? 0.03 : 0.025, backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")", backgroundSize: "200px" }} />
+      {/* ── RTL-aware global styles ── */}
+      <style>{`
+        /* RTL-aware logical property overrides */
+        [dir="rtl"] .border-r { border-right: none; border-left: 1px solid; border-left-color: inherit; }
+        [dir="rtl"] .last\\:border-r-0:last-child { border-left: none; }
+        [dir="rtl"] .sm\\:border-r { border-right: none; }
+        @media (min-width: 640px) {
+          [dir="rtl"] .sm\\:border-r { border-left: 1px solid; border-left-color: inherit; }
+          [dir="rtl"] .sm\\:last\\:border-r-0:last-child { border-left: none; }
+        }
+        
+        /* Arabic font optimization */
+        [dir="rtl"] {
+          font-feature-settings: "liga" 1, "calt" 1;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          word-spacing: 0.03em;
+          line-height: 2.0;
+        }
+        [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3 {
+          line-height: 1.4;
+          letter-spacing: 0;
+        }
+        [dir="rtl"] .tracking-\\[0\\.22em\\],
+        [dir="rtl"] .tracking-\\[0\\.35em\\],
+        [dir="rtl"] .tracking-\\[0\\.40em\\],
+        [dir="rtl"] .tracking-\\[0\\.24em\\],
+        [dir="rtl"] .tracking-\\[0\\.32em\\],
+        [dir="rtl"] .tracking-\\[0\\.20em\\],
+        [dir="rtl"] .tracking-\\[0\\.16em\\],
+        [dir="rtl"] .tracking-\\[0\\.18em\\],
+        [dir="rtl"] .tracking-\\[0\\.14em\\],
+        [dir="rtl"] .tracking-\\[0\\.10em\\],
+        [dir="rtl"] .tracking-wider,
+        [dir="rtl"] .tracking-widest {
+          letter-spacing: 0.04em !important;
+        }
+        
+        /* Premium scroll behavior */
+        html { scroll-behavior: smooth; }
+        
+        /* Enhanced gradient noise texture */
+        .z-noise { 
+          opacity: ${dark ? 0.03 : 0.025};
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          background-size: 200px;
+        }
+      `}</style>
+
+      <div className="pointer-events-none fixed inset-0 z-0 z-noise" />
       {dark && <div className="pointer-events-none fixed inset-0 -z-10" style={{ background: `radial-gradient(ellipse 55% 35% at 50% -4%,${G}06,transparent 60%)` }} />}
 
       {/* ── NAV ── */}
@@ -743,8 +768,8 @@ export default function Home() {
               </a>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
-            <div className="relative">
+          <div className="flex items-center gap-2" style={{ flexDirection: isAr ? "row-reverse" : "row" }}>
+            <div className="relative" onClick={e => e.stopPropagation()}>
               <button type="button" onClick={() => setLangOpen(o => !o)}
                 className="flex items-center gap-1 text-[9px] font-medium tracking-[0.16em] uppercase px-3 rounded-full transition-all duration-300"
                 style={{ border: `1px solid ${dark ? `${G}20` : `${G}25`}`, color: dark ? `${G}70` : G, height: "30px", fontFamily: "sans-serif", background: "transparent" }}
@@ -755,16 +780,16 @@ export default function Home() {
               <AnimatePresence>
                 {langOpen && (
                   <motion.div initial={{ opacity: 0, y: -6, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -4, scale: 0.98 }} transition={{ duration: 0.18 }}
-                    className="absolute top-9 right-0 rounded-xl overflow-hidden z-50"
-                    style={{ background: dark ? "#111009" : "#F5F1EB", border: dark ? `1px solid rgba(200,169,110,0.12)` : `1px solid ${bdr}`, boxShadow: dark ? "0 8px 32px rgba(0,0,0,0.70)" : "0 8px 24px rgba(0,0,0,0.10)", minWidth: "130px" }}>
+                    className="absolute top-9 rounded-xl overflow-hidden z-50"
+                    style={{ background: dark ? "#111009" : "#F5F1EB", border: dark ? `1px solid rgba(200,169,110,0.12)` : `1px solid ${bdr}`, boxShadow: dark ? "0 8px 32px rgba(0,0,0,0.70)" : "0 8px 24px rgba(0,0,0,0.10)", minWidth: "130px", ...(isAr ? { left: 0 } : { right: 0 }) }}>
                     {LANGS.map(l => (
                       <button key={l.code} type="button" onClick={() => { setLang(l.code); setLangOpen(false); }}
-                        className="w-full flex items-center gap-2 px-4 py-2.5 text-[10px] text-left"
-                        style={{ color: l.code === lang ? (dark ? "#D4AF37" : G) : hi, fontFamily: "sans-serif", background: l.code === lang ? (dark ? "rgba(212,175,55,0.06)" : `${G}06`) : "transparent", fontWeight: l.code === lang ? 600 : 400, border: "none", cursor: "pointer", width: "100%" }}
+                        className="w-full flex items-center gap-2 px-4 py-2.5 text-[10px]"
+                        style={{ color: l.code === lang ? (dark ? "#D4AF37" : G) : hi, fontFamily: "sans-serif", background: l.code === lang ? (dark ? "rgba(212,175,55,0.06)" : `${G}06`) : "transparent", fontWeight: l.code === lang ? 600 : 400, border: "none", cursor: "pointer", width: "100%", textAlign: isAr ? "right" : "left", flexDirection: isAr ? "row-reverse" : "row" }}
                         onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = dark ? "rgba(212,175,55,0.04)" : `${G}04`; }}
                         onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = l.code === lang ? (dark ? "rgba(212,175,55,0.06)" : `${G}06`) : "transparent"; }}>
                         {l.code === lang && <span className="h-1 w-1 rounded-full shrink-0" style={{ background: dark ? "#D4AF37" : G }} />}
-                        <span style={{ marginLeft: l.code === lang ? "0" : "9px" }}>{l.label}</span>
+                        <span style={{ marginInlineStart: l.code === lang ? "0" : "9px" }}>{l.label}</span>
                       </button>
                     ))}
                   </motion.div>
@@ -805,8 +830,7 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal d={0.3} y={40}>
-            {/* h1a / h1b kept exactly as original per user instruction */}
-            <h1 className="font-normal leading-[1.0] tracking-[-0.035em] mb-8 mx-auto" style={{ fontSize: "clamp(44px, 8vw, 96px)", color: hi, maxWidth: "900px" }}>
+            <h1 className="font-normal leading-[1.0] tracking-[-0.035em] mb-8 mx-auto" style={{ fontSize: "clamp(44px, 8vw, 96px)", color: hi, maxWidth: "900px", ...(isAr ? { lineHeight: 1.3, letterSpacing: "-0.01em" } : {}) }}>
               {tr("h1a", lang)}<br />
               <em style={{ fontStyle: "italic", color: G }}>{tr("h1b", lang)}</em>
             </h1>
@@ -815,14 +839,13 @@ export default function Home() {
             <GoldLine />
           </Reveal>
           <Reveal d={0.65} y={20}>
-            <p className="text-[15px] sm:text-[17px] leading-[2.0] max-w-[420px] mx-auto mb-0 px-4 sm:px-0" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300 }}>
+            <p className="text-[15px] sm:text-[17px] leading-[2.0] max-w-[420px] mx-auto mb-0 px-4 sm:px-0" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300, ...(isAr ? { lineHeight: 2.2 } : {}) }}>
               {tr("heroSub", lang)}
             </p>
           </Reveal>
           <div style={{ height: "48px" }} />
           <Reveal d={0.8} y={16}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full px-4 sm:px-0">
-              {/* Primary CTA — upgraded to identity language */}
               <button type="button" onClick={() => setModal(true)}
                 className="flex items-center justify-center gap-2.5 w-full sm:w-auto px-10 text-[10px] font-medium tracking-[0.22em] uppercase rounded-full transition-all duration-300 hover:opacity-90"
                 style={{ background: G, color: INK, height: "50px", fontFamily: "sans-serif", boxShadow: `0 6px 28px ${G}28` }}>
@@ -831,7 +854,7 @@ export default function Home() {
               <a href="#outcomes"
                 className="flex items-center justify-center gap-2 w-full sm:w-auto px-10 text-[10px] font-medium tracking-[0.22em] uppercase rounded-full transition-all duration-300 hover:opacity-65"
                 style={{ border: `1px solid ${G}28`, color: dark ? `${G}60` : G, height: "50px", fontFamily: "sans-serif" }}>
-                {tr("ctaSecondary", lang)} <ArrowRight size={11} strokeWidth={1.5} />
+                {tr("ctaSecondary", lang)} <ArrowIcon />
               </a>
             </div>
           </Reveal>
@@ -844,7 +867,7 @@ export default function Home() {
         <section style={{ borderTop: `1px solid ${bdr}`, borderBottom: `1px solid ${bdr}` }}>
           <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4">
             {AUTHORITY.map(({ n, k }, i) => (
-              <div key={k} className="border-r last:border-r-0" style={{ borderColor: bdr }}>
+              <div key={k} className={`${i < 3 ? "border-r" : ""}`} style={{ borderColor: bdr, ...(isAr ? { borderRight: "none", borderLeft: i < 3 ? `1px solid ${bdr}` : "none" } : {}) }}>
                 <Reveal d={0.06 * i} className="flex flex-col items-center justify-center py-14 px-6 text-center">
                   <p className="text-3xl sm:text-4xl font-normal tracking-tight mb-2" style={{ color: dark ? GL : "#B8962E", fontFamily: "'Georgia',serif" }}>
                     <CountUp value={n} />
@@ -874,25 +897,29 @@ export default function Home() {
         {/* ── DISCIPLINES ── */}
         <section id="disciplines" className="py-40 px-5 sm:px-8">
           <div className="mx-auto max-w-6xl">
-            <Reveal className="mb-24">
-              <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}>{tr("svcEyebrow", lang)}</p>
-              <h2 className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15]" style={{ color: hi, maxWidth: "520px" }}>
-                {tr("svcH2", lang).split("\n").map((line, i) => (
-                  <React.Fragment key={i}>{i > 0 && <br />}{i === 1 ? <em style={{ fontStyle: "italic", color: G }}>{line}</em> : line}</React.Fragment>
-                ))}
-              </h2>
+            <Reveal className="mb-24" >
+              <div style={{ textAlign: isAr ? "right" : "left" }}>
+                <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}>{tr("svcEyebrow", lang)}</p>
+                <h2 className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15]" style={{ color: hi, maxWidth: "520px", ...(isAr ? { marginInlineStart: "auto", marginInlineEnd: 0 } : {}) }}>
+                  {tr("svcH2", lang).split("\n").map((line, i) => (
+                    <React.Fragment key={i}>{i > 0 && <br />}{i === 1 ? <em style={{ fontStyle: "italic", color: G }}>{line}</em> : line}</React.Fragment>
+                  ))}
+                </h2>
+              </div>
             </Reveal>
             <div className="grid sm:grid-cols-3" style={{ borderTop: `1px solid ${bdr}` }}>
               {[{ t: "s1t", b: "s1b", tag: "s1tag", n: "I" }, { t: "s2t", b: "s2b", tag: "s2tag", n: "II" }, { t: "s3t", b: "s3b", tag: "s3tag", n: "III" }].map((s, i) => (
-                <div key={s.n} className="sm:border-r sm:last:border-r-0 border-b sm:border-b-0" style={{ borderColor: bdr }}>
+                <div key={s.n} className={`border-b sm:border-b-0 ${i < 2 ? "sm:border-r" : ""}`} style={{ borderColor: bdr, ...(isAr ? { borderRight: "none", borderLeft: i < 2 ? `1px solid ${bdr}` : "none" } : {}) }}>
                   <Reveal d={0.1 * i} className="p-10 lg:p-12">
-                    <div className="flex items-center gap-4 mb-10">
-                      <p className="text-[10px] tracking-[0.35em] uppercase" style={{ color: dark ? `${G}35` : `${G}60`, fontFamily: "sans-serif" }}>{s.n}</p>
-                      <div className="flex-1 h-px" style={{ background: `linear-gradient(to right, ${G}35, transparent)` }} />
+                    <div style={{ textAlign: isAr ? "right" : "left" }}>
+                      <div className="flex items-center gap-4 mb-10" style={{ flexDirection: isAr ? "row-reverse" : "row" }}>
+                        <p className="text-[10px] tracking-[0.35em] uppercase" style={{ color: dark ? `${G}35` : `${G}60`, fontFamily: "sans-serif" }}>{s.n}</p>
+                        <div className="flex-1 h-px" style={{ background: isAr ? `linear-gradient(to left, ${G}35, transparent)` : `linear-gradient(to right, ${G}35, transparent)` }} />
+                      </div>
+                      <h3 className="text-xl font-normal mb-5 tracking-tight leading-snug" style={{ color: hi }}>{tr(s.t, lang)}</h3>
+                      <p className="text-sm leading-[2.0] mb-10" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300 }}>{tr(s.b, lang)}</p>
+                      <p className="text-[9px] tracking-[0.14em] uppercase" style={{ color: dark ? `${G}35` : `${G}55`, fontFamily: "sans-serif" }}>{tr(s.tag, lang)}</p>
                     </div>
-                    <h3 className="text-xl font-normal mb-5 tracking-tight leading-snug" style={{ color: hi }}>{tr(s.t, lang)}</h3>
-                    <p className="text-sm leading-[2.0] mb-10" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300 }}>{tr(s.b, lang)}</p>
-                    <p className="text-[9px] tracking-[0.14em] uppercase" style={{ color: dark ? `${G}35` : `${G}55`, fontFamily: "sans-serif" }}>{tr(s.tag, lang)}</p>
                   </Reveal>
                 </div>
               ))}
@@ -907,16 +934,16 @@ export default function Home() {
         <section id="portfolio" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}>
           <div className="mx-auto max-w-6xl">
             <Reveal className="mb-6">
-              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
-                <div>
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6" style={{ ...(isAr ? { flexDirection: "column-reverse" } : {}) }}>
+                <div style={{ textAlign: isAr ? "right" : "left" }}>
                   <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}>{tr("tplEyebrow", lang)}</p>
                   <h2 className="text-3xl sm:text-[42px] font-normal tracking-tight" style={{ color: hi }}>
                     <em style={{ fontStyle: "italic", color: G }}>{tr("tplH2", lang)}</em>
                   </h2>
                 </div>
-                <div className="flex items-center gap-3 rounded-2xl px-5 py-3 shrink-0" style={{ background: dark ? `${G}07` : `${G}06`, border: `1px solid ${G}22` }}>
+                <div className="flex items-center gap-3 rounded-2xl px-5 py-3 shrink-0" style={{ background: dark ? `${G}07` : `${G}06`, border: `1px solid ${G}22`, ...(isAr ? { alignSelf: "flex-end" } : {}) }}>
                   <LayoutGrid size={14} color={dark ? `${G}80` : G} strokeWidth={1.5} />
-                  <div>
+                  <div style={{ textAlign: isAr ? "right" : "left" }}>
                     <p className="text-sm font-semibold leading-none" style={{ color: G, fontFamily: "sans-serif" }}>3,000+</p>
                     <p className="text-[9px] mt-0.5" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("tplBadge", lang)}</p>
                   </div>
@@ -924,7 +951,7 @@ export default function Home() {
               </div>
             </Reveal>
             <Reveal d={0.1} className="mb-16">
-              <p className="text-sm leading-[2.0] max-w-2xl" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300 }}>{tr("tplDesc", lang)}</p>
+              <p className="text-sm leading-[2.0] max-w-2xl" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300, textAlign: isAr ? "right" : "left", ...(isAr ? { marginInlineStart: "auto" } : {}) }}>{tr("tplDesc", lang)}</p>
             </Reveal>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
               <AnimatePresence initial={false}>
@@ -945,8 +972,8 @@ export default function Home() {
                             <p className="text-[9px] font-medium tracking-[0.20em] uppercase" style={{ color: G, fontFamily: "sans-serif" }}>{tr("tplPreview", lang)}</p>
                           </div>
                         </div>
-                        <div className="p-5 flex-1 flex flex-col">
-                          <div className="flex items-start justify-between gap-3 mb-1.5">
+                        <div className="p-5 flex-1 flex flex-col" style={{ textAlign: isAr ? "right" : "left" }}>
+                          <div className="flex items-start justify-between gap-3 mb-1.5" style={{ flexDirection: isAr ? "row-reverse" : "row" }}>
                             <h3 className="text-[13px] font-semibold leading-tight" style={{ color: hi, fontFamily: "sans-serif" }}>{cv.name}</h3>
                             <span className="shrink-0 rounded-full px-2 py-0.5 text-[8px] font-medium mt-0.5" style={{ background: cv.ats ? `${G}12` : "rgba(120,100,160,0.08)", color: cv.ats ? G : "#8A6AAA", border: `1px solid ${cv.ats ? `${G}22` : "rgba(120,100,160,0.18)"}`, fontFamily: "sans-serif" }}>
                               {cv.ats ? tr("tplAts", lang) : tr("tplDesign", lang)}
@@ -969,7 +996,7 @@ export default function Home() {
                 ? <button type="button" onClick={() => setVisible(n => Math.min(n + PAGE_SIZE, TEMPLATES.length))}
                     className="inline-flex items-center gap-2.5 px-8 text-[9px] font-medium tracking-[0.22em] uppercase rounded-full transition-all hover:opacity-75"
                     style={{ border: `1px solid ${G}28`, color: dark ? `${G}55` : G, height: "46px", fontFamily: "sans-serif", background: "transparent" }}>
-                    <LayoutGrid size={12} strokeWidth={1.5} />{tr("tplMore", lang)}<ArrowRight size={11} strokeWidth={1.5} />
+                    <LayoutGrid size={12} strokeWidth={1.5} />{tr("tplMore", lang)}<ArrowIcon />
                   </button>
                 : <Reveal>
                     <button type="button" onClick={() => setModal(true)} className="text-[9px] tracking-[0.24em] uppercase hover:opacity-60 transition-opacity" style={{ color: dark ? `${G}45` : G, fontFamily: "sans-serif", background: "none", border: "none", cursor: "pointer" }}>{tr("tplDone", lang)}</button>
@@ -982,19 +1009,21 @@ export default function Home() {
         <section id="method" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}>
           <div className="mx-auto max-w-6xl">
             <Reveal className="mb-24">
-              <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}>{tr("procEyebrow", lang)}</p>
-              <h2 className="text-3xl sm:text-[42px] font-normal tracking-tight" style={{ color: hi }}>{tr("procH2", lang)}</h2>
+              <div style={{ textAlign: isAr ? "right" : "left" }}>
+                <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}>{tr("procEyebrow", lang)}</p>
+                <h2 className="text-3xl sm:text-[42px] font-normal tracking-tight" style={{ color: hi }}>{tr("procH2", lang)}</h2>
+              </div>
             </Reveal>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {STEPS.map(({ n, t, b, Ic }, i) => (
                 <Reveal key={n} d={0.08 * i}>
-                  <div className="group p-8 rounded-2xl h-full relative transition-all duration-500" style={{ background: card, border: `1px solid ${bdr}` }}>
+                  <div className="group p-8 rounded-2xl h-full relative transition-all duration-500" style={{ background: card, border: `1px solid ${bdr}`, textAlign: isAr ? "right" : "left" }}>
                     <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{ boxShadow: `0 0 0 1px ${G}18,0 0 32px ${G}07` }} />
                     <p className="text-[28px] font-normal mb-8" style={{ color: G, fontFamily: "'Georgia',serif", opacity: 0.28 }}>{n}</p>
                     <Ic size={14} color={G} strokeWidth={1.5} style={{ opacity: 0.55 }} />
                     <h3 className="mt-4 text-[14px] font-semibold" style={{ color: hi, fontFamily: "sans-serif" }}>{t}</h3>
                     <p className="mt-2.5 text-[12px] leading-[1.9]" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300 }}>{b}</p>
-                    <div className="mt-8 h-px w-5 opacity-25" style={{ background: G }} />
+                    <div className="mt-8 h-px w-5 opacity-25" style={{ background: G, ...(isAr ? { marginInlineStart: "auto" } : {}) }} />
                   </div>
                 </Reveal>
               ))}
@@ -1006,13 +1035,15 @@ export default function Home() {
         <section id="investment" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}>
           <div className="mx-auto max-w-[1400px]">
             <Reveal className="mb-24">
-              <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}>{tr("prcEyebrow", lang)}</p>
-              <h2 className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15]" style={{ color: hi }}>
-                {tr("prcH2", lang).split("\n").map((line, i) => (
-                  <React.Fragment key={i}>{i > 0 && <br />}{i === 1 ? <em style={{ fontStyle: "italic", color: G }}>{line}</em> : line}</React.Fragment>
-                ))}
-              </h2>
-              <p className="mt-4 text-[11px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("prcNote", lang)}</p>
+              <div style={{ textAlign: isAr ? "right" : "left" }}>
+                <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}>{tr("prcEyebrow", lang)}</p>
+                <h2 className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15]" style={{ color: hi }}>
+                  {tr("prcH2", lang).split("\n").map((line, i) => (
+                    <React.Fragment key={i}>{i > 0 && <br />}{i === 1 ? <em style={{ fontStyle: "italic", color: G }}>{line}</em> : line}</React.Fragment>
+                  ))}
+                </h2>
+                <p className="mt-4 text-[11px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("prcNote", lang)}</p>
+              </div>
             </Reveal>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-start">
               {TIERS.map((tier, i) => (
@@ -1032,6 +1063,7 @@ export default function Home() {
                     hi={hi}
                     onBegin={() => setModal(true)}
                     beginLabel={tr("prcBegin", lang)}
+                    lang={lang}
                   />
                 </Reveal>
               ))}
@@ -1046,21 +1078,23 @@ export default function Home() {
         <section id="outcomes" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}>
           <div className="mx-auto max-w-6xl">
             <Reveal className="mb-20">
-              <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}>{tr("tmEyebrow", lang)}</p>
-              <h2 className="text-3xl sm:text-[42px] font-normal tracking-tight" style={{ color: hi }}>
-                {tr("tmH2a", lang)}<br />
-                <em style={{ fontStyle: "italic", color: G }}>{tr("tmH2b", lang)}</em>
-              </h2>
-              <div className="mt-5 flex items-center gap-3">
-                <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <svg key={i} width="11" height="11" viewBox="0 0 14 14" fill={G} opacity="0.65"><path d="M7 1l1.5 4H13l-3.5 2.5 1.5 4L7 9l-4 2.5 1.5-4L1 5h4.5z" /></svg>)}</div>
-                <span className="text-[10px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("tmStars", lang)}</span>
+              <div style={{ textAlign: isAr ? "right" : "left" }}>
+                <p className="text-[9px] font-medium tracking-[0.40em] uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif" }}>{tr("tmEyebrow", lang)}</p>
+                <h2 className="text-3xl sm:text-[42px] font-normal tracking-tight" style={{ color: hi }}>
+                  {tr("tmH2a", lang)}<br />
+                  <em style={{ fontStyle: "italic", color: G }}>{tr("tmH2b", lang)}</em>
+                </h2>
+                <div className="mt-5 flex items-center gap-3" style={{ justifyContent: isAr ? "flex-end" : "flex-start" }}>
+                  <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <svg key={i} width="11" height="11" viewBox="0 0 14 14" fill={G} opacity="0.65"><path d="M7 1l1.5 4H13l-3.5 2.5 1.5 4L7 9l-4 2.5 1.5-4L1 5h4.5z" /></svg>)}</div>
+                  <span className="text-[10px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("tmStars", lang)}</span>
+                </div>
               </div>
             </Reveal>
             <div className="hidden lg:grid grid-cols-3 gap-5" style={{ height: "680px", maskImage: "linear-gradient(to bottom,transparent,black 10%,black 90%,transparent)", WebkitMaskImage: "linear-gradient(to bottom,transparent,black 10%,black 90%,transparent)" }}>
-              {cols.map((col, ci) => <TCol key={ci} items={col} dark={dark} dur={[58, 72, 48][ci]} rev={ci === 1} />)}
+              {cols.map((col, ci) => <TCol key={ci} items={col} dark={dark} dur={[58, 72, 48][ci]} rev={ci === 1} lang={lang} />)}
             </div>
             <div className="lg:hidden overflow-hidden" style={{ height: "500px", maskImage: "linear-gradient(to bottom,transparent,black 8%,black 92%,transparent)", WebkitMaskImage: "linear-gradient(to bottom,transparent,black 8%,black 92%,transparent)" }}>
-              <TCol items={TMS} dark={dark} dur={90} />
+              <TCol items={TMS} dark={dark} dur={90} lang={lang} />
             </div>
           </div>
         </section>
@@ -1105,7 +1139,7 @@ export default function Home() {
               <img src="/images/logo.png" alt="Zenith Dubai CV" style={{ height: "32px", width: "auto", objectFit: "contain", display: "block", borderRadius: "5px", filter: logoFilter, transition: "filter 0.4s ease", maxWidth: "120px" }} />
               <span className="text-[9px] tracking-[0.10em]" style={{ color: dark ? `${G}25` : sub, fontFamily: "sans-serif", whiteSpace: "nowrap" }}>{tr("tagline", lang)}</span>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4" style={{ flexDirection: isAr ? "row-reverse" : "row" }}>
               <button type="button" onClick={() => setModal(true)} className="flex items-center gap-1.5 text-[9px] tracking-[0.16em] uppercase transition-all duration-300" style={{ color: dark ? `${G}22` : `${hi}35`, fontFamily: "sans-serif", background: "none", border: "none", cursor: "pointer", padding: 0 }}
                 onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = dark ? `${G}60` : hi; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = dark ? `${G}22` : `${hi}35`; }}>
@@ -1135,13 +1169,13 @@ export default function Home() {
 
       {/* ── FLOATING ACTIONS ── */}
       <button type="button" onClick={() => setModal(true)} aria-label="Request Review"
-        className="fixed bottom-24 right-6 h-11 w-11 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40"
-        style={{ background: G, boxShadow: `0 4px 22px ${G}35` }}>
+        className="fixed bottom-24 h-11 w-11 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40"
+        style={{ background: G, boxShadow: `0 4px 22px ${G}35`, ...(isAr ? { left: "1.5rem" } : { right: "1.5rem" }) }}>
         <Mail size={13} color={INK} strokeWidth={2} />
       </button>
       <a href={`https://wa.me/${WA}?text=${encodeURIComponent("Hello. I would like to request a private review.")}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
-        className="fixed bottom-8 right-6 h-11 w-11 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40"
-        style={{ background: "#25D366", boxShadow: "0 4px 22px rgba(37,211,102,0.28)" }}>
+        className="fixed bottom-8 h-11 w-11 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40"
+        style={{ background: "#25D366", boxShadow: "0 4px 22px rgba(37,211,102,0.28)", ...(isAr ? { left: "1.5rem" } : { right: "1.5rem" }) }}>
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
           <path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="white" strokeWidth="1.6" strokeLinejoin="round" />
           <path d="M9.35 8.9c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.1.8 2.6.7 3.1.6.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3-.1-.2-.2-.3-.5-.4l-1.9-.9c-.2-.1-.4-.1-.6.1-.2.2-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5l.4-.5c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.5l-.8-2Z" fill="white" />
