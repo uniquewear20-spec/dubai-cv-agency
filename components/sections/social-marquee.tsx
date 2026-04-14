@@ -70,6 +70,13 @@ export function Marquee({
       style={fade ? { maskImage, WebkitMaskImage: maskImage } : undefined}
       onMouseEnter={() => pauseOnHover && setPaused(true)}
       onMouseLeave={() => pauseOnHover && setPaused(false)}
+      /* ─── CRITICAL RTL FIX ───
+         Force LTR on the marquee wrapper. CSS translateX animations
+         break under dir="rtl" because the browser inverts the X axis,
+         causing the marquee to scroll the wrong way or stutter.
+         The marquee is purely decorative/visual, so forcing LTR here
+         has zero impact on text readability. ─── */
+      dir="ltr"
     >
       {copyWidth > 0 && (
         <style>{`
