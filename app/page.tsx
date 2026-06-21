@@ -65,7 +65,7 @@ const TX: Record<string, Record<Lang, string>> = {
   ctaPrimary:   { en: "Enter Executive Tier",             ar: "ادخل المستوى التنفيذي",      fr: "Accéder au niveau Exécutif" },
   ctaSecondary: { en: "View Outcomes",                    ar: "استعرض النتائج",              fr: "Voir les résultats" },
   scarcity:     { en: "By application only · Limited intake", ar: "بالطلب فقط · قبول محدود", fr: "Sur candidature uniquement · Admissions limitées" },
-  mAts:     { en: "ATS Clearance",       ar: "اجتياز الفرز الآلي",  fr: "Taux de passage ATS" },
+  mAts:     { en: "ATS Clearance",       ar: "اjتياز الفرز الآلي",  fr: "Taux de passage ATS" },
   mDraft:   { en: "48h Delivery",        ar: "تسليم خلال 48 ساعة",  fr: "Livraison 48h" },
   mClients: { en: "Careers Launched",    ar: "مسار مهني مُطلَق",    fr: "Carrières positionnées" },
   mMarkets: { en: "Global Markets",      ar: "سوق عالمي",           fr: "Marchés actifs" },
@@ -305,13 +305,21 @@ function UZ({ label, hint, accept, Ic, file, onFile, onClear, dark, busy, dropLa
   return (<div><label className="mb-1.5 block text-[9px] font-medium uppercase" style={{ color: s, letterSpacing: "0.22em" }}>{label}</label>{file ? (<div className="flex items-center gap-3 rounded-xl border px-4 py-3" style={{ borderColor: `${G}45`, background: dark ? `${G}07` : `${G}05` }}><Ic size={13} color={G} strokeWidth={1.5} className="shrink-0" /><div className="min-w-0 flex-1"><p className="truncate text-xs" style={{ color: h }}>{file.name}</p><p className="text-[9px]" style={{ color: s }}>{fb(file.size)}</p></div><button type="button" onClick={onClear} disabled={busy} className="opacity-25 hover:opacity-50 p-1" style={{ color: s }}><Trash2 size={11} /></button></div>) : (<div className="flex cursor-pointer flex-col items-center gap-1.5 rounded-xl border border-dashed px-4 py-4 text-center transition-all" style={{ borderColor: drag ? `${G}55` : dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }} onClick={() => !busy && inp.current?.click()} onDragOver={e => { e.preventDefault(); setDrag(true); }} onDragLeave={() => setDrag(false)} onDrop={e => { e.preventDefault(); setDrag(false); const f = e.dataTransfer.files[0]; if (f) onFile(f); }} role="button" tabIndex={0} onKeyDown={e => e.key === "Enter" && inp.current?.click()}><Upload size={12} color={drag ? G : s} strokeWidth={1.5} /><p className="text-[11px]" style={{ color: drag ? G : s }}>{dropLabel}</p><p className="text-[9px] opacity-40" style={{ color: s }}>{hint}</p></div>)}<input ref={inp} type="file" accept={accept} className="hidden" disabled={busy} onChange={e => { const f = e.target.files?.[0]; if (f) onFile(f); }} /></div>);
 }
 
-// ── Testimonial Card — uses translated text ─────────────────────────────────
+// ── Testimonial Card — FIXED WIDTH (w-72) to match reference component ───────
 function TC({ t, dark, lang }: { t: typeof TMS[0]; dark: boolean; lang: Lang }) {
   const ac = IH[t.ind] ?? G;
   const txt = t.text[lang] || t.text.en;
   const highlight = t.hl[lang] || t.hl.en;
   return (
-    <div className="flex flex-col p-5 mb-3 rounded-xl" dir={isRTL(lang) ? "rtl" : "ltr"} style={{ background: dark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.88)", border: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`, fontFamily: isRTL(lang) ? "'IBM Plex Sans Arabic','Tahoma',sans-serif" : "sans-serif" }}>
+    <div
+      className="flex flex-col p-5 mx-3 rounded-xl w-72 shrink-0"
+      dir={isRTL(lang) ? "rtl" : "ltr"}
+      style={{
+        background: dark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.88)",
+        border: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`,
+        fontFamily: isRTL(lang) ? "'IBM Plex Sans Arabic','Tahoma',sans-serif" : "sans-serif",
+      }}
+    >
       <p style={{ fontSize: "11px", lineHeight: "1.9", marginBottom: "14px", color: dark ? "#8A847E" : "#5A4E44", fontStyle: "italic", fontWeight: 400, textAlign: isRTL(lang) ? "right" : "left" }}>"{txt}"</p>
       <div style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`, paddingTop: "11px", display: "flex", alignItems: "center", gap: "10px", direction: isRTL(lang) ? "rtl" : "ltr" }}>
         <img src={t.img} alt={t.name} className="h-7 w-7 rounded-full object-cover shrink-0" style={{ filter: "grayscale(50%) contrast(1.05)" }} />
@@ -325,12 +333,17 @@ function TC({ t, dark, lang }: { t: typeof TMS[0]; dark: boolean; lang: Lang }) 
   );
 }
 
-// ── Testimonial Column — force LTR on motion animation to prevent RTL breakage ──
-function TCol({ items, dark, dur = 55, rev = false, lang }: { items: typeof TMS; dark: boolean; dur?: number; rev?: boolean; lang: Lang }) {
+// ── Testimonial Row — horizontal marquee with fixed-width cards ──────────────
+// Force dir=ltr so the translateX animation runs correctly regardless of page direction.
+function TRow({ items, dark, dur = 55, rev = false, lang }: { items: typeof TMS; dark: boolean; dur?: number; rev?: boolean; lang: Lang }) {
   const doubled = [...items, ...items];
   return (
-    <div className="overflow-hidden" dir="ltr">
-      <motion.div animate={{ y: rev ? ["0%", "50%"] : ["0%", "-50%"] }} transition={{ duration: dur, ease: "linear", repeat: Infinity, repeatType: "loop" }}>
+    <div className="relative w-full overflow-hidden" dir="ltr">
+      <motion.div
+        className="flex w-max"
+        animate={{ x: rev ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        transition={{ duration: dur, ease: "linear", repeat: Infinity, repeatType: "loop" }}
+      >
         {doubled.map((tm, i) => <TC key={`${tm.name}-${i}`} t={tm} dark={dark} lang={lang} />)}
       </motion.div>
     </div>
@@ -389,7 +402,6 @@ export default function Home() {
   const nav  = dark ? "rgba(10,9,7,0.97)" : "rgba(247,243,238,0.97)";
   const socialLinkColor = dark ? `${G}55` : `${G}70`;
 
-  const cols = [TMS.filter((_, i) => i % 3 === 0), TMS.filter((_, i) => i % 3 === 1), TMS.filter((_, i) => i % 3 === 2)];
   const wlMsg = wl("Hello. I would like to request a private review.");
   const shown = TEMPLATES.slice(0, visible);
   const hasMore = visible < TEMPLATES.length;
@@ -496,12 +508,14 @@ export default function Home() {
 
         <CustomPackageBuilder dark={dark} lang={lang} onEnquire={(services: any, total: any) => { setModal(true); }} />
 
-        {/* ── OUTCOMES — force LTR on the grid to prevent column collapse ── */}
+        {/* ── OUTCOMES — two horizontal marquee rows with fixed-width cards ── */}
         <section id="outcomes" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}><div className="mx-auto max-w-6xl">
           <Reveal className="mb-20"><div style={{ textAlign: isAr ? "right" : "left" }} dir={isAr ? "rtl" : "ltr"}><p className="text-[9px] font-medium uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif", letterSpacing: isAr ? "0.08em" : "0.40em" }}>{tr("tmEyebrow", lang)}</p><h2 className="text-3xl sm:text-[42px] font-normal tracking-tight" style={{ color: hi }}>{tr("tmH2a", lang)}<br /><em style={{ fontStyle: "italic", color: G }}>{tr("tmH2b", lang)}</em></h2><div className="mt-5 flex items-center gap-3"><div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <svg key={i} width="11" height="11" viewBox="0 0 14 14" fill={G} opacity="0.65"><path d="M7 1l1.5 4H13l-3.5 2.5 1.5 4L7 9l-4 2.5 1.5-4L1 5h4.5z" /></svg>)}</div><span className="text-[10px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("tmStars", lang)}</span></div></div></Reveal>
-          {/* Force dir=ltr on the testimonial grid so all 3 columns render properly */}
-          <div dir="ltr" className="hidden lg:grid grid-cols-3 gap-5" style={{ height: "680px", maskImage: "linear-gradient(to bottom,transparent,black 10%,black 90%,transparent)", WebkitMaskImage: "linear-gradient(to bottom,transparent,black 10%,black 90%,transparent)" }}>{cols.map((col, ci) => <TCol key={ci} items={col} dark={dark} dur={[58, 72, 48][ci]} rev={ci === 1} lang={lang} />)}</div>
-          <div dir="ltr" className="lg:hidden overflow-hidden" style={{ height: "500px", maskImage: "linear-gradient(to bottom,transparent,black 8%,black 92%,transparent)", WebkitMaskImage: "linear-gradient(to bottom,transparent,black 8%,black 92%,transparent)" }}><TCol items={TMS} dark={dark} dur={90} lang={lang} /></div>
+          {/* Two horizontal marquee rows — fixed-width (w-72) cards, matches reference */}
+          <div className="flex flex-col gap-5" style={{ maskImage: "linear-gradient(to right,transparent,black 6%,black 94%,transparent)", WebkitMaskImage: "linear-gradient(to right,transparent,black 6%,black 94%,transparent)" }}>
+            <TRow items={TMS.slice(0, 4)} dark={dark} dur={55} rev={false} lang={lang} />
+            <TRow items={TMS.slice(4, 8)} dark={dark} dur={50} rev={true} lang={lang} />
+          </div>
         </div></section>
 
         <SocialMarquee dark={dark} />
@@ -513,7 +527,7 @@ export default function Home() {
       {/* ── FOOTER ── */}
       <footer className="relative py-10 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}>{dark && <div aria-hidden className="absolute top-0 inset-x-0 h-px pointer-events-none" style={{ background: `linear-gradient(90deg,transparent 0%,rgba(200,169,110,0.06) 15%,rgba(200,169,110,0.28) 50%,rgba(200,169,110,0.06) 85%,transparent 100%)` }} />}<div className="mx-auto max-w-6xl flex flex-col gap-5"><div className="flex flex-wrap items-center justify-between gap-4"><div className="flex items-center gap-3"><img src="/images/logo.png" alt="Zenith Dubai CV" style={{ height: "32px", width: "auto", objectFit: "contain", display: "block", borderRadius: "5px", filter: logoFilter, maxWidth: "120px" }} /><span className="text-[9px]" style={{ color: dark ? `${G}25` : sub, fontFamily: "sans-serif", whiteSpace: "nowrap", letterSpacing: "0.10em" }}>{tr("tagline", lang)}</span></div><div className="flex items-center gap-4"><button type="button" onClick={() => setModal(true)} className="flex items-center gap-1.5 text-[9px] uppercase transition-all duration-300" style={{ color: dark ? `${G}22` : `${hi}35`, fontFamily: "sans-serif", background: "none", border: "none", cursor: "pointer", padding: 0, letterSpacing: "0.16em" }} onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = dark ? `${G}60` : hi; }} onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = dark ? `${G}22` : `${hi}35`; }}><Mail size={9} strokeWidth={1.5} />{EM}</button><span style={{ color: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)", fontSize: "9px" }}>·</span><a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[9px] uppercase transition-all duration-300" style={{ color: dark ? "rgba(74,154,90,0.32)" : "#4A9A5A55", fontFamily: "sans-serif", textDecoration: "none", letterSpacing: "0.16em" }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#4A9A5A"; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = dark ? "rgba(74,154,90,0.32)" : "#4A9A5A55"; }}><svg viewBox="0 0 24 24" width="9" height="9" fill="none"><path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /></svg>{tr("footerWA", lang)}</a></div></div><div className="h-px" style={{ background: bdr }} /><div className="flex flex-wrap items-center gap-x-4 gap-y-2"><p className="text-[9px]" style={{ color: dark ? `${G}10` : `${hi}20`, fontFamily: "sans-serif" }}>© {new Date().getFullYear()} Zenith Dubai CV</p>{[["Privacy Policy", "/privacy"], ["Terms of Service", "/terms"], ["Refund Policy", "/refund"]].map(([label, href]) => (<React.Fragment key={href}><span style={{ color: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)", fontSize: "9px" }}>·</span><a href={href} className="text-[9px] transition-opacity hover:opacity-60" style={{ color: dark ? `${G}18` : `${hi}30`, fontFamily: "sans-serif", textDecoration: "none" }}>{label}</a></React.Fragment>))}</div></div></footer>
 
-      {/* ── FLOATING ACTIONS — positioned based on direction ── */}
+      {/* ── FLOATING ACTIONS — positioned based on direction (KEEP THIS — the correct pair) ── */}
       <button type="button" onClick={() => setModal(true)} aria-label="Request Review" className="fixed bottom-24 h-11 w-11 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40" style={{ background: G, boxShadow: `0 4px 22px ${G}35`, insetInlineEnd: "1.5rem" }}><Mail size={13} color={INK} strokeWidth={2} /></button>
       <a href={`https://wa.me/${WA}?text=${encodeURIComponent("Hello. I would like to request a private review.")}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="fixed bottom-8 h-11 w-11 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40" style={{ background: "#25D366", boxShadow: "0 4px 22px rgba(37,211,102,0.28)", insetInlineEnd: "1.5rem" }}><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="white" strokeWidth="1.6" strokeLinejoin="round" /><path d="M9.35 8.9c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.1.8 2.6.7 3.1.6.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3-.1-.2-.2-.3-.5-.4l-1.9-.9c-.2-.1-.4-.1-.6.1-.2.2-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5l.4-.5c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.5l-.8-2Z" fill="white" /></svg></a>
 
