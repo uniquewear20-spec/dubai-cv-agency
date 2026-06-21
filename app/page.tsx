@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import CustomPackageBuilder from "@/components/sections/CustomPackageBuilder";
 import TeamMarqueeSection from "@/components/sections/team";
+import HeroBackgroundPaths from "@/components/ui/hero-background-paths";
 
 // ── Tokens ──────────────────────────────────────────────────────────────────
 const G = "#C8A96E", GL = "#E2C98E", INK = "#0A0907", ASH = "#F7F3EE";
@@ -470,13 +471,18 @@ export default function Home() {
 
         {/* ── HERO ── */}
         <section className="relative min-h-[98vh] flex flex-col items-center justify-center px-5 sm:px-8 text-center overflow-hidden">
+          {/* Animated gold paths backdrop — sits behind all hero content */}
+          <HeroBackgroundPaths dark={dark} />
+          {/* Hero content wrapper — z-10 keeps text/CTAs above the animated lines */}
+          <div className="relative z-10 flex flex-col items-center w-full">
           <Reveal d={0.1} y={12}><div className="inline-flex items-center gap-2 mb-12 px-4 py-1.5 rounded-full" style={{ border: `1px solid ${G}22`, background: dark ? `${G}06` : `${G}04` }}><span className="h-1 w-1 rounded-full animate-pulse" style={{ background: G }} /><span className="text-[8px] font-medium uppercase" style={{ color: dark ? `${G}80` : G, fontFamily: "sans-serif", letterSpacing: isAr ? "0.08em" : "0.35em" }}>{tr("scarcity", lang)}</span></div></Reveal>
           <Reveal d={0.3} y={40}><h1 className="font-normal mb-8 mx-auto" style={{ fontSize: "clamp(44px, 8vw, 96px)", color: hi, maxWidth: "900px", lineHeight: isAr ? 1.3 : 1.0, letterSpacing: isAr ? "-0.01em" : "-0.035em" }}>{tr("h1a", lang)}<br /><em style={{ fontStyle: "italic", color: G }}>{tr("h1b", lang)}</em></h1></Reveal>
           <Reveal d={0.55} y={0} className="w-full max-w-xs mb-10 mx-auto"><GoldLine /></Reveal>
           <Reveal d={0.65} y={20}><p className="text-[15px] sm:text-[17px] max-w-[420px] mx-auto mb-0 px-4 sm:px-0" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300, lineHeight: isAr ? 2.2 : 2.0 }}>{tr("heroSub", lang)}</p></Reveal>
           <div style={{ height: "48px" }} />
           <Reveal d={0.8} y={16}><div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full px-4 sm:px-0"><button type="button" onClick={() => setModal(true)} className="flex items-center justify-center gap-2.5 w-full sm:w-auto px-10 text-[10px] font-medium uppercase rounded-full transition-all duration-300 hover:opacity-90" style={{ background: G, color: INK, height: "50px", fontFamily: "sans-serif", boxShadow: `0 6px 28px ${G}28`, letterSpacing: isAr ? "0.05em" : "0.22em" }}>{tr("ctaPrimary", lang)}</button><a href="#outcomes" className="flex items-center justify-center gap-2 w-full sm:w-auto px-10 text-[10px] font-medium uppercase rounded-full transition-all duration-300 hover:opacity-65" style={{ border: `1px solid ${G}28`, color: dark ? `${G}60` : G, height: "50px", fontFamily: "sans-serif", letterSpacing: isAr ? "0.05em" : "0.22em" }}>{tr("ctaSecondary", lang)} <ArrowRight size={11} strokeWidth={1.5} style={{ transform: isAr ? "scaleX(-1)" : "none" }} /></a></div></Reveal>
-          <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2" initial={{ opacity: 0 }} animate={{ opacity: dark ? 0.12 : 0.2 }} transition={{ delay: 2.5, duration: 1.5 }}><motion.div className="w-px h-10" style={{ background: hi }} animate={{ scaleY: [1, 0, 1], transformOrigin: "top" }} transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }} /></motion.div>
+          </div>
+          <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10" initial={{ opacity: 0 }} animate={{ opacity: dark ? 0.12 : 0.2 }} transition={{ delay: 2.5, duration: 1.5 }}><motion.div className="w-px h-10" style={{ background: hi }} animate={{ scaleY: [1, 0, 1], transformOrigin: "top" }} transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }} /></motion.div>
         </section>
 
         {/* ── PROOF METRICS ── */}
