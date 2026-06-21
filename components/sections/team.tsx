@@ -62,32 +62,67 @@ const PROFILES: ProfileCard[] = Array.from({ length: 20 }, (_, i) => ({
   badge: (i % 3 === 0 ? "ai" : i % 3 === 1 ? "linkedin" : "recruiter") as "ai" | "linkedin" | "recruiter",
 }));
 
+// Fixed card dimensions in pixels so nothing can collapse under RTL.
+const CARD_W = 208; // matches old w-52 (13rem)
+const IMG_H = 268;
+
 function ProfilePhotoCard({ card, dark, lang }: { card: ProfileCard; dark: boolean; lang: Lang }) {
   const badgeColor = card.badge === "ai" ? "#8A6AAA" : card.badge === "linkedin" ? G : "#4A8A6A";
 
   return (
-    <div className="relative shrink-0 w-52 cursor-default select-none group">
-      <div className="rounded-2xl overflow-hidden transition-all duration-500"
+    // Force LTR on the entire card shell with an explicit pixel width so the
+    // page's RTL context can never shrink it. Caption flips direction below.
+    <div
+      className="relative shrink-0 cursor-default select-none group"
+      dir="ltr"
+      style={{ width: `${CARD_W}px` }}
+    >
+      <div
+        className="rounded-2xl overflow-hidden transition-all duration-500"
         style={{
           border: `1px solid rgba(200,169,110,0.10)`,
           background: dark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.92)",
           boxShadow: "0 2px 16px rgba(0,0,0,0.22)",
-        }}>
-        <div className="relative overflow-hidden" style={{ height: "268px" }}>
+        }}
+      >
+        {/* Image box: explicit pixel width + height, image absolutely pinned to fill */}
+        <div
+          className="relative overflow-hidden"
+          style={{ width: `${CARD_W}px`, height: `${IMG_H}px` }}
+        >
           <img
             src={card.image}
             alt={card.label[lang]}
-            className="w-full h-full object-cover object-top transition-all duration-700 
-                       grayscale group-hover:grayscale-0 group-hover:scale-[1.05] group-hover:brightness-[1.05]"
+            className="transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-[1.05] group-hover:brightness-[1.05]"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "top center",
+              display: "block",
+            }}
           />
-          <div className="absolute inset-x-0 bottom-0 pointer-events-none" style={{ height: "65%", background: "linear-gradient(to top, rgba(10,9,7,0.85) 0%, transparent 100%)" }} />
-          <div className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full z-20" style={{ background: "rgba(10,9,7,0.85)", backdropFilter: "blur(8px)", border: `1px solid ${badgeColor}30` }}>
+          <div
+            className="absolute inset-x-0 bottom-0 pointer-events-none z-10"
+            style={{ height: "65%", background: "linear-gradient(to top, rgba(10,9,7,0.85) 0%, transparent 100%)" }}
+          />
+          <div
+            className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full z-20"
+            style={{ background: "rgba(10,9,7,0.85)", backdropFilter: "blur(8px)", border: `1px solid ${badgeColor}30` }}
+          >
             <Sparkles size={8} strokeWidth={1.5} color={badgeColor} />
             <span className="text-[8px] font-medium tracking-[0.18em] uppercase" style={{ color: badgeColor, fontFamily: "sans-serif" }}>{card.badge}</span>
           </div>
         </div>
-        {/* Card text uses RTL direction for Arabic */}
-        <div className="px-4 py-3" dir={isRTL(lang) ? "rtl" : "ltr"} style={{ borderTop: `1px solid rgba(200,169,110,0.08)`, textAlign: isRTL(lang) ? "right" : "left" }}>
+        {/* Caption flips to RTL for Arabic; card shell stays LTR */}
+        <div
+          className="px-4 py-3"
+          dir={isRTL(lang) ? "rtl" : "ltr"}
+          style={{ borderTop: `1px solid rgba(200,169,110,0.08)`, textAlign: isRTL(lang) ? "right" : "left" }}
+        >
           <p className="text-[11px] font-semibold leading-tight" style={{ color: dark ? "#C8C0B8" : "#1A1410", fontFamily: "sans-serif" }}>{card.label[lang]}</p>
           <p className="text-[9px] mt-0.5" style={{ color: dark ? "#5A5450" : "#9A8E84", fontFamily: "sans-serif", letterSpacing: isRTL(lang) ? "0.02em" : "0.10em" }}>{card.sublabel[lang]}</p>
         </div>

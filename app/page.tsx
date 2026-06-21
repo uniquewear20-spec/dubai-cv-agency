@@ -10,7 +10,6 @@ import {
   Upload, FileText, ImageIcon, Trash2, CreditCard, ArrowRight,
   Globe, LayoutGrid,
 } from "lucide-react";
-import SocialMarquee from "@/components/sections/social-marquee";
 import CustomPackageBuilder from "@/components/sections/CustomPackageBuilder";
 import TeamMarqueeSection from "@/components/sections/team";
 
@@ -508,17 +507,18 @@ export default function Home() {
 
         <CustomPackageBuilder dark={dark} lang={lang} onEnquire={(services: any, total: any) => { setModal(true); }} />
 
-        {/* ── OUTCOMES — two horizontal marquee rows with fixed-width cards ── */}
-        <section id="outcomes" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}><div className="mx-auto max-w-6xl">
-          <Reveal className="mb-20"><div style={{ textAlign: isAr ? "right" : "left" }} dir={isAr ? "rtl" : "ltr"}><p className="text-[9px] font-medium uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif", letterSpacing: isAr ? "0.08em" : "0.40em" }}>{tr("tmEyebrow", lang)}</p><h2 className="text-3xl sm:text-[42px] font-normal tracking-tight" style={{ color: hi }}>{tr("tmH2a", lang)}<br /><em style={{ fontStyle: "italic", color: G }}>{tr("tmH2b", lang)}</em></h2><div className="mt-5 flex items-center gap-3"><div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <svg key={i} width="11" height="11" viewBox="0 0 14 14" fill={G} opacity="0.65"><path d="M7 1l1.5 4H13l-3.5 2.5 1.5 4L7 9l-4 2.5 1.5-4L1 5h4.5z" /></svg>)}</div><span className="text-[10px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("tmStars", lang)}</span></div></div></Reveal>
-          {/* Two horizontal marquee rows — fixed-width (w-72) cards, matches reference */}
-          <div className="flex flex-col gap-5" style={{ maskImage: "linear-gradient(to right,transparent,black 6%,black 94%,transparent)", WebkitMaskImage: "linear-gradient(to right,transparent,black 6%,black 94%,transparent)" }}>
+        {/* ── OUTCOMES — header contained, marquee rows break out edge-to-edge ── */}
+        <section id="outcomes" className="py-40" style={{ borderTop: `1px solid ${bdr}` }}>
+          {/* Header stays within the centered container */}
+          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+            <Reveal className="mb-20"><div style={{ textAlign: isAr ? "right" : "left" }} dir={isAr ? "rtl" : "ltr"}><p className="text-[9px] font-medium uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif", letterSpacing: isAr ? "0.08em" : "0.40em" }}>{tr("tmEyebrow", lang)}</p><h2 className="text-3xl sm:text-[42px] font-normal tracking-tight" style={{ color: hi }}>{tr("tmH2a", lang)}<br /><em style={{ fontStyle: "italic", color: G }}>{tr("tmH2b", lang)}</em></h2><div className="mt-5 flex items-center gap-3"><div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <svg key={i} width="11" height="11" viewBox="0 0 14 14" fill={G} opacity="0.65"><path d="M7 1l1.5 4H13l-3.5 2.5 1.5 4L7 9l-4 2.5 1.5-4L1 5h4.5z" /></svg>)}</div><span className="text-[10px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("tmStars", lang)}</span></div></div></Reveal>
+          </div>
+          {/* Marquee rows are full-bleed (edge-to-edge), no max-width container */}
+          <div className="w-full flex flex-col gap-5" style={{ maskImage: "linear-gradient(to right,transparent,black 4%,black 96%,transparent)", WebkitMaskImage: "linear-gradient(to right,transparent,black 4%,black 96%,transparent)" }}>
             <TRow items={TMS.slice(0, 4)} dark={dark} dur={55} rev={false} lang={lang} />
             <TRow items={TMS.slice(4, 8)} dark={dark} dur={50} rev={true} lang={lang} />
           </div>
-        </div></section>
-
-        <SocialMarquee dark={dark} />
+        </section>
 
         {/* ── CLOSING CTA ── */}
         <section className="py-48 px-5 sm:px-8 text-center" style={{ borderTop: `1px solid ${bdr}` }}><Reveal><div className="mx-auto max-w-xl"><GoldLine className="w-10 mx-auto mb-20" /><h2 className="text-3xl sm:text-[44px] font-normal tracking-tight leading-[1.1] mb-5" style={{ color: hi }}>{tr("ctaH2a", lang)}<br /><em style={{ fontStyle: "italic", color: G }}>{tr("ctaH2b", lang)}</em></h2><p className="text-base mb-14 max-w-sm mx-auto" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300, lineHeight: 2 }}>{tr("ctaBody", lang)}</p><div className="flex flex-col sm:flex-row items-center justify-center gap-3"><button type="button" onClick={() => setModal(true)} className="flex items-center justify-center gap-2.5 w-full sm:w-auto px-12 text-[10px] font-medium uppercase rounded-full transition-all hover:opacity-90" style={{ background: G, color: INK, height: "52px", fontFamily: "sans-serif", boxShadow: `0 8px 36px ${G}28`, letterSpacing: isAr ? "0.05em" : "0.22em" }}>{tr("ctaFinalBtn", lang)}</button><a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2.5 w-full sm:w-auto px-10 text-[10px] font-medium uppercase rounded-full transition-all hover:opacity-65" style={{ border: `1px solid ${G}25`, color: dark ? `${G}55` : G, height: "52px", fontFamily: "sans-serif", letterSpacing: isAr ? "0.05em" : "0.22em" }}>{tr("startWA", lang)}</a></div><p className="mt-20 text-[8px] uppercase" style={{ color: dark ? `${G}18` : "rgba(26,20,16,0.25)", fontFamily: "sans-serif", letterSpacing: "0.32em" }}>{tr("tagline", lang)}</p></div></Reveal></section>
