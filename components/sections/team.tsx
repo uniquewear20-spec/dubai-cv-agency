@@ -174,9 +174,15 @@ export default function TeamMarqueeSection({ dark, lang, onEnquire }: { dark: bo
         </p>
       </div>
 
-      {/* Marquee rows — the Marquee component forces dir="ltr" internally
-          so translateX animations work correctly regardless of page direction */}
-      <div className="space-y-5">
+      {/* ─── CRITICAL RTL FIX ───
+          Force dir="ltr" on the ENTIRE marquee block (not just the inner
+          Marquee wrapper). In Arabic/RTL, the section inherits dir="rtl",
+          which flips the marquee's start offset and overflow anchor — that's
+          why the cards were pushed inward instead of bleeding to both edges.
+          Forcing LTR here makes the rows lay out and bleed edge-to-edge
+          identically to the English/French versions. The card captions still
+          flip to RTL individually, so Arabic text stays correct. ─── */}
+      <div dir="ltr" className="w-full space-y-5">
         <Marquee speed={55} pauseOnHover fade dark={dark}>
           {rowA.map(c => <ProfilePhotoCard key={c.image} card={c} dark={dark} lang={lang} />)}
         </Marquee>
