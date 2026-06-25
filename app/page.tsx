@@ -47,6 +47,24 @@ const LANGS: { code: Lang; label: string; dir: "ltr" | "rtl"; font: string }[] =
   { code: "fr", label: "FR", dir: "ltr", font: "'Georgia','Times New Roman',serif" },
 ];
 
+// ── Currency ─────────────────────────────────────────────────────────────────
+type Currency = "AED" | "USD" | "EUR" | "MAD" | "INR" | "SAR" | "NGN";
+
+const CURRENCIES: { code: Currency; symbol: string }[] = [
+  { code: "AED", symbol: "AED" },
+  { code: "USD", symbol: "$" },
+  { code: "EUR", symbol: "€" },
+  { code: "MAD", symbol: "DH" },
+  { code: "INR", symbol: "₹" },
+  { code: "SAR", symbol: "SAR" },
+  { code: "NGN", symbol: "₦" },
+];
+
+// Fallback rates (value of 1 AED in target currency) — used only if the live fetch fails
+const FALLBACK_RATES: Record<Currency, number> = {
+  AED: 1, USD: 0.27, EUR: 0.25, MAD: 2.68, INR: 22.9, SAR: 1.02, NGN: 415,
+};
+
 // ── Translations ─────────────────────────────────────────────────────────────
 const TX: Record<string, Record<Lang, string>> = {
   navServices:  { en: "Disciplines",  ar: "تخصصاتنا",   fr: "Disciplines" },
@@ -85,7 +103,7 @@ const TX: Record<string, Record<Lang, string>> = {
   tplDesc: { en: "Every engagement unlocks our vault of precision-engineered documents across ATS-Optimised and Executive Design collections.", ar: "كل تعاقد يفتح مكتبة وثائقنا المُهندَسة بدقة — مجموعتا الفرز الآلي والتصميم التنفيذي.", fr: "Chaque mission débloque notre bibliothèque de documents — collection ATS et Design Exécutif." },
   tplBadge:   { en: "Market-specific designs",        ar: "تصاميم مخصصة",                    fr: "Designs par marché" },
   tplGet:     { en: "Enquire",                         ar: "استفسر",                           fr: "Demander" },
-  tplMore:    { en: "Continue",                        ar: "المزيد",                           fr: "Continuer" },
+  tplMore:    { en: "Continue",                         ar: "المزيد",                           fr: "Continuer" },
   tplDone:    { en: "Full library available on request", ar: "المكتبة الكاملة متاحة عند الطلب", fr: "Bibliothèque complète sur demande" },
   tplAts:     { en: "ATS",                             ar: "ATS",                              fr: "ATS" },
   tplDesign:  { en: "Design",                          ar: "تصميم",                            fr: "Design" },
@@ -100,7 +118,7 @@ const TX: Record<string, Record<Lang, string>> = {
   p4t: { en: "Refine",   ar: "التحسين",  fr: "Affiner" },    p4b: { en: "Unlimited revisions until every detail is exact.", ar: "مراجعات غير محدودة حتى يكون كل تفصيل دقيقاً.", fr: "Révisions illimitées jusqu'à ce que chaque détail soit exact." },
   prcEyebrow: { en: "Choose Your Tier",    ar: "اختر مستواك",          fr: "Choisissez Votre Niveau" },
   prcH2:      { en: "Four tiers.\nOne standard of excellence.", ar: "أربعة مستويات.\nمعيار واحد من التميز.", fr: "Quatre niveaux.\nUne seule exigence d'excellence." },
-  prcNote:    { en: "All prices in UAE Dirhams. Processed via Stripe.", ar: "جميع الأسعار بالدرهم الإماراتي. عبر Stripe.", fr: "Tous les prix en dirhams émiratis. Via Stripe." },
+  prcNote:    { en: "Prices shown in your selected currency. Processed via Stripe.", ar: "تُعرض الأسعار بالعملة المختارة. عبر Stripe.", fr: "Prix affichés dans la devise sélectionnée. Via Stripe." },
   prcBegin:   { en: "Enter This Tier",     ar: "الدخول لهذا المستوى", fr: "Accéder" },
   pF: { en: "Foundation", ar: "الأساسية", fr: "Fondation" }, pFsub: { en: "ATS-cleared. Professionally positioned.", ar: "محسَّن للفرز. موضَّع باحترافية.", fr: "Certifié ATS. Positionné professionnellement." },
   pFi1: { en: "ATS-optimized or Executive-grade CV with refined design", ar: "سيرة ذاتية محسَّنة للفرز أو تنفيذية بتصميم متقن", fr: "CV optimisé ATS ou Executive avec design soigné" },
@@ -305,6 +323,64 @@ function UZ({ label, hint, accept, Ic, file, onFile, onClear, dark, busy, dropLa
   return (<div><label className="mb-1.5 block text-[9px] font-medium uppercase" style={{ color: s, letterSpacing: "0.22em" }}>{label}</label>{file ? (<div className="flex items-center gap-3 rounded-xl border px-4 py-3" style={{ borderColor: `${G}45`, background: dark ? `${G}07` : `${G}05` }}><Ic size={13} color={G} strokeWidth={1.5} className="shrink-0" /><div className="min-w-0 flex-1"><p className="truncate text-xs" style={{ color: h }}>{file.name}</p><p className="text-[9px]" style={{ color: s }}>{fb(file.size)}</p></div><button type="button" onClick={onClear} disabled={busy} className="opacity-25 hover:opacity-50 p-1" style={{ color: s }}><Trash2 size={11} /></button></div>) : (<div className="flex cursor-pointer flex-col items-center gap-1.5 rounded-xl border border-dashed px-4 py-4 text-center transition-all" style={{ borderColor: drag ? `${G}55` : dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }} onClick={() => !busy && inp.current?.click()} onDragOver={e => { e.preventDefault(); setDrag(true); }} onDragLeave={() => setDrag(false)} onDrop={e => { e.preventDefault(); setDrag(false); const f = e.dataTransfer.files[0]; if (f) onFile(f); }} role="button" tabIndex={0} onKeyDown={e => e.key === "Enter" && inp.current?.click()}><Upload size={12} color={drag ? G : s} strokeWidth={1.5} /><p className="text-[11px]" style={{ color: drag ? G : s }}>{dropLabel}</p><p className="text-[9px] opacity-40" style={{ color: s }}>{hint}</p></div>)}<input ref={inp} type="file" accept={accept} className="hidden" disabled={busy} onChange={e => { const f = e.target.files?.[0]; if (f) onFile(f); }} /></div>);
 }
 
+// ── Currency Switcher — mirrors the language-switcher pattern ───────────────
+function CurrencySwitcher({ currency, setCur, open, setOpen, dark, hi, bdr, align = "right" }: {
+  currency: Currency; setCur: (c: Currency) => void; open: boolean; setOpen: (o: boolean) => void;
+  dark: boolean; hi: string; bdr: string; align?: "left" | "right";
+}) {
+  return (
+    <div className="relative" onClick={e => e.stopPropagation()}>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-1 text-[9px] font-medium uppercase px-3 rounded-full transition-all duration-300"
+        style={{ border: `1px solid ${dark ? `${G}20` : `${G}25`}`, color: dark ? `${G}70` : G, height: "30px", fontFamily: "sans-serif", background: "transparent", letterSpacing: "0.16em" }}
+      >
+        {currency}
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -6, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -4, scale: 0.98 }}
+            transition={{ duration: 0.18 }}
+            className="absolute top-9 rounded-xl overflow-hidden z-50"
+            style={{
+              background: dark ? "#111009" : "#F5F1EB",
+              border: dark ? `1px solid rgba(200,169,110,0.12)` : `1px solid ${bdr}`,
+              boxShadow: dark ? "0 8px 32px rgba(0,0,0,0.70)" : "0 8px 24px rgba(0,0,0,0.10)",
+              minWidth: "100px",
+              ...(align === "right" ? { right: 0 } : { left: 0 }),
+            }}
+          >
+            {CURRENCIES.map(c => (
+              <button
+                key={c.code}
+                type="button"
+                onClick={() => setCur(c.code)}
+                className="w-full flex items-center gap-2 px-4 py-2.5 text-[10px]"
+                style={{
+                  color: c.code === currency ? G : hi,
+                  fontFamily: "sans-serif",
+                  background: c.code === currency ? `${G}06` : "transparent",
+                  fontWeight: c.code === currency ? 600 : 400,
+                  border: "none", cursor: "pointer", width: "100%",
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = dark ? "rgba(212,175,55,0.04)" : `${G}04`; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = c.code === currency ? `${G}06` : "transparent"; }}
+              >
+                {c.code === currency && <span className="h-1 w-1 rounded-full shrink-0" style={{ background: G }} />}
+                <span>{c.code}</span>
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 // ── Testimonial Card — FIXED WIDTH (w-72) to match reference component ───────
 function TC({ t, dark, lang }: { t: typeof TMS[0]; dark: boolean; lang: Lang }) {
   const ac = IH[t.ind] ?? G;
@@ -334,7 +410,6 @@ function TC({ t, dark, lang }: { t: typeof TMS[0]; dark: boolean; lang: Lang }) 
 }
 
 // ── Testimonial Row — horizontal marquee with fixed-width cards ──────────────
-// Force dir=ltr so the translateX animation runs correctly regardless of page direction.
 function TRow({ items, dark, dur = 55, rev = false, lang }: { items: typeof TMS; dark: boolean; dur?: number; rev?: boolean; lang: Lang }) {
   const doubled = [...items, ...items];
   return (
@@ -369,11 +444,11 @@ function PreviewLightbox({ cv, onClose, onEnquire, dark, lang }: { cv: { id: num
   return (<AnimatePresence><div className="fixed inset-0 z-[95] flex items-center justify-center p-4"><motion.div className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} style={{ background: "rgba(5,4,3,0.94)", backdropFilter: "blur(24px)" }} /><motion.div className="relative flex flex-col w-full max-w-xl rounded-2xl overflow-hidden" style={{ maxHeight: "calc(100svh - 2rem)", background: dark ? "#0C0B09" : "#F8F4EF", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}` }} initial={{ opacity: 0, y: 24, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16 }} transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}><div className="h-px w-full shrink-0" style={{ background: `linear-gradient(90deg,transparent,${G}70,transparent)` }} /><div className="flex items-center justify-between px-6 py-4 shrink-0" style={{ borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}` }}><div className="flex items-center gap-3 min-w-0"><h3 className="text-sm font-semibold truncate" style={{ color: dark ? "#EDE8E0" : "#1A1410", fontFamily: "sans-serif" }}>{cv.name}</h3><span className="shrink-0 rounded-full px-2 py-0.5 text-[8px] font-medium" style={{ background: cv.ats ? `${G}12` : "rgba(120,100,160,0.10)", color: cv.ats ? G : "#8A6AAA", border: `1px solid ${cv.ats ? `${G}28` : "rgba(120,100,160,0.22)"}`, fontFamily: "sans-serif" }}>{cv.ats ? tr("tplAts", lang) : tr("tplDesign", lang)}</span></div><button type="button" onClick={onClose} className="shrink-0 ml-3 opacity-20 hover:opacity-50 transition-opacity" style={{ color: dark ? "#EDE8E0" : "#1A1410" }}><X size={14} strokeWidth={1.5} /></button></div><div className="flex-1 overflow-y-auto overscroll-contain">{!imgError ? (<div className="relative">{!loaded && <div className="flex items-center justify-center" style={{ height: "380px" }}><Loader2 size={18} color={G} className="animate-spin" strokeWidth={1.5} /></div>}<img src={src} alt={cv.name} className="w-full h-auto block" style={{ display: loaded ? "block" : "none", objectFit: "contain" }} onLoad={() => setLoaded(true)} onError={() => setImgError(true)} /></div>) : (<div className="flex flex-col items-center justify-center gap-3 py-20" style={{ color: dark ? "#605850" : "#9A8E84" }}><FileText size={32} strokeWidth={1} style={{ opacity: 0.25 }} /><p className="text-sm" style={{ fontFamily: "sans-serif" }}>{cv.name}</p></div>)}</div><div className="px-6 py-4 shrink-0 flex gap-3" style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}` }}><button type="button" onClick={() => { onClose(); onEnquire(); }} className="flex-1 flex items-center justify-center gap-2 h-10 rounded-full text-[10px] font-medium uppercase transition-all hover:opacity-85" style={{ background: G, color: INK, fontFamily: "sans-serif", letterSpacing: "0.16em" }}><Mail size={11} strokeWidth={2} />{tr("tplEnquire", lang)}</button><button type="button" onClick={onClose} className="px-5 h-10 rounded-full text-[10px] font-medium uppercase transition-all hover:opacity-60" style={{ border: `1px solid ${dark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.10)"}`, color: dark ? "#605850" : "#9A8E84", fontFamily: "sans-serif", letterSpacing: "0.16em" }}>{tr("tplClose", lang)}</button></div></motion.div></div></AnimatePresence>);
 }
 
-interface TierCardProps { featured?: boolean; badge?: { text: string; ink?: boolean }; eyebrow: string; price: number; subtitle: string; items: string[]; dark: boolean; bdr: string; card: string; sub: string; mid: string; hi: string; onBegin: () => void; beginLabel: string; lang: Lang; }
+interface TierCardProps { featured?: boolean; badge?: { text: string; ink?: boolean }; eyebrow: string; priceVal: string; priceSymbol: string; subtitle: string; items: string[]; dark: boolean; bdr: string; card: string; sub: string; mid: string; hi: string; onBegin: () => void; beginLabel: string; lang: Lang; }
 
-function TierCard({ featured = false, badge, eyebrow, price, subtitle, items, dark, bdr, card, sub, mid, hi, onBegin, beginLabel, lang }: TierCardProps) {
+function TierCard({ featured = false, badge, eyebrow, priceVal, priceSymbol, subtitle, items, dark, bdr, card, sub, mid, hi, onBegin, beginLabel, lang }: TierCardProps) {
   const borderColor = featured ? `${G}35` : bdr; const bgColor = featured ? dark ? "rgba(200,169,110,0.045)" : "rgba(200,169,110,0.065)" : card;
-  return (<div className="relative flex flex-col h-full rounded-2xl p-7" dir={isRTL(lang) ? "rtl" : "ltr"} style={{ background: bgColor, border: `1px solid ${borderColor}`, textAlign: isRTL(lang) ? "right" : "left" }}>{featured && <div className="absolute top-0 inset-x-0 h-px rounded-full" style={{ background: `linear-gradient(to right,transparent,${G}55,transparent)` }} />}{badge && (<div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 rounded-full" style={{ background: badge.ink ? G : dark ? `${G}18` : `${G}15`, border: badge.ink ? "none" : `1px solid ${G}30`, fontFamily: "sans-serif" }}>{badge.ink && <span className="h-1 w-1 rounded-full animate-pulse" style={{ background: INK, opacity: 0.6 }} />}<span className="text-[8px] font-semibold uppercase" style={{ color: badge.ink ? INK : G, letterSpacing: "0.28em" }}>{badge.text}</span></div>)}<p className="text-[9px] uppercase mb-6" style={{ color: featured ? G : dark ? `${G}45` : `${G}70`, fontFamily: "sans-serif", letterSpacing: "0.35em" }}>{eyebrow}</p><div className="flex items-baseline gap-1.5 mb-1.5"><span className="text-[36px] font-normal leading-none" style={{ color: hi }}>{price}</span><span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>AED</span></div><p className="text-[11px] mb-6" style={{ color: dark ? "#5A5450" : "#9A8E84", fontFamily: "sans-serif" }}>{subtitle}</p><div className="h-px mb-6" style={{ background: featured ? `${G}20` : bdr }} /><ul className="space-y-2.5 mb-8 flex-1" style={{ paddingInlineStart: 0, listStyle: "none" }}>{items.map((item, idx) => (<li key={idx} className="flex items-start gap-2.5 text-[11px]" style={{ color: mid, fontFamily: "sans-serif", fontWeight: 300 }}><div className="mt-[6px] h-[3px] w-[3px] rounded-full shrink-0" style={{ background: G, opacity: featured ? 1 : 0.4 }} />{item}</li>))}</ul><button type="button" onClick={onBegin} className="flex items-center justify-between w-full px-4 rounded-full text-[10px] uppercase font-medium transition-all" style={{ border: featured ? "none" : `1px solid ${G}28`, background: featured ? G : "transparent", color: featured ? INK : dark ? `${G}55` : G, fontFamily: "sans-serif", height: "42px", boxShadow: featured ? `0 5px 20px ${G}25` : "none", letterSpacing: "0.18em" }} onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = "0.82"; }} onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = "1"; }}>{beginLabel}<ArrowRight size={11} style={{ transform: isRTL(lang) ? "scaleX(-1)" : "none" }} /></button></div>);
+  return (<div className="relative flex flex-col h-full rounded-2xl p-7" dir={isRTL(lang) ? "rtl" : "ltr"} style={{ background: bgColor, border: `1px solid ${borderColor}`, textAlign: isRTL(lang) ? "right" : "left" }}>{featured && <div className="absolute top-0 inset-x-0 h-px rounded-full" style={{ background: `linear-gradient(to right,transparent,${G}55,transparent)` }} />}{badge && (<div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 rounded-full" style={{ background: badge.ink ? G : dark ? `${G}18` : `${G}15`, border: badge.ink ? "none" : `1px solid ${G}30`, fontFamily: "sans-serif" }}>{badge.ink && <span className="h-1 w-1 rounded-full animate-pulse" style={{ background: INK, opacity: 0.6 }} />}<span className="text-[8px] font-semibold uppercase" style={{ color: badge.ink ? INK : G, letterSpacing: "0.28em" }}>{badge.text}</span></div>)}<p className="text-[9px] uppercase mb-6" style={{ color: featured ? G : dark ? `${G}45` : `${G}70`, fontFamily: "sans-serif", letterSpacing: "0.35em" }}>{eyebrow}</p><div className="flex items-baseline gap-1.5 mb-1.5"><span className="text-[36px] font-normal leading-none" style={{ color: hi }}>{priceVal}</span><span className="text-xs" style={{ color: sub, fontFamily: "sans-serif" }}>{priceSymbol}</span></div><p className="text-[11px] mb-6" style={{ color: dark ? "#5A5450" : "#9A8E84", fontFamily: "sans-serif" }}>{subtitle}</p><div className="h-px mb-6" style={{ background: featured ? `${G}20` : bdr }} /><ul className="space-y-2.5 mb-8 flex-1" style={{ paddingInlineStart: 0, listStyle: "none" }}>{items.map((item, idx) => (<li key={idx} className="flex items-start gap-2.5 text-[11px]" style={{ color: mid, fontFamily: "sans-serif", fontWeight: 300 }}><div className="mt-[6px] h-[3px] w-[3px] rounded-full shrink-0" style={{ background: G, opacity: featured ? 1 : 0.4 }} />{item}</li>))}</ul><button type="button" onClick={onBegin} className="flex items-center justify-between w-full px-4 rounded-full text-[10px] uppercase font-medium transition-all" style={{ border: featured ? "none" : `1px solid ${G}28`, background: featured ? G : "transparent", color: featured ? INK : dark ? `${G}55` : G, fontFamily: "sans-serif", height: "42px", boxShadow: featured ? `0 5px 20px ${G}25` : "none", letterSpacing: "0.18em" }} onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = "0.82"; }} onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = "1"; }}>{beginLabel}<ArrowRight size={11} style={{ transform: isRTL(lang) ? "scaleX(-1)" : "none" }} /></button></div>);
 }
 
 // ── ROOT ──────────────────────────────────────────────────────────────────────
@@ -386,7 +461,42 @@ export default function Home() {
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [preview, setPreview] = useState<{ id: number; name: string; ats: boolean } | null>(null);
 
-  useEffect(() => { if (!langOpen) return; const handler = () => setLangOpen(false); document.addEventListener("click", handler); return () => document.removeEventListener("click", handler); }, [langOpen]);
+  // ── Currency state ──────────────────────────────────────────────────────
+  const [currency, setCurrency] = useState<Currency>("AED");
+  const [curOpen, setCurOpen] = useState(false);
+  const [rates, setRates] = useState<Record<Currency, number>>(FALLBACK_RATES);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("z-currency") as Currency | null;
+    if (saved) setCurrency(saved);
+
+    fetch("https://open.er-api.com/v6/latest/AED")
+      .then(r => r.json())
+      .then(d => {
+        if (d?.result === "success" && d.rates) {
+          const next: Record<Currency, number> = { ...FALLBACK_RATES };
+          CURRENCIES.forEach(c => { if (d.rates[c.code]) next[c.code] = d.rates[c.code]; });
+          setRates(next);
+        }
+      })
+      .catch(() => { /* keep fallback rates silently */ });
+  }, []);
+
+  const setCur = (c: Currency) => { setCurrency(c); localStorage.setItem("z-currency", c); setCurOpen(false); };
+
+  function priceDisplay(aed: number): { value: string; symbol: string } {
+    const cur = CURRENCIES.find(c => c.code === currency)!;
+    const converted = aed * rates[currency];
+    const rounded = currency === "AED" ? converted : Math.round(converted);
+    return { value: rounded.toLocaleString("en-US"), symbol: cur.symbol };
+  }
+
+  useEffect(() => {
+    if (!langOpen && !curOpen) return;
+    const handler = () => { setLangOpen(false); setCurOpen(false); };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
+  }, [langOpen, curOpen]);
 
   const LG = LANGS.find(l => l.code === lang)!;
   const dir = LG.dir;
@@ -461,6 +571,7 @@ export default function Home() {
               <button type="button" onClick={() => setLangOpen(o => !o)} className="flex items-center gap-1 text-[9px] font-medium uppercase px-3 rounded-full transition-all duration-300" style={{ border: `1px solid ${dark ? `${G}20` : `${G}25`}`, color: dark ? `${G}70` : G, height: "30px", fontFamily: "sans-serif", background: "transparent", letterSpacing: "0.16em" }}><Globe size={9} strokeWidth={1.5} />{LG.label}</button>
               <AnimatePresence>{langOpen && (<motion.div initial={{ opacity: 0, y: -6, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -4, scale: 0.98 }} transition={{ duration: 0.18 }} className="absolute top-9 rounded-xl overflow-hidden z-50" style={{ background: dark ? "#111009" : "#F5F1EB", border: dark ? `1px solid rgba(200,169,110,0.12)` : `1px solid ${bdr}`, boxShadow: dark ? "0 8px 32px rgba(0,0,0,0.70)" : "0 8px 24px rgba(0,0,0,0.10)", minWidth: "130px", ...(isAr ? { left: 0 } : { right: 0 }) }}>{LANGS.map(l => (<button key={l.code} type="button" onClick={() => { setLang(l.code); setLangOpen(false); }} className="w-full flex items-center gap-2 px-4 py-2.5 text-[10px]" style={{ color: l.code === lang ? (dark ? "#D4AF37" : G) : hi, fontFamily: "sans-serif", background: l.code === lang ? (dark ? "rgba(212,175,55,0.06)" : `${G}06`) : "transparent", fontWeight: l.code === lang ? 600 : 400, border: "none", cursor: "pointer", width: "100%" }} onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = dark ? "rgba(212,175,55,0.04)" : `${G}04`; }} onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = l.code === lang ? (dark ? "rgba(212,175,55,0.06)" : `${G}06`) : "transparent"; }}>{l.code === lang && <span className="h-1 w-1 rounded-full shrink-0" style={{ background: dark ? "#D4AF37" : G }} />}<span>{l.label}</span></button>))}</motion.div>)}</AnimatePresence>
             </div>
+            <CurrencySwitcher currency={currency} setCur={setCur} open={curOpen} setOpen={setCurOpen} dark={dark} hi={hi} bdr={bdr} align={isAr ? "left" : "right"} />
             <button type="button" onClick={() => setModal(true)} className="hidden sm:flex items-center gap-1.5 text-[9px] font-medium uppercase px-5 rounded-full transition-all duration-300" style={{ border: dark ? `1px solid rgba(200,169,110,0.28)` : `1px solid ${G}35`, color: dark ? `${G}80` : G, height: "30px", fontFamily: "sans-serif", background: "transparent", letterSpacing: "0.20em" }} onMouseEnter={e => { const el = e.currentTarget as HTMLButtonElement; el.style.borderColor = `${G}60`; el.style.color = G; }} onMouseLeave={e => { const el = e.currentTarget as HTMLButtonElement; el.style.borderColor = dark ? "rgba(200,169,110,0.28)" : `${G}35`; el.style.color = dark ? `${G}80` : G; }}>{tr("enquire", lang)}</button>
             <div onClick={tog} role="button" aria-label="Toggle theme" tabIndex={0} onKeyDown={e => e.key === "Enter" && tog()} className="flex p-1 rounded-full cursor-pointer" style={{ width: "52px", height: "26px", background: dark ? "#111009" : "#FFFFFF", border: dark ? "1px solid rgba(200,169,110,0.12)" : "1px solid rgba(0,0,0,0.08)", transition: "background 0.4s ease", flexShrink: 0 }}><div className="flex justify-between items-center w-full"><div className="flex justify-center items-center rounded-full transition-all duration-300" style={{ width: "18px", height: "18px", transform: dark ? "translateX(0)" : "translateX(26px)", background: dark ? "#1C1A17" : "#EDE8E3", flexShrink: 0 }}>{dark ? <Moon size={10} strokeWidth={1.5} color={G} /> : <Sun size={10} strokeWidth={1.5} color="#786860" />}</div><div className="flex justify-center items-center rounded-full transition-all duration-300" style={{ width: "18px", height: "18px", transform: dark ? "translateX(0)" : "translateX(-26px)", flexShrink: 0 }}>{dark ? <Sun size={10} strokeWidth={1.5} color="rgba(200,169,110,0.20)" /> : <Moon size={10} strokeWidth={1.5} color="rgba(0,0,0,0.15)" />}</div></div></div>
           </div>
@@ -471,9 +582,7 @@ export default function Home() {
 
         {/* ── HERO ── */}
         <section className="relative min-h-[98vh] flex flex-col items-center justify-center px-5 sm:px-8 text-center overflow-hidden">
-          {/* Animated gold paths backdrop — sits behind all hero content */}
           <HeroBackgroundPaths dark={dark} />
-          {/* Hero content wrapper — z-10 keeps text/CTAs above the animated lines */}
           <div className="relative z-10 flex flex-col items-center w-full">
           <Reveal d={0.1} y={12}><div className="inline-flex items-center gap-2 mb-12 px-4 py-1.5 rounded-full" style={{ border: `1px solid ${G}22`, background: dark ? `${G}06` : `${G}04` }}><span className="h-1 w-1 rounded-full animate-pulse" style={{ background: G }} /><span className="text-[8px] font-medium uppercase" style={{ color: dark ? `${G}80` : G, fontFamily: "sans-serif", letterSpacing: isAr ? "0.08em" : "0.35em" }}>{tr("scarcity", lang)}</span></div></Reveal>
           <Reveal d={0.3} y={40}><h1 className="font-normal mb-8 mx-auto" style={{ fontSize: "clamp(44px, 8vw, 96px)", color: hi, maxWidth: "900px", lineHeight: isAr ? 1.3 : 1.0, letterSpacing: isAr ? "-0.01em" : "-0.035em" }}>{tr("h1a", lang)}<br /><em style={{ fontStyle: "italic", color: G }}>{tr("h1b", lang)}</em></h1></Reveal>
@@ -508,18 +617,16 @@ export default function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">{STEPS.map(({ n, t, b, Ic }, i) => (<Reveal key={n} d={0.08 * i}><div className="group p-8 rounded-2xl h-full relative transition-all duration-500" style={{ background: card, border: `1px solid ${bdr}`, textAlign: isAr ? "right" : "left" }}><div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{ boxShadow: `0 0 0 1px ${G}18,0 0 32px ${G}07` }} /><p className="text-[28px] font-normal mb-8" style={{ color: G, fontFamily: "'Georgia',serif", opacity: 0.28 }}>{n}</p><Ic size={14} color={G} strokeWidth={1.5} style={{ opacity: 0.55 }} /><h3 className="mt-4 text-[14px] font-semibold" style={{ color: hi, fontFamily: "sans-serif" }}>{t}</h3><p className="mt-2.5 text-[12px]" style={{ color: dark ? "#6A5E56" : "#8A7A70", fontFamily: "sans-serif", fontWeight: 300, lineHeight: 1.9 }}>{b}</p><div className="mt-8 h-px w-5 opacity-25" style={{ background: G }} /></div></Reveal>))}</div></div></section>
 
         {/* ── INVESTMENT ── */}
-        <section id="investment" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}><div className="mx-auto max-w-[1400px]"><Reveal className="mb-24"><div style={{ textAlign: isAr ? "right" : "left" }}><p className="text-[9px] font-medium uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif", letterSpacing: isAr ? "0.08em" : "0.40em" }}>{tr("prcEyebrow", lang)}</p><h2 className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15]" style={{ color: hi }}>{tr("prcH2", lang).split("\n").map((line, i) => (<React.Fragment key={i}>{i > 0 && <br />}{i === 1 ? <em style={{ fontStyle: "italic", color: G }}>{line}</em> : line}</React.Fragment>))}</h2><p className="mt-4 text-[11px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("prcNote", lang)}</p></div></Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-start">{TIERS.map((tier, i) => (<Reveal key={tier.key} d={0.07 * i}><TierCard featured={tier.featured} badge={tier.badge} eyebrow={tier.eyebrow} price={tier.price} subtitle={tier.subtitle} items={tier.items} dark={dark} bdr={bdr} card={card} sub={sub} mid={mid} hi={hi} onBegin={() => setModal(true)} beginLabel={tr("prcBegin", lang)} lang={lang} /></Reveal>))}</div></div></section>
+        <section id="investment" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}><div className="mx-auto max-w-[1400px]"><Reveal className="mb-24"><div style={{ textAlign: isAr ? "right" : "left" }}><p className="text-[9px] font-medium uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif", letterSpacing: isAr ? "0.08em" : "0.40em" }}>{tr("prcEyebrow", lang)}</p><h2 className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15]" style={{ color: hi }}>{tr("prcH2", lang).split("\n").map((line, i) => (<React.Fragment key={i}>{i > 0 && <br />}{i === 1 ? <em style={{ fontStyle: "italic", color: G }}>{line}</em> : line}</React.Fragment>))}</h2><div className="mt-4 flex flex-wrap items-center gap-3"><p className="text-[11px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("prcNote", lang)}</p><CurrencySwitcher currency={currency} setCur={setCur} open={curOpen} setOpen={setCurOpen} dark={dark} hi={hi} bdr={bdr} align={isAr ? "right" : "left"} /></div></div></Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-start">{TIERS.map((tier, i) => { const { value, symbol } = priceDisplay(tier.price); return (<Reveal key={tier.key} d={0.07 * i}><TierCard featured={tier.featured} badge={tier.badge} eyebrow={tier.eyebrow} priceVal={value} priceSymbol={symbol} subtitle={tier.subtitle} items={tier.items} dark={dark} bdr={bdr} card={card} sub={sub} mid={mid} hi={hi} onBegin={() => setModal(true)} beginLabel={tr("prcBegin", lang)} lang={lang} /></Reveal>); })}</div></div></section>
 
         <CustomPackageBuilder dark={dark} lang={lang} onEnquire={(services: any, total: any) => { setModal(true); }} />
 
         {/* ── OUTCOMES — header contained, marquee rows break out edge-to-edge ── */}
         <section id="outcomes" className="py-40" style={{ borderTop: `1px solid ${bdr}` }}>
-          {/* Header stays within the centered container */}
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <Reveal className="mb-20"><div style={{ textAlign: isAr ? "right" : "left" }} dir={isAr ? "rtl" : "ltr"}><p className="text-[9px] font-medium uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif", letterSpacing: isAr ? "0.08em" : "0.40em" }}>{tr("tmEyebrow", lang)}</p><h2 className="text-3xl sm:text-[42px] font-normal tracking-tight" style={{ color: hi }}>{tr("tmH2a", lang)}<br /><em style={{ fontStyle: "italic", color: G }}>{tr("tmH2b", lang)}</em></h2><div className="mt-5 flex items-center gap-3"><div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <svg key={i} width="11" height="11" viewBox="0 0 14 14" fill={G} opacity="0.65"><path d="M7 1l1.5 4H13l-3.5 2.5 1.5 4L7 9l-4 2.5 1.5-4L1 5h4.5z" /></svg>)}</div><span className="text-[10px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("tmStars", lang)}</span></div></div></Reveal>
           </div>
-          {/* Marquee rows are full-bleed (edge-to-edge), no max-width container */}
           <div className="w-full flex flex-col gap-5" style={{ maskImage: "linear-gradient(to right,transparent,black 4%,black 96%,transparent)", WebkitMaskImage: "linear-gradient(to right,transparent,black 4%,black 96%,transparent)" }}>
             <TRow items={TMS.slice(0, 4)} dark={dark} dur={55} rev={false} lang={lang} />
             <TRow items={TMS.slice(4, 8)} dark={dark} dur={50} rev={true} lang={lang} />
@@ -533,7 +640,7 @@ export default function Home() {
       {/* ── FOOTER ── */}
       <footer className="relative py-10 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}>{dark && <div aria-hidden className="absolute top-0 inset-x-0 h-px pointer-events-none" style={{ background: `linear-gradient(90deg,transparent 0%,rgba(200,169,110,0.06) 15%,rgba(200,169,110,0.28) 50%,rgba(200,169,110,0.06) 85%,transparent 100%)` }} />}<div className="mx-auto max-w-6xl flex flex-col gap-5"><div className="flex flex-wrap items-center justify-between gap-4"><div className="flex items-center gap-3"><img src="/images/logo.png" alt="Zenith Dubai CV" style={{ height: "32px", width: "auto", objectFit: "contain", display: "block", borderRadius: "5px", filter: logoFilter, maxWidth: "120px" }} /><span className="text-[9px]" style={{ color: dark ? `${G}25` : sub, fontFamily: "sans-serif", whiteSpace: "nowrap", letterSpacing: "0.10em" }}>{tr("tagline", lang)}</span></div><div className="flex items-center gap-4"><button type="button" onClick={() => setModal(true)} className="flex items-center gap-1.5 text-[9px] uppercase transition-all duration-300" style={{ color: dark ? `${G}22` : `${hi}35`, fontFamily: "sans-serif", background: "none", border: "none", cursor: "pointer", padding: 0, letterSpacing: "0.16em" }} onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = dark ? `${G}60` : hi; }} onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = dark ? `${G}22` : `${hi}35`; }}><Mail size={9} strokeWidth={1.5} />{EM}</button><span style={{ color: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)", fontSize: "9px" }}>·</span><a href={wlMsg} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[9px] uppercase transition-all duration-300" style={{ color: dark ? "rgba(74,154,90,0.32)" : "#4A9A5A55", fontFamily: "sans-serif", textDecoration: "none", letterSpacing: "0.16em" }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#4A9A5A"; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = dark ? "rgba(74,154,90,0.32)" : "#4A9A5A55"; }}><svg viewBox="0 0 24 24" width="9" height="9" fill="none"><path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /></svg>{tr("footerWA", lang)}</a></div></div><div className="h-px" style={{ background: bdr }} /><div className="flex flex-wrap items-center gap-x-4 gap-y-2"><p className="text-[9px]" style={{ color: dark ? `${G}10` : `${hi}20`, fontFamily: "sans-serif" }}>© {new Date().getFullYear()} Zenith Dubai CV</p>{[["Privacy Policy", "/privacy"], ["Terms of Service", "/terms"], ["Refund Policy", "/refund"]].map(([label, href]) => (<React.Fragment key={href}><span style={{ color: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)", fontSize: "9px" }}>·</span><a href={href} className="text-[9px] transition-opacity hover:opacity-60" style={{ color: dark ? `${G}18` : `${hi}30`, fontFamily: "sans-serif", textDecoration: "none" }}>{label}</a></React.Fragment>))}</div></div></footer>
 
-      {/* ── FLOATING ACTIONS — positioned based on direction (KEEP THIS — the correct pair) ── */}
+      {/* ── FLOATING ACTIONS ── */}
       <button type="button" onClick={() => setModal(true)} aria-label="Request Review" className="fixed bottom-24 h-11 w-11 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40" style={{ background: G, boxShadow: `0 4px 22px ${G}35`, insetInlineEnd: "1.5rem" }}><Mail size={13} color={INK} strokeWidth={2} /></button>
       <a href={`https://wa.me/${WA}?text=${encodeURIComponent("Hello. I would like to request a private review.")}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="fixed bottom-8 h-11 w-11 rounded-full flex items-center justify-center transition-all hover:scale-105 z-40" style={{ background: "#25D366", boxShadow: "0 4px 22px rgba(37,211,102,0.28)", insetInlineEnd: "1.5rem" }}><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 22a10 10 0 0 0 8.66-15 10 10 0 0 0-16.9 10.6L3 22l4.56-.7A10 10 0 0 0 12 22Z" stroke="white" strokeWidth="1.6" strokeLinejoin="round" /><path d="M9.35 8.9c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.1.8 2.6.7 3.1.6.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3-.1-.2-.2-.3-.5-.4l-1.9-.9c-.2-.1-.4-.1-.6.1-.2.2-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5l.4-.5c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.5l-.8-2Z" fill="white" /></svg></a>
 
