@@ -1,14 +1,14 @@
 "use client";
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ArrowRight, Sparkles, ChevronDown } from "lucide-react";
+import { Check, ArrowRight, Sparkles, Loader2, AlertCircle } from "lucide-react";
+import { SERVICES, PRESETS, quotePackage, type Lang, type Service, type Preset } from "@/lib/checkout/catalog";
+import { startCheckout, CHECKOUT_TX } from "@/lib/checkout/client";
 
 // ── Tokens (mirrors page.tsx) ────────────────────────────────────────────────
 const G = "#C8A96E", GL = "#E2C98E", INK = "#0A0907";
 
 // ── i18n ─────────────────────────────────────────────────────────────────────
-type Lang = "en" | "ar" | "fr";
-
 const CPB_TX: Record<string, Record<Lang, string>> = {
   eyebrow:      { en: "À la carte",                          ar: "بالقطعة",                              fr: "À la carte" },
   heading:      { en: "Create Your Custom",                   ar: "أنشئ باقتك",                           fr: "Créez votre forfait" },
@@ -61,61 +61,23 @@ const CPB_TX: Record<string, Record<Lang, string>> = {
 
 const t = (k: string, l: Lang): string => CPB_TX[k]?.[l] ?? CPB_TX[k]?.en ?? k;
 
-// ── Service definitions ──────────────────────────────────────────────────────
-export interface Service {
-  id: string;
-  labelKey: string;
-  price: number;
-  category: "document" | "digital" | "coaching" | "applications";
-  noteKey?: string;
-}
-
-const SERVICES: Service[] = [
-  { id: "cv-ats",       labelKey: "svcCvAts",     price: 149, category: "document" },
-  { id: "cv-design",    labelKey: "svcCvDesign",   price: 99,  category: "document" },
-  { id: "cover-letter", labelKey: "svcCover",      price: 79,  category: "document" },
-  { id: "linkedin",     labelKey: "svcLinkedin",   price: 149, category: "digital" },
-  { id: "apps-5",       labelKey: "svcApps5",      price: 79,  category: "applications", noteKey: "noteTailored" },
-  { id: "apps-10",      labelKey: "svcApps10",     price: 119, category: "applications", noteKey: "notePopular" },
-  { id: "apps-30",      labelKey: "svcApps30",     price: 199, category: "applications", noteKey: "noteCampaign" },
-  { id: "coaching",     labelKey: "svcCoaching",   price: 199, category: "coaching" },
-  { id: "strategy",     labelKey: "svcStrategy",   price: 149, category: "coaching" },
-  { id: "branding",     labelKey: "svcBranding",   price: 149, category: "digital" },
-];
-
-// ── Preset combos ────────────────────────────────────────────────────────────
-interface Preset {
-  labelKey: string;
-  tagKey: string;
-  ids: string[];
-}
-
-const PRESETS: Preset[] = [
-  { labelKey: "preJobHunter", tagKey: "preJobTag",    ids: ["cv-ats", "cover-letter", "apps-10"] },
-  { labelKey: "preIntl",      tagKey: "preIntlTag",   ids: ["cv-ats", "linkedin", "cv-design"] },
-  { labelKey: "preUpgrade",   tagKey: "preUpgradeTag",ids: ["cv-ats", "linkedin", "coaching"] },
-];
-
-// ── Discount logic ────────────────────────────────────────────────────────────
-function getDiscount(count: number): number {
-  if (count >= 4) return 0.20;
-  if (count === 3) return 0.15;
-  if (count === 2) return 0.10;
-  return 0;
-}
+// Services, quick bundles and bundle discounts live in lib/checkout/catalog.ts —
+// the same list the checkout route charges from.
+export type { Service };
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 interface Props {
   dark: boolean;
   lang?: Lang;
-  onEnquire?: (selected: string[], total: number) => void;
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
-export default function CustomPackageBuilder({ dark, lang = "en", onEnquire }: Props) {
+export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [activePreset, setActivePreset] = useState<string | null>(null);
   const [justAdded, setJustAdded] = useState<string | null>(null);
+  const [paying, setPaying] = useState(false);
+  const [payError, setPayError] = useState(false);
 
   // Theme tokens
   const hi   = dark ? "#EDE8E0" : "#1A1410";
@@ -126,11 +88,7 @@ export default function CustomPackageBuilder({ dark, lang = "en", onEnquire }: P
   const cardHover = dark ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,1)";
 
   // Computed totals
-  const selectedServices = SERVICES.filter(s => selected.has(s.id));
-  const subtotal = selectedServices.reduce((acc, s) => acc + s.price, 0);
-  const discount = getDiscount(selected.size);
-  const savings = Math.round(subtotal * discount);
-  const total = subtotal - savings;
+  const { services: selectedServices, subtotal, discount, savings, total } = quotePackage(selected);
   const hasSelection = selected.size > 0;
 
   const toggle = useCallback((id: string) => {
@@ -146,6 +104,21 @@ export default function CustomPackageBuilder({ dark, lang = "en", onEnquire }: P
   const applyPreset = useCallback((preset: Preset) => {
     setSelected(new Set(preset.ids));
     setActivePreset(preset.labelKey);
+  }, []);
+
+  // Sends the selected item ids to the server, which prices them and opens Stripe Checkout
+  const checkout = useCallback(async () => {
+    if (paying || selected.size === 0) return;
+    setPaying(true); setPayError(false);
+    try { await startCheckout({ items: Array.from(selected) }, lang); }
+    catch { setPayError(true); setPaying(false); }
+  }, [paying, selected, lang]);
+
+  // Returning from Stripe with the browser's Back button restores this page from cache
+  useEffect(() => {
+    const reset = (e: PageTransitionEvent) => { if (e.persisted) setPaying(false); };
+    window.addEventListener("pageshow", reset);
+    return () => window.removeEventListener("pageshow", reset);
   }, []);
 
   const scrollToGrowth = useCallback(() => {
@@ -221,11 +194,7 @@ export default function CustomPackageBuilder({ dark, lang = "en", onEnquire }: P
           <div className="flex flex-wrap gap-3">
             {PRESETS.map((preset, i) => {
               const isActive = activePreset === preset.labelKey;
-              const presetTotal = SERVICES
-                .filter(s => preset.ids.includes(s.id))
-                .reduce((a, s) => a + s.price, 0);
-              const presetDiscount = getDiscount(preset.ids.length);
-              const presetFinal = Math.round(presetTotal * (1 - presetDiscount));
+              const presetFinal = quotePackage(preset.ids).total;
 
               return (
                 <motion.button
@@ -541,8 +510,9 @@ export default function CustomPackageBuilder({ dark, lang = "en", onEnquire }: P
                 {/* CTA Button */}
                 <button
                   type="button"
-                  disabled={!hasSelection}
-                  onClick={() => onEnquire?.(Array.from(selected), total)}
+                  disabled={!hasSelection || paying}
+                  aria-busy={paying}
+                  onClick={checkout}
                   className="w-full flex items-center justify-between px-5 rounded-full text-[10px] font-medium tracking-[0.18em] uppercase transition-all duration-300"
                   style={{
                     background: hasSelection ? G : `${G}20`,
@@ -550,12 +520,23 @@ export default function CustomPackageBuilder({ dark, lang = "en", onEnquire }: P
                     height: "48px",
                     fontFamily: "sans-serif",
                     boxShadow: hasSelection ? `0 5px 24px ${G}28` : "none",
-                    cursor: hasSelection ? "pointer" : "not-allowed",
+                    cursor: hasSelection && !paying ? "pointer" : "not-allowed",
                   }}
                 >
-                  <span>{hasSelection ? t("requestPkg", lang) : t("selectAbove", lang)}</span>
-                  <ArrowRight size={11} strokeWidth={hasSelection ? 2 : 1.5} />
+                  <span>{paying ? CHECKOUT_TX.redirecting[lang] : hasSelection ? t("requestPkg", lang) : t("selectAbove", lang)}</span>
+                  {paying ? <Loader2 size={11} className="animate-spin" /> : <ArrowRight size={11} strokeWidth={hasSelection ? 2 : 1.5} />}
                 </button>
+
+                {payError && (
+                  <p
+                    role="alert"
+                    className="mt-3 flex items-start gap-2 text-[10px] leading-relaxed"
+                    style={{ color: dark ? "#D08A7A" : "#A03232", fontFamily: "sans-serif" }}
+                  >
+                    <AlertCircle size={11} className="mt-0.5 shrink-0" />
+                    {CHECKOUT_TX.error[lang]}
+                  </p>
+                )}
 
                 {/* Upsell nudge */}
                 <div className="mt-5 pt-5" style={{ borderTop: `1px solid ${G}12` }}>
