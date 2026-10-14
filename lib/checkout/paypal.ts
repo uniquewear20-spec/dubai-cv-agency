@@ -187,7 +187,10 @@ export async function createPayPalOrder(
             brand_name: BRAND,
             shipping_preference: "NO_SHIPPING",
             user_action: "PAY_NOW",
-            landing_page: "NO_PREFERENCE",
+            // Opens on the debit/credit card form so clients without a PayPal
+            // account can pay by card; PayPal falls back to its login page when
+            // card checkout isn't offered for the buyer.
+            landing_page: "GUEST_CHECKOUT",
             payment_method_preference: "IMMEDIATE_PAYMENT_REQUIRED",
             return_url: input.returnUrl,
             cancel_url: input.cancelUrl,
