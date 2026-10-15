@@ -13,6 +13,7 @@ import {
 import CustomPackageBuilder from "@/components/sections/CustomPackageBuilder";
 import TeamMarqueeSection from "@/components/sections/team";
 import HeroBackgroundPaths from "@/components/ui/hero-background-paths";
+import PaymentBadges from "@/components/ui/payment-badges";
 import { TIERS as TIER_CATALOG, type TierKey } from "@/lib/checkout/catalog";
 import { startCheckout, CHECKOUT_TX } from "@/lib/checkout/client";
 
@@ -639,7 +640,7 @@ export default function Home() {
 
         {/* ── INVESTMENT ── */}
         <section id="investment" className="py-40 px-5 sm:px-8" style={{ borderTop: `1px solid ${bdr}` }}><div className="mx-auto max-w-[1400px]"><Reveal className="mb-24"><div style={{ textAlign: isAr ? "right" : "left" }}><p className="text-[9px] font-medium uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif", letterSpacing: isAr ? "0.08em" : "0.40em" }}>{tr("prcEyebrow", lang)}</p><h2 className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15]" style={{ color: hi }}>{tr("prcH2", lang).split("\n").map((line, i) => (<React.Fragment key={i}>{i > 0 && <br />}{i === 1 ? <em style={{ fontStyle: "italic", color: G }}>{line}</em> : line}</React.Fragment>))}</h2><div className="mt-4 flex flex-wrap items-center gap-3"><p className="text-[11px]" style={{ color: sub, fontFamily: "sans-serif" }}>{tr("prcNote", lang)}</p><CurrencySwitcher currency={currency} setCur={setCur} open={curOpen} setOpen={setCurOpen} dark={dark} hi={hi} bdr={bdr} align={isAr ? "right" : "left"} /></div></div></Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-start">{TIERS.map((tier, i) => { const { value, symbol } = priceDisplay(tier.price); return (<Reveal key={tier.key} d={0.07 * i}><TierCard featured={tier.featured} badge={tier.badge} eyebrow={tier.eyebrow} priceVal={value} priceSymbol={symbol} subtitle={tier.subtitle} items={tier.items} dark={dark} bdr={bdr} card={card} sub={sub} mid={mid} hi={hi} onBegin={() => beginTier(tier.key)} beginLabel={tr("prcBegin", lang)} lang={lang} busy={payTier === tier.key} locked={payTier !== null} error={payErr === tier.key ? CHECKOUT_TX.error[lang] : null} /></Reveal>); })}</div></div></section>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-start">{TIERS.map((tier, i) => { const { value, symbol } = priceDisplay(tier.price); return (<Reveal key={tier.key} d={0.07 * i}><TierCard featured={tier.featured} badge={tier.badge} eyebrow={tier.eyebrow} priceVal={value} priceSymbol={symbol} subtitle={tier.subtitle} items={tier.items} dark={dark} bdr={bdr} card={card} sub={sub} mid={mid} hi={hi} onBegin={() => beginTier(tier.key)} beginLabel={tr("prcBegin", lang)} lang={lang} busy={payTier === tier.key} locked={payTier !== null} error={payErr === tier.key ? CHECKOUT_TX.error[lang] : null} /></Reveal>); })}</div><PaymentBadges dark={dark} lang={lang} className="mt-12" /></div></section>
 
         <CustomPackageBuilder dark={dark} lang={lang} />
 

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, ArrowRight, Sparkles, Loader2, AlertCircle } from "lucide-react";
 import { SERVICES, PRESETS, aedToUsd, quotePackage, type Lang, type Service, type Preset } from "@/lib/checkout/catalog";
 import { startCheckout, CHECKOUT_TX } from "@/lib/checkout/client";
+import PaymentBadges from "@/components/ui/payment-badges";
 
 // ── Tokens (mirrors page.tsx) ────────────────────────────────────────────────
 const G = "#C8A96E", GL = "#E2C98E", INK = "#0A0907";
@@ -542,6 +543,8 @@ export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
                     {CHECKOUT_TX.error[lang]}
                   </p>
                 )}
+
+                <PaymentBadges dark={dark} lang={lang} compact className="mt-4" />
 
                 {/* Upsell nudge */}
                 <div className="mt-5 pt-5" style={{ borderTop: `1px solid ${G}12` }}>
