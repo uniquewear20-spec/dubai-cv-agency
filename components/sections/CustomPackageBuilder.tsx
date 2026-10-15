@@ -5,6 +5,7 @@ import { Check, ArrowRight, Sparkles, Loader2, AlertCircle } from "lucide-react"
 import { SERVICES, PRESETS, aedToUsd, quotePackage, type Lang, type Service, type Preset } from "@/lib/checkout/catalog";
 import { startCheckout, CHECKOUT_TX } from "@/lib/checkout/client";
 import PaymentBadges from "@/components/ui/payment-badges";
+import { FALLBACK_RATES, convertAed, currencySymbol, formatAmount, type Currency, type Rates } from "@/lib/currency";
 
 // ── Tokens (mirrors page.tsx) ────────────────────────────────────────────────
 const G = "#C8A96E", GL = "#E2C98E", INK = "#0A0907";
@@ -26,7 +27,6 @@ const CPB_TX: Record<string, Record<Lang, string>> = {
   growthNudge:  { en: "Most clients choose our Growth Package.", ar: "معظم العملاء يختارون باقة النمو.",   fr: "La plupart choisissent notre offre Croissance." },
   bundleSavings:{ en: "Bundle savings",                       ar: "وفر مع الباقات",                       fr: "Économies forfait" },
   youSave:      { en: "You save",                             ar: "توفر",                                  fr: "Vous économisez" },
-  aed:          { en: "AED",                                  ar: "AED",                                  fr: "AED" },
   // Discount labels
   disc10:       { en: "10% bundle discount applied",          ar: "خصم 10% على الباقة مطبَّق",            fr: "Remise forfait 10% appliquée" },
   disc15:       { en: "15% bundle discount applied",          ar: "خصم 15% على الباقة مطبَّق",            fr: "Remise forfait 15% appliquée" },
@@ -70,10 +70,13 @@ export type { Service };
 interface Props {
   dark: boolean;
   lang?: Lang;
+  /** Display currency picked in the header; prices are converted from AED. */
+  currency?: Currency;
+  rates?: Rates;
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
-export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
+export default function CustomPackageBuilder({ dark, lang = "en", currency = "AED", rates = FALLBACK_RATES }: Props) {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [activePreset, setActivePreset] = useState<string | null>(null);
   const [justAdded, setJustAdded] = useState<string | null>(null);
@@ -89,8 +92,16 @@ export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
   const cardHover = dark ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,1)";
 
   // Computed totals
-  const { services: selectedServices, subtotal, discount, savings, total } = quotePackage(selected);
+  const { services: selectedServices, subtotal, discount, total } = quotePackage(selected);
   const hasSelection = selected.size > 0;
+
+  // Prices in the visitor's chosen currency. Subtotal and total are converted on
+  // their own and the saving is their difference, so the numbers always add up.
+  const sym = currencySymbol(currency);
+  const amount = (aed: number) => formatAmount(convertAed(aed, currency, rates));
+  const subtotalShown = convertAed(subtotal, currency, rates);
+  const totalShown = convertAed(total, currency, rates);
+  const savingsShown = subtotalShown - totalShown;
 
   const toggle = useCallback((id: string) => {
     setSelected(prev => {
@@ -232,7 +243,7 @@ export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
                       {t(preset.labelKey, lang)}
                     </p>
                     <p className="text-[9px]" style={{ color: sub, fontFamily: "sans-serif" }}>
-                      {t(preset.tagKey, lang)} · {presetFinal} {t("aed", lang)}
+                      {t(preset.tagKey, lang)} · {amount(presetFinal)} {sym}
                     </p>
                   </div>
                   <ArrowRight size={10} strokeWidth={1.5} style={{ color: `${G}50`, marginLeft: "auto" }} />
@@ -343,7 +354,7 @@ export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
                                 transition: "color 0.25s ease",
                               }}
                             >
-                              {svc.price} <span className="text-[9px] font-normal">{t("aed", lang)}</span>
+                              {amount(svc.price)} <span className="text-[9px] font-normal">{sym}</span>
                             </p>
                           </div>
                         </motion.button>
@@ -412,7 +423,7 @@ export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
                             </p>
                           </div>
                           <p className="shrink-0 text-[11px] ml-3" style={{ color: mid, fontFamily: "sans-serif" }}>
-                            {svc.price}
+                            {amount(svc.price)}
                           </p>
                         </motion.div>
                       ))
@@ -436,7 +447,7 @@ export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
                         {t("subtotal", lang)}
                       </p>
                       <p className="text-[11px] line-through opacity-40" style={{ color: hi, fontFamily: "sans-serif" }}>
-                        {subtotal} {t("aed", lang)}
+                        {formatAmount(subtotalShown)} {sym}
                       </p>
                     </motion.div>
                   )}
@@ -456,7 +467,7 @@ export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
                         </p>
                       </div>
                       <p className="text-[11px] font-semibold" style={{ color: G, fontFamily: "sans-serif" }}>
-                        −{savings} {t("aed", lang)}
+                        −{formatAmount(savingsShown)} {sym}
                       </p>
                     </motion.div>
                   )}
@@ -470,23 +481,24 @@ export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
                     </p>
                     <div className="text-right">
                       <motion.p
-                        key={total}
+                        key={`${currency}-${total}`}
                         initial={{ opacity: 0.5, y: -4 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
                         className="text-3xl font-normal leading-none"
                         style={{ color: hasSelection ? (dark ? GL : G) : (dark ? "rgba(200,169,110,0.18)" : "rgba(200,169,110,0.35)"), fontFamily: "'Georgia',serif" }}
                       >
-                        {hasSelection ? total : "—"}
+                        {hasSelection ? formatAmount(totalShown) : "—"}
                       </motion.p>
                       {hasSelection && (
                         <p className="text-[9px] mt-0.5" style={{ color: sub, fontFamily: "sans-serif" }}>
-                          {t("aed", lang)}
+                          {sym}
                         </p>
                       )}
                       {hasSelection && (
+                        // The exact amount PayPal charges, whatever currency is shown above.
                         <p className="text-[9px] mt-1" dir="ltr" style={{ color: sub, fontFamily: "sans-serif" }}>
-                          = ${aedToUsd(total)} USD · PayPal
+                          PayPal · ${aedToUsd(total)} USD
                         </p>
                       )}
                     </div>
@@ -494,7 +506,7 @@ export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
 
                   {/* Savings badge */}
                   <AnimatePresence>
-                    {savings > 0 && (
+                    {savingsShown > 0 && (
                       <motion.p
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
@@ -507,7 +519,7 @@ export default function CustomPackageBuilder({ dark, lang = "en" }: Props) {
                           border: `1px solid ${G}18`,
                         }}
                       >
-                        {t("youSave", lang)} {savings} {t("aed", lang)}
+                        {t("youSave", lang)} {formatAmount(savingsShown)} {sym}
                       </motion.p>
                     )}
                   </AnimatePresence>
