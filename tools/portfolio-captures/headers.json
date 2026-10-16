@@ -1,0 +1,48 @@
+{
+  "abdell-el-khayir": {
+    "url": "https://abdell-portfolio.netlify.app/",
+    "status": 200,
+    "xFrameOptions": null,
+    "csp": null,
+    "server": "Netlify",
+    "gallerySize": [
+      1200,
+      29512
+    ],
+    "deskSize": [
+      1440,
+      27281
+    ],
+    "mobSize": [
+      390,
+      27743
+    ],
+    "tabSize": [
+      820,
+      28143
+    ]
+  },
+  "wasim-akram": {
+    "url": "https://wasim-akram-portfolio.netlify.app/",
+    "status": 200,
+    "xFrameOptions": null,
+    "csp": null,
+    "server": "Netlify",
+    "gallerySize": [
+      1200,
+      10780
+    ],
+    "deskSize": [
+      1440,
+      10838
+    ],
+    "mobSize": [
+      390,
+      19312
+    ],
+    "tabSize": [
+      820,
+      12108
+    ]
+  }
+}
