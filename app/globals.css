@@ -3,11 +3,32 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Tokens used by the portfolio gallery (shadcn names). The gallery section
+     sets its own Zenith dark/light values on its wrapper. */
+  --card: #ffffff;
+  --muted: #f2eee8;
+  --muted-foreground: #8a7e74;
+  --border: rgba(0, 0, 0, 0.08);
+  --accent: rgba(200, 169, 110, 0.12);
+  --primary: #c8a96e;
+  --primary-foreground: #0a0907;
+  --ring: #c8a96e;
+  --chart-2: #c8a96e;
+  --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-ring: var(--ring);
+  --color-chart-2: var(--chart-2);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
