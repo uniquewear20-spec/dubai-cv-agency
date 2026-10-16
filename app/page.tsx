@@ -14,6 +14,7 @@ import CustomPackageBuilder from "@/components/sections/CustomPackageBuilder";
 import TeamMarqueeSection from "@/components/sections/team";
 import HeroBackgroundPaths from "@/components/ui/hero-background-paths";
 import PaymentBadges from "@/components/ui/payment-badges";
+import PortfolioShowcase from "@/components/sections/portfolio-showcase";
 import { CURRENCIES, FALLBACK_RATES, isCurrency, priceIn, type Currency, type Rates } from "@/lib/currency";
 import { TIERS as TIER_CATALOG, type TierKey } from "@/lib/checkout/catalog";
 import { startCheckout, CHECKOUT_TX } from "@/lib/checkout/client";
@@ -603,6 +604,9 @@ export default function Home() {
 
         {/* ── SOCIAL LINKS ── */}
         <div style={{ borderBottom: `1px solid ${bdr}` }}><div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: "32px", padding: "22px 24px", maxWidth: "1152px", margin: "0 auto" }}>{SOCIALS.map((s) => (<a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer" title={s.name} style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: socialLinkColor, fontFamily: "sans-serif", fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase" as const, transition: "color 0.25s ease", padding: "4px 0" }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = GL; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = socialLinkColor; }}><span style={{ color: "inherit", display: "flex" }}>{s.icon}</span>{s.name}</a>))}</div></div>
+
+        {/* ── SAMPLE PORTFOLIO WEBSITES ── */}
+        <PortfolioShowcase dark={dark} lang={lang} />
 
         {/* ── DISCIPLINES ── */}
         <section id="disciplines" className="py-40 px-5 sm:px-8"><div className="mx-auto max-w-6xl"><Reveal className="mb-24"><div style={{ textAlign: isAr ? "right" : "left" }}><p className="text-[9px] font-medium uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif", letterSpacing: isAr ? "0.08em" : "0.40em" }}>{tr("svcEyebrow", lang)}</p><h2 className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15]" style={{ color: hi, maxWidth: "520px" }}>{tr("svcH2", lang).split("\n").map((line, i) => (<React.Fragment key={i}>{i > 0 && <br />}{i === 1 ? <em style={{ fontStyle: "italic", color: G }}>{line}</em> : line}</React.Fragment>))}</h2></div></Reveal>

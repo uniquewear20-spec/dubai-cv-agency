@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Thomas Whitaker · Principal Architect — Sample design by Zenith Dubai CV</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{--blue:#1C3D6E;--blue2:#163259;--paper:#F4F4F0;--white:#FFFFFF;--graphite:#3A3A3A;--muted:#6E7176;--rule:rgba(244,244,240,.22);--line:rgba(28,61,110,.18);--red:#C8553D;
+--sans:"Red Hat Display","Helvetica Neue",Arial,sans-serif;--mono:"Red Hat Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--graphite);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:inherit}
+.wrap{max-width:1220px;margin:0 auto;padding:0 28px}
+.bp{background-color:var(--blue);color:var(--paper);background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px),linear-gradient(rgba(244,244,240,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(244,244,240,.08) 1px,transparent 1px);background-size:120px 120px,120px 120px,24px 24px,24px 24px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0;font:500 13px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.top nav{display:flex;gap:24px}.top a{text-decoration:none}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:end;padding:60px 0 64px}
+.hero small{font:500 13px var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+h1{font:300 clamp(56px,7.6vw,120px)/.9 var(--sans);letter-spacing:-.03em;margin:18px 0 0}
+h1 b{font-weight:700}
+.hero p{max-width:44ch;font-size:19px;opacity:.9;margin:26px 0 0}
+.pic{position:relative;padding:18px;border:1px solid var(--rule)}
+.pic img{aspect-ratio:4/5;object-fit:cover;filter:grayscale(.2)}
+.pic::before,.pic::after{content:"";position:absolute;width:26px;height:26px;border:2px solid var(--paper)}
+.pic::before{left:-2px;top:-2px;border-right:0;border-bottom:0}.pic::after{right:-2px;bottom:-2px;border-left:0;border-top:0}
+.block{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--paper);margin:0 0 56px;font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.block div{padding:12px 14px;border-right:1px solid var(--paper)}.block div:last-child{border-right:0}
+.block b{display:block;font:500 16px var(--sans);text-transform:none;letter-spacing:0;margin-top:4px}
+section{padding:90px 0;border-bottom:1px solid var(--line)}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:44px;flex-wrap:wrap}
+.tag{font:500 13px var(--mono);color:var(--blue);letter-spacing:.1em;text-transform:uppercase}
+h2{font:300 clamp(36px,4.6vw,60px)/1.02 var(--sans);letter-spacing:-.02em;margin:8px 0 0;color:var(--blue)}h2 b{font-weight:700}
+.sh p{max-width:44ch;margin:0;color:var(--muted)}
+.project{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);background:var(--white);margin-bottom:26px}
+.drawing{background:var(--blue2);display:grid;place-items:center;min-height:340px;position:relative}
+.drawing svg{width:80%;height:auto;color:var(--paper)}
+.drawing .scale{position:absolute;left:18px;bottom:16px;font:500 11px var(--mono);color:var(--paper);display:flex;align-items:center;gap:8px}
+.drawing .scale i{display:inline-block;width:80px;height:6px;background:repeating-linear-gradient(90deg,var(--paper) 0 20px,transparent 20px 40px);border:1px solid var(--paper)}
+.project .info{padding:34px}
+.project .no{font:500 13px var(--mono);color:var(--red)}
+.project h3{font:700 32px/1.1 var(--sans);letter-spacing:-.02em;margin:8px 0 12px;color:var(--blue)}
+.project p{margin:0 0 20px;color:var(--muted)}
+.meta{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.meta div{padding:12px 0;border-bottom:1px solid var(--line);font:500 12px var(--mono);text-transform:uppercase;color:var(--muted)}
+.meta b{display:block;font:500 15px var(--sans);color:var(--graphite);text-transform:none}
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.principles div{border-top:3px solid var(--blue);padding-top:18px}
+.principles h3{font:700 24px var(--sans);margin:0 0 8px;color:var(--blue)}
+.principles p{margin:0;color:var(--muted)}
+.cv{display:grid;grid-template-columns:1.2fr .8fr;gap:48px}
+.cv .row{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.cv time{font:500 13px var(--mono);color:var(--blue)}
+.cv h3{font:700 20px var(--sans);margin:0}.cv h3 span{display:block;font-weight:400;color:var(--muted);font-size:16px}
+.badges{display:grid;gap:12px}
+.badges div{border:1px solid var(--line);background:var(--white);padding:16px 18px}
+.badges b{display:block;font:700 18px var(--sans);color:var(--blue)}.badges span{font:500 13px var(--mono);color:var(--muted)}
+.contact{padding:90px 0 96px;border:0}
+.contact .wrap{text-align:center}
+.contact h2{color:var(--paper)}
+.contact p{max-width:48ch;margin:18px auto 0;opacity:.85}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.btn{padding:14px 24px;border:1px solid var(--paper);text-decoration:none;font:500 13px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.btn.fill{background:var(--paper);color:var(--blue)}
+footer{text-align:center;padding:24px 0 90px;font:500 12px var(--mono);color:var(--muted)}
+.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:10px 14px;background:var(--paper);color:var(--blue);border:1px solid var(--blue);font:500 12px var(--mono);text-transform:uppercase;text-decoration:none}
+@media (max-width:940px){.hero,.project,.cv{grid-template-columns:1fr}.principles{grid-template-columns:1fr}.block{grid-template-columns:1fr 1fr}.block div:nth-child(2){border-right:0}.block div:nth-child(-n+2){border-bottom:1px solid var(--paper)}.top nav{display:none}.pic{max-width:400px}.cv .row{grid-template-columns:1fr;gap:4px}}
+</style>
+</head>
+<body>
+<div class="bp">
+  <div class="wrap">
+    <header class="top"><span>Whitaker Lane Architects</span><nav><a href="#projects">Projects</a><a href="#practice">Practice</a><a href="#contact">Contact</a></nav></header>
+    <div class="hero">
+      <div><small>Principal Architect · RIBA</small><h1>Thomas<br><b>Whitaker</b></h1><p>Civic and residential buildings that work with climate, light and the people who use them, in London and the Gulf.</p></div>
+      <div class="pic"><img src="img/thomas-whitaker.jpg" alt="Portrait of Thomas Whitaker against a concrete wall"></div>
+    </div>
+    <div class="block" aria-label="Drawing title block">
+      <div>Project<b>Portfolio 2026</b></div><div>Drawn by<b>T. Whitaker</b></div><div>Sheet<b>A-001</b></div><div>Status<b>Open to new work</b></div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section id="projects"><div class="wrap">
+    <div class="sh"><div><span class="tag">Sheet A-100 · Projects</span><h2>Selected <b>buildings</b></h2></div><p>Four projects from a twenty-five-year practice. Plans simplified for clarity.</p></div>
+    <article class="project">
+      <div class="drawing"><svg viewBox="0 0 320 220" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="20" y="20" width="280" height="180"/><path d="M20 90h120v110M140 20v40M200 90h100M200 90v110M140 140h60"/><circle cx="250" cy="55" r="22"/><path d="M60 20v-8M100 20v-8M20 60h-8M20 150h-8"/><path d="M150 200a30 30 0 0 1 30-30" stroke-dasharray="4 4"/></svg><span class="scale"><i></i>0 — 10 m</span></div>
+      <div class="info"><span class="no">01 · Civic</span><h3>Al Qudra Desert Library</h3><p>A public library half-sunk into the desert, with courtyards that keep reading rooms ten degrees cooler without extra cooling.</p>
+        <div class="meta"><div>Area<b>6,800 m²</b></div><div>Completed<b>2023</b></div><div>Role<b>Lead architect</b></div><div>Recognition<b>Gulf Civic Design Prize</b></div></div></div>
+    </article>
+    <article class="project">
+      <div class="drawing"><svg viewBox="0 0 320 220" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 200V60h60v140M80 200V40h60v160M140 200V70h60v130M200 200V50h60v150M260 200V90h40v110"/><path d="M20 200h280"/><path d="M30 80h40M30 110h40M30 140h40M90 60h40M90 90h40M90 120h40M150 90h40M150 120h40M210 70h40M210 100h40M210 130h40"/></svg><span class="scale"><i></i>0 — 20 m</span></div>
+      <div class="info"><span class="no">02 · Residential</span><h3>Harbour Quay Housing</h3><p>212 homes around shared gardens on a former dockyard, with every flat dual-aspect for daylight and cross-ventilation.</p>
+        <div class="meta"><div>Homes<b>212</b></div><div>Completed<b>2021</b></div><div>Role<b>Partner in charge</b></div><div>Rating<b>BREEAM Excellent</b></div></div></div>
+    </article>
+    <article class="project">
+      <div class="drawing"><svg viewBox="0 0 320 220" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M160 20l120 180H40z"/><path d="M160 20v180M100 110h120M70 155h180M130 65l-60 135M190 65l60 135"/></svg><span class="scale"><i></i>0 — 5 m</span></div>
+      <div class="info"><span class="no">03 · Cultural</span><h3>Lattice Pavilion</h3><p>A timber lattice pavilion for a summer arts festival, assembled in nine days and reused as a school canopy.</p>
+        <div class="meta"><div>Area<b>420 m²</b></div><div>Completed<b>2019</b></div><div>Role<b>Design lead</b></div><div>Material<b>Glulam timber</b></div></div></div>
+    </article>
+  </div></section>
+
+  <section id="practice"><div class="wrap">
+    <div class="sh"><div><span class="tag">Sheet A-200 · Practice</span><h2>Three <b>principles</b></h2></div><p>How the studio approaches every brief, large or small.</p></div>
+    <div class="principles">
+      <div><h3>Climate first</h3><p>Orientation, shade and thermal mass before any machinery. The best kilowatt is the one never used.</p></div>
+      <div><h3>Light as material</h3><p>Every room is drawn with its daylight at noon in June and in December.</p></div>
+      <div><h3>Built to be changed</h3><p>Structures planned for second and third lives, so buildings outlast their first use.</p></div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap cv">
+    <div><span class="tag">Sheet A-300 · Career</span><h2 style="margin-bottom:24px">Practice <b>history</b></h2>
+      <div class="row"><time>2015 — today</time><h3>Principal &amp; Founder<span>Whitaker Lane Architects, London &amp; Dubai</span></h3></div>
+      <div class="row"><time>2006 — 2015</time><h3>Associate Director<span>Fenwick Hale Partnership, London</span></h3></div>
+      <div class="row"><time>2001 — 2006</time><h3>Architect<span>Morrow Studio, Edinburgh</span></h3></div>
+      <div class="row"><time>1994 — 2001</time><h3>BA, Diploma in Architecture<span>Part I &amp; II, with distinction</span></h3></div></div>
+    <div class="badges"><span class="tag">Credentials</span>
+      <div><b>RIBA Chartered Architect</b><span>Registered architect, UK</span></div>
+      <div><b>LEED AP BD+C</b><span>Green building accreditation</span></div>
+      <div><b>Visiting critic</b><span>Two schools of architecture</span></div>
+      <div><b>English · Arabic (conversational)</b><span>Languages</span></div></div>
+  </div></section>
+</main>
+
+<div class="bp contact" id="contact"><div class="wrap"><span class="tag" style="color:var(--paper)">Sheet A-400 · Contact</span><h2>Have a site and <b>a question</b>?</h2><p>Thomas takes on civic, education and residential commissions, and is open to design director roles.</p>
+  <div class="btns"><a class="btn fill" href="#contact">Start a conversation</a><a class="btn" href="#contact">Download portfolio</a><a class="btn" href="#contact">LinkedIn</a></div></div></div>
+<footer class="wrap">Sample portfolio website designed by Zenith Dubai CV · Thomas Whitaker is a fictional profile; projects, firms and awards are illustrative.</footer>
+<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design · Zenith</a>
+</body>
+</html>

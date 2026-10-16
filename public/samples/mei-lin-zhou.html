@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mei Lin Zhou · Lead Data Scientist, AI — Sample design by Zenith Dubai CV</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{--mist:#F4F5FF;--white:#fff;--indigo:#2B2D6E;--deep:#1B1C4A;--violet:#7B5CFF;--sky:#55C2FF;--pink:#FF7AB6;--ink:#1B1C3A;--muted:#5D6088;--line:rgba(43,45,110,.12);
+--sans:"Manrope","Helvetica Neue",Arial,sans-serif;--mono:"Fira Code",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--mist);color:var(--ink);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-weight:700}
+.top .logo{display:flex;align-items:center;gap:10px}.top .logo i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--violet),var(--sky))}
+.top a.btn{font-size:14px}
+.hero{background:linear-gradient(135deg,var(--deep) 0%,var(--indigo) 45%,var(--violet) 100%);border-radius:32px;color:var(--white);padding:56px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+.hero svg.plot{position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none}
+.hero>*{position:relative}
+.tag{display:inline-block;font:500 13px var(--mono);padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+h1{font:800 clamp(46px,6vw,82px)/1 var(--sans);letter-spacing:-.035em;margin:20px 0 0}
+.hero p{font-size:19px;color:rgba(255,255,255,.85);max-width:42ch;margin:20px 0 0}
+.hero .pic img{aspect-ratio:4/5;object-fit:cover;border-radius:22px;border:1px solid rgba(255,255,255,.25)}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.chips span{font:500 13px var(--mono);padding:7px 12px;border-radius:10px;background:rgba(255,255,255,.1)}
+section{padding:90px 0}
+.k{font:500 14px var(--mono);color:var(--violet);margin:0 0 10px}
+h2{font:800 clamp(32px,4.2vw,52px)/1.05 var(--sans);letter-spacing:-.03em;margin:0 0 14px}
+.sub{color:var(--muted);max-width:60ch;margin:0 0 40px}
+.models{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.model{background:var(--white);border-radius:22px;padding:26px;border:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.model .type{font:500 12px var(--mono);color:var(--muted)}
+.model h3{font:700 22px/1.25 var(--sans);margin:0}
+.model p{margin:0;color:var(--muted);font-size:15px;flex:1}
+.model .metric{display:flex;align-items:baseline;gap:8px;padding-top:12px;border-top:1px solid var(--line)}
+.model .metric b{font:800 34px var(--sans);letter-spacing:-.02em;background:linear-gradient(90deg,var(--violet),var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent}
+.model .metric span{font:500 13px var(--mono);color:var(--muted)}
+.model svg{width:100%;height:56px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.panel{background:var(--white);border-radius:22px;padding:30px;border:1px solid var(--line)}
+.tl{position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:3px;border-radius:3px;background:linear-gradient(var(--violet),var(--sky))}
+.tl div{position:relative;padding-bottom:24px}
+.tl div::before{content:"";position:absolute;left:-26px;top:7px;width:15px;height:15px;border-radius:50%;background:var(--white);border:3px solid var(--violet)}
+.tl time{font:500 13px var(--mono);color:var(--violet)}
+.tl h3{font:700 19px/1.3 var(--sans);margin:2px 0}
+.tl p{margin:0;color:var(--muted);font-size:15px}
+.pubs{list-style:none;padding:0;margin:0}
+.pubs li{padding:14px 0;border-bottom:1px solid var(--line)}
+.pubs b{display:block;font-weight:700;font-size:16px;line-height:1.4}
+.pubs span{font:400 13px var(--mono);color:var(--muted)}
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 30px}
+.skill span{display:flex;justify-content:space-between;font:600 15px var(--sans)}
+.skill span em{font:500 13px var(--mono);color:var(--muted);font-style:normal}
+.meter{height:8px;border-radius:8px;background:rgba(123,92,255,.12);margin-top:6px;overflow:hidden}
+.meter i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--violet),var(--sky))}
+.contact{background:var(--white);border-radius:32px;padding:56px;text-align:center;border:1px solid var(--line);margin-bottom:40px}
+.contact p{color:var(--muted);max-width:52ch;margin:0 auto}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-block;padding:13px 22px;border-radius:12px;text-decoration:none;font-weight:700;background:var(--white);border:1px solid var(--line)}
+.btn.fill{background:linear-gradient(135deg,var(--violet),var(--indigo));color:var(--white);border:0}
+footer{text-align:center;padding:0 0 90px;font-size:13px;color:var(--muted)}
+.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:10px 16px;border-radius:12px;background:var(--deep);color:var(--white);font:700 12px var(--sans);text-decoration:none;box-shadow:0 10px 30px rgba(43,45,110,.3)}
+.zen b{color:var(--sky)}
+@media (max-width:900px){.hero{grid-template-columns:1fr;padding:34px}.models,.two{grid-template-columns:1fr}.contact{padding:36px 22px}.skills{grid-template-columns:1fr}.hero .pic{max-width:360px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><span class="logo"><i></i>meilin.ai</span><a class="btn" href="#contact">Get in touch</a></header>
+<main>
+  <div class="hero">
+    <svg class="plot" viewBox="0 0 800 420" preserveAspectRatio="none" aria-hidden="true">
+      <g fill="#fff"><circle cx="60" cy="350" r="3"/><circle cx="110" cy="320" r="2.5"/><circle cx="150" cy="335" r="3"/><circle cx="190" cy="290" r="2"/><circle cx="240" cy="300" r="3"/><circle cx="280" cy="260" r="2.5"/><circle cx="330" cy="250" r="3"/><circle cx="380" cy="215" r="2"/><circle cx="420" cy="225" r="3"/><circle cx="470" cy="180" r="2.5"/><circle cx="520" cy="170" r="3"/><circle cx="560" cy="140" r="2"/><circle cx="610" cy="130" r="3"/><circle cx="660" cy="96" r="2.5"/><circle cx="710" cy="90" r="3"/><circle cx="750" cy="62" r="2"/></g>
+      <path d="M40 360 C 260 300, 480 190, 770 55" stroke="#55C2FF" stroke-width="2" fill="none" stroke-dasharray="6 6"/>
+    </svg>
+    <div>
+      <span class="tag">lead_data_scientist.py</span>
+      <h1>Mei Lin Zhou</h1>
+      <p>I build machine-learning systems that ship: forecasting, language models and computer vision that people use every day.</p>
+      <div class="chips"><span>Python</span><span>PyTorch</span><span>LLMs</span><span>MLOps</span><span>Dubai · Shenzhen</span></div>
+    </div>
+    <div class="pic"><img src="img/mei-lin-zhou.jpg" alt="Portrait of Mei Lin Zhou"></div>
+  </div>
+
+  <section>
+    <p class="k">// selected_models</p><h2>Models in production</h2>
+    <p class="sub">Each project went from notebook to production with monitoring, retraining and a business owner who uses it.</p>
+    <div class="models">
+      <article class="model"><span class="type">Time series · retail</span><h3>Demand forecasting for 4,000 stores</h3><p>Hierarchical forecasting with promotions and weather. Cut stock-outs and overstock across the region.</p>
+        <svg viewBox="0 0 200 56" aria-hidden="true"><polyline fill="none" stroke="#7B5CFF" stroke-width="2.5" points="0,44 20,40 40,42 60,30 80,34 100,24 120,26 140,18 160,20 180,10 200,12"/></svg>
+        <div class="metric"><b>8.1%</b><span>MAPE, down from 14.6%</span></div></article>
+      <article class="model"><span class="type">LLM · customer support</span><h3>Retrieval-augmented support assistant</h3><p>Answers agents' questions from 12,000 policy pages with citations, evaluated weekly against a gold set.</p>
+        <svg viewBox="0 0 200 56" aria-hidden="true"><polyline fill="none" stroke="#55C2FF" stroke-width="2.5" points="0,48 20,46 40,40 60,38 80,30 100,28 120,22 140,20 160,14 180,12 200,8"/></svg>
+        <div class="metric"><b>+34%</b><span>first-contact resolution</span></div></article>
+      <article class="model"><span class="type">Computer vision · manufacturing</span><h3>Defect detection on the production line</h3><p>Edge-deployed model inspecting 18 parts per second, with human review for low-confidence cases.</p>
+        <svg viewBox="0 0 200 56" aria-hidden="true"><polyline fill="none" stroke="#FF7AB6" stroke-width="2.5" points="0,40 20,36 40,38 60,26 80,22 100,24 120,16 140,14 160,12 180,10 200,9"/></svg>
+        <div class="metric"><b>97.2%</b><span>recall at 0.5% false alarms</span></div></article>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="two">
+      <div class="panel"><p class="k">// experience</p><h2 style="font-size:34px">Experience</h2>
+        <div class="tl">
+          <div><time>2022 — today</time><h3>Lead Data Scientist, Quanta Grid AI</h3><p>Leads a team of seven across forecasting and generative AI; owns model governance.</p></div>
+          <div><time>2019 — 2022</time><h3>Senior Data Scientist, Orbit Retail Group</h3><p>Built the forecasting platform and the pricing experiments framework.</p></div>
+          <div><time>2017 — 2019</time><h3>Machine Learning Engineer, Shenzhen Vision Lab</h3><p>Computer vision models for quality inspection on edge devices.</p></div>
+          <div><time>2015 — 2017</time><h3>MSc Statistics &amp; Machine Learning</h3><p>Pacific Institute of Technology · distinction</p></div>
+        </div></div>
+      <div class="panel"><p class="k">// publications</p><h2 style="font-size:34px">Papers &amp; talks</h2>
+        <ul class="pubs">
+          <li><b>Hierarchical forecasting under promotion shocks</b><span>Applied ML in Retail Workshop · 2024</span></li>
+          <li><b>Evaluating retrieval-augmented assistants with small gold sets</b><span>NLP Industry Track · 2025</span></li>
+          <li><b>Cheap labels, good models: active learning for visual inspection</b><span>Vision for Industry Symposium · 2019</span></li>
+          <li><b>Talk: shipping LLM features without breaking trust</b><span>Data Leaders Forum, Dubai · 2025</span></li>
+        </ul></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="panel"><p class="k">// skills</p><h2 style="font-size:34px">Toolkit</h2>
+      <div class="skills">
+        <div class="skill"><span>Python &amp; PyTorch <em>9 yrs</em></span><div class="meter"><i style="width:95%"></i></div></div>
+        <div class="skill"><span>LLM evaluation &amp; RAG <em>3 yrs</em></span><div class="meter"><i style="width:85%"></i></div></div>
+        <div class="skill"><span>Forecasting &amp; causal inference <em>7 yrs</em></span><div class="meter"><i style="width:90%"></i></div></div>
+        <div class="skill"><span>Spark, SQL &amp; dbt <em>8 yrs</em></span><div class="meter"><i style="width:82%"></i></div></div>
+        <div class="skill"><span>MLOps: MLflow, Kubeflow <em>5 yrs</em></span><div class="meter"><i style="width:78%"></i></div></div>
+        <div class="skill"><span>Mandarin · English · Arabic (basic)</span><div class="meter"><i style="width:70%"></i></div></div>
+      </div></div>
+  </section>
+
+  <section class="contact" id="contact">
+    <p class="k">// contact</p><h2>Have a problem worth modelling?</h2>
+    <p>Open to head of data science and AI lead roles, and to advising teams moving models into production.</p>
+    <div class="btns"><a class="btn fill" href="#contact">Email Mei Lin</a><a class="btn" href="#contact">GitHub</a><a class="btn" href="#contact">Google Scholar</a><a class="btn" href="#contact">CV</a></div>
+  </section>
+</main>
+<footer>Sample portfolio website designed by Zenith Dubai CV. Mei Lin Zhou is a fictional profile; organisations, papers and links are illustrative.</footer>
+</div>
+<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design <b>· Zenith Dubai CV</b></a>
+</body>
+</html>

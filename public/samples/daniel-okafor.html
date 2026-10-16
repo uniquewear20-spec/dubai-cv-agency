@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Daniel Okafor · Head of Software Engineering — Sample design by Zenith Dubai CV</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{--bg:#0D1117;--panel:#161B22;--panel2:#1C2230;--line:#30363D;--cyan:#3DDBD9;--green:#3FB950;--violet:#A371F7;--amber:#E3B341;--text:#E6EDF3;--muted:#8B949E;
+--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;--sans:"Sora","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font:500 14px var(--mono);color:var(--muted)}
+.nav b{color:var(--text)}.nav b span{color:var(--cyan)}
+.nav nav{display:flex;gap:22px}.nav nav a{text-decoration:none}.nav nav a:hover{color:var(--cyan)}
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;padding:40px 0 80px}
+.term{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.term .tb{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line);font:500 12px var(--mono);color:var(--muted)}
+.term .tb i{width:11px;height:11px;border-radius:50%;background:#F85149}.term .tb i:nth-child(2){background:var(--amber)}.term .tb i:nth-child(3){background:var(--green)}
+.term .tb span{margin-left:8px}
+.term pre{margin:0;padding:22px 22px 26px;font:400 15px/1.75 var(--mono);white-space:pre-wrap;color:var(--text)}
+.p{color:var(--green)}.c{color:var(--cyan)}.v{color:var(--violet)}.a{color:var(--amber)}.m{color:var(--muted)}
+h1{font:700 clamp(40px,5.4vw,72px)/1.02 var(--sans);letter-spacing:-.03em;margin:0 0 6px}
+.caret{display:inline-block;width:.55em;height:1.05em;background:var(--cyan);vertical-align:-.15em;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.me{position:relative}
+.me img{aspect-ratio:4/5;object-fit:cover;border-radius:18px;border:1px solid var(--line)}
+.me::after{content:"";position:absolute;inset:-1px;border-radius:18px;box-shadow:0 0 0 1px rgba(61,219,217,.35),0 0 60px rgba(61,219,217,.18);pointer-events:none}
+.me .st{position:absolute;left:14px;bottom:14px;background:rgba(13,17,23,.85);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:500 12px var(--mono);backdrop-filter:blur(6px)}
+.me .st i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:8px;box-shadow:0 0 8px var(--green)}
+section{padding:80px 0;border-top:1px solid var(--line)}
+.h{font:500 14px var(--mono);color:var(--cyan);margin:0 0 10px}
+h2{font:700 clamp(30px,3.8vw,46px)/1.1 var(--sans);letter-spacing:-.02em;margin:0 0 36px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.metric{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px;min-width:0}
+.metric .k{font:500 12px var(--mono);color:var(--muted)}
+.metric b{display:block;font:700 40px/1.1 var(--sans);margin-top:10px;letter-spacing:-.02em}
+.metric small{font:400 13px var(--sans);color:var(--muted)}
+.metric.c1 b{color:var(--cyan)}.metric.c2 b{color:var(--green)}.metric.c3 b{color:var(--violet)}.metric.c4 b{color:var(--amber)}
+.log{border-left:2px solid var(--line);margin-left:8px}
+.commit{position:relative;padding:0 0 34px 30px}
+.commit::before{content:"";position:absolute;left:-8px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--cyan)}
+.commit .hash{font:500 13px var(--mono);color:var(--amber)}.commit .hash span{color:var(--muted)}
+.commit h3{font:600 21px/1.3 var(--sans);margin:6px 0 4px}
+.commit h3 em{font-style:normal;color:var(--cyan)}
+.commit p{margin:0;color:#C2CBD5;max-width:70ch}
+.commit .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.commit .tags span{font:500 12px var(--mono);padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.heat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px;overflow-x:auto}
+.grid{display:grid;grid-template-rows:repeat(7,12px);grid-auto-flow:column;grid-auto-columns:12px;gap:3px;width:max-content}
+.grid i{width:12px;height:12px;border-radius:3px;background:#161B22;outline:1px solid rgba(255,255,255,.04)}
+.grid i[data-l="1"]{background:#0E4429}.grid i[data-l="2"]{background:#006D32}.grid i[data-l="3"]{background:#26A641}.grid i[data-l="4"]{background:#39D353}
+.heat p{margin:14px 0 0;font:400 13px var(--mono);color:var(--muted)}
+.stack{display:flex;flex-wrap:wrap;gap:10px}
+.stack span{font:500 14px var(--mono);padding:9px 14px;border-radius:8px;background:var(--panel2);border:1px solid var(--line)}
+.stack span b{color:var(--cyan);font-weight:500}
+.adr{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.adr div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
+.adr .n{font:500 12px var(--mono);color:var(--violet)}
+.adr h3{font:600 19px/1.3 var(--sans);margin:8px 0}
+.adr p{margin:0;font-size:15px;color:#C2CBD5}
+.contact .term pre{font-size:16px}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{font:500 14px var(--mono);padding:12px 18px;border-radius:8px;border:1px solid var(--line);text-decoration:none;background:var(--panel2)}
+.btn.fill{background:var(--cyan);color:var(--bg);border-color:var(--cyan)}
+footer{padding:26px 0 90px;font:400 12px var(--mono);color:var(--muted);text-align:center}
+.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:9px 14px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);color:var(--text);font:500 12px var(--mono);text-decoration:none}
+.zen b{color:var(--cyan);font-weight:500}
+@media (max-width:520px){.metric{padding:16px}.metric b{font-size:30px}}
+@media (max-width:900px){.hero{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.adr{grid-template-columns:1fr}.nav nav{display:none}.me{max-width:360px}}
+@media (prefers-reduced-motion:reduce){.caret{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="nav"><b>daniel<span>.okafor</span></b><nav><a href="#log">git log</a><a href="#stack">stack</a><a href="#contact">contact</a></nav></header>
+<main>
+  <div class="hero">
+    <div>
+      <h1>Daniel Okafor<span class="caret" aria-hidden="true"></span></h1>
+      <div class="term" style="margin-top:26px">
+        <div class="tb"><i></i><i></i><i></i><span>~/daniel — zsh</span></div>
+<pre><span class="p">$</span> whoami
+Head of Software Engineering · payments at scale
+<span class="p">$</span> cat focus.txt
+<span class="c">→</span> Teams of 40+ engineers, 7 squads, 2 time zones
+<span class="c">→</span> Platforms that move money and never sleep
+<span class="c">→</span> Hiring, growing and keeping great engineers
+<span class="p">$</span> locate daniel
+<span class="v">Dubai</span> <span class="m">·</span> <span class="v">Lagos</span> <span class="m">· remote-friendly</span></pre>
+      </div>
+    </div>
+    <div class="me"><img src="img/daniel-okafor.jpg" alt="Portrait of Daniel Okafor in a tech office"><span class="st"><i></i>Open to CTO / VP Engineering</span></div>
+  </div>
+
+  <section>
+    <p class="h">// metrics.json</p><h2>What changed under his watch</h2>
+    <div class="metrics">
+      <div class="metric c1"><span class="k">"uptime"</span><b>99.99%</b><small>Payments API, last 24 months</small></div>
+      <div class="metric c2"><span class="k">"p99_latency"</span><b>−62%</b><small>After the ledger rewrite</small></div>
+      <div class="metric c3"><span class="k">"deploys_per_day"</span><b>40</b><small>Up from two a week</small></div>
+      <div class="metric c4"><span class="k">"engineers"</span><b>46</b><small>Across seven squads</small></div>
+    </div>
+  </section>
+
+  <section id="log">
+    <p class="h">$ git log --career</p><h2>Commit history</h2>
+    <div class="log">
+      <div class="commit"><span class="hash">a3f9c21 <span>(HEAD → today)</span></span><h3>Head of Software Engineering <em>@ Korra Commerce</em></h3><p>Leads engineering for a pan-African and Gulf payments platform processing 9 million transactions a month. Introduced squad ownership, on-call that people don't dread, and a promotion framework.</p><div class="tags"><span>2021 — now</span><span>Dubai &amp; Lagos</span></div></div>
+      <div class="commit"><span class="hash">7c1d0e4</span><h3>Engineering Manager <em>@ Fieldwise</em></h3><p>Grew the team from 6 to 22 engineers while shipping the offline-first field-service app used by 30,000 technicians.</p><div class="tags"><span>2018 — 2021</span><span>Lagos</span></div></div>
+      <div class="commit"><span class="hash">2b88f9a</span><h3>Senior Software Engineer <em>@ Tidewater Labs</em></h3><p>Built the event-streaming backbone and mentored five engineers into senior roles.</p><div class="tags"><span>2014 — 2018</span><span>Lagos · London</span></div></div>
+      <div class="commit"><span class="hash">0f1e2d3</span><h3>BSc Computer Science <em>@ Lagos</em></h3><p>First-class honours. Final project: a fraud-detection service for mobile money.</p><div class="tags"><span>2010 — 2014</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="h">// contributions</p><h2>Still writes code</h2>
+    <div class="heat"><div class="grid" id="grid" aria-label="Contribution activity over the last year" role="img"></div><p>1,284 contributions in the last year · maintainer of two open-source libraries</p></div>
+  </section>
+
+  <section id="stack">
+    <p class="h">// stack.yml</p><h2>Tools of the trade</h2>
+    <div class="stack"><span><b>lang:</b> Go</span><span><b>lang:</b> TypeScript</span><span><b>lang:</b> Kotlin</span><span><b>data:</b> PostgreSQL</span><span><b>data:</b> Kafka</span><span><b>infra:</b> Kubernetes</span><span><b>infra:</b> AWS</span><span><b>infra:</b> Terraform</span><span><b>obs:</b> OpenTelemetry</span><span><b>sec:</b> PCI DSS</span></div>
+    <div class="adr">
+      <div><span class="n">ADR-014</span><h3>Double-entry ledger as the source of truth</h3><p>Every balance is derived, never stored. Reconciliation incidents dropped to zero.</p></div>
+      <div><span class="n">ADR-022</span><h3>Squads own services end to end</h3><p>Build it, run it, improve it. Mean time to recovery fell from hours to 11 minutes.</p></div>
+      <div><span class="n">ADR-031</span><h3>Hiring with a work sample, not a puzzle</h3><p>A paid, realistic task. Offer acceptance rose to 86%.</p></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <p class="h">$ ssh daniel</p><h2>Let's build something reliable</h2>
+    <div class="term"><div class="tb"><i></i><i></i><i></i><span>contact.sh</span></div>
+<pre><span class="p">$</span> ./contact --role <span class="a">"CTO | VP Engineering"</span> --region <span class="a">"GCC, Africa, remote"</span>
+<span class="c">✓</span> Daniel replies within two working days</pre></div>
+    <div class="btns"><a class="btn fill" href="#contact">Email Daniel</a><a class="btn" href="#contact">GitHub</a><a class="btn" href="#contact">LinkedIn</a><a class="btn" href="#contact">CV.pdf</a></div>
+  </section>
+</main>
+<footer>Sample portfolio website designed by Zenith Dubai CV · Daniel Okafor is a fictional profile · links are disabled</footer>
+</div>
+<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">sample design <b>· zenith</b></a>
+<script>
+(function(){var g=document.getElementById('grid');if(!g)return;var s=7;function r(){s=(s*9301+49297)%233280;return s/233280}
+for(var w=0;w<52;w++)for(var d=0;d<7;d++){var x=r(),wk=(d>0&&d<6)?1:.35,l=x*wk>.82?4:x*wk>.6?3:x*wk>.38?2:x*wk>.18?1:0;var i=document.createElement('i');i.setAttribute('data-l',l);g.appendChild(i)}})();
+</script>
+</body>
+</html>

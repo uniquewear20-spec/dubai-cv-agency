@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Alexei Morozov · Supply Chain Director — Sample design by Zenith Dubai CV</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{--steel:#3E4C59;--dark:#1F2730;--dark2:#171D24;--tile:#242E39;--signal:#E4B43A;--fog:#E8ECEF;--soft:#C3CCD5;--muted:#9AA7B4;--green:#5BC48B;--line:rgba(232,236,239,.12);
+--tech:"Chakra Petch","Arial Narrow",sans-serif;--sans:"Rubik","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--dark);color:var(--fog);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased;background-image:linear-gradient(rgba(232,236,239,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(232,236,239,.04) 1px,transparent 1px);background-size:64px 64px}
+img{max-width:100%;display:block}a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.status{border-bottom:1px solid var(--line);background:rgba(23,29,36,.92);font:600 12px var(--tech);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.status .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;height:48px}
+.status b{color:var(--fog);font-weight:700;letter-spacing:.2em}.status b span{color:var(--signal)}
+.ok{display:inline-flex;align-items:center;gap:10px;color:var(--fog)}
+.ok::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(91,196,139,.2)}
+.hgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;padding-top:80px;padding-bottom:64px}
+.kick{font:600 14px var(--tech);letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin:0}
+h1{font:700 clamp(54px,6.6vw,100px)/.92 var(--tech);text-transform:uppercase;letter-spacing:-.01em;margin:20px 0 0}
+h1 span{color:var(--signal)}
+.lead{color:var(--soft);max-width:48ch;margin:26px 0 0;font-size:18px}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-block;padding:14px 24px;font:700 15px var(--tech);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border:1.5px solid var(--fog);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
+.btn.y{background:var(--signal);border-color:var(--signal);color:var(--dark2)}
+.hud{position:relative;padding:18px}
+.hud img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 18%}
+.hud i{position:absolute;width:36px;height:36px;border:2px solid var(--signal)}
+.hud i.a{top:0;left:0;border-right:0;border-bottom:0}.hud i.b{top:0;right:0;border-left:0;border-bottom:0}
+.hud i.c{bottom:0;left:0;border-right:0;border-top:0}.hud i.d{bottom:0;right:0;border-left:0;border-top:0}
+.hud .tag{position:absolute;left:36px;bottom:36px;background:rgba(23,29,36,.9);border:1px solid var(--line);padding:10px 16px;font:600 11.5px var(--tech);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.hud .tag b{display:block;color:var(--signal);font-size:24px;letter-spacing:.06em;line-height:1.1}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-bottom:40px}
+.tile{background:var(--tile);border:1px solid var(--line);padding:22px 22px 20px;position:relative}
+.tile::before{content:"";position:absolute;left:-1px;top:-1px;width:40px;height:3px;background:var(--signal)}
+.tile small{display:block;font:600 11.5px var(--tech);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.tile b{display:block;font:700 46px/1 var(--tech);margin-top:14px;letter-spacing:-.01em}
+.tile span{display:block;font-size:14px;color:var(--soft);margin-top:8px;line-height:1.45}
+.tile svg{display:block;width:100%;height:34px;margin-top:16px}
+.bar{height:6px;background:rgba(232,236,239,.1);margin-top:22px}.bar i{display:block;height:100%;background:var(--signal)}
+.blocks{display:flex;gap:6px;margin-top:20px}.blocks i{flex:1;height:14px;background:var(--signal)}.blocks i:first-child{flex:2.2}
+section{padding:100px 0}
+.label{font:600 13px var(--tech);letter-spacing:.22em;text-transform:uppercase;color:var(--signal);margin:0 0 14px}
+h2{font:700 clamp(36px,4.4vw,60px)/1 var(--tech);text-transform:uppercase;margin:0}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:44px}
+.head p{max-width:44ch;margin:0;color:var(--muted)}
+.netgrid{display:grid;grid-template-columns:.7fr 1.3fr;gap:24px}
+.side{display:grid;gap:16px;align-content:start}
+.side .tile b{font-size:40px;margin-top:10px}
+.map{background:var(--dark2);border:1px solid var(--line);padding:14px}
+.map svg{display:block;width:100%;height:auto}
+.map text{font-family:var(--tech)}
+.route{fill:none;stroke:var(--signal);stroke-width:2.2;stroke-dasharray:7 9;animation:flow 1.4s linear infinite}
+.route.in{stroke:var(--fog);stroke-opacity:.6}
+@keyframes flow{to{stroke-dashoffset:-32}}
+.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2);opacity:0}}
+@media (prefers-reduced-motion:reduce){.route,.pulse{animation:none}}
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:14px;font:600 11.5px var(--tech);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{display:inline-block;width:12px;height:12px}
+.moves{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.move{background:var(--tile);border:1px solid var(--line);display:flex;flex-direction:column}
+.move header{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px dashed rgba(232,236,239,.22);font:600 12px var(--tech);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.move header em{font-style:normal;color:var(--green);border:1px solid rgba(91,196,139,.5);padding:2px 8px;white-space:nowrap}
+.move .body{padding:24px 20px;flex:1}
+.move h3{font:700 26px/1.1 var(--tech);text-transform:uppercase;margin:0 0 10px}
+.move p{margin:0;color:var(--soft);font-size:15.5px}
+.move footer{padding:18px 20px;border-top:1px solid var(--line);background:rgba(228,180,58,.07)}
+.move footer b{display:block;font:700 34px/1 var(--tech);color:var(--signal)}
+.move footer span{font-size:13.5px;color:var(--muted)}
+.line{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding-top:58px}
+.line::before{content:"";position:absolute;left:0;right:0;top:20px;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--steel),var(--signal))}
+.stop{position:relative}
+.stop::before{content:"";position:absolute;top:-48px;left:0;width:26px;height:26px;border-radius:50%;background:var(--dark);border:5px solid var(--signal)}
+.stop.now::before{background:var(--signal);box-shadow:0 0 0 8px rgba(228,180,58,.2)}
+.stop time{font:700 15px var(--tech);letter-spacing:.14em;color:var(--signal)}
+.stop h3{font:700 25px/1.15 var(--tech);text-transform:uppercase;margin:8px 0 4px}
+.stop .org{font-weight:500}
+.stop p{margin:10px 0 0;color:var(--muted);font-size:15.5px}
+.certs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cert{border:1px solid var(--line);border-left:3px solid var(--signal);padding:18px 20px;background:rgba(36,46,57,.7)}
+.cert small{font:600 11.5px var(--tech);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.cert b{display:block;font:700 22px/1.2 var(--tech);margin-top:6px}
+.cert span{font-size:14px;color:var(--soft)}
+.contact{padding-top:0}
+.contact .panel{position:relative;overflow:hidden;border:1px solid var(--line);background:linear-gradient(135deg,#283441,#1B222B);padding:70px 56px;display:grid;grid-template-columns:1.3fr .7fr;gap:30px;align-items:center}
+.contact .panel::after{content:"";position:absolute;right:-50px;top:-50px;width:230px;height:230px;background:repeating-linear-gradient(-45deg,rgba(228,180,58,.2) 0 10px,transparent 10px 22px)}
+.contact .panel>*{position:relative;z-index:1}
+.contact p{color:var(--soft);margin:16px 0 0;max-width:46ch}
+.contact .btns{justify-content:flex-end;margin-top:0}
+footer.foot{text-align:center;font-size:12.5px;color:var(--muted);padding:0 24px 90px}
+.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:10px 18px;background:var(--signal);color:var(--dark2);font:700 12px var(--tech);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+@media (max-width:1060px){.kpis,.certs{grid-template-columns:1fr 1fr}.status .mid{display:none}}
+@media (max-width:900px){.hgrid{grid-template-columns:1fr;gap:46px;padding-top:56px}.hud{max-width:460px}.netgrid{grid-template-columns:1fr}.side{grid-template-columns:repeat(3,1fr)}.moves{grid-template-columns:1fr}.line{grid-template-columns:1fr;padding:0 0 0 50px;gap:38px}.line::before{left:10px;right:auto;top:6px;bottom:6px;width:6px;height:auto;background:linear-gradient(180deg,var(--steel),var(--signal))}.stop::before{top:2px;left:-50px}.contact .panel{grid-template-columns:1fr;padding:48px 28px}.contact .btns{justify-content:flex-start}}
+@media (max-width:560px){.wrap{padding:0 20px}section{padding:76px 0}.kpis,.certs,.side{grid-template-columns:1fr}.status .right{display:none}.tile b{font-size:40px}.hud{padding:14px}.hud .tag{left:26px;bottom:26px}.map .sub{display:none}.map .lbl{font-size:24px}.contact .panel{padding:42px 22px}}
+</style>
+</head>
+<body>
+<header class="status"><div class="wrap"><b>AM<span>/</span>SC</b><span class="ok mid">Network status · all lanes green</span><span class="right">Dubai · UTC+4</span></div></header>
+<main>
+  <div class="hero"><div class="wrap hgrid">
+    <div>
+      <p class="kick">[ Supply Chain Director · GCC &amp; India ]</p>
+      <h1>Alexei<br><span>Morozov</span></h1>
+      <p class="lead">I design supply chains that are boring in the best way: the product arrives on time, in full, at the lowest cost to serve. Eighteen years across freight, retail and logistics, from Moscow to the Gulf.</p>
+      <div class="btns"><a class="btn y" href="#contact">Request a briefing</a><a class="btn" href="#contact">Download CV</a></div>
+    </div>
+    <div class="hud">
+      <img src="img/alexei-morozov.jpg" alt="Portrait of Alexei Morozov in a grey suit in front of a container port">
+      <i class="a"></i><i class="b"></i><i class="c"></i><i class="d"></i>
+      <div class="tag">Operator since<b>2006</b></div>
+    </div>
+  </div>
+  <div class="wrap kpis">
+    <div class="tile"><small>KPI-01 · OTIF</small><b>97.8%</b><span>On time, in full, 12-month average</span><svg viewBox="0 0 200 34" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,30 25,28 50,27 75,22 100,21 125,15 150,12 175,9 200,5" fill="none" stroke="#E4B43A" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg></div>
+    <div class="tile"><small>KPI-02 · Turns</small><b>11.4×</b><span>Inventory turns a year, up from 7.9</span><div class="bar"><i style="width:76%"></i></div></div>
+    <div class="tile"><small>KPI-03 · Cost</small><b>−16%</b><span>Cost-to-serve per order since 2019</span><svg viewBox="0 0 200 34" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,5 25,7 50,8 75,12 100,14 125,19 150,22 175,26 200,29" fill="none" stroke="#E4B43A" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg></div>
+    <div class="tile"><small>KPI-04 · Network</small><b>4 DCs</b><span>1.2m sq ft across the GCC</span><div class="blocks" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+  </div></div>
+
+  <section>
+    <div class="wrap">
+      <div class="head"><div><p class="label">The network</p><h2>One hub, four countries</h2></div><p>A Jebel Ali hub feeding three regional centres, with inbound flows from Europe and India.</p></div>
+      <div class="netgrid">
+        <div class="side">
+          <div class="tile"><small>Lanes</small><b>142</b><span>Active transport lanes</span></div>
+          <div class="tile"><small>Carriers</small><b>38</b><span>Road, sea and air partners</span></div>
+          <div class="tile"><small>Orders</small><b>61k</b><span>Customer orders a week</span></div>
+        </div>
+        <div class="map">
+          <svg viewBox="0 0 800 460" role="img" aria-label="Network map: Jebel Ali hub linked to distribution centres in Riyadh, Doha and Muscat, with inbound routes from Rotterdam and Mumbai">
+            <defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#3E4C59"/></pattern></defs>
+            <rect width="800" height="460" fill="url(#dots)"/>
+            <path class="route in" d="M110 80C260 60 420 120 540 250"/>
+            <path class="route in" d="M740 390C700 300 620 250 540 250"/>
+            <path class="route" d="M540 250C480 300 430 300 380 280"/>
+            <path class="route" d="M540 250C515 225 490 220 465 232"/>
+            <path class="route" d="M540 250C575 255 600 270 625 305"/>
+            <g fill="#171D24" stroke="#E8ECEF" stroke-width="3"><circle cx="110" cy="80" r="9"/><circle cx="740" cy="390" r="9"/></g>
+            <g fill="#E8ECEF"><rect x="372" y="272" width="16" height="16" transform="rotate(45 380 280)"/><rect x="457" y="224" width="16" height="16" transform="rotate(45 465 232)"/><rect x="617" y="297" width="16" height="16" transform="rotate(45 625 305)"/></g>
+            <circle class="pulse" cx="540" cy="250" r="20" fill="none" stroke="#E4B43A" stroke-width="2"/>
+            <circle cx="540" cy="250" r="12" fill="#E4B43A"/>
+            <g fill="#E8ECEF" font-size="17" font-weight="700" letter-spacing="2">
+              <text class="lbl" x="560" y="212">JEBEL ALI</text>
+              <text class="lbl" x="448" y="208" text-anchor="end">DOHA</text>
+              <text class="lbl" x="380" y="322" text-anchor="middle">RIYADH</text>
+              <text class="lbl" x="644" y="338">MUSCAT</text>
+              <text class="lbl" x="132" y="76">ROTTERDAM</text>
+              <text class="lbl" x="740" y="428" text-anchor="middle">MUMBAI</text>
+            </g>
+            <g class="sub" fill="#9AA7B4" font-size="13" letter-spacing="1">
+              <text x="560" y="230">Main hub · 620k sq ft</text>
+              <text x="448" y="226" text-anchor="end">DC · 150k sq ft</text>
+              <text x="380" y="340" text-anchor="middle">DC · 260k sq ft</text>
+              <text x="644" y="356">DC · 170k sq ft</text>
+              <text x="132" y="94">Inbound · Europe</text>
+              <text x="740" y="446" text-anchor="middle">Inbound · India</text>
+              <text x="16" y="448">SCHEMATIC · NOT TO SCALE</text>
+            </g>
+          </svg>
+          <div class="legend"><span><i style="background:#E4B43A;border-radius:50%"></i>Hub</span><span><i style="background:#E8ECEF;transform:rotate(45deg) scale(.8)"></i>Distribution centre</span><span><i style="border:2px solid #E8ECEF;border-radius:50%"></i>Inbound port</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="head"><div><p class="label">Projects</p><h2>Three big moves</h2></div><p>Each one planned, piloted and rolled out without stopping the operation.</p></div>
+      <div class="moves">
+        <article class="move"><header><span>TRF-01</span><em>Delivered 2021</em></header><div class="body"><h3>Network redesign</h3><p>Consolidated seven warehouses into four regional distribution centres, with new transport lanes from the Jebel Ali hub.</p></div><footer><b>−16%</b><span>cost-to-serve per order</span></footer></article>
+        <article class="move"><header><span>TRF-02</span><em>Delivered 2022</em></header><div class="body"><h3>Sales &amp; operations planning</h3><p>One monthly planning cycle across five countries, with one shared forecast for sales, finance and operations.</p></div><footer><b>84%</b><span>forecast accuracy, up from 61%</span></footer></article>
+        <article class="move"><header><span>TRF-03</span><em>Delivered 2024</em></header><div class="body"><h3>Warehouse automation</h3><p>Goods-to-person picking and a new warehouse management system in the main hub, live in eleven months.</p></div><footer><b>2.3×</b><span>order lines picked per hour</span></footer></article>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="head"><div><p class="label">Route</p><h2>Career</h2></div><p>Three countries, three kinds of supply chain: freight, retail and third-party logistics.</p></div>
+      <div class="line">
+        <div class="stop"><time>2006 — 2012 · MOSCOW</time><h3>Planning Manager</h3><div class="org">Steppe Freight</div><p>Road and rail planning for a fleet of 300 trucks; launched the company's first transport management system.</p></div>
+        <div class="stop"><time>2012 — 2018 · RIGA</time><h3>Head of Logistics</h3><div class="org">Amberline Retail Group</div><p>Ran two distribution centres serving 180 stores in the Baltics and cut stock-outs by 40%.</p></div>
+        <div class="stop now"><time>2018 — TODAY · DUBAI</time><h3>Supply Chain Director</h3><div class="org">Corvex Logistics</div><p>Leads planning, warehousing and transport for the GCC and India: four DCs and 900 people.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="head"><div><p class="label">Credentials</p><h2>Certified</h2></div></div>
+      <div class="certs">
+        <div class="cert"><small>APICS</small><b>CSCP</b><span>Certified Supply Chain Professional</span></div>
+        <div class="cert"><small>Lean Six Sigma</small><b>Black Belt</b><span>Process improvement</span></div>
+        <div class="cert"><small>Education</small><b>MSc Logistics</b><span>Moscow, 2006</span></div>
+        <div class="cert"><small>Languages</small><b>RU · EN · AR</b><span>Native · fluent · basic</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap"><div class="panel">
+      <div><p class="label">Contact</p><h2>Need a supply chain<br>that just works?</h2><p>Alexei is open to Supply Chain Director and VP Operations roles in the Gulf.</p></div>
+      <div class="btns"><a class="btn y" href="#contact">Request a briefing</a><a class="btn" href="#contact">Download CV</a><a class="btn" href="#contact">LinkedIn</a></div>
+    </div></div>
+  </section>
+</main>
+<footer class="foot">Sample portfolio website designed by Zenith Dubai CV. Alexei Morozov is a fictional profile; companies and figures are illustrative and contact links are disabled.</footer>
+<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design · Zenith Dubai CV</a>
+</body>
+</html>
