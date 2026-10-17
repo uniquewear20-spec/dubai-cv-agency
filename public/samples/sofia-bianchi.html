@@ -2,137 +2,357 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Sofia Bianchi · Senior Product Designer — Sample design by Zenith Dubai CV</title>
+<meta name="theme-color" content="#EEECE7">
+<title>Sofia Bianchi · Senior Product Designer — Concept site by Zenith Dubai CV</title>
+<meta name="description" content="Concept portfolio website for a fictional senior product designer, designed by Zenith Dubai CV.">
+<link rel="preload" href="img/sofia-bianchi-640.webp" as="image" type="image/webp">
+<link rel="preload" href="fonts/syne-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
+<script src="assets/sample.js"></script>
 <style>
-:root{--cream:#FFF4E8;--coral:#FF6F59;--mustard:#F2B134;--ink:#1B1B1B;--white:#fff;--muted:#5A5550;--mint:#BFE3D0;
---display:"Syne","Arial Black",sans-serif;--sans:"Outfit","Helvetica Neue",Arial,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--cream);color:var(--ink);font:400 18px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}a{color:inherit}
-.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
-.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
-.logo{font:800 26px var(--display);letter-spacing:-.02em}.logo span{color:var(--coral)}
-.top nav{display:flex;gap:10px}
-.top nav a{padding:10px 16px;border:2px solid var(--ink);border-radius:999px;text-decoration:none;font-weight:600;font-size:15px}
-.top nav a:last-child{background:var(--ink);color:var(--cream)}
-.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:40px;align-items:center;padding:40px 0 70px}
-h1{font:800 clamp(52px,7.6vw,118px)/.92 var(--display);letter-spacing:-.045em;margin:0}
-h1 .hl{background:var(--mustard);padding:0 .12em;border-radius:.12em;display:inline-block;transform:rotate(-1.5deg)}
-h1 .c{color:var(--coral)}
-.stick{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.stick span{padding:10px 18px;border-radius:999px;border:2px solid var(--ink);font-weight:600;background:var(--white);font-size:16px}
-.stick span:nth-child(1){transform:rotate(-3deg);background:var(--mint)}.stick span:nth-child(2){transform:rotate(2deg)}.stick span:nth-child(3){transform:rotate(-1deg);background:var(--mustard)}.stick span:nth-child(4){transform:rotate(3deg);background:var(--coral);color:var(--white)}
-.me{position:relative}
-.me img{aspect-ratio:4/5;object-fit:cover;border:3px solid var(--ink);border-radius:28px;position:relative;z-index:1}
-.me::before{content:"";position:absolute;inset:0;transform:translate(14px,14px);background:var(--mustard);border:3px solid var(--ink);border-radius:28px}
-.me .hello{position:absolute;z-index:2;top:-18px;left:-22px;background:var(--white);border:3px solid var(--ink);border-radius:20px 20px 20px 4px;padding:10px 16px;font:700 18px var(--display);transform:rotate(-6deg)}
-section{padding:90px 0}
-.k{display:inline-block;font:700 14px var(--sans);letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;background:var(--ink);color:var(--cream);border-radius:8px;margin-bottom:16px}
-h2{font:800 clamp(40px,5.4vw,76px)/.95 var(--display);letter-spacing:-.04em;margin:0 0 40px}
-.case{display:grid;grid-template-columns:1fr 1fr;gap:0;border:3px solid var(--ink);border-radius:32px;overflow:hidden;margin-bottom:28px;background:var(--white)}
-.case .art{min-height:380px;display:grid;place-items:center;position:relative;overflow:hidden}
-.case.a .art{background:var(--coral)}.case.b .art{background:var(--mint)}.case.c .art{background:var(--mustard)}
-.phone{width:200px;height:360px;background:var(--white);border:3px solid var(--ink);border-radius:30px;padding:16px 14px;display:flex;flex-direction:column;gap:10px;box-shadow:10px 10px 0 var(--ink);transform:rotate(-4deg)}
-.phone i{display:block;border-radius:10px;background:#EFE7DC}
-.phone .h1{height:14px;width:60%;background:var(--ink)}.phone .card{height:90px;background:#FFE1D6}.phone .row{height:26px}.phone .cta{height:40px;margin-top:auto;background:var(--coral);border-radius:20px}
-.case.b .phone .card{background:#DCEFE5}.case.b .phone .cta{background:var(--ink)}
-.case.c .phone{transform:rotate(3deg)}.case.c .phone .card{background:#FDECC8}
-.case .txt{padding:40px}
-.case .txt .meta{font-weight:600;color:var(--muted);font-size:15px}
-.case h3{font:800 34px/1.05 var(--display);letter-spacing:-.03em;margin:10px 0 14px}
-.case p{margin:0 0 20px;color:var(--muted)}
-.res{display:flex;gap:12px;flex-wrap:wrap}
-.res span{border:2px solid var(--ink);border-radius:14px;padding:10px 14px;font-weight:700}
-.res span b{display:block;font:800 30px/1 var(--display)}
-.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.step{background:var(--white);border:3px solid var(--ink);border-radius:24px;padding:22px}
-.step b{font:800 46px/1 var(--display);color:var(--coral)}
-.step h3{font:700 22px var(--sans);margin:10px 0 6px}
-.step p{margin:0;font-size:15px;color:var(--muted)}
-.cv{display:grid;grid-template-columns:1.2fr .8fr;gap:28px}
-.jobs div{display:flex;justify-content:space-between;gap:20px;padding:20px 0;border-bottom:3px solid var(--ink)}
-.jobs div:first-child{border-top:3px solid var(--ink)}
-.jobs h3{font:700 24px/1.2 var(--sans);margin:0}.jobs h3 span{display:block;font-weight:400;font-size:17px;color:var(--muted)}
-.jobs time{font:700 16px var(--sans);white-space:nowrap}
-.tools{background:var(--ink);color:var(--cream);border-radius:28px;padding:30px}
-.tools h3{font:800 28px var(--display);margin:0 0 16px}
-.tools ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px}
-.tools li{padding:8px 14px;border:2px solid var(--cream);border-radius:999px;font-weight:500;font-size:16px}
-.cta{background:var(--coral);border:3px solid var(--ink);border-radius:40px;padding:70px 40px;text-align:center;margin-bottom:40px}
-.cta h2{margin-bottom:20px;color:var(--ink)}
-.cta p{max-width:44ch;margin:0 auto;font-size:20px}
-.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
-.btn{padding:15px 26px;border-radius:999px;border:3px solid var(--ink);background:var(--white);text-decoration:none;font-weight:700}
-.btn.dark{background:var(--ink);color:var(--cream)}
-footer{text-align:center;padding:0 0 90px;font-size:14px;color:var(--muted)}
-.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:10px 16px;border-radius:999px;background:var(--ink);color:var(--cream);font:600 13px var(--sans);text-decoration:none;border:2px solid var(--ink)}
-.zen b{color:var(--mustard)}
-@media (max-width:1000px){.steps{grid-template-columns:1fr 1fr}}
-@media (max-width:860px){.hero,.case,.cv{grid-template-columns:1fr}.case .art{min-height:300px}.case .txt{padding:28px}.top nav a:not(:last-child){display:none}.me{max-width:360px;margin:20px auto 0}}
-@media (max-width:520px){.steps{grid-template-columns:1fr}.jobs div{flex-direction:column;gap:4px}.cta{padding:52px 20px;border-radius:28px}.me .hello{left:-6px}.cta h2{font-size:36px}}
-@media (max-width:380px){.wrap{padding:0 18px}h1{font-size:44px}h2{font-size:34px}.cta h2{font-size:30px}.stick span{font-size:14px;padding:8px 14px}}
+/* Concept: her portfolio as an open design file. The hero is the canvas mid-edit:
+   a selected photo frame with handles and dimensions, the headline being typed with a
+   live text selection, a sticky note, a comment pin and teammates' cursors. Below,
+   case studies are frames with redline annotations, the process is a flow diagram,
+   and the career is the file's version history. */
+:root{
+  --canvas:#EEECE7; --dot:#CFCBC2; --frame:#fff; --ink:#1C1B1F; --mute:#6D6A72; --line:#DDD9D1;
+  --sel:#3D6BFF; --coral:#F26B5B; --mustard:#E7A934; --green:#22A66B; --violet:#8B5CF6; --sticky:#FFE38A;
+  --display:"Syne","Helvetica Neue",Arial,sans-serif; --sans:"Outfit","Helvetica Neue",Arial,sans-serif;
+  --zc-bg:#1C1B1F; --zc-fg:#fff; --zc-dot:#F26B5B;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--sel);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.dots{background-image:radial-gradient(var(--dot) 1.2px,transparent 1.4px);background-size:22px 22px}
+
+/* ---------- App bar ---------- */
+.app{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:18px;height:56px;padding:0 max(16px,env(safe-area-inset-left,0px));background:#fff;border-bottom:1px solid var(--line)}
+.logo{font:800 20px/1 var(--display);letter-spacing:-.02em;text-decoration:none}
+.logo span{color:var(--coral)}
+.file{display:flex;align-items:center;gap:8px;font:500 14px/1 var(--sans);color:var(--mute)}
+.file b{color:var(--ink);font-weight:500}
+.pages{display:flex;gap:2px;margin:0 auto;padding:0;list-style:none}
+.pages a{display:block;padding:8px 12px;border-radius:8px;text-decoration:none;font:500 14px/1 var(--sans);color:var(--mute)}
+.pages a:hover{background:#F2F0EC;color:var(--ink)}
+.pages a[aria-current]{background:#E8EEFF;color:var(--sel)}
+.who{display:flex;align-items:center}
+.who i{width:30px;height:30px;margin-left:-8px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;font:600 11px/1 var(--sans);font-style:normal;color:#fff}
+.share{padding:10px 16px;border-radius:9px;background:var(--sel);color:#fff;text-decoration:none;font:600 14px/1 var(--sans)}
+.share:hover{background:#2A55E0}
+
+/* ---------- Canvas hero ---------- */
+.hero{position:relative;min-height:max(660px,calc(100svh - 56px));overflow:hidden}
+.board{position:relative;height:100%;min-height:inherit;max-width:1320px;margin:0 auto}
+.flabel{position:absolute;font:500 12.5px/1 var(--sans);color:var(--mute);white-space:nowrap}
+.flabel.sel{color:var(--sel)}
+.hl-frame{position:absolute;left:clamp(16px,3vw,40px);top:clamp(40px,7vh,74px);width:min(56%,720px);padding:clamp(28px,3.4vw,52px);background:var(--frame);border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.06),0 20px 50px -30px rgba(0,0,0,.25)}
+.hl-frame .flabel{top:-22px;left:0}
+.kicker{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px;padding:0;list-style:none}
+.kicker li{padding:6px 12px;border-radius:999px;background:#F3F1ED;font:500 13.5px/1 var(--sans)}
+.kicker li:first-child{background:var(--ink);color:#fff}
+h1{margin:0;font:800 clamp(40px,4.7vw,74px)/1 var(--display);letter-spacing:-.035em}
+h1 .mark{position:relative;background:rgba(61,107,255,.22);box-shadow:0 0 0 2px rgba(61,107,255,.22);border-radius:2px}
+h1 .caret{display:inline-block;width:4px;height:.9em;margin-left:4px;vertical-align:-.08em;background:var(--sel);animation:blink 1.05s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.zc-reduce h1 .caret,.zc-static h1 .caret{animation:none}
+.hl-frame .who-line{margin:24px 0 0;max-width:40ch;font:400 clamp(17px,1.4vw,19px)/1.55 var(--sans);color:#47454C}
+.hl-frame .who-line b{font-weight:600;color:var(--ink)}
+.ph-frame{position:absolute;right:clamp(16px,4.6vw,80px);top:clamp(60px,9vh,100px);width:clamp(250px,24vw,350px)}
+.ph-frame .flabel{top:-22px;left:0}
+.ph{position:relative;aspect-ratio:928/1152;background:var(--coral)}
+.ph img{width:100%;height:100%;object-fit:cover}
+.selbox{position:absolute;inset:-1px;border:1.5px solid var(--sel);pointer-events:none}
+.selbox i{position:absolute;width:9px;height:9px;background:#fff;border:1.5px solid var(--sel)}
+.selbox i:nth-child(1){left:-5px;top:-5px}.selbox i:nth-child(2){right:-5px;top:-5px}.selbox i:nth-child(3){left:-5px;bottom:-5px}.selbox i:nth-child(4){right:-5px;bottom:-5px}
+.selbox i:nth-child(5){left:50%;top:-5px;margin-left:-4.5px}.selbox i:nth-child(6){left:50%;bottom:-5px;margin-left:-4.5px}.selbox i:nth-child(7){left:-5px;top:50%;margin-top:-4.5px}.selbox i:nth-child(8){right:-5px;top:50%;margin-top:-4.5px}
+.dim{position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);padding:4px 8px;border-radius:5px;background:var(--sel);color:#fff;font:500 12px/1 var(--sans);white-space:nowrap}
+.sticky{position:absolute;z-index:2;right:clamp(200px,24vw,400px);bottom:clamp(26px,5vh,60px);width:240px;padding:20px 20px 22px;background:var(--sticky);transform:rotate(-2.5deg);box-shadow:0 18px 30px -18px rgba(0,0,0,.35);font:500 16px/1.45 var(--sans)}
+.sticky b{display:block;margin-bottom:6px;font:700 13px/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
+.pin{position:absolute;display:flex;align-items:flex-start;gap:10px}
+.pin .av{flex:none;width:34px;height:34px;border-radius:50% 50% 50% 4px;display:grid;place-items:center;background:var(--coral);color:#fff;font:700 13px/1 var(--display);box-shadow:0 0 0 3px #fff,0 8px 16px -6px rgba(0,0,0,.4)}
+.pin .bub{padding:10px 14px;border-radius:4px 14px 14px 14px;background:#fff;box-shadow:0 12px 30px -14px rgba(0,0,0,.35);font:500 15px/1.35 var(--sans);white-space:nowrap}
+.pin .bub small{display:block;font:400 12px/1.3 var(--sans);color:var(--mute)}
+.p1{left:-70px;bottom:70px;z-index:3}
+.cur{position:absolute;display:flex;align-items:flex-start;pointer-events:none;will-change:transform}
+.cur svg{width:20px;height:20px}
+.cur span{margin:16px 0 0 -2px;padding:4px 9px;border-radius:4px 10px 10px 10px;color:#fff;font:600 12.5px/1 var(--sans);white-space:nowrap}
+.c1{left:47%;top:40%}.c1 svg{fill:var(--coral)}.c1 span{background:var(--coral)}
+.c2{left:62%;bottom:16%}.c2 svg{fill:var(--violet)}.c2 span{background:var(--violet)}
+.c3{left:30%;bottom:9%}.c3 svg{fill:var(--green)}.c3 span{background:var(--green)}
+.zc-reveal .c1{animation:drift1 9s ease-in-out infinite}
+.zc-reveal .c2{animation:drift2 11s ease-in-out infinite}
+.zc-reveal .c3{animation:drift3 13s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0)}35%{transform:translate(-60px,24px)}70%{transform:translate(30px,-16px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}40%{transform:translate(40px,-50px)}75%{transform:translate(-30px,10px)}}
+@keyframes drift3{0%,100%{transform:translate(0,0)}50%{transform:translate(80px,-20px)}}
+
+/* ---------- Sections ---------- */
+section{padding:clamp(80px,9vw,120px) 0}
+.page{display:flex;align-items:center;gap:10px;margin:0 0 14px;font:500 13px/1 var(--sans);color:var(--mute)}
+.page i{width:8px;height:8px;border-radius:2px;background:var(--sel)}
+h2{margin:0;font:800 clamp(36px,4.6vw,64px)/1 var(--display);letter-spacing:-.035em}
+h2 span{color:var(--coral)}
+.lede{margin:16px 0 0;max-width:52ch;color:#55525A}
+
+/* case studies */
+.cases{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(70px,8vw,110px);margin-top:60px}
+.case{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,70px);align-items:center;padding:clamp(26px,3.5vw,48px);background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.05),0 30px 60px -40px rgba(0,0,0,.3)}
+.case>.flabel{top:-24px;left:0}
+.case:nth-child(even) .mock{order:2}
+.mock{position:relative;display:grid;place-items:center;min-height:440px;border-radius:4px;padding:30px 0}
+.phone{position:relative;width:236px;height:470px;padding:14px 12px;border-radius:38px;background:#141316;box-shadow:0 30px 50px -24px rgba(0,0,0,.5)}
+.scr{height:100%;border-radius:28px;overflow:hidden;padding:30px 14px 14px;font:500 11px/1.3 var(--sans)}
+.scr .sb{display:flex;justify-content:space-between;margin:-18px 4px 14px;font-size:10px;font-weight:600}
+.redline{position:absolute;display:flex;align-items:center;gap:8px;font:600 12px/1 var(--sans);color:#E5484D;white-space:nowrap}
+.redline::before{content:"";width:40px;height:1px;background:#E5484D}
+.case h3{margin:0;font:700 clamp(24px,2.4vw,32px)/1.12 var(--display);letter-spacing:-.025em}
+.case .meta{margin:0 0 12px;font:500 13.5px/1.4 var(--sans);color:var(--mute)}
+.case p{color:#4A4850}
+.nums{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.nums div{min-width:150px;padding:14px 18px;border:1.5px dashed #F3A79F;border-radius:6px}
+.nums b{display:block;font:800 34px/1 var(--display);letter-spacing:-.03em;color:var(--coral)}
+.nums span{display:block;margin-top:6px;font-size:14px;color:var(--mute)}
+
+/* process flow */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:34px;margin-top:56px;position:relative}
+.step{position:relative;padding:22px 20px 24px;border-radius:10px;background:var(--bg,#fff);box-shadow:0 14px 28px -20px rgba(0,0,0,.4)}
+.step:not(:last-child)::after{content:"";position:absolute;right:-30px;top:50%;width:26px;height:2px;background:var(--ink)}
+.step:not(:last-child)::before{content:"";position:absolute;right:-31px;top:calc(50% - 5px);border:6px solid transparent;border-left:8px solid var(--ink);border-right:0}
+.step b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;font:700 15px/1 var(--display)}
+.step h3{margin:16px 0 6px;font:700 22px/1.1 var(--display)}
+.step p{margin:0;font-size:15px;color:#3F3D44}
+
+/* version history */
+.hist{margin-top:44px;padding:8px;border-radius:14px;background:#fff;box-shadow:0 30px 60px -40px rgba(0,0,0,.3)}
+.ver{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:16px;align-items:center;padding:18px 18px;border-radius:10px}
+.ver+.ver{border-top:1px solid #F0EDE8}
+.ver.now{background:#F2F5FF}
+.ver .dotv{display:block;width:12px;height:12px;border-radius:50%;border:2px solid var(--sel);justify-self:center}
+.ver.now .dotv{background:var(--sel)}
+.ver h3{margin:0;font:700 20px/1.2 var(--display);letter-spacing:-.015em}
+.ver p{margin:3px 0 0;font-size:15px;color:var(--mute)}
+.ver time{font:500 14px/1 var(--sans);color:var(--mute);white-space:nowrap}
+.ver .tag{display:inline-block;margin-left:8px;padding:3px 8px;border-radius:999px;background:var(--sel);color:#fff;font:600 11px/1 var(--sans);vertical-align:3px}
+
+/* assets */
+.assets{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+.asset{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;background:#fff;border:1px solid var(--line);font:500 16px/1 var(--sans)}
+.asset i{width:18px;height:18px;border-radius:4px;background:var(--c,#3D6BFF);transform:rotate(45deg) scale(.75)}
+.langs{margin-top:22px;color:var(--mute)}
+.langs b{color:var(--ink);font-weight:600}
+
+/* contact */
+.contact{text-align:center}
+.contact h2{font-size:clamp(36px,7.4vw,110px)}
+.contact .lede{margin-left:auto;margin-right:auto}
+.cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:16px 26px;border-radius:12px;background:#fff;border:1px solid var(--line);text-decoration:none;font:600 16px/1 var(--sans)}
+.btn.pr{background:var(--coral);border-color:var(--coral);color:#fff}
+.btn:hover{border-color:var(--sel)}
+footer{padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));text-align:center;color:var(--mute);font-size:13px;border-top:1px solid var(--line)}
+
+@media (max-width:1100px){
+  .pages{display:none}
+  .who{margin-left:auto}
+  .flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .step:nth-child(3)::after,.step:nth-child(3)::before{display:none}
+}
+@media (max-width:900px){
+  .hero{min-height:0}
+  .board{display:flex;flex-direction:column;gap:56px;padding:56px 18px 64px}
+  .hl-frame,.ph-frame,.sticky{position:relative;left:auto;right:auto;top:auto;bottom:auto}
+  .hl-frame{width:100%;order:2}
+  .ph-frame{order:1;width:min(78%,360px);align-self:center}
+  .sticky{order:3;align-self:flex-start;margin-left:10px}
+  .p1{left:auto;right:-8px;bottom:36px;flex-direction:row-reverse}
+  .p1 .bub{border-radius:14px 4px 14px 14px}
+  .c1{left:auto;right:16%;top:44%}.c2{display:none}.c3{left:56%;bottom:auto;top:62%}
+  .case{grid-template-columns:minmax(0,1fr)}
+  .ds{grid-template-columns:repeat(2,auto)!important;padding:0 12px}
+  .ds .wide{min-width:0!important}
+  .case:nth-child(even) .mock{order:0}
+  .mock{min-height:0}
+}
+@media (max-width:640px){
+  .file,.who{display:none}
+  .share{margin-left:auto}
+  .ph-frame{width:min(70%,300px)}
+  h1{font-size:clamp(34px,9.6vw,52px)}
+  .pin .bub{white-space:normal;max-width:150px}
+  .p1{bottom:-22px;right:-6px}
+  .flow{grid-template-columns:1fr;gap:30px}
+  .step::after,.step::before{display:none}
+  .ver{grid-template-columns:20px minmax(0,1fr)}
+  .ver time{grid-column:2}
+  .redline{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top"><span class="logo">sofia<span>.</span>b</span><nav><a href="#work">Work</a><a href="#process">Process</a><a href="#contact">Say ciao</a></nav></header>
+<nav class="app" aria-label="Sections">
+  <a class="logo" href="#top" aria-label="Sofia Bianchi, back to top">sofia<span>.</span>b</a>
+  <span class="file" aria-hidden="true">Drafts / <b>Portfolio 2026</b> ▾</span>
+  <ul class="pages">
+    <li><a href="#work" data-spy>Work</a></li>
+    <li><a href="#process" data-spy>Process</a></li>
+    <li><a href="#history" data-spy>Experience</a></li>
+    <li><a href="#toolbox" data-spy>Toolbox</a></li>
+  </ul>
+  <span class="who" aria-hidden="true"><i style="background:#F26B5B">SB</i><i style="background:#8B5CF6">DV</i><i style="background:#22A66B">PM</i></span>
+  <a class="share" href="#contact">Say ciao</a>
+</nav>
 <main>
-  <div class="hero">
-    <div>
-      <h1>I design <span class="hl">apps</span> people <span class="c">actually</span> enjoy using.</h1>
-      <div class="stick"><span>Senior Product Designer</span><span>Milan → Dubai</span><span>8 years in product</span><span>Design systems nerd</span></div>
-    </div>
-    <div class="me"><span class="hello">Ciao! 👋</span><img src="img/sofia-bianchi.jpg" alt="Portrait of Sofia Bianchi laughing"></div>
-  </div>
-
-  <section id="work">
-    <span class="k">Selected work</span><h2>Three projects,<br>three problems solved.</h2>
-    <article class="case a"><div class="art"><div class="phone" aria-hidden="true"><i class="h1"></i><i class="card"></i><i class="row"></i><i class="row"></i><i class="cta"></i></div></div>
-      <div class="txt"><span class="meta">Brio Travel · 2024 · Lead designer</span><h3>Rebooking a cancelled flight in three taps</h3><p>Travellers stuck at the airport had to call a hotline. We designed a self-service flow that suggests the best alternatives first and handles refunds in the same screen.</p>
-        <div class="res"><span><b>+22%</b>self-service rebookings</span><span><b>−41%</b>call-centre volume</span></div></div></article>
-    <article class="case b"><div class="art"><div class="phone" aria-hidden="true"><i class="h1"></i><i class="card"></i><i class="row"></i><i class="row"></i><i class="cta"></i></div></div>
-      <div class="txt"><span class="meta">Fiorella Bank · 2021 · Product designer</span><h3>Banking for people starting their first job</h3><p>Research with 60 graduates led to salary splitting, simple savings pots and a home screen that answers one question: how much can I spend today?</p>
-        <div class="res"><span><b>+31</b>NPS points</span><span><b>2×</b>accounts opened in-app</span></div></div></article>
-    <article class="case c"><div class="art"><div class="phone" aria-hidden="true"><i class="h1"></i><i class="card"></i><i class="row"></i><i class="row"></i><i class="cta"></i></div></div>
-      <div class="txt"><span class="meta">Brio Travel · 2023 · Design system lead</span><h3>Lira, a design system for four product teams</h3><p>240 components, accessible by default, with tokens shared between design files and code. New screens now take days instead of weeks.</p>
-        <div class="res"><span><b>240</b>components</span><span><b>AA</b>contrast on every token</span></div></div></article>
-  </section>
-
-  <section id="process" style="padding-top:20px">
-    <span class="k">How I work</span><h2>Five steps, every project.</h2>
-    <div class="steps">
-      <div class="step"><b>1</b><h3>Listen</h3><p>Interviews, data and support tickets before any pixels.</p></div>
-      <div class="step"><b>2</b><h3>Frame</h3><p>One clear problem statement the whole team agrees on.</p></div>
-      <div class="step"><b>3</b><h3>Sketch</h3><p>Many rough ideas, quickly, on paper and in Figma.</p></div>
-      <div class="step"><b>4</b><h3>Test</h3><p>Prototypes in front of real users every week.</p></div>
-      <div class="step"><b>5</b><h3>Ship</h3><p>Pairing with engineers until it's live and measured.</p></div>
-    </div>
-  </section>
-
-  <section style="padding-top:20px">
-    <span class="k">Experience</span><h2>Where I've been.</h2>
-    <div class="cv">
-      <div class="jobs">
-        <div><h3>Senior Product Designer<span>Brio Travel, Dubai</span></h3><time>2022 — now</time></div>
-        <div><h3>Product Designer<span>Fiorella Bank, Milan</span></h3><time>2019 — 2022</time></div>
-        <div><h3>UX Designer<span>Studio Nove, Milan</span></h3><time>2017 — 2019</time></div>
-        <div><h3>BA Interaction Design<span>Milan</span></h3><time>2013 — 2017</time></div>
+  <header class="hero dots" id="top">
+    <div class="board">
+      <div class="hl-frame">
+        <span class="flabel">Hero — Desktop</span>
+        <ul class="kicker"><li>Senior Product Designer</li><li>Milan → Dubai</li></ul>
+        <h1>I design apps people <span class="mark">actually</span><span class="caret" aria-hidden="true"></span> enjoy using.</h1>
+        <p class="who-line">Hi, I'm <b>Sofia Bianchi</b>. Eight years in product, a design-systems nerd, and happiest when research turns into a flow that just works.</p>
       </div>
-      <div class="tools"><h3>Toolbox</h3><ul><li>Figma</li><li>Prototyping</li><li>User research</li><li>Design systems</li><li>Accessibility</li><li>Motion</li><li>HTML &amp; CSS</li><li>Workshops</li><li>Italian · English · Spanish</li></ul></div>
+      <figure class="ph-frame" style="margin:0">
+        <span class="flabel sel">Sofia.jpg</span>
+        <div class="ph"><img src="img/sofia-bianchi-640.webp" srcset="img/sofia-bianchi-640.webp 640w, img/sofia-bianchi.webp 928w" sizes="(max-width:640px) 70vw, 380px" width="928" height="1152" alt="Sofia Bianchi laughing, with curly hair and a mustard cardigan, against a coral wall" fetchpriority="high"></div>
+        <span class="selbox" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="dim" aria-hidden="true">350 × 435</span>
+        <div class="pin p1" aria-hidden="true"><span class="av">SB</span><span class="bub">Ciao! 👋 <small>Scroll for three case studies</small></span></div>
+      </figure>
+      <div class="sticky" aria-hidden="true"><b>Note to self</b>8 years in product · design systems · research first, pixels second.</div>
+      <div class="cur c1" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M2 2l15 6-6.5 2.2L8 17z"/></svg><span>Sofia</span></div>
+      <div class="cur c2" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M2 2l15 6-6.5 2.2L8 17z"/></svg><span>Dev team</span></div>
+      <div class="cur c3" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M2 2l15 6-6.5 2.2L8 17z"/></svg><span>Product manager</span></div>
+    </div>
+  </header>
+
+  <section id="work" class="dots">
+    <div class="wrap">
+      <p class="page"><i></i>Page 1 · Selected work</p>
+      <h2>Three projects, <span>three problems solved.</span></h2>
+      <div class="cases">
+        <article class="case" data-reveal>
+          <span class="flabel">Brio Travel — Rebooking flow</span>
+          <div class="mock" style="background:#FFF1EE">
+            <div class="phone"><div class="scr" style="background:#FFFBF8">
+              <p class="sb"><span>9:41</span><span>●●● ▮</span></p>
+              <p style="margin:0 0 10px;font:700 16px/1.2 var(--display)">Your flight was cancelled</p>
+              <p style="margin:0 0 12px;color:#6D6A72">We found 3 alternatives. Refund options below.</p>
+              <div style="padding:12px;border-radius:12px;background:#fff;box-shadow:0 0 0 2px #F26B5B;margin-bottom:8px"><span style="display:inline-block;padding:3px 7px;border-radius:999px;background:#F26B5B;color:#fff;font-size:9px;margin-bottom:6px">Best alternative</span><b style="display:block;font-size:13px">DXB → MXP · 14:05</b><span style="color:#6D6A72">Same seat class · +0 €</span></div>
+              <div style="padding:12px;border-radius:12px;background:#fff;margin-bottom:8px;box-shadow:0 0 0 1px #EEE"><b style="display:block;font-size:13px">DXB → LIN · 16:40</b><span style="color:#6D6A72">1 stop · +0 €</span></div>
+              <div style="padding:12px;border-radius:12px;background:#fff;margin-bottom:14px;box-shadow:0 0 0 1px #EEE"><b style="display:block;font-size:13px">Refund to card</b><span style="color:#6D6A72">3–5 working days</span></div>
+              <div style="padding:12px;border-radius:12px;background:#1C1B1F;color:#fff;text-align:center;font-weight:600">Rebook in one tap</div>
+            </div></div>
+            <span class="redline" style="right:6%;top:38%">3 taps, end to end</span>
+          </div>
+          <div>
+            <p class="meta">Brio Travel · 2024 · Lead designer</p>
+            <h3>Rebooking a cancelled flight in three taps</h3>
+            <p>Travellers stuck at the airport had to call a hotline. We designed a self-service flow that suggests the best alternatives first and handles refunds in the same screen.</p>
+            <div class="nums"><div><b>+22%</b><span>self-service rebookings</span></div><div><b>−41%</b><span>call-centre volume</span></div></div>
+          </div>
+        </article>
+        <article class="case" data-reveal>
+          <span class="flabel">Fiorella Bank — First-job banking</span>
+          <div class="mock" style="background:#EEF6F1">
+            <div class="phone"><div class="scr" style="background:#F7FBF8">
+              <p class="sb"><span>9:41</span><span>●●● ▮</span></p>
+              <p style="margin:0;color:#6D6A72">You can spend today</p>
+              <p style="margin:4px 0 14px;font:800 40px/1 var(--display);letter-spacing:-.03em;color:#16794A">€84</p>
+              <div style="height:8px;border-radius:8px;background:#DCEFE3;margin-bottom:16px"><i style="display:block;width:62%;height:100%;border-radius:8px;background:#22A66B"></i></div>
+              <p style="margin:0 0 8px;font-weight:700">Salary split</p>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px"><span style="padding:10px 6px;border-radius:10px;background:#fff;text-align:center;box-shadow:0 0 0 1px #E6EEE9"><b style="display:block">50%</b>Bills</span><span style="padding:10px 6px;border-radius:10px;background:#fff;text-align:center;box-shadow:0 0 0 1px #E6EEE9"><b style="display:block">30%</b>Life</span><span style="padding:10px 6px;border-radius:10px;background:#fff;text-align:center;box-shadow:0 0 0 1px #E6EEE9"><b style="display:block">20%</b>Save</span></div>
+              <p style="margin:0 0 8px;font-weight:700">Savings pots</p>
+              <div style="padding:12px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px #E6EEE9;margin-bottom:8px">✈ Summer trip <b style="float:right">€640</b></div>
+              <div style="padding:12px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px #E6EEE9">🛋 First flat <b style="float:right">€1,210</b></div>
+            </div></div>
+            <span class="redline" style="left:4%;top:24%;flex-direction:row-reverse">one question answered</span>
+          </div>
+          <div>
+            <p class="meta">Fiorella Bank · 2021 · Product designer</p>
+            <h3>Banking for people starting their first job</h3>
+            <p>Research with 60 graduates led to salary splitting, simple savings pots and a home screen that answers one question: how much can I spend today?</p>
+            <div class="nums"><div><b>+31</b><span>NPS points</span></div><div><b>2×</b><span>accounts opened in-app</span></div></div>
+          </div>
+        </article>
+        <article class="case" data-reveal>
+          <span class="flabel">Brio Travel — Lira design system</span>
+          <div class="mock" style="background:#F1EEFF">
+            <div class="ds" style="display:grid;grid-template-columns:repeat(3,auto);gap:14px;align-items:center">
+              <span style="padding:12px 18px;border-radius:10px;background:#1C1B1F;color:#fff;font-weight:600">Primary</span>
+              <span style="padding:12px 18px;border-radius:10px;background:#fff;box-shadow:0 0 0 1.5px #1C1B1F;font-weight:600">Secondary</span>
+              <span style="padding:12px 18px;border-radius:10px;color:#3D6BFF;font-weight:600">Tertiary</span>
+              <span style="width:52px;height:30px;border-radius:999px;background:#22A66B;position:relative"><i style="position:absolute;right:3px;top:3px;width:24px;height:24px;border-radius:50%;background:#fff"></i></span>
+              <span class="wide" style="padding:12px 14px;border-radius:10px;background:#fff;box-shadow:0 0 0 1.5px #8B5CF6;color:#6D6A72;min-width:150px">Search flights…</span>
+              <span style="display:flex;gap:6px"><i style="width:22px;height:22px;border-radius:6px;background:#F26B5B"></i><i style="width:22px;height:22px;border-radius:6px;background:#E7A934"></i><i style="width:22px;height:22px;border-radius:6px;background:#3D6BFF"></i><i style="width:22px;height:22px;border-radius:6px;background:#22A66B"></i></span>
+              <span style="grid-column:1/-1;padding:14px 16px;border-radius:12px;background:#fff;box-shadow:0 12px 24px -16px rgba(0,0,0,.4)"><b style="font:700 15px/1.2 var(--display)">Card / Flight</b><br><span style="color:#6D6A72;font-size:13px">240 components · tokens shared with code</span></span>
+            </div>
+            <span class="redline" style="right:4%;bottom:12%">AA contrast on every token</span>
+          </div>
+          <div>
+            <p class="meta">Brio Travel · 2023 · Design system lead</p>
+            <h3>Lira, a design system for four product teams</h3>
+            <p>240 components, accessible by default, with tokens shared between design files and code. New screens now take days instead of weeks.</p>
+            <div class="nums"><div><b>240</b><span>components</span></div><div><b>AA</b><span>contrast on every token</span></div></div>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section class="cta" id="contact">
-    <h2>Let's make something good.</h2>
-    <p>Open to lead and principal product design roles, in Dubai or remote.</p>
-    <div class="btns"><a class="btn dark" href="#contact">Email Sofia</a><a class="btn" href="#contact">Dribbble</a><a class="btn" href="#contact">LinkedIn</a><a class="btn" href="#contact">CV</a></div>
+  <section id="process">
+    <div class="wrap">
+      <p class="page"><i></i>Page 2 · How I work</p>
+      <h2>Five steps, <span>every project.</span></h2>
+      <div class="flow">
+        <div class="step" style="--bg:#FFE9E5" data-reveal><b>1</b><h3>Listen</h3><p>Interviews, data and support tickets before any pixels.</p></div>
+        <div class="step" style="--bg:#FFF2CC" data-reveal><b>2</b><h3>Frame</h3><p>One clear problem statement the whole team agrees on.</p></div>
+        <div class="step" style="--bg:#E6F4EC" data-reveal><b>3</b><h3>Sketch</h3><p>Many rough ideas, quickly, on paper and in Figma.</p></div>
+        <div class="step" style="--bg:#ECE6FF" data-reveal><b>4</b><h3>Test</h3><p>Prototypes in front of real users every week.</p></div>
+        <div class="step" style="--bg:#E3EBFF" data-reveal><b>5</b><h3>Ship</h3><p>Pairing with engineers until it's live and measured.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="history" class="dots">
+    <div class="wrap">
+      <p class="page"><i></i>Page 3 · Version history</p>
+      <h2>Where I've <span>been.</span></h2>
+      <div class="hist" data-reveal>
+        <div class="ver now"><span class="dotv" aria-hidden="true"></span><div><h3>Senior Product Designer <span class="tag">Current version</span></h3><p>Brio Travel, Dubai</p></div><time>2022 — now</time></div>
+        <div class="ver"><span class="dotv" aria-hidden="true"></span><div><h3>Product Designer</h3><p>Fiorella Bank, Milan</p></div><time>2019 — 2022</time></div>
+        <div class="ver"><span class="dotv" aria-hidden="true"></span><div><h3>UX Designer</h3><p>Studio Nove, Milan</p></div><time>2017 — 2019</time></div>
+        <div class="ver"><span class="dotv" aria-hidden="true"></span><div><h3>BA Interaction Design</h3><p>Milan</p></div><time>2013 — 2017</time></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="toolbox">
+    <div class="wrap">
+      <p class="page"><i></i>Page 4 · Assets</p>
+      <h2>Toolbox.</h2>
+      <div class="assets" data-reveal>
+        <span class="asset"><i style="--c:#F26B5B"></i>Figma</span><span class="asset"><i style="--c:#E7A934"></i>Prototyping</span><span class="asset"><i style="--c:#22A66B"></i>User research</span><span class="asset"><i style="--c:#3D6BFF"></i>Design systems</span><span class="asset"><i style="--c:#8B5CF6"></i>Accessibility</span><span class="asset"><i style="--c:#F26B5B"></i>Motion</span><span class="asset"><i style="--c:#E7A934"></i>HTML &amp; CSS</span><span class="asset"><i style="--c:#22A66B"></i>Workshops</span>
+      </div>
+      <p class="langs">Speaks <b>Italian</b>, <b>English</b> and <b>Spanish</b>.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact dots">
+    <div class="wrap" data-reveal>
+      <p class="page" style="justify-content:center"><i></i>Page 5 · Share</p>
+      <h2>Let's make <span>something good.</span></h2>
+      <p class="lede">Open to lead and principal product design roles, in Dubai or remote.</p>
+      <div class="cta"><a class="btn pr" href="#contact" data-demo>Email Sofia</a><a class="btn" href="#contact" data-demo>Dribbble</a><a class="btn" href="#contact" data-demo>LinkedIn</a><a class="btn" href="#contact" data-demo>CV</a></div>
+    </div>
   </section>
 </main>
-<footer>Sample portfolio website designed by Zenith Dubai CV. Sofia Bianchi is a fictional profile; companies and links are illustrative.</footer>
-</div>
-<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design <b>· Zenith Dubai CV</b></a>
+<footer>Concept site designed by Zenith Dubai CV. Sofia Bianchi is a fictional person; companies, projects, figures and links are illustrative.</footer>
 </body>
 </html>

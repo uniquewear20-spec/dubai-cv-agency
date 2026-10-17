@@ -2,144 +2,395 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Mei Lin Zhou · Lead Data Scientist, AI — Sample design by Zenith Dubai CV</title>
+<meta name="theme-color" content="#0E0D1F">
+<title>Mei Lin Zhou · Lead Data Scientist — Concept site by Zenith Dubai CV</title>
+<meta name="description" content="Concept portfolio website for a fictional lead data scientist, designed by Zenith Dubai CV.">
+<link rel="preload" href="img/mei-lin-zhou-640.webp" as="image" type="image/webp">
+<link rel="preload" href="fonts/manrope-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
+<script src="assets/sample.js"></script>
 <style>
-:root{--mist:#F4F5FF;--white:#fff;--indigo:#2B2D6E;--deep:#1B1C4A;--violet:#7B5CFF;--sky:#55C2FF;--pink:#FF7AB6;--ink:#1B1C3A;--muted:#5D6088;--line:rgba(43,45,110,.12);
---sans:"Manrope","Helvetica Neue",Arial,sans-serif;--mono:"Fira Code",ui-monospace,Menlo,monospace}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--mist);color:var(--ink);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}a{color:inherit}
-.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
-.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-weight:700}
-.top .logo{display:flex;align-items:center;gap:10px}.top .logo i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--violet),var(--sky))}
-.top a.btn{font-size:14px}
-.hero{background:linear-gradient(135deg,var(--deep) 0%,var(--indigo) 45%,var(--violet) 100%);border-radius:32px;color:var(--white);padding:56px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;position:relative;overflow:hidden}
-.hero svg.plot{position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none}
-.hero>*{position:relative}
-.tag{display:inline-block;font:500 13px var(--mono);padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
-h1{font:800 clamp(46px,6vw,82px)/1 var(--sans);letter-spacing:-.035em;margin:20px 0 0}
-.hero p{font-size:19px;color:rgba(255,255,255,.85);max-width:42ch;margin:20px 0 0}
-.hero .pic img{aspect-ratio:4/5;object-fit:cover;border-radius:22px;border:1px solid rgba(255,255,255,.25)}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
-.chips span{font:500 13px var(--mono);padding:7px 12px;border-radius:10px;background:rgba(255,255,255,.1)}
-section{padding:90px 0}
-.k{font:500 14px var(--mono);color:var(--violet);margin:0 0 10px}
-h2{font:800 clamp(32px,4.2vw,52px)/1.05 var(--sans);letter-spacing:-.03em;margin:0 0 14px}
-.sub{color:var(--muted);max-width:60ch;margin:0 0 40px}
-.models{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.model{background:var(--white);border-radius:22px;padding:26px;border:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
-.model .type{font:500 12px var(--mono);color:var(--muted)}
-.model h3{font:700 22px/1.25 var(--sans);margin:0}
-.model p{margin:0;color:var(--muted);font-size:15px;flex:1}
-.model .metric{display:flex;align-items:baseline;gap:8px;padding-top:12px;border-top:1px solid var(--line)}
-.model .metric b{font:800 34px var(--sans);letter-spacing:-.02em;background:linear-gradient(90deg,var(--violet),var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent}
-.model .metric span{font:500 13px var(--mono);color:var(--muted)}
-.model svg{width:100%;height:56px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.panel{background:var(--white);border-radius:22px;padding:30px;border:1px solid var(--line)}
-.tl{position:relative;padding-left:26px}
-.tl::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:3px;border-radius:3px;background:linear-gradient(var(--violet),var(--sky))}
-.tl div{position:relative;padding-bottom:24px}
-.tl div::before{content:"";position:absolute;left:-26px;top:7px;width:15px;height:15px;border-radius:50%;background:var(--white);border:3px solid var(--violet)}
-.tl time{font:500 13px var(--mono);color:var(--violet)}
-.tl h3{font:700 19px/1.3 var(--sans);margin:2px 0}
-.tl p{margin:0;color:var(--muted);font-size:15px}
-.pubs{list-style:none;padding:0;margin:0}
-.pubs li{padding:14px 0;border-bottom:1px solid var(--line)}
-.pubs b{display:block;font-weight:700;font-size:16px;line-height:1.4}
-.pubs span{font:400 13px var(--mono);color:var(--muted)}
-.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 30px}
-.skill span{display:flex;justify-content:space-between;font:600 15px var(--sans)}
-.skill span em{font:500 13px var(--mono);color:var(--muted);font-style:normal}
-.meter{height:8px;border-radius:8px;background:rgba(123,92,255,.12);margin-top:6px;overflow:hidden}
-.meter i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--violet),var(--sky))}
-.contact{background:var(--white);border-radius:32px;padding:56px;text-align:center;border:1px solid var(--line);margin-bottom:40px}
-.contact p{color:var(--muted);max-width:52ch;margin:0 auto}
-.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
-.btn{display:inline-block;padding:13px 22px;border-radius:12px;text-decoration:none;font-weight:700;background:var(--white);border:1px solid var(--line)}
-.btn.fill{background:linear-gradient(135deg,var(--violet),var(--indigo));color:var(--white);border:0}
-footer{text-align:center;padding:0 0 90px;font-size:13px;color:var(--muted)}
-.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:10px 16px;border-radius:12px;background:var(--deep);color:var(--white);font:700 12px var(--sans);text-decoration:none;box-shadow:0 10px 30px rgba(43,45,110,.3)}
-.zen b{color:var(--sky)}
-@media (max-width:900px){.hero{grid-template-columns:1fr;padding:34px}.models,.two{grid-template-columns:1fr}.contact{padding:36px 22px}.skills{grid-template-columns:1fr}.hero .pic{max-width:360px}}
+/* Concept: a live notebook. Every section is a cell with its execution count, and
+   the outputs are real-looking results: the portrait is "sampled" out of noise like
+   a diffusion model (point cloud converging, then resolving into the photo), the
+   models report their metrics with small charts, experience prints as a DataFrame,
+   and the toolkit is a bar chart. */
+:root{
+  --bg:#0E0D1F; --cell:#15142B; --cell2:#1A1934; --line:#29274D; --txt:#D9D7F1; --mute:#8E8BB8; --white:#F6F5FF;
+  --lilac:#B6A6FF; --cyan:#5FE3CF; --pink:#FF8FB8; --amber:#FFC56E;
+  --sans:"Manrope","Helvetica Neue",Arial,sans-serif; --mono:"Fira Code",ui-monospace,Menlo,monospace;
+  --zc-bg:#B6A6FF; --zc-fg:#0E0D1F; --zc-dot:#0E0D1F;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--txt);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.k{color:var(--pink)}.s{color:var(--cyan)}.f{color:var(--lilac)}.n{color:var(--amber)}.c{color:var(--mute)}
+
+/* ---------- Top bar ---------- */
+.top{display:flex;align-items:center;gap:20px;padding-top:max(18px,env(safe-area-inset-top,0px));padding-bottom:18px}
+.logo{font:500 17px/1 var(--mono);text-decoration:none;color:var(--white)}
+.logo span{color:var(--cyan)}
+.kernel{display:flex;align-items:center;gap:8px;font:400 12.5px/1 var(--mono);color:var(--mute)}
+.kernel i{width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.top nav{margin-left:auto}
+.nav{display:flex;gap:4px;margin:0;padding:0;list-style:none;font:500 13.5px/1 var(--mono)}
+.nav a{display:block;padding:9px 12px;border-radius:8px;text-decoration:none;color:var(--mute)}
+.nav a span{color:#55527E}
+.nav a:hover,.nav a[aria-current]{background:var(--cell);color:var(--white)}
+.nav a[aria-current] span{color:var(--cyan)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;background:var(--lilac);color:#14122C;text-decoration:none;font:700 14px/1 var(--sans)}
+.btn:hover{background:var(--white)}
+.btn.ghost{background:transparent;color:var(--white);box-shadow:inset 0 0 0 1px var(--line)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--lilac)}
+
+/* ---------- Cells ---------- */
+.cellrow{display:grid;grid-template-columns:76px minmax(0,1fr);gap:0 14px}
+.lbl{padding-top:16px;text-align:right;font:400 13px/1.4 var(--mono);color:#625F94;white-space:nowrap}
+.lbl.out{color:var(--pink)}
+.cell{position:relative;border:1px solid var(--line);border-radius:12px;background:var(--cell);min-width:0}
+.cell.active{border-color:#5B4FD0;box-shadow:-4px 0 0 0 var(--lilac)}
+.codeline{margin:0;padding:14px 18px;font:400 15px/1.6 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--txt)}
+.output{border:0;background:transparent;min-width:0}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:max(700px,100svh);display:flex;flex-direction:column;overflow:hidden;
+  background:radial-gradient(55% 60% at 78% 45%,rgba(109,76,255,.32),transparent 70%),radial-gradient(40% 40% at 10% 90%,rgba(95,227,207,.08),transparent 70%),var(--bg)}
+.hero>.wrap{width:100%}
+.nb{flex:1;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(24px,3vw,44px);align-items:center;padding-top:clamp(10px,3vh,30px);padding-bottom:clamp(30px,6vh,60px)}
+.intro .md{padding:30px 34px 34px}
+.md .eyebrow{margin:0;font:500 13px/1.4 var(--mono);color:var(--cyan)}
+h1{margin:14px 0 0;font:800 clamp(56px,6.6vw,104px)/.92 var(--sans);letter-spacing:-.045em;color:var(--white)}
+h1 span{display:block;background:linear-gradient(90deg,var(--lilac),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.role{margin:18px 0 0;font:700 clamp(17px,1.5vw,20px)/1.35 var(--sans);color:var(--white)}
+.lead{margin:10px 0 0;max-width:46ch;color:#B9B6DA}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.tags li{padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--cell2);font:500 12.5px/1 var(--mono);color:var(--txt)}
+.tags li.loc{border-color:transparent;background:transparent;color:var(--mute);padding-left:4px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.gen .codeline{border-bottom:1px solid var(--line)}
+.sample{position:relative;margin:16px auto 0;width:min(100%,430px);aspect-ratio:928/1152;border-radius:14px;overflow:hidden;background:#141233;box-shadow:0 40px 80px -40px #000,0 0 0 1px var(--line)}
+.sample img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sample canvas{position:absolute;inset:0;width:100%;height:100%;display:none;transition:opacity 1s ease}
+.genning .sample canvas{display:block}
+.genning .sample img{opacity:0;transition:none}
+.genning.done .sample img{opacity:1;transition:opacity 1s ease}
+.genning.done .sample canvas{opacity:0}
+.prog{display:flex;align-items:center;gap:12px;width:min(100%,430px);margin:12px auto 0;font:400 12.5px/1 var(--mono);color:var(--mute)}
+.prog .bar{flex:1;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.prog .bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--lilac),var(--cyan));transform-origin:left}
+.prog b{color:var(--cyan);font-weight:400}
+
+/* ---------- Sections ---------- */
+section{padding:clamp(70px,8vw,110px) 0}
+.sec h2{margin:0;font:800 clamp(34px,4vw,54px)/1.04 var(--sans);letter-spacing:-.035em;color:var(--white)}
+.sec .md{padding:24px 28px}
+.sec .md p{margin:10px 0 0;max-width:62ch;color:#B9B6DA}
+.stack{display:grid;gap:18px}
+
+/* models */
+.models{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.model{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;background:var(--cell);overflow:hidden}
+.model .codeline{font-size:13.5px;border-bottom:1px solid var(--line);color:var(--mute)}
+.model .body{flex:1;display:flex;flex-direction:column;padding:20px 22px 22px}
+.model .tag{font:500 12px/1.4 var(--mono);color:var(--cyan)}
+.model h3{margin:8px 0 0;font:800 21px/1.25 var(--sans);letter-spacing:-.02em;color:var(--white)}
+.model p{margin:8px 0 0;color:#ABA8CF;font-size:15.5px}
+.model svg{width:100%;height:auto;margin-top:auto;padding-top:18px}
+.model .metric{display:flex;align-items:baseline;gap:12px;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.model .metric b{font:800 40px/1 var(--sans);letter-spacing:-.03em;color:var(--white)}
+.model .metric span{font:400 13px/1.35 var(--mono);color:var(--mute)}
+
+/* dataframe */
+.df{width:100%;border-collapse:collapse;font:400 15px/1.5 var(--sans)}
+.df th,.df td{padding:12px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.df thead th{font:500 12.5px/1.4 var(--mono);color:var(--mute);border-bottom:1px solid #3A3768}
+.df tbody tr:nth-child(odd){background:rgba(255,255,255,.025)}
+.df tbody th{font:400 13px/1.5 var(--mono);color:#625F94;width:40px}
+.df td.m{font:500 14px/1.5 var(--mono);color:var(--cyan);white-space:nowrap}
+.df td b{color:var(--white);font-weight:700}
+.df td span{display:block;color:#ABA8CF;font-size:14.5px}
+.dfwrap{overflow-x:auto;padding:6px 6px 14px}
+.shape{margin:0;padding:0 16px 12px;font:400 12.5px/1 var(--mono);color:var(--mute)}
+
+/* papers */
+.refs{margin:0;padding:6px 0;list-style:none;counter-reset:r}
+.refs li{counter-increment:r;display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;padding:16px 24px 16px 14px;border-bottom:1px solid var(--line)}
+.refs li:last-child{border-bottom:0}
+.refs li::before{content:"[" counter(r) "]";font:500 14px/1.6 var(--mono);color:var(--lilac)}
+.refs b{display:block;color:var(--white);font-weight:700}
+.refs span{font:400 13.5px/1.6 var(--mono);color:var(--mute)}
+.refs .talk{color:var(--pink)}
+
+/* toolkit chart */
+.chart{padding:22px 26px 18px}
+.bars{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.bars li{display:grid;grid-template-columns:minmax(150px,240px) minmax(0,1fr) 56px;gap:16px;align-items:center;font-size:15px}
+.bars .t{color:var(--white);font-weight:600}
+.bars .b{height:16px;border-radius:4px;background:var(--line);overflow:hidden}
+.bars .b i{display:block;height:100%;width:calc(var(--v) / 10 * 100%);border-radius:4px;background:linear-gradient(90deg,#6D4CFF,var(--lilac));transform-origin:left;transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.bars li:nth-child(2) .b i{background:linear-gradient(90deg,#1E9D8C,var(--cyan))}
+.zc-reveal .chart:not(.is-in) .b i{transform:scaleX(0)}
+.bars .v{font:500 14px/1 var(--mono);color:var(--mute);text-align:right}
+.axis{display:grid;grid-template-columns:minmax(150px,240px) minmax(0,1fr) 56px;gap:16px;margin-top:10px;font:400 12px/1 var(--mono);color:#625F94}
+.axis span{display:flex;justify-content:space-between}
+.langs{margin:18px 0 0;padding-top:14px;border-top:1px dashed var(--line);font:400 14px/1.5 var(--mono);color:var(--mute)}
+.langs b{color:var(--white);font-weight:500}
+
+/* contact */
+.contact .md{padding:34px 34px 36px;background:linear-gradient(135deg,#1C1840,#15142B 60%)}
+.contact h2{font-size:clamp(38px,5vw,68px)}
+footer{padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));color:var(--mute);text-align:center;font:400 12.5px/1.6 var(--mono);border-top:1px solid var(--line)}
+
+@media (max-width:1100px){
+  .nav{display:none}
+  .top .btn{margin-left:auto}
+  .models{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  .nb{grid-template-columns:1fr;align-items:start}
+  .gen{max-width:560px}
+}
+@media (max-width:700px){
+  .kernel{display:none}
+  .cellrow{grid-template-columns:minmax(0,1fr)}
+  .lbl{text-align:left;padding:0 0 6px}
+  .intro .md{padding:22px 20px 24px}
+  .sec .md{padding:20px}
+  .models{grid-template-columns:1fr}
+  .bars li,.axis{grid-template-columns:minmax(0,1fr) 46px}
+  .bars .t{grid-column:1/-1}
+  .axis span:first-child{display:none}
+  .refs li{grid-template-columns:40px minmax(0,1fr);padding-right:16px}
+  .contact .md{padding:24px 20px 26px}
+  .df thead,.df tbody th{display:none}
+  .df tr{display:block;padding:12px 10px;border-bottom:1px solid var(--line)}
+  .df td{display:block;padding:2px 0;border:0}
+  .df td.m{white-space:normal}
+  .codeline{font-size:13.5px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top"><span class="logo"><i></i>meilin.ai</span><a class="btn" href="#contact">Get in touch</a></header>
 <main>
-  <div class="hero">
-    <svg class="plot" viewBox="0 0 800 420" preserveAspectRatio="none" aria-hidden="true">
-      <g fill="#fff"><circle cx="60" cy="350" r="3"/><circle cx="110" cy="320" r="2.5"/><circle cx="150" cy="335" r="3"/><circle cx="190" cy="290" r="2"/><circle cx="240" cy="300" r="3"/><circle cx="280" cy="260" r="2.5"/><circle cx="330" cy="250" r="3"/><circle cx="380" cy="215" r="2"/><circle cx="420" cy="225" r="3"/><circle cx="470" cy="180" r="2.5"/><circle cx="520" cy="170" r="3"/><circle cx="560" cy="140" r="2"/><circle cx="610" cy="130" r="3"/><circle cx="660" cy="96" r="2.5"/><circle cx="710" cy="90" r="3"/><circle cx="750" cy="62" r="2"/></g>
-      <path d="M40 360 C 260 300, 480 190, 770 55" stroke="#55C2FF" stroke-width="2" fill="none" stroke-dasharray="6 6"/>
-    </svg>
-    <div>
-      <span class="tag">lead_data_scientist.py</span>
-      <h1>Mei Lin Zhou</h1>
-      <p>I build machine-learning systems that ship: forecasting, language models and computer vision that people use every day.</p>
-      <div class="chips"><span>Python</span><span>PyTorch</span><span>LLMs</span><span>MLOps</span><span>Dubai · Shenzhen</span></div>
+  <header class="hero" id="top">
+    <div class="wrap top">
+      <a class="logo" href="#top" aria-label="Mei Lin Zhou, back to top">meilin<span>.ai</span></a>
+      <span class="kernel" aria-hidden="true"><i></i>Python 3 · kernel idle</span>
+      <nav aria-label="Sections"><ul class="nav">
+        <li><a href="#models" data-spy><span>[1]</span> models</a></li>
+        <li><a href="#experience" data-spy><span>[2]</span> experience</a></li>
+        <li><a href="#papers" data-spy><span>[3]</span> papers</a></li>
+        <li><a href="#toolkit" data-spy><span>[4]</span> toolkit</a></li>
+      </ul></nav>
+      <a class="btn" href="#contact">Get in touch</a>
     </div>
-    <div class="pic"><img src="img/mei-lin-zhou.jpg" alt="Portrait of Mei Lin Zhou"></div>
-  </div>
+    <div class="wrap nb">
+      <div class="cellrow intro">
+        <span class="lbl" aria-hidden="true">[ ]:</span>
+        <div class="cell active md">
+          <p class="eyebrow">lead_data_scientist.md</p>
+          <h1>Mei Lin <span>Zhou</span></h1>
+          <p class="role">Lead Data Scientist · machine learning that ships</p>
+          <p class="lead">I build machine-learning systems that ship: forecasting, language models and computer vision that people use every day.</p>
+          <ul class="tags"><li>Python</li><li>PyTorch</li><li>LLMs</li><li>MLOps</li><li class="loc">Dubai · Shenzhen</li></ul>
+          <div class="ctas"><a class="btn" href="#models">See models in production</a><a class="btn ghost" href="#contact">Email Mei Lin</a></div>
+        </div>
+      </div>
+      <div class="gen" id="gen">
+        <div class="cellrow">
+          <span class="lbl" aria-hidden="true">In [1]:</span>
+          <div class="cell"><p class="codeline"><span class="f">portrait</span> = model.<span class="s">sample</span>(seed=<span class="n">2026</span>, steps=<span class="n">50</span>)</p></div>
+        </div>
+        <div class="cellrow" style="margin-top:6px">
+          <span class="lbl out" aria-hidden="true">Out[1]:</span>
+          <div class="output">
+            <div class="sample"><img src="img/mei-lin-zhou-640.webp" srcset="img/mei-lin-zhou-640.webp 640w, img/mei-lin-zhou.webp 928w" sizes="430px" width="928" height="1152" alt="Mei Lin Zhou in a black turtleneck against an indigo background" fetchpriority="high"><canvas id="cv" aria-hidden="true"></canvas></div>
+            <p class="prog" aria-hidden="true"><span id="step">step 50/50</span><span class="bar"><i id="pbar"></i></span><b id="pdone">✓ sampled</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <section>
-    <p class="k">// selected_models</p><h2>Models in production</h2>
-    <p class="sub">Each project went from notebook to production with monitoring, retraining and a business owner who uses it.</p>
-    <div class="models">
-      <article class="model"><span class="type">Time series · retail</span><h3>Demand forecasting for 4,000 stores</h3><p>Hierarchical forecasting with promotions and weather. Cut stock-outs and overstock across the region.</p>
-        <svg viewBox="0 0 200 56" aria-hidden="true"><polyline fill="none" stroke="#7B5CFF" stroke-width="2.5" points="0,44 20,40 40,42 60,30 80,34 100,24 120,26 140,18 160,20 180,10 200,12"/></svg>
-        <div class="metric"><b>8.1%</b><span>MAPE, down from 14.6%</span></div></article>
-      <article class="model"><span class="type">LLM · customer support</span><h3>Retrieval-augmented support assistant</h3><p>Answers agents' questions from 12,000 policy pages with citations, evaluated weekly against a gold set.</p>
-        <svg viewBox="0 0 200 56" aria-hidden="true"><polyline fill="none" stroke="#55C2FF" stroke-width="2.5" points="0,48 20,46 40,40 60,38 80,30 100,28 120,22 140,20 160,14 180,12 200,8"/></svg>
-        <div class="metric"><b>+34%</b><span>first-contact resolution</span></div></article>
-      <article class="model"><span class="type">Computer vision · manufacturing</span><h3>Defect detection on the production line</h3><p>Edge-deployed model inspecting 18 parts per second, with human review for low-confidence cases.</p>
-        <svg viewBox="0 0 200 56" aria-hidden="true"><polyline fill="none" stroke="#FF7AB6" stroke-width="2.5" points="0,40 20,36 40,38 60,26 80,22 100,24 120,16 140,14 160,12 180,10 200,9"/></svg>
-        <div class="metric"><b>97.2%</b><span>recall at 0.5% false alarms</span></div></article>
+  <section id="models" class="sec">
+    <div class="wrap stack">
+      <div class="cellrow" data-reveal><span class="lbl" aria-hidden="true">[1]:</span><div class="cell md"><h2>Models in production</h2><p>Each project went from notebook to production with monitoring, retraining and a business owner who uses it.</p></div></div>
+      <div class="cellrow"><span class="lbl out" aria-hidden="true">Out[1]:</span>
+        <div class="models">
+          <article class="model" data-reveal>
+            <p class="codeline">forecast.evaluate(stores=<span class="n">4000</span>)</p>
+            <div class="body">
+              <span class="tag">time series · retail</span>
+              <h3>Demand forecasting for 4,000 stores</h3>
+              <p>Hierarchical forecasting with promotions and weather. Cut stock-outs and overstock across the region.</p>
+              <svg viewBox="0 0 300 110" role="img" aria-label="Illustrative chart: forecast line closely tracking actual demand">
+                <path d="M0 70 C20 60 30 40 50 48 S80 80 100 62 S130 20 150 34 S180 76 200 60 S235 30 250 40 S280 66 300 52" fill="none" stroke="#5A5690" stroke-width="2"/>
+                <path d="M0 72 C20 62 32 44 50 50 S82 78 100 64 S132 24 150 36 S182 72 200 58 S236 32 250 42 S282 64 300 54" fill="none" stroke="#5FE3CF" stroke-width="2.4" stroke-dasharray="5 4"/>
+                <text x="0" y="104" fill="#8E8BB8" font-family="Fira Code,monospace" font-size="11">— actual   - - forecast</text>
+              </svg>
+              <div class="metric"><b>8.1%</b><span>MAPE, down from 14.6%</span></div>
+            </div>
+          </article>
+          <article class="model" data-reveal style="--d:.08s">
+            <p class="codeline">assistant.eval(gold_set=<span class="s">"weekly"</span>)</p>
+            <div class="body">
+              <span class="tag">LLM · customer support</span>
+              <h3>Retrieval-augmented support assistant</h3>
+              <p>Answers agents' questions from 12,000 policy pages with citations, evaluated weekly against a gold set.</p>
+              <svg viewBox="0 0 300 110" role="img" aria-label="Illustrative chart: first-contact resolution before and after the assistant">
+                <rect x="40" y="52" width="70" height="40" rx="4" fill="#3A3768"/><rect x="170" y="38" width="70" height="54" rx="4" fill="#B6A6FF"/>
+                <text x="75" y="46" text-anchor="middle" fill="#8E8BB8" font-family="Fira Code,monospace" font-size="11">before</text><text x="205" y="32" text-anchor="middle" fill="#F6F5FF" font-family="Fira Code,monospace" font-size="11">after +34%</text>
+                <line x1="20" y1="92.5" x2="280" y2="92.5" stroke="#29274D"/>
+              </svg>
+              <div class="metric"><b>+34%</b><span>first-contact resolution</span></div>
+            </div>
+          </article>
+          <article class="model" data-reveal style="--d:.16s">
+            <p class="codeline">inspector.deploy(device=<span class="s">"edge"</span>)</p>
+            <div class="body">
+              <span class="tag">computer vision · manufacturing</span>
+              <h3>Defect detection on the production line</h3>
+              <p>Edge-deployed model inspecting 18 parts per second, with human review for low-confidence cases.</p>
+              <svg viewBox="0 0 300 110" role="img" aria-label="Illustrative grid of inspected parts with two flagged for human review">
+                <g fill="#2A2850"><rect x="10" y="10" width="34" height="34" rx="6"/><rect x="52" y="10" width="34" height="34" rx="6"/><rect x="94" y="10" width="34" height="34" rx="6"/><rect x="136" y="10" width="34" height="34" rx="6"/><rect x="178" y="10" width="34" height="34" rx="6"/><rect x="220" y="10" width="34" height="34" rx="6"/><rect x="262" y="10" width="34" height="34" rx="6"/><rect x="10" y="54" width="34" height="34" rx="6"/><rect x="52" y="54" width="34" height="34" rx="6"/><rect x="136" y="54" width="34" height="34" rx="6"/><rect x="178" y="54" width="34" height="34" rx="6"/><rect x="262" y="54" width="34" height="34" rx="6"/></g>
+                <rect x="94" y="54" width="34" height="34" rx="6" fill="none" stroke="#FF8FB8" stroke-width="2.5"/><rect x="220" y="54" width="34" height="34" rx="6" fill="none" stroke="#FFC56E" stroke-width="2.5" stroke-dasharray="4 3"/>
+                <text x="10" y="105" fill="#8E8BB8" font-family="Fira Code,monospace" font-size="11">■ defect   ┅ sent to human review</text>
+              </svg>
+              <div class="metric"><b>97.2%</b><span>recall at 0.5% false alarms</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section style="padding-top:0">
-    <div class="two">
-      <div class="panel"><p class="k">// experience</p><h2 style="font-size:34px">Experience</h2>
-        <div class="tl">
-          <div><time>2022 — today</time><h3>Lead Data Scientist, Quanta Grid AI</h3><p>Leads a team of seven across forecasting and generative AI; owns model governance.</p></div>
-          <div><time>2019 — 2022</time><h3>Senior Data Scientist, Orbit Retail Group</h3><p>Built the forecasting platform and the pricing experiments framework.</p></div>
-          <div><time>2017 — 2019</time><h3>Machine Learning Engineer, Shenzhen Vision Lab</h3><p>Computer vision models for quality inspection on edge devices.</p></div>
-          <div><time>2015 — 2017</time><h3>MSc Statistics &amp; Machine Learning</h3><p>Pacific Institute of Technology · distinction</p></div>
-        </div></div>
-      <div class="panel"><p class="k">// publications</p><h2 style="font-size:34px">Papers &amp; talks</h2>
-        <ul class="pubs">
-          <li><b>Hierarchical forecasting under promotion shocks</b><span>Applied ML in Retail Workshop · 2024</span></li>
-          <li><b>Evaluating retrieval-augmented assistants with small gold sets</b><span>NLP Industry Track · 2025</span></li>
-          <li><b>Cheap labels, good models: active learning for visual inspection</b><span>Vision for Industry Symposium · 2019</span></li>
-          <li><b>Talk: shipping LLM features without breaking trust</b><span>Data Leaders Forum, Dubai · 2025</span></li>
-        </ul></div>
+  <section id="experience" class="sec">
+    <div class="wrap stack">
+      <div class="cellrow" data-reveal><span class="lbl" aria-hidden="true">In [2]:</span><div class="cell"><p class="codeline">career = pd.read_csv(<span class="s">"experience.csv"</span>).sort_values(<span class="s">"start"</span>, ascending=<span class="k">False</span>)</p></div></div>
+      <div class="cellrow" data-reveal><span class="lbl out" aria-hidden="true">Out[2]:</span>
+        <div class="cell">
+          <div class="dfwrap">
+            <table class="df">
+              <thead><tr><th></th><th>years</th><th>role</th><th>notes</th></tr></thead>
+              <tbody>
+                <tr><th>0</th><td class="m">2022 — today</td><td><b>Lead Data Scientist</b><span>Quanta Grid AI</span></td><td>Leads a team of seven across forecasting and generative AI; owns model governance.</td></tr>
+                <tr><th>1</th><td class="m">2019 — 2022</td><td><b>Senior Data Scientist</b><span>Orbit Retail Group</span></td><td>Built the forecasting platform and the pricing experiments framework.</td></tr>
+                <tr><th>2</th><td class="m">2017 — 2019</td><td><b>Machine Learning Engineer</b><span>Shenzhen Vision Lab</span></td><td>Computer vision models for quality inspection on edge devices.</td></tr>
+                <tr><th>3</th><td class="m">2015 — 2017</td><td><b>MSc Statistics &amp; Machine Learning</b><span>Pacific Institute of Technology</span></td><td>Graduated with distinction.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="shape">4 rows × 3 columns</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section style="padding-top:0">
-    <div class="panel"><p class="k">// skills</p><h2 style="font-size:34px">Toolkit</h2>
-      <div class="skills">
-        <div class="skill"><span>Python &amp; PyTorch <em>9 yrs</em></span><div class="meter"><i style="width:95%"></i></div></div>
-        <div class="skill"><span>LLM evaluation &amp; RAG <em>3 yrs</em></span><div class="meter"><i style="width:85%"></i></div></div>
-        <div class="skill"><span>Forecasting &amp; causal inference <em>7 yrs</em></span><div class="meter"><i style="width:90%"></i></div></div>
-        <div class="skill"><span>Spark, SQL &amp; dbt <em>8 yrs</em></span><div class="meter"><i style="width:82%"></i></div></div>
-        <div class="skill"><span>MLOps: MLflow, Kubeflow <em>5 yrs</em></span><div class="meter"><i style="width:78%"></i></div></div>
-        <div class="skill"><span>Mandarin · English · Arabic (basic)</span><div class="meter"><i style="width:70%"></i></div></div>
-      </div></div>
+  <section id="papers" class="sec">
+    <div class="wrap stack">
+      <div class="cellrow" data-reveal><span class="lbl" aria-hidden="true">[3]:</span><div class="cell md"><h2>Papers &amp; talks</h2><p>Venues and titles are illustrative for this concept site.</p></div></div>
+      <div class="cellrow" data-reveal><span class="lbl out" aria-hidden="true">Out[3]:</span>
+        <div class="cell">
+          <ol class="refs">
+            <li><div><b>Hierarchical forecasting under promotion shocks</b><span>Applied ML in Retail Workshop · 2024</span></div></li>
+            <li><div><b>Evaluating retrieval-augmented assistants with small gold sets</b><span>Industry track, NLP conference · 2025</span></div></li>
+            <li><div><b>Cheap labels, good models: active learning for visual inspection</b><span>Vision for Industry Symposium · 2019</span></div></li>
+            <li><div><b>Shipping LLM features without breaking trust</b><span class="talk">Talk · Data Leaders Forum, Dubai · 2025</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="contact" id="contact">
-    <p class="k">// contact</p><h2>Have a problem worth modelling?</h2>
-    <p>Open to head of data science and AI lead roles, and to advising teams moving models into production.</p>
-    <div class="btns"><a class="btn fill" href="#contact">Email Mei Lin</a><a class="btn" href="#contact">GitHub</a><a class="btn" href="#contact">Google Scholar</a><a class="btn" href="#contact">CV</a></div>
+  <section id="toolkit" class="sec">
+    <div class="wrap stack">
+      <div class="cellrow" data-reveal><span class="lbl" aria-hidden="true">In [4]:</span><div class="cell"><p class="codeline">skills.plot.barh(x=<span class="s">"years"</span>)</p></div></div>
+      <div class="cellrow"><span class="lbl out" aria-hidden="true">Out[4]:</span>
+        <div class="cell chart" data-reveal>
+          <ul class="bars">
+            <li style="--v:9"><span class="t">Python &amp; PyTorch</span><span class="b"><i></i></span><span class="v">9 yrs</span></li>
+            <li style="--v:3"><span class="t">LLM evaluation &amp; RAG</span><span class="b"><i></i></span><span class="v">3 yrs</span></li>
+            <li style="--v:7"><span class="t">Forecasting &amp; causal inference</span><span class="b"><i></i></span><span class="v">7 yrs</span></li>
+            <li style="--v:8"><span class="t">Spark, SQL &amp; dbt</span><span class="b"><i></i></span><span class="v">8 yrs</span></li>
+            <li style="--v:5"><span class="t">MLOps: MLflow, Kubeflow</span><span class="b"><i></i></span><span class="v">5 yrs</span></li>
+          </ul>
+          <div class="axis" aria-hidden="true"><span></span><span><i>0</i><i>5</i><i>10 yrs</i></span><span></span></div>
+          <p class="langs"><b>languages</b> = ["Mandarin", "English", "Arabic (basic)"]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="sec contact">
+    <div class="wrap">
+      <div class="cellrow" data-reveal><span class="lbl" aria-hidden="true">[5]:</span>
+        <div class="cell md">
+          <h2>Have a problem worth modelling?</h2>
+          <p>Open to head of data science and AI lead roles, and to advising teams moving models into production.</p>
+          <div class="ctas"><a class="btn" href="#contact" data-demo>Email Mei Lin</a><a class="btn ghost" href="#contact" data-demo>GitHub</a><a class="btn ghost" href="#contact" data-demo>Google Scholar</a><a class="btn ghost" href="#contact" data-demo>CV</a></div>
+        </div>
+      </div>
+    </div>
   </section>
 </main>
-<footer>Sample portfolio website designed by Zenith Dubai CV. Mei Lin Zhou is a fictional profile; organisations, papers and links are illustrative.</footer>
-</div>
-<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design <b>· Zenith Dubai CV</b></a>
+<footer>Concept site designed by Zenith Dubai CV · Mei Lin Zhou is a fictional person; organisations, papers, figures and links are illustrative.</footer>
+<script>
+(function () {
+  // "Sampling" the portrait: a point cloud that converges out of noise, then resolves
+  // into the photograph. Skipped with reduced motion, ?static, or no canvas support.
+  var Z = window.ZC || {}, gen = document.getElementById("gen"), cv = document.getElementById("cv");
+  if (!gen || !cv || !cv.getContext || Z.reduce || Z.still) return;
+  var img = gen.querySelector("img"), step = document.getElementById("step"), bar = document.getElementById("pbar"), done = document.getElementById("pdone");
+  var src = new Image(); src.src = "img/mei-lin-zhou-640.webp";
+  function start() {
+    var box = cv.parentNode.getBoundingClientRect(); if (!box.width) return;
+    var dpr = Math.min(2, window.devicePixelRatio || 1), W = Math.round(box.width * dpr), H = Math.round(box.height * dpr);
+    cv.width = W; cv.height = H;
+    var cols = 96, rows = Math.round(cols * H / W), off = document.createElement("canvas");
+    off.width = cols; off.height = rows;
+    var o = off.getContext("2d"); o.drawImage(src, 0, 0, cols, rows);
+    var data = o.getImageData(0, 0, cols, rows).data, cw = W / cols, ch = H / rows, pts = [];
+    for (var y = 0; y < rows; y++) for (var x = 0; x < cols; x++) {
+      var i = (y * cols + x) * 4, l = (0.3 * data[i] + 0.59 * data[i + 1] + 0.11 * data[i + 2]) / 255;
+      var a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random()) * Math.max(W, H) * 0.7;
+      pts.push({ tx: (x + .5) * cw, ty: (y + .5) * ch, sx: W / 2 + Math.cos(a) * r, sy: H / 2 + Math.sin(a) * r, s: 0.35 + l * 0.9, b: Math.min(7, Math.floor(l * 8)), j: Math.random() * 6.28 });
+    }
+    var cols8 = ["#2B2266", "#3D3190", "#5543C0", "#6F5BE6", "#8D7CF5", "#A99CFF", "#CBC3FF", "#ECE9FF"];
+    var ctx = cv.getContext("2d"), t0 = 0, D = 2600;
+    gen.classList.add("genning"); bar.style.transform = "scaleX(0)"; done.textContent = "";
+    function frame(ts) {
+      if (!t0) t0 = ts;
+      var t = Math.min(1, (ts - t0) / D), e = t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, n = (1 - e) * 26 * dpr;
+      ctx.clearRect(0, 0, W, H);
+      for (var b = 0; b < 8; b++) {
+        ctx.fillStyle = cols8[b];
+        for (var k = 0; k < pts.length; k++) {
+          var p = pts[k]; if (p.b !== b) continue;
+          var px = p.sx + (p.tx - p.sx) * e + Math.cos(p.j + ts / 300) * n, py = p.sy + (p.ty - p.sy) * e + Math.sin(p.j + ts / 260) * n, sz = p.s * cw;
+          ctx.fillRect(px - sz / 2, py - sz / 2, sz, sz);
+        }
+      }
+      step.textContent = "step " + Math.max(1, Math.round(t * 50)) + "/50";
+      bar.style.transform = "scaleX(" + t + ")";
+      if (t < 1) requestAnimationFrame(frame);
+      else setTimeout(function () { gen.classList.add("done"); done.textContent = "✓ sampled"; }, 250);
+    }
+    requestAnimationFrame(frame);
+  }
+  var ready = src.decode ? src.decode() : new Promise(function (r) { src.onload = r; });
+  function go() { ready.then(start, function () {}); }
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); go(); } }, { threshold: 0.35 });
+    io.observe(cv.parentNode);
+  } else go();
+})();
+</script>
 </body>
 </html>

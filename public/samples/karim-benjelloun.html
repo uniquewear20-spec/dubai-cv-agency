@@ -2,127 +2,254 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Karim Benjelloun · Marketing Director, Luxury — Sample design by Zenith Dubai CV</title>
+<meta name="theme-color" content="#050505">
+<title>Karim Benjelloun · Marketing Director, Luxury — Concept site by Zenith Dubai CV</title>
+<meta name="description" content="Concept portfolio website for a fictional luxury marketing director, designed by Zenith Dubai CV.">
+<link rel="preload" href="img/karim-benjelloun.webp" as="image" type="image/webp">
+<link rel="preload" href="fonts/bodoni-moda-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
+<script src="assets/sample.js"></script>
 <style>
-:root{--black:#0B0B0B;--black2:#141312;--gold:#C8A24D;--gold2:#E0C27A;--bone:#EDE6D6;--grey:#8C857A;--line:rgba(200,162,77,.28);
---serif:"Bodoni Moda",Didot,"Times New Roman",serif;--sans:"Tenor Sans","Helvetica Neue",Arial,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--black);color:var(--bone);font:400 16px/1.8 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}a{color:inherit}
-.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
-.top{display:flex;justify-content:space-between;align-items:center;padding:26px 0;font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--grey)}
-.top b{font:500 15px var(--serif);letter-spacing:.5em;color:var(--bone)}
-.hero{display:grid;grid-template-columns:1fr 1fr;min-height:640px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.hero .pic{position:relative;border-right:1px solid var(--line)}
-.hero .pic img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
-.hero .pic::after{content:"";position:absolute;inset:0;box-shadow:inset -120px 0 120px -60px var(--black)}
-.hero .txt{display:flex;flex-direction:column;justify-content:center;padding:60px 56px}
-.kick{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin:0}
-h1{font:400 clamp(54px,6.4vw,104px)/.92 var(--serif);letter-spacing:-.02em;margin:26px 0 0;text-transform:uppercase}
-h1 em{font-style:italic;text-transform:none;color:var(--gold2)}
-.rule{width:80px;height:1px;background:var(--gold);margin:34px 0}
-.hero p{max-width:40ch;color:#CFC7B6;margin:0}
-section{padding:110px 0;border-bottom:1px solid var(--line)}
-h2{font:400 clamp(40px,5vw,72px)/1 var(--serif);margin:0;letter-spacing:-.01em}
-h2 em{font-style:italic;color:var(--gold2)}
-.head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:60px;flex-wrap:wrap}
-.head p{max-width:42ch;margin:0;color:var(--grey)}
-.camps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-.camp{border:1px solid var(--line);background:var(--black2)}
-.visual{aspect-ratio:4/5;position:relative;overflow:hidden;display:grid;place-items:center}
-.v1{background:radial-gradient(circle at 50% 38%,rgba(224,194,122,.95) 0 14%,rgba(200,162,77,.25) 15% 32%,transparent 33%),linear-gradient(180deg,#1A1610,#0B0B0B 70%)}
-.v1::after{content:"";position:absolute;left:0;right:0;bottom:22%;height:30%;background:linear-gradient(170deg,transparent 40%,#2A2216 41% 60%,transparent 61%),linear-gradient(190deg,transparent 45%,#1E1A12 46% 70%,transparent 71%)}
-.v2{background:repeating-radial-gradient(circle at 50% 50%,transparent 0 22px,rgba(200,162,77,.22) 23px 24px),#0E0D0B}
-.v2 span{width:44%;aspect-ratio:1;border:1px solid var(--gold2);transform:rotate(45deg);display:block;box-shadow:0 0 0 18px rgba(200,162,77,.08)}
-.v3{background:linear-gradient(90deg,transparent 49.7%,rgba(200,162,77,.5) 49.8% 50.2%,transparent 50.3%),linear-gradient(#0B0B0B,#17140F)}
-.v3 span{font:italic 400 120px/1 var(--serif);color:var(--gold2)}
-.camp .cap{padding:24px 24px 26px}
-.camp .cap small{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
-.camp h3{font:400 30px/1.15 var(--serif);margin:8px 0 10px}
-.camp p{margin:0;color:var(--grey);font-size:15px;line-height:1.7}
-.camp .num{display:flex;align-items:baseline;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
-.camp .num b{font:400 40px/1 var(--serif);color:var(--gold2)}
-.maisons{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
-.maison{padding:36px 30px 40px;border-right:1px solid var(--line)}.maison:last-child{border-right:0}
-.maison time{font-size:11px;letter-spacing:.3em;color:var(--gold)}
-.maison h3{font:400 34px/1.1 var(--serif);margin:14px 0 6px}
-.maison .r{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--bone)}
-.maison p{color:var(--grey);margin:14px 0 0;font-size:15px}
-.quote{text-align:center}
-.quote blockquote{font:italic 400 clamp(32px,4.4vw,58px)/1.2 var(--serif);max-width:24ch;margin:0 auto;color:var(--bone)}
-.quote cite{display:block;margin-top:24px;font-style:normal;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold)}
-.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line)}
-.facts div{padding:34px 26px;border-right:1px solid var(--line)}.facts div:last-child{border-right:0}
-.facts b{display:block;font:400 54px/1 var(--serif);color:var(--gold2)}
-.facts span{display:block;margin-top:12px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
-.edu{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:60px}
-.edu b{display:block;font:400 22px var(--serif)}.edu span{color:var(--grey);font-size:14px}
-.contact{text-align:center;border-bottom:0}
-.contact p{color:var(--grey);max-width:46ch;margin:22px auto 0}
-.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:38px}
-.btn{padding:16px 32px;border:1px solid var(--gold);color:var(--gold2);text-decoration:none;font-size:11px;letter-spacing:.32em;text-transform:uppercase}
-.btn.fill{background:var(--gold);color:var(--black)}
-footer{text-align:center;padding:30px 0 90px;font-size:12px;color:var(--grey);letter-spacing:.04em}
-.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:10px 16px;background:var(--bone);color:var(--black);font:400 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none}
-@media (max-width:960px){.hero{grid-template-columns:1fr}.hero .pic{border-right:0;border-bottom:1px solid var(--line);max-height:620px}.hero .txt{padding:44px 0}.camps,.maisons,.edu{grid-template-columns:1fr}.maison{border-right:0;border-bottom:1px solid var(--line)}.facts{grid-template-columns:1fr 1fr}.facts div:nth-child(2){border-right:0}.facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}.top span{display:none}}
-@media (max-width:520px){.wrap{padding:0 20px}.facts div{padding:26px 14px;min-width:0}.facts b{font-size:clamp(32px,10vw,44px)}.facts span{letter-spacing:.12em;font-size:11px}}
+/* Concept: the cover star. The hero is a luxury magazine cover: a Bodoni masthead
+   across the top, his portrait rising out of the black page, and cover lines that
+   double as the table of contents. Inside: campaign spreads, the maisons as a
+   masthead of credits, a full-page quote, and a by-appointment invitation. */
+:root{
+  --black:#050505; --ink2:#111; --ivory:#F2ECE1; --cream:#E4DACA; --gold:#C8A36A; --gold2:#E3C792; --grey:#8C857B; --line:rgba(242,236,225,.16);
+  --didone:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif; --sans:"Tenor Sans","Helvetica Neue",Arial,sans-serif;
+  --zc-bg:#F2ECE1; --zc-fg:#050505; --zc-dot:#C8A36A;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--black);color:var(--ivory);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:1.5px solid var(--gold);outline-offset:4px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
+.sc{font:400 12px/1.4 var(--sans);letter-spacing:.32em;text-transform:uppercase}
+
+/* ---------- Cover ---------- */
+.cover{position:relative;height:max(720px,100svh);overflow:hidden;background:var(--black)}
+.issue{position:absolute;z-index:3;left:0;right:0;top:max(18px,env(safe-area-inset-top,0px));display:flex;justify-content:space-between;gap:20px;padding:0 clamp(20px,3vw,44px);color:var(--cream)}
+.mast{position:absolute;z-index:2;left:0;right:0;top:calc(max(18px,env(safe-area-inset-top,0px)) + 22px);margin:0;text-align:center;font:400 clamp(64px,14.6vw,232px)/.86 var(--didone);letter-spacing:-.035em;color:var(--ivory);white-space:nowrap}
+.star{position:absolute;z-index:1;left:50%;bottom:0;height:min(88%,1000px);aspect-ratio:928/1152;transform:translateX(-50%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%),radial-gradient(110% 85% at 50% 38%,#000 52%,transparent 80%);-webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%),radial-gradient(110% 85% at 50% 38%,#000 52%,transparent 80%);mask-composite:intersect}
+.star img{width:100%;height:100%;object-fit:cover}
+.cover::after{content:"";position:absolute;inset:auto 0 0 0;height:26%;z-index:1;background:linear-gradient(transparent,var(--black));pointer-events:none}
+.lines{position:absolute;z-index:3;left:0;right:0;bottom:clamp(26px,5vh,54px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;padding:0 clamp(20px,3vw,44px);pointer-events:none}
+.lines>*{pointer-events:auto}
+.left,.right{display:flex;flex-direction:column;gap:clamp(16px,2.6vh,30px)}
+.right{align-items:flex-end;text-align:right}
+.cl{display:block;max-width:300px;text-decoration:none}
+.cl small{display:block;margin-bottom:6px;color:var(--gold)}
+.cl b{display:block;font:400 clamp(20px,1.9vw,28px)/1.08 var(--didone);color:var(--ivory)}
+.cl b i{color:var(--gold2)}
+.cl span{display:block;margin-top:5px;font:400 13px/1.45 var(--sans);color:var(--cream)}
+.cl:hover b,.cl[aria-current] b{color:var(--gold2)}
+.feature{max-width:360px}
+.feature .sc{color:var(--gold)}
+h1{margin:6px 0 0;font:italic 400 clamp(34px,3.6vw,54px)/1 var(--didone);letter-spacing:-.01em}
+.feature p{margin:10px 0 0;font:400 15px/1.5 var(--sans);color:var(--cream)}
+.big{font:500 clamp(44px,4.4vw,70px)/.9 var(--didone);color:var(--gold2)}
+.barcode{display:flex;align-items:flex-end;gap:10px;color:var(--cream)}
+.barcode i{display:block;width:84px;height:44px;background:repeating-linear-gradient(90deg,var(--ivory) 0 2px,transparent 2px 4px,var(--ivory) 4px 5px,transparent 5px 8px,var(--ivory) 8px 11px,transparent 11px 12px)}
+.zc-reveal .mast{animation:rise 1.4s cubic-bezier(.2,.8,.2,1) both}
+.zc-reveal .star{animation:fadein 1.8s ease-out .2s both}
+.zc-reveal .lines{animation:fadein 1.2s ease-out .9s both}
+@keyframes rise{from{opacity:0;transform:translateY(24px);letter-spacing:.02em}to{opacity:1;transform:none}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+
+/* ---------- Inside ---------- */
+section{padding:clamp(90px,11vw,150px) 0;border-top:1px solid var(--line)}
+.folio{display:flex;justify-content:space-between;margin:0 0 40px;padding-bottom:14px;border-bottom:1px solid var(--line);color:var(--grey)}
+h2{margin:0;font:400 clamp(48px,7vw,110px)/.9 var(--didone);letter-spacing:-.03em}
+h2 i{color:var(--gold2)}
+.intro{margin:22px 0 0;max-width:56ch;color:var(--cream)}
+
+/* spreads */
+.spread{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(30px,5vw,80px);align-items:center;margin-top:clamp(70px,8vw,110px)}
+.spread:nth-of-type(even) .art{order:2}
+.art{position:relative;aspect-ratio:4/5;overflow:hidden}
+.art figcaption{position:absolute;left:18px;bottom:16px;color:rgba(242,236,225,.85)}
+.a1{background:radial-gradient(60% 30% at 70% 22%,#F7D9A6 0,rgba(247,217,166,0) 70%),linear-gradient(180deg,#E9B57A 0,#C67E4B 30%,#8E4A2A 52%,#3B1E12 100%)}
+.a1::before{content:"";position:absolute;left:-20%;right:-20%;bottom:-8%;height:58%;border-radius:50% 50% 0 0/40% 40% 0 0;background:linear-gradient(180deg,#B66A3C,#5A2E19)}
+.a1::after{content:"";position:absolute;left:-40%;right:10%;bottom:-20%;height:52%;border-radius:50% 60% 0 0/60% 50% 0 0;background:linear-gradient(180deg,#7F4325,#2A140B)}
+.a1 i{position:absolute;left:50%;top:44%;width:26%;aspect-ratio:1/1.5;transform:translate(-50%,-50%);border-radius:44% 44% 10% 10%/30% 30% 10% 10%;background:linear-gradient(160deg,rgba(255,244,222,.75),rgba(255,214,150,.25));box-shadow:inset 0 0 0 2px rgba(255,245,225,.6),0 30px 40px -10px rgba(60,20,5,.6);z-index:1}
+.a1 i::before{content:"";position:absolute;left:34%;right:34%;top:-16%;height:16%;border-radius:3px 3px 0 0;background:linear-gradient(#E9D3A8,#B89060)}
+.a2{background:radial-gradient(40% 40% at 72% 26%,rgba(200,163,106,.35),transparent 70%),linear-gradient(180deg,#0B1028 0,#141B3E 55%,#271A3A 100%)}
+.a2::before{content:"";position:absolute;right:20%;top:14%;width:26%;aspect-ratio:1;border-radius:50%;box-shadow:-22px 8px 0 0 #E3C792;transform:rotate(-20deg)}
+.a2 i{position:absolute;left:0;right:0;bottom:0;height:38%;background:linear-gradient(180deg,transparent,rgba(5,5,5,.9)),repeating-linear-gradient(90deg,transparent 0 9%,rgba(227,199,146,.6) 9% 9.4%,transparent 9.4% 17%)}
+.a2 b{position:absolute;inset:auto 12% 16% 12%;height:30%;border-radius:50% 50% 0 0/22% 22% 0 0;border:1.5px solid rgba(227,199,146,.55);border-bottom:0}
+.a3{background:linear-gradient(180deg,#EDE4D3,#D9CBB2)}
+.a3 i{position:absolute;left:18%;right:18%;top:16%;bottom:0;border-radius:999px 999px 0 0;background:linear-gradient(180deg,#1A1714,#2B2520);box-shadow:inset 0 0 0 10px #CDB991}
+.a3 i::after{content:"";position:absolute;left:50%;bottom:0;width:38%;height:56%;transform:translateX(-50%);border-radius:999px 999px 0 0;background:linear-gradient(180deg,#C8A36A,#7C5E33);opacity:.85}
+.a3 figcaption{color:#2B2520}
+.spread .k{color:var(--gold)}
+.spread h3{margin:12px 0 0;font:400 clamp(40px,4.6vw,68px)/.95 var(--didone);letter-spacing:-.02em}
+.spread p{color:var(--cream);max-width:44ch}
+.stat{display:flex;align-items:baseline;gap:16px;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.stat b{font:500 clamp(54px,6vw,92px)/.85 var(--didone);color:var(--gold2)}
+.stat span{max-width:20ch;font-size:14px;line-height:1.45;color:var(--cream)}
+
+/* maisons (credits) */
+.credits{margin-top:56px;border-top:1px solid var(--ivory)}
+.credit{display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);gap:30px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--line)}
+.credit .yr{color:var(--gold)}
+.credit h3{margin:0;font:400 clamp(32px,3.4vw,50px)/1 var(--didone);letter-spacing:-.02em}
+.credit h3 span{display:block;margin-top:8px;font:italic 400 19px/1.3 var(--didone);color:var(--gold2);letter-spacing:0}
+.credit p{margin:0;color:var(--cream)}
+
+/* quote */
+.words{background:var(--ivory);color:var(--black);text-align:center}
+.words blockquote{margin:0 auto;max-width:20ch;font:italic 400 clamp(40px,5.6vw,86px)/1.04 var(--didone);letter-spacing:-.02em}
+.words blockquote::before{content:"“";display:block;font:400 clamp(110px,12vw,180px)/.6 var(--didone);color:var(--gold)}
+.words cite{display:block;margin-top:34px;font-style:normal;color:#5C554C}
+
+/* numbers */
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:56px;border-top:1px solid var(--ivory)}
+.nums div{padding:28px 20px 10px 0}
+.nums div+div{padding-left:24px;border-left:1px solid var(--line)}
+.nums b{display:block;font:400 clamp(52px,5.2vw,86px)/.9 var(--didone);letter-spacing:-.03em}
+.nums span{display:block;margin-top:14px;color:var(--grey)}
+.edu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;margin-top:70px}
+.edu div{padding-top:16px;border-top:1px solid var(--line)}
+.edu b{display:block;font:400 24px/1.2 var(--didone)}
+.edu span{display:block;margin-top:6px;color:var(--grey);font-size:15px}
+
+/* invitation */
+.invite{display:grid;place-items:center}
+.card{position:relative;width:min(100%,760px);padding:clamp(40px,6vw,80px) clamp(26px,5vw,70px);text-align:center;border:1px solid var(--gold);outline:1px solid rgba(200,163,106,.4);outline-offset:-12px}
+.card h2{font-size:clamp(38px,10.4vw,104px)}
+.card p{max-width:46ch;margin:22px auto 0;color:var(--cream)}
+.btns{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:36px}
+.btn{display:inline-block;padding:16px 28px;border:1px solid var(--ivory);text-decoration:none;font:400 12px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;transition:background .3s,color .3s}
+.btn.fill,.btn:hover{background:var(--ivory);color:var(--black)}
+footer{padding:28px 24px max(96px,env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);text-align:center;color:var(--grey);font-size:13px}
+
+@media (max-width:1000px){
+  .issue span:nth-child(2){display:none}
+  .spread,.credit{grid-template-columns:1fr}
+  .spread:nth-of-type(even) .art{order:0}
+  .credit{gap:10px}
+  .nums{grid-template-columns:1fr 1fr}
+  .nums div:nth-child(3){padding-left:0;border-left:0}
+  .nums div:nth-child(-n+2){border-bottom:1px solid var(--line);padding-bottom:26px}
+  .edu{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .cover{height:auto;min-height:0;display:flex;flex-direction:column}
+  .issue{position:relative;top:auto;padding-top:max(16px,env(safe-area-inset-top,0px));font-size:10px;letter-spacing:.22em}
+  .mast{position:relative;top:auto;margin-top:12px;font-size:13.6vw}
+  .star{position:relative;left:auto;transform:none;width:100%;height:auto;margin-top:-6vw;align-self:center}
+  .cover::after{display:none}
+  .lines{position:relative;bottom:auto;grid-template-columns:1fr;margin-top:-28vw;padding-bottom:36px;gap:26px}
+  .left,.right{gap:20px}
+  .right{align-items:flex-start;text-align:left}
+  .feature{max-width:none}
+  .barcode{display:none}
+}
+@media (max-width:440px){
+  .nums{grid-template-columns:1fr}
+  .nums div,.nums div+div{padding:22px 0;border-left:0;border-bottom:1px solid var(--line)}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top"><b>K · B</b><span>Luxury marketing · Middle East &amp; Africa</span><span>Dubai · Paris · Casablanca</span></header>
 <main>
-  <div class="hero">
-    <div class="pic"><img src="img/karim-benjelloun.jpg" alt="Portrait of Karim Benjelloun in a black suit"></div>
-    <div class="txt">
-      <p class="kick">Marketing Director · Luxury Maisons</p>
-      <h1>Karim <em>Benjelloun</em></h1>
-      <div class="rule"></div>
-      <p>Building desire for luxury maisons across the Middle East and Africa for eighteen years. Campaigns, flagships and communities that clients remember, and that sell.</p>
+  <header class="cover" id="top">
+    <p class="issue sc" style="margin:0"><span>Nº 18 · The luxury issue</span><span>Middle East &amp; Africa</span><span>Dubai · Paris · Casablanca</span></p>
+    <p class="mast" aria-hidden="true">BENJELLOUN</p>
+    <div class="star"><img src="img/karim-benjelloun.webp" srcset="img/karim-benjelloun-640.webp 640w, img/karim-benjelloun.webp 928w" sizes="(max-width:760px) 100vw, 720px" width="928" height="1152" alt="Karim Benjelloun in a black shirt and jacket against a black background" fetchpriority="high"></div>
+    <div class="lines">
+      <div class="left">
+        <div class="feature">
+          <p class="sc" style="margin:0">Cover story</p>
+          <h1>Karim Benjelloun</h1>
+          <p>Marketing Director, luxury maisons. Eighteen years building desire across the Middle East and Africa.</p>
+        </div>
+        <a class="cl" href="#campaigns" data-spy><small class="sc">p. 02</small><b>Desert Light: <i>a launch at dawn</i></b><span>+41% regional sales in the launch quarter</span></a>
+      </div>
+      <nav class="right" aria-label="Sections">
+        <a class="cl" href="#maisons" data-spy><small class="sc">p. 04</small><b>The <i>maisons</i></b><span>Three houses, one way of working</span></a>
+        <a class="cl" href="#words" data-spy><small class="sc">p. 06</small><b>“What the client <i>feels</i>”</b><span>In his own words</span></a>
+        <a class="cl" href="#contact" data-spy><small class="sc">p. 08</small><b>By <i>appointment</i></b><span>Request a meeting</span></a>
+        <span class="barcode" aria-hidden="true"><span class="sc" style="font-size:10px">€120m<br>led</span><i></i></span>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <section>
-    <div class="head"><h2>Selected <em>campaigns</em></h2><p>Each campaign began with one question: what should a client feel the moment they meet the brand?</p></div>
-    <div class="camps">
-      <article class="camp"><div class="visual v1" aria-hidden="true"></div><div class="cap"><small>Fragrance launch · 2024</small><h3>Desert Light</h3><p>A regional launch shot at dawn in the dunes, with private previews in four cities.</p><div class="num"><b>+41%</b><span>regional sales in launch quarter</span></div></div></article>
-      <article class="camp"><div class="visual v2" aria-hidden="true"><span></span></div><div class="cap"><small>Capsule collection · 2023</small><h3>Ramadan Nights</h3><p>A limited capsule and clienteling programme built with the sales teams in nine markets.</p><div class="num"><b>9</b><span>markets, sold out in 19 days</span></div></div></article>
-      <article class="camp"><div class="visual v3" aria-hidden="true"><span>M</span></div><div class="cap"><small>Flagship opening · 2022</small><h3>Maison Verlaine, Dubai</h3><p>A 900 m² flagship opening with an atelier, a salon and an event season.</p><div class="num"><b>2.4M</b><span>engaged community members</span></div></div></article>
+  <section id="campaigns">
+    <div class="wrap">
+      <p class="folio sc"><span>Selected campaigns</span><span>p. 02</span></p>
+      <h2>Building <i>desire,</i><br>then selling it.</h2>
+      <p class="intro">Each campaign began with one question: what should a client feel the moment they meet the brand?</p>
+      <article class="spread" data-reveal>
+        <figure class="art a1" style="margin:0" aria-hidden="true"><i></i><figcaption class="sc">Fragrance · 2024</figcaption></figure>
+        <div><p class="k sc">Fragrance launch · 2024</p><h3>Desert Light</h3><p>A regional launch shot at dawn in the dunes, with private previews in four cities.</p><div class="stat"><b>+41%</b><span>regional sales in the launch quarter</span></div></div>
+      </article>
+      <article class="spread" data-reveal>
+        <figure class="art a2" style="margin:0" aria-hidden="true"><i></i><b></b><figcaption class="sc">Capsule · 2023</figcaption></figure>
+        <div><p class="k sc">Capsule collection · 2023</p><h3>Ramadan Nights</h3><p>A limited capsule and clienteling programme, built with the sales teams in nine markets.</p><div class="stat"><b>19</b><span>days to sell out across nine markets</span></div></div>
+      </article>
+      <article class="spread" data-reveal>
+        <figure class="art a3" style="margin:0" aria-hidden="true"><i></i><figcaption class="sc">Flagship · 2022</figcaption></figure>
+        <div><p class="k sc">Flagship opening · 2022</p><h3>Maison Verlaine, Dubai</h3><p>A 900 m² flagship with an atelier, a salon and an event season.</p><div class="stat"><b>2.4M</b><span>engaged community members</span></div></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="maisons">
+    <div class="wrap">
+      <p class="folio sc"><span>The maisons</span><span>p. 04</span></p>
+      <h2>Brand first, <i>client always.</i></h2>
+      <div class="credits">
+        <div class="credit" data-reveal><span class="yr sc">2019 — today</span><h3>Maison Verlaine<span>Marketing Director, MEA</span></h3><p>Leads brand, CRM, events and media for nine markets; €120m regional revenue.</p></div>
+        <div class="credit" data-reveal><span class="yr sc">2014 — 2019</span><h3>Atelier Sahar Parfums<span>Head of Brand</span></h3><p>Repositioned a regional perfumer as a luxury house; entered six new markets.</p></div>
+        <div class="credit" data-reveal><span class="yr sc">2009 — 2014</span><h3>Lumière &amp; Fils<span>Brand Manager, Jewellery</span></h3><p>Launched the high-jewellery line and the first private-client salons in the Gulf.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="words" class="words">
+    <div class="wrap" data-reveal>
+      <p class="folio sc" style="color:#5C554C;border-color:rgba(5,5,5,.16)"><span>In his own words</span><span>p. 06</span></p>
+      <blockquote>Luxury is not what you show. It is what the client feels when you are not in the room.</blockquote>
+      <cite class="sc">— Karim Benjelloun</cite>
     </div>
   </section>
 
   <section>
-    <div class="head"><h2>The <em>maisons</em></h2><p>Three houses, one way of working: brand first, client always.</p></div>
-    <div class="maisons">
-      <div class="maison"><time>2019 — TODAY</time><h3>Maison Verlaine</h3><span class="r">Marketing Director, MEA</span><p>Leads brand, CRM, events and media for nine markets; €120m regional revenue.</p></div>
-      <div class="maison"><time>2014 — 2019</time><h3>Atelier Sahar Parfums</h3><span class="r">Head of Brand</span><p>Repositioned a regional perfumer as a luxury house; entered six new markets.</p></div>
-      <div class="maison"><time>2009 — 2014</time><h3>Lumière &amp; Fils</h3><span class="r">Brand Manager, Jewellery</span><p>Launched the high-jewellery line and the first private-client salons in the Gulf.</p></div>
+    <div class="wrap">
+      <p class="folio sc"><span>By the numbers</span><span>p. 07</span></p>
+      <div class="nums" data-reveal>
+        <div><b>18</b><span class="sc">Years in luxury</span></div>
+        <div><b>€120m</b><span class="sc">Regional revenue led</span></div>
+        <div><b>9</b><span class="sc">Markets</span></div>
+        <div><b>3</b><span class="sc">Flagship openings</span></div>
+      </div>
+      <div class="edu" data-reveal>
+        <div><b>MSc Luxury Brand Management</b><span>Paris, 2009</span></div>
+        <div><b>BA Marketing &amp; Communication</b><span>Casablanca, 2006</span></div>
+        <div><b>Arabic · French · English</b><span>Native · native · fluent</span></div>
+      </div>
     </div>
   </section>
 
-  <section class="quote"><blockquote>“Luxury is not what you show. It is what the client feels when you are not in the room.”</blockquote><cite>Karim Benjelloun</cite></section>
-
-  <section>
-    <div class="facts"><div><b>18</b><span>Years in luxury</span></div><div><b>€120m</b><span>Regional revenue led</span></div><div><b>9</b><span>Markets</span></div><div><b>3</b><span>Flagship openings</span></div></div>
-    <div class="edu">
-      <div><b>MSc Luxury Brand Management</b><span>Paris, 2009</span></div>
-      <div><b>BA Marketing &amp; Communication</b><span>Casablanca, 2006</span></div>
-      <div><b>Arabic · French · English</b><span>Native · native · fluent</span></div>
+  <section id="contact" class="invite">
+    <div class="wrap" style="display:grid;grid-template-columns:minmax(0,1fr);place-items:center">
+      <div class="card" data-reveal>
+        <p class="sc" style="margin:0;color:var(--gold)">You are invited · p. 08</p>
+        <h2>By <i>appointment.</i></h2>
+        <p>Karim is considering regional and global marketing roles with luxury and premium houses.</p>
+        <div class="btns"><a class="btn fill" href="#contact" data-demo>Request a meeting</a><a class="btn" href="#contact" data-demo>Download CV</a><a class="btn" href="#contact" data-demo>LinkedIn</a></div>
+      </div>
     </div>
-  </section>
-
-  <section class="contact" id="contact">
-    <p class="kick">Contact</p>
-    <h2 style="margin-top:18px">By <em>appointment</em></h2>
-    <p>Karim is considering regional and global marketing roles with luxury and premium houses.</p>
-    <div class="btns"><a class="btn fill" href="#contact">Request a meeting</a><a class="btn" href="#contact">Download CV</a><a class="btn" href="#contact">LinkedIn</a></div>
   </section>
 </main>
-<footer>Sample portfolio website designed by Zenith Dubai CV. Karim Benjelloun is a fictional profile and the maisons named are fictional; contact links are disabled.</footer>
-</div>
-<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design · Zenith</a>
+<footer>Concept site designed by Zenith Dubai CV. Karim Benjelloun is a fictional person; the maisons, campaigns and figures are illustrative.</footer>
 </body>
 </html>

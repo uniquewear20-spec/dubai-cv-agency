@@ -4,6 +4,8 @@
 // - `thumb`: optional small image for the gondolas, so the wheel loads light files
 // - `labels`: every visible word can be translated (EN / FR / AR)
 // - `renderActions`: extra buttons under the caption (e.g. "View full website")
+// - `renderPreview`: replaces the large photo with custom content (e.g. device previews)
+// - `badge` on an item: shown above the caption title instead of the generic item label
 // - Page scrolling is never trapped: a vertical mouse wheel or a vertical swipe on a
 //   phone scrolls the page; horizontal swipes, drags, arrows and buttons turn the wheel.
 
@@ -19,6 +21,8 @@ export interface FerrisWheelItem {
   title: string;
   year?: string | number;
   discipline?: string;
+  /** Shown above the title of the selected item (e.g. "Live website"). */
+  badge?: React.ReactNode;
 }
 
 export interface FerrisWheelLabels {
@@ -53,6 +57,8 @@ export interface FerrisWheelGalleryProps extends DivProps {
   labels?: FerrisWheelLabels;
   /** Extra controls shown under the caption of the selected item. */
   renderActions?: (item: FerrisWheelItem, index: number) => React.ReactNode;
+  /** Custom content for the large preview of the selected item. */
+  renderPreview?: (item: FerrisWheelItem, index: number) => React.ReactNode;
   ref?: DivProps["ref"];
 }
 
@@ -116,6 +122,7 @@ export function FerrisWheelGallery({
   interval = 2600,
   labels: labelOverrides,
   renderActions,
+  renderPreview,
   className,
   ref,
   onKeyDown,
@@ -129,7 +136,7 @@ export function FerrisWheelGallery({
   const sign = direction === "cw" ? 1 : -1;
   const slot = total > 0 ? 360 / total : 0;
   // Gondolas shrink when the wheel holds many items, so neighbours overlap less.
-  const gondolaWidth = total > 12 ? Math.max(22, Math.round((34 * 12) / total)) : 34;
+  const gondolaWidth = total > 12 ? Math.max(17, Math.round((34 * 12) / total)) : total > 6 ? 30 : 34;
   // A motion-free first render is also safe for SSR and reduced-motion hydration.
   const [reducedMotion, setReducedMotion] = React.useState(true);
   const [paused, setPaused] = React.useState(false);
@@ -333,7 +340,7 @@ export function FerrisWheelGallery({
       }}
     >
       {!current ? <div className="flex min-h-72 items-center justify-center rounded-2xl border border-dashed border-border text-sm text-muted-foreground" role="status">{labels.empty}</div> : (
-        <div className="grid items-center gap-4 @min-[600px]/ferris:grid-cols-[1.6fr_1fr] @min-[900px]/ferris:gap-14">
+        <div className="grid items-center gap-6 @min-[600px]/ferris:grid-cols-[1.25fr_1fr] @min-[900px]/ferris:gap-12 @min-[1000px]/ferris:grid-cols-[1.05fr_1fr]">
           <div>
             <div
               ref={stageRef}
@@ -402,10 +409,10 @@ export function FerrisWheelGallery({
                                 aria-current={isActive ? "true" : undefined}
                                 aria-controls={labelId}
                                 onClick={(event) => { if (event.timeStamp >= suppressClickUntil.current) request(index); }}
-                                className={`relative block w-full rounded-md border bg-card p-1 shadow-sm shadow-foreground/10 ${isActive ? "border-chart-2 ring-2 ring-chart-2/15" : "border-border hover:border-muted-foreground"} ${focusRing}`}
-                                style={{ transform: `scale(${isActive ? 1.12 : 1})`, transition: reducedMotion ? "none" : "transform 320ms ease" }}
+                                className={`relative block w-full rounded-md border bg-card p-1 ${isActive ? "border-chart-2 ring-4 ring-chart-2/25 shadow-lg shadow-foreground/25" : "border-border opacity-75 shadow-sm shadow-foreground/10 hover:border-muted-foreground hover:opacity-100"} ${focusRing}`}
+                                style={{ transform: `scale(${isActive ? 1.3 : 1})`, transition: reducedMotion ? "none" : "transform 320ms ease, opacity 320ms ease" }}
                               >
-                                <span className="relative block aspect-[1.45] overflow-hidden rounded-[3px] bg-muted"><Photo item={item} thumbnail unavailable={labels.unavailable} /></span>
+                                <span className="relative block aspect-[1.6] overflow-hidden rounded-[3px] bg-muted"><Photo item={item} thumbnail unavailable={labels.unavailable} /></span>
                                 <span aria-hidden="true" className={`mt-1 block text-center font-mono text-[10px] leading-none ${isActive ? "text-foreground" : "text-muted-foreground"}`}>{String(index + 1).padStart(2, "0")}</span>
                               </button>
                             </div>
@@ -424,15 +431,19 @@ export function FerrisWheelGallery({
             </div>
             <p id={helpId} className="mt-1 text-center text-[10px] tracking-wide text-muted-foreground">{labels.help}</p>
           </div>
-          <div data-detail-panel id={labelId} className="grid grid-cols-1 items-center gap-4 @min-[440px]/ferris:grid-cols-[1.35fr_1fr] @min-[440px]/ferris:gap-5 @min-[600px]/ferris:grid-cols-1">
+          <div data-detail-panel id={labelId} className="grid grid-cols-1 items-center gap-5 @min-[600px]/ferris:gap-6">
+            {renderPreview ? (
+              <div ref={photoRef} data-current-photo className="min-w-0">{renderPreview(current, wrap(view.index, total))}</div>
+            ) : (
             <div className="relative aspect-[1.8] min-w-0 overflow-hidden rounded-xl bg-muted @min-[600px]/ferris:aspect-[1.15]">
               {previous && view.previous !== view.index && <div ref={previousRef} data-previous-photo aria-hidden="true" className="absolute inset-0" style={{ opacity: 0 }}><Photo item={previous} unavailable={labels.unavailable} /></div>}
               <div ref={photoRef} data-current-photo className="absolute inset-0"><Photo item={current} unavailable={labels.unavailable} /></div>
               <span aria-hidden="true" className="absolute inset-0 rounded-xl ring-1 ring-inset ring-foreground/10" />
             </div>
+            )}
             <div className="min-w-0">
               <div ref={captionRef} data-caption>
-                <p className="mb-2 border-l-2 border-chart-2 pl-2 font-mono text-[10px] tracking-wider text-muted-foreground">{labels.item} {String(view.index + 1).padStart(2, "0")}</p>
+                {current.badge ? <div className="mb-2">{current.badge}</div> : <p className="mb-2 border-l-2 border-chart-2 pl-2 font-mono text-[10px] tracking-wider text-muted-foreground">{labels.item} {String(view.index + 1).padStart(2, "0")}</p>}
                 <h3 className="text-xl font-medium leading-tight tracking-tight @min-[600px]/ferris:text-2xl @min-[900px]/ferris:text-3xl">{current.title}</h3>
                 <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">{[current.discipline, current.year].filter((value) => value !== undefined && value !== "").join(" · ")}</p>
                 {renderActions && <div className="mt-4">{renderActions(current, wrap(view.index, total))}</div>}

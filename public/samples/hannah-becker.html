@@ -2,147 +2,315 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Hannah Becker · Chief Financial Officer — Sample design by Zenith Dubai CV</title>
+<meta name="theme-color" content="#1C4434">
+<title>Hannah Becker · Chief Financial Officer — Concept site by Zenith Dubai CV</title>
+<meta name="description" content="Concept portfolio website for a fictional chief financial officer, designed by Zenith Dubai CV.">
+<link rel="preload" href="img/hannah-becker-640.webp" as="image" type="image/webp">
+<link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
+<script src="assets/sample.js"></script>
 <style>
-:root{--cream:#F2EDE2;--paper:#FBF8F1;--forest:#1F4D3A;--forest2:#163828;--brass:#B08D57;--ink:#1E2421;--muted:#6B726C;--line:rgba(30,36,33,.14);
---display:"Libre Caslon Display",Georgia,serif;--text:"Libre Caslon Text",Georgia,serif;--sans:"Source Sans 3","Helvetica Neue",Arial,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--cream);color:var(--ink);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}a{color:inherit}
-.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
-.cover{background:var(--forest);color:var(--cream);position:relative;overflow:hidden}
-.cover::after{content:"";position:absolute;right:-120px;top:-120px;width:520px;height:520px;border:1px solid rgba(176,141,87,.35);border-radius:50%}
-.cover .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:end;padding-top:40px;padding-bottom:0;position:relative;z-index:1}
-.ctop{grid-column:1/-1;display:flex;justify-content:space-between;font:600 12px var(--sans);letter-spacing:.24em;text-transform:uppercase;color:rgba(242,237,226,.7);border-bottom:1px solid rgba(242,237,226,.2);padding-bottom:16px}
-.year{font:400 clamp(80px,12vw,170px)/.8 var(--display);color:var(--brass);margin:60px 0 0}
-h1{font:400 clamp(44px,6vw,80px)/1 var(--display);margin:20px 0 0}
-.role{font:italic 400 22px var(--text);color:rgba(242,237,226,.85);margin:14px 0 70px}
-.portrait{border:1px solid var(--brass);padding:12px 12px 0;border-bottom:0}
-.portrait img{aspect-ratio:4/5;object-fit:cover}
-.contents{background:var(--paper);border-bottom:1px solid var(--line)}
-.contents .wrap{display:flex;gap:34px;flex-wrap:wrap;padding-top:18px;padding-bottom:18px;font:600 13px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.contents span b{color:var(--brass);margin-right:8px}
-section{padding:96px 0;border-bottom:1px solid var(--line)}
-.sec{font:600 12px var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--brass);margin:0 0 14px}
-h2{font:400 clamp(34px,4.4vw,56px)/1.08 var(--display);margin:0 0 34px;color:var(--forest)}
-.letter{display:grid;grid-template-columns:.75fr 1.25fr;gap:56px}
-.letter .cols{columns:2;column-gap:40px;font:400 17px/1.8 var(--text)}
-.letter .cols p{margin:0 0 16px}
-.sign{margin-top:12px;font:italic 400 30px var(--text);color:var(--forest)}
-.sign small{display:block;font:600 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-style:normal}
-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
-th{text-align:right;font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:12px 10px;border-bottom:2px solid var(--forest)}
-th:first-child,td:first-child{text-align:left}
-td{padding:16px 10px;border-bottom:1px solid var(--line);text-align:right;font-size:17px}
-td.up{color:var(--forest);font-weight:600}
-.tw{overflow-x:auto}
-.charts{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:56px}
-.chart{background:var(--paper);border:1px solid var(--line);padding:26px 26px 20px}
-.chart h3{font:400 24px var(--display);margin:0 0 4px;color:var(--forest)}
-.chart p{margin:0 0 20px;font-size:14px;color:var(--muted)}
-.bars{display:grid;grid-template-columns:repeat(5,1fr);align-items:end;gap:14px;height:200px;border-bottom:1px solid var(--ink);padding:0 4px}
-.bar{background:var(--brass);position:relative}
-.bar.last{background:var(--forest)}
-.bar span{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font:600 13px var(--sans);white-space:nowrap}
-.axis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;padding:8px 4px 0;font:600 12px var(--sans);color:var(--muted);text-align:center}
-.career .item{display:grid;grid-template-columns:160px 1fr;gap:28px;padding:26px 0;border-top:1px solid var(--line)}
-.career time{font:600 13px var(--sans);letter-spacing:.12em;color:var(--brass);text-transform:uppercase;padding-top:6px}
-.career h3{font:400 28px/1.2 var(--display);margin:0;color:var(--forest)}
-.career h3 span{font:italic 400 18px var(--text);color:var(--muted)}
-.career p{margin:8px 0 0}
-.gov{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.gov div{background:var(--forest);color:var(--cream);padding:28px}
-.gov b{display:block;font:400 22px/1.25 var(--display);color:var(--cream);margin-bottom:8px}
-.gov span{font-size:15px;color:rgba(242,237,226,.75)}
-.contact{background:var(--forest2);color:var(--cream);text-align:center;border-bottom:0}
-.contact h2{color:var(--cream)}.contact p{max-width:52ch;margin:0 auto;color:rgba(242,237,226,.8)}
-.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
-.btn{padding:14px 26px;border:1px solid var(--brass);color:var(--cream);text-decoration:none;font:600 13px var(--sans);letter-spacing:.16em;text-transform:uppercase}
-.btn.fill{background:var(--brass);color:var(--forest2)}
-footer{text-align:center;padding:28px 0 90px;font-size:13px;color:var(--muted)}
-.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:10px 16px;background:var(--brass);color:var(--forest2);font:600 12px var(--sans);letter-spacing:.08em;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.2)}
-@media (max-width:900px){.cover .wrap,.letter,.charts{grid-template-columns:1fr}.letter .cols{columns:1}.gov{grid-template-columns:1fr}.career .item{grid-template-columns:1fr;gap:6px}.role{margin-bottom:30px}.portrait{max-width:420px}}
+/* Concept: her career as a premium annual report. The hero is the cover: forest-green
+   board, gold foil, a die-cut circle that shows the portrait printed on the page
+   beneath, and the five-year EBITDA line foil-stamped across the front. The table
+   of contents on the cover is the navigation. Inside: letter, key figures with
+   charts, a statement of positions held, governance, and a back cover. */
+:root{
+  --green:#1C4434; --green2:#15362A; --green3:#0F2A20; --paper:#F7F2E7; --paper2:#EFE8D8; --ink:#1D2A23; --mute:#5F6B63;
+  --gold:#C9A45C; --rule:rgba(29,42,35,.16); --pos:#2F7A4F; --neg:#A3412E;
+  --foil:linear-gradient(100deg,#8A6830 0%,#E8CD8A 22%,#B88C43 40%,#F4E2AE 58%,#A9813D 78%,#E2C37F 100%);
+  --display:"Libre Caslon Display","Libre Caslon Text",Georgia,serif; --serif:"Libre Caslon Text",Georgia,serif; --sans:"Source Sans 3","Helvetica Neue",Arial,sans-serif;
+  --zc-bg:#15362A; --zc-fg:#F7F2E7; --zc-dot:#C9A45C;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.7 var(--sans);-webkit-font-smoothing:antialiased;font-variant-numeric:lining-nums}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
+.foil{background:var(--foil);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+/* ---------- Cover ---------- */
+.cover{position:relative;min-height:max(700px,100svh);display:grid;grid-template-columns:clamp(40px,4.4vw,64px) minmax(0,1fr);overflow:hidden;
+  background:radial-gradient(80% 70% at 70% 40%,#235341 0,transparent 70%),repeating-linear-gradient(115deg,rgba(255,255,255,.018) 0 2px,transparent 2px 5px),var(--green);color:var(--paper)}
+.spine{position:relative;background:linear-gradient(90deg,var(--green3),var(--green2) 70%,#0B2018);box-shadow:inset -2px 0 0 rgba(0,0,0,.25),2px 0 8px rgba(0,0,0,.25)}
+.spine span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg);white-space:nowrap;font:600 11px/1 var(--sans);letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:.85}
+.sheet{position:relative;display:grid;grid-template-rows:auto 1fr auto;padding:max(26px,env(safe-area-inset-top,0px)) clamp(26px,4.5vw,72px) clamp(22px,3.4vh,34px)}
+.meta{display:flex;justify-content:space-between;gap:20px;padding-bottom:16px;border-bottom:1px solid rgba(201,164,92,.45);font:600 12px/1.3 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.body{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(24px,4vw,70px);padding:clamp(20px,4vh,46px) 0}
+.title{position:relative;z-index:2}
+.title .k{margin:0 0 18px;font:italic 400 clamp(18px,1.6vw,22px)/1.3 var(--serif);color:#D8C9A4}
+h1{margin:0;font:400 clamp(66px,9.6vw,150px)/.86 var(--display);letter-spacing:-.015em;padding-bottom:.06em}
+.role{margin:22px 0 0;font:600 13px/1.6 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:#E9E1CD}
+.role span{color:var(--gold)}
+.window{position:relative;z-index:1;width:clamp(300px,36vw,520px);aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--paper);
+  box-shadow:inset 0 0 0 1.5px rgba(247,242,231,.65),0 0 0 6px rgba(0,0,0,.08)}
+.window img{position:absolute;width:130%;max-width:none;left:-13.7%;top:0}
+.window::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 6px 10px 18px rgba(0,0,0,.42),inset -2px -3px 6px rgba(255,255,255,.18);pointer-events:none}
+.window figcaption{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);padding:4px 10px;background:rgba(247,242,231,.88);color:var(--ink);font:600 10px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+.ebitda{display:block;width:min(100%,620px);height:auto;margin-top:clamp(18px,3vh,30px);overflow:visible;pointer-events:none}
+.ebitda .ln{fill:none;stroke:url(#foilg);stroke-width:2.2;stroke-dasharray:1000;stroke-dashoffset:0}
+.ebitda circle{fill:#E8CD8A}
+.ecap{margin:8px 0 0;font:600 11.5px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.ecap b{font-weight:600;color:#F0E3BF}
+.zc-reveal .ebitda .ln{animation:draw 2.2s cubic-bezier(.4,.1,.2,1) .4s both}
+.zc-reveal .ebitda circle{animation:fade .6s ease-out 2s both}
+.zc-reveal h1.foil{animation:shine 2.8s ease-out .3s both}
+@keyframes draw{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes shine{from{background-position:100% 0}to{background-position:0 0}}
+.toc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid rgba(201,164,92,.45);margin:0;padding:0;list-style:none}
+.toc a{display:flex;align-items:baseline;gap:10px;padding:14px 12px 4px 0;text-decoration:none;font:400 clamp(15px,1.25vw,18px)/1.25 var(--serif);color:#EFE7D3}
+.toc a b{font:600 12px/1 var(--sans);letter-spacing:.14em;color:var(--gold)}
+.toc a:hover,.toc a[aria-current]{color:#fff;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:5px}
+
+/* ---------- Inside pages ---------- */
+section{padding:clamp(84px,10vw,124px) 0;border-top:1px solid var(--rule)}
+.folio{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 34px;padding-bottom:12px;border-bottom:2px solid var(--ink);font:600 12px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+.folio b{color:var(--green);font-weight:600}
+h2{margin:0;font:400 clamp(38px,4.6vw,62px)/1.04 var(--display);letter-spacing:-.01em;color:var(--green)}
+h2 em{font-family:var(--serif);font-style:italic;font-size:.82em;color:var(--ink)}
+
+/* letter */
+.letter{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,6vw,96px);align-items:start}
+.letter .txt p{margin:0 0 20px;font:400 19px/1.75 var(--serif);color:#2A3530}
+.letter .txt p:first-child::first-letter{float:left;margin:8px 12px 0 0;font:400 92px/.78 var(--display);color:var(--green)}
+.sign{margin-top:30px;padding-top:20px;border-top:1px solid var(--rule)}
+.sign b{display:block;font:italic 400 34px/1 var(--serif);color:var(--green)}
+.sign span{display:block;margin-top:8px;font:600 12px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+
+/* key figures */
+.figs{background:var(--paper2)}
+.hl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:44px 0 54px;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule)}
+.hl div{padding:22px 20px 24px 0}
+.hl div+div{padding-left:22px;border-left:1px solid var(--rule)}
+.hl b{display:block;font:400 clamp(40px,4vw,56px)/1 var(--display);color:var(--green)}
+.hl span{display:block;margin-top:10px;font:600 13px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.hl em{display:block;margin-top:6px;font:italic 400 16px/1.3 var(--serif);color:var(--pos)}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(40px,5vw,72px);align-items:start}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums lining-nums}
+caption{text-align:left;margin-bottom:12px;font:600 12px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+th,td{padding:13px 10px;text-align:right;border-bottom:1px solid var(--rule);font-size:16.5px}
+th:first-child,td:first-child{text-align:left;padding-left:0}
+thead th{border-bottom:2px solid var(--ink);font:600 12px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+tbody th{font-weight:600}
+td.up{color:var(--pos);font-weight:600}
+td.ig{font:italic 400 15px/1.3 var(--serif);color:var(--pos)}
+.charts{display:grid;gap:30px}
+.chart{margin:0;padding:22px 22px 16px;background:var(--paper);border:1px solid var(--rule)}
+.chart figcaption{display:flex;justify-content:space-between;gap:12px;font:600 12px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.chart figcaption em{font:italic 400 14px/1.4 var(--serif);text-transform:none;letter-spacing:0}
+.chart svg{width:100%;height:auto;margin-top:12px;overflow:visible}
+.chart text{font:600 12px var(--sans);fill:var(--mute)}
+.chart .v{fill:var(--ink);font-size:13px}
+.chart .bar{fill:var(--green);transform-box:fill-box;transform-origin:50% 100%;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.chart .bar.last{fill:var(--gold)}
+.zc-reveal .charts:not(.is-in) .bar{transform:scaleY(0)}
+.chart .dso{fill:none;stroke:var(--green);stroke-width:2.5;stroke-dasharray:400;transition:stroke-dashoffset 1.4s ease .2s}
+.zc-reveal .charts:not(.is-in) .dso{stroke-dashoffset:400}
+
+/* statement of positions */
+.stmt{margin-top:44px;border-top:2px solid var(--ink)}
+.pos{display:grid;grid-template-columns:70px minmax(0,1fr) 170px;gap:20px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.pos .note{font:600 12px/1.6 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.pos h3{margin:0;font:400 27px/1.2 var(--display);color:var(--green)}
+.pos h3 span{display:block;margin-top:4px;font:italic 400 17px/1.4 var(--serif);color:var(--ink)}
+.pos p{margin:10px 0 0;max-width:62ch;color:#3A4540;font-size:17px}
+.pos .yr{text-align:right;font:400 22px/1.2 var(--serif);font-variant-numeric:tabular-nums lining-nums;color:var(--ink)}
+.pos .yr small{display:block;font:600 11px/1.6 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+
+/* governance */
+.gov{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:44px;border-top:2px solid var(--ink)}
+.gov div{padding:26px 26px 26px 0}
+.gov div+div{padding-left:26px;border-left:1px solid var(--rule)}
+.gov span{display:block;font:600 12px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.gov b{display:block;margin-top:10px;font:400 25px/1.25 var(--display);color:var(--green)}
+.gov p{margin:8px 0 0;color:var(--mute);font-size:16px}
+
+/* back cover */
+.back{position:relative;overflow:hidden;background:radial-gradient(70% 80% at 30% 30%,#235341 0,transparent 70%),var(--green);color:var(--paper);border-top:0}
+.back .in{display:grid;grid-template-columns:minmax(0,1.2fr) auto;gap:60px;align-items:center}
+.back h2{color:transparent;font-size:clamp(44px,5.6vw,78px)}
+.back p{max-width:48ch;color:#E3DCC8}
+.disc{width:clamp(200px,22vw,300px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:var(--green2);box-shadow:inset 6px 10px 22px rgba(0,0,0,.45),inset 0 0 0 1.5px rgba(247,242,231,.4)}
+.disc span{font:400 clamp(70px,8vw,110px)/1 var(--display)}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.btn{display:inline-block;padding:15px 26px;border:1px solid var(--gold);color:#F0E3BF;text-decoration:none;font:600 13px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;transition:background .25s,color .25s}
+.btn.fill,.btn:hover{background:var(--gold);color:var(--green3)}
+footer{background:var(--green3);color:#AFC0B5;text-align:center;padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));font-size:13px}
+
+@media (max-width:960px){
+  .letter,.two,.back .in{grid-template-columns:1fr}
+  .hl{grid-template-columns:1fr 1fr}
+  .hl div:nth-child(3){padding-left:0;border-left:0}
+  .hl div:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+  .gov{grid-template-columns:1fr}
+  .gov div+div{padding-left:0;border-left:0;border-top:1px solid var(--rule)}
+  .toc{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:960px){
+  .body{grid-template-columns:1fr;align-content:start;gap:26px;padding-top:30px}
+  .window{order:-1;justify-self:center;width:min(62vw,440px)}
+}
+@media (max-width:760px){
+  .cover{grid-template-columns:22px minmax(0,1fr)}
+  .spine span{font-size:9px;letter-spacing:.3em}
+  .meta span:nth-child(2){display:none}
+  .meta{font-size:10.5px;letter-spacing:.2em}
+  .body{gap:20px;padding-top:24px}
+  .window{width:min(72vw,320px)}
+  h1{font-size:clamp(58px,17vw,84px)}
+  .toc{grid-template-columns:1fr 1fr}
+  .toc li:last-child{grid-column:1/-1}
+  .toc a{padding-top:10px}
+  .pos{grid-template-columns:1fr;gap:6px}
+  th,td{padding:11px 5px;font-size:14.5px}
+  thead th{font-size:10.5px;letter-spacing:.06em}
+  td.ig{font-size:13px}
+  .pos .yr{text-align:left;order:-1}
+  .pos .note{order:-2}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
 </style>
 </head>
 <body>
-<header class="cover">
-  <div class="wrap">
-    <div class="ctop"><span>Annual Review · Career Edition</span><span>Frankfurt · Dubai</span></div>
-    <div><p class="year">2026</p><h1>Hannah Becker</h1><p class="role">Chief Financial Officer, Lindqvist Industrial Group</p></div>
-    <div class="portrait"><img src="img/hannah-becker.jpg" alt="Portrait of Hannah Becker in a boardroom"></div>
-  </div>
-</header>
-<nav class="contents"><div class="wrap"><span><b>01</b>Letter</span><span><b>02</b>Key figures</span><span><b>03</b>Career</span><span><b>04</b>Governance</span><span><b>05</b>Contact</span></div></nav>
 <main>
-  <section>
-    <div class="wrap letter">
-      <div><p class="sec">01 · Letter</p><h2>Numbers that tell the truth, early.</h2></div>
-      <div>
-        <div class="cols">
+  <header class="cover" id="top">
+    <div class="spine" aria-hidden="true"><span>Hannah Becker · Annual Review 2026 · Career Edition</span></div>
+    <div class="sheet">
+      <div class="meta"><span>Annual Review · Career Edition</span><span>Frankfurt · Dubai</span><span>2026</span></div>
+      <div class="body">
+        <div class="title">
+          <p class="k">Numbers that tell the truth, early.</p>
+          <h1 class="foil">Hannah<br>Becker</h1>
+          <p class="role">Chief Financial Officer <span>·</span> Lindqvist Industrial Group</p>
+          <svg class="ebitda" viewBox="0 20 1000 250" aria-hidden="true">
+        <defs><linearGradient id="foilg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A6830"/><stop offset=".3" stop-color="#E8CD8A"/><stop offset=".55" stop-color="#B88C43"/><stop offset=".8" stop-color="#F4E2AE"/><stop offset="1" stop-color="#C9A45C"/></linearGradient></defs>
+        <path class="ln" pathLength="1000" d="M40 236 L250 196 L460 148 L670 108 L880 72"/>
+        <circle cx="40" cy="236" r="5"/><circle cx="250" cy="196" r="4"/><circle cx="460" cy="148" r="4"/><circle cx="670" cy="108" r="4"/><circle cx="880" cy="72" r="6"/>
+      </svg>
+          <p class="ecap">EBITDA margin <b>11.2% → 15.3%</b> · FY2021 – FY2025</p>
+        </div>
+        <figure class="window" style="margin:0">
+          <img src="img/hannah-becker-640.webp" srcset="img/hannah-becker-640.webp 640w, img/hannah-becker.webp 928w" sizes="(max-width:760px) 96vw, 680px" width="928" height="1152" alt="Hannah Becker in a green blazer in a boardroom" fetchpriority="high">
+          <figcaption>Page 2 · The CFO</figcaption>
+        </figure>
+      </div>
+      <nav aria-label="Contents">
+        <ul class="toc">
+          <li><a href="#letter" data-spy><b>01</b>Letter</a></li>
+          <li><a href="#figures" data-spy><b>02</b>Key figures</a></li>
+          <li><a href="#career" data-spy><b>03</b>Career</a></li>
+          <li><a href="#governance" data-spy><b>04</b>Governance</a></li>
+          <li><a href="#contact" data-spy><b>05</b>Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="letter">
+    <div class="wrap">
+      <p class="folio"><span><b>01</b> · Letter from the CFO</span><span>Annual Review 2026</span></p>
+      <div class="letter">
+        <div data-reveal><h2>Numbers that tell the truth, <em>early.</em></h2></div>
+        <div class="txt" data-reveal>
           <p>Dear reader, over twenty-five years in finance I have learned that a good CFO is the first person to say what the numbers mean, not the last person to sign them.</p>
           <p>At Lindqvist Industrial Group, a €2.3bn manufacturer with plants on three continents, my team rebuilt planning around rolling forecasts, released €180m of cost and moved the company to an investment-grade rating.</p>
           <p>I work closely with boards and lenders, and I am at my best when a business is changing: new markets, a refinancing, a carve-out or a listing.</p>
-          <p>This review summarises the results my teams delivered and the roles where I can help next.</p>
+          <p>This review summarises the results my teams delivered, and the roles where I can help next.</p>
+          <div class="sign"><b>Hannah Becker</b><span>Chief Financial Officer</span></div>
         </div>
-        <p class="sign">Hannah Becker<small>Chief Financial Officer</small></p>
       </div>
     </div>
   </section>
 
-  <section>
+  <section id="figures" class="figs">
     <div class="wrap">
-      <p class="sec">02 · Key figures</p><h2>Five years at Lindqvist, in five lines.</h2>
-      <div class="tw"><table>
-        <thead><tr><th>Measure</th><th>FY2021</th><th>FY2025</th><th>Change</th></tr></thead>
-        <tbody>
-          <tr><td>Revenue</td><td>€1.7bn</td><td>€2.3bn</td><td class="up">+35%</td></tr>
-          <tr><td>EBITDA margin</td><td>11.2%</td><td>15.3%</td><td class="up">+4.1 pts</td></tr>
-          <tr><td>Days sales outstanding</td><td>64</td><td>45</td><td class="up">−19 days</td></tr>
-          <tr><td>Net debt / EBITDA</td><td>2.9×</td><td>1.6×</td><td class="up">−1.3×</td></tr>
-          <tr><td>Credit rating</td><td>BB+</td><td>BBB+</td><td class="up">Investment grade</td></tr>
-        </tbody>
-      </table></div>
-      <div class="charts">
-        <div class="chart"><h3>EBITDA margin</h3><p>Per cent of revenue, FY2021–FY2025</p>
-          <div class="bars"><div class="bar" style="height:56%"><span>11.2</span></div><div class="bar" style="height:61%"><span>12.2</span></div><div class="bar" style="height:67%"><span>13.4</span></div><div class="bar" style="height:72%"><span>14.4</span></div><div class="bar last" style="height:76.5%"><span>15.3</span></div></div>
-          <div class="axis"><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span></div></div>
-        <div class="chart"><h3>Days sales outstanding</h3><p>Days, FY2021–FY2025 (lower is better)</p>
-          <div class="bars"><div class="bar" style="height:91%"><span>64</span></div><div class="bar" style="height:84%"><span>59</span></div><div class="bar" style="height:77%"><span>54</span></div><div class="bar" style="height:70%"><span>49</span></div><div class="bar last" style="height:64%"><span>45</span></div></div>
-          <div class="axis"><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span></div></div>
+      <p class="folio"><span><b>02</b> · Key figures</span><span>FY2021 – FY2025</span></p>
+      <h2 data-reveal>Five years at Lindqvist, <em>in five lines.</em></h2>
+      <div class="hl" data-reveal>
+        <div><b>€2.3bn</b><span>Revenue</span><em>+35% since FY2021</em></div>
+        <div><b>15.3%</b><span>EBITDA margin</span><em>+4.1 points</em></div>
+        <div><b>1.6×</b><span>Net debt / EBITDA</span><em>down from 2.9×</em></div>
+        <div><b>BBB+</b><span>Credit rating</span><em>investment grade</em></div>
+      </div>
+      <div class="two">
+        <table data-reveal>
+          <caption>Selected financial data</caption>
+          <thead><tr><th scope="col">Measure</th><th scope="col">FY2021</th><th scope="col">FY2025</th><th scope="col">Change</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Revenue</th><td>€1.7bn</td><td>€2.3bn</td><td class="up">+35%</td></tr>
+            <tr><th scope="row">EBITDA margin</th><td>11.2%</td><td>15.3%</td><td class="up">+4.1 pts</td></tr>
+            <tr><th scope="row">Days sales outstanding</th><td>64</td><td>45</td><td class="up">−19 days</td></tr>
+            <tr><th scope="row">Net debt / EBITDA</th><td>2.9×</td><td>1.6×</td><td class="up">−1.3×</td></tr>
+            <tr><th scope="row">Credit rating</th><td>BB+</td><td>BBB+</td><td class="ig">investment grade</td></tr>
+          </tbody>
+        </table>
+        <div class="charts" data-reveal>
+          <figure class="chart">
+            <figcaption><span>EBITDA margin</span><em>% of revenue</em></figcaption>
+            <svg viewBox="0 0 400 170" role="img" aria-label="EBITDA margin rose from 11.2% in FY2021 to 15.3% in FY2025">
+              <g><rect class="bar" x="18" y="67" width="48" height="73"/><rect class="bar" x="96" y="60" width="48" height="80" style="transition-delay:.08s"/><rect class="bar" x="174" y="52" width="48" height="88" style="transition-delay:.16s"/><rect class="bar" x="252" y="46" width="48" height="94" style="transition-delay:.24s"/><rect class="bar last" x="330" y="40" width="48" height="100" style="transition-delay:.32s"/></g>
+              <g class="v" text-anchor="middle"><text x="42" y="59">11.2</text><text x="120" y="52">12.2</text><text x="198" y="44">13.4</text><text x="276" y="38">14.4</text><text x="354" y="32">15.3</text></g>
+              <line x1="0" y1="140.5" x2="400" y2="140.5" stroke="#1D2A23" stroke-width="1"/>
+              <g text-anchor="middle"><text x="42" y="160">FY21</text><text x="120" y="160">FY22</text><text x="198" y="160">FY23</text><text x="276" y="160">FY24</text><text x="354" y="160">FY25</text></g>
+            </svg>
+          </figure>
+          <figure class="chart">
+            <figcaption><span>Days sales outstanding</span><em>lower is better</em></figcaption>
+            <svg viewBox="0 0 400 150" role="img" aria-label="Days sales outstanding fell from 64 in FY2021 to 45 in FY2025">
+              <line x1="0" y1="120.5" x2="400" y2="120.5" stroke="#1D2A23" stroke-width="1"/>
+              <path class="dso" pathLength="400" d="M42 30 L120 47 L198 64 L276 81 L354 95"/>
+              <g fill="#1C4434"><circle cx="42" cy="30" r="4"/><circle cx="120" cy="47" r="4"/><circle cx="198" cy="64" r="4"/><circle cx="276" cy="81" r="4"/><circle cx="354" cy="95" r="5" fill="#C9A45C"/></g>
+              <g class="v" text-anchor="middle"><text x="42" y="18">64</text><text x="120" y="35">59</text><text x="198" y="52">54</text><text x="276" y="69">49</text><text x="354" y="83">45</text></g>
+              <g text-anchor="middle"><text x="42" y="140">FY21</text><text x="120" y="140">FY22</text><text x="198" y="140">FY23</text><text x="276" y="140">FY24</text><text x="354" y="140">FY25</text></g>
+            </svg>
+          </figure>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="career">
+  <section id="career">
     <div class="wrap">
-      <p class="sec">03 · Career</p><h2>Statement of positions held.</h2>
-      <div class="item"><time>2018 — today</time><div><h3>Chief Financial Officer <span>· Lindqvist Industrial Group</span></h3><p>Leads finance, treasury, tax, IT and procurement; 260 people in 14 countries. Delivered the €180m cost programme and a €900m refinancing.</p></div></div>
-      <div class="item"><time>2012 — 2018</time><div><h3>Vice President, Finance <span>· Brennwald Pharma</span></h3><p>Finance lead for the European business; integrated two acquisitions and built a shared-service centre in Lisbon.</p></div></div>
-      <div class="item"><time>2007 — 2012</time><div><h3>Director, FP&amp;A <span>· Auerbach Logistics</span></h3><p>Introduced rolling forecasts and a pricing model that lifted contract margins by three points.</p></div></div>
-      <div class="item"><time>2001 — 2007</time><div><h3>Audit Manager <span>· Hartmann &amp; Kühn Auditors</span></h3><p>Statutory audits of listed industrial and consumer companies.</p></div></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <p class="sec">04 · Governance &amp; education</p><h2>Boards, credentials, languages.</h2>
-      <div class="gov">
-        <div><b>Non-executive director &amp; audit chair</b><span>Rheinwerk Foundation, since 2021</span></div>
-        <div><b>Diplom-Kauffrau &amp; certified public accountant</b><span>Business Administration · Wirtschaftsprüferin</span></div>
-        <div><b>German · English · French</b><span>Native · fluent · professional</span></div>
+      <p class="folio"><span><b>03</b> · Career</span><span>Statement of positions held</span></p>
+      <h2 data-reveal>Twenty-five years, <em>four balance sheets.</em></h2>
+      <div class="stmt">
+        <div class="pos" data-reveal><span class="note">Note 1</span><div><h3>Chief Financial Officer<span>Lindqvist Industrial Group</span></h3><p>Leads finance, treasury, tax, IT and procurement: 260 people in 14 countries. Delivered the €180m cost programme and a €900m refinancing.</p></div><p class="yr"><small>Period</small>2018 — today</p></div>
+        <div class="pos" data-reveal><span class="note">Note 2</span><div><h3>Vice President, Finance<span>Brennwald Pharma</span></h3><p>Finance lead for the European business; integrated two acquisitions and built a shared-service centre in Lisbon.</p></div><p class="yr"><small>Period</small>2012 — 2018</p></div>
+        <div class="pos" data-reveal><span class="note">Note 3</span><div><h3>Director, FP&amp;A<span>Auerbach Logistics</span></h3><p>Introduced rolling forecasts and a pricing model that lifted contract margins by three points.</p></div><p class="yr"><small>Period</small>2007 — 2012</p></div>
+        <div class="pos" data-reveal><span class="note">Note 4</span><div><h3>Audit Manager<span>Hartmann &amp; Kühn Auditors</span></h3><p>Statutory audits of listed industrial and consumer companies.</p></div><p class="yr"><small>Period</small>2001 — 2007</p></div>
       </div>
     </div>
   </section>
 
-  <section class="contact" id="contact">
-    <div class="wrap"><p class="sec">05 · Contact</p><h2>For board and CFO appointments.</h2><p>Hannah is open to group CFO and non-executive roles in the Gulf and Europe, particularly in industrial, logistics and healthcare businesses.</p>
-      <div class="btns"><a class="btn fill" href="#contact">Arrange a meeting</a><a class="btn" href="#contact">Download CV</a><a class="btn" href="#contact">LinkedIn</a></div></div>
+  <section id="governance" class="figs">
+    <div class="wrap">
+      <p class="folio"><span><b>04</b> · Governance &amp; education</span><span>Boards · credentials · languages</span></p>
+      <h2 data-reveal>Independent, qualified, <em>multilingual.</em></h2>
+      <div class="gov" data-reveal>
+        <div><span>Board</span><b>Non-executive director &amp; audit chair</b><p>Rheinwerk Foundation, since 2021</p></div>
+        <div><span>Qualifications</span><b>Diplom-Kauffrau &amp; certified public accountant</b><p>Business Administration · Wirtschaftsprüferin</p></div>
+        <div><span>Languages</span><b>German · English · French</b><p>Native · fluent · professional</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="back">
+    <div class="wrap in">
+      <div data-reveal>
+        <p class="folio" style="border-color:rgba(201,164,92,.5);color:#C9D3CC"><span><b style="color:var(--gold)">05</b> · Contact</span><span>Back cover</span></p>
+        <h2 class="foil">For board and CFO appointments.</h2>
+        <p>Hannah is open to group CFO and non-executive roles in the Gulf and Europe, particularly in industrial, logistics and healthcare businesses.</p>
+        <div class="btns"><a class="btn fill" href="#contact" data-demo>Arrange a meeting</a><a class="btn" href="#contact" data-demo>Download CV</a><a class="btn" href="#contact" data-demo>LinkedIn</a></div>
+      </div>
+      <div class="disc" aria-hidden="true" data-reveal><span class="foil">HB</span></div>
+    </div>
   </section>
 </main>
-<footer class="wrap">Sample portfolio website designed by Zenith Dubai CV. Hannah Becker is a fictional profile and the companies named are fictional; contact links are disabled.</footer>
-<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design · Zenith Dubai CV</a>
+<footer>Concept site designed by Zenith Dubai CV. Hannah Becker is a fictional person; the companies named and all figures are illustrative.</footer>
 </body>
 </html>

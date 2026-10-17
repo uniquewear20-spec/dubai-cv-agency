@@ -2,208 +2,236 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Inès Ben Salah · Director of People &amp; Culture — Sample design by Zenith Dubai CV</title>
+<meta name="theme-color" content="#FAF5EE">
+<title>Inès Ben Salah · Director of People &amp; Culture — Concept site by Zenith Dubai CV</title>
+<meta name="description" content="Concept portfolio website for a fictional director of people and culture, designed by Zenith Dubai CV.">
+<link rel="preload" href="img/ines-ben-salah-640.webp" as="image" type="image/webp">
+<link rel="preload" href="fonts/gloock-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
+<script src="assets/sample.js"></script>
 <style>
-:root{--blush:#FBE7E1;--blush2:#F6D3C8;--coral:#F07C64;--coral2:#C24A33;--navy:#1E2A4A;--muted:#5B6178;--line:#EFD6CD;--paper:#FFF9F6;
---serif:"Gloock",Georgia,serif;--sans:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--navy);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}a{color:inherit}
-.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
-.hero{background:var(--blush);overflow:hidden}
-.top{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0}
-.logo{font:400 25px var(--serif);text-decoration:none;white-space:nowrap}.logo span{color:var(--coral)}
-.nav{display:flex;gap:4px}
-.nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:500;font-size:14.5px}
-.nav a:hover{background:rgba(255,255,255,.65)}
-.btn{display:inline-block;padding:14px 26px;border-radius:999px;font-weight:700;font-size:16px;text-decoration:none;border:2px solid var(--navy)}
-.btn.fill{background:var(--navy);color:#fff}
-.top .btn{padding:9px 20px;font-size:14.5px}
-.hgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center;padding:46px 0 110px}
-.kick{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral2);margin:0}
-.kick::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--coral)}
-h1{font:400 clamp(56px,7.2vw,106px)/.95 var(--serif);letter-spacing:-.02em;margin:22px 0 0}
-.say{font:500 clamp(22px,2.1vw,27px)/1.42 var(--sans);margin:26px 0 0;max-width:26ch;letter-spacing:-.01em}
-.say mark{background:linear-gradient(transparent 60%,rgba(240,124,100,.5) 60%);color:inherit;padding:0 .08em}
-.lead{color:var(--muted);max-width:46ch;margin:18px 0 0}
-.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
-.circle{position:relative;width:min(100%,460px);margin:0 auto;aspect-ratio:1}
-.circle::before{content:"";position:absolute;inset:-22px;border:2px dashed var(--coral);border-radius:50%}
-.circle::after{content:"";position:absolute;width:36%;aspect-ratio:1;border-radius:50%;background:var(--coral);right:-5%;bottom:-3%}
-.circle img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;object-position:50% 22%;border-radius:50%;border:8px solid #fff}
-.chip{position:absolute;z-index:2;display:flex;align-items:center;gap:8px;background:#fff;padding:10px 18px;border-radius:999px;font-weight:700;font-size:15px;box-shadow:0 14px 30px -14px rgba(30,42,74,.4);white-space:nowrap}
-.chip i{width:10px;height:10px;border-radius:50%}
-.chip.a{left:-6%;top:10%}.chip.b{right:-4%;top:44%}.chip.c{left:0;bottom:6%}
-.strip{background:var(--navy);color:#fff}
-.strip .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
-.strip .wrap>div{padding:40px 28px;border-left:1px solid rgba(255,255,255,.14)}.strip .wrap>div:first-child{border-left:0;padding-left:0}
-.strip b{display:block;font:400 54px/1 var(--serif);color:var(--coral)}
-.strip span{display:block;margin-top:10px;font-size:14px;color:#C5CBE0}
-section{padding:100px 0}
-.eyebrow{font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--coral2);margin:0 0 14px}
-h2{font:400 clamp(38px,4.6vw,62px)/1.04 var(--serif);letter-spacing:-.015em;margin:0}
-.head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:50px}
-.head p{max-width:42ch;margin:0;color:var(--muted)}
-.progs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.prog{border-radius:30px;padding:34px 30px 30px;display:flex;flex-direction:column;min-height:440px;background:#fff;border:1.5px solid var(--line)}
-.prog small{font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;opacity:.75}
-.prog h3{font:400 42px/1.02 var(--serif);margin:16px 0 14px}
-.prog p{margin:0;font-size:15.5px}
-.kpi{margin-top:auto;padding-top:22px;display:flex;gap:28px;border-top:1.5px solid rgba(30,42,74,.18)}
-.kpi b{display:block;font:400 36px/1 var(--serif)}.kpi span{display:block;font-size:13px;margin-top:6px;line-height:1.4}
-.p1{background:var(--coral);border-color:var(--coral)}
-.p3{background:var(--navy);border-color:var(--navy);color:#fff}.p3 .kpi{border-top-color:rgba(255,255,255,.2)}.p3 .kpi b{color:var(--coral)}.p3 p,.p3 .kpi span{color:#D3D8E8}
-.impact{background:var(--blush)}
-.igrid{display:grid;grid-template-columns:1.3fr .7fr;gap:24px}
-.panel{background:#fff;border-radius:30px;padding:30px 32px 26px}
-.panel h3{font:700 18px var(--sans);margin:0}
-.panel .sub{font-size:14px;color:var(--muted);margin:2px 0 0}
-.chart{display:block;width:100%;height:auto;margin-top:20px}
-.chart text{font-family:var(--sans)}
-.rings{display:grid;gap:24px;align-content:start}
-.ring{display:flex;align-items:center;gap:22px}
-.donut{flex:none;width:118px;height:118px;border-radius:50%;display:grid;place-items:center;position:relative}
-.donut::before{content:"";position:absolute;inset:14px;border-radius:50%;background:#fff}
-.donut b{position:relative;font:400 30px var(--serif)}
-.ring p{margin:0;font-size:15px;color:var(--muted);line-height:1.55}.ring strong{display:block;color:var(--navy);font-size:17px;margin-bottom:2px}
-.career{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding-top:44px}
-.career::before{content:"";position:absolute;left:0;right:0;top:14px;height:2px;background:linear-gradient(90deg,var(--coral),var(--blush2))}
-.job{position:relative}
-.job::before{content:"";position:absolute;top:-39px;left:0;width:20px;height:20px;border-radius:50%;background:#fff;border:4px solid var(--coral);box-sizing:border-box}
-.job time{font-weight:700;font-size:14px;color:var(--coral2);letter-spacing:.06em}
-.job h3{font:400 31px/1.1 var(--serif);margin:10px 0 6px}
-.job .org{font-weight:700;font-size:15px}
-.job p{color:var(--muted);font-size:15.5px;margin:12px 0 0}
-.ways{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.way{padding:28px 24px;border-radius:24px;background:#fff;border:1.5px solid var(--line)}
-.way b{display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:var(--blush);font:400 24px var(--serif);color:var(--coral2)}
-.way h3{font:700 18px var(--sans);margin:18px 0 6px}
-.way p{margin:0;font-size:15px;color:var(--muted)}
-.quote{background:var(--navy);color:#fff;text-align:center}
-.quote blockquote{font:400 clamp(34px,4.8vw,64px)/1.14 var(--serif);max-width:22ch;margin:0 auto}
-.quote blockquote span{color:var(--coral)}
-.quote cite{display:block;margin-top:26px;font-style:normal;font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#C5CBE0}
-.creds{display:flex;flex-wrap:wrap;gap:14px}
-.creds div{padding:18px 24px;border-radius:22px;background:#fff;border:1.5px solid var(--line)}
-.creds b{display:block;font:400 23px/1.2 var(--serif)}.creds span{font-size:14px;color:var(--muted)}
-.contact{padding-top:0}
-.contact .box{position:relative;overflow:hidden;background:var(--coral);border-radius:36px;padding:78px 56px;text-align:center}
-.contact .box::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.2);left:-90px;top:-130px}
-.contact .box::after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;border:2px dashed rgba(30,42,74,.4);right:-60px;bottom:-90px}
-.contact .box>*{position:relative;z-index:1}
-.contact .eyebrow{color:var(--navy)}
-.contact p{max-width:46ch;margin:18px auto 0}
-.contact .btns{justify-content:center}
-footer{text-align:center;font-size:12.5px;color:var(--muted);padding:0 24px 90px}
-.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:10px 18px;border-radius:999px;background:var(--navy);color:#fff;font:700 12px var(--sans);letter-spacing:.06em;text-decoration:none;box-shadow:0 10px 24px -12px rgba(30,42,74,.7)}
-.zen b{color:var(--coral)}
-@media (max-width:1040px){.nav{display:none}.ways{grid-template-columns:1fr 1fr}}
-@media (max-width:900px){.hgrid{grid-template-columns:1fr;gap:70px;padding:24px 0 96px}.strip .wrap{grid-template-columns:1fr 1fr}.strip .wrap>div{padding:28px 20px}.strip .wrap>div:nth-child(3){border-left:0;padding-left:0}.strip .wrap>div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.14)}.progs{grid-template-columns:1fr}.prog{min-height:0}.prog p{margin-bottom:26px}.igrid{grid-template-columns:1fr}.career{grid-template-columns:1fr;padding:0 0 0 42px;gap:36px}.career::before{left:9px;right:auto;top:8px;bottom:8px;width:2px;height:auto;background:linear-gradient(180deg,var(--coral),var(--blush2))}.job::before{top:4px;left:-42px}}
-@media (max-width:560px){.wrap{padding:0 20px}section{padding:76px 0}.ways{grid-template-columns:1fr}.circle{width:min(100%,280px)}.circle::before{inset:-16px}.chip{font-size:13px;padding:8px 13px}.chip.a{left:-10%}.chip.b{right:-6%}.contact .box{padding:54px 22px;border-radius:26px}.panel{padding:24px 18px 20px;border-radius:24px}.ring{gap:16px}.donut{width:96px;height:96px}.donut::before{inset:12px}.donut b{font-size:25px}.strip b{font-size:44px}.top .btn{display:none}.kpi{gap:20px}}
+/* Concept: a manifesto. The hero is one sentence set huge, with her portrait set
+   into the line like a word, ringed by her three values. The rest of the site reads
+   like the articles of a charter: programmes as chapters, habits as articles,
+   impact as a single rising line. */
+:root{
+  --paper:#FAF5EE; --paper2:#F2E9DD; --ink:#1C1A24; --text:#3B3946; --mute:#6F6B78; --coral:#E5533B; --navy:#1E2A4A; --blush:#F6D9CD; --line:rgba(28,26,36,.14);
+  --serif:"Gloock",Georgia,serif; --sans:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --zc-bg:#1C1A24; --zc-fg:#FAF5EE; --zc-dot:#E5533B;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--text);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(26px,env(safe-area-inset-left,0px));padding-right:max(26px,env(safe-area-inset-right,0px))}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:max(680px,100svh);display:flex;flex-direction:column;overflow:hidden}
+.hero>.wrap{width:100%}
+.top{display:flex;align-items:center;gap:26px;padding-top:max(20px,env(safe-area-inset-top,0px));padding-bottom:16px}
+.logo{font:400 26px/1 var(--serif);text-decoration:none;color:var(--ink)}
+.logo span{color:var(--coral)}
+.top nav{margin-left:auto}
+.top ul{display:flex;gap:24px;margin:0;padding:0;list-style:none}
+.top ul a{text-decoration:none;font:600 14.5px/1 var(--sans);color:var(--mute)}
+.top ul a:hover,.top ul a[aria-current]{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:999px;background:var(--ink);color:var(--paper);text-decoration:none;font:700 14.5px/1 var(--sans)}
+.pill:hover{background:var(--coral)}
+.pill.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.pill.ghost:hover{background:var(--ink);color:var(--paper)}
+.stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:clamp(10px,2vh,24px);padding-bottom:clamp(30px,6vh,60px)}
+.mani{margin:0;font:400 clamp(58px,9.4vw,152px)/.98 var(--serif);letter-spacing:-.03em;color:var(--ink)}
+.mani .stay{color:var(--coral)}
+.badge{position:relative;display:inline-block;width:1.36em;height:1.36em;margin:0 .04em;vertical-align:-.3em}
+.badge img{position:absolute;inset:.13em;width:calc(100% - .26em);height:calc(100% - .26em);border-radius:50%;object-fit:cover;object-position:50% 22%}
+.badge svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.badge text{font:600 9.4px var(--sans);letter-spacing:2.6px;fill:var(--ink);text-transform:uppercase}
+.zc-reveal .badge svg{animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sig{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px;margin-top:clamp(26px,4.4vh,46px);padding-top:22px;border-top:2px solid var(--ink)}
+.sig h1{margin:0;font:400 clamp(26px,2.4vw,34px)/1.1 var(--serif);color:var(--ink)}
+.sig h1 span{display:block;margin-top:6px;font:600 14px/1.4 var(--sans);letter-spacing:.04em;color:var(--mute)}
+.sig .ctas{display:flex;flex-wrap:wrap;gap:10px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 26px;margin:0;padding:0;list-style:none;font:600 14px/1.3 var(--sans);color:var(--mute)}
+.facts b{font:400 24px/1 var(--serif);color:var(--ink);margin-right:6px}
+
+/* ---------- Sections ---------- */
+section{padding:clamp(88px,10vw,130px) 0}
+.eyebrow{margin:0 0 14px;font:700 13px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--coral)}
+h2{margin:0;font:400 clamp(40px,5vw,72px)/1.02 var(--serif);letter-spacing:-.025em;color:var(--ink)}
+h2 em{font-style:normal;color:var(--coral)}
+.sub{margin:18px 0 0;max-width:56ch}
+
+.prog{display:grid;grid-template-columns:minmax(120px,.35fr) minmax(0,1fr) minmax(0,.8fr);gap:clamp(20px,4vw,60px);align-items:start;padding:46px 0;border-top:2px solid var(--ink)}
+.prog:last-child{border-bottom:2px solid var(--ink)}
+.prog .no{font:400 clamp(70px,8vw,120px)/.8 var(--serif);color:var(--blush)}
+.prog .k{margin:0 0 8px;font:700 12.5px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.prog h3{margin:0;font:400 clamp(34px,3.6vw,52px)/1 var(--serif);color:var(--ink)}
+.prog p{margin:14px 0 0}
+.prog .st{display:grid;gap:18px}
+.prog .st b{display:block;font:400 clamp(40px,4vw,58px)/1 var(--serif);color:var(--coral)}
+.prog .st span{display:block;margin-top:4px;font:600 14px/1.4 var(--sans);color:var(--mute)}
+
+.impact{background:var(--navy);color:#DCE1EE}
+.impact h2{color:#fff}
+.impact .sub{color:#B7C0D6}
+.chart{margin-top:50px;padding:30px clamp(18px,3vw,36px) 24px;border-radius:24px;background:#18223D}
+.chart .hd{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-bottom:10px}
+.chart .hd b{font:700 16px/1.4 var(--sans);color:#fff}
+.chart .hd span{color:#9AA6C3;font-size:14.5px}
+.chart .gain{font:400 46px/1 var(--serif);color:var(--blush)}
+.chart svg{width:100%;height:auto;overflow:visible}
+.chart .ln{fill:none;stroke:var(--coral);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1000;transition:stroke-dashoffset 1.6s cubic-bezier(.4,.1,.2,1)}
+.zc-reveal .chart:not(.is-in) .ln{stroke-dashoffset:1000}
+.chart .ar{fill:rgba(229,83,59,.16)}
+.chart text{font:600 13px var(--sans);fill:#9AA6C3}
+.chart .v{font:700 14px var(--sans);fill:#fff}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}
+.three div{padding:24px;border-radius:22px;background:#18223D}
+.three b{display:block;font:400 clamp(44px,4.4vw,62px)/1 var(--serif);color:#fff}
+.three h3{margin:10px 0 4px;font:700 16px/1.3 var(--sans);color:var(--blush)}
+.three p{margin:0;font-size:15px;color:#B7C0D6}
+
+.career .row{display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);gap:30px;padding:30px 0;border-top:1px solid var(--line)}
+.career .row:last-child{border-bottom:1px solid var(--line)}
+.career time{font:700 13px/1.5 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--coral)}
+.career h3{margin:0;font:400 28px/1.15 var(--serif);color:var(--ink)}
+.career h3 span{display:block;margin-top:6px;font:600 15px/1.4 var(--sans);color:var(--mute)}
+.career p{margin:0}
+
+.articles{background:var(--paper2)}
+.arts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 60px;margin-top:50px}
+.art{padding:26px 0;border-top:2px solid var(--ink)}
+.art small{display:block;font:700 12.5px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--coral)}
+.art h3{margin:8px 0 8px;font:400 34px/1.05 var(--serif);color:var(--ink)}
+.art p{margin:0}
+.quote{margin:80px 0 0;text-align:center}
+.quote blockquote{margin:0 auto;max-width:18ch;font:400 clamp(40px,5vw,72px)/1.05 var(--serif);color:var(--ink)}
+.quote blockquote em{font-style:normal;color:var(--coral)}
+.quote figcaption{margin-top:16px;font:600 14px/1 var(--sans);color:var(--mute)}
+
+.creds{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+.creds div{padding:18px 22px;border-radius:999px;border:2px solid var(--ink)}
+.creds b{font:400 22px/1.1 var(--serif);color:var(--ink);margin-right:10px}
+.creds span{font:600 14px/1.3 var(--sans);color:var(--mute)}
+
+.contact{background:var(--coral);color:#fff}
+.contact h2{color:#fff;font-size:clamp(48px,7vw,112px)}
+.contact .sub{color:#FFE6DE}
+.contact .pill{background:#fff;color:var(--ink)}
+.contact .pill:hover{background:var(--ink);color:#fff}
+.contact .pill.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px #fff}
+footer{padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));background:var(--ink);color:#A9A5B3;text-align:center;font-size:13px}
+
+@media (max-width:1060px){
+  .top ul{display:none}
+  .top .pill{margin-left:auto}
+  .prog{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .prog .no{grid-column:1/-1}
+  .career .row{grid-template-columns:160px minmax(0,1fr)}
+  .career .row p{grid-column:2}
+}
+@media (max-width:760px){
+  .mani{font-size:clamp(46px,13.4vw,84px)}
+  .sig{flex-direction:column;align-items:flex-start}
+  .prog,.arts{grid-template-columns:1fr}
+  .three{grid-template-columns:1fr}
+  .career .row{grid-template-columns:1fr;gap:8px}
+  .career .row p{grid-column:1}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="hero">
-  <div class="wrap">
-    <header class="top"><a class="logo" href="#top">Inès Ben Salah<span>.</span></a><nav class="nav"><a href="#programmes">Programmes</a><a href="#impact">Impact</a><a href="#career">Career</a><a href="#contact">Contact</a></nav><a class="btn fill" href="#contact">Let's talk</a></header>
-    <div class="hgrid" id="top">
-      <div>
-        <p class="kick">Director of People &amp; Culture</p>
-        <h1>Inès Ben Salah</h1>
-        <p class="say">I build workplaces people <mark>choose to stay in.</mark></p>
-        <p class="lead">Fifteen years in HR across hospitality, telecoms and consulting. Today I lead people and culture for 6,000 colleagues in nine countries.</p>
-        <div class="btns"><a class="btn fill" href="#contact">Let's talk</a><a class="btn" href="#contact">Download CV</a></div>
-      </div>
-      <div class="circle">
-        <img src="img/ines-ben-salah.jpg" alt="Portrait of Inès Ben Salah in a navy blazer and coral top in a bright office">
-        <span class="chip a"><i style="background:#F07C64"></i>Trust</span>
-        <span class="chip b"><i style="background:#1E2A4A"></i>Growth</span>
-        <span class="chip c"><i style="background:#E9B44C"></i>Belonging</span>
+<main>
+  <header class="hero" id="top">
+    <div class="wrap top">
+      <a class="logo" href="#top" aria-label="Inès Ben Salah, back to top">Inès<span>.</span></a>
+      <nav aria-label="Sections"><ul>
+        <li><a href="#programmes" data-spy>Programmes</a></li>
+        <li><a href="#impact" data-spy>Impact</a></li>
+        <li><a href="#career" data-spy>Career</a></li>
+        <li><a href="#habits" data-spy>How I work</a></li>
+      </ul></nav>
+      <a class="pill" href="#contact">Let's talk</a>
+    </div>
+    <div class="wrap stage">
+      <p class="mani">I build workplaces <span class="badge"><img src="img/ines-ben-salah-640.webp" srcset="img/ines-ben-salah-640.webp 640w, img/ines-ben-salah.webp 928w" sizes="180px" width="928" height="1152" alt="Inès Ben Salah smiling, in a navy blazer and coral top" fetchpriority="high"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><path id="ring" d="M50 50m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text><textPath href="#ring" textLength="285" lengthAdjust="spacing">Trust · Growth · Belonging · Trust · Growth · Belonging ·</textPath></text></svg></span> people choose to <span class="stay">stay</span> in.</p>
+      <div class="sig">
+        <h1>Inès Ben Salah<span>Director of People &amp; Culture · 15 years in HR</span></h1>
+        <ul class="facts"><li><b>6,000</b>colleagues</li><li><b>9</b>countries</li><li><b>280</b>leaders graduated</li></ul>
+        <div class="ctas"><a class="pill" href="#contact">Let's talk</a><a class="pill ghost" href="#programmes">Read the programmes</a></div>
       </div>
     </div>
-  </div>
-</div>
-<main>
-  <div class="strip"><div class="wrap">
-    <div><b>6,000</b><span>Colleagues supported</span></div>
-    <div><b>9</b><span>Countries</span></div>
-    <div><b>280</b><span>Leaders graduated from Rise</span></div>
-    <div><b>15</b><span>Years in HR</span></div>
-  </div></div>
+  </header>
 
   <section id="programmes">
     <div class="wrap">
-      <div class="head"><div><p class="eyebrow">Programmes</p><h2>Built with people,<br>not for them</h2></div><p>Three programmes that changed how the company hires, grows and pays its people.</p></div>
-      <div class="progs">
-        <article class="prog p1"><small>Programme 01 · Leadership</small><h3>Rise</h3><p>A nine-month academy for first-time managers, designed with them: coaching, peer circles and real business projects.</p><div class="kpi"><div><b>280</b><span>graduates</span></div><div><b>64%</b><span>promoted within two years</span></div></div></article>
-        <article class="prog p2"><small>Programme 02 · Ways of working</small><h3>Work that works</h3><p>A flexible-work charter where every team agrees how and where it works best, from hotel front desks to finance.</p><div class="kpi"><div><b>9</b><span>countries live in six months</span></div><div><b>+11</b><span>points in wellbeing score</span></div></div></article>
-        <article class="prog p3"><small>Programme 03 · Fairness</small><h3>Fair pay review</h3><p>A pay-equity audit across 6,000 roles, with clear salary bands that managers can explain to their teams.</p><div class="kpi"><div><b>&lt;2%</b><span>unexplained gender pay gap</span></div><div><b>100%</b><span>roles with published bands</span></div></div></article>
+      <p class="eyebrow">Programmes</p>
+      <h2>Built with people, <em>not for them.</em></h2>
+      <p class="sub">Three programmes that changed how the company hires, grows and pays its people.</p>
+      <div style="margin-top:56px">
+        <article class="prog" data-reveal><span class="no" aria-hidden="true">01</span><div><p class="k">Leadership</p><h3>Rise</h3><p>A nine-month academy for first-time managers, designed with them: coaching, peer circles and real business projects.</p></div><div class="st"><div><b>280</b><span>graduates</span></div><div><b>64%</b><span>promoted within two years</span></div></div></article>
+        <article class="prog" data-reveal><span class="no" aria-hidden="true">02</span><div><p class="k">Ways of working</p><h3>Work that works</h3><p>A flexible-work charter where every team agrees how and where it works best, from hotel front desks to finance.</p></div><div class="st"><div><b>9</b><span>countries live in six months</span></div><div><b>+11</b><span>points in wellbeing score</span></div></div></article>
+        <article class="prog" data-reveal><span class="no" aria-hidden="true">03</span><div><p class="k">Fairness</p><h3>Fair pay review</h3><p>A pay-equity audit across 6,000 roles, with clear salary bands that managers can explain to their teams.</p></div><div class="st"><div><b>&lt;2%</b><span>unexplained gender pay gap</span></div><div><b>100%</b><span>roles with published bands</span></div></div></article>
       </div>
     </div>
   </section>
 
-  <section class="impact" id="impact">
+  <section id="impact" class="impact">
     <div class="wrap">
-      <div class="head"><div><p class="eyebrow">Impact</p><h2>Culture you can measure</h2></div><p>Results from the annual colleague survey and HR data at Sable &amp; Palm Hospitality.</p></div>
-      <div class="igrid">
-        <div class="panel">
-          <h3>Employee engagement score</h3><p class="sub">Annual survey of all colleagues, 2020 to 2025</p>
-          <svg class="chart" viewBox="0 0 520 300" role="img" aria-label="Engagement score rose from 61 in 2020 to 78 in 2025">
-            <defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F07C64" stop-opacity=".35"/><stop offset="1" stop-color="#F07C64" stop-opacity="0"/></linearGradient></defs>
-            <g stroke="#EFD6CD" stroke-width="1"><line x1="40" y1="197" x2="510" y2="197"/><line x1="40" y1="134" x2="510" y2="134"/><line x1="40" y1="71" x2="510" y2="71"/></g>
-            <g fill="#5B6178" font-size="14"><text x="0" y="201">60</text><text x="0" y="138">70</text><text x="0" y="75">80</text></g>
-            <path d="M60 191L146 159L232 134L318 109L404 97L490 84L490 260L60 260Z" fill="url(#fill)"/>
-            <path d="M60 191L146 159L232 134L318 109L404 97L490 84" fill="none" stroke="#F07C64" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
-            <g fill="#fff" stroke="#F07C64" stroke-width="3"><circle cx="60" cy="191" r="6"/><circle cx="146" cy="159" r="6"/><circle cx="232" cy="134" r="6"/><circle cx="318" cy="109" r="6"/><circle cx="404" cy="97" r="6"/></g>
-            <circle cx="490" cy="84" r="9" fill="#1E2A4A"/>
-            <g fill="#1E2A4A" font-size="15" font-weight="700" text-anchor="middle"><text x="60" y="176">61</text><text x="146" y="144">66</text><text x="232" y="119">70</text><text x="318" y="94">74</text><text x="404" y="82">76</text></g>
-            <text x="490" y="62" text-anchor="middle" font-size="22" font-weight="700" fill="#1E2A4A">78</text>
-            <rect x="398" y="16" width="92" height="28" rx="14" fill="#1E2A4A"/><text x="444" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">+17 pts</text>
-            <g fill="#5B6178" font-size="14" text-anchor="middle"><text x="60" y="288">2020</text><text x="146" y="288">2021</text><text x="232" y="288">2022</text><text x="318" y="288">2023</text><text x="404" y="288">2024</text><text x="490" y="288">2025</text></g>
-            <line x1="40" y1="260" x2="510" y2="260" stroke="#1E2A4A" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <div class="rings">
-          <div class="panel ring"><div class="donut" style="background:conic-gradient(#F07C64 0 41%,#F6D3C8 41% 100%)"><b>41%</b></div><p><strong>Internal mobility</strong>Open roles filled by internal candidates, up from 22% in 2020.</p></div>
-          <div class="panel ring"><div class="donut" style="background:conic-gradient(#1E2A4A 0 92%,#F6D3C8 92% 100%)"><b>92%</b></div><p><strong>Leaders retained</strong>Rise graduates still with the company two years later.</p></div>
-          <div class="panel ring"><div class="donut" style="background:conic-gradient(#E9B44C 0 34%,#F6D3C8 34% 100%)"><b>34</b></div><p><strong>Days to hire</strong>Average time to fill a role, down from 58 days.</p></div>
-        </div>
+      <p class="eyebrow" style="color:var(--blush)">Impact</p>
+      <h2>Culture you can measure.</h2>
+      <p class="sub">Results from the annual colleague survey and HR data at Sable &amp; Palm Hospitality.</p>
+      <div class="chart" data-reveal>
+        <div class="hd"><div><b>Employee engagement score</b><br><span>Annual survey of all colleagues, 2020 to 2025</span></div><span class="gain">+17 pts</span></div>
+        <svg viewBox="0 0 800 260" role="img" aria-label="Engagement rose from 61 in 2020 to 78 in 2025">
+          <g stroke="#2A3657" stroke-width="1"><line x1="40" y1="210" x2="780" y2="210"/><line x1="40" y1="150" x2="780" y2="150"/><line x1="40" y1="90" x2="780" y2="90"/><line x1="40" y1="30" x2="780" y2="30"/></g>
+          <g text-anchor="end"><text x="30" y="214">60</text><text x="30" y="154">70</text><text x="30" y="94">80</text></g>
+          <path class="ar" d="M60 204L200 174L340 150L480 126L620 114L760 102V210H60z"/>
+          <path class="ln" pathLength="1000" d="M60 204L200 174L340 150L480 126L620 114L760 102"/>
+          <g fill="#E5533B"><circle cx="60" cy="204" r="6"/><circle cx="200" cy="174" r="6"/><circle cx="340" cy="150" r="6"/><circle cx="480" cy="126" r="6"/><circle cx="620" cy="114" r="6"/><circle cx="760" cy="102" r="8"/></g>
+          <g class="v" text-anchor="middle"><text x="60" y="188">61</text><text x="200" y="158">66</text><text x="340" y="134">70</text><text x="480" y="110">74</text><text x="620" y="98">76</text><text x="760" y="84">78</text></g>
+          <g text-anchor="middle"><text x="60" y="236">2020</text><text x="200" y="236">2021</text><text x="340" y="236">2022</text><text x="480" y="236">2023</text><text x="620" y="236">2024</text><text x="760" y="236">2025</text></g>
+        </svg>
+      </div>
+      <div class="three" data-reveal>
+        <div><b>41%</b><h3>Internal mobility</h3><p>Open roles filled by internal candidates, up from 22% in 2020.</p></div>
+        <div><b>92%</b><h3>Leaders retained</h3><p>Rise graduates still with the company two years later.</p></div>
+        <div><b>34</b><h3>Days to hire</h3><p>Average time to fill a role, down from 58 days.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="career">
+  <section id="career" class="career">
     <div class="wrap">
-      <div class="head"><div><p class="eyebrow">Career</p><h2>Fifteen years, three industries</h2></div><p>Hospitality, telecoms and consulting, in Tunis, Paris and Dubai.</p></div>
-      <div class="career">
-        <article class="job"><time>2020 — TODAY</time><h3>Director of People &amp; Culture</h3><div class="org">Sable &amp; Palm Hospitality, Dubai</div><p>People strategy for 6,000 colleagues across hotels, restaurants and head office in nine countries.</p></article>
-        <article class="job"><time>2014 — 2020</time><h3>Head of Talent &amp; Development</h3><div class="org">Tanitel Communications, Tunis</div><p>Built the graduate programme and the company's first leadership academy; cut first-year attrition by a third.</p></article>
-        <article class="job"><time>2009 — 2014</time><h3>HR Consultant</h3><div class="org">Medjerda Consulting, Tunis &amp; Paris</div><p>Organisation design and change programmes for banks, retailers and telecom operators.</p></article>
+      <p class="eyebrow">Career</p>
+      <h2>Fifteen years, <em>three industries.</em></h2>
+      <p class="sub">Hospitality, telecoms and consulting, in Tunis, Paris and Dubai.</p>
+      <div style="margin-top:50px">
+        <div class="row" data-reveal><time>2020 — today</time><h3>Director of People &amp; Culture<span>Sable &amp; Palm Hospitality, Dubai</span></h3><p>People strategy for 6,000 colleagues across hotels, restaurants and head office in nine countries.</p></div>
+        <div class="row" data-reveal><time>2014 — 2020</time><h3>Head of Talent &amp; Development<span>Tanitel Communications, Tunis</span></h3><p>Built the graduate programme and the company's first leadership academy; cut first-year attrition by a third.</p></div>
+        <div class="row" data-reveal><time>2009 — 2014</time><h3>HR Consultant<span>Medjerda Consulting, Tunis &amp; Paris</span></h3><p>Organisation design and change programmes for banks, retailers and telecom operators.</p></div>
       </div>
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <section id="habits" class="articles">
     <div class="wrap">
-      <div class="head"><div><p class="eyebrow">How I work</p><h2>Four habits</h2></div></div>
-      <div class="ways">
-        <div class="way"><b>1</b><h3>Listen first</h3><p>Every programme starts with interviews and focus groups, not a slide deck.</p></div>
-        <div class="way"><b>2</b><h3>Managers make the culture</h3><p>Most of the budget goes into helping managers lead well.</p></div>
-        <div class="way"><b>3</b><h3>Measure what people feel</h3><p>Engagement and exit data reviewed every quarter with the leadership team.</p></div>
-        <div class="way"><b>4</b><h3>Keep it simple</h3><p>If a policy needs a training course to understand, it gets rewritten.</p></div>
+      <p class="eyebrow">How I work</p>
+      <h2>Four articles <em>of practice.</em></h2>
+      <div class="arts">
+        <div class="art" data-reveal><small>Article 1</small><h3>Listen first</h3><p>Every programme starts with interviews and focus groups, not a slide deck.</p></div>
+        <div class="art" data-reveal><small>Article 2</small><h3>Managers make the culture</h3><p>Most of the budget goes into helping managers lead well.</p></div>
+        <div class="art" data-reveal><small>Article 3</small><h3>Measure what people feel</h3><p>Engagement and exit data reviewed every quarter with the leadership team.</p></div>
+        <div class="art" data-reveal><small>Article 4</small><h3>Keep it simple</h3><p>If a policy needs a training course to understand, it gets rewritten.</p></div>
       </div>
-    </div>
-  </section>
-
-  <section class="quote"><div class="wrap"><blockquote>“Culture is what people do <span>when no one is watching.</span>”</blockquote><cite>Inès Ben Salah</cite></div></section>
-
-  <section>
-    <div class="wrap">
-      <div class="head"><div><p class="eyebrow">Qualifications</p><h2>Credentials</h2></div></div>
-      <div class="creds">
+      <figure class="quote" data-reveal><blockquote>“Culture is what people do <em>when no one is watching.</em>”</blockquote><figcaption>Inès Ben Salah</figcaption></figure>
+      <div class="creds" data-reveal>
         <div><b>CIPD Level 7</b><span>Chartered Member</span></div>
         <div><b>SHRM-SCP</b><span>Senior Certified Professional</span></div>
         <div><b>MSc Organisational Psychology</b><span>Paris, 2009</span></div>
@@ -213,16 +241,15 @@ footer{text-align:center;font-size:12.5px;color:var(--muted);padding:0 24px 90px
     </div>
   </section>
 
-  <section class="contact" id="contact">
-    <div class="wrap"><div class="box">
-      <p class="eyebrow">Contact</p>
-      <h2>Let's build a place<br>people want to work.</h2>
-      <p>Inès is open to Chief People Officer and HR Director roles across the GCC.</p>
-      <div class="btns"><a class="btn fill" href="#contact">Book a conversation</a><a class="btn" href="#contact">Download CV</a><a class="btn" href="#contact">LinkedIn</a></div>
-    </div></div>
+  <section id="contact" class="contact">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow" style="color:#fff">Contact</p>
+      <h2>Let's build a place people want to work.</h2>
+      <p class="sub">Inès is open to Chief People Officer and HR Director roles across the GCC.</p>
+      <div class="ctas" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:30px"><a class="pill" href="#contact" data-demo>Book a conversation</a><a class="pill ghost" href="#contact" data-demo>Download CV</a><a class="pill ghost" href="#contact" data-demo>LinkedIn</a></div>
+    </div>
   </section>
 </main>
-<footer>Sample portfolio website designed by Zenith Dubai CV. Inès Ben Salah is a fictional profile; companies are illustrative and contact links are disabled.</footer>
-<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design <b>· Zenith Dubai CV</b></a>
+<footer>Concept site designed by Zenith Dubai CV. Inès Ben Salah is a fictional person; companies, programmes and figures are illustrative.</footer>
 </body>
 </html>

@@ -2,135 +2,352 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Maria Dela Cruz · Cabin Services Manager — Sample design by Zenith Dubai CV</title>
+<meta name="theme-color" content="#D7E7F3">
+<title>Maria Dela Cruz · Cabin Services Manager — Concept site by Zenith Dubai CV</title>
+<meta name="description" content="Concept portfolio website for a fictional cabin services manager, designed by Zenith Dubai CV.">
+<link rel="preload" href="img/maria-dela-cruz-640.webp" as="image" type="image/webp">
+<link rel="preload" href="fonts/caveat-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
+<script src="assets/sample.js"></script>
 <style>
-:root{--bg:#FFF8F6;--blush:#F3D9D4;--blush2:#E8B9B0;--rose:#C9786B;--slate:#4A5562;--ink:#2B323B;--muted:#77808C;--white:#fff;
---serif:"DM Serif Display",Georgia,serif;--sans:"Nunito","Helvetica Neue",Arial,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}a{color:inherit}
-.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-nav.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
-.logo{font:400 24px var(--serif)}.logo span{color:var(--rose)}
-.pill{padding:10px 18px;border-radius:999px;background:var(--white);box-shadow:0 4px 16px rgba(74,85,98,.08);font-weight:700;font-size:14px;text-decoration:none}
-.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:40px 0 80px}
-.hi{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--blush);color:var(--slate);font-weight:700;font-size:13px}
-h1{font:400 clamp(52px,7vw,92px)/1 var(--serif);margin:20px 0 0}
-h1 em{color:var(--rose);font-style:italic}
-.intro{font-size:19px;color:var(--slate);max-width:44ch;margin:20px 0 0}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
-.chips span{padding:8px 14px;border-radius:999px;border:1.5px solid var(--blush2);font-size:14px;font-weight:600;color:var(--slate);background:var(--white)}
-.photo{position:relative;justify-self:center;width:min(420px,100%)}
-.photo::before{content:"";position:absolute;inset:-18px;border-radius:50%;background:conic-gradient(from 200deg,var(--blush),var(--blush2),var(--blush));z-index:0}
-.photo img{position:relative;z-index:1;aspect-ratio:1;object-fit:cover;object-position:50% 18%;border-radius:50%;border:8px solid var(--white)}
-.badge{position:absolute;z-index:2;right:-6px;bottom:24px;background:var(--white);border-radius:16px;padding:12px 16px;box-shadow:0 10px 30px rgba(74,85,98,.15);font-size:13px;color:var(--muted)}
-.badge b{display:block;font:400 26px/1 var(--serif);color:var(--ink)}
-section{padding:80px 0}
-h2{font:400 clamp(36px,5vw,54px)/1.08 var(--serif);margin:0 0 12px}
-h2 em{color:var(--rose)}
-.sub{color:var(--muted);max-width:56ch;margin:0 0 40px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:var(--white);border-radius:24px;padding:30px;box-shadow:0 6px 24px rgba(74,85,98,.06)}
-.ico{width:52px;height:52px;border-radius:16px;background:var(--blush);display:grid;place-items:center;margin-bottom:18px}
-.ico svg{width:24px;height:24px;stroke:var(--rose);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.card h3{font:400 24px/1.2 var(--serif);margin:0 0 8px}
-.card p{margin:0;color:var(--muted);font-size:16px}
-.journey{position:relative;margin-top:30px}
-.path{position:absolute;left:0;right:0;top:34px;height:2px;background:repeating-linear-gradient(90deg,var(--blush2) 0 10px,transparent 10px 18px)}
-.stops{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative}
-.stop .dot{width:70px;height:70px;border-radius:50%;background:var(--white);border:2px solid var(--blush2);display:grid;place-items:center;font:400 18px var(--serif);color:var(--rose);margin-bottom:18px}
-.stop.now .dot{background:var(--rose);color:var(--white);border-color:var(--rose)}
-.stop h3{font:400 22px/1.2 var(--serif);margin:0}
-.stop .org{font-weight:700;font-size:14px;color:var(--slate);margin:4px 0 8px}
-.stop p{margin:0;font-size:15px;color:var(--muted)}
-.numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.num{background:var(--slate);color:var(--white);border-radius:22px;padding:28px 22px}
-.num:nth-child(even){background:var(--blush);color:var(--ink)}
-.num b{display:block;font:400 46px/1 var(--serif)}
-.num span{display:block;margin-top:10px;font-size:14px;font-weight:600;opacity:.85}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.checks{list-style:none;padding:0;margin:0;display:grid;gap:12px}
-.checks li{display:flex;gap:12px;align-items:flex-start;background:var(--white);border-radius:16px;padding:16px 18px}
-.checks li::before{content:"";flex:none;width:22px;height:22px;border-radius:50%;background:var(--blush) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C9786B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/13px no-repeat;margin-top:2px}
-.checks b{display:block}.checks span{font-size:14px;color:var(--muted)}
-.quote{background:var(--white);border-radius:28px;padding:40px;box-shadow:0 6px 24px rgba(74,85,98,.06);position:relative}
-.quote p{font:400 26px/1.4 var(--serif);margin:0}
-.quote small{display:block;margin-top:18px;color:var(--muted);font-size:14px;font-weight:600}
-.quote::before{content:"“";position:absolute;top:-28px;left:30px;font:400 110px/1 var(--serif);color:var(--blush2)}
-.contact{background:var(--slate);color:var(--white);border-radius:36px;padding:64px 40px;text-align:center;margin:20px 0 40px}
-.contact h2{color:var(--white)}.contact h2 em{color:var(--blush)}
-.contact p{opacity:.85;max-width:46ch;margin:0 auto}
-.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
-.btn{padding:14px 24px;border-radius:999px;background:var(--white);color:var(--ink);text-decoration:none;font-weight:700;font-size:15px}
-.btn.ghost{background:transparent;border:1.5px solid rgba(255,255,255,.5);color:var(--white)}
-footer{text-align:center;padding:10px 0 90px;font-size:13px;color:var(--muted)}
-.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:10px 16px;border-radius:999px;background:var(--white);color:var(--slate);font:700 12px var(--sans);text-decoration:none;box-shadow:0 8px 24px rgba(74,85,98,.2)}
-.zen b{color:var(--rose)}
-@media (max-width:900px){.hero,.split{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.stops{grid-template-columns:1fr 1fr;row-gap:34px}.path{display:none}.numbers{grid-template-columns:1fr 1fr}.photo{order:-1}}
+/* Concept: "Postcards from 38,000 ft". The hero is the back of a postcard she
+   wrote you: handwritten hello, her portrait as the stamp, a Dubai postmark.
+   Further down, the career is a passport page of entry stamps and her skills are
+   luggage tags. Warm, personal, and unmistakably cabin crew. */
+:root{
+  --sky:#D7E7F3; --sky2:#EAF2F8; --paper:#FFFCF6; --cream:#F6EFE3; --ink:#1F2A44; --ink2:#47546F;
+  --coral:#E26D55; --rose:#E9B8A8; --red:#CF3F37; --blue:#2E5BA6; --pen:#24418C; --line:rgba(31,42,68,.14);
+  --serif:"DM Serif Display",Georgia,serif; --sans:"Nunito","Helvetica Neue",Arial,sans-serif; --hand:"Caveat","Segoe Print","Bradley Hand",cursive;
+  --airmail:repeating-linear-gradient(-45deg,var(--red) 0 16px,#fff 16px 26px,var(--blue) 26px 42px,#fff 42px 52px);
+  --zc-bg:#1F2A44; --zc-fg:#FFFCF6; --zc-dot:#E26D55;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- Hero: the postcard ---------- */
+.hero{position:relative;min-height:max(700px,100svh);display:flex;flex-direction:column;overflow:hidden;
+  background:radial-gradient(70% 60% at 80% 10%,#fff 0,transparent 60%),linear-gradient(180deg,var(--sky) 0,var(--sky2) 70%,var(--cream) 100%)}
+.hero::before{content:"";height:10px;flex:none;background:var(--airmail)}
+.hero>.wrap{width:100%}
+.trail{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.trail path{fill:none;stroke:#fff;stroke-width:2.5;stroke-dasharray:2 12;stroke-linecap:round;opacity:.9}
+.top{position:relative;z-index:2;display:flex;align-items:center;gap:28px;padding-top:max(18px,env(safe-area-inset-top,0px));padding-bottom:12px}
+.mark{font:italic 400 28px/1 var(--serif);text-decoration:none;color:var(--ink)}
+.mark b{color:var(--coral);font-weight:400}
+.top nav{margin-left:auto}
+.nav{display:flex;gap:24px;margin:0;padding:0;list-style:none;font:700 13px/1 var(--sans);letter-spacing:.06em}
+.nav a{text-decoration:none;color:var(--ink2);padding:6px 0;border-bottom:2px solid transparent}
+.nav a:hover,.nav a[aria-current]{color:var(--ink);border-bottom-color:var(--coral)}
+.hi{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font:700 13px/1 var(--sans);letter-spacing:.04em}
+.hi:hover{background:var(--coral)}
+.stage{position:relative;z-index:1;flex:1;display:grid;place-items:center;padding:clamp(10px,3vh,34px) 0 clamp(36px,6vh,64px)}
+.card{position:relative;width:min(1120px,100%);display:grid;grid-template-columns:minmax(0,1.22fr) 1px minmax(0,1fr);gap:0 clamp(26px,3.4vw,48px);
+  padding:clamp(28px,4vw,50px) clamp(26px,4vw,54px);background:var(--paper);border-radius:6px;transform:rotate(-1.2deg);
+  box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 30px 60px -28px rgba(31,42,68,.45),0 2px 6px rgba(31,42,68,.08);
+  background-image:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0)),repeating-linear-gradient(90deg,rgba(120,90,40,.018) 0 2px,transparent 2px 5px)}
+.card .pc{position:absolute;top:18px;left:0;right:0;text-align:center;margin:0;font:400 13px/1 var(--serif);letter-spacing:.6em;color:#9AA2B3;text-transform:uppercase}
+.card .divider{background:linear-gradient(var(--line),var(--line)) no-repeat center/1px 100%;margin:30px 0 6px}
+.write{padding-top:22px}
+.greet{display:inline-block;margin:0;font:600 clamp(30px,3vw,40px)/1 var(--hand);color:var(--coral);transform:rotate(-4deg);transform-origin:left bottom}
+h1{margin:6px 0 0;font:400 clamp(46px,5.6vw,80px)/.98 var(--serif);letter-spacing:-.012em;color:var(--ink)}
+.role{margin:14px 0 0;font:800 12px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink2)}
+.msg{margin:18px 0 0;max-width:30ch;font:400 clamp(23px,2.05vw,28px)/1.32 var(--hand);color:var(--pen)}
+.sig{margin:12px 0 0;font:600 clamp(26px,2.4vw,32px)/1 var(--hand);color:var(--pen)}
+.ps{margin:16px 0 0;font:400 19px/1.35 var(--hand);color:var(--ink2)}
+.side{position:relative;display:flex;flex-direction:column;align-items:flex-end;padding-top:6px}
+.stampwrap{position:relative;filter:drop-shadow(0 6px 10px rgba(31,42,68,.25));transform:rotate(3deg);margin-right:4px}
+.stamp{--r:5px;width:clamp(200px,19vw,250px);padding:calc(var(--r)*3);background:#fff;
+  -webkit-mask:radial-gradient(var(--r),#0000 98%,#000) round calc(-1.5*var(--r)) calc(-1.5*var(--r))/calc(3*var(--r)) calc(3*var(--r)),linear-gradient(#000 0 0) no-repeat 50%/calc(100% - 3*var(--r)) calc(100% - 3*var(--r));
+  mask:radial-gradient(var(--r),#0000 98%,#000) round calc(-1.5*var(--r)) calc(-1.5*var(--r))/calc(3*var(--r)) calc(3*var(--r)),linear-gradient(#000 0 0) no-repeat 50%/calc(100% - 3*var(--r)) calc(100% - 3*var(--r))}
+.stamp .ph{position:relative;aspect-ratio:4/5;overflow:hidden;background:#C9B9A6}
+.stamp img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.stamp .ph::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.stamp .val{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:8px;color:var(--ink)}
+.stamp .val b{font:400 30px/1 var(--serif);color:var(--coral)}
+.stamp .val span{font:800 9.5px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;text-align:right;color:var(--ink2)}
+.stamp .air{position:absolute;top:calc(var(--r)*3 + 8px);left:calc(var(--r)*3 + 8px);padding:4px 7px;background:rgba(255,252,246,.9);font:800 9px/1 var(--sans);letter-spacing:.22em;color:var(--ink);text-transform:uppercase}
+.postmark{position:absolute;left:-118px;top:96px;width:210px;color:#3B3778;opacity:.82;transform:rotate(-12deg);pointer-events:none}
+.parav{align-self:flex-start;margin:22px 0 0;padding:6px 10px 5px;background:var(--blue);color:#fff;font:800 11px/1.25 var(--sans);letter-spacing:.16em;text-transform:uppercase;transform:rotate(-2deg)}
+.parav small{display:block;font-weight:600;letter-spacing:.24em;font-size:9px;opacity:.85}
+.addr{align-self:stretch;margin:22px 0 0;padding:0;list-style:none}
+.addr li{min-height:42px;padding:6px 0 0;border-bottom:1.5px solid var(--line);font:400 clamp(21px,1.8vw,25px)/1.3 var(--hand);color:var(--pen)}
+.zc-reveal .card{animation:land 1.2s cubic-bezier(.2,.8,.2,1) both}
+.zc-reveal .stampwrap{animation:stick .9s cubic-bezier(.3,1.5,.5,1) .7s both}
+.zc-reveal .postmark{animation:inkin .5s ease-out 1.3s both}
+@keyframes land{from{opacity:0;transform:translateY(30px) rotate(-4deg)}to{opacity:1;transform:rotate(-1.2deg)}}
+@keyframes stick{from{opacity:0;transform:translateY(-18px) rotate(12deg) scale(1.08)}to{opacity:1;transform:rotate(3deg)}}
+@keyframes inkin{from{opacity:0;transform:rotate(-12deg) scale(1.3)}to{opacity:.82;transform:rotate(-12deg)}}
+
+/* ---------- Sections ---------- */
+section{padding:clamp(84px,10vw,124px) 0}
+.kick{margin:0 0 10px;font:600 26px/1 var(--hand);color:var(--coral)}
+h2{margin:0;font:400 clamp(38px,4.6vw,62px)/1.02 var(--serif);letter-spacing:-.01em}
+h2 em{font-style:italic;color:var(--coral)}
+.intro{margin:18px 0 0;max-width:52ch;color:var(--ink2);font-size:18px}
+
+/* Luggage tags */
+.onboard{background:var(--cream)}
+.tags{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,40px);margin-top:70px;padding-top:30px;position:relative}
+.tags::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;border-radius:3px;background:linear-gradient(90deg,#B8A48A,#8E7B62)}
+.ltag{position:relative;padding:80px 28px 32px;color:#fff;background:var(--bg);transform:rotate(var(--rot));transform-origin:50% -30px;
+  clip-path:polygon(22% 0,78% 0,100% 13%,100% 100%,0 100%,0 13%);transition:transform .6s cubic-bezier(.3,1.6,.5,1)}
+.tagbox{position:relative;filter:drop-shadow(0 18px 18px rgba(31,42,68,.18))}
+.tagbox::before{content:"";position:absolute;left:50%;top:-30px;width:2px;height:52px;background:#8E7B62;transform:rotate(var(--rot));transform-origin:50% 0}
+.ltag:hover{transform:rotate(calc(var(--rot) * -1))}
+.ltag .hole{position:absolute;left:50%;top:22px;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:var(--cream);box-shadow:0 0 0 5px rgba(255,255,255,.55)}
+.ltag .code{margin:0;font:400 64px/1 var(--serif);letter-spacing:.02em}
+.ltag .code small{display:block;margin-top:6px;font:800 10.5px/1 var(--sans);letter-spacing:.24em;opacity:.85}
+.ltag h3{margin:22px 0 8px;font:800 19px/1.25 var(--sans)}
+.ltag p{margin:0;font-size:15.5px;line-height:1.55;opacity:.95}
+.ltag .bc{display:block;height:34px;margin-top:24px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.95) 0 2px,transparent 2px 4px,rgba(255,255,255,.95) 4px 5px,transparent 5px 9px,rgba(255,255,255,.95) 9px 12px,transparent 12px 14px);opacity:.85}
+
+/* Passport page */
+.journey{background:var(--paper)}
+.passport{position:relative;margin-top:56px;padding:clamp(26px,4vw,52px);border-radius:12px;
+  background:repeating-radial-gradient(circle at 18% 120%,rgba(46,91,166,.07) 0 1px,transparent 1px 9px),repeating-radial-gradient(circle at 90% -20%,rgba(226,109,85,.07) 0 1px,transparent 1px 11px),#F4F1E6;
+  box-shadow:inset 0 0 0 1px rgba(31,42,68,.08),0 30px 60px -40px rgba(31,42,68,.5)}
+.passport .ph2{display:flex;justify-content:space-between;margin:0 0 30px;font:800 11px/1 var(--sans);letter-spacing:.28em;color:#8A93A6;text-transform:uppercase}
+.visas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 56px}
+.visa{display:grid;grid-template-columns:160px minmax(0,1fr);gap:22px;align-items:center}
+.visa svg{width:160px;height:auto;transform:rotate(var(--rot));overflow:visible}
+.visa h3{margin:0;font:400 26px/1.15 var(--serif)}
+.visa .at{margin:4px 0 8px;font:800 12px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--coral)}
+.visa p{margin:0;color:var(--ink2);font-size:15.5px}
+.zc-reveal .visa svg{opacity:0;transform:rotate(var(--rot)) scale(1.35);transition:opacity .25s ease-out,transform .35s cubic-bezier(.4,1.6,.6,1)}
+.zc-reveal .visa.is-in svg{opacity:.92;transform:rotate(var(--rot))}
+.visa svg{opacity:.92}
+
+/* Numbers */
+.numbers{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--sky),var(--sky2))}
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px;margin-top:60px}
+.num b{display:block;font:400 clamp(54px,6vw,86px)/1 var(--serif);color:var(--ink)}
+.num span{display:block;margin-top:8px;font:800 12px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+.num i{display:block;margin-top:10px;font:400 22px/1.15 var(--hand);font-style:normal;color:var(--pen);transform:rotate(-2deg)}
+
+/* Certificates */
+.cert .grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,6vw,90px);align-items:start}
+.list{margin:0;padding:0;list-style:none;border-top:1.5px solid var(--ink)}
+.list li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line)}
+.list .tick{font:600 34px/0 var(--hand);color:var(--coral);transform:translateY(8px)}
+.list b{display:block;font:800 17px/1.35 var(--sans)}
+.list span{color:var(--ink2);font-size:15px}
+.list em{font:400 20px/1 var(--hand);font-style:normal;color:var(--pen);white-space:nowrap}
+.note{position:relative;margin:0;padding:34px 34px 30px;background:var(--paper);transform:rotate(1.6deg);box-shadow:0 24px 50px -30px rgba(31,42,68,.5),0 1px 3px rgba(31,42,68,.12);
+  background-image:repeating-linear-gradient(180deg,transparent 0 37px,rgba(46,91,166,.16) 37px 38px);background-position:0 18px}
+.note::before{content:"";position:absolute;left:50%;top:-14px;width:110px;height:28px;margin-left:-55px;background:rgba(233,184,168,.65);transform:rotate(-3deg)}
+.note blockquote{margin:0;font:400 clamp(26px,2.4vw,31px)/1.22 var(--hand);color:var(--pen)}
+.note figcaption{margin-top:16px;font:800 12px/1.5 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.flag{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:var(--rose);color:var(--ink);font-size:10px;letter-spacing:.14em}
+
+/* Envelope */
+.hello{background:var(--cream)}
+.env{position:relative;padding:12px;border-radius:10px;background:var(--airmail);box-shadow:0 40px 70px -40px rgba(31,42,68,.55)}
+.env .in{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:end;padding:clamp(30px,5vw,64px);border-radius:4px;background:var(--paper)}
+.env h2{font-size:clamp(46px,5.4vw,76px)}
+.env p{max-width:46ch;color:var(--ink2)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-block;padding:15px 24px;border-radius:999px;border:1.5px solid var(--ink);color:var(--ink);text-decoration:none;font:800 14px/1 var(--sans);letter-spacing:.04em}
+.btn.fill{background:var(--ink);color:#fff}
+.btn:hover{background:var(--coral);border-color:var(--coral);color:#fff}
+.to{margin:0;padding:0;list-style:none}
+.to li{padding:8px 0;border-bottom:1.5px solid var(--line);font:400 24px/1.3 var(--hand);color:var(--pen)}
+.to li:first-child{font:800 11px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:#8A93A6;border:0}
+footer{padding:28px 24px max(96px,env(safe-area-inset-bottom,0px));background:var(--cream);text-align:center;color:var(--ink2);font-size:13px}
+
+@media (max-width:1000px){
+  .nav{display:none}
+  .hi{margin-left:auto}
+  .card{grid-template-columns:minmax(0,1.3fr) 1px minmax(0,1fr)}
+  .postmark{left:-80px;width:170px}
+  .tags{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto;gap:60px}
+  .tagbox+.tagbox::before{top:-62px;height:84px}
+  .visas{grid-template-columns:1fr}
+  .nums{grid-template-columns:1fr 1fr;gap:44px 24px}
+  .cert .grid,.env .in{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  .card{grid-template-columns:1fr;transform:rotate(-.6deg);padding:46px 22px 26px}
+  @keyframes land{from{opacity:0;transform:translateY(30px) rotate(-3deg)}to{opacity:1;transform:rotate(-.6deg)}}
+  .card .divider{display:none}
+  .write{padding-top:0;order:2}
+  .side{order:1;flex-direction:row;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px}
+  .stampwrap{order:2;margin:0 2px 0 0}
+  .stamp{width:min(44vw,180px)}
+  .stamp .val b{font-size:22px}
+  .stamp .val span{font-size:8px}
+  .postmark{left:auto;right:min(40vw,170px);top:120px;width:130px}
+  .parav{order:1;margin:4px 0 0}
+  .addr{display:none}
+  .greet{margin-top:12px}
+  .msg{max-width:none}
+  .visa{grid-template-columns:110px minmax(0,1fr);gap:16px}
+  .visa svg{width:110px}
+  .list li{grid-template-columns:34px minmax(0,1fr)}
+  .list em{grid-column:2}
+  .env{padding:9px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ltag{transition:none}.ltag:hover{transform:rotate(var(--rot))}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<nav class="top"><div class="logo">Maria<span>.</span></div><a class="pill" href="#contact">Say hello</a></nav>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="ink" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 2.1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>
+</svg>
 <main>
-  <div class="hero">
-    <div>
-      <span class="hi">Cabin Services Manager · A380 First &amp; Business</span>
-      <h1>Hi, I'm <em>Maria</em> Dela Cruz.</h1>
-      <p class="intro">I lead cabin crews of up to fourteen on long-haul flights and make sure every passenger, from first class to the last row, lands feeling looked after.</p>
-      <div class="chips"><span>English</span><span>Filipino</span><span>Spanish · conversational</span><span>Arabic · basic</span></div>
+  <header class="hero" id="top">
+    <svg class="trail" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true"><path d="M-40 760 C 260 640 420 820 700 640 S 1180 300 1500 180"/></svg>
+    <div class="wrap top">
+      <a class="mark" href="#top" aria-label="Maria Dela Cruz, back to top">Maria<b>.</b></a>
+      <nav aria-label="Sections">
+        <ul class="nav">
+          <li><a href="#onboard" data-spy>On board</a></li>
+          <li><a href="#journey" data-spy>Journey</a></li>
+          <li><a href="#numbers" data-spy>In numbers</a></li>
+          <li><a href="#certified" data-spy>Certified</a></li>
+        </ul>
+      </nav>
+      <a class="hi" href="#hello">Say hello</a>
     </div>
-    <div class="photo"><img src="img/maria-dela-cruz.jpg" alt="Portrait of Maria Dela Cruz in her cabin crew uniform"><div class="badge"><b>98%</b>passenger satisfaction</div></div>
-  </div>
-
-  <section style="padding-top:20px">
-    <h2>What I bring <em>on board</em></h2>
-    <p class="sub">Calm leadership at 38,000 feet, with service that feels personal even on a full flight of 500 guests.</p>
-    <div class="cards">
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg></div><h3>Premium cabin service</h3><p>Dine-on-demand, wine service and bespoke arrivals for first and business class guests.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c0-2.5 1.5-4.5 4-4.5s3 1.5 3 4.5"/></svg></div><h3>Crew leadership</h3><p>Briefings, coaching and fair rosters for teams of up to fourteen crew members per flight.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.6-7 10-7 10z"/></svg></div><h3>Safety &amp; care</h3><p>Medical incidents, disruptions and nervous flyers handled with a steady voice and clear steps.</p></div>
+    <div class="wrap stage">
+      <article class="card" aria-labelledby="name">
+        <p class="pc" aria-hidden="true">Post card</p>
+        <div class="write">
+          <p class="greet">Hi, I'm</p>
+          <h1 id="name">Maria Dela Cruz.</h1>
+          <p class="role">Cabin Services Manager · A380 First &amp; Business</p>
+          <p class="msg">I lead cabin crews of up to fourteen on long-haul flights, and make sure every passenger, from first class to the last row, lands feeling looked after.</p>
+          <p class="sig">— Maria</p>
+          <p class="ps">P.S. I speak English, Filipino, conversational Spanish and some Arabic.</p>
+        </div>
+        <div class="divider" aria-hidden="true"></div>
+        <div class="side">
+          <div class="stampwrap">
+            <div class="stamp">
+              <div class="ph"><img src="img/maria-dela-cruz-640.webp" srcset="img/maria-dela-cruz-640.webp 640w, img/maria-dela-cruz.webp 928w" sizes="250px" width="928" height="1152" alt="Maria Dela Cruz smiling in her cabin crew uniform inside an aircraft cabin" fetchpriority="high"></div>
+              <span class="air" aria-hidden="true">Air mail</span>
+              <p class="val" style="margin-bottom:0"><b>98%</b><span>passenger<br>satisfaction</span></p>
+            </div>
+          </div>
+          <svg class="postmark" viewBox="0 0 220 130" aria-hidden="true">
+            <g filter="url(#ink)" fill="none" stroke="currentColor">
+              <circle cx="150" cy="65" r="56" stroke-width="3.5"/><circle cx="150" cy="65" r="44" stroke-width="1.6"/>
+              <path d="M2 40c16-8 32 8 48 0s32 8 48 0M2 56c16-8 32 8 48 0s32 8 48 0M2 72c16-8 32 8 48 0s32 8 48 0M2 88c16-8 32 8 48 0s32 8 48 0" stroke-width="3"/>
+              <defs><path id="pmtop" d="M104 65a46 46 0 0 1 92 0"/><path id="pmbot" d="M98 65a52 52 0 0 0 104 0"/></defs>
+              <text font-family="Nunito,sans-serif" font-weight="800" font-size="11" letter-spacing="3" fill="currentColor" stroke="none"><textPath href="#pmtop" startOffset="50%" text-anchor="middle">DUBAI · UAE</textPath></text>
+              <text font-family="Nunito,sans-serif" font-weight="800" font-size="10" letter-spacing="3" fill="currentColor" stroke="none"><textPath href="#pmbot" startOffset="50%" text-anchor="middle">AIR MAIL</textPath></text>
+              <text x="150" y="62" text-anchor="middle" font-family="DM Serif Display,serif" font-size="22" fill="currentColor" stroke="none">A380</text>
+              <text x="150" y="80" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="10" letter-spacing="2" fill="currentColor" stroke="none">38,000 FT</text>
+            </g>
+          </svg>
+          <p class="parav">Par avion<small>By air mail</small></p>
+          <ul class="addr" aria-label="Addressed to">
+            <li>To: your premium cabin team</li>
+            <li>Wherever the A380 flies next</li>
+            <li>From the upper deck ✈</li>
+          </ul>
+        </div>
+      </article>
     </div>
-  </section>
+  </header>
 
-  <section>
-    <h2>My <em>journey</em> so far</h2>
-    <p class="sub">From a hotel lobby in Manila to the upper deck of the A380.</p>
-    <div class="journey"><div class="path" aria-hidden="true"></div>
-      <div class="stops">
-        <div class="stop"><div class="dot">2011</div><h3>Guest Relations</h3><div class="org">Manila Bay Grand Hotel</div><p>VIP arrivals and guest recovery for a 400-room hotel.</p></div>
-        <div class="stop"><div class="dot">2013</div><h3>Flight Attendant</h3><div class="org">Pearl Coast Air</div><p>Economy and business on regional and medium-haul routes.</p></div>
-        <div class="stop"><div class="dot">2016</div><h3>Senior Flight Attendant</h3><div class="org">Azure Crown Airlines</div><p>First and business galley lead; in-flight trainer from 2018.</p></div>
-        <div class="stop now"><div class="dot">Now</div><h3>Cabin Services Manager</h3><div class="org">Azure Crown Airlines</div><p>Leads A380 crews on long-haul routes across four continents.</p></div>
+  <section id="onboard" class="onboard">
+    <div class="wrap">
+      <div data-reveal><p class="kick">what I bring</p><h2>On board, <em>every flight.</em></h2><p class="intro">Calm leadership at 38,000 feet, with service that feels personal even on a full flight of 500 guests.</p></div>
+      <div class="tags">
+        <div class="tagbox" style="--rot:-3deg" data-reveal><article class="ltag" style="--rot:-3deg;--bg:#E26D55"><span class="hole" aria-hidden="true"></span><p class="code">1ST<small>Priority · premium cabins</small></p><h3>Premium cabin service</h3><p>Dine-on-demand, wine service and bespoke arrivals for first and business class guests.</p><span class="bc" aria-hidden="true"></span></article></div>
+        <div class="tagbox" style="--rot:2deg" data-reveal><article class="ltag" style="--rot:2deg;--bg:#2E5BA6"><span class="hole" aria-hidden="true"></span><p class="code">CRW<small>Crew · up to 14 per flight</small></p><h3>Crew leadership</h3><p>Briefings, coaching and fair rosters for teams of up to fourteen crew members per flight.</p><span class="bc" aria-hidden="true"></span></article></div>
+        <div class="tagbox" style="--rot:-1.5deg" data-reveal><article class="ltag" style="--rot:-1.5deg;--bg:#1F2A44"><span class="hole" aria-hidden="true"></span><p class="code">SFE<small>Safety · care · calm</small></p><h3>Safety &amp; care</h3><p>Medical incidents, disruptions and nervous flyers, handled with a steady voice and clear steps.</p><span class="bc" aria-hidden="true"></span></article></div>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>In <em>numbers</em></h2>
-    <p class="sub">A few figures from my flight logs and guest surveys.</p>
-    <div class="numbers"><div class="num"><b>1,900</b><span>Sectors flown</span></div><div class="num"><b>98%</b><span>Guest satisfaction</span></div><div class="num"><b>14</b><span>Crew led per flight</span></div><div class="num"><b>65</b><span>Destinations</span></div></div>
-  </section>
-
-  <section>
-    <div class="split">
-      <div><h2>Certified <em>and current</em></h2><p class="sub">Recurrent training completed every year.</p>
-        <ul class="checks"><li><div><b>Safety &amp; Emergency Procedures</b><span>A380 · B777 · recurrent 2026</span></div></li><li><div><b>Aviation First Aid &amp; AED</b><span>Recurrent 2026</span></div></li><li><div><b>Wine &amp; Spirits, Level 2</b><span>Awarded with distinction</span></div></li><li><div><b>In-flight Leadership Programme</b><span>Azure Crown Academy, 2021</span></div></li></ul></div>
-      <div style="display:flex;align-items:center"><div class="quote"><p>Maria is the manager every new crew member hopes to fly with. Calm in a diversion, warm with every guest.</p><small>Captain, A380 fleet · colleague since 2019</small></div></div>
+  <section id="journey" class="journey">
+    <div class="wrap">
+      <div data-reveal><p class="kick">my journey so far</p><h2>From a hotel lobby in Manila <em>to the upper deck.</em></h2></div>
+      <div class="passport">
+        <p class="ph2" aria-hidden="true"><span>Visas · Entries</span><span>Page 07</span></p>
+        <div class="visas">
+          <div class="visa" data-reveal>
+            <svg viewBox="0 0 200 200" style="--rot:-8deg;color:#5A3E8E" aria-hidden="true"><g filter="url(#ink)" fill="none" stroke="currentColor"><circle cx="100" cy="100" r="92" stroke-width="5"/><circle cx="100" cy="100" r="78" stroke-width="2"/><defs><path id="v1t" d="M30 100a70 70 0 0 1 140 0"/><path id="v1b" d="M22 100a78 78 0 0 0 156 0"/></defs><text font-family="Nunito,sans-serif" font-weight="800" font-size="15" letter-spacing="3" fill="currentColor" stroke="none"><textPath href="#v1t" startOffset="50%" text-anchor="middle">MANILA · PH</textPath></text><text font-family="Nunito,sans-serif" font-weight="800" font-size="12" letter-spacing="3" fill="currentColor" stroke="none"><textPath href="#v1b" startOffset="50%" text-anchor="middle">GUEST RELATIONS</textPath></text><text x="100" y="112" text-anchor="middle" font-family="DM Serif Display,serif" font-size="40" fill="currentColor" stroke="none">2011</text><path d="M62 128h76" stroke-width="2"/><text x="100" y="146" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="11" letter-spacing="4" fill="currentColor" stroke="none">ARRIVED</text></g></svg>
+            <div><h3>Guest Relations</h3><p class="at">Manila Bay Grand Hotel · 2011</p><p>VIP arrivals and guest recovery for a 400-room hotel.</p></div>
+          </div>
+          <div class="visa" data-reveal style="--d:.1s">
+            <svg viewBox="0 0 200 200" style="--rot:6deg;color:#2F7A55" aria-hidden="true"><g filter="url(#ink)" fill="none" stroke="currentColor"><rect x="10" y="38" width="180" height="124" rx="6" stroke-width="5"/><rect x="20" y="48" width="160" height="104" rx="3" stroke-width="2"/><text x="100" y="74" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="13" letter-spacing="2.5" fill="currentColor" stroke="none">PEARL COAST AIR</text><text x="100" y="114" text-anchor="middle" font-family="DM Serif Display,serif" font-size="38" fill="currentColor" stroke="none">2013</text><text x="100" y="138" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="11" letter-spacing="3" fill="currentColor" stroke="none">★ CREW ★</text></g></svg>
+            <div><h3>Flight Attendant</h3><p class="at">Pearl Coast Air · 2013</p><p>Economy and business on regional and medium-haul routes.</p></div>
+          </div>
+          <div class="visa" data-reveal>
+            <svg viewBox="0 0 200 200" style="--rot:-4deg;color:#C0392B" aria-hidden="true"><g filter="url(#ink)" fill="none" stroke="currentColor"><ellipse cx="100" cy="100" rx="94" ry="68" stroke-width="5"/><ellipse cx="100" cy="100" rx="82" ry="56" stroke-width="2"/><defs><path id="v3t" d="M30 100a70 46 0 0 1 140 0"/><path id="v3b" d="M24 100a76 52 0 0 0 152 0"/></defs><text font-family="Nunito,sans-serif" font-weight="800" font-size="12" letter-spacing="2" fill="currentColor" stroke="none"><textPath href="#v3t" startOffset="50%" text-anchor="middle">AZURE CROWN</textPath></text><text font-family="Nunito,sans-serif" font-weight="800" font-size="10.5" letter-spacing="2" fill="currentColor" stroke="none"><textPath href="#v3b" startOffset="50%" text-anchor="middle">SENIOR CREW · DXB</textPath></text><text x="100" y="112" text-anchor="middle" font-family="DM Serif Display,serif" font-size="36" fill="currentColor" stroke="none">2016</text></g></svg>
+            <div><h3>Senior Flight Attendant</h3><p class="at">Azure Crown Airlines · 2016</p><p>First and business galley lead; in-flight trainer from 2018.</p></div>
+          </div>
+          <div class="visa" data-reveal style="--d:.1s">
+            <svg viewBox="0 0 200 200" style="--rot:4deg;color:#2E5BA6" aria-hidden="true"><g filter="url(#ink)" fill="none" stroke="currentColor"><path d="M40 30h120l30 30v80l-30 30H40l-30-30V60z" stroke-width="5"/><path d="M45 42h110l23 23v70l-23 23H45l-23-23V65z" stroke-width="2"/><text x="100" y="74" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="12" letter-spacing="3" fill="currentColor" stroke="none">NOW BOARDING</text><text x="100" y="114" text-anchor="middle" font-family="DM Serif Display,serif" font-size="38" fill="currentColor" stroke="none">A380</text><text x="100" y="138" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="11" letter-spacing="3" fill="currentColor" stroke="none">CSM · DXB</text></g></svg>
+            <div><h3>Cabin Services Manager</h3><p class="at">Azure Crown Airlines · Now</p><p>Leads A380 crews on long-haul routes across four continents.</p></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="contact" id="contact">
-    <h2>Let's <em>connect</em></h2>
-    <p>Open to cabin services, in-flight training and guest-experience roles with premium airlines and private aviation.</p>
-    <div class="btns"><a class="btn" href="#contact">Email Maria</a><a class="btn ghost" href="#contact">Download CV</a><a class="btn ghost" href="#contact">LinkedIn</a></div>
+  <section id="numbers" class="numbers">
+    <div class="wrap">
+      <div data-reveal><p class="kick">in numbers</p><h2>A few figures from <em>my flight logs.</em></h2><p class="intro">From flight logs and guest surveys.</p></div>
+      <div class="nums">
+        <div class="num" data-reveal><b>1,900</b><span>Sectors flown</span><i>that's a lot of safety demos</i></div>
+        <div class="num" data-reveal style="--d:.08s"><b>98%</b><span>Guest satisfaction</span><i>my favourite number</i></div>
+        <div class="num" data-reveal style="--d:.16s"><b>14</b><span>Crew led per flight</span><i>one team, every time</i></div>
+        <div class="num" data-reveal style="--d:.24s"><b>65</b><span>Destinations</span><i>and counting…</i></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certified" class="cert">
+    <div class="wrap grid">
+      <div data-reveal>
+        <p class="kick">certified and current</p>
+        <h2>Recurrent training, <em>every year.</em></h2>
+        <ul class="list" style="margin-top:36px">
+          <li><span class="tick" aria-hidden="true">✓</span><div><b>Safety &amp; Emergency Procedures</b><span>A380 · B777</span></div><em>recurrent 2026</em></li>
+          <li><span class="tick" aria-hidden="true">✓</span><div><b>Aviation First Aid &amp; AED</b><span>Medical response on board</span></div><em>recurrent 2026</em></li>
+          <li><span class="tick" aria-hidden="true">✓</span><div><b>Wine &amp; Spirits, Level 2</b><span>Awarded with distinction</span></div><em>with distinction</em></li>
+          <li><span class="tick" aria-hidden="true">✓</span><div><b>In-flight Leadership Programme</b><span>Azure Crown Academy</span></div><em>2021</em></li>
+        </ul>
+      </div>
+      <figure class="note" data-reveal style="--d:.1s">
+        <blockquote>“Maria is the manager every new crew member hopes to fly with. Calm in a diversion, warm with every guest.”</blockquote>
+        <figcaption>Captain, A380 fleet · colleague since 2019 <span class="flag">Illustrative</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="hello" class="hello">
+    <div class="wrap">
+      <div class="env" data-reveal>
+        <div class="in">
+          <div>
+            <p class="kick">let's connect</p>
+            <h2>Write back <em>anytime.</em></h2>
+            <p>Open to cabin services, in-flight training and guest-experience roles with premium airlines and private aviation.</p>
+            <div class="btns"><a class="btn fill" href="#hello" data-demo>Email Maria</a><a class="btn" href="#hello" data-demo>Download CV</a><a class="btn" href="#hello" data-demo>LinkedIn</a></div>
+          </div>
+          <ul class="to" aria-label="Return address">
+            <li>Return address</li>
+            <li>Maria Dela Cruz</li>
+            <li>Cabin Services, Dubai</li>
+            <li>United Arab Emirates ✈</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </section>
 </main>
-<footer>Sample portfolio website designed by Zenith Dubai CV. Maria Dela Cruz is a fictional profile; contact links are disabled.</footer>
-</div>
-<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design <b>· Zenith Dubai CV</b></a>
+<footer>Concept site designed by Zenith Dubai CV. Maria Dela Cruz is a fictional person; airlines, hotels, figures and the colleague note are illustrative.</footer>
 </body>
 </html>

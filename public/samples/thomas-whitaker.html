@@ -2,132 +2,344 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Thomas Whitaker · Principal Architect — Sample design by Zenith Dubai CV</title>
+<meta name="theme-color" content="#F3F1EB">
+<title>Thomas Whitaker · Principal Architect — Concept site by Zenith Dubai CV</title>
+<meta name="description" content="Concept portfolio website for a fictional principal architect, designed by Zenith Dubai CV.">
+<link rel="preload" href="img/thomas-whitaker-640.webp" as="image" type="image/webp">
+<link rel="preload" href="fonts/red-hat-display-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
+<script src="assets/sample.js"></script>
 <style>
-:root{--blue:#1C3D6E;--blue2:#163259;--paper:#F4F4F0;--white:#FFFFFF;--graphite:#3A3A3A;--muted:#6E7176;--rule:rgba(244,244,240,.22);--line:rgba(28,61,110,.18);--red:#C8553D;
---sans:"Red Hat Display","Helvetica Neue",Arial,sans-serif;--mono:"Red Hat Mono",ui-monospace,Menlo,monospace}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--graphite);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}a{color:inherit}
-.wrap{max-width:1220px;margin:0 auto;padding:0 28px}
-.bp{background-color:var(--blue);color:var(--paper);background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px),linear-gradient(rgba(244,244,240,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(244,244,240,.08) 1px,transparent 1px);background-size:120px 120px,120px 120px,24px 24px,24px 24px}
-.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0;font:500 13px var(--mono);letter-spacing:.06em;text-transform:uppercase}
-.top nav{display:flex;gap:24px}.top a{text-decoration:none}
-.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:end;padding:60px 0 64px}
-.hero small{font:500 13px var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.8}
-h1{font:300 clamp(56px,7.6vw,120px)/.9 var(--sans);letter-spacing:-.03em;margin:18px 0 0}
-h1 b{font-weight:700}
-.hero p{max-width:44ch;font-size:19px;opacity:.9;margin:26px 0 0}
-.pic{position:relative;padding:18px;border:1px solid var(--rule)}
-.pic img{aspect-ratio:4/5;object-fit:cover;filter:grayscale(.2)}
-.pic::before,.pic::after{content:"";position:absolute;width:26px;height:26px;border:2px solid var(--paper)}
-.pic::before{left:-2px;top:-2px;border-right:0;border-bottom:0}.pic::after{right:-2px;bottom:-2px;border-left:0;border-top:0}
-.block{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--paper);margin:0 0 56px;font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.06em}
-.block div{padding:12px 14px;border-right:1px solid var(--paper)}.block div:last-child{border-right:0}
-.block b{display:block;font:500 16px var(--sans);text-transform:none;letter-spacing:0;margin-top:4px}
-section{padding:90px 0;border-bottom:1px solid var(--line)}
-.sh{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:44px;flex-wrap:wrap}
-.tag{font:500 13px var(--mono);color:var(--blue);letter-spacing:.1em;text-transform:uppercase}
-h2{font:300 clamp(36px,4.6vw,60px)/1.02 var(--sans);letter-spacing:-.02em;margin:8px 0 0;color:var(--blue)}h2 b{font-weight:700}
-.sh p{max-width:44ch;margin:0;color:var(--muted)}
-.project{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);background:var(--white);margin-bottom:26px}
-.drawing{background:var(--blue2);display:grid;place-items:center;min-height:340px;position:relative}
-.drawing svg{width:80%;height:auto;color:var(--paper)}
-.drawing .scale{position:absolute;left:18px;bottom:16px;font:500 11px var(--mono);color:var(--paper);display:flex;align-items:center;gap:8px}
-.drawing .scale i{display:inline-block;width:80px;height:6px;background:repeating-linear-gradient(90deg,var(--paper) 0 20px,transparent 20px 40px);border:1px solid var(--paper)}
-.project .info{padding:34px}
-.project .no{font:500 13px var(--mono);color:var(--red)}
-.project h3{font:700 32px/1.1 var(--sans);letter-spacing:-.02em;margin:8px 0 12px;color:var(--blue)}
-.project p{margin:0 0 20px;color:var(--muted)}
-.meta{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
-.meta div{padding:12px 0;border-bottom:1px solid var(--line);font:500 12px var(--mono);text-transform:uppercase;color:var(--muted)}
-.meta b{display:block;font:500 15px var(--sans);color:var(--graphite);text-transform:none}
-.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.principles div{border-top:3px solid var(--blue);padding-top:18px}
-.principles h3{font:700 24px var(--sans);margin:0 0 8px;color:var(--blue)}
-.principles p{margin:0;color:var(--muted)}
-.cv{display:grid;grid-template-columns:1.2fr .8fr;gap:48px}
-.cv .row{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
-.cv time{font:500 13px var(--mono);color:var(--blue)}
-.cv h3{font:700 20px var(--sans);margin:0}.cv h3 span{display:block;font-weight:400;color:var(--muted);font-size:16px}
-.badges{display:grid;gap:12px}
-.badges div{border:1px solid var(--line);background:var(--white);padding:16px 18px}
-.badges b{display:block;font:700 18px var(--sans);color:var(--blue)}.badges span{font:500 13px var(--mono);color:var(--muted)}
-.contact{padding:90px 0 96px;border:0}
-.contact .wrap{text-align:center}
-.contact h2{color:var(--paper)}
-.contact p{max-width:48ch;margin:18px auto 0;opacity:.85}
-.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
-.btn{padding:14px 24px;border:1px solid var(--paper);text-decoration:none;font:500 13px var(--mono);letter-spacing:.08em;text-transform:uppercase}
-.btn.fill{background:var(--paper);color:var(--blue)}
-footer{text-align:center;padding:24px 0 90px;font:500 12px var(--mono);color:var(--muted)}
-.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:10px 14px;background:var(--paper);color:var(--blue);border:1px solid var(--blue);font:500 12px var(--mono);text-transform:uppercase;text-decoration:none}
-@media (max-width:940px){.hero,.project,.cv{grid-template-columns:1fr}.principles{grid-template-columns:1fr}.block{grid-template-columns:1fr 1fr}.block div:nth-child(2){border-right:0}.block div:nth-child(-n+2){border-bottom:1px solid var(--paper)}.top nav{display:none}.pic{max-width:400px}.cv .row{grid-template-columns:1fr;gap:4px}}
+/* Concept: drawing sheet A-001. The hero is a working drawing: sheet border with grid
+   references, his name dimensioned like a wall, the portrait called out as Detail 1,
+   a north arrow, and a title block whose status is ringed with a revision cloud.
+   Each project gets its own plan, the career is the revision table, and the
+   credentials are the general notes. */
+:root{
+  --paper:#F3F1EB; --paper2:#EAE7DE; --ink:#1C232B; --mute:#5E6670; --line:#1C232B; --hair:rgba(28,35,43,.18); --blue:#2B5FAE; --red:#C8402F;
+  --sans:"Red Hat Display","Helvetica Neue",Arial,sans-serif; --mono:"Red Hat Mono",ui-monospace,Menlo,monospace;
+  --zc-bg:#1C232B; --zc-fg:#F3F1EB; --zc-dot:#C8402F;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.mono{font-family:var(--mono)}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.grid-bg{background-image:linear-gradient(var(--hair) 1px,transparent 1px),linear-gradient(90deg,var(--hair) 1px,transparent 1px);background-size:120px 120px;background-position:-1px -1px}
+
+/* ---------- Sheet (hero) ---------- */
+.hero{position:relative;min-height:max(700px,100svh);padding:max(14px,env(safe-area-inset-top,0px)) clamp(10px,1.4vw,18px) clamp(10px,1.4vw,18px);display:flex}
+.sheet{position:relative;flex:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);grid-template-rows:auto minmax(0,1fr) auto;gap:0 clamp(20px,3vw,48px);padding:clamp(34px,3.4vw,46px) clamp(30px,3.6vw,56px) 0;border:2px solid var(--ink);outline:1px solid var(--ink);outline-offset:-8px;overflow:hidden;
+  background:linear-gradient(rgba(28,35,43,.05) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(28,35,43,.05) 1px,transparent 1px) 0 0/24px 24px,var(--paper)}
+.refs-x,.refs-y{position:absolute;display:flex;justify-content:space-around;font:500 10px/1 var(--mono);color:var(--mute);pointer-events:none}
+.refs-x{left:8px;right:8px;top:0;height:8px;align-items:center;transform:translateY(-1px)}
+.refs-y{top:8px;bottom:8px;left:0;width:8px;flex-direction:column;align-items:center}
+.plan-bg{position:absolute;right:-4%;bottom:-6%;width:62%;opacity:.13;pointer-events:none}
+.head{grid-column:1/-1;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding-bottom:18px;border-bottom:1px solid var(--ink)}
+.firm{font:700 13px/1.3 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none}
+.firm span{display:block;font:400 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:none;color:var(--mute)}
+.index{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,auto);border:1px solid var(--ink)}
+.index li+li{border-left:1px solid var(--ink)}
+.index a{display:block;padding:7px 12px;text-decoration:none;font:500 12px/1.3 var(--mono)}
+.index a b{display:block;font:700 13px/1.2 var(--sans);letter-spacing:.02em}
+.index a:hover,.index a[aria-current]{background:var(--ink);color:var(--paper)}
+.main{position:relative;align-self:center;padding:clamp(20px,4vh,40px) 0}
+.dimline{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 18px;color:var(--blue);font:500 12px/1 var(--mono)}
+.dimline::before,.dimline::after{content:"";flex:1;height:1px;background:var(--blue)}
+.dimline i{position:absolute;top:50%;width:1px;height:14px;margin-top:-7px;background:var(--blue)}
+.dimline i:first-child{left:0}.dimline i:last-of-type{right:0}
+.dimline i::after{content:"";position:absolute;left:-4px;top:3px;width:9px;height:1px;background:var(--blue);transform:rotate(-45deg)}
+h1{margin:0;font:700 clamp(62px,8.2vw,132px)/.88 var(--sans);letter-spacing:-.045em}
+h1 span{display:block;color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.role{display:flex;align-items:center;gap:12px;margin:22px 0 0;font:500 14px/1.4 var(--mono)}
+.role b{padding:4px 8px;border:1.5px solid var(--ink);font:700 12px/1 var(--sans);letter-spacing:.12em}
+.lead{margin:16px 0 0;max-width:44ch;font-size:clamp(17px,1.4vw,20px);line-height:1.55;color:#2E3640}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{display:inline-block;padding:13px 20px;border:1.5px solid var(--ink);text-decoration:none;font:600 14px/1 var(--sans);letter-spacing:.02em}
+.btn.fill{background:var(--ink);color:var(--paper)}
+.btn:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+.detail{position:relative;align-self:center;justify-self:center;width:min(100%,360px);margin:clamp(20px,4vh,40px) 34px 0 0}
+.detail .ph{position:relative;aspect-ratio:928/1152;border:1.5px solid var(--ink);background:#C9C7C1;overflow:hidden}
+.detail .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.03)}
+.dim-v{position:absolute;top:0;bottom:0;right:-28px;width:1px;background:var(--blue)}
+.dim-v::before,.dim-v::after{content:"";position:absolute;left:-6px;width:13px;height:1px;background:var(--blue);transform:rotate(-45deg)}
+.dim-v::before{top:0}.dim-v::after{bottom:0}
+.dim-v span{position:absolute;top:50%;left:8px;transform:translateY(-50%) rotate(90deg);transform-origin:left center;white-space:nowrap;font:500 12px/1 var(--mono);color:var(--blue)}
+.dim-h{position:absolute;left:0;right:0;top:-24px;height:1px;background:var(--blue)}
+.dim-h::before,.dim-h::after{content:"";position:absolute;top:-6px;width:1px;height:13px;background:var(--blue);transform:rotate(45deg)}
+.dim-h::before{left:0}.dim-h::after{right:0}
+.dim-h span{position:absolute;left:50%;top:-18px;transform:translateX(-50%);padding:0 6px;background:var(--paper);font:500 12px/1 var(--mono);color:var(--blue)}
+.callout{position:absolute;left:-58px;bottom:16%;display:flex;align-items:center;pointer-events:none}
+.callout b{display:grid;place-items:center;width:52px;height:52px;border:1.5px solid var(--ink);border-radius:50%;background:var(--paper);font:700 15px/1 var(--sans);position:relative}
+.callout b::after{content:"";position:absolute;left:4px;right:4px;top:50%;height:1px;background:var(--ink)}
+.callout b span{font:500 9px/1 var(--mono);position:absolute;bottom:9px}
+.callout b em{font-style:normal;position:absolute;top:9px}
+.callout i{width:40px;height:1px;background:var(--ink)}
+.detail figcaption{margin-top:10px;font:500 12px/1.4 var(--mono);color:var(--mute)}
+.detail figcaption b{color:var(--ink);font-family:var(--sans)}
+.north{position:absolute;right:clamp(30px,3vw,52px);top:calc(50% + 40px);width:54px;color:var(--ink);pointer-events:none}
+.tblock{position:relative;z-index:1;grid-column:1/-1;display:grid;grid-template-columns:1.2fr 1.5fr 1fr .8fr .7fr .7fr;margin:0 calc(-1 * clamp(30px,3.6vw,56px));border-top:1.5px solid var(--ink);background:var(--paper)}
+.tblock div{position:relative;padding:10px 14px 12px;border-left:1px solid var(--ink)}
+.tblock div:first-child{border-left:0}
+.tblock small{display:block;font:500 10px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.tblock b{display:block;margin-top:4px;font:700 16px/1.25 var(--sans)}
+.tblock .rc{position:relative;display:inline-block}
+.tblock .cloud{position:absolute;left:-14px;top:-9px;width:calc(100% + 28px);height:calc(100% + 18px);pointer-events:none;overflow:visible}
+.tblock .st b{color:var(--red)}
+.zc-reveal .tblock .cloud path{stroke-dasharray:900;animation:cloud 1.6s ease-out .8s both}
+@keyframes cloud{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
+
+/* ---------- Sheets ---------- */
+section{padding:clamp(84px,10vw,124px) 0;border-top:2px solid var(--ink)}
+.shead{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px 28px;align-items:end;margin-bottom:48px}
+.tag{display:grid;place-items:center;width:84px;height:84px;border:1.5px solid var(--ink);border-radius:50%;position:relative;font:700 18px/1 var(--sans)}
+.tag::after{content:"";position:absolute;left:6px;right:6px;top:50%;height:1px;background:var(--ink)}
+.tag em{position:absolute;top:18px;font-style:normal}
+.tag span{position:absolute;bottom:18px;font:500 12px/1 var(--mono)}
+h2{margin:0;font:700 clamp(38px,4.6vw,64px)/.95 var(--sans);letter-spacing:-.04em}
+h2 span{color:transparent;-webkit-text-stroke:1.2px var(--ink)}
+.shead p{grid-column:2;margin:0;max-width:56ch;color:var(--mute)}
+
+.proj{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(30px,5vw,70px);align-items:start;padding:44px 0;border-top:1px solid var(--ink)}
+.proj svg{width:100%;height:auto;background:#fff;border:1px solid var(--hair)}
+.proj .no{font:500 13px/1 var(--mono);color:var(--blue)}
+.proj h3{margin:10px 0 12px;font:700 clamp(28px,2.8vw,40px)/1.05 var(--sans);letter-spacing:-.03em}
+.proj p{color:#2E3640}
+.spec{display:grid;grid-template-columns:1fr 1fr;margin-top:22px;border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
+.spec div{padding:10px 12px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.spec small{display:block;font:500 10.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.spec b{display:block;margin-top:2px;font:700 17px/1.3 var(--sans)}
+.scale{display:flex;align-items:center;gap:10px;margin-top:10px;font:500 11.5px/1 var(--mono);color:var(--mute)}
+.scale i{display:block;width:120px;height:6px;background:linear-gradient(90deg,var(--ink) 25%,transparent 25% 50%,var(--ink) 50% 75%,transparent 75%);border:1px solid var(--ink)}
+
+.princ{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
+.princ div{padding:28px 26px 30px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.princ svg{width:64px;height:64px;color:var(--blue)}
+.princ h3{margin:18px 0 8px;font:700 24px/1.15 var(--sans);letter-spacing:-.02em}
+.princ p{margin:0;color:#2E3640}
+
+.rev{width:100%;border-collapse:collapse;border:1.5px solid var(--ink)}
+.rev th,.rev td{padding:14px 16px;text-align:left;vertical-align:top;border:1px solid var(--ink)}
+.rev thead th{background:var(--ink);color:var(--paper);font:500 11px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.rev td.r{width:70px;font:700 20px/1 var(--sans);text-align:center}
+.rev td.d{width:170px;font:500 14px/1.5 var(--mono);white-space:nowrap}
+.rev td b{display:block;font:700 19px/1.3 var(--sans)}
+.rev td span{color:var(--mute)}
+.rev tr.now td{background:rgba(200,64,47,.06)}
+.rev tr.now td.r{color:var(--red)}
+.notes{margin:44px 0 0;padding:0;list-style:none;counter-reset:n;columns:2;column-gap:56px}
+.notes li{counter-increment:n;display:grid;grid-template-columns:34px minmax(0,1fr);break-inside:avoid;padding:12px 0;border-top:1px solid var(--hair)}
+.notes li::before{content:counter(n) ".";font:700 16px/1.5 var(--sans)}
+.notes b{display:block;font:700 17px/1.4 var(--sans)}
+.notes span{color:var(--mute);font-size:15.5px}
+
+.contact .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:50px;align-items:end}
+.contact h2{font-size:clamp(46px,6.4vw,96px)}
+.contact h2 b{color:var(--red)}
+.stampbox{border:1.5px solid var(--ink)}
+.stampbox div{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-top:1px solid var(--ink);font:500 13px/1.4 var(--mono)}
+.stampbox div:first-child{border-top:0;background:var(--ink);color:var(--paper);font-weight:500;letter-spacing:.1em;text-transform:uppercase;font-size:11px}
+footer{padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));border-top:2px solid var(--ink);text-align:center;color:var(--mute);font:500 12.5px/1.6 var(--mono)}
+
+@media (max-width:1060px){
+  .index{grid-template-columns:repeat(2,auto)}
+  .index li:nth-child(3){border-left:0}
+  .index li:nth-child(n+3){border-top:1px solid var(--ink)}
+  .tblock{grid-template-columns:repeat(3,1fr)}
+  .tblock div:nth-child(4){border-left:0}
+  .tblock div:nth-child(n+4){border-top:1px solid var(--ink)}
+  .north{display:none}
+}
+@media (max-width:860px){
+  .sheet{grid-template-columns:1fr;grid-template-rows:auto auto auto auto}
+  .head{flex-direction:column}
+  .index{grid-template-columns:repeat(4,auto);width:100%}
+  .index li:nth-child(3){border-left:1px solid var(--ink)}
+  .index li:nth-child(n+3){border-top:0}
+  .detail{order:-1;grid-row:2;margin:44px auto 10px;width:min(76%,320px)}
+  .main{grid-row:3}
+  .proj,.contact .wrap{grid-template-columns:1fr}
+  .princ{grid-template-columns:1fr}
+  .notes{columns:1}
+}
+@media (max-width:560px){
+  .index{grid-template-columns:1fr 1fr}
+  .index li:nth-child(3){border-left:0}
+  .index li:nth-child(n+3){border-top:1px solid var(--ink)}
+  .index a{padding:7px 10px}
+  .callout{left:-46px}.callout b{width:44px;height:44px}.callout i{width:20px}
+  .detail{width:min(70%,280px);margin-left:calc(15% + 10px)}
+  .tblock{grid-template-columns:1fr 1fr}
+  .tblock div:nth-child(odd){border-left:0}
+  .tblock div:nth-child(4){border-left:1px solid var(--ink)}
+  .tblock div:nth-child(n+3){border-top:1px solid var(--ink)}
+  .shead{grid-template-columns:1fr}
+  .shead p{grid-column:1}
+  .tag{width:68px;height:68px}
+  .rev thead{display:none}
+  .rev,.rev tbody,.rev tr,.rev td{display:block;width:auto!important}
+  .rev tr{border-bottom:1.5px solid var(--ink)}
+  .rev td{border:0;padding:6px 14px}
+  .rev td.r{text-align:left;padding-top:14px}
+  .rev td.d{padding-bottom:0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="bp">
-  <div class="wrap">
-    <header class="top"><span>Whitaker Lane Architects</span><nav><a href="#projects">Projects</a><a href="#practice">Practice</a><a href="#contact">Contact</a></nav></header>
-    <div class="hero">
-      <div><small>Principal Architect · RIBA</small><h1>Thomas<br><b>Whitaker</b></h1><p>Civic and residential buildings that work with climate, light and the people who use them, in London and the Gulf.</p></div>
-      <div class="pic"><img src="img/thomas-whitaker.jpg" alt="Portrait of Thomas Whitaker against a concrete wall"></div>
-    </div>
-    <div class="block" aria-label="Drawing title block">
-      <div>Project<b>Portfolio 2026</b></div><div>Drawn by<b>T. Whitaker</b></div><div>Sheet<b>A-001</b></div><div>Status<b>Open to new work</b></div>
-    </div>
-  </div>
-</div>
-
 <main>
-  <section id="projects"><div class="wrap">
-    <div class="sh"><div><span class="tag">Sheet A-100 · Projects</span><h2>Selected <b>buildings</b></h2></div><p>Four projects from a twenty-five-year practice. Plans simplified for clarity.</p></div>
-    <article class="project">
-      <div class="drawing"><svg viewBox="0 0 320 220" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="20" y="20" width="280" height="180"/><path d="M20 90h120v110M140 20v40M200 90h100M200 90v110M140 140h60"/><circle cx="250" cy="55" r="22"/><path d="M60 20v-8M100 20v-8M20 60h-8M20 150h-8"/><path d="M150 200a30 30 0 0 1 30-30" stroke-dasharray="4 4"/></svg><span class="scale"><i></i>0 — 10 m</span></div>
-      <div class="info"><span class="no">01 · Civic</span><h3>Al Qudra Desert Library</h3><p>A public library half-sunk into the desert, with courtyards that keep reading rooms ten degrees cooler without extra cooling.</p>
-        <div class="meta"><div>Area<b>6,800 m²</b></div><div>Completed<b>2023</b></div><div>Role<b>Lead architect</b></div><div>Recognition<b>Gulf Civic Design Prize</b></div></div></div>
-    </article>
-    <article class="project">
-      <div class="drawing"><svg viewBox="0 0 320 220" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 200V60h60v140M80 200V40h60v160M140 200V70h60v130M200 200V50h60v150M260 200V90h40v110"/><path d="M20 200h280"/><path d="M30 80h40M30 110h40M30 140h40M90 60h40M90 90h40M90 120h40M150 90h40M150 120h40M210 70h40M210 100h40M210 130h40"/></svg><span class="scale"><i></i>0 — 20 m</span></div>
-      <div class="info"><span class="no">02 · Residential</span><h3>Harbour Quay Housing</h3><p>212 homes around shared gardens on a former dockyard, with every flat dual-aspect for daylight and cross-ventilation.</p>
-        <div class="meta"><div>Homes<b>212</b></div><div>Completed<b>2021</b></div><div>Role<b>Partner in charge</b></div><div>Rating<b>BREEAM Excellent</b></div></div></div>
-    </article>
-    <article class="project">
-      <div class="drawing"><svg viewBox="0 0 320 220" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M160 20l120 180H40z"/><path d="M160 20v180M100 110h120M70 155h180M130 65l-60 135M190 65l60 135"/></svg><span class="scale"><i></i>0 — 5 m</span></div>
-      <div class="info"><span class="no">03 · Cultural</span><h3>Lattice Pavilion</h3><p>A timber lattice pavilion for a summer arts festival, assembled in nine days and reused as a school canopy.</p>
-        <div class="meta"><div>Area<b>420 m²</b></div><div>Completed<b>2019</b></div><div>Role<b>Design lead</b></div><div>Material<b>Glulam timber</b></div></div></div>
-    </article>
-  </div></section>
-
-  <section id="practice"><div class="wrap">
-    <div class="sh"><div><span class="tag">Sheet A-200 · Practice</span><h2>Three <b>principles</b></h2></div><p>How the studio approaches every brief, large or small.</p></div>
-    <div class="principles">
-      <div><h3>Climate first</h3><p>Orientation, shade and thermal mass before any machinery. The best kilowatt is the one never used.</p></div>
-      <div><h3>Light as material</h3><p>Every room is drawn with its daylight at noon in June and in December.</p></div>
-      <div><h3>Built to be changed</h3><p>Structures planned for second and third lives, so buildings outlast their first use.</p></div>
+  <header class="hero" id="top">
+    <div class="sheet">
+      <div class="refs-x" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+      <div class="refs-y" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span></div>
+      <svg class="plan-bg" viewBox="0 0 600 420" aria-hidden="true" fill="none" stroke="#1C232B" stroke-width="3"><rect x="10" y="10" width="580" height="400"/><circle cx="170" cy="150" r="70"/><circle cx="420" cy="260" r="90"/><path d="M10 210h160M340 10v160M260 260h70M500 10v120h90"/><path d="M60 330l60-60M90 360l60-60M120 390l60-60M150 410l40-40" stroke-width="1.5"/></svg>
+      <div class="head">
+        <a class="firm" href="#top">Whitaker Lane Architects<span>London · Dubai · drawing register</span></a>
+        <nav aria-label="Sheets"><ul class="index">
+          <li><a href="#projects" data-spy><b>A-100</b>Projects</a></li>
+          <li><a href="#practice" data-spy><b>A-200</b>Practice</a></li>
+          <li><a href="#career" data-spy><b>A-300</b>Career</a></li>
+          <li><a href="#contact" data-spy><b>A-400</b>Contact</a></li>
+        </ul></nav>
+      </div>
+      <div class="main">
+        <p class="dimline" aria-hidden="true"><i></i><span>25 years in practice</span><i></i></p>
+        <h1>Thomas <span>Whitaker</span></h1>
+        <p class="role"><b>RIBA</b>Principal Architect · London &amp; the Gulf</p>
+        <p class="lead">Civic and residential buildings that work with climate, light and the people who use them.</p>
+        <div class="ctas"><a class="btn fill" href="#projects">View the projects</a><a class="btn" href="#contact">Start a conversation</a></div>
+      </div>
+      <figure class="detail" style="margin-bottom:0">
+        <div class="ph"><img src="img/thomas-whitaker-640.webp" srcset="img/thomas-whitaker-640.webp 640w, img/thomas-whitaker.webp 928w" sizes="(max-width:860px) 76vw, 360px" width="928" height="1152" alt="Thomas Whitaker in glasses and a navy sweater against a concrete wall" fetchpriority="high"></div>
+        <span class="dim-h" aria-hidden="true"><span>928</span></span>
+        <span class="dim-v" aria-hidden="true"><span>1152</span></span>
+        <span class="callout" aria-hidden="true"><b><em>1</em><span>A-001</span></b><i></i></span>
+        <figcaption><b>Detail 1</b> · The architect · scale 1:1</figcaption>
+      </figure>
+      <svg class="north" viewBox="0 0 60 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="30" cy="50" r="24"/><path d="M30 18L40 62 30 54 20 62z" fill="currentColor"/><text x="30" y="12" text-anchor="middle" font-family="Red Hat Display,sans-serif" font-weight="700" font-size="13" fill="currentColor" stroke="none">N</text></svg>
+      <div class="tblock">
+        <div><small>Project</small><b>Portfolio 2026</b></div>
+        <div class="st"><small>Status</small><b class="rc">Open to new work<svg class="cloud" viewBox="0 0 200 44" preserveAspectRatio="none" aria-hidden="true"><path d="M10 10 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a8 7 0 0 1 0 12 a8 7 0 0 1 0 12 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a8 7 0 0 1 0 -12 a8 7 0 0 1 0 -12z" fill="none" stroke="#C8402F" stroke-width="1.8" vector-effect="non-scaling-stroke"/></svg></b></div>
+        <div><small>Drawn by</small><b>T. Whitaker</b></div>
+        <div><small>Sheet</small><b>A-001</b></div>
+        <div><small>Scale</small><b>1 : 1</b></div>
+        <div><small>Date</small><b>2026</b></div>
+      </div>
     </div>
-  </div></section>
+  </header>
 
-  <section><div class="wrap cv">
-    <div><span class="tag">Sheet A-300 · Career</span><h2 style="margin-bottom:24px">Practice <b>history</b></h2>
-      <div class="row"><time>2015 — today</time><h3>Principal &amp; Founder<span>Whitaker Lane Architects, London &amp; Dubai</span></h3></div>
-      <div class="row"><time>2006 — 2015</time><h3>Associate Director<span>Fenwick Hale Partnership, London</span></h3></div>
-      <div class="row"><time>2001 — 2006</time><h3>Architect<span>Morrow Studio, Edinburgh</span></h3></div>
-      <div class="row"><time>1994 — 2001</time><h3>BA, Diploma in Architecture<span>Part I &amp; II, with distinction</span></h3></div></div>
-    <div class="badges"><span class="tag">Credentials</span>
-      <div><b>RIBA Chartered Architect</b><span>Registered architect, UK</span></div>
-      <div><b>LEED AP BD+C</b><span>Green building accreditation</span></div>
-      <div><b>Visiting critic</b><span>Two schools of architecture</span></div>
-      <div><b>English · Arabic (conversational)</b><span>Languages</span></div></div>
-  </div></section>
+  <section id="projects">
+    <div class="wrap">
+      <div class="shead" data-reveal><span class="tag" aria-hidden="true"><em>A</em><span>100</span></span><h2>Selected <span>buildings</span></h2><p>Three projects from a twenty-five-year practice. Plans simplified for clarity.</p></div>
+      <article class="proj" data-reveal>
+        <div>
+          <svg viewBox="0 0 520 340" role="img" aria-label="Simplified plan of the Al Qudra Desert Library: a long low building with two circular sunken courtyards">
+            <g fill="none" stroke="#1C232B"><rect x="30" y="40" width="460" height="230" stroke-width="5"/><rect x="40" y="50" width="440" height="210" stroke-width="1"/>
+            <circle cx="160" cy="155" r="62" stroke-width="4"/><circle cx="160" cy="155" r="48" stroke-width="1" stroke-dasharray="4 4"/><circle cx="360" cy="155" r="62" stroke-width="4"/><circle cx="360" cy="155" r="48" stroke-width="1" stroke-dasharray="4 4"/>
+            <path d="M30 155h68M222 155h76M422 155h68M260 40v54M260 216v54" stroke-width="3"/></g>
+            <g stroke="#1C232B" stroke-width="1" opacity=".5"><path d="M40 270l20-20M70 270l20-20M100 270l20-20M130 270l20-20M160 270l20-20M190 270l20-20M220 270l20-20M250 270l20-20M280 270l20-20M310 270l20-20M340 270l20-20M370 270l20-20M400 270l20-20M430 270l20-20M460 270l20-20"/></g>
+            <g fill="#2B5FAE" font-family="Red Hat Mono,monospace" font-size="12"><text x="160" y="159" text-anchor="middle">COURT 1</text><text x="360" y="159" text-anchor="middle">COURT 2</text><text x="260" y="300" text-anchor="middle">−10 °C IN READING ROOMS · NO EXTRA COOLING</text></g>
+            <path d="M30 22h460M30 16v12M490 16v12" stroke="#2B5FAE"/><text x="260" y="16" text-anchor="middle" fill="#2B5FAE" font-family="Red Hat Mono,monospace" font-size="12">6,800 m²</text>
+          </svg>
+          <p class="scale"><i></i>0 — 10 m</p>
+        </div>
+        <div>
+          <p class="no">01 · Civic</p>
+          <h3>Al Qudra Desert Library</h3>
+          <p>A public library half-sunk into the desert, with courtyards that keep reading rooms ten degrees cooler without extra cooling.</p>
+          <div class="spec"><div><small>Area</small><b>6,800 m²</b></div><div><small>Completed</small><b>2023</b></div><div><small>Role</small><b>Lead architect</b></div><div><small>Recognition</small><b>Gulf Civic Design Prize</b></div></div>
+        </div>
+      </article>
+      <article class="proj" data-reveal>
+        <div>
+          <svg viewBox="0 0 520 340" role="img" aria-label="Simplified plan of Harbour Quay Housing: a perimeter block of homes around shared gardens">
+            <g fill="none" stroke="#1C232B" stroke-width="5"><path d="M40 40h440v260H40z"/><path d="M90 90h340v160H90z"/></g>
+            <g fill="none" stroke="#1C232B" stroke-width="1.2"><path d="M40 90h50M40 140h50M40 190h50M40 240h50M480 90h-50M480 140h-50M480 190h-50M480 240h-50M140 40v50M200 40v50M260 40v50M320 40v50M380 40v50M140 300v-50M200 300v-50M260 300v-50M320 300v-50M380 300v-50"/></g>
+            <g fill="#DCE6D2" stroke="#1C232B" stroke-width="1"><circle cx="170" cy="150" r="22"/><circle cx="250" cy="190" r="30"/><circle cx="340" cy="140" r="24"/><circle cx="370" cy="210" r="16"/><circle cx="140" cy="215" r="14"/></g>
+            <g fill="#2B5FAE" font-family="Red Hat Mono,monospace" font-size="12"><text x="260" y="128" text-anchor="middle">SHARED GARDENS</text><text x="260" y="326" text-anchor="middle">EVERY HOME DUAL-ASPECT · CROSS-VENTILATED</text></g>
+          </svg>
+          <p class="scale"><i></i>0 — 20 m</p>
+        </div>
+        <div>
+          <p class="no">02 · Residential</p>
+          <h3>Harbour Quay Housing</h3>
+          <p>212 homes around shared gardens on a former dockyard, with every flat dual-aspect for daylight and cross-ventilation.</p>
+          <div class="spec"><div><small>Homes</small><b>212</b></div><div><small>Completed</small><b>2021</b></div><div><small>Role</small><b>Partner in charge</b></div><div><small>Rating</small><b>BREEAM Excellent</b></div></div>
+        </div>
+      </article>
+      <article class="proj" data-reveal>
+        <div>
+          <svg viewBox="0 0 520 340" role="img" aria-label="Simplified plan of the Lattice Pavilion: a timber diagonal grid on a square footprint">
+            <defs><clipPath id="lat"><rect x="110" y="40" width="300" height="260"/></clipPath></defs>
+            <rect x="110" y="40" width="300" height="260" fill="none" stroke="#1C232B" stroke-width="5"/>
+            <g clip-path="url(#lat)" stroke="#8A6A3E" stroke-width="2.5"><path d="M50 40l260 260M90 40l260 260M130 40l260 260M170 40l260 260M210 40l260 260M10 40l260 260M-30 40l260 260M-70 40l260 260"/><path d="M470 40L210 300M430 40L170 300M390 40L130 300M350 40L90 300M310 40L50 300M510 40L250 300M550 40L290 300M590 40L330 300"/></g>
+            <g fill="#2B5FAE" font-family="Red Hat Mono,monospace" font-size="12"><text x="260" y="326" text-anchor="middle">GLULAM LATTICE · ASSEMBLED IN 9 DAYS</text></g>
+          </svg>
+          <p class="scale"><i></i>0 — 5 m</p>
+        </div>
+        <div>
+          <p class="no">03 · Cultural</p>
+          <h3>Lattice Pavilion</h3>
+          <p>A timber lattice pavilion for a summer arts festival, assembled in nine days and reused as a school canopy.</p>
+          <div class="spec"><div><small>Area</small><b>420 m²</b></div><div><small>Completed</small><b>2019</b></div><div><small>Role</small><b>Design lead</b></div><div><small>Material</small><b>Glulam timber</b></div></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="practice" style="background:var(--paper2)">
+    <div class="wrap">
+      <div class="shead" data-reveal><span class="tag" aria-hidden="true"><em>A</em><span>200</span></span><h2>Three <span>principles</span></h2><p>How the studio approaches every brief, large or small.</p></div>
+      <div class="princ" data-reveal>
+        <div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 50h52"/><path d="M12 50a20 20 0 0 1 40 0" stroke-dasharray="3 3"/><circle cx="44" cy="22" r="6"/><path d="M20 50V36h16v14"/></svg><h3>Climate first</h3><p>Orientation, shade and thermal mass before any machinery. The best kilowatt is the one never used.</p></div>
+        <div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 56h48M14 56V22h36v34"/><path d="M50 8L30 40M58 16L38 46" stroke-dasharray="3 3"/><path d="M22 56V40h12v16"/></svg><h3>Light as material</h3><p>Every room is drawn with its daylight at noon in June and in December.</p></div>
+        <div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 56h48"/><rect x="12" y="16" width="16" height="40"/><rect x="36" y="16" width="16" height="40" stroke-dasharray="3 3"/><path d="M12 30h16M12 43h16M36 30h16M36 43h16"/></svg><h3>Built to be changed</h3><p>Structures planned for second and third lives, so buildings outlast their first use.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="career">
+    <div class="wrap">
+      <div class="shead" data-reveal><span class="tag" aria-hidden="true"><em>A</em><span>300</span></span><h2>Practice <span>history</span></h2><p>The revision table: each revision supersedes the last.</p></div>
+      <table class="rev" data-reveal>
+        <thead><tr><th scope="col">Rev</th><th scope="col">Date</th><th scope="col">Description</th></tr></thead>
+        <tbody>
+          <tr class="now"><td class="r">D</td><td class="d">2015 — today</td><td><b>Principal &amp; Founder</b><span>Whitaker Lane Architects, London &amp; Dubai</span></td></tr>
+          <tr><td class="r">C</td><td class="d">2006 — 2015</td><td><b>Associate Director</b><span>Fenwick Hale Partnership, London</span></td></tr>
+          <tr><td class="r">B</td><td class="d">2001 — 2006</td><td><b>Architect</b><span>Morrow Studio, Edinburgh</span></td></tr>
+          <tr><td class="r">A</td><td class="d">1994 — 2001</td><td><b>BA, Diploma in Architecture</b><span>Part I &amp; II, with distinction</span></td></tr>
+        </tbody>
+      </table>
+      <ol class="notes" data-reveal aria-label="Credentials">
+        <li><div><b>RIBA Chartered Architect</b><span>Registered architect, UK</span></div></li>
+        <li><div><b>LEED AP BD+C</b><span>Green building accreditation</span></div></li>
+        <li><div><b>Visiting critic</b><span>Two schools of architecture</span></div></li>
+        <li><div><b>English · Arabic (conversational)</b><span>Languages</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" style="background:var(--paper2)">
+    <div class="wrap">
+      <div data-reveal>
+        <div class="shead" style="margin-bottom:26px"><span class="tag" aria-hidden="true"><em>A</em><span>400</span></span><h2>Have a site and <span>a question</span><b>?</b></h2></div>
+        <p style="max-width:52ch;color:#2E3640">Thomas takes on civic, education and residential commissions, and is open to design director roles.</p>
+        <div class="ctas"><a class="btn fill" href="#contact" data-demo>Start a conversation</a><a class="btn" href="#contact" data-demo>Download portfolio</a><a class="btn" href="#contact" data-demo>LinkedIn</a></div>
+      </div>
+      <div class="stampbox" data-reveal>
+        <div><span>Issued for</span><span>Rev D</span></div>
+        <div><span>Commissions</span><span>Civic · education · housing</span></div>
+        <div><span>Roles</span><span>Design director</span></div>
+        <div><span>Studios</span><span>London · Dubai</span></div>
+      </div>
+    </div>
+  </section>
 </main>
-
-<div class="bp contact" id="contact"><div class="wrap"><span class="tag" style="color:var(--paper)">Sheet A-400 · Contact</span><h2>Have a site and <b>a question</b>?</h2><p>Thomas takes on civic, education and residential commissions, and is open to design director roles.</p>
-  <div class="btns"><a class="btn fill" href="#contact">Start a conversation</a><a class="btn" href="#contact">Download portfolio</a><a class="btn" href="#contact">LinkedIn</a></div></div></div>
-<footer class="wrap">Sample portfolio website designed by Zenith Dubai CV · Thomas Whitaker is a fictional profile; projects, firms and awards are illustrative.</footer>
-<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design · Zenith</a>
+<footer>Concept site designed by Zenith Dubai CV · Thomas Whitaker is a fictional person; projects, firms and awards are illustrative.</footer>
 </body>
 </html>

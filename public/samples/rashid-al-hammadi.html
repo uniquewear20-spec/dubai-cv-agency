@@ -2,177 +2,421 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Captain Rashid Al Hammadi · Airline Captain — Sample design by Zenith Dubai CV</title>
+<meta name="theme-color" content="#111417">
+<title>Capt. Rashid Al Hammadi · Airline Captain — Concept site by Zenith Dubai CV</title>
+<meta name="description" content="Concept portfolio website for a fictional airline training captain, designed by Zenith Dubai CV.">
+<link rel="preload" href="img/rashid-al-hammadi-640.webp" as="image" type="image/webp">
+<link rel="preload" href="fonts/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
+<script src="assets/sample.js"></script>
 <style>
-:root{--navy:#0F1E3A;--deep:#0A1529;--panel:#13254A;--gold:#C9A24A;--gold2:#E2BE68;--white:#F4F6FA;--muted:#8EA0BF;--line:rgba(244,246,250,.1);--green:#5CD6A1;
---head:"Barlow Condensed","Arial Narrow",sans-serif;--body:"Barlow","Helvetica Neue",Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--navy);color:var(--white);font:400 16px/1.65 var(--body);-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}a{color:inherit}
-.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
-.bar{background:var(--deep);border-bottom:1px solid var(--line);font:500 12px var(--mono);color:var(--muted);letter-spacing:.06em}
-.bar .wrap{display:flex;justify-content:space-between;align-items:center;height:48px;gap:20px}
-.lights{display:flex;gap:16px;align-items:center}.lights i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);margin-right:6px}
-.hero{padding-top:70px;padding-bottom:90px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.eyebrow{font:600 14px var(--head);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
-h1{font:700 clamp(58px,8vw,108px)/.9 var(--head);text-transform:uppercase;margin:16px 0 0;letter-spacing:.01em}
-h1 span{color:var(--gold2)}
-.sub{margin:22px 0 0;font-size:19px;color:#C8D2E4;max-width:40ch}
-.ratings{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
-.ratings span{font:500 12px var(--mono);padding:8px 12px;border:1px solid var(--line);border-radius:4px;color:var(--white);background:rgba(255,255,255,.03)}
-.pass{display:grid;grid-template-columns:150px 1fr;background:var(--white);color:var(--navy);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.35)}
-.pass img{height:100%;object-fit:cover;object-position:50% 20%}
-.pass .info{padding:22px 24px;position:relative}
-.pass .info::before{content:"";position:absolute;left:0;top:10px;bottom:10px;border-left:2px dashed rgba(15,30,58,.25)}
-.pass h3{margin:0 0 14px;font:700 15px var(--head);letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px}
-.fields div{font:500 11px var(--mono);color:#5B6B86;text-transform:uppercase;letter-spacing:.08em}
-.fields b{display:block;font:700 22px/1.1 var(--head);color:var(--navy);letter-spacing:.02em;text-transform:uppercase;margin-top:2px}
-.route{display:flex;align-items:center;gap:12px;margin:18px 0 14px;font:700 34px var(--head)}
-.route .line{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--navy) 0 8px,transparent 8px 14px);position:relative}
-.route .line::after{content:"✈";position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);font-size:20px;background:var(--white);padding:0 6px}
-.barcode{height:44px;margin-top:16px;background:repeating-linear-gradient(90deg,var(--navy) 0 2px,transparent 2px 4px,var(--navy) 4px 7px,transparent 7px 9px,var(--navy) 9px 10px,transparent 10px 13px)}
-section{padding:96px 0;border-top:1px solid var(--line)}
-h2{font:700 clamp(36px,5vw,58px)/1 var(--head);text-transform:uppercase;margin:0 0 14px;letter-spacing:.01em}
-.lead{color:#C8D2E4;max-width:62ch;margin:0 0 48px}
-.gauges{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.gauge{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 20px;text-align:center}
-.gauge{min-width:0}.dial{position:relative;width:150px;max-width:100%;margin:0 auto}
-.dial svg{width:100%;height:auto;display:block}
-.dial b{position:absolute;inset:0;display:grid;place-items:center;font:700 30px var(--head)}
-.gauge span{display:block;font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:16px}
-.gauge small{display:block;font:400 11px var(--mono);color:#6E7FA0;margin-top:6px}
-.log{width:100%;border-collapse:collapse;font:400 14px var(--mono)}
-.log th{text-align:left;font:600 12px var(--head);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding:12px 14px;border-bottom:1px solid var(--gold)}
-.log td{padding:16px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-.log td:first-child{color:var(--gold2);white-space:nowrap}
-.log .what{font:400 15px var(--body);color:#C8D2E4}
-.tablewrap{overflow-x:auto}
-.two{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
-.map{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
-.map svg{width:100%;height:auto;display:block}
-.lic{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.lic div{border:1px solid var(--line);border-radius:10px;padding:20px;background:rgba(255,255,255,.02)}
-.lic b{display:block;font:700 20px var(--head);letter-spacing:.04em;text-transform:uppercase}
-.lic span{font:400 13px var(--mono);color:var(--muted)}
-.cta{text-align:center;background:linear-gradient(180deg,var(--navy),var(--deep))}
-.cta p{color:#C8D2E4;max-width:52ch;margin:0 auto}
-.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
-.btn{font:700 14px var(--head);letter-spacing:.2em;text-transform:uppercase;padding:14px 26px;border:1px solid var(--gold);color:var(--gold2);text-decoration:none;border-radius:4px}
-.btn.fill{background:var(--gold);color:var(--navy)}
-footer{text-align:center;padding:28px 0 90px;font:400 12px var(--mono);color:#6E7FA0}
-.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:9px 14px;border-radius:6px;background:var(--gold);color:var(--navy);font:600 12px var(--head);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35)}
-@media (max-width:960px){.hero,.two{grid-template-columns:1fr}.gauges{grid-template-columns:1fr 1fr}.lic{grid-template-columns:1fr}.bar .hide{display:none}}
-@media (max-width:520px){.dial b{font-size:24px}.gauge{padding:20px 12px}.pass{grid-template-columns:1fr}.pass img{height:260px}.pass .info::before{display:none}}
+/* Concept: the captain's side of a glass cockpit. The primary flight display carries
+   the portrait in a cabin window, and its tapes read out the career: 140 pilots
+   released (airspeed), 16,400 flight hours (altitude), 62 countries (heading).
+   The flight-mode annunciator along the top is the site navigation. */
+:root{
+  --panel:#111417; --panel2:#171B1F; --bezel:#2C3136; --glass:#05070A;
+  --green:#3BE07A; --cyan:#3CD3EE; --magenta:#E35BEF; --amber:#F2A33A; --white:#F3F5F6;
+  --ink:#C5CDD3; --mute:#8C969E; --line:rgba(255,255,255,.12);
+  --cond:"Barlow Condensed","Arial Narrow",sans-serif; --sans:"Barlow","Helvetica Neue",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --zc-bg:#05070A; --zc-fg:#F3F5F6; --zc-dot:#3BE07A;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--panel);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+
+/* ---------- Cockpit (hero) ---------- */
+.cockpit{position:relative;min-height:max(700px,100svh);display:flex;flex-direction:column;padding-bottom:clamp(24px,4vh,44px);
+  background:radial-gradient(90% 60% at 50% 0%,#1E2328 0,transparent 70%),repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 2px,transparent 2px 4px),var(--panel)}
+.shield{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:max(16px,env(safe-area-inset-top,0px));padding-bottom:16px;font:500 11.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.plate{display:inline-block;padding:8px 12px 7px;border-radius:3px;background:linear-gradient(#D2D6DA,#9EA5AB);color:#15181B;font:700 12.5px/1 var(--cond);letter-spacing:.22em;text-decoration:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(0,0,0,.25),0 3px 8px rgba(0,0,0,.5)}
+.clock b{color:var(--white);font-weight:500}
+.cockpit>.wrap{width:100%}
+.deck{margin-block:auto;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(18px,2.4vw,32px);align-items:stretch}
+.disp{position:relative;padding:14px;border-radius:16px;background:linear-gradient(160deg,#323840,#1F2327);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),inset 0 -2px 0 rgba(0,0,0,.45),0 40px 70px -40px #000}
+.disp::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(circle at 8px 8px,#79818A 0 2px,#0E1113 2.6px,transparent 3.6px),radial-gradient(circle at calc(100% - 8px) 8px,#79818A 0 2px,#0E1113 2.6px,transparent 3.6px),
+  radial-gradient(circle at 8px calc(100% - 8px),#79818A 0 2px,#0E1113 2.6px,transparent 3.6px),radial-gradient(circle at calc(100% - 8px) calc(100% - 8px),#79818A 0 2px,#0E1113 2.6px,transparent 3.6px)}
+.glass{position:relative;height:100%;border-radius:7px;background:var(--glass);overflow:hidden;box-shadow:inset 0 0 0 1px #000,inset 0 0 40px rgba(0,0,0,.9)}
+.glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.075) 0,rgba(255,255,255,0) 36%)}
+.pfdbox .glass{display:flex;flex-direction:column}
+.fma{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-bottom:1px solid rgba(255,255,255,.22)}
+.fma a{position:relative;display:block;padding:15px 4px 14px;text-align:center;color:var(--cyan);font:600 15px/1 var(--cond);letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
+.fma a+a{border-left:1px solid rgba(255,255,255,.4)}
+.fma a::after{content:"";position:absolute;inset:7px 9px;border:1.5px solid transparent}
+.fma a:hover,.fma a[aria-current]{color:var(--green)}
+.fma a:hover::after,.fma a[aria-current]::after{border-color:var(--white)}
+.pfd{width:100%;height:auto;flex:1;min-height:0;max-height:calc(100svh - 230px);margin:6px auto 0}
+.pfd text{font-family:var(--mono);font-size:17px}
+.pfd .lad text{font-size:14px;stroke:none}
+.pfd .tape text{stroke:none;font-size:17px}
+.pfd .tapealt text{font-size:14.5px}
+.pfd .ro{fill:#fff;font-size:25px;font-weight:500}
+.pfd .cap text{fill:var(--cyan);font:600 15px var(--cond);letter-spacing:.08em}
+.legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.legend li{padding:11px 14px 12px;font:400 12.5px/1.35 var(--sans);color:var(--mute)}
+.legend li+li{border-left:1px solid var(--line)}
+.legend b{display:block;margin-bottom:2px;font:500 13px/1.2 var(--mono);color:var(--white)}
+.legend b span{color:var(--cyan)}
+
+.ecam .glass{display:flex;flex-direction:column;padding:clamp(22px,2.8vw,42px)}
+.scr{display:flex;justify-content:space-between;margin:0;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.22);font:600 13px/1 var(--cond);letter-spacing:.16em;text-transform:uppercase;color:var(--white)}
+.scr span:first-child{text-decoration:underline;text-underline-offset:4px}
+.scr span:last-child{color:var(--green)}
+.capt{margin:clamp(20px,3.4vh,34px) 0 0;color:var(--cyan);font:600 15px/1 var(--cond);letter-spacing:.32em;text-transform:uppercase}
+h1{margin:12px 0 0;color:var(--white);font:700 clamp(54px,6.4vw,104px)/.86 var(--cond);letter-spacing:.004em;text-transform:uppercase}
+h1 span{display:block}
+.role{margin:18px 0 0;color:var(--green);font:600 clamp(16px,1.35vw,19px)/1.3 var(--cond);letter-spacing:.12em;text-transform:uppercase}
+.lead{margin:12px 0 0;max-width:42ch;color:var(--ink);font-size:17px}
+.chk{margin:clamp(18px,3vh,28px) 0 0;padding:0;list-style:none;font:500 13.5px/1.2 var(--mono);text-transform:uppercase}
+.chk li{display:flex;align-items:baseline;gap:10px;padding:6px 0}
+.chk span{color:var(--white);white-space:nowrap}
+.chk i{flex:1;min-width:16px;border-bottom:2px dotted rgba(255,255,255,.3);transform:translateY(-4px)}
+.chk b{color:var(--green);font-weight:500;text-align:right}
+.pbtn{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;margin-top:clamp(22px,4vh,40px);padding:14px 20px 13px;border:1px solid #555D65;border-radius:6px;background:linear-gradient(#3B4148,#272C31);color:var(--white);font:600 14px/1 var(--cond);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 4px 0 #0D0F11;transition:transform .12s,box-shadow .12s}
+.pbtn i{width:26px;height:12px;border-radius:2px;background:var(--green);box-shadow:0 0 12px rgba(59,224,122,.8)}
+.pbtn:hover{background:linear-gradient(#444B52,#2D3237)}
+.pbtn:active{transform:translateY(3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 1px 0 #0D0F11}
+
+/* ---------- Shared section bits ---------- */
+section{padding:clamp(84px,10vw,128px) 0}
+.eyebrow{margin:0 0 14px;color:var(--cyan);font:600 13px/1 var(--cond);letter-spacing:.3em;text-transform:uppercase}
+h2{margin:0;color:var(--white);font:700 clamp(36px,4.4vw,60px)/.98 var(--cond);text-transform:uppercase;letter-spacing:.005em}
+.sub{margin:16px 0 0;max-width:54ch;color:var(--ink)}
+
+/* Profile + standby gauges */
+.prof{background:var(--panel2);border-top:1px solid var(--line)}
+.prof .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(40px,6vw,90px);align-items:center}
+.prof p{color:var(--ink)}
+.note{margin:28px 0 0;padding:16px 20px;border-left:3px solid var(--green);background:rgba(59,224,122,.06);color:var(--white)}
+.note b{display:block;margin-bottom:4px;color:var(--green);font:600 12px/1 var(--cond);letter-spacing:.24em;text-transform:uppercase}
+.gauges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:18px;border-radius:14px;background:linear-gradient(160deg,#2B3036,#1C2024);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 30px 60px -36px #000}
+.gauge{margin:0;padding:18px 14px 16px;border-radius:10px;background:#15191C;text-align:center}
+.gauge svg{width:min(100%,190px);margin:0 auto}
+.gauge .gl text{fill:#C9D0D5;font:600 15px var(--cond)}
+.gauge .gu{fill:var(--cyan);font:600 11px var(--cond);letter-spacing:.14em;text-transform:uppercase}
+.gauge .needle{transform:rotate(var(--a));transform-origin:100px 100px;transform-box:view-box;transition:transform 1.8s cubic-bezier(.2,.9,.25,1.12) .2s}
+.zc-reveal .gauges:not(.is-in) .needle{transform:rotate(-135deg)}
+.gauge figcaption{margin-top:10px}
+.gauge figcaption b{display:block;color:var(--white);font:700 30px/1 var(--cond);letter-spacing:.02em}
+.gauge figcaption span{display:block;margin-top:6px;color:var(--white);font:500 13px/1.3 var(--sans)}
+.gauge figcaption small{display:block;margin-top:2px;color:var(--mute);font:400 12px/1.3 var(--mono)}
+
+/* Pilot's logbook */
+.log{background:#0C0F12}
+.log .head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px 40px;margin-bottom:40px}
+.book{position:relative;padding:clamp(18px,3vw,34px);border-radius:6px;background:#F1EFE8;color:#1D2836;box-shadow:0 40px 70px -40px #000,inset 0 0 0 1px rgba(0,0,0,.06)}
+.book::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:30px;margin-left:-15px;background:linear-gradient(90deg,transparent,rgba(0,0,0,.06) 45%,rgba(0,0,0,.1) 50%,rgba(0,0,0,.06) 55%,transparent);pointer-events:none}
+.book .bt{display:flex;justify-content:space-between;margin:0 0 14px;color:#41546B;font:600 12px/1 var(--cond);letter-spacing:.22em;text-transform:uppercase}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{padding:10px 12px;background:#D9E3EC;color:#1F3B5A;border:1px solid #AFC0D0;font:600 12px/1.2 var(--cond);letter-spacing:.16em;text-transform:uppercase;text-align:left}
+td{padding:14px 12px;border:1px solid #CBD3DB;vertical-align:top;background:repeating-linear-gradient(180deg,transparent 0 25px,rgba(31,59,90,.06) 25px 26px)}
+td.m{font:500 13.5px/1.5 var(--mono);white-space:nowrap}
+td.pos{font:600 18px/1.25 var(--cond);letter-spacing:.02em;text-transform:uppercase;color:#14202D}
+td.rem{color:#33465C;line-height:1.55}
+tfoot td{background:#E6EBEF;font:600 13px/1.3 var(--mono);color:#1F3B5A}
+tfoot td.tl{font:600 12px/1.3 var(--cond);letter-spacing:.18em;text-transform:uppercase}
+.stamp{position:absolute;right:clamp(20px,4vw,48px);bottom:-22px;transform:rotate(-7deg);padding:8px 14px;border:2px solid #B3412E;border-radius:6px;color:#B3412E;font:700 13px/1.15 var(--cond);letter-spacing:.18em;text-transform:uppercase;text-align:center;background:rgba(241,239,232,.92)}
+
+/* Route network: navigation display */
+.routes{background:radial-gradient(70% 70% at 70% 50%,#0B1A24 0,#05080B 70%)}
+.routes .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,6vw,90px);align-items:center}
+.nd{width:100%;max-width:600px;margin:0 auto}
+.nd .rose text{fill:#E9ECEE;font:600 19px var(--cond)}
+.nd .rg{fill:var(--cyan);font:500 13px var(--mono)}
+.nd .trk line{stroke:var(--magenta);stroke-width:2;stroke-dasharray:var(--len) 999;stroke-dashoffset:0;transition:stroke-dashoffset 1.6s cubic-bezier(.3,.7,.2,1)}
+.zc-reveal .ndwrap:not(.is-in) .trk line{stroke-dashoffset:var(--len)}
+.nd .wp path{fill:none;stroke:var(--white);stroke-width:2}
+.nd .wp text{fill:var(--white);font:600 18px var(--cond);letter-spacing:.06em}
+.nd .wp .d{fill:var(--green);font:500 12px var(--mono);letter-spacing:0}
+.nd .ac path{fill:#FFD23F;stroke:#000;stroke-width:1.5}
+.nd .ac text{fill:var(--white);font:700 15px var(--cond);letter-spacing:.12em}
+.ndcap{margin:14px 0 0;text-align:center;color:var(--mute);font:400 12.5px/1.4 var(--mono)}
+.dest{margin:30px 0 0;padding:0;list-style:none;border-top:1px solid var(--line);columns:2;column-gap:28px}
+.dest li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);break-inside:avoid;font-size:15px}
+.dest b{color:var(--white);font:600 16px/1.4 var(--cond);letter-spacing:.08em}
+.dest span{color:var(--green);font:500 13px/1.6 var(--mono)}
+
+/* Licences: overhead panel */
+.ratings{background:var(--panel2)}
+.ovh{margin-top:44px;padding:clamp(18px,3vw,30px);border-radius:12px;background:linear-gradient(170deg,#66737D,#4D5961);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 40px 60px -40px #000;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.pb{position:relative;padding:22px 20px 24px;text-align:center;color:#fff}
+.pb:nth-child(n+4){border-top:1px solid rgba(255,255,255,.28)}
+.pb:not(:nth-child(3n+1)){border-left:1px solid rgba(255,255,255,.28)}
+.pb h3{margin:0 0 12px;font:700 15px/1.2 var(--cond);letter-spacing:.2em;text-transform:uppercase}
+.btn-lt{display:grid;grid-template-rows:1fr 1fr;width:92px;height:76px;margin:0 auto;padding:7px;border-radius:5px;background:#16191C;box-shadow:inset 0 2px 4px rgba(0,0,0,.6),0 2px 0 rgba(255,255,255,.18)}
+.btn-lt i{display:grid;place-items:center;font:700 11.5px/1 var(--cond);letter-spacing:.12em;font-style:normal}
+.btn-lt .off{color:rgba(242,163,58,.18)}
+.btn-lt .on{color:var(--green);text-shadow:0 0 10px rgba(59,224,122,.75)}
+.pb p{margin:14px auto 0;max-width:24ch;font:500 13.5px/1.45 var(--sans);color:#EEF2F4}
+
+/* Contact: boarding pass */
+.brief{background:linear-gradient(180deg,#0C0F12,#0A1A2A)}
+.pass{display:grid;grid-template-columns:minmax(0,1fr) 300px;margin-top:44px;border-radius:18px;background:#F5F3EE;color:#152230;overflow:hidden;box-shadow:0 40px 80px -40px #000}
+.pass .main{padding:clamp(26px,4vw,48px)}
+.pass .main p{max-width:52ch;color:#38495C}
+.pass h3{margin:0;font:700 clamp(30px,3.4vw,44px)/1 var(--cond);text-transform:uppercase;color:#0E2236}
+.route{display:flex;align-items:center;gap:18px;margin:0 0 22px;font:700 40px/1 var(--cond);letter-spacing:.04em;color:#0E2236}
+.route i{flex:1;height:2px;background:repeating-linear-gradient(90deg,#0E2236 0 8px,transparent 8px 14px);position:relative}
+.route i::after{content:"✈";position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);font-size:20px;background:#F5F3EE;padding:0 6px}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.act{display:inline-block;padding:14px 22px 13px;border-radius:999px;border:1.5px solid #0E2236;color:#0E2236;text-decoration:none;font:600 14px/1 var(--cond);letter-spacing:.16em;text-transform:uppercase}
+.act.fill,.act:hover{background:#0E2236;color:#F5F3EE}
+.stub{position:relative;padding:clamp(26px,3vw,40px) 28px;border-left:2px dashed #B7BFC7;background:#EAE7E0;font:500 12px/1.3 var(--mono);color:#4B5B6C}
+.stub::before,.stub::after{content:"";position:absolute;left:-14px;width:26px;height:26px;border-radius:50%;background:#0B1520}
+.stub::before{top:-13px}.stub::after{bottom:-13px}
+.stub dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:16px 12px}
+.stub dt{font:600 10.5px/1 var(--cond);letter-spacing:.2em;text-transform:uppercase;color:#7A8896}
+.stub dd{margin:5px 0 0;font:700 19px/1 var(--cond);letter-spacing:.06em;color:#0E2236;text-transform:uppercase}
+.bars{height:46px;margin-top:22px;background:repeating-linear-gradient(90deg,#0E2236 0 2px,transparent 2px 4px,#0E2236 4px 5px,transparent 5px 8px,#0E2236 8px 11px,transparent 11px 13px)}
+footer{padding:28px 24px max(96px,env(safe-area-inset-bottom,0px));background:#0A1A2A;text-align:center;color:var(--mute);font-size:12.5px}
+
+@media (max-width:1060px){
+  .deck{grid-template-columns:1fr;max-width:640px;margin:0 auto;width:100%}
+  .pfd{max-height:none}
+  .prof .wrap,.routes .wrap{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .shield{font-size:10px}
+  .shield .clock span{display:none}
+  .disp{padding:9px;border-radius:12px}
+  .fma a{font-size:12.5px;padding:13px 2px 12px;letter-spacing:.04em}
+  .fma a::after{inset:6px 4px}
+  .legend li{padding:9px 9px 10px;font-size:11.5px}
+  .legend b{font-size:12px}
+  .chk{font-size:12px}
+  .chk span{white-space:normal}
+  .ovh{grid-template-columns:1fr 1fr}
+  .pb:nth-child(n+3){border-top:1px solid rgba(255,255,255,.28)}
+  .pb:not(:nth-child(3n+1)){border-left:0}
+  .pb:nth-child(2n){border-left:1px solid rgba(255,255,255,.28)}
+  .pass{grid-template-columns:1fr}
+  .stub{border-left:0;border-top:2px dashed #B7BFC7}
+  .stub::before,.stub::after{top:-14px;bottom:auto}
+  .stub::before{left:-13px}.stub::after{left:auto;right:-13px}
+  .dest{columns:1}
+  table,thead,tbody,tfoot,tr,td{display:block}
+  thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  tbody tr{padding:14px 0;border-bottom:1px solid #CBD3DB}
+  td{border:0;padding:3px 0;background:none}
+  td.m{white-space:normal}
+  td[data-l]::before{content:attr(data-l);display:block;color:#6B7D90;font:600 10.5px/1.5 var(--cond);letter-spacing:.18em;text-transform:uppercase}
+  td.pos::before,td.yrs::before{display:none}
+  tfoot tr{display:flex;flex-wrap:wrap;gap:4px 14px;padding:12px;margin-top:12px}
+  tfoot td{background:none;padding:0}
+  .book::before{display:none}
+  .stamp{position:static;display:inline-block;margin-top:18px;transform:rotate(-3deg)}
+}
+@media (max-width:420px){
+  .gauges{grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  .gauge{padding:12px 8px}
+  .gauge figcaption b{font-size:24px}
+  .ovh{grid-template-columns:1fr}
+  .pb:nth-child(n+2){border-top:1px solid rgba(255,255,255,.28)}
+  .pb:nth-child(2n){border-left:0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pbtn{transition:none}}
 </style>
 </head>
 <body>
-<div class="bar"><div class="wrap"><span>CAPT · R. AL HAMMADI</span><span class="lights hide"><span><i></i>ATPL VALID</span><span><i></i>CLASS 1 MEDICAL</span></span><span>DXB · UTC+4</span></div></div>
 <main>
-  <div class="wrap hero">
-    <div>
-      <div class="eyebrow">Airline Captain · B777 &amp; A350</div>
-      <h1>Captain<br>Rashid <span>Al Hammadi</span></h1>
-      <p class="sub">Twenty-five years in aviation, fourteen in command. Line Training Captain who turns first officers into future captains.</p>
-      <div class="ratings"><span>B777</span><span>A350</span><span>A330</span><span>TRI / TRE</span><span>ICAO English L6</span></div>
+  <header class="cockpit" id="top">
+    <div class="wrap shield">
+      <a class="plate" href="#top" aria-label="Captain R. Al Hammadi, back to top">Capt · R. Al Hammadi</a>
+      <p class="clock" style="margin:0"><span>DXB · UTC+4 · </span><b id="lt">--:--</b> LT · <b id="utc">--:--</b> UTC</p>
     </div>
-    <div class="pass" role="img" aria-label="Boarding-pass style summary of Captain Rashid Al Hammadi">
-      <img src="img/rashid-al-hammadi.jpg" alt="">
-      <div class="info">
-        <h3>Crew boarding pass</h3>
-        <div class="fields"><div>Name<b>R. Al Hammadi</b></div><div>Position<b>Captain</b></div></div>
-        <div class="route"><span>DXB</span><span class="line"></span><span>62</span></div>
-        <div class="fields"><div>Flight hours<b>16,400</b></div><div>Seat<b>Left · 1L</b></div><div>Since<b>1999</b></div><div>Class<b>Command</b></div></div>
-        <div class="barcode" aria-hidden="true"></div>
+    <div class="wrap deck">
+      <div class="disp pfdbox">
+        <div class="glass">
+          <nav class="fma" aria-label="Sections">
+            <a href="#profile" data-spy>Profile</a><a href="#log" data-spy>Log</a><a href="#routes" data-spy>Routes</a><a href="#ratings" data-spy>Ratings</a><a href="#brief" data-spy>Brief</a>
+          </nav>
+          <svg class="pfd" viewBox="0 0 600 620" role="img" aria-label="Captain Rashid Al Hammadi framed in a cabin window at the centre of a primary flight display. Airspeed tape at 140, altitude 16,400, heading 062."><defs><clipPath id="ai-clip"><rect x="112" y="40" width="376" height="500" rx="30"/></clipPath><clipPath id="spd-clip"><rect x="18" y="60" width="78" height="460"/></clipPath><clipPath id="alt-clip"><rect x="504" y="60" width="78" height="460"/></clipPath><clipPath id="hdg-clip"><rect x="112" y="556" width="376" height="58"/></clipPath><clipPath id="win"><rect x="190" y="145" width="220" height="290" rx="86" ry="100"/></clipPath><linearGradient id="sky" gradientUnits="userSpaceOnUse" x1="0" y1="-120" x2="0" y2="290"><stop offset="0" stop-color="#0B3F8F"/><stop offset="1" stop-color="#3F95EE"/></linearGradient><linearGradient id="gnd" gradientUnits="userSpaceOnUse" x1="0" y1="290" x2="0" y2="640"><stop offset="0" stop-color="#93592A"/><stop offset="1" stop-color="#3A210D"/></linearGradient><linearGradient id="pane" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="600" height="620" fill="#05070A"/><g clip-path="url(#ai-clip)"><g id="att" transform="rotate(-3 300 290) translate(0 20)"><rect x="-300" y="-710" width="1200" height="1000" fill="url(#sky)"/><rect x="-300" y="290" width="1200" height="1000" fill="url(#gnd)"/><line x1="-300" y1="290" x2="900" y2="290" stroke="#fff" stroke-width="2.5"/><g class="lad" stroke="#fff" stroke-width="2" fill="#fff"><line x1="240" y1="530" x2="360" y2="530"/><text x="232" y="536" text-anchor="end">30</text><text x="368" y="536">30</text><line x1="273" y1="490" x2="327" y2="490"/><line x1="240" y1="450" x2="360" y2="450"/><text x="232" y="456" text-anchor="end">20</text><text x="368" y="456">20</text><line x1="273" y1="410" x2="327" y2="410"/><line x1="240" y1="370" x2="360" y2="370"/><text x="232" y="376" text-anchor="end">10</text><text x="368" y="376">10</text><line x1="273" y1="330" x2="327" y2="330"/><line x1="273" y1="250" x2="327" y2="250"/><line x1="240" y1="210" x2="360" y2="210"/><text x="232" y="216" text-anchor="end">10</text><text x="368" y="216">10</text><line x1="273" y1="170" x2="327" y2="170"/><line x1="240" y1="130" x2="360" y2="130"/><text x="232" y="136" text-anchor="end">20</text><text x="368" y="136">20</text><line x1="273" y1="90" x2="327" y2="90"/><line x1="240" y1="50" x2="360" y2="50"/><text x="232" y="56" text-anchor="end">30</text><text x="368" y="56">30</text><line x1="288" y1="510" x2="312" y2="510"/><line x1="288" y1="470" x2="312" y2="470"/><line x1="288" y1="430" x2="312" y2="430"/><line x1="288" y1="390" x2="312" y2="390"/><line x1="288" y1="350" x2="312" y2="350"/><line x1="288" y1="310" x2="312" y2="310"/><line x1="288" y1="270" x2="312" y2="270"/><line x1="288" y1="230" x2="312" y2="230"/><line x1="288" y1="190" x2="312" y2="190"/><line x1="288" y1="150" x2="312" y2="150"/><line x1="288" y1="110" x2="312" y2="110"/><line x1="288" y1="70" x2="312" y2="70"/></g></g></g><g stroke="#fff" stroke-width="2.4"><path d="M130.3 192 A196 196 0 0 1 469.7 192" fill="none"/><line x1="130.3" y1="192" x2="112.9" y2="182"/><line x1="161.4" y1="151.4" x2="153.6" y2="143.6"/><line x1="202" y1="120.3" x2="192" y2="102.9"/><line x1="233" y1="105.8" x2="229.2" y2="95.5"/><line x1="266" y1="97" x2="264.1" y2="86.1"/><line x1="334" y1="97" x2="335.9" y2="86.1"/><line x1="367" y1="105.8" x2="370.8" y2="95.5"/><line x1="398" y1="120.3" x2="408" y2="102.9"/><line x1="438.6" y1="151.4" x2="446.4" y2="143.6"/><line x1="469.7" y1="192" x2="487.1" y2="182"/><path d="M300 94 l-10 -16 h20z" fill="#fff" stroke="none"/></g><g id="bankptr" transform="rotate(-3 300 290)"><path d="M300 98 l-10 16 h20z" fill="#fff"/><rect x="290" y="118" width="20" height="6" fill="#fff"/></g><g class="win"><rect x="174" y="129" width="252" height="322" rx="102" ry="118" fill="#B9BEC3"/><rect x="179" y="134" width="242" height="312" rx="97" ry="113" fill="#ECEEF0"/><rect x="187" y="142" width="226" height="296" rx="89" ry="103" fill="#C6CBD0"/><rect x="190" y="145" width="220" height="290" rx="86" ry="100" fill="#0B1118"/><image href="img/rashid-al-hammadi-640.webp" x="123" y="115" width="355" height="441" preserveAspectRatio="xMidYMid slice" clip-path="url(#win)"/><rect x="190" y="145" width="220" height="290" rx="86" ry="100" fill="url(#pane)"/><rect x="191.5" y="146.5" width="217" height="287" rx="85" ry="99" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="3"/></g><g fill="#FFD23F" stroke="#000" stroke-width="2.5" stroke-linejoin="round"><path d="M124 283h64v22h-12v-11h-52z"/><path d="M476 283h-64v22h12v-11h52z"/></g><rect x="18" y="60" width="78" height="460" fill="#2A3137"/><g clip-path="url(#spd-clip)"><g id="spdtape" transform="translate(0 850)" stroke="#fff" stroke-width="2" fill="#fff" class="tape"><line x1="83" y1="-240" x2="96" y2="-240"/><text x="76" y="-234" text-anchor="end">60</text><line x1="83" y1="-280" x2="96" y2="-280"/><line x1="83" y1="-320" x2="96" y2="-320"/><text x="76" y="-314" text-anchor="end">80</text><line x1="83" y1="-360" x2="96" y2="-360"/><line x1="83" y1="-400" x2="96" y2="-400"/><text x="76" y="-394" text-anchor="end">100</text><line x1="83" y1="-440" x2="96" y2="-440"/><line x1="83" y1="-480" x2="96" y2="-480"/><text x="76" y="-474" text-anchor="end">120</text><line x1="83" y1="-520" x2="96" y2="-520"/><line x1="83" y1="-560" x2="96" y2="-560"/><text x="76" y="-554" text-anchor="end">140</text><line x1="83" y1="-600" x2="96" y2="-600"/><line x1="83" y1="-640" x2="96" y2="-640"/><text x="76" y="-634" text-anchor="end">160</text><line x1="83" y1="-680" x2="96" y2="-680"/><line x1="83" y1="-720" x2="96" y2="-720"/><text x="76" y="-714" text-anchor="end">180</text><line x1="83" y1="-760" x2="96" y2="-760"/><line x1="83" y1="-800" x2="96" y2="-800"/><text x="76" y="-794" text-anchor="end">200</text><line x1="83" y1="-840" x2="96" y2="-840"/><line x1="83" y1="-880" x2="96" y2="-880"/><text x="76" y="-874" text-anchor="end">220</text><line x1="83" y1="-920" x2="96" y2="-920"/><line x1="83" y1="-960" x2="96" y2="-960"/><text x="76" y="-954" text-anchor="end">240</text></g></g><path d="M12 271h78l12 19-12 19h-78z" fill="#000" stroke="#fff" stroke-width="2"/><text id="spdv" class="ro" x="86" y="300" text-anchor="end">140</text><rect x="504" y="60" width="78" height="460" fill="#2A3137"/><g clip-path="url(#alt-clip)"><g id="alttape" transform="translate(0 6850)" stroke="#fff" stroke-width="2" fill="#fff" class="tape tapealt"><line x1="504" y1="-6000" x2="515" y2="-6000"/><text x="521" y="-5994.5">15000</text><line x1="504" y1="-6040" x2="515" y2="-6040"/><line x1="504" y1="-6080" x2="515" y2="-6080"/><text x="521" y="-6074.5">15200</text><line x1="504" y1="-6120" x2="515" y2="-6120"/><line x1="504" y1="-6160" x2="515" y2="-6160"/><text x="521" y="-6154.5">15400</text><line x1="504" y1="-6200" x2="515" y2="-6200"/><line x1="504" y1="-6240" x2="515" y2="-6240"/><text x="521" y="-6234.5">15600</text><line x1="504" y1="-6280" x2="515" y2="-6280"/><line x1="504" y1="-6320" x2="515" y2="-6320"/><text x="521" y="-6314.5">15800</text><line x1="504" y1="-6360" x2="515" y2="-6360"/><line x1="504" y1="-6400" x2="515" y2="-6400"/><text x="521" y="-6394.5">16000</text><line x1="504" y1="-6440" x2="515" y2="-6440"/><line x1="504" y1="-6480" x2="515" y2="-6480"/><text x="521" y="-6474.5">16200</text><line x1="504" y1="-6520" x2="515" y2="-6520"/><line x1="504" y1="-6560" x2="515" y2="-6560"/><text x="521" y="-6554.5">16400</text><line x1="504" y1="-6600" x2="515" y2="-6600"/><line x1="504" y1="-6640" x2="515" y2="-6640"/><text x="521" y="-6634.5">16600</text><line x1="504" y1="-6680" x2="515" y2="-6680"/><line x1="504" y1="-6720" x2="515" y2="-6720"/><text x="521" y="-6714.5">16800</text><line x1="504" y1="-6760" x2="515" y2="-6760"/><line x1="504" y1="-6800" x2="515" y2="-6800"/><text x="521" y="-6794.5">17000</text><line x1="504" y1="-6840" x2="515" y2="-6840"/><line x1="504" y1="-6880" x2="515" y2="-6880"/><text x="521" y="-6874.5">17200</text><line x1="504" y1="-6920" x2="515" y2="-6920"/><line x1="504" y1="-6960" x2="515" y2="-6960"/><text x="521" y="-6954.5">17400</text><line x1="504" y1="-7000" x2="515" y2="-7000"/><line x1="504" y1="-7040" x2="515" y2="-7040"/><text x="521" y="-7034.5">17600</text><line x1="504" y1="-7080" x2="515" y2="-7080"/><line x1="504" y1="-7120" x2="515" y2="-7120"/><text x="521" y="-7114.5">17800</text></g></g><path d="M496 290l12-19h86v38h-86z" fill="#000" stroke="#fff" stroke-width="2"/><text id="altv" class="ro" x="589" y="299" text-anchor="end">16400</text><rect x="112" y="556" width="376" height="58" fill="#2A3137"/><g clip-path="url(#hdg-clip)"><g id="hdgtape" transform="translate(-72 0)" stroke="#fff" stroke-width="2" fill="#fff" class="tape"><line x1="0" y1="556" x2="0" y2="572"/><text x="0" y="597" text-anchor="middle">000</text><line x1="30" y1="556" x2="30" y2="565"/><line x1="60" y1="556" x2="60" y2="572"/><text x="60" y="597" text-anchor="middle">010</text><line x1="90" y1="556" x2="90" y2="565"/><line x1="120" y1="556" x2="120" y2="572"/><text x="120" y="597" text-anchor="middle">020</text><line x1="150" y1="556" x2="150" y2="565"/><line x1="180" y1="556" x2="180" y2="572"/><text x="180" y="597" text-anchor="middle">030</text><line x1="210" y1="556" x2="210" y2="565"/><line x1="240" y1="556" x2="240" y2="572"/><text x="240" y="597" text-anchor="middle">040</text><line x1="270" y1="556" x2="270" y2="565"/><line x1="300" y1="556" x2="300" y2="572"/><text x="300" y="597" text-anchor="middle">050</text><line x1="330" y1="556" x2="330" y2="565"/><line x1="360" y1="556" x2="360" y2="572"/><text x="360" y="597" text-anchor="middle">060</text><line x1="390" y1="556" x2="390" y2="565"/><line x1="420" y1="556" x2="420" y2="572"/><text x="420" y="597" text-anchor="middle">070</text><line x1="450" y1="556" x2="450" y2="565"/><line x1="480" y1="556" x2="480" y2="572"/><text x="480" y="597" text-anchor="middle">080</text><line x1="510" y1="556" x2="510" y2="565"/><line x1="540" y1="556" x2="540" y2="572"/><text x="540" y="597" text-anchor="middle">090</text><line x1="570" y1="556" x2="570" y2="565"/><line x1="600" y1="556" x2="600" y2="572"/><text x="600" y="597" text-anchor="middle">100</text><line x1="630" y1="556" x2="630" y2="565"/><line x1="660" y1="556" x2="660" y2="572"/><text x="660" y="597" text-anchor="middle">110</text><line x1="690" y1="556" x2="690" y2="565"/><line x1="720" y1="556" x2="720" y2="572"/><text x="720" y="597" text-anchor="middle">120</text><line x1="750" y1="556" x2="750" y2="565"/><line x1="780" y1="556" x2="780" y2="572"/><text x="780" y="597" text-anchor="middle">130</text><line x1="810" y1="556" x2="810" y2="565"/><line x1="840" y1="556" x2="840" y2="572"/><text x="840" y="597" text-anchor="middle">140</text><line x1="870" y1="556" x2="870" y2="565"/><line x1="900" y1="556" x2="900" y2="572"/><text x="900" y="597" text-anchor="middle">150</text><line x1="930" y1="556" x2="930" y2="565"/><line x1="960" y1="556" x2="960" y2="572"/><text x="960" y="597" text-anchor="middle">160</text><line x1="990" y1="556" x2="990" y2="565"/><line x1="1020" y1="556" x2="1020" y2="572"/><text x="1020" y="597" text-anchor="middle">170</text><line x1="1050" y1="556" x2="1050" y2="565"/><line x1="1080" y1="556" x2="1080" y2="572"/><text x="1080" y="597" text-anchor="middle">180</text></g></g><path d="M300 556v18" stroke="#fff" stroke-width="2.5"/><rect x="268" y="574" width="64" height="34" fill="#000" stroke="#fff" stroke-width="2"/><text id="hdgv" class="ro" x="300" y="599" text-anchor="middle">062</text><g class="cap"><text x="57" y="46" text-anchor="middle">IAS</text><text x="543" y="46" text-anchor="middle">ALT</text><text x="100" y="592" text-anchor="end">HDG</text><text x="500" y="592">MAG</text></g></svg>
+          <ul class="legend">
+            <li><b><span>IAS</span> 140</b>pilots released to the line</li>
+            <li><b><span>ALT</span> 16,400</b>flight hours logged</li>
+            <li><b><span>HDG</span> 062</b>countries flown</li>
+          </ul>
+        </div>
+      </div>
+      <div class="disp ecam">
+        <div class="glass">
+          <p class="scr"><span>Crew briefing</span><span>Ready</span></p>
+          <p class="capt">Captain</p>
+          <h1><span>Rashid</span> <span>Al Hammadi</span></h1>
+          <p class="role">Line Training Captain · B777 &amp; A350</p>
+          <p class="lead">Twenty-five years in aviation, fourteen in command. The training captain who turns first officers into future captains.</p>
+          <ul class="chk" aria-label="Licence status">
+            <li><span>ATPL</span><i aria-hidden="true"></i><b>Valid</b></li>
+            <li><span>Class 1 medical</span><i aria-hidden="true"></i><b>Valid</b></li>
+            <li><span>Type ratings</span><i aria-hidden="true"></i><b>B777 · A350 · A330</b></li>
+            <li><span>TRI / TRE</span><i aria-hidden="true"></i><b>Current</b></li>
+            <li><span>ICAO English</span><i aria-hidden="true"></i><b>Level 6</b></li>
+          </ul>
+          <a class="pbtn" href="#brief"><i aria-hidden="true"></i>Request a briefing</a>
+        </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <section>
+  <section id="profile" class="prof">
     <div class="wrap">
-      <h2>Flight instruments</h2>
-      <p class="lead">A career measured the way pilots measure everything: hours, sectors and a clean safety record.</p>
-      <div class="gauges">
-        <div class="gauge"><div class="dial"><svg viewBox="0 0 150 150" aria-hidden="true"><circle cx="75" cy="75" r="62" fill="none" stroke="rgba(244,246,250,.12)" stroke-width="10"/><circle cx="75" cy="75" r="62" fill="none" stroke="#C9A24A" stroke-width="10" stroke-linecap="round" stroke-dasharray="319.4 389.6" transform="rotate(-90 75 75)"/></svg><b>16,400</b></div><span>Total flight hours</span><small>scale 0 – 20,000</small></div>
-        <div class="gauge"><div class="dial"><svg viewBox="0 0 150 150" aria-hidden="true"><circle cx="75" cy="75" r="62" fill="none" stroke="rgba(244,246,250,.12)" stroke-width="10"/><circle cx="75" cy="75" r="62" fill="none" stroke="#C9A24A" stroke-width="10" stroke-linecap="round" stroke-dasharray="190.9 389.6" transform="rotate(-90 75 75)"/></svg><b>9,800</b></div><span>Hours in command</span><small>scale 0 – 20,000</small></div>
-        <div class="gauge"><div class="dial"><svg viewBox="0 0 150 150" aria-hidden="true"><circle cx="75" cy="75" r="62" fill="none" stroke="rgba(244,246,250,.12)" stroke-width="10"/><circle cx="75" cy="75" r="62" fill="none" stroke="#C9A24A" stroke-width="10" stroke-linecap="round" stroke-dasharray="241.6 389.6" transform="rotate(-90 75 75)"/></svg><b>62</b></div><span>Countries flown</span><small>scale 0 – 100</small></div>
-        <div class="gauge"><div class="dial"><svg viewBox="0 0 150 150" aria-hidden="true"><circle cx="75" cy="75" r="62" fill="none" stroke="rgba(244,246,250,.12)" stroke-width="10"/><circle cx="75" cy="75" r="62" fill="none" stroke="#5CD6A1" stroke-width="10" stroke-linecap="round" stroke-dasharray="389.6 389.6" transform="rotate(-90 75 75)"/></svg><b>0</b></div><span>Reportable incidents</span><small>full record since 1999</small></div>
+      <div data-reveal>
+        <p class="eyebrow">Profile</p>
+        <h2>A career measured the way pilots measure everything.</h2>
+        <p class="sub">Hours, sectors and a clean safety record.</p>
+        <p>Rashid started as a flight instructor in 1999, flew the A330 and B777 as a first officer, and took his first long-haul command in 2012. Since 2017 he has trained and checked captains and first officers on line operations; more than 140 pilots have been released to the line under his supervision.</p>
+        <p class="note"><b>Crew note</b>Known for calm decision-making in weather diversions, and for crew briefings that first officers still quote years later.</p>
+      </div>
+      <div class="gauges" data-reveal>
+        <figure class="gauge" style="--a:86.4deg"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="96" fill="#0A0C0E" stroke="#3B4147" stroke-width="5"/><circle cx="100" cy="100" r="86" fill="none" stroke="#15191C" stroke-width="2"/><g stroke="#E9ECEE" stroke-width="2"><line x1="42" y1="158" x2="51.9" y2="148.1"/><line x1="30.1" y1="142.8" x2="36.1" y2="139.2"/><line x1="22" y1="125.3" x2="28.7" y2="123.2"/><line x1="18.3" y1="106.4" x2="25.2" y2="105.9"/><line x1="19" y1="87.2" x2="25.9" y2="88.3"/><line x1="24.2" y1="68.6" x2="37.2" y2="74"/><line x1="33.7" y1="51.8" x2="39.3" y2="55.9"/><line x1="46.7" y1="37.6" x2="51.3" y2="43"/><line x1="62.8" y1="26.9" x2="66" y2="33.2"/><line x1="80.9" y1="20.3" x2="82.5" y2="27.1"/><line x1="100" y1="18" x2="100" y2="32"/><line x1="119.1" y1="20.3" x2="117.5" y2="27.1"/><line x1="137.2" y1="26.9" x2="134" y2="33.2"/><line x1="153.3" y1="37.6" x2="148.7" y2="43"/><line x1="166.3" y1="51.8" x2="160.7" y2="55.9"/><line x1="175.8" y1="68.6" x2="162.8" y2="74"/><line x1="181" y1="87.2" x2="174.1" y2="88.3"/><line x1="181.7" y1="106.4" x2="174.8" y2="105.9"/><line x1="178" y1="125.3" x2="171.3" y2="123.2"/><line x1="169.9" y1="142.8" x2="163.9" y2="139.2"/><line x1="158" y1="158" x2="148.1" y2="148.1"/></g><path class="arc" d="M37.8 162.2 A88 88 0 1 1 187.8 94.5" fill="none" stroke="#3BE07A" stroke-width="3" stroke-linecap="round"/><g class="gl"><text x="59" y="147" text-anchor="middle">0</text><text x="100" y="48" text-anchor="middle">10</text><text x="141" y="147" text-anchor="middle">20</text></g><text class="gu" x="100" y="170" text-anchor="middle">×1000 h</text><g class="needle"><path d="M100 112 L96.5 100 L100 22 L103.5 100z" fill="#F4F6F7"/><path d="M100 112 L100 124" stroke="#F4F6F7" stroke-width="5"/></g><circle cx="100" cy="100" r="8" fill="#2A2F34" stroke="#0A0C0E" stroke-width="2"/></svg><figcaption><b>16,400</b><span>Total flight hours</span><small>scale 0 – 20,000</small></figcaption></figure>
+        <figure class="gauge" style="--a:-2.7deg"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="96" fill="#0A0C0E" stroke="#3B4147" stroke-width="5"/><circle cx="100" cy="100" r="86" fill="none" stroke="#15191C" stroke-width="2"/><g stroke="#E9ECEE" stroke-width="2"><line x1="42" y1="158" x2="51.9" y2="148.1"/><line x1="30.1" y1="142.8" x2="36.1" y2="139.2"/><line x1="22" y1="125.3" x2="28.7" y2="123.2"/><line x1="18.3" y1="106.4" x2="25.2" y2="105.9"/><line x1="19" y1="87.2" x2="25.9" y2="88.3"/><line x1="24.2" y1="68.6" x2="37.2" y2="74"/><line x1="33.7" y1="51.8" x2="39.3" y2="55.9"/><line x1="46.7" y1="37.6" x2="51.3" y2="43"/><line x1="62.8" y1="26.9" x2="66" y2="33.2"/><line x1="80.9" y1="20.3" x2="82.5" y2="27.1"/><line x1="100" y1="18" x2="100" y2="32"/><line x1="119.1" y1="20.3" x2="117.5" y2="27.1"/><line x1="137.2" y1="26.9" x2="134" y2="33.2"/><line x1="153.3" y1="37.6" x2="148.7" y2="43"/><line x1="166.3" y1="51.8" x2="160.7" y2="55.9"/><line x1="175.8" y1="68.6" x2="162.8" y2="74"/><line x1="181" y1="87.2" x2="174.1" y2="88.3"/><line x1="181.7" y1="106.4" x2="174.8" y2="105.9"/><line x1="178" y1="125.3" x2="171.3" y2="123.2"/><line x1="169.9" y1="142.8" x2="163.9" y2="139.2"/><line x1="158" y1="158" x2="148.1" y2="148.1"/></g><path class="arc" d="M37.8 162.2 A88 88 0 0 1 95.9 12.1" fill="none" stroke="#3BE07A" stroke-width="3" stroke-linecap="round"/><g class="gl"><text x="59" y="147" text-anchor="middle">0</text><text x="100" y="48" text-anchor="middle">10</text><text x="141" y="147" text-anchor="middle">20</text></g><text class="gu" x="100" y="170" text-anchor="middle">×1000 h</text><g class="needle"><path d="M100 112 L96.5 100 L100 22 L103.5 100z" fill="#F4F6F7"/><path d="M100 112 L100 124" stroke="#F4F6F7" stroke-width="5"/></g><circle cx="100" cy="100" r="8" fill="#2A2F34" stroke="#0A0C0E" stroke-width="2"/></svg><figcaption><b>9,800</b><span>Hours in command</span><small>scale 0 – 20,000</small></figcaption></figure>
+        <figure class="gauge" style="--a:32.4deg"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="96" fill="#0A0C0E" stroke="#3B4147" stroke-width="5"/><circle cx="100" cy="100" r="86" fill="none" stroke="#15191C" stroke-width="2"/><g stroke="#E9ECEE" stroke-width="2"><line x1="42" y1="158" x2="51.9" y2="148.1"/><line x1="30.1" y1="142.8" x2="36.1" y2="139.2"/><line x1="22" y1="125.3" x2="28.7" y2="123.2"/><line x1="18.3" y1="106.4" x2="25.2" y2="105.9"/><line x1="19" y1="87.2" x2="25.9" y2="88.3"/><line x1="24.2" y1="68.6" x2="37.2" y2="74"/><line x1="33.7" y1="51.8" x2="39.3" y2="55.9"/><line x1="46.7" y1="37.6" x2="51.3" y2="43"/><line x1="62.8" y1="26.9" x2="66" y2="33.2"/><line x1="80.9" y1="20.3" x2="82.5" y2="27.1"/><line x1="100" y1="18" x2="100" y2="32"/><line x1="119.1" y1="20.3" x2="117.5" y2="27.1"/><line x1="137.2" y1="26.9" x2="134" y2="33.2"/><line x1="153.3" y1="37.6" x2="148.7" y2="43"/><line x1="166.3" y1="51.8" x2="160.7" y2="55.9"/><line x1="175.8" y1="68.6" x2="162.8" y2="74"/><line x1="181" y1="87.2" x2="174.1" y2="88.3"/><line x1="181.7" y1="106.4" x2="174.8" y2="105.9"/><line x1="178" y1="125.3" x2="171.3" y2="123.2"/><line x1="169.9" y1="142.8" x2="163.9" y2="139.2"/><line x1="158" y1="158" x2="148.1" y2="148.1"/></g><path class="arc" d="M37.8 162.2 A88 88 0 0 1 147.2 25.7" fill="none" stroke="#3BE07A" stroke-width="3" stroke-linecap="round"/><g class="gl"><text x="59" y="147" text-anchor="middle">0</text><text x="100" y="48" text-anchor="middle">50</text><text x="141" y="147" text-anchor="middle">100</text></g><text class="gu" x="100" y="170" text-anchor="middle">countries</text><g class="needle"><path d="M100 112 L96.5 100 L100 22 L103.5 100z" fill="#F4F6F7"/><path d="M100 112 L100 124" stroke="#F4F6F7" stroke-width="5"/></g><circle cx="100" cy="100" r="8" fill="#2A2F34" stroke="#0A0C0E" stroke-width="2"/></svg><figcaption><b>62</b><span>Countries flown</span><small>scale 0 – 100</small></figcaption></figure>
+        <figure class="gauge" style="--a:-135deg"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="96" fill="#0A0C0E" stroke="#3B4147" stroke-width="5"/><circle cx="100" cy="100" r="86" fill="none" stroke="#15191C" stroke-width="2"/><g stroke="#E9ECEE" stroke-width="2"><line x1="42" y1="158" x2="51.9" y2="148.1"/><line x1="30.1" y1="142.8" x2="36.1" y2="139.2"/><line x1="22" y1="125.3" x2="28.7" y2="123.2"/><line x1="18.3" y1="106.4" x2="25.2" y2="105.9"/><line x1="19" y1="87.2" x2="25.9" y2="88.3"/><line x1="24.2" y1="68.6" x2="37.2" y2="74"/><line x1="33.7" y1="51.8" x2="39.3" y2="55.9"/><line x1="46.7" y1="37.6" x2="51.3" y2="43"/><line x1="62.8" y1="26.9" x2="66" y2="33.2"/><line x1="80.9" y1="20.3" x2="82.5" y2="27.1"/><line x1="100" y1="18" x2="100" y2="32"/><line x1="119.1" y1="20.3" x2="117.5" y2="27.1"/><line x1="137.2" y1="26.9" x2="134" y2="33.2"/><line x1="153.3" y1="37.6" x2="148.7" y2="43"/><line x1="166.3" y1="51.8" x2="160.7" y2="55.9"/><line x1="175.8" y1="68.6" x2="162.8" y2="74"/><line x1="181" y1="87.2" x2="174.1" y2="88.3"/><line x1="181.7" y1="106.4" x2="174.8" y2="105.9"/><line x1="178" y1="125.3" x2="171.3" y2="123.2"/><line x1="169.9" y1="142.8" x2="163.9" y2="139.2"/><line x1="158" y1="158" x2="148.1" y2="148.1"/></g><g class="gl"><text x="59" y="147" text-anchor="middle">0</text><text x="100" y="48" text-anchor="middle">5</text><text x="141" y="147" text-anchor="middle">10</text></g><text class="gu" x="100" y="170" text-anchor="middle">events</text><g class="needle"><path d="M100 112 L96.5 100 L100 22 L103.5 100z" fill="#F4F6F7"/><path d="M100 112 L100 124" stroke="#F4F6F7" stroke-width="5"/></g><circle cx="100" cy="100" r="8" fill="#2A2F34" stroke="#0A0C0E" stroke-width="2"/></svg><figcaption><b>0</b><span>Reportable incidents</span><small>full record since 1999</small></figcaption></figure>
       </div>
     </div>
   </section>
 
-  <section>
+  <section id="log" class="log">
     <div class="wrap">
-      <h2>Flight log</h2>
-      <p class="lead">From flight instructor to training captain on long-haul widebodies.</p>
-      <div class="tablewrap"><table class="log">
-        <thead><tr><th>Years</th><th>Position</th><th>Aircraft</th><th>Operator</th></tr></thead>
-        <tbody>
-          <tr><td>2017 — now</td><td>Line Training Captain<div class="what">Trains and checks captains and first officers on line operations; 140+ pilots released to the line.</div></td><td>B777 · A350</td><td>Gulf Horizon Airways</td></tr>
-          <tr><td>2012 — 2017</td><td>Captain<div class="what">Long-haul command on routes to Europe, Asia and the Americas, including ultra-long-haul sectors.</div></td><td>B777</td><td>Gulf Horizon Airways</td></tr>
-          <tr><td>2004 — 2012</td><td>First Officer<div class="what">Medium and long-haul operations; selected for the airline's first A330 fleet entry team.</div></td><td>A330 · B777</td><td>Gulf Horizon Airways</td></tr>
-          <tr><td>1999 — 2004</td><td>Flight Instructor<div class="what">Ab-initio and instrument instruction for cadet pilots.</div></td><td>Single &amp; multi-engine</td><td>Al Dhafra Aviation Academy</td></tr>
-        </tbody>
-      </table></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap two">
-      <div>
-        <h2>Route network</h2>
-        <p class="lead" style="margin-bottom:24px">Command experience across six continents, from short Gulf sectors to sixteen-hour ultra-long-haul flights.</p>
-        <p class="lead" style="margin-bottom:0">Known for calm decision-making in weather diversions and for crew briefings that first officers still quote years later.</p>
+      <div class="head" data-reveal>
+        <div><p class="eyebrow">Flight log</p><h2>From flight instructor<br>to training captain.</h2></div>
+        <p class="sub" style="margin:0;max-width:40ch">Twenty-five years, four seats and one airline that kept promoting him: long-haul widebodies across six continents.</p>
       </div>
-      <div class="map">
-        <svg viewBox="0 0 520 300" role="img" aria-label="Stylised route map from Dubai to major cities">
-          <defs><pattern id="d" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="rgba(244,246,250,.12)"/></pattern></defs>
-          <rect width="520" height="300" fill="url(#d)"/>
-          <g fill="none" stroke="#C9A24A" stroke-width="1.6" opacity=".9">
-            <path d="M300 150 Q 240 60 150 80"/><path d="M300 150 Q 200 40 70 110"/><path d="M300 150 Q 360 90 430 95"/><path d="M300 150 Q 400 160 470 210"/><path d="M300 150 Q 330 230 360 260"/><path d="M300 150 Q 240 220 180 250"/><path d="M300 150 Q 120 160 40 200"/>
-          </g>
-          <g fill="#F4F6FA" font-family="IBM Plex Mono, monospace" font-size="11">
-            <circle cx="300" cy="150" r="6" fill="#E2BE68"/><text x="310" y="146" fill="#E2BE68">DXB</text>
-            <circle cx="150" cy="80" r="3.5"/><text x="120" y="70">LHR</text>
-            <circle cx="70" cy="110" r="3.5"/><text x="44" y="100">JFK</text>
-            <circle cx="430" cy="95" r="3.5"/><text x="440" y="92">PEK</text>
-            <circle cx="470" cy="210" r="3.5"/><text x="440" y="230">SYD</text>
-            <circle cx="360" cy="260" r="3.5"/><text x="370" y="266">JNB</text>
-            <circle cx="180" cy="250" r="3.5"/><text x="150" y="272">GRU</text>
-            <circle cx="40" cy="200" r="3.5"/><text x="20" y="222">LAX</text>
-          </g>
-        </svg>
+      <div class="book" data-reveal>
+        <p class="bt"><span>Pilot's logbook · career summary</span><span>Page 25</span></p>
+        <table>
+          <thead><tr><th scope="col">Years</th><th scope="col">Position</th><th scope="col">Aircraft</th><th scope="col">Operator</th><th scope="col">Remarks</th></tr></thead>
+          <tbody>
+            <tr><td class="m yrs">2017 — now</td><td class="pos">Line Training Captain</td><td class="m" data-l="Aircraft">B777 · A350</td><td data-l="Operator">Gulf Horizon Airways</td><td class="rem" data-l="Remarks">Trains and checks captains and first officers on line operations; 140+ pilots released to the line.</td></tr>
+            <tr><td class="m yrs">2012 — 2017</td><td class="pos">Captain</td><td class="m" data-l="Aircraft">B777</td><td data-l="Operator">Gulf Horizon Airways</td><td class="rem" data-l="Remarks">Long-haul command on routes to Europe, Asia and the Americas, including ultra-long-haul sectors.</td></tr>
+            <tr><td class="m yrs">2004 — 2012</td><td class="pos">First Officer</td><td class="m" data-l="Aircraft">A330 · B777</td><td data-l="Operator">Gulf Horizon Airways</td><td class="rem" data-l="Remarks">Medium and long-haul operations; selected for the airline's first A330 fleet entry team.</td></tr>
+            <tr><td class="m yrs">1999 — 2004</td><td class="pos">Flight Instructor</td><td class="m" data-l="Aircraft">Single &amp; multi-engine</td><td data-l="Operator">Cadet flight academy, Abu Dhabi</td><td class="rem" data-l="Remarks">Ab-initio and instrument instruction for cadet pilots.</td></tr>
+          </tbody>
+          <tfoot><tr><td class="tl" colspan="2">Totals carried forward</td><td>16,400 h total</td><td>9,800 h in command</td><td>0 reportable incidents</td></tr></tfoot>
+        </table>
+        <p class="stamp" aria-hidden="true">Totals<br>verified</p>
       </div>
     </div>
   </section>
 
-  <section>
+  <section id="routes" class="routes">
     <div class="wrap">
-      <h2>Licences &amp; ratings</h2>
-      <p class="lead">Current, valid and audited every six months in the simulator.</p>
-      <div class="lic">
-        <div><b>ATPL</b><span>General Civil Aviation Authority, UAE</span></div>
-        <div><b>Type ratings</b><span>B777 · A350 · A330</span></div>
-        <div><b>TRI / TRE</b><span>Type rating instructor &amp; examiner</span></div>
-        <div><b>Class 1 Medical</b><span>Valid · renewed annually</span></div>
-        <div><b>CRM Facilitator</b><span>Crew resource management</span></div>
-        <div><b>ICAO English</b><span>Level 6 · Arabic native</span></div>
+      <div data-reveal>
+        <p class="eyebrow">Route network</p>
+        <h2>Six continents from one home base.</h2>
+        <p class="sub">Command experience from short Gulf sectors to sixteen-hour ultra-long-haul flights. Plotted the way the aircraft sees it: great-circle bearing and distance from Dubai, which is why Los Angeles sits almost due north.</p>
+        <ul class="dest">
+          <li><b>LHR · London</b><span>2,968 NM</span></li>
+          <li><b>PEK · Beijing</b><span>3,157 NM</span></li>
+          <li><b>JNB · Johannesburg</b><span>3,463 NM</span></li>
+          <li><b>JFK · New York</b><span>5,940 NM</span></li>
+          <li><b>SYD · Sydney</b><span>6,503 NM</span></li>
+          <li><b>GRU · São Paulo</b><span>6,597 NM</span></li>
+          <li><b>LAX · Los Angeles</b><span>7,236 NM</span></li>
+        </ul>
+      </div>
+      <div class="ndwrap" data-reveal>
+        <svg class="nd" viewBox="0 0 640 640" role="img" aria-label="Navigation display centred on Dubai, plotting great-circle bearing and distance to London, New York, Beijing, Sydney, Johannesburg, São Paulo and Los Angeles."><circle cx="320" cy="320" r="280" fill="#04070A" stroke="#E9ECEE" stroke-width="2"/><circle cx="320" cy="320" r="70" fill="none" stroke="#E9ECEE" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="3 7"/><text class="rg" x="264.5" y="385.5" text-anchor="end">2000</text><circle cx="320" cy="320" r="140" fill="none" stroke="#E9ECEE" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="3 7"/><text class="rg" x="215" y="435" text-anchor="end">4000</text><circle cx="320" cy="320" r="210" fill="none" stroke="#E9ECEE" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="3 7"/><text class="rg" x="165.5" y="484.5" text-anchor="end">6000</text><g stroke="#E9ECEE" stroke-width="2"><line x1="320" y1="40" x2="320" y2="54"/><line x1="344.4" y1="41.1" x2="343.8" y2="48"/><line x1="368.6" y1="44.3" x2="366.2" y2="58"/><line x1="392.5" y1="49.5" x2="390.7" y2="56.3"/><line x1="415.8" y1="56.9" x2="411" y2="70"/><line x1="438.3" y1="66.2" x2="435.4" y2="72.6"/><line x1="460" y1="77.5" x2="453" y2="89.6"/><line x1="480.6" y1="90.6" x2="476.6" y2="96.4"/><line x1="500" y1="105.5" x2="491" y2="116.2"/><line x1="518" y1="122" x2="513" y2="127"/><line x1="534.5" y1="140" x2="523.8" y2="149"/><line x1="549.4" y1="159.4" x2="543.6" y2="163.4"/><line x1="562.5" y1="180" x2="550.4" y2="187"/><line x1="573.8" y1="201.7" x2="567.4" y2="204.6"/><line x1="583.1" y1="224.2" x2="570" y2="229"/><line x1="590.5" y1="247.5" x2="583.7" y2="249.3"/><line x1="595.7" y1="271.4" x2="582" y2="273.8"/><line x1="598.9" y1="295.6" x2="592" y2="296.2"/><line x1="600" y1="320" x2="586" y2="320"/><line x1="598.9" y1="344.4" x2="592" y2="343.8"/><line x1="595.7" y1="368.6" x2="582" y2="366.2"/><line x1="590.5" y1="392.5" x2="583.7" y2="390.7"/><line x1="583.1" y1="415.8" x2="570" y2="411"/><line x1="573.8" y1="438.3" x2="567.4" y2="435.4"/><line x1="562.5" y1="460" x2="550.4" y2="453"/><line x1="549.4" y1="480.6" x2="543.6" y2="476.6"/><line x1="534.5" y1="500" x2="523.8" y2="491"/><line x1="518" y1="518" x2="513" y2="513"/><line x1="500" y1="534.5" x2="491" y2="523.8"/><line x1="480.6" y1="549.4" x2="476.6" y2="543.6"/><line x1="460" y1="562.5" x2="453" y2="550.4"/><line x1="438.3" y1="573.8" x2="435.4" y2="567.4"/><line x1="415.8" y1="583.1" x2="411" y2="570"/><line x1="392.5" y1="590.5" x2="390.7" y2="583.7"/><line x1="368.6" y1="595.7" x2="366.2" y2="582"/><line x1="344.4" y1="598.9" x2="343.8" y2="592"/><line x1="320" y1="600" x2="320" y2="586"/><line x1="295.6" y1="598.9" x2="296.2" y2="592"/><line x1="271.4" y1="595.7" x2="273.8" y2="582"/><line x1="247.5" y1="590.5" x2="249.3" y2="583.7"/><line x1="224.2" y1="583.1" x2="229" y2="570"/><line x1="201.7" y1="573.8" x2="204.6" y2="567.4"/><line x1="180" y1="562.5" x2="187" y2="550.4"/><line x1="159.4" y1="549.4" x2="163.4" y2="543.6"/><line x1="140" y1="534.5" x2="149" y2="523.8"/><line x1="122" y1="518" x2="127" y2="513"/><line x1="105.5" y1="500" x2="116.2" y2="491"/><line x1="90.6" y1="480.6" x2="96.4" y2="476.6"/><line x1="77.5" y1="460" x2="89.6" y2="453"/><line x1="66.2" y1="438.3" x2="72.6" y2="435.4"/><line x1="56.9" y1="415.8" x2="70" y2="411"/><line x1="49.5" y1="392.5" x2="56.3" y2="390.7"/><line x1="44.3" y1="368.6" x2="58" y2="366.2"/><line x1="41.1" y1="344.4" x2="48" y2="343.8"/><line x1="40" y1="320" x2="54" y2="320"/><line x1="41.1" y1="295.6" x2="48" y2="296.2"/><line x1="44.3" y1="271.4" x2="58" y2="273.8"/><line x1="49.5" y1="247.5" x2="56.3" y2="249.3"/><line x1="56.9" y1="224.2" x2="70" y2="229"/><line x1="66.2" y1="201.7" x2="72.6" y2="204.6"/><line x1="77.5" y1="180" x2="89.6" y2="187"/><line x1="90.6" y1="159.4" x2="96.4" y2="163.4"/><line x1="105.5" y1="140" x2="116.2" y2="149"/><line x1="122" y1="122" x2="127" y2="127"/><line x1="140" y1="105.5" x2="149" y2="116.2"/><line x1="159.4" y1="90.6" x2="163.4" y2="96.4"/><line x1="180" y1="77.5" x2="187" y2="89.6"/><line x1="201.7" y1="66.2" x2="204.6" y2="72.6"/><line x1="224.2" y1="56.9" x2="229" y2="70"/><line x1="247.5" y1="49.5" x2="249.3" y2="56.3"/><line x1="271.4" y1="44.3" x2="273.8" y2="58"/><line x1="295.6" y1="41.1" x2="296.2" y2="48"/></g><g class="rose"><text x="320" y="27" text-anchor="middle">N</text><text x="470" y="67.2" text-anchor="middle">3</text><text x="579.8" y="177" text-anchor="middle">6</text><text x="620" y="327" text-anchor="middle">E</text><text x="579.8" y="477" text-anchor="middle">12</text><text x="470" y="586.8" text-anchor="middle">15</text><text x="320" y="627" text-anchor="middle">S</text><text x="170" y="586.8" text-anchor="middle">21</text><text x="60.2" y="477" text-anchor="middle">24</text><text x="20" y="327" text-anchor="middle">W</text><text x="60.2" y="177" text-anchor="middle">30</text><text x="170" y="67.2" text-anchor="middle">33</text></g><g class="trk"><line x1="320" y1="320" x2="249.6" y2="243.7" style="--len:103.9"/><line x1="320" y1="320" x2="196" y2="153.1" style="--len:207.9"/><line x1="320" y1="320" x2="413.3" y2="260.8" style="--len:110.5"/><line x1="320" y1="320" x2="517.9" y2="432.4" style="--len:227.6"/><line x1="320" y1="320" x2="261.2" y2="426" style="--len:121.2"/><line x1="320" y1="320" x2="99.6" y2="388.7" style="--len:230.9"/><line x1="320" y1="320" x2="293.5" y2="68.1" style="--len:253.3"/></g><g class="wp"><path d="M249.6 235.7 l8 8 -8 8 -8 -8z"/><text x="235.6" y="241.7" text-anchor="end">LHR</text><text class="d" x="235.6" y="258.7" text-anchor="end">2,968 NM</text></g><g class="wp"><path d="M196 145.1 l8 8 -8 8 -8 -8z"/><text x="182" y="151.1" text-anchor="end">JFK</text><text class="d" x="182" y="168.1" text-anchor="end">5,940 NM</text></g><g class="wp"><path d="M413.3 252.8 l8 8 -8 8 -8 -8z"/><text x="427.3" y="258.8" text-anchor="start">PEK</text><text class="d" x="427.3" y="275.8" text-anchor="start">3,157 NM</text></g><g class="wp"><path d="M517.9 424.4 l8 8 -8 8 -8 -8z"/><text x="505.9" y="456.4" text-anchor="end">SYD</text><text class="d" x="505.9" y="473.4" text-anchor="end">6,503 NM</text></g><g class="wp"><path d="M261.2 418 l8 8 -8 8 -8 -8z"/><text x="275.2" y="424" text-anchor="start">JNB</text><text class="d" x="275.2" y="441" text-anchor="start">3,463 NM</text></g><g class="wp"><path d="M99.6 380.7 l8 8 -8 8 -8 -8z"/><text x="113.6" y="400.7" text-anchor="start">GRU</text><text class="d" x="113.6" y="417.7" text-anchor="start">6,597 NM</text></g><g class="wp"><path d="M293.5 60.1 l8 8 -8 8 -8 -8z"/><text x="307.5" y="74.1" text-anchor="start">LAX</text><text class="d" x="307.5" y="91.1" text-anchor="start">7,236 NM</text></g><g class="ac"><path d="M320 300 L326 316 L344 324 L344 329 L326 326 L324 340 L330 345 L330 348 L320 346 L310 348 L310 345 L316 340 L314 326 L296 329 L296 324 L314 316z"/><text x="320" y="370" text-anchor="middle">DXB</text></g></svg>
+        <p class="ndcap">ROSE · TRUE NORTH UP · RANGE 8,000 NM</p>
       </div>
     </div>
   </section>
 
-  <section class="cta" id="contact">
+  <section id="ratings" class="ratings">
     <div class="wrap">
-      <h2>Request a briefing</h2>
-      <p>Open to fleet, training and flight-operations leadership roles. Available for recruitment interviews and simulator assessments.</p>
-      <div class="btns"><a class="btn fill" href="#contact">Contact Captain Al Hammadi</a><a class="btn" href="#contact">Download CV</a><a class="btn" href="#contact">LinkedIn</a></div>
+      <div data-reveal>
+        <p class="eyebrow">Licences &amp; ratings</p>
+        <h2>Every light on the panel is green.</h2>
+        <p class="sub">Current, valid and audited every six months in the simulator.</p>
+      </div>
+      <div class="ovh" data-reveal>
+        <div class="pb"><h3>ATPL</h3><span class="btn-lt" aria-hidden="true"><i class="off">Expired</i><i class="on">Valid</i></span><p>Airline Transport Pilot Licence, issued in the UAE</p></div>
+        <div class="pb"><h3>Type ratings</h3><span class="btn-lt" aria-hidden="true"><i class="off">Lapsed</i><i class="on">Current</i></span><p>B777 · A350 · A330</p></div>
+        <div class="pb"><h3>TRI / TRE</h3><span class="btn-lt" aria-hidden="true"><i class="off">Lapsed</i><i class="on">Current</i></span><p>Type rating instructor and examiner</p></div>
+        <div class="pb"><h3>Class 1 medical</h3><span class="btn-lt" aria-hidden="true"><i class="off">Expired</i><i class="on">Valid</i></span><p>Renewed every year</p></div>
+        <div class="pb"><h3>CRM facilitator</h3><span class="btn-lt" aria-hidden="true"><i class="off">Off</i><i class="on">Active</i></span><p>Crew resource management training</p></div>
+        <div class="pb"><h3>ICAO English</h3><span class="btn-lt" aria-hidden="true"><i class="off">Fault</i><i class="on">Level 6</i></span><p>Expert level · Arabic native</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="brief" class="brief">
+    <div class="wrap">
+      <div data-reveal>
+        <p class="eyebrow">Request a briefing</p>
+        <h2>Cleared for the next command.</h2>
+      </div>
+      <div class="pass" data-reveal>
+        <div class="main">
+          <p class="route" aria-label="From Dubai to your fleet"><span>DXB</span><i aria-hidden="true"></i><span>You</span></p>
+          <h3>Contact Captain Al Hammadi</h3>
+          <p>Open to fleet, training and flight-operations leadership roles. Available for recruitment interviews and simulator assessments.</p>
+          <div class="acts"><a class="act fill" href="#brief" data-demo>Send a message</a><a class="act" href="#brief" data-demo>Download CV</a><a class="act" href="#brief" data-demo>LinkedIn</a></div>
+        </div>
+        <div class="stub">
+          <dl>
+            <div><dt>Name</dt><dd>R. Al Hammadi</dd></div>
+            <div><dt>Position</dt><dd>Captain</dd></div>
+            <div><dt>Seat</dt><dd>Left · 1L</dd></div>
+            <div><dt>Since</dt><dd>1999</dd></div>
+            <div><dt>Base</dt><dd>DXB</dd></div>
+            <div><dt>Class</dt><dd>Command</dd></div>
+          </dl>
+          <div class="bars" aria-hidden="true"></div>
+        </div>
+      </div>
     </div>
   </section>
 </main>
-<footer class="wrap">Sample portfolio website designed by Zenith Dubai CV. Rashid Al Hammadi is a fictional profile and Gulf Horizon Airways a fictional airline; contact links are disabled.</footer>
-<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design · Zenith</a>
+<footer>Concept site designed by Zenith Dubai CV. Rashid Al Hammadi is a fictional person and Gulf Horizon Airways a fictional airline; figures are illustrative.</footer>
+<script>
+(function () {
+  var Z = window.ZC || {};
+  function two(n) { return (n < 10 ? "0" : "") + n; }
+  var lt = document.getElementById("lt"), utc = document.getElementById("utc");
+  function tick() {
+    var d = new Date(), h = d.getUTCHours(), m = d.getUTCMinutes();
+    utc.textContent = two(h) + ":" + two(m);
+    lt.textContent = two((h + 4) % 24) + ":" + two(m);
+  }
+  tick(); setInterval(tick, 20000);
+
+  // Climb-out: tapes roll up to their final values once, then hold.
+  if (Z.reduce || Z.still) return;
+  var att = document.getElementById("att"), bp = document.getElementById("bankptr"),
+      spd = document.getElementById("spdtape"), alt = document.getElementById("alttape"), hdg = document.getElementById("hdgtape"),
+      sv = document.getElementById("spdv"), av = document.getElementById("altv"), hv = document.getElementById("hdgv");
+  if (!att) return;
+  function set(t) {
+    var e = 1 - Math.pow(1 - t, 3);
+    var pitch = 2.5 * e, bank = -3 * e, s = 112 + 28 * e, a = 15400 + 1000 * e, h = 30 + 32 * e;
+    att.setAttribute("transform", "rotate(" + bank.toFixed(2) + " 300 290) translate(0 " + (pitch * 8).toFixed(1) + ")");
+    bp.setAttribute("transform", "rotate(" + bank.toFixed(2) + " 300 290)");
+    spd.setAttribute("transform", "translate(0 " + (290 + s * 4).toFixed(1) + ")");
+    alt.setAttribute("transform", "translate(0 " + (290 + a * 0.4).toFixed(1) + ")");
+    hdg.setAttribute("transform", "translate(" + (300 - h * 6).toFixed(1) + " 0)");
+    sv.textContent = Math.round(s);
+    av.textContent = t >= 1 ? 16400 : Math.round(a / 20) * 20;
+    hv.textContent = ("00" + Math.round(h)).slice(-3);
+  }
+  var t0 = 0, D = 2600;
+  set(0);
+  function step(ts) {
+    if (!t0) t0 = ts;
+    var t = Math.min(1, (ts - t0) / D);
+    set(t);
+    if (t < 1) requestAnimationFrame(step);
+  }
+  setTimeout(function () { requestAnimationFrame(step); }, 300);
+})();
+</script>
 </body>
 </html>

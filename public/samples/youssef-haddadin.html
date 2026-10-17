@@ -2,197 +2,334 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Youssef Haddadin · Construction Project Director — Sample design by Zenith Dubai CV</title>
+<meta name="theme-color" content="#23272B">
+<title>Youssef Haddadin · Construction Project Director — Concept site by Zenith Dubai CV</title>
+<meta name="description" content="Concept portfolio website for a fictional construction project director, designed by Zenith Dubai CV.">
+<link rel="preload" href="img/youssef-haddadin-640.webp" as="image" type="image/webp">
+<link rel="preload" href="fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
+<script src="assets/sample.js"></script>
 <style>
-:root{--concrete:#8D8D8A;--light:#D9D8D3;--paper:#ECEBE7;--orange:#F26B1D;--char:#232323;--ink:#1A1A1A;--muted:#5E5E5B;
---display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;--sans:"Work Sans","Helvetica Neue",Arial,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}a{color:inherit}
-.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
-.bar{background:var(--char);color:#CFCFCB;font:500 12px var(--sans);letter-spacing:.16em;text-transform:uppercase}
-.bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:14px;padding-bottom:14px}
-.bar b{font:800 22px/1 var(--display);letter-spacing:.06em;color:#fff}.bar b span{color:var(--orange)}
-.live{display:inline-flex;align-items:center;gap:10px}
-.live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px rgba(242,107,29,.25)}
-.hazard{height:14px;background:repeating-linear-gradient(-45deg,var(--orange) 0 18px,var(--char) 18px 36px)}
-.hero{background:var(--light) radial-gradient(rgba(0,0,0,.06) 1px,transparent 1.3px) 0 0/7px 7px}
-.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center;padding-top:76px;padding-bottom:92px}
-.kick{font:600 13px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0;display:flex;align-items:center;gap:12px}
-.kick::before{content:"";flex:none;width:34px;height:3px;background:var(--orange)}
-h1{font:900 clamp(64px,9.4vw,148px)/.84 var(--display);text-transform:uppercase;margin:24px 0 0;color:var(--char)}
-h1 span{color:var(--orange)}
-.big{display:flex;align-items:flex-end;gap:20px;margin:36px 0 0;padding:20px 0;border-top:2px solid var(--char);border-bottom:2px solid var(--char)}
-.big b{font:800 clamp(48px,5.2vw,76px)/.86 var(--display);color:var(--char);white-space:nowrap}
-.big span{font-size:15px;line-height:1.45;color:var(--muted);max-width:30ch}
-.lead{max-width:52ch;margin:26px 0 0;color:#3A3A38}
-.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-.btn{display:inline-block;padding:14px 26px;font:700 19px/1.2 var(--display);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:2px solid var(--char)}
-.btn.o{background:var(--orange);border-color:var(--orange);color:#fff}
-.photo{position:relative;margin-bottom:30px}
-.photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;border:10px solid var(--char)}
-.sign{position:absolute;left:-28px;bottom:-30px;background:var(--orange);color:#fff;padding:14px 22px 14px;font:600 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;box-shadow:8px 8px 0 var(--char)}
-.sign b{display:block;font:800 30px/1 var(--display);letter-spacing:.04em;margin-top:6px}
-.stats{background:var(--char);color:#fff}
-.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
-.stats .wrap>div{padding:42px 28px;border-left:1px solid #3B3B3B}.stats .wrap>div:first-child{border-left:0;padding-left:0}
-.stats b{display:block;font:800 clamp(46px,4.6vw,66px)/1 var(--display);color:var(--orange)}
-.stats span{display:block;margin-top:8px;font-size:14px;color:#BDBDB8}
-section{padding:104px 0}
-.label{font:600 13px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin:0 0 14px}
-h2{font:800 clamp(44px,5.4vw,82px)/.9 var(--display);text-transform:uppercase;margin:0;color:var(--char)}
-.head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:48px}
-.head p{max-width:44ch;margin:0;color:var(--muted)}
-.gantt{background:#fff;border:2px solid var(--char);padding:26px 30px 14px}
-.axis,.row{display:grid;grid-template-columns:320px 1fr;gap:28px;align-items:center}
-.axis .l{font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.axis .t{position:relative;height:30px;border-bottom:2px solid var(--char)}
-.axis .t span{position:absolute;bottom:5px;font:700 17px var(--display);letter-spacing:.06em;color:var(--muted);padding-left:6px;border-left:2px solid var(--char)}
-.row{padding:16px 0;border-bottom:1px dashed #CFCFCB}.row:last-child{border-bottom:0}
-.row h3{margin:0;font:800 23px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em}
-.row small{display:block;font-size:13px;color:var(--muted);margin-top:4px}
-.track{position:relative;height:34px;background:repeating-linear-gradient(90deg,#E9E8E4 0 2px,transparent 2px 21.0526%)}
-.track i{position:absolute;top:6px;bottom:6px;background:var(--char)}
-.track i.now{background:repeating-linear-gradient(-45deg,var(--orange) 0 9px,#F7955C 9px 18px)}
-.legend{display:flex;gap:26px;flex-wrap:wrap;margin-top:18px;font-size:13px;color:var(--muted)}
-.legend span{display:inline-flex;align-items:center;gap:8px}
-.legend span::before{content:"";width:26px;height:12px;background:var(--char)}
-.legend span.n::before{background:repeating-linear-gradient(-45deg,var(--orange) 0 5px,#F7955C 5px 10px)}
-.safety{background:var(--orange);color:#fff;padding:76px 0}
-.safety .wrap{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center}
-.safety b{font:900 clamp(62px,9vw,146px)/.84 var(--display);letter-spacing:-.01em}
-.safety p{margin:0;font-size:19px;line-height:1.6;max-width:48ch}
-.safety p strong{display:block;font:800 30px/1.1 var(--display);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
-.boards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.board{position:relative;background:var(--char);color:#E9E9E5;padding:38px 30px 30px;border-top:8px solid var(--orange)}
-.board::before,.board::after{content:"";position:absolute;top:14px;width:10px;height:10px;border-radius:50%;background:#4A4A4A;box-shadow:inset 0 0 0 2px #6E6E6E}
-.board::before{left:14px}.board::after{right:14px}
-.board time{font:700 19px var(--display);letter-spacing:.12em;color:var(--orange)}
-.board h3{font:800 36px/1 var(--display);text-transform:uppercase;margin:12px 0 6px;color:#fff}
-.board .r{font-size:14px;color:#BDBDB8}
-.board p{margin:16px 0 0;font-size:15px;color:#D6D6D2}
-.board dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:22px 0 0;padding-top:16px;border-top:1px solid #3F3F3F;font-size:13px}
-.board dt{color:var(--concrete);text-transform:uppercase;letter-spacing:.12em}.board dd{margin:0;color:#fff}
-.rules{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;border-top:2px solid var(--char)}
-.rules div{padding-top:26px}
-.rules b{font:900 66px/1 var(--display);color:var(--orange)}
-.rules h3{font:800 27px/1.05 var(--display);text-transform:uppercase;margin:14px 0 10px}
-.rules p{margin:0;color:var(--muted);font-size:15px}
-.creds{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.tag{background:#fff;border:2px solid var(--char);padding:24px 26px;position:relative}
-.tag::before{content:"";position:absolute;top:-2px;right:-2px;width:28px;height:28px;background:linear-gradient(225deg,var(--paper) 50%,var(--char) 50%)}
-.tag small{font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--orange)}
-.tag b{display:block;font:800 28px/1.05 var(--display);text-transform:uppercase;margin-top:6px}
-.tag span{display:block;font-size:14px;color:var(--muted);margin-top:6px}
-.contact{background:var(--char);color:#fff;text-align:center;padding:110px 0 100px;position:relative}
-.contact::before{content:"";position:absolute;left:0;right:0;top:0;height:14px;background:repeating-linear-gradient(-45deg,var(--orange) 0 18px,#111 18px 36px)}
-.contact h2{color:#fff}.contact .label{text-align:center}
-.contact p{color:#BDBDB8;max-width:50ch;margin:22px auto 0}
-.contact .btns{justify-content:center;margin-top:36px}
-.contact .btn{color:#fff;border-color:#6E6E6E}.contact .btn.o{border-color:var(--orange)}
-footer{background:var(--char);color:var(--concrete);text-align:center;font-size:12px;padding:0 24px 90px}
-.zen{position:fixed;right:16px;bottom:16px;z-index:50;padding:9px 16px;background:var(--orange);color:#fff;font:700 16px var(--display);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;box-shadow:4px 4px 0 var(--char)}
-@media (max-width:1000px){.hero .wrap{grid-template-columns:1fr;gap:56px}.photo{max-width:460px}.stats .wrap{grid-template-columns:1fr 1fr}.stats .wrap>div{padding:30px 22px}.stats .wrap>div:nth-child(3){border-left:0;padding-left:0}.stats .wrap>div:nth-child(-n+2){border-bottom:1px solid #3B3B3B}.boards,.creds{grid-template-columns:1fr}.rules{grid-template-columns:1fr 1fr}.safety .wrap{grid-template-columns:1fr;gap:18px}.bar .where{display:none}}
-@media (max-width:760px){.axis,.row{grid-template-columns:1fr;gap:10px}.axis .l{display:none}.gantt{padding:18px 16px 8px}}
-@media (max-width:520px){.wrap{padding:0 20px}section{padding:78px 0}.rules{grid-template-columns:1fr}.sign{left:-6px}.big{flex-direction:column;align-items:flex-start;gap:10px}.axis .t span{font-size:14px;padding-left:4px}.bar .live{font-size:10px;letter-spacing:.1em}.board h3{font-size:32px}}
+/* Concept: the site hoarding. The hero is the bolted hoarding around a live site:
+   his portrait printed across two panels (seam and all) next to the statutory site
+   information board, with branded barrier tape along the bottom. Below: the
+   programme as a Gantt chart, a safety board with a mechanical counter, method
+   statements as safety signs, and credentials as permits. */
+:root{
+  --panel:#23272B; --panel2:#2C3136; --board:#FAFAF7; --ink:#15181B; --mute:#5D646B; --yellow:#F6C400; --orange:#FF6A13; --green:#1D8A4E; --blue:#1F5FAD; --concrete:#CFCBC4; --line:rgba(21,24,27,.14);
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif; --sans:"Work Sans","Helvetica Neue",Arial,sans-serif;
+  --tape:repeating-linear-gradient(-45deg,var(--yellow) 0 22px,#15181B 22px 44px);
+  --zc-bg:#F6C400; --zc-fg:#15181B; --zc-dot:#15181B;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--panel);color:#E9EAEB;font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.bolts{position:relative}
+.bolts::before{content:"";position:absolute;inset:4px;pointer-events:none;z-index:3;background:radial-gradient(circle at 8px 8px,#B9BEC3 0 3px,#4B5157 3.6px,transparent 4.6px),radial-gradient(circle at calc(100% - 8px) 8px,#B9BEC3 0 3px,#4B5157 3.6px,transparent 4.6px),radial-gradient(circle at 8px calc(100% - 8px),#B9BEC3 0 3px,#4B5157 3.6px,transparent 4.6px),radial-gradient(circle at calc(100% - 8px) calc(100% - 8px),#B9BEC3 0 3px,#4B5157 3.6px,transparent 4.6px)}
+
+/* ---------- Hoarding hero ---------- */
+.hero{min-height:max(700px,100svh);display:flex;flex-direction:column;background:var(--panel)}
+.bar{display:flex;align-items:center;gap:24px;padding:max(14px,env(safe-area-inset-top,0px)) clamp(14px,2.4vw,32px) 14px;background:#1A1D20;border-bottom:4px solid var(--yellow)}
+.logo{display:flex;align-items:baseline;font:900 30px/1 var(--display);letter-spacing:.02em;text-decoration:none;color:#fff}
+.logo span{color:var(--yellow);margin:0 2px}
+.bar nav{margin-left:auto}
+.plates{display:flex;gap:8px;margin:0;padding:0;list-style:none}
+.plates a{display:block;padding:8px 12px 7px;border-radius:3px;background:#2E3338;color:#fff;text-decoration:none;font:800 15px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.plates a:hover,.plates a[aria-current]{background:var(--yellow);color:var(--ink)}
+.open{display:inline-flex;align-items:center;gap:8px;padding:9px 14px 8px;border-radius:3px;background:var(--green);color:#fff;font:800 14px/1 var(--display);letter-spacing:.1em;text-transform:uppercase}
+.open i{width:8px;height:8px;border-radius:50%;background:#7CF0A9;box-shadow:0 0 8px #7CF0A9}
+.hoard{flex:1;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:6px;padding:6px;background:#121416;min-height:0}
+.pan{position:relative;overflow:hidden;background:var(--panel2)}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.photo::after{content:"";position:absolute;left:86%;top:0;bottom:0;width:6px;background:#121416;box-shadow:-1px 0 0 rgba(255,255,255,.12),1px 0 0 rgba(0,0,0,.4);z-index:2}
+.photo .print{position:absolute;left:18px;bottom:18px;z-index:3;padding:8px 12px 7px;background:var(--yellow);color:var(--ink);font:800 16px/1 var(--display);letter-spacing:.08em;text-transform:uppercase}
+.info{display:flex;flex-direction:column;background:var(--board);color:var(--ink);padding:0}
+.info .hd{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px clamp(22px,3vw,40px) 12px;background:var(--ink);color:#fff;font:800 15px/1 var(--display);letter-spacing:.16em;text-transform:uppercase}
+.info .hd span:last-child{color:var(--yellow)}
+.info .bd{flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(22px,3.2vw,46px) clamp(22px,3vw,40px)}
+.kick{margin:0;font:800 clamp(16px,1.4vw,20px)/1.2 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+h1{margin:8px 0 0;font:900 clamp(66px,8.6vw,150px)/.84 var(--display);letter-spacing:-.005em;text-transform:uppercase}
+h1 span{display:block}
+.value{margin:22px 0 0;max-width:44ch;font:400 clamp(17px,1.35vw,20px)/1.5 var(--sans);color:#33393F}
+.value b{font:900 1.5em/1 var(--display);letter-spacing:.01em;color:var(--ink)}
+.facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:clamp(20px,3.4vh,34px) 0 0;border-top:3px solid var(--ink);border-bottom:1px solid var(--line)}
+.facts div{padding:12px 10px 12px 0}
+.facts div+div{padding-left:12px;border-left:1px solid var(--line)}
+.facts b{display:block;font:900 clamp(30px,2.8vw,42px)/1 var(--display)}
+.facts span{display:block;margin-top:4px;font:500 12.5px/1.3 var(--sans);color:var(--mute)}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(20px,3vh,30px)}
+.btn{display:inline-block;padding:15px 22px 14px;border:2px solid var(--ink);border-radius:2px;background:transparent;color:var(--ink);text-decoration:none;font:800 16px/1 var(--display);letter-spacing:.1em;text-transform:uppercase}
+.btn.fill{background:var(--yellow);border-color:var(--yellow)}
+.btn:hover{background:var(--ink);border-color:var(--ink);color:var(--yellow)}
+.tapebar{position:relative;height:46px;background:var(--tape);overflow:hidden;border-top:3px solid #121416}
+.tapebar span{position:absolute;inset:8px 0;display:flex;align-items:center;gap:40px;padding-left:20px;white-space:nowrap;font:900 18px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.tapebar b{padding:3px 12px;background:var(--yellow)}
+
+/* ---------- Sections ---------- */
+section{padding:clamp(84px,10vw,124px) 0}
+.eyebrow{margin:0 0 12px;font:800 16px/1 var(--display);letter-spacing:.18em;text-transform:uppercase;color:var(--yellow)}
+h2{margin:0;font:900 clamp(46px,6vw,92px)/.9 var(--display);text-transform:uppercase}
+.lede{margin:18px 0 0;max-width:58ch;color:#B9BEC3}
+
+/* programme */
+.gantt{margin-top:50px;padding:24px clamp(16px,2.4vw,30px) 26px;background:#1A1D20;border:1px solid #3A4046}
+.gtop,.grow{display:grid;grid-template-columns:minmax(200px,300px) minmax(0,1fr);gap:20px;align-items:center}
+.gtop{padding-bottom:10px;border-bottom:1px solid #3A4046;font:800 15px/1 var(--display);letter-spacing:.1em;color:#9AA1A8}
+.years{position:relative;display:block;height:16px}
+.years span{position:absolute;top:0;transform:translateX(-50%)}
+.years span:first-child{transform:none}
+.grow{padding:14px 0;border-bottom:1px solid #2B3035}
+.grow b{display:block;font:800 21px/1.1 var(--display);letter-spacing:.03em;color:#fff;text-transform:uppercase}
+.grow small{display:block;margin-top:3px;font:400 13px/1.4 var(--sans);color:#9AA1A8}
+.track{position:relative;height:22px;background:repeating-linear-gradient(90deg,transparent 0 calc(22.222% - 1px),#2E3439 calc(22.222% - 1px) 22.222%)}
+.track i{position:absolute;top:0;bottom:0;left:calc((var(--s) - 2008) / 18 * 100%);width:calc((var(--e) - var(--s)) / 18 * 100%);background:var(--yellow);transform-origin:left;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.track i.ip{background:repeating-linear-gradient(-45deg,var(--orange) 0 8px,#C24E0C 8px 16px)}
+.zc-reveal .gantt:not(.is-in) .track i{transform:scaleX(0)}
+.today{position:absolute;top:-8px;bottom:-8px;left:calc((2026 - 2008) / 18 * 100%);width:2px;background:#fff}
+.gkey{display:flex;gap:20px;margin-top:16px;font:500 13px/1 var(--sans);color:#9AA1A8}
+.gkey span{display:inline-flex;align-items:center;gap:8px}
+.gkey i{width:22px;height:10px;background:var(--yellow)}
+.gkey i.ip{background:repeating-linear-gradient(-45deg,var(--orange) 0 5px,#C24E0C 5px 10px)}
+
+/* safety board */
+.safety{background:var(--green);color:#fff}
+.sboard{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:50px;align-items:center}
+.counter{display:flex;gap:6px;margin:26px 0 0}
+.counter span{display:grid;place-items:center;width:clamp(36px,4.4vw,64px);height:clamp(54px,6.4vw,92px);border-radius:6px;background:#0F1A14;color:#fff;font:900 clamp(40px,5vw,72px)/1 var(--display);box-shadow:inset 0 -2px 0 rgba(255,255,255,.08),inset 0 2px 6px rgba(0,0,0,.6);position:relative;overflow:hidden}
+.counter span::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.6)}
+.counter .sep{width:auto;background:none;box-shadow:none;color:#BFE9CF;font-size:clamp(30px,3.6vw,52px)}
+.counter .sep::after{display:none}
+.safety .lede{color:#D9F2E3}
+.sign{justify-self:end;width:min(100%,320px);aspect-ratio:1;border-radius:16px;display:grid;place-items:center;text-align:center;background:#fff;color:var(--green);border:10px solid #fff;outline:4px solid var(--green);outline-offset:-18px;padding:30px}
+.sign svg{width:46%;height:auto}
+.sign b{display:block;margin-top:10px;font:900 28px/1 var(--display);text-transform:uppercase;letter-spacing:.04em}
+
+/* career */
+.job{display:grid;grid-template-columns:240px minmax(0,1fr) minmax(0,.8fr);gap:30px;padding:34px 0;border-top:2px solid #3A4046}
+.job:first-of-type{border-top:6px solid transparent;border-image:var(--tape) 6}
+.job .yr{font:900 clamp(36px,3.6vw,54px)/.9 var(--display);color:#fff}
+.job .yr small{display:block;margin-top:6px;font:800 16px/1 var(--display);letter-spacing:.12em;color:var(--yellow);text-transform:uppercase}
+.job h3{margin:0;font:900 clamp(28px,2.6vw,38px)/1 var(--display);text-transform:uppercase;color:#fff}
+.job h3 span{display:block;margin-top:6px;font:500 16px/1.4 var(--sans);text-transform:none;color:var(--yellow)}
+.job p{margin:12px 0 0;color:#C3C8CD}
+.job dl{margin:0;display:grid;gap:12px;align-content:start}
+.job dt{font:800 14px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:#8E959C}
+.job dd{margin:4px 0 0;color:#E9EAEB}
+
+/* method signs */
+.method{background:var(--concrete);color:var(--ink)}
+.method .lede{color:#41474D}
+.signs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:50px}
+.msign{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 20px 40px -26px rgba(0,0,0,.5)}
+.msign .top{display:grid;place-items:center;height:150px;background:var(--c)}
+.msign .top svg{width:84px;height:84px}
+.msign .txt{padding:18px 20px 22px}
+.msign b{display:block;font:900 15px/1 var(--display);letter-spacing:.14em;color:var(--mute)}
+.msign h3{margin:6px 0 8px;font:900 28px/1 var(--display);text-transform:uppercase}
+.msign p{margin:0;font-size:15.5px;color:#41474D}
+
+/* permits */
+.permits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:50px}
+.permit{position:relative;padding:22px 22px 20px;background:#F3F1EA;color:var(--ink);border-radius:4px;border-left:10px solid var(--c,#F6C400)}
+.permit small{display:block;font:800 14px/1 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.permit b{display:block;margin-top:8px;font:900 32px/1 var(--display);text-transform:uppercase}
+.permit span{display:block;margin-top:6px;font-size:15px;color:#41474D}
+.permit .ok{position:absolute;right:16px;top:16px;padding:4px 8px 3px;border:2px solid var(--green);border-radius:3px;color:var(--green);font:900 13px/1 var(--display);letter-spacing:.12em;transform:rotate(6deg)}
+
+/* contact */
+.contact{background:var(--yellow);color:var(--ink)}
+.contact h2{font-size:clamp(52px,8vw,128px)}
+.contact .lede{color:#2E3338}
+.contact .btn:hover{background:var(--ink);color:var(--yellow)}
+.contact .btn.fill{background:var(--ink);border-color:var(--ink);color:var(--yellow)}
+.contact .btn.fill:hover{background:#fff;color:var(--ink);border-color:#fff}
+footer{padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));background:#15181B;color:#9AA1A8;text-align:center;font-size:13px}
+
+@media (max-width:1100px){
+  .plates{display:none}
+  .open{margin-left:auto}
+  .facts{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:0}
+  .facts div:nth-child(4){padding-left:0;border-left:0}
+  .facts div:nth-child(n+4){border-top:1px solid var(--line)}
+  .signs{grid-template-columns:1fr 1fr}
+  .job{grid-template-columns:200px minmax(0,1fr)}
+  .job dl{grid-column:2}
+}
+@media (max-width:860px){
+  .hoard{grid-template-columns:1fr}
+  .photo{height:min(70svh,560px)}
+  .sboard{grid-template-columns:1fr}
+  .sign{justify-self:start;width:min(100%,260px)}
+  .permits{grid-template-columns:1fr 1fr}
+  .gtop,.grow{grid-template-columns:1fr;gap:8px}
+  .gtop>span:first-child{display:none}
+}
+@media (max-width:560px){
+  .bar{gap:12px}
+  .open{font-size:12px;padding:8px 10px 7px}
+  .facts{grid-template-columns:1fr 1fr}
+  .facts div:nth-child(n){padding-left:0;border-left:0;border-top:1px solid var(--line)}
+  .facts div:nth-child(even){padding-left:12px;border-left:1px solid var(--line)}
+  .facts div:nth-child(-n+2){border-top:0}
+  .signs,.permits{grid-template-columns:1fr}
+  .job{grid-template-columns:1fr;gap:14px}
+  .job dl{grid-column:1}
+  .counter{gap:3px}
+  .counter span{width:30px;height:46px;font-size:34px;border-radius:4px}
+  .counter .sep{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track i{transition:none}}
 </style>
 </head>
 <body>
-<header class="bar"><div class="wrap"><b>Y<span>/</span>H</b><span class="where">Dubai · Amman · Riyadh</span><span class="live">Open to new mandates</span></div></header>
-<div class="hazard" aria-hidden="true"></div>
 <main>
-  <div class="hero"><div class="wrap">
-    <div>
-      <p class="kick">Construction Project Director · 26 years on site</p>
-      <h1>Youssef<br><span>Haddadin</span></h1>
-      <div class="big"><b>AED 14bn</b><span>of towers, hospitals and infrastructure delivered across the Gulf and Jordan</span></div>
-      <p class="lead">I take complex projects from first excavation to handover: on programme, on budget, and with every worker home safe at the end of the day.</p>
-      <div class="btns"><a class="btn o" href="#contact">Discuss a project</a><a class="btn" href="#contact">Download CV</a></div>
+  <header class="hero" id="top">
+    <div class="bar">
+      <a class="logo" href="#top" aria-label="Youssef Haddadin, back to top">Y<span>/</span>H</a>
+      <nav aria-label="Sections"><ul class="plates">
+        <li><a href="#programme" data-spy>Programme</a></li>
+        <li><a href="#safety" data-spy>Safety</a></li>
+        <li><a href="#career" data-spy>Career</a></li>
+        <li><a href="#method" data-spy>Method</a></li>
+        <li><a href="#contact" data-spy>Contact</a></li>
+      </ul></nav>
+      <span class="open"><i aria-hidden="true"></i>Open to new mandates</span>
     </div>
-    <div class="photo">
-      <img src="img/youssef-haddadin.jpg" alt="Portrait of Youssef Haddadin on a construction site at sunset, holding a white safety helmet">
-      <div class="sign">On site since<b>1998</b></div>
-    </div>
-  </div></div>
-
-  <div class="stats"><div class="wrap">
-    <div><b>9</b><span>Major projects delivered</span></div>
-    <div><b>68</b><span>Floors on the tallest tower</span></div>
-    <div><b>3,200</b><span>Peak workforce on one site</span></div>
-    <div><b>&lt;4%</b><span>Maximum cost variance</span></div>
-  </div></div>
-
-  <section>
-    <div class="wrap">
-      <div class="head"><div><p class="label">Programme</p><h2>Six projects,<br>one standard</h2></div><p>Selected projects from a career on site. Each bar runs from construction start to handover.</p></div>
-      <div class="gantt">
-        <div class="axis"><span class="l">Project</span><div class="t" aria-hidden="true"><span style="left:0">2008</span><span style="left:21.05%">2012</span><span style="left:42.1%">2016</span><span style="left:63.15%">2020</span><span style="left:84.2%">2024</span></div></div>
-        <div class="row"><div><h3>Blue Basin Water Works</h3><small>Jordan · water treatment · AED 0.6bn · 2008–2011</small></div><div class="track" aria-hidden="true"><i style="left:0;width:15.79%"></i></div></div>
-        <div class="row"><div><h3>Cedar Heights Residences</h3><small>Amman · 640 homes · AED 0.9bn · 2010–2014</small></div><div class="track" aria-hidden="true"><i style="left:10.53%;width:21.05%"></i></div></div>
-        <div class="row"><div><h3>Saltwater Bay Resort</h3><small>Dead Sea · 420 keys · AED 1.1bn · 2012–2016</small></div><div class="track" aria-hidden="true"><i style="left:21.05%;width:21.05%"></i></div></div>
-        <div class="row"><div><h3>Desert Gate Logistics Park</h3><small>Dubai · 210,000 m² · AED 1.2bn · 2016–2019</small></div><div class="track" aria-hidden="true"><i style="left:42.1%;width:15.79%"></i></div></div>
-        <div class="row"><div><h3>Halcyon Tower</h3><small>Dubai · 68 floors, 312 m · AED 3.1bn · 2019–2024</small></div><div class="track" aria-hidden="true"><i style="left:57.89%;width:26.32%"></i></div></div>
-        <div class="row"><div><h3>Northern Ring Medical Campus</h3><small>Riyadh · 600 beds · AED 4.4bn · 2021–2026</small></div><div class="track" aria-hidden="true"><i class="now" style="left:68.42%;width:26.32%"></i></div></div>
-      </div>
-      <div class="legend"><span>Handed over</span><span class="n">In progress</span></div>
-    </div>
-  </section>
-
-  <div class="safety"><div class="wrap">
-    <b>31,000,000</b>
-    <p><strong>Safe man-hours</strong>Recorded across the projects Youssef has led since 2008. Every shift opens with the same ten-minute safety briefing, and he still joins it in person every week.</p>
-  </div></div>
-
-  <section>
-    <div class="wrap">
-      <div class="head"><div><p class="label">Site record</p><h2>Career</h2></div><p>Twenty-six years with three contractors, from site engineer to the director responsible for the whole job.</p></div>
-      <div class="boards">
-        <article class="board"><time>2016 — Today</time><h3>Ironstone Contracting</h3><span class="r">Project Director · Dubai &amp; Riyadh</span><p>Runs a portfolio of live projects worth AED 8.7bn, with 1,900 people on site at peak. Reports to the CEO and the board.</p><dl><dt>Projects</dt><dd>Halcyon Tower, Desert Gate, Northern Ring</dd><dt>Team</dt><dd>140 engineers and managers</dd></dl></article>
-        <article class="board"><time>2008 — 2016</time><h3>Basalt Build Group</h3><span class="r">Senior Project Manager · Amman</span><p>Delivered water, residential and hospitality projects across Jordan, all handed over within 4% of budget.</p><dl><dt>Projects</dt><dd>Blue Basin, Cedar Heights, Saltwater Bay</dd><dt>Team</dt><dd>60 engineers</dd></dl></article>
-        <article class="board"><time>1998 — 2008</time><h3>Ajloun Structures</h3><span class="r">Site Engineer to Project Engineer</span><p>Ten years on site, from rebar schedules to running a 400-person site through a 24-hour concrete pour.</p><dl><dt>Projects</dt><dd>14 buildings in Amman and Irbid</dd><dt>Team</dt><dd>Up to 400 people</dd></dl></article>
+    <div class="hoard">
+      <figure class="pan photo bolts" style="margin:0">
+        <img src="img/youssef-haddadin-640.webp" srcset="img/youssef-haddadin-640.webp 640w, img/youssef-haddadin.webp 928w" sizes="(max-width:860px) 100vw, 42vw" width="928" height="1152" alt="Youssef Haddadin on a construction site at sunset, holding a white hard hat" fetchpriority="high">
+        <figcaption class="print">On site since 1998</figcaption>
+      </figure>
+      <div class="pan info bolts">
+        <p class="hd" style="margin:0"><span>Site information</span><span>Dubai · Amman · Riyadh</span></p>
+        <div class="bd">
+          <p class="kick">Construction Project Director · 26 years on site</p>
+          <h1><span>Youssef</span> <span>Haddadin</span></h1>
+          <p class="value"><b>AED 14bn</b> of towers, hospitals and infrastructure delivered across the Gulf and Jordan, on programme, on budget, and with every worker home safe at the end of the day.</p>
+          <div class="facts">
+            <div><b>9</b><span>Major projects delivered</span></div>
+            <div><b>68</b><span>Floors on the tallest tower</span></div>
+            <div><b>3,200</b><span>Peak workforce on one site</span></div>
+            <div><b>&lt;4%</b><span>Maximum cost variance</span></div>
+            <div><b>1998</b><span>On site since</span></div>
+          </div>
+          <div class="acts"><a class="btn fill" href="#contact">Discuss a project</a><a class="btn" href="#programme">See the programme</a></div>
+        </div>
       </div>
     </div>
-  </section>
+    <div class="tapebar" aria-hidden="true"><span><b>Open to new mandates</b><b>Project Director</b><b>Dubai · Amman · Riyadh</b><b>31,000,000 safe hours</b><b>Open to new mandates</b><b>Project Director</b></span></div>
+  </header>
 
-  <section style="padding-top:0">
+  <section id="programme">
     <div class="wrap">
-      <div class="head"><div><p class="label">Method</p><h2>How I run a site</h2></div></div>
-      <div class="rules">
-        <div><b>01</b><h3>Safety comes first</h3><p>The first item in every meeting and the last thing checked every night.</p></div>
-        <div><b>02</b><h3>The programme is a promise</h3><p>A weekly look-ahead with every trade, so nothing on site surprises anyone.</p></div>
-        <div><b>03</b><h3>Cost is managed weekly</h3><p>Commercial reviews every Thursday, not a surprise at the final account.</p></div>
-        <div><b>04</b><h3>Hand over what you'd buy</h3><p>Snagging starts on day one, so the client receives a finished building, not a list.</p></div>
+      <p class="eyebrow">Programme</p>
+      <h2>Six projects, one standard.</h2>
+      <p class="lede">Selected projects from a career on site. Each bar runs from construction start to handover.</p>
+      <div class="gantt" data-reveal>
+        <div class="gtop"><span>Project</span><span class="years"><span style="left:0">2008</span><span style="left:22.222%">2012</span><span style="left:44.444%">2016</span><span style="left:66.667%">2020</span><span style="left:88.889%">2024</span></span></div>
+        <div class="grow"><div><b>Blue Basin Water Works</b><small>Jordan · water treatment · AED 0.6bn · 2008–2011</small></div><div class="track"><i style="--s:2008;--e:2011"></i></div></div>
+        <div class="grow"><div><b>Cedar Heights Residences</b><small>Amman · 640 homes · AED 0.9bn · 2010–2014</small></div><div class="track"><i style="--s:2010;--e:2014"></i></div></div>
+        <div class="grow"><div><b>Saltwater Bay Resort</b><small>Dead Sea · 420 keys · AED 1.1bn · 2012–2016</small></div><div class="track"><i style="--s:2012;--e:2016"></i></div></div>
+        <div class="grow"><div><b>Desert Gate Logistics Park</b><small>Dubai · 210,000 m² · AED 1.2bn · 2016–2019</small></div><div class="track"><i style="--s:2016;--e:2019"></i></div></div>
+        <div class="grow"><div><b>Halcyon Tower</b><small>Dubai · 68 floors, 312 m · AED 3.1bn · 2019–2024</small></div><div class="track"><i style="--s:2019;--e:2024"></i></div></div>
+        <div class="grow"><div><b>Northern Ring Medical Campus</b><small>Riyadh · 600 beds · AED 4.4bn · 2021–2026</small></div><div class="track"><i class="ip" style="--s:2021;--e:2026"></i><span class="today" aria-hidden="true"></span></div></div>
+        <p class="gkey" aria-hidden="true"><span><i></i>Handed over</span><span><i class="ip"></i>In progress</span><span>│ today</span></p>
       </div>
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <section id="safety" class="safety">
+    <div class="wrap sboard">
+      <div data-reveal>
+        <p class="eyebrow" style="color:#BFE9CF">Site record</p>
+        <h2>Safe working hours.</h2>
+        <p class="counter" id="counter" aria-label="31,000,000 safe working hours"><span>3</span><span>1</span><span class="sep">,</span><span>0</span><span>0</span><span>0</span><span class="sep">,</span><span>0</span><span>0</span><span>0</span></p>
+        <p class="lede">Recorded across the projects Youssef has led since 2008. Every shift opens with the same ten-minute safety briefing, and he still joins it in person every week.</p>
+      </div>
+      <div class="sign" data-reveal aria-hidden="true"><div><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 8a24 24 0 0 0-24 24v6h48v-6A24 24 0 0 0 50 8z"/><rect x="18" y="38" width="64" height="8" rx="3"/><path d="M34 52h32l-4 40H38z" opacity=".25"/></svg><b>Safety first</b></div></div>
+    </div>
+  </section>
+
+  <section id="career">
     <div class="wrap">
-      <div class="head"><div><p class="label">Credentials</p><h2>Qualified to sign off</h2></div></div>
-      <div class="creds">
-        <div class="tag"><small>Certification</small><b>PMP</b><span>Project Management Professional</span></div>
-        <div class="tag"><small>Safety</small><b>NEBOSH IGC</b><span>International General Certificate</span></div>
-        <div class="tag"><small>Engineering</small><b>Chartered Engineer</b><span>Civil engineering, 2009</span></div>
-        <div class="tag"><small>Education</small><b>MSc Construction Mgmt</b><span>2006</span></div>
-        <div class="tag"><small>Education</small><b>BSc Civil Engineering</b><span>Amman, 1998</span></div>
-        <div class="tag"><small>Languages</small><b>Arabic · English</b><span>Native · fluent</span></div>
+      <p class="eyebrow">Career</p>
+      <h2>Site engineer to director.</h2>
+      <p class="lede">Twenty-six years with three contractors, from site engineer to the director responsible for the whole job.</p>
+      <div style="margin-top:50px">
+        <article class="job" data-reveal><p class="yr" style="margin:0">2016<small>to today</small></p><div><h3>Project Director<span>Ironstone Contracting · Dubai &amp; Riyadh</span></h3><p>Runs a portfolio of live projects worth AED 8.7bn, with 1,900 people on site at peak. Reports to the CEO and the board.</p></div><dl><div><dt>Projects</dt><dd>Halcyon Tower, Desert Gate, Northern Ring</dd></div><div><dt>Team</dt><dd>140 engineers and managers</dd></div></dl></article>
+        <article class="job" data-reveal><p class="yr" style="margin:0">2008<small>to 2016</small></p><div><h3>Senior Project Manager<span>Basalt Build Group · Amman</span></h3><p>Delivered water, residential and hospitality projects across Jordan, all handed over within 4% of budget.</p></div><dl><div><dt>Projects</dt><dd>Blue Basin, Cedar Heights, Saltwater Bay</dd></div><div><dt>Team</dt><dd>60 engineers</dd></div></dl></article>
+        <article class="job" data-reveal><p class="yr" style="margin:0">1998<small>to 2008</small></p><div><h3>Site Engineer to Project Engineer<span>Ajloun Structures</span></h3><p>Ten years on site, from rebar schedules to running a 400-person site through a 24-hour concrete pour.</p></div><dl><div><dt>Projects</dt><dd>14 buildings in Amman and Irbid</dd></div><div><dt>Team</dt><dd>Up to 400 people</dd></div></dl></article>
       </div>
     </div>
   </section>
 
-  <section class="contact" id="contact">
+  <section id="method" class="method">
     <div class="wrap">
-      <p class="label">Contact</p>
-      <h2>Got a project that<br>has to finish on time?</h2>
-      <p>Youssef is open to Project Director and Construction Director roles in the UAE and Saudi Arabia.</p>
-      <div class="btns"><a class="btn o" href="#contact">Arrange a call</a><a class="btn" href="#contact">Download CV</a><a class="btn" href="#contact">LinkedIn</a></div>
+      <p class="eyebrow" style="color:var(--orange)">Method statement</p>
+      <h2>How I run a site.</h2>
+      <div class="signs">
+        <article class="msign" style="--c:#1D8A4E" data-reveal><div class="top"><svg viewBox="0 0 100 100" fill="#fff"><path d="M50 10l34 14v22c0 22-15 38-34 44-19-6-34-22-34-44V24z"/><path d="M38 52l9 9 17-20" fill="none" stroke="#1D8A4E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="txt"><b>01</b><h3>Safety comes first</h3><p>The first item in every meeting and the last thing checked every night.</p></div></article>
+        <article class="msign" style="--c:#1F5FAD" data-reveal><div class="top"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#fff"/><path d="M50 26v26l16 10" fill="none" stroke="#1F5FAD" stroke-width="8" stroke-linecap="round"/></svg></div><div class="txt"><b>02</b><h3>The programme is a promise</h3><p>A weekly look-ahead with every trade, so nothing on site surprises anyone.</p></div></article>
+        <article class="msign" style="--c:#F6C400" data-reveal><div class="top"><svg viewBox="0 0 100 100"><path d="M50 12L92 86H8z" fill="#15181B"/><path d="M50 26L80 80H20z" fill="#F6C400"/><text x="50" y="74" text-anchor="middle" font-family="Big Shoulders Display,sans-serif" font-weight="900" font-size="34" fill="#15181B">AED</text></svg></div><div class="txt"><b>03</b><h3>Cost is managed weekly</h3><p>Commercial reviews every Thursday, not a surprise at the final account.</p></div></article>
+        <article class="msign" style="--c:#FF6A13" data-reveal><div class="top"><svg viewBox="0 0 100 100" fill="#fff"><path d="M18 46L50 20l32 26v34H18z"/><rect x="42" y="58" width="16" height="22" fill="#FF6A13"/></svg></div><div class="txt"><b>04</b><h3>Hand over what you'd buy</h3><p>Snagging starts on day one, so the client receives a finished building, not a list.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="credentials">
+    <div class="wrap">
+      <p class="eyebrow">Credentials</p>
+      <h2>Qualified to sign off.</h2>
+      <div class="permits">
+        <div class="permit" data-reveal><span class="ok" aria-hidden="true">Valid</span><small>Certification</small><b>PMP</b><span>Project Management Professional</span></div>
+        <div class="permit" style="--c:#1D8A4E" data-reveal><span class="ok" aria-hidden="true">Valid</span><small>Safety</small><b>NEBOSH IGC</b><span>International General Certificate</span></div>
+        <div class="permit" style="--c:#1F5FAD" data-reveal><span class="ok" aria-hidden="true">Valid</span><small>Engineering</small><b>Chartered Engineer</b><span>Civil engineering, 2009</span></div>
+        <div class="permit" style="--c:#FF6A13" data-reveal><small>Education</small><b>MSc Construction Mgmt</b><span>2006</span></div>
+        <div class="permit" style="--c:#FF6A13" data-reveal><small>Education</small><b>BSc Civil Engineering</b><span>Amman, 1998</span></div>
+        <div class="permit" style="--c:#CFCBC4" data-reveal><small>Languages</small><b>Arabic · English</b><span>Native · fluent</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow" style="color:var(--ink)">Contact</p>
+      <h2>Got a project that has to finish on time?</h2>
+      <p class="lede">Youssef is open to Project Director and Construction Director roles in the UAE and Saudi Arabia.</p>
+      <div class="acts" style="margin-top:30px"><a class="btn fill" href="#contact" data-demo>Arrange a call</a><a class="btn" href="#contact" data-demo>Download CV</a><a class="btn" href="#contact" data-demo>LinkedIn</a></div>
     </div>
   </section>
 </main>
-<footer>Sample portfolio website designed by Zenith Dubai CV. Youssef Haddadin is a fictional profile; companies and projects are illustrative and contact links are disabled.</footer>
-<a class="zen" href="https://zenithdubaicv.com/#websites" target="_blank" rel="noopener">Sample design · Zenith Dubai CV</a>
+<footer>Concept site designed by Zenith Dubai CV. Youssef Haddadin is a fictional person; companies, projects and figures are illustrative.</footer>
+<script>
+(function () {
+  // Safety counter: digits roll up once when the board comes into view.
+  var Z = window.ZC || {}, c = document.getElementById("counter");
+  if (!c || Z.reduce || Z.still || !("IntersectionObserver" in window)) return;
+  var digits = [].filter.call(c.children, function (s) { return !s.classList.contains("sep"); });
+  var finals = digits.map(function (d) { return +d.textContent; });
+  var io = new IntersectionObserver(function (en) {
+    if (!en[0].isIntersecting) return; io.disconnect();
+    var t0 = 0;
+    function f(ts) {
+      if (!t0) t0 = ts;
+      var t = Math.min(1, (ts - t0) / 1800);
+      digits.forEach(function (d, i) {
+        var stop = 0.35 + 0.65 * (i / (digits.length - 1));
+        d.textContent = t >= stop ? finals[i] : Math.floor(Math.random() * 10);
+      });
+      if (t < 1) requestAnimationFrame(f);
+    }
+    requestAnimationFrame(f);
+  }, { threshold: 0.5 });
+  io.observe(c);
+})();
+</script>
 </body>
 </html>
