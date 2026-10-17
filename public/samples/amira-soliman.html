@@ -3,303 +3,335 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#F5F8F8">
-<title>Dr. Amira Soliman · Consultant Interventional Cardiologist — Concept site by Zenith Dubai CV</title>
-<meta name="description" content="Concept portfolio website for a fictional consultant cardiologist, designed by Zenith Dubai CV. Not medical advice.">
-<link rel="preload" href="img/amira-soliman-640.webp" as="image" type="image/webp">
-<link rel="preload" href="fonts/lora-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css">
+<title>Dr Amira Soliman — Interventional Cardiologist · Concept site</title>
+<meta name="description" content="Dr Amira Soliman, consultant interventional cardiologist in Dubai. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content, not medical advice.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F6F9FA">
+<link rel="preload" href="fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/amira-soliman/cut.webp" as="image" fetchpriority="high">
 <script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
 <style>
-/* Concept: calm precision. Airy and highly legible, the way a good clinic feels.
-   One ECG trace runs across the hero and draws itself once; her career figures sit
-   in a bedside-monitor panel over the portrait. Everything else is generous
-   whitespace, a serif for warmth and a clear sans for reading. */
+@font-face{font-family:"Plus Jakarta Sans";src:url(fonts/plus-jakarta-sans-latin-wght-normal.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url(fonts/source-serif-4-latin-wght-italic.woff2) format("woff2");font-weight:200 900;font-style:italic;font-display:swap}
 :root{
-  --bg:#F5F8F8; --white:#fff; --ink:#0F3A42; --text:#2C4A50; --mute:#5F7A7F; --mint:#DDEFEA; --mint2:#C7E6DE; --heart:#D2445C; --line:rgba(15,58,66,.12);
-  --mon:#0C1B1F; --g:#4BE38A; --y:#F2D44B; --c:#53D2EE;
-  --serif:"Lora",Georgia,serif; --sans:"Figtree","Helvetica Neue",Arial,sans-serif;
-  --zc-bg:#0F3A42; --zc-fg:#fff; --zc-dot:#4BE38A;
+  --bg:#F6F9FA;--white:#FFFFFF;--navy:#0B2545;--navy2:#3C516B;--mute:#61748A;--line:rgba(11,37,69,.14);--coral:#E5484D;--mint:#DCEFEA;--sky:#E6EFF7;
+  --sans:"Plus Jakarta Sans",system-ui,sans-serif;--serif:"Source Serif 4",Georgia,serif;
+  --pad:clamp(18px,4.6vw,76px);
+  --zc-bg:#0B2545;--zc-fg:#fff;--zc-dot:#E5484D;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:400 18px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;height:auto;display:block}
-a{color:inherit}
-:focus-visible{outline:3px solid #2E9C86;outline-offset:3px;border-radius:6px}
-.wrap{max-width:1200px;margin:0 auto;padding-left:max(26px,env(safe-area-inset-left,0px));padding-right:max(26px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--navy);font:400 18px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:4px}
+main{position:relative;overflow-x:clip}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tag{display:inline-flex;align-items:center;gap:10px;font:600 13px/1.2 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--navy2)}
+.tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--coral)}
 
-/* ---------- Hero ---------- */
-.hero{position:relative;min-height:max(700px,100svh);display:flex;flex-direction:column;overflow:hidden;background:linear-gradient(180deg,#fff 0,var(--bg) 100%)}
-.hero>.wrap{width:100%}
-.top{display:flex;align-items:center;gap:26px;padding-top:max(20px,env(safe-area-inset-top,0px));padding-bottom:20px}
-.mark{display:flex;align-items:center;gap:10px;text-decoration:none;font:500 19px/1 var(--serif);color:var(--ink)}
-.mark svg{width:26px;height:26px}
-.top nav{margin-left:auto}
-.top ul{display:flex;gap:26px;margin:0;padding:0;list-style:none}
-.top ul a{text-decoration:none;font:500 15px/1 var(--sans);color:var(--mute);padding:6px 0;border-bottom:2px solid transparent}
-.top ul a:hover,.top ul a[aria-current]{color:var(--ink);border-bottom-color:var(--g)}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font:600 15px/1 var(--sans)}
-.btn:hover{background:#155763}
-.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
-.btn.ghost:hover{background:var(--mint)}
-.main{flex:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(30px,5vw,80px);align-items:center;padding-top:clamp(10px,3vh,30px);padding-bottom:clamp(100px,16vh,150px)}
-.spec{margin:0;font:600 13px/1.5 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#2E9C86}
-h1{margin:16px 0 0;font:500 clamp(48px,5.6vw,86px)/1.02 var(--serif);letter-spacing:-.02em;color:var(--ink)}
-.cred{display:flex;gap:10px;margin-top:16px}
-.cred span{padding:6px 12px;border-radius:999px;background:var(--mint);font:600 14px/1 var(--sans);color:var(--ink)}
-.lead{margin:22px 0 0;max-width:46ch;font-size:clamp(18px,1.45vw,20px);color:var(--text)}
-.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.portrait{position:relative;justify-self:end;width:min(100%,460px)}
-.portrait .ph{aspect-ratio:928/1100;border-radius:28px;overflow:hidden;background:var(--mint)}
-.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
-.monitor{position:absolute;left:clamp(-90px,-6vw,-40px);bottom:-46px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;width:min(340px,86%);border-radius:16px;overflow:hidden;background:#24363B;box-shadow:0 30px 50px -24px rgba(12,27,31,.55)}
-.monitor .v{padding:12px 14px 13px;background:var(--mon);color:var(--col)}
-.monitor small{display:flex;justify-content:space-between;font:600 10.5px/1 var(--sans);letter-spacing:.14em;opacity:.9}
-.monitor b{display:block;margin-top:6px;font:600 clamp(28px,2.6vw,36px)/1 var(--sans);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
-.monitor b i{font-style:normal;font-size:.45em;margin-left:3px}
-.monitor span{display:block;margin-top:4px;font:400 12px/1.3 var(--sans);color:#9FB6BB}
-.ecg{position:absolute;left:0;right:0;bottom:clamp(20px,5vh,46px);height:90px;pointer-events:none}
-.ecg svg{width:100%;height:100%}
-.ecg path{fill:none;stroke:var(--heart);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
-.ecg .base{stroke:rgba(15,58,66,.1);stroke-width:1}
-.zc-reveal .ecg .trace{stroke-dasharray:3000;animation:trace 3.4s cubic-bezier(.45,.1,.3,1) .4s both}
-@keyframes trace{from{stroke-dashoffset:3000}to{stroke-dashoffset:0}}
+/* emergency strip + header */
+.emerg{position:relative;z-index:61;background:var(--navy);color:#fff;font:500 14px/1.4 var(--sans);text-align:center;padding:9px var(--pad)}
+.emerg b{color:#FFB3B5}
+.top{position:sticky;top:0;z-index:60;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:14px var(--pad);background:rgba(246,249,250,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
+html.scrolled .top{border-bottom-color:var(--line)}
+.brand{display:flex;flex-direction:column;text-decoration:none;line-height:1.15}
+.brand b{font:700 18px/1.15 var(--sans);letter-spacing:-.01em}
+.brand span{font:500 13px/1.3 var(--sans);color:var(--mute)}
+.top nav{display:flex;gap:clamp(14px,2vw,30px);font-weight:600;font-size:15px}
+.top nav a{text-decoration:none;color:var(--navy2)}.top nav a:hover{color:var(--navy)}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:12px 22px;border-radius:999px;background:var(--navy);color:#fff;text-decoration:none;font:600 15px/1.2 var(--sans);border:2px solid var(--navy);cursor:pointer;transition:background .25s,color .25s}
+.btn:hover{background:#163A63}
+.btn.ghost{background:transparent;color:var(--navy)}
+.btn.ghost:hover{background:var(--white)}
 
-/* ---------- Sections ---------- */
-section{padding:clamp(90px,10vw,130px) 0}
-.eyebrow{margin:0 0 14px;font:600 13px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#2E9C86}
-h2{margin:0;font:500 clamp(36px,4.2vw,58px)/1.1 var(--serif);letter-spacing:-.015em;color:var(--ink)}
-.sub{margin:18px 0 0;max-width:58ch;color:var(--text)}
+/* hero: the headline splits around the lens, like a pulse either side of a beat */
+.hero{position:relative;min-height:calc(100svh - 110px);display:grid;place-items:center;padding:clamp(40px,6vh,70px) var(--pad) clamp(140px,18vh,190px);overflow:hidden}
+.hero .tag.top-tag{position:absolute;left:var(--pad);top:clamp(26px,5vh,54px)}
+.hero h1{font:700 clamp(46px,5.8vw,104px)/.98 var(--sans);letter-spacing:-.035em}
+.hero h1 .l1{position:absolute;z-index:3;left:var(--pad);top:24%;max-width:30vw}
+.hero h1 .l2{position:absolute;z-index:3;right:var(--pad);top:50%;text-align:right;max-width:34vw}
+.hero h1 em.s{font-weight:400;color:var(--coral);letter-spacing:-.02em}
+.hero .lede{position:absolute;z-index:3;left:var(--pad);bottom:clamp(40px,7vh,80px);max-width:34ch;font-size:clamp(17px,1.25vw,20px);color:var(--navy2)}
+.hero .cta{position:absolute;z-index:3;left:50%;transform:translateX(-50%);bottom:clamp(36px,6vh,70px);display:flex;flex-wrap:nowrap;gap:12px;justify-content:center}
+.meta{position:absolute;z-index:3;left:var(--pad);top:calc(24% + clamp(110px,13vw,220px));display:flex;flex-direction:column;gap:2px;color:var(--mute);font-size:15px}
+.meta b{color:var(--navy);font-weight:600}
+.stage{position:relative;width:min(38vw,64vh,600px);aspect-ratio:1;margin-top:6%}
+.rings{position:absolute;left:50%;top:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none}
+.circ{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 38%,#FFFFFF 0%,#EEF6F4 46%,#D7ECE6 100%);box-shadow:0 40px 90px -40px rgba(11,37,69,.35),inset 0 0 0 1px rgba(11,37,69,.06)}
+.over{position:absolute;left:0;right:0;bottom:50%;height:200%;overflow:hidden;pointer-events:none}
+.circ img,.over img{position:absolute;left:0;width:100%;max-width:none}
+.circ img{bottom:0}
+.over img{bottom:-25%}
+.bpm{position:absolute;left:-10%;bottom:8%;z-index:3;display:flex;align-items:flex-end;gap:10px;padding:14px 18px 12px;border-radius:18px;background:var(--white);box-shadow:0 20px 40px -24px rgba(11,37,69,.45)}
+.bpm b{font:300 54px/.9 var(--sans);letter-spacing:-.04em;font-variant-numeric:tabular-nums;min-width:2.1ch}
+.bpm span{font:600 12px/1.25 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.bpm i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--coral);margin-bottom:6px}
+.pause{position:absolute;right:-6%;bottom:2%;z-index:3;min-height:44px;padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--white);font:600 13px/1 var(--sans);cursor:pointer}
 
-.interests{background:#fff}
-.int{display:grid;grid-template-columns:64px minmax(0,.9fr) minmax(0,1.1fr);gap:24px 40px;align-items:start;padding:30px 0;border-top:1px solid var(--line)}
-.int:last-child{border-bottom:1px solid var(--line)}
-.int svg{width:44px;height:44px;color:#2E9C86}
-.int h3{margin:0;font:500 clamp(24px,2.2vw,30px)/1.2 var(--serif);color:var(--ink)}
-.int p{margin:0;color:var(--text)}
-.clinic{display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px;margin-top:40px;padding:22px 26px;border-radius:18px;background:var(--mint)}
-.clinic b{font:500 22px/1.2 var(--serif);color:var(--ink)}
-.clinic span{color:var(--text)}
+/* sections */
+.sec{padding:clamp(80px,10vw,150px) var(--pad)}
+.sec h2{font:700 clamp(36px,4.4vw,70px)/1.02 var(--sans);letter-spacing:-.03em;max-width:20ch;margin-top:16px}
+.sec h2 em.s{font-weight:400;color:var(--coral)}
+.sec .intro{max-width:52ch;margin-top:18px;color:var(--navy2)}
+.patients{background:var(--white)}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:clamp(36px,5vw,70px)}
+.card{border:1px solid var(--line);border-radius:22px;padding:26px 24px 28px;background:var(--bg);display:flex;flex-direction:column;gap:12px;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s}
+.card:hover{transform:translateY(-6px);box-shadow:0 30px 50px -30px rgba(11,37,69,.35)}
+.card .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--mint)}
+.card h3{font:700 21px/1.25 var(--sans);letter-spacing:-.01em}
+.card p{font-size:16px;color:var(--navy2)}
+.card dl{margin-top:auto;font-size:15px;border-top:1px solid var(--line);padding-top:12px}
+.card dt{font-weight:700}
+.card dd{color:var(--navy2);margin-bottom:8px}
+.procs{margin-top:clamp(36px,5vw,70px);border-top:1px solid var(--line)}
+.proc{border-bottom:1px solid var(--line)}
+.proc button{width:100%;display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:16px;align-items:center;padding:24px 0;background:none;border:0;text-align:left;cursor:pointer}
+.proc .n{font:400 italic 26px/1 var(--serif);color:var(--coral)}
+.proc h3{font:700 clamp(22px,2.2vw,32px)/1.2 var(--sans);letter-spacing:-.02em}
+.proc .pm{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:22px;transition:transform .3s}
+.proc[data-open] .pm{transform:rotate(45deg);background:var(--navy);color:#fff}
+.proc .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.7,.2,1)}
+.proc[data-open] .body{grid-template-rows:1fr}
+.proc .body>div{overflow:hidden}
+.proc .inner{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:24px;padding:0 0 28px 76px}
+.proc .inner p{color:var(--navy2)}
+.proc .inner dt{font:600 12px/1.3 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.proc .inner dd{font-weight:700;margin-top:4px}
+.exp{background:var(--navy);color:#fff}
+.exp .tag{color:#B9C7D8}
+.exp h2 em.s{color:#FF9A9D}
+.figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin-top:clamp(36px,5vw,70px);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);border-radius:22px;overflow:hidden}
+.figs div{background:var(--navy);padding:30px 26px}
+.figs b{display:block;font:300 clamp(48px,5.4vw,88px)/1 var(--sans);letter-spacing:-.04em}
+.figs span{display:block;margin-top:10px;color:#C6D2E0;font-size:16px}
+.exp .fine{margin-top:18px;color:#93A5BA;font-size:14px}
+.research{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(30px,6vw,100px)}
+.pubs{list-style:none;border-top:1px solid var(--line)}
+.pubs li{padding:20px 0;border-bottom:1px solid var(--line)}
+.pubs b{display:block;font:600 19px/1.4 var(--sans)}
+.pubs span{color:var(--mute);font-size:15px}
+.clinics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:clamp(36px,5vw,70px)}
+.clinic{border-radius:22px;padding:28px;background:var(--white);border:1px solid var(--line)}
+.clinic h3{font:700 22px/1.3 var(--sans)}
+.clinic p{color:var(--navy2);margin-top:6px}
+.clinic table{margin-top:16px;border-collapse:collapse;width:100%;font-size:16px}
+.clinic td{padding:8px 0;border-top:1px solid var(--line)}
+.clinic td:last-child{text-align:right;font-weight:600}
+.book{background:linear-gradient(160deg,var(--sky),var(--mint))}
+.book .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(30px,6vw,100px);align-items:start}
+form{background:var(--white);border-radius:26px;padding:clamp(22px,3vw,40px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;box-shadow:0 40px 80px -50px rgba(11,37,69,.5)}
+form .full{grid-column:1/-1}
+label{display:block;font-weight:600;font-size:15px;margin-bottom:6px}
+input,select,textarea{width:100%;min-height:48px;border:1px solid rgba(11,37,69,.3);border-radius:12px;background:#fff;font:400 17px/1.4 var(--sans);padding:10px 14px;color:var(--navy)}
+textarea{min-height:110px;resize:vertical}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--navy2)}
+.check input{width:22px;min-height:22px;height:22px;margin-top:2px;flex:none}
+.disclaim{margin-top:22px;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.6);font-size:15px;color:var(--navy2)}
+footer{padding:36px var(--pad) 90px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 40px;color:var(--mute);font-size:14px;border-top:1px solid var(--line)}
+footer p{max-width:72ch}
 
-.journey .steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;margin:60px 0 0;padding:0;list-style:none;position:relative}
-.journey .steps::before{content:"";position:absolute;left:0;right:0;top:27px;height:2px;background:linear-gradient(90deg,var(--mint2),#2E9C86)}
-.journey li{position:relative}
-.journey li b{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#fff;border:2px solid #2E9C86;color:var(--ink);font:600 18px/1 var(--sans);position:relative}
-.journey li:last-child b{background:#2E9C86;color:#fff}
-.journey li h3{margin:18px 0 6px;font:500 22px/1.2 var(--serif);color:var(--ink)}
-.journey li p{margin:0;font-size:16px;color:var(--text)}
-.note{display:flex;gap:12px;align-items:flex-start;margin-top:44px;padding:16px 20px;border-radius:12px;background:#FFF5F6;color:#7C2A38;font-size:15.5px}
-.note svg{flex:none;width:20px;height:20px;margin-top:3px}
-
-.exp{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,6vw,90px)}
-.facts{margin:30px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
-.facts li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
-.facts span{color:var(--mute)}
-.facts b{font-weight:600;color:var(--ink);text-align:right}
-.tl{margin:0;padding:0;list-style:none}
-.tl li{position:relative;padding:0 0 34px 34px;border-left:2px solid var(--mint2)}
-.tl li:last-child{padding-bottom:0;border-left-color:transparent}
-.tl li::before{content:"";position:absolute;left:-8px;top:6px;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #2E9C86}
-.tl li:first-child::before{background:#2E9C86;box-shadow:0 0 0 6px rgba(46,156,134,.15)}
-.tl time{font:600 13px/1.4 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#2E9C86}
-.tl h3{margin:6px 0 2px;font:500 24px/1.25 var(--serif);color:var(--ink)}
-.tl .at{margin:0;color:var(--mute);font-size:16px}
-.tl p{margin:8px 0 0}
-
-.research{background:#fff}
-.pubs{margin:44px 0 0;padding:0;list-style:none}
-.pubs li{display:grid;grid-template-columns:90px minmax(0,1fr) 140px;gap:24px;padding:22px 0;border-top:1px solid var(--line)}
-.pubs li:last-child{border-bottom:1px solid var(--line)}
-.pubs time{font:500 26px/1.1 var(--serif);color:#2E9C86}
-.pubs b{font:500 20px/1.4 var(--serif);color:var(--ink)}
-.pubs span{text-align:right;color:var(--mute);font-size:15px}
-.teach{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:50px}
-.teach div{padding:24px;border-radius:18px;background:var(--bg)}
-.teach b{display:block;font:500 clamp(40px,4vw,54px)/1 var(--serif);color:var(--ink)}
-.teach span{display:block;margin-top:8px;color:var(--text)}
-.quote{margin:70px auto 0;max-width:30ch;text-align:center}
-.quote blockquote{margin:0;font:italic 400 clamp(28px,3vw,40px)/1.3 var(--serif);color:var(--ink)}
-.quote figcaption{margin-top:16px;color:var(--mute);font-size:15px}
-
-.creds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:44px}
-.creds div{padding:24px 22px;border-radius:18px;background:#fff;border:1px solid var(--line)}
-.creds small{display:block;font:600 12px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#2E9C86}
-.creds b{display:block;margin-top:8px;font:500 22px/1.25 var(--serif);color:var(--ink)}
-.creds span{display:block;margin-top:6px;color:var(--mute);font-size:15.5px}
-
-.refer{background:var(--ink);color:#E7F2F1}
-.refer h2{color:#fff}
-.refer .sub{color:#C9DEDD}
-.refer .btn{background:#fff;color:var(--ink)}
-.refer .btn:hover{background:var(--mint)}
-.refer .btn.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
-.refer .note{background:rgba(255,255,255,.08);color:#E7F2F1}
-footer{padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));background:var(--ink);border-top:1px solid rgba(255,255,255,.12);text-align:center;color:#9FBCBC;font-size:13.5px}
-
-@media (max-width:1060px){
-  .top ul{display:none}
-  .top .btn{margin-left:auto}
-  .journey .steps{grid-template-columns:1fr;gap:26px}
-  .journey .steps::before{left:27px;right:auto;top:0;bottom:0;width:2px;height:auto}
-  .journey li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:0 20px}
-  .journey li h3{margin-top:12px}
-  .journey li p{grid-column:2}
-  .creds{grid-template-columns:1fr 1fr}
+@media (max-width:1100px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.proc .inner{grid-template-columns:repeat(3,minmax(0,1fr))}.proc .inner p{grid-column:1/-1}}
+@media (max-width:900px){
+  .top nav{display:none}
+  .hero{display:flex;flex-direction:column;align-items:flex-start;gap:22px;padding-bottom:60px}
+  .hero .tag.top-tag,.hero h1 .l1,.hero h1 .l2,.hero .lede,.hero .cta,.meta{position:static;max-width:none;text-align:left}
+  .hero h1 .l1,.hero h1 .l2{display:block}
+  .hero .cta{justify-content:flex-start;transform:none;flex-wrap:wrap}
+  .meta{flex-direction:row;flex-wrap:wrap;gap:6px 20px}
+  .stage{width:min(80vw,440px);margin:16% auto 4%;order:2}
+  .hero .lede{order:3}.hero .cta{order:4}.meta{order:5}
+  .figs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .research,.book .wrap,.clinics{grid-template-columns:minmax(0,1fr)}
 }
-@media (max-width:860px){
-  .main{grid-template-columns:1fr;padding-bottom:130px}
-  .portrait{justify-self:center;order:-1;width:min(84%,400px)}
-  .monitor{position:relative;left:auto;bottom:auto;margin:-46px auto 0;width:min(92%,380px)}
-  .int{grid-template-columns:52px minmax(0,1fr)}
-  .int p{grid-column:2}
-  .exp{grid-template-columns:1fr}
-  .pubs li{grid-template-columns:70px minmax(0,1fr)}
-  .pubs span{grid-column:2;text-align:left}
-  .teach{grid-template-columns:1fr}
+@media (max-width:640px){
+  .cards{grid-template-columns:minmax(0,1fr)}
+  .proc .inner{grid-template-columns:repeat(2,minmax(0,1fr));padding-left:0}
+  .proc button{grid-template-columns:44px minmax(0,1fr) auto}
+  form{grid-template-columns:minmax(0,1fr)}
+  .bpm{left:0;bottom:-2%}.bpm b{font-size:42px}
+  .pause{right:0;bottom:auto;top:-4%}
+  .top .btn{display:none}
 }
-@media (max-width:520px){
-  .mark span{display:none}
-  .creds{grid-template-columns:1fr}
-  .monitor b{font-size:26px}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
+<p class="emerg">Chest pain right now? <b>Call 998</b> in the UAE, or your local emergency number. Don't wait for an appointment.</p>
+<header class="top">
+  <a class="brand" href="#top"><b>Dr Amira Soliman</b><span>Interventional cardiology · Dubai</span></a>
+  <nav aria-label="Sections"><a href="#patients">For patients</a><a href="#procedures">Procedures</a><a href="#experience">For doctors</a><a href="#clinics">Clinics</a></nav>
+  <a class="btn" href="#book">Book an appointment</a>
+</header>
+
 <main>
-  <header class="hero" id="top">
-    <div class="wrap top">
-      <a class="mark" href="#top" aria-label="Dr. Amira Soliman, back to top"><svg viewBox="0 0 26 26" aria-hidden="true" fill="none" stroke="#D2445C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14h5l2-5 4 10 3-7h8"/></svg><span>Dr. Amira Soliman</span></a>
-      <nav aria-label="Sections"><ul>
-        <li><a href="#interests" data-spy>Clinical interests</a></li>
-        <li><a href="#experience" data-spy>Experience</a></li>
-        <li><a href="#research" data-spy>Research</a></li>
-        <li><a href="#referrals" data-spy>Referrals</a></li>
-      </ul></nav>
-      <a class="btn" href="#referrals">Referral enquiries</a>
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <p class="tag top-tag">Consultant interventional cardiologist</p>
+    <h1 id="hero-h"><span class="l1" data-hero>Calm is a</span> <span class="l2" data-hero><em class="s">clinical outcome.</em></span></h1>
+    <div class="stage">
+      <canvas class="rings" aria-hidden="true"></canvas>
+      <div class="circ"><img src="img/amira-soliman/cut.webp" srcset="img/amira-soliman/cut-760.webp 647w, img/amira-soliman/cut.webp 810w" sizes="(max-width:900px) 80vw, 38vw" width="810" height="952" alt="Dr Amira Soliman in a white coat and navy headscarf, a stethoscope around her neck"></div>
+      <div class="over" aria-hidden="true"><img src="img/amira-soliman/cut.webp" srcset="img/amira-soliman/cut-760.webp 647w, img/amira-soliman/cut.webp 810w" sizes="(max-width:900px) 80vw, 38vw" width="810" height="952" alt=""></div>
+      <div class="bpm" role="img" aria-label="An animated heart rate that slows as you scroll"><i aria-hidden="true"></i><b id="bpm">110</b><span>beats per<br>minute</span></div>
+      <button class="pause" type="button" id="pause" aria-pressed="false">Pause animation</button>
     </div>
-    <div class="wrap main">
+    <p class="meta"><span><b>18 years</b> in cardiology</span><span><b>2,400+</b> coronary procedures</span><span><b>Arabic · English · French</b></span></p>
+    <p class="lede">Dr Amira Soliman treats complex coronary and valve disease through the wrist and the leg, not the chest, and explains every step in plain words.</p>
+    <div class="cta"><a class="btn" href="#book">Book an appointment</a><a class="btn ghost" href="#experience">Refer a patient</a></div>
+  </section>
+
+  <section class="sec patients" id="patients" aria-labelledby="pat-h">
+    <p class="tag">For patients</p>
+    <h2 id="pat-h" data-lines>Plain answers, <em class="s">before you ask.</em></h2>
+    <p class="intro">The four reasons people most often come to see Dr Soliman, and what happens at the first appointment.</p>
+    <div class="cards">
+      <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="1.8"><path d="M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6.6 5.2 5.2 0 0 1 21.3 12C19 16.6 12 21 12 21z"/></svg></span><h3>Chest pain and angina</h3><p>Tightness when you walk uphill or climb stairs, easing when you rest.</p><dl><dt>First visit</dt><dd>Examination, ECG and, if needed, a CT scan of the heart arteries.</dd></dl></article>
+      <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="1.8"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><h3>After a heart attack</h3><p>Recovery, medicines and a safe return to work, driving and exercise.</p><dl><dt>First visit</dt><dd>A review of your treatment and a plan for the next twelve months.</dd></dl></article>
+      <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg></span><h3>Valve disease</h3><p>Breathlessness or tiredness from a narrowed aortic valve, often in later life.</p><dl><dt>First visit</dt><dd>Echocardiogram and a discussion of keyhole valve replacement (TAVI).</dd></dl></article>
+      <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="1.8"><path d="M4 12h3l1.5-3 3 6 1.5-3H20"/><path d="M4 18h16" opacity=".4"/></svg></span><h3>Palpitations</h3><p>A racing, fluttering or irregular heartbeat that comes and goes.</p><dl><dt>First visit</dt><dd>ECG and a small wearable monitor for a few days at home.</dd></dl></article>
+    </div>
+  </section>
+
+  <section class="sec" id="procedures" aria-labelledby="proc-h">
+    <p class="tag">Procedures</p>
+    <h2 id="proc-h" data-lines>What she does, <em class="s">step by step.</em></h2>
+    <div class="procs">
+      <div class="proc" data-open><button type="button" aria-expanded="true" aria-controls="p1"><span class="n">01</span><h3>Coronary angiography</h3><span class="pm" aria-hidden="true">+</span></button><div class="body" id="p1"><div><div class="inner"><p>A thin tube is passed from the wrist to the heart, and a dye shows any narrowing in the arteries on X-ray.</p><dl><dt>Takes</dt><dd>30 minutes</dd></dl><dl><dt>Anaesthesia</dt><dd>Local</dd></dl><dl><dt>Home</dt><dd>Same day</dd></dl></div></div></div></div>
+      <div class="proc"><button type="button" aria-expanded="false" aria-controls="p2"><span class="n">02</span><h3>Angioplasty and stents</h3><span class="pm" aria-hidden="true">+</span></button><div class="body" id="p2"><div><div class="inner"><p>A tiny balloon opens the narrowed artery and a mesh tube, a stent, keeps it open.</p><dl><dt>Takes</dt><dd>45–90 minutes</dd></dl><dl><dt>Anaesthesia</dt><dd>Local</dd></dl><dl><dt>Home</dt><dd>Next day</dd></dl></div></div></div></div>
+      <div class="proc"><button type="button" aria-expanded="false" aria-controls="p3"><span class="n">03</span><h3>Keyhole valve replacement (TAVI)</h3><span class="pm" aria-hidden="true">+</span></button><div class="body" id="p3"><div><div class="inner"><p>A new aortic valve is placed through an artery in the leg, without opening the chest.</p><dl><dt>Takes</dt><dd>1–2 hours</dd></dl><dl><dt>Anaesthesia</dt><dd>Sedation</dd></dl><dl><dt>Home</dt><dd>2–3 days</dd></dl></div></div></div></div>
+      <div class="proc"><button type="button" aria-expanded="false" aria-controls="p4"><span class="n">04</span><h3>Left atrial appendage closure</h3><span class="pm" aria-hidden="true">+</span></button><div class="body" id="p4"><div><div class="inner"><p>For some people with atrial fibrillation who cannot take blood thinners, a small plug lowers the risk of stroke.</p><dl><dt>Takes</dt><dd>1 hour</dd></dl><dl><dt>Anaesthesia</dt><dd>General</dd></dl><dl><dt>Home</dt><dd>Next day</dd></dl></div></div></div></div>
+    </div>
+  </section>
+
+  <section class="sec exp" id="experience" aria-labelledby="exp-h">
+    <p class="tag">For referring doctors</p>
+    <h2 id="exp-h" data-lines>Experience you can <em class="s">refer with confidence.</em></h2>
+    <div class="figs">
+      <div><b data-count="2400">2,400</b><span>coronary procedures</span></div>
+      <div><b data-count="310">310</b><span>TAVI valve replacements</span></div>
+      <div><b data-count="96" data-suffix="%">96%</b><span>procedures through the wrist</span></div>
+      <div><b data-count="24" data-suffix=" h">24 h</b><span>reply to referrals</span></div>
+    </div>
+    <p class="fine">Figures are illustrative. Referral letters and imaging can be sent securely through the clinic portal.</p>
+  </section>
+
+  <section class="sec" id="research" aria-labelledby="res-h">
+    <div class="research">
+      <div><p class="tag">Research &amp; teaching</p><h2 id="res-h" data-lines>She trains the <em class="s">next hands.</em></h2><p class="intro">Faculty for the regional interventional fellowship, and lead of a women-in-cardiology mentoring circle with 40 members across the Gulf.</p></div>
+      <ul class="pubs">
+        <li><b>Same-day discharge after radial angioplasty in a Gulf population</b><span>Gulf Journal of Cardiology · 2024 · illustrative title</span></li>
+        <li><b>Sex differences in symptoms of aortic stenosis</b><span>Heart &amp; Valve Review · 2022 · illustrative title</span></li>
+        <li><b>Teaching transradial access: a ten-year curriculum</b><span>Interventional Education Quarterly · 2020 · illustrative title</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="clinics" aria-labelledby="cli-h" style="padding-top:0">
+    <p class="tag">Clinics</p>
+    <h2 id="cli-h" data-lines>Two clinics, <em class="s">one team.</em></h2>
+    <div class="clinics">
+      <article class="clinic"><h3>Noor Heart Centre</h3><p>Dubai Healthcare City, Building 64</p><table><tr><td>Monday – Wednesday</td><td>8:00 – 16:00</td></tr><tr><td>Catheter lab</td><td>Tuesday, Thursday</td></tr></table></article>
+      <article class="clinic"><h3>Noor Clinic Jumeirah</h3><p>Jumeirah Beach Road, Villa 12</p><table><tr><td>Thursday</td><td>10:00 – 18:00</td></tr><tr><td>Saturday</td><td>9:00 – 13:00</td></tr></table></article>
+    </div>
+  </section>
+
+  <section class="sec book" id="book" aria-labelledby="book-h">
+    <div class="wrap">
       <div>
-        <p class="spec">Consultant Interventional Cardiologist · Dubai</p>
-        <h1>Dr. Amira Soliman</h1>
-        <p class="cred"><span>MD</span><span>FESC</span><span>15 years in cardiology</span></p>
-        <p class="lead">Fifteen years treating coronary and structural heart disease, with a particular focus on women's heart health and on prevention, so that fewer patients ever need a procedure.</p>
-        <div class="ctas"><a class="btn" href="#referrals">Referral enquiries</a><a class="btn ghost" href="#research">Publications</a></div>
+        <p class="tag">Appointments</p>
+        <h2 id="book-h" data-lines>Book a <em class="s">first visit.</em></h2>
+        <p class="intro">The clinic team will call you within one working day to confirm a time. Bring any previous ECGs, scans and a list of your medicines.</p>
+        <p class="disclaim">This is a concept website. Nothing on it is medical advice, and the form does not send anything.</p>
       </div>
-      <figure class="portrait" style="margin:0">
-        <div class="ph"><img src="img/amira-soliman-640.webp" srcset="img/amira-soliman-640.webp 640w, img/amira-soliman.webp 928w" sizes="(max-width:860px) 84vw, 460px" width="928" height="1152" alt="Dr. Amira Soliman in a white coat with a stethoscope, in a bright clinic corridor" fetchpriority="high"></div>
-        <div class="monitor" aria-label="Career figures">
-          <div class="v" style="--col:var(--g)"><small><span>PCI</span><span>♥</span></small><b>2,400+</b><span>coronary interventions</span></div>
-          <div class="v" style="--col:var(--y)"><small><span>TAVI</span></small><b>350</b><span>valve procedures</span></div>
-          <div class="v" style="--col:var(--c)"><small><span>D2B</span></small><b>58<i>min</i></b><span>door-to-balloon achieved</span></div>
-          <div class="v" style="--col:#fff"><small><span>PAPERS</span></small><b>18</b><span>peer-reviewed</span></div>
-        </div>
-      </figure>
-    </div>
-    <div class="ecg" aria-hidden="true">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="xMidYMid slice">
-        <path class="base" d="M0 56H1440"/>
-        <path class="trace" d="M0 56H60q6-10 12 0H84l4 7 7-48 7 58 5-17H128q12-18 24 0H240q6-10 12 0H264l4 7 7-48 7 58 5-17H308q12-18 24 0H420q6-10 12 0H444l4 7 7-48 7 58 5-17H488q12-18 24 0H600q6-10 12 0H624l4 7 7-48 7 58 5-17H668q12-18 24 0H780q6-10 12 0H804l4 7 7-48 7 58 5-17H848q12-18 24 0H960q6-10 12 0H984l4 7 7-48 7 58 5-17H1028q12-18 24 0H1140q6-10 12 0H1164l4 7 7-48 7 58 5-17H1208q12-18 24 0H1320q6-10 12 0H1344l4 7 7-48 7 58 5-17H1388q12-18 24 0H1440"/>
-      </svg>
-    </div>
-  </header>
-
-  <section id="interests" class="interests">
-    <div class="wrap">
-      <p class="eyebrow">Clinical interests</p>
-      <h2>Expert care for the whole heart.</h2>
-      <p class="sub">Dr. Soliman works within a heart team of surgeons, imaging specialists and nurses, so every patient gets the right treatment, not just the one on offer.</p>
-      <div style="margin-top:50px">
-        <div class="int" data-reveal><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 38S6 28 6 16a8 8 0 0 1 16-3 8 8 0 0 1 16 3c0 12-16 22-16 22z"/><path d="M12 20h6l2-4 4 8 2-4h6"/></svg><h3>Coronary intervention</h3><p>Primary and elective angioplasty, including complex and chronic occlusion cases, with wrist (radial) access as standard.</p></div>
-        <div class="int" data-reveal><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="22" cy="22" r="14"/><path d="M22 8v14l10 8M22 22l-10 8"/></svg><h3>Structural heart &amp; TAVI</h3><p>Transcatheter valve replacement for patients at high risk from open surgery, planned with the heart team.</p></div>
-        <div class="int" data-reveal><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="22" cy="13" r="6"/><path d="M10 38c0-7 5-12 12-12s12 5 12 12"/><path d="M22 33s-4-2.5-4-5.2a2 2 0 0 1 4-.8 2 2 0 0 1 4 .8c0 2.7-4 5.2-4 5.2z" fill="currentColor"/></svg><h3>Women's heart health</h3><p>Heart disease often looks different in women. A dedicated clinic for diagnosis, treatment and rehabilitation.</p></div>
-        <div class="int" data-reveal><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 6l14 6v10c0 9-6 15-14 18-8-3-14-9-14-18V12z"/><path d="M15 22l5 5 9-10"/></svg><h3>Prevention &amp; risk</h3><p>Risk assessment, cholesterol and blood-pressure care, and lifestyle programmes that keep patients out of the cath lab.</p></div>
-      </div>
-      <div class="clinic" data-reveal><b>Women's Heart Clinic</b><span>Founder and lead, since 2019</span></div>
+      <form data-form>
+        <div><label for="f-name">Full name</label><input id="f-name" autocomplete="name" required></div>
+        <div><label for="f-tel">Phone</label><input id="f-tel" type="tel" autocomplete="tel" required></div>
+        <div><label for="f-clinic">Clinic</label><select id="f-clinic"><option>Noor Heart Centre</option><option>Noor Clinic Jumeirah</option></select></div>
+        <div><label for="f-lang">Language</label><select id="f-lang"><option>English</option><option>العربية</option><option>Français</option></select></div>
+        <div class="full"><label for="f-why">Reason for the visit</label><textarea id="f-why"></textarea></div>
+        <label class="check full"><input type="checkbox" required> I agree to be contacted by the clinic about this request.</label>
+        <div class="full"><button class="btn" type="submit">Request an appointment</button></div>
+      </form>
     </div>
   </section>
 
-  <section class="journey">
-    <div class="wrap">
-      <p class="eyebrow">The patient journey</p>
-      <h2>Clear steps, one doctor throughout.</h2>
-      <p class="sub">Patients see the same consultant from the first appointment to the last follow-up.</p>
-      <ol class="steps" data-reveal>
-        <li><b>1</b><h3>Referral</h3><p>From a GP or specialist, with recent tests attached.</p></li>
-        <li><b>2</b><h3>Consultation</h3><p>A full history, examination and an honest conversation.</p></li>
-        <li><b>3</b><h3>Diagnostics</h3><p>ECG, echo, stress testing or CT, only where needed.</p></li>
-        <li><b>4</b><h3>Treatment plan</h3><p>Medication, procedure or surgery, agreed together.</p></li>
-        <li><b>5</b><h3>Follow-up</h3><p>Rehabilitation and prevention for the long term.</p></li>
-      </ol>
-      <p class="note"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm1 13H9v-2h2zm0-4H9V5h2z"/></svg>Consultations are by referral only. This concept website does not offer medical advice.</p>
-    </div>
-  </section>
-
-  <section id="experience" style="background:#fff">
-    <div class="wrap exp">
-      <div data-reveal>
-        <p class="eyebrow">Experience</p>
-        <h2>Fifteen years, three health systems.</h2>
-        <ul class="facts">
-          <li><span>Hospital</span><b>Palm Crescent Heart Institute</b></li>
-          <li><span>Clinics</span><b>Sunday to Thursday</b></li>
-          <li><span>Languages</span><b>Arabic, English, French</b></li>
-        </ul>
-      </div>
-      <ol class="tl" data-reveal>
-        <li><time>2017 — today</time><h3>Consultant Interventional Cardiologist</h3><p class="at">Palm Crescent Heart Institute, Dubai</p><p>Leads the structural heart programme and founded the Women's Heart Clinic. Performs more than 250 coronary interventions a year.</p></li>
-        <li><time>2011 — 2017</time><h3>Specialist Cardiologist</h3><p class="at">Nile Valley University Hospital, Cairo</p><p>Set up the hospital's 24/7 primary PCI service and cut door-to-balloon time from 96 to 58 minutes.</p></li>
-        <li><time>2009 — 2011</time><h3>Clinical Fellow, Interventional Cardiology</h3><p class="at">Teaching hospital, London</p><p>Two-year fellowship in complex coronary and structural intervention.</p></li>
-        <li><time>2002 — 2009</time><h3>MBBCh, MD and cardiology residency</h3><p class="at">Cairo</p><p>Graduated with honours; MD thesis on outcomes after heart attack in women.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="research" class="research">
-    <div class="wrap">
-      <p class="eyebrow">Research &amp; teaching</p>
-      <h2>Selected publications.</h2>
-      <p class="sub">Eighteen peer-reviewed papers, mostly on outcomes after intervention and on heart disease in women. Titles shown are illustrative for this concept site.</p>
-      <ol class="pubs" data-reveal>
-        <li><time>2024</time><b>Sex differences in the presentation of acute coronary syndrome in Gulf populations</b><span>Lead author</span></li>
-        <li><time>2022</time><b>Same-day discharge after transradial PCI: a single-centre experience</b><span>Lead author</span></li>
-        <li><time>2021</time><b>TAVI outcomes in patients under 75: a five-year review</b><span>Co-author</span></li>
-        <li><time>2016</time><b>Improving door-to-balloon time through a regional STEMI network</b><span>Lead author</span></li>
-      </ol>
-      <div class="teach" data-reveal>
-        <div><b>40+</b><span>Cardiology fellows trained in the cath lab</span></div>
-        <div><b>25</b><span>Talks at regional cardiology meetings</span></div>
-        <div><b>6</b><span>Years as clinical tutor for residents</span></div>
-      </div>
-      <figure class="quote" data-reveal><blockquote>“The best procedure is the one that prevention made unnecessary.”</blockquote><figcaption>Dr. Amira Soliman</figcaption></figure>
-    </div>
-  </section>
-
-  <section id="credentials">
-    <div class="wrap">
-      <p class="eyebrow">Qualifications</p>
-      <h2>Credentials &amp; memberships.</h2>
-      <div class="creds" data-reveal>
-        <div><small>Degree</small><b>MD, Cardiology</b><span>Cairo, 2009</span></div>
-        <div><small>Fellowship</small><b>FESC</b><span>Fellow, European Society of Cardiology</span></div>
-        <div><small>Licence</small><b>Consultant Cardiologist</b><span>Licensed to practise in Dubai</span></div>
-        <div><small>Training</small><b>Interventional fellowship</b><span>London, 2009–2011</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="referrals" class="refer">
-    <div class="wrap" data-reveal>
-      <p class="eyebrow" style="color:var(--g)">Referrals &amp; enquiries</p>
-      <h2>Working with Dr. Soliman.</h2>
-      <p class="sub">Dr. Soliman is open to senior consultant and clinical leadership roles in the UAE. Patient consultations are by referral.</p>
-      <div class="ctas"><a class="btn" href="#referrals" data-demo>Referral enquiries</a><a class="btn ghost" href="#referrals" data-demo>Download CV</a><a class="btn ghost" href="#referrals" data-demo>LinkedIn</a></div>
-      <p class="note"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm1 13H9v-2h2zm0-4H9V5h2z"/></svg>This is a concept design. It does not provide medical advice.</p>
-    </div>
-  </section>
+  <footer>
+    <p>Dr Amira Soliman is a fictional person. Clinics, figures, publications and qualifications on this page are illustrative, and nothing here is medical advice. Portrait generated with AI.</p>
+    <p>A concept website by Zenith Dubai CV.</p>
+  </footer>
 </main>
-<footer>Concept site designed by Zenith Dubai CV. Dr. Amira Soliman is a fictional person; hospitals, publications and figures are illustrative, and nothing here is medical advice.</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC, root = document.documentElement;
+  document.querySelector("[data-form]").addEventListener("submit", function(e){ e.preventDefault(); ZC.toast("This is a concept site, so the form is switched off."); });
+  document.querySelectorAll(".proc button").forEach(function(b){
+    b.addEventListener("click", function(){ var p = b.parentElement, open = !p.hasAttribute("data-open"); p.toggleAttribute("data-open", open); b.setAttribute("aria-expanded", open ? "true" : "false"); });
+  });
+
+  // ---- Rhythm: rings leave the portrait on each heartbeat (lub-dub). The rate slows as you scroll. ----
+  var cv = document.querySelector(".rings"), cx = cv.getContext("2d"), bpmEl = document.getElementById("bpm"), pauseB = document.getElementById("pause");
+  var bpm = ZC.motion ? 110 : 60, rings = [], nextBeat = 0, running = ZC.motion, inView = true, raf = 0, W = 0, H = 0, R = 0;
+  function size(){ var d = Math.min(2, devicePixelRatio || 1); W = cv.width = cv.clientWidth * d; H = cv.height = cv.clientHeight * d; R = W / 2.4 / 2; }
+  size(); window.addEventListener("resize", size);
+  function beat(t){ rings.push({t:t, a:1}); rings.push({t:t + 220, a:.55}); }
+  function draw(now){
+    cx.clearRect(0, 0, W, H);
+    if (running && now >= nextBeat){ beat(now); nextBeat = now + 60000 / bpm; }
+    var life = 2600;
+    rings = rings.filter(function(r){ return now - r.t < life; });
+    rings.forEach(function(r){
+      var k = (now - r.t) / life; if (k < 0) return;
+      var e = 1 - Math.pow(1 - k, 3), rad = R * (1 + e * 1.25);
+      cx.beginPath(); cx.arc(W / 2, H / 2, rad, 0, Math.PI * 2);
+      cx.strokeStyle = "rgba(229,72,77," + (0.5 * r.a * (1 - k)).toFixed(3) + ")"; cx.lineWidth = (1.2 + 2.2 * (1 - k)) * (W / 1400); cx.stroke();
+    });
+    for (var i = 1; i <= 3; i++){ cx.beginPath(); cx.arc(W / 2, H / 2, R * (1 + i * .32), 0, Math.PI * 2); cx.strokeStyle = "rgba(11,37,69,.06)"; cx.lineWidth = W / 1800; cx.stroke(); }
+    raf = (running || rings.length) && inView ? requestAnimationFrame(draw) : 0;
+  }
+  function kick(){ if (!raf) raf = requestAnimationFrame(draw); }
+  ZC.visible(cv, function(v){ inView = v; if (v) kick(); });
+  if (!ZC.motion){ bpmEl.textContent = "60"; pauseB.hidden = true; draw(performance.now()); }
+  pauseB.addEventListener("click", function(){ running = !running; pauseB.setAttribute("aria-pressed", running ? "false" : "true"); pauseB.textContent = running ? "Pause animation" : "Play animation"; kick(); });
+
+  window.addEventListener("load", function(){
+    if (!ZC.motion || !window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+    ZC.smooth();
+    kick();
+    ScrollTrigger.create({start:120,end:"max",onToggle:function(st){ root.classList.toggle("scrolled", st.isActive); }});
+    document.fonts.ready.then(function(){
+      var h = SplitText.create("[data-hero]",{type:"lines",mask:"lines"});
+      gsap.from(".hero h1 .l1",{xPercent:-8,duration:2,ease:"power3.out"});
+      gsap.from(".hero h1 .l2",{xPercent:8,duration:2,ease:"power3.out"});
+      gsap.timeline({defaults:{ease:"sine.out"}})
+        .from(h.lines,{yPercent:100,duration:1.4,stagger:.14,ease:"power3.out"},.1)
+        .from(".circ",{scale:.86,opacity:0,duration:1.8,ease:"power3.out"},0)
+        .from(".over img",{opacity:0,duration:1.6},.4)
+        .from([".hero .top-tag",".hero .meta",".hero .lede",".hero .cta"],{opacity:0,y:14,duration:1.2,stagger:.12},.5)
+        .from([".bpm",".pause"],{opacity:0,y:16,duration:1,stagger:.1},1);
+      // Scrolling calms the heart: 110 → 60 bpm across the first screen.
+      var o = {v:110};
+      gsap.to(o,{v:60,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom 30%",scrub:true},onUpdate:function(){ bpm = o.v; bpmEl.textContent = Math.round(o.v); }});
+      gsap.utils.toArray("[data-lines]").forEach(function(el){
+        SplitText.create(el,{type:"lines",mask:"lines",autoSplit:true,onSplit:function(self){
+          return gsap.from(self.lines,{yPercent:100,duration:1.3,stagger:.1,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 86%"}});
+        }});
+      });
+      gsap.from(".card",{y:40,opacity:0,duration:1.2,stagger:.1,ease:"sine.out",scrollTrigger:{trigger:".cards",start:"top 85%"}});
+      gsap.from(".proc",{y:24,opacity:0,duration:1,stagger:.08,ease:"sine.out",scrollTrigger:{trigger:".procs",start:"top 85%"}});
+      gsap.utils.toArray("[data-count]").forEach(function(b){
+        var to = +b.dataset.count, suf = b.dataset.suffix || "", oo = {v:0};
+        ScrollTrigger.create({trigger:b,start:"top 90%",once:true,onEnter:function(){ gsap.to(oo,{v:to,duration:2,ease:"power2.out",onUpdate:function(){ b.textContent = Math.round(oo.v).toLocaleString("en-US") + suf; }}); }});
+      });
+      ScrollTrigger.refresh();
+    });
+  });
+});
+</script>
 </body>
 </html>

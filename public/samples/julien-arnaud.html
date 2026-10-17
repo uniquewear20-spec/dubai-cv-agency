@@ -3,244 +3,350 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#151311">
-<title>Julien Arnaud · Executive Chef — Concept site by Zenith Dubai CV</title>
-<meta name="description" content="Concept portfolio website for a fictional executive chef, designed by Zenith Dubai CV.">
-<link rel="preload" href="img/julien-arnaud.webp" as="image" type="image/webp">
-<link rel="preload" href="fonts/playfair-display-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css">
+<title>Julien Arnaud — Chef de cuisine · Concept site</title>
+<meta name="description" content="Julien Arnaud, chef de cuisine. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F0E0D">
+<link rel="preload" href="fonts/gloock-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/julien-arnaud/cut.webp" as="image" fetchpriority="high">
 <script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/DrawSVGPlugin.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
 <style>
-/* Concept: "Le passe". The chef is plated: portrait in a porcelain plate with
-   his name running round the rim, cutlery either side, and the menu clipped to
-   the ticket rail like orders waiting at the pass. */
+@font-face{font-family:"Gloock";src:url(fonts/gloock-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"EB Garamond";src:url(fonts/eb-garamond-latin-wght-normal.woff2) format("woff2");font-weight:400 800;font-style:normal;font-display:swap}
+@font-face{font-family:"EB Garamond";src:url(fonts/eb-garamond-latin-wght-italic.woff2) format("woff2");font-weight:400 800;font-style:italic;font-display:swap}
+@font-face{font-family:"Inter Tight";src:url(fonts/inter-tight-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-display:swap}
 :root{
-  --slate:#151311; --slate2:#1D1A17; --stone:#2A2622; --copper:#B87333; --copper2:#D69A5C; --cream:#F1E8DA; --paper:#F7F1E4;
-  --muted:#A99C8B; --line:rgba(241,232,218,.13);
-  --serif:"Playfair Display",Georgia,serif; --sans:"Karla","Helvetica Neue",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
-  --zc-bg:#F1E8DA; --zc-fg:#151311; --zc-dot:#B87333;
+  --char:#0F0E0D;--char2:#191715;--bone:#EDE6DA;--bone2:#C9C0B2;--copper:#C2703D;--copper-l:#E3A46F;--card:#F3EDE2;--ink:#1D1A17;
+  --display:"Gloock",Georgia,serif;--serif:"EB Garamond",Garamond,Georgia,serif;--sans:"Inter Tight",system-ui,sans-serif;
+  --pad:clamp(18px,4.4vw,72px);
+  --zc-bg:#EDE6DA;--zc-fg:#0F0E0D;--zc-dot:#C2703D;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--slate);color:var(--cream);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;height:auto;display:block}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--copper2);outline-offset:3px}
-.wrap{max-width:1180px;margin:0 auto;padding-left:max(26px,env(safe-area-inset-left,0px));padding-right:max(26px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--char)}
+body{background:var(--char);color:var(--bone);font:400 19px/1.55 var(--serif);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--copper-l);outline-offset:3px}
+main{position:relative;overflow-x:clip}
+.lab{font:500 11px/1.4 var(--sans);letter-spacing:.22em;text-transform:uppercase}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* ---------- The pass (hero) ---------- */
-.pass{position:relative;min-height:max(680px,100svh);display:flex;flex-direction:column;overflow:hidden;
-  background:radial-gradient(60% 55% at 50% 48%,#2B2621 0,#1A1714 55%,#121010 100%)}
-.pass::before{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
-  background:repeating-radial-gradient(circle at 30% 20%,rgba(255,255,255,.012) 0 1px,transparent 1px 3px),repeating-radial-gradient(circle at 70% 80%,rgba(0,0,0,.18) 0 1px,transparent 1px 4px)}
-.rail{position:relative;z-index:2;padding-top:max(26px,env(safe-area-inset-top,0px))}
-.rail .bar{position:absolute;left:0;right:0;top:calc(max(26px,env(safe-area-inset-top,0px)) + 14px);height:11px;background:linear-gradient(#E7EAEC,#9CA2A8 45%,#5F646A 100%);box-shadow:0 4px 8px rgba(0,0,0,.55)}
-.rail .wrap{position:relative;display:flex;align-items:flex-start;gap:24px}
-.seal{flex:none;display:grid;place-items:center;width:58px;height:58px;margin-top:-6px;border-radius:50%;border:1px solid var(--copper);background:var(--slate);font:italic 400 19px/1 var(--serif);color:var(--copper2);text-decoration:none;position:relative;z-index:1}
-.tickets{display:flex;gap:12px;margin-left:auto;padding:0 2px 16px;list-style:none;margin-top:0;margin-bottom:0}
-.tickets li{flex:none}
-.ticket{position:relative;display:block;width:112px;padding:30px 12px 22px;background:var(--paper);color:#2A2622;text-decoration:none;font:500 10.5px/1.5 var(--mono);letter-spacing:.02em;
-  transform:rotate(var(--r,0deg));transform-origin:50% 0;transition:transform .5s cubic-bezier(.3,1.6,.5,1);box-shadow:0 10px 18px -10px rgba(0,0,0,.7);
-  clip-path:polygon(0 0,100% 0,100% calc(100% - 6px),92% 100%,84% calc(100% - 6px),76% 100%,68% calc(100% - 6px),60% 100%,52% calc(100% - 6px),44% 100%,36% calc(100% - 6px),28% 100%,20% calc(100% - 6px),12% 100%,4% calc(100% - 6px),0 100%)}
-.ticket::before{content:"";position:absolute;left:50%;top:0;width:26px;height:16px;margin-left:-13px;background:linear-gradient(#4A4F55,#23272B);border-radius:0 0 3px 3px}
-.ticket b{display:block;font-weight:500;font-size:9.5px;letter-spacing:.14em;color:#8B7D6C}
-.ticket strong{display:block;font:500 13px/1.25 var(--mono);margin:6px 0 4px;letter-spacing:.02em}
-.ticket span{display:block;border-top:1px dashed #BBAE9B;padding-top:6px;margin-top:6px}
-.ticket:hover,.ticket[aria-current]{transform:rotate(0deg) translateY(4px)}
-.ticket[aria-current] strong{color:var(--copper)}
+.top{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad)}
+.top::before{content:"";position:absolute;inset:0 0 -30px;z-index:-1;background:linear-gradient(rgba(15,14,13,.85),transparent);opacity:0;transition:opacity .4s}
+html.scrolled .top::before{opacity:1}
+.top .name{font:400 22px/1 var(--display);text-decoration:none;letter-spacing:.01em}
+.top nav{display:flex;gap:clamp(16px,2.4vw,36px)}
+.top nav a{text-decoration:none;opacity:.8}.top nav a:hover{opacity:1;color:var(--copper-l)}
 
-.table{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;justify-items:center;gap:clamp(18px,4vw,64px);padding:clamp(8px,2vh,24px) 0 0}
-.utensil{width:clamp(30px,3.4vw,46px);height:auto;color:var(--copper2);opacity:.9}
-.plate{position:relative;width:min(52vh,540px,82vw);aspect-ratio:1}
-.plate .rim{position:absolute;inset:0;border-radius:50%;
-  background:radial-gradient(circle,#F9F6F0 0 57%,#D8D0C3 58.5%,#FBF8F2 61%,#EDE6DA 82%,#D5CCBE 99%,#BDB3A3 100%);
-  box-shadow:0 40px 80px -30px rgba(0,0,0,.9),0 0 0 1px rgba(0,0,0,.2),inset 0 -10px 24px rgba(0,0,0,.12)}
-.plate .well{position:absolute;inset:21%;border-radius:50%;overflow:hidden;box-shadow:inset 0 6px 18px rgba(0,0,0,.35),0 0 0 3px rgba(255,255,255,.7)}
-.plate .well img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;transform:scale(1.18);transform-origin:50% 26%}
-.plate .words{position:absolute;inset:0;width:100%;height:100%;color:#7E5A35;overflow:visible}
-.plate .words text{font:700 15.4px var(--sans);letter-spacing:.32em;fill:currentColor;text-transform:uppercase}
-.zc-reveal .plate .words{animation:turn 90s linear infinite}
-@keyframes turn{to{transform:rotate(360deg)}}
-.zc-reveal .plate{animation:serve 1.4s cubic-bezier(.2,.8,.2,1) both}
-@keyframes serve{from{transform:translateY(40px) scale(.94);opacity:0}to{transform:none;opacity:1}}
+/* hero: the pass, with steam */
+.pass{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;isolation:isolate;background:radial-gradient(70% 70% at 70% 70%,#2A1D14 0%,#14110F 55%,#0B0A09 100%)}
+.pass .plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.22;filter:saturate(.7)}
+.pass .glow{position:absolute;right:6%;bottom:-20%;width:70vmax;height:70vmax;border-radius:50%;background:radial-gradient(circle,rgba(194,112,61,.34),rgba(194,112,61,0) 62%)}
+.chef{position:absolute;z-index:2;right:max(2vw,calc(50% - 720px));bottom:0;height:min(92%,1046px);width:auto;max-width:none;filter:drop-shadow(-30px 0 60px rgba(0,0,0,.6))}
+.hero-copy{position:absolute;z-index:3;left:var(--pad);top:50%;transform:translateY(-44%);max-width:min(50vw,820px)}
+.hero-copy .lab{color:var(--copper-l);margin-bottom:26px;display:flex;gap:14px;align-items:center}
+.hero-copy .lab::before{content:"";width:34px;height:1px;background:currentColor}
+.hero-copy h1{font:400 clamp(56px,7.6vw,140px)/.9 var(--display);letter-spacing:-.02em}
+.hero-copy h1 .it{font:italic 400 .86em/1 var(--serif);color:var(--copper-l);letter-spacing:-.01em}
+.hero-copy p{margin-top:28px;max-width:36ch;color:var(--bone2);font-size:clamp(17px,1.3vw,21px)}
+.pass-foot{position:absolute;z-index:4;left:var(--pad);right:var(--pad);bottom:22px;display:flex;justify-content:space-between;color:var(--bone2)}
+#steam{position:absolute;inset:0;z-index:5;width:100%;height:100%;pointer-events:none}
+.steam-css{position:absolute;inset:0;z-index:5;pointer-events:none;background:radial-gradient(30% 40% at 30% 85%,rgba(237,230,218,.10),transparent 70%),radial-gradient(26% 36% at 60% 75%,rgba(237,230,218,.08),transparent 70%)}
 
-.title{position:relative;z-index:1;text-align:center;padding:clamp(16px,2.6vh,30px) 20px clamp(30px,5vh,56px)}
-.title p{margin:0;font:500 11px/1 var(--mono);letter-spacing:.32em;text-transform:uppercase;color:var(--copper2)}
-.title h1{margin:12px 0 0;font:400 clamp(48px,6vw,86px)/.95 var(--serif);letter-spacing:-.01em}
-.title h1 em{color:var(--copper2)}
-.title .tag{margin:16px auto 0;font:italic 400 clamp(18px,1.7vw,22px)/1.45 var(--serif);color:rgba(241,232,218,.82);text-transform:none;letter-spacing:0;font-family:var(--serif)}
+/* menu card */
+.menu-wrap{position:relative;padding:clamp(100px,13vw,190px) var(--pad);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(30px,6vw,110px);align-items:start}
+.menu-intro{position:sticky;top:120px}
+.menu-intro h2{font:400 clamp(44px,5.4vw,96px)/.94 var(--display);letter-spacing:-.02em}
+.menu-intro h2 em{font:italic 400 .9em var(--serif);color:var(--copper-l)}
+.menu-intro p{margin-top:24px;color:var(--bone2);max-width:34ch}
+.card{position:relative;background:var(--card);color:var(--ink);padding:clamp(28px,4vw,64px) clamp(22px,4vw,64px);box-shadow:0 60px 90px -40px rgba(0,0,0,.8),0 0 0 1px rgba(0,0,0,.05);transform:rotate(-1deg)}
+.card::before{content:"";position:absolute;inset:12px;border:1px solid rgba(29,26,23,.22);pointer-events:none}
+.card header{text-align:center;padding-bottom:22px;border-bottom:1px solid rgba(29,26,23,.2)}
+.card header b{display:block;font:400 clamp(30px,2.8vw,44px)/1 var(--display)}
+.card header span{display:block;margin-top:10px;font:italic 400 18px/1.3 var(--serif);color:#6A6157}
+.course{padding:20px 0;border-bottom:1px dashed rgba(29,26,23,.22)}
+.course:last-of-type{border-bottom:0}
+.course .line{display:flex;align-items:baseline;gap:10px}
+.course .num{font:500 11px/1 var(--sans);letter-spacing:.2em;color:var(--copper)}
+.course h3{font:600 15px/1.2 var(--serif);font-variant:small-caps;letter-spacing:.14em;text-transform:lowercase;font-size:20px}
+.course .dots{flex:1;border-bottom:1px dotted rgba(29,26,23,.45);transform:translateY(-4px)}
+.course .yr{font:400 18px/1 var(--display)}
+.course p{margin-top:6px;font:italic 400 18px/1.45 var(--serif);color:#4E463E;max-width:44ch}
+.card .sig{text-align:center;padding-top:18px;font:italic 400 16px/1.3 var(--serif);color:#6A6157}
 
-/* ---------- Menu sections ---------- */
-section{padding:clamp(84px,10vw,120px) 0;border-top:1px solid var(--line)}
-.course{text-align:center;font:500 11px/1 var(--mono);letter-spacing:.38em;text-transform:uppercase;color:var(--copper2);margin:0 0 14px}
-.orn{display:flex;align-items:center;justify-content:center;gap:18px;color:var(--copper);margin:0 auto 26px;max-width:320px}
-.orn::before,.orn::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--copper))}
-.orn::after{background:linear-gradient(90deg,var(--copper),transparent)}
-.orn i{width:8px;height:8px;border:1px solid var(--copper);transform:rotate(45deg)}
-h2{text-align:center;font:400 clamp(36px,4.8vw,58px)/1.1 var(--serif);margin:0 0 50px}
-h2 em{color:var(--copper2)}
-.about p{max-width:62ch;margin:0 auto 18px;text-align:center;font-size:18px;color:#DCD1C1}
-.facts{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin:40px auto 0;padding:18px 0 0;max-width:760px;border-top:1px solid var(--line);list-style:none;font:500 11px/1.6 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.facts b{color:var(--cream);font-weight:500}
-.menu{max-width:880px;margin:0 auto;border-top:1px solid var(--line)}
-.dish{padding:26px 0;border-bottom:1px solid var(--line)}
-.dish .row{display:flex;align-items:baseline;gap:14px}
-.dish h3{font:400 clamp(22px,2.4vw,28px)/1.25 var(--serif);margin:0}
-.dish .dots{flex:1;min-width:20px;border-bottom:1px dotted rgba(241,232,218,.35);transform:translateY(-6px)}
-.dish .yr{font:italic 400 18px var(--serif);color:var(--copper2);white-space:nowrap}
-.dish p{margin:6px 0 0;color:var(--muted);font-size:15.5px;max-width:66ch}
-.dish small{display:block;margin-top:8px;font:500 10.5px/1.4 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#C9BBA7}
-.plates{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-.dishcard{text-align:center;padding:10px 10px 0}
-.mini{width:150px;height:150px;margin:0 auto 26px;border-radius:50%;position:relative;background:radial-gradient(circle,#F9F6F0 0 56%,#D8D0C3 57.5%,#FBF8F2 60%,#E6DFD3 98%);box-shadow:0 22px 34px -18px rgba(0,0,0,.8)}
-.mini i{position:absolute;border-radius:50%}
-.dishcard h3{font:400 24px/1.25 var(--serif);margin:0}
-.dishcard p{margin:12px 0 0;font:500 11px/1.8 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.dishcard em{display:block;margin-top:14px;font:italic 400 16px var(--serif);color:var(--copper2)}
-.brigade{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.brigade div{padding:36px 18px;text-align:center}
-.brigade div+div{border-left:1px solid var(--line)}
-.brigade b{display:block;font:400 clamp(44px,5vw,58px)/1 var(--serif);color:var(--copper2)}
-.brigade span{display:block;margin-top:12px;font:500 10.5px/1.5 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px}
-.rules h3{font:italic 400 23px/1.3 var(--serif);margin:0 0 8px}
-.rules p{margin:0;color:var(--muted);font-size:15.5px}
-.edu{display:grid;grid-template-columns:1fr 1fr;gap:0 60px;max-width:900px;margin:0 auto}
-.edu div{border-top:1px solid var(--line);padding:18px 0}
-.edu b{display:block;font:400 21px/1.3 var(--serif)}
-.edu span{color:var(--muted);font-size:14.5px}
-.reserve{text-align:center;background:radial-gradient(60% 80% at 50% 0%,rgba(184,115,51,.2),transparent 70%),var(--slate2)}
-.reserve p{max-width:48ch;margin:0 auto;color:#DCD1C1}
-.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
-.btn{display:inline-block;padding:15px 28px;border:1px solid var(--copper);color:var(--copper2);text-decoration:none;font:500 11px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;transition:background .3s,color .3s}
-.btn.fill,.btn:hover{background:var(--copper);color:var(--slate)}
-footer{background:var(--slate2);text-align:center;padding:0 24px max(96px,env(safe-area-inset-bottom,0px));font-size:12.5px;color:var(--muted)}
+/* brigade */
+.brigade{padding:clamp(90px,12vw,170px) var(--pad);background:linear-gradient(var(--char),#16110E)}
+.brigade h2{font:400 clamp(40px,5vw,86px)/.95 var(--display);max-width:16ch;letter-spacing:-.02em}
+.brigade h2 em{font:italic 400 .92em var(--serif);color:var(--copper-l)}
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(40px,6vw,90px);border-top:1px solid rgba(237,230,218,.2)}
+.nums div{padding:26px 20px 0 0}
+.nums div+div{padding-left:20px;border-left:1px solid rgba(237,230,218,.12)}
+.nums b{display:block;font:400 clamp(64px,7vw,124px)/1 var(--display);color:var(--bone)}
+.nums span{display:block;margin-top:10px;color:var(--bone2);font-size:17px}
+.nums i{display:block;font:500 11px/1.3 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--copper-l);font-style:normal;margin-top:6px}
+.fine{margin-top:22px;color:#8C8378;font:400 12px/1.5 var(--sans);letter-spacing:.04em}
 
-@media (max-width:900px){
-  .plates,.rules{grid-template-columns:1fr;gap:44px}
-  .brigade{grid-template-columns:1fr 1fr}
-  .brigade div:nth-child(3){border-left:0}
-  .brigade div:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .edu{grid-template-columns:1fr}
+/* signatures: plates set in type */
+.sigs{padding:clamp(90px,12vw,170px) var(--pad);background:#0B0A09}
+.sigs h2{font:400 clamp(40px,5vw,86px)/.95 var(--display);letter-spacing:-.02em}
+.sigs h2 em{font:italic 400 .92em var(--serif);color:var(--copper-l)}
+.plates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,50px);margin-top:clamp(40px,6vw,90px)}
+.dish{text-align:center}
+.plate-c{position:relative;width:min(100%,380px);aspect-ratio:1;margin:0 auto;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,#2B2724 0 54%,#221F1C 55% 63%,#2E2A26 64% 70%,#1A1816 71%),#1A1816;
+  box-shadow:0 40px 60px -30px rgba(0,0,0,.9),inset 0 0 0 1px rgba(237,230,218,.06),inset 0 -12px 30px rgba(0,0,0,.6)}
+.plate-c::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 34% 28%,rgba(255,240,220,.10),transparent 40%)}
+.plate-c svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.plate-c .w{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font:italic 400 clamp(13px,1.1vw,16px)/1 var(--serif);color:var(--bone2)}
+.plate-c .w.main{font:400 clamp(24px,2.2vw,34px)/1 var(--display);font-style:normal;color:var(--bone)}
+.dish h3{margin-top:26px;font:400 clamp(24px,2vw,32px)/1.1 var(--display)}
+.dish p{margin-top:8px;color:var(--bone2);font-size:17px;font-style:italic}
+
+/* press + contact */
+.press{padding:clamp(90px,12vw,170px) var(--pad);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,50px)}
+.press figure{border-top:1px solid rgba(237,230,218,.25);padding-top:22px}
+.press blockquote{font:italic 400 clamp(22px,2vw,30px)/1.3 var(--serif)}
+.press figcaption{margin-top:16px;color:var(--bone2)}
+.press .head{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:20px;color:var(--bone2)}
+.contact{position:relative;padding:clamp(100px,13vw,190px) var(--pad) 60px;background:var(--card);color:var(--ink);overflow:hidden}
+.contact h2{font:400 clamp(52px,8vw,150px)/.9 var(--display);letter-spacing:-.025em}
+.contact h2 em{font:italic 400 .9em var(--serif);color:var(--copper)}
+.contact .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,50px);margin-top:clamp(40px,6vw,90px)}
+.contact .grid div{border-top:1px solid rgba(29,26,23,.3);padding-top:18px}
+.contact .grid b{display:block;font:400 24px/1.2 var(--display);margin:8px 0 6px}
+.contact .grid p{color:#4E463E;font-size:18px}
+.contact .grid a{display:inline-block;margin-top:12px;font:500 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:4px}
+.contact footer{margin-top:clamp(70px,9vw,120px);padding-top:22px;border-top:1px solid rgba(29,26,23,.2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 40px;font:400 13px/1.5 var(--sans);color:#6A6157}
+.contact footer p{max-width:70ch}
+
+@media (max-width:980px){
+  .menu-wrap{grid-template-columns:minmax(0,1fr)}
+  .menu-intro{position:relative;top:0}
+  .plates,.press,.contact .grid{grid-template-columns:minmax(0,1fr)}
+  .plate-c{width:min(78vw,340px)}
+  .nums{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nums div:nth-child(3){padding-left:0;border-left:0}
+  .nums div{padding-bottom:22px}
 }
-@media (max-width:720px){
-  .rail .wrap{padding-right:0}
-  .tickets{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-right:20px;margin-left:0}
-  .tickets::-webkit-scrollbar{display:none}
-  .tickets li{scroll-snap-align:start}
-  .ticket{width:100px;font-size:10px}
-  .seal{width:48px;height:48px;font-size:16px}
-  .table{grid-template-columns:auto;padding-top:36px}
-  .utensil{display:none}
-  .plate{width:min(82vw,420px)}
-  .title p{letter-spacing:.2em;font-size:10px}
-  .dish .row{flex-direction:column;gap:2px}
-  .dish .dots{display:none}
+@media (max-width:700px){
+  .top nav{display:none}
+  .chef{right:-14vw;height:66%}
+  .hero-copy{top:110px;transform:none;max-width:none;right:var(--pad)}
+  .hero-copy h1{font-size:15vw}
+  .hero-copy p{display:none}
+  .pass-foot .lab:last-child{display:none}
+  .card{transform:none}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticket{transition:none}}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="name" href="#pass">Julien Arnaud</a>
+  <nav class="lab" aria-label="Sections"><a href="#menu">Le menu</a><a href="#brigade">Brigade</a><a href="#signatures">Signatures</a><a href="#reserver">Réserver</a></nav>
+</header>
+
 <main>
-  <header class="pass" id="top">
-    <nav class="rail" aria-label="Menu">
-      <div class="bar" aria-hidden="true"></div>
-      <div class="wrap">
-        <a class="seal" href="#top" aria-label="Julien Arnaud, back to top">J·A</a>
-        <ul class="tickets">
-          <li><a class="ticket" href="#about" data-spy style="--r:-3deg"><b>No. 01</b><strong>Amuse</strong>about<span>1 × chef</span></a></li>
-          <li><a class="ticket" href="#carte" data-spy style="--r:2deg"><b>No. 02</b><strong>La carte</strong>career<span>4 kitchens</span></a></li>
-          <li><a class="ticket" href="#signature" data-spy style="--r:-1.5deg"><b>No. 03</b><strong>Signature</strong>plates<span>3 dishes</span></a></li>
-          <li><a class="ticket" href="#brigade" data-spy style="--r:2.5deg"><b>No. 04</b><strong>Brigade</strong>leadership<span>14 cooks</span></a></li>
-          <li><a class="ticket" href="#contact" data-spy style="--r:-2deg"><b>No. 05</b><strong>Réserver</strong>contact<span>table for 1</span></a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="table">
-      <svg class="utensil" viewBox="0 0 40 300" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6v58M16 6v58M24 6v58M32 6v58"/><path d="M8 64c0 18 8 26 12 28 4-2 12-10 12-28"/><path d="M20 92v196"/></svg>
-      <div class="plate">
-        <div class="rim" aria-hidden="true"></div>
-        <svg class="words" viewBox="0 0 600 600" aria-hidden="true"><defs><path id="rimpath" d="M300 300m-241 0a241 241 0 1 1 482 0a241 241 0 1 1-482 0"/></defs><text><textPath href="#rimpath" textLength="1508" lengthAdjust="spacing">Julien Arnaud · Executive Chef · Maison Ambre · Dubai · Saison ·</textPath></text></svg>
-        <div class="well"><img src="img/julien-arnaud.webp" srcset="img/julien-arnaud-640.webp 640w, img/julien-arnaud.webp 928w" sizes="(max-width:720px) 60vw, 340px" width="928" height="1152" alt="Chef Julien Arnaud in a white chef's jacket" fetchpriority="high"></div>
-      </div>
-      <svg class="utensil" viewBox="0 0 40 300" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 8c16 10 18 70 12 104H14z"/><path d="M20 112v176"/></svg>
+  <section class="pass" id="pass" aria-label="Introduction">
+    <img class="plate" src="img/julien-arnaud/plate.webp" alt="" width="928" height="1152">
+    <div class="glow" aria-hidden="true"></div>
+    <img class="chef" src="img/julien-arnaud/cut.webp" srcset="img/julien-arnaud/cut-760.webp 674w, img/julien-arnaud/cut.webp 928w" sizes="(max-width:700px) 90vw, 55vw" width="928" height="1046" alt="Chef Julien Arnaud in a white chef's jacket, in a dark kitchen">
+    <div class="hero-copy">
+      <p class="lab">Chef de cuisine · Maison Sel, Dubai</p>
+      <h1 data-hero>Le goût <span class="it">du juste.</span></h1>
+      <p>Julien Arnaud cooks French food with Gulf produce and Japanese restraint: two stars, thirty-eight cooks, and one rule. Nothing on the plate that doesn't earn its place.</p>
     </div>
+    <div class="pass-foot lab"><span>Service · 19:00 — 23:30</span><span>Lyon · Paris · Tokyo · Dubai</span></div>
+    <canvas id="steam" aria-hidden="true"></canvas>
+  </section>
 
-    <div class="title">
-      <p>Executive Chef · Maison Ambre, Dubai</p>
-      <h1>Julien <em>Arnaud</em></h1>
-      <p class="tag">Seasonal French technique, cooked with a Gulf pantry.</p>
+  <section class="menu-wrap" id="menu" aria-labelledby="menu-h">
+    <div class="menu-intro">
+      <p class="lab" style="color:var(--copper-l)">Le menu</p>
+      <h2 id="menu-h" data-lines>A career in <em>seven courses.</em></h2>
+      <p>Each course is a kitchen that shaped him. The year is the price.</p>
     </div>
-  </header>
+    <article class="card" aria-label="Career, as a tasting menu">
+      <header><b>Menu dégustation</b><span>Julien Arnaud · 2001 — today</span></header>
+      <div class="course"><div class="line"><span class="num">I</span><h3>Amuse-bouche</h3><span class="dots"></span><span class="yr">2001</span></div><p>Lyon. Apprentice in a bouchon on the Rue Mercière. Three hundred quenelles before breakfast.</p></div>
+      <div class="course"><div class="line"><span class="num">II</span><h3>Entrée</h3><span class="dots"></span><span class="yr">2005</span></div><p>Paris. Commis, then chef de partie in a three-star kitchen. He learned silence, and sauces.</p></div>
+      <div class="course"><div class="line"><span class="num">III</span><h3>Poisson</h3><span class="dots"></span><span class="yr">2009</span></div><p>Tokyo. Eight months at a counter of eight seats, where a single cut takes a year to learn.</p></div>
+      <div class="course"><div class="line"><span class="num">IV</span><h3>Viande</h3><span class="dots"></span><span class="yr">2012</span></div><p>Paris. Sous-chef. The restaurant earned its first star the following spring.</p></div>
+      <div class="course"><div class="line"><span class="num">V</span><h3>Fromage</h3><span class="dots"></span><span class="yr">2016</span></div><p>Copenhagen. Head chef of a forty-cover dining room with its own fermentation lab.</p></div>
+      <div class="course"><div class="line"><span class="num">VI</span><h3>Dessert</h3><span class="dots"></span><span class="yr">2019</span></div><p>Dubai. Chef de cuisine at Maison Sel. Two stars in four years.</p></div>
+      <div class="course"><div class="line"><span class="num">VII</span><h3>Mignardises</h3><span class="dots"></span><span class="yr">Today</span></div><p>Mentoring thirty-eight cooks, and the first Emirati chefs de partie in his brigade.</p></div>
+      <p class="sig">Bon appétit.</p>
+    </article>
+  </section>
 
-  <section id="about" class="about">
-    <div class="wrap" data-reveal>
-      <p class="course">Amuse-bouche</p><div class="orn" aria-hidden="true"><i></i></div>
-      <h2>A chef who <em>cooks for the room</em>.</h2>
-      <p>Julien trained in the brigades of Lyon and Paris, then spent four years on the Riviera learning that service is part of the plate. Since 2020 he has led Maison Ambre, a 90-seat dining room in Dubai's financial district.</p>
-      <p>His menus follow two calendars: the French seasons and the Gulf's harvests. Dates, saffron, Omani limes and line-caught fish from the Arabian Sea meet classic sauces made the long way.</p>
-      <ul class="facts"><li><b>20 years</b> in kitchens</li><li>Lyon · Paris · Monaco · <b>Dubai</b></li><li>French · English · kitchen Arabic</li></ul>
+  <section class="brigade" id="brigade" aria-labelledby="brig-h">
+    <p class="lab" style="color:var(--copper-l);margin-bottom:24px">La brigade</p>
+    <h2 id="brig-h" data-lines>A kitchen runs on <em>discipline</em> and kindness.</h2>
+    <div class="nums">
+      <div><b data-count="38">38</b><span>cooks in the brigade</span><i>Cuisiniers</i></div>
+      <div><b data-count="2">2</b><span>stars, held since 2023</span><i>Étoiles</i></div>
+      <div><b data-count="120">120</b><span>covers a night</span><i>Couverts</i></div>
+      <div><b data-count="40">40</b><span>farms, fishers and growers</span><i>Producteurs</i></div>
+    </div>
+    <p class="fine">All figures, awards and restaurants on this page are illustrative.</p>
+  </section>
+
+  <section class="sigs" id="signatures" aria-labelledby="sigs-h">
+    <p class="lab" style="color:var(--copper-l);margin-bottom:24px">Signatures</p>
+    <h2 id="sigs-h" data-lines>Three plates, <em>set in type.</em></h2>
+    <div class="plates">
+      <article class="dish">
+        <div class="plate-c" data-plate>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><path class="sauce" d="M24 62 C 34 48, 52 70, 70 50 S 82 40, 78 34" fill="none" stroke="#C2703D" stroke-width="2.2" stroke-linecap="round"/><circle cx="30" cy="38" r="1.6" fill="#E3A46F"/><circle cx="34" cy="34" r="1" fill="#E3A46F"/><circle cx="70" cy="66" r="1.3" fill="#9FB58A"/></svg>
+          <span class="w main" style="left:50%;top:50%">Turbot</span><span class="w" style="left:32%;top:28%">beurre noisette</span><span class="w" style="left:72%;top:36%">kombu</span><span class="w" style="left:68%;top:72%">cédrat</span><span class="w" style="left:30%;top:70%">oseille</span>
+        </div>
+        <h3>Turbot, beurre noisette</h3><p>Line-caught in the Gulf of Oman, kombu from Hokkaido.</p>
+      </article>
+      <article class="dish">
+        <div class="plate-c" data-plate>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><path class="sauce" d="M30 70 C 40 76, 62 76, 72 66" fill="none" stroke="#6E1F2A" stroke-width="3" stroke-linecap="round"/><circle cx="66" cy="30" r="2" fill="#6E1F2A"/><circle cx="71" cy="34" r="1.2" fill="#6E1F2A"/><circle cx="28" cy="40" r="1.4" fill="#C2703D"/></svg>
+          <span class="w main" style="left:50%;top:50%">Pigeon</span><span class="w" style="left:30%;top:30%">betterave</span><span class="w" style="left:70%;top:24%">cerise noire</span><span class="w" style="left:73%;top:58%">cacao</span><span class="w" style="left:27%;top:62%">jus corsé</span>
+        </div>
+        <h3>Pigeon de Bresse</h3><p>Roasted on the bone, beetroot and black cherry.</p>
+      </article>
+      <article class="dish">
+        <div class="plate-c" data-plate>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="sauce" cx="50" cy="50" r="22" fill="none" stroke="#E3A46F" stroke-width="1.4" stroke-dasharray="2 3"/><circle cx="50" cy="26" r="1.8" fill="#9FB58A"/><circle cx="72" cy="52" r="1.4" fill="#9FB58A"/></svg>
+          <span class="w main" style="left:50%;top:50%">Datte</span><span class="w" style="left:50%;top:22%">safran</span><span class="w" style="left:78%;top:44%">pistache</span><span class="w" style="left:50%;top:78%">lait de chamelle</span><span class="w" style="left:22%;top:46%">Medjool</span>
+        </div>
+        <h3>Datte &amp; safran</h3><p>Camel-milk ice cream, Medjool dates, saffron from Herat.</p>
+      </article>
     </div>
   </section>
 
-  <section id="carte">
-    <div class="wrap">
-      <div data-reveal><p class="course">La carte</p><div class="orn" aria-hidden="true"><i></i></div><h2>Twenty years, <em>four kitchens</em>.</h2></div>
-      <div class="menu">
-        <div class="dish" data-reveal><div class="row"><h3>Executive Chef · Maison Ambre, Dubai</h3><span class="dots" aria-hidden="true"></span><span class="yr">2020 — today</span></div><p>Opened the restaurant and built a brigade of fourteen. Two national guide distinctions within three years and a waiting list on weekends.</p><small>90 covers · tasting &amp; à la carte</small></div>
-        <div class="dish" data-reveal><div class="row"><h3>Chef de Cuisine · Le Quai Rouge, Lyon</h3><span class="dots" aria-hidden="true"></span><span class="yr">2015 — 2020</span></div><p>Rewrote the menu around regional producers; food cost fell from 33% to 27% while covers rose 22%.</p><small>Brasserie de luxe · 140 covers</small></div>
-        <div class="dish" data-reveal><div class="row"><h3>Sous Chef · Atelier Saline, Paris</h3><span class="dots" aria-hidden="true"></span><span class="yr">2011 — 2015</span></div><p>Ran the pass for a counter-dining concept; trained eleven commis who now lead their own sections.</p><small>Counter dining · 32 seats</small></div>
-        <div class="dish" data-reveal><div class="row"><h3>Chef de Partie · Hôtel Belvédère, Monaco</h3><span class="dots" aria-hidden="true"></span><span class="yr">2007 — 2011</span></div><p>Sauce and fish sections in a palace hotel kitchen serving four outlets and banqueting.</p><small>Palace hotel · four outlets</small></div>
-      </div>
-    </div>
+  <section class="press" aria-labelledby="press-h">
+    <div class="head"><h2 class="lab" id="press-h" style="color:var(--copper-l)">Presse</h2><span class="lab">Quotes are illustrative</span></div>
+    <figure><blockquote>“The most precise French cooking in the Gulf, and the least showy.”</blockquote><figcaption class="lab">Table &amp; Terroir</figcaption></figure>
+    <figure><blockquote>“A turbot you will think about for a year.”</blockquote><figcaption class="lab">The Gulf Gourmand</figcaption></figure>
+    <figure><blockquote>“Arnaud cooks like a man with nothing to prove, which is why he proves so much.”</blockquote><figcaption class="lab">Carnet de Route</figcaption></figure>
   </section>
 
-  <section id="signature">
-    <div class="wrap">
-      <div data-reveal><p class="course">Plats signature</p><div class="orn" aria-hidden="true"><i></i></div><h2>Three plates <em>that tell the story</em>.</h2></div>
-      <div class="plates">
-        <div class="dishcard" data-reveal><div class="mini" aria-hidden="true"><i style="inset:34% 30% 40% 26%;background:#F3E3C4;transform:rotate(-12deg);border-radius:40% 60% 50% 50%"></i><i style="inset:30% 36%;background:radial-gradient(circle,#E9B44C 0 40%,transparent 41%)"></i><i style="inset:56% 30% 30% 46%;background:#4E6B3A"></i></div><h3>Line-caught sea bass</h3><p>Saffron beurre blanc · fennel ash · Omani lime</p><em>Lyon technique, Gulf waters</em></div>
-        <div class="dishcard" data-reveal style="--d:.08s"><div class="mini" aria-hidden="true"><i style="inset:32% 28%;background:#5A2A1C"></i><i style="inset:40% 22% 44% 50%;background:#E8D6A8;border-radius:40%"></i><i style="inset:36% 44% 50% 30%;background:#2B1510"></i></div><h3>Wagyu cheek, slow-braised</h3><p>Black garlic jus · pommes soufflées · date glaze</p><em>Twelve hours, one sauce</em></div>
-        <div class="dishcard" data-reveal style="--d:.16s"><div class="mini" aria-hidden="true"><i style="inset:28% 30%;background:radial-gradient(circle at 40% 35%,#F2D7A2,#C78B4B)"></i><i style="inset:52% 24% 32% 52%;background:#F7F1E4"></i><i style="inset:60% 56% 26% 30%;background:#7A4A22"></i></div><h3>Cardamom soufflé</h3><p>Date caramel · camel-milk ice cream</p><em>A dessert guests rebook for</em></div>
-      </div>
+  <section class="contact" id="reserver" aria-labelledby="res-h">
+    <p class="lab" style="color:var(--copper);margin-bottom:24px">Réserver</p>
+    <h2 id="res-h" data-lines>À <em>table.</em></h2>
+    <div class="grid">
+      <div><span class="lab">Private dining</span><b>The chef's table</b><p>Eight seats facing the pass, one menu, Thursday to Saturday.</p><a href="#" data-demo>Request a date</a></div>
+      <div><span class="lab">Collaborations</span><b>Guest kitchens &amp; festivals</b><p>Four-hands dinners and residencies, booked a season ahead.</p><a href="#" data-demo>Write to the office</a></div>
+      <div><span class="lab">Consulting</span><b>Openings</b><p>Menu development, brigade training and kitchen design for new restaurants.</p><a href="#" data-demo>Start a conversation</a></div>
     </div>
-  </section>
-
-  <section id="brigade">
-    <div class="wrap">
-      <div data-reveal><p class="course">La brigade</p><div class="orn" aria-hidden="true"><i></i></div><h2>Leading the kitchen, <em>by the numbers</em>.</h2></div>
-      <div class="brigade" data-reveal><div><b>14</b><span>Cooks in the brigade</span></div><div><b>180</b><span>Covers on a full night</span></div><div><b>27%</b><span>Food cost</span></div><div><b>2</b><span>Guide distinctions</span></div></div>
-      <div class="rules">
-        <div data-reveal><h3>Mise en place first</h3><p>Every service starts with a ten-minute briefing at the pass. No surprises after six o'clock.</p></div>
-        <div data-reveal style="--d:.08s"><h3>Waste is a recipe</h3><p>Trim becomes stock, peel becomes powder. Waste per cover is down 31% since opening.</p></div>
-        <div data-reveal style="--d:.16s"><h3>Grow the team</h3><p>Commis rotate every quarter, so each cook learns every section within a year.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div data-reveal><p class="course">Formation</p><div class="orn" aria-hidden="true"><i></i></div><h2>Training &amp; <em>recognition</em>.</h2></div>
-      <div class="edu" data-reveal>
-        <div><b>Diplôme de Cuisine</b><span>Culinary institute, Lyon · 2006</span></div>
-        <div><b>Pastry &amp; Viennoiserie Certificate</b><span>Paris · 2012</span></div>
-        <div><b>Finalist, young chefs competition</b><span>Regional · 2009</span></div>
-        <div><b>Food Safety Management, Level 4</b><span>Dubai · 2021</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="reserve" id="contact">
-    <div class="wrap" data-reveal>
-      <p class="course">Réservations</p><div class="orn" aria-hidden="true"><i></i></div>
-      <h2>Private dinners, consulting <em>and new openings</em>.</h2>
-      <p>Julien takes on a small number of restaurant openings and menu consultations each year, alongside executive chef roles in the Gulf and Europe.</p>
-      <div class="btns"><a class="btn fill" href="#contact" data-demo>Book a tasting</a><a class="btn" href="#contact" data-demo>Download CV</a><a class="btn" href="#contact" data-demo>Instagram</a></div>
-    </div>
+    <footer>
+      <p>Julien Arnaud is a fictional person. Restaurants, stars, employers, figures and press quotes on this page are illustrative. Portrait generated with AI.</p>
+      <p>A concept website by Zenith Dubai CV.</p>
+    </footer>
   </section>
 </main>
-<footer>Concept site designed by Zenith Dubai CV. Julien Arnaud is a fictional person; restaurants, figures and distinctions are illustrative.</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC, root = document.documentElement;
+
+  // ---- Steam: a small WebGL shader of rising, domain-warped noise; the cursor stirs it. ----
+  var canvas = document.getElementById("steam"), steam = null;
+  function initSteam(){
+    var gl = canvas.getContext("webgl", {premultipliedAlpha:true, alpha:true, antialias:false});
+    if (!gl) return null;
+    var vs = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+    var fs = [
+      "precision highp float;uniform vec2 R;uniform float T;uniform vec2 M;uniform vec2 V;uniform float I;",
+      "float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}",
+      "float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}",
+      "float fbm(vec2 p){float v=0.,a=.5;for(int k=0;k<5;k++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}",
+      "void main(){vec2 uv=gl_FragCoord.xy/R;float asp=R.x/R.y;vec2 p=vec2(uv.x*asp,uv.y);float t=T*.05;",
+      "vec2 m=vec2(M.x*asp,M.y);float d=distance(p,m);vec2 stir=(p-m)*exp(-d*d*14.)*1.4+V*exp(-d*d*10.)*.8;",
+      "vec2 q=vec2(fbm(p*1.7+vec2(0.,-t*3.2)+stir),fbm(p*1.7+vec2(5.2,-t*2.7)-stir));",
+      "float f=fbm(p*2.4+q*1.9+vec2(t*.6,-t*4.6));",
+      "float col=smoothstep(.0,.75,1.-abs(uv.x-.36)*1.1)*.65+smoothstep(.0,.8,1.-abs(uv.x-.78)*1.6)*.55;",
+      "float mask=smoothstep(1.1,.05,uv.y)*(.35+.65*col);",
+      "float a=smoothstep(.42,.92,f)*mask*I;",
+      "gl_FragColor=vec4(vec3(.95,.92,.87)*a,a);}"
+    ].join("");
+    function sh(t, s){ var o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return gl.getShaderParameter(o, gl.COMPILE_STATUS) ? o : null; }
+    var v = sh(gl.VERTEX_SHADER, vs), f = sh(gl.FRAGMENT_SHADER, fs); if (!v || !f) return null;
+    var pr = gl.createProgram(); gl.attachShader(pr, v); gl.attachShader(pr, f); gl.linkProgram(pr); if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return null;
+    gl.useProgram(pr);
+    var b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    var U = {R:gl.getUniformLocation(pr,"R"),T:gl.getUniformLocation(pr,"T"),M:gl.getUniformLocation(pr,"M"),V:gl.getUniformLocation(pr,"V"),I:gl.getUniformLocation(pr,"I")};
+    var S = {gl:gl, U:U, mx:.5, my:.25, tx:.5, ty:.25, vx:0, vy:0, intensity:1, on:false, raf:0, t0:performance.now(), scale:.5};
+    function size(){ var w = canvas.clientWidth, h = canvas.clientHeight, k = S.scale * Math.min(1.5, devicePixelRatio || 1); canvas.width = Math.max(2, Math.round(w * k)); canvas.height = Math.max(2, Math.round(h * k)); gl.viewport(0, 0, canvas.width, canvas.height); }
+    size(); window.addEventListener("resize", size);
+    function frame(now){
+      S.mx += (S.tx - S.mx) * .06; S.my += (S.ty - S.my) * .06; S.vx *= .94; S.vy *= .94;
+      gl.uniform2f(U.R, canvas.width, canvas.height); gl.uniform1f(U.T, (now - S.t0) / 1000 * 10);
+      gl.uniform2f(U.M, S.mx, S.my); gl.uniform2f(U.V, S.vx, S.vy); gl.uniform1f(U.I, S.intensity);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      S.raf = S.on ? requestAnimationFrame(frame) : 0;
+    }
+    S.draw = function(){ frame(performance.now()); };
+    S.play = function(on){ S.on = on; if (on && !S.raf) S.raf = requestAnimationFrame(frame); };
+    var pass = document.getElementById("pass"), lx = 0, ly = 0;
+    pass.addEventListener("pointermove", function(e){
+      var r = pass.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = 1 - (e.clientY - r.top) / r.height;
+      S.vx += (x - (lx || x)) * 3; S.vy += (y - (ly || y)) * 3; lx = x; ly = y; S.tx = x; S.ty = y;
+    });
+    return S;
+  }
+
+  window.addEventListener("load", function(){
+    steam = initSteam();
+    if (!steam){ canvas.insertAdjacentHTML("afterend", '<div class="steam-css" aria-hidden="true"></div>'); }
+    if (!ZC.motion || !window.gsap){ if (steam) steam.draw(); return; }
+    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
+    ZC.smooth();
+    if (steam) ZC.visible(document.getElementById("pass"), function(v){ steam.play(v); }, "0px");
+    ScrollTrigger.create({start:200,end:"max",onToggle:function(st){ root.classList.toggle("scrolled", st.isActive); }});
+
+    document.fonts.ready.then(function(){
+      var h = SplitText.create("[data-hero]",{type:"lines,words",mask:"lines"});
+      gsap.timeline({defaults:{ease:"expo.out"}})
+        .from(".pass .plate",{opacity:0,scale:1.08,duration:2.4},0)
+        .from(".chef",{opacity:0,x:60,duration:1.8},.1)
+        .from(h.lines,{yPercent:110,duration:1.4,stagger:.12},.3)
+        .from([".hero-copy .lab",".hero-copy p",".pass-foot"],{opacity:0,y:16,duration:1.1,stagger:.1},.7)
+        .fromTo(steam || {},{intensity:0},{intensity:1,duration:3,ease:"power2.out"},0);
+      // Scrolling off the pass: the steam thickens and the chef recedes into it.
+      gsap.timeline({scrollTrigger:{trigger:".pass",start:"top top",end:"bottom top",scrub:.6}})
+        .to(steam || {},{intensity:2.1,ease:"none"},0)
+        .to(".chef",{yPercent:8,opacity:.25,ease:"none"},0)
+        .to(".hero-copy",{yPercent:-18,opacity:0,ease:"none"},0);
+
+      gsap.utils.toArray("[data-lines]").forEach(function(el){
+        SplitText.create(el,{type:"lines",mask:"lines",autoSplit:true,onSplit:function(self){
+          return gsap.from(self.lines,{yPercent:105,duration:1.2,stagger:.1,ease:"expo.out",scrollTrigger:{trigger:el,start:"top 86%"}});
+        }});
+      });
+      // Plating the menu: each course is set down in turn.
+      gsap.from(".card",{y:120,rotation:4,opacity:0,duration:1.6,ease:"expo.out",scrollTrigger:{trigger:".card",start:"top 85%"}});
+      gsap.utils.toArray(".course").forEach(function(c){
+        gsap.from(c.children,{y:22,opacity:0,duration:.9,stagger:.08,ease:"power3.out",scrollTrigger:{trigger:c,start:"top 85%"}});
+        gsap.from(c.querySelector(".dots"),{scaleX:0,transformOrigin:"0 50%",duration:1.2,ease:"power2.out",scrollTrigger:{trigger:c,start:"top 85%"}});
+      });
+      gsap.utils.toArray("[data-count]").forEach(function(b){
+        var to = +b.dataset.count, o = {v:0};
+        ScrollTrigger.create({trigger:b,start:"top 90%",once:true,onEnter:function(){ gsap.to(o,{v:to,duration:1.8,ease:"power3.out",onUpdate:function(){ b.textContent = Math.round(o.v); }}); }});
+      });
+      // Plates turn on the pass as they arrive; sauce is drawn, garnish set.
+      gsap.utils.toArray("[data-plate]").forEach(function(p, i){
+        var tl = gsap.timeline({scrollTrigger:{trigger:p,start:"top 85%"}});
+        tl.from(p,{rotation:-50,scale:.88,opacity:0,duration:1.6,ease:"expo.out"})
+          .from(p.querySelector(".sauce"),{drawSVG:"0%",duration:1.4,ease:"power2.inOut"},.3)
+          .from(p.querySelectorAll(".w"),{opacity:0,y:8,duration:.8,stagger:.1,ease:"power2.out"},.5)
+          .from(p.querySelectorAll("circle:not(.sauce)"),{scale:0,transformOrigin:"50% 50%",duration:.5,stagger:.08,ease:"back.out(3)"},.9);
+      });
+      gsap.from(".press figure",{y:50,opacity:0,duration:1.1,stagger:.12,ease:"expo.out",scrollTrigger:{trigger:".press",start:"top 80%"}});
+      ScrollTrigger.refresh();
+    });
+  });
+});
+</script>
 </body>
 </html>
