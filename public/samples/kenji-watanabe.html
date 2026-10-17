@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kenji Watanabe — Portrait photographer · Concept site</title>
+<meta name="description" content="Kenji Watanabe, portrait photographer. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0C0C0D">
+<link rel="preload" href="fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/DrawSVGPlugin.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
+<style>
+@font-face{font-family:"Schibsted Grotesk";src:url(fonts/schibsted-grotesk-latin-wght-normal.woff2) format("woff2");font-weight:400 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Schibsted Grotesk";src:url(fonts/schibsted-grotesk-latin-wght-italic.woff2) format("woff2");font-weight:400 900;font-style:italic;font-display:swap}
+@font-face{font-family:"Spline Sans Mono";src:url(fonts/spline-sans-mono-latin-wght-normal.woff2) format("woff2");font-weight:300 700;font-display:swap}
+@font-face{font-family:"Shippori";src:url(fonts/shippori-kenji.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Caveat";src:url(fonts/caveat-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+:root{
+  --black:#0C0C0D;--black2:#141415;--paper:#F2F1EE;--grey:#8E8E8C;--line:rgba(242,241,238,.14);--red:#E2381F;
+  --sans:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;--mono:"Spline Sans Mono",ui-monospace,Menlo,monospace;--jp:"Shippori",serif;
+  --pad:clamp(18px,4.2vw,68px);
+  --zc-bg:#F2F1EE;--zc-fg:#0C0C0D;--zc-dot:#E2381F;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--black)}
+body{background:var(--black);color:var(--paper);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+main{position:relative;overflow-x:clip}
+.mono{font:400 11px/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.jp{font-family:var(--jp);font-weight:500;letter-spacing:.06em}
+html.lb-open .zc-badge{display:none}
+
+/* Viewfinder corners, header, exposure read-out */
+.vf{position:fixed;inset:14px;z-index:40;pointer-events:none}
+.vf i{position:absolute;width:26px;height:26px;border:0 solid rgba(242,241,238,.55)}
+.vf i:nth-child(1){left:0;top:0;border-left-width:1.5px;border-top-width:1.5px}
+.vf i:nth-child(2){right:0;top:0;border-right-width:1.5px;border-top-width:1.5px}
+.vf i:nth-child(3){left:0;bottom:0;border-left-width:1.5px;border-bottom-width:1.5px}
+.vf i:nth-child(4){right:0;bottom:0;border-right-width:1.5px;border-bottom-width:1.5px}
+.top{position:fixed;left:var(--pad);right:var(--pad);top:26px;z-index:50;display:flex;justify-content:space-between;align-items:baseline;gap:20px;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{text-decoration:none;display:flex;align-items:baseline;gap:12px}
+.brand b{font:700 17px/1 var(--sans);letter-spacing:-.01em}
+.brand .jp{font-size:14px;color:var(--grey)}
+.top .links{display:flex;gap:22px}
+.top .links a{text-decoration:none;opacity:.66;transition:opacity .2s}
+.top .links a:hover,.top .links a[aria-current]{opacity:1}
+.readout{position:fixed;left:50%;top:20px;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:14px;padding:10px 16px 9px;border-radius:999px;background:rgba(12,12,13,.74);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line);white-space:nowrap;pointer-events:none}
+.readout .rec{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(226,56,31,.22)}
+.readout .ex{color:var(--grey)}
+.readout b{font-weight:500}
+
+/* HERO — the curved strip, after the client's Tilted Grid Hero:
+   frames curve in from the left edge, flatten and come into focus at the centre, then fade away round the right. */
+.hero{position:relative;height:100svh;min-height:680px;overflow:hidden;background:radial-gradient(80% 60% at 50% 62%,#1b1b1d 0%,var(--black) 72%)}
+.hero .head{position:absolute;z-index:3;left:0;right:0;top:clamp(84px,12vh,124px);text-align:center;pointer-events:none;padding:0 var(--pad)}
+.hero h1{font:700 clamp(44px,6vw,104px)/.95 var(--sans);letter-spacing:-.045em}
+.hero h1 em{font-weight:500;font-style:italic;color:rgba(242,241,238,.6)}
+.hero .who{margin-top:16px;color:var(--grey)}
+.stage{position:absolute;left:0;right:0;top:41%;height:38%;perspective-origin:50% 50%;z-index:1;touch-action:pan-y;-webkit-user-select:none;user-select:none;cursor:grab}
+.stage.drag{cursor:grabbing}
+.strip{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+.frame{position:absolute;left:0;top:0;width:var(--fw);height:calc(var(--fw) * .625);margin:calc(var(--fw) * -.3125) 0 0 calc(var(--fw) * -.5);border-radius:12px;overflow:hidden;background:#222224;padding:0;border:0;cursor:pointer;will-change:transform,filter;visibility:hidden}
+.frame img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.frame:focus-visible{outline:2px solid var(--red);outline-offset:5px}
+.cap{position:absolute;z-index:3;left:50%;top:80%;transform:translateX(-50%);text-align:center;width:min(560px,60vw)}
+.cap b{display:block;font:600 21px/1.25 var(--sans);letter-spacing:-.01em}
+.cap .js-role{color:var(--grey);font-size:15px}
+.cap a{display:inline-block;margin-top:7px;font-size:15px;text-decoration:none;border-bottom:1px solid rgba(242,241,238,.4);padding-bottom:1px}
+.cap a:hover{border-color:var(--red)}
+.kenji{position:absolute;z-index:2;right:clamp(-40px,.5vw,24px);bottom:0;height:min(60svh,600px);aspect-ratio:866/1104;pointer-events:none;-webkit-mask:linear-gradient(#000 84%,transparent 99%);mask:linear-gradient(#000 84%,transparent 99%)}
+.kenji img{width:100%;height:100%;object-fit:contain;object-position:bottom}
+.hero .ctl{position:absolute;z-index:3;left:var(--pad);bottom:clamp(40px,7vh,76px);display:flex;align-items:center;gap:10px}
+.hero .ctl button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(242,241,238,.32);display:grid;place-items:center;transition:background .2s,color .2s,border-color .2s}
+.hero .ctl button:hover{background:var(--paper);color:var(--black);border-color:var(--paper)}
+.hero .ctl button[hidden]{display:none}
+.hero .ctl svg{width:16px;height:16px}
+.hero .ctl .n{color:var(--grey);min-width:6.5em;margin-left:6px}
+
+/* Lightbox */
+.lb{position:fixed;inset:0;z-index:95;display:none;place-items:center;background:rgba(8,8,9,.95);padding:clamp(20px,5vw,60px)}
+.lb.on{display:grid}
+.lb figure{display:grid;grid-template-columns:auto minmax(0,340px);gap:clamp(20px,4vw,60px);align-items:end;max-height:100%}
+.lb img{height:min(80svh,880px);width:auto;aspect-ratio:4/5;object-fit:cover;border-radius:6px}
+.lb figcaption .mono{color:var(--grey)}
+.lb figcaption b{display:block;font:700 clamp(28px,2.6vw,40px)/1.05 var(--sans);letter-spacing:-.02em;margin:10px 0}
+.lb figcaption p{color:rgba(242,241,238,.8)}
+.lb figcaption a{display:inline-flex;margin-top:22px;padding:13px 20px;border-radius:999px;background:var(--paper);color:var(--black);text-decoration:none;font-weight:600}
+.lb .x{position:absolute;right:22px;top:22px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(242,241,238,.4);display:grid;place-items:center;font-size:18px}
+
+/* Sections */
+.sec{position:relative;padding:clamp(100px,12vw,170px) var(--pad)}
+.eyebrow{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:14px;margin-bottom:clamp(30px,4vw,56px);color:var(--grey)}
+.h2{font:700 clamp(42px,5.4vw,90px)/.96 var(--sans);letter-spacing:-.04em;max-width:15ch}
+.h2 em{font-style:italic;font-weight:500;color:rgba(242,241,238,.6)}
+.lead{max-width:50ch;margin-top:22px;color:rgba(242,241,238,.8);font-size:clamp(17px,1.4vw,20px)}
+
+/* 01 THE EDIT — contact sheet, grease pencil, loupe */
+.edit{background:var(--paper);color:var(--black)}
+.edit .eyebrow{border-color:rgba(12,12,13,.2);color:#5D5D5B}
+.edit .h2 em{color:#6B6B69}
+.edit .lead{color:#3E3E3C}
+.sheetwrap{margin-top:clamp(40px,5vw,70px);display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:clamp(24px,4vw,60px);align-items:start}
+.sheet{position:relative;background:#FBFAF7;border-radius:4px;padding:clamp(14px,2vw,28px);box-shadow:0 30px 70px -40px rgba(0,0,0,.5);touch-action:pan-y}
+@media (hover:hover) and (pointer:fine){.sheet{cursor:none}}
+.film{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:#141414;padding:16px 10px 22px;border-radius:2px;background-image:radial-gradient(circle at 50% 50%,#FBFAF7 0 2.2px,transparent 2.6px),radial-gradient(circle at 50% 50%,#FBFAF7 0 2.2px,transparent 2.6px);background-size:14px 8px,14px 8px;background-position:4px 3px,4px calc(100% - 3px);background-repeat:repeat-x}
+.film+.film{margin-top:12px}
+.shot{position:relative;margin:0 5px;aspect-ratio:4/5;background:#333;overflow:hidden}
+.shot i{position:absolute;inset:0;background-repeat:no-repeat}
+.shot.m i{transform:scaleX(-1)}
+.shot::after{content:attr(data-n);position:absolute;left:0;bottom:-15px;font:600 9px/1 var(--mono);color:#E8C547;letter-spacing:.08em}
+.film .shot{overflow:visible}.film .shot i{overflow:hidden}
+.marks{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.marks path{fill:none;stroke:var(--red);stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.marks text{font:600 32px "Caveat",cursive;fill:var(--red)}
+.loupe{position:absolute;left:0;top:0;width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:50%;overflow:hidden;pointer-events:none;opacity:0;transform:scale(.6);transition:opacity .2s,transform .25s cubic-bezier(.2,.7,.2,1);box-shadow:0 0 0 7px #1b1b1b,0 0 0 8px #555,0 30px 60px -20px rgba(0,0,0,.7);z-index:3;background:#FBFAF7}
+.loupe.on{opacity:1;transform:none}
+.loupe .inner{position:absolute;left:0;top:0;transform-origin:0 0}
+.notes .mono{color:#5D5D5B}
+.notes h3{font:700 26px/1.1 var(--sans);letter-spacing:-.02em;margin:10px 0 12px}
+.notes p{color:#3E3E3C;font-size:15.5px}
+.notes ul{list-style:none;margin-top:18px;border-top:1px solid rgba(12,12,13,.15)}
+.notes li{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid rgba(12,12,13,.15);font-size:14.5px}
+.notes li span{color:#5D5D5B;font:400 11px/1.9 var(--mono);letter-spacing:.08em;text-transform:uppercase;text-align:right}
+.notes .tip{margin-top:18px;font:400 11px/1.6 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#5D5D5B}
+
+/* 02 SITTERS — viewfinder + roll */
+.sitters{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(30px,5vw,90px);margin-top:clamp(40px,5vw,70px);align-items:start}
+.vfd{position:sticky;top:max(92px,11vh);height:min(78vh,760px);border-radius:6px;overflow:hidden;background:#1a1a1b;isolation:isolate}
+.vfd img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .25s}
+.vfd .thirds{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent calc(33.33% - .5px),rgba(255,255,255,.22) calc(33.33% - .5px) calc(33.33% + .5px),transparent calc(33.33% + .5px) calc(66.66% - .5px),rgba(255,255,255,.22) calc(66.66% - .5px) calc(66.66% + .5px),transparent calc(66.66% + .5px)),linear-gradient(180deg,transparent calc(33.33% - .5px),rgba(255,255,255,.22) calc(33.33% - .5px) calc(33.33% + .5px),transparent calc(33.33% + .5px) calc(66.66% - .5px),rgba(255,255,255,.22) calc(66.66% - .5px) calc(66.66% + .5px),transparent calc(66.66% + .5px))}
+.vfd .af{position:absolute;left:50%;top:40%;width:90px;height:90px;translate:-50% -50%;pointer-events:none;transition:left .4s cubic-bezier(.2,.7,.2,1),top .4s cubic-bezier(.2,.7,.2,1),width .4s,height .4s}
+.vfd .af::before,.vfd .af::after{content:"";position:absolute;inset:0;border:1.5px solid rgba(255,255,255,.9);-webkit-mask:conic-gradient(#000 0 0) 0 0/14px 14px no-repeat,conic-gradient(#000 0 0) 100% 0/14px 14px no-repeat,conic-gradient(#000 0 0) 0 100%/14px 14px no-repeat,conic-gradient(#000 0 0) 100% 100%/14px 14px no-repeat;mask:conic-gradient(#000 0 0) 0 0/14px 14px no-repeat,conic-gradient(#000 0 0) 100% 0/14px 14px no-repeat,conic-gradient(#000 0 0) 0 100%/14px 14px no-repeat,conic-gradient(#000 0 0) 100% 100%/14px 14px no-repeat}
+.vfd .af::after{border-color:var(--red);opacity:0;transition:opacity .15s}
+.vfd .af.lock::after{opacity:1}
+.vfd .hud{position:absolute;left:0;right:0;display:flex;justify-content:space-between;gap:12px;padding:12px 14px;color:#fff;font:500 10.5px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;pointer-events:none}
+.vfd .hud.t{top:0;background:linear-gradient(rgba(0,0,0,.45),transparent)}
+.vfd .hud.b{bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.6));align-items:center}
+.vfd .dot{display:inline-block;width:8px;height:8px;border-radius:50%;border:1.5px solid #fff;margin-right:8px;vertical-align:-1px;transition:background .15s,border-color .15s}
+.vfd .dot.lock{background:#4BD37B;border-color:#4BD37B}
+.roll{list-style:none;border-top:1px solid var(--line)}
+.roll a{display:grid;grid-template-columns:46px minmax(0,1fr) 22px;align-items:baseline;gap:14px;padding:16px 0 15px;border-bottom:1px solid var(--line);text-decoration:none}
+.roll .n{color:var(--grey);font:400 11px/1 var(--mono);letter-spacing:.08em}
+.roll b{font:600 clamp(20px,1.9vw,28px)/1.15 var(--sans);letter-spacing:-.02em;color:rgba(242,241,238,.5);transition:color .25s}
+.roll small{display:block;font:400 14px/1.4 var(--sans);color:var(--grey);letter-spacing:0;margin-top:3px}
+.roll .go{opacity:0;transform:translateX(-8px);transition:opacity .25s,transform .35s cubic-bezier(.2,.7,.2,1);color:var(--red)}
+.roll a.on b,.roll a:hover b,.roll a:focus-visible b{color:var(--paper)}
+.roll a.on .go,.roll a:hover .go,.roll a:focus-visible .go{opacity:1;transform:none}
+
+/* 03 METHOD */
+.method{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);margin-top:clamp(40px,5vw,70px)}
+.method li{border-top:1px solid var(--line);padding-top:18px}
+.method svg{width:64px;height:64px;margin-bottom:22px;color:var(--paper);overflow:visible}
+.method .bl{transform-origin:32px 32px;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.method li:hover .bl{transform:rotate(30deg)}
+.method h3{font:700 28px/1.05 var(--sans);letter-spacing:-.02em;margin-bottom:10px}
+.method p{color:rgba(242,241,238,.76)}
+
+/* 04 BOOK */
+.bookwrap{background:var(--black2)}
+.book{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(30px,6vw,110px);align-items:end}
+.months{list-style:none;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:30px}
+.months li{display:grid;place-items:center;height:56px;border-radius:10px;border:1px solid var(--line);font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.months li.on{background:var(--paper);color:var(--black);border-color:var(--paper)}
+.months li.full{color:var(--grey);text-decoration:line-through}
+.legend{margin-top:12px;color:var(--grey)}
+.cgrid{display:grid;gap:18px}
+.cgrid div{border-top:1px solid var(--line);padding-top:12px}
+.cgrid .mono{color:var(--grey);display:block;margin-bottom:6px}
+.cgrid a,.cgrid p{font:600 clamp(18px,1.5vw,22px)/1.3 var(--sans);text-decoration:none;overflow-wrap:anywhere}
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:999px;background:var(--red);color:#fff;text-decoration:none;font-weight:600;justify-self:start;transition:background .3s,color .3s}
+.btn:hover{background:#fff;color:var(--black)}
+footer{border-top:1px solid var(--line);padding:30px var(--pad) 100px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;color:var(--grey);font-size:13.5px;line-height:1.6}
+footer p{max-width:84ch}
+
+@media (max-width:1199px){
+  .readout{left:14px;transform:none;top:auto;bottom:14px;padding:9px 13px 8px;gap:9px}
+  .readout .ex{display:none}
+}
+@media (max-width:1000px){
+  .top .links{display:none}
+  .sheetwrap,.book{grid-template-columns:minmax(0,1fr)}
+  .method{grid-template-columns:minmax(0,1fr)}
+  .sitters{grid-template-columns:minmax(0,1fr);gap:24px}
+  .vfd{top:12px;height:44svh;z-index:2;box-shadow:0 20px 40px -10px rgba(12,12,13,.9)}
+}
+/* Portrait screens (phones and upright tablets): the strip moves up, the caption sits left of the photographer. */
+@media (max-aspect-ratio:10/11){
+  .hero h1{font-size:clamp(40px,9.4vw,96px)}
+  .stage{top:27%;height:32%}
+  .cap{left:var(--pad);transform:none;text-align:left;width:min(58vw,440px)}
+  .kenji{height:min(46svh,600px);right:-8vw}
+  .hero .ctl{bottom:64px}
+}
+@media (max-width:700px){
+  .vf{inset:10px}
+  .top{top:22px}
+  .hero{min-height:620px}
+  .hero .head{top:74px}
+  .hero h1{font-size:clamp(40px,11.4vw,58px)}
+  .hero .who .nm{display:none}
+  .cap b{font-size:18px}
+  .cap .js-role{font-size:14px}
+  .kenji{height:min(34svh,300px);right:-12vw}
+  .hero .ctl .n{display:none}
+  .vfd .hud .ex{display:none}
+  .lb figure{grid-template-columns:minmax(0,1fr)}
+  .lb img{height:auto;width:100%;max-height:56svh}
+  .film{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:24px}
+  .months{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:reduce){.roll .go,.roll b,.method .bl,.loupe,.vfd .af,.vfd img{transition:none}}
+</style>
+</head>
+<body>
+<div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<header class="top" data-headroom="1.5">
+  <a class="brand" href="#top"><b>Kenji Watanabe</b><span class="jp" lang="ja">渡辺健二</span></a>
+  <nav class="links mono" aria-label="Sections">
+    <a href="#top" data-spy>Frames</a><a href="#edit" data-spy>The edit</a><a href="#sitters" data-spy>Sitters</a><a href="#method" data-spy>Method</a><a href="#book" data-spy>Book</a>
+  </nav>
+</header>
+<p class="readout mono" aria-hidden="true"><i class="rec"></i><span class="ex">1/125 · f/2.8 · ISO 400</span><b class="js-sec">Frames</b></p>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="head">
+      <h1 id="h1">Every frame,<br><em>brought into focus.</em></h1>
+      <p class="who mono"><span class="nm">Kenji Watanabe · </span>Portrait photographer · Tokyo / Dubai</p>
+    </div>
+    <div class="stage" role="region" aria-roledescription="carousel" aria-label="Portraits of people at work">
+      <div class="strip"></div>
+    </div>
+    <p class="cap"><span class="sr js-live" aria-live="off"></span><b class="js-name">Captain Rashid Al Hammadi</b><span class="js-role">Long-haul captain, at the gate</span><br><a class="js-link" href="rashid-al-hammadi.html">Open the portfolio</a></p>
+    <div class="kenji"><img src="img/kenji-watanabe/cut.webp" srcset="img/kenji-watanabe/cut-760.webp 596w, img/kenji-watanabe/cut.webp 866w" sizes="(max-width:700px) 260px, 490px" width="866" height="1104" alt="Kenji Watanabe holding a rangefinder camera" fetchpriority="high"></div>
+    <div class="ctl">
+      <button type="button" class="js-prev" aria-label="Previous portrait"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+      <button type="button" class="js-next" aria-label="Next portrait"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+      <button type="button" class="js-play" aria-label="Pause the strip"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="js-ico" d="M5 3v10M11 3v10" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+      <span class="n mono js-n" aria-hidden="true">01 / 28</span>
+    </div>
+  </section>
+
+  <section class="sec edit" id="edit" aria-labelledby="e-h">
+    <div class="eyebrow mono"><span>01 · The edit</span><span>Sitting 0412 · Lyon</span></div>
+    <h2 class="h2" id="e-h" data-lines>Twelve frames, <em>one keeper.</em></h2>
+    <p class="lead">Every sitting ends on a contact sheet and a grease pencil. Look closer with the loupe: the circled frame went to print, the crossed ones never left the studio.</p>
+    <div class="sheetwrap">
+      <div class="sheet" data-sheet>
+        <div class="film"></div><div class="film"></div><div class="film"></div>
+        <svg class="marks" aria-hidden="true"></svg>
+        <div class="loupe" aria-hidden="true"><div class="inner"></div></div>
+      </div>
+      <div class="notes">
+        <span class="mono">Sitting notes</span>
+        <h3>Julien Arnaud, chef de cuisine</h3>
+        <p>Twenty minutes in his kitchen at four in the afternoon, between the deliveries and the first prep. One window, one reflector, no assistant.</p>
+        <ul><li>Lens<span>50 mm</span></li><li>Light<span>North window</span></li><li>Exposure<span>1/125 · f/2.8</span></li><li>Frames<span>12, one select</span></li></ul>
+        <p class="tip js-tip">Move the pointer over the sheet</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sitters" aria-labelledby="s-h">
+    <div class="eyebrow mono"><span>02 · Sitters</span><span>People at work</span></div>
+    <h2 class="h2" id="s-h" data-lines>Twenty-eight people, <em>twenty-eight workplaces.</em></h2>
+    <p class="lead">A captain at the gate, a chef before service, a sommelier in the cellar. Each name opens the portfolio site made around the portrait.</p>
+    <div class="sitters">
+      <div class="vfd" aria-hidden="true">
+        <img class="a" alt="" width="520" height="650"><img class="b" alt="" width="520" height="650" style="opacity:0">
+        <div class="thirds"></div>
+        <div class="af"></div>
+        <div class="hud t"><span>AF-S · 50 mm</span><span class="js-vn">01 / 28</span></div>
+        <div class="hud b"><span><i class="dot"></i><span class="ex">f/2.8 · 1/125 · ISO 400</span></span><span class="js-vname"></span></div>
+      </div>
+      <ol class="roll" aria-label="Sitters and their portfolio sites"></ol>
+    </div>
+  </section>
+
+  <section class="sec" id="method" aria-labelledby="m-h" style="padding-top:clamp(40px,5vw,80px)">
+    <div class="eyebrow mono"><span>03 · Method</span><span>How a sitting works</span></div>
+    <h2 class="h2" id="m-h" data-lines>One lens, one light, <em>twenty minutes.</em></h2>
+    <ol class="method">
+      <li><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="1.5"/><g class="bl" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M32 3 44 30M61 32 34 44M32 61 20 34M3 32 30 20"/></g><circle cx="32" cy="32" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <h3>Arrive early.</h3><p>I come an hour before the sitting and watch the room work. The portrait is usually wherever the light and the habits meet.</p></li>
+      <li><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="1.5"/><g class="bl" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M32 3 40 26M58 18 38 32M50 56 30 40M10 52 24 32M8 14 30 24"/></g><circle cx="32" cy="32" r="14" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <h3>One light.</h3><p>A window when there is one, a single soft lamp when there isn't. Fewer lights, fewer reasons for the sitter to stiffen.</p></li>
+      <li><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="1.5"/><g class="bl" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M32 3 36 28M52 10 36 30M61 32 36 36M52 54 34 36M32 61 28 36M12 54 28 36M3 32 28 32M12 10 28 28"/></g><circle cx="32" cy="32" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <h3>Twenty minutes.</h3><p>People run out of patience before they run out of expressions. Short sittings keep the face honest.</p></li>
+    </ol>
+  </section>
+
+  <section class="sec bookwrap" id="book" aria-labelledby="b-h">
+    <div class="eyebrow mono"><span>04 · Book a sitting</span><span>Portraits, editorial, annual reports</span></div>
+    <div class="book">
+      <div>
+        <h2 class="h2" id="b-h" data-lines>Let's find <em>your light.</em></h2>
+        <p class="lead">For portraits, editorial commissions, books and annual reports. Sittings in Dubai and Tokyo; travel by arrangement.</p>
+        <ul class="months" aria-label="Availability, next six months">
+          <li class="full">Oct<span class="sr">: fully booked</span></li><li class="on">Nov<span class="sr">: open</span></li><li class="on">Dec<span class="sr">: open</span></li><li class="full">Jan<span class="sr">: fully booked</span></li><li class="on">Feb<span class="sr">: open</span></li><li class="on">Mar<span class="sr">: open</span></li>
+        </ul>
+        <p class="legend mono" aria-hidden="true">Open months in white · struck through = fully booked</p>
+      </div>
+      <div class="cgrid">
+        <div><span class="mono">Studio</span><a href="mailto:studio@kenjiwatanabe.example" data-demo>studio@kenjiwatanabe.example</a></div>
+        <div><span class="mono">Studios</span><p>Dubai · Tokyo</p></div>
+        <a class="btn" href="#" data-demo="This is a concept site, so sittings can't be booked here.">Request a sitting</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="lb" role="dialog" aria-modal="true" aria-labelledby="lb-h" hidden>
+  <button class="x" type="button" aria-label="Close">✕</button>
+  <figure><img alt="" width="520" height="650"><figcaption><span class="mono js-lbn"></span><b id="lb-h" class="js-lbt"></b><p class="js-lbr"></p><a class="js-lbl" href="#">Open the portfolio</a></figcaption></figure>
+</div>
+
+<footer>
+  <p>Kenji Watanabe is fictional. His sitters are the fictional professionals of this collection, and every photograph on this page was generated with AI: none shows a real person or is a real photograph. Contact sheet, sitting notes, dates and availability are illustrative. The tilted strip is adapted from the Tilted Grid Hero component supplied for this collection.</p>
+  <p>A concept website by Zenith Dubai CV.</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC, root = document.documentElement;
+  var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
+  var pad2 = function(n){ return (n < 10 ? "0" : "") + n; };
+  var IMG = function(slug){ return "img/kenji-watanabe/frames/" + slug + ".webp"; };
+  var WIDE = function(slug){ return "img/kenji-watanabe/wide/" + slug + ".webp"; };
+
+  // slug, name, caption, face x %, eye line y %, face width % (measured on each 4:5 frame)
+  var S = [
+    ["rashid-al-hammadi","Captain Rashid Al Hammadi","Long-haul captain, at the gate",49.4,28.1,29.6],
+    ["amira-soliman","Dr Amira Soliman","Interventional cardiologist",49.3,36.8,34],
+    ["julien-arnaud","Julien Arnaud","Chef de cuisine, before service",50.6,30.9,35.8],
+    ["layla-haddad","Layla Haddad","Hotel general manager, in the lobby",51.4,32.2,29.8],
+    ["kofi-mensah","Kofi Mensah","DJ and producer, in the studio",56.8,24.8,26.7],
+    ["awa-ndiaye","Awa Ndiaye","Model, between looks",45.8,6.6,10],
+    ["thomas-whitaker","Thomas Whitaker","Architect",50.5,36.1,47.1],
+    ["valentina-rios","Valentina Ríos","Singer, on stage",49.8,29.9,30.4],
+    ["arjun-nair","Arjun Nair","Managing director, M&amp;A",51,35.9,49.2],
+    ["karim-benjelloun","Karim Benjelloun","Film director",50.6,37.6,45.4],
+    ["ananya-rao","Ananya Rao","Dancer and choreographer, mid-turn",45.1,18.2,10.2],
+    ["hannah-becker","Hannah Becker","Group chief executive",50.3,29.8,29],
+    ["noura-al-mazrouei","Noura Al Mazrouei","Founder, real-estate developer",48.4,27.4,29.4],
+    ["faisal-al-qahtani","Faisal Al Qahtani","Partner, corporate law",49.9,34.9,47.5],
+    ["grace-wanjiku","Dr Grace Wanjiku","Paediatric surgeon",49.8,35.6,37.7],
+    ["ines-ben-salah","Inès Ben Salah","Strategy partner",50,35.6,30.4],
+    ["alexei-morozov","Alexei Morozov","Founder, logistics technology, at the port",51.2,37.1,41.2],
+    ["daniel-okafor","Daniel Okafor","Principal AI engineer",49.8,33.7,35.4],
+    ["youssef-haddadin","Youssef Haddadin","Project director, on site",51.1,41.2,29.8],
+    ["maria-dela-cruz","Maria Dela Cruz","Cabin services manager, on board",50.7,31.1,32.5],
+    ["mei-lin-zhou","Mei Lin Zhou","Concert pianist and composer",51,35.1,41.2],
+    ["sofia-bianchi","Sofia Bianchi","Food and travel creator",51.1,33.8,35.6],
+    ["ji-woo-han","Ji-woo Han","Restaurant general manager, before doors",51.9,33.2,27.3],
+    ["lucas-ferreira","Lucas Ferreira","Head sommelier, in the cellar",51.4,27.3,33.3],
+    ["mateo-herrera","Mateo Herrera","Mixologist, behind the bar",51.8,25.5,30.6],
+    ["zofia-nowak","Zofia Nowak","Head of floor",50.8,9.8,16.9],
+    ["marco-bellini","Marco Bellini","Chief concierge",50,21,25.8],
+    ["freja-lindqvist","Freja Lindqvist","Creative director",45.8,21.7,24.2]
+  ];
+  var N = S.length;
+  var plain = function(t){ var d = document.createElement("div"); d.innerHTML = t; return d.textContent; };
+
+  /* ---------- Hero: the curved strip ----------
+     The frames sit on the inside of a cylinder (translateZ(R) rotateY(θ) translateZ(-R)): they curve in from the
+     left edge close to the lens, flatten at the centre, then fade away round the right. pos is a continuous index
+     (frame i sits at u = i - pos, u > 0 on the left); F is the global focus (0..1) that the intro pulls from soft to sharp. */
+  var hero = $(".hero"), strip = $(".strip"), stage = $(".stage"), cap = $(".cap"), frames = [];
+  S.forEach(function(s, i){
+    var b = document.createElement("button"); b.type = "button"; b.className = "frame";
+    b.setAttribute("aria-label", plain(s[1]) + ", " + plain(s[2]) + ". Portrait " + (i + 1) + " of " + N);
+    b.innerHTML = '<img alt="" width="768" height="480" decoding="async" draggable="false">';
+    strip.appendChild(b); frames.push(b);
+  });
+  var pos = ZC.motion ? -2.4 : 0, F = ZC.motion ? 0 : 1, target = null, vel = 0, drag = null, moved = 0;
+  var hover = false, inView = true, raf = 0, last = 0, introDone = !ZC.motion, paused = false, idleUntil = 0, lbOpen = false;
+  var fw = 0, fh = 0, RAD = 0, PERS = 0, STEP = 0, DEG = 180 / Math.PI;
+  function wrap(u){ u = ((u % N) + N) % N; return u > N / 2 ? u - N : u; }
+  function size(){
+    var mob = innerWidth < 700, port = innerHeight > innerWidth * 1.1;
+    fw = Math.round(mob ? innerWidth * .68 : port ? innerWidth * .5 : clamp(Math.min(innerWidth * .27, innerHeight * .48), 220, 460));
+    fh = Math.round(fw * .625);
+    RAD = fw * (port ? 1.2 : 1.3); PERS = fw * (port ? 1.9 : 2); STEP = fw * 1.045 / RAD;
+    stage.style.perspective = PERS.toFixed(0) + "px";
+    strip.style.setProperty("--fw", fw + "px");
+    cap.style.top = (stage.offsetTop + stage.offsetHeight / 2 + fh / 2 + 20).toFixed(0) + "px";
+  }
+  function layout(){
+    var soft = 1 - F;
+    for (var i = 0; i < N; i++){
+      var u = wrap(i - pos), el = frames[i], a = Math.abs(u), th = u * STEP;
+      var zOut = RAD * (1 - Math.cos(th)) + fw / 2 * Math.abs(Math.sin(th));
+      if (Math.abs(th) > 1.45 || zOut > PERS * .86 || u < -2.7){ if (el._v){ el.style.visibility = "hidden"; el._v = 0; } continue; }
+      if (!el._v){ el.style.visibility = "visible"; el._v = 1; if (!el._src){ el._src = 1; el.firstChild.src = WIDE(S[i][0]); } }
+      el.style.transform = "translateZ(" + RAD.toFixed(1) + "px) rotateY(" + (th * DEG).toFixed(2) + "deg) translateZ(" + (-RAD).toFixed(1) + "px)";
+      var blur = Math.min(a * 2.1, 6) + soft * 10, gray = clamp(a * .42 + soft * .5, 0, 1), br = 1 - Math.min(a * .15, .45) - soft * .12;
+      el.style.filter = blur < .05 ? "none" : "blur(" + blur.toFixed(2) + "px) grayscale(" + gray.toFixed(2) + ") brightness(" + br.toFixed(2) + ")";
+      el.style.opacity = u < -1 ? clamp(1 + (u + 1) * .6, 0, 1).toFixed(3) : "1";
+      el.tabIndex = a < .5 ? 0 : -1;
+    }
+    var k = ((Math.round(pos) % N) + N) % N;
+    if (k !== layout.k){ layout.k = k; caption(k); }
+  }
+  var live = $(".js-live");
+  function caption(k){
+    var s = S[k];
+    $(".js-name").innerHTML = s[1]; $(".js-role").innerHTML = s[2];
+    var l = $(".js-link"); l.href = s[0] + ".html"; l.setAttribute("aria-label", "Open " + plain(s[1]) + "'s portfolio");
+    $(".js-n").textContent = pad2(k + 1) + " / " + N;
+    live.textContent = plain(s[1]) + ", " + plain(s[2]) + ". Portrait " + (k + 1) + " of " + N + ".";
+  }
+  function running(){ return drag || target !== null || Math.abs(vel) > .0004; }
+  function tick(now){
+    raf = 0; var dt = Math.min(48, now - (last || now)); last = now;
+    if (!drag){
+      if (target !== null){ var d = target - pos; pos += d * (1 - Math.pow(.84, dt / 16)); if (Math.abs(d) < .002){ pos = target; target = null; } }
+      else if (Math.abs(vel) > .0004){ pos += vel * dt; vel *= Math.pow(.93, dt / 16); if (Math.abs(vel) <= .0004){ vel = 0; target = Math.round(pos); } }
+    }
+    layout();
+    if (running()) raf = requestAnimationFrame(tick); else last = 0;
+  }
+  function kick(){ if (!raf){ last = 0; raf = requestAnimationFrame(tick); } }
+  function user(){ idleUntil = performance.now() + 9000; live.setAttribute("aria-live", "polite"); }
+  function go(d){
+    var base = Math.round(target !== null ? target : pos);
+    vel = 0;
+    if (!ZC.motion){ pos = base + d; target = null; layout(); return; }
+    target = base + d; kick();
+  }
+  function centre(){ return ((Math.round(pos) % N) + N) % N; }
+  $(".js-prev").addEventListener("click", function(){ user(); go(-1); });
+  $(".js-next").addEventListener("click", function(){ user(); go(1); });
+  var play = $(".js-play");
+  function setPaused(p){ paused = p; play.setAttribute("aria-label", p ? "Play the strip" : "Pause the strip"); $(".js-ico").setAttribute("d", p ? "M5 3l8 5-8 5z" : "M5 3v10M11 3v10"); }
+  play.addEventListener("click", function(){ setPaused(!paused); });
+  if (!ZC.motion){ setPaused(true); play.hidden = true; }
+  stage.addEventListener("keydown", function(e){
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    e.preventDefault(); user(); go(e.key === "ArrowRight" ? 1 : -1);
+    setTimeout(function(){ frames[centre()].focus({preventScroll:true}); }, ZC.motion ? 260 : 0);
+  });
+  stage.addEventListener("pointerenter", function(e){ if (e.pointerType === "mouse") hover = true; });
+  stage.addEventListener("pointerleave", function(){ hover = false; });
+  stage.addEventListener("pointerdown", function(e){
+    if (e.button !== 0) return;
+    drag = {x:e.clientX, p:pos, t:performance.now(), lx:e.clientX}; moved = 0; target = null; vel = 0; user(); kick();
+  });
+  window.addEventListener("pointermove", function(e){
+    if (!drag) return;
+    var dx = e.clientX - drag.x; moved = Math.max(moved, Math.abs(dx));
+    if (moved > 6){
+      stage.classList.add("drag");
+      var now = performance.now(), gap = fw * 1.05;
+      pos = drag.p + dx / gap;
+      vel = (e.clientX - drag.lx) / gap / Math.max(8, now - drag.t); drag.t = now; drag.lx = e.clientX;
+    }
+  });
+  function endDrag(){
+    if (!drag) return; drag = null; stage.classList.remove("drag");
+    if (!ZC.motion || Math.abs(vel) < .0006){ vel = 0; target = Math.round(pos); if (!ZC.motion){ pos = target; target = null; layout(); return; } }
+    vel = clamp(vel, -.012, .012); kick();
+  }
+  window.addEventListener("pointerup", endDrag);
+  window.addEventListener("pointercancel", endDrag);
+  frames.forEach(function(f, i){
+    f.addEventListener("click", function(e){
+      if (e.detail && moved > 6) return;
+      var u = wrap(i - pos); user();
+      if (Math.abs(u) < .5) openLB(i);
+      else if (!ZC.motion){ pos = Math.round(pos + u); layout(); }
+      else { target = Math.round(pos + u); kick(); }
+    });
+  });
+  // The strip advances by itself, one frame every four seconds, unless someone is looking, dragging or reading.
+  setInterval(function(){
+    if (!ZC.motion || paused || !introDone || !inView || hover || drag || lbOpen || document.hidden || performance.now() < idleUntil) return;
+    if (stage.contains(document.activeElement)) return;
+    live.setAttribute("aria-live", "off"); go(1);
+  }, 4000);
+  size(); layout();
+  window.addEventListener("resize", function(){ size(); layout(); });
+  ZC.visible($(".hero"), function(v){ inView = v; }, "0px");
+
+  /* ---------- Lightbox ---------- */
+  var lb = $(".lb"), lastF = null;
+  function openLB(i){
+    var s = S[i]; lastF = document.activeElement; lbOpen = true;
+    var im = $("img", lb); im.src = IMG(s[0]); im.alt = "Portrait of " + plain(s[1]) + " (generated with AI)";
+    $(".js-lbn", lb).textContent = "Portrait " + pad2(i + 1) + " of " + N + " · People at work";
+    $(".js-lbt", lb).innerHTML = s[1]; $(".js-lbr", lb).innerHTML = s[2] + ".";
+    $(".js-lbl", lb).href = s[0] + ".html";
+    lb.hidden = false; lb.classList.add("on"); root.classList.add("lb-open"); root.style.overflow = "hidden"; window.__lenis && window.__lenis.stop();
+    if (ZC.motion && window.gsap) gsap.fromTo($("figure", lb), {opacity:0, y:24}, {opacity:1, y:0, duration:.6, ease:"expo.out"});
+    $(".x", lb).focus({preventScroll:true});
+  }
+  function closeLB(){
+    lb.classList.remove("on"); lb.hidden = true; lbOpen = false; root.classList.remove("lb-open"); root.style.overflow = "";
+    window.__lenis && window.__lenis.start(); lastF && lastF.focus({preventScroll:true});
+  }
+  $(".x", lb).addEventListener("click", closeLB);
+  lb.addEventListener("click", function(e){ if (e.target === lb) closeLB(); });
+  lb.addEventListener("keydown", function(e){
+    if (e.key === "Escape"){ closeLB(); return; }
+    if (e.key !== "Tab") return;
+    var f = [$(".x", lb), $(".js-lbl", lb)];
+    if (e.shiftKey && document.activeElement === f[0]){ e.preventDefault(); f[1].focus(); }
+    else if (!e.shiftKey && document.activeElement === f[1]){ e.preventDefault(); f[0].focus(); }
+  });
+
+  /* ---------- 01 The edit: contact sheet, grease pencil, loupe ---------- */
+  var films = $$(".film"), shots = [];
+  // Twelve frames of one sitting (illustrative: one generated portrait, recropped, turned and re-exposed).
+  // The crossed frames are the misses: soft focus, a blown exposure, a blink of softness.
+  var CROPS = [[100,50,30,0,""],[108,48,26,0,"blur(1.6px)"],[118,52,22,1,""],[130,50,18,0,"brightness(.8) contrast(1.05)"],
+               [105,40,30,1,"brightness(1.32) contrast(.88)"],[112,58,24,1,""],[145,50,16,0,""],[122,46,20,1,""],
+               [100,54,34,0,"brightness(.9)"],[160,50,14,1,"brightness(.8) contrast(1.05)"],[115,50,26,0,"blur(1.2px) brightness(1.06)"],[135,44,18,1,""]];
+  CROPS.forEach(function(c, i){
+    var d = document.createElement("div"); d.className = "shot" + (c[3] ? " m" : ""); d.dataset.n = String(14 + i);
+    var im = document.createElement("i");
+    im.style.backgroundImage = "url(" + IMG("julien-arnaud") + ")";
+    im.style.backgroundSize = c[0] + "% auto"; im.style.backgroundPosition = c[1] + "% " + c[2] + "%";
+    if (c[4]) im.style.filter = c[4];
+    d.appendChild(im); films[Math.floor(i / 4)].appendChild(d); shots.push(d);
+  });
+  var sheet = $("[data-sheet]"), marks = $(".marks", sheet), NS = "http://www.w3.org/2000/svg";
+  function drawMarks(){
+    cloned = false;
+    var r0 = sheet.getBoundingClientRect(); marks.setAttribute("viewBox", "0 0 " + r0.width.toFixed(0) + " " + r0.height.toFixed(0)); marks.innerHTML = "";
+    function rel(el){ var r = el.getBoundingClientRect(); return {x:r.left - r0.left, y:r.top - r0.top, w:r.width, h:r.height}; }
+    function P(d, cls){ var p = document.createElementNS(NS, "path"); p.setAttribute("d", d); p.setAttribute("class", cls); marks.appendChild(p); return p; }
+    var sel = rel(shots[6]), cx = sel.x + sel.w / 2, cy = sel.y + sel.h / 2, rx = sel.w * .64, ry = sel.h * .6, d = "";
+    for (var t = 0; t <= Math.PI * 2.18; t += .1){ var wob = 1 + .045 * Math.sin(t * 3 + .6); d += (d ? "L" : "M") + (cx + Math.cos(t - 2.2) * rx * wob).toFixed(1) + " " + (cy + Math.sin(t - 2.2) * ry * wob).toFixed(1); }
+    P(d, "sel");
+    [1, 4, 10].forEach(function(k){ var r = rel(shots[k]), m = r.w * .14; P("M" + (r.x + m) + " " + (r.y + m * 1.2) + "L" + (r.x + r.w - m) + " " + (r.y + r.h - m) + "M" + (r.x + r.w - m * 1.2) + " " + (r.y + m) + "L" + (r.x + m) + " " + (r.y + r.h - m * 1.1), "x"); });
+    if (innerWidth >= 700){
+      var ax = cx + rx * .7, ay = cy + ry * .78;
+      P("M" + (ax + 64) + " " + (ay + 52) + "Q" + (ax + 52) + " " + (ay + 10) + " " + (ax + 8) + " " + (ay + 2), "arr");
+      P("M" + (ax + 8) + " " + (ay + 2) + "l17 -5M" + (ax + 8) + " " + (ay + 2) + "l10 14", "arr");
+      var tx = document.createElementNS(NS, "text"); tx.setAttribute("x", (ax + 40).toFixed(0)); tx.setAttribute("y", (ay + 86).toFixed(0)); tx.textContent = "this one ✓"; marks.appendChild(tx);
+    }
+  }
+  var loupe = $(".loupe", sheet), inner = $(".inner", loupe), Z = 2.4, R = 100, cloned = false;
+  // The loupe shows a magnified copy of the sheet; it is built once and rebuilt only when the marks are redrawn.
+  function buildClone(){
+    if (cloned) return; cloned = true;
+    inner.innerHTML = "";
+    var c = sheet.cloneNode(true); c.removeAttribute("data-sheet"); c.querySelector(".loupe").remove();
+    c.style.cssText = "width:" + sheet.offsetWidth + "px;box-shadow:none;cursor:auto";
+    // drop anything the entrance animations left inline (opacity, dash offsets) so the copy shows the finished sheet
+    $$(".shot, .marks path, .marks text", c).forEach(function(p){ p.removeAttribute("style"); });
+    inner.appendChild(c);
+  }
+  function moveLoupe(e, lift){
+    var r = sheet.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, ly = y - (lift ? 120 : 0);
+    loupe.style.left = x + "px"; loupe.style.top = ly + "px";
+    inner.style.transform = "translate(" + (R - x * Z).toFixed(1) + "px," + (R - y * Z).toFixed(1) + "px) scale(" + Z + ")";
+  }
+  var touchLoupe = false;
+  sheet.addEventListener("pointerenter", function(e){ if (e.pointerType !== "mouse") return; buildClone(); loupe.classList.add("on"); moveLoupe(e); });
+  sheet.addEventListener("pointermove", function(e){ if (e.pointerType === "mouse" || touchLoupe) moveLoupe(e, e.pointerType !== "mouse"); });
+  sheet.addEventListener("pointerleave", function(e){ if (e.pointerType === "mouse") loupe.classList.remove("on"); });
+  sheet.addEventListener("pointerdown", function(e){ if (e.pointerType === "mouse") return; touchLoupe = true; buildClone(); loupe.classList.add("on"); moveLoupe(e, true); });
+  ["pointerup", "pointercancel"].forEach(function(t){ sheet.addEventListener(t, function(e){ if (e.pointerType === "mouse") return; touchLoupe = false; loupe.classList.remove("on"); }); });
+  if (!matchMedia("(hover:hover) and (pointer:fine)").matches) $(".js-tip").textContent = "Press and hold on the sheet to look closer";
+  window.addEventListener("resize", drawMarks);
+  if (document.fonts && document.fonts.load) document.fonts.load('600 32px "Caveat"').then(drawMarks, drawMarks);
+
+  /* ---------- 02 Sitters: the roll and the viewfinder ---------- */
+  var roll = $(".roll");
+  roll.innerHTML = S.map(function(s, i){ return '<li><a href="' + s[0] + '.html" data-i="' + i + '"><span class="n">' + pad2(i + 1) + '</span><b>' + s[1] + '<small>' + s[2] + '</small></b><span class="go" aria-hidden="true">→</span></a></li>'; }).join("");
+  var rows = $$(".roll a"), vfd = $(".vfd"), vA = $("img.a", vfd), vB = $("img.b", vfd), af = $(".af", vfd), dot = $(".dot", vfd), cur = -1, front = vA, hunt = null, hoverRoll = false;
+  function placeAF(i){
+    var s = S[i], W = vfd.clientWidth, H = vfd.clientHeight, sc = Math.max(W / 520, H / 650), dw = 520 * sc, dh = 650 * sc;
+    var py = clamp(s[4] / 100 * 1.4, 0, 1), ox = (W - dw) * s[3] / 100, oy = (H - dh) * py;
+    [vA, vB].forEach(function(im){ im.style.objectPosition = s[3] + "% " + (py * 100).toFixed(1) + "%"; });
+    var side = clamp(s[5] / 100 * dw * .62, 34, 150);
+    af.style.left = (ox + s[3] / 100 * dw).toFixed(1) + "px"; af.style.top = (oy + s[4] / 100 * dh).toFixed(1) + "px";
+    af.style.width = af.style.height = side.toFixed(0) + "px";
+  }
+  function pick(i, instant){
+    if (i === cur) return; cur = i;
+    rows.forEach(function(r, k){ r.classList.toggle("on", k === i); });
+    var s = S[i], back = front === vA ? vB : vA;
+    back.src = IMG(s[0]); front.style.opacity = 0; back.style.opacity = 1; front = back;
+    placeAF(i);
+    $(".js-vn", vfd).textContent = pad2(i + 1) + " / " + N; $(".js-vname", vfd).innerHTML = s[1];
+    af.classList.remove("lock"); dot.classList.remove("lock");
+    if (hunt) hunt.kill();
+    hunt = null;
+    if (instant || !ZC.motion || !window.gsap){ vA.style.filter = vB.style.filter = ""; af.classList.add("lock"); dot.classList.add("lock"); return; }
+    // Focus hunt: the lens racks past the face once, comes back, and locks.
+    hunt = gsap.timeline({onComplete:function(){ af.classList.add("lock"); dot.classList.add("lock"); }})
+      .fromTo(front, {filter:"blur(11px)"}, {filter:"blur(1.5px)", duration:.2, ease:"power2.out"})
+      .to(front, {filter:"blur(5px)", duration:.12, ease:"power1.inOut"})
+      .to(front, {filter:"blur(0px)", duration:.16, ease:"power2.out", clearProps:"filter"});
+  }
+  rows.forEach(function(r){
+    var i = +r.dataset.i;
+    r.addEventListener("pointerenter", function(e){ if (e.pointerType === "mouse"){ hoverRoll = true; pick(i); } });
+    r.addEventListener("focus", function(){ pick(i); });
+  });
+  roll.addEventListener("pointerleave", function(){ hoverRoll = false; });
+  // While scrolling, the row that crosses the focus line is the one in the viewfinder.
+  var queued = false;
+  function byScroll(){
+    queued = false; if (hoverRoll) return;
+    var sr = $(".sitters").getBoundingClientRect();
+    if (sr.bottom < 0 || sr.top > innerHeight) return;
+    var stacked = innerWidth <= 1000, vb = stacked ? vfd.getBoundingClientRect().bottom : 0;
+    var line = stacked ? vb + (innerHeight - vb) * .35 : innerHeight * .5, best = -1, bd = 1e9;
+    for (var k = 0; k < rows.length; k++){ var r = rows[k].getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - line); if (d < bd){ bd = d; best = k; } }
+    if (best >= 0) pick(best);
+  }
+  window.addEventListener("scroll", function(){ if (!queued){ queued = true; requestAnimationFrame(byScroll); } }, {passive:true});
+  window.addEventListener("resize", function(){ if (cur >= 0) placeAF(cur); });
+  pick(0, true);
+
+  /* ---------- Read-out names the current section ---------- */
+  var NAMES = {top:"Frames", edit:"The edit", sitters:"Sitters", method:"Method", book:"Book a sitting"};
+  var EX = {top:"1/125 · f/2.8 · ISO 400", edit:"1/60 · f/5.6 · ISO 100", sitters:"1/250 · f/4 · ISO 200", method:"1/30 · f/2 · ISO 800", book:"1/500 · f/8 · ISO 100"};
+  document.addEventListener("zc:section", function(e){ $(".js-sec").textContent = NAMES[e.detail] || "Frames"; $(".readout .ex").textContent = EX[e.detail] || EX.top; });
+
+  window.addEventListener("load", function(){
+    drawMarks();
+    if (!ZC.motion || !window.gsap){ pos = Math.round(pos > -1 ? pos : 0); F = 1; introDone = true; layout(); return; }
+    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
+    window.__lenis = ZC.smooth();
+    document.fonts.ready.then(function(){
+      var o = {p:pos, f:F};
+      gsap.timeline({defaults:{ease:"expo.out"}, onComplete:function(){ introDone = true; idleUntil = performance.now() + 2500; }})
+        .from(".hero h1", {opacity:0, y:36, filter:"blur(14px)", duration:1.6, clearProps:"filter"}, .1)
+        .from(".hero .who, .cap, .hero .ctl, .hero .hint", {opacity:0, y:14, duration:1, stagger:.08}, .8)
+        .from(".kenji", {opacity:0, x:50, duration:1.8}, .5)
+        .from(".vf i", {opacity:0, scale:1.6, duration:1, stagger:.06}, .2)
+        .to(o, {p:0, duration:2.8, onUpdate:function(){ if (!drag && target === null){ pos = o.p; layout(); } }}, 0)
+        .to(o, {f:1, duration:1.5, ease:"power2.inOut", onUpdate:function(){ F = o.f; layout(); }}, .9);
+      gsap.to(".kenji", {yPercent:12, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:true}});
+      gsap.to(".hero .head", {yPercent:-30, opacity:0, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"60% top", scrub:true}});
+      $$("[data-lines]").forEach(function(el){
+        SplitText.create(el, {type:"lines", mask:"lines", autoSplit:true, onSplit:function(self){
+          return gsap.from(self.lines, {yPercent:105, duration:1.1, stagger:.1, ease:"expo.out", scrollTrigger:{trigger:el, start:"top 86%"}});
+        }});
+      });
+      gsap.from(".shot", {opacity:0, duration:.45, stagger:.05, scrollTrigger:{trigger:".sheet", start:"top 78%"}});
+      ScrollTrigger.create({trigger:".sheet", start:"top 62%", once:true, onEnter:function(){
+        drawMarks();
+        gsap.from(".marks path", {drawSVG:0, duration:.8, stagger:.22, ease:"power2.inOut", delay:.7});
+        if ($(".marks text")) gsap.from(".marks text", {opacity:0, duration:.6, delay:2.1});
+      }});
+      gsap.from(".method li", {opacity:0, y:30, duration:1, stagger:.1, ease:"expo.out", scrollTrigger:{trigger:".method", start:"top 85%"}});
+      gsap.from(".months li", {opacity:0, y:12, duration:.6, stagger:.06, ease:"expo.out", scrollTrigger:{trigger:".months", start:"top 90%"}});
+    });
+  });
+});
+</script>
+</body>
+</html>
