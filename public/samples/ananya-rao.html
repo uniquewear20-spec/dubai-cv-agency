@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ananya Rao — Dancer &amp; choreographer · Concept site</title>
+<meta name="description" content="Ananya Rao, dancer and choreographer. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0E0C0B">
+<link rel="preload" href="fonts/rozha-one-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/ananya-rao/cut.webp" as="image" fetchpriority="high">
+<script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/DrawSVGPlugin.min.js"></script>
+<script defer src="assets/vendor/MotionPathPlugin.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
+<script defer src="assets/liquid-sculpture.js"></script>
+<style>
+@font-face{font-family:"Rozha One";src:url(fonts/rozha-one-latin-400-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Rozha One";src:url(fonts/rozha-one-deva-name.woff2) format("woff2");unicode-range:U+0900-097F,U+200C-200D,U+25CC;font-display:swap}
+@font-face{font-family:"Tenor Sans";src:url(fonts/tenor-sans-latin-400-normal.woff2) format("woff2");font-display:swap}
+:root{
+  --stage:#0E0C0B;--stage2:#16120F;--ivory:#F2EBE3;--mute:#A79E94;--saffron:#E8893A;--alta:#C93A2E;--line:rgba(242,235,227,.14);
+  --display:"Rozha One",Georgia,serif;--sans:"Tenor Sans","Gill Sans","Trebuchet MS",sans-serif;
+  --pad:clamp(18px,4.2vw,68px);
+  --zc-bg:#F2EBE3;--zc-fg:#0E0C0B;--zc-dot:#E8893A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--stage)}
+body{background:var(--stage);color:var(--ivory);font:400 17px/1.62 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img,svg{display:block;max-width:100%}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--saffron);outline-offset:3px}
+main{position:relative;overflow-x:clip}
+.cap{font:400 11.5px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.deva{font-family:var(--display);letter-spacing:0}
+
+/* Header and the tala ring: sixteen beats of teentaal, four sections of four */
+.top{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px var(--pad);pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+.brand b{font:400 22px/1 var(--display)}
+.brand .deva{font-size:15px;color:var(--mute)}
+.tala{display:flex;align-items:center;gap:14px}
+.tala .now{color:var(--mute);min-width:6.5em;text-align:right}
+.ring{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;position:relative}
+.ring svg{width:46px;height:46px;overflow:visible}
+.ring .tick{fill:rgba(242,235,227,.28);transition:fill .4s}
+.ring .tick.on{fill:var(--saffron)}
+.ring .sam{fill:var(--ivory)}
+.ring:hover .tick{fill:rgba(242,235,227,.5)}
+.menu{position:fixed;top:78px;right:var(--pad);z-index:60;width:min(320px,calc(100vw - 2 * var(--pad)));padding:18px 20px;border-radius:18px;background:rgba(22,18,15,.96);border:1px solid var(--line);box-shadow:0 30px 60px -30px #000;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .3s,transform .3s,visibility .3s}
+.menu.open{opacity:1;visibility:visible;transform:none}
+.menu a{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line);text-decoration:none;font:400 26px/1.1 var(--display)}
+.menu a:last-child{border-bottom:0}
+.menu a span{font:400 11px/1 var(--sans);letter-spacing:.2em;color:var(--mute)}
+.menu a:hover,.menu a[aria-current]{color:var(--saffron)}
+
+/* Hero: the dancer rebuilt from her own pixels */
+.hero{position:relative;height:100svh;min-height:640px;overflow:hidden;isolation:isolate;touch-action:pan-y;background:radial-gradient(60% 55% at 52% 46%,#2a1d14 0%,rgba(14,12,11,0) 70%),var(--stage)}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(transparent,rgba(14,12,11,.85));pointer-events:none;z-index:1}
+.backdrop{position:absolute;left:50%;top:50%;transform:translate(-50%,-56%);white-space:nowrap;font:400 1px/0.8 var(--display);color:rgba(242,235,227,.045);pointer-events:none;user-select:none;z-index:0}
+.stagec{position:absolute;inset:0;z-index:0;pointer-events:none}
+.stagec canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .6s ease}
+.stagec .still{position:absolute;max-width:none;transition:opacity .6s ease;user-select:none}
+.hero[data-gl="on"] .stagec canvas{opacity:1}
+.hero[data-gl="on"] .stagec .still{opacity:0}
+.hero .hint{position:absolute;z-index:2;transform:translateX(-50%);display:flex;align-items:center;gap:10px;color:var(--mute);pointer-events:none;transition:opacity .8s}
+.hero .hint::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--saffron);animation:pulse 2.4s ease-in-out infinite}
+.hero[data-touched="1"] .hint{opacity:0}
+@keyframes pulse{0%,100%{transform:scale(.6);opacity:.45}50%{transform:scale(1);opacity:1}}
+.hero .copy{position:absolute;z-index:2;left:var(--pad);right:var(--pad);bottom:clamp(26px,5vh,54px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:40px;align-items:end;pointer-events:none}
+.hero .copy>*{pointer-events:auto}
+.hero .eyebrow{color:var(--mute);display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.hero .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+.hero h1{font:400 clamp(58px,8.4vw,150px)/.86 var(--display);letter-spacing:-.01em}
+.hero h1 .deva{display:block;font-size:.26em;line-height:1.3;color:var(--saffron);margin-top:.18em;letter-spacing:.02em}
+.hero .aside{justify-self:end;max-width:400px}
+.hero .tag{font:400 clamp(22px,2vw,30px)/1.2 var(--display);margin-bottom:14px}
+.hero .tag em{font-style:normal;color:var(--saffron)}
+.hero .body{color:rgba(242,235,227,.78);font-size:16px;line-height:1.55;margin-bottom:22px}
+.ctas{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;background:var(--ivory);color:var(--stage);text-decoration:none;font:400 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;transition:background .3s}
+.btn:hover{background:var(--saffron)}
+.txt{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font:400 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;padding:6px 0;border-bottom:1px solid rgba(242,235,227,.35)}
+.txt:hover{border-color:var(--saffron)}
+
+/* Sections */
+.sec{position:relative;padding:clamp(100px,12vw,180px) var(--pad)}
+.label{display:flex;justify-content:space-between;gap:20px;color:var(--mute);border-top:1px solid var(--line);padding-top:14px;margin-bottom:clamp(30px,4vw,60px)}
+.h2{font:400 clamp(44px,6vw,104px)/.95 var(--display);letter-spacing:-.005em;max-width:14ch}
+.h2 em{font-style:normal;color:var(--saffron)}
+.lead{max-width:44ch;color:rgba(242,235,227,.8);font-size:clamp(18px,1.5vw,21px);line-height:1.55}
+
+/* TRACE: one turn in nine exposures */
+.trace{position:relative;height:100svh;overflow:hidden;background:linear-gradient(#0E0C0B,#120E0B 70%,#0E0C0B)}
+.trace .floor{position:absolute;left:0;right:0;top:82%;height:1px;background:linear-gradient(90deg,transparent,rgba(242,235,227,.22),transparent)}
+.trace .streak{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.trace .streak path{fill:none;stroke:url(#streakg);stroke-width:2.2;stroke-linecap:round}
+.echo{position:absolute;bottom:18%;height:62%;aspect-ratio:830/945;transform-origin:50% 100%;opacity:0;pointer-events:none}
+.echo img{width:100%;height:100%;object-fit:contain}
+.trace::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,11,.92) 0%,rgba(14,12,11,.6) 28%,rgba(14,12,11,0) 52%);pointer-events:none;z-index:2}
+.trace .txtb{position:absolute;left:var(--pad);top:clamp(96px,14vh,150px);max-width:min(560px,46vw);z-index:3}
+.trace .count{position:absolute;right:var(--pad);top:clamp(100px,14vh,150px);text-align:right;z-index:3}
+.trace .count b{display:block;font:400 clamp(70px,9vw,150px)/.8 var(--display);color:var(--saffron)}
+.trace .count span{color:var(--mute)}
+.trace .bols{position:absolute;left:var(--pad);right:var(--pad);bottom:7%;display:flex;justify-content:space-between;color:rgba(242,235,227,.35);z-index:3}
+.trace .bols span{transition:color .3s}
+.trace .bols span.on{color:var(--ivory)}
+.trace .bols span.sam{color:var(--saffron)}
+
+/* WORKS: each piece as its floor pattern */
+.work{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(30px,5vw,90px);align-items:center;padding:clamp(40px,5vw,70px) 0;border-top:1px solid var(--line)}
+.work:nth-of-type(even) .plan{order:2}
+.plan{position:relative;aspect-ratio:4/3;border-radius:18px;background:radial-gradient(80% 70% at 50% 40%,#1d1712,#120f0c);border:1px solid var(--line);overflow:hidden}
+.plan svg{position:absolute;inset:0;width:100%;height:100%}
+.plan .grid{stroke:rgba(242,235,227,.06);stroke-width:1}
+.plan .edge{fill:none;stroke:rgba(242,235,227,.3);stroke-width:1.2;stroke-dasharray:2 5}
+.plan .route{fill:none;stroke:var(--saffron);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.plan .route2{fill:none;stroke:rgba(242,235,227,.55);stroke-width:1.4;stroke-dasharray:1 7;stroke-linecap:round}
+.plan .mark{fill:var(--ivory)}
+.plan .dot{fill:var(--ivory)}
+.plan .halo{fill:rgba(232,137,58,.25)}
+.plan text{font:400 10px var(--sans);letter-spacing:.2em;fill:rgba(242,235,227,.45);text-transform:uppercase}
+.plan .num{font:400 13px var(--display);fill:var(--saffron);letter-spacing:0}
+.work h3{font:400 clamp(40px,4.4vw,72px)/.95 var(--display);margin:10px 0 18px}
+.work .meta{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);font-size:15px}
+.work .meta dt{color:var(--mute);font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding-top:3px}
+.work p{color:rgba(242,235,227,.8)}
+
+/* LINEAGE */
+.lineage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(30px,6vw,110px);align-items:start}
+.steps{list-style:none;position:relative}
+.steps::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:1px;background:var(--line)}
+.steps li{position:relative;padding:0 0 34px 40px}
+.steps li::before{content:"";position:absolute;left:2px;top:9px;width:11px;height:11px;border-radius:50%;background:var(--stage);border:1px solid var(--saffron)}
+.steps li:first-child::before{background:var(--saffron)}
+.steps b{display:block;font:400 30px/1 var(--display);color:var(--saffron);margin-bottom:6px}
+.steps h3{font:400 13px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
+.steps p{color:rgba(242,235,227,.76);font-size:16px}
+.offers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,28px);margin-top:clamp(50px,6vw,90px)}
+.offer{border:1px solid var(--line);border-radius:18px;padding:26px 24px 28px;background:linear-gradient(180deg,rgba(242,235,227,.035),transparent)}
+.offer .cap{color:var(--saffron)}
+.offer h3{font:400 30px/1.02 var(--display);margin:14px 0 12px}
+.offer p{color:rgba(242,235,227,.76);font-size:15.5px}
+
+/* STAGE */
+.dates{list-style:none;border-top:1px solid var(--line)}
+.dates li{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1fr) auto;gap:20px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+.dates .d{font:400 34px/1 var(--display)}
+.dates .d small{display:block;font:400 11px/1.6 var(--sans);letter-spacing:.2em;color:var(--mute);margin-top:6px}
+.dates .w{font:400 24px/1.1 var(--display)}
+.dates .v{color:var(--mute);font-size:15px}
+.dates a{white-space:nowrap}
+
+/* BOOK */
+.book{text-align:center;padding-bottom:clamp(110px,12vw,170px)}
+.book .h2{margin:0 auto;max-width:12ch}
+.book .lead{margin:24px auto 0}
+.book .ctas{justify-content:center;margin-top:36px}
+.cgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:clamp(60px,7vw,100px);text-align:left}
+.cgrid div{border-top:1px solid var(--line);padding-top:14px}
+.cgrid .cap{color:var(--mute);display:block;margin-bottom:8px}
+.cgrid a,.cgrid p{font:400 clamp(20px,1.6vw,24px)/1.3 var(--display);text-decoration:none;overflow-wrap:anywhere}
+footer{border-top:1px solid var(--line);padding:30px var(--pad) 92px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;color:var(--mute);font-size:13.5px;line-height:1.6}
+footer p{max-width:80ch}
+
+@media (max-width:900px){
+  .hero .copy{grid-template-columns:minmax(0,1fr);gap:20px}
+  .hero .aside{justify-self:start}
+  .work,.lineage{grid-template-columns:minmax(0,1fr)}
+  .work:nth-of-type(even) .plan{order:0}
+  .offers{grid-template-columns:minmax(0,1fr)}
+  .dates li{grid-template-columns:110px minmax(0,1fr) auto}
+  .dates .v{display:none}
+  .cgrid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .tala .now{display:none}
+  .hero .copy{bottom:76px;gap:14px}
+  .hero .eyebrow{display:none}
+  .hero h1{font-size:clamp(48px,14vw,70px)}
+  .hero .body{display:none}
+  .hero .tag{font-size:20px;margin-bottom:14px}
+  .btn{height:44px;padding:0 18px}
+  .trace .txtb{max-width:none;right:var(--pad)}
+  .trace .count{top:auto;bottom:16%;right:var(--pad)}
+  .trace .count b{font-size:64px}
+  .trace .bols{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));row-gap:8px;font-size:10px;letter-spacing:.1em;bottom:5%}
+  .echo{height:42%;bottom:22%}
+  .dates li{grid-template-columns:86px minmax(0,1fr)}
+  .dates li a{grid-column:2}
+  .dates .d{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){.hero .hint::before{animation:none}.stagec canvas,.stagec .still,.menu{transition:none}}
+</style>
+</head>
+<body>
+<header class="top" data-headroom="1.2">
+  <a class="brand" href="#top" aria-label="Ananya Rao, back to the top"><b>Ananya Rao</b><span class="deva" lang="hi">अनन्या राव</span></a>
+  <div class="tala">
+    <span class="now cap js-now" aria-hidden="true">Sam</span>
+    <button class="ring" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <svg viewBox="-23 -23 46 46" aria-hidden="true"><g class="ticks"></g><circle r="3" class="sam"/></svg>
+    </button>
+  </div>
+</header>
+<nav class="menu" id="menu" aria-label="Sections">
+  <a href="#trace" data-spy>Trace <span>Beat 1</span></a>
+  <a href="#works" data-spy>Works <span>Beat 5</span></a>
+  <a href="#lineage" data-spy>Lineage <span>Beat 9</span></a>
+  <a href="#stage" data-spy>On stage <span>Beat 13</span></a>
+  <a href="#book" data-spy>Book <span>Sam</span></a>
+</nav>
+
+<main id="top">
+  <section class="hero" aria-labelledby="h1">
+    <div class="backdrop" aria-hidden="true">ANANYA</div>
+    <div class="stagec" aria-hidden="true"><img class="still" src="img/ananya-rao/cut.webp" alt="" width="830" height="945" fetchpriority="high"></div>
+    <span class="sr">Portrait: Ananya Rao mid-turn in a flowing saffron costume.</span>
+    <div class="hint cap" aria-hidden="true"><span class="js-hint">Move through the dancer</span></div>
+    <div class="copy">
+      <div>
+        <p class="eyebrow cap">Kathak &amp; contemporary · London / Bengaluru</p>
+        <h1 id="h1">Ananya Rao<span class="deva" lang="hi" aria-hidden="true">अनन्या राव</span></h1>
+      </div>
+      <div class="aside">
+        <p class="tag">Every gesture leaves <em>a trace.</em></p>
+        <p class="body">Dancer and choreographer. I make work where the spin of Kathak meets the weight and breath of contemporary dance, for stages, films and festivals.</p>
+        <div class="ctas"><a class="btn" href="#works">See the work</a><a class="txt" href="#book">Book a workshop</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trace" id="trace" aria-labelledby="t-h">
+    <svg class="streak" aria-hidden="true"><defs><linearGradient id="streakg" x1="0" x2="1"><stop offset="0" stop-color="#E8893A" stop-opacity="0"/><stop offset=".7" stop-color="#E8893A" stop-opacity=".6"/><stop offset="1" stop-color="#F2EBE3" stop-opacity=".95"/></linearGradient></defs><path d=""/></svg>
+    <div class="floor" aria-hidden="true"></div>
+    <div class="txtb">
+      <p class="cap" style="color:var(--mute)">01 · Trace</p>
+      <h2 class="h2" id="t-h" style="font-size:clamp(40px,5vw,84px);margin:16px 0 20px">One turn, <em>nine exposures.</em></h2>
+      <p class="lead">Kathak is built on the spin. In a chakkar the dancer turns on the heel, finds the audience again and lands exactly on the beat. My work slows that second down until you can see it.</p>
+    </div>
+    <div class="count" aria-hidden="true"><b class="js-count">1</b><span class="cap">Exposure of 9</span></div>
+    <div class="bols cap" aria-hidden="true"></div>
+  </section>
+
+  <section class="sec" id="works" aria-labelledby="w-h">
+    <div class="label cap"><span>02 · Works</span><span>Choreography, 2019 – 2025</span></div>
+    <h2 class="h2" id="w-h" data-blur>Four dances, drawn <em>from above.</em></h2>
+    <p class="lead" style="margin:24px 0 clamp(40px,5vw,70px)">Before a piece is rehearsed, I draw its floor pattern: the path the body takes across the stage. These are the paths of four works.</p>
+
+    <article class="work" aria-labelledby="w1">
+      <div class="plan" data-plan="spiral"></div>
+      <div><span class="cap" style="color:var(--saffron)">2025 · Solo · 42 minutes</span><h3 id="w1">Chakkar</h3>
+        <p>A solo built from a single turn, repeated and slowed until it becomes a landscape. The dancer spirals from the centre of the stage to its edges and back.</p>
+        <dl class="meta"><dt>Premiere</dt><dd>London, 2025</dd><dt>Music</dt><dd>Live tabla and electronics</dd><dt>Touring</dt><dd>2026 – 2027</dd></dl></div>
+    </article>
+    <article class="work" aria-labelledby="w2">
+      <div class="plan" data-plan="waves"></div>
+      <div><span class="cap" style="color:var(--saffron)">2023 · Six dancers · 55 minutes</span><h3 id="w2">Monsoon Notation</h3>
+        <p>Six dancers cross the stage like weather fronts. Each pass is a line of a score that the audience can read as rain arriving, breaking and moving on.</p>
+        <dl class="meta"><dt>Premiere</dt><dd>Bengaluru, 2023</dd><dt>Music</dt><dd>Commissioned score for strings</dd><dt>Cast</dt><dd>Six dancers</dd></dl></div>
+    </article>
+    <article class="work" aria-labelledby="w3">
+      <div class="plan" data-plan="diagonal"></div>
+      <div><span class="cap" style="color:var(--saffron)">2021 · Duet · 30 minutes</span><h3 id="w3">Ghungroo</h3>
+        <p>A duet for a dancer and a tabla player. One long diagonal, walked twice: once in silence, once with every footfall answered by the drum.</p>
+        <dl class="meta"><dt>Premiere</dt><dd>Lisbon, 2021</dd><dt>Music</dt><dd>Tabla, played live</dd><dt>Cast</dt><dd>Dancer and musician</dd></dl></div>
+    </article>
+    <article class="work" aria-labelledby="w4">
+      <div class="plan" data-plan="circle"></div>
+      <div><span class="cap" style="color:var(--saffron)">2019 · Solo · 24 minutes</span><h3 id="w4">The Weight of Silk</h3>
+        <p>My first solo. A slow orbit of the stage in a costume of eleven metres of silk, which keeps moving long after the body has stopped.</p>
+        <dl class="meta"><dt>Premiere</dt><dd>London, 2019</dd><dt>Music</dt><dd>Sarangi and field recordings</dd><dt>Costume</dt><dd>Eleven metres of silk</dd></dl></div>
+    </article>
+  </section>
+
+  <section class="sec" id="lineage" aria-labelledby="l-h" style="background:var(--stage2)">
+    <div class="label cap"><span>03 · Lineage</span><span>Training, company, teaching</span></div>
+    <div class="lineage">
+      <div><h2 class="h2" id="l-h" data-blur>Twenty years <em>on one floor.</em></h2>
+        <p class="lead" style="margin-top:24px">Classical training first, then the rest of the world. Most of what I make still starts with the footwork I learned at seven.</p></div>
+      <ol class="steps">
+        <li><b>2006</b><h3>First Kathak class</h3><p>Began training in Kathak in Bengaluru, at seven: footwork, rhythm and spins.</p></li>
+        <li><b>2016</b><h3>Contemporary dance</h3><p>Moved to London to train in contemporary technique, improvisation and choreography.</p></li>
+        <li><b>2018</b><h3>Company dancer</h3><p>Danced with touring companies across Europe for four seasons.</p></li>
+        <li><b>2019</b><h3>First solo</h3><p>Premiered <em>The Weight of Silk</em> and began making her own work.</p></li>
+        <li><b>2022</b><h3>Rao Movement</h3><p>Founded a small company for new work that joins Kathak and contemporary dance.</p></li>
+      </ol>
+    </div>
+    <div class="offers">
+      <div class="offer"><span class="cap">Workshop</span><h3>Spin and spot</h3><p>A turning workshop for dancers of any style: the heel, the gaze and the breath that make thirty turns possible.</p></div>
+      <div class="offer"><span class="cap">Workshop</span><h3>Kathak for contemporary dancers</h3><p>Five days of footwork, rhythm cycles and hand gestures for dancers trained in other techniques.</p></div>
+      <div class="offer"><span class="cap">Direction</span><h3>Movement for film</h3><p>Movement direction for film, music videos and campaigns, from the first storyboard to the last take.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="stage" aria-labelledby="s-h">
+    <div class="label cap"><span>04 · On stage</span><span>Season 2026 – 2027</span></div>
+    <h2 class="h2" id="s-h" data-blur style="margin-bottom:clamp(36px,4vw,60px)">Where to <em>see the work.</em></h2>
+    <ul class="dates">
+      <li><span class="d">14 Nov<small>2026</small></span><span class="w">Chakkar</span><span class="v">Studio theatre · Dubai</span><a class="txt" href="#" data-demo>Tickets</a></li>
+      <li><span class="d">03 Dec<small>2026</small></span><span class="w">Spin and spot</span><span class="v">Workshop · Mumbai</span><a class="txt" href="#" data-demo>Join</a></li>
+      <li><span class="d">22 Jan<small>2027</small></span><span class="w">Monsoon Notation</span><span class="v">Main stage · London</span><a class="txt" href="#" data-demo>Tickets</a></li>
+      <li><span class="d">18 Mar<small>2027</small></span><span class="w">Chakkar</span><span class="v">Festival programme · Lisbon</span><a class="txt" href="#" data-demo>Tickets</a></li>
+    </ul>
+  </section>
+
+  <section class="sec book" id="book" aria-labelledby="b-h" style="background:radial-gradient(60% 70% at 50% 100%,#2b1c11,transparent 70%)">
+    <div class="label cap"><span>05 · Book</span><span>Performances, workshops, direction</span></div>
+    <h2 class="h2" id="b-h" data-blur>Bring the dance <em>to your stage.</em></h2>
+    <p class="lead">For performances, residencies, workshops and movement direction, write with the dates, the place and the people you have in mind.</p>
+    <div class="ctas"><a class="btn" href="#" data-demo="This is a concept site, so bookings can't be made here.">Ask about dates</a><a class="txt" href="#works">Back to the work</a></div>
+    <div class="cgrid">
+      <div><span class="cap">Bookings</span><a href="mailto:hello@raomovement.example" data-demo>hello@raomovement.example</a></div>
+      <div><span class="cap">Based in</span><p>London and Bengaluru</p></div>
+      <div><span class="cap">Languages</span><p>English, Kannada, Hindi</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Ananya Rao and Rao Movement are fictional. Works, dates, venues and figures on this page are illustrative. Portrait generated with AI. Hero particles: the client's Liquid Sculpture component (by guglielmogiannattasio.it), ported to plain JavaScript.</p>
+  <p>A concept website by Zenith Dubai CV.</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC, root = document.documentElement;
+  var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
+
+  // ---------- Tala ring: 16 beats, the current section lights its group of four ----------
+  var ticks = "", NS = "http://www.w3.org/2000/svg";
+  for (var i = 0; i < 16; i++){ var a = i / 16 * Math.PI * 2 - Math.PI / 2, r = 18; ticks += '<circle class="tick" cx="' + (Math.cos(a) * r).toFixed(2) + '" cy="' + (Math.sin(a) * r).toFixed(2) + '" r="' + (i % 4 === 0 ? 2.6 : 1.6) + '"/>'; }
+  $(".ring .ticks").innerHTML = ticks;
+  var tickEls = $$(".ring .tick"), nowEl = $(".js-now"), ORDER = ["trace", "works", "lineage", "stage", "book"], NAMES = {trace:"Trace", works:"Works", lineage:"Lineage", stage:"On stage", book:"Book"};
+  document.addEventListener("zc:section", function(e){
+    var k = ORDER.indexOf(e.detail);
+    tickEls.forEach(function(t, i){ t.classList.toggle("on", k >= 0 && k < 4 ? Math.floor(i / 4) === k : k === 4); });
+    nowEl.textContent = NAMES[e.detail] || "Sam";
+  });
+  var ring = $(".ring"), menu = $("#menu");
+  function setMenu(o){ menu.classList.toggle("open", o); ring.setAttribute("aria-expanded", o); }
+  ring.addEventListener("click", function(){ setMenu(!menu.classList.contains("open")); });
+  menu.addEventListener("click", function(e){ if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && menu.classList.contains("open")){ setMenu(false); ring.focus(); } });
+  document.addEventListener("click", function(e){ if (menu.classList.contains("open") && !e.target.closest(".menu, .ring")) setMenu(false); });
+
+  // ---------- Hero: the liquid sculpture ----------
+  var hero = $(".hero"), stage = $(".stagec"), still = $(".still"), hint = $(".hero .hint"), back = $(".backdrop");
+  var aspect = 830 / 945, eng = null;
+  function rectFor(w, h){
+    var mob = w < 640, rh = mob ? h * .54 : h * .9, rw = rh * aspect;
+    if (rw > w * (mob ? 1.04 : .7)){ rw = w * (mob ? 1.04 : .7); rh = rw / aspect; }
+    var cx = w * .5, top = mob ? h * .085 : h * .05;
+    return {x:cx - rw / 2, y:top, w:rw, h:rh};
+  }
+  function relayout(){
+    var w = hero.clientWidth, h = hero.clientHeight, r = rectFor(w, h);
+    still.style.left = r.x + "px"; still.style.top = r.y + "px"; still.style.width = r.w + "px"; still.style.height = r.h + "px";
+    back.style.fontSize = Math.min(h * .5, w * .92 / (6 * .62)) + "px";
+    hint.style.left = clamp(r.x + r.w / 2, 90, w - 90) + "px"; hint.style.top = Math.min(r.y + r.h * .965, h * .62) + "px";
+    if (w < 640) hint.style.top = (r.y + r.h * .9) + "px";
+    if (eng) eng.resize(w, h, r);
+  }
+  window.addEventListener("resize", relayout);
+  relayout();
+  var touch = matchMedia("(hover:none), (pointer:coarse)").matches;
+  if (touch) $(".js-hint").textContent = "Touch the dancer";
+
+  function startEngine(){
+    if (!window.LiquidSculpture || ZC.still) return;
+    var canvas = document.createElement("canvas");
+    stage.appendChild(canvas);
+    try {
+      eng = new LiquidSculpture(canvas, {strength:1.05, radius:200, density:1, dotSize:1.1, spread:1.15, turbulence:1.1, liquid:1.1, streaks:true, returnSpeed:.9, intro:ZC.motion, reducedMotion:ZC.reduce, bg:[.055, .047, .043]}, function(){ hero.dataset.gl = "off"; });
+    } catch (e) { canvas.remove(); hero.dataset.gl = "off"; return; }
+    var img = new Image(); img.decoding = "async";
+    img.onload = function(){
+      try {
+        eng.onFirstFrame = function(){ hero.dataset.gl = "on"; };
+        eng.setImage(img); relayout();
+      } catch (e) { hero.dataset.gl = "off"; }
+    };
+    img.src = "img/ananya-rao/cut.webp";
+    ZC.visible(hero, function(v){ eng && eng.setVisible(v && !document.hidden); }, "0px");
+    document.addEventListener("visibilitychange", function(){ eng && eng.setVisible(!document.hidden); });
+    function pos(e){ var b = hero.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; }
+    var touched = false;
+    function mark(){ if (!touched){ touched = true; hero.dataset.touched = "1"; } }
+    hero.addEventListener("pointermove", function(e){ var p = pos(e), t = e.pointerType === "touch"; if (t && e.buttons === 0 && e.pressure === 0) return; eng.pointer("move", p[0], p[1], t); mark(); }, {passive:true});
+    hero.addEventListener("pointerdown", function(e){ var p = pos(e); eng.pointer("down", p[0], p[1], e.pointerType === "touch"); mark(); }, {passive:true});
+    hero.addEventListener("pointerup", function(e){ var p = pos(e); eng.pointer("up", p[0], p[1], e.pointerType === "touch"); }, {passive:true});
+    hero.addEventListener("pointercancel", function(e){ var p = pos(e); eng.pointer("up", p[0], p[1], e.pointerType === "touch"); }, {passive:true});
+    hero.addEventListener("pointerleave", function(e){ var p = pos(e); eng.pointer("leave", p[0], p[1], e.pointerType === "touch"); }, {passive:true});
+  }
+
+  // ---------- TRACE: nine exposures of one turn ----------
+  var trace = $(".trace"), echoes = [], N = 9, bolsEl = $(".trace .bols");
+  var BOLS = ["Dha", "Dhin", "Dhin", "Dha", "Dha", "Dhin", "Dhin", "Dha", "Dha", "Tin", "Tin", "Ta", "Ta", "Dhin", "Dhin", "Dha"];
+  bolsEl.innerHTML = BOLS.map(function(b, i){ return '<span class="' + (i === 0 ? "sam" : "") + '">' + b + "</span>"; }).join("");
+  var bolEls = $$("span", bolsEl);
+  for (i = 0; i < N; i++){
+    var e = document.createElement("div"); e.className = "echo";
+    e.innerHTML = '<img src="img/ananya-rao/cut-560.webp" alt="" width="560" height="638" loading="lazy" decoding="async">';
+    trace.insertBefore(e, $(".txtb", trace)); echoes.push(e);
+  }
+  // Each exposure: a position along the stage and a turn angle (scaleX = cos of the turn, mirrored past 90°).
+  function placeEchoes(p){
+    var w = trace.clientWidth, h = trace.clientHeight, mob = w < 640, eh = h * (mob ? .42 : .62), ew = eh * aspect;
+    var x0 = mob ? -.05 * w : .02 * w, x1 = mob ? w - ew * .95 : w - ew * 1.02, shown = p * N, d = "";
+    echoes.forEach(function(el, k){
+      var t = k / (N - 1), x = x0 + (x1 - x0) * t, lift = Math.sin(t * Math.PI) * (mob ? h * .06 : h * .05);
+      var turn = Math.cos(k * Math.PI / 4), sx = Math.abs(turn) < .2 ? (turn < 0 ? -.2 : .2) : turn;
+      var age = shown - k, vis = clamp(age, 0, 1), fade = k === Math.min(N - 1, Math.floor(shown)) ? 1 : clamp(.18 + .5 * (k / Math.max(1, shown)), .18, .62);
+      el.style.left = x.toFixed(1) + "px"; el.style.bottom = "calc(" + (mob ? 22 : 18) + "% + " + lift.toFixed(1) + "px)";
+      el.style.transform = "scaleX(" + sx.toFixed(3) + ")";
+      el.style.opacity = (vis * fade).toFixed(3);
+      el.style.filter = k < shown - 1.5 ? "saturate(.55) brightness(.85)" : "none";
+      if (vis > 0) d += (d ? "L" : "M") + (x + ew * .62).toFixed(1) + " " + (h - h * (mob ? .22 : .18) - lift - eh * .74).toFixed(1);
+    });
+    $(".trace .streak path").setAttribute("d", d);
+    var cur = Math.max(1, Math.min(N, Math.ceil(shown)));
+    $(".js-count").textContent = cur;
+    var beat = Math.min(15, Math.floor(p * 16));
+    bolEls.forEach(function(b, i){ b.classList.toggle("on", i <= beat && i > 0); });
+  }
+  window.addEventListener("resize", function(){ placeEchoes(traceP); });
+  var traceP = ZC.motion ? 0 : 1;
+  placeEchoes(traceP);
+
+  // ---------- Works: floor patterns ----------
+  function E(t, a, p){ var el = document.createElementNS(NS, t); for (var k in a) el.setAttribute(k, a[k]); if (p) p.appendChild(el); return el; }
+  var PLANS = {
+    spiral: function(){ var d = "", cx = 200, cy = 150; for (var t = 0; t <= 6.2 * Math.PI; t += .08){ var r = 6 + t * 6.2; d += (d ? "L" : "M") + (cx + Math.cos(t) * r * 1.25).toFixed(1) + " " + (cy + Math.sin(t) * r * .82).toFixed(1); } return {d:d, marks:[[200,150,"1"],[262,150,"9"],[118,150,"17"],[322,122,"33"]]}; },
+    waves: function(){ var d = "M40 70"; for (var x = 40; x <= 360; x += 8) d += "L" + x + " " + (70 + Math.sin(x / 26) * 18).toFixed(1); d += "M360 150"; for (x = 360; x >= 40; x -= 8) d += "L" + x + " " + (150 + Math.sin(x / 22 + 1) * 22).toFixed(1); d += "M40 228"; for (x = 40; x <= 360; x += 8) d += "L" + x + " " + (228 + Math.sin(x / 30 + 2) * 16).toFixed(1); return {d:d, marks:[[40,70,"1"],[360,150,"2"],[40,228,"3"]]}; },
+    diagonal: function(){ var d = "M54 46L346 254", m = []; for (var i = 0; i <= 10; i++) m.push([54 + 29.2 * i, 46 + 20.8 * i, i % 5 === 0 ? String(i + 1) : ""]); return {d:d, marks:m, stamps:true}; },
+    circle: function(){ var d = "", cx = 200, cy = 150; for (var t = 0; t <= Math.PI * 2 + .01; t += .06) d += (d ? "L" : "M") + (cx + Math.cos(t - Math.PI / 2) * 140).toFixed(1) + " " + (cy + Math.sin(t - Math.PI / 2) * 96).toFixed(1); return {d:d, marks:[[200,54,"1"],[340,150,"4"],[200,246,"8"],[60,150,"12"]]}; }
+  };
+  var plans = $$(".plan").map(function(box){
+    var svg = E("svg", {viewBox:"0 0 400 300", "aria-hidden":"true"}, box), g = "";
+    for (var x = 40; x <= 360; x += 40) g += "M" + x + " 20V280"; for (var y = 20; y <= 280; y += 40) g += "M20 " + y + "H380";
+    E("path", {d:g, "class":"grid"}, svg);
+    E("rect", {x:20, y:20, width:360, height:260, rx:6, "class":"edge"}, svg);
+    E("text", {x:200, y:294, "text-anchor":"middle"}, svg).textContent = "Audience";
+    E("text", {x:200, y:14, "text-anchor":"middle"}, svg).textContent = "Upstage";
+    var spec = PLANS[box.dataset.plan](), route = E("path", {d:spec.d, "class":"route"}, svg);
+    if (spec.stamps) spec.marks.forEach(function(m){ E("circle", {cx:m[0], cy:m[1], r:4, "class":"mark"}, svg); });
+    spec.marks.forEach(function(m){ if (m[2]) E("text", {x:m[0] + 8, y:m[1] - 8, "class":"num"}, svg).textContent = m[2]; });
+    var halo = E("circle", {r:11, "class":"halo"}, svg), dot = E("circle", {r:5, "class":"dot"}, svg);
+    var len = route.getTotalLength(), p0 = route.getPointAtLength(0);
+    halo.setAttribute("cx", p0.x); halo.setAttribute("cy", p0.y); dot.setAttribute("cx", p0.x); dot.setAttribute("cy", p0.y);
+    return {box:box, route:route, dot:dot, halo:halo, len:len, t:0, on:false};
+  });
+  // The dancer's dot walks each floor pattern while the plan is on screen.
+  var raf = 0, last = 0;
+  function walk(now){
+    raf = 0; var dt = Math.min(64, now - (last || now)); last = now; var any = false;
+    plans.forEach(function(p){
+      if (!p.on) return; any = true;
+      p.t = (p.t + dt / 9000) % 1;
+      var pt = p.route.getPointAtLength(p.t * p.len);
+      p.dot.setAttribute("cx", pt.x.toFixed(1)); p.dot.setAttribute("cy", pt.y.toFixed(1)); p.halo.setAttribute("cx", pt.x.toFixed(1)); p.halo.setAttribute("cy", pt.y.toFixed(1));
+    });
+    if (any) raf = requestAnimationFrame(walk); else last = 0;
+  }
+  if (ZC.motion) plans.forEach(function(p){ ZC.visible(p.box, function(v){ p.on = v; if (v && !raf) raf = requestAnimationFrame(walk); }, "0px"); });
+
+  // ---------- Motion ----------
+  window.addEventListener("load", function(){
+    startEngine();
+    if (!ZC.motion || !window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
+    ZC.smooth();
+    document.fonts.ready.then(function(){
+      gsap.timeline({defaults:{ease:"expo.out"}})
+        .from(".hero .eyebrow, .hero h1, .hero .aside > *", {opacity:0, y:24, filter:"blur(10px)", duration:1.4, stagger:.1, clearProps:"filter"}, .9)
+        .from(".backdrop", {opacity:0, scale:1.06, duration:2.4, ease:"power2.out"}, .2)
+        .from(".top", {opacity:0, duration:1}, .6);
+      // Trace: pinned while the nine exposures of the turn appear.
+      var st = {p:0};
+      gsap.to(st, {p:1, ease:"none", scrollTrigger:{trigger:".trace", start:"top top", end:"+=220%", pin:true, scrub:.4}, onUpdate:function(){ traceP = st.p; placeEchoes(st.p); }});
+      gsap.from(".trace .txtb > *", {opacity:0, x:-40, filter:"blur(8px)", duration:1.2, stagger:.1, ease:"expo.out", clearProps:"filter", scrollTrigger:{trigger:".trace", start:"top 70%"}});
+      // Headings arrive like a body moving fast: a horizontal blur that settles.
+      $$("[data-blur]").forEach(function(el){
+        SplitText.create(el, {type:"lines", autoSplit:true, onSplit:function(self){
+          return gsap.from(self.lines, {opacity:0, x:-60, filter:"blur(12px)", duration:1.3, stagger:.12, ease:"expo.out", clearProps:"filter", scrollTrigger:{trigger:el, start:"top 85%"}});
+        }});
+      });
+      plans.forEach(function(p){
+        gsap.from(p.route, {drawSVG:0, duration:2.6, ease:"power2.inOut", scrollTrigger:{trigger:p.box, start:"top 75%"}});
+        gsap.from($$(".num, .mark", p.box), {opacity:0, duration:.6, stagger:.08, delay:.8, scrollTrigger:{trigger:p.box, start:"top 75%"}});
+      });
+      gsap.from(".work > div:not(.plan)", {opacity:0, y:30, duration:1.1, ease:"expo.out", stagger:.1, scrollTrigger:{trigger:"#works .work", start:"top 80%"}});
+      gsap.utils.toArray(".work").forEach(function(w){ gsap.from($(".plan", w), {opacity:0, scale:.96, duration:1.2, ease:"expo.out", scrollTrigger:{trigger:w, start:"top 82%"}}); });
+      gsap.from(".steps li", {opacity:0, x:-24, duration:1, stagger:.1, ease:"expo.out", scrollTrigger:{trigger:".steps", start:"top 80%"}});
+      gsap.from(".offer", {opacity:0, y:36, duration:1.1, stagger:.1, ease:"expo.out", scrollTrigger:{trigger:".offers", start:"top 85%"}});
+      gsap.from(".dates li", {opacity:0, y:20, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:".dates", start:"top 85%"}});
+    });
+  });
+});
+</script>
+</body>
+</html>
