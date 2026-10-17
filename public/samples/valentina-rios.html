@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valentina Ríos — Singer · Concept site</title>
+<meta name="description" content="Valentina Ríos, singer: bolero, soul and jazz. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#060405">
+<link rel="preload" href="fonts/dm-serif-display-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/valentina-rios/stage.webp" as="image" fetchpriority="high">
+<script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
+<style>
+@font-face{font-family:"DM Serif Display";src:url(fonts/dm-serif-display-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"DM Serif Display";src:url(fonts/dm-serif-display-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"DM Sans";src:url(fonts/dm-sans-latin-wght-normal.woff2) format("woff2");font-weight:100 1000;font-display:swap}
+:root{
+  --night:#060405;--velvet:#5E0A16;--red:#B3162A;--gold:#F2C46B;--cream:#F4E9DC;--mute:#A8968E;--dim:#2B2224;
+  --serif:"DM Serif Display",Georgia,serif;--sans:"DM Sans",system-ui,sans-serif;
+  --pad:clamp(18px,4.4vw,72px);
+  --zc-bg:#F2C46B;--zc-fg:#060405;--zc-dot:#B3162A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--night)}
+body{background:var(--night);color:var(--cream);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+main{position:relative;overflow-x:clip}
+.sm{font:600 11px/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.top{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad)}
+.top .sig{font:italic 400 24px/1 var(--serif);text-decoration:none;color:var(--gold)}
+.top nav{display:flex;gap:clamp(16px,2.4vw,34px)}
+.top nav a{text-decoration:none;color:var(--mute)}.top nav a:hover{color:var(--cream)}
+
+/* stage */
+.stage{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;isolation:isolate}
+.lyrics-bg{position:absolute;inset:0;z-index:0;font:italic 400 clamp(18px,1.6vw,26px)/1.9 var(--serif);color:#E9C9A0;opacity:.85;padding:9vh 4vw;display:flex;flex-wrap:wrap;gap:1.5vh 4vw;align-content:space-around;
+  -webkit-mask-image:radial-gradient(circle 220px at var(--sx,30%) var(--sy,40%),#000 0%,rgba(0,0,0,.35) 45%,transparent 100%);mask-image:radial-gradient(circle 220px at var(--sx,30%) var(--sy,40%),#000 0%,rgba(0,0,0,.35) 45%,transparent 100%)}
+.lyrics-bg span{white-space:nowrap}
+.photo{position:absolute;z-index:1;right:max(0px,calc(50% - 760px));top:0;height:100%;aspect-ratio:928/1152;
+  -webkit-mask-image:radial-gradient(64% 58% at 50% 42%,#000 58%,transparent 100%);mask-image:radial-gradient(64% 58% at 50% 42%,#000 58%,transparent 100%)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.beam{position:absolute;z-index:2;right:max(0px,calc(50% - 760px));top:-10%;height:120%;aspect-ratio:928/1152;pointer-events:none;background:conic-gradient(from 180deg at 50% 0%,transparent 168deg,rgba(242,196,107,.10) 176deg,rgba(242,196,107,.16) 180deg,rgba(242,196,107,.10) 184deg,transparent 192deg);mix-blend-mode:screen}
+.name{position:absolute;z-index:3;left:var(--pad);top:50%;transform:translateY(-52%)}
+.name .sm{color:var(--gold);margin-bottom:18px}
+.name h1{font:italic 400 clamp(72px,11vw,200px)/.84 var(--serif);letter-spacing:-.02em}
+.name h1 span{display:block}
+.name h1 span+span{padding-left:.9em;color:var(--red);-webkit-text-stroke:0}
+.name p.lede{margin-top:26px;max-width:32ch;color:#D8C7BC;font-size:clamp(16px,1.2vw,19px)}
+.name .cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;font:600 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;transition:background .3s,color .3s}
+.btn:hover,.btn.solid{background:var(--gold);color:var(--night)}
+.btn.solid:hover{background:var(--cream)}
+.hint{position:absolute;z-index:3;left:var(--pad);bottom:24px;color:var(--mute)}
+
+/* voice */
+.sec{position:relative;padding:clamp(100px,13vw,190px) var(--pad)}
+.voice{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(30px,6vw,110px);align-items:end}
+.h2{font:400 clamp(44px,6vw,108px)/.95 var(--serif);letter-spacing:-.015em}
+.h2 em{color:var(--gold)}
+.voice p{color:#D8C7BC;max-width:46ch;margin-top:22px}
+.genres{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.genres span{padding:9px 14px;border-radius:999px;border:1px solid rgba(242,196,107,.35);color:var(--gold)}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.facts div{border-top:1px solid rgba(244,233,220,.2);padding-top:14px}
+.facts b{display:block;font:italic 400 clamp(46px,5vw,82px)/1 var(--serif);color:var(--cream)}
+.facts span{color:var(--mute)}
+
+/* karaoke */
+.karaoke{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,10vw,140px) var(--pad);background:radial-gradient(60% 60% at 50% 50%,rgba(94,10,22,.55),transparent 75%)}
+.karaoke .sm{color:var(--gold);margin-bottom:26px}
+.song{font:400 clamp(30px,4.4vw,72px)/1.16 var(--serif);max-width:20ch}
+.song .w{color:#3A2E30;transition:color .2s}
+.song .es{font-style:italic}
+.credit{margin-top:30px;color:var(--mute)}
+
+/* live */
+.shows{list-style:none;margin-top:clamp(40px,5vw,70px)}
+.shows li{display:grid;grid-template-columns:120px minmax(0,1.2fr) minmax(0,1fr) auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid rgba(244,233,220,.16)}
+.shows li:last-child{border-bottom:1px solid rgba(244,233,220,.16)}
+.shows .d{font:italic 400 26px/1 var(--serif);color:var(--gold)}
+.shows .d small{display:block;font:600 11px/1.4 var(--sans);letter-spacing:.2em;font-style:normal;color:var(--mute);margin-top:6px}
+.shows .v{font:400 clamp(24px,2.4vw,36px)/1.1 var(--serif)}
+.shows .c{color:var(--mute)}
+.shows a{padding:11px 18px;border-radius:999px;border:1px solid rgba(244,233,220,.35);text-decoration:none;font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase}
+.shows a:hover{background:var(--cream);color:var(--night)}
+
+/* records */
+.records{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,44px);margin-top:clamp(40px,5vw,70px)}
+.rec .cover{position:relative;aspect-ratio:1;overflow:hidden;background:var(--bg);box-shadow:0 40px 60px -30px rgba(0,0,0,.9);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.rec:hover .cover{transform:translateY(-8px) rotate(-1deg)}
+.rec .cover .t{position:absolute;left:8%;bottom:8%;font:italic 400 clamp(30px,3.2vw,52px)/.95 var(--serif);color:var(--fg)}
+.rec h3{margin-top:18px;font:400 26px/1.1 var(--serif)}
+.rec p{color:var(--mute)}
+.r1{--bg:radial-gradient(circle at 70% 30%,#F2C46B 0 22%,#B3162A 23% 100%);--fg:#F4E9DC}
+.r2{--bg:linear-gradient(160deg,#120A0B,#3A0910);--fg:#F2C46B}
+.r2 .cover::before{content:"";position:absolute;left:50%;top:0;width:140%;height:120%;transform:translateX(-50%);background:conic-gradient(from 180deg at 50% 0,transparent 160deg,rgba(242,196,107,.35) 180deg,transparent 200deg)}
+.r3{--bg:repeating-linear-gradient(115deg,#5E0A16 0 18px,#7A0E1A 18px 36px);--fg:#F4E9DC}
+
+/* press + booking */
+.press{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,44px)}
+.press blockquote{font:italic 400 clamp(24px,2.2vw,34px)/1.25 var(--serif)}
+.press figcaption{margin-top:14px;color:var(--mute)}
+.booking{background:var(--velvet);overflow:hidden}
+.booking::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.18) 0 2px,transparent 2px 46px);opacity:.6}
+.booking>*{position:relative}
+.book-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:clamp(40px,5vw,70px)}
+.book-grid div{border-top:1px solid rgba(244,233,220,.35);padding-top:16px}
+.book-grid b{display:block;font:400 26px/1.15 var(--serif);margin:8px 0 6px}
+.book-grid a{color:#F7D9B2}
+footer{padding:36px var(--pad) 90px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 40px;color:var(--mute);font-size:13px;border-top:1px solid rgba(244,233,220,.12)}
+footer p{max-width:72ch}
+
+@media (max-width:900px){
+  .top nav{display:none}
+  .voice,.press,.book-grid{grid-template-columns:minmax(0,1fr)}
+  .records{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .shows li{grid-template-columns:minmax(0,1fr) auto;gap:8px 16px}
+  .shows .d{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .photo,.beam{right:-30%;height:78%;top:auto;bottom:0}
+  .name{top:96px;transform:none;right:var(--pad)}
+  .name h1{font-size:22vw}
+  .name p.lede{display:none}
+  .name .cta{position:absolute;left:0;top:calc(100svh - 96px - 84px);margin:0}
+  .hint{display:none}
+  .records{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="sig" href="#stage">Valentina Ríos</a>
+  <nav class="sm" aria-label="Sections"><a href="#voice">Voice</a><a href="#song">Lyrics</a><a href="#live">Live</a><a href="#records">Records</a><a href="#booking">Booking</a></nav>
+</header>
+
+<main>
+  <section class="stage" id="stage" aria-label="Introduction">
+    <div class="lyrics-bg" aria-hidden="true">
+      <span>apaga la luz despacio</span><span>every song I know began in the dark</span><span>canto por los dos</span><span>the room goes quiet, then it listens</span><span>Cartagena a medianoche</span><span>hold the last note like a hand</span><span>candela, candela</span><span>sing it slower, sing it true</span><span>la noche no se va</span><span>a red dress and a silver microphone</span><span>bolero en rojo</span><span>stay until the lights come up</span>
+    </div>
+    <div class="photo"><img src="img/valentina-rios/stage.webp" srcset="img/valentina-rios/stage-560.webp 560w, img/valentina-rios/stage.webp 928w" sizes="(max-width:640px) 90vw, 60vh" width="928" height="1152" alt="Valentina Ríos singing into a vintage microphone under a single spotlight, in a red satin dress"></div>
+    <div class="beam" aria-hidden="true"></div>
+    <div class="name">
+      <p class="sm">Singer · bolero, soul &amp; jazz</p>
+      <h1><span>Valentina</span><span>Ríos</span></h1>
+      <p class="lede">A voice from Cartagena that fills concert halls in Madrid, Paris and Dubai with boleros sung like secrets.</p>
+      <div class="cta"><a class="btn solid" href="#live">See her live</a><a class="btn" href="#booking">Booking</a></div>
+    </div>
+    <p class="hint sm" aria-hidden="true">Move the light to read the room</p>
+  </section>
+
+  <section class="sec" id="voice" aria-labelledby="voice-h">
+    <div class="voice">
+      <div>
+        <p class="sm" style="color:var(--gold)">The voice</p>
+        <h2 class="h2" id="voice-h" data-lines>Old songs, <em>sung like news.</em></h2>
+        <p>Valentina grew up singing boleros in her grandmother's kitchen in Cartagena and soul records in her own bedroom. Today she sings both, in Spanish, English and Portuguese, with a quartet that follows her breath rather than a click track.</p>
+        <div class="genres sm"><span>Bolero</span><span>Soul</span><span>Jazz standards</span><span>Latin songbook</span></div>
+      </div>
+      <div class="facts">
+        <div><b data-count="3">3</b><span>studio albums</span></div>
+        <div><b data-count="210">210</b><span>concerts since 2019</span></div>
+        <div><b data-count="4">4</b><span>languages on stage</span></div>
+        <div><b data-count="12">12</b><span>countries toured</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="karaoke" id="song" aria-labelledby="song-h">
+    <p class="sm" id="song-h">“Candela”, the title song · original lyrics</p>
+    <p class="song" data-karaoke>Turn the lights down slowly, let the room fall quiet. <span class="es">Canto por los dos,</span> every song I know began in the dark, and stays until the lights come up.</p>
+    <p class="credit sm">Words and music: Valentina Ríos (fictional)</p>
+  </section>
+
+  <section class="sec" id="live" aria-labelledby="live-h">
+    <p class="sm" style="color:var(--gold)">Live</p>
+    <h2 class="h2" id="live-h" data-lines>Upcoming <em>nights.</em></h2>
+    <ol class="shows">
+      <li><span class="d">06 Nov<small>Fri · 2026</small></span><span class="v">Sala Candela</span><span class="c">Madrid · with the quartet</span><a href="#" data-demo>Tickets</a></li>
+      <li><span class="d">20 Nov<small>Fri · 2026</small></span><span class="v">Le Velours</span><span class="c">Paris · two shows</span><a href="#" data-demo>Tickets</a></li>
+      <li><span class="d">04 Dec<small>Fri · 2026</small></span><span class="v">Blue Lantern Jazz Club</span><span class="c">Dubai · residency</span><a href="#" data-demo>Tickets</a></li>
+      <li><span class="d">19 Dec<small>Sat · 2026</small></span><span class="v">Teatro del Mar</span><span class="c">Cartagena · homecoming</span><a href="#" data-demo>Tickets</a></li>
+    </ol>
+  </section>
+
+  <section class="sec" id="records" aria-labelledby="rec-h" style="padding-top:0">
+    <p class="sm" style="color:var(--gold)">Records</p>
+    <h2 class="h2" id="rec-h" data-lines>Three albums, <em>one red thread.</em></h2>
+    <div class="records">
+      <article class="rec r1"><div class="cover"><span class="t">Candela</span></div><h3>Candela</h3><p>Debut album · 2021 · 10 songs</p></article>
+      <article class="rec r2"><div class="cover"><span class="t">Bolero<br>en rojo</span></div><h3>Bolero en rojo</h3><p>Album · 2023 · 12 songs</p></article>
+      <article class="rec r3"><div class="cover"><span class="t">Medianoche</span></div><h3>Medianoche</h3><p>Album · 2025 · 9 songs</p></article>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="press-h" style="padding-top:0">
+    <h2 class="sr" id="press-h">Press</h2>
+    <div class="press">
+      <figure><blockquote>“She sings a bolero as if she wrote it last night.”</blockquote><figcaption class="sm">Ritmo Weekly · illustrative</figcaption></figure>
+      <figure><blockquote>“Ninety minutes, no microphone tricks, total silence in the room.”</blockquote><figcaption class="sm">The Listening Room · illustrative</figcaption></figure>
+      <figure><blockquote>“The most moving voice in Latin jazz right now.”</blockquote><figcaption class="sm">Noches Magazine · illustrative</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="sec booking" id="booking" aria-labelledby="book-h">
+    <p class="sm" style="color:var(--gold)">Booking</p>
+    <h2 class="h2" id="book-h" data-lines>Bring the <em>quartet</em> to your stage.</h2>
+    <div class="book-grid">
+      <div><span class="sm">Management</span><b>Casa Ríos Music</b><a href="#" data-demo>management@casarios.example</a></div>
+      <div><span class="sm">Europe &amp; Latin America</span><b>Faro Booking, Madrid</b><a href="#" data-demo>valentina@farobooking.example</a></div>
+      <div><span class="sm">Middle East &amp; private events</span><b>Gulf Stage Desk, Dubai</b><a href="#" data-demo>events@gulfstage.example</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Valentina Ríos is a fictional person. Venues, dates, albums, figures and press quotes on this page are illustrative; the lyrics are original to this concept. Portrait generated with AI.</p>
+    <p>A concept website by Zenith Dubai CV.</p>
+  </footer>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC, stage = document.getElementById("stage"), lb = document.querySelector(".lyrics-bg");
+  // A follow spot: the cursor lights up words hidden in the dark. Without a mouse it wanders on its own.
+  var sx = 30, sy = 40, tx = 30, ty = 40, fine = matchMedia("(pointer:fine)").matches, t0 = performance.now(), raf = 0, on = true;
+  function setSpot(){ lb.style.setProperty("--sx", sx + "%"); lb.style.setProperty("--sy", sy + "%"); }
+  if (fine) stage.addEventListener("pointermove", function(e){ var r = stage.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width * 100; ty = (e.clientY - r.top) / r.height * 100; });
+  function loop(now){
+    if (!fine){ var t = (now - t0) / 1000; tx = 32 + Math.sin(t * .35) * 22; ty = 45 + Math.sin(t * .5) * 25; }
+    sx += (tx - sx) * .08; sy += (ty - sy) * .08; setSpot();
+    raf = on ? requestAnimationFrame(loop) : 0;
+  }
+  if (ZC.motion){ ZC.visible(stage, function(v){ on = v; if (v && !raf) raf = requestAnimationFrame(loop); }); }
+  else { lb.style.setProperty("--sx","28%"); lb.style.setProperty("--sy","40%"); }
+
+  window.addEventListener("load", function(){
+    if (!ZC.motion || !window.gsap){ document.querySelectorAll("[data-karaoke]").forEach(function(s){ s.querySelectorAll(".w").forEach(function(w){ w.style.color = ""; }); }); return; }
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+    ZC.smooth();
+    document.fonts.ready.then(function(){
+      // The house lights go down, the spot finds her.
+      var tl = gsap.timeline({defaults:{ease:"power3.out"}});
+      tl.from(".photo",{opacity:0,duration:2.2,ease:"power2.inOut"})
+        .from(".beam",{opacity:0,scaleY:.4,transformOrigin:"50% 0%",duration:1.6},.6)
+        .from(".name h1 span",{yPercent:110,opacity:0,duration:1.5,stagger:.18},.9)
+        .from([".name .sm",".name .lede",".name .cta",".hint"],{opacity:0,y:14,duration:1.1,stagger:.1},1.4);
+      gsap.timeline({scrollTrigger:{trigger:".stage",start:"top top",end:"bottom top",scrub:.6}})
+        .to(".photo",{scale:1.08,opacity:.35,ease:"none",transformOrigin:"50% 30%"},0)
+        .to(".name",{yPercent:-30,opacity:0,ease:"none"},0);
+
+      gsap.utils.toArray("[data-lines]").forEach(function(el){
+        SplitText.create(el,{type:"lines",mask:"lines",autoSplit:true,onSplit:function(self){
+          return gsap.from(self.lines,{yPercent:105,duration:1.3,stagger:.1,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 86%"}});
+        }});
+      });
+      // Karaoke: each word lights up as the song is sung through the scroll.
+      var song = document.querySelector("[data-karaoke]");
+      var st = SplitText.create(song,{type:"words",wordsClass:"w"});
+      gsap.to(st.words,{color:"#F2C46B",stagger:.5,ease:"none",scrollTrigger:{trigger:".karaoke",start:"top top",end:"+=140%",scrub:.4,pin:true}});
+      gsap.utils.toArray("[data-count]").forEach(function(b){
+        var to = +b.dataset.count, o = {v:0};
+        ScrollTrigger.create({trigger:b,start:"top 90%",once:true,onEnter:function(){ gsap.to(o,{v:to,duration:1.6,ease:"power3.out",onUpdate:function(){ b.textContent = Math.round(o.v); }}); }});
+      });
+      gsap.from(".shows li",{y:30,opacity:0,duration:1,stagger:.08,ease:"power3.out",scrollTrigger:{trigger:".shows",start:"top 85%"}});
+      gsap.from(".rec",{y:80,opacity:0,rotation:function(i){ return [-4,0,4][i]; },duration:1.3,stagger:.12,ease:"expo.out",scrollTrigger:{trigger:".records",start:"top 85%"}});
+      ScrollTrigger.refresh();
+    });
+  });
+});
+</script>
+</body>
+</html>

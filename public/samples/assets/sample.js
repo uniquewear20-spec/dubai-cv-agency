@@ -13,7 +13,8 @@
      (used to pause canvases and WebGL off-screen).
    - The "Concept site" badge (hidden inside the gallery viewer).
    - [data-demo] links show a short notice instead of going nowhere.
-   - a[data-spy] links get aria-current while their section is on screen. */
+   - a[data-spy] links get aria-current while their section is on screen.
+   - [data-headroom="0.6"] fixed headers hide while scrolling down (past 0.6 viewport heights) and return on scroll up. */
 (function () {
   "use strict";
   var root = document.documentElement;
@@ -39,7 +40,8 @@
     ".zc-toast.on{opacity:1;transform:translate(-50%,0)}" +
     ".zc-skip{position:fixed;left:12px;top:12px;z-index:2147483002;padding:10px 14px;border-radius:8px;background:#111;color:#fff;font:600 13px/1 system-ui,sans-serif;transform:translateY(-160%);transition:transform .2s}" +
     ".zc-skip:focus{transform:none;outline:2px solid #fff;outline-offset:2px}" +
-    "@media (prefers-reduced-motion:reduce){.zc-badge,.zc-toast,.zc-skip{transition:none}}";
+    "[data-headroom]{transition:translate .5s cubic-bezier(.2,.7,.2,1)}[data-headroom].zc-hide:not(:focus-within){translate:0 -130%}" +
+    "@media (prefers-reduced-motion:reduce){.zc-badge,.zc-toast,.zc-skip,[data-headroom]{transition:none}}";
   var style = document.createElement("style");
   style.textContent = css;
   (document.head || root).appendChild(style);
@@ -134,6 +136,23 @@
       e.preventDefault();
       toast(el.getAttribute("data-demo") || "This is a concept site, so contact links are switched off.");
     });
+
+    // [data-headroom] headers slide away while reading downwards and come back on any upward scroll.
+    var heads = Array.prototype.slice.call(document.querySelectorAll("[data-headroom]"));
+    if (heads.length) {
+      var lastY = window.scrollY, queued = false;
+      window.addEventListener("scroll", function () {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(function () {
+          queued = false;
+          var y = window.scrollY, limit = parseFloat(heads[0].getAttribute("data-headroom")) || 0.6;
+          if (y < window.innerHeight * limit || y < lastY - 3) heads.forEach(function (h) { h.classList.remove("zc-hide"); });
+          else if (y > lastY + 3) heads.forEach(function (h) { h.classList.add("zc-hide"); });
+          lastY = y;
+        });
+      }, { passive: true });
+    }
 
     var spies = Array.prototype.slice.call(document.querySelectorAll("a[data-spy]"));
     if (spies.length && "IntersectionObserver" in window) {
