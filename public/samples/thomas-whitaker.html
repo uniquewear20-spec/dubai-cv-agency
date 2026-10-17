@@ -3,343 +3,1208 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#F3F1EB">
-<title>Thomas Whitaker · Principal Architect — Concept site by Zenith Dubai CV</title>
-<meta name="description" content="Concept portfolio website for a fictional principal architect, designed by Zenith Dubai CV.">
-<link rel="preload" href="img/thomas-whitaker-640.webp" as="image" type="image/webp">
-<link rel="preload" href="fonts/red-hat-display-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css">
+<title>Thomas Whitaker — Architect · Concept site</title>
+<meta name="description" content="Thomas Whitaker, architect. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ECE9E2">
+<link rel="preload" href="fonts/familjen-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" imagesrcset="img/thomas-whitaker/cut-760.webp 665w, img/thomas-whitaker/cut.webp 928w" imagesizes="(max-width:700px) 72vw, 78vh" fetchpriority="high">
 <script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/DrawSVGPlugin.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
 <style>
-/* Concept: drawing sheet A-001. The hero is a working drawing: sheet border with grid
-   references, his name dimensioned like a wall, the portrait called out as Detail 1,
-   a north arrow, and a title block whose status is ringed with a revision cloud.
-   Each project gets its own plan, the career is the revision table, and the
-   credentials are the general notes. */
+@font-face{font-family:"Familjen Grotesk";src:url(fonts/familjen-grotesk-latin-wght-normal.woff2) format("woff2");font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Familjen Grotesk";src:url(fonts/familjen-grotesk-latin-wght-italic.woff2) format("woff2");font-weight:400 700;font-style:italic;font-display:swap}
+@font-face{font-family:"Martian Mono";src:url(fonts/martian-mono-latin-wght-normal.woff2) format("woff2");font-weight:100 800;font-display:swap}
 :root{
-  --paper:#F3F1EB; --paper2:#EAE7DE; --ink:#1C232B; --mute:#5E6670; --line:#1C232B; --hair:rgba(28,35,43,.18); --blue:#2B5FAE; --red:#C8402F;
-  --sans:"Red Hat Display","Helvetica Neue",Arial,sans-serif; --mono:"Red Hat Mono",ui-monospace,Menlo,monospace;
-  --zc-bg:#1C232B; --zc-fg:#F3F1EB; --zc-dot:#C8402F;
+  --paper:#ECE9E2;--paper2:#E3DFD6;--white:#F8F7F3;--ink:#1B1D20;--ink2:#55585D;--line:rgba(27,29,32,.18);
+  --sun:#D9481F;--dusk:#121829;--glow:#F0B26A;
+  --display:"Familjen Grotesk","Helvetica Neue",Arial,sans-serif;--mono:"Martian Mono",ui-monospace,Menlo,monospace;
+  --pad:clamp(18px,4vw,64px);--padL:var(--pad);
+  --zc-bg:#1B1D20;--zc-fg:#F8F7F3;--zc-dot:#D9481F;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;height:auto;display:block}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-.mono{font-family:var(--mono)}
-.wrap{max-width:1240px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
-.grid-bg{background-image:linear-gradient(var(--hair) 1px,transparent 1px),linear-gradient(90deg,var(--hair) 1px,transparent 1px);background-size:120px 120px;background-position:-1px -1px}
+@media (min-width:1100px){:root{--padL:clamp(130px,10.5vw,180px)}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--display);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img,svg{display:block;max-width:100%}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+main{position:relative;overflow-x:clip}
+.mono{font:500 10.5px/1.55 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+em{font-style:italic}
 
-/* ---------- Sheet (hero) ---------- */
-.hero{position:relative;min-height:max(700px,100svh);padding:max(14px,env(safe-area-inset-top,0px)) clamp(10px,1.4vw,18px) clamp(10px,1.4vw,18px);display:flex}
-.sheet{position:relative;flex:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);grid-template-rows:auto minmax(0,1fr) auto;gap:0 clamp(20px,3vw,48px);padding:clamp(34px,3.4vw,46px) clamp(30px,3.6vw,56px) 0;border:2px solid var(--ink);outline:1px solid var(--ink);outline-offset:-8px;overflow:hidden;
-  background:linear-gradient(rgba(28,35,43,.05) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(28,35,43,.05) 1px,transparent 1px) 0 0/24px 24px,var(--paper)}
-.refs-x,.refs-y{position:absolute;display:flex;justify-content:space-around;font:500 10px/1 var(--mono);color:var(--mute);pointer-events:none}
-.refs-x{left:8px;right:8px;top:0;height:8px;align-items:center;transform:translateY(-1px)}
-.refs-y{top:8px;bottom:8px;left:0;width:8px;flex-direction:column;align-items:center}
-.plan-bg{position:absolute;right:-4%;bottom:-6%;width:62%;opacity:.13;pointer-events:none}
-.head{grid-column:1/-1;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding-bottom:18px;border-bottom:1px solid var(--ink)}
-.firm{font:700 13px/1.3 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none}
-.firm span{display:block;font:400 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:none;color:var(--mute)}
-.index{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,auto);border:1px solid var(--ink)}
-.index li+li{border-left:1px solid var(--ink)}
-.index a{display:block;padding:7px 12px;text-decoration:none;font:500 12px/1.3 var(--mono)}
-.index a b{display:block;font:700 13px/1.2 var(--sans);letter-spacing:.02em}
-.index a:hover,.index a[aria-current]{background:var(--ink);color:var(--paper)}
-.main{position:relative;align-self:center;padding:clamp(20px,4vh,40px) 0}
-.dimline{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 18px;color:var(--blue);font:500 12px/1 var(--mono)}
-.dimline::before,.dimline::after{content:"";flex:1;height:1px;background:var(--blue)}
-.dimline i{position:absolute;top:50%;width:1px;height:14px;margin-top:-7px;background:var(--blue)}
-.dimline i:first-child{left:0}.dimline i:last-of-type{right:0}
-.dimline i::after{content:"";position:absolute;left:-4px;top:3px;width:9px;height:1px;background:var(--blue);transform:rotate(-45deg)}
-h1{margin:0;font:700 clamp(62px,8.2vw,132px)/.88 var(--sans);letter-spacing:-.045em}
-h1 span{display:block;color:transparent;-webkit-text-stroke:1.5px var(--ink)}
-.role{display:flex;align-items:center;gap:12px;margin:22px 0 0;font:500 14px/1.4 var(--mono)}
-.role b{padding:4px 8px;border:1.5px solid var(--ink);font:700 12px/1 var(--sans);letter-spacing:.12em}
-.lead{margin:16px 0 0;max-width:44ch;font-size:clamp(17px,1.4vw,20px);line-height:1.55;color:#2E3640}
-.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.btn{display:inline-block;padding:13px 20px;border:1.5px solid var(--ink);text-decoration:none;font:600 14px/1 var(--sans);letter-spacing:.02em}
-.btn.fill{background:var(--ink);color:var(--paper)}
-.btn:hover{background:var(--blue);border-color:var(--blue);color:#fff}
-.detail{position:relative;align-self:center;justify-self:center;width:min(100%,360px);margin:clamp(20px,4vh,40px) 34px 0 0}
-.detail .ph{position:relative;aspect-ratio:928/1152;border:1.5px solid var(--ink);background:#C9C7C1;overflow:hidden}
-.detail .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.03)}
-.dim-v{position:absolute;top:0;bottom:0;right:-28px;width:1px;background:var(--blue)}
-.dim-v::before,.dim-v::after{content:"";position:absolute;left:-6px;width:13px;height:1px;background:var(--blue);transform:rotate(-45deg)}
-.dim-v::before{top:0}.dim-v::after{bottom:0}
-.dim-v span{position:absolute;top:50%;left:8px;transform:translateY(-50%) rotate(90deg);transform-origin:left center;white-space:nowrap;font:500 12px/1 var(--mono);color:var(--blue)}
-.dim-h{position:absolute;left:0;right:0;top:-24px;height:1px;background:var(--blue)}
-.dim-h::before,.dim-h::after{content:"";position:absolute;top:-6px;width:1px;height:13px;background:var(--blue);transform:rotate(45deg)}
-.dim-h::before{left:0}.dim-h::after{right:0}
-.dim-h span{position:absolute;left:50%;top:-18px;transform:translateX(-50%);padding:0 6px;background:var(--paper);font:500 12px/1 var(--mono);color:var(--blue)}
-.callout{position:absolute;left:-58px;bottom:16%;display:flex;align-items:center;pointer-events:none}
-.callout b{display:grid;place-items:center;width:52px;height:52px;border:1.5px solid var(--ink);border-radius:50%;background:var(--paper);font:700 15px/1 var(--sans);position:relative}
-.callout b::after{content:"";position:absolute;left:4px;right:4px;top:50%;height:1px;background:var(--ink)}
-.callout b span{font:500 9px/1 var(--mono);position:absolute;bottom:9px}
-.callout b em{font-style:normal;position:absolute;top:9px}
-.callout i{width:40px;height:1px;background:var(--ink)}
-.detail figcaption{margin-top:10px;font:500 12px/1.4 var(--mono);color:var(--mute)}
-.detail figcaption b{color:var(--ink);font-family:var(--sans)}
-.north{position:absolute;right:clamp(30px,3vw,52px);top:calc(50% + 40px);width:54px;color:var(--ink);pointer-events:none}
-.tblock{position:relative;z-index:1;grid-column:1/-1;display:grid;grid-template-columns:1.2fr 1.5fr 1fr .8fr .7fr .7fr;margin:0 calc(-1 * clamp(30px,3.6vw,56px));border-top:1.5px solid var(--ink);background:var(--paper)}
-.tblock div{position:relative;padding:10px 14px 12px;border-left:1px solid var(--ink)}
-.tblock div:first-child{border-left:0}
-.tblock small{display:block;font:500 10px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-.tblock b{display:block;margin-top:4px;font:700 16px/1.25 var(--sans)}
-.tblock .rc{position:relative;display:inline-block}
-.tblock .cloud{position:absolute;left:-14px;top:-9px;width:calc(100% + 28px);height:calc(100% + 18px);pointer-events:none;overflow:visible}
-.tblock .st b{color:var(--red)}
-.zc-reveal .tblock .cloud path{stroke-dasharray:900;animation:cloud 1.6s ease-out .8s both}
-@keyframes cloud{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
+/* The sun study: one WebGL canvas behind the page, seen in the hero (morning) and in the contact section (dusk). */
+#sun{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:0;transition:opacity 1.4s ease;pointer-events:none}
+#sun.on{opacity:1}
+.sunfall{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:none}
+html.nogl .sunfall{display:block}
 
-/* ---------- Sheets ---------- */
-section{padding:clamp(84px,10vw,124px) 0;border-top:2px solid var(--ink)}
-.shead{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px 28px;align-items:end;margin-bottom:48px}
-.tag{display:grid;place-items:center;width:84px;height:84px;border:1.5px solid var(--ink);border-radius:50%;position:relative;font:700 18px/1 var(--sans)}
-.tag::after{content:"";position:absolute;left:6px;right:6px;top:50%;height:1px;background:var(--ink)}
-.tag em{position:absolute;top:18px;font-style:normal}
-.tag span{position:absolute;bottom:18px;font:500 12px/1 var(--mono)}
-h2{margin:0;font:700 clamp(38px,4.6vw,64px)/.95 var(--sans);letter-spacing:-.04em}
-h2 span{color:transparent;-webkit-text-stroke:1.2px var(--ink)}
-.shead p{grid-column:2;margin:0;max-width:56ch;color:var(--mute)}
+/* Header */
+.top{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px var(--pad) 18px var(--padL);transition:color .5s,translate .5s cubic-bezier(.2,.7,.2,1)}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand svg{width:22px;height:22px;flex:none}
+.brand b{font:600 16px/1 var(--display);letter-spacing:-.01em}
+.brand .mono{opacity:.7}
+.top .acts{display:flex;align-items:center;gap:10px}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:11px 16px 10px;border:1px solid currentColor;border-radius:999px;text-decoration:none;transition:background .3s,color .3s}
+.pill:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pill i{width:6px;height:6px;border-radius:50%;background:var(--sun)}
+.menu{display:none}
 
-.proj{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(30px,5vw,70px);align-items:start;padding:44px 0;border-top:1px solid var(--ink)}
-.proj svg{width:100%;height:auto;background:#fff;border:1px solid var(--hair)}
-.proj .no{font:500 13px/1 var(--mono);color:var(--blue)}
-.proj h3{margin:10px 0 12px;font:700 clamp(28px,2.8vw,40px)/1.05 var(--sans);letter-spacing:-.03em}
-.proj p{color:#2E3640}
-.spec{display:grid;grid-template-columns:1fr 1fr;margin-top:22px;border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
-.spec div{padding:10px 12px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
-.spec small{display:block;font:500 10.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-.spec b{display:block;margin-top:2px;font:700 17px/1.3 var(--sans)}
-.scale{display:flex;align-items:center;gap:10px;margin-top:10px;font:500 11.5px/1 var(--mono);color:var(--mute)}
-.scale i{display:block;width:120px;height:6px;background:linear-gradient(90deg,var(--ink) 25%,transparent 25% 50%,var(--ink) 50% 75%,transparent 75%);border:1px solid var(--ink)}
+/* Drawing register (left edge): sheet numbers, the active sheet and the time of day */
+.reg{position:fixed;left:clamp(16px,2.1vw,34px);top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:1px;transition:color .5s}
+.reg a{display:flex;align-items:center;gap:12px;padding:6px 0;text-decoration:none;font:500 10px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.46;transition:opacity .3s}
+.reg a b{font-weight:600;display:inline-flex;align-items:center;gap:8px;min-width:58px}
+.reg a b::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.35;transition:background .3s,opacity .3s,transform .3s}
+.reg a span{max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .6s cubic-bezier(.2,.7,.2,1)}
+.reg a:hover,.reg a:focus-visible,.reg a[aria-current]{opacity:1}
+.reg a:hover span,.reg a:focus-visible span,.reg a[aria-current] span{max-width:150px}
+.reg a[aria-current] b::before{background:var(--sun);opacity:1;transform:scale(1.5)}
+.reg .clock{margin-top:16px;padding-top:12px;border-top:1px solid currentColor;display:flex;align-items:center;gap:8px;font:500 10px/1 var(--mono);letter-spacing:.06em;opacity:.8}
+.reg .clock i{width:9px;height:9px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 3px rgba(217,72,31,.18)}
+html[data-section="a900"] .top,html[data-section="a900"] .reg{color:var(--paper)}
+html[data-section="a900"] .pill:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 
-.princ{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
-.princ div{padding:28px 26px 30px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
-.princ svg{width:64px;height:64px;color:var(--blue)}
-.princ h3{margin:18px 0 8px;font:700 24px/1.15 var(--sans);letter-spacing:-.02em}
-.princ p{margin:0;color:#2E3640}
+/* A-000 Hero */
+.hero{position:relative;z-index:2;height:100svh;min-height:620px}
+.lede{position:absolute;z-index:3;left:var(--padL);top:clamp(100px,15.5vh,160px);width:min(660px,50vw)}
+.lede .eyebrow{color:var(--ink2);margin-bottom:clamp(18px,2.6vh,30px)}
+.lede h1 .who{display:block;font:600 clamp(17px,1.4vw,21px)/1.25 var(--display);letter-spacing:-.01em;margin-bottom:14px}
+.lede h1 .say{display:block;font-size:clamp(48px,6.3vw,108px);line-height:.93;letter-spacing:-.045em;font-weight:500}
+.lede h1 .say>span{display:block}
+.lede .sub{margin-top:clamp(18px,3vh,30px);max-width:34ch;color:var(--ink2);font-size:17px;line-height:1.5}
+.tw{position:absolute;z-index:2;right:clamp(-40px,-1vw,0px);bottom:0;height:min(84svh,960px,56vw);aspect-ratio:928/1061;-webkit-mask:linear-gradient(#000 76%,transparent 99%);mask:linear-gradient(#000 76%,transparent 99%);pointer-events:none}
+.tw img{width:100%;height:100%;object-fit:contain;object-position:bottom}
+.tw .lit{position:absolute;inset:0;-webkit-mask:url(img/thomas-whitaker/cut-760.webp) center bottom/contain no-repeat;mask:url(img/thomas-whitaker/cut-760.webp) center bottom/contain no-repeat;background:linear-gradient(var(--la,120deg),rgba(255,198,140,var(--lw,.5)),rgba(255,198,140,0) 46%,rgba(22,30,58,0) 54%,rgba(22,30,58,var(--lc,.3)));mix-blend-mode:soft-light}
+.study{position:absolute;z-index:3;left:var(--padL);bottom:clamp(22px,4.5vh,48px);width:min(300px,80vw)}
+.study .row{display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
+.study .path{width:220px;height:auto;overflow:visible}
+.study .north{width:38px;height:38px;flex:none}
+.study .read{display:flex;align-items:baseline;gap:12px;margin:10px 0 6px}
+.study .read b{font:400 30px/1 var(--mono);letter-spacing:-.04em}
+.study .read span{color:var(--ink2)}
+.range{position:relative;display:block;height:30px}
+.range input{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;cursor:ew-resize;margin:0}
+.range input::-webkit-slider-runnable-track{height:1px;background:var(--ink)}
+.range input::-moz-range-track{height:1px;background:var(--ink)}
+.range input::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--sun);border:4px solid var(--paper);box-shadow:0 0 0 1px var(--sun);margin-top:-10px}
+.range input::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--sun);border:4px solid var(--paper);box-shadow:0 0 0 1px var(--sun)}
+.range input:focus-visible{outline:none}
+.range input:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 1px var(--sun),0 0 0 6px rgba(217,72,31,.25)}
+.study .hint{color:var(--ink2);margin-top:2px}
 
-.rev{width:100%;border-collapse:collapse;border:1.5px solid var(--ink)}
-.rev th,.rev td{padding:14px 16px;text-align:left;vertical-align:top;border:1px solid var(--ink)}
-.rev thead th{background:var(--ink);color:var(--paper);font:500 11px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase}
-.rev td.r{width:70px;font:700 20px/1 var(--sans);text-align:center}
-.rev td.d{width:170px;font:500 14px/1.5 var(--mono);white-space:nowrap}
-.rev td b{display:block;font:700 19px/1.3 var(--sans)}
-.rev td span{color:var(--mute)}
-.rev tr.now td{background:rgba(200,64,47,.06)}
-.rev tr.now td.r{color:var(--red)}
-.notes{margin:44px 0 0;padding:0;list-style:none;counter-reset:n;columns:2;column-gap:56px}
-.notes li{counter-increment:n;display:grid;grid-template-columns:34px minmax(0,1fr);break-inside:avoid;padding:12px 0;border-top:1px solid var(--hair)}
-.notes li::before{content:counter(n) ".";font:700 16px/1.5 var(--sans)}
-.notes b{display:block;font:700 17px/1.4 var(--sans)}
-.notes span{color:var(--mute);font-size:15.5px}
+/* Shared sheet sections */
+.sec{position:relative;z-index:3;background:var(--paper);padding:clamp(96px,11vw,170px) var(--pad) clamp(96px,11vw,170px) var(--padL)}
+.shh{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:baseline;border-top:1px solid var(--ink);padding-top:12px;color:var(--ink2)}
+.shh b{color:var(--ink);font-weight:600}
+.h2{font:500 clamp(42px,5.5vw,92px)/.97 var(--display);letter-spacing:-.04em;margin:clamp(30px,4vw,58px) 0 clamp(40px,5vw,76px);max-width:15ch}
+.h2 em{font-weight:400}
 
-.contact .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:50px;align-items:end}
-.contact h2{font-size:clamp(46px,6.4vw,96px)}
-.contact h2 b{color:var(--red)}
-.stampbox{border:1.5px solid var(--ink)}
-.stampbox div{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-top:1px solid var(--ink);font:500 13px/1.4 var(--mono)}
-.stampbox div:first-child{border-top:0;background:var(--ink);color:var(--paper);font-weight:500;letter-spacing:.1em;text-transform:uppercase;font-size:11px}
-footer{padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));border-top:2px solid var(--ink);text-align:center;color:var(--mute);font:500 12.5px/1.6 var(--mono)}
+/* A-100 Practice */
+.pgrid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(36px,6vw,120px);align-items:start}
+.spd{width:100%;max-width:500px;overflow:visible}
+.spd .ln{fill:none;stroke:var(--ink);stroke-width:1;vector-effect:non-scaling-stroke}
+.spd .thin{stroke-width:.6;opacity:.45}
+.spd .day{stroke-width:1.4}
+.spd .dec{stroke:var(--sun);stroke-width:1.8}
+.spd text{font:500 10px var(--mono);fill:var(--ink2);letter-spacing:.06em}
+.spd .dot{fill:var(--sun)}
+.spd .halo{fill:rgba(217,72,31,.16)}
+.spdcap{margin-top:16px;color:var(--ink2)}
+.pbig{font:400 clamp(23px,2.2vw,34px)/1.3 var(--display);letter-spacing:-.018em}
+.sched{margin-top:clamp(36px,4vw,56px);border-top:1px solid var(--ink)}
+.sched div{display:grid;grid-template-columns:minmax(120px,170px) minmax(0,1fr);gap:18px;padding:13px 0 12px;border-bottom:1px solid var(--line)}
+.sched dt{font:500 10.5px/2 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink2)}
+.sched dd{font-size:17px}
 
-@media (max-width:1060px){
-  .index{grid-template-columns:repeat(2,auto)}
-  .index li:nth-child(3){border-left:0}
-  .index li:nth-child(n+3){border-top:1px solid var(--ink)}
-  .tblock{grid-template-columns:repeat(3,1fr)}
-  .tblock div:nth-child(4){border-left:0}
-  .tblock div:nth-child(n+4){border-top:1px solid var(--ink)}
-  .north{display:none}
+/* A-200 Drawing set */
+.sheet{display:grid;grid-template-columns:minmax(0,1fr) clamp(270px,23vw,340px);border:1px solid var(--ink);background:var(--white);margin-top:clamp(28px,4vw,56px)}
+.sheet .draw{position:relative;border-right:1px solid var(--ink);padding:clamp(18px,3vw,46px);display:flex;flex-direction:column;justify-content:center;min-height:min(68vh,620px)}
+.sheet .draw .lab{position:absolute;left:14px;top:12px;color:var(--ink2)}
+.sheet .draw .lab2{position:absolute;right:14px;top:12px;color:var(--ink2)}
+.dr{width:100%;height:auto;overflow:visible}
+.dr .ln{fill:none;stroke:var(--ink);stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.dr .thin{stroke-width:.65;opacity:.6}
+.dr .bold{stroke-width:2.2}
+.dr .pc{fill:var(--ink)}
+.dr .sh{fill:rgba(27,29,32,.16)}
+.dr .shd{fill:rgba(27,29,32,.2);fill-rule:evenodd}
+.dr .beam{fill:rgba(240,178,106,.32)}
+.dr .ray{fill:none;stroke:var(--sun);stroke-width:1;stroke-dasharray:4 5;vector-effect:non-scaling-stroke}
+.dr .fig{fill:var(--ink)}
+.dr .hat{fill:url(#hatch)}
+.dr text{font:500 13px var(--mono);fill:var(--ink2);letter-spacing:.05em}
+.tb{display:flex;flex-direction:column;font-size:15px}
+.tb>div{border-bottom:1px solid var(--ink);padding:13px 16px}
+.tb>div:last-child{border-bottom:0}
+.tb .ttl{padding:18px 16px 20px}
+.tb .ttl h3{font:600 clamp(24px,2vw,30px)/1.05 var(--display);letter-spacing:-.025em;margin-top:8px}
+.tb dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;padding:14px 16px}
+.tb dt{font:500 10px/1.9 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink2)}
+.tb dd{font-size:14.5px;line-height:1.45}
+.tb .note{color:var(--ink2);font-size:14.5px;line-height:1.5;flex:1}
+.tb .no{display:flex;justify-content:space-between;align-items:flex-end;padding:14px 16px}
+.tb .no b{font:400 44px/1 var(--mono);letter-spacing:-.06em}
+.tb .no span{text-align:right;color:var(--ink2)}
+
+/* A-250 Model shop: the constellation of plaster models */
+.shop{position:relative;z-index:3;background:#16181B;color:var(--paper);padding:clamp(96px,11vw,160px) var(--pad) clamp(70px,8vw,120px) var(--padL)}
+.shop .shh{border-color:rgba(236,233,226,.5);color:rgba(236,233,226,.62)}
+.shop .shh b{color:var(--paper)}
+.shop .h2{max-width:13ch}
+.sky{position:relative;height:min(78svh,760px);min-height:520px;border:1px solid rgba(236,233,226,.14);border-radius:18px;background:radial-gradient(120% 90% at 50% 0%,#202329,#141619 70%);overflow:hidden;touch-action:pan-y}
+.sky::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(236,233,226,.09) 1px,transparent 1.4px);background-size:26px 26px;pointer-events:none}
+.sky svg.links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.sky svg.links path{fill:none;stroke:var(--glow);stroke-width:1.2;stroke-dasharray:3 5;opacity:.9}
+.sky svg.links circle{fill:var(--glow)}
+.star{position:absolute;left:0;top:0;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);padding:0;border-radius:50%;cursor:pointer;background:none;border:0;transition:opacity .45s ease}
+.star .dr{display:block;width:100%;height:100%;border-radius:50%;animation:drift var(--d,9s) ease-in-out infinite alternate;animation-delay:var(--dl,0s)}
+.star img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px rgba(236,233,226,.22),0 18px 40px -18px rgba(0,0,0,.8);transition:box-shadow .35s ease,filter .35s ease;filter:grayscale(.2) brightness(.92)}
+.star:hover img,.star:focus-visible img,.star.on img{box-shadow:0 0 0 2px var(--glow),0 24px 50px -18px rgba(0,0,0,.85);filter:none}
+.star:focus-visible{outline:none}
+.sky.dim .star:not(.on){opacity:.32}
+.sky.gathered .star:not(.on){opacity:0;pointer-events:none}
+@keyframes drift{from{transform:translate(calc(var(--dx,6px) * -1),calc(var(--dy,5px) * -1))}to{transform:translate(var(--dx,6px),var(--dy,5px))}}
+.sky .tag{position:absolute;left:0;top:0;pointer-events:none;padding:8px 12px 7px;border-radius:999px;background:rgba(236,233,226,.94);color:var(--ink);white-space:nowrap;opacity:0;transform:translate(-50%,-140%);transition:opacity .25s ease}
+.sky .tag.on{opacity:1}
+.sky .cap{position:absolute;left:50%;bottom:clamp(20px,5%,44px);transform:translateX(-50%);width:min(560px,88%);text-align:center;opacity:0;visibility:hidden;transition:opacity .4s ease,visibility .4s}
+.sky.gathered .cap{opacity:1;visibility:visible}
+.sky .cap h3{font:500 clamp(24px,2.3vw,34px)/1.05 var(--display);letter-spacing:-.025em;margin:8px 0 8px}
+.sky .cap p{color:rgba(236,233,226,.74);font-size:15.5px;line-height:1.5}
+.sky .cap .row{display:flex;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+.sky .cap a,.sky .cap button{display:inline-flex;align-items:center;gap:8px;padding:11px 16px 10px;border-radius:999px;border:1px solid rgba(236,233,226,.4);color:var(--paper);text-decoration:none;font:500 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.sky .cap a{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.shopfoot{display:flex;justify-content:space-between;gap:20px;margin-top:16px;color:rgba(236,233,226,.6)}
+.shopfoot .legend{display:flex;gap:18px;flex-wrap:wrap}
+.shopfoot .legend button{color:rgba(236,233,226,.72);font:500 10.5px/1.6 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:0;border-bottom:1px solid transparent}
+.shopfoot .legend button:hover,.shopfoot .legend button[aria-pressed="true"]{color:var(--paper);border-color:var(--glow)}
+@media (max-width:700px){.sky{height:120vw;min-height:440px}.shopfoot{flex-direction:column}}
+@media (prefers-reduced-motion:reduce){.star .dr{animation:none}.star,.star img,.sky .cap{transition:none}}
+
+/* A-300 Principles */
+.rules{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,56px)}
+.rules li{border-top:1px solid var(--ink);padding-top:14px;display:flex;flex-direction:column}
+.rules .dg{aspect-ratio:16/11;margin:18px 0 26px;background:var(--white);border:1px solid var(--line);display:grid;place-items:center;padding:8%}
+.rules .dg svg{width:100%;height:100%;overflow:visible}
+.rules h3{font:500 clamp(26px,2.3vw,38px)/1.02 var(--display);letter-spacing:-.03em;margin-bottom:12px}
+.rules p{color:var(--ink2)}
+.rules .ln{fill:none;stroke:var(--ink);stroke-width:1.2;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.rules .thin{stroke-width:.7;opacity:.55}
+.rules .acc{stroke:var(--sun)}
+.rules .sh{fill:rgba(27,29,32,.17)}
+.rules .hat{fill:url(#hatch2)}
+.rules text{font:500 9px var(--mono);fill:var(--ink2);letter-spacing:.06em}
+
+/* A-400 On the board */
+.bgrid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:clamp(36px,6vw,110px);align-items:start}
+.regt{width:100%;border-collapse:collapse;font-size:16px}
+.regt th{font:500 10px/1.5 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);text-align:left;padding:0 12px 10px 0;border-bottom:1px solid var(--ink)}
+.regt td{padding:16px 12px 15px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.regt td:first-child{font:500 12px/1.9 var(--mono);color:var(--ink2);white-space:nowrap}
+.regt td:last-child{white-space:nowrap}
+.regt .st{display:inline-flex;align-items:center;gap:8px;font:500 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.regt .st i{width:7px;height:7px;border-radius:50%;border:1px solid var(--ink)}
+.regt .st.on i{background:var(--sun);border-color:var(--sun)}
+.teach{border-top:1px solid var(--ink);padding-top:14px}
+.teach h3{font:500 26px/1.1 var(--display);letter-spacing:-.025em;margin:14px 0 12px}
+.teach p{color:var(--ink2)}
+.teach p+p{margin-top:12px}
+
+/* A-900 Contact: the canvas shows the model at dusk */
+.contact{position:relative;z-index:2;min-height:112svh;color:var(--paper);padding:clamp(110px,14vw,180px) var(--pad) clamp(54px,7vw,90px) var(--padL);display:flex;flex-direction:column}
+.contact::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,16,30,.55),rgba(12,16,30,0) 62%);pointer-events:none}
+.contact>*{position:relative}
+.contact .shh{border-color:var(--paper);color:rgba(236,233,226,.72)}
+.contact .shh b{color:var(--paper)}
+.contact .h2{max-width:12ch;margin-bottom:24px}
+.contact .lead{max-width:40ch;font-size:clamp(18px,1.5vw,21px);line-height:1.5;color:rgba(236,233,226,.86)}
+.cgrid{margin-top:auto;padding-top:clamp(60px,10vh,120px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:clamp(18px,3vw,48px);align-items:end}
+.cgrid div{border-top:1px solid rgba(236,233,226,.4);padding-top:12px}
+.cgrid .mono{color:rgba(236,233,226,.7);display:block;margin-bottom:6px}
+.cgrid a,.cgrid p{font-size:clamp(17px,1.4vw,20px);text-decoration:none;overflow-wrap:anywhere}
+.cgrid a:hover{text-decoration:underline}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:17px 24px 16px;border-radius:999px;background:var(--paper);color:var(--ink);text-decoration:none;font-weight:600;white-space:nowrap;transition:background .3s}
+.btn:hover{background:var(--glow)}
+.btn i{width:8px;height:8px;border-radius:50%;background:var(--sun)}
+footer{position:relative;z-index:3;background:var(--dusk);color:rgba(236,233,226,.66);padding:28px var(--pad) 90px var(--padL);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;font-size:13.5px;line-height:1.6}
+footer p{max-width:78ch}
+
+@media (max-width:1099px){
+  .reg{display:none}
+  .reg.open{display:flex;position:fixed;top:auto;bottom:12px;left:12px;right:12px;transform:none;z-index:60;background:var(--ink);color:var(--paper)!important;padding:16px 18px;border-radius:16px;box-shadow:0 24px 60px -20px rgba(0,0,0,.5)}
+  .reg.open a{opacity:.7;padding:10px 0}
+  .reg.open a span{max-width:none}
+  .menu{display:inline-flex}
 }
-@media (max-width:860px){
-  .sheet{grid-template-columns:1fr;grid-template-rows:auto auto auto auto}
-  .head{flex-direction:column}
-  .index{grid-template-columns:repeat(4,auto);width:100%}
-  .index li:nth-child(3){border-left:1px solid var(--ink)}
-  .index li:nth-child(n+3){border-top:0}
-  .detail{order:-1;grid-row:2;margin:44px auto 10px;width:min(76%,320px)}
-  .main{grid-row:3}
-  .proj,.contact .wrap{grid-template-columns:1fr}
-  .princ{grid-template-columns:1fr}
-  .notes{columns:1}
+@media (max-width:900px){
+  .pgrid,.bgrid{grid-template-columns:minmax(0,1fr)}
+  .spd{max-width:420px}
+  .sheet{grid-template-columns:minmax(0,1fr)}
+  .sheet .draw{border-right:0;border-bottom:1px solid var(--ink);min-height:0;padding:44px 14px 22px}
+  .rules{grid-template-columns:minmax(0,1fr);gap:40px}
+  .cgrid{grid-template-columns:minmax(0,1fr)}
+  .cgrid .btn{justify-self:start}
 }
-@media (max-width:560px){
-  .index{grid-template-columns:1fr 1fr}
-  .index li:nth-child(3){border-left:0}
-  .index li:nth-child(n+3){border-top:1px solid var(--ink)}
-  .index a{padding:7px 10px}
-  .callout{left:-46px}.callout b{width:44px;height:44px}.callout i{width:20px}
-  .detail{width:min(70%,280px);margin-left:calc(15% + 10px)}
-  .tblock{grid-template-columns:1fr 1fr}
-  .tblock div:nth-child(odd){border-left:0}
-  .tblock div:nth-child(4){border-left:1px solid var(--ink)}
-  .tblock div:nth-child(n+3){border-top:1px solid var(--ink)}
-  .shead{grid-template-columns:1fr}
-  .shead p{grid-column:1}
-  .tag{width:68px;height:68px}
-  .rev thead{display:none}
-  .rev,.rev tbody,.rev tr,.rev td{display:block;width:auto!important}
-  .rev tr{border-bottom:1.5px solid var(--ink)}
-  .rev td{border:0;padding:6px 14px}
-  .rev td.r{text-align:left;padding-top:14px}
-  .rev td.d{padding-bottom:0}
+@media (max-width:700px){
+  .top{padding-top:14px;padding-bottom:14px}
+  .brand .mono,.top .pill.visit{display:none}
+  .lede{top:84px;width:auto;right:var(--pad)}
+  .lede .eyebrow{margin-bottom:14px}
+  .lede h1 .who{margin-bottom:10px}
+  .lede h1 .say{font-size:clamp(40px,12.4vw,58px)}
+  .lede .sub{display:none}
+  .tw{height:min(40svh,400px);right:-9vw}
+  .study{width:min(46vw,210px);bottom:64px}
+  .study .path{width:100%}
+  .study .north{display:none}
+  .study .read b{font-size:24px}
+  .study .read span{display:none}
+  .study .hint{display:none}
+  .shh{grid-template-columns:auto 1fr;font-size:9.5px}
+  .shh>:last-child{display:none}
+  .sched div{grid-template-columns:minmax(0,1fr);gap:2px}
+  .regt{font-size:15px}
+  .regt td:nth-child(3),.regt th:nth-child(3){display:none}
+  .contact{min-height:100svh}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html.cap main,html.cap .top,html.cap .reg,html.cap footer,html.cap .zc-badge{visibility:hidden}
+@media (prefers-reduced-motion:reduce){#sun{transition:none}.reg a span{transition:none}}
 </style>
 </head>
 <body>
+<canvas id="sun" aria-hidden="true"></canvas>
+<img class="sunfall" alt="" aria-hidden="true">
+
+<header class="top" data-headroom="1.4">
+  <a class="brand" href="#a000" aria-label="Whitaker Lane Architects, back to the top">
+    <svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M11 11V3" stroke="currentColor" stroke-width="1.3"/><path d="M11 11 17.5 15.5" stroke="#D9481F" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <b>Whitaker Lane</b><span class="mono">Architects · London / Dubai</span>
+  </a>
+  <div class="acts">
+    <a class="pill visit mono" href="#a900"><i></i>Studio visits</a>
+    <button class="pill menu mono" type="button" aria-expanded="false" aria-controls="reg">Sheets</button>
+  </div>
+</header>
+
+<nav class="reg" id="reg" aria-label="Drawing register">
+  <a href="#a000" data-spy><b>A-000</b><span>Sun study</span></a>
+  <a href="#a100" data-spy><b>A-100</b><span>Practice</span></a>
+  <a href="#a200" data-spy><b>A-200</b><span>Drawings</span></a>
+  <a href="#a250" data-spy><b>A-250</b><span>Model shop</span></a>
+  <a href="#a300" data-spy><b>A-300</b><span>Principles</span></a>
+  <a href="#a400" data-spy><b>A-400</b><span>On the board</span></a>
+  <a href="#a900" data-spy><b>A-900</b><span>Contact</span></a>
+  <p class="clock" aria-hidden="true"><i></i><span class="js-clock">08:12</span></p>
+</nav>
+
 <main>
-  <header class="hero" id="top">
-    <div class="sheet">
-      <div class="refs-x" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
-      <div class="refs-y" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span></div>
-      <svg class="plan-bg" viewBox="0 0 600 420" aria-hidden="true" fill="none" stroke="#1C232B" stroke-width="3"><rect x="10" y="10" width="580" height="400"/><circle cx="170" cy="150" r="70"/><circle cx="420" cy="260" r="90"/><path d="M10 210h160M340 10v160M260 260h70M500 10v120h90"/><path d="M60 330l60-60M90 360l60-60M120 390l60-60M150 410l40-40" stroke-width="1.5"/></svg>
-      <div class="head">
-        <a class="firm" href="#top">Whitaker Lane Architects<span>London · Dubai · drawing register</span></a>
-        <nav aria-label="Sheets"><ul class="index">
-          <li><a href="#projects" data-spy><b>A-100</b>Projects</a></li>
-          <li><a href="#practice" data-spy><b>A-200</b>Practice</a></li>
-          <li><a href="#career" data-spy><b>A-300</b>Career</a></li>
-          <li><a href="#contact" data-spy><b>A-400</b>Contact</a></li>
-        </ul></nav>
+  <section class="hero" id="a000" aria-labelledby="h1">
+    <div class="lede">
+      <p class="eyebrow mono">A-000 · Sun study · 21 December · Dubai 25.2°N</p>
+      <h1 id="h1"><span class="who">Thomas Whitaker, architect</span><span class="say"><span>Every building</span><span>is a <em>sundial.</em></span></span></h1>
+    </div>
+    <div class="tw"><img src="img/thomas-whitaker/cut.webp" srcset="img/thomas-whitaker/cut-760.webp 665w, img/thomas-whitaker/cut.webp 928w" sizes="(max-width:700px) 72vw, 78vh" width="928" height="1061" alt="Thomas Whitaker" fetchpriority="high"><i class="lit" aria-hidden="true"></i></div>
+    <div class="study">
+      <div class="row">
+        <svg class="path" viewBox="0 0 220 64" aria-hidden="true">
+          <path class="arc" d="" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3" vector-effect="non-scaling-stroke"/>
+          <path d="M0 60H220" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>
+          <g class="ticks"></g>
+          <circle class="sdot" r="5" cx="0" cy="60" fill="#D9481F"/>
+        </svg>
+        <svg class="north" viewBox="-19 -19 38 38" aria-hidden="true"><circle r="17" fill="none" stroke="currentColor" stroke-width="1"/><g class="nrot"><path d="M0-12 4 4 0 1-4 4Z" fill="currentColor"/><text y="-14.5" text-anchor="middle" font-size="7" font-family="Martian Mono,monospace" fill="currentColor" dy="-2">N</text></g></svg>
       </div>
-      <div class="main">
-        <p class="dimline" aria-hidden="true"><i></i><span>25 years in practice</span><i></i></p>
-        <h1>Thomas <span>Whitaker</span></h1>
-        <p class="role"><b>RIBA</b>Principal Architect · London &amp; the Gulf</p>
-        <p class="lead">Civic and residential buildings that work with climate, light and the people who use them.</p>
-        <div class="ctas"><a class="btn fill" href="#projects">View the projects</a><a class="btn" href="#contact">Start a conversation</a></div>
-      </div>
-      <figure class="detail" style="margin-bottom:0">
-        <div class="ph"><img src="img/thomas-whitaker-640.webp" srcset="img/thomas-whitaker-640.webp 640w, img/thomas-whitaker.webp 928w" sizes="(max-width:860px) 76vw, 360px" width="928" height="1152" alt="Thomas Whitaker in glasses and a navy sweater against a concrete wall" fetchpriority="high"></div>
-        <span class="dim-h" aria-hidden="true"><span>928</span></span>
-        <span class="dim-v" aria-hidden="true"><span>1152</span></span>
-        <span class="callout" aria-hidden="true"><b><em>1</em><span>A-001</span></b><i></i></span>
-        <figcaption><b>Detail 1</b> · The architect · scale 1:1</figcaption>
+      <p class="read"><b class="js-clock">08:12</b><span class="mono js-sunread">Altitude 13° · azimuth 125°</span></p>
+      <label class="range"><span class="sr">Time of day for the sun study</span><input id="time" type="range" min="7.15" max="17.4" step="0.01" value="8.2"></label>
+      <p class="hint mono">Scroll, or drag, to move the sun</p>
+    </div>
+  </section>
+
+  <section class="sec practice" id="a100" aria-labelledby="p-h">
+    <div class="shh mono"><b>A-100</b><span>Practice</span><span>Whitaker Lane Architects</span></div>
+    <h2 class="h2" id="p-h" data-wipe>Shade first. <em>Glass second.</em></h2>
+    <div class="pgrid">
+      <figure>
+        <svg class="spd" viewBox="-30 -30 460 460" role="img" aria-label="Sun-path diagram for Dubai, showing the sun's track on 21 June, 21 March and 21 December, and its position at the current time."></svg>
+        <figcaption class="spdcap mono">Sun path · Dubai 25.2°N · ● now, <span class="js-clock">13:12</span>, 21 December</figcaption>
       </figure>
-      <svg class="north" viewBox="0 0 60 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="30" cy="50" r="24"/><path d="M30 18L40 62 30 54 20 62z" fill="currentColor"/><text x="30" y="12" text-anchor="middle" font-family="Red Hat Display,sans-serif" font-weight="700" font-size="13" fill="currentColor" stroke="none">N</text></svg>
-      <div class="tblock">
-        <div><small>Project</small><b>Portfolio 2026</b></div>
-        <div class="st"><small>Status</small><b class="rc">Open to new work<svg class="cloud" viewBox="0 0 200 44" preserveAspectRatio="none" aria-hidden="true"><path d="M10 10 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a10 8 0 0 1 20 0 a8 7 0 0 1 0 12 a8 7 0 0 1 0 12 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a10 8 0 0 1 -20 0 a8 7 0 0 1 0 -12 a8 7 0 0 1 0 -12z" fill="none" stroke="#C8402F" stroke-width="1.8" vector-effect="non-scaling-stroke"/></svg></b></div>
-        <div><small>Drawn by</small><b>T. Whitaker</b></div>
-        <div><small>Sheet</small><b>A-001</b></div>
-        <div><small>Scale</small><b>1 : 1</b></div>
-        <div><small>Date</small><b>2026</b></div>
-      </div>
-    </div>
-  </header>
-
-  <section id="projects">
-    <div class="wrap">
-      <div class="shead" data-reveal><span class="tag" aria-hidden="true"><em>A</em><span>100</span></span><h2>Selected <span>buildings</span></h2><p>Three projects from a twenty-five-year practice. Plans simplified for clarity.</p></div>
-      <article class="proj" data-reveal>
-        <div>
-          <svg viewBox="0 0 520 340" role="img" aria-label="Simplified plan of the Al Qudra Desert Library: a long low building with two circular sunken courtyards">
-            <g fill="none" stroke="#1C232B"><rect x="30" y="40" width="460" height="230" stroke-width="5"/><rect x="40" y="50" width="440" height="210" stroke-width="1"/>
-            <circle cx="160" cy="155" r="62" stroke-width="4"/><circle cx="160" cy="155" r="48" stroke-width="1" stroke-dasharray="4 4"/><circle cx="360" cy="155" r="62" stroke-width="4"/><circle cx="360" cy="155" r="48" stroke-width="1" stroke-dasharray="4 4"/>
-            <path d="M30 155h68M222 155h76M422 155h68M260 40v54M260 216v54" stroke-width="3"/></g>
-            <g stroke="#1C232B" stroke-width="1" opacity=".5"><path d="M40 270l20-20M70 270l20-20M100 270l20-20M130 270l20-20M160 270l20-20M190 270l20-20M220 270l20-20M250 270l20-20M280 270l20-20M310 270l20-20M340 270l20-20M370 270l20-20M400 270l20-20M430 270l20-20M460 270l20-20"/></g>
-            <g fill="#2B5FAE" font-family="Red Hat Mono,monospace" font-size="12"><text x="160" y="159" text-anchor="middle">COURT 1</text><text x="360" y="159" text-anchor="middle">COURT 2</text><text x="260" y="300" text-anchor="middle">−10 °C IN READING ROOMS · NO EXTRA COOLING</text></g>
-            <path d="M30 22h460M30 16v12M490 16v12" stroke="#2B5FAE"/><text x="260" y="16" text-anchor="middle" fill="#2B5FAE" font-family="Red Hat Mono,monospace" font-size="12">6,800 m²</text>
-          </svg>
-          <p class="scale"><i></i>0 — 10 m</p>
-        </div>
-        <div>
-          <p class="no">01 · Civic</p>
-          <h3>Al Qudra Desert Library</h3>
-          <p>A public library half-sunk into the desert, with courtyards that keep reading rooms ten degrees cooler without extra cooling.</p>
-          <div class="spec"><div><small>Area</small><b>6,800 m²</b></div><div><small>Completed</small><b>2023</b></div><div><small>Role</small><b>Lead architect</b></div><div><small>Recognition</small><b>Gulf Civic Design Prize</b></div></div>
-        </div>
-      </article>
-      <article class="proj" data-reveal>
-        <div>
-          <svg viewBox="0 0 520 340" role="img" aria-label="Simplified plan of Harbour Quay Housing: a perimeter block of homes around shared gardens">
-            <g fill="none" stroke="#1C232B" stroke-width="5"><path d="M40 40h440v260H40z"/><path d="M90 90h340v160H90z"/></g>
-            <g fill="none" stroke="#1C232B" stroke-width="1.2"><path d="M40 90h50M40 140h50M40 190h50M40 240h50M480 90h-50M480 140h-50M480 190h-50M480 240h-50M140 40v50M200 40v50M260 40v50M320 40v50M380 40v50M140 300v-50M200 300v-50M260 300v-50M320 300v-50M380 300v-50"/></g>
-            <g fill="#DCE6D2" stroke="#1C232B" stroke-width="1"><circle cx="170" cy="150" r="22"/><circle cx="250" cy="190" r="30"/><circle cx="340" cy="140" r="24"/><circle cx="370" cy="210" r="16"/><circle cx="140" cy="215" r="14"/></g>
-            <g fill="#2B5FAE" font-family="Red Hat Mono,monospace" font-size="12"><text x="260" y="128" text-anchor="middle">SHARED GARDENS</text><text x="260" y="326" text-anchor="middle">EVERY HOME DUAL-ASPECT · CROSS-VENTILATED</text></g>
-          </svg>
-          <p class="scale"><i></i>0 — 20 m</p>
-        </div>
-        <div>
-          <p class="no">02 · Residential</p>
-          <h3>Harbour Quay Housing</h3>
-          <p>212 homes around shared gardens on a former dockyard, with every flat dual-aspect for daylight and cross-ventilation.</p>
-          <div class="spec"><div><small>Homes</small><b>212</b></div><div><small>Completed</small><b>2021</b></div><div><small>Role</small><b>Partner in charge</b></div><div><small>Rating</small><b>BREEAM Excellent</b></div></div>
-        </div>
-      </article>
-      <article class="proj" data-reveal>
-        <div>
-          <svg viewBox="0 0 520 340" role="img" aria-label="Simplified plan of the Lattice Pavilion: a timber diagonal grid on a square footprint">
-            <defs><clipPath id="lat"><rect x="110" y="40" width="300" height="260"/></clipPath></defs>
-            <rect x="110" y="40" width="300" height="260" fill="none" stroke="#1C232B" stroke-width="5"/>
-            <g clip-path="url(#lat)" stroke="#8A6A3E" stroke-width="2.5"><path d="M50 40l260 260M90 40l260 260M130 40l260 260M170 40l260 260M210 40l260 260M10 40l260 260M-30 40l260 260M-70 40l260 260"/><path d="M470 40L210 300M430 40L170 300M390 40L130 300M350 40L90 300M310 40L50 300M510 40L250 300M550 40L290 300M590 40L330 300"/></g>
-            <g fill="#2B5FAE" font-family="Red Hat Mono,monospace" font-size="12"><text x="260" y="326" text-anchor="middle">GLULAM LATTICE · ASSEMBLED IN 9 DAYS</text></g>
-          </svg>
-          <p class="scale"><i></i>0 — 5 m</p>
-        </div>
-        <div>
-          <p class="no">03 · Cultural</p>
-          <h3>Lattice Pavilion</h3>
-          <p>A timber lattice pavilion for a summer arts festival, assembled in nine days and reused as a school canopy.</p>
-          <div class="spec"><div><small>Area</small><b>420 m²</b></div><div><small>Completed</small><b>2019</b></div><div><small>Role</small><b>Design lead</b></div><div><small>Material</small><b>Glulam timber</b></div></div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section id="practice" style="background:var(--paper2)">
-    <div class="wrap">
-      <div class="shead" data-reveal><span class="tag" aria-hidden="true"><em>A</em><span>200</span></span><h2>Three <span>principles</span></h2><p>How the studio approaches every brief, large or small.</p></div>
-      <div class="princ" data-reveal>
-        <div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 50h52"/><path d="M12 50a20 20 0 0 1 40 0" stroke-dasharray="3 3"/><circle cx="44" cy="22" r="6"/><path d="M20 50V36h16v14"/></svg><h3>Climate first</h3><p>Orientation, shade and thermal mass before any machinery. The best kilowatt is the one never used.</p></div>
-        <div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 56h48M14 56V22h36v34"/><path d="M50 8L30 40M58 16L38 46" stroke-dasharray="3 3"/><path d="M22 56V40h12v16"/></svg><h3>Light as material</h3><p>Every room is drawn with its daylight at noon in June and in December.</p></div>
-        <div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 56h48"/><rect x="12" y="16" width="16" height="40"/><rect x="36" y="16" width="16" height="40" stroke-dasharray="3 3"/><path d="M12 30h16M12 43h16M36 30h16M36 43h16"/></svg><h3>Built to be changed</h3><p>Structures planned for second and third lives, so buildings outlast their first use.</p></div>
+      <div>
+        <p class="pbig">I lead Whitaker Lane, a studio of architects in London and Dubai. Every project starts the same way: with a sun path, a wind rose and a walk around the site at the hottest hour of the day. The building comes after.</p>
+        <dl class="sched">
+          <div><dt>Role</dt><dd>Founding principal, Whitaker Lane Architects</dd></div>
+          <div><dt>Studios</dt><dd>London · Dubai</dd></div>
+          <div><dt>Practising since</dt><dd>2004</dd></div>
+          <div><dt>Work</dt><dd>Libraries, schools, housing and public space</dd></div>
+          <div><dt>Team</dt><dd><span data-count="38">38</span> architects and designers</dd></div>
+          <div><dt>Completed</dt><dd><span data-count="21">21</span> buildings in four countries</dd></div>
+        </dl>
       </div>
     </div>
   </section>
 
-  <section id="career">
-    <div class="wrap">
-      <div class="shead" data-reveal><span class="tag" aria-hidden="true"><em>A</em><span>300</span></span><h2>Practice <span>history</span></h2><p>The revision table: each revision supersedes the last.</p></div>
-      <table class="rev" data-reveal>
-        <thead><tr><th scope="col">Rev</th><th scope="col">Date</th><th scope="col">Description</th></tr></thead>
+  <section class="sec sheets" id="a200" aria-labelledby="d-h" style="padding-top:0">
+    <div class="shh mono"><b>A-200</b><span>Drawings</span><span>Selected work, 2019–2026</span></div>
+    <h2 class="h2" id="d-h" data-wipe>Four buildings, <em>drawn in their own light.</em></h2>
+
+    <article class="sheet" id="sheet-library" data-draw="library" aria-labelledby="s1">
+      <div class="draw"><span class="lab mono">South elevation · 1:200</span><span class="lab2 mono">Shadows at <span class="js-clock">14:00</span></span><svg class="dr" viewBox="0 0 1200 560" role="img" aria-label="South elevation of the Shaded Library: a long, low reading room behind a screen of vertical fins under a deep roof."></svg></div>
+      <div class="tb">
+        <div class="ttl"><span class="mono">Project 01</span><h3 id="s1">The Shaded Library</h3></div>
+        <dl><dt>Place</dt><dd>Ras Al Khaimah, UAE</dd><dt>Status</dt><dd>Completed 2024</dd><dt>Area</dt><dd>6,200 m²</dd><dt>Client</dt><dd>Public library service</dd></dl>
+        <div class="note">Fins at 450 mm centres keep the low east and west sun off the reading-room glass. The roof oversails by three metres, so the walls stay in shade from late morning.</div>
+        <div class="no"><b>A-201</b><span class="mono">Rev C<br>Sheet 1 of 4</span></div>
+      </div>
+    </article>
+
+    <article class="sheet" id="sheet-school" data-draw="school" aria-labelledby="s2">
+      <div class="draw"><span class="lab mono">Section A–A · 1:100</span><span class="lab2 mono">Sunlight at <span class="js-clock">14:00</span></span><svg class="dr" viewBox="0 0 1200 600" role="img" aria-label="Section through the Courtyard School hall, showing winter sun entering through a south-facing clerestory and a shaded window."></svg></div>
+      <div class="tb">
+        <div class="ttl"><span class="mono">Project 02</span><h3 id="s2">Courtyard School</h3></div>
+        <dl><dt>Place</dt><dd>Sharjah, UAE</dd><dt>Status</dt><dd>Completed 2021</dd><dt>Area</dt><dd>4,800 m²</dd><dt>Pupils</dt><dd>540, ages 4 to 11</dd></dl>
+        <div class="note">A clerestory facing south lets the low winter sun reach the back of the hall. In summer, when the sun is high, the same roof keeps it off the glass.</div>
+        <div class="no"><b>A-202</b><span class="mono">Rev B<br>Sheet 2 of 4</span></div>
+      </div>
+    </article>
+
+    <article class="sheet" id="sheet-housing" data-draw="housing" aria-labelledby="s3">
+      <div class="draw"><span class="lab mono">Street elevation · 1:200</span><span class="lab2 mono">Shadows at <span class="js-clock">14:00</span></span><svg class="dr" viewBox="0 0 1200 600" role="img" aria-label="Street elevation of Barjeel Housing: three stepped blocks with deep loggias and wind towers on the roofs."></svg></div>
+      <div class="tb">
+        <div class="ttl"><span class="mono">Project 03</span><h3 id="s3">Barjeel Housing</h3></div>
+        <dl><dt>Place</dt><dd>Dubai, UAE</dd><dt>Status</dt><dd>On site, 2026</dd><dt>Homes</dt><dd>140</dd><dt>Client</dt><dd>Housing developer</dd></dl>
+        <div class="note">Every home has a loggia deep enough to sit in at noon. Wind towers on the roofs draw cooler air down through the stair cores, the way the old barjeel did.</div>
+        <div class="no"><b>A-203</b><span class="mono">Rev D<br>Sheet 3 of 4</span></div>
+      </div>
+    </article>
+
+    <article class="sheet" id="sheet-pavilion" data-draw="pavilion" aria-labelledby="s4">
+      <div class="draw"><span class="lab mono">Plan with shade · 1:100</span><span class="lab2 mono">Shade at <span class="js-clock">14:00</span></span><svg class="dr" viewBox="0 0 1200 720" role="img" aria-label="Plan of the Harbour Pavilion: a perforated canopy whose dappled shade moves across the paving through the day."></svg></div>
+      <div class="tb">
+        <div class="ttl"><span class="mono">Project 04</span><h3 id="s4">Harbour Pavilion</h3></div>
+        <dl><dt>Place</dt><dd>Khor Fakkan, UAE</dd><dt>Status</dt><dd>Completed 2019</dd><dt>Area</dt><dd>380 m²</dd><dt>Client</dt><dd>Municipality</dd></dl>
+        <div class="note">A perforated steel canopy over the harbour walk. Two hundred and twenty openings throw a field of light that moves across the paving with the sun.</div>
+        <div class="no"><b>A-204</b><span class="mono">Rev A<br>Sheet 4 of 4</span></div>
+      </div>
+    </article>
+  </section>
+
+
+  <section class="shop" id="a250" aria-labelledby="m-h">
+    <div class="shh mono"><b>A-250</b><span>Model shop</span><span>13 plaster models · 4 projects</span></div>
+    <h2 class="h2" id="m-h" data-wipe>Every building starts <em>as a model.</em></h2>
+    <div class="sky" data-sky>
+      <svg class="links" aria-hidden="true"><path d=""/></svg>
+      <span class="tag mono" aria-hidden="true"></span>
+      <div class="cap" role="region" aria-live="polite" aria-label="Gathered project">
+        <span class="mono js-capn"></span><h3 class="js-capt"></h3><p class="js-capd"></p>
+        <div class="row"><a class="js-capl" href="#a200">See the drawing</a><button type="button" class="js-back">Back to the model shop</button></div>
+      </div>
+    </div>
+    <div class="shopfoot mono"><span class="js-hint">Hover a model to see its project · click to gather it</span><span class="legend" role="group" aria-label="Gather a project"></span></div>
+  </section>
+
+  <section class="sec" id="a300" aria-labelledby="r-h">
+    <div class="shh mono"><b>A-300</b><span>Principles</span><span>Three rules on every drawing board</span></div>
+    <h2 class="h2" id="r-h" data-wipe>Start with the climate, <em>not the shape.</em></h2>
+    <ol class="rules">
+      <li><span class="mono">Rule 01</span><div class="dg"><svg viewBox="0 0 320 220" class="p1" aria-hidden="true"></svg></div><h3>Begin with the sun.</h3><p>Orientation is the cheapest decision on any project, and the hardest one to undo. We settle it before we draw a single wall.</p></li>
+      <li><span class="mono">Rule 02</span><div class="dg"><svg viewBox="0 0 320 220" class="p2" aria-hidden="true"></svg></div><h3>Shade is a material.</h3><p>A deep roof, a screen, a row of trees. In a hot city, shade is what people actually feel, so we design it as carefully as stone.</p></li>
+      <li><span class="mono">Rule 03</span><div class="dg"><svg viewBox="0 0 320 220" class="p3" aria-hidden="true"></svg></div><h3>Build less, and keep it.</h3><p>The lowest-carbon building is usually the one already standing. We repair, extend and reuse before we replace.</p></li>
+    </ol>
+  </section>
+
+  <section class="sec" id="a400" aria-labelledby="b-h" style="padding-top:0">
+    <div class="shh mono"><b>A-400</b><span>On the board</span><span>October 2026</span></div>
+    <h2 class="h2" id="b-h" data-wipe>Now drawing.</h2>
+    <div class="bgrid">
+      <table class="regt">
+        <caption class="sr">Current projects</caption>
+        <thead><tr><th scope="col">Job</th><th scope="col">Project</th><th scope="col">Place</th><th scope="col">Stage</th></tr></thead>
         <tbody>
-          <tr class="now"><td class="r">D</td><td class="d">2015 — today</td><td><b>Principal &amp; Founder</b><span>Whitaker Lane Architects, London &amp; Dubai</span></td></tr>
-          <tr><td class="r">C</td><td class="d">2006 — 2015</td><td><b>Associate Director</b><span>Fenwick Hale Partnership, London</span></td></tr>
-          <tr><td class="r">B</td><td class="d">2001 — 2006</td><td><b>Architect</b><span>Morrow Studio, Edinburgh</span></td></tr>
-          <tr><td class="r">A</td><td class="d">1994 — 2001</td><td><b>BA, Diploma in Architecture</b><span>Part I &amp; II, with distinction</span></td></tr>
+          <tr><td>26-03</td><td>Barjeel Housing, 140 homes</td><td>Dubai</td><td><span class="st on"><i></i>On site</span></td></tr>
+          <tr><td>26-07</td><td>Primary school extension and new hall</td><td>Kent</td><td><span class="st"><i></i>Planning</span></td></tr>
+          <tr><td>26-11</td><td>Desert field station for ecologists</td><td>Hatta</td><td><span class="st"><i></i>Concept</span></td></tr>
+          <tr><td>26-14</td><td>Reading room in a former warehouse</td><td>Sharjah</td><td><span class="st"><i></i>Design</span></td></tr>
+          <tr><td>26-18</td><td>Shaded market street, phase one</td><td>Ajman</td><td><span class="st"><i></i>Feasibility</span></td></tr>
         </tbody>
       </table>
-      <ol class="notes" data-reveal aria-label="Credentials">
-        <li><div><b>RIBA Chartered Architect</b><span>Registered architect, UK</span></div></li>
-        <li><div><b>LEED AP BD+C</b><span>Green building accreditation</span></div></li>
-        <li><div><b>Visiting critic</b><span>Two schools of architecture</span></div></li>
-        <li><div><b>English · Arabic (conversational)</b><span>Languages</span></div></li>
-      </ol>
+      <div class="teach">
+        <span class="mono">Teaching</span>
+        <h3>One afternoon a week, he teaches.</h3>
+        <p>Thomas runs a climate-design studio for architecture students and reviews student work in London and Dubai.</p>
+        <p>He gives the same advice every term: go and stand on the site at the hottest hour of the day before you draw anything.</p>
+      </div>
     </div>
   </section>
 
-  <section id="contact" class="contact" style="background:var(--paper2)">
-    <div class="wrap">
-      <div data-reveal>
-        <div class="shead" style="margin-bottom:26px"><span class="tag" aria-hidden="true"><em>A</em><span>400</span></span><h2>Have a site and <span>a question</span><b>?</b></h2></div>
-        <p style="max-width:52ch;color:#2E3640">Thomas takes on civic, education and residential commissions, and is open to design director roles.</p>
-        <div class="ctas"><a class="btn fill" href="#contact" data-demo>Start a conversation</a><a class="btn" href="#contact" data-demo>Download portfolio</a><a class="btn" href="#contact" data-demo>LinkedIn</a></div>
-      </div>
-      <div class="stampbox" data-reveal>
-        <div><span>Issued for</span><span>Rev D</span></div>
-        <div><span>Commissions</span><span>Civic · education · housing</span></div>
-        <div><span>Roles</span><span>Design director</span></div>
-        <div><span>Studios</span><span>London · Dubai</span></div>
-      </div>
+  <section class="contact" id="a900" aria-labelledby="c-h">
+    <div class="shh mono"><b>A-900</b><span>Contact</span><span>Sunset 17:29 · Dubai</span></div>
+    <h2 class="h2" id="c-h" data-wipe>Come and see <em>the models.</em></h2>
+    <p class="lead">The Dubai studio keeps Thursday afternoons open for visits. Bring a site, a brief or just a question about light, and we will walk you through the drawings and the models.</p>
+    <div class="cgrid">
+      <div><span class="mono">Write</span><a href="mailto:studio@whitakerlane.example" data-demo>studio@whitakerlane.example</a></div>
+      <div><span class="mono">Dubai studio</span><p>Al Quoz, Dubai</p></div>
+      <div><span class="mono">London studio</span><p>Clerkenwell, London</p></div>
+      <a class="btn" href="#" data-demo="This is a concept site, so visits can't be booked here."><i></i>Book a studio visit</a>
     </div>
   </section>
 </main>
-<footer>Concept site designed by Zenith Dubai CV · Thomas Whitaker is a fictional person; projects, firms and awards are illustrative.</footer>
+
+<footer>
+  <p>Thomas Whitaker and Whitaker Lane Architects are fictional. Projects, drawings, clients and figures on this page are illustrative. Portrait generated with AI. Sun positions are calculated for Dubai on 21 December and are approximate.</p>
+  <p>A concept website by Zenith Dubai CV.</p>
+</footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V9" stroke="#1B1D20" stroke-width="1" opacity=".5"/></pattern>
+    <pattern id="hatch2" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V6" stroke="#1B1D20" stroke-width=".8" opacity=".55"/></pattern>
+  </defs>
+</svg>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC, root = document.documentElement, Q = new URLSearchParams(location.search);
+  if (Q.has("cap")) root.classList.add("cap");
+  var deg = Math.PI / 180, clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
+  var smooth = function(a, b, x){ var t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+  var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+  // ---------- The sun over Dubai on 21 December (solar declination -23.44°, solar noon about 12:17 local time) ----------
+  var LAT = 25.2 * deg, DEC = -23.44 * deg, NOON = 12.28, NORTH = (+Q.get("north") || 0) * deg;
+  function sunAt(T, dec){
+    var H = (T - NOON) * 15 * deg, d = dec === undefined ? DEC : dec;
+    var alt = Math.asin(Math.sin(LAT) * Math.sin(d) + Math.cos(LAT) * Math.cos(d) * Math.cos(H));
+    var az = Math.atan2(Math.sin(H), Math.cos(H) * Math.sin(LAT) - Math.tan(d) * Math.cos(LAT)) + Math.PI;
+    return {alt:alt, az:az};
+  }
+  function sunVec(s){
+    var x = Math.sin(s.az) * Math.cos(s.alt), y = Math.sin(s.alt), z = -Math.cos(s.az) * Math.cos(s.alt);
+    var c = Math.cos(NORTH), n = Math.sin(NORTH);
+    return [x * c - z * n, y, x * n + z * c];
+  }
+  function hhmm(T){ var m = Math.round(T * 60), h = Math.floor(m / 60); m -= h * 60; return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m; }
+  var RISE = 7.07, SET = 17.49;
+
+  var state = {T: Q.has("T") ? +Q.get("T") : 8.2, mode: Q.get("mode") || "hero"};
+  var subs = [];
+  function setT(T){ state.T = T; for (var i = 0; i < subs.length; i++) subs[i](T); }
+
+  // ---------- WebGL: the word WHITAKER as a plaster massing model, raymarched with soft sun shadows ----------
+  var GLX = (function(){
+    var cv = $("#sun"), gl = null;
+    var ctxOpts = {antialias:false, alpha:false, depth:false, stencil:false, preserveDrawingBuffer:Q.has("cap"), powerPreference:"high-performance"}, GL2 = false;
+    // WebGL2 lets the letter fields be stored at half-float precision (smooth walls); WebGL1 falls back to 8-bit.
+    try { gl = Q.has("gl1") ? null : cv.getContext("webgl2", ctxOpts); GL2 = !!gl; if (!gl) gl = cv.getContext("webgl", ctxOpts); } catch (e) {}
+    if (!gl) return null;
+    var FS = [
+      "precision highp float;",
+      "uniform vec2 uRes;uniform vec3 uRo,uTa;uniform vec2 uOff;uniform float uFl;",
+      "uniform vec3 uSun;uniform float uSunI,uDusk,uGlow,uExp,uFogN,uFogF;",
+      "uniform vec3 uSkyTop,uSkyHor;",
+      "uniform sampler2D uTex;uniform vec4 uTxt;uniform float uRange,uHMax;",
+      "const vec3 BMIN=vec3(-6.3,-0.15,-2.1);const vec3 BMAX=vec3(6.3,1.6,2.1);",
+      "float sdBox(vec3 p,vec3 b){vec3 q=abs(p)-b;return length(max(q,0.))+min(max(q.x,max(q.y,q.z)),0.);}",
+      "float ext(float d,float h,float y){vec2 w=vec2(d,abs(y-h*.5)-h*.5);return min(max(w.x,w.y),0.)+length(max(w,0.));}",
+      "float band(float y){return abs(mod(y-.2,.25)-.125)-.034;}",
+      "uniform vec4 uH0,uH1;",
+      "uniform vec2 uTexSize;",
+      "vec4 tex4(vec2 uv){vec2 q=uv*uTexSize-.5;vec2 f=fract(q);vec2 i=(floor(q)+.5)/uTexSize;vec2 d=1./uTexSize;return mix(mix(texture2D(uTex,i),texture2D(uTex,i+vec2(d.x,0.)),f.x),mix(texture2D(uTex,i+vec2(0.,d.y)),texture2D(uTex,i+d),f.x),f.y);}",
+      "float letters(vec3 p,out float dn,out float hn,float hq){vec2 uv=(p.xz-uTxt.xy)/uTxt.zw;vec2 c=clamp(uv,0.,1.);float o=length((uv-c)*uTxt.zw);",
+      " vec2 ua=vec2(c.x,c.y*.5),ub=vec2(c.x,.5+c.y*.5);vec4 a,b;if(hq>.5){a=tex4(ua);b=tex4(ub);}else{a=texture2D(uTex,ua);b=texture2D(uTex,ub);}a=(a-.5)*uRange+o;b=(b-.5)*uRange+o;",
+      " float d=ext(a.x,uH0.x,p.y);dn=a.x;hn=uH0.x;float e;",
+      " e=ext(a.y,uH0.y,p.y);if(e<d){d=e;dn=a.y;hn=uH0.y;}",
+      " e=ext(a.z,uH0.z,p.y);if(e<d){d=e;dn=a.z;hn=uH0.z;}",
+      " e=ext(a.w,uH0.w,p.y);if(e<d){d=e;dn=a.w;hn=uH0.w;}",
+      " e=ext(b.x,uH1.x,p.y);if(e<d){d=e;dn=b.x;hn=uH1.x;}",
+      " e=ext(b.y,uH1.y,p.y);if(e<d){d=e;dn=b.y;hn=uH1.y;}",
+      " e=ext(b.z,uH1.z,p.y);if(e<d){d=e;dn=b.z;hn=uH1.z;}",
+      " e=ext(b.w,uH1.w,p.y);if(e<d){d=e;dn=b.w;hn=uH1.w;}",
+      " return d;}",
+      "float tree(vec3 p,vec3 c,float r){vec3 q=p-c;float s=length(q-vec3(0.,r*1.45,0.))-r;vec2 d=abs(vec2(length(q.xz),q.y-r*.5))-vec2(.03,r*.5);return min(s,min(max(d.x,d.y),0.)+length(max(d,0.)));}",
+      "vec2 mapx(vec3 p,float hq){vec2 r=vec2(p.y+.14,0.);",
+      " float b=sdBox(p-vec3(0.,-.07,0.),vec3(5.99,.065,1.89))-.005;if(b<r.x)r=vec2(b,1.);",
+      " float bb=sdBox(p-vec3(0.,uHMax*.5,0.),vec3(uTxt.z*.5+.04,uHMax*.5+.02,uTxt.w*.5+.04));",
+      " if(bb<r.x){float dn,hn;float l=bb>.3?bb:letters(p,dn,hn,hq);if(l<r.x)r=vec2(l,2.);}",
+      " float t=tree(p,vec3(-5.45,0.,1.3),.3);t=min(t,tree(p,vec3(-4.85,0.,1.6),.2));t=min(t,tree(p,vec3(5.4,0.,1.35),.27));",
+      " t=min(t,tree(p,vec3(5.05,0.,-1.4),.32));t=min(t,tree(p,vec3(-5.4,0.,-1.35),.24));t=min(t,tree(p,vec3(5.6,0.,-.55),.18));",
+      " if(t<r.x)r=vec2(t,3.);return r;}",
+      "vec2 map(vec3 p){return mapx(p,0.);}",
+      "uniform float uEps;vec3 nor(vec3 p){vec2 e=vec2(uEps,-uEps);return normalize(e.xyy*mapx(p+e.xyy,1.).x+e.yyx*mapx(p+e.yyx,1.).x+e.yxy*mapx(p+e.yxy,1.).x+e.xxx*mapx(p+e.xxx,1.).x);}",
+      "vec2 box(vec3 ro,vec3 rd){vec3 m=1./rd;vec3 a=(BMIN-ro)*m,b=(BMAX-ro)*m;vec3 n=min(a,b),f=max(a,b);return vec2(max(max(n.x,n.y),n.z),min(min(f.x,f.y),f.z));}",
+      "float shadow(vec3 ro,vec3 rd){vec2 bx=box(ro,rd);if(bx.y<max(bx.x,0.))return 1.;float t=max(bx.x,.045),res=1.;",
+      " for(int i=0;i<90;i++){float h=mapx(ro+rd*t,0.).x;if(h<.0006)return 0.;res=min(res,13.*h/t);t+=clamp(h,.015,.3);if(t>bx.y)break;}",
+      " res=clamp(res,0.,1.);return res*res*(3.-2.*res);}",
+      "float ao(vec3 p,vec3 n){float o=0.,s=1.;for(int i=0;i<4;i++){float h=.025+.11*float(i);o+=(h-map(p+n*h).x)*s;s*=.72;}return clamp(1.-1.7*o,0.,1.);}",
+      "vec3 shade(vec3 p,vec3 n,vec3 rd,float m){",
+      " vec3 alb=m<.5?vec3(.78,.75,.70):(m<1.5?vec3(.88,.87,.84):(m<2.5?vec3(.9,.89,.86):vec3(.85,.84,.80)));",
+      " float dif=clamp(dot(n,uSun),0.,1.);float sh=(dif>0.&&uSunI>0.)?shadow(p+n*.02,uSun):0.;sh=mix(1.,sh,smoothstep(.03,.3,dif));float o=ao(p,n);",
+      " vec3 sc=mix(vec3(1.,.48,.24),vec3(1.,.93,.84),smoothstep(0.,.42,uSun.y))*2.9*uSunI;",
+      " vec3 kc=mix(vec3(.56,.63,.78),vec3(.13,.18,.36),uDusk);",
+      " vec3 c=alb*(sc*dif*sh+kc*(.36+.3*n.y)*o+vec3(.5,.43,.36)*(.5-.5*n.y)*o*.3*(1.-.7*uDusk));",
+      " if(m>1.5&&m<2.5&&uGlow>0.&&abs(n.y)<.5){float dn,hn;letters(p,dn,hn,0.);float b=1.-smoothstep(-.012,.004,band(p.y));b*=step(.14,p.y)*step(p.y,hn-.12);c+=vec3(1.,.62,.3)*b*uGlow*1.7/max(uExp,.5);}",
+      
+      " return c;}",
+      "void main(){vec2 uv=(gl_FragCoord.xy-.5*uRes)/uRes.y-uOff;",
+      " vec3 ww=normalize(uTa-uRo),uu=normalize(cross(ww,vec3(0.,1.,0.))),vv=cross(uu,ww);",
+      " vec3 rd=normalize(uv.x*uu+uv.y*vv+uFl*ww),ro=uRo;",
+      " float tp=rd.y<-1e-4?(-.14-ro.y)/rd.y:1e9;float t=-1.,m=-1.;",
+      " vec2 bx=box(ro,rd);",
+      " if(bx.y>max(bx.x,0.)){float s=max(bx.x,0.),e=min(bx.y,tp);for(int i=0;i<150;i++){vec2 h=map(ro+rd*s);if(h.x<.0006*s){t=s;m=h.y;break;}s+=h.x*.9;if(s>e)break;}}",
+      " if(t<0.&&tp<1e8){t=tp;m=0.;}",
+      " vec3 sky=mix(uSkyHor,uSkyTop,smoothstep(-.005,.13,rd.y));vec3 col=sky;",
+      " if(t>0.){vec3 p=ro+rd*t;vec3 n=m<.5?vec3(0.,1.,0.):nor(p);vec3 c=shade(p,n,rd,m);",
+      "  c=1.-exp(-c*uExp);c=pow(c,vec3(.4545));",
+      "  float f=max(smoothstep(uFogN,uFogF,length(p.xz*vec2(1.,1.5))),smoothstep(-.06,-.004,rd.y));col=mix(c,uSkyHor,f);}",
+      " float gr=fract(sin(dot(gl_FragCoord.xy,vec2(12.9898,78.233)))*43758.5453);col+=(gr-.5)/255.*2.;",
+      " gl_FragColor=vec4(col,1.);}"
+    ].join("\n");
+    var VS = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+    function sh(t, s){ var o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)){ console.warn(gl.getShaderInfoLog(o)); return null; } return o; }
+    var v = sh(gl.VERTEX_SHADER, VS), f = sh(gl.FRAGMENT_SHADER, FS);
+    if (!v || !f) return null;
+    var pr = gl.createProgram(); gl.attachShader(pr, v); gl.attachShader(pr, f); gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return null;
+    gl.useProgram(pr);
+    var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    var U = {};
+    ["uRes","uRo","uTa","uOff","uFl","uSun","uSunI","uDusk","uGlow","uExp","uFogN","uFogF","uSkyTop","uSkyHor","uTex","uTxt","uRange","uHMax","uH0","uH1","uEps","uTexSize"].forEach(function(n){ U[n] = gl.getUniformLocation(pr, n); });
+
+    // The name, set in Familjen Grotesk Bold, turned into a signed distance field; each letter gets its own height.
+    function edt1(f, n, d, v, z){
+      var k = 0, q, s; v[0] = 0; z[0] = -1e20; z[1] = 1e20;
+      for (q = 1; q < n; q++){
+        s = ((f[q] + q * q) - (f[v[k]] + v[k] * v[k])) / (2 * q - 2 * v[k]);
+        while (s <= z[k]){ k--; s = ((f[q] + q * q) - (f[v[k]] + v[k] * v[k])) / (2 * q - 2 * v[k]); }
+        k++; v[k] = q; z[k] = s; z[k + 1] = 1e20;
+      }
+      for (k = 0, q = 0; q < n; q++){ while (z[k + 1] < q) k++; d[q] = (q - v[k]) * (q - v[k]) + f[v[k]]; }
+    }
+    function blur(src, dst, w, h, step, n){
+      // 1-4-6-4-1 binomial along rows (step 1) or columns (step w), clamped at the edges.
+      var lines = step === 1 ? h : w, len = step === 1 ? w : h, stride = step === 1 ? w : 1;
+      for (var L = 0; L < lines; L++){
+        var base = L * stride;
+        for (var j = 0; j < len; j++){
+          var a = Math.max(0, j - 2), b = Math.max(0, j - 1), c = Math.min(len - 1, j + 1), d = Math.min(len - 1, j + 2);
+          dst[base + j * step] = (src[base + a * step] + 4 * src[base + b * step] + 6 * src[base + j * step] + 4 * src[base + c * step] + src[base + d * step]) / 16;
+        }
+      }
+    }
+    function edt(g, w, h){
+      var m = Math.max(w, h), f = new Float64Array(m), d = new Float64Array(m), v = new Int32Array(m), z = new Float64Array(m + 1), x, y;
+      for (x = 0; x < w; x++){ for (y = 0; y < h; y++) f[y] = g[y * w + x]; edt1(f, h, d, v, z); for (y = 0; y < h; y++) g[y * w + x] = d[y]; }
+      for (y = 0; y < h; y++){ for (x = 0; x < w; x++) f[x] = g[y * w + x]; edt1(f, w, d, v, z); for (x = 0; x < w; x++) g[y * w + x] = d[x]; }
+    }
+    var WORD = "WHITAKER", HEIGHTS = [.62, .95, 1.5, .78, .5, 1.12, .72, .46], HMAX = 1.5, TW = 10.6;
+    var TXT = null;
+    function buildField(){
+      // One signed distance field per letter (so each letter can have its own height without the fields fighting),
+      // packed four to a row: letters 0-3 in the RGBA of the top half, letters 4-7 in the bottom half.
+      var fs = 200, R = 26, track = -5, c = document.createElement("canvas"), x = c.getContext("2d", {willReadFrequently:true}), font = "700 " + fs + "px 'Familjen Grotesk', Arial, sans-serif";
+      x.font = font;
+      var adv = [], tot = 0, i;
+      for (i = 0; i < WORD.length; i++){ adv.push(x.measureText(WORD[i]).width); tot += adv[i] + (i < WORD.length - 1 ? track : 0); }
+      var cap = Math.ceil(x.measureText("H").actualBoundingBoxAscent || fs * .7);
+      var W = Math.ceil(tot + 2 * R), H = cap + 2 * R, n = W * H;
+      var out = GL2 ? new Float32Array(W * H * 2 * 4) : new Uint8Array(W * H * 2 * 4); out.fill(GL2 ? 1 : 255);
+      var xx = R;
+      for (i = 0; i < WORD.length; i++){
+        var x0 = Math.max(0, Math.floor(xx - R)), x1 = Math.min(W, Math.ceil(xx + adv[i] + R)), w = x1 - x0;
+        c.width = w; c.height = H; x.font = font; x.fillStyle = "#fff"; x.textBaseline = "alphabetic";
+        x.clearRect(0, 0, w, H); x.fillText(WORD[i], xx - x0, R + cap);
+        var data = x.getImageData(0, 0, w, H).data, m = w * H, go = new Float64Array(m), gi = new Float64Array(m), INF = 1e20, k;
+        for (k = 0; k < m; k++){
+          var al = data[k * 4 + 3] / 255;
+          if (al >= 1){ go[k] = 0; gi[k] = INF; } else if (al <= 0){ go[k] = INF; gi[k] = 0; }
+          else { var dd = .5 - al; go[k] = dd > 0 ? dd * dd : 0; gi[k] = dd < 0 ? dd * dd : 0; }
+        }
+        edt(go, w, H); edt(gi, w, H);
+        var half = i < 4 ? 0 : H, ch = i % 4, df = new Float32Array(m), tmp = new Float32Array(m);
+        for (k = 0; k < m; k++) df[k] = Math.sqrt(go[k]) - Math.sqrt(gi[k]);
+        // A light binomial blur removes the ripple that anti-aliased diagonal edges leave in the field.
+        for (var pass = 0; pass < 3; pass++){
+          blur(df, tmp, w, H, 1, w); blur(tmp, df, w, H, w, H);
+        }
+        for (var yy = 0; yy < H; yy++) for (var px = 0; px < w; px++){
+          k = yy * w + px;
+          var dist = df[k];
+          var enc = clamp(.5 + dist / (2 * R), 0, 1);
+          out[((half + yy) * W + x0 + px) * 4 + ch] = GL2 ? enc : Math.round(enc * 255);
+        }
+        xx += adv[i] + track;
+      }
+      var tex = gl.createTexture(); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
+      if (GL2) gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, W, H * 2, 0, gl.RGBA, gl.FLOAT, out);
+      else gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, W, H * 2, 0, gl.RGBA, gl.UNSIGNED_BYTE, out);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      TXT = {w:TW, h:TW * H / W, range:2 * R * TW / W, texel:TW / W, tw:W, th:H * 2};
+    }
+
+    // Camera framings: the morning view for the hero and a low view at dusk for the contact section.
+    var CAMS = {
+      wide: {yaw:-.2, pitch:.9, dist:25, ta:[0,.2,0], fl:2, off:[-.2,-.05]},
+      tall: {yaw:-.75, pitch:.75, dist:29, ta:[.3,.3,0], fl:1.6, off:[.05,.04]},
+      duskWide: {yaw:.36, pitch:.2, dist:23.5, ta:[0,.5,0], fl:2.1, off:[.24,.0]},
+      duskTall: {yaw:.55, pitch:.24, dist:19, ta:[.3,.5,0], fl:1.5, off:[0,-.24]},
+      top: {yaw:0, pitch:1.5, dist:16, ta:[0,0,0], fl:1.2, off:[0,0]}
+    };
+    var S = {scaleMove:.5, scaleIdle:.85, last:0, raf:0, timer:0, lastFrame:0, active:true, yaw:0, ready:false, first:false, cam:null, cvec:null};
+    // The hero model fills the paper between the left margin and Thomas's shoulder, whatever the screen.
+    function frameWide(){
+      var w = innerWidth, h = innerHeight, tw = document.querySelector(".tw"), lede = document.querySelector(".lede");
+      if (!tw || !lede) return;
+      var r = tw.getBoundingClientRect(), lx = Math.max(lede.getBoundingClientRect().left - 10, w * .05), rx = r.left + r.width * .08;
+      var L = (lx - w / 2) / h, R = (rx - w / 2) / h, width = Math.max(.45, R - L);
+      CAMS.wide.dist = clamp(25.4 / width, 18, 40); CAMS.wide.off[0] = (L + R) / 2;
+    }
+    function camFor(){
+      var tall = innerWidth / innerHeight < .9, k = state.mode === "dusk" ? (tall ? "duskTall" : "duskWide") : (tall ? "tall" : "wide");
+      if (k === "wide" && S.framed !== innerWidth + "x" + innerHeight){ S.framed = innerWidth + "x" + innerHeight; frameWide(); }
+      var c = CAMS[Q.get("cam") || k];
+      if (Q.has("yaw")){ c = JSON.parse(JSON.stringify(c)); ["yaw","pitch","dist","fl"].forEach(function(n){ if (Q.has(n)) c[n] = +Q.get(n); }); if (Q.has("ox")) c.off[0] = +Q.get("ox"); if (Q.has("oy")) c.off[1] = +Q.get("oy"); if (Q.has("tx")) c.ta[0] = +Q.get("tx"); if (Q.has("ty")) c.ta[1] = +Q.get("ty"); }
+      return c;
+    }
+    function cross(a, b){ return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+    function norm(a){ var l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0] / l, a[1] / l, a[2] / l]; }
+    function camera(){
+      var c = camFor(), yaw = c.yaw + S.yaw, ta = c.ta;
+      var ro = [ta[0] + c.dist * Math.sin(yaw) * Math.cos(c.pitch), ta[1] + c.dist * Math.sin(c.pitch), ta[2] + c.dist * Math.cos(yaw) * Math.cos(c.pitch)];
+      var ww = norm([ta[0] - ro[0], ta[1] - ro[1], ta[2] - ro[2]]), uu = norm(cross(ww, [0, 1, 0])), vv = cross(uu, ww);
+      S.cvec = {uu:uu, vv:vv, ww:ww};
+      return {c:c, ro:ro};
+    }
+    var PAPER = [236 / 255, 233 / 255, 226 / 255];
+    function lights(T){
+      var s = sunAt(T), v = sunVec(s), dusk = state.mode === "dusk";
+      var sunI = smooth(-.012, .04, v[1]), dk = smooth(.08, -.08, v[1]), glow = dusk ? smooth(.06, -.05, v[1]) : 0;
+      var sunG = (.48 + (.93 - .48) * smooth(0, .42, v[1])) * 2.9 * sunI, kcG = .63 + (.18 - .63) * dk;
+      var table = .75 * (sunG * Math.max(v[1], 0) + kcG * .66);
+      var target = dusk ? .74 + (.07 - .74) * smooth(.04, -.09, v[1]) : .84;
+      var exp = clamp(-Math.log(1 - target) / Math.max(table, .02), .3, 9);
+      var hor = PAPER, top = PAPER;
+      if (dusk){
+        var a = smooth(.0, -.1, v[1]), b = smooth(.03, -.02, v[1]);
+        hor = mix3(mix3([.95, .72, .52], [.9, .55, .44], b), [.2, .24, .38], a); top = mix3([.2, .27, .45], [.04, .06, .12], a);
+      }
+      return {v:v, s:s, sunI:sunI, dusk:dk, glow:glow, exp:exp, hor:hor, top:top};
+    }
+    function mix3(a, b, t){ return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
+    function draw(k){
+      var w = Math.max(2, Math.round(innerWidth * k)), h = Math.max(2, Math.round(innerHeight * k));
+      if (cv.width !== w || cv.height !== h){ cv.width = w; cv.height = h; gl.viewport(0, 0, w, h); }
+      var cam = camera(), L = lights(state.T), c = cam.c, dusk = state.mode === "dusk";
+      gl.uniform2f(U.uRes, w, h); gl.uniform3f(U.uRo, cam.ro[0], cam.ro[1], cam.ro[2]); gl.uniform3f(U.uTa, c.ta[0], c.ta[1], c.ta[2]);
+      gl.uniform2f(U.uOff, c.off[0], c.off[1]); gl.uniform1f(U.uFl, c.fl);
+      gl.uniform3f(U.uSun, L.v[0], L.v[1], L.v[2]); gl.uniform1f(U.uSunI, L.sunI); gl.uniform1f(U.uDusk, L.dusk); gl.uniform1f(U.uGlow, L.glow); gl.uniform1f(U.uExp, L.exp);
+      gl.uniform1f(U.uFogN, dusk ? 9 : 6.6); gl.uniform1f(U.uFogF, dusk ? 26 : 12.5);
+      gl.uniform3f(U.uSkyTop, L.top[0], L.top[1], L.top[2]); gl.uniform3f(U.uSkyHor, L.hor[0], L.hor[1], L.hor[2]);
+      gl.uniform1i(U.uTex, 0); gl.uniform4f(U.uTxt, -TXT.w / 2, -TXT.h / 2, TXT.w, TXT.h); gl.uniform1f(U.uRange, TXT.range); gl.uniform1f(U.uHMax, HMAX);
+      gl.uniform1f(U.uEps, TXT.texel * (+Q.get("eps") || 1)); gl.uniform2f(U.uTexSize, TXT.tw, TXT.th);
+      gl.uniform4f(U.uH0, HEIGHTS[0], HEIGHTS[1], HEIGHTS[2], HEIGHTS[3]); gl.uniform4f(U.uH1, HEIGHTS[4], HEIGHTS[5], HEIGHTS[6], HEIGHTS[7]);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      if (!S.first){ S.first = true; cv.classList.add("on"); root.classList.add("gl-on"); }
+    }
+    function frame(now){
+      S.raf = 0;
+      if (!S.ready || !S.active) return;
+      var moving = now - S.last < 110, dpr = Math.min(1.5, devicePixelRatio || 1);
+      if (moving && S.lastFrame){
+        var dt = now - S.lastFrame;
+        if (dt > 30) S.scaleMove = Math.max(.26, S.scaleMove * .9); else if (dt < 17) S.scaleMove = Math.min(.62, S.scaleMove * 1.03);
+      }
+      S.lastFrame = moving ? now : 0;
+      draw((moving ? S.scaleMove : S.scaleIdle) * dpr);
+      clearTimeout(S.timer);
+      if (moving) S.timer = setTimeout(function(){ if (!S.raf) S.raf = requestAnimationFrame(frame); }, 150);
+    }
+    function want(){ S.last = performance.now(); if (!S.raf) S.raf = requestAnimationFrame(frame); }
+    function still(){ if (!S.raf) S.raf = requestAnimationFrame(function(n){ S.last = 0; frame(n); }); }
+    var api = {
+      S: S, want: want, still: still, lights: lights,
+      start: function(){ buildField(); S.ready = true; still(); },
+      setActive: function(on){ S.active = on; if (on) still(); },
+      setYaw: function(y){ S.yaw = y; },
+      screen: function(vec){ if (!S.cvec) camera(); var a = S.cvec; return [vec[0] * a.uu[0] + vec[1] * a.uu[1] + vec[2] * a.uu[2], vec[0] * a.vv[0] + vec[1] * a.vv[1] + vec[2] * a.vv[2]]; }
+    };
+    cv.addEventListener("webglcontextlost", function(e){ e.preventDefault(); S.ready = false; root.classList.add("nogl"); });
+    window.addEventListener("resize", function(){ if (S.ready) still(); });
+    return api;
+  })();
+
+  if (!GLX){
+    root.classList.add("nogl");
+    $(".sunfall").src = "img/thomas-whitaker/model.webp";
+  }
+
+  // ---------- Hero read-outs: clock, sun-path arc, north point, the slider, the headline's weight and shadow, the light on Thomas ----------
+  var clocks = $$(".js-clock"), sunread = $(".js-sunread"), slider = $("#time"), say = $(".lede h1 .say"), lit = $(".tw .lit");
+  var arc = $(".study .arc"), sdot = $(".study .sdot"), nrot = $(".study .nrot");
+  function arcPt(T){ var s = sunAt(T); return [220 * (T - RISE) / (SET - RISE), 60 - 54 * Math.max(0, s.alt) / (41.4 * deg)]; }
+  (function(){
+    var d = "", t, p, ticks = "";
+    for (t = RISE; t <= SET + 1e-6; t += .1){ p = arcPt(t); d += (d ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }
+    arc.setAttribute("d", d);
+    for (t = 8; t <= 17; t++){ var x = 220 * (t - RISE) / (SET - RISE); ticks += '<path d="M' + x.toFixed(1) + ' 60v' + (t % 3 === 0 ? 6 : 3) + '" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>'; if (t % 3 === 0) ticks += '<text x="' + x.toFixed(1) + '" y="76" text-anchor="middle" font-size="8" font-family="Martian Mono,monospace" fill="currentColor">' + (t < 10 ? "0" : "") + t + '</text>'; }
+    $(".study .ticks").innerHTML = ticks;
+  })();
+  var dragging = false, lastHeroT = state.T;
+  subs.push(function(T){
+    var label = hhmm(T);
+    for (var i = 0; i < clocks.length; i++) if (clocks[i].textContent !== label) clocks[i].textContent = label;
+  });
+  function heroRead(T){
+    var s = sunAt(T), p = arcPt(clamp(T, RISE, SET));
+    sdot.setAttribute("cx", p[0].toFixed(1)); sdot.setAttribute("cy", p[1].toFixed(1));
+    sunread.textContent = "Altitude " + Math.max(0, Math.round(s.alt / deg)) + "° · azimuth " + Math.round(s.az / deg) + "°";
+    if (!dragging) slider.value = clamp(T, +slider.min, +slider.max);
+    slider.setAttribute("aria-valuetext", hhmm(T) + ", sun altitude " + Math.max(0, Math.round(s.alt / deg)) + " degrees");
+    if (!GLX) return;
+    var v = sunVec(s), sc = GLX.screen(v), up = Math.max(v[1], 0);
+    // Headline: heavier as the light hardens, with a shadow cast across the paper from the same sun.
+    say.style.fontWeight = Math.round(420 + 260 * smooth(.02, .62, up));
+    var g = GLX.screen([-v[0], 0, -v[2]]), gl = Math.hypot(g[0], g[1]) || 1, len = clamp(1.2 / Math.max(Math.tan(s.alt), .06), 0, 16) * smooth(-.01, .04, v[1]);
+    say.style.textShadow = (g[0] / gl * len).toFixed(1) + "px " + (-g[1] / gl * len).toFixed(1) + "px " + (3 + len * .55).toFixed(1) + "px rgba(84,58,30," + (.13 * smooth(-.01, .05, v[1])).toFixed(3) + ")";
+    // Thomas: warm on the sun side, cool on the shade side.
+    var ang = Math.atan2(-sc[0], -sc[1]) / deg;
+    lit.style.setProperty("--la", ang.toFixed(1) + "deg");
+    lit.style.setProperty("--lw", (.62 * smooth(-.01, .05, v[1]) * (1 - .45 * smooth(.2, .6, up))).toFixed(3));
+    lit.style.setProperty("--lc", (.36 * smooth(-.01, .05, v[1])).toFixed(3));
+    var n = GLX.screen([Math.sin(NORTH), 0, -Math.cos(NORTH)]);
+    nrot.setAttribute("transform", "rotate(" + (Math.atan2(n[0], n[1]) / deg).toFixed(1) + ")");
+  }
+  subs.push(function(T){ if (state.mode === "hero") { lastHeroT = T; heroRead(T); } if (GLX) GLX.want(); });
+
+  slider.addEventListener("input", function(){ dragging = true; state.mode = "hero"; setT(+slider.value); });
+  slider.addEventListener("change", function(){ dragging = false; });
+  slider.addEventListener("pointerup", function(){ dragging = false; });
+
+  // ---------- Sun-path diagram (A-100) ----------
+  var SPD = (function(){
+    var svg = $(".spd"), NS = "http://www.w3.org/2000/svg", C = 200, R = 190;
+    function E(t, a, p){ var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); (p || svg).appendChild(e); return e; }
+    function pt(alt, az){ var r = R * (1 - alt / (Math.PI / 2)); return [C + r * Math.sin(az), C - r * Math.cos(az)]; }
+    var i, d = "";
+    [0, 30, 60].forEach(function(a){ E("circle", {cx:C, cy:C, r:(R * (1 - a / 90)).toFixed(1), "class":"ln" + (a ? " thin" : "")}); if (a) E("text", {x:C + 4, y:(C - R * (1 - a / 90) - 4).toFixed(1)}).textContent = a + "°"; });
+    for (i = 0; i < 360; i += 30){ var p = pt(0, i * deg); d += "M" + C + " " + C + "L" + p[0].toFixed(1) + " " + p[1].toFixed(1); }
+    E("path", {d:d, "class":"ln thin"});
+    [["N", 0], ["E", 90], ["S", 180], ["W", 270]].forEach(function(q){ var p = pt(-10 * deg, q[1] * deg); E("text", {x:p[0].toFixed(1), y:(p[1] + 4).toFixed(1), "text-anchor":"middle"}).textContent = q[0]; });
+    [[23.44, "21 Jun", "day"], [0, "21 Mar", "day"], [-23.44, "21 Dec", "dec"]].forEach(function(q){
+      var dd = "", first = null, last = null;
+      for (var T = 4; T <= 20.01; T += .1){ var s = sunAt(T, q[0] * deg); if (s.alt < 0) continue; var p = pt(s.alt, s.az); dd += (dd ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); if (!first) first = p; last = p; }
+      E("path", {d:dd, "class":"ln " + q[2]});
+      E("text", {x:(last[0] + 8).toFixed(1), y:(last[1] + (q[0] > 0 ? -6 : 14)).toFixed(1)}).textContent = q[1];
+    });
+    for (var h = 8; h <= 16; h += 2){ var s = sunAt(h), p = pt(s.alt, s.az); E("circle", {cx:p[0].toFixed(1), cy:p[1].toFixed(1), r:2.2, fill:"#1B1D20"}); E("text", {x:(p[0] - 6).toFixed(1), y:(p[1] + 16).toFixed(1)}).textContent = (h < 10 ? "0" : "") + h; }
+    var halo = E("circle", {r:13, "class":"halo"}), dot = E("circle", {r:6, "class":"dot"});
+    return {set: function(T){ var s = sunAt(clamp(T, RISE + .02, SET - .02)), p = pt(Math.max(0, s.alt), s.az); halo.setAttribute("cx", p[0].toFixed(1)); halo.setAttribute("cy", p[1].toFixed(1)); dot.setAttribute("cx", p[0].toFixed(1)); dot.setAttribute("cy", p[1].toFixed(1)); }};
+  })();
+  subs.push(SPD.set);
+
+  // ---------- The drawing set (A-200): line drawings whose shadows are cast for the current time ----------
+  var NS = "http://www.w3.org/2000/svg";
+  function E(t, a, p){ var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+  function rect(x, y, w, h){ return "M" + x.toFixed(1) + " " + y.toFixed(1) + "h" + w.toFixed(1) + "v" + h.toFixed(1) + "h" + (-w).toFixed(1) + "Z"; }
+  function circ(cx, cy, r){ return "M" + (cx - r) + " " + cy + "a" + r + " " + r + " 0 1 0 " + 2 * r + " 0a" + r + " " + r + " 0 1 0 " + -2 * r + " 0"; }
+  function figure(g, x, y, s, flip){ s = s || 1; var f = flip ? -1 : 1;
+    E("circle", {cx:x, cy:y - 31 * s, r:4.2 * s, "class":"fig"}, g);
+    E("path", {"class":"fig", d:"M" + (x - 5 * s * f) + " " + (y - 25 * s) + "q" + (5 * s * f) + " -2 " + (10 * s * f) + " 0l" + (1 * s * f) + " " + (13 * s) + "l" + (-2 * s * f) + " " + (12 * s) + "h" + (-3 * s * f) + "l" + (-1 * s * f) + " " + (-10 * s) + "l" + (-1 * s * f) + " " + (10 * s) + "h" + (-3 * s * f) + "l" + (-1 * s * f) + " " + (-12 * s) + "z"}, g);
+  }
+  function tree(g, x, base, r, cls){
+    E("path", {"class":"ln " + (cls || ""), d:"M" + x + " " + base + "V" + (base - r * 1.15)}, g);
+    E("path", {"class":"ln", d:circ(x, base - r * 1.9, r)}, g);
+    E("path", {"class":"ln thin", d:"M" + (x - r * .55) + " " + (base - r * 1.7) + "q" + r * .3 + " " + -r * .5 + " " + r * .6 + " 0M" + (x + r * .05) + " " + (base - r * 2.25) + "q" + r * .25 + " " + -r * .4 + " " + r * .5 + " 0M" + (x - r * .1) + " " + (base - r * 1.35) + "q" + r * .3 + " " + -r * .3 + " " + r * .55 + " 0"}, g);
+  }
+  function earth(y, x0, x1){ var d = ""; for (var x = x0 + 8; x < x1; x += 15) d += "M" + x + " " + (y + 3) + "l-9 12"; return d; }
+  function rel(T){ var s = sunAt(T), phi = s.az - Math.PI; return {s:s, phi:phi, tanP:Math.tan(Math.max(s.alt, .01)) / Math.max(Math.cos(phi), .05), tanH:Math.tan(phi), up:s.alt > .005}; }
+
+  var DRAW = {
+    library: function(svg){
+      var sh = E("path", {"class":"sh"}, svg), L = E("g", {"class":"lines"}, svg);
+      E("path", {"class":"ln bold", d:"M20 470H1180"}, L);
+      E("path", {"class":"ln thin", d:earth(470, 20, 1180)}, L);
+      E("path", {"class":"ln", d:rect(120, 226, 960, 24)}, L);
+      E("path", {"class":"ln", d:rect(170, 250, 860, 220)}, L);
+      E("path", {"class":"ln thin", d:"M170 330H1030M170 404H1030"}, L);
+      var fins = [], fp = "";
+      for (var x = 184; x <= 1012; x += 20){ if (x > 552 && x < 640) continue; fins.push(x); fp += rect(x, 250, 5, 220); }
+      E("path", {"class":"ln", d:fp}, L);
+      E("path", {"class":"ln", d:rect(566, 352, 68, 118) + "M600 352V470M566 300h68"}, L);
+      E("path", {"class":"ln thin", d:"M520 470v-5h160v5"}, L);
+      tree(L, 72, 470, 46); tree(L, 1124, 470, 40);
+      var F = E("g", {"class":"figs"}, svg); figure(F, 470, 470, 1); figure(F, 498, 470, .94, true); figure(F, 760, 470, 1.02); figure(F, 1090, 470, .96, true);
+      var T1 = E("g", {"class":"txt"}, svg);
+      E("path", {"class":"ln thin", d:"M170 196H1030M170 190v12M1030 190v12M120 238h-30M1030 470h108"}, T1);
+      E("text", {x:600, y:186, "text-anchor":"middle"}, T1).textContent = "86.0 m";
+      E("text", {x:30, y:243}, T1).textContent = "+11.2";
+      E("text", {x:1080, y:462}, T1).textContent = "±0.00";
+      return function(r, k){
+        if (!r.up){ sh.setAttribute("d", rect(170, 250, 860, 220)); return; }
+        var drop = Math.min(220, 30 * r.tanP) * k, ox = clamp(15 * r.tanH, -36, 36) * k, d = rect(170, 250, 860, drop), y0 = 250 + drop, h = 470 - y0;
+        if (h > 0 && Math.abs(ox) > .4) for (var i = 0; i < fins.length; i++) d += ox > 0 ? rect(fins[i] + 5, y0, ox, h) : rect(fins[i] + ox, y0, -ox, h);
+        sh.setAttribute("d", d);
+      };
+    },
+    school: function(svg){
+      var beam = E("path", {"class":"beam"}, svg), rays = E("path", {"class":"ray"}, svg), L = E("g", {"class":"lines"}, svg), P = E("g", {"class":"poche"}, svg);
+      E("path", {"class":"ln bold", d:"M20 480H1180"}, L);
+      E("path", {"class":"ln thin", d:earth(492, 20, 1180)}, L);
+      E("path", {"class":"pc", d:rect(110, 480, 980, 12) + rect(124, 300, 14, 180) + rect(1066, 180, 14, 300) + rect(30, 288, 500, 12) + rect(510, 168, 584, 12) + rect(510, 168, 14, 132)}, P);
+      E("path", {"class":"ln", d:"M131 312V470M134 312V470M128 390h9M520 186V284M517 186V284M514 236h9"}, L);
+      E("path", {"class":"ln thin", d:"M30 300V480M30 288h-10"}, L);
+      var desks = ""; for (var dx = 300; dx <= 960; dx += 120) desks += "M" + dx + " 440h56M" + (dx + 6) + " 440v40M" + (dx + 50) + " 440v40";
+      E("path", {"class":"ln thin", d:desks}, L);
+      E("path", {"class":"ln thin", d:"M138 200H1060M138 200v8M1060 200v8"}, L);
+      var F = E("g", {"class":"figs"}, svg); figure(F, 240, 480, 1.05); figure(F, 690, 480, 1, true); figure(F, 76, 480, .98);
+      var T1 = E("g", {"class":"txt"}, svg);
+      E("text", {x:600, y:160, "text-anchor":"middle"}, T1).textContent = "Clerestory, facing south";
+      E("text", {x:150, y:290}, T1).textContent = "Roof oversails 3.2 m";
+      E("text", {x:40, y:560}, T1).textContent = "South";
+      E("text", {x:1160, y:560, "text-anchor":"end"}, T1).textContent = "North";
+      function hit(x0, y0, tp){ var xf = x0 + (480 - y0) / tp; return xf <= 1066 ? [xf, 480, 0] : [1066, y0 + (1066 - x0) * tp, 1]; }
+      return function(r, k){
+        if (!r.up){ beam.setAttribute("d", ""); rays.setAttribute("d", ""); return; }
+        var tp = Math.max(.08, r.tanP), d = "", rd = "", out = 260 * k;
+        var a = hit(524, 180, tp), b = hit(524, 300, tp);
+        d += "M524 180L" + a[0].toFixed(1) + " " + a[1].toFixed(1) + (a[2] !== b[2] ? "L1066 480" : "") + "L" + b[0].toFixed(1) + " " + b[1].toFixed(1) + "L524 300Z";
+        rd += "M" + (524 - out).toFixed(1) + " " + (180 - out * tp).toFixed(1) + "L" + a[0].toFixed(1) + " " + a[1].toFixed(1) + "M" + (524 - out).toFixed(1) + " " + (300 - out * tp).toFixed(1) + "L" + b[0].toFixed(1) + " " + b[1].toFixed(1);
+        var yTop = 300 + (134 - 30) * tp;
+        if (yTop < 470){
+          var c1 = hit(134, yTop, tp), c2 = hit(134, 470, tp);
+          d += "M134 " + yTop.toFixed(1) + "L" + c1[0].toFixed(1) + " " + c1[1].toFixed(1) + "L" + c2[0].toFixed(1) + " " + c2[1].toFixed(1) + "L134 470Z";
+          rd += "M" + (30 - out * .5).toFixed(1) + " " + (300 - out * .5 * tp).toFixed(1) + "L" + c1[0].toFixed(1) + " " + c1[1].toFixed(1);
+        }
+        beam.setAttribute("d", d); beam.style.opacity = k; rays.setAttribute("d", rd);
+      };
+    },
+    housing: function(svg){
+      var sh = E("path", {"class":"sh"}, svg), L = E("g", {"class":"lines"}, svg);
+      E("path", {"class":"ln bold", d:"M20 500H1180"}, L);
+      E("path", {"class":"ln thin", d:earth(500, 20, 1180)}, L);
+      var blocks = [{x:80, w:330, n:4}, {x:410, w:370, n:6}, {x:780, w:330, n:3}], FH = 54, loggias = [], out = "", floors = "", shop = "", towers = "";
+      blocks.forEach(function(b, bi){
+        var top = 500 - b.n * FH - 14;
+        out += rect(b.x, top, b.w, 500 - top);
+        for (var f = 1; f < b.n; f++){
+          var y = 500 - f * FH - 14;
+          floors += "M" + b.x + " " + y + "h" + b.w;
+          var cols = Math.floor((b.w - 30) / 92);
+          for (var c = 0; c < cols; c++){
+            var lx = b.x + 24 + c * ((b.w - 48 - 66) / Math.max(1, cols - 1)), ly = y - 44;
+            loggias.push([lx, ly, 66, 40]); out += rect(lx, ly, 66, 40);
+            floors += "M" + (lx + 4) + " " + (ly + 26) + "h58";
+          }
+        }
+        for (var s = b.x + 26; s < b.x + b.w - 70; s += 98) shop += rect(s, 448, 72, 52);
+        var tx = b.x + (bi === 1 ? b.w * .62 : b.w * .3), th = bi === 1 ? 104 : 82;
+        towers += rect(tx, top - th, 36, th);
+        for (var lv = top - th + 14; lv < top - 10; lv += 9) towers += "M" + (tx + 6) + " " + lv + "h24";
+      });
+      E("path", {"class":"ln", d:out}, L);
+      E("path", {"class":"ln thin", d:floors + shop}, L);
+      E("path", {"class":"ln", d:towers}, L);
+      tree(L, 1150, 500, 34); tree(L, 50, 500, 30);
+      var F = E("g", {"class":"figs"}, svg); figure(F, 300, 500, 1); figure(F, 640, 500, 1.04, true); figure(F, 664, 500, .9); figure(F, 900, 500, 1, true);
+      return function(r, k){
+        if (!r.up){ sh.setAttribute("d", ""); return; }
+        var drop = Math.min(40, 22 * r.tanP) * k, ox = clamp(22 * r.tanH, -66, 66) * k, d = "";
+        for (var i = 0; i < loggias.length; i++){
+          var g = loggias[i];
+          d += rect(g[0], g[1], g[2], drop);
+          if (Math.abs(ox) > .4) d += ox > 0 ? rect(g[0], g[1] + drop, ox, g[3] - drop) : rect(g[0] + g[2] + ox, g[1] + drop, -ox, g[3] - drop);
+        }
+        sh.setAttribute("d", d);
+      };
+    },
+    pavilion: function(svg){
+      var G = E("g", {}, svg), shade = E("path", {"class":"shd"}, G), L = E("g", {"class":"lines"}, svg);
+      E("path", {"class":"ln thin", d:rect(60, 40, 1080, 640)}, L);
+      var pav = ""; for (var px = 60; px <= 1140; px += 60) pav += "M" + px + " 40V680"; for (var py = 40; py <= 680; py += 60) pav += "M60 " + py + "H1140";
+      E("path", {"class":"ln thin", d:pav, style:"opacity:.18"}, L);
+      E("path", {"class":"ln", d:"M60 610H1140M60 640H1140"}, L);
+      E("path", {"class":"ln thin", d:"M60 625H1140", style:"stroke-dasharray:3 6"}, L);
+      var holes = "", hp = "", X0 = 280, Y0 = 110, CW = 640, CH = 440;
+      for (var ix = 0; ix < 16; ix++) for (var iy = 0; iy < 11; iy++){ var cx = X0 + 30 + ix * 38.66, cy = Y0 + 30 + iy * 38; holes += circ(cx, cy, 10); }
+      hp = rect(X0, Y0, CW, CH) + holes;
+      shade.setAttribute("d", hp);
+      E("path", {"class":"ln", d:rect(X0, Y0, CW, CH)}, L);
+      E("path", {"class":"ln thin", d:holes}, L);
+      E("path", {"class":"pc", d:rect(X0 + 40, Y0 + 60, 10, 10) + rect(X0 + CW - 50, Y0 + 60, 10, 10) + rect(X0 + 40, Y0 + CH - 70, 10, 10) + rect(X0 + CW - 50, Y0 + CH - 70, 10, 10)}, L);
+      E("path", {"class":"ln", d:rect(380, 560, 170, 18) + rect(660, 560, 170, 18)}, L);
+      [[140, 170, 46], [150, 420, 38], [1040, 200, 42], [1060, 470, 50]].forEach(function(t){
+        E("path", {"class":"ln", d:circ(t[0], t[1], t[2])}, L);
+        var sp = ""; for (var a = 0; a < 8; a++){ var an = a / 8 * Math.PI * 2; sp += "M" + t[0] + " " + t[1] + "l" + (Math.cos(an) * t[2] * .7).toFixed(1) + " " + (Math.sin(an) * t[2] * .7).toFixed(1); }
+        E("path", {"class":"ln thin", d:sp}, L);
+      });
+      var T1 = E("g", {"class":"txt"}, svg);
+      E("path", {"class":"ln", d:"M1100 90l-12 30h24z M1100 72v18"}, T1);
+      E("text", {x:1100, y:64, "text-anchor":"middle"}, T1).textContent = "N";
+      E("text", {x:80, y:600}, T1).textContent = "Harbour walk";
+      E("text", {x:80, y:665}, T1).textContent = "Quay edge";
+      return function(r, k){
+        if (!r.up){ G.setAttribute("transform", ""); shade.style.opacity = 0; return; }
+        var Lh = clamp(70 / Math.tan(r.s.alt), 0, 520) * k, dx = -Math.sin(r.s.az) * Lh, dy = Math.cos(r.s.az) * Lh;
+        G.setAttribute("transform", "translate(" + dx.toFixed(1) + " " + dy.toFixed(1) + ")"); shade.style.opacity = k;
+      };
+    }
+  };
+  var sheets = $$(".sheet").map(function(a){
+    var svg = $("svg.dr", a), upd = DRAW[a.dataset.draw](svg), o = {el:a, svg:svg, upd:upd, k:1, near:true};
+    ZC.visible(a, function(v){ o.near = v; if (v) o.upd(rel(state.T), o.k); }, "200px 0px");
+    return o;
+  });
+  subs.push(function(T){ var r = rel(T); for (var i = 0; i < sheets.length; i++) if (sheets[i].near) sheets[i].upd(r, sheets[i].k); });
+
+  // ---------- Principles diagrams ----------
+  var P1 = $(".p1"), P2 = $(".p2"), P3 = $(".p3");
+  (function(){
+    E("path", {"class":"ln thin", d:circ(160, 110, 92)}, P1);
+    E("path", {"class":"ln acc", d:"M78 150Q160 228 242 150", style:"stroke-dasharray:3 5"}, P1);
+    E("circle", {cx:160, cy:189, r:5, fill:"#D9481F"}, P1);
+    E("path", {"class":"ln", d:"M160 10v14M156 18l4-8 4 8"}, P1);
+    E("text", {x:170, y:20}, P1).textContent = "N";
+    var b = E("g", {"class":"bld", transform:"rotate(-34 160 110)"}, P1);
+    E("path", {"class":"ln", d:rect(100, 88, 120, 44) + "M100 132h120"}, b);
+    E("path", {"class":"sh", d:rect(100, 88, 120, 10)}, b);
+    E("text", {x:78, y:206}, P1).textContent = "Long side to the south";
+  })();
+  var P2upd = (function(){
+    E("path", {"class":"ln thin", d:"M20 190H300"}, P2);
+    var s = E("ellipse", {"class":"sh", cx:160, cy:100, rx:52, ry:46}, P2);
+    E("path", {"class":"ln", d:circ(160, 100, 44)}, P2);
+    var sp = ""; for (var a = 0; a < 10; a++){ var an = a / 10 * Math.PI * 2; sp += "M160 100l" + (Math.cos(an) * 30).toFixed(1) + " " + (Math.sin(an) * 30).toFixed(1); }
+    E("path", {"class":"ln thin", d:sp}, P2);
+    E("path", {"class":"ln", d:rect(118, 168, 84, 8)}, P2);
+    E("text", {x:20, y:212}, P2).textContent = "Plan · tree shade";
+    var t = E("text", {x:300, y:212, "text-anchor":"end"}, P2);
+    return function(T){
+      var x = sunAt(T), Lh = x.alt > .01 ? clamp(26 / Math.tan(x.alt), 0, 90) : 0;
+      s.setAttribute("cx", (160 - Math.sin(x.az) * Lh).toFixed(1)); s.setAttribute("cy", (100 + Math.cos(x.az) * Lh).toFixed(1));
+      s.setAttribute("rx", (44 + Lh * .18).toFixed(1));
+      t.textContent = hhmm(T);
+    };
+  })();
+  subs.push(P2upd);
+  (function(){
+    E("path", {"class":"ln thin", d:"M10 196H310"}, P3);
+    E("path", {"class":"hat", d:rect(40, 70, 130, 126)}, P3);
+    E("path", {"class":"ln", d:rect(40, 70, 130, 126) + "M40 70l65-38 65 38"}, P3);
+    E("path", {"class":"ln acc p3new", d:"M170 112h110v84M170 112v84M280 112l14 0M200 140h50v56"}, P3);
+    E("text", {x:40, y:214}, P3).textContent = "Existing, kept";
+    E("text", {x:190, y:214}, P3).textContent = "New";
+  })();
+
+
+  // ---------- A-250 Model shop: hover a model to see its project's constellation, click to gather it ----------
+  var SHOP = (function(){
+    var sky = $("[data-sky]"); if (!sky) return null;
+    var P = {
+      library: {name:"The Shaded Library", sheet:"A-201", d:"Four studies for the reading room: the fin screen, the louvred glass, the courtyard and the forest of columns under the roof."},
+      school: {name:"Courtyard School", sheet:"A-202", d:"Three models of the hall: the vaulted roof, the arcade around the courtyard and the stair up to the roof garden."},
+      housing: {name:"Barjeel Housing", sheet:"A-203", d:"Four massing studies: stepped terraces, the wind tower, a cantilevered loggia and an early study of rotated floors."},
+      pavilion: {name:"Harbour Pavilion", sheet:"A-204", d:"Two models of the canopy: a test panel of the perforated screen and the full canopy on its four legs."}
+    };
+    var M = [ // file, title, project, x, y (fractions of the field), size (px at 1440)
+      [0,"Fin screen","library",.09,.2,124],[4,"Arcade","school",.27,.3,108],[3,"Vaulted hall roof","school",.43,.14,132],[10,"Perforated screen","pavilion",.58,.26,116],
+      [7,"Wind tower","housing",.75,.13,122],[9,"Rotated slabs, a study","housing",.91,.3,104],[2,"Reading courtyard","library",.15,.62,136],[5,"Stair to the roof garden","school",.33,.74,112],
+      [11,"Columns under the roof","library",.5,.55,146],[6,"Stepped terraces","housing",.67,.7,118],[1,"Louvred glazing","library",.84,.6,128],[12,"Canopy on four legs","pavilion",.27,.9,0],[8,"Cantilevered loggia","housing",.88,.88,0]
+    ];
+    M[11][3] = .07; M[11][4] = .9; M[11][5] = 100; M[12][3] = .73; M[12][4] = .92; M[12][5] = 104;
+    var stars = M.map(function(m, i){
+      var b = document.createElement("button"); b.type = "button"; b.className = "star"; b.dataset.p = m[2];
+      b.setAttribute("aria-label", m[1] + ", a model for " + P[m[2]].name + ". Gather this project.");
+      b.style.setProperty("--d", (7 + (i * 1.7) % 5).toFixed(1) + "s"); b.style.setProperty("--dl", (-i * 1.3).toFixed(1) + "s");
+      b.style.setProperty("--dx", (4 + i % 4 * 2) + "px"); b.style.setProperty("--dy", (3 + (i * 3) % 5) + "px");
+      b.innerHTML = '<span class="dr"><img src="img/thomas-whitaker/models/m' + m[0] + '.webp" alt="" width="440" height="440" loading="lazy" decoding="async"></span>';
+      sky.appendChild(b);
+      return {el:b, m:m, x:0, y:0, s:0};
+    });
+    var path = $("svg.links path", sky), svg = $("svg.links", sky), tag = $(".tag", sky), W = 0, H = 0, cur = null, gathered = null, lastStar = null;
+    function layout(){
+      W = sky.clientWidth; H = sky.clientHeight;
+      var k = clamp(W / 1200, .52, 1.1);
+      stars.forEach(function(st){
+        st.s = st.m[5] * k; st.x = clamp(st.m[3] * W, st.s / 2 + 10, W - st.s / 2 - 10); st.y = clamp(st.m[4] * H, st.s / 2 + 10, H - st.s / 2 - 10);
+        st.el.style.setProperty("--s", st.s.toFixed(0) + "px");
+        if (!gathered) gsap_set(st, st.x, st.y, 1);
+      });
+      if (gathered) gather(gathered, true);
+      if (cur) links(cur);
+    }
+    function gsap_set(st, x, y, sc){ if (window.gsap) gsap.set(st.el, {x:x, y:y, scale:sc}); else st.el.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) scale(" + sc + ")"; }
+    function members(p){ return stars.filter(function(st){ return st.m[2] === p; }).sort(function(a, b){ return a.x - b.x; }); }
+    function links(p){
+      var ms = members(p), d = "";
+      ms.forEach(function(st, i){ d += (i ? "L" : "M") + st.x.toFixed(1) + " " + st.y.toFixed(1); });
+      path.setAttribute("d", d);
+      svg.querySelectorAll("circle").forEach(function(c){ c.remove(); });
+      if (ZC.motion && window.gsap && window.DrawSVGPlugin) gsap.fromTo(path, {drawSVG:0}, {drawSVG:"100%", duration:.9, ease:"power2.inOut"});
+    }
+    function show(p, st){
+      if (gathered) return;
+      cur = p; sky.classList.toggle("dim", !!p);
+      stars.forEach(function(s2){ s2.el.classList.toggle("on", s2.m[2] === p); });
+      if (!p){ path.setAttribute("d", ""); tag.classList.remove("on"); return; }
+      links(p);
+      var ms = members(p), lead = st || ms[0];
+      tag.textContent = P[p].name + " · " + ms.length + " models";
+      tag.style.transform = "translate(" + lead.x.toFixed(0) + "px," + (lead.y - lead.s / 2).toFixed(0) + "px) translate(-50%,-125%)";
+      tag.classList.add("on");
+    }
+    function gather(p, instant){
+      gathered = p; cur = p; tag.classList.remove("on"); path.setAttribute("d", "");
+      sky.classList.add("gathered", "dim");
+      var ms = members(p), n = ms.length, rowW = W * .86, cell = Math.min(W < 700 ? 150 : 230, rowW / n), y = H * (W < 700 ? .36 : .4);
+      ms.forEach(function(st, i){
+        var x = W / 2 + (i - (n - 1) / 2) * cell, sc = (cell * .86) / st.s;
+        st.el.classList.add("on");
+        if (instant || !ZC.motion || !window.gsap) gsap_set(st, x, y, sc);
+        else gsap.to(st.el, {x:x, y:y, scale:sc, duration:1.1, ease:"expo.inOut", delay:i * .05});
+      });
+      $(".js-capn", sky).textContent = "Sheet " + P[p].sheet + " · " + n + " models";
+      $(".js-capt", sky).textContent = P[p].name;
+      $(".js-capd", sky).textContent = P[p].d;
+      $(".js-capl", sky).setAttribute("href", "#sheet-" + p);
+      $(".js-capl", sky).textContent = "See drawing " + P[p].sheet;
+      legend.forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.p === p); });
+      if (!instant) setTimeout(function(){ $(".js-back", sky).focus({preventScroll:true}); }, 50);
+    }
+    function scatter(){
+      if (!gathered) return;
+      var p = gathered; gathered = null;
+      sky.classList.remove("gathered");
+      stars.forEach(function(st, i){
+        if (!ZC.motion || !window.gsap) gsap_set(st, st.x, st.y, 1);
+        else gsap.to(st.el, {x:st.x, y:st.y, scale:1, duration:1, ease:"expo.inOut", delay:(st.m[2] === p ? 0 : .15)});
+      });
+      legend.forEach(function(b){ b.setAttribute("aria-pressed", "false"); });
+      show(null);
+      if (lastStar) lastStar.el.focus({preventScroll:true});
+    }
+    // GSAP owns the transform once it is loaded; before that, plain CSS transforms place the stars.
+    stars.forEach(function(st){
+      st.el.addEventListener("mouseenter", function(){ idle = 0; show(st.m[2], st); });
+      st.el.addEventListener("focus", function(){ idle = 0; show(st.m[2], st); });
+      st.el.addEventListener("click", function(){ idle = 0; lastStar = st; if (gathered === st.m[2]) scatter(); else { if (gathered) scatter(); gather(st.m[2]); } });
+    });
+    sky.addEventListener("mouseleave", function(){ if (!gathered) show(null); });
+    $(".js-back", sky).addEventListener("click", scatter);
+    sky.addEventListener("keydown", function(e){ if (e.key === "Escape") scatter(); });
+    var legendWrap = $(".shopfoot .legend"), legend = Object.keys(P).map(function(k){
+      var b = document.createElement("button"); b.type = "button"; b.dataset.p = k; b.textContent = P[k].name; b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", function(){ idle = 0; if (gathered === k) scatter(); else { if (gathered) scatter(); lastStar = members(k)[0]; gather(k); } });
+      legendWrap.appendChild(b); return b;
+    });
+    if (matchMedia("(hover:none)").matches) $(".js-hint").textContent = "Tap a model to gather its project";
+    // Autoplay: while nobody is touching it, the shop shows each project's constellation in turn.
+    var idle = 0, order = Object.keys(P), oi = 0, inView = false;
+    ZC.visible(sky, function(v){ inView = v; }, "0px");
+    if (ZC.motion) setInterval(function(){ if (!inView || gathered || document.hidden) return; idle++; if (idle < 2) return; show(order[oi++ % order.length]); }, 4200);
+    window.addEventListener("resize", layout);
+    layout();
+    return {layout: layout};
+  })();
+
+  // ---------- Count-ups and the mobile register ----------
+  var menu = $(".menu"), reg = $("#reg");
+  menu.addEventListener("click", function(){ var o = reg.classList.toggle("open"); menu.setAttribute("aria-expanded", o); });
+  reg.addEventListener("click", function(e){ if (e.target.closest("a")){ reg.classList.remove("open"); menu.setAttribute("aria-expanded", "false"); } });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && reg.classList.contains("open")){ reg.classList.remove("open"); menu.setAttribute("aria-expanded", "false"); menu.focus(); } });
+
+  // ---------- Scene switching: the canvas works only while the hero or the contact section is on screen ----------
+  var vis = {hero:true, contact:false};
+  function scene(){
+    if (!GLX) return;
+    if (Q.has("mode")){ GLX.setActive(true); return; }
+    var dusk = vis.contact && !vis.hero;
+    if (dusk && state.mode !== "dusk"){ state.mode = "dusk"; }
+    if (!dusk && vis.hero && state.mode !== "hero"){ state.mode = "hero"; }
+    GLX.setActive(vis.hero || vis.contact);
+  }
+  ZC.visible($(".hero"), function(v){ vis.hero = v; scene(); }, "0px");
+  ZC.visible($(".contact"), function(v){ vis.contact = v; scene(); }, "0px");
+
+  function startGL(){ if (!GLX) return; GLX.start(); setT(state.T); }
+  var fontReady = document.fonts && document.fonts.load ? document.fonts.load("700 200px 'Familjen Grotesk'") : Promise.resolve();
+
+  // ---------- Motion ----------
+  window.addEventListener("load", function(){
+    var still = !ZC.motion || !window.gsap || Q.has("T");
+    if (still){
+      fontReady.then(function(){
+        if (!Q.has("T")) state.T = 9.4;
+        startGL(); heroRead(state.T); setT(state.T);
+        // Without scroll-linked time, each scene shows a fixed hour: morning in the hero, dusk at the contact section.
+        ZC.visible($(".contact"), function(v){ if (Q.has("mode")) return; if (v && GLX){ state.mode = "dusk"; state.T = Q.has("T") ? state.T : 17.85; GLX.still(); } else if (GLX && vis.hero){ state.mode = "hero"; state.T = Q.has("T") ? state.T : 9.4; GLX.still(); } }, "0px");
+      });
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
+    ZC.smooth();
+    fontReady.then(function(){
+      // Sunrise: the shadows shorten as the sun clears the horizon.
+      state.T = 7.12; startGL();
+      var intro = gsap.timeline({defaults:{ease:"expo.out"}});
+      var sun = {T:7.12};
+      intro.to(sun, {T:8.2, duration:3.6, ease:"power2.out", onUpdate:function(){ if (window.scrollY < 4) setT(sun.T); }}, .2)
+        .from(".lede .eyebrow, .lede h1 .who", {opacity:0, y:14, duration:1, stagger:.08}, .1)
+        .fromTo(".lede h1 .say>span", {clipPath:"inset(-20% 100% -30% 0)"}, {clipPath:"inset(-20% 0% -30% 0)", duration:1.4, stagger:.16, ease:"power3.inOut", clearProps:"clipPath"}, .3)
+        .from(".tw", {opacity:0, y:40, duration:1.8}, .15)
+        .from(".study", {opacity:0, y:16, duration:1}, 1.1)
+        .from(".top, .reg", {opacity:0, duration:1.2}, .4);
+
+      // A-000: the sun crosses the morning while the hero is pinned.
+      ScrollTrigger.create({trigger:".hero", start:"top top", end:"+=130%", pin:true, onUpdate:function(self){
+        if (dragging) return;
+        if (self.progress > .001) intro.progress(1);
+        state.mode = "hero"; GLX && GLX.setYaw(.2 * self.progress); setT(8.2 + 5 * self.progress);
+      }});
+      gsap.to(".tw", {yPercent:4, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"+=130%", scrub:true}});
+      // As the hero scrolls away, its text clears off the model so the practice sheet can slide over it.
+      gsap.fromTo(".lede, .study > *", {autoAlpha:1, y:0}, {autoAlpha:0, y:-30, ease:"none", immediateRender:false, scrollTrigger:{trigger:"#a100", start:"top bottom", end:"top 62%", scrub:true}});
+      // The afternoon passes over the drawings; the sun sets at the contact section.
+      ScrollTrigger.create({trigger:"#a100", start:"top bottom", endTrigger:"#a900", end:"top bottom", onUpdate:function(self){ setT(13.2 + 4.35 * self.progress); }});
+      ScrollTrigger.create({trigger:"#a900", start:"top bottom", end:"bottom bottom", onUpdate:function(self){ state.mode = "dusk"; setT(17.55 + .5 * self.progress); }});
+
+      // Headings are laid down like ink, left to right.
+      $$("[data-wipe]").forEach(function(el){
+        SplitText.create(el, {type:"lines", autoSplit:true, onSplit:function(self){
+          return gsap.fromTo(self.lines, {clipPath:"inset(-20% 100% -30% 0)"}, {clipPath:"inset(-20% 0% -30% 0)", duration:1.25, stagger:.14, ease:"power3.inOut", scrollTrigger:{trigger:el, start:"top 84%"}});
+        }});
+      });
+      // The sun-path diagram plots itself.
+      gsap.from(".spd .ln", {drawSVG:0, duration:1.6, stagger:.05, ease:"power2.inOut", scrollTrigger:{trigger:".spd", start:"top 78%"}});
+      gsap.from(".spd text, .spd .dot, .spd .halo", {opacity:0, duration:.8, stagger:.02, delay:.6, scrollTrigger:{trigger:".spd", start:"top 78%"}});
+      // Each sheet: the pen draws the linework, then the sun comes out and the shadows grow.
+      sheets.forEach(function(o){
+        o.k = 0; o.upd(rel(state.T), 0);
+        var lines = $$(".lines .ln", o.svg), extra = $$(".figs, .txt, .poche", o.svg);
+        if (extra.length) gsap.set(extra, {opacity:0});
+        var tl = gsap.timeline({scrollTrigger:{trigger:o.el, start:"top 72%"}});
+        tl.from(lines, {drawSVG:0, duration:1.5, stagger:.06, ease:"power2.inOut"})
+          .to(extra.length ? extra : {}, {opacity:1, duration:.7, stagger:.1}, "-=.7")
+          .to(o, {k:1, duration:1.6, ease:"power2.out", onUpdate:function(){ o.upd(rel(state.T), o.k); }}, "-=.4");
+        gsap.from($(".tb", o.el).children, {opacity:0, y:12, duration:.8, stagger:.08, scrollTrigger:{trigger:o.el, start:"top 72%"}});
+      });
+      gsap.fromTo(".p1 .bld", {rotation:-34, svgOrigin:"160 110"}, {rotation:0, svgOrigin:"160 110", duration:1.8, ease:"power3.inOut", scrollTrigger:{trigger:".p1", start:"top 80%"}});
+      gsap.from(".p3 .p3new", {drawSVG:0, duration:1.4, ease:"power2.inOut", scrollTrigger:{trigger:".p3", start:"top 80%"}});
+      gsap.from(".rules li", {opacity:0, y:30, duration:1, stagger:.12, ease:"expo.out", scrollTrigger:{trigger:".rules", start:"top 84%"}});
+      gsap.from(".regt tbody tr", {opacity:0, x:-16, duration:.8, stagger:.07, ease:"expo.out", scrollTrigger:{trigger:".regt", start:"top 84%"}});
+      gsap.from(".cgrid > *", {opacity:0, y:18, duration:1, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:".cgrid", start:"top 92%"}});
+      $$("[data-count]").forEach(function(b){
+        var to = +b.dataset.count, o = {v:0};
+        ScrollTrigger.create({trigger:b, start:"top 90%", once:true, onEnter:function(){ gsap.to(o, {v:to, duration:1.6, ease:"power3.out", onUpdate:function(){ b.textContent = Math.round(o.v); }}); }});
+      });
+    });
+  });
+});
+</script>
 </body>
 </html>
