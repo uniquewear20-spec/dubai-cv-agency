@@ -3,391 +3,460 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0B0D11">
-<title>Daniel Okafor · Head of Software Engineering — Concept site by Zenith Dubai CV</title>
-<meta name="description" content="Concept portfolio website for a fictional head of software engineering, designed by Zenith Dubai CV.">
-<link rel="preload" href="img/daniel-okafor-640.webp" as="image" type="image/webp">
-<link rel="preload" href="fonts/jetbrains-mono-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css">
+<title>Daniel Okafor — Principal AI engineer · Concept site</title>
+<meta name="description" content="Daniel Okafor, principal AI engineer. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDECE7">
+<link rel="preload" href="fonts/sora-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/daniel-okafor/cut.webp" as="image" fetchpriority="high">
 <script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/ScrambleTextPlugin.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
 <style>
-/* Concept: his workspace, opened. The hero is a code editor: the file tree is the
-   navigation, README.md introduces him, the portrait is open in an image tab, the
-   terminal answers whoami, and the status bar carries his metrics. Further down,
-   metrics.json, a git log of his career, a contributions graph, stack.yml and three
-   architecture decision records. */
+@font-face{font-family:"Sora";src:url(fonts/sora-latin-wght-normal.woff2) format("woff2");font-weight:100 800;font-display:swap}
+@font-face{font-family:"Azeret Mono";src:url(fonts/azeret-mono-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-display:swap}
 :root{
-  --desk:#07080B; --bg:#0E1116; --side:#12161C; --tab:#171C24; --line:#222934; --txt:#C9D1DC; --dim:#6B7685; --white:#F2F5F9;
-  --violet:#7C6CFF; --orange:#FF8A4C; --green:#9BDB7C; --blue:#79B8FF; --pink:#F28FD3; --yellow:#F5D76E; --cyan:#7FDBEA;
-  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace; --sans:"Sora","Helvetica Neue",Arial,sans-serif;
-  --zc-bg:#7C6CFF; --zc-fg:#fff; --zc-dot:#FF8A4C;
+  --paper:#EDECE7;--paper2:#E4E3DD;--ink:#0E0F12;--grey:#66665F;--line:rgba(14,15,18,.14);--sig:#2C3BFF;
+  --sans:"Sora","Helvetica Neue",Arial,sans-serif;--mono:"Azeret Mono",ui-monospace,Menlo,monospace;
+  --pad:clamp(18px,4vw,64px);
+  --zc-bg:#0E0F12;--zc-fg:#EDECE7;--zc-dot:#2C3BFF;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--desk);color:var(--txt);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;height:auto;display:block}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
-.wrap{max-width:1180px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
-.k{color:var(--pink)}.s{color:var(--green)}.n{color:var(--orange)}.f{color:var(--blue)}.c{color:var(--dim)}.y{color:var(--yellow)}.cy{color:var(--cyan)}.w{color:var(--white)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.62 var(--sans);-webkit-font-smoothing:antialiased}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--sig);outline-offset:3px}
+main{position:relative;overflow-x:clip}
+.mono{font:500 11.5px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* ---------- IDE hero ---------- */
-.hero{min-height:max(680px,100svh);display:flex;padding:max(14px,env(safe-area-inset-top,0px)) clamp(10px,1.6vw,22px) clamp(10px,1.6vw,22px);
-  background:radial-gradient(60% 50% at 80% 0%,rgba(124,108,255,.18),transparent 70%),radial-gradient(50% 40% at 0% 100%,rgba(255,138,76,.12),transparent 70%),var(--desk)}
-.ide{flex:1;display:grid;grid-template-rows:38px minmax(0,1fr) 28px;min-height:0;border-radius:12px;overflow:hidden;background:var(--bg);box-shadow:0 0 0 1px #262D38,0 40px 80px -30px #000}
-.tbar{display:flex;align-items:center;gap:14px;padding:0 14px;background:var(--side);border-bottom:1px solid var(--line);font:500 12.5px/1 var(--mono);color:var(--dim)}
-.dots{display:flex;gap:7px}.dots i{width:11px;height:11px;border-radius:50%;background:#3A414D}
-.tbar .ttl{flex:1;text-align:center}
-.tbar .ttl b{color:var(--txt);font-weight:500}
-.tbar .cmd{padding:4px 9px;border:1px solid var(--line);border-radius:6px}
-.work{display:grid;grid-template-columns:52px 236px minmax(0,1fr);min-height:0}
-.act{display:flex;flex-direction:column;align-items:center;gap:20px;padding-top:16px;background:var(--side);border-right:1px solid var(--line)}
-.act svg{width:22px;height:22px;stroke:var(--dim);fill:none;stroke-width:1.6}
-.act svg.on{stroke:var(--white)}
-.exp{background:var(--side);border-right:1px solid var(--line);padding:12px 0;overflow:auto;font:400 13.5px/1 var(--mono)}
-.exp .h{margin:0 0 10px;padding:0 16px;font-size:11px;letter-spacing:.12em;color:var(--dim)}
-.exp .root{padding:6px 16px;color:var(--white);font-weight:700;font-size:12px;letter-spacing:.06em}
-.tree{margin:0;padding:0;list-style:none}
-.tree a{display:flex;align-items:center;gap:9px;padding:7px 16px 7px 30px;text-decoration:none;color:var(--txt);border-left:2px solid transparent}
-.tree a:hover{background:#1A2029}
-.tree a[aria-current],.tree a.cur{background:#1E2532;border-left-color:var(--violet);color:var(--white)}
-.tree .ic{width:16px;text-align:center;font-weight:700;font-size:12px}
-.tree .sub a{padding-left:48px}
-.tree .dir{padding:7px 16px 7px 30px;color:var(--dim)}
-.ed{display:grid;grid-template-rows:38px minmax(0,1fr) auto;min-width:0;min-height:0}
-.tabs{display:flex;background:var(--side);border-bottom:1px solid var(--line);overflow:hidden}
-.tabs span{display:flex;align-items:center;gap:8px;padding:0 18px;border-right:1px solid var(--line);font:400 13px/1 var(--mono);color:var(--dim);white-space:nowrap}
-.tabs span.on{background:var(--bg);color:var(--white);box-shadow:inset 0 2px 0 var(--violet)}
-.panes{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);min-height:0}
-.code{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr);align-content:start;padding:22px 0;overflow:hidden;font:400 15px/1.85 var(--mono)}
-.gut{margin:0;padding:0;list-style:none;text-align:right;color:#3E4756;padding-right:14px;user-select:none}
-.src{min-width:0;padding-right:24px}
-.src p{margin:0;white-space:pre-wrap}
-.src .h1{margin:0 0 4px;font:700 clamp(40px,4.4vw,66px)/1.05 var(--mono);letter-spacing:-.03em;color:var(--white)}
-.src .h1 .c{font-weight:400}
-.src .q{color:var(--cyan)}
-.src .lk{display:inline-block;margin-top:14px;padding:8px 14px;border:1px solid var(--line);border-radius:6px;text-decoration:none;color:var(--white);background:#151A22}
-.src .lk:hover{border-color:var(--violet)}
-.src .lk.pr{background:var(--violet);border-color:var(--violet)}
-.prev{display:grid;grid-template-rows:auto minmax(0,1fr);border-left:1px solid var(--line);min-height:0}
-.prev .bar{display:flex;justify-content:space-between;padding:9px 14px;font:400 12px/1.3 var(--mono);color:var(--dim);border-bottom:1px solid var(--line)}
-.canvas{position:relative;min-height:0;display:grid;place-items:center;padding:18px;
-  background:conic-gradient(#12161C 25%,#0E1116 0 50%,#12161C 0 75%,#0E1116 0) 0 0/22px 22px}
-.canvas img{width:auto;max-width:100%;max-height:100%;aspect-ratio:928/1152;object-fit:cover;border-radius:4px;box-shadow:0 20px 40px -20px #000;outline:1px dashed rgba(124,108,255,.6);outline-offset:6px}
-.term{border-top:1px solid var(--line);background:#0B0E12;font:400 13.5px/1.7 var(--mono)}
-.term .tt{display:flex;gap:22px;padding:8px 16px;border-bottom:1px solid var(--line);font-size:11.5px;letter-spacing:.08em;color:var(--dim)}
-.term .tt b{color:var(--white);font-weight:400;box-shadow:inset 0 -1px 0 var(--white);padding-bottom:4px}
-.term pre{margin:0;padding:10px 16px 14px;white-space:pre-wrap;min-height:150px;font:inherit}
-.term .pr{color:var(--green)}
-.term .cur{display:inline-block;width:8px;height:16px;vertical-align:-3px;background:var(--txt);animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.zc-reduce .term .cur,.zc-static .term .cur{animation:none}
-.status{display:flex;align-items:center;gap:0;background:var(--violet);color:#fff;font:400 12px/1 var(--mono);overflow:hidden;white-space:nowrap}
-.status span{padding:0 12px;height:100%;display:flex;align-items:center;gap:6px}
-.status span.sep{margin-left:auto}
-.status b{font-weight:700}
+/* Header + the page-as-sampler rail: t counts down from 1000 at the top to 0 at the contact */
+.top{position:fixed;left:var(--pad);right:var(--pad);top:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:20px;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:600 15px/1 var(--sans);letter-spacing:-.01em;background:var(--paper);padding:8px 12px 8px 8px;margin-left:-8px;border-radius:6px}
+.brand i{width:18px;height:18px;border-radius:3px;background:repeating-conic-gradient(var(--ink) 0 25%,transparent 0 50%) 0 0/6px 6px;transition:background-size .4s}
+.brand:hover i{background-size:18px 18px}
+.top .say{display:inline-flex;align-items:center;height:38px;padding:0 16px;border-radius:999px;background:var(--ink);color:var(--paper);text-decoration:none;font:500 13px/1 var(--sans)}
+.top .say:hover{background:var(--sig)}
+.rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:45;height:min(52vh,440px);width:58px;pointer-events:none}
+.rail .ln{position:absolute;right:6px;top:0;bottom:0;width:1px;background:var(--line)}
+.rail .fill{position:absolute;right:6px;top:0;width:1px;background:var(--ink);height:0}
+.rail a{position:absolute;right:0;transform:translateY(-50%);display:flex;align-items:center;gap:8px;text-decoration:none;pointer-events:auto;color:var(--grey);font:500 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 0 4px 6px;border-radius:3px;background:var(--paper)}
+.rail a::after{content:"";width:13px;height:1px;background:currentColor}
+.rail a span{position:absolute;right:100%;margin-right:4px;padding:4px 6px;border-radius:3px;background:var(--paper);white-space:nowrap;opacity:0;transform:translateX(6px);transition:opacity .25s,transform .3s}
+.rail:hover a span,.rail a:focus-visible span{opacity:1;transform:none}
+.rail:hover .t{opacity:0}
+.rail a[aria-current]{color:var(--ink)}
+.rail .t{position:absolute;right:62px;transform:translateY(-50%);padding:4px 6px;border-radius:3px;background:var(--paper);font:600 11.5px/1 var(--mono);letter-spacing:.02em;color:var(--sig);white-space:nowrap;transition:opacity .2s}
 
-/* ---------- Sections ---------- */
-section{padding:clamp(80px,9vw,120px) 0;background:var(--bg);border-top:1px solid var(--line)}
-section:nth-of-type(even){background:#0C0F14}
-.file{display:inline-flex;align-items:center;gap:10px;margin:0 0 18px;padding:6px 12px;border:1px solid var(--line);border-radius:6px;background:var(--tab);font:400 13px/1 var(--mono);color:var(--dim)}
-.file b{color:var(--white);font-weight:400}
-h2{margin:0;font:700 clamp(34px,4.2vw,56px)/1.06 var(--sans);letter-spacing:-.03em;color:var(--white)}
-h2 em{font-style:normal;color:var(--orange)}
-.lede{margin:16px 0 0;max-width:56ch;color:#9AA6B6}
+/* HERO — the portrait is sampled out of noise; scrolling runs the sampler to t = 0 */
+.hero{position:relative;height:100svh;min-height:640px;display:grid;grid-template-columns:minmax(0,46fr) minmax(0,54fr)}
+.hero .copy{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 clamp(40px,8vh,90px) var(--pad)}
+.kick{color:var(--grey)}
+.hero h1{font:600 clamp(64px,9.2vw,160px)/.86 var(--sans);letter-spacing:-.055em;margin:18px 0 28px}
+.hero .lede{font:500 clamp(22px,2vw,30px)/1.2 var(--sans);letter-spacing:-.02em;max-width:17ch}
+.hero .sub{max-width:40ch;margin-top:16px;color:#3B3B37}
+.cue{display:inline-flex;align-items:center;gap:12px;margin-top:30px;text-decoration:none;font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.cue i{width:34px;height:34px;border-radius:50%;border:1px solid var(--ink);display:grid;place-items:center;font-style:normal;transition:background .2s,color .2s}
+.cue:hover i{background:var(--ink);color:var(--paper)}
+.field{position:relative;overflow:hidden}
+.field canvas{position:absolute;inset:0;width:100%;height:100%}
+.field .still{position:absolute;left:50%;bottom:0;height:93%;width:auto;max-width:none;transform:translateX(-50%);display:none}
+html.no-gl .field canvas{display:none}
+html.no-gl .field .still{display:block}
+.readout{position:absolute;z-index:2;left:clamp(24px,3vw,48px);top:clamp(84px,13vh,130px);color:var(--ink);pointer-events:none;background:var(--paper);padding:16px 18px 16px;border-radius:6px;box-shadow:0 18px 40px -24px rgba(14,15,18,.5)}
+.readout .tt{display:block;font:300 clamp(34px,3.6vw,56px)/1 var(--mono);letter-spacing:-.04em}
+.readout .tt b{font-weight:600}
+.readout .ab{display:block;margin-top:8px;color:var(--grey)}
+.readout svg{width:170px;height:58px;margin:12px 0 0;overflow:visible}
+.readout svg path{fill:none;stroke:var(--ink);stroke-width:1.2}
+.readout svg .ax{stroke:var(--line)}
+.readout svg circle{fill:var(--sig)}
+.readout .pill{display:inline-block;margin-top:10px;padding:5px 9px 4px;border-radius:4px;background:var(--ink);color:var(--paper);font:500 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+html.no-gl .readout{display:none}
 
-/* metrics.json */
-.json{margin-top:44px;padding:26px 0;border:1px solid var(--line);border-radius:12px;background:#0B0E12;font:400 16px/1.6 var(--mono)}
-.json .row{display:grid;grid-template-columns:44px minmax(0,auto) minmax(0,1fr);align-items:baseline;gap:0 18px;padding:6px 26px 6px 0}
-.json .ln{text-align:right;color:#3E4756}
-.json .val{font:700 clamp(38px,5vw,72px)/1.1 var(--mono);letter-spacing:-.03em}
-.json .row.kv{border-top:1px solid #161B23;padding-top:16px;padding-bottom:16px}
-.json .key{grid-column:2;color:var(--blue)}
-.json .cm{grid-column:3;color:var(--dim);font-size:14px}
+/* Sections */
+.sec{position:relative;padding:clamp(100px,12vw,170px) var(--pad)}
+.eyebrow{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--ink);padding-top:12px;margin-bottom:clamp(36px,5vw,72px)}
+.eyebrow span:last-child{color:var(--grey)}
+.h2{font:600 clamp(42px,5.6vw,92px)/.95 var(--sans);letter-spacing:-.05em;max-width:16ch}
+.h2 .soft{color:var(--grey);font-weight:400}
+.lead{max-width:52ch;margin-top:22px;font-size:clamp(17px,1.35vw,20px);color:#2E2E2B}
 
-/* git log */
-.graph{position:relative;margin-top:50px;padding-left:44px}
-.graph::before{content:"";position:absolute;left:13px;top:10px;bottom:10px;width:3px;border-radius:3px;background:linear-gradient(var(--violet),var(--orange) 60%,var(--green))}
-.commit{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 200px;gap:10px 40px;padding:0 0 46px}
-.commit::before{content:"";position:absolute;left:-38px;top:6px;width:15px;height:15px;border-radius:50%;background:var(--bg);border:3px solid var(--violet)}
-.commit:first-child::before{background:var(--violet);box-shadow:0 0 0 6px rgba(124,108,255,.2)}
-.commit .hash{font:400 13.5px/1.4 var(--mono);color:var(--yellow)}
-.commit .hash span{color:var(--cyan)}
-.commit h3{margin:6px 0 0;font:700 clamp(22px,2.2vw,28px)/1.2 var(--sans);letter-spacing:-.02em;color:var(--white)}
-.commit h3 span{color:var(--orange);font-weight:600}
-.commit p{margin:8px 0 0;max-width:64ch;color:#A3AEBD}
-.commit .meta{font:400 13px/1.7 var(--mono);color:var(--dim);text-align:right}
-.commit .meta b{display:block;color:var(--txt);font-weight:400}
+/* 01 SYSTEMS — each case's signal line morphs from noise to its clean shape */
+.cases{list-style:none;margin-top:clamp(40px,5vw,80px);border-top:1px solid var(--line)}
+.case{display:grid;grid-template-columns:70px minmax(0,1.15fr) minmax(0,1fr);gap:clamp(18px,3vw,48px);padding:clamp(28px,3.6vw,48px) 0;border-bottom:1px solid var(--line);align-items:start}
+.case .no{font:500 12px/1.6 var(--mono);color:var(--grey)}
+.case h3{font:600 clamp(26px,2.5vw,40px)/1.04 var(--sans);letter-spacing:-.035em}
+.case .tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+.case .tags span{padding:5px 9px 4px;border:1px solid var(--line);border-radius:4px;font:500 10.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:#45453F}
+.case p{color:#2E2E2B}
+.case .sig{grid-column:2 / 4;height:64px;width:100%;margin-top:6px;overflow:visible}
+.case .sig path{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linejoin:round}
+.case .sig .base{stroke:var(--line);stroke-width:1}
+.case .sig text{font:500 10px var(--mono);fill:var(--grey);letter-spacing:.05em}
+.case .out{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);font-size:15px}
+.case .out b{font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--sig);display:block;margin-bottom:6px}
 
-/* contributions */
-.contrib{margin-top:40px;padding:24px;border:1px solid var(--line);border-radius:12px;background:#0B0E12;overflow-x:auto}
-.cgrid{display:grid;grid-template-rows:repeat(7,12px);grid-auto-flow:column;grid-auto-columns:12px;gap:4px;min-width:max-content}
-.cgrid i{border-radius:3px;background:#161C25}
-.cgrid i.l1{background:#3A2F7A}.cgrid i.l2{background:#5747C9}.cgrid i.l3{background:#7C6CFF}.cgrid i.l4{background:#FF8A4C}
-.legend{display:flex;justify-content:space-between;gap:16px;margin-top:16px;font:400 12.5px/1.4 var(--mono);color:var(--dim)}
+/* 02 METHOD — three steps, read as the last steps of a sampler */
+.method{background:var(--ink);color:var(--paper)}
+.method .eyebrow{border-color:var(--paper)}
+.method .eyebrow span:last-child{color:#9A9A92}
+.steps{list-style:none;margin-top:clamp(30px,4vw,60px)}
+.steps li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:clamp(16px,3vw,48px);padding:clamp(30px,4vw,56px) 0;border-top:1px solid rgba(237,236,231,.16)}
+.steps .t{font:300 clamp(28px,2.6vw,40px)/1 var(--mono);letter-spacing:-.04em;color:#8F8F88}
+.steps .t b{display:block;margin-top:10px;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#6D6D66}
+.steps h3{font:600 clamp(34px,4.6vw,76px)/.98 var(--sans);letter-spacing:-.05em;max-width:18ch}
+.steps p{margin-top:16px;max-width:52ch;color:#B9B8B1;font-size:clamp(16px,1.25vw,19px)}
 
-/* stack.yml + ADRs */
-.split{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5vw,70px);align-items:start}
-.yml{margin-top:30px;padding:22px 24px;border:1px solid var(--line);border-radius:12px;background:#0B0E12;font:400 15px/2.1 var(--mono)}
-.yml p{margin:0}
-.yml .chip{display:inline-block;margin:0 4px 0 0;padding:1px 10px;border-radius:999px;background:#1A202B;color:var(--white);line-height:1.8}
-.adrs{display:grid;gap:18px;margin-top:30px}
-.adr{border:1px solid var(--line);border-radius:12px;background:#0B0E12;overflow:hidden}
-.adr .t{display:flex;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--tab);font:400 12.5px/1.3 var(--mono);color:var(--dim)}
-.adr .t b{color:var(--white);font-weight:400}
-.adr .t .ok{color:var(--green)}
-.adr div.b{padding:16px 18px 18px}
-.adr h3{margin:0;font:700 19px/1.3 var(--sans);color:var(--white)}
-.adr p{margin:8px 0 0;color:#A3AEBD;font-size:15.5px}
-.adr p strong{color:var(--orange);font-weight:600}
+/* 03 NOTES */
+.notes{list-style:none;margin-top:clamp(36px,4vw,64px);border-top:1px solid var(--line)}
+.notes li{display:grid;grid-template-columns:90px minmax(0,1fr) 120px;gap:20px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line)}
+.notes .y{font:500 12px/1 var(--mono);color:var(--grey)}
+.notes b{font:500 clamp(19px,1.6vw,24px)/1.25 var(--sans);letter-spacing:-.02em}
+.notes small{display:block;color:var(--grey);font-size:14.5px;margin-top:4px;letter-spacing:0}
+.notes .k{justify-self:end;font:500 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 9px 4px;border:1px solid var(--line);border-radius:4px}
 
-/* contact.sh */
-.sh{margin-top:40px;border:1px solid var(--line);border-radius:12px;background:#0B0E12;overflow:hidden;font:400 15px/1.8 var(--mono)}
-.sh .t{padding:10px 16px;border-bottom:1px solid var(--line);background:var(--tab);font-size:12.5px;color:var(--dim)}
-.sh pre{margin:0;padding:22px 22px 8px;white-space:pre-wrap;font:inherit}
-.opts{display:flex;flex-wrap:wrap;gap:12px;padding:10px 22px 26px}
-.opt{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border:1px solid var(--line);border-radius:8px;background:#141922;color:var(--white);text-decoration:none;font:500 14px/1 var(--mono)}
-.opt span{color:var(--dim)}
-.opt.pr{background:var(--violet);border-color:var(--violet)}
-.opt.pr span{color:#E4E0FF}
-.opt:hover{border-color:var(--orange)}
-footer{padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));background:var(--desk);color:var(--dim);text-align:center;font:400 12.5px/1.6 var(--mono)}
+/* 04 SIGNAL — contact */
+.signal{padding-bottom:clamp(60px,8vw,110px)}
+.signal .big{font:600 clamp(60px,10.5vw,190px)/.86 var(--sans);letter-spacing:-.06em}
+.signal .big span{color:var(--sig)}
+.cgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,40px);margin-top:clamp(40px,5vw,72px)}
+.cgrid div{border-top:1px solid var(--ink);padding-top:12px}
+.cgrid .mono{color:var(--grey);display:block;margin-bottom:8px}
+.cgrid a,.cgrid p{font:500 clamp(17px,1.4vw,21px)/1.35 var(--sans);text-decoration:none;overflow-wrap:anywhere}
+.cgrid a:hover{color:var(--sig)}
+.btn{display:inline-flex;align-items:center;gap:12px;margin-top:clamp(30px,4vw,50px);height:56px;padding:0 26px;border-radius:999px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:500;transition:background .25s}
+.btn:hover{background:var(--sig)}
+footer{border-top:1px solid var(--line);padding:28px var(--pad) 96px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;color:var(--grey);font-size:13.5px;line-height:1.6}
+footer p{max-width:86ch}
 
-@media (max-width:1100px){
-  .work{grid-template-columns:52px 200px minmax(0,1fr)}
-  .panes{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
-  .status span:nth-child(n+5):not(.sep):not(:last-child){display:none}
-}
+@media (min-width:1101px){.sec{padding-right:calc(var(--pad) + 64px)}}
+@media (max-width:1100px){.rail{display:none}}
 @media (max-width:900px){
-  .hero{padding:10px}
-  .ide{grid-template-rows:auto auto 28px}
-  .work{grid-template-columns:minmax(0,1fr)}
-  .exp{min-width:0}
-  .act{display:none}
-  .exp{padding:0;border-right:0;border-bottom:1px solid var(--line);overflow:visible}
-  .exp .h,.exp .root,.tree .dir,.tree .img{display:none}
-  .tree{display:flex;overflow-x:auto;scrollbar-width:none}
-  .tree::-webkit-scrollbar{display:none}
-  .tree li{flex:none}
-  .tree .sub{display:contents}
-  .tree a,.tree .sub a{padding:12px 14px;border-left:0;border-bottom:2px solid transparent;white-space:nowrap}
-  .tree a[aria-current],.tree a.cur{border-bottom-color:var(--violet)}
-  .ed{grid-template-rows:38px auto auto}
-  .panes{grid-template-columns:minmax(0,1fr)}
-  .prev{border-left:0;border-top:1px solid var(--line)}
-  .canvas{padding:16px}
-  .canvas img{max-height:none;width:min(100%,360px)}
-  .split{grid-template-columns:1fr}
-  .commit{grid-template-columns:1fr}
-  .commit .meta{text-align:left}
-  .status span:nth-child(n+3):not(:last-child){display:none}
-  .status span.sep{display:flex}
+  .hero{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;height:auto;min-height:0}
+  .field{order:-1;height:66svh;min-height:420px}
+  .hero .copy{padding:26px var(--pad) 56px}
+  .hero h1{font-size:clamp(56px,16vw,96px);margin:14px 0 20px}
+  .readout{right:auto;top:auto;bottom:14px;left:var(--pad);display:flex;gap:14px;align-items:center;padding:10px 12px}
+  .readout .ab{display:none}
+  .readout svg{display:none}
+  .readout .tt{font-size:24px}
+  .readout .pill{margin-top:0}
+  .case{grid-template-columns:minmax(0,1fr)}
+  .case .no{order:-1}
+  .case .sig{grid-column:auto}
+  .steps li{grid-template-columns:minmax(0,1fr)}
+  .notes li{grid-template-columns:64px minmax(0,1fr)}
+  .notes .k{grid-column:2;justify-self:start}
+  .cgrid{grid-template-columns:minmax(0,1fr)}
 }
-@media (max-width:600px){
-  .tbar .cmd,.dots{display:none}
-  .tabs span:nth-child(3){display:none}
-  .code{font-size:13.5px;padding:16px 0}
-  .code{grid-template-columns:34px minmax(0,1fr)}
-  .gut{padding-right:10px}
-  .src{padding-right:14px}
-  .src .h1{font-size:clamp(30px,8.6vw,46px)}
-  .json .row{grid-template-columns:30px minmax(0,1fr);padding-right:16px}
-  .json .cm{grid-column:2}
-  .json .key{grid-column:2}
-  .json .val{grid-column:2!important;font-size:clamp(34px,11vw,48px)}
-  .graph{padding-left:34px}
-  .graph::before{left:8px}
-  .commit::before{left:-32px}
-  .term pre{min-height:0}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (max-width:600px){.top .say{display:none}}
 </style>
 </head>
 <body>
-<main>
-  <header class="hero" id="top">
-    <div class="ide">
-      <div class="tbar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="ttl"><b>README.md</b> — daniel-okafor</span><span class="cmd" aria-hidden="true">⌘ K</span></div>
-      <div class="work">
-        <div class="act" aria-hidden="true">
-          <svg class="on" viewBox="0 0 24 24"><path d="M4 4h7l2 2h7v14H4z"/></svg>
-          <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg>
-          <svg viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="9" r="2"/><path d="M6 7v10M18 11c0 4-6 3-11 7"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
-        </div>
-        <nav class="exp" aria-label="Sections">
-          <p class="h">EXPLORER</p>
-          <p class="root">▾ DANIEL-OKAFOR</p>
-          <ul class="tree">
-            <li><a href="#top" class="cur"><span class="ic y">#</span>README.md</a></li>
-            <li><a href="#metrics" data-spy><span class="ic cy">{}</span>metrics.json</a></li>
-            <li><a href="#log" data-spy><span class="ic n">⎇</span>git log</a></li>
-            <li><a href="#contrib" data-spy><span class="ic s">▦</span>contributions</a></li>
-            <li><a href="#stack" data-spy><span class="ic k">≡</span>stack.yml</a></li>
-            <li class="dir">▾ adr</li>
-            <li class="sub"><a href="#adr" data-spy><span class="ic f">◆</span>decisions.md</a></li>
-            <li><a href="#contact" data-spy><span class="ic s">$</span>contact.sh</a></li>
-            <li class="img"><a href="#top"><span class="ic k">▣</span>daniel.jpg</a></li>
-          </ul>
-        </nav>
-        <div class="ed">
-          <div class="tabs" aria-hidden="true"><span class="on"><b class="y">#</b>README.md</span><span><b class="k">▣</b>daniel.jpg</span><span><b class="cy">{}</b>metrics.json</span></div>
-          <div class="panes">
-            <div class="code">
-              <ol class="gut" aria-hidden="true"><li style="height:calc(clamp(40px,4.4vw,66px)*1.05 + 4px)">1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li><li>13</li></ol>
-              <div class="src">
-                <h1 class="h1"><span class="c" aria-hidden="true"># </span>Daniel Okafor</h1>
-                <p> </p>
-                <p class="q">&gt; Head of Software Engineering · payments at scale</p>
-                <p> </p>
-                <p><span class="k">##</span> <span class="w">focus</span></p>
-                <p><span class="n">-</span> Teams of <b class="w">40+ engineers</b>, 7 squads, 2 time zones</p>
-                <p><span class="n">-</span> Platforms that move money and never sleep</p>
-                <p><span class="n">-</span> Hiring, growing and keeping great engineers</p>
-                <p> </p>
-                <p><b class="w">**Based:**</b> Dubai · Lagos <span class="c">— remote-friendly</span></p>
-                <p><b class="w">**Open to:**</b> <span class="s">`CTO`</span> / <span class="s">`VP Engineering`</span></p>
-                <p> </p>
-                <p><a class="lk pr" href="#contact">./contact.sh →</a> <a class="lk" href="#log">git log --career</a></p>
-              </div>
-            </div>
-            <div class="prev">
-              <div class="bar"><span>daniel.jpg — preview</span><span>928 × 1152</span></div>
-              <div class="canvas"><img src="img/daniel-okafor-640.webp" srcset="img/daniel-okafor-640.webp 640w, img/daniel-okafor.webp 928w" sizes="(max-width:900px) 360px, 420px" width="928" height="1152" alt="Daniel Okafor smiling, in a black sweater, in front of monitors" fetchpriority="high"></div>
-            </div>
-          </div>
-          <div class="term">
-            <div class="tt" aria-hidden="true"><b>TERMINAL</b><span>PROBLEMS 0</span><span>OUTPUT</span></div>
-<pre id="term" aria-label="Terminal"><span class="pr">daniel@lagos-dxb ~/career (main)$</span> whoami
-Head of Software Engineering · payments at scale
-<span class="pr">daniel@lagos-dxb ~/career (main)$</span> ./open-to --roles
-<span class="s">✓</span> CTO · VP Engineering · GCC, Africa or remote
-<span class="pr">daniel@lagos-dxb ~/career (main)$</span> <span class="cur" aria-hidden="true"></span></pre>
-          </div>
-        </div>
-      </div>
-      <div class="status" aria-label="Status bar">
-        <span>⎇ <b>main</b></span><span>✓ 0 problems</span><span>uptime <b>99.99%</b></span><span>p99 <b>−62%</b></span><span>deploys/day <b>40</b></span><span class="sep">Ln 1, Col 1</span><span>UTF-8</span><span>Go · TS · Kotlin</span>
-      </div>
-    </div>
-  </header>
+<header class="top" data-headroom="0.9">
+  <a class="brand" href="#top"><i aria-hidden="true"></i>Daniel Okafor</a>
+  <a class="say" href="#signal">Send a signal</a>
+</header>
+<nav class="rail" aria-label="Sections">
+  <div class="ln"></div><div class="fill"></div>
+  <a href="#top" data-spy style="top:0%"><span>Noise</span>1000</a>
+  <a href="#systems" data-spy style="top:25%"><span>Systems</span>750</a>
+  <a href="#method" data-spy style="top:50%"><span>Method</span>500</a>
+  <a href="#notes" data-spy style="top:75%"><span>Notes</span>250</a>
+  <a href="#signal" data-spy style="top:100%"><span>Signal</span>0</a>
+  <b class="t" aria-hidden="true">t = 1000</b>
+</nav>
 
-  <section id="metrics">
-    <div class="wrap">
-      <p class="file"><b>{}</b> metrics.json</p>
-      <h2>What changed <em>under his watch.</em></h2>
-      <div class="json" data-reveal>
-        <div class="row"><span class="ln">1</span><span class="cy">{</span></div>
-        <div class="row kv"><span class="ln">2</span><span class="key">"uptime":</span><span class="cm">// Payments API, last 24 months</span><span></span><span class="val s" style="grid-column:2/4">"99.99%"</span></div>
-        <div class="row kv"><span class="ln">3</span><span class="key">"p99_latency":</span><span class="cm">// after the ledger rewrite</span><span></span><span class="val n" style="grid-column:2/4">"−62%"</span></div>
-        <div class="row kv"><span class="ln">4</span><span class="key">"deploys_per_day":</span><span class="cm">// up from two a week</span><span></span><span class="val n" style="grid-column:2/4">40</span></div>
-        <div class="row kv"><span class="ln">5</span><span class="key">"engineers":</span><span class="cm">// across seven squads</span><span></span><span class="val n" style="grid-column:2/4">46</span></div>
-        <div class="row"><span class="ln">6</span><span class="cy">}</span></div>
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="copy">
+      <p class="kick mono">Principal AI engineer · London / Lagos</p>
+      <h1 id="h1">Daniel<br>Okafor</h1>
+      <p class="lede">Most of the work is removing noise.</p>
+      <p class="sub">I build machine-learning systems that hold up outside the demo: retrieval, evaluation, and the unglamorous plumbing between them.</p>
+      <a class="cue" href="#systems"><i aria-hidden="true">↓</i>Scroll to denoise</a>
+    </div>
+    <div class="field" aria-hidden="true">
+      <canvas id="noise"></canvas>
+      <img class="still" src="img/daniel-okafor/cut.webp" alt="" width="928" height="1013">
+      <div class="readout">
+        <span class="tt">t = <b class="js-t">1000</b></span>
+        <span class="ab mono">ᾱ<sub>t</sub> = <span class="js-ab">0.000</span> · cosine schedule</span>
+        <svg viewBox="0 0 170 58"><path class="ax" d="M0 57.5H170"/><path class="js-curve" d=""/><circle class="js-dot" r="3.2" cx="0" cy="58"/></svg>
+        <span class="pill js-state">Sampling</span>
       </div>
     </div>
+    <p class="sr">Portrait of Daniel Okafor, generated with AI, rendering out of noise as the page scrolls.</p>
   </section>
 
-  <section id="log">
-    <div class="wrap">
-      <p class="file"><b>$</b> git log --career --graph</p>
-      <h2>Commit <em>history.</em></h2>
-      <div class="graph">
-        <article class="commit" data-reveal><div><p class="hash">a3f9c21 <span>(HEAD → today)</span></p><h3>Head of Software Engineering <span>@ Korra Commerce</span></h3><p>Leads engineering for a pan-African and Gulf payments platform processing 9 million transactions a month. Introduced squad ownership, on-call that people don't dread, and a promotion framework.</p></div><p class="meta"><b>2021 — now</b>Dubai &amp; Lagos</p></article>
-        <article class="commit" data-reveal><div><p class="hash">7c1d0e4</p><h3>Engineering Manager <span>@ Fieldwise</span></h3><p>Grew the team from 6 to 22 engineers while shipping the offline-first field-service app used by 30,000 technicians.</p></div><p class="meta"><b>2018 — 2021</b>Lagos</p></article>
-        <article class="commit" data-reveal><div><p class="hash">2b88f9a</p><h3>Senior Software Engineer <span>@ Tidewater Labs</span></h3><p>Built the event-streaming backbone and mentored five engineers into senior roles.</p></div><p class="meta"><b>2014 — 2018</b>Lagos · London</p></article>
-        <article class="commit" data-reveal style="padding-bottom:0"><div><p class="hash">0f1e2d3 <span>(initial commit)</span></p><h3>BSc Computer Science <span>@ Lagos</span></h3><p>First-class honours. Final project: a fraud-detection service for mobile money.</p></div><p class="meta"><b>2010 — 2014</b>Lagos</p></article>
-      </div>
-    </div>
+  <section class="sec" id="systems" aria-labelledby="sys-h">
+    <div class="eyebrow mono"><span>01 · Systems</span><span>Selected work, 2019 – 2026</span></div>
+    <h2 class="h2" id="sys-h" data-scramble>Models are the easy part.</h2>
+    <p class="lead">The hard part is everything that decides whether you can trust them on a Tuesday: what they retrieve, how they are tested, and what they do when they do not know.</p>
+    <ol class="cases">
+      <li class="case" data-shape="peak">
+        <span class="no">01</span>
+        <div><h3>Guideline search for clinicians</h3><div class="tags"><span>Retrieval</span><span>Evaluation</span><span>Python</span></div></div>
+        <div><p>Search over a hospital group's clinical guidelines. Every answer quotes the paragraph it came from, and when the guidelines are silent the system says so instead of guessing.</p>
+          <p class="out"><b>What changed</b>Doctors stopped double-checking every answer, because each one showed its source.</p></div>
+        <svg class="sig" aria-hidden="true"></svg>
+      </li>
+      <li class="case" data-shape="step">
+        <span class="no">02</span>
+        <div><h3>A release gate for model updates</h3><div class="tags"><span>Evaluation</span><span>CI</span><span>Infrastructure</span></div></div>
+        <div><p>A test harness that runs every candidate model against hand-written cases from real support tickets, and blocks the release if any category gets worse.</p>
+          <p class="out"><b>What changed</b>Regressions are caught before release instead of being reported by customers.</p></div>
+        <svg class="sig" aria-hidden="true"></svg>
+      </li>
+      <li class="case" data-shape="speech">
+        <span class="no">03</span>
+        <div><h3>Speech recognition on a budget</h3><div class="tags"><span>On-device</span><span>Yoruba</span><span>Hausa</span></div></div>
+        <div><p>Small speech models that run on entry-level phones over patchy networks, trained with community-recorded audio and evaluated by native speakers, not just word error rates.</p>
+          <p class="out"><b>What changed</b>Voice notes became searchable for people who never type.</p></div>
+        <svg class="sig" aria-hidden="true"></svg>
+      </li>
+      <li class="case" data-shape="decay">
+        <span class="no">04</span>
+        <div><h3>Cost per answer</h3><div class="tags"><span>LLM systems</span><span>Caching</span><span>Routing</span></div></div>
+        <div><p>A routing layer that sends easy questions to small models and hard ones to large models, with caching in between, so the bill grows slower than the traffic.</p>
+          <p class="out"><b>What changed</b>Finance could finally forecast the line item.</p></div>
+        <svg class="sig" aria-hidden="true"></svg>
+      </li>
+    </ol>
   </section>
 
-  <section id="contrib">
-    <div class="wrap">
-      <p class="file"><b>▦</b> contributions</p>
-      <h2>Still <em>writes code.</em></h2>
-      <p class="lede">1,284 contributions in the last year, and maintainer of two open-source libraries.</p>
-      <div class="contrib" data-reveal>
-        <div class="cgrid" id="cgrid" aria-hidden="true"></div>
-        <div class="legend"><span>Illustrative activity pattern · last 52 weeks</span><span>less ▢ ▣ ■ more</span></div>
-      </div>
-    </div>
+  <section class="sec method" id="method" aria-labelledby="m-h">
+    <div class="eyebrow mono"><span>02 · Method</span><span>The last three steps</span></div>
+    <h2 class="h2 sr" id="m-h">Method</h2>
+    <ol class="steps">
+      <li><span class="t">t = 3<b>Evaluate</b></span><div><h3 data-jitter>Write the test set before the model.</h3><p>A model without an evaluation is a rumour. I start every project with the cases it must get right, the cases it must refuse, and a way to run both in minutes.</p></div></li>
+      <li><span class="t">t = 2<b>Fail well</b></span><div><h3 data-jitter>Decide where it says "I don't know".</h3><p>Every system is uncertain somewhere. The design work is choosing where, and making that answer useful: a source, a hand-off, a better question.</p></div></li>
+      <li><span class="t">t = 1<b>Ship small</b></span><div><h3 data-jitter>The smallest model that works, then make it boring.</h3><p>Boring means monitored, versioned, cheap to run and easy to roll back. Clever comes after it is boring, if at all.</p></div></li>
+    </ol>
   </section>
 
-  <section id="stack">
-    <div class="wrap split">
-      <div>
-        <p class="file"><b>≡</b> stack.yml</p>
-        <h2>Tools of <em>the trade.</em></h2>
-        <div class="yml" data-reveal>
-          <p><span class="k">lang:</span> <span class="chip">Go</span><span class="chip">TypeScript</span><span class="chip">Kotlin</span></p>
-          <p><span class="k">data:</span> <span class="chip">PostgreSQL</span><span class="chip">Kafka</span></p>
-          <p><span class="k">infra:</span> <span class="chip">Kubernetes</span><span class="chip">AWS</span><span class="chip">Terraform</span></p>
-          <p><span class="k">obs:</span> <span class="chip">OpenTelemetry</span></p>
-          <p><span class="k">sec:</span> <span class="chip">PCI DSS</span></p>
-        </div>
-      </div>
-      <div id="adr">
-        <p class="file"><b>◆</b> adr/decisions.md</p>
-        <h2>Decisions <em>on record.</em></h2>
-        <div class="adrs">
-          <article class="adr" data-reveal><p class="t" style="margin:0"><b>ADR-014</b><span class="ok">accepted</span></p><div class="b"><h3>Double-entry ledger as the source of truth</h3><p>Every balance is derived, never stored. <strong>Reconciliation incidents dropped to zero.</strong></p></div></article>
-          <article class="adr" data-reveal><p class="t" style="margin:0"><b>ADR-022</b><span class="ok">accepted</span></p><div class="b"><h3>Squads own services end to end</h3><p>Build it, run it, improve it. <strong>Mean time to recovery fell from hours to 11 minutes.</strong></p></div></article>
-          <article class="adr" data-reveal><p class="t" style="margin:0"><b>ADR-031</b><span class="ok">accepted</span></p><div class="b"><h3>Hiring with a work sample, not a puzzle</h3><p>A paid, realistic task. <strong>Offer acceptance rose to 86%.</strong></p></div></article>
-        </div>
-      </div>
-    </div>
+  <section class="sec" id="notes" aria-labelledby="n-h">
+    <div class="eyebrow mono"><span>03 · Notes</span><span>Writing and talks</span></div>
+    <h2 class="h2" id="n-h" data-scramble>Notes from the noise floor.</h2>
+    <ul class="notes">
+      <li><span class="y">2026</span><b>Test sets age badly<small>Why last year's evaluation can make this year's model look better than it is.</small></b><span class="k">Essay</span></li>
+      <li><span class="y">2025</span><b>Retrieval is a search problem<small>Most retrieval failures are search failures with a language model on top.</small></b><span class="k">Talk</span></li>
+      <li><span class="y">2025</span><b>Listening tests for low-resource speech<small>What native-speaker review catches that word error rate misses.</small></b><span class="k">Paper</span></li>
+      <li><span class="y">2024</span><b>The cost of an answer<small>A worked example of routing, caching and the maths finance teams ask for.</small></b><span class="k">Essay</span></li>
+    </ul>
   </section>
 
-  <section id="contact">
-    <div class="wrap">
-      <p class="file"><b>$</b> ssh daniel</p>
-      <h2>Let's build something <em>reliable.</em></h2>
-      <div class="sh" data-reveal>
-        <p class="t" style="margin:0">contact.sh</p>
-<pre><span class="pr" style="color:var(--green)">$</span> ./contact --role <span class="s">"CTO | VP Engineering"</span> --region <span class="s">"GCC, Africa, remote"</span>
-<span class="s">✓</span> Daniel replies within two working days</pre>
-        <div class="opts"><a class="opt pr" href="#contact" data-demo><span>--</span>email</a><a class="opt" href="#contact" data-demo><span>--</span>github</a><a class="opt" href="#contact" data-demo><span>--</span>linkedin</a><a class="opt" href="#contact" data-demo><span>--</span>cv.pdf</a></div>
-      </div>
+  <section class="sec signal" id="signal" aria-labelledby="c-h">
+    <div class="eyebrow mono"><span>04 · Signal</span><span>t = 0</span></div>
+    <h2 class="big" id="c-h">Send a <span>signal.</span></h2>
+    <div class="cgrid">
+      <div><span class="mono">Email</span><a href="mailto:daniel@okafor.example" data-demo>daniel@okafor.example</a></div>
+      <div><span class="mono">Based in</span><p>London, with teams in Lagos and Nairobi</p></div>
+      <div><span class="mono">Open to</span><p>Principal and staff roles, and advisory work on evaluation</p></div>
     </div>
+    <a class="btn" href="#" data-demo="This is a concept site, so messages can't be sent from here.">Start a conversation <span aria-hidden="true">→</span></a>
   </section>
 </main>
-<footer>Concept site designed by Zenith Dubai CV · Daniel Okafor is a fictional person; companies, figures and links are illustrative.</footer>
+
+<footer>
+  <p>Daniel Okafor is fictional and this is a concept website. The portrait was generated with AI. Projects, outcomes, writing and contact details are illustrative and do not describe real organisations or real work. The noise follows a real cosine diffusion schedule, run backwards as you scroll.</p>
+  <p>A concept website by Zenith Dubai CV.</p>
+</footer>
+
 <script>
-(function () {
-  // Contribution grid: a fixed pseudo-random pattern (same on every visit), busier on weekdays.
-  var g = document.getElementById("cgrid");
-  if (g) {
-    var seed = 20260416, html = "";
-    function rnd() { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; }
-    for (var w = 0; w < 52; w++) for (var d = 0; d < 7; d++) {
-      var r = rnd() * (d === 0 || d === 6 ? 0.55 : 1) * (0.75 + 0.25 * Math.sin(w / 5));
-      var l = r > 0.86 ? 4 : r > 0.62 ? 3 : r > 0.38 ? 2 : r > 0.16 ? 1 : 0;
-      html += "<i" + (l ? ' class="l' + l + '"' : "") + "></i>";
-    }
-    g.innerHTML = html;
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC, root = document.documentElement;
+  var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
+  var pad4 = function(n){ n = Math.round(n); return ("000" + n).slice(-4); };
+
+  /* ---------- Cosine schedule (Nichol & Dhariwal): ᾱ(t) = cos²(((t/T)+s)/(1+s)·π/2) / ᾱ(0) ---------- */
+  var T = 1000, S0 = .008, F0 = Math.pow(Math.cos(S0 / (1 + S0) * Math.PI / 2), 2);
+  function abar(t){ return Math.pow(Math.cos(((t / T) + S0) / (1 + S0) * Math.PI / 2), 2) / F0; }
+  (function plot(){
+    var d = "";
+    for (var t = T; t >= 0; t -= 20){ var x = (1 - t / T) * 170, y = 57.5 - Math.sqrt(abar(t)) * 55; d += (d ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1); }
+    $(".js-curve").setAttribute("d", d);
+  })();
+
+  /* ---------- The sampler: x_t = √ᾱ·x₀ + √(1−ᾱ)·ε, with x₀ = the cut-out portrait over paper ---------- */
+  var cv = $("#noise"), field = $(".field"), gl = null, prog, U = {}, tex, img = new Image(), ready = false, tNow = 1000, dirty = true;
+  var PAPER = [0xED / 255, 0xEC / 255, 0xE7 / 255];
+  try { gl = cv.getContext("webgl", {antialias:false, alpha:false, depth:false, stencil:false, preserveDrawingBuffer:false}); } catch (e) {}
+  if (!gl) root.classList.add("no-gl");
+  var VS = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+  var FS = [
+    "precision highp float;",
+    "uniform sampler2D uImg;uniform vec2 uRes;uniform vec4 uRect;uniform float uAbar,uLod,uSeed,uGrain,uFeather;uniform vec3 uPaper;",
+    "float h(vec2 p){vec3 q=fract(vec3(p.xyx)*.1031);q+=dot(q,q.yzx+33.33);return fract((q.x+q.y)*q.z);}",
+    "vec3 gauss(vec2 c){vec2 s=c+uSeed*vec2(7.13,3.71);",
+    " float u1=max(h(s),1e-5),u2=h(s+19.7),u3=max(h(s+41.3),1e-5),u4=h(s+73.1);",
+    " float r1=sqrt(-2.*log(u1)),r2=sqrt(-2.*log(u3));",
+    " return vec3(r1*cos(6.28318*u2),r1*sin(6.28318*u2),r2*cos(6.28318*u4));}",
+    "void main(){",
+    " vec2 p=vec2(gl_FragCoord.x,uRes.y-gl_FragCoord.y);",
+    " vec2 uv=(p-uRect.xy)/uRect.zw;",
+    " vec4 c=vec4(0.);",
+    " if(uv.x>=0.&&uv.x<=1.&&uv.y>=0.&&uv.y<=1.)c=texture2D(uImg,uv,uLod);",
+    " vec3 x0=c.rgb+uPaper*(1.-c.a);",
+    " float k=smoothstep(0.,uFeather,p.x)*smoothstep(0.,uFeather*.5,p.y);",
+    " float ab=mix(1.,uAbar,k);",
+    " vec3 xt=sqrt(ab)*(x0*2.-1.)+sqrt(1.-ab)*gauss(floor(p/uGrain));",
+    " gl_FragColor=vec4(clamp(xt*.5+.5,0.,1.),1.);",
+    "}"].join("\n");
+  function sh(type, src){ var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
+  if (gl){
+    try {
+      prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+      gl.useProgram(prog);
+      var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+      var loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      ["uImg","uRes","uRect","uAbar","uLod","uSeed","uGrain","uFeather","uPaper"].forEach(function(n){ U[n] = gl.getUniformLocation(prog, n); });
+    } catch (e) { gl = null; root.classList.add("no-gl"); }
   }
-  // Terminal: type the two commands once on load (instant with reduced motion or ?static).
-  var Z = window.ZC || {}, t = document.getElementById("term");
-  if (!t || Z.reduce || Z.still) return;
-  var full = t.innerHTML, cmds = ["whoami", "./open-to --roles"], outs = [];
-  var prompt = '<span class="pr">daniel@lagos-dxb ~/career (main)$</span> ';
-  var lines = ["Head of Software Engineering · payments at scale", '<span class="s">✓</span> CTO · VP Engineering · GCC, Africa or remote'];
-  var cur = '<span class="cur" aria-hidden="true"></span>';
-  var done = "", i = 0, j = 0;
-  t.innerHTML = prompt + cur;
-  function step() {
-    if (i >= cmds.length) { t.innerHTML = full; return; }
-    if (j <= cmds[i].length) {
-      t.innerHTML = done + prompt + cmds[i].slice(0, j) + cur; j++;
-      setTimeout(step, 55 + Math.random() * 60);
-    } else {
-      done += prompt + cmds[i] + "\n" + lines[i] + "\n"; i++; j = 0;
-      t.innerHTML = done + prompt + cur;
-      setTimeout(step, 650);
-    }
+  img.onload = function(){
+    if (!gl) return;
+    // Upload into a power-of-two canvas so the mip chain exists in WebGL1 too; the mips give the coarse-to-fine look.
+    var c2 = document.createElement("canvas"); c2.width = c2.height = 1024; c2.getContext("2d").drawImage(img, 0, 0, 1024, 1024);
+    tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c2);
+    gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    ready = true; resize(); draw();
+  };
+  img.onerror = function(){ root.classList.add("no-gl"); };
+  img.src = "img/daniel-okafor/cut.webp";
+  var dpr = 1, W = 0, H = 0;
+  function resize(){
+    if (!gl) return;
+    dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    W = Math.max(2, Math.round(field.clientWidth * dpr)); H = Math.max(2, Math.round(field.clientHeight * dpr));
+    cv.width = W; cv.height = H; gl.viewport(0, 0, W, H); dirty = true; draw();
   }
-  setTimeout(step, 700);
-})();
+  var tAbar = $(".js-ab"), tT = $(".js-t"), dot = $(".js-dot"), state = $(".js-state"), lastSeed = -1;
+  function readout(t){
+    var a = abar(t);
+    tT.textContent = pad4(t); tAbar.textContent = a.toFixed(3);
+    dot.setAttribute("cx", ((1 - t / T) * 170).toFixed(1)); dot.setAttribute("cy", (57.5 - Math.sqrt(a) * 55).toFixed(1));
+    state.textContent = t < .5 ? "Sample complete" : "Sampling";
+  }
+  function draw(){
+    readout(tNow);
+    if (!gl) return;
+    // until the portrait has loaded, the field is pure noise whatever the counter says
+    var t = ready ? tNow : T, a = abar(t), mob = innerWidth <= 900;
+    var fh = H * (mob ? .9 : .93), fwid = fh * 928 / 1013;
+    gl.uniform1i(U.uImg, 0);
+    gl.uniform2f(U.uRes, W, H);
+    gl.uniform4f(U.uRect, (W - fwid) / 2 + (mob ? 0 : W * .02), H - fh, fwid, fh);
+    gl.uniform1f(U.uAbar, a);
+    gl.uniform1f(U.uLod, 6 * Math.pow(t / T, 1.15));
+    gl.uniform1f(U.uSeed, Math.floor(t / 8));
+    gl.uniform1f(U.uGrain, Math.round(2 * dpr));
+    gl.uniform1f(U.uFeather, mob ? 1 : 140 * dpr);
+    gl.uniform3f(U.uPaper, PAPER[0], PAPER[1], PAPER[2]);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  function setT(t){ t = clamp(t, 0, T); if (Math.abs(t - tNow) < .01 && !dirty) return; tNow = t; dirty = false; draw(); }
+  window.addEventListener("resize", resize);
+  if (!ZC.motion) tNow = 0;
+  resize();
+
+  /* ---------- Systems: each signal line resolves from noise into its own clean shape ---------- */
+  function gaussR(){ var u = 1 - Math.random(), v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  var SHAPES = {
+    peak: function(x){ return Math.exp(-Math.pow((x - .62) / .045, 2)); },
+    step: function(x){ return x < .48 ? .15 : .85; },
+    speech: function(x){ var env = Math.max(0, Math.sin(x * Math.PI * 3.2)) * .5 + .1; return .5 + Math.sin(x * 96) * env * .5; },
+    decay: function(x){ return .1 + .82 * Math.exp(-x * 3.4); }
+  };
+  var LABELS = {peak:"one source, quoted", step:"gate: worse → blocked", speech:"voice, on device", decay:"cost per answer"};
+  var sigs = $$(".case").map(function(li){
+    var svg = $(".sig", li), shape = SHAPES[li.dataset.shape], n = 160, noise = [], clean = [];
+    for (var i = 0; i <= n; i++){ noise.push(.5 + gaussR() * .2); clean.push(shape(i / n)); }
+    var base = document.createElementNS("http://www.w3.org/2000/svg", "path"); base.setAttribute("class", "base");
+    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    var lab = document.createElementNS("http://www.w3.org/2000/svg", "text"); lab.textContent = LABELS[li.dataset.shape];
+    svg.appendChild(base); svg.appendChild(path); svg.appendChild(lab);
+    var o = {k: ZC.motion ? 0 : 1};
+    function render(){
+      var w = svg.clientWidth || 600, h = 64, d = "";
+      svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+      for (var i = 0; i <= n; i++){ var v = noise[i] * (1 - o.k) + clean[i] * o.k; d += (i ? "L" : "M") + (i / n * w).toFixed(1) + " " + (h - 4 - v * (h - 10)).toFixed(1); }
+      path.setAttribute("d", d); base.setAttribute("d", "M0 " + (h - .5) + "H" + w);
+      lab.setAttribute("x", w); lab.setAttribute("y", 8); lab.setAttribute("text-anchor", "end");
+      lab.style.opacity = o.k > .85 ? (o.k - .85) / .15 : 0;
+    }
+    render(); return {li:li, o:o, render:render};
+  });
+  window.addEventListener("resize", function(){ sigs.forEach(function(s){ s.render(); }); });
+
+  /* ---------- Rail: the page counts down from t = 1000 to t = 0 ---------- */
+  var railT = $(".rail .t"), railFill = $(".rail .fill"), rail = $(".rail");
+  function railUpdate(){
+    var max = document.documentElement.scrollHeight - innerHeight, p = max > 0 ? clamp(scrollY / max, 0, 1) : 0;
+    var hgt = rail.clientHeight;
+    railFill.style.height = (p * hgt).toFixed(1) + "px";
+    railT.style.top = (p * hgt).toFixed(1) + "px";
+    railT.textContent = "t = " + pad4(T * (1 - p));
+  }
+  window.addEventListener("scroll", railUpdate, {passive:true}); railUpdate();
+
+  window.addEventListener("load", function(){
+    if (!ZC.motion || !window.gsap){ setT(0); return; }
+    gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin);
+    ZC.smooth();
+    document.fonts.ready.then(function(){
+      var o = {t:1000}, mob = innerWidth <= 900, START = mob ? 520 : 600, introT = 1000, scrollT = T;
+      function apply(){ setT(Math.min(introT, scrollT)); }
+      // Intro: the sampler runs from pure noise to a ghost of the portrait; scrolling finishes the job
+      // (whichever is further along wins, so an early scroll is never fought by the intro).
+      gsap.to(o, {t:START, duration:2.6, ease:"power2.out", onUpdate:function(){ introT = o.t; apply(); }});
+      var lines = SplitText.create(".hero h1", {type:"lines,chars", mask:"lines"});
+      gsap.from(lines.chars, {yPercent:110, duration:1.1, stagger:.035, ease:"expo.out", delay:.2});
+      gsap.from(".kick, .hero .lede, .hero .sub, .cue", {opacity:0, y:16, duration:1, stagger:.08, ease:"expo.out", delay:.5});
+      gsap.from(".readout > *", {opacity:0, y:10, duration:.8, stagger:.08, ease:"expo.out", delay:.8});
+      if (!mob){
+        ScrollTrigger.create({trigger:".hero", start:"top top", end:"+=130%", pin:true, scrub:true,
+          onUpdate:function(self){ scrollT = self.progress > .002 ? START * (1 - self.progress) : T; apply(); }});
+        gsap.to(".hero .copy", {yPercent:-6, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"+=130%", scrub:true}});
+      } else {
+        ScrollTrigger.create({trigger:".field", start:"top top", end:"bottom top", scrub:true,
+          onUpdate:function(self){ scrollT = self.progress > .002 ? START * (1 - Math.min(1, self.progress * 1.6)) : T; apply(); }});
+      }
+      $$("[data-scramble]").forEach(function(el){
+        var txt = el.textContent;
+        el.setAttribute("aria-label", txt);
+        ScrollTrigger.create({trigger:el, start:"top 85%", once:true, onEnter:function(){
+          gsap.to(el, {duration:1.4, scrambleText:{text:txt, chars:"▓▒░█01", revealDelay:.2, speed:.6, tweenLength:false}, ease:"none"});
+        }});
+      });
+      var big = SplitText.create(".signal .big", {type:"chars", mask:"chars"});
+      gsap.from(big.chars, {yPercent:105, duration:1, stagger:.03, ease:"expo.out", scrollTrigger:{trigger:".signal .big", start:"top 85%"}});
+      sigs.forEach(function(s){
+        gsap.to(s.o, {k:1, ease:"none", onUpdate:s.render, scrollTrigger:{trigger:s.li, start:"top 85%", end:"top 35%", scrub:.6}});
+      });
+      // Method: each step's line sits a little off the grid, like a sample a few steps from done, and settles as it is read.
+      $$("[data-jitter]").forEach(function(el){
+        var sp = SplitText.create(el, {type:"words"});
+        gsap.fromTo(sp.words, {x:function(){ return (Math.random() - .5) * 26; }, y:function(){ return (Math.random() - .5) * 18; }, opacity:.25, filter:"blur(3px)"},
+          {x:0, y:0, opacity:1, filter:"blur(0px)", ease:"none", stagger:{each:.02, from:"random"}, scrollTrigger:{trigger:el, start:"top 90%", end:"top 50%", scrub:.5}});
+      });
+      gsap.from(".notes li", {opacity:0, y:18, duration:.9, stagger:.07, ease:"expo.out", scrollTrigger:{trigger:".notes", start:"top 85%"}});
+      gsap.from(".cgrid > div, .btn", {opacity:0, y:18, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:".cgrid", start:"top 90%"}});
+    });
+  });
+});
 </script>
 </body>
 </html>
