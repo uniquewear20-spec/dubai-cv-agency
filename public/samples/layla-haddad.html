@@ -3,296 +3,544 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#1A120D">
-<title>Layla Haddad · Hotel General Manager — Concept site by Zenith Dubai CV</title>
-<meta name="description" content="Concept portfolio website for a fictional luxury hotel general manager, designed by Zenith Dubai CV.">
-<link rel="preload" href="img/layla-haddad.webp" as="image" type="image/webp">
-<link rel="preload" href="fonts/cormorant-garamond-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css">
+<title>Layla Haddad — General Manager · Concept site</title>
+<meta name="description" content="Layla Haddad, General Manager of a luxury hotel in Dubai. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1C1915">
+<link rel="preload" href="fonts/bodoni-moda-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/jost-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/layla-haddad/cut.webp" as="image" fetchpriority="high">
 <script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/DrawSVGPlugin.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
 <style>
-/* Concept: "The Grand Lobby". A warm, cinematic first screen with the portrait
-   blending into the lobby light; navigation is a brass lift dial whose needle
-   follows the section ("floor") you are on. */
+@font-face{font-family:"Bodoni Moda";src:url(fonts/bodoni-moda-latin-standard-normal.woff2) format("woff2");font-weight:400 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Bodoni Moda";src:url(fonts/bodoni-moda-latin-standard-italic.woff2) format("woff2");font-weight:400 900;font-style:italic;font-display:swap}
+@font-face{font-family:"Jost";src:url(fonts/jost-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+
 :root{
-  --night:#1A120D; --lobby:#24180F; --ivory:#F6F0E4; --paper:#FBF7EF; --champagne:#DCC5A0;
-  --brass:#B4955F; --brass2:#8E7044; --ink:#2A1E17; --muted:#7D6B5D; --line:rgba(42,30,23,.14);
-  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif; --sans:"Jost","Helvetica Neue",Arial,sans-serif;
-  --zc-bg:#2A1E17; --zc-fg:#F6F0E4; --zc-dot:#DCC5A0;
+  --ivory:#F3ECE1;--paper:#FAF6EF;--ink:#1C1915;--ink2:#5B5246;--brass:#A9834F;--brass-d:#7E5F33;--brass-l:#D9BD8A;
+  --teal:#172A2A;--night:#0D1616;
+  --bg:var(--ivory);--fg:var(--ink);--fg2:var(--ink2);--line:rgba(28,25,21,.16);--accent:var(--brass-d);
+  --serif:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;--sans:"Jost","Futura","Avenir Next",system-ui,sans-serif;
+  --pad:clamp(20px,5vw,84px);
+  --zc-bg:#1C1915;--zc-fg:#F3ECE1;--zc-dot:#D9BD8A;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--ivory);color:var(--ink);font:300 17px/1.75 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-img{max-width:100%;height:auto;display:block}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;background:var(--ivory)}
+body{background:var(--bg);color:var(--fg);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
-.wrap{max-width:1200px;margin:0 auto;padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
-.sc{font-size:11px;letter-spacing:.34em;text-transform:uppercase;font-weight:400}
+:focus-visible{outline:2px solid var(--brass);outline-offset:4px;border-radius:2px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.label{font:500 12px/1.3 var(--sans);letter-spacing:.3em;text-transform:uppercase}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.06;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.2 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
 
-/* ---------- Lobby (hero) ---------- */
-.lobby{position:relative;min-height:100svh;min-height:max(640px,100svh);background:var(--night);color:var(--ivory);overflow:hidden;isolation:isolate}
-.lobby .ambient{position:absolute;inset:-6%;z-index:-4;background:url(img/layla-haddad-blur.webp) center 30%/cover no-repeat;filter:saturate(1.15) brightness(.55)}
-.lobby::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(60% 55% at 70% 28%,rgba(255,214,150,.14),transparent 62%),linear-gradient(90deg,rgba(26,18,13,.97) 0%,rgba(26,18,13,.86) 30%,rgba(26,18,13,.42) 48%,rgba(26,18,13,.06) 66%,rgba(26,18,13,.3) 100%),linear-gradient(0deg,rgba(26,18,13,.85) 0%,transparent 30%)}
-.portrait{position:absolute;z-index:-3;top:0;bottom:0;left:44%;width:auto;height:100%;aspect-ratio:928/1152;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 42%,#000 84%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 42%,#000 84%,transparent 100%)}
-.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
-.lobby::after{content:"";position:absolute;inset:16px;border:1px solid rgba(220,197,160,.22);pointer-events:none;z-index:1}
+/* ---------- header ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad) 28px;color:var(--ink);transition:color .5s ease}
+.top::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(var(--bg) 35%,transparent);opacity:0;transition:opacity .4s ease}
+html.is-scrolled .top::before{opacity:.94}
+html.zc-still .top{background:var(--paper);border-bottom:1px solid var(--line);padding-bottom:20px}
+html[data-head="dark"] .top,html:not(.is-open) .top{color:var(--ivory)}
+.mono{display:flex;align-items:center;gap:14px;text-decoration:none}
+.mono b{font:400 italic 22px/1 var(--serif);letter-spacing:.02em;border:1px solid currentColor;border-radius:999px 999px 0 0;padding:9px 9px 5px;min-width:44px;text-align:center}
+.mono span{font:500 12px/1.2 var(--sans);letter-spacing:.28em;text-transform:uppercase}
+.top .cta{font:500 12px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;text-decoration:none;padding:13px 0;border-bottom:1px solid currentColor}
 
-.top{position:relative;z-index:3;display:grid;grid-template-columns:1fr auto 1fr;align-items:start;padding-top:max(30px,env(safe-area-inset-top,0px))}
-.mono{font:500 24px/1 var(--serif);letter-spacing:.14em;text-decoration:none;padding-top:8px}
-.mono span{color:var(--champagne)}
-.reserve{justify-self:end;margin-top:6px;text-decoration:none;font:400 11px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;padding:13px 18px;border:1px solid rgba(220,197,160,.45);background:rgba(26,18,13,.62);color:var(--champagne);transition:background .3s,color .3s}
-.reserve:hover{background:var(--champagne);color:var(--night)}
+/* ---------- floor indicator ---------- */
+.floors{position:fixed;right:clamp(14px,2vw,30px);top:50%;transform:translateY(-50%);z-index:41;display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px 9px;border:1px solid rgba(169,131,79,.55);border-radius:999px;background:rgba(250,246,239,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity .6s ease,background .5s ease,border-color .5s ease}
+html.is-open .floors{opacity:1;pointer-events:auto}
+html[data-head="dark"] .floors{background:rgba(13,22,22,.55);border-color:rgba(217,189,138,.4)}
+.floors .win{width:40px;height:44px;border-radius:999px 999px 6px 6px;background:var(--ink);color:var(--brass-l);display:grid;place-items:center;overflow:hidden;font:400 22px/1 var(--serif);position:relative}
+.floors .win span{display:block}
+.floors .arrow{font:500 9px/1 var(--sans);letter-spacing:.2em;color:var(--brass);height:9px}
+.floors ol{list-style:none;display:flex;flex-direction:column;gap:6px}
+.floors a{position:relative;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:1px solid rgba(169,131,79,.6);text-decoration:none;font:500 12px/1 var(--sans);color:var(--ink2);transition:background .3s,color .3s,border-color .3s}
+html[data-head="dark"] .floors a{color:#C9BFAF}
+.floors a[aria-current]{background:var(--brass);border-color:var(--brass);color:var(--paper)}
+.floors a:hover{border-color:var(--ink)}
+.floors a .tip{position:absolute;right:calc(100% + 12px);top:50%;transform:translate(6px,-50%);white-space:nowrap;padding:7px 11px;border-radius:6px;background:var(--ink);color:var(--ivory);font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.floors a:hover .tip,.floors a:focus-visible .tip{opacity:1;transform:translate(0,-50%)}
 
-/* Brass lift dial */
-.lift{position:relative;width:206px;height:118px;margin:0 auto}
-.lift .face{position:absolute;inset:0;border-radius:206px 206px 0 0;background:radial-gradient(120% 120% at 50% 100%,#3A2A1C 0,#20160F 70%);border:1px solid rgba(220,197,160,.5);border-bottom:0;box-shadow:inset 0 0 0 5px rgba(26,18,13,.9),inset 0 0 0 6px rgba(220,197,160,.25),0 18px 40px -20px rgba(0,0,0,.8)}
-.lift ol{list-style:none;margin:0;padding:0}
-.lift li{position:absolute;left:50%;bottom:6px;transform:translateX(-50%) rotate(var(--a)) translateY(-78px) rotate(calc(var(--a) * -1))}
-.lift a{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;text-decoration:none;font:500 15px/1 var(--serif);color:var(--champagne);transition:color .3s,background .3s}
-.lift a span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.lift a[aria-current],.lift a:hover{background:var(--champagne);color:var(--night)}
-.needle{position:absolute;left:50%;bottom:6px;width:2px;height:60px;margin-left:-1px;background:linear-gradient(var(--champagne),var(--brass));transform-origin:50% 100%;transform:rotate(var(--needle,-70deg));transition:transform 1.1s cubic-bezier(.3,1.4,.4,1);border-radius:2px}
-.needle::after{content:"";position:absolute;left:50%;bottom:-7px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F0DDB8,#8E7044)}
-[data-section="profile"] .needle{--needle:-42deg}[data-section="properties"] .needle{--needle:-14deg}[data-section="expertise"] .needle{--needle:14deg}[data-section="credentials"] .needle{--needle:42deg}[data-section="contact"] .needle{--needle:70deg}
-.lift .cap{position:absolute;left:0;right:0;top:100%;margin-top:10px;text-align:center;font:400 10px/1 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:rgba(220,197,160,.75)}
+/* ---------- arrival (hero) ---------- */
+.arrival{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#E8D7BA}
+.scene{position:absolute;inset:0;background:radial-gradient(120% 90% at 68% 36%,#FFF7E9 0%,#F4E5CB 34%,#E3CDA8 64%,#C3A57B 100%)}
+.plate{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;opacity:.42;mix-blend-mode:multiply;transform-origin:60% 40%}
+.veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,234,214,.94) 0%,rgba(245,234,214,.78) 36%,rgba(245,234,214,0) 62%)}
+.fill{position:absolute;inset:0;background:var(--ivory);opacity:0;pointer-events:none;z-index:3}
+.arch{position:absolute;right:clamp(24px,10vw,170px);bottom:0;width:min(34vw,540px);height:84%;border-radius:999px 999px 0 0;
+  background:radial-gradient(70% 46% at 50% 26%,#FFFBF2 0%,#F9EBD0 42%,#EFD9B2 72%,#E3C79A 100%);
+  box-shadow:inset 0 0 0 1px rgba(169,131,79,calc(.55 * var(--edge,1))),0 50px 120px -50px rgba(110,70,25,calc(.55 * var(--edge,1)));transform-origin:50% 72%}
+.arch::after{content:"";position:absolute;inset:16px 16px 0;border:1px solid rgba(169,131,79,.38);border-bottom:0;border-radius:999px 999px 0 0;opacity:var(--edge,1)}
+.layla{position:absolute;bottom:0;right:calc(clamp(24px,10vw,170px) + min(34vw,540px)/2);transform:translateX(50%);height:min(88%,1012px);width:auto;max-width:none;filter:drop-shadow(0 30px 34px rgba(70,45,18,.22))}
+.intro{position:absolute;left:var(--pad);top:50%;transform:translateY(-46%);width:min(48vw,760px);z-index:2}
+.intro .label{color:var(--brass-d);display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.intro .label::before{content:"";width:46px;height:1px;background:currentColor}
+.intro h1{font:400 clamp(50px,7.1vw,128px)/.93 var(--serif);font-variation-settings:"opsz" 96;letter-spacing:-.018em;color:var(--ink)}
+.intro h1 .ln{display:block}
+.intro h1 em{font-style:italic;color:var(--brass-d)}
+.intro .sub{margin-top:30px;max-width:34ch;font-size:clamp(16px,1.25vw,19px);line-height:1.6;color:var(--ink2)}
+.cue{position:absolute;left:var(--pad);bottom:28px;z-index:2;display:flex;align-items:center;gap:14px;color:var(--ink2)}
+.cue i{display:block;width:1px;height:38px;background:linear-gradient(var(--brass),transparent);transform-origin:top}
+.zc-motion .cue i{animation:cue 2.4s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0)}45%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 
-.sign{position:relative;z-index:2;padding-top:clamp(70px,13vh,150px);padding-bottom:clamp(120px,18vh,190px);max-width:760px}
-.sign .kick{margin:0;color:var(--champagne)}
-.sign h1{margin:28px 0 0;font:300 clamp(76px,11.5vw,176px)/.82 var(--serif);letter-spacing:-.025em}
-.sign h1 em{display:block;font-style:italic;font-weight:400;color:var(--champagne);padding-left:.62em}
-.sign .rule{display:flex;align-items:center;gap:16px;margin:40px 0 0;max-width:440px}
-.sign .rule::before{content:"";height:1px;width:64px;background:var(--brass)}
-.sign .rule p{margin:0;font:italic 400 clamp(21px,1.9vw,27px)/1.42 var(--serif);color:rgba(246,240,228,.92);max-width:28ch}
-.concierge{position:absolute;z-index:2;left:0;right:0;bottom:0;padding-bottom:max(38px,env(safe-area-inset-bottom,0px))}
-.concierge .wrap{display:flex;flex-wrap:wrap;gap:12px 44px;align-items:flex-end;font:400 12px/1.6 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(246,240,228,.7)}
-.concierge b{display:block;font:400 10px/1 var(--sans);letter-spacing:.32em;color:var(--champagne);margin-bottom:7px}
-.concierge .down{margin-left:auto;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--champagne)}
-.concierge .down i{display:block;width:1px;height:46px;background:linear-gradient(var(--champagne),transparent);animation:drop 2.4s ease-in-out infinite}
-@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-.zc-reveal .lobby .portrait img{animation:settle 2.8s cubic-bezier(.2,.7,.2,1) both}
-.zc-reveal .sign>*{animation:rise 1.4s cubic-bezier(.2,.7,.2,1) both}
-.zc-reveal .sign>*:nth-child(2){animation-delay:.12s}.zc-reveal .sign>*:nth-child(3){animation-delay:.28s}
-@keyframes settle{from{transform:scale(1.07);opacity:.2}to{transform:none;opacity:1}}
-@keyframes rise{from{transform:translateY(26px);opacity:0}to{transform:none;opacity:1}}
+/* doors */
+.doors{position:absolute;inset:0;z-index:5;perspective:2400px;perspective-origin:50% 45%;pointer-events:none}
+html.is-open .doors{display:none}
+.door{position:absolute;top:0;bottom:0;width:50.1%;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.32),rgba(0,0,0,0) 14%,rgba(0,0,0,0) 86%,rgba(0,0,0,.32)),
+    repeating-linear-gradient(90deg,rgba(255,229,184,.13) 0 1px,rgba(255,229,184,0) 1px 10px,rgba(0,0,0,.30) 10px 12px,rgba(0,0,0,0) 12px 13px),
+    linear-gradient(180deg,#8E683C 0%,#6C4B29 46%,#4A321D 100%);
+  box-shadow:inset 0 0 0 clamp(8px,1.2vw,16px) #36251A,inset 0 0 0 calc(clamp(8px,1.2vw,16px) + 1px) rgba(217,189,138,.55);
+  backface-visibility:hidden;will-change:transform}
+.sheen{position:absolute;inset:0;background:linear-gradient(105deg,transparent 25%,rgba(255,236,200,.24) 42%,transparent 58%);background-size:240% 100%;background-position:100% 0}
+.door::after{content:"";position:absolute;inset:0;background:#000;opacity:var(--shade,0)}
+.door-l{left:0;transform-origin:0 50%}
+.door-r{right:0;transform-origin:100% 50%}
+.handle{position:absolute;top:36%;height:28%;width:clamp(8px,.8vw,12px);border-radius:8px;background:linear-gradient(90deg,#7E5D31,#F2DCA6 45%,#A07A45);box-shadow:0 10px 18px rgba(0,0,0,.4)}
+.door-l .handle{right:clamp(16px,2.4vw,40px)}
+.door-r .handle{left:clamp(16px,2.4vw,40px)}
+.plaque{position:absolute;left:50%;top:22%;transform:translateX(-50%);z-index:2;padding:18px 30px 16px;border-radius:3px;text-align:center;color:#3A2816;
+  background:linear-gradient(135deg,#B48E54 0%,#F0DBA6 42%,#C9A465 64%,#A9834F 100%);box-shadow:0 18px 40px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,248,226,.5)}
+.plaque b{display:block;font:500 clamp(15px,1.5vw,21px)/1.1 var(--serif);letter-spacing:.32em;text-transform:uppercase;text-shadow:0 1px 0 rgba(255,249,228,.55)}
+.plaque small{display:block;margin-top:7px;font:500 10px/1 var(--sans);letter-spacing:.34em;text-transform:uppercase;opacity:.8}
 
-/* ---------- Ledger ---------- */
-.ledger{background:var(--lobby);color:var(--ivory)}
-.ledger .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
-.ledger .wrap>div{padding:46px 26px 44px;border-left:1px solid rgba(246,240,228,.12)}
-.ledger .wrap>div:first-child{border-left:0;padding-left:0}
-.ledger b{display:block;font:400 clamp(44px,4.6vw,66px)/1 var(--serif);color:var(--champagne);font-variant-numeric:lining-nums}
-.ledger span{display:block;margin-top:14px;font:400 11px/1.6 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:rgba(246,240,228,.7)}
+/* ---------- sections ---------- */
+main{overflow-x:clip}
+section{position:relative}
+.sec{padding:clamp(96px,14vw,200px) max(var(--pad),96px) clamp(96px,14vw,200px) var(--pad)}
+.sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:clamp(36px,5vw,64px)}
+.sec-head .no{font:400 italic 20px/1 var(--serif);color:var(--brass)}
+.sec-head .label{color:var(--fg2)}
 
-section{padding:clamp(84px,11vw,130px) 0}
-.label{color:var(--brass2);margin:0 0 20px}
-h2{font:300 clamp(40px,5.2vw,70px)/1.02 var(--serif);margin:0;letter-spacing:-.015em}
-h2 em{font-style:italic;font-weight:400;color:var(--brass2)}
-.profile .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:72px}
-.profile .cols{columns:2;column-gap:46px;font-size:16.5px}
-.profile .cols p{margin:0 0 18px;break-inside:avoid-column}
-.profile .cols p:first-child::first-letter{float:left;font:400 92px/.74 var(--serif);color:var(--brass);padding:10px 10px 0 0}
+/* G — welcome */
+.welcome .lede{font:400 clamp(30px,3.6vw,62px)/1.16 var(--serif);font-variation-settings:"opsz" 60;letter-spacing:-.01em;max-width:24ch}
+.welcome .lede em{color:var(--accent)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(56px,8vw,120px);border-top:1px solid var(--line)}
+.facts div{padding:28px 24px 0 0}
+.facts div+div{padding-left:24px;border-left:1px solid var(--line)}
+.facts b{display:block;font:400 clamp(54px,6.4vw,104px)/1 var(--serif);font-variation-settings:"opsz" 96;letter-spacing:-.02em}
+.facts span{display:block;margin-top:12px;color:var(--fg2);font-size:15px;max-width:20ch}
+.langs{margin-top:56px;display:flex;flex-wrap:wrap;gap:12px 34px;color:var(--fg2);font-size:15px}
+.langs .label{color:var(--brass-d);margin-right:6px}
 
-/* Properties as room-key fobs */
-.keys{margin-top:58px;border-top:1px solid var(--line)}
-.key{display:grid;grid-template-columns:120px 150px 1fr;gap:34px;padding:34px 0;border-bottom:1px solid var(--line);align-items:center}
-.fob{position:relative;width:96px;height:118px}
-.fob svg{width:100%;height:100%}
-.fob b{position:absolute;left:0;right:0;top:56px;text-align:center;font:500 25px/1 var(--serif);color:var(--paper)}
-.fob small{position:absolute;left:0;right:0;top:84px;text-align:center;font:400 8px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:rgba(251,247,239,.8)}
-.key time{font:400 12px/1.6 var(--sans);letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
-.key h3{font:500 clamp(26px,2.6vw,32px)/1.1 var(--serif);margin:0}
-.key h3 span{display:block;font:400 11px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--brass2);margin-top:8px}
-.key p{margin:12px 0 0;color:var(--muted);max-width:62ch}
+/* 1 — properties */
+.properties{padding:clamp(96px,12vw,170px) 0 clamp(80px,10vw,140px);overflow:hidden}
+@media (min-width:761px){.properties{min-height:100vh;min-height:100svh;padding:clamp(80px,11vh,120px) 0 clamp(28px,5vh,56px);display:flex;flex-direction:column;justify-content:center}.properties .sec-head{margin-bottom:clamp(14px,2.4vh,28px)}.properties .intro2{margin-bottom:clamp(22px,4vh,46px);padding-right:max(var(--pad),96px)}}
+.properties .sec-head,.properties .intro2{padding:0 var(--pad)}
+.intro2{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:clamp(40px,5vw,70px)}
+.intro2 h2{font:400 clamp(36px,4.6vw,78px)/1 var(--serif);font-variation-settings:"opsz" 80;letter-spacing:-.015em;max-width:16ch}
+.intro2 h2 em{color:var(--brass-d)}
+.intro2 p{max-width:30ch;color:var(--ink2);font-size:15px}
+.rail{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{display:none}
+.track{display:flex;gap:clamp(22px,3.2vw,56px);padding:0 var(--pad);width:max-content}
+.house{width:clamp(270px,27vw,420px);scroll-snap-align:start;flex:none}
+.house .win{position:relative;height:clamp(300px,44vh,470px);border-radius:999px 999px 0 0;overflow:hidden;background:var(--g);box-shadow:inset 0 0 0 1px rgba(169,131,79,.5)}
+.house .win::after{content:"";position:absolute;inset:12px 12px 0;border:1px solid rgba(255,248,232,.38);border-bottom:0;border-radius:999px 999px 0 0}
+.house .sun{position:absolute;left:50%;top:var(--sy,34%);width:46%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,250,236,.95),rgba(255,244,220,0) 68%)}
+.house .city{position:absolute;left:0;right:0;bottom:22px;text-align:center;font:400 italic clamp(40px,4.4vw,72px)/1 var(--serif);font-variation-settings:"opsz" 96;color:rgba(255,251,242,.96);letter-spacing:-.01em;text-shadow:0 10px 30px rgba(0,0,0,.18)}
+.house .n{position:absolute;left:50%;top:26px;transform:translateX(-50%);font:500 11px/1 var(--sans);letter-spacing:.3em;color:rgba(255,251,242,.85)}
+.house .yr{margin-top:22px;display:flex;justify-content:space-between;color:var(--brass-d)}
+.house h3{margin-top:10px;font:400 clamp(24px,2vw,32px)/1.12 var(--serif);font-variation-settings:"opsz" 36}
+.house .role{margin-top:6px;color:var(--ink2);font-size:14px;letter-spacing:.04em}
+.house p{margin-top:14px;font-size:15px;line-height:1.55;color:var(--ink2);max-width:34ch}
 
-.quote{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
-.quote blockquote{margin:0 auto;max-width:20ch;font:italic 400 clamp(36px,5.4vw,68px)/1.12 var(--serif)}
-.quote cite{display:block;margin-top:28px;font-style:normal;color:var(--muted)}
+/* 2 — results (dark) */
+.is-dark{--bg:var(--teal);--fg:var(--ivory);--fg2:#C9BFAF;--line:rgba(217,189,138,.26);--accent:var(--brass-l)}
+.rooftop.is-dark{--bg:var(--night)}
+.is-dark,[data-floor]{background:var(--bg);color:var(--fg)}
+html.bg-morph [data-floor]{--bg:inherit;--fg:inherit;--fg2:inherit;--line:inherit;--accent:inherit;background:transparent}
+.results h2{font:400 clamp(36px,4.6vw,78px)/1 var(--serif);font-variation-settings:"opsz" 80;letter-spacing:-.015em;max-width:15ch}
+.results h2 em{color:var(--accent)}
+.nums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:clamp(48px,6vw,90px)}
+.nums div{padding:clamp(28px,3vw,44px) clamp(10px,3vw,40px) clamp(28px,3vw,44px) 0;border-top:1px solid var(--line)}
+.nums div:nth-child(even){padding-left:clamp(20px,3vw,44px);border-left:1px solid var(--line)}
+.nums b{display:block;font:400 clamp(64px,8.6vw,150px)/.95 var(--serif);font-variation-settings:"opsz" 96;letter-spacing:-.03em}
+.nums b sup{font-size:.42em;vertical-align:.95em;margin-left:.06em;color:var(--accent)}
+.nums span{display:block;margin-top:14px;max-width:30ch;color:var(--fg2);font-size:16px}
+.note{margin-top:34px;font-size:13px;color:var(--fg2);opacity:.8}
 
-.grid6{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;border-top:1px solid var(--line)}
-.cell{padding:34px 30px 38px 0;border-bottom:1px solid var(--line)}
-.cell:not(:nth-child(3n+1)){padding-left:30px;border-left:1px solid var(--line)}
-.cell i{font:italic 400 32px/1 var(--serif);color:var(--brass)}
-.cell h3{font:500 25px/1.15 var(--serif);margin:14px 0 10px}
-.cell p{margin:0;color:var(--muted);font-size:15.5px}
+/* 3 — principles */
+.principles .p{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2.2fr) minmax(0,1.3fr);gap:clamp(20px,3vw,48px);padding:clamp(34px,4vw,56px) 0;border-top:1px solid var(--line);align-items:baseline}
+.principles .rn{font:400 italic clamp(40px,4vw,64px)/1 var(--serif);color:var(--brass)}
+.principles h3{font:400 clamp(30px,3.4vw,58px)/1.04 var(--serif);font-variation-settings:"opsz" 72;letter-spacing:-.012em}
+.principles p{color:var(--fg2);font-size:16px}
+.sign{margin-top:clamp(50px,6vw,90px);display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.sign svg{width:min(420px,78vw);height:auto;overflow:visible}
+.sign path{fill:var(--fg);stroke:var(--fg);stroke-width:.6}
+.sign small{color:var(--fg2)}
 
-.creds .wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px}
-.list{list-style:none;margin:30px 0 0;padding:0}
-.list li{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:17px 0;border-bottom:1px solid var(--line)}
-.list li span{color:var(--muted);font-size:14px;white-space:nowrap}
+/* 4 — recognition */
+.recog .cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(30px,6vw,110px)}
+.recog h2{font:400 clamp(34px,4vw,66px)/1 var(--serif);font-variation-settings:"opsz" 72;letter-spacing:-.012em;margin-bottom:34px}
+.list{list-style:none}
+.list li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.list li:last-child{border-bottom:1px solid var(--line)}
+.list .y{font:400 italic 20px/1.3 var(--serif);color:var(--accent)}
+.list b{display:block;font:400 21px/1.3 var(--serif)}
+.list span{font-size:14px;color:var(--fg2)}
+.tag{display:inline-block;margin-left:8px;padding:2px 7px;border:1px solid rgba(169,131,79,.5);border-radius:99px;font:500 10px/1.4 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--brass-d);vertical-align:2px}
+.side h4{font:500 12px/1.3 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--brass-d);margin:0 0 14px}
+.side p{color:var(--fg2);font-size:15px;margin-bottom:34px}
 
-.contact{background:var(--night);color:var(--ivory);text-align:center;position:relative;overflow:hidden}
-.contact::before{content:"";position:absolute;inset:16px;border:1px solid rgba(220,197,160,.2);pointer-events:none}
-.contact .label{color:var(--champagne)}
-.contact h2 em{color:var(--champagne)}
-.contact p{color:rgba(246,240,228,.74);max-width:46ch;margin:24px auto 0}
-.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:42px}
-.btn{display:inline-block;padding:16px 30px;border:1px solid var(--champagne);color:var(--champagne);text-decoration:none;font:400 11px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;transition:background .3s,color .3s}
-.btn.fill,.btn:hover{background:var(--champagne);color:var(--night)}
-footer{background:var(--night);color:rgba(246,240,228,.55);text-align:center;font-size:12.5px;letter-spacing:.04em;padding:0 24px max(96px,env(safe-area-inset-bottom,0px))}
+/* R — rooftop */
+.rooftop{overflow:hidden;padding-bottom:40px}
+.stars{position:absolute;inset:0;pointer-events:none;background-image:
+  radial-gradient(1px 1px at 12% 18%,rgba(255,244,220,.9),transparent),radial-gradient(1px 1px at 28% 42%,rgba(255,244,220,.6),transparent),
+  radial-gradient(1.5px 1.5px at 44% 12%,rgba(255,244,220,.8),transparent),radial-gradient(1px 1px at 63% 33%,rgba(255,244,220,.55),transparent),
+  radial-gradient(1px 1px at 78% 16%,rgba(255,244,220,.85),transparent),radial-gradient(1.5px 1.5px at 90% 40%,rgba(255,244,220,.6),transparent),
+  radial-gradient(1px 1px at 8% 60%,rgba(255,244,220,.5),transparent),radial-gradient(1px 1px at 55% 58%,rgba(255,244,220,.4),transparent)}
+.moon{position:absolute;right:12vw;top:14%;width:clamp(70px,8vw,130px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 38%,#FFF6DE,#E9D3A6 60%,#C8A877);box-shadow:0 0 80px 10px rgba(233,211,166,.18)}
+.rooftop h2{position:relative;font:400 clamp(44px,6.4vw,118px)/.96 var(--serif);font-variation-settings:"opsz" 96;letter-spacing:-.02em;max-width:13ch}
+.rooftop h2 em{color:var(--brass-l)}
+.rooftop .lead{position:relative;margin-top:28px;max-width:44ch;color:var(--fg2)}
+.contact{position:relative;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(36px,6vw,110px);margin-top:clamp(50px,6vw,90px)}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 28px}
+form .full{grid-column:1/-1}
+label{display:block;font:500 11px/1.3 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--brass-l);margin-bottom:8px}
+input,textarea{width:100%;border:0;border-bottom:1px solid rgba(217,189,138,.45);background:transparent;color:var(--ivory);font:400 18px/1.5 var(--sans);padding:8px 0 10px;border-radius:0}
+textarea{resize:vertical;min-height:110px}
+input:focus,textarea:focus{outline:none;border-bottom-color:var(--brass-l)}
+input:focus-visible,textarea:focus-visible{outline:2px solid var(--brass-l);outline-offset:4px}
+.btn{display:inline-flex;align-items:center;gap:14px;padding:18px 30px;border:1px solid var(--brass-l);border-radius:999px;background:transparent;color:var(--ivory);font:500 12px/1 var(--sans);letter-spacing:.26em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .3s,color .3s}
+.btn:hover{background:var(--brass-l);color:var(--night)}
+.direct dl{display:grid;gap:22px}
+.direct dt{font:500 11px/1.3 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:#9C9282;margin-bottom:6px}
+.direct dd{font:400 22px/1.3 var(--serif)}
+.direct dd a{text-decoration:none;border-bottom:1px solid rgba(217,189,138,.45)}
+.direct .clock{font-variant-numeric:tabular-nums}
+footer{position:relative;margin-top:clamp(80px,10vw,140px);padding-top:26px;border-top:1px solid rgba(217,189,138,.2);display:flex;justify-content:space-between;gap:20px 40px;flex-wrap:wrap;font-size:13px;color:#9C9282}
+footer p{max-width:70ch}
 
-@media (max-width:980px){
-  .portrait{left:auto;right:-14%;height:78%;top:auto;bottom:0;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%),linear-gradient(180deg,transparent 0,#000 24%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0,#000 30%),linear-gradient(180deg,transparent 0,#000 24%);mask-composite:intersect}
-  .lobby::before{background:radial-gradient(80% 50% at 70% 40%,rgba(255,214,150,.16),transparent 60%),linear-gradient(180deg,rgba(26,18,13,.55) 0%,rgba(26,18,13,.2) 40%,rgba(26,18,13,.92) 82%)}
-  .profile .wrap,.creds .wrap{grid-template-columns:1fr;gap:34px}
-  .ledger .wrap{grid-template-columns:1fr 1fr}
-  .ledger .wrap>div:nth-child(3){border-left:0;padding-left:0}
-  .ledger .wrap>div:nth-child(-n+2){border-bottom:1px solid rgba(246,240,228,.12)}
-  .grid6{grid-template-columns:1fr 1fr}
-  .cell:not(:nth-child(3n+1)){padding-left:0;border-left:0}
-  .cell:nth-child(even){padding-left:24px;border-left:1px solid var(--line)}
+/* background morph (motion only): sections become transparent and the body colour follows them */
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .principles .p{grid-template-columns:minmax(0,.5fr) minmax(0,2fr)}
+  .principles .p p{grid-column:2}
+  .recog .cols,.contact{grid-template-columns:minmax(0,1fr)}
 }
-@media (max-width:700px){
-  .top{grid-template-columns:1fr auto}
-  .lift{grid-column:2;grid-row:1;width:156px;height:90px}
-  .lift li{transform:translateX(-50%) rotate(var(--a)) translateY(-58px) rotate(calc(var(--a) * -1))}
-  .lift a{width:22px;height:22px;font-size:13px}
-  .needle{height:44px}
-  .lift .cap{display:none}
-  .reserve{display:none}
-  .portrait{left:50%;right:auto;top:64px;bottom:auto;height:64svh;transform:translateX(-50%);-webkit-mask-image:linear-gradient(0deg,transparent 0,#000 34%);mask-image:linear-gradient(0deg,transparent 0,#000 34%)}
-  .lobby::before{background:linear-gradient(180deg,rgba(26,18,13,.5) 0%,rgba(26,18,13,0) 18%,rgba(26,18,13,0) 40%,rgba(26,18,13,.9) 66%,rgba(26,18,13,.98) 100%)}
-  .sign{padding-top:calc(64px + 46svh);padding-bottom:170px}
-  .sign h1{font-size:clamp(66px,19vw,96px)}
-  .sign .kick{font-size:10px;letter-spacing:.26em}
-  .sign h1 em{padding-left:.3em}
-  .concierge .wrap{gap:12px 26px}
-  .concierge .down{display:none}
-  .profile .cols{columns:1}
-  .key{grid-template-columns:96px 1fr;gap:6px 22px}
-  .key time{grid-column:2;grid-row:1}
-  .key>div:last-child{grid-column:1/-1;margin-top:10px}
-  .fob{grid-row:1/3}
-  .grid6{grid-template-columns:1fr}
-  .cell:nth-child(even){padding-left:0;border-left:0}
-  .list li{flex-direction:column;gap:2px}
-  .list li span{white-space:normal}
+@media (max-width:760px){
+  body{font-size:16px}
+  .mono span{display:none}
+  .veil{background:linear-gradient(180deg,rgba(245,234,214,.95) 0%,rgba(245,234,214,.8) 42%,rgba(245,234,214,0) 64%)}
+  .intro{top:clamp(84px,13svh,120px);transform:none;width:auto;right:var(--pad)}
+  .intro h1{font-size:clamp(42px,12.4vw,64px)}
+  .intro .label{margin-bottom:18px;font-size:11px;letter-spacing:.24em}
+  .intro .label::before{width:26px}
+  .intro .sub{display:none}
+  .arch{right:50%;transform:translateX(50%);width:min(78vw,380px);height:56%}
+  .layla{right:50%;height:58%}
+  .cue{display:none}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts div:nth-child(3){padding-left:0;border-left:0}
+  .facts div{padding-bottom:26px}
+  .nums{grid-template-columns:minmax(0,1fr)}
+  .nums div:nth-child(even){padding-left:0;border-left:0}
+  .principles .p{grid-template-columns:minmax(0,1fr);gap:12px}
+  .principles .p p{grid-column:auto}
+  form{grid-template-columns:minmax(0,1fr)}
+  .intro2{flex-direction:column;align-items:flex-start}
+  .floors{top:auto;bottom:max(16px,env(safe-area-inset-bottom));right:auto;left:16px;transform:none;flex-direction:row;padding:6px 8px;gap:8px}
+  .floors ol{display:none}
+  .floors .arrow{display:none}
+  .floors .win{width:34px;height:36px;font-size:18px}
+  .floors .cur{font:500 11px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);padding-right:8px}
+  html[data-head="dark"] .floors .cur{color:#C9BFAF}
 }
-@media (max-width:340px){.ledger .wrap{grid-template-columns:1fr}.ledger .wrap>div{border-left:0;padding-left:0;border-bottom:1px solid rgba(246,240,228,.12)}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.needle{transition:none}.concierge .down i{animation:none}}
+@media (min-width:761px){.floors .cur{display:none}}
+@media (max-width:400px){.facts b{font-size:48px}}
 </style>
 </head>
 <body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="top">
+  <a class="mono" href="#arrival" aria-label="Layla Haddad, back to the top"><b>LH</b><span>Layla Haddad</span></a>
+  <a class="cta" href="#rooftop">Request an introduction</a>
+</header>
+
+<nav class="floors" aria-label="Floors">
+  <div class="win" aria-hidden="true"><span id="floorNow">G</span></div>
+  <span class="cur" aria-hidden="true" id="floorName">Welcome</span>
+  <span class="arrow" aria-hidden="true" id="floorDir"></span>
+  <ol>
+    <li><a href="#rooftop" data-spy><span aria-hidden="true">R</span><span class="tip">Rooftop · Contact</span><span class="sr">Rooftop, contact</span></a></li>
+    <li><a href="#recognition" data-spy><span aria-hidden="true">4</span><span class="tip">Recognition</span><span class="sr">Floor 4, recognition</span></a></li>
+    <li><a href="#principles" data-spy><span aria-hidden="true">3</span><span class="tip">The art of welcome</span><span class="sr">Floor 3, the art of welcome</span></a></li>
+    <li><a href="#results" data-spy><span aria-hidden="true">2</span><span class="tip">Results</span><span class="sr">Floor 2, results</span></a></li>
+    <li><a href="#properties" data-spy><span aria-hidden="true">1</span><span class="tip">Properties</span><span class="sr">Floor 1, properties</span></a></li>
+    <li><a href="#welcome" data-spy><span aria-hidden="true">G</span><span class="tip">Welcome</span><span class="sr">Ground floor, welcome</span></a></li>
+  </ol>
+</nav>
+
 <main>
-  <header class="lobby" id="lobby">
-    <div class="ambient" aria-hidden="true"></div>
-    <div class="portrait"><img src="img/layla-haddad.webp" srcset="img/layla-haddad-640.webp 640w, img/layla-haddad.webp 928w" sizes="(max-width:700px) 90vw, 60vw" width="928" height="1152" alt="Layla Haddad in an ivory blazer in a softly lit hotel lobby" fetchpriority="high"></div>
-    <div class="wrap top">
-      <a class="mono" href="#lobby" aria-label="Layla Haddad, back to top">L<span>·</span>H</a>
-      <nav class="lift" aria-label="Floors">
-        <div class="face" aria-hidden="true"></div>
-        <ol>
-          <li style="--a:-70deg"><a href="#lobby" data-spy>L<span>Lobby</span></a></li>
-          <li style="--a:-42deg"><a href="#profile" data-spy>1<span>Profile</span></a></li>
-          <li style="--a:-14deg"><a href="#properties" data-spy>2<span>Properties</span></a></li>
-          <li style="--a:14deg"><a href="#expertise" data-spy>3<span>Expertise</span></a></li>
-          <li style="--a:42deg"><a href="#credentials" data-spy>4<span>Credentials</span></a></li>
-          <li style="--a:70deg"><a href="#contact" data-spy>5<span>Contact</span></a></li>
+  <section id="arrival" class="arrival" aria-label="Introduction">
+    <div class="scene">
+      <img class="plate" src="img/layla-haddad/plate.webp" alt="" width="928" height="1152">
+      <div class="veil"></div>
+      <div class="arch"></div>
+      <img class="layla" src="img/layla-haddad/cut.webp" srcset="img/layla-haddad/cut-720.webp 512w, img/layla-haddad/cut.webp 719w" sizes="(max-width:760px) 60vw, 40vw" width="719" height="1012" alt="Layla Haddad, smiling, in an ivory blazer">
+      <div class="intro">
+        <p class="label">General Manager · Maison Ambre Dubai</p>
+        <h1><span class="ln">Every arrival</span><span class="ln">is a <em>promise.</em></span></h1>
+        <p class="sub">Layla Haddad has led six luxury hotels across the Levant, North Africa and the Gulf, and opened four of them.</p>
+      </div>
+      <p class="cue label"><i></i>Please, come in</p>
+      <div class="fill" aria-hidden="true"></div>
+    </div>
+    <div class="doors" aria-hidden="true">
+      <div class="door door-l"><i class="sheen"></i><span class="handle"></span></div>
+      <div class="door door-r"><i class="sheen"></i><span class="handle"></span></div>
+      <div class="plaque"><b>Layla Haddad</b><small>General Manager</small></div>
+    </div>
+  </section>
+
+  <section id="welcome" class="sec welcome" data-floor="G" data-name="Welcome">
+    <div class="sec-head"><span class="no">G</span><span class="label">Welcome</span></div>
+    <p class="lede" data-lines>A hotel is a promise made to strangers. For twenty-two years I have made sure it is kept: at check-in, at three in the morning, and on <em>the morning they leave.</em></p>
+    <div class="facts">
+      <div><b data-count="22">22</b><span>years in luxury hospitality</span></div>
+      <div><b data-count="6">6</b><span>hotels led in four countries</span></div>
+      <div><b data-count="4">4</b><span>pre-openings, from first hire to first guest</span></div>
+      <div><b data-count="640">640</b><span>colleagues in my team today</span></div>
+    </div>
+    <p class="langs"><span class="label">Languages</span><span>Arabic</span><span>French</span><span>English</span><span>Italian</span></p>
+  </section>
+
+  <section id="properties" class="properties" data-floor="1" data-name="Properties">
+    <div class="sec-head"><span class="no">1</span><span class="label">Properties</span></div>
+    <div class="intro2">
+      <h2>Six houses, <em>one way</em> of keeping them.</h2>
+      <p>From a front desk in Beirut to three hotels in the Emirates. Each house taught me one thing I still practise every day.</p>
+    </div>
+    <div class="rail" tabindex="0" aria-label="Career, six hotels. Scroll sideways to see all six.">
+      <ol class="track" role="list">
+        <li class="house" style="--g:linear-gradient(180deg,#3A5672 0%,#7C7F8E 52%,#D19B7F 100%);--sy:62%"><div class="win"><span class="n">01</span><span class="sun"></span><span class="city">Beirut</span></div>
+          <p class="yr label"><span>2003</span><span>2008</span></p><h3>Hôtel Cèdre</h3><p class="role">Front Office Manager</p><p>A remembered name is worth more than an upgrade. I learned it at the front desk and never unlearned it.</p></li>
+        <li class="house" style="--g:linear-gradient(180deg,#E9E4DA 0%,#CFC6B6 55%,#A8A090 100%);--sy:30%"><div class="win"><span class="n">02</span><span class="sun"></span><span class="city" style="color:#5B5246;text-shadow:none">Doha</span></div>
+          <p class="yr label"><span>2009</span><span>2012</span></p><h3>The Pearl House</h3><p class="role">Rooms Division Manager</p><p>Rebuilt the guest-recognition programme. Returning guests rose by a quarter in two years.</p></li>
+        <li class="house" style="--g:linear-gradient(180deg,#E7A267 0%,#C8653F 60%,#8E3E26 100%);--sy:40%"><div class="win"><span class="n">03</span><span class="sun"></span><span class="city">Marrakech</span></div>
+          <p class="yr label"><span>2013</span><span>2015</span></p><h3>Riad Lune</h3><p class="role">Hotel Manager</p><p>Led a 41-key riad through a full restoration without closing for a single night.</p></li>
+        <li class="house" style="--g:linear-gradient(180deg,#BFE3DD 0%,#5FA6A6 50%,#245F66 100%);--sy:26%"><div class="win"><span class="n">04</span><span class="sun"></span><span class="city">Abu Dhabi</span></div>
+          <p class="yr label"><span>2016</span><span>2018</span></p><h3>Dunes &amp; Tide Resort</h3><p class="role">Resort Manager, pre-opening</p><p>Hired and trained 380 colleagues in nine months, and opened on the day we promised.</p></li>
+        <li class="house" style="--g:linear-gradient(180deg,#F4DDA9 0%,#D3A55E 52%,#8F6A34 100%);--sy:34%"><div class="win"><span class="n">05</span><span class="sun"></span><span class="city">Dubai</span></div>
+          <p class="yr label"><span>2019</span><span>Now</span></p><h3>Maison Ambre Dubai</h3><p class="role">General Manager</p><p>Opened 312 keys and 9 restaurants. In the city's top five for guest satisfaction within a year.</p></li>
+        <li class="house" style="--g:linear-gradient(180deg,#2B4746 0%,#1E3434 55%,#0F1A1A 100%);--sy:24%"><div class="win"><span class="n">06</span><span class="sun" style="opacity:.55"></span><span class="city">Emirates</span></div>
+          <p class="yr label"><span>2023</span><span>Now</span></p><h3>Maison Ambre Hotels</h3><p class="role">Area General Manager</p><p>Three hotels, one standard of welcome, and a shared academy for our future managers.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="results" class="sec results is-dark" data-floor="2" data-name="Results" data-bg="#172A2A" data-dark>
+    <div class="sec-head"><span class="no">2</span><span class="label">Results</span></div>
+    <h2>Hospitality is felt. <em>Results are measured.</em></h2>
+    <div class="nums">
+      <div><b data-count="31" data-prefix="+" data-suffix="%">+31<sup>%</sup></b><span>RevPAR growth in three years at Maison Ambre Dubai</span></div>
+      <div><b data-count="9.6" data-dec="1">9.6</b><span>average guest score out of 10, across 41,000 reviews</span></div>
+      <div><b data-count="19" data-suffix="%">19<sup>%</sup></b><span>team turnover, down from 38% the year I arrived</span></div>
+      <div><b data-count="44" data-suffix="%">44<sup>%</sup></b><span>gross operating profit margin in 2024</span></div>
+    </div>
+    <p class="note">All figures on this page are illustrative.</p>
+  </section>
+
+  <section id="principles" class="sec principles" data-floor="3" data-name="The art of welcome" data-bg="#F3ECE1">
+    <div class="sec-head"><span class="no">3</span><span class="label">The art of welcome</span></div>
+    <div class="p"><span class="rn">I.</span><h3 data-lines>Remember the name.</h3><p>Recognition is the most personal luxury there is. Every colleague, from the doorman to the director of sales, learns the names of tonight's arrivals.</p></div>
+    <div class="p"><span class="rn">II.</span><h3 data-lines>Anticipate, never interrupt.</h3><p>The best service is noticed only afterwards: the umbrella at the door before the rain, the quiet room ready before the meeting.</p></div>
+    <div class="p"><span class="rn">III.</span><h3 data-lines>Leave every room better than you found it.</h3><p>Guests, colleagues, owners. I judge a year by what has improved, not by what has merely been maintained.</p></div>
+    <div class="sign">
+      <svg viewBox="-6 -10 524 200" role="img" aria-label="Signature of Layla Haddad"><path id="sig" d="M0 115.1Q0 109.2 10.7 99.6Q21.4 90 32.6 88.1Q34.9 85.2 40.1 78.4Q45.2 71.5 48.5 67.4Q58.7 54 64.8 47.2Q40.3 53.6 14.8 53.6Q9.5 53.6 9.5 52.1Q9.5 51.2 10.9 50.3Q12.4 49.3 13.7 49.3Q20.2 50.2 26 50.2Q45.4 50.2 68 43.4Q89.8 19.7 104.8 19.7Q111 19.7 111 22.6Q111 26.5 99.8 33.2Q88.7 40 71.5 45.2Q65.3 52.7 53.5 68.5Q41.8 84.4 39 87.8Q50 88.3 58.1 95.3Q61.4 98 64.6 100.8Q72.2 107.4 80.9 107.4Q85 107.4 89.8 104.8Q94.7 102.2 95.3 102.2Q96 102.2 96 102.8Q96 105 89.9 107.6Q83.8 110.2 77.8 110.2Q71.8 110.2 67 108.2Q62.2 106.2 59 103.3Q55.8 100.4 52.8 97.6Q45.7 90.5 37.4 89.9Q26.8 103.4 18.6 110.9Q10.4 118.3 4.1 118.3Q0 118.3 0 115.1ZM4.9 115.1Q9.1 115.1 15.5 108.7Q21.8 102.4 31 90.4Q21.6 92.5 12.2 100.9Q2.8 109.2 2.8 113.4Q2.8 115.1 4.9 115.1ZM102.6 21.8Q91.9 21.8 74.9 41.2Q88.3 36.6 97.5 31.4Q106.7 26.3 106.7 23.5Q106.7 21.8 102.6 21.8Z M122.9 94.3Q122.2 94.3 122.2 93.8Q122.2 93.2 123 92.5Q127 89.3 127 86.6Q127 85 124 84.7Q118.6 84.8 111.1 92.5Q103.6 100.2 103.6 104Q103.6 105.4 105.1 105.4Q106.6 105.4 109.1 103.3Q111.4 101.9 117.6 96.1Q119 94.7 120.4 94.7Q122 94.7 122 96.2Q122 96.8 121.7 97.2Q121.3 97.6 120.4 98.7Q119.4 99.8 118.7 100.8Q116.5 103.9 116.5 104.9Q116.5 107.3 118.4 107.3Q121 107.3 127.9 102.7Q134.9 98 140.6 93.4L146.4 88.8Q147.2 88.2 148 88.2Q148.7 88.2 148.7 89V89.3Q139.4 97.1 129.2 103.9Q118.9 110.8 115.7 110.8Q111.8 110.8 111.8 106.7Q111.8 105.7 112.2 104.9Q112.6 104 112.6 103.7Q112.6 103.3 112.3 103.2Q112 103.2 107.7 106.4Q103.4 109.7 100.3 109.7Q97.1 109.7 97.1 106.3Q97.1 103 101.6 97.3Q106.1 91.6 113.6 86.9Q121.2 82.2 128.4 82.2Q130.1 82.2 131.2 83Q132.4 83.9 132.4 85.6Q132.4 87.4 128.9 90.8Q125.4 94.3 122.9 94.3Z M141 122.4 142.6 120.4Q144.5 118.1 145 117.4Q141.5 118.9 139.4 119.5Q137.4 120 137.4 120.2ZM141.6 129.6Q141.6 128.4 141.2 127.1Q123.6 149.2 123.6 153.5Q123.6 153.8 124 153.8Q126 153.8 130.2 149.9Q134.4 145.9 138 140Q141.6 134.2 141.6 129.6ZM132 120.4Q132.4 119.4 132.5 119.3Q132.7 119.2 133.4 119.1Q134.2 119 138 118Q141.8 117 147.1 114.7Q162.5 95.2 163.4 93.4Q164.3 91.7 164.3 91.3Q164.3 91 163.8 91Q163.3 91 162.7 91.8Q162.5 91.9 159.5 94.6Q156.6 97.3 153.8 99.6Q151 101.9 147.2 104Q143.5 106.1 140.9 106.1Q138.2 106.1 138.2 104.2Q138.4 99.7 144.3 91.9Q150.2 84.1 152.3 84.1Q154.3 84.1 154.3 85.2Q154.3 85.8 148.9 92.6Q143.4 99.5 143.4 101.2Q143.4 102.8 144.5 102.8Q146.6 102.8 156.9 94.1Q167.2 85.3 169.6 85.3Q170.3 85.3 170.9 86Q171.6 86.8 171.6 87.6Q171.6 90.2 154.3 111.2Q170.5 102.2 184.4 90.8L187.1 88.7Q188 88.1 188.6 88.1Q189.2 88.1 189.2 88.7L189.1 89.2Q189.7 89.2 182.8 94.4Q175.8 99.7 169.9 103.8Q164 107.9 151.8 114.1L143.3 124.6Q145 127 145 130.2Q145 135.7 140.3 142.5Q135.6 149.3 129.8 153.8Q124 158.3 120.2 158.3Q119.2 158.3 118.3 157.5Q117.4 156.7 117.4 155.3Q117.4 154 118.7 151.2Q120.1 148.4 122.8 144.8Q125.5 141.1 127.9 138.2Q130.3 135.2 134 130.8Q137.8 126.4 139.6 124.2Q137.4 122.3 134.7 121.8Q132 121.3 132 120.4Z M215.8 88.8Q216.6 88.2 217.3 88.2Q218 88.2 218 89V89.3Q205.6 99.6 199.1 103.7Q190.7 110 184.9 110Q179.9 110 179.9 104Q179.9 96 190.3 80.2Q200.6 64.4 213.6 51.8Q226.6 39.2 233.2 39.2Q236.2 39.2 236.2 41.9Q236.2 48.5 220.4 63.7Q204.6 78.8 189.4 89.5Q184.9 98 184.9 102.5Q184.9 106.9 188 106.9Q191.2 106.9 196.2 103.3Q204.7 98.3 212.8 91.3ZM230.2 43.1Q225.1 43.1 212.3 57.6Q199.4 72.1 191 86.6Q204.8 76.8 218 62.6Q231.2 48.4 231.2 44.2Q231.2 43.1 230.2 43.1Z M228.2 94.3Q227.5 94.3 227.5 93.8Q227.5 93.2 228.4 92.5Q232.3 89.3 232.3 86.6Q232.3 85 229.3 84.7Q223.9 84.8 216.4 92.5Q208.9 100.2 208.9 104Q208.9 105.4 210.4 105.4Q211.9 105.4 214.4 103.3Q216.7 101.9 223 96.1Q224.4 94.7 225.7 94.7Q227.4 94.7 227.4 96.2Q227.4 96.8 227 97.2Q226.7 97.6 225.7 98.7Q224.8 99.8 224 100.8Q221.9 103.9 221.9 104.9Q221.9 107.3 223.8 107.3Q226.3 107.3 233.3 102.7Q240.2 98 246 93.4L251.8 88.8Q252.6 88.2 253.3 88.2Q254 88.2 254 89V89.3Q244.8 97.1 234.5 103.9Q224.3 110.8 221 110.8Q217.2 110.8 217.2 106.7Q217.2 105.7 217.6 104.9Q217.9 104 217.9 103.7Q217.9 103.3 217.7 103.2Q217.3 103.2 213.1 106.4Q208.8 109.7 205.6 109.7Q202.4 109.7 202.4 106.3Q202.4 103 206.9 97.3Q211.4 91.6 219 86.9Q226.6 82.2 233.8 82.2Q235.4 82.2 236.6 83Q237.7 83.9 237.7 85.6Q237.7 87.4 234.2 90.8Q230.8 94.3 228.2 94.3Z M384.2 20.9Q384.2 26.2 374.3 34.7Q364.3 43.2 346 55.4Q334.8 70.4 327.1 84.1Q319.3 97.8 319.3 103.1Q319.3 108.4 322.3 108.4Q324.5 108.4 328.3 106.1Q332 103.8 334.7 101.5L337.3 99.2Q338 98.4 338.6 98.4Q339.2 98.4 339.2 98.9Q339.2 102 331.6 106.6Q323.9 111.1 320 111.1Q312.7 111.1 312.7 105.4Q312.7 99.7 318.5 88.3Q324.2 76.9 333.4 63.8Q313.6 76.7 303.7 83.3Q291 100.7 278.4 113.5Q265.8 126.2 260.8 126.2Q258 126.2 258 124.2Q258 117.5 268.3 107.8Q278.5 98 296.8 85.3Q308 69.2 315.7 54.8Q323.3 40.3 323.3 33.7Q323.3 26.2 315.7 24.5Q309.8 23 303.4 23Q297 23 293.2 23.4Q289.4 23.8 284.9 24.8Q280.3 25.8 277.5 28.1Q274.7 30.4 274.7 33.6Q274.7 37.3 281.2 39.5Q287.8 41.6 295.9 43.8Q304 46 306.2 49.1Q307.2 50.2 307.6 53Q307.6 53.9 307 53.9Q306.5 53.9 306 53Q304.9 50.5 299.1 48.5Q293.3 46.6 287 45.4Q280.7 44.3 275.6 41.7Q270.5 39.1 270.5 35.3Q270.5 31.4 273 28.6Q275.5 25.8 278.9 24.4Q282.4 22.9 287.6 22.1Q295.6 21 306.2 21Q316.8 21 322.7 24.5Q328.7 28 328.7 34.2Q328.7 47.5 307.3 78.1Q313.1 74.3 323.6 67.4Q334.2 60.5 337.2 58.4Q349.6 41.6 362 30.2Q374.4 18.8 382.1 18.8Q384.2 18.8 384.2 20.9ZM262.2 123.5Q265.6 123.5 274.3 114.1Q283 104.6 293.2 90.5Q261.4 112.8 261.4 122.4Q261.4 123.5 262.2 123.5ZM379.2 21.6Q375.8 21.6 367.9 29.5Q360 37.3 350.4 49.7Q379.9 29.5 379.9 22.3Q379.9 21.6 379.2 21.6Z M366.7 94.3Q366 94.3 366 93.8Q366 93.2 366.8 92.5Q370.8 89.3 370.8 86.6Q370.8 85 367.8 84.7Q362.4 84.8 354.9 92.5Q347.4 100.2 347.4 104Q347.4 105.4 348.9 105.4Q350.4 105.4 352.9 103.3Q355.2 101.9 361.4 96.1Q362.9 94.7 364.2 94.7Q365.9 94.7 365.9 96.2Q365.9 96.8 365.5 97.2Q365.2 97.6 364.2 98.7Q363.2 99.8 362.5 100.8Q360.4 103.9 360.4 104.9Q360.4 107.3 362.3 107.3Q364.8 107.3 371.8 102.7Q378.7 98 384.5 93.4L390.2 88.8Q391.1 88.2 391.8 88.2Q392.5 88.2 392.5 89V89.3Q383.3 97.1 373 103.9Q362.8 110.8 359.5 110.8Q355.7 110.8 355.7 106.7Q355.7 105.7 356 104.9Q356.4 104 356.4 103.7Q356.4 103.3 356.2 103.2Q355.8 103.2 351.5 106.4Q347.3 109.7 344.1 109.7Q340.9 109.7 340.9 106.3Q340.9 103 345.4 97.3Q349.9 91.6 357.5 86.9Q365 82.2 372.2 82.2Q373.9 82.2 375.1 83Q376.2 83.9 376.2 85.6Q376.2 87.4 372.7 90.8Q369.2 94.3 366.7 94.3Z M399 91.6 402.8 85.7Q402.5 85.6 402.1 85.6Q397.1 85.6 388.9 93.2Q380.8 100.9 380.8 104Q380.8 104.9 381.7 104.9Q384.7 104.9 390.8 99.8Q397 94.7 399 91.6ZM425.8 89.3Q400.8 109.4 395.5 109.4Q393.5 109.4 393.5 107Q393.5 104.6 395.3 99Q395.3 98.9 395 98.9Q381.2 110.3 376.7 110.3Q373.6 110.3 373.6 108Q373.6 103 384.4 93.2Q395.3 83.5 401.8 83.5Q402.6 83.5 403.6 84.7Q406.3 80.6 434.5 40.4Q437.5 36.7 439.4 36.7Q441.2 36.7 441.2 37.9Q441.2 40.9 420.6 66.2Q412.9 75.8 406.5 86.2Q400.1 96.6 400.1 102Q400.1 104.3 401.4 104.3Q403 104.3 406.9 101.5Q415.1 95.6 421.2 90.7L423.5 88.8Q424.3 88.2 425 88.2Q425.8 88.2 425.8 89Z M432.1 91.6 436 85.7Q435.6 85.6 435.2 85.6Q430.2 85.6 422 93.2Q413.9 100.9 413.9 104Q413.9 104.9 414.8 104.9Q417.8 104.9 424 99.8Q430.1 94.7 432.1 91.6ZM458.9 89.3Q433.9 109.4 428.6 109.4Q426.6 109.4 426.6 107Q426.6 104.6 428.4 99Q428.4 98.9 428.2 98.9Q414.4 110.3 409.8 110.3Q406.7 110.3 406.7 108Q406.7 103 417.5 93.2Q428.4 83.5 434.9 83.5Q435.7 83.5 436.7 84.7Q439.4 80.6 467.6 40.4Q470.6 36.7 472.5 36.7Q474.4 36.7 474.4 37.9Q474.4 40.9 453.7 66.2Q446 75.8 439.6 86.2Q433.2 96.6 433.2 102Q433.2 104.3 434.5 104.3Q436.1 104.3 440 101.5Q448.2 95.6 454.3 90.7L456.6 88.8Q457.4 88.2 458.2 88.2Q458.9 88.2 458.9 89Z M469 94.3Q468.2 94.3 468.2 93.8Q468.2 93.2 469.1 92.5Q473 89.3 473 86.6Q473 85 470 84.7Q464.6 84.8 457.1 92.5Q449.6 100.2 449.6 104Q449.6 105.4 451.1 105.4Q452.6 105.4 455.2 103.3Q457.4 101.9 463.7 96.1Q465.1 94.7 466.4 94.7Q468.1 94.7 468.1 96.2Q468.1 96.8 467.8 97.2Q467.4 97.6 466.4 98.7Q465.5 99.8 464.8 100.8Q462.6 103.9 462.6 104.9Q462.6 107.3 464.5 107.3Q467 107.3 474 102.7Q481 98 486.7 93.4L492.5 88.8Q493.3 88.2 494 88.2Q494.8 88.2 494.8 89V89.3Q485.5 97.1 475.3 103.9Q465 110.8 461.8 110.8Q457.9 110.8 457.9 106.7Q457.9 105.7 458.3 104.9Q458.6 104 458.6 103.7Q458.6 103.3 458.4 103.2Q458 103.2 453.8 106.4Q449.5 109.7 446.3 109.7Q443.2 109.7 443.2 106.3Q443.2 103 447.7 97.3Q452.2 91.6 459.7 86.9Q467.3 82.2 474.5 82.2Q476.2 82.2 477.3 83Q478.4 83.9 478.4 85.6Q478.4 87.4 475 90.8Q471.5 94.3 469 94.3Z M501.2 91.6 505.1 85.7Q504.7 85.6 504.4 85.6Q499.3 85.6 491.2 93.2Q483 100.9 483 104Q483 104.9 484 104.9Q487 104.9 493.1 99.8Q499.2 94.7 501.2 91.6ZM528 89.3Q503 109.4 497.8 109.4Q495.7 109.4 495.7 107Q495.7 104.6 497.5 99Q497.5 98.9 497.3 98.9Q483.5 110.3 478.9 110.3Q475.8 110.3 475.8 108Q475.8 103 486.7 93.2Q497.5 83.5 504 83.5Q504.8 83.5 505.8 84.7Q508.6 80.6 536.8 40.4Q539.8 36.7 541.6 36.7Q543.5 36.7 543.5 37.9Q543.5 40.9 522.8 66.2Q515.2 75.8 508.7 86.2Q502.3 96.6 502.3 102Q502.3 104.3 503.6 104.3Q505.2 104.3 509.2 101.5Q517.3 95.6 523.4 90.7L525.7 88.8Q526.6 88.2 527.3 88.2Q528 88.2 528 89Z"/></svg>
+      <small>General Manager, Maison Ambre Dubai</small>
+    </div>
+  </section>
+
+  <section id="recognition" class="sec recog" data-floor="4" data-name="Recognition" data-bg="#F3ECE1">
+    <div class="sec-head"><span class="no">4</span><span class="label">Recognition</span></div>
+    <div class="cols">
+      <div>
+        <h2>Kind words, <em style="color:var(--brass-d)">kept on file.</em></h2>
+        <ol class="list">
+          <li><span class="y">2024</span><div><b>Hotel General Manager of the Year<span class="tag">Illustrative</span></b><span>Gulf Hospitality Review</span></div></li>
+          <li><span class="y">2022</span><div><b>Best New Luxury Hotel, Maison Ambre Dubai<span class="tag">Illustrative</span></b><span>Travel Ledger Awards</span></div></li>
+          <li><span class="y">2019</span><div><b>Pre-opening of the Year, Dunes &amp; Tide Resort<span class="tag">Illustrative</span></b><span>Atlas Hospitality Journal</span></div></li>
+          <li><span class="y">2015</span><div><b>Heritage Restoration Commendation, Riad Lune<span class="tag">Illustrative</span></b><span>Maghreb Travel Circle</span></div></li>
         </ol>
-        <div class="needle" aria-hidden="true"></div>
-        <p class="cap" aria-hidden="true">Floor guide</p>
-      </nav>
-      <a class="reserve" href="#contact">Reserve a conversation</a>
-    </div>
-    <div class="wrap sign">
-      <p class="sc kick">General Manager · Luxury Hotels &amp; Residences</p>
-      <h1>Layla <em>Haddad</em></h1>
-      <div class="rule"><p>Twenty years of turning grand hotels into places guests feel were waiting for them.</p></div>
-    </div>
-    <div class="concierge">
-      <div class="wrap">
-        <span><b>Hotels</b>Dubai · Beirut · Doha · Nice</span>
-        <span><b>Languages</b>Arabic · English · French</span>
-        <span><b>Open to</b>GM &amp; area roles</span>
-        <a class="down" href="#profile">Take the lift<i aria-hidden="true"></i></a>
       </div>
-    </div>
-  </header>
-
-  <div class="ledger" aria-label="Key figures">
-    <div class="wrap">
-      <div><b>+28%</b><span>RevPAR in three years</span></div>
-      <div><b>94.6</b><span>Guest satisfaction score</span></div>
-      <div><b>410</b><span>Colleagues led</span></div>
-      <div><b>4</b><span>Hotel pre-openings</span></div>
-    </div>
-  </div>
-
-  <section class="profile" id="profile">
-    <div class="wrap">
-      <div data-reveal><p class="sc label">Floor 1 · Profile</p><h2>Service is a <em>culture</em>, not a checklist.</h2></div>
-      <div class="cols" data-reveal style="--d:.1s">
-        <p>Layla leads luxury hotels the way a conductor leads an orchestra: every department hears the same tempo. She has opened four properties, repositioned two heritage hotels and built teams that guests ask for by name.</p>
-        <p>Her approach pairs warm, personal hospitality with commercial discipline. Revenue, owner relations and guest experience sit on the same page, reviewed every morning with the executive committee.</p>
-        <p>Born in Beirut and trained in Lausanne and Nice, she brings a Levantine sense of welcome to the Gulf's most demanding guests.</p>
-        <p>She mentors future general managers through an internal academy she founded in 2021, with eleven graduates now leading departments across the region.</p>
+      <div class="side">
+        <h4>Speaking</h4>
+        <p>“The Human Hotel”, keynote on service culture and staff retention. Dubai, 2024.</p>
+        <h4>Education</h4>
+        <p>Degree in hospitality management. Executive programme in revenue strategy and asset management.</p>
+        <h4>Boards</h4>
+        <p>Mentor to the Maison Ambre Academy, which trains 60 future supervisors a year.</p>
       </div>
     </div>
   </section>
 
-  <section id="properties" style="padding-top:0">
-    <div class="wrap">
-      <div data-reveal><p class="sc label">Floor 2 · Properties</p><h2>A career written <em>in room keys</em>.</h2></div>
-      <div class="keys">
-        <article class="key" data-reveal>
-          <div class="fob" aria-hidden="true"><svg viewBox="0 0 96 118"><path d="M48 2 90 26v66L48 116 6 92V26Z" fill="#8E7044"/><path d="M48 9 84 30v58L48 109 12 88V30Z" fill="none" stroke="#DCC5A0" stroke-width="1"/><circle cx="48" cy="30" r="7" fill="#FBF7EF"/></svg><b>312</b><small>keys</small></div>
-          <time>2019 — Today</time>
-          <div><h3>The Saffron Palace Hotel &amp; Residences<span>General Manager · Dubai</span></h3><p>Led the repositioning of a 312-key palace hotel and 90 branded residences; raised RevPAR 28% and reached the region's top guest-satisfaction tier.</p></div>
-        </article>
-        <article class="key" data-reveal>
-          <div class="fob" aria-hidden="true"><svg viewBox="0 0 96 118"><path d="M48 2 90 26v66L48 116 6 92V26Z" fill="#2A1E17"/><path d="M48 9 84 30v58L48 109 12 88V30Z" fill="none" stroke="#B4955F" stroke-width="1"/><circle cx="48" cy="30" r="7" fill="#FBF7EF"/></svg><b>186</b><small>keys</small></div>
-          <time>2014 — 2019</time>
-          <div><h3>Cedar &amp; Sea Resort<span>Hotel Manager · Beirut</span></h3><p>Rebuilt the resort's service culture after a full renovation; occupancy rose from 61% to 83% within two seasons.</p></div>
-        </article>
-        <article class="key" data-reveal>
-          <div class="fob" aria-hidden="true"><svg viewBox="0 0 96 118"><path d="M48 2 90 26v66L48 116 6 92V26Z" fill="#8E7044"/><path d="M48 9 84 30v58L48 109 12 88V30Z" fill="none" stroke="#DCC5A0" stroke-width="1"/><circle cx="48" cy="30" r="7" fill="#FBF7EF"/></svg><b>254</b><small>keys</small></div>
-          <time>2010 — 2014</time>
-          <div><h3>Al Noor Grand<span>Director of Rooms · Doha</span></h3><p>Opened the hotel from pre-opening through its first full year, hiring and training 140 colleagues.</p></div>
-        </article>
-        <article class="key" data-reveal>
-          <div class="fob" aria-hidden="true"><svg viewBox="0 0 96 118"><path d="M48 2 90 26v66L48 116 6 92V26Z" fill="#2A1E17"/><path d="M48 9 84 30v58L48 109 12 88V30Z" fill="none" stroke="#B4955F" stroke-width="1"/><circle cx="48" cy="30" r="7" fill="#FBF7EF"/></svg><b>98</b><small>keys</small></div>
-          <time>2006 — 2010</time>
-          <div><h3>Riviera Lumière<span>Front Office Manager · Nice</span></h3><p>Introduced a guest-preference programme later adopted by the group's eight European hotels.</p></div>
-        </article>
+  <section id="rooftop" class="sec rooftop is-dark" data-floor="R" data-name="Rooftop" data-bg="#0D1616" data-dark>
+    <div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
+    <div class="sec-head"><span class="no">R</span><span class="label">Rooftop · Contact</span></div>
+    <h2>Shall we continue <em>on the rooftop?</em></h2>
+    <p class="lead">For ownership groups, operators and hotel boards. I reply to every message within two working days.</p>
+    <div class="contact">
+      <form data-form>
+        <div><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+        <div><label for="f-mail">Email</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
+        <div class="full"><label for="f-org">Organisation</label><input id="f-org" name="org" autocomplete="organization"></div>
+        <div class="full"><label for="f-msg">Message</label><textarea id="f-msg" name="message" rows="4"></textarea></div>
+        <div class="full"><button class="btn" type="submit">Request an introduction <span aria-hidden="true">→</span></button></div>
+      </form>
+      <div class="direct">
+        <dl>
+          <div><dt>Email</dt><dd><a href="#" data-demo>layla@maisonambre.example</a></dd></div>
+          <div><dt>LinkedIn</dt><dd><a href="#" data-demo>in/laylahaddad</a></dd></div>
+          <div><dt>Dubai, now</dt><dd class="clock" id="clock">—</dd></div>
+        </dl>
       </div>
     </div>
-  </section>
-
-  <section class="quote"><div class="wrap" data-reveal><blockquote>“Luxury is the feeling of being expected.”</blockquote><cite class="sc">Layla Haddad</cite></div></section>
-
-  <section id="expertise">
-    <div class="wrap">
-      <div data-reveal><p class="sc label">Floor 3 · Expertise</p><h2>Where she makes <em>the difference</em>.</h2></div>
-      <div class="grid6">
-        <div class="cell" data-reveal><i>i.</i><h3>Pre-opening &amp; repositioning</h3><p>From hoarding to first guest: hiring, training, systems and launch in under nine months.</p></div>
-        <div class="cell" data-reveal style="--d:.06s"><i>ii.</i><h3>Revenue &amp; owner relations</h3><p>Budgets owners trust, with monthly forecasts accurate to within two per cent.</p></div>
-        <div class="cell" data-reveal style="--d:.12s"><i>iii.</i><h3>Service culture</h3><p>Standards that live in people, not manuals: daily line-ups, recognition and coaching.</p></div>
-        <div class="cell" data-reveal><i>iv.</i><h3>Guest experience design</h3><p>Arrival rituals, preference tracking and recovery that turns complaints into loyalty.</p></div>
-        <div class="cell" data-reveal style="--d:.06s"><i>v.</i><h3>Talent &amp; succession</h3><p>A general-manager academy with eleven graduates now leading departments.</p></div>
-        <div class="cell" data-reveal style="--d:.12s"><i>vi.</i><h3>Responsible luxury</h3><p>Energy use down 22% and single-use plastics removed from all guest areas.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="creds" id="credentials" style="padding-top:0">
-    <div class="wrap">
-      <div data-reveal><p class="sc label">Floor 4 · Education</p><h2>Trained in <em>the classics</em>.</h2>
-        <ul class="list"><li>MSc International Hospitality Management<span>Lausanne, 2005</span></li><li>BA Business Administration<span>Beirut, 2003</span></li><li>Certificate in Hotel Real Estate &amp; Asset Management<span>2018</span></li></ul></div>
-      <div data-reveal style="--d:.1s"><p class="sc label">Languages &amp; recognition</p><h2>Fluent in <em>welcome</em>.</h2>
-        <ul class="list"><li>Arabic · English · French<span>Native / fluent</span></li><li>Hotel General Manager of the Year<span>2023</span></li><li>Forty Under Forty, hotel industry<span>2016</span></li></ul></div>
-    </div>
-  </section>
-
-  <section class="contact" id="contact">
-    <div class="wrap" data-reveal>
-      <p class="sc label">Floor 5 · Reception</p>
-      <h2>For appointments <em>and introductions</em>.</h2>
-      <p>Open to general manager and area roles across the Gulf and Europe. Executive search firms are welcome.</p>
-      <div class="btns"><a class="btn fill" href="#contact" data-demo>Request a conversation</a><a class="btn" href="#contact" data-demo>Download CV</a><a class="btn" href="#contact" data-demo>LinkedIn</a></div>
-    </div>
+    <footer>
+      <p>Layla Haddad is a fictional person. The hotels, employers, awards and figures on this page are illustrative. Portrait generated with AI.</p>
+      <p>A concept website by Zenith Dubai CV.</p>
+    </footer>
   </section>
 </main>
-<footer>Concept site designed by Zenith Dubai CV. Layla Haddad is a fictional person; hotels, figures and awards are illustrative.</footer>
+
+<script>
+(function(){
+  var ZC = window.ZC, root = document.documentElement;
+  var clock = document.getElementById("clock");
+  function tick(){ try{ clock.textContent = new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Dubai",hour:"2-digit",minute:"2-digit"}).format(new Date()); }catch(e){ clock.textContent = "GMT+4"; } }
+  tick(); setInterval(tick, 20000);
+  document.querySelector("[data-form]").addEventListener("submit", function(e){ e.preventDefault(); ZC.toast("This is a concept site, so the form is switched off."); });
+
+  // Floor indicator (works with or without GSAP)
+  var now = document.getElementById("floorNow"), nameEl = document.getElementById("floorName"), dirEl = document.getElementById("floorDir");
+  var order = ["G","1","2","3","4","R"], current = "G";
+  function setFloor(f, name){
+    if (f === current) return;
+    var up = order.indexOf(f) > order.indexOf(current);
+    current = f; nameEl.textContent = name; dirEl.textContent = up ? "▲" : "▼";
+    if (window.gsap && ZC.motion){
+      gsap.timeline().to(now,{yPercent: up ? -120 : 120, duration:.22, ease:"power2.in"})
+        .add(function(){ now.textContent = f; }).fromTo(now,{yPercent: up ? 120 : -120},{yPercent:0,duration:.34,ease:"power3.out"});
+    } else now.textContent = f;
+  }
+  document.addEventListener("zc:section", function(e){
+    var s = document.getElementById(e.detail); if (!s) return;
+    if (e.detail === "arrival") { setFloor("G","Welcome"); return; }
+    setFloor(s.getAttribute("data-floor"), s.getAttribute("data-name"));
+  });
+
+  function finalState(){ root.classList.add("is-open"); }
+
+  window.addEventListener("load", function(){
+    if (!ZC.motion || !window.gsap){ finalState(); return; }
+    var gsap = window.gsap; gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
+    ZC.smooth();
+    root.classList.add("bg-morph");
+
+    document.fonts.ready.then(function(){
+      var h1 = SplitText.create(".intro h1 .ln",{type:"lines",mask:"lines"});
+      var intro = gsap.timeline({defaults:{ease:"power3.out"}});
+      var startedAtTop = window.scrollY < 40;
+      if (startedAtTop){
+        gsap.set(".layla",{yPercent:6,opacity:0});
+        gsap.set([".intro .label",".intro .sub",".cue"],{opacity:0,y:18});
+        gsap.set(h1.lines,{yPercent:105});
+        intro.from(".plaque",{opacity:0,y:14,duration:.9})
+          .to(".sheen",{backgroundPosition:"0% 0",duration:1.7,ease:"power1.inOut"},0)
+          .to(".plaque",{opacity:0,y:-10,duration:.45,ease:"power2.in"},"+=.35")
+          .addLabel("open")
+          .to(".door-l",{rotationY:-108,duration:1.9,ease:"power3.inOut"},"open")
+          .to(".door-r",{rotationY:108,duration:1.9,ease:"power3.inOut"},"open")
+          .to(".door",{"--shade":.62,duration:1.9,ease:"power2.in"},"open")
+          .fromTo(".scene",{filter:"brightness(.82)"},{filter:"brightness(1)",duration:1.8,ease:"power2.out",clearProps:"filter"},"open")
+          .fromTo(".plate",{scale:1.08},{scale:1,duration:2.6,ease:"power2.out"},"open")
+          .to(".layla",{yPercent:0,opacity:1,duration:1.5},"open+=.55")
+          .to(h1.lines,{yPercent:0,duration:1.25,stagger:.12},"open+=.75")
+          .to([".intro .label",".intro .sub",".cue"],{opacity:1,y:0,duration:1,stagger:.1},"open+=1")
+          .add(finalState,"open+=1.2");
+      } else finalState();
+
+      // Walking in: the arch grows until its light fills the screen.
+      var mm = gsap.matchMedia();
+      mm.add({desk:"(min-width:761px)",mob:"(max-width:760px)"}, function(ctx){
+        var walk = gsap.timeline({scrollTrigger:{trigger:".arrival",start:"top top",end:"+=110%",scrub:1,pin:true,anticipatePin:1}});
+        walk.to(".intro",{yPercent:-12,opacity:0,ease:"power1.in",duration:.45},0)
+            .to(".cue",{opacity:0,duration:.2},0)
+            .to(".arch",{scale:ctx.conditions.desk?4.4:3.6,"--edge":0,duration:1,ease:"power2.in"},0)
+            .to(".layla",{scale:1.14,yPercent:5,duration:.8,ease:"power1.in"},0)
+            .to(".layla",{opacity:0,duration:.25},.62)
+            .to(".plate",{scale:1.25,opacity:0,duration:1},0)
+            .to(".veil",{opacity:0,duration:.6},0)
+            .to(".fill",{opacity:1,duration:.38,ease:"power1.in"},.62);
+
+        // Properties: horizontal walk on desktop, native swipe on phones.
+        if (ctx.conditions.desk){
+          var rail = document.querySelector(".rail"), track = document.querySelector(".track");
+          rail.style.overflow = "visible";
+          var dist = function(){ return Math.max(0, track.scrollWidth - window.innerWidth); };
+          var hz = gsap.to(track,{x:function(){ return -dist(); },ease:"none",scrollTrigger:{trigger:".properties",start:"top top",end:function(){ return "+=" + dist(); },scrub:1,pin:true,invalidateOnRefresh:true,anticipatePin:1}});
+          gsap.utils.toArray(".house .sun").forEach(function(s){
+            gsap.fromTo(s,{xPercent:-80},{xPercent:-20,ease:"none",scrollTrigger:{trigger:s.closest(".house"),containerAnimation:hz,start:"left right",end:"right left",scrub:true}});
+          });
+          gsap.utils.toArray(".house .city").forEach(function(c){
+            gsap.from(c,{yPercent:40,opacity:0,ease:"power2.out",scrollTrigger:{trigger:c.closest(".house"),containerAnimation:hz,start:"left 85%",end:"left 45%",scrub:true}});
+          });
+        }
+        return function(){ var r=document.querySelector(".rail"); if(r) r.style.overflow=""; };
+      });
+
+      // Section headlines and paragraphs: masked line reveals.
+      gsap.utils.toArray("[data-lines], .intro2 h2, .results h2, .recog h2, .rooftop h2").forEach(function(el){
+        SplitText.create(el,{type:"lines",mask:"lines",autoSplit:true,onSplit:function(self){
+          return gsap.from(self.lines,{yPercent:105,duration:1.1,stagger:.09,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 85%"}});
+        }});
+      });
+
+      // Numbers count up once.
+      gsap.utils.toArray("[data-count]").forEach(function(b){
+        var to = parseFloat(b.dataset.count), dec = +(b.dataset.dec||0), pre = b.dataset.prefix||"", suf = b.dataset.suffix||"";
+        var o = {v:0};
+        ScrollTrigger.create({trigger:b,start:"top 88%",once:true,onEnter:function(){
+          gsap.to(o,{v:to,duration:1.8,ease:"power3.out",onUpdate:function(){
+            b.innerHTML = pre + o.v.toFixed(dec) + (suf ? "<sup>"+suf+"</sup>" : "");
+          }});
+        }});
+      });
+
+      // Body colour follows the floor.
+      var themes = {
+        light:{"--bg":"#F3ECE1","--fg":"#1C1915","--fg2":"#5B5246","--line":"rgba(28,25,21,.16)","--accent":"#7E5F33"},
+        dark:{"--bg":"#172A2A","--fg":"#F3ECE1","--fg2":"#C9BFAF","--line":"rgba(217,189,138,.26)","--accent":"#D9BD8A"},
+        night:{"--bg":"#0D1616","--fg":"#F3ECE1","--fg2":"#B7AE9F","--line":"rgba(217,189,138,.22)","--accent":"#D9BD8A"}
+      };
+      gsap.utils.toArray("[data-floor]").forEach(function(s){
+        var t = s.id === "rooftop" ? "night" : s.hasAttribute("data-dark") ? "dark" : "light";
+        ScrollTrigger.create({trigger:s,start:"top 62%",end:"bottom 62%",onToggle:function(st){
+          if (!st.isActive) return;
+          gsap.to(document.body,Object.assign({duration:.9,ease:"power2.out",overwrite:"auto"},themes[t]));
+          root.setAttribute("data-head", t === "light" ? "light" : "dark");
+        }});
+      });
+
+      // The signature writes itself.
+      gsap.from("#sig",{drawSVG:"0%",fillOpacity:0,duration:2.6,ease:"power1.inOut",scrollTrigger:{trigger:".sign",start:"top 80%"}});
+      gsap.set("#sig",{fillOpacity:1});
+      gsap.from(".moon",{yPercent:60,opacity:0,ease:"none",scrollTrigger:{trigger:".rooftop",start:"top bottom",end:"top 20%",scrub:true}});
+      ScrollTrigger.create({start:function(){ return window.innerHeight * .6; },end:"max",onToggle:function(st){ root.classList.toggle("is-scrolled", st.isActive); }});
+      ScrollTrigger.refresh();
+    });
+  });
+})();
+</script>
 </body>
 </html>

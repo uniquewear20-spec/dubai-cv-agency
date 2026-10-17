@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kofi Mensah — DJ &amp; Producer · Concept site</title>
+<meta name="description" content="Kofi Mensah, DJ and producer, Afro-house. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#08070A">
+<link rel="preload" href="fonts/anybody-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/kofi-mensah/cut.webp" as="image" fetchpriority="high">
+<script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
+<script defer src="assets/disc-cascade.js"></script>
+<style>
+@font-face{font-family:"Anybody";src:url(fonts/anybody-latin-standard-normal.woff2) format("woff2");font-weight:100 900;font-stretch:50% 150%;font-display:swap}
+@font-face{font-family:"Manrope";src:url(fonts/manrope-latin-wght-normal.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url(fonts/instrument-serif-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url(fonts/instrument-serif-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Space Mono";src:url(fonts/space-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Space Mono";src:url(fonts/space-mono-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{
+  --ink:#08070A;--ink2:#121016;--paper:#F4F1EA;--mute:#9C96A3;--mag:#FF2E88;--cyan:#22E1E1;--gold:#F2B705;
+  --display:"Anybody","Arial Black",Impact,sans-serif;--sans:"Manrope",system-ui,sans-serif;--serif:"Instrument Serif",Georgia,serif;--mono:"Space Mono",ui-monospace,monospace;
+  --pad:clamp(18px,4vw,64px);--beat:.46875s;
+  --zc-bg:#F4F1EA;--zc-fg:#08070A;--zc-dot:#FF2E88;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink)}
+body{background:var(--ink);color:var(--paper);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mono{font:400 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+main{position:relative;overflow-x:clip}
+
+/* nav */
+.top{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px var(--pad);mix-blend-mode:difference;color:#fff}
+.logo{font:800 17px/1 var(--display);font-stretch:130%;letter-spacing:-.01em;text-decoration:none}
+.top nav{display:flex;gap:clamp(14px,2.2vw,34px)}
+.top nav a{font:400 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;opacity:.85}
+.top nav a:hover{opacity:1}
+.bpm{display:flex;align-items:center;gap:9px;font:700 12px/1 var(--mono);letter-spacing:.08em}
+.bpm i{width:8px;height:8px;border-radius:50%;background:#fff}
+.zc-motion .bpm i{animation:dot var(--beat) linear infinite}
+@keyframes dot{0%{transform:scale(1.6);opacity:1}40%,100%{transform:scale(1);opacity:.55}}
+
+/* hero */
+.hero{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;isolation:isolate}
+.lights{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(40% 55% at 22% 38%,rgba(255,46,136,.30),transparent 70%),
+  radial-gradient(42% 60% at 80% 72%,rgba(34,225,225,.22),transparent 70%),
+  radial-gradient(70% 60% at 50% 110%,rgba(242,183,5,.10),transparent 70%)}
+.floor{position:absolute;left:0;right:0;bottom:0;height:34%;z-index:0;opacity:.35;
+  background:repeating-linear-gradient(90deg,rgba(244,241,234,.09) 0 1px,transparent 1px 7.69%),linear-gradient(transparent,rgba(255,46,136,.08));
+  transform:perspective(600px) rotateX(58deg);transform-origin:50% 100%;-webkit-mask:linear-gradient(transparent,#000 60%);mask:linear-gradient(transparent,#000 60%)}
+.kofi,.mensah{position:absolute;font-family:var(--display);font-weight:900;line-height:.8;letter-spacing:-.02em;white-space:nowrap;user-select:none}
+.kofi{z-index:1;left:2.6vw;top:clamp(70px,11vh,120px);font-size:min(27vw,46vh);font-stretch:150%;color:var(--paper)}
+.mensah{z-index:3;right:2.6vw;bottom:clamp(54px,8.5vh,90px);font-size:min(13.2vw,22vh);font-stretch:150%;color:transparent;-webkit-text-stroke:1.5px var(--paper)}
+.dj{position:absolute;z-index:2;bottom:0;left:56%;height:min(96%,1099px);aspect-ratio:877/1099;transform:translateX(-50%);margin:0}
+.dj .cut{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 60px rgba(255,46,136,.18))}
+.anchor{position:absolute;left:22.8%;top:7.2%;width:27%;aspect-ratio:1;transform:translate(-50%,-50%)}
+.role{position:absolute;z-index:4;left:var(--pad);top:58%;max-width:22ch;color:var(--mute)}
+.role b{display:block;color:var(--paper);font:500 15px/1.35 var(--sans);letter-spacing:0;text-transform:none;margin-bottom:8px}
+.next{position:absolute;z-index:4;right:var(--pad);top:52%;display:grid;gap:4px;padding:14px 16px;border:1px solid rgba(244,241,234,.22);border-radius:14px;background:rgba(8,7,10,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);text-decoration:none;max-width:250px}
+.next span{color:var(--mag)}
+.play{display:inline-flex;align-items:center;gap:10px;padding:12px 18px 12px 14px;border-radius:999px;border:1px solid rgba(244,241,234,.3);background:rgba(8,7,10,.55);cursor:pointer;font:700 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;transition:background .2s,border-color .2s}
+.play:hover{border-color:var(--mag)}
+.play .ic{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--mag);color:var(--ink)}
+.play[aria-pressed=true] .ic{background:var(--cyan)}
+.hero .play{position:absolute;z-index:4;right:var(--pad);top:calc(52% + 96px)}
+.ticker{position:absolute;z-index:5;left:0;right:0;bottom:0;height:42px;display:flex;align-items:center;overflow:hidden;border-top:1px solid rgba(244,241,234,.14);background:rgba(8,7,10,.7)}
+.ticker .run{display:flex;gap:48px;white-space:nowrap;padding-left:48px;color:var(--paper)}
+.zc-motion .ticker .run{animation:run 38s linear infinite}
+.ticker .run span::before{content:"●";color:var(--mag);margin-right:14px;font-size:9px;vertical-align:2px}
+@keyframes run{to{transform:translateX(-50%)}}
+.hero.beat .kofi{animation:pump var(--beat) cubic-bezier(.2,.7,.2,1) infinite}
+.hero.beat .lights{animation:glow var(--beat) ease-out infinite}
+@keyframes pump{0%{transform:scale(1.018)}35%,100%{transform:scale(1)}}
+@keyframes glow{0%{opacity:1}50%,100%{opacity:.72}}
+
+/* the disc that flies from his fingertips into the crate */
+.flydisc{position:absolute;left:0;top:0;z-index:30;pointer-events:none;transform-style:preserve-3d;--dcc-sheen:.6}
+.flydisc .dcc-tilt{position:absolute;inset:0;transform-style:preserve-3d}
+.zc-motion .flydisc .dcc-idle{animation:dcc-spin 1.8s linear infinite}
+.flydisc::after{content:"";position:absolute;inset:-18%;z-index:-1;border-radius:50%;background:radial-gradient(circle,rgba(255,46,136,.35),transparent 62%)}
+.crate[data-awaiting] .dcc-slide[data-active]{opacity:0!important}
+
+/* crate */
+.crate{position:relative}
+.crate-head{position:absolute;z-index:6;left:var(--pad);bottom:calc(clamp(16px,3.6vw,44px) + 46px);pointer-events:none;color:var(--mute)}
+.crate .note{position:absolute;z-index:6;right:var(--pad);top:116px;color:var(--mute);font:400 10px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;max-width:22ch;text-align:right}
+.dcc-root{--dcc-menu-bg:rgba(18,16,22,.92)}
+@media (min-width:641px){.crate .dcc-nav{top:74px}.crate .dcc-head{top:110px}.crate .dcc-frame{inset:62px calc(var(--dcc-pad) * .45) calc(var(--dcc-pad) * .45)}}
+
+/* sections */
+.sec{position:relative;padding:clamp(90px,12vw,170px) var(--pad)}
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:28px;color:var(--mute)}
+.eyebrow::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--mag)}
+.big{font:800 clamp(42px,6.6vw,118px)/.9 var(--display);font-stretch:118%;letter-spacing:-.025em;text-transform:uppercase}
+.big em{font:italic 400 1.04em/0 var(--serif);text-transform:none;letter-spacing:-.01em;color:var(--mag)}
+
+.sound{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(30px,6vw,110px);align-items:end}
+.sound p.lead{font:400 clamp(18px,1.6vw,23px)/1.55 var(--sans);color:#D6D2DA;max-width:46ch;margin-top:30px}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.tags span{padding:9px 14px;border:1px solid rgba(244,241,234,.22);border-radius:999px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(244,241,234,.14);border:1px solid rgba(244,241,234,.14)}
+.stats div{background:var(--ink);padding:clamp(20px,2.4vw,34px)}
+.stats b{display:block;font:800 clamp(40px,4.6vw,74px)/1 var(--display);font-stretch:112%;letter-spacing:-.03em}
+.stats b i{font-style:normal;color:var(--cyan)}
+.stats span{display:block;margin-top:10px;color:var(--mute);font-size:14px}
+.fine{margin-top:16px;color:#6F6977;font:400 11px/1.5 var(--mono);letter-spacing:.04em}
+
+/* listen */
+.listen{background:linear-gradient(180deg,var(--ink),#120B17 40%,var(--ink))}
+.player{margin-top:clamp(36px,5vw,70px);border:1px solid rgba(244,241,234,.16);border-radius:22px;padding:clamp(18px,2.6vw,34px);background:rgba(18,16,22,.6)}
+.player-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.player h3{font:800 clamp(22px,2.4vw,34px)/1.05 var(--display);font-stretch:110%;letter-spacing:-.01em}
+.player h3 small{display:block;margin-top:6px;font:400 12px/1.4 var(--mono);letter-spacing:.06em;color:var(--mute);text-transform:uppercase}
+.wave{position:relative;margin-top:26px;height:clamp(90px,12vw,150px);display:flex;align-items:center;gap:2px}
+.wave i{flex:1;min-width:1px;height:var(--h);border-radius:2px;background:rgba(244,241,234,.28);transition:background .2s}
+.wave i.on{background:linear-gradient(var(--mag),var(--cyan))}
+.wave .head{position:absolute;top:-6px;bottom:-6px;width:2px;left:0;background:var(--paper);box-shadow:0 0 12px var(--mag)}
+.chapters{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:16px;color:var(--mute)}
+.scope{display:block;width:100%;height:46px;margin-top:20px;opacity:.85}
+.disclose{margin-top:14px;color:#6F6977;font:400 11px/1.5 var(--mono)}
+
+/* tour */
+.tour-list{list-style:none;margin-top:clamp(36px,5vw,70px);border-top:1px solid rgba(244,241,234,.16)}
+.tour-list li{position:relative;display:grid;grid-template-columns:150px minmax(0,1.1fr) minmax(0,1.3fr) auto;gap:20px;align-items:center;padding:22px 0;border-bottom:1px solid rgba(244,241,234,.16);transition:padding .35s cubic-bezier(.2,.7,.2,1)}
+.tour-list li::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(255,46,136,.18),rgba(34,225,225,.08));transform:scaleY(0);transform-origin:50% 100%;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.tour-list li:hover::before{transform:scaleY(1)}
+.tour-list li:hover{padding-left:14px;padding-right:14px}
+.tour-list .city{font:800 clamp(24px,2.8vw,44px)/1 var(--display);font-stretch:120%;letter-spacing:-.02em;text-transform:uppercase}
+.tour-list .venue{color:#D6D2DA}
+.tour-list .venue small{display:block;color:var(--mute);font:400 11px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+.tix{justify-self:end;padding:11px 16px;border-radius:999px;border:1px solid rgba(244,241,234,.3);text-decoration:none;font:700 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.tix:hover{background:var(--paper);color:var(--ink)}
+.tix.low{border-color:var(--mag);color:var(--mag)}
+
+/* residencies */
+.res{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,28px);margin-top:clamp(36px,5vw,70px)}
+.res article{position:relative;border-radius:22px;padding:clamp(22px,2.4vw,34px);min-height:300px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;border:1px solid rgba(244,241,234,.14);background:var(--ink2)}
+.res article::before{content:"";position:absolute;width:140%;aspect-ratio:1;left:-20%;top:46%;border-radius:50%;background:radial-gradient(circle,var(--c),transparent 62%);opacity:.5}
+.res h3{position:relative;font:800 clamp(26px,2.6vw,40px)/1 var(--display);font-stretch:118%;letter-spacing:-.02em;text-transform:uppercase}
+.res p{position:relative;color:#D6D2DA;font-size:15px;max-width:32ch}
+.res .when{position:relative;color:var(--paper)}
+
+/* press kit + booking */
+.kit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,6vw,110px);align-items:start}
+.files{list-style:none;margin-top:30px;border-top:1px solid rgba(244,241,234,.16)}
+.files li{border-bottom:1px solid rgba(244,241,234,.16)}
+.files a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;text-decoration:none}
+.files a:hover span:first-child{color:var(--cyan)}
+.files small{color:var(--mute);font:400 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.rider{margin-top:30px;color:var(--mute);font-size:14px}
+.kit .big{font-size:clamp(34px,4.4vw,76px)}
+.book{border-radius:26px;padding:clamp(24px,3vw,44px);background:linear-gradient(140deg,rgba(255,46,136,.22),rgba(34,225,225,.14));border:1px solid rgba(244,241,234,.18)}
+.book h3{font:800 clamp(30px,3.4vw,56px)/.95 var(--display);font-stretch:120%;letter-spacing:-.02em;text-transform:uppercase}
+.book dl{display:grid;gap:18px;margin-top:28px}
+.book dt{color:var(--mute)}
+.book dd{font:500 19px/1.35 var(--sans)}
+.book dd a{text-decoration:none;border-bottom:1px solid rgba(244,241,234,.4)}
+.book .btn{display:inline-flex;margin-top:30px;padding:16px 24px;border-radius:999px;background:var(--paper);color:var(--ink);text-decoration:none;font:700 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.book .btn:hover{background:var(--mag);color:var(--paper)}
+footer{padding:40px var(--pad) 90px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px 40px;border-top:1px solid rgba(244,241,234,.12);color:#857F8C;font-size:13px}
+footer p{max-width:72ch}
+
+@media (max-width:900px){
+  .top nav{display:none}
+  .sound,.kit{grid-template-columns:minmax(0,1fr)}
+  .res{grid-template-columns:minmax(0,1fr)}
+  .res article{min-height:220px}
+  .tour-list li{grid-template-columns:minmax(0,1fr) auto;gap:6px 16px}
+  .tour-list .date{grid-column:1/-1}
+  .tour-list .venue{grid-column:1}
+  .tour-list .tix{grid-row:2/4;grid-column:2;align-self:center}
+}
+@media (max-width:640px){
+  .kofi{font-size:26vw;top:88px;left:4vw}
+  .mensah{font-size:12.9vw;left:4vw;right:auto;top:calc(88px + 23vw);bottom:auto;z-index:1;-webkit-text-stroke:1px var(--paper)}
+  .dj{left:54%;height:62%}
+  .role{top:auto;bottom:58px;max-width:15ch;font-size:10px}
+  .role b{font-size:13px}
+  .next{display:none}
+  .hero .play{top:auto;right:var(--pad);bottom:58px;padding:10px 14px 10px 10px}
+  .floor{height:24%}
+  .crate .note{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="#top">KOFI MENSAH</a>
+  <nav aria-label="Sections"><a href="#crate">Music</a><a href="#listen">Listen</a><a href="#tour">Tour</a><a href="#kit">Press kit</a><a href="#booking">Booking</a></nav>
+  <span class="bpm" aria-label="Tempo 128 beats per minute"><i aria-hidden="true"></i>128 BPM</span>
+</header>
+
+<main>
+  <section class="hero" id="top" aria-label="Introduction">
+    <div class="lights" aria-hidden="true"></div>
+    <div class="floor" aria-hidden="true"></div>
+    <h1 class="sr">Kofi Mensah, DJ and producer</h1>
+    <span class="kofi" aria-hidden="true">KOFI</span>
+    <figure class="dj">
+      <img class="cut" src="img/kofi-mensah/cut.webp" srcset="img/kofi-mensah/cut-760.webp 606w, img/kofi-mensah/cut.webp 877w" sizes="(max-width:640px) 70vw, 60vh" width="877" height="1099" alt="Kofi Mensah in a black t-shirt, headphones round his neck, lit in magenta and cyan, one hand raised">
+      <span class="anchor" aria-hidden="true"></span>
+    </figure>
+    <span class="mensah" aria-hidden="true">MENSAH</span>
+    <p class="role mono"><b>Afro-house, deep and late.</b>DJ &amp; producer · Kumasi → South London → Dubai</p>
+    <a class="next mono" href="#tour"><span>Next show</span>Fri 23 Oct · Dubai · Sola Rooftop</a>
+    <button class="play" type="button" data-play aria-pressed="false"><span class="ic" aria-hidden="true">▶</span><span class="lbl">Play a 128 BPM preview</span></button>
+    <div class="ticker mono" aria-label="Upcoming dates">
+      <div class="run"><span>Fri 23 Oct · Dubai · Sola Rooftop</span><span>Sat 31 Oct · Ibiza · Casa Brava closing</span><span>Sat 14 Nov · London · The Vault</span><span>Fri 11 Dec · Accra · Shoreline Festival</span><span>Thu 31 Dec · Cape Town · Mountainside NYE</span><span aria-hidden="true">Fri 23 Oct · Dubai · Sola Rooftop</span><span aria-hidden="true">Sat 31 Oct · Ibiza · Casa Brava closing</span><span aria-hidden="true">Sat 14 Nov · London · The Vault</span><span aria-hidden="true">Fri 11 Dec · Accra · Shoreline Festival</span><span aria-hidden="true">Thu 31 Dec · Cape Town · Mountainside NYE</span></div>
+    </div>
+  </section>
+
+  <section class="crate" id="crate" aria-label="Discography">
+    <div id="discs"></div>
+    <p class="crate-head mono">The crate · seven releases</p>
+    <p class="note">Press quotes are illustrative</p>
+  </section>
+
+  <section class="sec" id="sound" aria-labelledby="sound-h">
+    <div class="sound">
+      <div>
+        <p class="eyebrow mono">The sound</p>
+        <h2 class="big" id="sound-h" data-lines>Strangers in, <em>family</em> out.</h2>
+        <p class="lead">Kofi plays long, patient sets that start with log drums and highlife guitars and end, hours later, with a room that moves as one. He grew up between his grandmother's records in Kumasi and the sound systems of South London, and he still carries both into every booth.</p>
+        <div class="tags mono"><span>Afro-house</span><span>Amapiano</span><span>Deep house</span><span>Highlife edits</span></div>
+      </div>
+      <div>
+        <div class="stats">
+          <div><b data-count="9">9</b><span>years behind the decks</span></div>
+          <div><b data-count="140">140</b><span>shows a year</span></div>
+          <div><b data-count="24">24</b><span>countries played</span></div>
+          <div><b><span data-count="18">18</span><i>M</i></b><span>streams across releases</span></div>
+        </div>
+        <p class="fine">All figures are illustrative.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec listen" id="listen" aria-labelledby="listen-h">
+    <p class="eyebrow mono">Listen</p>
+    <h2 class="big" id="listen-h" data-lines>Live from <em>the rooftop.</em></h2>
+    <div class="player">
+      <div class="player-top">
+        <h3>Sola Rooftop Sessions 07<small>Recorded live in Dubai · 62 min · 118 → 126 BPM</small></h3>
+        <button class="play" type="button" data-play aria-pressed="false"><span class="ic" aria-hidden="true">▶</span><span class="lbl">Play a 128 BPM preview</span></button>
+      </div>
+      <div class="wave" id="wave" aria-hidden="true"><span class="head"></span></div>
+      <div class="chapters mono" aria-label="Chapters"><span>00:00 Warm-up</span><span>14:20 Log drums</span><span>31:05 Highlife edit</span><span>47:40 Peak</span><span>58:10 Sunrise</span></div>
+      <canvas class="scope" id="scope" aria-hidden="true"></canvas>
+      <p class="disclose">The preview is a short loop generated live in your browser. Kofi's mixes and releases are fictional.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="tour" aria-labelledby="tour-h">
+    <p class="eyebrow mono">Tour</p>
+    <h2 class="big" id="tour-h" data-lines>Where the <em>room</em> is next.</h2>
+    <ol class="tour-list">
+      <li><span class="date mono">Fri 23 Oct 2026</span><span class="city">Dubai</span><span class="venue">Sola Rooftop<small>Friday residency</small></span><a class="tix" href="#" data-demo>Tickets</a></li>
+      <li><span class="date mono">Sat 31 Oct 2026</span><span class="city">Ibiza</span><span class="venue">Casa Brava<small>Season closing</small></span><a class="tix low" href="#" data-demo>Last tickets</a></li>
+      <li><span class="date mono">Sat 14 Nov 2026</span><span class="city">London</span><span class="venue">The Vault, Peckham<small>All-night set</small></span><a class="tix" href="#" data-demo>Tickets</a></li>
+      <li><span class="date mono">Fri 11 Dec 2026</span><span class="city">Accra</span><span class="venue">Shoreline Festival<small>Main stage, sunset</small></span><a class="tix" href="#" data-demo>Tickets</a></li>
+      <li><span class="date mono">Thu 31 Dec 2026</span><span class="city">Cape Town</span><span class="venue">Mountainside NYE<small>Midnight set</small></span><a class="tix" href="#" data-demo>Tickets</a></li>
+    </ol>
+    <p class="fine">Venues and dates are fictional.</p>
+  </section>
+
+  <section class="sec" id="residencies" aria-labelledby="res-h">
+    <p class="eyebrow mono">Residencies</p>
+    <h2 class="big" id="res-h" data-lines>Rooms that <em>know</em> his name.</h2>
+    <div class="res">
+      <article style="--c:rgba(255,46,136,.6)"><span class="when mono">Fridays · since 2023</span><div><h3>Sola Rooftop</h3><p>Dubai. Sunset to 3 a.m., 1,200 people, and the longest-running Afro-house night in the city.</p></div></article>
+      <article style="--c:rgba(34,225,225,.55)"><span class="when mono">Summers · 2024–2026</span><div><h3>Casa Brava</h3><p>Ibiza. A weekly terrace residency that sold out every date of the 2025 season.</p></div></article>
+      <article style="--c:rgba(242,183,5,.55)"><span class="when mono">Monthly · since 2019</span><div><h3>The Vault</h3><p>London. Where it started: a basement in Peckham, a borrowed sound system and a queue round the block.</p></div></article>
+    </div>
+  </section>
+
+  <section class="sec" id="kit" aria-labelledby="kit-h">
+    <div class="kit">
+      <div>
+        <p class="eyebrow mono">Press kit</p>
+        <h2 class="big" id="kit-h" data-lines>Everything a <em>promoter</em> needs.</h2>
+        <ul class="files">
+          <li><a href="#" data-demo><span>Biography, short and long</span><small>PDF · 2 pages</small></a></li>
+          <li><a href="#" data-demo><span>Press photos, high resolution</span><small>ZIP · 12 images</small></a></li>
+          <li><a href="#" data-demo><span>Logos and artwork</span><small>ZIP · SVG + PNG</small></a></li>
+          <li><a href="#" data-demo><span>Technical rider</span><small>PDF · 1 page</small></a></li>
+        </ul>
+        <p class="rider">Booth: three media players, one four-channel mixer, two booth monitors at head height. Sets from 2 to 6 hours.</p>
+      </div>
+      <div class="book" id="booking">
+        <p class="eyebrow mono">Booking</p>
+        <h3>Book Kofi for your room.</h3>
+        <dl>
+          <div><dt class="mono">Worldwide agent</dt><dd><a href="#" data-demo>Northside Artists · bookings@northside.example</a></dd></div>
+          <div><dt class="mono">Management</dt><dd><a href="#" data-demo>Ama Owusu · mgmt@kofimensah.example</a></dd></div>
+          <div><dt class="mono">Middle East</dt><dd><a href="#" data-demo>Dubai office · +971 4 000 0000</a></dd></div>
+        </dl>
+        <a class="btn" href="#" data-demo>Send a booking request</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Kofi Mensah is a fictional person. Releases, labels, venues, figures and press quotes on this page are illustrative. Portrait generated with AI. Disc carousel adapted from the client's Disc Cascade component.</p>
+    <p>A concept website by Zenith Dubai CV.</p>
+  </footer>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC, root = document.documentElement;
+
+  // ---- releases ----
+  var GH = ["#0B0A0C","#F2B705","#C8102E"];
+  var releases = [
+    {title:"First Light", pattern:"horizon", palette:["#1A0F2E","#0B0A0C","#FF2E88"], credits:[{label:"Format",value:"Debut EP · 4 tracks"},{label:"Label",value:"Sankofa Sound"},{label:"Year",value:"2018"},{label:"Tempo",value:"120 BPM"}], reviews:[{source:"Low End Notes",quote:"A debut that already knows the room"},{source:"Night Shift Weekly",quote:"Warm, patient, deadly",stars:4}]},
+    {title:"Afterglow", labelStyle:"block", pattern:"rings", palette:["#FF2E88","#0B0A0C","#22E1E1"], credits:[{label:"Format",value:"Single · Sunrise edit"},{label:"Label",value:"Sankofa Sound"},{label:"Year",value:"2020"},{label:"Tempo",value:"122 BPM"}], reviews:[{source:"The Groove Ledger",quote:"Built for the last hour"},{source:"Low End Notes",quote:"Pure morning light"}]},
+    {title:"Lagos Layover", pattern:"stripes", palette:["#0B0A0C","#22E1E1","#F2B705"], credits:[{label:"Format",value:"Remix"},{label:"Label",value:"Coastline Records"},{label:"Year",value:"2021"},{label:"Tempo",value:"124 BPM"}], reviews:[{source:"Night Shift Weekly",quote:"Log drums with a passport"},{source:"Bassline Daily",quote:"Restless and joyful",stars:4}]},
+    {title:"Harmattan", pattern:"sunburst", palette:GH, credits:[{label:"Format",value:"Single"},{label:"Label",value:"Sankofa Sound"},{label:"Year",value:"2025"},{label:"Tempo",value:"122 BPM · 6:48"}], reviews:[{source:"The Groove Ledger",quote:"Dust, drums and daylight"},{source:"Low End Notes",quote:"A slow-burn anthem"}]},
+    {title:"Adinkra", src:"img/kofi-mensah/label.webp", alt:"Album label: a magenta and gold duotone portrait of Kofi", credits:[{label:"Format",value:"Album · 11 tracks"},{label:"Label",value:"Sankofa Sound"},{label:"Year",value:"2024"},{label:"Length",value:"58 min"}], reviews:[{source:"Bassline Daily",quote:"His most personal record"},{source:"Night Shift Weekly",quote:"Kumasi to Peckham, in one breath"}]},
+    {title:"Gold Coast Nights", pattern:"mosaic", palette:["#F2B705","#0B0A0C","#1E7B4E"], credits:[{label:"Format",value:"DJ mix"},{label:"Label",value:"Coastline Records"},{label:"Year",value:"2023"},{label:"Length",value:"74 min"}], reviews:[{source:"Low End Notes",quote:"Two hours you'll want back"},{source:"The Groove Ledger",quote:"A masterclass in patience"}]},
+    {title:"Kumasi to Peckham", labelStyle:"block", pattern:"halftone", palette:["#F4F1EA","#0B0A0C","#FF2E88"], credits:[{label:"Format",value:"EP · 5 tracks"},{label:"Label",value:"Sankofa Sound"},{label:"Year",value:"2022"},{label:"Tempo",value:"124 BPM"}], reviews:[{source:"Night Shift Weekly",quote:"Two cities, one heartbeat"},{source:"Bassline Daily",quote:"Grandmother's records, remixed",stars:4}]}
+  ];
+  var START = 3; // Harmattan, the disc in the hero
+  var crate = document.getElementById("crate");
+  var dc = new DiscCascade(document.getElementById("discs"), {
+    items: releases, defaultIndex: START, loop: true, autoplay: 0, brand: "KOFI",
+    nav: [{label:"Releases"},{label:"Mixes"},{label:"Remixes"}], indexLabel: "Catalogue", itemNoun: "release",
+    background: "radial-gradient(120% 90% at 50% 40%, #1A121F, #08070A 70%)", color: "#F4F1EA",
+    serif: '"Instrument Serif", Georgia, serif', sans: '"Manrope", system-ui, sans-serif', display: '"Anybody", Impact, sans-serif',
+    hint: "Drag · ← →", ariaLabel: "Kofi Mensah discography", height: "100svh", spin: 14
+  });
+
+  // ---- waveform ----
+  var wave = document.getElementById("wave"), bars = 140, html = "", seed = 7;
+  function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  for (var i = 0; i < bars; i++){
+    var t = i / bars, env = .35 + .45 * Math.sin(Math.PI * Math.min(1, t * 1.15)) + (t > .62 && t < .82 ? .18 : 0);
+    html += '<i style="--h:' + Math.round(Math.max(.08, Math.min(1, env * (.55 + rnd() * .5))) * 100) + '%"></i>';
+  }
+  wave.insertAdjacentHTML("afterbegin", html);
+  var waveBars = wave.querySelectorAll("i"), head = wave.querySelector(".head");
+
+  // ---- a small 128 BPM loop, synthesised in the browser on request ----
+  var audio = null;
+  function makeAudio(){
+    var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
+    var ctx = new AC(), out = ctx.createGain(), comp = ctx.createDynamicsCompressor(), an = ctx.createAnalyser();
+    out.gain.value = .7; comp.threshold.value = -14; comp.ratio.value = 4;
+    out.connect(comp); comp.connect(an); an.connect(ctx.destination); an.fftSize = 1024;
+    var noise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate), nd = noise.getChannelData(0);
+    for (var j = 0; j < nd.length; j++) nd[j] = Math.random() * 2 - 1;
+    var spb = 60 / 128, six = spb / 4, step = 0, next = 0, timer = 0, startAt = 0;
+    var bass = [1,0,0,1, 0,0,1,0, 0,1,0,0, 1,0,0,0]; var bassN = [55,0,0,55, 0,0,65.4,0, 0,73.4,0,0, 49,0,0,0];
+    var perc = [0,0,1,0, 0,1,0,0, 0,0,1,0, 0,1,0,1];
+    function env(g, t, a, d, peak){ g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + d); }
+    function kick(t){ var o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(44, t + .13); env(g, t, .002, .38, 1); o.connect(g); g.connect(out); o.start(t); o.stop(t + .45); }
+    function hat(t, open){ var s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain(); s.buffer = noise; f.type = "highpass"; f.frequency.value = 7600; env(g, t, .001, open ? .16 : .045, open ? .16 : .22); s.connect(f); f.connect(g); g.connect(out); s.start(t); s.stop(t + .3); }
+    function clap(t){ [0, .012, .026].forEach(function(o){ var s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain(); s.buffer = noise; f.type = "bandpass"; f.frequency.value = 1600; f.Q.value = .9; env(g, t + o, .001, .16, .38); s.connect(f); f.connect(g); g.connect(out); s.start(t + o); s.stop(t + o + .25); }); }
+    function log(t, f0){ var o = ctx.createOscillator(), g = ctx.createGain(); o.type = "sine"; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f0 * .72, t + .14); env(g, t, .003, .26, .34); o.connect(g); g.connect(out); o.start(t); o.stop(t + .3); }
+    function bassNote(t, f){ var o = ctx.createOscillator(), fl = ctx.createBiquadFilter(), g = ctx.createGain(); o.type = "sawtooth"; o.frequency.value = f; fl.type = "lowpass"; fl.frequency.value = 340; env(g, t, .006, .2, .32); o.connect(fl); fl.connect(g); g.connect(out); o.start(t); o.stop(t + .26); }
+    var pad = ctx.createGain(); pad.gain.value = 0; pad.connect(out);
+    [220, 261.6, 329.6, 392].forEach(function(f){ var o = ctx.createOscillator(), fl = ctx.createBiquadFilter(); o.type = "triangle"; o.frequency.value = f; fl.type = "lowpass"; fl.frequency.value = 1100; o.connect(fl); fl.connect(pad); o.start(); });
+    function schedule(){
+      while (next < ctx.currentTime + .12){
+        var s = step % 16;
+        if (s % 4 === 0) kick(next);
+        if (s % 4 === 2) hat(next, s === 14);
+        if (s === 4 || s === 12) clap(next);
+        if (perc[s]) log(next, s % 2 ? 196 : 262);
+        if (bass[s]) bassNote(next, bassN[s]);
+        if (s === 0) beatSync(next);
+        next += six; step++;
+      }
+      timer = setTimeout(schedule, 25);
+    }
+    function beatSync(t){ var d = Math.max(0, (t - ctx.currentTime) * 1000); setTimeout(function(){ var h = document.querySelector(".hero"); if (h){ h.classList.remove("beat"); void h.offsetWidth; h.classList.add("beat"); } }, d); }
+    return {
+      ctx: ctx, an: an, playing: false,
+      start: function(){ ctx.resume(); next = ctx.currentTime + .06; step = 0; startAt = next; pad.gain.cancelScheduledValues(ctx.currentTime); pad.gain.setTargetAtTime(.05, ctx.currentTime, .8); schedule(); this.playing = true; },
+      stop: function(){ clearTimeout(timer); pad.gain.setTargetAtTime(0, ctx.currentTime, .2); this.playing = false; document.querySelector(".hero").classList.remove("beat"); },
+      progress: function(){ return ((ctx.currentTime - startAt) / (spb * 32)) % 1; }
+    };
+  }
+  var playBtns = document.querySelectorAll("[data-play]"), scope = document.getElementById("scope"), sctx = scope.getContext("2d"), raf = 0;
+  function draw(){
+    if (!audio || !audio.playing) return;
+    var w = scope.width = scope.clientWidth * Math.min(2, devicePixelRatio || 1), h = scope.height = scope.clientHeight * Math.min(2, devicePixelRatio || 1);
+    var buf = new Uint8Array(audio.an.fftSize); audio.an.getByteTimeDomainData(buf);
+    sctx.clearRect(0, 0, w, h); var g = sctx.createLinearGradient(0, 0, w, 0); g.addColorStop(0, "#FF2E88"); g.addColorStop(1, "#22E1E1");
+    sctx.strokeStyle = g; sctx.lineWidth = 2; sctx.beginPath();
+    for (var k = 0; k < buf.length; k++){ var x = k / (buf.length - 1) * w, y = buf[k] / 255 * h; k ? sctx.lineTo(x, y) : sctx.moveTo(x, y); }
+    sctx.stroke();
+    var p = audio.progress(), lit = Math.floor(p * waveBars.length);
+    waveBars.forEach(function(b, k){ b.classList.toggle("on", k <= lit); });
+    head.style.left = (p * 100) + "%";
+    raf = requestAnimationFrame(draw);
+  }
+  playBtns.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      if (!audio) audio = makeAudio();
+      if (!audio){ ZC.toast("Audio isn't available in this browser."); return; }
+      if (audio.playing){ audio.stop(); cancelAnimationFrame(raf); }
+      else { audio.start(); draw(); }
+      playBtns.forEach(function(b){ b.setAttribute("aria-pressed", audio.playing ? "true" : "false"); b.querySelector(".ic").textContent = audio.playing ? "❚❚" : "▶"; b.querySelector(".lbl").textContent = audio.playing ? "Pause the preview" : "Play a 128 BPM preview"; });
+    });
+  });
+
+  // ---- motion ----
+  window.addEventListener("load", function(){
+    var anchor = document.querySelector(".anchor");
+    var fly = document.createElement("div");
+    fly.className = "flydisc"; fly.setAttribute("aria-hidden", "true");
+    fly.innerHTML = '<span class="dcc-tilt">' + DiscCascade.discFace(releases[START], START, {uid:"fly", display:'"Anybody", Impact, sans-serif', brand:"KOFI"}) + "</span>";
+    document.querySelector("main").appendChild(fly);
+    function docRect(el){ var r = el.getBoundingClientRect(); return {x:r.left + scrollX, y:r.top + scrollY, w:r.width, h:r.height}; }
+    function placeFly(){ var a = docRect(anchor); fly.style.left = a.x + "px"; fly.style.top = a.y + "px"; fly.style.width = a.w + "px"; fly.style.height = a.w + "px"; }
+    placeFly();
+    window.addEventListener("resize", placeFly);
+
+    if (!ZC.motion || !window.gsap){
+      dc.play(5200);
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+    ZC.smooth();
+
+    document.fonts.ready.then(function(){
+      placeFly();
+      // arrival
+      var tl = gsap.timeline({defaults:{ease:"expo.out"}});
+      tl.from(".kofi",{yPercent:30,opacity:0,duration:1.4})
+        .from(".dj",{yPercent:8,opacity:0,duration:1.5},.15)
+        .from(".mensah",{xPercent:12,opacity:0,duration:1.4},.3)
+        .from(fly,{scale:.2,opacity:0,rotation:-140,duration:1.6,ease:"back.out(1.6)"},.55)
+        .from([".role",".next",".hero .play",".ticker"],{y:16,opacity:0,duration:1,stagger:.08},.7);
+      // hover bob of the disc above the fingertips
+      gsap.to(fly.firstChild,{y:-10,duration:1.875,ease:"sine.inOut",yoyo:true,repeat:-1});
+
+      // hero type parts as you scroll away
+      gsap.timeline({scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:.6}})
+        .to(".kofi",{xPercent:-14,yPercent:-10,ease:"none"},0)
+        .to(".mensah",{xPercent:12,ease:"none"},0)
+        .to(".dj",{scale:.94,yPercent:6,ease:"none"},0)
+        .to(".lights",{opacity:.3,ease:"none"},0);
+
+      // the disc flies from his fingertips to the crate
+      var stage = dc.stage;
+      crate.setAttribute("data-awaiting", "");
+      var flight = gsap.timeline({scrollTrigger:{trigger:crate,start:"top bottom",end:"top top",scrub:.8,invalidateOnRefresh:true,
+        onRefresh: placeFly,
+        onUpdate:function(st){ var landed = st.progress > .985; crate.toggleAttribute("data-awaiting", !landed); fly.style.visibility = landed ? "hidden" : ""; },
+        onLeave:function(){ crate.removeAttribute("data-awaiting"); fly.style.visibility = "hidden"; dc.play(4600); }}});
+      flight.to(fly,{
+        x:function(){ var a = docRect(anchor), b = docRect(stage); return (b.x + b.w / 2) - (a.x + a.w / 2); },
+        y:function(){ var a = docRect(anchor), b = docRect(stage); return (b.y + b.h / 2) - (a.y + a.w / 2); },
+        scale:function(){ return docRect(stage).w / docRect(anchor).w; },
+        rotationY:22, rotationZ:-6, rotationX:8, ease:"power1.inOut"
+      });
+
+      // headlines
+      gsap.utils.toArray("[data-lines]").forEach(function(el){
+        SplitText.create(el,{type:"lines,words",mask:"lines",autoSplit:true,onSplit:function(self){
+          return gsap.from(self.lines,{yPercent:110,rotation:2,duration:1.1,stagger:.08,ease:"expo.out",scrollTrigger:{trigger:el,start:"top 86%"}});
+        }});
+      });
+      gsap.utils.toArray("[data-count]").forEach(function(b){
+        var to = +b.dataset.count, o = {v:0};
+        ScrollTrigger.create({trigger:b,start:"top 90%",once:true,onEnter:function(){ gsap.to(o,{v:to,duration:1.6,ease:"power3.out",onUpdate:function(){ b.textContent = Math.round(o.v); }}); }});
+      });
+      gsap.from(".tour-list li",{x:-40,opacity:0,duration:.9,stagger:.08,ease:"expo.out",scrollTrigger:{trigger:".tour-list",start:"top 82%"}});
+      gsap.from(".res article",{y:60,opacity:0,duration:1.1,stagger:.12,ease:"expo.out",scrollTrigger:{trigger:".res",start:"top 85%"}});
+      gsap.from("#wave i",{scaleY:0,transformOrigin:"50% 50%",duration:.8,stagger:{each:.004,from:"start"},ease:"power3.out",scrollTrigger:{trigger:"#wave",start:"top 85%"}});
+      ScrollTrigger.refresh();
+    });
+  });
+});
+</script>
+</body>
+</html>
