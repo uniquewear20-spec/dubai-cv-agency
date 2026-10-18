@@ -336,7 +336,7 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
     const byCat = Object.fromEntries(CATEGORIES.map(c => [c, PORTFOLIOS.filter(p => p.category === c).length])) as Record<Category, number>;
     return { all: PORTFOLIOS.length, live, concept: PORTFOLIOS.length - live, byCat };
   }, []);
-  // Catalogue numbers stay fixed (01–30) whatever the filter.
+  // Catalogue numbers stay fixed (01 to the last) whatever the filter.
   const numberOf = React.useMemo(() => Object.fromEntries(PORTFOLIOS.map((p, i) => [p.slug, i + 1])) as Record<string, number>, []);
 
   const list = React.useMemo(
@@ -423,25 +423,28 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
   const playing = wide && inView && !paused && !viewing && !(view === "wheel" && wheelRunning);
   const showVideoControl = device === "desktop" && site.loop && motionOk && wide;
 
+  // Group the index when everything is shown: the featured sites first, then by field.
+  // Each group gathers its sites from the whole list, so reordering the list never repeats a heading.
+  const groups: { cat: Category | "featured"; items: Portfolio[] }[] = [];
+  for (const p of list) {
+    const g = p.featured ? "featured" : p.category;
+    const found = groups.find(x => x.cat === g);
+    if (found) found.items.push(p); else groups.push({ cat: g, items: [p] });
+  }
+  // Arrow keys in the index follow the order on screen.
+  const indexOrder = groups.flatMap(g => g.items);
+
   const rowKeys = (e: React.KeyboardEvent<HTMLButtonElement>, i: number) => {
     const go = (j: number) => {
-      const n = list[(j + list.length) % list.length];
+      const n = indexOrder[(j + indexOrder.length) % indexOrder.length];
       select(n.slug);
       indexRef.current?.querySelector<HTMLButtonElement>(`[data-slug="${n.slug}"] button`)?.focus();
     };
     if (e.key === "ArrowDown") { e.preventDefault(); go(i + 1); }
     else if (e.key === "ArrowUp") { e.preventDefault(); go(i - 1); }
     else if (e.key === "Home") { e.preventDefault(); go(0); }
-    else if (e.key === "End") { e.preventDefault(); go(list.length - 1); }
+    else if (e.key === "End") { e.preventDefault(); go(indexOrder.length - 1); }
   };
-
-  // Group the index when everything is shown: the featured sites first, then by field.
-  const groups: { cat: Category | "featured"; items: Portfolio[] }[] = [];
-  for (const p of list) {
-    const g = p.featured ? "featured" : p.category;
-    const last = groups[groups.length - 1];
-    if (last && last.cat === g) last.items.push(p); else groups.push({ cat: g, items: [p] });
-  }
 
   return (
     <section id="websites" className="relative py-28 sm:py-36 px-5 sm:px-8 scroll-mt-20" style={{ borderTop: `1px solid ${theme.line}` }} aria-labelledby="zx-title">
@@ -653,7 +656,7 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
                   )}
                   <ol>
                     {g.items.map(p => {
-                      const i = list.indexOf(p), on = p.slug === site.slug;
+                      const i = indexOrder.indexOf(p), on = p.slug === site.slug;
                       return (
                         <li key={p.slug} data-slug={p.slug} className="list-none">
                           <button type="button" aria-current={on ? "true" : undefined}

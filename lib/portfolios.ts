@@ -46,13 +46,6 @@ const PUBLISHED: T = { en: "Published portfolio", fr: "Portfolio publié", ar: "
 export const PORTFOLIOS: Portfolio[] = [
   // ── Featured, in this order (chosen by Zenith Dubai CV) ──────────────────────────────────────
   {
-    slug: "wasim-akram", name: "Wasim Akram", featured: true, kind: "live", category: "built", url: "https://wasim-akram-portfolio.netlify.app/",
-    tone: "#1E1914", stills: ["desktop", "mobile"], loop: false,
-    role: { en: "3D Visualizer & Interior Designer", fr: "Visualiseur 3D et architecte d'intérieur", ar: "مصمم مرئيات ثلاثية الأبعاد ومصمم داخلي" },
-    idea: PUBLISHED,
-    line: { en: "His own website, shown live exactly as he published it.", fr: "Son propre site, présenté en direct tel qu'il l'a publié.", ar: "موقعه الخاص، معروض مباشرةً كما نشره تماماً." },
-  },
-  {
     slug: "awa-ndiaye", name: "Awa Ndiaye", featured: true, kind: "concept", category: "creative", url: "/samples/awa-ndiaye.html",
     tone: "#E7E2DA", stills: ALL, loop: true,
     role: { en: "Model & Brand Ambassador", fr: "Mannequin et ambassadrice de marque", ar: "عارضة أزياء وسفيرة علامات" },
@@ -87,22 +80,29 @@ export const PORTFOLIOS: Portfolio[] = [
     idea: { en: "Focus", fr: "La mise au point", ar: "ضبط التركيز" },
     line: { en: "A curved strip of frames pulls focus on the centre one, then a contact sheet with loupe and grease pencil.", fr: "Une bande d'images incurvée fait le point sur celle du centre, puis une planche-contact avec loupe et crayon gras.", ar: "شريط صور منحنٍ يتّضح فيه الإطار الأوسط، ثم ورقة تلامس مع عدسة مكبّرة وقلم تأشير." },
   },
-
-  // ── Hospitality & travel ──────────────────────────────────────────────────────────────────────
   {
-    slug: "layla-haddad", name: "Layla Haddad", kind: "concept", category: "hospitality", url: "/samples/layla-haddad.html",
+    slug: "layla-haddad", name: "Layla Haddad", featured: true, kind: "concept", category: "hospitality", url: "/samples/layla-haddad.html",
     tone: "#1C1915", stills: ALL, loop: true,
     role: { en: "Hotel General Manager", fr: "Directrice générale d'hôtel", ar: "مديرة عامة لفندق فاخر" },
     idea: { en: "The arrival", fr: "L'arrivée", ar: "الوصول" },
     line: { en: "Bronze doors open onto a lit arch, and a lift's floor indicator guides you through the hotel.", fr: "Des portes de bronze s'ouvrent sur une arche de lumière, et l'indicateur d'étage d'un ascenseur guide la visite.", ar: "أبواب برونزية تنفتح على قوس مضيء، ومؤشّر طوابق المصعد يرشدك في أرجاء الفندق." },
   },
   {
-    slug: "julien-arnaud", name: "Julien Arnaud", kind: "concept", category: "hospitality", url: "/samples/julien-arnaud.html",
+    slug: "julien-arnaud", name: "Julien Arnaud", featured: true, kind: "concept", category: "hospitality", url: "/samples/julien-arnaud.html",
     tone: "#0F0E0D", stills: ALL, loop: true,
     role: { en: "Chef de cuisine", fr: "Chef de cuisine", ar: "رئيس الطهاة" },
     idea: { en: "Steam", fr: "La vapeur", ar: "البخار" },
     line: { en: "Steam rises over the pass as you scroll, and his career is plated as a tasting menu.", fr: "La vapeur monte au-dessus du passe au fil du défilement, et sa carrière est dressée comme un menu dégustation.", ar: "يتصاعد البخار فوق منصة التقديم مع التمرير، وتُقدَّم مسيرته المهنية كقائمة تذوّق." },
   },
+  {
+    slug: "wasim-akram", name: "Wasim Akram", featured: true, kind: "live", category: "built", url: "https://wasim-akram-portfolio.netlify.app/",
+    tone: "#1E1914", stills: ["desktop", "mobile"], loop: false,
+    role: { en: "3D Visualizer & Interior Designer", fr: "Visualiseur 3D et architecte d'intérieur", ar: "مصمم مرئيات ثلاثية الأبعاد ومصمم داخلي" },
+    idea: PUBLISHED,
+    line: { en: "His own website, shown live exactly as he published it.", fr: "Son propre site, présenté en direct tel qu'il l'a publié.", ar: "موقعه الخاص، معروض مباشرةً كما نشره تماماً." },
+  },
+
+  // ── Hospitality & travel ──────────────────────────────────────────────────────────────────────
   {
     slug: "ji-woo-han", name: "Ji-woo Han", kind: "concept", category: "hospitality", url: "/samples/ji-woo-han.html",
     tone: "#F3ECE1", stills: ALL, loop: true,
