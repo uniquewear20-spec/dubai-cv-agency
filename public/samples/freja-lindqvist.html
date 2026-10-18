@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Freja Lindqvist — Creative Director · Concept site</title>
+<meta name="description" content="Freja Lindqvist, creative director. A concept portfolio website by Zenith Dubai CV — fictional person, fictional brands, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#E6E0D4">
+<link rel="preload" href="fonts/hedvig-letters-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/hedvig-letters-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" imagesrcset="img/freja-lindqvist/cut-640.webp 437w, img/freja-lindqvist/cut.webp 728w" imagesizes="(max-width:760px) 80vw, 56vh" fetchpriority="high">
+<script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/Flip.min.js"></script>
+<script defer src="assets/vendor/Draggable.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
+<style>
+@font-face{font-family:"Hedvig Serif";src:url(fonts/hedvig-letters-serif-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Hedvig Sans";src:url(fonts/hedvig-letters-sans-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Caveat";src:url(fonts/caveat-freja.woff2) format("woff2");font-weight:600;font-display:swap}
+:root{
+  --wall:#E6E0D4;--paper:#F5F1E8;--linen:#E9E2D3;--clay:#B5674D;--pine:#2F3B33;--ochre:#C9973A;--ink:#1B1B19;--ink2:#5B5850;--note:#F3E19A;
+  --serif:"Hedvig Serif",Georgia,serif;--sans:"Hedvig Sans","Helvetica Neue",Arial,sans-serif;--hand:"Caveat","Comic Sans MS",cursive;
+  --pad:clamp(18px,4.4vw,72px);
+  --zc-bg:#2F3B33;--zc-fg:#F5F1E8;--zc-dot:#C9973A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--wall)}
+body{background:var(--wall);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img,svg{display:block}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--clay);outline-offset:3px}
+em{font-style:normal;color:var(--clay)}
+.lab{font:400 12px/1.3 var(--sans);letter-spacing:.2em;text-transform:uppercase}
+main{position:relative;overflow-x:clip}
+
+/* Header */
+.top{position:fixed;inset-inline:var(--pad);top:16px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:16px;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:baseline;gap:12px;padding:9px 16px;text-decoration:none;background:rgba(245,241,232,.9)}
+.brand b{font:400 20px/1 var(--serif)}
+.brand span{font:400 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+.top nav{display:flex;background:rgba(245,241,232,.9)}
+.top nav a{padding:10px 14px;text-decoration:none;font-size:14px;color:var(--ink2)}
+.top nav a:hover{color:var(--ink)}
+.top nav a[aria-current]{background:var(--ink);color:var(--paper)}
+
+/* HERO: the moodboard */
+.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden}
+.panel{position:absolute;z-index:0;right:calc(var(--pad) + 1.5vw);top:11vh;bottom:0;width:min(30vw,440px);background:var(--clay)}
+.freja{position:absolute;z-index:1;right:calc(var(--pad) - 1.5vw);bottom:0;height:min(84vh,940px);width:auto;max-width:none;user-select:none;pointer-events:none}
+.hero .copy{position:relative;z-index:3;padding:clamp(96px,12vh,132px) var(--pad) 0;max-width:min(60vw,900px)}
+.hero h1{font:400 clamp(40px,4.4vw,76px)/1.02 var(--serif);letter-spacing:-.015em}
+.hero h1 em{display:block}
+.hero .who{display:flex;gap:16px;flex-wrap:wrap;align-items:baseline;margin-top:14px;color:var(--ink2)}
+/* the board is sized by whichever runs out first: width or the height left under the headline */
+.boardwrap{position:relative;z-index:2;margin:3vh 0 0 var(--pad);width:clamp(420px,min(54vw,calc((100svh - 400px) * 1.42)),820px);aspect-ratio:1.42}
+.board{position:absolute;inset:0;background:var(--paper);box-shadow:0 30px 60px -36px rgba(27,27,25,.55),0 0 0 1px rgba(27,27,25,.06);transition:box-shadow .6s}
+.board.campaign{box-shadow:0 40px 80px -36px rgba(27,27,25,.7)}
+.ctrl{position:relative;z-index:3;display:flex;align-items:center;gap:26px;margin:18px 0 0 var(--pad);padding-bottom:28px}
+.flip{display:inline-flex;align-items:center;gap:12px;padding:14px 20px;background:var(--ink);color:var(--paper);font-size:15px;letter-spacing:.04em;transition:background .25s,translate .25s}
+.flip:hover{background:var(--pine);translate:0 -2px}
+.flip i{width:14px;height:14px;border:1.5px solid currentColor;border-radius:2px;rotate:45deg;transition:rotate .5s}
+.ctrl.on .flip i{rotate:225deg}
+.drag{align-items:flex-end;gap:6px;font:600 22px/1 var(--hand);color:var(--ink2);rotate:-2deg;transition:opacity .4s}
+.drag svg{flex:none;margin-bottom:6px}
+.ctrl.on .drag{opacity:0}
+
+/* pieces: one set of elements, two layouts */
+.pc{position:absolute;will-change:transform}
+.board.campaign .pc{cursor:default!important;z-index:2!important}
+.board.campaign [data-p="linen"]{z-index:0!important}
+.drag{display:none}
+.can-drag .drag{display:flex}
+.mm,.cc{transition:opacity .45s ease}
+.board.mood .cc{opacity:0;pointer-events:none}
+.board.campaign .mm{opacity:0;pointer-events:none}
+.board.mood .pc{box-shadow:0 10px 20px -12px rgba(27,27,25,.5)}
+.board.mood .pc.sun,.board.mood .pc.line,.board.mood .pc.chips{box-shadow:none}
+.pc .pin{position:absolute;left:50%;top:-5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#E46A4E,#9A2E1E);box-shadow:0 2px 3px rgba(0,0,0,.35);transition:opacity .3s}
+.board.campaign .pin{opacity:0}
+
+.pc.linen{background:var(--linen);background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.06) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,100,70,.05) 0 1px,transparent 1px 3px)}
+.pc.linen .lbl{position:absolute;left:12px;bottom:10px;font:400 11px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.pc.sun{border-radius:50%;background:radial-gradient(circle at 40% 38%,#DDB15A,var(--ochre) 55%,#B98428)}
+.pc.type{background:var(--paper);display:grid}
+.pc.type > *{grid-area:1/1}
+.pc.type .mm{display:flex;flex-direction:column;justify-content:space-between;padding:12px 14px;border:1px solid rgba(27,27,25,.12)}
+.pc.type .big{font:400 clamp(40px,5vw,84px)/.9 var(--serif)}
+.pc.type .lbl{font:400 11px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.board.campaign .pc.type{background:transparent}
+.pc.type .cc{display:flex;align-items:flex-end}
+.pc.type .head{font:400 clamp(44px,6vw,104px)/.9 var(--serif);letter-spacing:-.02em;color:var(--pine);white-space:nowrap}
+.pc.chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:8px;background:var(--paper)}
+.board.campaign .pc.chips{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:0;background:transparent}
+.pc.chips i{position:relative;display:block;background:var(--c);min-height:0}
+.pc.chips b{position:absolute;left:6px;bottom:4px;font:400 10px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--t,#fff);transition:opacity .3s}
+.board.campaign .pc.chips b{opacity:0}
+.pc.photo{background:#fff;padding:7px 7px 30px}
+.board.campaign .pc.photo{padding:0;background:transparent}
+.pc.photo .img{width:100%;height:100%;overflow:hidden}
+.pc.photo svg{width:100%;height:100%}
+.pc.photo .cap{position:absolute;left:10px;bottom:6px;font:600 17px/1 var(--hand);color:var(--ink2)}
+.pc.note{background:var(--note);display:grid;padding:10px 12px}
+.board.campaign .pc.note{background:transparent;padding:0}
+.pc.note > *{grid-area:1/1}
+.pc.note .hand{font:600 clamp(18px,1.8vw,28px)/1 var(--hand);color:#3A3626;align-self:center}
+.pc.note .tag{font:400 clamp(10px,.9vw,13px)/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--pine);align-self:center;white-space:nowrap}
+.pc.line{display:grid}
+.pc.line > *{grid-area:1/1}
+.pc.line svg{width:100%;height:100%}
+.pc.line .rule{align-self:center;height:1.5px;background:var(--pine)}
+.pc.logo{display:grid;background:var(--paper);border:1px dashed rgba(27,27,25,.3)}
+.board.campaign .pc.logo{background:transparent;border-color:transparent}
+.pc.logo > *{grid-area:1/1;align-self:center;justify-self:center}
+.pc.logo .hand{font:600 clamp(15px,1.3vw,20px)/1.05 var(--hand);color:var(--ink2);text-align:center}
+.pc.logo .mark{font:400 clamp(13px,1.25vw,20px)/1 var(--serif);color:var(--pine);letter-spacing:.06em;white-space:nowrap;justify-self:end}
+
+/* mood positions (percent of the board) */
+.board.mood [data-p="linen"]{left:4%;top:7%;width:38%;height:36%}
+.board.mood [data-p="sun"]{left:47%;top:6%;width:18%;aspect-ratio:1}
+.board.mood [data-p="type"]{left:34%;top:42%;width:32%;height:25%}
+.board.mood [data-p="chips"]{left:5%;top:55%;width:24%;height:28%}
+.board.mood [data-p="photo"]{left:70%;top:9%;width:25%;height:44%}
+.board.mood [data-p="note"]{left:31%;top:73%;width:22%;height:19%}
+.board.mood [data-p="line"]{left:58%;top:74%;width:30%;height:14%}
+.board.mood [data-p="logo"]{left:72%;top:56%;width:17%;height:15%}
+/* campaign positions: one poster */
+.board.campaign [data-p="linen"]{left:0;top:0;width:100%;height:100%}
+.board.campaign [data-p="sun"]{left:61%;top:8%;width:28%;aspect-ratio:1}
+.board.campaign [data-p="type"]{left:6%;top:60%;width:70%;height:18%}
+.board.campaign [data-p="chips"]{left:0;top:93%;width:100%;height:7%}
+.board.campaign [data-p="photo"]{left:6%;top:8%;width:42%;height:47%}
+.board.campaign [data-p="note"]{left:6%;top:81%;width:60%;height:7%}
+.board.campaign [data-p="line"]{left:6%;top:57.5%;width:22%;height:2%}
+.board.campaign [data-p="logo"]{left:70%;top:80%;width:24%;height:9%}
+
+/* Sections */
+.sec{position:relative;padding:16vh var(--pad)}
+.h2{font:400 clamp(46px,5.8vw,100px)/1 var(--serif);letter-spacing:-.015em;max-width:15ch}
+.lede{font-size:clamp(17px,1.35vw,20px);line-height:1.6;max-width:54ch;margin-top:22px;color:var(--ink2)}
+.note{font-size:13.5px;margin-top:24px;color:var(--ink2)}
+.eyebrow{display:flex;justify-content:space-between;gap:16px;padding-top:14px;border-top:1px solid var(--ink);margin-bottom:5vh}
+
+/* Campaigns */
+.camps{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,48px);margin-top:7vh}
+.poster{position:relative;aspect-ratio:4/5;overflow:hidden;box-shadow:0 30px 60px -38px rgba(27,27,25,.6)}
+.poster .t{position:absolute;left:7%;right:7%;font:400 clamp(34px,3.6vw,64px)/.95 var(--serif);letter-spacing:-.02em}
+.poster .s{position:absolute;left:7%;bottom:6%;font:400 11.5px/1.3 var(--sans);letter-spacing:.22em;text-transform:uppercase}
+.poster svg{position:absolute}
+.pw{position:relative}
+.camp .idea{position:absolute;z-index:2;right:-12px;top:42%;max-width:8.6em;margin:0;padding:10px 14px 12px;background:var(--note);font:600 23px/1.02 var(--hand);color:#3A3626;rotate:3deg;box-shadow:0 10px 18px -10px rgba(27,27,25,.5);transition:rotate .35s ease,translate .35s ease}
+.camp:nth-child(even) .idea{rotate:-2.5deg}
+.camp:hover .idea{rotate:-1deg;translate:0 -4px}
+.camp:nth-child(even):hover .idea{rotate:1.5deg}
+.camp .pw{transition:translate .35s ease}
+.camp:hover .pw{translate:0 -4px}
+.camp h3{font:400 28px/1.1 var(--serif);margin-top:18px}
+.camp .meta{font-size:14.5px;color:var(--ink2);margin-top:6px}
+.camp p{margin-top:10px;font-size:16px;max-width:52ch}
+.p1{background:var(--linen)}.p2{background:var(--pine);color:var(--paper)}.p3{background:linear-gradient(160deg,#C9826A,var(--clay) 60%,#8E4A36);color:#F7EDE4}.p4{background:var(--ochre);color:var(--ink)}
+
+/* How I work */
+.how{background:var(--pine);color:var(--paper)}
+.how .eyebrow{border-color:rgba(245,241,232,.5)}
+.how .lede{color:rgba(245,241,232,.78)}
+.how em{color:#E0B565}
+.stepsx{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,2.6vw,40px);margin-top:8vh;counter-reset:s}
+.stepsx li{counter-increment:s;border-top:1px solid rgba(245,241,232,.4);padding-top:18px}
+.stepsx li::before{content:"0" counter(s);font:400 15px/1 var(--sans);letter-spacing:.14em;color:#E0B565}
+.stepsx .ill{display:block;width:100%;max-width:240px;height:auto;margin:18px 0 6px;color:rgba(245,241,232,.82)}
+.stepsx h3{font:400 30px/1.05 var(--serif);margin-top:14px}
+.stepsx p{margin-top:10px;font-size:16px;color:rgba(245,241,232,.8)}
+
+/* Career */
+.career{list-style:none;margin-top:7vh}
+.career li{display:grid;grid-template-columns:110px 160px minmax(0,1fr);gap:24px;align-items:baseline;padding:22px 0;border-top:1px solid rgba(27,27,25,.2)}
+.career .y{font:400 34px/1 var(--serif);color:var(--clay)}
+.career .c{font:400 12.5px/1.3 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--ink2)}
+.career h3{font:400 26px/1.1 var(--serif)}
+.career p{margin-top:6px;font-size:16px;color:var(--ink2)}
+
+/* Contact */
+.contact{min-height:88vh;display:flex;flex-direction:column;justify-content:center;background:var(--paper)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:7vh;max-width:1100px}
+.cards a{display:flex;flex-direction:column;gap:10px;padding:22px 22px 24px;background:var(--wall);text-decoration:none;transition:background .25s,translate .25s}
+.cards a:hover{background:#DCD4C5;translate:0 -3px}
+.cards .lab{color:var(--clay)}
+.cards b{font:400 clamp(20px,1.55vw,25px)/1.15 var(--serif);overflow-wrap:anywhere}
+body>footer{background:var(--ink);color:#B8B4AA;padding:30px var(--pad) 96px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;font-size:14px;line-height:1.7}
+body>footer p{max-width:92ch}
+
+@media (max-width:1100px){.stepsx{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1000px){.top nav{display:none}.cards{grid-template-columns:minmax(0,1fr)}.career li{grid-template-columns:90px minmax(0,1fr)}.career li>div{grid-column:2}}
+/* phones, and tablets held upright: the hero stacks (headline, board, button, portrait) */
+@media (max-width:760px), (max-width:1100px) and (max-aspect-ratio:1/1){
+  .hero{display:flex;flex-direction:column;min-height:0;padding-bottom:0}
+  .hero .copy{order:1;max-width:none;padding-top:clamp(100px,11vh,130px)}
+  .boardwrap{order:2;width:auto;margin:26px var(--pad) 0}
+  .ctrl{order:3;margin:18px var(--pad) 0;padding:0}
+  .panel{position:relative;order:4;right:auto;top:auto;width:min(72vw,380px);height:min(92vw,486px);margin:calc(min(80vw,400px) * 1.536 - min(92vw,486px) + 34px) 0 0 auto}
+  .freja{order:5;position:absolute;right:4vw;bottom:0;height:auto;width:min(80vw,400px)}
+}
+@media (max-width:760px){
+  body{font-size:16.5px}
+  .brand span{display:none}
+  .hero .copy{padding-top:100px}
+  .hero h1{font-size:clamp(40px,11vw,56px)}
+  .boardwrap{margin-top:22px;aspect-ratio:.82}
+  .ctrl{margin-top:16px}
+  .board.mood [data-p="linen"]{left:5%;top:4%;width:52%;height:24%}
+  .board.mood [data-p="sun"]{left:62%;top:5%;width:28%}
+  .board.mood [data-p="type"]{left:30%;top:31%;width:58%;height:18%}
+  .board.mood [data-p="chips"]{left:5%;top:52%;width:38%;height:20%}
+  .board.mood [data-p="photo"]{left:52%;top:52%;width:42%;height:28%}
+  .board.mood [data-p="note"]{left:6%;top:76%;width:38%;height:15%}
+  .board.mood [data-p="line"]{left:4%;top:33%;width:24%;height:12%}
+  .board.mood [data-p="logo"]{left:54%;top:83%;width:34%;height:12%}
+  .board.campaign [data-p="sun"]{left:56%;top:6%;width:36%}
+  .board.campaign [data-p="photo"]{left:6%;top:6%;width:46%;height:42%}
+  .board.campaign [data-p="type"]{left:6%;top:58%;width:88%;height:16%}
+  .board.campaign [data-p="line"]{left:6%;top:55%;width:30%}
+  .board.campaign [data-p="note"]{top:79%;width:88%}
+  .board.campaign [data-p="logo"]{left:72%;top:84%;width:22%}
+  .camps,.stepsx{grid-template-columns:minmax(0,1fr)}
+  .eyebrow{flex-direction:column;gap:4px}
+  .camp .idea{right:-8px;font-size:21px}
+  .career li{grid-template-columns:minmax(0,1fr);gap:6px}.career li>div{grid-column:auto}
+}
+@media (prefers-reduced-motion:reduce){.flip,.flip i,.cards a,.mm,.cc,.drag,.pin,.board,.camp .pw,.camp .idea{transition:none}}
+</style>
+</head>
+<body>
+<header class="top" data-headroom="0.9">
+  <a class="brand" href="#top"><b>Freja Lindqvist</b><span>Creative director</span></a>
+  <nav aria-label="Sections"><a href="#work" data-spy>Work</a><a href="#how" data-spy>How I work</a><a href="#career" data-spy>Career</a><a href="#contact" data-spy>Contact</a></nav>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="panel" aria-hidden="true"></div>
+    <img class="freja" src="img/freja-lindqvist/cut.webp" srcset="img/freja-lindqvist/cut-640.webp 437w, img/freja-lindqvist/cut.webp 728w" sizes="(max-width:760px) 80vw, 56vh" width="728" height="1118" alt="Freja Lindqvist with a platinum bob, in a loose white shirt">
+    <div class="copy">
+      <h1 id="h1">Every campaign starts <em>as a wall of maybes.</em></h1>
+      <p class="who"><span class="lab">Freja Lindqvist</span><span>Creative director · Stockholm → Dubai</span></p>
+    </div>
+    <div class="boardwrap">
+      <div class="board mood" role="img" aria-label="A moodboard of linen, an ochre sun, a typeface, four colours, a winter photograph, a note and a logo sketch. Press the button to turn it into the finished campaign poster for Lera and Lin: Slow light, Autumn Winter 2026.">
+        <div class="pc linen" data-p="linen"><span class="pin" aria-hidden="true"></span><span class="mm lbl">Linen, 180 g · stone washed</span></div>
+        <div class="pc sun" data-p="sun"></div>
+        <div class="pc type" data-p="type"><span class="pin" aria-hidden="true"></span><div class="mm"><span class="big">Aa</span><span class="lbl">Hedvig Letters · Serif 400</span></div><div class="cc"><span class="head">Slow light.</span></div></div>
+        <div class="pc chips" data-p="chips"><i style="--c:#E9E2D3;--t:#5B5850"><b>Linen</b></i><i style="--c:#B5674D"><b>Clay</b></i><i style="--c:#2F3B33"><b>Pine</b></i><i style="--c:#C9973A"><b>Ochre</b></i></div>
+        <div class="pc photo" data-p="photo"><span class="pin" aria-hidden="true"></span><div class="img"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9D3D8"/><stop offset=".55" stop-color="#EEE6D8"/><stop offset="1" stop-color="#F3E8D6"/></linearGradient><radialGradient id="glow" cx=".7" cy=".52" r=".5"><stop offset="0" stop-color="#F6D9A2" stop-opacity=".9"/><stop offset="1" stop-color="#F6D9A2" stop-opacity="0"/></radialGradient></defs><rect width="300" height="400" fill="url(#sky)"/><rect width="300" height="400" fill="url(#glow)"/><path d="M0 230 L30 214 L52 226 L84 196 L118 222 L150 204 L190 228 L222 210 L260 226 L300 214 V260 H0Z" fill="#8A958F" opacity=".55"/><path d="M0 262 Q 80 240 160 258 T 300 252 V400 H0Z" fill="#F5F1E8"/><g fill="#2F3B33"><path d="M28 262 l8 -34 l8 34z"/><path d="M48 262 l10 -46 l10 46z"/><path d="M70 262 l7 -28 l7 28z"/><path d="M224 258 l9 -40 l9 40z"/><path d="M246 258 l7 -26 l7 26z"/></g><path d="M0 300 Q 150 286 300 300" stroke="#DCD3C2" fill="none"/></svg></div><span class="mm cap">Lofoten, 7am</span></div>
+        <div class="pc note" data-p="note"><span class="mm hand">less, but louder.</span><span class="cc tag">Autumn / Winter 2026</span></div>
+        <div class="pc line" data-p="line"><svg class="mm" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M6 40 C 40 10, 60 54, 96 30 S 150 8, 194 26" fill="none" stroke="#5B5850" stroke-width="2" stroke-linecap="round"/></svg><span class="cc rule"></span></div>
+        <div class="pc logo" data-p="logo"><span class="mm hand">L&amp;L<br>sketch v3</span><span class="cc mark">LERA &amp; LIN</span></div>
+      </div>
+    </div>
+    <div class="ctrl">
+      <button class="flip js-flip" type="button"><i aria-hidden="true"></i><span class="js-fl">Make the campaign</span></button>
+      <p class="drag" aria-hidden="true"><svg viewBox="0 0 40 30" width="34" height="26"><path d="M37 25C27 26 12 22 8 6M3 12 8 4.5 14 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>or move things around first</p>
+    </div>
+  </section>
+
+  <section class="sec" id="work" aria-labelledby="w-h">
+    <div class="eyebrow lab"><span>Selected work</span><span>2023 – 2026</span></div>
+    <h2 class="h2" id="w-h">Four campaigns, <em>four single ideas.</em></h2>
+    <ul class="camps">
+      <li class="camp"><div class="pw"><div class="poster p1" aria-hidden="true"><svg viewBox="0 0 400 500" style="inset:0;width:100%;height:100%"><circle cx="292" cy="112" r="70" fill="#C9973A"/><rect x="28" y="40" width="168" height="210" fill="#C9D3D8"/><path d="M28 180 L60 168 L90 182 L130 160 L196 176 V250 H28Z" fill="#8A958F" opacity=".5"/><rect x="28" y="214" width="168" height="36" fill="#F5F1E8"/><rect x="0" y="466" width="100" height="34" fill="#E9E2D3"/><rect x="100" y="466" width="100" height="34" fill="#B5674D"/><rect x="200" y="466" width="100" height="34" fill="#2F3B33"/><rect x="300" y="466" width="100" height="34" fill="#C9973A"/></svg><span class="t" style="top:58%;color:#2F3B33">Slow light.</span><span class="s" style="bottom:12%;color:#2F3B33">Autumn / Winter 2026</span></div><p class="idea" aria-hidden="true">light moves slower through linen</p></div><h3>Lera &amp; Lin · Slow light</h3><p class="meta">Linen homeware · campaign, print and outdoor · 2026</p><p>One idea: light moves slower through linen. Everything was shot in the first hour of daylight.</p></li>
+      <li class="camp"><div class="pw"><div class="poster p2" aria-hidden="true"><svg viewBox="0 0 400 500" style="inset:0;width:100%;height:100%"><path d="M150 260 h100 v60 a50 50 0 0 1 -100 0z" fill="none" stroke="#F5F1E8" stroke-width="3"/><path d="M250 276 a18 18 0 0 1 0 36" fill="none" stroke="#F5F1E8" stroke-width="3"/><path d="M182 240 q-14 -26 0 -50 q14 -24 0 -50 M212 240 q-14 -26 0 -50 q14 -24 0 -50" fill="none" stroke="#E0B565" stroke-width="3" stroke-linecap="round"/></svg><span class="t" style="top:8%">Morning, unhurried.</span><span class="s" style="color:#E0B565">Ruskfjord Coffee · 2025</span></div><p class="idea" aria-hidden="true">nothing else happens</p></div><h3>Ruskfjord Coffee · Morning, unhurried</h3><p class="meta">Coffee roaster · film, packaging and social · 2025</p><p>We filmed people drinking coffee and nothing else happening. It was the most shared film the brand ever made.</p></li>
+      <li class="camp"><div class="pw"><div class="poster p3" aria-hidden="true"><svg viewBox="0 0 400 500" style="inset:0;width:100%;height:100%"><rect x="160" y="170" width="80" height="150" rx="10" fill="none" stroke="#F7EDE4" stroke-width="3"/><rect x="182" y="140" width="36" height="30" fill="none" stroke="#F7EDE4" stroke-width="3"/><path d="M160 250 h80" stroke="#F7EDE4" stroke-width="1.5" opacity=".6"/></svg><span class="t" style="top:72%">Second skin.</span><span class="s">Stillhav · fragrance · 2024</span></div><p class="idea" aria-hidden="true">closer.</p></div><h3>Stillhav · Second skin</h3><p class="meta">Fragrance · launch campaign and retail · 2024</p><p>No bottle shots for the first month: only skin, light and the word "closer".</p></li>
+      <li class="camp"><div class="pw"><div class="poster p4" aria-hidden="true"><svg viewBox="0 0 400 500" style="inset:0;width:100%;height:100%"><path d="M140 380 V230 h120 V380 M140 300 h120 M150 230 V140 q50 -20 100 0 V230" fill="none" stroke="#1B1B19" stroke-width="3" stroke-linejoin="round"/></svg><span class="t" style="top:8%;color:#1B1B19">Sit with it.</span><span class="s" style="color:#1B1B19">Bjørkhem · furniture · 2023</span></div><p class="idea" aria-hidden="true">sit for twenty minutes</p></div><h3>Bjørkhem · Sit with it</h3><p class="meta">Furniture · brand relaunch and showroom · 2023</p><p>A chair, a person and twenty minutes of silence, shown in full on screens in the showroom window.</p></li>
+    </ul>
+    <p class="note">All brands, campaigns and results on this page are fictional.</p>
+  </section>
+
+  <section class="sec how" id="how" aria-labelledby="h-h">
+    <div class="eyebrow lab"><span>How I work</span><span>From a wall of maybes to one idea</span></div>
+    <h2 class="h2" id="h-h">The brief gets smaller. <em>The idea gets bigger.</em></h2>
+    <ol class="stepsx">
+      <li><svg class="ill" viewBox="0 0 200 100" aria-hidden="true"><g fill="#2F3B33" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M16 10h76a8 8 0 0 1 8 8v24a8 8 0 0 1-8 8H42l-16 14 4-14H16a8 8 0 0 1-8-8V18a8 8 0 0 1 8-8z"/><path d="M104 34h80a8 8 0 0 1 8 8v24a8 8 0 0 1-8 8h-12l4 14-16-14h-56a8 8 0 0 1-8-8V42a8 8 0 0 1 8-8z"/></g><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".6"><path d="M22 24h62M22 36h40M110 48h66M110 60h44"/></g></svg><h3>Listen</h3><p>A day with the founders, the sales team and the people who pack the boxes. The brief is usually hiding there.</p></li>
+      <li><svg class="ill" viewBox="0 0 200 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.4"><rect x="8" y="6" width="40" height="28"/><rect x="80" y="6" width="44" height="22"/><rect x="128" y="8" width="26" height="26"/><rect x="8" y="40" width="30" height="38"/><rect x="42" y="50" width="38" height="22"/><rect x="128" y="40" width="26" height="40"/><rect x="42" y="78" width="36" height="16"/><rect x="84" y="70" width="40" height="24"/><rect x="160" y="56" width="32" height="38"/><circle cx="176" cy="24" r="14"/></g><rect x="52" y="6" width="24" height="38" fill="#E0B565"/><rect x="86" y="34" width="36" height="30" fill="#B5674D"/><rect x="8" y="84" width="30" height="10" fill="#E9E2D3"/></svg><h3>One wall</h3><p>Everything goes on one wall, never in slides. If it does not survive a week on the wall, it goes.</p></li>
+      <li><svg class="ill" viewBox="0 0 200 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 4" opacity=".35"><rect x="8" y="6" width="40" height="28"/><rect x="8" y="44" width="30" height="40"/><rect x="152" y="8" width="38" height="24"/><rect x="156" y="52" width="34" height="40"/></g><g transform="rotate(-4 100 50)"><rect x="66" y="16" width="68" height="68" fill="#F3E19A"/><path d="M76 54c8-10 14 6 22-4s14 4 22-4" fill="none" stroke="#3A3626" stroke-width="2" stroke-linecap="round"/></g></svg><h3>One idea</h3><p>If it takes a paragraph to explain, it is not one idea yet. We edit until it fits on a sticky note.</p></li>
+      <li><svg class="ill" viewBox="0 0 200 100" aria-hidden="true"><rect x="62" y="2" width="76" height="96" fill="#E9E2D3"/><rect x="68" y="9" width="34" height="38" fill="#C9D3D8"/><path d="M68 38l8-5 7 4 9-7 10 6v11H68z" fill="#8A958F"/><circle cx="120" cy="24" r="11" fill="#C9973A"/><rect x="68" y="56" width="52" height="8" fill="#2F3B33"/><rect x="68" y="69" width="30" height="2.5" fill="#2F3B33"/><rect x="81" y="88" width="19" height="10" fill="#B5674D"/><rect x="100" y="88" width="19" height="10" fill="#2F3B33"/><rect x="119" y="88" width="19" height="10" fill="#C9973A"/></svg><h3>Craft</h3><p>Type, light, casting and the edit. The idea is a promise; the craft is how we keep it.</p></li>
+    </ol>
+  </section>
+
+  <section class="sec" id="career" aria-labelledby="c-h">
+    <div class="eyebrow lab"><span>Career</span><span>Studios and brands</span></div>
+    <h2 class="h2" id="c-h">Seventeen years of <em>saying less.</em></h2>
+    <ol class="career">
+      <li><span class="y">2009</span><span class="c">Stockholm</span><div><h3>Junior designer</h3><p>A small branding studio. Learned kerning, deadlines and how to present to a room.</p></div></li>
+      <li><span class="y">2013</span><span class="c">Copenhagen</span><div><h3>Art director</h3><p>Furniture and fashion clients, my first films, and the habit of shooting at dawn.</p></div></li>
+      <li><span class="y">2017</span><span class="c">London</span><div><h3>Associate creative director</h3><p>An agency of 120 people: global campaigns, bigger budgets, the same single ideas.</p></div></li>
+      <li><span class="y">2021</span><span class="c">Dubai</span><div><h3>Creative director</h3><p>Leading a team of fourteen across design, film and copy for brands in the region and in Europe.</p></div></li>
+    </ol>
+    <p class="note">Employers are not named; roles and dates are illustrative.</p>
+  </section>
+
+  <section class="sec contact" id="contact" aria-labelledby="k-h">
+    <div class="eyebrow lab"><span>Contact</span><span>Dubai and Stockholm</span></div>
+    <h2 class="h2" id="k-h">Bring me <em>the brief.</em></h2>
+    <p class="lede">Open to creative director roles, brand relaunches and campaign work with founders who are ready to say one thing well.</p>
+    <div class="cards">
+      <a href="mailto:freja@lindqvist.example" data-demo><span class="lab">Email</span><b>freja@lindqvist.example</b></a>
+      <a href="#" data-demo><span class="lab">Portfolio</span><b>Full case studies (PDF)</b></a>
+      <a href="#" data-demo><span class="lab">LinkedIn</span><b>Freja Lindqvist</b></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Freja Lindqvist is fictional and this is a concept website. The portrait was generated with AI. Brands, campaigns, results, roles and dates are illustrative; Lera &amp; Lin, Ruskfjord, Stillhav and Bjørkhem are invented names.</p>
+  <p>A concept website by Zenith Dubai CV.</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC;
+  var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var board = $(".board"), pieces = $$(".pc", board), chips = $$(".pc.chips i", board), ctrl = $(".ctrl"), lbl = $(".js-fl");
+  var LABEL = {mood: board.getAttribute("aria-label"), campaign: "The finished campaign poster for Lera and Lin: a winter photograph, an ochre sun, the headline Slow light, Autumn Winter 2026, and a bar of four colours. Press the button to go back to the moodboard."};
+  var ROT = {linen:-3, sun:0, type:2.5, chips:-2, photo:5, note:-5, line:3, logo:-6};
+  var off = {}; pieces.forEach(function(p){ off[p.getAttribute("data-p")] = {x:0, y:0}; });
+  var campaign = false, drags = [], busy = false, want = null, intro = null;
+  function setMood(){ pieces.forEach(function(p){ var k = p.getAttribute("data-p"); if (window.gsap) gsap.set(p, {x:off[k].x, y:off[k].y, rotation:ROT[k]}); else p.style.transform = "rotate(" + ROT[k] + "deg)"; }); }
+  function setCampaign(){ pieces.forEach(function(p){ if (window.gsap) gsap.set(p, {x:0, y:0, rotation:0}); else p.style.transform = "none"; }); }
+  setMood();
+  // one set of pieces, two layouts: Flip records where everything is, the classes swap, and it animates the difference
+  function toggle(to){
+    if (busy){ want = to; return; }
+    if (to === campaign) return;
+    campaign = to;
+    lbl.textContent = to ? "Back to the mood" : "Make the campaign";
+    ctrl.classList.toggle("on", to);
+    board.setAttribute("aria-label", to ? LABEL.campaign : LABEL.mood);
+    var go = function(){ board.classList.toggle("campaign", to); board.classList.toggle("mood", !to); to ? setCampaign() : setMood(); drags.forEach(function(d){ to ? d.disable() : d.enable(); }); };
+    if (!ZC.motion || !window.Flip){ go(); return; }
+    if (intro) intro.progress(1);
+    busy = true;
+    var state = Flip.getState(pieces.concat(chips), {props:"boxShadow"});
+    go();
+    Flip.from(state, {duration:1.15, ease:"power3.inOut", stagger:.035, nested:true, onComplete:function(){ busy = false; var w = want; want = null; if (w !== null) toggle(w); }});
+  }
+  $(".js-flip").addEventListener("click", function(){ toggle(!campaign); });
+
+  addEventListener("load", function(){
+    if (!window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger, Flip, Draggable);
+    setMood();
+    // with a mouse, everything on the moodboard can be moved about first (touch keeps scrolling the page)
+    if (matchMedia("(min-width: 761px) and (pointer: fine)").matches){
+      drags = Draggable.create(pieces, {bounds:board, zIndexBoost:true, onDragEnd:function(){ off[this.target.getAttribute("data-p")] = {x:this.x, y:this.y}; }});
+      $(".hero").classList.add("can-drag");
+      // keep moved pieces in proportion when the board changes size
+      var bw = board.offsetWidth;
+      if ("ResizeObserver" in window) new ResizeObserver(function(){ var w = board.offsetWidth; if (!w || w === bw) return; var r = w / bw; bw = w; Object.keys(off).forEach(function(k){ off[k].x *= r; off[k].y *= r; }); if (!campaign) setMood(); }).observe(board);
+    }
+    if (!ZC.motion) return;
+    ZC.smooth();
+    document.fonts.ready.then(function(){
+      gsap.from(".freja", {opacity:0, x:30, duration:1.5, ease:"expo.out", delay:.2});
+      gsap.from(".panel", {scaleY:0, transformOrigin:"50% 100%", duration:1.2, ease:"expo.out"});
+      gsap.from(".hero .copy > *", {opacity:0, y:20, duration:1, stagger:.1, ease:"expo.out", delay:.3});
+      // the pieces get pinned up one by one
+      intro = gsap.from(pieces, {opacity:0, scale:1.15, y:"-=20", duration:.6, stagger:.08, ease:"back.out(1.6)", delay:.5, onComplete:function(){ intro = null; }});
+      gsap.from(".ctrl", {opacity:0, y:12, duration:.8, delay:1.3});
+      // scrolling on from the top turns the mood into the campaign (and back again)
+      var mm = gsap.matchMedia();
+      mm.add({stack:"(max-width: 760px), (max-width: 1100px) and (max-aspect-ratio: 1/1)", wide:"(min-width: 761px)", tall:"(min-height: 560px)"}, function(c){
+        var k = c.conditions;
+        if (!k.stack && k.tall){
+          // side by side: hold the hero for a moment so the change happens in full view
+          var last = 0;
+          ScrollTrigger.create({trigger:".hero", start:"top top", end:"+=60%", pin:true, onUpdate:function(s){ var p = s.progress; if (last < .14 && p >= .14) toggle(true); else if (last >= .14 && p < .14) toggle(false); last = p; }});
+        } else if (k.stack){
+          ScrollTrigger.create({trigger:".boardwrap", start:"top 22%", onEnter:function(){ toggle(true); }, onLeaveBack:function(){ toggle(false); }});
+        } else {
+          ScrollTrigger.create({trigger:".hero", start:"top -8%", onEnter:function(){ toggle(true); }, onLeaveBack:function(){ toggle(false); }});
+        }
+      });
+      $$(".h2").forEach(function(h){ gsap.from(h, {y:30, opacity:0, duration:1, ease:"expo.out", scrollTrigger:{trigger:h, start:"top 88%"}}); });
+      gsap.from(".camp", {y:50, opacity:0, duration:1, stagger:.12, ease:"expo.out", scrollTrigger:{trigger:".camps", start:"top 82%"}});
+      [".stepsx li", ".career li", ".cards a"].forEach(function(sel){ gsap.from(sel, {y:26, opacity:0, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:$(sel).parentNode, start:"top 86%"}}); });
+      setTimeout(function(){ ScrollTrigger.refresh(); }, 400);
+    });
+  });
+});
+</script>
+</body>
+</html>
