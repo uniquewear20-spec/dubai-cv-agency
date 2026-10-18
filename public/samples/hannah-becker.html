@@ -3,314 +3,425 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#1C4434">
-<title>Hannah Becker · Chief Financial Officer — Concept site by Zenith Dubai CV</title>
-<meta name="description" content="Concept portfolio website for a fictional chief financial officer, designed by Zenith Dubai CV.">
-<link rel="preload" href="img/hannah-becker-640.webp" as="image" type="image/webp">
-<link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css">
+<title>Hannah Becker — Group chief executive · Concept site</title>
+<meta name="description" content="Hannah Becker, group chief executive. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3F0E8">
+<link rel="preload" href="fonts/newsreader-display.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" imagesrcset="img/hannah-becker/cut-700.webp 463w, img/hannah-becker/cut.webp 692w" imagesizes="(max-width:760px) 46vw, 52vh" fetchpriority="high">
 <script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
 <style>
-/* Concept: her career as a premium annual report. The hero is the cover: forest-green
-   board, gold foil, a die-cut circle that shows the portrait printed on the page
-   beneath, and the five-year EBITDA line foil-stamped across the front. The table
-   of contents on the cover is the navigation. Inside: letter, key figures with
-   charts, a statement of positions held, governance, and a back cover. */
+@font-face{font-family:"Newsreader Display";src:url(fonts/newsreader-display.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-latin-wght-normal.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-latin-wght-italic.woff2) format("woff2");font-weight:200 800;font-style:italic;font-display:swap}
+@font-face{font-family:"Inter Tight";src:url(fonts/inter-tight-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-display:swap}
 :root{
-  --green:#1C4434; --green2:#15362A; --green3:#0F2A20; --paper:#F7F2E7; --paper2:#EFE8D8; --ink:#1D2A23; --mute:#5F6B63;
-  --gold:#C9A45C; --rule:rgba(29,42,35,.16); --pos:#2F7A4F; --neg:#A3412E;
-  --foil:linear-gradient(100deg,#8A6830 0%,#E8CD8A 22%,#B88C43 40%,#F4E2AE 58%,#A9813D 78%,#E2C37F 100%);
-  --display:"Libre Caslon Display","Libre Caslon Text",Georgia,serif; --serif:"Libre Caslon Text",Georgia,serif; --sans:"Source Sans 3","Helvetica Neue",Arial,sans-serif;
-  --zc-bg:#15362A; --zc-fg:#F7F2E7; --zc-dot:#C9A45C;
+  --paper:#F3F0E8;--paper2:#EAE6DB;--ink:#151513;--green:#1E4A38;--green2:#2E6B53;--greenl:#DCE5DD;--red:#B23A2A;--grey:#6A675E;--line:rgba(21,21,19,.15);
+  --disp:"Newsreader Display","Newsreader",Georgia,serif;--serif:"Newsreader",Georgia,serif;--sans:"Inter Tight","Helvetica Neue",Arial,sans-serif;
+  --pad:clamp(18px,4.4vw,72px);
+  --zc-bg:#1E4A38;--zc-fg:#F3F0E8;--zc-dot:#F3F0E8;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.7 var(--sans);-webkit-font-smoothing:antialiased;font-variant-numeric:lining-nums}
-img{max-width:100%;height:auto;display:block}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.wrap{max-width:1180px;margin:0 auto;padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
-.foil{background:var(--foil);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:400 19px/1.62 var(--serif);-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+main{position:relative;overflow-x:clip}
+.ui{font:500 12px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* ---------- Cover ---------- */
-.cover{position:relative;min-height:max(700px,100svh);display:grid;grid-template-columns:clamp(40px,4.4vw,64px) minmax(0,1fr);overflow:hidden;
-  background:radial-gradient(80% 70% at 70% 40%,#235341 0,transparent 70%),repeating-linear-gradient(115deg,rgba(255,255,255,.018) 0 2px,transparent 2px 5px),var(--green);color:var(--paper)}
-.spine{position:relative;background:linear-gradient(90deg,var(--green3),var(--green2) 70%,#0B2018);box-shadow:inset -2px 0 0 rgba(0,0,0,.25),2px 0 8px rgba(0,0,0,.25)}
-.spine span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg);white-space:nowrap;font:600 11px/1 var(--sans);letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:.85}
-.sheet{position:relative;display:grid;grid-template-rows:auto 1fr auto;padding:max(26px,env(safe-area-inset-top,0px)) clamp(26px,4.5vw,72px) clamp(22px,3.4vh,34px)}
-.meta{display:flex;justify-content:space-between;gap:20px;padding-bottom:16px;border-bottom:1px solid rgba(201,164,92,.45);font:600 12px/1.3 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
-.body{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(24px,4vw,70px);padding:clamp(20px,4vh,46px) 0}
-.title{position:relative;z-index:2}
-.title .k{margin:0 0 18px;font:italic 400 clamp(18px,1.6vw,22px)/1.3 var(--serif);color:#D8C9A4}
-h1{margin:0;font:400 clamp(66px,9.6vw,150px)/.86 var(--display);letter-spacing:-.015em;padding-bottom:.06em}
-.role{margin:22px 0 0;font:600 13px/1.6 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:#E9E1CD}
-.role span{color:var(--gold)}
-.window{position:relative;z-index:1;width:clamp(300px,36vw,520px);aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--paper);
-  box-shadow:inset 0 0 0 1.5px rgba(247,242,231,.65),0 0 0 6px rgba(0,0,0,.08)}
-.window img{position:absolute;width:130%;max-width:none;left:-13.7%;top:0}
-.window::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 6px 10px 18px rgba(0,0,0,.42),inset -2px -3px 6px rgba(255,255,255,.18);pointer-events:none}
-.window figcaption{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);padding:4px 10px;background:rgba(247,242,231,.88);color:var(--ink);font:600 10px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
-.ebitda{display:block;width:min(100%,620px);height:auto;margin-top:clamp(18px,3vh,30px);overflow:visible;pointer-events:none}
-.ebitda .ln{fill:none;stroke:url(#foilg);stroke-width:2.2;stroke-dasharray:1000;stroke-dashoffset:0}
-.ebitda circle{fill:#E8CD8A}
-.ecap{margin:8px 0 0;font:600 11.5px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
-.ecap b{font-weight:600;color:#F0E3BF}
-.zc-reveal .ebitda .ln{animation:draw 2.2s cubic-bezier(.4,.1,.2,1) .4s both}
-.zc-reveal .ebitda circle{animation:fade .6s ease-out 2s both}
-.zc-reveal h1.foil{animation:shine 2.8s ease-out .3s both}
-@keyframes draw{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-@keyframes shine{from{background-position:100% 0}to{background-position:0 0}}
-.toc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid rgba(201,164,92,.45);margin:0;padding:0;list-style:none}
-.toc a{display:flex;align-items:baseline;gap:10px;padding:14px 12px 4px 0;text-decoration:none;font:400 clamp(15px,1.25vw,18px)/1.25 var(--serif);color:#EFE7D3}
-.toc a b{font:600 12px/1 var(--sans);letter-spacing:.14em;color:var(--gold)}
-.toc a:hover,.toc a[aria-current]{color:#fff;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:5px}
+/* Masthead */
+.mast{position:fixed;inset-inline:0;top:0;z-index:50;background:rgba(243,240,232,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.mast .row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding:14px var(--pad)}
+.mast .who{font:500 15px/1.2 var(--serif);text-decoration:none}
+.mast .who b{font-weight:600}
+.mast nav{display:flex;gap:22px}
+.mast nav a{text-decoration:none;color:var(--grey);transition:color .2s}
+.mast nav a:hover,.mast nav a[aria-current]{color:var(--ink)}
+.mast .end{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+.mast .end .date{color:var(--grey)}
+.mast .end a{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:999px;background:var(--green);color:var(--paper);text-decoration:none}
+.mast .end a:hover{background:var(--ink)}
+.mast .prog{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--green);transform-origin:left;transform:scaleX(0)}
 
-/* ---------- Inside pages ---------- */
-section{padding:clamp(84px,10vw,124px) 0;border-top:1px solid var(--rule)}
-.folio{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 34px;padding-bottom:12px;border-bottom:2px solid var(--ink);font:600 12px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
-.folio b{color:var(--green);font-weight:600}
-h2{margin:0;font:400 clamp(38px,4.6vw,62px)/1.04 var(--display);letter-spacing:-.01em;color:var(--green)}
-h2 em{font-family:var(--serif);font-style:italic;font-size:.82em;color:var(--ink)}
+/* HERO — the same chart, from one bad quarter out to the decade */
+.hero{position:relative;height:100svh;min-height:660px;overflow:hidden}
+.hero .head{position:absolute;z-index:3;inset-inline-start:var(--pad);top:clamp(88px,12vh,124px);max-width:720px}
+.hero .kick{color:var(--grey);margin-bottom:16px}
+.hero h1{font:400 clamp(66px,9.4vw,164px)/.86 var(--disp);letter-spacing:-.035em}
+.hero h1 em{font-style:italic;font-family:var(--serif);font-weight:300;letter-spacing:-.04em}
+.chart{position:absolute;inset-inline:0;bottom:0;top:47%;z-index:1}
+.chart .unit{font:500 11px var(--sans);fill:var(--grey);letter-spacing:.06em;text-transform:uppercase}
+.chart svg{width:100%;height:100%;overflow:visible}
+.chart .grid line{stroke:var(--line);stroke-width:1}
+.chart .xt text,.chart .yt text{font:500 11.5px var(--sans);fill:var(--grey);letter-spacing:.04em}
+.chart .area{fill:url(#ga)}
+.chart .ln{fill:none;stroke:var(--green);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.chart .dip circle{fill:var(--red)}
+.chart .dip line{stroke:var(--red);stroke-width:1;stroke-dasharray:3 3}
+.chart .dip text{font:600 12px var(--sans);fill:var(--red);letter-spacing:.03em}
+.chart .now circle{fill:var(--green)}
+.chart .now text{font:600 12px var(--sans);fill:var(--green)}
+.hannah{position:absolute;z-index:2;bottom:0;inset-inline-end:clamp(-40px,2vw,40px);height:80%;aspect-ratio:692/1047}
+.hannah img{width:100%;height:100%;object-fit:contain;object-position:bottom}
+.cap{margin-top:16px;width:min(440px,40vw);padding:2px 0 2px 16px;border-left:3px solid var(--green)}
+.cap .win{display:block;color:var(--grey);margin-bottom:6px}
+.cap p{font:500 clamp(18px,1.4vw,21px)/1.35 var(--serif)}
+.cap.alarm{border-color:var(--red)}
+.cap.alarm .win{color:var(--red)}
 
-/* letter */
-.letter{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,6vw,96px);align-items:start}
-.letter .txt p{margin:0 0 20px;font:400 19px/1.75 var(--serif);color:#2A3530}
-.letter .txt p:first-child::first-letter{float:left;margin:8px 12px 0 0;font:400 92px/.78 var(--display);color:var(--green)}
-.sign{margin-top:30px;padding-top:20px;border-top:1px solid var(--rule)}
-.sign b{display:block;font:italic 400 34px/1 var(--serif);color:var(--green)}
-.sign span{display:block;margin-top:8px;font:600 12px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+/* Sections */
+.sec{position:relative;padding:clamp(100px,12vw,170px) var(--pad)}
+.kicker{display:flex;justify-content:space-between;gap:20px;border-top:2px solid var(--ink);padding-top:10px;margin-bottom:clamp(36px,5vw,70px)}
+.kicker span:last-child{color:var(--grey)}
+.h2{font:400 clamp(44px,5.6vw,92px)/.96 var(--disp);letter-spacing:-.03em;max-width:15ch}
+.h2 em{font-family:var(--serif);font-style:italic;font-weight:300}
 
-/* key figures */
-.figs{background:var(--paper2)}
-.hl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:44px 0 54px;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule)}
-.hl div{padding:22px 20px 24px 0}
-.hl div+div{padding-left:22px;border-left:1px solid var(--rule)}
-.hl b{display:block;font:400 clamp(40px,4vw,56px)/1 var(--display);color:var(--green)}
-.hl span{display:block;margin-top:10px;font:600 13px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
-.hl em{display:block;margin-top:6px;font:italic 400 16px/1.3 var(--serif);color:var(--pos)}
-.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(40px,5vw,72px);align-items:start}
-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums lining-nums}
-caption{text-align:left;margin-bottom:12px;font:600 12px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
-th,td{padding:13px 10px;text-align:right;border-bottom:1px solid var(--rule);font-size:16.5px}
-th:first-child,td:first-child{text-align:left;padding-left:0}
-thead th{border-bottom:2px solid var(--ink);font:600 12px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
-tbody th{font-weight:600}
-td.up{color:var(--pos);font-weight:600}
-td.ig{font:italic 400 15px/1.3 var(--serif);color:var(--pos)}
-.charts{display:grid;gap:30px}
-.chart{margin:0;padding:22px 22px 16px;background:var(--paper);border:1px solid var(--rule)}
-.chart figcaption{display:flex;justify-content:space-between;gap:12px;font:600 12px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
-.chart figcaption em{font:italic 400 14px/1.4 var(--serif);text-transform:none;letter-spacing:0}
-.chart svg{width:100%;height:auto;margin-top:12px;overflow:visible}
-.chart text{font:600 12px var(--sans);fill:var(--mute)}
-.chart .v{fill:var(--ink);font-size:13px}
-.chart .bar{fill:var(--green);transform-box:fill-box;transform-origin:50% 100%;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
-.chart .bar.last{fill:var(--gold)}
-.zc-reveal .charts:not(.is-in) .bar{transform:scaleY(0)}
-.chart .dso{fill:none;stroke:var(--green);stroke-width:2.5;stroke-dasharray:400;transition:stroke-dashoffset 1.4s ease .2s}
-.zc-reveal .charts:not(.is-in) .dso{stroke-dashoffset:400}
+/* THE LETTER */
+.letter{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:clamp(30px,6vw,110px);margin-top:clamp(40px,5vw,70px)}
+.side{position:relative}
+.side .stick{position:sticky;top:120px}
+.pull{font:italic 300 clamp(26px,2.4vw,38px)/1.2 var(--serif);color:var(--green);letter-spacing:-.01em}
+.readbar{margin-top:30px;height:2px;background:var(--line);position:relative}
+.readbar i{position:absolute;inset:0;background:var(--green);transform-origin:left;transform:scaleX(0)}
+.readlab{margin-top:8px;color:var(--grey)}
+.body{font-size:clamp(19px,1.4vw,21px);line-height:1.68;max-width:62ch}
+.body p+p{margin-top:1.05em}
+.body .salut{font-style:italic}
+.body .drop::first-letter{float:left;font:400 5.2em/.78 var(--disp);margin:.07em .08em 0 0;color:var(--green)}
+.body .signoff{margin-top:1.6em;font-style:italic}
+.body .signoff b{display:block;font:500 26px/1.2 var(--disp);font-style:normal;margin-top:6px}
+.body .signoff small{display:block;font:500 12px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--grey);font-style:normal;margin-top:4px}
 
-/* statement of positions */
-.stmt{margin-top:44px;border-top:2px solid var(--ink)}
-.pos{display:grid;grid-template-columns:70px minmax(0,1fr) 170px;gap:20px;padding:26px 0;border-bottom:1px solid var(--rule)}
-.pos .note{font:600 12px/1.6 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
-.pos h3{margin:0;font:400 27px/1.2 var(--display);color:var(--green)}
-.pos h3 span{display:block;margin-top:4px;font:italic 400 17px/1.4 var(--serif);color:var(--ink)}
-.pos p{margin:10px 0 0;max-width:62ch;color:#3A4540;font-size:17px}
-.pos .yr{text-align:right;font:400 22px/1.2 var(--serif);font-variant-numeric:tabular-nums lining-nums;color:var(--ink)}
-.pos .yr small{display:block;font:600 11px/1.6 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+/* DECISIONS THAT TOOK A DECADE */
+.decisions{background:var(--green);color:var(--paper)}
+.decisions .kicker{border-color:var(--paper)}
+.decisions .kicker span:last-child{color:#B9C9BE}
+.axis{position:relative;margin-top:clamp(40px,5vw,70px);height:22px;border-bottom:1px solid rgba(243,240,232,.4)}
+.axis span{position:absolute;bottom:6px;transform:translateX(-50%);font:500 11px var(--sans);color:#B9C9BE;letter-spacing:.04em}
+.dec{list-style:none}
+.dec li{display:grid;grid-template-columns:minmax(0,1fr);padding:26px 0 30px;border-bottom:1px solid rgba(243,240,232,.18)}
+.span{position:relative;height:30px;margin-bottom:18px}
+.span .bar{position:absolute;top:13px;height:4px;background:var(--paper);border-radius:2px;transform-origin:left}
+.span .a,.span .b{position:absolute;top:6px;width:18px;height:18px;border-radius:50%;transform:translateX(-50%)}
+.span .a{border:2px solid var(--paper);background:var(--green)}
+.span .b{background:var(--paper)}
+.span .yr{position:absolute;top:-16px;transform:translateX(-50%);font:600 12px var(--sans);letter-spacing:.04em}
+.dec .txt{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,3vw,48px)}
+.dec h3{font:400 clamp(24px,2.2vw,34px)/1.15 var(--disp);letter-spacing:-.01em}
+.dec p{color:#CBD8CF}
+.dec p b{display:block;font:600 11.5px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--paper);margin-bottom:4px}
 
-/* governance */
-.gov{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:44px;border-top:2px solid var(--ink)}
-.gov div{padding:26px 26px 26px 0}
-.gov div+div{padding-left:26px;border-left:1px solid var(--rule)}
-.gov span{display:block;font:600 12px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.gov b{display:block;margin-top:10px;font:400 25px/1.25 var(--display);color:var(--green)}
-.gov p{margin:8px 0 0;color:var(--mute);font-size:16px}
+/* CAREER — one company, thirty years */
+.career{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(30px,6vw,110px);align-items:start}
+.tl{list-style:none;position:relative;border-left:1px solid var(--ink);margin-top:10px}
+.tl li{position:relative;padding:0 0 30px 30px}
+.tl li::before{content:"";position:absolute;left:-6px;top:9px;width:11px;height:11px;border-radius:50%;background:var(--paper);border:2px solid var(--green)}
+.tl li:last-child::before{background:var(--green)}
+.tl .y{font:600 13px/1 var(--sans);letter-spacing:.06em;color:var(--green)}
+.tl h3{font:400 clamp(24px,2vw,30px)/1.2 var(--disp);margin:6px 0 4px}
+.tl p{color:#45433C;font-size:17.5px}
+.roles{margin-top:28px;border-top:1px solid var(--line)}
+.roles div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:17.5px}
+.roles span{color:var(--grey);font:500 11.5px/1.9 var(--sans);letter-spacing:.06em;text-transform:uppercase}
 
-/* back cover */
-.back{position:relative;overflow:hidden;background:radial-gradient(70% 80% at 30% 30%,#235341 0,transparent 70%),var(--green);color:var(--paper);border-top:0}
-.back .in{display:grid;grid-template-columns:minmax(0,1.2fr) auto;gap:60px;align-items:center}
-.back h2{color:transparent;font-size:clamp(44px,5.6vw,78px)}
-.back p{max-width:48ch;color:#E3DCC8}
-.disc{width:clamp(200px,22vw,300px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:var(--green2);box-shadow:inset 6px 10px 22px rgba(0,0,0,.45),inset 0 0 0 1.5px rgba(247,242,231,.4)}
-.disc span{font:400 clamp(70px,8vw,110px)/1 var(--display)}
-.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
-.btn{display:inline-block;padding:15px 26px;border:1px solid var(--gold);color:#F0E3BF;text-decoration:none;font:600 13px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;transition:background .25s,color .25s}
-.btn.fill,.btn:hover{background:var(--gold);color:var(--green3)}
-footer{background:var(--green3);color:#AFC0B5;text-align:center;padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));font-size:13px}
+/* SPEAKING + CONTACT */
+.talks{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.6vw,40px);margin-top:clamp(36px,4vw,60px)}
+.talks li{border-top:1px solid var(--ink);padding-top:16px}
+.talks .n{font:500 12px/1 var(--sans);color:var(--grey);letter-spacing:.06em}
+.talks h3{font:400 clamp(26px,2.3vw,36px)/1.1 var(--disp);margin:12px 0 10px;letter-spacing:-.01em}
+.talks p{color:#45433C;font-size:17.5px}
+.contact{background:var(--paper2)}
+.contact .big{font:400 clamp(52px,8.2vw,140px)/.9 var(--disp);letter-spacing:-.035em}
+.contact .big em{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--green)}
+.cgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,40px);margin-top:clamp(36px,4vw,60px)}
+.cgrid div{border-top:1px solid var(--ink);padding-top:12px}
+.cgrid .ui{color:var(--grey);display:block;margin-bottom:8px}
+.cgrid a,.cgrid p{font:500 clamp(18px,1.4vw,21px)/1.4 var(--serif);text-decoration:none;overflow-wrap:anywhere}
+.cgrid a:hover{color:var(--green)}
+.btn{display:inline-flex;align-items:center;gap:12px;margin-top:clamp(28px,3vw,44px);height:54px;padding:0 24px;border-radius:999px;background:var(--green);color:var(--paper);text-decoration:none;font:600 15px/1 var(--sans);transition:background .25s}
+.btn:hover{background:var(--ink)}
+footer{background:var(--ink);color:#B8B5AB;padding:30px var(--pad) 96px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;font:400 14px/1.7 var(--sans)}
+footer p{max-width:90ch}
 
-@media (max-width:960px){
-  .letter,.two,.back .in{grid-template-columns:1fr}
-  .hl{grid-template-columns:1fr 1fr}
-  .hl div:nth-child(3){padding-left:0;border-left:0}
-  .hl div:nth-child(-n+2){border-bottom:1px solid var(--rule)}
-  .gov{grid-template-columns:1fr}
-  .gov div+div{padding-left:0;border-left:0;border-top:1px solid var(--rule)}
-  .toc{grid-template-columns:repeat(3,minmax(0,1fr))}
-}
-@media (max-width:960px){
-  .body{grid-template-columns:1fr;align-content:start;gap:26px;padding-top:30px}
-  .window{order:-1;justify-self:center;width:min(62vw,440px)}
+@media (max-width:1000px){
+  .mast nav{display:none}
+  .mast .row{grid-template-columns:1fr auto}
+  .letter,.career{grid-template-columns:minmax(0,1fr)}
+  .side .stick{position:static}
+  .talks,.cgrid{grid-template-columns:minmax(0,1fr)}
+  .dec .txt{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:760px){
-  .cover{grid-template-columns:22px minmax(0,1fr)}
-  .spine span{font-size:9px;letter-spacing:.3em}
-  .meta span:nth-child(2){display:none}
-  .meta{font-size:10.5px;letter-spacing:.2em}
-  .body{gap:20px;padding-top:24px}
-  .window{width:min(72vw,320px)}
-  h1{font-size:clamp(58px,17vw,84px)}
-  .toc{grid-template-columns:1fr 1fr}
-  .toc li:last-child{grid-column:1/-1}
-  .toc a{padding-top:10px}
-  .pos{grid-template-columns:1fr;gap:6px}
-  th,td{padding:11px 5px;font-size:14.5px}
-  thead th{font-size:10.5px;letter-spacing:.06em}
-  td.ig{font-size:13px}
-  .pos .yr{text-align:left;order:-1}
-  .pos .note{order:-2}
+  .mast .end .date{display:none}
+  .hero{min-height:620px}
+  .hero .head{top:84px;inset-inline-end:var(--pad)}
+  .hero h1{font-size:clamp(52px,15vw,80px)}
+  .hero .kick{max-width:56vw;margin-bottom:10px}
+  .chart{top:46%;bottom:4%}
+  .hannah{top:70px;bottom:auto;height:32%;inset-inline-end:-6vw;-webkit-mask:linear-gradient(#000 78%,transparent);mask:linear-gradient(#000 78%,transparent)}
+  .cap{width:58vw}
+  .cap p{font-size:16px}
+  .hero .head{inset-inline-end:auto}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+@media (prefers-reduced-motion:reduce){.mast nav a{transition:none}}
 </style>
 </head>
 <body>
-<main>
-  <header class="cover" id="top">
-    <div class="spine" aria-hidden="true"><span>Hannah Becker · Annual Review 2026 · Career Edition</span></div>
-    <div class="sheet">
-      <div class="meta"><span>Annual Review · Career Edition</span><span>Frankfurt · Dubai</span><span>2026</span></div>
-      <div class="body">
-        <div class="title">
-          <p class="k">Numbers that tell the truth, early.</p>
-          <h1 class="foil">Hannah<br>Becker</h1>
-          <p class="role">Chief Financial Officer <span>·</span> Lindqvist Industrial Group</p>
-          <svg class="ebitda" viewBox="0 20 1000 250" aria-hidden="true">
-        <defs><linearGradient id="foilg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A6830"/><stop offset=".3" stop-color="#E8CD8A"/><stop offset=".55" stop-color="#B88C43"/><stop offset=".8" stop-color="#F4E2AE"/><stop offset="1" stop-color="#C9A45C"/></linearGradient></defs>
-        <path class="ln" pathLength="1000" d="M40 236 L250 196 L460 148 L670 108 L880 72"/>
-        <circle cx="40" cy="236" r="5"/><circle cx="250" cy="196" r="4"/><circle cx="460" cy="148" r="4"/><circle cx="670" cy="108" r="4"/><circle cx="880" cy="72" r="6"/>
+<header class="mast" data-headroom="2.4">
+  <div class="row">
+    <a class="who" href="#top"><b>Hannah Becker</b> · Group chief executive</a>
+    <nav class="ui" aria-label="Sections"><a href="#letter" data-spy>Letter</a><a href="#decisions" data-spy>Decisions</a><a href="#career" data-spy>Career</a><a href="#speaking" data-spy>Speaking</a></nav>
+    <div class="end"><span class="date ui">October 2026</span><a class="ui" href="#contact">Contact</a></div>
+  </div>
+  <i class="prog" aria-hidden="true"></i>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="head">
+      <p class="kick ui">A letter from the group chief executive</p>
+      <h1 id="h1">The long <em>view.</em></h1>
+      <div class="cap alarm" aria-live="polite"><span class="win ui js-win">February – June 2020</span><p class="js-cap">Orders fell eighteen per cent in ten weeks. It felt like the only quarter that mattered.</p></div>
+    </div>
+    <div class="chart" aria-hidden="true">
+      <svg class="js-chart"><defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E6B53" stop-opacity=".16"/><stop offset="1" stop-color="#2E6B53" stop-opacity="0"/></linearGradient></defs>
+        <g class="grid"></g><g class="yt"></g><g class="xt"></g><path class="area"/><path class="ln"/>
+        <g class="dip"><line/><circle r="5"/><text></text></g><g class="now"><circle r="5"/><text></text></g><text class="unit">Order index, 2016 = 100 · illustrative</text>
       </svg>
-          <p class="ecap">EBITDA margin <b>11.2% → 15.3%</b> · FY2021 – FY2025</p>
-        </div>
-        <figure class="window" style="margin:0">
-          <img src="img/hannah-becker-640.webp" srcset="img/hannah-becker-640.webp 640w, img/hannah-becker.webp 928w" sizes="(max-width:760px) 96vw, 680px" width="928" height="1152" alt="Hannah Becker in a green blazer in a boardroom" fetchpriority="high">
-          <figcaption>Page 2 · The CFO</figcaption>
-        </figure>
-      </div>
-      <nav aria-label="Contents">
-        <ul class="toc">
-          <li><a href="#letter" data-spy><b>01</b>Letter</a></li>
-          <li><a href="#figures" data-spy><b>02</b>Key figures</a></li>
-          <li><a href="#career" data-spy><b>03</b>Career</a></li>
-          <li><a href="#governance" data-spy><b>04</b>Governance</a></li>
-          <li><a href="#contact" data-spy><b>05</b>Contact</a></li>
-        </ul>
-      </nav>
     </div>
-  </header>
+    <div class="hannah"><img src="img/hannah-becker/cut.webp" srcset="img/hannah-becker/cut-700.webp 463w, img/hannah-becker/cut.webp 692w" sizes="(max-width:760px) 46vw, 52vh" width="692" height="1047" alt="Hannah Becker"></div>
+    <p class="sr">Chart: an illustrative order index for the group. Zoomed in on spring 2020 it shows an eighteen per cent fall; zoomed out to 2016–2026 the fall is a small notch in a line that roughly doubles.</p>
+  </section>
 
-  <section id="letter">
-    <div class="wrap">
-      <p class="folio"><span><b>01</b> · Letter from the CFO</span><span>Annual Review 2026</span></p>
-      <div class="letter">
-        <div data-reveal><h2>Numbers that tell the truth, <em>early.</em></h2></div>
-        <div class="txt" data-reveal>
-          <p>Dear reader, over twenty-five years in finance I have learned that a good CFO is the first person to say what the numbers mean, not the last person to sign them.</p>
-          <p>At Lindqvist Industrial Group, a €2.3bn manufacturer with plants on three continents, my team rebuilt planning around rolling forecasts, released €180m of cost and moved the company to an investment-grade rating.</p>
-          <p>I work closely with boards and lenders, and I am at my best when a business is changing: new markets, a refinancing, a carve-out or a listing.</p>
-          <p>This review summarises the results my teams delivered, and the roles where I can help next.</p>
-          <div class="sign"><b>Hannah Becker</b><span>Chief Financial Officer</span></div>
-        </div>
+  <section class="sec" id="letter" aria-labelledby="l-h">
+    <div class="kicker ui"><span>The letter</span><span>To colleagues, shareholders and friends</span></div>
+    <h2 class="h2" id="l-h" data-lines>Judge us by the <em>decade.</em></h2>
+    <div class="letter">
+      <aside class="side"><div class="stick">
+        <p class="pull">"A pump installed in a city's water network today will still be running in 2060."</p>
+        <div class="readbar" aria-hidden="true"><i class="js-read"></i></div>
+        <p class="readlab ui js-readlab" aria-hidden="true">Reading · 0%</p>
+      </div></aside>
+      <div class="body js-body">
+        <p class="salut">Dear colleagues, shareholders and friends,</p>
+        <p class="drop">In the spring of 2020 our order book fell by almost a fifth in ten weeks. It was the worst quarter of my working life, and at the time it felt like the only quarter that mattered.</p>
+        <p>It wasn't. Seen from here, that fall is a notch on a line that has roughly doubled in ten years. The decisions that made the difference were not the ones we took in the panic. They were the ones we had taken years before: to keep training apprentices through a downturn, to own the service of the pumps we sell, and to build our plants close to the customers who will need them for forty years.</p>
+        <p>A pump installed in a city's water network today will still be running in 2060. That changes how you think about almost everything: what a good quarter is, which customers matter, which shortcuts turn out to be expensive.</p>
+        <p>So this letter is not about this year. It is about the next ten. We will keep investing in people before machines, in service before sales, and in the unglamorous work of making things that last. We will report every quarter, as we must. But we will judge ourselves by the decade, and we ask you to do the same.</p>
+        <p class="signoff">With thanks for your patience, which is the rarest capital of all,<b>Hannah Becker</b><small>Group chief executive · Hamburg, October 2026</small></p>
       </div>
     </div>
   </section>
 
-  <section id="figures" class="figs">
-    <div class="wrap">
-      <p class="folio"><span><b>02</b> · Key figures</span><span>FY2021 – FY2025</span></p>
-      <h2 data-reveal>Five years at Lindqvist, <em>in five lines.</em></h2>
-      <div class="hl" data-reveal>
-        <div><b>€2.3bn</b><span>Revenue</span><em>+35% since FY2021</em></div>
-        <div><b>15.3%</b><span>EBITDA margin</span><em>+4.1 points</em></div>
-        <div><b>1.6×</b><span>Net debt / EBITDA</span><em>down from 2.9×</em></div>
-        <div><b>BBB+</b><span>Credit rating</span><em>investment grade</em></div>
-      </div>
-      <div class="two">
-        <table data-reveal>
-          <caption>Selected financial data</caption>
-          <thead><tr><th scope="col">Measure</th><th scope="col">FY2021</th><th scope="col">FY2025</th><th scope="col">Change</th></tr></thead>
-          <tbody>
-            <tr><th scope="row">Revenue</th><td>€1.7bn</td><td>€2.3bn</td><td class="up">+35%</td></tr>
-            <tr><th scope="row">EBITDA margin</th><td>11.2%</td><td>15.3%</td><td class="up">+4.1 pts</td></tr>
-            <tr><th scope="row">Days sales outstanding</th><td>64</td><td>45</td><td class="up">−19 days</td></tr>
-            <tr><th scope="row">Net debt / EBITDA</th><td>2.9×</td><td>1.6×</td><td class="up">−1.3×</td></tr>
-            <tr><th scope="row">Credit rating</th><td>BB+</td><td>BBB+</td><td class="ig">investment grade</td></tr>
-          </tbody>
-        </table>
-        <div class="charts" data-reveal>
-          <figure class="chart">
-            <figcaption><span>EBITDA margin</span><em>% of revenue</em></figcaption>
-            <svg viewBox="0 0 400 170" role="img" aria-label="EBITDA margin rose from 11.2% in FY2021 to 15.3% in FY2025">
-              <g><rect class="bar" x="18" y="67" width="48" height="73"/><rect class="bar" x="96" y="60" width="48" height="80" style="transition-delay:.08s"/><rect class="bar" x="174" y="52" width="48" height="88" style="transition-delay:.16s"/><rect class="bar" x="252" y="46" width="48" height="94" style="transition-delay:.24s"/><rect class="bar last" x="330" y="40" width="48" height="100" style="transition-delay:.32s"/></g>
-              <g class="v" text-anchor="middle"><text x="42" y="59">11.2</text><text x="120" y="52">12.2</text><text x="198" y="44">13.4</text><text x="276" y="38">14.4</text><text x="354" y="32">15.3</text></g>
-              <line x1="0" y1="140.5" x2="400" y2="140.5" stroke="#1D2A23" stroke-width="1"/>
-              <g text-anchor="middle"><text x="42" y="160">FY21</text><text x="120" y="160">FY22</text><text x="198" y="160">FY23</text><text x="276" y="160">FY24</text><text x="354" y="160">FY25</text></g>
-            </svg>
-          </figure>
-          <figure class="chart">
-            <figcaption><span>Days sales outstanding</span><em>lower is better</em></figcaption>
-            <svg viewBox="0 0 400 150" role="img" aria-label="Days sales outstanding fell from 64 in FY2021 to 45 in FY2025">
-              <line x1="0" y1="120.5" x2="400" y2="120.5" stroke="#1D2A23" stroke-width="1"/>
-              <path class="dso" pathLength="400" d="M42 30 L120 47 L198 64 L276 81 L354 95"/>
-              <g fill="#1C4434"><circle cx="42" cy="30" r="4"/><circle cx="120" cy="47" r="4"/><circle cx="198" cy="64" r="4"/><circle cx="276" cy="81" r="4"/><circle cx="354" cy="95" r="5" fill="#C9A45C"/></g>
-              <g class="v" text-anchor="middle"><text x="42" y="18">64</text><text x="120" y="35">59</text><text x="198" y="52">54</text><text x="276" y="69">49</text><text x="354" y="83">45</text></g>
-              <g text-anchor="middle"><text x="42" y="140">FY21</text><text x="120" y="140">FY22</text><text x="198" y="140">FY23</text><text x="276" y="140">FY24</text><text x="354" y="140">FY25</text></g>
-            </svg>
-          </figure>
+  <section class="sec decisions" id="decisions" aria-labelledby="d-h">
+    <div class="kicker ui"><span>Decisions that took a decade</span><span>Decided → paid off</span></div>
+    <h2 class="h2" id="d-h" data-lines>The slow <em>bets.</em></h2>
+    <div class="axis js-axis" aria-hidden="true"></div>
+    <ol class="dec">
+      <li data-a="2014" data-b="2023"><div class="span" aria-hidden="true"></div>
+        <div class="txt"><h3>Kept the apprenticeship programme through the downturn.</h3><p><b>2014 → 2023</b>The apprentices hired that year now run two of the group's five plants.</p></div></li>
+      <li data-a="2016" data-b="2022"><div class="span" aria-hidden="true"></div>
+        <div class="txt"><h3>Took back the servicing of the pumps we sell.</h3><p><b>2016 → 2022</b>Service became the steadier half of the business, and the half customers thank us for.</p></div></li>
+      <li data-a="2017" data-b="2025"><div class="span" aria-hidden="true"></div>
+        <div class="txt"><h3>Built five plants near customers instead of one big one.</h3><p><b>2017 → 2025</b>Deliveries kept moving when shipping lanes did not.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="sec" id="career" aria-labelledby="c-h">
+    <div class="kicker ui"><span>Career</span><span>One company, thirty years</span></div>
+    <div class="career">
+      <div><h2 class="h2" id="c-h" data-lines>From the test bench to the <em>board.</em></h2></div>
+      <div>
+        <ol class="tl">
+          <li><span class="y">1996</span><h3>Graduate engineer</h3><p>Started on the pump test bench in the original plant.</p></li>
+          <li><span class="y">2005</span><h3>Head of service</h3><p>Built the service business that now carries half the group.</p></li>
+          <li><span class="y">2011</span><h3>Chief operating officer</h3><p>Ran the five plants through two downturns and one expansion.</p></li>
+          <li><span class="y">2015</span><h3>Group chief executive</h3><p>Leads the group and reports to a family-controlled board.</p></li>
+        </ol>
+        <div class="roles">
+          <div>Non-executive director, a regional water utility<span>Since 2019</span></div>
+          <div>Chair, a vocational training foundation<span>Since 2021</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="career">
-    <div class="wrap">
-      <p class="folio"><span><b>03</b> · Career</span><span>Statement of positions held</span></p>
-      <h2 data-reveal>Twenty-five years, <em>four balance sheets.</em></h2>
-      <div class="stmt">
-        <div class="pos" data-reveal><span class="note">Note 1</span><div><h3>Chief Financial Officer<span>Lindqvist Industrial Group</span></h3><p>Leads finance, treasury, tax, IT and procurement: 260 people in 14 countries. Delivered the €180m cost programme and a €900m refinancing.</p></div><p class="yr"><small>Period</small>2018 — today</p></div>
-        <div class="pos" data-reveal><span class="note">Note 2</span><div><h3>Vice President, Finance<span>Brennwald Pharma</span></h3><p>Finance lead for the European business; integrated two acquisitions and built a shared-service centre in Lisbon.</p></div><p class="yr"><small>Period</small>2012 — 2018</p></div>
-        <div class="pos" data-reveal><span class="note">Note 3</span><div><h3>Director, FP&amp;A<span>Auerbach Logistics</span></h3><p>Introduced rolling forecasts and a pricing model that lifted contract margins by three points.</p></div><p class="yr"><small>Period</small>2007 — 2012</p></div>
-        <div class="pos" data-reveal><span class="note">Note 4</span><div><h3>Audit Manager<span>Hartmann &amp; Kühn Auditors</span></h3><p>Statutory audits of listed industrial and consumer companies.</p></div><p class="yr"><small>Period</small>2001 — 2007</p></div>
-      </div>
-    </div>
+  <section class="sec" id="speaking" aria-labelledby="s-h" style="padding-top:0">
+    <div class="kicker ui"><span>Speaking</span><span>Selected topics</span></div>
+    <h2 class="h2" id="s-h" data-lines>Three things she will <em>talk about.</em></h2>
+    <ol class="talks">
+      <li><span class="n">01</span><h3>Owning for decades</h3><p>What changes when shareholders, managers and customers all expect the company to be here in 2060.</p></li>
+      <li><span class="n">02</span><h3>Apprentices first</h3><p>Why the training budget is the last thing to cut, and how to keep it when everything else is cut.</p></li>
+      <li><span class="n">03</span><h3>Water is infrastructure</h3><p>The unglamorous systems every city depends on, and who pays to keep them running.</p></li>
+    </ol>
   </section>
 
-  <section id="governance" class="figs">
-    <div class="wrap">
-      <p class="folio"><span><b>04</b> · Governance &amp; education</span><span>Boards · credentials · languages</span></p>
-      <h2 data-reveal>Independent, qualified, <em>multilingual.</em></h2>
-      <div class="gov" data-reveal>
-        <div><span>Board</span><b>Non-executive director &amp; audit chair</b><p>Rheinwerk Foundation, since 2021</p></div>
-        <div><span>Qualifications</span><b>Diplom-Kauffrau &amp; certified public accountant</b><p>Business Administration · Wirtschaftsprüferin</p></div>
-        <div><span>Languages</span><b>German · English · French</b><p>Native · fluent · professional</p></div>
-      </div>
+  <section class="sec contact" id="contact" aria-labelledby="k-h">
+    <div class="kicker ui"><span>Contact</span><span>Office of the chief executive</span></div>
+    <h2 class="big" id="k-h">Write, and we will <em>reply.</em></h2>
+    <div class="cgrid">
+      <div><span class="ui">Speaking and board enquiries</span><a href="mailto:office@hannahbecker.example" data-demo>office@hannahbecker.example</a></div>
+      <div><span class="ui">Office</span><p>Hamburg, Germany</p></div>
+      <div><span class="ui">Assistant</span><p>Replies within two working days</p></div>
     </div>
-  </section>
-
-  <section id="contact" class="back">
-    <div class="wrap in">
-      <div data-reveal>
-        <p class="folio" style="border-color:rgba(201,164,92,.5);color:#C9D3CC"><span><b style="color:var(--gold)">05</b> · Contact</span><span>Back cover</span></p>
-        <h2 class="foil">For board and CFO appointments.</h2>
-        <p>Hannah is open to group CFO and non-executive roles in the Gulf and Europe, particularly in industrial, logistics and healthcare businesses.</p>
-        <div class="btns"><a class="btn fill" href="#contact" data-demo>Arrange a meeting</a><a class="btn" href="#contact" data-demo>Download CV</a><a class="btn" href="#contact" data-demo>LinkedIn</a></div>
-      </div>
-      <div class="disc" aria-hidden="true" data-reveal><span class="foil">HB</span></div>
-    </div>
+    <a class="btn" href="#" data-demo="This is a concept site, so messages can't be sent from here.">Write to the office <span aria-hidden="true">→</span></a>
   </section>
 </main>
-<footer>Concept site designed by Zenith Dubai CV. Hannah Becker is a fictional person; the companies named and all figures are illustrative.</footer>
+
+<footer>
+  <p>Hannah Becker and her company are fictional, and this is a concept website. The portrait was generated with AI. The letter, the chart, the decisions, career, roles and contact details are illustrative: the chart shows an invented order index, not real results.</p>
+  <p>A concept website by Zenith Dubai CV.</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC;
+  var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
+  var lerp = function(a, b, t){ return a + (b - a) * t; };
+
+  /* ---------- An illustrative order index (2016 = 100), weekly, with a hard spring in 2020 ---------- */
+  var seed = 7; function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  var D = [];
+  for (var t = 2016; t <= 2026.8; t += 1 / 52){
+    var trend = 100 * Math.pow(1.071, t - 2016), v = trend;
+    if (t > 2020.1 && t < 2022.2){
+      var k = t < 2020.32 ? (t - 2020.1) / .22 : t < 2020.45 ? 1 : 1 - clamp((t - 2020.45) / 1.75, 0, 1);
+      v = trend * (1 - .185 * Math.pow(Math.sin(Math.min(1, k) * Math.PI / 2), 1.4));
+    }
+    v *= 1 + (rnd() - .5) * .024 + Math.sin(t * Math.PI * 2) * .012;
+    D.push([t, v]);
+  }
+  // Two views: one bad quarter, then the decade.
+  var V0 = {a:2020.05, b:2020.52}, V1 = {a:2016, b:2026.8};
+  var svg = $(".js-chart"), gGrid = $(".grid", svg), gX = $(".xt", svg), gY = $(".yt", svg), ln = $(".ln", svg), area = $(".area", svg), dip = $(".dip", svg), now = $(".now", svg);
+  var W = 0, H = 0, L = 0, R = 0, TOP = 0, BOT = 0, P = 0;
+  var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function size(){
+    W = svg.clientWidth; H = svg.clientHeight; var mob = innerWidth <= 760;
+    // the line ends where Hannah stands: today
+    var hb = $(".hannah").getBoundingClientRect(), cb = svg.getBoundingClientRect();
+    L = mob ? 44 : Math.max(70, innerWidth * .05); R = mob ? 14 : Math.max(innerWidth * .07, cb.right - hb.left + 26); TOP = 24; BOT = 30;
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H); draw(P);
+  }
+  function el(tag, attrs, text){ var e = document.createElementNS("http://www.w3.org/2000/svg", tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; }
+  function draw(p){
+    P = p; if (!W) return;
+    // zoom out geometrically, so every step of the scroll feels like the same amount of "stepping back"
+    var e = p * p * (3 - 2 * p), w0 = V0.b - V0.a, w1 = V1.b - V1.a, w = w0 * Math.pow(w1 / w0, e);
+    var c0 = (V0.a + V0.b) / 2, c1 = (V1.a + V1.b) / 2, c = lerp(c0, c1, Math.pow(e, 1.6));
+    var a = c - w / 2, b = c + w / 2;
+    if (a < V1.a){ b += V1.a - a; a = V1.a; } if (b > V1.b){ a -= b - V1.b; b = V1.b; }
+    var vis = D.filter(function(d){ return d[0] >= a - .05 && d[0] <= b + .05; });
+    var lo = Infinity, hi = -Infinity; vis.forEach(function(d){ if (d[1] < lo) lo = d[1]; if (d[1] > hi) hi = d[1]; });
+    var y0 = lo - (hi - lo) * .12, y1 = hi + (hi - lo) * .1;
+    y0 = lerp(y0, 80, e * e); y1 = lerp(y1, 230, e * e);
+    var X = function(t){ return L + (t - a) / (b - a) * (W - L - R); }, Y = function(v){ return TOP + (1 - (v - y0) / (y1 - y0)) * (H - TOP - BOT); };
+    var step = Math.max(1, Math.floor(vis.length / 700)), d = "";
+    for (var i = 0; i < vis.length; i += step) d += (i ? "L" : "M") + X(vis[i][0]).toFixed(1) + " " + Y(vis[i][1]).toFixed(1);
+    ln.setAttribute("d", d);
+    area.setAttribute("d", d + "L" + X(vis[vis.length - 1][0]).toFixed(1) + " " + (H - BOT) + "L" + X(vis[0][0]).toFixed(1) + " " + (H - BOT) + "Z");
+    // ticks: months when close, quarters in between, years when far
+    gX.innerHTML = ""; gGrid.innerHTML = "";
+    var span = b - a, ticks = [];
+    if (span < .9){ for (var m = Math.ceil(a * 12); m <= b * 12; m++) ticks.push([m / 12, MONTHS[((m % 12) + 12) % 12] + (m % 12 === 0 ? " " + Math.floor(m / 12) : "")]); }
+    else if (span < 3.2){ for (var q = Math.ceil(a * 4); q <= b * 4; q++) ticks.push([q / 4, (q % 4 === 0 ? Math.floor(q / 4) + " " : "") + "Q" + (((q % 4) + 4) % 4 + 1)]); }
+    else { for (var yv = Math.ceil(a); yv <= b; yv++) ticks.push([yv, String(yv)]); }
+    var minGap = innerWidth <= 760 ? 52 : 70, lastX = -1e9;
+    ticks.forEach(function(tk){
+      var x = X(tk[0]); if (x < L - 1 || x > W - R + 1) return;
+      gGrid.appendChild(el("line", {x1:x, x2:x, y1:TOP, y2:H - BOT}));
+      if (x - lastX < minGap) return; lastX = x;
+      gX.appendChild(el("text", {x:x, y:H - 8, "text-anchor":"middle"}, tk[1]));
+    });
+    gY.innerHTML = "";
+    var ys = (y1 - y0) > 80 ? 50 : (y1 - y0) > 30 ? 10 : 5;
+    for (var yy = Math.ceil(y0 / ys) * ys; yy <= y1; yy += ys){
+      var py = Y(yy); gGrid.appendChild(el("line", {x1:L, x2:W - R, y1:py, y2:py}));
+      gY.appendChild(el("text", {x:L - 10, y:py + 4, "text-anchor":"end"}, yy));
+    }
+    // the low point of 2020, and today
+    var low = D.reduce(function(m, d){ return d[0] > 2020.2 && d[0] < 2020.6 && d[1] < m[1] ? d : m; }, [0, 1e9]);
+    var dx = X(low[0]), dy = Y(low[1]);
+    $("circle", dip).setAttribute("cx", dx); $("circle", dip).setAttribute("cy", dy);
+    $("line", dip).setAttribute("x1", dx); $("line", dip).setAttribute("x2", dx); $("line", dip).setAttribute("y1", dy + 8); $("line", dip).setAttribute("y2", H - BOT);
+    var dt = $("text", dip); dt.setAttribute("x", dx + 10); dt.setAttribute("y", dy + 22); dt.textContent = e < .5 ? "−18% in ten weeks" : "spring 2020";
+    var last = D[D.length - 1], show = b >= last[0] - .01;
+    now.style.opacity = show ? 1 : 0;
+    if (show){ var nx = X(last[0]), ny = Y(last[1]); $("circle", now).setAttribute("cx", nx); $("circle", now).setAttribute("cy", ny); var nt = $("text", now); nt.setAttribute("x", nx - 10); nt.setAttribute("y", ny - 14); nt.setAttribute("text-anchor", "end"); nt.textContent = "2026: " + Math.round(last[1]); }
+    var u = $(".unit", svg); u.setAttribute("x", W - R); u.setAttribute("y", TOP - 8); u.setAttribute("text-anchor", "end");
+    caption(e);
+  }
+  var capEl = $(".cap"), win = $(".js-win"), capT = $(".js-cap"), stage = -1;
+  var CAPS = [
+    ["February – June 2020", "Orders fell eighteen per cent in ten weeks. It felt like the only quarter that mattered.", true],
+    ["2019 – 2022", "Step back a little and the fall has a shape: steep, then a long climb back.", false],
+    ["2016 – 2026", "Step back to the decade and it is a notch. The order index roughly doubled.", false]
+  ];
+  function caption(e){
+    var s = e < .3 ? 0 : e < .75 ? 1 : 2; if (s === stage) return; stage = s;
+    win.textContent = CAPS[s][0]; capT.textContent = CAPS[s][1]; capEl.classList.toggle("alarm", CAPS[s][2]);
+  }
+  size(); window.addEventListener("resize", size);
+  if (!ZC.motion) draw(1);
+
+  /* ---------- Decisions: each bet drawn as a span on one decade axis ---------- */
+  var A0 = 2013, A1 = 2026, axis = $(".js-axis");
+  for (var y = A0; y <= A1; y++){ if ((y - A0) % (innerWidth <= 760 ? 3 : 1)) continue; var s = document.createElement("span"); s.textContent = y; s.style.left = ((y - A0) / (A1 - A0) * 100) + "%"; axis.appendChild(s); }
+  $$(".dec li").forEach(function(li){
+    var a = +li.dataset.a, b = +li.dataset.b, pa = (a - A0) / (A1 - A0) * 100, pb = (b - A0) / (A1 - A0) * 100;
+    $(".span", li).innerHTML = '<i class="bar" style="left:' + pa + '%;width:' + (pb - pa) + '%"></i><i class="a" style="left:' + pa + '%"></i><i class="b" style="left:' + pb + '%"></i><span class="yr" style="left:' + pa + '%">' + a + '</span><span class="yr" style="left:' + pb + '%">' + b + '</span>';
+  });
+
+  /* ---------- Reading progress for the letter, and the masthead rule ---------- */
+  var body = $(".js-body"), read = $(".js-read"), readlab = $(".js-readlab"), prog = $(".mast .prog");
+  function progress(){
+    var r = body.getBoundingClientRect(), p = clamp((innerHeight * .6 - r.top) / r.height, 0, 1);
+    read.style.transform = "scaleX(" + p.toFixed(3) + ")"; readlab.textContent = "Reading · " + Math.round(p * 100) + "%";
+    var max = document.documentElement.scrollHeight - innerHeight; prog.style.transform = "scaleX(" + (max > 0 ? scrollY / max : 0).toFixed(4) + ")";
+  }
+  window.addEventListener("scroll", progress, {passive:true}); progress();
+
+  window.addEventListener("load", function(){
+    if (!ZC.motion || !window.gsap){ draw(1); return; }
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+    ZC.smooth();
+    document.fonts.ready.then(function(){
+      var h = SplitText.create(".hero h1", {type:"words,chars"});
+      gsap.from(h.chars, {yPercent:40, opacity:0, duration:1.2, stagger:.04, ease:"expo.out", delay:.1});
+      gsap.from(".hero .kick, .cap", {opacity:0, y:16, duration:1, stagger:.12, ease:"expo.out", delay:.5});
+      gsap.from(".hannah", {opacity:0, y:40, duration:1.6, ease:"expo.out", delay:.2});
+      // the line draws itself in the zoomed view first
+      var len = ln.getTotalLength ? ln.getTotalLength() : 2000;
+      gsap.fromTo(ln, {strokeDasharray:len, strokeDashoffset:len}, {strokeDashoffset:0, duration:2, ease:"power2.inOut", delay:.4, onComplete:function(){ ln.style.strokeDasharray = "none"; }});
+      gsap.from(".area, .dip", {opacity:0, duration:1, delay:1.6});
+      var o = {p:0};
+      ScrollTrigger.create({trigger:".hero", start:"top top", end:innerWidth <= 760 ? "+=120%" : "+=160%", pin:true, scrub:.5,
+        animation:gsap.to(o, {p:1, ease:"none", paused:true, onUpdate:function(){ draw(o.p); }})});
+      $$("[data-lines]").forEach(function(el){
+        SplitText.create(el, {type:"lines", mask:"lines", autoSplit:true, onSplit:function(self){
+          return gsap.from(self.lines, {yPercent:105, duration:1.1, stagger:.1, ease:"expo.out", scrollTrigger:{trigger:el, start:"top 86%"}});
+        }});
+      });
+      $$(".dec li").forEach(function(li){
+        var tl = gsap.timeline({scrollTrigger:{trigger:li, start:"top 82%"}});
+        tl.from($(".a", li), {scale:0, duration:.4, ease:"back.out(2)"})
+          .from($(".bar", li), {scaleX:0, duration:1.1, ease:"power2.inOut"}, .2)
+          .from($(".b", li), {scale:0, duration:.4, ease:"back.out(2)"}, 1.2)
+          .from($$(".yr", li), {opacity:0, y:6, duration:.5, stagger:.4}, .1)
+          .from($(".txt", li), {opacity:0, y:16, duration:.9, ease:"expo.out"}, .3);
+      });
+      gsap.from(".tl li", {opacity:0, x:-16, duration:.9, stagger:.12, ease:"expo.out", scrollTrigger:{trigger:".tl", start:"top 85%"}});
+      gsap.from(".talks li", {opacity:0, y:24, duration:1, stagger:.1, ease:"expo.out", scrollTrigger:{trigger:".talks", start:"top 86%"}});
+    });
+  });
+});
+</script>
 </body>
 </html>
