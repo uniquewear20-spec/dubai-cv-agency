@@ -80,8 +80,8 @@ main{position:relative;overflow-x:clip}
 .hero .kick{color:var(--emerald);margin-bottom:18px}
 .hero .right{grid-column:3;max-width:40ch;justify-self:end}
 .hero .right p{font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:#2E3732}
-.cta{display:inline-flex;align-items:center;gap:12px;margin-top:22px;padding:14px 22px;border-radius:999px;background:var(--emerald);color:var(--linen);text-decoration:none;font-weight:600;font-size:15.5px;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s}
-.cta:hover{transform:translateY(-2px);background:#0B3B2C}
+.cta{display:inline-flex;align-items:center;gap:12px;margin-top:22px;padding:14px 22px;border-radius:999px;background:var(--emerald);color:var(--linen);text-decoration:none;font-weight:600;font-size:15.5px;transition:translate .3s cubic-bezier(.2,.7,.2,1),background .3s}
+.cta:hover{translate:0 -2px;background:#0B3B2C}
 
 /* Sections: one Friday, stop by stop */
 .sec{position:relative;padding:20vh var(--pad);background:linear-gradient(var(--prev,var(--sbg)),var(--sbg) 18vh)}
@@ -157,8 +157,8 @@ main{position:relative;overflow-x:clip}
 .off .lamp{position:absolute;right:28%;top:0;width:1px;height:16vh;background:rgba(243,236,225,.3)}
 .off .lamp::after{content:"";position:absolute;left:-26px;top:100%;width:53px;height:26px;border-radius:53px 53px 0 0;background:#1B2620;box-shadow:0 18px 60px 10px rgba(242,194,123,.25)}
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:8vh;max-width:1100px}
-.cards a{display:flex;flex-direction:column;gap:10px;padding:24px 24px 26px;border-radius:22px;text-decoration:none;background:rgba(243,236,225,.06);box-shadow:inset 0 0 0 1px rgba(243,236,225,.16);transition:background .3s,transform .3s cubic-bezier(.2,.7,.2,1)}
-.cards a:hover{background:rgba(243,236,225,.12);transform:translateY(-3px)}
+.cards a{display:flex;flex-direction:column;gap:10px;padding:24px 24px 26px;border-radius:22px;text-decoration:none;background:rgba(243,236,225,.06);box-shadow:inset 0 0 0 1px rgba(243,236,225,.16);transition:background .3s,translate .3s cubic-bezier(.2,.7,.2,1)}
+.cards a:hover{background:rgba(243,236,225,.12);translate:0 -3px}
 .cards .lab{color:var(--gold2)}
 .cards b{font:400 clamp(21px,1.7vw,27px)/1.15 var(--serif);word-break:break-word}
 footer{background:#050807;color:#9EA79F;padding:30px var(--pad) 96px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;font-size:14px;line-height:1.7}

@@ -125,8 +125,8 @@ main{position:relative;overflow-x:clip}
 /* covers */
 .covers{background:var(--paper)}
 .fan{display:flex;justify-content:center;gap:clamp(12px,2vw,30px);perspective:1400px;margin-top:clamp(30px,4vw,60px);flex-wrap:wrap}
-.mag{position:relative;width:min(300px,80vw);aspect-ratio:3/4;overflow:hidden;background:var(--bg);color:var(--fg);box-shadow:0 40px 70px -30px rgba(18,17,16,.5);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-.mag:hover{transform:translateY(-10px) rotateY(-6deg)}
+.mag{position:relative;width:min(300px,80vw);aspect-ratio:3/4;overflow:hidden;background:var(--bg);color:var(--fg);box-shadow:0 40px 70px -30px rgba(18,17,16,.5);transition:translate .6s cubic-bezier(.2,.7,.2,1),rotate .6s cubic-bezier(.2,.7,.2,1)}
+.mag:hover{translate:0 -10px}
 .mag img{position:absolute;left:50%;bottom:-6%;height:96%;width:auto;max-width:none;transform:translateX(-50%)}
 .mag .m{position:absolute;z-index:1;left:0;right:0;top:12px;text-align:center;font:500 54px/.9 var(--serif);font-stretch:62.5%;letter-spacing:.02em}
 .mag .lines{position:absolute;z-index:3;left:14px;right:14px;bottom:14px;font:600 10px/1.35 var(--sans);font-stretch:110%;letter-spacing:.08em;text-transform:uppercase}
@@ -135,7 +135,7 @@ main{position:relative;overflow-x:clip}
 .mag.b{--bg:#121110;--fg:#F1EDE6}.mag.b .m{top:auto;bottom:70px;z-index:3;font-size:64px}.mag.b img{filter:grayscale(1)}
 .mag.c{--bg:#E8B04A;--fg:#3A1A12}.mag.c .m{font-weight:800;font-stretch:100%;font-size:46px;letter-spacing:-.02em}
 .fan .mag:nth-child(1){transform:rotate(-4deg) translateY(16px)}.fan .mag:nth-child(3){transform:rotate(4deg) translateY(16px)}
-.fan .mag:nth-child(1):hover,.fan .mag:nth-child(3):hover{transform:rotate(0) translateY(-10px)}
+.fan .mag:nth-child(1):hover{translate:0 -26px;rotate:4deg}.fan .mag:nth-child(3):hover{translate:0 -26px;rotate:-4deg}
 .note{margin-top:22px;text-align:center;color:var(--ink2)}
 
 /* ambassador */

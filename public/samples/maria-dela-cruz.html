@@ -80,8 +80,8 @@ footer{position:relative;z-index:1}
 .hero h1{font:400 clamp(56px,8.4vw,140px)/.9 var(--serif);letter-spacing:-.015em}
 .hero h1 em{color:#fff;text-shadow:0 2px 30px rgba(224,122,102,.55)}
 .hero .sub{font-size:clamp(17px,1.4vw,20px);line-height:1.6;max-width:44ch;margin-top:28px;color:#26304F}
-.cta{display:inline-flex;align-items:center;gap:12px;margin-top:34px;padding:15px 24px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:500;font-size:16px;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s}
-.cta:hover{transform:translateY(-2px);background:#24305A}
+.cta{display:inline-flex;align-items:center;gap:12px;margin-top:34px;padding:15px 24px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:500;font-size:16px;transition:translate .3s cubic-bezier(.2,.7,.2,1),background .3s}
+.cta:hover{translate:0 -2px;background:#24305A}
 .maria{position:absolute;z-index:2;right:max(1vw,calc(50% - 780px));bottom:0;height:min(94vh,1080px);width:auto;max-width:none;pointer-events:none;user-select:none}
 .near{position:absolute;z-index:3;left:0;top:0;width:100%;height:calc(100% + 26vh);pointer-events:none}
 .contrail{position:absolute;z-index:1;left:0;top:0;width:100%;height:60%;pointer-events:none;overflow:visible}
@@ -182,8 +182,8 @@ footer{position:relative;z-index:1}
 /* FL 410: night, keep in touch */
 .contact{min-height:100vh;padding-bottom:16vh}
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:8vh;max-width:1100px}
-.cards a{display:flex;flex-direction:column;gap:10px;padding:24px 24px 26px;border-radius:22px;text-decoration:none;background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);transition:background .3s,transform .3s cubic-bezier(.2,.7,.2,1)}
-.cards a:hover{background:rgba(255,255,255,.14);transform:translateY(-3px)}
+.cards a{display:flex;flex-direction:column;gap:10px;padding:24px 24px 26px;border-radius:22px;text-decoration:none;background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);transition:background .3s,translate .3s cubic-bezier(.2,.7,.2,1)}
+.cards a:hover{background:rgba(255,255,255,.14);translate:0 -3px}
 .cards .lab{color:var(--coral2)}
 .cards b{font:400 clamp(22px,1.8vw,28px)/1.15 var(--serif);word-break:break-word}
 .base{margin-top:34px;color:rgba(255,255,255,.82);font-size:15.5px}
