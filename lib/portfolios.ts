@@ -126,10 +126,10 @@ export const PORTFOLIOS: Portfolio[] = [
   },
   {
     slug: "mateo-herrera", name: "Mateo Herrera", kind: "concept", category: "hospitality", url: "/samples/mateo-herrera.html",
-    tone: "#120B07", stills: ALL, loop: true,
-    role: { en: "Mixologist", fr: "Mixologue", ar: "خبير مزج المشروبات" },
-    idea: { en: "The spec", fr: "La fiche", ar: "الوصفة" },
-    line: { en: "The headline is typed out as a cocktail spec, and at the back bar you fill a glass layer by layer.", fr: "Le titre s'écrit comme une fiche cocktail, et au bar on remplit un verre couche après couche.", ar: "العنوان يُكتب كوصفة كوكتيل، وعند البار تملأ كأساً طبقةً فوق طبقة." },
+    tone: "#EE9E9D", stills: ALL, loop: true,
+    role: { en: "Bar Director & Mixologist", fr: "Directeur de bar et mixologue", ar: "مدير بار وخبير مزج مشروبات" },
+    idea: { en: "Light and shade", fr: "Ombre et lumière", ar: "الضوء والظل" },
+    line: { en: "A pink wall, a window and a sun you move through the bar day: the light, the shadows and the drink change with the hour.", fr: "Un mur rose, une fenêtre et un soleil que l'on déplace au fil de la journée du bar : la lumière, les ombres et le cocktail changent avec l'heure.", ar: "جدار وردي ونافذة وشمس تحرّكها عبر يوم البار، فيتغيّر الضوء والظلال والمشروب مع الساعة." },
   },
   {
     slug: "marco-bellini", name: "Marco Bellini", kind: "concept", category: "hospitality", url: "/samples/marco-bellini.html",
