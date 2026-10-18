@@ -3,394 +3,467 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0E0D1F">
-<title>Mei Lin Zhou · Lead Data Scientist — Concept site by Zenith Dubai CV</title>
-<meta name="description" content="Concept portfolio website for a fictional lead data scientist, designed by Zenith Dubai CV.">
-<link rel="preload" href="img/mei-lin-zhou-640.webp" as="image" type="image/webp">
-<link rel="preload" href="fonts/manrope-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css">
+<title>Mei Lin Zhou — Pianist &amp; composer · Concept site</title>
+<meta name="description" content="Mei Lin Zhou, concert pianist and composer from Singapore. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3EEE6">
+<link rel="preload" href="fonts/spectral-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" imagesrcset="img/mei-lin-zhou/cut-640.webp 557w, img/mei-lin-zhou/cut.webp 928w" imagesizes="(max-width:760px) 90vw, 80vh" fetchpriority="high">
 <script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/DrawSVGPlugin.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
 <style>
-/* Concept: a live notebook. Every section is a cell with its execution count, and
-   the outputs are real-looking results: the portrait is "sampled" out of noise like
-   a diffusion model (point cloud converging, then resolving into the photo), the
-   models report their metrics with small charts, experience prints as a DataFrame,
-   and the toolkit is a bar chart. */
+@font-face{font-family:"Spectral";src:url(fonts/spectral-latin-300-normal.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Spectral";src:url(fonts/spectral-latin-300-italic.woff2) format("woff2");font-weight:300;font-style:italic;font-display:swap}
+@font-face{font-family:"Spectral";src:url(fonts/spectral-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Spectral";src:url(fonts/spectral-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Spectral";src:url(fonts/spectral-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Noto Serif SC";src:url(fonts/noto-serif-sc-meilin.woff2) format("woff2");font-weight:400;font-display:swap;unicode-range:U+4E00-9FFF}
 :root{
-  --bg:#0E0D1F; --cell:#15142B; --cell2:#1A1934; --line:#29274D; --txt:#D9D7F1; --mute:#8E8BB8; --white:#F6F5FF;
-  --lilac:#B6A6FF; --cyan:#5FE3CF; --pink:#FF8FB8; --amber:#FFC56E;
-  --sans:"Manrope","Helvetica Neue",Arial,sans-serif; --mono:"Fira Code",ui-monospace,Menlo,monospace;
-  --zc-bg:#B6A6FF; --zc-fg:#0E0D1F; --zc-dot:#0E0D1F;
+  --ivory:#F3EEE6;--paper:#FAF7F2;--ink:#17141C;--ink2:#55505C;--gold:#B8913F;--gold2:#D9B66B;--copper:#A8643A;--night:#16121D;--plum:#2A2033;--lilac:#B9A9D6;
+  --serif:"Spectral",Georgia,"Times New Roman",serif;--sc:"Noto Serif SC","Spectral",serif;
+  --pad:clamp(18px,4.4vw,72px);
+  --zc-bg:#17141C;--zc-fg:#F3EEE6;--zc-dot:#D9B66B;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--txt);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;height:auto;display:block}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1240px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
-.k{color:var(--pink)}.s{color:var(--cyan)}.f{color:var(--lilac)}.n{color:var(--amber)}.c{color:var(--mute)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ivory)}
+body{background:var(--ivory);color:var(--ink);font:400 18px/1.65 var(--serif);-webkit-font-smoothing:antialiased}
+img,svg,canvas{display:block}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+em{font-style:italic;font-weight:300}
+.lab{font:500 12.5px/1.3 var(--serif);letter-spacing:.2em;text-transform:uppercase}
+main{position:relative;overflow-x:clip}
 
-/* ---------- Top bar ---------- */
-.top{display:flex;align-items:center;gap:20px;padding-top:max(18px,env(safe-area-inset-top,0px));padding-bottom:18px}
-.logo{font:500 17px/1 var(--mono);text-decoration:none;color:var(--white)}
-.logo span{color:var(--cyan)}
-.kernel{display:flex;align-items:center;gap:8px;font:400 12.5px/1 var(--mono);color:var(--mute)}
-.kernel i{width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
-.top nav{margin-left:auto}
-.nav{display:flex;gap:4px;margin:0;padding:0;list-style:none;font:500 13.5px/1 var(--mono)}
-.nav a{display:block;padding:9px 12px;border-radius:8px;text-decoration:none;color:var(--mute)}
-.nav a span{color:#55527E}
-.nav a:hover,.nav a[aria-current]{background:var(--cell);color:var(--white)}
-.nav a[aria-current] span{color:var(--cyan)}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;background:var(--lilac);color:#14122C;text-decoration:none;font:700 14px/1 var(--sans)}
-.btn:hover{background:var(--white)}
-.btn.ghost{background:transparent;color:var(--white);box-shadow:inset 0 0 0 1px var(--line)}
-.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--lilac)}
+/* Header */
+.top{position:fixed;inset-inline:var(--pad);top:16px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:16px;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;padding:9px 16px;border-radius:999px;background:rgba(250,247,242,.85);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.brand b{font:400 20px/1 var(--serif)}
+.brand span{font:400 17px/1 var(--sc);color:var(--gold)}
+.right{display:flex;gap:8px;align-items:center}
+.top nav{display:flex;gap:2px;padding:5px;border-radius:999px;background:rgba(250,247,242,.85);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.top nav a{text-decoration:none;padding:7px 14px;border-radius:999px;font-size:15px;color:var(--ink2)}
+.top nav a:hover{color:var(--ink)}
+.top nav a[aria-current]{background:var(--ink);color:var(--ivory)}
+.sound{display:flex;align-items:center;gap:9px;padding:9px 16px 9px 12px;border-radius:999px;background:var(--ink);color:var(--ivory);font-size:15px}
+.sound svg{width:18px;height:18px}
+.sound .on{display:none}
+.sound[aria-pressed="true"] .on{display:inline}.sound[aria-pressed="true"] .off{display:none}
+.sound[aria-pressed="true"]{background:var(--gold);color:var(--ink)}
 
-/* ---------- Cells ---------- */
-.cellrow{display:grid;grid-template-columns:76px minmax(0,1fr);gap:0 14px}
-.lbl{padding-top:16px;text-align:right;font:400 13px/1.4 var(--mono);color:#625F94;white-space:nowrap}
-.lbl.out{color:var(--pink)}
-.cell{position:relative;border:1px solid var(--line);border-radius:12px;background:var(--cell);min-width:0}
-.cell.active{border-color:#5B4FD0;box-shadow:-4px 0 0 0 var(--lilac)}
-.codeline{margin:0;padding:14px 18px;font:400 15px/1.6 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--txt)}
-.output{border:0;background:transparent;min-width:0}
+/* HERO: the strings */
+.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:radial-gradient(60% 70% at 72% 45%,#FBF8F3,var(--ivory) 70%)}
+.strings{position:absolute;inset:0;width:100%;height:100%;z-index:1;touch-action:pan-y}
+.meilin{position:absolute;z-index:2;right:max(2vw,calc(50% - 720px));bottom:0;height:min(90vh,1000px);width:auto;max-width:none;pointer-events:none;user-select:none}
+.hero .copy{position:relative;z-index:3;padding:clamp(140px,22vh,210px) var(--pad) 0;max-width:min(47vw,720px);pointer-events:none}
+.hero .copy a,.hero .copy button{pointer-events:auto}
+.hero .kick{color:var(--gold)}
+.hero h1{font:300 clamp(60px,6.6vw,124px)/.92 var(--serif);letter-spacing:-.02em;margin-top:18px}
+.hero h1 .sc{display:block;font:400 clamp(28px,2.8vw,46px)/1.2 var(--sc);letter-spacing:.3em;color:var(--gold);margin-top:16px}
+.hero .sub{font:300 clamp(19px,1.6vw,24px)/1.5 var(--serif);font-style:italic;max-width:30ch;margin-top:26px;color:#3A3540}
+.hint{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:34px;font-size:15.5px;color:var(--ink2)}
+.next{position:absolute;z-index:3;left:var(--pad);bottom:36px;display:flex;gap:18px;align-items:baseline;padding-top:14px;border-top:1px solid rgba(23,20,28,.2);max-width:min(40vw,520px)}
+.next .lab{color:var(--gold);white-space:nowrap}
+.next p{font-size:16px;color:#3A3540}
+.next b{font-weight:500}
+.hint .sound{padding:8px 14px 8px 11px;font-size:14.5px}
 
-/* ---------- Hero ---------- */
-.hero{position:relative;min-height:max(700px,100svh);display:flex;flex-direction:column;overflow:hidden;
-  background:radial-gradient(55% 60% at 78% 45%,rgba(109,76,255,.32),transparent 70%),radial-gradient(40% 40% at 10% 90%,rgba(95,227,207,.08),transparent 70%),var(--bg)}
-.hero>.wrap{width:100%}
-.nb{flex:1;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(24px,3vw,44px);align-items:center;padding-top:clamp(10px,3vh,30px);padding-bottom:clamp(30px,6vh,60px)}
-.intro .md{padding:30px 34px 34px}
-.md .eyebrow{margin:0;font:500 13px/1.4 var(--mono);color:var(--cyan)}
-h1{margin:14px 0 0;font:800 clamp(56px,6.6vw,104px)/.92 var(--sans);letter-spacing:-.045em;color:var(--white)}
-h1 span{display:block;background:linear-gradient(90deg,var(--lilac),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-.role{margin:18px 0 0;font:700 clamp(17px,1.5vw,20px)/1.35 var(--sans);color:var(--white)}
-.lead{margin:10px 0 0;max-width:46ch;color:#B9B6DA}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
-.tags li{padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--cell2);font:500 12.5px/1 var(--mono);color:var(--txt)}
-.tags li.loc{border-color:transparent;background:transparent;color:var(--mute);padding-left:4px}
-.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.gen .codeline{border-bottom:1px solid var(--line)}
-.sample{position:relative;margin:16px auto 0;width:min(100%,430px);aspect-ratio:928/1152;border-radius:14px;overflow:hidden;background:#141233;box-shadow:0 40px 80px -40px #000,0 0 0 1px var(--line)}
-.sample img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sample canvas{position:absolute;inset:0;width:100%;height:100%;display:none;transition:opacity 1s ease}
-.genning .sample canvas{display:block}
-.genning .sample img{opacity:0;transition:none}
-.genning.done .sample img{opacity:1;transition:opacity 1s ease}
-.genning.done .sample canvas{opacity:0}
-.prog{display:flex;align-items:center;gap:12px;width:min(100%,430px);margin:12px auto 0;font:400 12.5px/1 var(--mono);color:var(--mute)}
-.prog .bar{flex:1;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
-.prog .bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--lilac),var(--cyan));transform-origin:left}
-.prog b{color:var(--cyan);font-weight:400}
+/* Section furniture */
+.sec{position:relative;padding:18vh var(--pad)}
+.h2{font:300 clamp(48px,6.4vw,108px)/.95 var(--serif);letter-spacing:-.02em;max-width:14ch}
+.h2 em{color:var(--gold)}
+.lede{font-size:clamp(18px,1.4vw,21px);line-height:1.6;max-width:52ch;margin-top:24px;color:var(--ink2)}
+.note{font-size:14px;margin-top:26px;color:var(--ink2)}
+.dark{background:var(--night);color:var(--ivory)}
+.dark .lede,.dark .note{color:rgba(243,238,230,.75)}
+.dark .h2 em{color:var(--gold2)}
 
-/* ---------- Sections ---------- */
-section{padding:clamp(70px,8vw,110px) 0}
-.sec h2{margin:0;font:800 clamp(34px,4vw,54px)/1.04 var(--sans);letter-spacing:-.035em;color:var(--white)}
-.sec .md{padding:24px 28px}
-.sec .md p{margin:10px 0 0;max-width:62ch;color:#B9B6DA}
-.stack{display:grid;gap:18px}
+/* Season: concerts as notes on a staff */
+.staffwrap{position:relative;margin-top:10vh}
+.staff{width:100%;height:clamp(180px,24vh,240px);overflow:visible}
+.staff .ln{stroke:rgba(243,238,230,.4);stroke-width:1.2}
+.staff .clef{fill:none;stroke:var(--gold2);stroke-width:2}
+.staff .bar{stroke:rgba(243,238,230,.4);stroke-width:1.2}
+.staff .nh{fill:var(--ivory);transition:fill .3s}
+.staff .stem{stroke:var(--ivory);stroke-width:1.6}
+.staff .ring{fill:none;stroke:var(--gold2);stroke-width:1.5;opacity:0}
+.staff .lbl{font:500 13px/1 var(--serif);fill:rgba(243,238,230,.7);letter-spacing:.08em}
+.staff .n.on .nh{fill:var(--gold2)}
+.staff .n.on .lbl{fill:var(--gold2)}
+.concerts{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 34px;margin-top:6vh;border-top:1px solid rgba(243,238,230,.18)}
+.concerts li{padding:20px 0 22px;border-bottom:1px solid rgba(243,238,230,.14);transition:color .3s}
+.concerts .d{font:500 13px/1.2 var(--serif);letter-spacing:.16em;text-transform:uppercase;color:var(--gold2)}
+.concerts h3{font:400 26px/1.15 var(--serif);margin-top:8px}
+.concerts p{font-size:16px;color:rgba(243,238,230,.75);margin-top:6px}
+.concerts li.on h3{color:var(--gold2)}
 
-/* models */
-.models{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.model{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;background:var(--cell);overflow:hidden}
-.model .codeline{font-size:13.5px;border-bottom:1px solid var(--line);color:var(--mute)}
-.model .body{flex:1;display:flex;flex-direction:column;padding:20px 22px 22px}
-.model .tag{font:500 12px/1.4 var(--mono);color:var(--cyan)}
-.model h3{margin:8px 0 0;font:800 21px/1.25 var(--sans);letter-spacing:-.02em;color:var(--white)}
-.model p{margin:8px 0 0;color:#ABA8CF;font-size:15.5px}
-.model svg{width:100%;height:auto;margin-top:auto;padding-top:18px}
-.model .metric{display:flex;align-items:baseline;gap:12px;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
-.model .metric b{font:800 40px/1 var(--sans);letter-spacing:-.03em;color:var(--white)}
-.model .metric span{font:400 13px/1.35 var(--mono);color:var(--mute)}
+/* Recordings: Chladni covers */
+.albums{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,44px);margin-top:9vh}
+.album .cover{position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;box-shadow:0 30px 60px -34px rgba(23,20,28,.6)}
+.album canvas{width:100%;height:100%}
+.album .cover b{position:absolute;left:18px;bottom:16px;right:18px;font:400 clamp(22px,2vw,30px)/1.05 var(--serif);color:var(--fg,#F3EEE6)}
+.album .cover i{position:absolute;left:18px;top:16px;font:500 11.5px/1 var(--serif);letter-spacing:.22em;text-transform:uppercase;font-style:normal;color:var(--fg,#F3EEE6);opacity:.85}
+.album h3{font:400 26px/1.15 var(--serif);margin-top:20px}
+.album .meta{font-size:15px;color:var(--ink2);margin-top:6px}
+.album p{font-size:16.5px;margin-top:10px}
+.play{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:10px 18px 10px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(23,20,28,.35);font-size:15.5px;transition:background .3s}
+.play:hover{background:rgba(23,20,28,.06)}
+.play svg{width:20px;height:20px}
+.play[aria-pressed="true"]{background:var(--ink);color:var(--ivory)}
 
-/* dataframe */
-.df{width:100%;border-collapse:collapse;font:400 15px/1.5 var(--sans)}
-.df th,.df td{padding:12px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
-.df thead th{font:500 12.5px/1.4 var(--mono);color:var(--mute);border-bottom:1px solid #3A3768}
-.df tbody tr:nth-child(odd){background:rgba(255,255,255,.025)}
-.df tbody th{font:400 13px/1.5 var(--mono);color:#625F94;width:40px}
-.df td.m{font:500 14px/1.5 var(--mono);color:var(--cyan);white-space:nowrap}
-.df td b{color:var(--white);font-weight:700}
-.df td span{display:block;color:#ABA8CF;font-size:14.5px}
-.dfwrap{overflow-x:auto;padding:6px 6px 14px}
-.shape{margin:0;padding:0 16px 12px;font:400 12.5px/1 var(--mono);color:var(--mute)}
+/* Works */
+.works{list-style:none;margin-top:8vh;border-top:1px solid rgba(243,238,230,.2)}
+.works li{display:grid;grid-template-columns:90px minmax(0,1.3fr) minmax(0,1fr) 80px;gap:20px;align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(243,238,230,.14)}
+.works .y{font:300 28px/1 var(--serif);color:var(--gold2)}
+.works h3{font:400 clamp(26px,2.4vw,36px)/1.1 var(--serif)}
+.works h3 em{color:rgba(243,238,230,.7)}
+.works .for{font-size:16px;color:rgba(243,238,230,.78)}
+.works .len{font:300 22px/1 var(--serif);text-align:right;color:rgba(243,238,230,.7)}
 
-/* papers */
-.refs{margin:0;padding:6px 0;list-style:none;counter-reset:r}
-.refs li{counter-increment:r;display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;padding:16px 24px 16px 14px;border-bottom:1px solid var(--line)}
-.refs li:last-child{border-bottom:0}
-.refs li::before{content:"[" counter(r) "]";font:500 14px/1.6 var(--mono);color:var(--lilac)}
-.refs b{display:block;color:var(--white);font-weight:700}
-.refs span{font:400 13.5px/1.6 var(--mono);color:var(--mute)}
-.refs .talk{color:var(--pink)}
+/* About */
+.about .grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(30px,6vw,110px);margin-top:8vh;align-items:start}
+.about blockquote p{font:300 clamp(30px,3vw,48px)/1.2 var(--serif);font-style:italic}
+.about blockquote footer{margin-top:16px;font-size:15px;color:var(--ink2)}
+.about .bio p{font-size:17.5px;color:#3A3540}
+.about .bio p+p{margin-top:16px}
 
-/* toolkit chart */
-.chart{padding:22px 26px 18px}
-.bars{display:grid;gap:14px;margin:0;padding:0;list-style:none}
-.bars li{display:grid;grid-template-columns:minmax(150px,240px) minmax(0,1fr) 56px;gap:16px;align-items:center;font-size:15px}
-.bars .t{color:var(--white);font-weight:600}
-.bars .b{height:16px;border-radius:4px;background:var(--line);overflow:hidden}
-.bars .b i{display:block;height:100%;width:calc(var(--v) / 10 * 100%);border-radius:4px;background:linear-gradient(90deg,#6D4CFF,var(--lilac));transform-origin:left;transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
-.bars li:nth-child(2) .b i{background:linear-gradient(90deg,#1E9D8C,var(--cyan))}
-.zc-reveal .chart:not(.is-in) .b i{transform:scaleX(0)}
-.bars .v{font:500 14px/1 var(--mono);color:var(--mute);text-align:right}
-.axis{display:grid;grid-template-columns:minmax(150px,240px) minmax(0,1fr) 56px;gap:16px;margin-top:10px;font:400 12px/1 var(--mono);color:#625F94}
-.axis span{display:flex;justify-content:space-between}
-.langs{margin:18px 0 0;padding-top:14px;border-top:1px dashed var(--line);font:400 14px/1.5 var(--mono);color:var(--mute)}
-.langs b{color:var(--white);font-weight:500}
+/* Contact */
+.contact{min-height:92vh;display:flex;flex-direction:column;justify-content:center}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:8vh;max-width:1100px}
+.cards a{display:flex;flex-direction:column;gap:10px;padding:24px 24px 26px;border-radius:18px;text-decoration:none;background:rgba(243,238,230,.06);box-shadow:inset 0 0 0 1px rgba(243,238,230,.2);transition:background .3s,translate .3s cubic-bezier(.2,.7,.2,1)}
+.cards a:hover{background:rgba(243,238,230,.12);translate:0 -3px}
+.cards .lab{color:var(--gold2)}
+.cards b{font:400 clamp(21px,1.7vw,26px)/1.15 var(--serif);overflow-wrap:anywhere}
+body>footer{background:#0E0B12;color:#ABA4B4;padding:30px var(--pad) 96px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;font-size:14.5px;line-height:1.7}
+body>footer p{max-width:92ch}
 
-/* contact */
-.contact .md{padding:34px 34px 36px;background:linear-gradient(135deg,#1C1840,#15142B 60%)}
-.contact h2{font-size:clamp(38px,5vw,68px)}
-footer{padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));color:var(--mute);text-align:center;font:400 12.5px/1.6 var(--mono);border-top:1px solid var(--line)}
-
-@media (max-width:1100px){
-  .nav{display:none}
-  .top .btn{margin-left:auto}
-  .models{grid-template-columns:1fr 1fr}
+@media (max-width:1100px){.concerts,.albums{grid-template-columns:repeat(2,minmax(0,1fr))}.works li{grid-template-columns:70px minmax(0,1fr) 70px}.works .for{grid-column:2}.works .len{grid-row:1;grid-column:3}}
+@media (max-width:1000px){.top nav{display:none}.about .grid{grid-template-columns:minmax(0,1fr)}.cards{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){
+  body{font-size:17px}
+  .brand span{display:none}
+  .top .sound span{display:none}.top .sound{padding:10px}
+  .hero{display:flex;flex-direction:column;min-height:0}
+  .hero .copy{order:1;max-width:none;padding-top:104px}
+  .meilin{order:2}
+  .next{position:relative;left:auto;bottom:auto;order:3;max-width:none;margin:0 var(--pad) 28px}
+  .hero h1{font-size:clamp(56px,16vw,76px)}
+  .meilin{position:relative;right:auto;bottom:auto;height:auto;width:min(92vw,460px);margin:22px auto 0}
+  .concerts,.albums{grid-template-columns:minmax(0,1fr)}
+  .staff .lbl{display:none}
+  .works li{grid-template-columns:56px minmax(0,1fr);gap:4px 14px}.works .len{grid-column:2;grid-row:auto;text-align:left;font-size:18px}
 }
-@media (max-width:900px){
-  .nb{grid-template-columns:1fr;align-items:start}
-  .gen{max-width:560px}
-}
-@media (max-width:700px){
-  .kernel{display:none}
-  .cellrow{grid-template-columns:minmax(0,1fr)}
-  .lbl{text-align:left;padding:0 0 6px}
-  .intro .md{padding:22px 20px 24px}
-  .sec .md{padding:20px}
-  .models{grid-template-columns:1fr}
-  .bars li,.axis{grid-template-columns:minmax(0,1fr) 46px}
-  .bars .t{grid-column:1/-1}
-  .axis span:first-child{display:none}
-  .refs li{grid-template-columns:40px minmax(0,1fr);padding-right:16px}
-  .contact .md{padding:24px 20px 26px}
-  .df thead,.df tbody th{display:none}
-  .df tr{display:block;padding:12px 10px;border-bottom:1px solid var(--line)}
-  .df td{display:block;padding:2px 0;border:0}
-  .df td.m{white-space:normal}
-  .codeline{font-size:13.5px}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.play,.cards a,.concerts li,.staff .nh{transition:none}}
 </style>
 </head>
 <body>
-<main>
-  <header class="hero" id="top">
-    <div class="wrap top">
-      <a class="logo" href="#top" aria-label="Mei Lin Zhou, back to top">meilin<span>.ai</span></a>
-      <span class="kernel" aria-hidden="true"><i></i>Python 3 · kernel idle</span>
-      <nav aria-label="Sections"><ul class="nav">
-        <li><a href="#models" data-spy><span>[1]</span> models</a></li>
-        <li><a href="#experience" data-spy><span>[2]</span> experience</a></li>
-        <li><a href="#papers" data-spy><span>[3]</span> papers</a></li>
-        <li><a href="#toolkit" data-spy><span>[4]</span> toolkit</a></li>
-      </ul></nav>
-      <a class="btn" href="#contact">Get in touch</a>
-    </div>
-    <div class="wrap nb">
-      <div class="cellrow intro">
-        <span class="lbl" aria-hidden="true">[ ]:</span>
-        <div class="cell active md">
-          <p class="eyebrow">lead_data_scientist.md</p>
-          <h1>Mei Lin <span>Zhou</span></h1>
-          <p class="role">Lead Data Scientist · machine learning that ships</p>
-          <p class="lead">I build machine-learning systems that ship: forecasting, language models and computer vision that people use every day.</p>
-          <ul class="tags"><li>Python</li><li>PyTorch</li><li>LLMs</li><li>MLOps</li><li class="loc">Dubai · Shenzhen</li></ul>
-          <div class="ctas"><a class="btn" href="#models">See models in production</a><a class="btn ghost" href="#contact">Email Mei Lin</a></div>
-        </div>
-      </div>
-      <div class="gen" id="gen">
-        <div class="cellrow">
-          <span class="lbl" aria-hidden="true">In [1]:</span>
-          <div class="cell"><p class="codeline"><span class="f">portrait</span> = model.<span class="s">sample</span>(seed=<span class="n">2026</span>, steps=<span class="n">50</span>)</p></div>
-        </div>
-        <div class="cellrow" style="margin-top:6px">
-          <span class="lbl out" aria-hidden="true">Out[1]:</span>
-          <div class="output">
-            <div class="sample"><img src="img/mei-lin-zhou-640.webp" srcset="img/mei-lin-zhou-640.webp 640w, img/mei-lin-zhou.webp 928w" sizes="430px" width="928" height="1152" alt="Mei Lin Zhou in a black turtleneck against an indigo background" fetchpriority="high"><canvas id="cv" aria-hidden="true"></canvas></div>
-            <p class="prog" aria-hidden="true"><span id="step">step 50/50</span><span class="bar"><i id="pbar"></i></span><b id="pdone">✓ sampled</b></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+<header class="top" data-headroom="0.9">
+  <a class="brand" href="#top"><b>Mei Lin Zhou</b><span lang="zh-Hans">周美琳</span></a>
+  <div class="right">
+    <nav aria-label="Sections"><a href="#season" data-spy>Season</a><a href="#recordings" data-spy>Recordings</a><a href="#works" data-spy>Works</a><a href="#about" data-spy>About</a><a href="#contact" data-spy>Contact</a></nav>
+    <button class="sound js-sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="on" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="off" d="M17 9.5l5 5M22 9.5l-5 5"/></svg><span class="off">Sound off</span><span class="on">Sound on</span></button>
+  </div>
+</header>
 
-  <section id="models" class="sec">
-    <div class="wrap stack">
-      <div class="cellrow" data-reveal><span class="lbl" aria-hidden="true">[1]:</span><div class="cell md"><h2>Models in production</h2><p>Each project went from notebook to production with monitoring, retraining and a business owner who uses it.</p></div></div>
-      <div class="cellrow"><span class="lbl out" aria-hidden="true">Out[1]:</span>
-        <div class="models">
-          <article class="model" data-reveal>
-            <p class="codeline">forecast.evaluate(stores=<span class="n">4000</span>)</p>
-            <div class="body">
-              <span class="tag">time series · retail</span>
-              <h3>Demand forecasting for 4,000 stores</h3>
-              <p>Hierarchical forecasting with promotions and weather. Cut stock-outs and overstock across the region.</p>
-              <svg viewBox="0 0 300 110" role="img" aria-label="Illustrative chart: forecast line closely tracking actual demand">
-                <path d="M0 70 C20 60 30 40 50 48 S80 80 100 62 S130 20 150 34 S180 76 200 60 S235 30 250 40 S280 66 300 52" fill="none" stroke="#5A5690" stroke-width="2"/>
-                <path d="M0 72 C20 62 32 44 50 50 S82 78 100 64 S132 24 150 36 S182 72 200 58 S236 32 250 42 S282 64 300 54" fill="none" stroke="#5FE3CF" stroke-width="2.4" stroke-dasharray="5 4"/>
-                <text x="0" y="104" fill="#8E8BB8" font-family="Fira Code,monospace" font-size="11">— actual   - - forecast</text>
-              </svg>
-              <div class="metric"><b>8.1%</b><span>MAPE, down from 14.6%</span></div>
-            </div>
-          </article>
-          <article class="model" data-reveal style="--d:.08s">
-            <p class="codeline">assistant.eval(gold_set=<span class="s">"weekly"</span>)</p>
-            <div class="body">
-              <span class="tag">LLM · customer support</span>
-              <h3>Retrieval-augmented support assistant</h3>
-              <p>Answers agents' questions from 12,000 policy pages with citations, evaluated weekly against a gold set.</p>
-              <svg viewBox="0 0 300 110" role="img" aria-label="Illustrative chart: first-contact resolution before and after the assistant">
-                <rect x="40" y="52" width="70" height="40" rx="4" fill="#3A3768"/><rect x="170" y="38" width="70" height="54" rx="4" fill="#B6A6FF"/>
-                <text x="75" y="46" text-anchor="middle" fill="#8E8BB8" font-family="Fira Code,monospace" font-size="11">before</text><text x="205" y="32" text-anchor="middle" fill="#F6F5FF" font-family="Fira Code,monospace" font-size="11">after +34%</text>
-                <line x1="20" y1="92.5" x2="280" y2="92.5" stroke="#29274D"/>
-              </svg>
-              <div class="metric"><b>+34%</b><span>first-contact resolution</span></div>
-            </div>
-          </article>
-          <article class="model" data-reveal style="--d:.16s">
-            <p class="codeline">inspector.deploy(device=<span class="s">"edge"</span>)</p>
-            <div class="body">
-              <span class="tag">computer vision · manufacturing</span>
-              <h3>Defect detection on the production line</h3>
-              <p>Edge-deployed model inspecting 18 parts per second, with human review for low-confidence cases.</p>
-              <svg viewBox="0 0 300 110" role="img" aria-label="Illustrative grid of inspected parts with two flagged for human review">
-                <g fill="#2A2850"><rect x="10" y="10" width="34" height="34" rx="6"/><rect x="52" y="10" width="34" height="34" rx="6"/><rect x="94" y="10" width="34" height="34" rx="6"/><rect x="136" y="10" width="34" height="34" rx="6"/><rect x="178" y="10" width="34" height="34" rx="6"/><rect x="220" y="10" width="34" height="34" rx="6"/><rect x="262" y="10" width="34" height="34" rx="6"/><rect x="10" y="54" width="34" height="34" rx="6"/><rect x="52" y="54" width="34" height="34" rx="6"/><rect x="136" y="54" width="34" height="34" rx="6"/><rect x="178" y="54" width="34" height="34" rx="6"/><rect x="262" y="54" width="34" height="34" rx="6"/></g>
-                <rect x="94" y="54" width="34" height="34" rx="6" fill="none" stroke="#FF8FB8" stroke-width="2.5"/><rect x="220" y="54" width="34" height="34" rx="6" fill="none" stroke="#FFC56E" stroke-width="2.5" stroke-dasharray="4 3"/>
-                <text x="10" y="105" fill="#8E8BB8" font-family="Fira Code,monospace" font-size="11">■ defect   ┅ sent to human review</text>
-              </svg>
-              <div class="metric"><b>97.2%</b><span>recall at 0.5% false alarms</span></div>
-            </div>
-          </article>
-        </div>
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <canvas class="strings" aria-hidden="true"></canvas>
+    <a class="next" href="#season" style="text-decoration:none"><span class="lab">Next</span><p><b>12 September · Singapore.</b> Ravel's Concerto in G, opening the 2026–27 season.</p></a>
+    <img class="meilin" src="img/mei-lin-zhou/cut.webp" srcset="img/mei-lin-zhou/cut-640.webp 557w, img/mei-lin-zhou/cut.webp 928w" sizes="(max-width:760px) 90vw, 80vh" width="928" height="1088" alt="Mei Lin Zhou in a black turtleneck, with straight black hair">
+    <div class="copy">
+      <p class="kick lab">Pianist &amp; composer · Singapore</p>
+      <h1 id="h1">Mei Lin Zhou <span class="sc" lang="zh-Hans">周美琳</span></h1>
+      <p class="sub">I play for the moment after the last note, when the hall is still ringing.</p>
+      <p class="hint"><span class="js-hint">Run your cursor across the strings.</span><button class="sound js-sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="on" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="off" d="M17 9.5l5 5M22 9.5l-5 5"/></svg><span class="off">Turn sound on</span><span class="on">Sound on</span></button></p>
+    </div>
+  </section>
+
+  <section class="sec dark" id="season" aria-labelledby="s-h">
+    <p class="lab" style="color:var(--gold2)">Season 2026–27</p>
+    <h2 class="h2" id="s-h" style="margin-top:18px">Nine evenings, <em>one long phrase.</em></h2>
+    <p class="lede">Each concert is a note on the staff below. With sound on, the season plays as you scroll.</p>
+    <div class="staffwrap"><svg class="staff" aria-hidden="true"></svg></div>
+    <ol class="concerts"></ol>
+    <p class="note">Dates, cities and venues are illustrative.</p>
+  </section>
+
+  <section class="sec" id="recordings" aria-labelledby="r-h">
+    <p class="lab" style="color:var(--gold)">Recordings</p>
+    <h2 class="h2" id="r-h" style="margin-top:18px">Three albums, <em>three resonances.</em></h2>
+    <p class="lede">Each cover is a Chladni figure: the pattern sand makes on a plate that vibrates at one frequency. Press play and the plate changes its note.</p>
+    <ul class="albums"></ul>
+    <p class="note">Albums are fictional. The phrases are short original motifs synthesised in your browser.</p>
+  </section>
+
+  <section class="sec dark" id="works" aria-labelledby="w-h">
+    <p class="lab" style="color:var(--gold2)">Works</p>
+    <h2 class="h2" id="w-h" style="margin-top:18px">Music I have <em>written down.</em></h2>
+    <ol class="works">
+      <li><span class="y">2019</span><h3>Monsoon Études <em>(I–VI)</em></h3><span class="for">Solo piano</span><span class="len">24′</span></li>
+      <li><span class="y">2022</span><h3>Tide Tables</h3><span class="for">Piano and string quartet</span><span class="len">18′</span></li>
+      <li><span class="y">2023</span><h3>Lantern Songs</h3><span class="for">Soprano and piano, on poems in Mandarin and English</span><span class="len">15′</span></li>
+      <li><span class="y">2025</span><h3>Chinatown at Dawn</h3><span class="for">Chamber orchestra, a commission</span><span class="len">12′</span></li>
+    </ol>
+    <p class="note">Works, years and commissions are illustrative.</p>
+  </section>
+
+  <section class="sec about" id="about" aria-labelledby="a-h">
+    <p class="lab" style="color:var(--gold)">About</p>
+    <h2 class="h2" id="a-h" style="margin-top:18px">Slow practice, <em>free playing.</em></h2>
+    <div class="grid">
+      <blockquote><p>“I practise slowly so that on the night I can play freely. The audience should only ever hear the freedom.”</p><footer>Mei Lin Zhou</footer></blockquote>
+      <div class="bio">
+        <p>Mei Lin grew up in Singapore, where she began the piano at five on an upright that had survived three families. She trained in Singapore and in Europe, and has since played as a soloist and chamber musician across Asia and Europe.</p>
+        <p>Her own music grows out of the places she knows: the weight of monsoon air, harbour tides, lanterns in old streets. She teaches masterclasses for young pianists every season, and believes every student should compose something, however small.</p>
       </div>
     </div>
   </section>
 
-  <section id="experience" class="sec">
-    <div class="wrap stack">
-      <div class="cellrow" data-reveal><span class="lbl" aria-hidden="true">In [2]:</span><div class="cell"><p class="codeline">career = pd.read_csv(<span class="s">"experience.csv"</span>).sort_values(<span class="s">"start"</span>, ascending=<span class="k">False</span>)</p></div></div>
-      <div class="cellrow" data-reveal><span class="lbl out" aria-hidden="true">Out[2]:</span>
-        <div class="cell">
-          <div class="dfwrap">
-            <table class="df">
-              <thead><tr><th></th><th>years</th><th>role</th><th>notes</th></tr></thead>
-              <tbody>
-                <tr><th>0</th><td class="m">2022 — today</td><td><b>Lead Data Scientist</b><span>Quanta Grid AI</span></td><td>Leads a team of seven across forecasting and generative AI; owns model governance.</td></tr>
-                <tr><th>1</th><td class="m">2019 — 2022</td><td><b>Senior Data Scientist</b><span>Orbit Retail Group</span></td><td>Built the forecasting platform and the pricing experiments framework.</td></tr>
-                <tr><th>2</th><td class="m">2017 — 2019</td><td><b>Machine Learning Engineer</b><span>Shenzhen Vision Lab</span></td><td>Computer vision models for quality inspection on edge devices.</td></tr>
-                <tr><th>3</th><td class="m">2015 — 2017</td><td><b>MSc Statistics &amp; Machine Learning</b><span>Pacific Institute of Technology</span></td><td>Graduated with distinction.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="shape">4 rows × 3 columns</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="papers" class="sec">
-    <div class="wrap stack">
-      <div class="cellrow" data-reveal><span class="lbl" aria-hidden="true">[3]:</span><div class="cell md"><h2>Papers &amp; talks</h2><p>Venues and titles are illustrative for this concept site.</p></div></div>
-      <div class="cellrow" data-reveal><span class="lbl out" aria-hidden="true">Out[3]:</span>
-        <div class="cell">
-          <ol class="refs">
-            <li><div><b>Hierarchical forecasting under promotion shocks</b><span>Applied ML in Retail Workshop · 2024</span></div></li>
-            <li><div><b>Evaluating retrieval-augmented assistants with small gold sets</b><span>Industry track, NLP conference · 2025</span></div></li>
-            <li><div><b>Cheap labels, good models: active learning for visual inspection</b><span>Vision for Industry Symposium · 2019</span></div></li>
-            <li><div><b>Shipping LLM features without breaking trust</b><span class="talk">Talk · Data Leaders Forum, Dubai · 2025</span></div></li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="toolkit" class="sec">
-    <div class="wrap stack">
-      <div class="cellrow" data-reveal><span class="lbl" aria-hidden="true">In [4]:</span><div class="cell"><p class="codeline">skills.plot.barh(x=<span class="s">"years"</span>)</p></div></div>
-      <div class="cellrow"><span class="lbl out" aria-hidden="true">Out[4]:</span>
-        <div class="cell chart" data-reveal>
-          <ul class="bars">
-            <li style="--v:9"><span class="t">Python &amp; PyTorch</span><span class="b"><i></i></span><span class="v">9 yrs</span></li>
-            <li style="--v:3"><span class="t">LLM evaluation &amp; RAG</span><span class="b"><i></i></span><span class="v">3 yrs</span></li>
-            <li style="--v:7"><span class="t">Forecasting &amp; causal inference</span><span class="b"><i></i></span><span class="v">7 yrs</span></li>
-            <li style="--v:8"><span class="t">Spark, SQL &amp; dbt</span><span class="b"><i></i></span><span class="v">8 yrs</span></li>
-            <li style="--v:5"><span class="t">MLOps: MLflow, Kubeflow</span><span class="b"><i></i></span><span class="v">5 yrs</span></li>
-          </ul>
-          <div class="axis" aria-hidden="true"><span></span><span><i>0</i><i>5</i><i>10 yrs</i></span><span></span></div>
-          <p class="langs"><b>languages</b> = ["Mandarin", "English", "Arabic (basic)"]</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="sec contact">
-    <div class="wrap">
-      <div class="cellrow" data-reveal><span class="lbl" aria-hidden="true">[5]:</span>
-        <div class="cell md">
-          <h2>Have a problem worth modelling?</h2>
-          <p>Open to head of data science and AI lead roles, and to advising teams moving models into production.</p>
-          <div class="ctas"><a class="btn" href="#contact" data-demo>Email Mei Lin</a><a class="btn ghost" href="#contact" data-demo>GitHub</a><a class="btn ghost" href="#contact" data-demo>Google Scholar</a><a class="btn ghost" href="#contact" data-demo>CV</a></div>
-        </div>
-      </div>
+  <section class="sec dark contact" id="contact" aria-labelledby="c-h">
+    <p class="lab" style="color:var(--gold2)">Contact</p>
+    <h2 class="h2" id="c-h" style="margin-top:18px">For concerts, <em>commissions and teaching.</em></h2>
+    <div class="cards">
+      <a href="mailto:mgmt@meilinzhou.example" data-demo><span class="lab">Management</span><b>mgmt@meilinzhou.example</b></a>
+      <a href="#" data-demo><span class="lab">Press kit</span><b>Biographies and photos</b></a>
+      <a href="#" data-demo><span class="lab">Scores</span><b>Perusal scores on request</b></a>
     </div>
   </section>
 </main>
-<footer>Concept site designed by Zenith Dubai CV · Mei Lin Zhou is a fictional person; organisations, papers, figures and links are illustrative.</footer>
+
+<footer>
+  <p>Mei Lin Zhou is fictional and this is a concept website. The portrait was generated with AI. Concerts, venues, recordings, works and the quote are illustrative. Sounds are synthesised in your browser and only play after you turn them on.</p>
+  <p>A concept website by Zenith Dubai CV.</p>
+</footer>
+
 <script>
-(function () {
-  // "Sampling" the portrait: a point cloud that converges out of noise, then resolves
-  // into the photograph. Skipped with reduced motion, ?static, or no canvas support.
-  var Z = window.ZC || {}, gen = document.getElementById("gen"), cv = document.getElementById("cv");
-  if (!gen || !cv || !cv.getContext || Z.reduce || Z.still) return;
-  var img = gen.querySelector("img"), step = document.getElementById("step"), bar = document.getElementById("pbar"), done = document.getElementById("pdone");
-  var src = new Image(); src.src = "img/mei-lin-zhou-640.webp";
-  function start() {
-    var box = cv.parentNode.getBoundingClientRect(); if (!box.width) return;
-    var dpr = Math.min(2, window.devicePixelRatio || 1), W = Math.round(box.width * dpr), H = Math.round(box.height * dpr);
-    cv.width = W; cv.height = H;
-    var cols = 96, rows = Math.round(cols * H / W), off = document.createElement("canvas");
-    off.width = cols; off.height = rows;
-    var o = off.getContext("2d"); o.drawImage(src, 0, 0, cols, rows);
-    var data = o.getImageData(0, 0, cols, rows).data, cw = W / cols, ch = H / rows, pts = [];
-    for (var y = 0; y < rows; y++) for (var x = 0; x < cols; x++) {
-      var i = (y * cols + x) * 4, l = (0.3 * data[i] + 0.59 * data[i + 1] + 0.11 * data[i + 2]) / 255;
-      var a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random()) * Math.max(W, H) * 0.7;
-      pts.push({ tx: (x + .5) * cw, ty: (y + .5) * ch, sx: W / 2 + Math.cos(a) * r, sy: H / 2 + Math.sin(a) * r, s: 0.35 + l * 0.9, b: Math.min(7, Math.floor(l * 8)), j: Math.random() * 6.28 });
-    }
-    var cols8 = ["#2B2266", "#3D3190", "#5543C0", "#6F5BE6", "#8D7CF5", "#A99CFF", "#CBC3FF", "#ECE9FF"];
-    var ctx = cv.getContext("2d"), t0 = 0, D = 2600;
-    gen.classList.add("genning"); bar.style.transform = "scaleX(0)"; done.textContent = "";
-    function frame(ts) {
-      if (!t0) t0 = ts;
-      var t = Math.min(1, (ts - t0) / D), e = t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, n = (1 - e) * 26 * dpr;
-      ctx.clearRect(0, 0, W, H);
-      for (var b = 0; b < 8; b++) {
-        ctx.fillStyle = cols8[b];
-        for (var k = 0; k < pts.length; k++) {
-          var p = pts[k]; if (p.b !== b) continue;
-          var px = p.sx + (p.tx - p.sx) * e + Math.cos(p.j + ts / 300) * n, py = p.sy + (p.ty - p.sy) * e + Math.sin(p.j + ts / 260) * n, sz = p.s * cw;
-          ctx.fillRect(px - sz / 2, py - sz / 2, sz, sz);
-        }
-      }
-      step.textContent = "step " + Math.max(1, Math.round(t * 50)) + "/50";
-      bar.style.transform = "scaleX(" + t + ")";
-      if (t < 1) requestAnimationFrame(frame);
-      else setTimeout(function () { gen.classList.add("done"); done.textContent = "✓ sampled"; }, 250);
-    }
-    requestAnimationFrame(frame);
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC;
+  var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, a, p){ var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+
+  /* ================= Sound: a small piano-like synth, off until asked ================= */
+  var AC = null, master = null, soundOn = false, voices = 0, lastNote = 0;
+  function audio(){
+    if (AC) return AC;
+    var C = window.AudioContext || window.webkitAudioContext; if (!C) return null;
+    AC = new C(); master = AC.createGain(); master.gain.value = .28;
+    var len = Math.round(AC.sampleRate * 2.8), ir = AC.createBuffer(2, len, AC.sampleRate);
+    for (var ch = 0; ch < 2; ch++){ var d = ir.getChannelData(ch); for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.4); }
+    var verb = AC.createConvolver(); verb.buffer = ir; var wet = AC.createGain(); wet.gain.value = .32;
+    master.connect(AC.destination); master.connect(verb); verb.connect(wet); wet.connect(AC.destination);
+    return AC;
   }
-  var ready = src.decode ? src.decode() : new Promise(function (r) { src.onload = r; });
-  function go() { ready.then(start, function () {}); }
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); go(); } }, { threshold: 0.35 });
-    io.observe(cv.parentNode);
-  } else go();
-})();
+  function note(freq, vel, when){
+    if (!soundOn || !AC || voices > 18) return;
+    var now = AC.currentTime, t = Math.max(now, when || now);
+    if (!when && now - lastNote < .035) return; lastNote = now;
+    var out = AC.createGain(); out.connect(master); voices++;
+    out.gain.setValueAtTime(0, t); out.gain.linearRampToValueAtTime(vel, t + .005); out.gain.exponentialRampToValueAtTime(vel * .35, t + .3); out.gain.exponentialRampToValueAtTime(.0005, t + 3.4);
+    [1, .42, .22, .12, .07, .04].forEach(function(amp, i){
+      var n = i + 1, o = AC.createOscillator(), g = AC.createGain();
+      o.frequency.value = freq * n * Math.sqrt(1 + .00045 * n * n);
+      g.gain.setValueAtTime(amp, t); g.gain.exponentialRampToValueAtTime(.0001, t + 3.2 / (1 + i * .9));
+      o.connect(g); g.connect(out); o.start(t); o.stop(t + 3.5);
+    });
+    setTimeout(function(){ voices--; }, (t - now + 3.5) * 1000);
+  }
+  var hz = function(midi){ return 440 * Math.pow(2, (midi - 69) / 12); };
+  var sndBtns = $$(".js-sound");
+  sndBtns.forEach(function(b){ b.addEventListener("click", function(){
+    soundOn = !soundOn; if (soundOn){ audio(); if (AC && AC.state === "suspended") AC.resume(); [62, 66, 69, 74].forEach(function(m, i){ note(hz(m), .22, AC.currentTime + i * .07); }); }
+    sndBtns.forEach(function(x){ x.setAttribute("aria-pressed", soundOn ? "true" : "false"); });
+  }); });
+
+  /* ================= Hero: piano strings you can run your hand across ================= */
+  var hero = $(".hero"), cv = $(".strings"), cx = cv.getContext("2d"), S = [], W = 0, H = 0, DPR = 1;
+  // D major pentatonic from D2 to D7: low, long, copper-wound strings on the left; short steel ones on the right
+  var PENTA = [0, 2, 4, 7, 9], MIDI = []; for (var o = 0; o < 5; o++) PENTA.forEach(function(p){ MIDI.push(38 + o * 12 + p); }); MIDI.push(38 + 60);
+  function build(){
+    DPR = Math.min(devicePixelRatio || 1, 1.75); W = hero.clientWidth; H = hero.clientHeight; cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+    // the strings stand behind her, clear of the words: the right half on wide screens, the lower part on phones
+    var mob = W <= 760, n = MIDI.length; S = [];
+    var img = $(".meilin").getBoundingClientRect(), hr = hero.getBoundingClientRect(), yT = mob ? Math.max(0, img.top - hr.top - 30) : 0;
+    var fx0 = mob ? .03 : .47, fx1 = mob ? .97 : .985;
+    for (var i = 0; i < n; i++){
+      var u = i / (n - 1), x = W * (fx0 + (fx1 - fx0) * u);
+      var yB = mob ? img.bottom - hr.top : H;
+      var top = yT + (yB - yT) * (.07 + .05 * u), bot = yT + (yB - yT) * (.97 - .44 * Math.pow(u, 1.2));
+      var group = u < .25 ? 1 : u < .6 ? 2 : 3, gap = mob ? 2.2 : 3.2;
+      S.push({x:x, top:top, bot:bot, midi:MIDI[i], group:group, gap:gap, w:(u < .25 ? 2.4 - u * 3 : 1.1 - u * .5), wound:u < .25, a:0, t:0, f:4 + u * 18, ph:0});
+    }
+  }
+  function pluck(s, amp){
+    if (s.a > amp * .6 && performance.now() - s.t < 120) return;
+    s.a = Math.min(18, amp); s.t = performance.now(); s.ph = Math.random() * 6;
+    note(hz(s.midi), clamp(.12 + amp / 60, .12, .4));
+  }
+  var last = null;
+  cv.addEventListener("pointermove", function(e){
+    var r = cv.getBoundingClientRect(), p = {x:e.clientX - r.left, y:e.clientY - r.top, t:performance.now()};
+    if (last){
+      var x0 = Math.min(last.x, p.x), x1 = Math.max(last.x, p.x), sp = Math.abs(p.x - last.x) / Math.max(8, p.t - last.t);
+      S.forEach(function(s){ if (s.x >= x0 && s.x <= x1 && p.y > s.top && p.y < s.bot) pluck(s, 4 + sp * 9); });
+    }
+    last = p;
+  });
+  cv.addEventListener("pointerleave", function(){ last = null; });
+  cv.addEventListener("pointerdown", function(e){ var r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, best = null, bd = 18; S.forEach(function(s){ var d = Math.abs(s.x - x); if (d < bd && y > s.top && y < s.bot){ bd = d; best = s; } }); if (best) pluck(best, 10); last = {x:x, y:y, t:performance.now()}; });
+  function draw(now){
+    cx.setTransform(DPR, 0, 0, DPR, 0, 0); cx.clearRect(0, 0, W, H);
+    // the bridge and the line of tuning pins
+    cx.lineWidth = 1; cx.strokeStyle = "rgba(168,100,58,.35)";
+    cx.beginPath(); S.forEach(function(s, i){ i ? cx.lineTo(s.x, s.bot) : cx.moveTo(s.x, s.bot); }); cx.stroke();
+    S.forEach(function(s){
+      var age = (now - s.t) / 1000, amp = ZC.motion ? s.a * Math.exp(-age * 1.6) : 0;
+      if (amp < .05) amp = 0;
+      for (var g = 0; g < s.group; g++){
+        var x = s.x + (g - (s.group - 1) / 2) * s.gap, my = (s.top + s.bot) / 2;
+        var off = amp ? amp * Math.sin(age * s.f * 6.283 + s.ph + g) : 0;
+        if (amp){
+          // the blur envelope of a fast-vibrating string
+          cx.beginPath(); cx.moveTo(x, s.top); cx.quadraticCurveTo(x + amp * 2, my, x, s.bot); cx.quadraticCurveTo(x - amp * 2, my, x, s.top);
+          cx.fillStyle = s.wound ? "rgba(168,100,58,.10)" : "rgba(184,145,63,.10)"; cx.fill();
+        }
+        cx.beginPath(); cx.moveTo(x, s.top); cx.quadraticCurveTo(x + off * 2, my, x, s.bot);
+        cx.lineWidth = s.w; cx.strokeStyle = s.wound ? "rgba(152,88,50," + (amp ? .95 : .6) + ")" : "rgba(170,132,58," + (amp ? .95 : .55) + ")"; cx.stroke();
+        cx.beginPath(); cx.arc(x, s.top, s.group > 1 ? 1.6 : 2.4, 0, 6.283); cx.fillStyle = "rgba(110,100,92,.6)"; cx.fill();
+      }
+      // a ring of resonance where the string was struck
+      if (amp > .5 && ZC.motion){ var rr = 6 + age * 90; cx.beginPath(); cx.arc(s.x, (s.top + s.bot) / 2, rr, 0, 6.283); cx.strokeStyle = "rgba(184,145,63," + clamp(.35 - age * .5, 0, .35) + ")"; cx.lineWidth = 1; cx.stroke(); }
+    });
+  }
+  var heroOn = true, running = false;
+  function loop(now){ if (heroOn) draw(now); requestAnimationFrame(loop); }
+  ZC.visible(hero, function(v){ heroOn = v; });
+  addEventListener("resize", function(){ build(); draw(performance.now()); });
+  if (matchMedia("(hover: none)").matches) $(".js-hint").textContent = "Swipe sideways across the strings.";
+
+  /* ================= Season: notes on a staff ================= */
+  var SEASON = [
+    {d:"12 Sep 2026", c:"Singapore", v:"Concert hall, season opening", p:"Ravel, Concerto in G, with orchestra", m:74},
+    {d:"3 Oct 2026", c:"Hong Kong", v:"Recital hall", p:"Debussy Préludes, Book I · her Monsoon Études", m:71},
+    {d:"21 Nov 2026", c:"Vienna", v:"Chamber hall", p:"Tide Tables, with a string quartet", m:69},
+    {d:"9 Dec 2026", c:"London", v:"Recital room, 500 seats", p:"Bach Partita No. 2 · Schumann Kinderszenen", m:66},
+    {d:"24 Jan 2027", c:"Tokyo", v:"Concert hall", p:"Chopin, Concerto No. 2, with orchestra", m:69},
+    {d:"14 Feb 2027", c:"Seoul", v:"Recital hall", p:"Solo recital: water and light", m:74},
+    {d:"20 Mar 2027", c:"Dubai", v:"Opera house", p:"Rachmaninoff, Rhapsody on a Theme of Paganini", m:76},
+    {d:"8 May 2027", c:"Paris", v:"Salle de concert", p:"Lantern Songs, with soprano", m:71},
+    {d:"19 Jun 2027", c:"Singapore", v:"Concert hall, season close", p:"Chinatown at Dawn, premiere", m:74}
+  ];
+  var conc = $(".concerts");
+  SEASON.forEach(function(s, i){ var li = document.createElement("li"); li.setAttribute("data-i", i); li.innerHTML = '<span class="d">' + s.d + '</span><h3>' + s.c + ' · <em>' + s.v + '</em></h3><p>' + s.p + '</p>'; conc.appendChild(li); });
+  var staff = $(".staff"), NOTES = [];
+  // staff positions: midi → line/space, treble clef, E4 (64) on the bottom line
+  var DIAT = {64:0, 66:1, 67:2, 69:3, 71:4, 72:5, 74:6, 76:7, 78:8, 79:9, 81:10};
+  function buildStaff(){
+    var w = staff.clientWidth, h = staff.clientHeight; staff.setAttribute("viewBox", "0 0 " + w + " " + h); staff.innerHTML = ""; NOTES = [];
+    var gap = Math.min(18, h / 9), y0 = h * .62, lines = [];
+    for (var i = 0; i < 5; i++){ var y = y0 - i * gap; lines.push(el("line", {class:"ln", x1:0, x2:w, y1:y, y2:y}, staff)); }
+    // a light treble clef drawn as a single curve
+    el("path", {class:"clef", d:"M34 " + (y0 + gap * 1.6) + " C 24 " + (y0 + gap * 2.4) + ", 14 " + (y0 + gap * .4) + ", 30 " + (y0 - gap * .2) + " C 46 " + (y0 - gap * .8) + ", 50 " + (y0 - gap * 2.4) + ", 36 " + (y0 - gap * 3.2) + " C 24 " + (y0 - gap * 4) + ", 30 " + (y0 - gap * 5.2) + ", 38 " + (y0 - gap * 5) + " L 30 " + (y0 + gap * 1.2) + " C 28 " + (y0 + gap * 2) + ", 40 " + (y0 + gap * 2.2) + ", 42 " + (y0 + gap * 1.4)}, staff);
+    el("line", {class:"bar", x1:w - 1, x2:w - 1, y1:y0, y2:y0 - 4 * gap}, staff);
+    var x0 = 90, span = w - x0 - 40;
+    SEASON.forEach(function(s, i){
+      var x = x0 + span * (i + .5) / SEASON.length, step = DIAT[s.m] != null ? DIAT[s.m] : 3, y = y0 - step * gap / 2;
+      var g = el("g", {class:"n", "data-i":i}, staff);
+      el("circle", {class:"ring", cx:x, cy:y, r:gap * .7}, g);
+      el("ellipse", {class:"nh", cx:x, cy:y, rx:gap * .62, ry:gap * .44, transform:"rotate(-22 " + x + " " + y + ")"}, g);
+      var up = step < 4; el("line", {class:"stem", x1:up ? x + gap * .56 : x - gap * .56, x2:up ? x + gap * .56 : x - gap * .56, y1:y, y2:up ? y - gap * 3.4 : y + gap * 3.4}, g);
+      var t = el("text", {class:"lbl", x:x, y:y0 + gap * 2.6, "text-anchor":"middle"}, g); t.textContent = s.c.toUpperCase();
+      NOTES.push({g:g, x:x, y:y, s:s});
+    });
+    return lines;
+  }
+  var lit = -1, conLis = $$(".concerts li");
+  function light(i, ring){
+    NOTES.forEach(function(n, j){ n.g.classList.toggle("on", j === i); }); conLis.forEach(function(li, j){ li.classList.toggle("on", j === i); });
+    if (ring && i >= 0 && window.gsap && ZC.motion){ var r = $(".ring", NOTES[i].g); gsap.fromTo(r, {attr:{r:8}, opacity:.9}, {attr:{r:60}, opacity:0, duration:1.4, ease:"power2.out"}); }
+  }
+  conLis.forEach(function(li, i){ li.addEventListener("pointerenter", function(){ light(i, true); note(hz(SEASON[i].m), .3); }); });
+  $(".concerts").addEventListener("pointerleave", function(){ light(lit, false); });
+
+  /* ================= Recordings: Chladni covers ================= */
+  var ALB = [
+    {t:"Water Studies", y:"2021", k:"Debussy · Ravel", tr:"14 tracks · 61 min", p:"Reflections, fountains and a drowned cathedral: the French piano at its most liquid.", n:3, m:5, pal:["#1C2A3A", "#A9C7D6"], fg:"#EAF3F7", motif:[74, 76, 81, 79, 76, 74, 71, 74]},
+    {t:"Monsoon Études", y:"2023", k:"Mei Lin Zhou", tr:"6 études · 24 min", p:"Her own études on the weather of her childhood: heavy air, sudden rain, the hour after.", n:2, m:7, pal:["#2A2033", "#D9B66B"], fg:"#F7EEDB", motif:[62, 69, 74, 76, 74, 69, 71, 69]},
+    {t:"Bach in the Small Hours", y:"2025", k:"J. S. Bach", tr:"2 partitas · 48 min", p:"Two partitas recorded late at night, slowly, in an empty hall.", n:4, m:6, pal:["#EDE6DA", "#3A3035"], fg:"#2A2228", motif:[74, 73, 74, 69, 71, 67, 69, 66]}
+  ];
+  var albums = $(".albums"), covers = [];
+  ALB.forEach(function(a, i){
+    var li = document.createElement("li"); li.className = "album";
+    li.innerHTML = '<div class="cover" style="--fg:' + a.fg + '"><canvas width="480" height="480" aria-hidden="true"></canvas><i>' + a.k + '</i><b>' + a.t + '</b></div><h3>' + a.t + '</h3><p class="meta">' + a.y + ' · ' + a.tr + '</p><p>' + a.p + '</p><button class="play" type="button" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4 L16 10 L6 16 Z" fill="currentColor"/></svg>Play a phrase</button>';
+    albums.appendChild(li);
+    var c = $("canvas", li); covers.push({c:c, a:a, n:a.n, m:a.m});
+    chladni(covers[i], a.n, a.m);
+    $(".play", li).addEventListener("click", function(){ playPhrase(i, this); });
+  });
+  function hex(h){ return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
+  // sand gathers where the plate does not move: |cos(nπx)cos(mπy) − cos(mπx)cos(nπy)| ≈ 0
+  function chladni(cv2, n, m){
+    var c = cv2.c, ctx = c.getContext("2d"), S2 = c.width, img = ctx.createImageData(S2, S2), bg = hex(cv2.a.pal[0]), fg = hex(cv2.a.pal[1]), d = img.data;
+    for (var y = 0; y < S2; y++) for (var x = 0; x < S2; x++){
+      var u = x / S2, v = y / S2, val = Math.cos(n * Math.PI * u) * Math.cos(m * Math.PI * v) - Math.cos(m * Math.PI * u) * Math.cos(n * Math.PI * v);
+      var s = Math.exp(-Math.abs(val) * 26), grain = ((x * 7919 + y * 104729) % 97) / 97 * .25;
+      var k = clamp(s * 1.1 - grain * .4, 0, 1), o = (y * S2 + x) * 4;
+      d[o] = bg[0] + (fg[0] - bg[0]) * k; d[o + 1] = bg[1] + (fg[1] - bg[1]) * k; d[o + 2] = bg[2] + (fg[2] - bg[2]) * k; d[o + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+  }
+  var playing = -1, timer = null;
+  function playPhrase(i, btn){
+    var a = covers[i];
+    if (playing === i){ stopPhrase(); return; }
+    stopPhrase(); playing = i; btn.setAttribute("aria-pressed", "true");
+    if (!soundOn){ soundOn = true; audio(); if (AC && AC.state === "suspended") AC.resume(); sndBtns.forEach(function(x){ x.setAttribute("aria-pressed", "true"); }); }
+    var k = 0, NM = [[a.a.n, a.a.m], [a.a.n + 1, a.a.m], [a.a.n + 1, a.a.m + 2], [a.a.n, a.a.m + 1], [a.a.n + 2, a.a.m + 1], [a.a.n, a.a.m]];
+    var step = function(){
+      if (playing !== i) return;
+      if (k >= a.a.motif.length){ chladni(a, a.a.n, a.a.m); stopPhrase(); return; }
+      note(hz(a.a.motif[k]), .32);
+      var nm = NM[k % NM.length]; if (ZC.motion) chladni(a, nm[0], nm[1]);
+      k++; timer = setTimeout(step, k % 4 === 0 ? 620 : 380);
+    };
+    step();
+  }
+  function stopPhrase(){ clearTimeout(timer); if (playing >= 0){ var b = $$(".play")[playing]; b && b.setAttribute("aria-pressed", "false"); chladni(covers[playing], covers[playing].a.n, covers[playing].a.m); } playing = -1; }
+
+  /* ================= Boot ================= */
+  build();
+  addEventListener("load", function(){
+    build(); buildStaff(); requestAnimationFrame(loop);
+    if (!ZC.motion || !window.gsap){ light(-1); return; }
+    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
+    ZC.smooth();
+    document.fonts.ready.then(function(){
+      // an opening glissando runs across the strings (silent unless sound is on)
+      var g = {i:0}; gsap.to(g, {i:S.length - 1, duration:1.6, ease:"power1.inOut", delay:.6, onUpdate:function(){ var s = S[Math.round(g.i)]; if (s && s.a < 1) { s.a = 7; s.t = performance.now(); s.ph = Math.random() * 6; } }});
+      gsap.from(".meilin", {opacity:0, x:40, duration:1.6, ease:"expo.out", delay:.2});
+      var h = SplitText.create(".hero h1", {type:"words,chars", charsClass:"ch"});
+      gsap.from(h.chars, {opacity:0, yPercent:40, duration:1, stagger:.035, ease:"expo.out", delay:.4});
+      gsap.from(".hero .kick, .hero .sub, .hero .hint", {opacity:0, y:16, duration:1, stagger:.1, ease:"expo.out", delay:.9});
+      $$(".h2").forEach(function(h2){ var s = SplitText.create(h2, {type:"lines", mask:"lines"}); gsap.from(s.lines, {yPercent:105, duration:1.1, stagger:.09, ease:"expo.out", scrollTrigger:{trigger:h2, start:"top 86%"}}); });
+      // the staff draws as the reader moves through the season; each note rings (and sounds) as the line reaches it
+      var lines = $$(".staff .ln");
+      var st = ScrollTrigger.create({trigger:".staffwrap", start:"top 80%", end:"bottom 35%", scrub:.4, onUpdate:function(self){
+        var p = self.progress; lines.forEach(function(l){ gsap.set(l, {drawSVG:"0% " + (p * 100) + "%"}); });
+        var w = staff.clientWidth, reach = p * w, idx = -1; NOTES.forEach(function(n, j){ n.g.style.opacity = n.x <= reach + 4 ? 1 : .12; if (n.x <= reach + 4) idx = j; });
+        if (idx !== lit){ if (idx > lit && self.direction > 0) note(hz(SEASON[idx].m), .3); lit = idx; light(idx, true); }
+      }});
+      gsap.from(".concerts li", {opacity:0, y:20, duration:.8, stagger:.06, ease:"expo.out", scrollTrigger:{trigger:".concerts", start:"top 85%"}});
+      gsap.from(".album", {opacity:0, y:40, duration:1, stagger:.12, ease:"expo.out", scrollTrigger:{trigger:".albums", start:"top 82%"}});
+      gsap.from(".works li", {opacity:0, y:24, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:".works", start:"top 85%"}});
+      gsap.from(".cards a", {opacity:0, y:24, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:".cards", start:"top 90%"}});
+      addEventListener("resize", function(){ buildStaff(); st.refresh(); });
+      setTimeout(function(){ ScrollTrigger.refresh(); }, 400);
+    });
+  });
+});
 </script>
 </body>
 </html>
