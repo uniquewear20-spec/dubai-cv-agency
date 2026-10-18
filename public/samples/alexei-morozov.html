@@ -3,322 +3,462 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0B0C0E">
-<title>Alexei Morozov · Supply Chain Director — Concept site by Zenith Dubai CV</title>
-<meta name="description" content="Concept portfolio website for a fictional supply chain director, designed by Zenith Dubai CV.">
-<link rel="preload" href="img/alexei-morozov-640.webp" as="image" type="image/webp">
-<link rel="preload" href="fonts/barlow-condensed-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css">
+<title>Alexei Morozov — Founder &amp; CEO, logistics software · Concept site</title>
+<meta name="description" content="Alexei Morozov, founder and CEO of a logistics software company, Rotterdam and Dubai. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A1A2B">
+<link rel="preload" href="fonts/ibm-plex-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" imagesrcset="img/alexei-morozov/cut-700.webp 646w, img/alexei-morozov/cut.webp 928w" imagesizes="(max-width:760px) 70vw, 62vh" fetchpriority="high">
 <script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
 <style>
-/* Concept: departures. A split-flap board spells out his name and runs his KPIs
-   like scheduled departures, all on time. The portrait is the "now boarding" gate
-   screen. Below: the network as a schematic route map, projects as waybills and
-   the career as a route with three stops. */
+@font-face{font-family:"Plex Sans";src:url(fonts/ibm-plex-sans-latin-wght-normal.woff2) format("woff2");font-weight:100 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
 :root{
-  --black:#0B0C0E; --board:#111316; --tile:#1B1E22; --tile2:#24282D; --flap:#F3EBCF; --dim:#8D949B; --green:#3DDC84; --amber:#F5B642; --orange:#FF7A1A; --line:rgba(243,235,207,.12);
-  --paper:#EEEBE3; --ink:#15171A;
-  --flapf:"Barlow Condensed","Arial Narrow",sans-serif; --head:"Chakra Petch","Helvetica Neue",Arial,sans-serif; --sans:"Rubik","Helvetica Neue",Arial,sans-serif;
-  --zc-bg:#F5B642; --zc-fg:#0B0C0E; --zc-dot:#0B0C0E;
+  --navy:#0A1A2B;--deep:#07121F;--panel:#0F2439;--ink:#E8EEF4;--grey:#8FA3B8;--line:rgba(232,238,244,.14);--orange:#FF6B1A;--orange2:#FF8F52;--sky:#7FB2E5;
+  --sans:"Plex Sans","Helvetica Neue",Arial,sans-serif;--mono:"Plex Mono",ui-monospace,Menlo,monospace;
+  --pad:clamp(18px,4.2vw,68px);
+  --zc-bg:#FF6B1A;--zc-fg:#07121F;--zc-dot:#07121F;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--black);color:#D9DCDF;font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;height:auto;display:block}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
-.wrap{max-width:1280px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--navy)}
+body{background:var(--navy);color:var(--ink);font:400 17px/1.62 var(--sans);-webkit-font-smoothing:antialiased}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+main{position:relative;overflow-x:clip}
+.mono{font:500 11.5px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* ---------- Board (hero) ---------- */
-.hero{min-height:max(700px,100svh);display:flex;flex-direction:column;background:radial-gradient(70% 60% at 30% 0%,#1A1D22 0,transparent 70%),var(--black)}
-.hero>.wrap{width:100%}
-.bar{display:flex;align-items:center;gap:22px;padding-top:max(16px,env(safe-area-inset-top,0px));padding-bottom:14px;border-bottom:1px solid var(--line);font:500 13px/1 var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
-.logo{font:700 20px/1 var(--head);letter-spacing:.04em;color:#fff;text-decoration:none}
-.logo span{color:var(--amber)}
-.status{display:inline-flex;align-items:center;gap:8px}
-.status i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
-.bar nav{margin-left:auto}
-.bar ul{display:flex;gap:4px;margin:0;padding:0;list-style:none}
-.bar ul a{display:block;padding:8px 11px;border-radius:4px;text-decoration:none;color:var(--dim)}
-.bar ul a:hover,.bar ul a[aria-current]{background:var(--tile);color:var(--flap)}
-.clock b{color:var(--flap);font-weight:600}
-.term{flex:1;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,.85fr);gap:clamp(18px,2.6vw,36px);align-items:center;padding-top:clamp(18px,3.4vh,36px);padding-bottom:clamp(22px,4vh,40px)}
-.board{padding:clamp(16px,2vw,26px);border-radius:10px;background:var(--board);box-shadow:inset 0 0 0 1px #24282D,0 30px 60px -30px #000}
-.bh{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:0 0 14px;font:700 clamp(15px,1.3vw,19px)/1 var(--head);letter-spacing:.24em;text-transform:uppercase;color:var(--amber)}
-.bh span:last-child{color:var(--dim);letter-spacing:.12em;font-size:13px}
-.flaps{display:flex;flex-wrap:wrap;gap:4px;margin:0}
-.f{position:relative;display:inline-grid;place-items:center;width:.7em;height:1.06em;border-radius:.06em;background:linear-gradient(180deg,var(--tile2) 0 49.4%,#0B0C0E 49.4% 50.6%,var(--tile) 50.6%);color:var(--flap);font-family:var(--flapf);font-weight:600;line-height:1;text-transform:uppercase;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 2px 2px rgba(0,0,0,.5)}
-.f.sp{background:linear-gradient(180deg,#16191C 0 49.4%,#0B0C0E 49.4% 50.6%,#131518 50.6%)}
-h1{margin:0}
-h1 .flaps{font-size:clamp(46px,6.6vw,104px);gap:.06em}
-h1 .flaps+.flaps{margin-top:.08em}
-.role{margin:16px 0 0;font-size:clamp(17px,1.6vw,24px)}
-.role .flaps{gap:3px}
-.rows{margin:22px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
-.rows li{display:grid;grid-template-columns:76px minmax(0,1.3fr) minmax(0,.9fr) minmax(0,1.2fr);gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font:500 15px/1.2 var(--flapf);letter-spacing:.06em;text-transform:uppercase}
-.rows .hd{padding:6px 0;font:600 11.5px/1 var(--head);letter-spacing:.16em;color:var(--dim)}
-.rows .k{color:var(--dim)}
-.rows .d{color:var(--flap);font-size:clamp(17px,1.5vw,21px);font-weight:600}
-.rows .v{color:#fff;font-size:clamp(22px,2vw,30px);font-weight:700;letter-spacing:.02em}
-.rows .s{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-weight:600}
-.rows .s::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
-.gate{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;background:var(--board);box-shadow:inset 0 0 0 1px #24282D,0 30px 60px -30px #000}
-.gate .gh{display:flex;justify-content:space-between;padding:12px 16px;background:var(--amber);color:var(--black);font:700 14px/1 var(--head);letter-spacing:.14em;text-transform:uppercase}
-.gate .ph{aspect-ratio:4/4.4;overflow:hidden;background:#2A2E33}
-.gate .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
-.gate .gb{padding:16px 18px 20px}
-.gate .gb p{margin:0;color:#C9CDD1;font-size:15.5px;line-height:1.55}
-.gate .gb .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 18px;border-radius:4px;background:var(--amber);color:var(--black);text-decoration:none;font:700 13.5px/1 var(--head);letter-spacing:.1em;text-transform:uppercase}
-.btn:hover{background:#fff}
-.btn.ghost{background:transparent;color:var(--flap);box-shadow:inset 0 0 0 1.5px rgba(243,235,207,.4)}
-.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--amber);color:var(--amber)}
+/* Header */
+.top{position:fixed;inset-inline:var(--pad);top:20px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:20px;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:600 15px/1 var(--sans);padding:8px 12px 8px 10px;margin-inline-start:-10px;border-radius:7px;background:rgba(7,18,31,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.brand i{width:22px;height:14px;background:var(--orange);clip-path:polygon(0 0,100% 0,100% 100%,0 100%);box-shadow:inset 0 0 0 2px var(--orange);position:relative}
+.brand i::after{content:"";position:absolute;inset:3px 4px;background:repeating-linear-gradient(90deg,var(--deep) 0 1.5px,transparent 1.5px 4px)}
+.top nav{display:flex;gap:4px;padding:4px;border-radius:8px;background:rgba(7,18,31,.7);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line)}
+.top nav a{text-decoration:none;padding:7px 12px;border-radius:5px;color:var(--grey)}
+.top nav a:hover{color:var(--ink)}
+.top nav a[aria-current]{background:var(--orange);color:var(--deep)}
 
-/* ---------- Sections ---------- */
-section{padding:clamp(84px,10vw,124px) 0}
-.eyebrow{margin:0 0 12px;font:700 13px/1.4 var(--head);letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
-h2{margin:0;font:700 clamp(36px,4.4vw,62px)/1 var(--head);letter-spacing:-.01em;color:#fff;text-transform:uppercase}
-.sub{margin:16px 0 0;max-width:58ch;color:#AEB4BA}
+/* HERO — a dotted world, the lanes that cross it, and the containers that never stop */
+.hero{position:relative;height:100svh;min-height:680px;overflow:hidden;background:radial-gradient(70% 60% at 55% 45%,#0F2640 0%,var(--navy) 60%,var(--deep) 100%)}
+#map{position:absolute;inset:0;width:100%;height:100%}
+.hero .head{position:absolute;z-index:3;inset-inline-start:var(--pad);top:clamp(92px,13vh,130px);max-width:640px;pointer-events:none}
+.kick{color:var(--orange)}
+.hero h1{font:600 clamp(48px,5.6vw,96px)/.98 var(--sans);letter-spacing:-.035em;margin:16px 0 18px;text-wrap:balance}
+.hero .name{font:500 clamp(18px,1.5vw,22px)/1.4 var(--sans);color:var(--grey)}
+.hero .name b{color:var(--ink);font-weight:600}
+.alexei{position:absolute;z-index:2;bottom:0;inset-inline-end:clamp(-60px,-1vw,10px);height:74%;aspect-ratio:928/1005;pointer-events:none;-webkit-mask:linear-gradient(#000 86%,transparent);mask:linear-gradient(#000 86%,transparent)}
+.alexei img{width:100%;height:100%;object-fit:contain;object-position:bottom}
+.ctl{position:absolute;z-index:3;inset-inline-start:var(--pad);bottom:clamp(28px,5vh,56px);width:min(430px,44vw);padding:18px;border-radius:10px;background:rgba(7,18,31,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line)}
+.ctl .q{font-size:15px;color:var(--grey);margin-bottom:14px}
+.toggle{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border-radius:7px;background:var(--orange);color:var(--deep);font:600 15px/1.2 var(--sans);text-align:start;transition:background .2s}
+.toggle:hover{background:var(--orange2)}
+.toggle .sw{flex:none;width:36px;height:20px;border-radius:999px;background:rgba(7,18,31,.35);position:relative;transition:background .2s}
+.toggle .sw::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--deep);transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.toggle[aria-pressed=true]{background:var(--ink)}
+.toggle[aria-pressed=true] .sw{background:var(--orange)}
+.toggle[aria-pressed=true] .sw::after{transform:translateX(16px)}
+.routes{list-style:none;margin-top:14px}
+.routes li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:9px 0;border-top:1px solid var(--line)}
+.routes .r{font-size:14.5px}
+.routes .d{font:500 22px/1 var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.routes .d small{font-size:12px;color:var(--grey);margin-inline-start:4px}
+.routes .delta{grid-column:1 / -1;font:500 11.5px/1 var(--mono);color:var(--orange);letter-spacing:.04em;min-height:12px}
+.ctl .fine{margin-top:10px;font:400 11px/1.4 var(--mono);color:var(--grey)}
 
-.network{background:#0F1114}
-.netgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.7fr);gap:clamp(24px,4vw,50px);margin-top:44px;align-items:start}
-.map{padding:18px;border-radius:12px;background:#0B0C0E;box-shadow:inset 0 0 0 1px #24282D}
-.map svg{width:100%;height:auto}
-.map text{font-family:var(--flapf);font-weight:600;letter-spacing:.06em}
-.map .ln{fill:none;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
-.map .dash{stroke-dasharray:2 12;stroke-width:4}
-.zc-reveal .netgrid:not(.is-in) .flow{opacity:0}
-.flow{transition:opacity 1s ease .3s}
-.kpis{display:grid;gap:12px}
-.kpis div{padding:18px 20px;border-radius:10px;background:var(--board);box-shadow:inset 0 0 0 1px #24282D}
-.kpis b{display:block;font:700 44px/1 var(--head);color:#fff}
-.kpis span{display:block;margin-top:6px;color:var(--dim);font-size:15px}
-.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px;font:500 13px/1 var(--head);letter-spacing:.06em;color:var(--dim)}
-.legend i{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px;border-radius:50%}
+/* Sections */
+.sec{position:relative;padding:clamp(100px,12vw,170px) var(--pad)}
+.eyebrow{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:12px;margin-bottom:clamp(36px,5vw,70px);color:var(--grey)}
+.eyebrow span:first-child{color:var(--orange)}
+.h2{font:600 clamp(40px,5vw,84px)/1 var(--sans);letter-spacing:-.035em;max-width:17ch}
+.h2 .dim{color:var(--grey);font-weight:400}
+.lead{max-width:54ch;margin-top:20px;color:#C3CFDB;font-size:clamp(17px,1.3vw,19px)}
 
-.projects{background:var(--paper);color:var(--ink)}
-.projects h2{color:var(--ink)}
-.projects .sub{color:#4C5258}
-.bills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:44px}
-.bill{position:relative;padding:22px 22px 20px;background:#fff;border-radius:6px;box-shadow:0 24px 40px -30px rgba(0,0,0,.5);border-top:6px solid var(--orange)}
-.bill .t{display:flex;justify-content:space-between;align-items:center;font:700 13px/1 var(--head);letter-spacing:.14em;color:#6A7076}
-.bill .t b{color:var(--ink)}
-.bill h3{margin:14px 0 8px;font:700 26px/1.1 var(--head);text-transform:uppercase;color:var(--ink)}
-.bill p{margin:0;color:#4C5258;font-size:15.5px}
-.bill dl{display:grid;grid-template-columns:1fr 1fr;margin:18px 0 0;border-top:1px dashed #C9C5BB}
-.bill dl div{padding:10px 0}
-.bill dt{font:600 11px/1 var(--head);letter-spacing:.14em;text-transform:uppercase;color:#7C8288}
-.bill dd{margin:5px 0 0;font:700 30px/1 var(--head);color:var(--ink)}
-.bill dd small{display:block;margin-top:4px;font:400 13px/1.3 var(--sans);color:#6A7076}
-.bill .bc{height:34px;margin-top:14px;background:repeating-linear-gradient(90deg,#15171A 0 2px,transparent 2px 4px,#15171A 4px 5px,transparent 5px 9px,#15171A 9px 12px,transparent 12px 13px)}
-.bill .st{position:relative;top:-2px;padding:5px 9px 4px;border:2px solid #1E9E58;border-radius:3px;color:#1E9E58;font:700 12px/1 var(--head);letter-spacing:.12em;transform:rotate(-6deg)}
+/* 01 — one container's journey, stage by stage */
+.journey{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(30px,6vw,110px);margin-top:clamp(40px,5vw,70px)}
+.jwrap{position:relative}
+.jline{position:relative;list-style:none;padding-inline-start:70px}
+.jwrap::before{content:"";position:absolute;inset-inline-start:24px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.jwrap .fill{position:absolute;inset-inline-start:24px;top:8px;width:2px;height:0;background:var(--orange);z-index:1}
+.jwrap .box{z-index:2;position:absolute;inset-inline-start:13px;top:0;width:24px;height:16px;border-radius:2px;background:var(--orange);box-shadow:0 0 0 4px rgba(255,107,26,.18);transform:translateY(0)}
+.jwrap .box::after{content:"";position:absolute;inset:3px 4px;background:repeating-linear-gradient(90deg,rgba(7,18,31,.7) 0 1.5px,transparent 1.5px 4px)}
+.jline li{position:relative;padding:0 0 clamp(34px,4vw,56px)}
+.jline li::before{content:"";position:absolute;inset-inline-start:-51px;top:9px;width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid var(--grey)}
+.jline li.on::before{border-color:var(--orange);background:var(--orange)}
+.jline .st{font:500 11.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--grey)}
+.jline li.on .st{color:var(--orange)}
+.jline h3{font:600 clamp(22px,2vw,30px)/1.15 var(--sans);letter-spacing:-.02em;margin:8px 0 6px}
+.jline p{color:#B5C3D1;max-width:44ch}
+.jline .wait{display:inline-block;margin-top:8px;padding:4px 8px;border-radius:4px;border:1px dashed rgba(255,107,26,.6);font:500 11px/1.2 var(--mono);color:var(--orange2);letter-spacing:.04em}
+.jaside{position:relative}
+.jaside .stick{position:sticky;top:120px}
+.big{font:600 clamp(30px,3vw,50px)/1.08 var(--sans);letter-spacing:-.03em}
+.big em{font-style:normal;color:var(--orange)}
 
-.route{position:relative;margin-top:60px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
-.route::before{content:"";position:absolute;left:16px;right:16px;top:15px;border-top:3px dashed rgba(243,235,207,.35)}
-.stop{position:relative;padding-top:50px}
-.stop::before{content:"";position:absolute;left:4px;top:4px;width:22px;height:22px;border-radius:50%;background:var(--black);border:4px solid var(--amber)}
-.stop:last-child::before{background:var(--amber);box-shadow:0 0 0 8px rgba(245,182,66,.18)}
-.stop .city{font:700 clamp(30px,3vw,44px)/1 var(--head);text-transform:uppercase;color:#fff}
-.stop time{display:block;margin-top:6px;font:600 13px/1 var(--head);letter-spacing:.14em;color:var(--amber)}
-.stop h3{margin:16px 0 4px;font:600 21px/1.25 var(--sans);color:#fff}
-.stop .co{margin:0;color:var(--dim)}
-.stop p{margin:10px 0 0;color:#AEB4BA;font-size:15.5px}
+/* 02 — what the software does */
+.build{background:var(--deep)}
+.caps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px);margin-top:clamp(40px,5vw,70px)}
+.caps li{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.caps svg{width:100%;height:140px;border-radius:8px;background:#0B1C2E}
+.caps h3{font:600 26px/1.1 var(--sans);letter-spacing:-.02em}
+.caps p{color:#B5C3D1;font-size:16px}
+.caps .k{font:500 11.5px/1 var(--mono);color:var(--orange);letter-spacing:.06em;text-transform:uppercase}
 
-.certs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:44px}
-.cert{padding:20px;border-radius:10px;background:var(--board);box-shadow:inset 0 0 0 1px #24282D}
-.cert small{display:block;font:600 11.5px/1 var(--head);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
-.cert b{display:block;margin-top:10px;font:700 28px/1 var(--head);color:#fff}
-.cert span{display:block;margin-top:6px;color:#AEB4BA;font-size:15px}
+/* 03 — founder */
+.founder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,6vw,110px);align-items:start}
+.facts{list-style:none;border-top:1px solid var(--line);margin-top:28px}
+.facts li{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.facts .y{font:500 13px/1.5 var(--mono);color:var(--orange)}
+.quote{font:500 clamp(24px,2.2vw,34px)/1.3 var(--sans);letter-spacing:-.02em}
+.quote small{display:block;margin-top:14px;font:500 11.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--grey)}
 
-.contact{background:var(--amber);color:var(--black)}
-.contact h2{color:var(--black);font-size:clamp(44px,6.4vw,100px)}
-.contact .sub{color:#3A2E12}
-.contact .btn{background:var(--black);color:var(--amber)}
-.contact .btn:hover{background:#fff;color:var(--black)}
-.contact .btn.ghost{background:transparent;color:var(--black);box-shadow:inset 0 0 0 2px var(--black)}
-footer{padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));text-align:center;color:var(--dim);font-size:13px}
+/* 04 — contact */
+.contact{background:var(--orange);color:var(--deep)}
+.contact .eyebrow{border-color:rgba(7,18,31,.3);color:rgba(7,18,31,.7)}
+.contact .eyebrow span:first-child{color:var(--deep)}
+.contact .h2{max-width:14ch}
+.cgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,40px);margin-top:clamp(36px,4vw,60px)}
+.cgrid div{border-top:1px solid rgba(7,18,31,.4);padding-top:12px}
+.cgrid .mono{display:block;margin-bottom:8px;color:rgba(7,18,31,.7)}
+.cgrid a,.cgrid p{font:600 clamp(17px,1.4vw,21px)/1.4 var(--sans);text-decoration:none;overflow-wrap:anywhere}
+.btn{display:inline-flex;align-items:center;gap:12px;margin-top:clamp(28px,3vw,44px);height:54px;padding:0 24px;border-radius:8px;background:var(--deep);color:var(--ink);text-decoration:none;font-weight:600;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+footer{background:var(--deep);color:var(--grey);padding:30px var(--pad) 96px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;font-size:13.5px;line-height:1.7}
+footer p{max-width:90ch}
 
-@media (max-width:1100px){
-  .bar ul{display:none}
-  .clock{margin-left:auto}
-  .term{grid-template-columns:minmax(0,1fr)}
-  .gate{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);order:-1}
-  .gate .gh{grid-column:1/-1}
-  .gate .ph{aspect-ratio:auto;height:100%;min-height:260px}
-  .netgrid{grid-template-columns:1fr}
-  .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .bills{grid-template-columns:1fr}
-  .certs{grid-template-columns:1fr 1fr}
+@media (max-width:1000px){
+  .top nav{display:none}
+  .journey,.founder{grid-template-columns:minmax(0,1fr)}
+  .jaside .stick{position:static}
+  .caps,.cgrid{grid-template-columns:minmax(0,1fr)}
 }
-@media (max-width:700px){
-  .status span{display:none}
-  .gate{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
-  .gate .gb{padding:12px 14px 14px}
-  .gate .gb p{font-size:14px}
-  .gate .ph{min-height:200px}
-  h1 .flaps{font-size:clamp(28px,9.2vw,58px);gap:.05em}
-  .role .flaps{gap:2px}
-  .rows li{grid-template-columns:54px minmax(0,1fr) auto;gap:10px}
-  .rows li>:nth-child(4){grid-column:2/-1}
-  .rows .hd>:nth-child(4){display:none}
-  .kpis{grid-template-columns:1fr}
-  .route{grid-template-columns:1fr;gap:10px}
-  .route::before{left:15px;right:auto;top:20px;bottom:20px;border-top:0;border-left:3px dashed rgba(243,235,207,.35)}
-  .stop{padding:0 0 30px 56px}
-  .stop::before{top:2px}
-  .certs{grid-template-columns:1fr}
+@media (max-width:760px){
+  .hero{min-height:700px}
+  .hero .head{top:78px;inset-inline-end:var(--pad)}
+  .hero h1{font-size:clamp(38px,10.6vw,52px)}
+  .alexei{height:40%;bottom:auto;top:30%;inset-inline-end:-16vw;-webkit-mask:linear-gradient(#000 70%,transparent);mask:linear-gradient(#000 70%,transparent)}
+  .ctl{width:auto;inset-inline-end:var(--pad);bottom:58px;padding:12px}
+  .hero{min-height:720px}
+  .ctl .q,.ctl .fine{display:none}
+  .toggle{padding:10px 12px;font-size:14px}
+  .routes{margin-top:8px}
+  .routes li{padding:6px 0}
+  .routes .r{font-size:13.5px}
+  .routes .d{font-size:18px}
+  .routes .delta{font-size:10.5px}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.toggle,.toggle .sw,.toggle .sw::after{transition:none}}
 </style>
 </head>
 <body>
-<main>
-  <header class="hero" id="top">
-    <div class="wrap bar">
-      <a class="logo" href="#top" aria-label="Alexei Morozov, back to top">AM<span>/</span>SC</a>
-      <span class="status"><i aria-hidden="true"></i><span>Network status · all lanes green</span></span>
-      <nav aria-label="Sections"><ul>
-        <li><a href="#network" data-spy>Network</a></li>
-        <li><a href="#projects" data-spy>Projects</a></li>
-        <li><a href="#route" data-spy>Route</a></li>
-        <li><a href="#contact" data-spy>Contact</a></li>
-      </ul></nav>
-      <span class="clock">Dubai <b id="clk">--:--</b></span>
+<header class="top" data-headroom="1.2">
+  <a class="brand" href="#top"><i aria-hidden="true"></i>Alexei Morozov</a>
+  <nav class="mono" aria-label="Sections"><a href="#journey" data-spy>Journey</a><a href="#build" data-spy>Software</a><a href="#founder" data-spy>Founder</a><a href="#contact" data-spy>Contact</a></nav>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <canvas id="map" aria-hidden="true"></canvas>
+    <div class="head">
+      <p class="kick mono">Founder &amp; CEO · Logistics software · Rotterdam / Dubai</p>
+      <h1 id="h1">Freight should move like water.</h1>
+      <p class="name"><b>Alexei Morozov</b> builds the software that sees a delay coming and moves the cargo around it.</p>
     </div>
-    <div class="wrap term">
-      <div class="board">
-        <p class="bh"><span>Departures</span><span>Supply chain · GCC &amp; India</span></p>
-        <h1 aria-label="Alexei Morozov"><span class="flaps" data-text="ALEXEI" aria-hidden="true">ALEXEI</span><span class="flaps" data-text="MOROZOV" aria-hidden="true">MOROZOV</span></h1>
-        <p class="role" aria-label="Supply Chain Director, GCC and India"><span class="flaps" data-text="SUPPLY CHAIN DIRECTOR" aria-hidden="true">SUPPLY CHAIN DIRECTOR</span></p>
-        <ul class="rows">
-          <li class="hd" aria-hidden="true"><span>Code</span><span>Measure</span><span>Value</span><span>Status</span></li>
-          <li><span class="k">KPI-01</span><span class="d">On time, in full</span><span class="v">97.8%</span><span class="s">12-month average</span></li>
-          <li><span class="k">KPI-02</span><span class="d">Inventory turns</span><span class="v">11.4×</span><span class="s">Up from 7.9</span></li>
-          <li><span class="k">KPI-03</span><span class="d">Cost-to-serve</span><span class="v">−16%</span><span class="s">Per order since 2019</span></li>
-          <li><span class="k">KPI-04</span><span class="d">Network</span><span class="v">4 DCs</span><span class="s">1.2m sq ft, GCC</span></li>
+    <div class="alexei"><img src="img/alexei-morozov/cut.webp" srcset="img/alexei-morozov/cut-700.webp 646w, img/alexei-morozov/cut.webp 928w" sizes="(max-width:760px) 70vw, 62vh" width="928" height="1005" alt="Alexei Morozov"></div>
+    <div class="ctl">
+      <p class="q">Close a route and see what it costs. Every container on these lanes would feel it.</p>
+      <button class="toggle" type="button" aria-pressed="false"><span class="sw" aria-hidden="true"></span><span class="js-tl">Close the Suez route</span></button>
+      <ul class="routes" aria-live="polite">
+        <li><span class="r">Rotterdam → Jebel Ali</span><span class="d js-d0">19<small>days</small></span><span class="delta js-x0"></span></li>
+        <li><span class="r">Shanghai → Rotterdam</span><span class="d js-d1">31<small>days</small></span><span class="delta js-x1"></span></li>
+      </ul>
+      <p class="fine">At 14 knots, sea time only. Distances approximate.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="journey" aria-labelledby="j-h">
+    <div class="eyebrow mono"><span>01 · The journey</span><span>One container, door to door</span></div>
+    <div class="journey">
+      <div class="jaside"><div class="stick">
+        <h2 class="h2" id="j-h">Ships are rarely the problem. <span class="dim">The waiting happens on land.</span></h2>
+        <p class="lead">Follow one container from a factory to a shelf. At every handover someone is waiting for information somebody else already has.</p>
+      </div></div>
+      <div class="jwrap"><span class="fill" aria-hidden="true"></span><span class="box" aria-hidden="true"></span>
+      <ol class="jline">
+        <li><span class="st">01 · Factory</span><h3>Packed, sealed, booked.</h3><p>The booking says Tuesday. The truck company hears about it on Monday night.</p><span class="wait">Waiting for: a truck slot</span></li>
+        <li><span class="st">02 · Port gate</span><h3>A queue at the gate.</h3><p>The driver waits while the terminal checks a booking reference typed in by hand.</p><span class="wait">Waiting for: a gate appointment</span></li>
+        <li><span class="st">03 · Yard</span><h3>Stacked, then moved twice.</h3><p>Boxes for the same ship are spread across the yard because nobody knew the loading order in time.</p><span class="wait">Waiting for: a loading plan</span></li>
+        <li><span class="st">04 · At sea</span><h3>The easy part.</h3><p>Three weeks across two oceans, on time to within a day. Then the ship arrives at a busy port.</p><span class="wait">Waiting for: a berth</span></li>
+        <li><span class="st">05 · Customs</span><h3>One missing document.</h3><p>The box is cleared in hours if the paperwork is right, and in days if one form is not.</p><span class="wait">Waiting for: a signature</span></li>
+        <li><span class="st">06 · Warehouse</span><h3>On the shelf.</h3><p>The software's job is to make every one of these waits visible early enough to shorten it.</p></li>
+      </ol></div>
+    </div>
+  </section>
+
+  <section class="sec build" id="build" aria-labelledby="b-h">
+    <div class="eyebrow mono"><span>02 · The software</span><span>Three things it does</span></div>
+    <h2 class="h2" id="b-h">See it. Predict it. <span class="dim">Move it.</span></h2>
+    <ol class="caps">
+      <li><span class="k">See</span><svg class="js-see" viewBox="0 0 300 140" aria-hidden="true"></svg><h3>Every box, one screen.</h3><p>Positions from ships, terminals, trucks and customs, joined into one timeline per container.</p></li>
+      <li><span class="k">Predict</span><svg class="js-eta" viewBox="0 0 300 140" aria-hidden="true"></svg><h3>Arrival times that update.</h3><p>A range, not a promise, and it narrows as the cargo gets closer. Planners get warned while there is still time to act.</p></li>
+      <li><span class="k">Move</span><svg class="js-move" viewBox="0 0 300 140" aria-hidden="true"></svg><h3>Plan B before it is needed.</h3><p>When a route or a port closes, it proposes the alternatives with their cost in days and money.</p></li>
+    </ol>
+  </section>
+
+  <section class="sec" id="founder" aria-labelledby="f-h">
+    <div class="eyebrow mono"><span>03 · Founder</span><span>From the yard to the software</span></div>
+    <div class="founder">
+      <div>
+        <h2 class="h2" id="f-h">Ten years in a container yard, <span class="dim">then the software he wished he had.</span></h2>
+        <ul class="facts">
+          <li><span class="y">2009</span><span>Yard planner at a container terminal in Rotterdam.</span></li>
+          <li><span class="y">2014</span><span>Head of yard operations: six hundred people, three shifts, one spreadsheet too many.</span></li>
+          <li><span class="y">2021</span><span>Moved to Dubai and founded the company with two engineers.</span></li>
+          <li><span class="y">Today</span><span>Pilots with terminal and freight partners in Rotterdam and Jebel Ali.</span></li>
         </ul>
       </div>
-      <aside class="gate" aria-label="Profile">
-        <p class="gh" style="margin:0"><span>Now boarding</span><span>Since 2006</span></p>
-        <div class="ph"><img src="img/alexei-morozov-640.webp" srcset="img/alexei-morozov-640.webp 640w, img/alexei-morozov.webp 928w" sizes="(max-width:1100px) 45vw, 400px" width="928" height="1152" alt="Alexei Morozov in a grey suit at a container port" fetchpriority="high"></div>
-        <div class="gb">
-          <p>I design supply chains that are boring in the best way: the product arrives on time, in full, at the lowest cost to serve. Eighteen years across freight, retail and logistics, from Moscow to the Gulf.</p>
-          <div class="acts"><a class="btn" href="#contact">Request a briefing</a><a class="btn ghost" href="#network">The network</a></div>
-        </div>
-      </aside>
-    </div>
-  </header>
-
-  <section id="network" class="network">
-    <div class="wrap">
-      <p class="eyebrow">The network</p>
-      <h2>One hub, four countries.</h2>
-      <p class="sub">A Jebel Ali hub feeding three regional centres, with inbound flows from Europe and India.</p>
-      <div class="netgrid" data-reveal>
-        <div>
-          <div class="map">
-            <svg viewBox="0 0 760 420" role="img" aria-label="Schematic network map: Rotterdam and Mumbai inbound to the Jebel Ali hub, which feeds distribution centres in Doha, Riyadh and Muscat">
-              <g class="flow">
-                <path class="ln dash" d="M70 70 H250 L330 150 H400" stroke="#8D949B"/>
-                <path class="ln dash" d="M690 70 H560 L480 150 H400" stroke="#8D949B"/>
-                <path class="ln" d="M400 150 V250 L330 320 H150" stroke="#F5B642"/>
-                <path class="ln" d="M400 150 L470 220 H620" stroke="#3DDC84"/>
-                <path class="ln" d="M400 150 V340 H600" stroke="#FF7A1A"/>
-              </g>
-              <g fill="#0B0C0E" stroke="#F3EBCF" stroke-width="4"><circle cx="70" cy="70" r="11"/><circle cx="690" cy="70" r="11"/><circle cx="150" cy="320" r="12"/><circle cx="620" cy="220" r="12"/><circle cx="600" cy="340" r="12"/></g>
-              <circle cx="400" cy="150" r="22" fill="#F5B642" stroke="#0B0C0E" stroke-width="5"/>
-              <g fill="#F3EBCF" font-size="22"><text x="70" y="44" text-anchor="middle">ROTTERDAM</text><text x="690" y="44" text-anchor="middle">MUMBAI</text><text x="436" y="140">JEBEL ALI</text><text x="150" y="362" text-anchor="middle">RIYADH</text><text x="640" y="227">DOHA</text><text x="620" y="347">MUSCAT</text></g>
-              <g fill="#8D949B" font-size="15"><text x="70" y="98" text-anchor="middle">INBOUND · EUROPE</text><text x="690" y="98" text-anchor="middle">INBOUND · INDIA</text><text x="436" y="166">MAIN HUB · 620K SQ FT</text><text x="150" y="384" text-anchor="middle">DC · 260K SQ FT</text><text x="640" y="246">DC · 150K SQ FT</text><text x="620" y="368">DC · 170K SQ FT</text></g>
-            </svg>
-          </div>
-          <p class="legend" aria-hidden="true"><span><i style="background:#F5B642"></i>Hub</span><span><i style="background:#0B0C0E;box-shadow:inset 0 0 0 3px #F3EBCF"></i>Distribution centre</span><span><i style="background:#8D949B"></i>Inbound port</span><span>Schematic · not to scale</span></p>
-        </div>
-        <div class="kpis">
-          <div><b>142</b><span>Active transport lanes</span></div>
-          <div><b>38</b><span>Road, sea and air carriers</span></div>
-          <div><b>61k</b><span>Customer orders a week</span></div>
-        </div>
-      </div>
+      <p class="quote">"Cargo does not get lost. It gets forgotten for a few hours at a time, and those hours add up to days."<small>Illustrative quote</small></p>
     </div>
   </section>
 
-  <section id="projects" class="projects">
-    <div class="wrap">
-      <p class="eyebrow" style="color:#B5560E">Projects</p>
-      <h2>Three big moves.</h2>
-      <p class="sub">Each one planned, piloted and rolled out without stopping the operation.</p>
-      <div class="bills">
-        <article class="bill" data-reveal><p class="t" style="margin:0"><b>TRF-01</b><span class="st">Delivered 2021</span></p><h3>Network redesign</h3><p>Consolidated seven warehouses into four regional distribution centres, with new transport lanes from the Jebel Ali hub.</p><dl><div><dt>Result</dt><dd>−16%<small>cost-to-serve per order</small></dd></div><div><dt>Sites</dt><dd>7 → 4<small>warehouses to DCs</small></dd></div></dl><div class="bc" aria-hidden="true"></div></article>
-        <article class="bill" data-reveal style="--d:.08s"><p class="t" style="margin:0"><b>TRF-02</b><span class="st">Delivered 2022</span></p><h3>Sales &amp; operations planning</h3><p>One monthly planning cycle across five countries, with one shared forecast for sales, finance and operations.</p><dl><div><dt>Result</dt><dd>84%<small>forecast accuracy, up from 61%</small></dd></div><div><dt>Scope</dt><dd>5<small>countries, one cycle</small></dd></div></dl><div class="bc" aria-hidden="true"></div></article>
-        <article class="bill" data-reveal style="--d:.16s"><p class="t" style="margin:0"><b>TRF-03</b><span class="st">Delivered 2024</span></p><h3>Warehouse automation</h3><p>Goods-to-person picking and a new warehouse management system in the main hub, live in eleven months.</p><dl><div><dt>Result</dt><dd>2.3×<small>order lines picked per hour</small></dd></div><div><dt>Go-live</dt><dd>11<small>months, start to live</small></dd></div></dl><div class="bc" aria-hidden="true"></div></article>
-      </div>
+  <section class="sec contact" id="contact" aria-labelledby="c-h">
+    <div class="eyebrow mono"><span>04 · Contact</span><span>Partners, pilots, press</span></div>
+    <h2 class="h2" id="c-h">Ship something with us.</h2>
+    <div class="cgrid">
+      <div><span class="mono">Email</span><a href="mailto:alexei@morozov.example" data-demo>alexei@morozov.example</a></div>
+      <div><span class="mono">Offices</span><p>Rotterdam · Dubai</p></div>
+      <div><span class="mono">Looking for</span><p>Terminals and forwarders for the next pilots</p></div>
     </div>
-  </section>
-
-  <section id="route">
-    <div class="wrap">
-      <p class="eyebrow">Route</p>
-      <h2>Three stops, three kinds of supply chain.</h2>
-      <p class="sub">Freight, retail and third-party logistics, in three countries.</p>
-      <div class="route">
-        <div class="stop" data-reveal><span class="city">Moscow</span><time>2006 — 2012</time><h3>Planning Manager</h3><p class="co">Steppe Freight</p><p>Road and rail planning for a fleet of 300 trucks; launched the company's first transport management system.</p></div>
-        <div class="stop" data-reveal style="--d:.08s"><span class="city">Riga</span><time>2012 — 2018</time><h3>Head of Logistics</h3><p class="co">Amberline Retail Group</p><p>Ran two distribution centres serving 180 stores in the Baltics and cut stock-outs by 40%.</p></div>
-        <div class="stop" data-reveal style="--d:.16s"><span class="city">Dubai</span><time>2018 — today</time><h3>Supply Chain Director</h3><p class="co">Corvex Logistics</p><p>Leads planning, warehousing and transport for the GCC and India: four DCs and 900 people.</p></div>
-      </div>
-      <div class="certs" data-reveal>
-        <div class="cert"><small>APICS</small><b>CSCP</b><span>Certified Supply Chain Professional</span></div>
-        <div class="cert"><small>Lean Six Sigma</small><b>Black Belt</b><span>Process improvement</span></div>
-        <div class="cert"><small>Education</small><b>MSc Logistics</b><span>Moscow, 2006</span></div>
-        <div class="cert"><small>Languages</small><b>RU · EN · AR</b><span>Native · fluent · basic</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <div class="wrap" data-reveal>
-      <p class="eyebrow" style="color:var(--black)">Contact</p>
-      <h2>Need a supply chain that just works?</h2>
-      <p class="sub">Alexei is open to Supply Chain Director and VP Operations roles in the Gulf.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:30px"><a class="btn" href="#contact" data-demo>Request a briefing</a><a class="btn ghost" href="#contact" data-demo>Download CV</a><a class="btn ghost" href="#contact" data-demo>LinkedIn</a></div>
-    </div>
+    <a class="btn" href="#" data-demo="This is a concept site, so messages can't be sent from here.">Book a call <span aria-hidden="true">→</span></a>
   </section>
 </main>
-<footer>Concept site designed by Zenith Dubai CV. Alexei Morozov is a fictional person; companies, the network and figures are illustrative.</footer>
+
+<footer>
+  <p>Alexei Morozov and his company are fictional, and this is a concept website. The portrait was generated with AI. Career, pilots, quotes and contact details are illustrative. Map: Natural Earth land outlines (public domain) via world-atlas. Sea distances follow simplified routes and are approximate.</p>
+  <p>A concept website by Zenith Dubai CV.</p>
+</footer>
+
 <script>
-(function () {
-  var Z = window.ZC || {};
-  // Build the split-flap tiles, then flip them into place once.
-  var sets = document.querySelectorAll(".flaps[data-text]"), tiles = [];
-  Array.prototype.forEach.call(sets, function (el) {
-    var txt = el.getAttribute("data-text");
-    el.textContent = "";
-    for (var i = 0; i < txt.length; i++) {
-      var s = document.createElement("span"), ch = txt[i];
-      s.className = "f" + (ch === " " ? " sp" : "");
-      s.textContent = ch === " " ? "" : ch;
-      el.appendChild(s);
-      if (ch !== " ") tiles.push({ el: s, ch: ch });
-    }
-  });
-  var clk = document.getElementById("clk");
-  function two(n) { return (n < 10 ? "0" : "") + n; }
-  function tick() { var d = new Date(); clk.textContent = two((d.getUTCHours() + 4) % 24) + ":" + two(d.getUTCMinutes()); }
-  tick(); setInterval(tick, 20000);
-  if (Z.reduce || Z.still) return;
-  var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", t0 = 0;
-  tiles.forEach(function (t, i) { t.stop = 500 + i * 55 + Math.random() * 400; });
-  function frame(ts) {
-    if (!t0) t0 = ts;
-    var e = ts - t0, busy = false;
-    tiles.forEach(function (t) {
-      if (e < t.stop) { busy = true; if (Math.random() < .5) t.el.textContent = chars[Math.floor(Math.random() * chars.length)]; }
-      else if (t.el.textContent !== t.ch) t.el.textContent = t.ch;
-    });
-    if (busy) requestAnimationFrame(frame);
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC;
+  var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
+
+  /* ---------- Data: land as a 1° bit grid (Natural Earth), ports, and simplified sea lanes ---------- */
+  var LAND = {"step":1,"lon0":-180,"lat0":78,"cols":360,"rows":136,"b64":"AAAAAAAAAIA4BHAyO0D8/////38AAAAAPAoAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAFhAmPPVH4D//////z8AAAAAAAAAAAAA4AEAAAD8HwAAAAAAAAAAAAAAAAAAAAD/Az/fDwAA/P////8BAAAAAAAAAADABwAAwP//PwAA4FsAAAAAAAAAAAAAAAQMAAQQAAAA8P////8BAAAAAAAAAABwAAAA+P//FwAAAAAAAAAAAAAAAAAAAP8BxvMxfwAA8P///3cAAAAAAAAAAAAcAIDh//9/3IcLAAcAAAAAAAAAAAAAgN9/xy+8xwEA4P///zcAAAAAAAAAAAAGAJ7i//////8fAD4AAAAAAwAAAAAAAMf+D2L8/wsAoP///x0AAAAAAAAAAAAOAG9+//////8fef8HAAAAAADwTwAAAADwH/D4//8AwP7/fxEAAAAAANgHAAAAgN9/////////////DwAAAAD+//+Bvob/H9SBof8AwP7//w8AAAAAoP8PAAAAD9///////////////48/A8D///////8LD8jNA/wBgP///wAAAAAA6P//AwN6//79////////////////HwD///////9//+/vh/EPwP//BwAAAAAA8P//H/H//8///////////////////4Hw//////////+fAfw/wP//AQAAAAAA/v+fH/////P/////////////////8fD///////////9XAPwZgP8PANA/AAAA/+N/8P//////////////////////wAD4///////////Pw/gHAP4PAMA/AACA//F//v////////////////////8fAAP4///////////BAGAHAP4HAAADAACw//z///////////////////////9/AID//////////38AQ4AJAPwDAAAAAAD8P/7/////////////////////f/5fAMD//////////z8AwA8AAPgDAAAAAAD+H/z/////////////////////Mf8BAID/7/z//////x8AwD8AAMAAAAAAAAT+P7z+//////////////////9/wG8AAAD8AwD//////x8AwD8IAAAAAAAAAAC+P2D///////////////////91cAAAAACACwD4/////38AwP8eAAAAAAAAgAGcH/T//////////////////wEAOAAAAACADgDw/////38AgP8/AAAAAAAA4AMAX/T//////////////////wAAfgAAAAAwAABA//////8PgP8/AAAAAAAAgAFwHv7/////////////////PwAAfwAAAAAAAABA//////8/gP//AAAAAAAAgAPwAv7/////////////////DwAAPwAAAIAAAAAA/P//////8///AwAAAAAAcAcgcv//////////////////HwAAHwAAAAAAAACA/P//////4///DwAAAAAAPA7o/////////////////////wEADwAAAAAAAAAA8f//////4///DwAAAAAAPD/+/////////////////////wUAAwAAAAAAAAAA8P//////////FwAAAAAAAB///////////////////////wUAAwAAAAAAAAAAkP//////////CAAAAAAAgMD//////////////////////wwAAAAAAAAAAAAAYP////////8xLAAAAAAAAPT//////////////////////wwAAAAAAAAAAAAAAP///////38PfAAAAAAAgP///////////////////////wQAAAAAAAAAAAAAAP3///////8HUAAAAAAAAPz/////////////////////fwQAAAAAAAAAAAAAAP////////+XAAAAAAAAAPz////3/B/+////////////PwgAAAAAAAAAAAAAAP////////9/AAAAAAAAAPj//f9j/A/+////////////HwAAAAAAAAAAAAAAAP////////8MAAAAAAAAAPj/+P8B/Mf/////////////DwQAAAAAAAAAAAAAAP///////z8AAAAAAAAAcPzH4/8B8I//////////////Bx4AAAAAAAAAAAAAAP///////x8AAAAAAAAA+H+gw/8AwA/+//////////9/AAQAAAAAAAAAAAAAAP///////x8AAAAAAAAA+D8Ajv/w4B/8//////////8/AAAAAAAAAAAAAAAAAP///////wMAAAAAAAAA+B8wuA/+/z/+/////////98fAAMAAAAAAAAAAAAAAP///////wMAAAAAAAAA+E8wEIf//x/+/////////2cOAAMAAAAAAAAAAAAAAP7//////wEAAAAAgAAA+A8AEM7//x/8/////////wMOAAMAAAAAAAAAAAAAAPz//////wAAAAAAAAAA+AcABoT//x/8/////////zcYgAEAAAAAAAAAAAAAAPz//////wAAAAAAAAAAQOB/AAA2/////////////x8Y8AEAAAAAAAAAAAAAAPj//////wAAAAAAAAAAQPh/AAAA/////////////w8c/AAAAAAAAAAAAAAAAPj/////fwAAAAAAAAAA4P8/AAAA/////////////w+EGwAAAAAAAAAAAAAAAMD/////HwAAAAAAAAAA8P9/AACA/////////////x/EAwAAAAAAAAAAAAAAAID/////BwAAAAAAAAAA+P//BweA/////////////x+AAAAAAAAAAAAAAAAAAID9////BwAAAAAAAAAA/P//D3/A/////////////x9AAAAAAAAAAAAAAAAAAAD5////BwAAAAAAAAAA/P//f////////////////x8AAAAAAAAAAAAAAAAAAAD2/x8CBgAAAAAAAAAA/P/////v/4///////////z8AAAAAAAAAAAAAAAAAAAD0/wcABgAAAAAAAAAA/v///////4///////////z8AAAAAAAAAAAAAAAAAAADu/wcADgAAAAAAAACA//////8//x/+/////////x8AAAAAAAAAAAAAAAAAAACY/wcADAAAAAAAAADA//////8//z/g/////////w8AAAAAAAAAAAAAAAAAAACQ/wcACAAAAAAAAADg//////9//j+Av////////w8AAAAAAAAAAAAAAAAAAAAQ/wMAAAAAAAAAAADg//////9//n8YgP///////yMAAAAAAAAAAAAAAAAAAABA/gMAAAAAAAAAAADw////////+P9/AP///////xEAAAAAAAAAAAAAAAAAAAAA/AMAPQAAAAAAAADw////////+P//APz/////PxAAAAAAAAAAAAAAAAAAAAAA+AMIYAAAAAAAAAD4////////+f9/AOz/B///BAAAAAAAAAAAAAAAAAAAAAAA/AccgAEAAAAAAADw////////8f9/AOD/B/5/BAAAAAAAAAAAAAAAAQAAAAAA+A8eADgAAAAAAADw////////4f8/AOD/Afw/BgAAAAAAAAAAAAAAAAAAAAAA8J8OAPwAAAAAAADw////////4/8fAOD/APw/AgAAAAAAAAAAAAAAAAAAAAAAgP8PAAAAAAAAAADw////////x/8HAOB/APh/ADAAAAAAAAAAAAAAAAAAAAAAAP4PAAAAAAAAAADw////////h/8BAOA/AMz/ADAAAAAAAAAAAAAAAAAAAAAAAID/AAAAAAAAAAD4////////j/8AAMAPAMD/ARAAAAAAAAAAAAAAAAAAAAAAAAD/AQAAAAAAAAD4////////nx8AAMAPAMD/ATAAAAAAAAAAAAAAAAAAAAAAAAD4AAAAAAAAAAD4////////vwcAAIAPAMD+AdAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAD4////////fwACAIAPAID8AQABAAAAAAAAAAAAAAAAAAAAAADAAEgAAAAAAADg////////f0AAAAAPAID4AUADAAAAAAAAAAAAAAAAAAAAAADAAe8TAAAAAADg/////////34AAAAPAEBwAAgAAAAAAAAAAAAAAAAAAAAAAAAAE+9/AAAAAADA/////////38AAAAXAEAgAAQCAAAAAAAAAAAAAAAAAAAAAAAAz///AAAAAACA/////////z8AAAASAMAAAIADAAAAAAAAAAAAAAAAAAAAAAAAyP//AQAAAAAA/////////z8AAAAwAIAAAAAHAAAAAAAAAAAAAAAAAAAAAAAAgP//AwAAAAAA/n///////x8AAAAwAAADAAMDAAAAAAAAAAAAAAAAAAAAAAAAgP//fwAAAAAA/A/+/////x8AAAAAAAgHgAcAAAAAAAAAAAAAAAAAAAAAAAAAgP///wAAAAAAEADk/////w8AAAAAADAGwAcAAAAAAAAAAAAAAAAAAAAAAAAAgP///wEAAAAAAADA/////wcAAAAAAGAG4AEAAAAAAAAAAAAAAAAAAAAAAAAAwP///wEAAAAAAADA/////wMAAAAAAMAM+AMQAAAAAAAAAAAAAAAAAAAAAAAA4P///wMAAAAAAADA/////wAAAAAAAIAL/gMQAAAAAAAAAAAAAAAAAAAAAAAA8P///wEAAAAAAADg////fwAAAAAAAIAH/uMQAAAAAAAAAAAAAAAAAAAAAAAA8P///w8AAAAAAADg////PwAAAAAAAAAX/gNIAQAAAAAAAAAAAAAAAAAAAAAA+P//f3cAAAAAAADg////PwAAAAAAAAAO/DkIAwAAAAAAAAAAAAAAAAAAAAAA+P///3sAAAAAAADA////HwAAAAAAAAB+/DkA8AEAAAAAAAAAAAAAAAAAAAAA+P////8fAAAAAACA////DwAAAAAAAAA8gChE/g8AAAAAAAAAAAAAAAAAAAAA+P////8/AAAAAAAA////BwAAAAAAAAA4AAAA8B8AAAAAAAAAAAAAAAAAAAAA+P//////AQAAAAAA////BwAAAAAAAAAwAAgAxD8NAAAAAAAAAAAAAAAAAAAA8P//////AQAAAAAA////BwAAAAAAAADAAQAAhP+AAAAAAAAAAAAAAAAAAAAA8P//////AQAAAAAA/v//BwAAAAAAAACAHwCAwH8AAAAAAAAAAAAAAAAAAAAA4P//////AQAAAAAA/v//BwAAAAAAAAAAgN8EAMcAAAAAAAAAAAAAAAAAAAAAwP//////AAAAAAAA/v//DwAAAAAAAAAAAAgBAIAFAAAAAAAAAAAAAAAAAAAAwP//////AAAAAAAA/P//DwAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAgP////9/AAAAAAAA/P//DwAAAAAAAAAAAABAAQQgAAAAAAAAAAAAAAAAAAAAgP////8/AAAAAAAA/v//HyAAAAAAAAAAAACAHwQAAAAAgAAAAAAAAAAAAAAAAP////8fAAAAAAAA/v//HzAAAAAAAAAAAADADwwAAAAAAAAAAAAAAAAAAAAAAP////8fAAAAAAAA////HzAAAAAAAAAAAADMDxwAAAAAAAAAAAAAAAAAAAAAAP7///8fAAAAAAAA////HzwAAAAAAAAAAAD/Dx4AAAAAAAAAAAAAAAAAAAAAAPj///8fAAAAAAAA////Dz8AAAAAAAAAAID/vx4AAAiAAAAAQAAAAAAAAAAAAOD///8fAAAAAAAA////Ax8AAAAAAAAAAMD//z4AAAAAAAAAAAAAAAAAAAAAAMD///8PAAAAAAAA////AR8AAAAAAAAAAMD//z8AAAAAAAAAAAAAAAAAAAAAAMD///8PAAAAAAAA/v9/AB8AAAAAAAAAAOD///8AAAAAAAAAAAAAAAAAAAAAAMD///8PAAAAAAAA/v9/AB8gAAAAAAAAAPz///8BAAEAAAAAAAAAAAAAAAAAAMD///8HAAAAAAAA/P9/gA8AAAAAAAAAgP////8BAAIAAAAAAAAAAAAAAAAAAMD///8DAAAAAAAA/P//gA8AAAAAAAAAwP////8DAAAAAAAAAAAAAAAAAAAAAMD//38AAAAAAAAA/P9/AA8AAAAAAAAAwP////8HAAAAAAAAAAAAAAAAAAAAAOD//x8AAAAAAAAA+P9/AAcAAAAAAAAA4P////8PAAAAAAAAAAAAAAAAAAAAAOD//wcAAAAAAAAA+P8fAAIAAAAAAAAAwP////8fAAAAAAAAAAAAAAAAAAAAAOD//wcAAAAAAAAA+P8fAAAAAAAAAAAA4P////8fAAAAAAAAAAAAAAAAAAAAAOD//w8AAAAAAAAA+P8fAAAAAAAAAAAAwP////8/AAAAAAAAAAAAAAAAAAAAAOD//wcAAAAAAAAA8P8PAAAAAAAAAAAAgP////8/AAAAAAAAAAAAAAAAAAAAAOD//wMAAAAAAAAA4P8HAAAAAAAAAAAAgP////8fAAAAAAAAAAAAAAAAAAAAAPD//wMAAAAAAAAA4P8HAAAAAAAAAAAAgP////8fAAAAAAAAAAAAAAAAAAAAAPD//wAAAAAAAAAAwP8DAAAAAAAAAAAAAP////8fAAAAAAAAAAAAAAAAAAAAAOD//wAAAAAAAAAAwP8BAAAAAAAAAAAAAP8D/P8PAAAAAAAAAAAAAAAAAAAAAPD/fQAAAAAAAAAAwH8AAAAAAAAAAAAAAP8A2P8HAAAAAAAAAAAAAAAAAAAAAPD/OwAAAAAAAAAAgAAAAAAAAAAAAAAAAAcA6P8HAAAAAAAAAAAAAAAAAAAAAPj/BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwP8DAAACAAAAAAAAAAAAAAAAAPj/BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8DAAAEAAAAAAAAAAAAAAAAAPz/BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8DAAAIAAAAAAAAAAAAAAAAAPz/AwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGgAAAA4AAAAAAAAAAAAAAAAAPg/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAAAPw/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAAAPwHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAALAAAAAAAAAAAAAAAAAPgPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAIADAAAAAAAAAAAAAAAAAPgHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAMABAAAAAAAAAAAAAAAAAPgHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAAP4BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgAAAAAAAAAAAAAAAAAAP4BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAPwDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP0BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP4AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANADAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"};
+  // [lon, lat] waypoints at sea; ports at the ends
+var PORTS = {
+  rtm:{n:"Rotterdam", p:[4.05, 51.95]}, jea:{n:"Jebel Ali", p:[55.03, 25.01]}, sin:{n:"Singapore", p:[103.84, 1.26]},
+  sha:{n:"Shanghai", p:[121.8, 31.0]}, lax:{n:"Los Angeles", p:[-118.27, 33.73]}, nyc:{n:"New York", p:[-74.05, 40.62]},
+  sts:{n:"Santos", p:[-46.3, -23.97]}, dur:{n:"Durban", p:[31.05, -29.87]}, bom:{n:"Mumbai", p:[72.95, 18.95]}
+};
+var MED = [[2.0, 51.1], [-1.5, 50.2], [-5.6, 48.7], [-10.0, 44.0], [-9.9, 38.5], [-7.5, 36.3], [-5.6, 35.95], [-2.0, 36.2], [3.0, 37.3], [10.0, 37.6], [12.5, 36.8], [19.0, 34.8], [26.0, 33.0], [30.5, 31.9], [32.35, 31.35], [32.56, 30.6], [32.56, 29.9], [33.4, 28.6], [34.6, 27.0], [37.0, 23.0], [39.5, 19.0], [41.5, 15.5], [43.35, 12.65], [45.5, 12.3], [49.0, 12.6], [52.5, 13.8]];
+var ARAB_TO_JEA = [[56.0, 16.5], [58.8, 20.5], [59.8, 22.8], [57.4, 25.4], [56.3, 26.55], [55.2, 25.9]];
+var CAPE_W = [[2.0, 51.1], [-1.5, 50.2], [-5.6, 48.7], [-12.0, 42.0], [-14.5, 32.0], [-18.5, 24.0], [-19.5, 15.0], [-15.0, 6.0], [-5.0, 0.0], [5.0, -9.0], [11.5, -20.0], [15.5, -31.0], [18.4, -35.6], [22.0, -36.6], [28.0, -35.5]];
+var CAPE_E_TO_ARAB = [[34.0, -33.0], [42.0, -27.0], [50.0, -20.0], [55.0, -10.0], [58.0, 2.0], [57.5, 12.0]];
+var MALACCA = [[103.3, 1.6], [101.0, 2.6], [98.5, 4.6], [95.6, 5.9], [88.0, 5.8], [80.6, 5.6], [75.0, 7.5], [66.0, 11.5], [57.0, 13.0]];
+var SCS = [[122.6, 30.6], [123.0, 28.5], [120.8, 25.5], [119.6, 23.6], [117.0, 22.0], [113.8, 20.8], [110.5, 16.5], [109.6, 12.0], [107.0, 7.5], [104.8, 3.2], [104.3, 1.35]];
+function rev(a){ return a.slice().reverse(); }
+var LANES = [
+  {k:"rtm-jea", from:"rtm", to:"jea", suez:true, path:[].concat(MED, ARAB_TO_JEA), cape:[].concat(CAPE_W, CAPE_E_TO_ARAB, ARAB_TO_JEA)},
+  {k:"sha-rtm", from:"sha", to:"rtm", suez:true, path:[].concat(SCS, MALACCA, rev(MED)), cape:[].concat(SCS, MALACCA.slice(0, 7), [[70.0, -2.0], [62.0, -14.0], [50.0, -26.0], [38.0, -33.0], [28.0, -35.5]], rev(CAPE_W))},
+  {k:"sha-lax", from:"sha", to:"lax", path:[[122.6, 30.6], [128.0, 31.5], [134.0, 33.0], [142.0, 36.0], [152.0, 39.5], [165.0, 42.0], [180.0, 43.0], [195.0, 42.5], [210.0, 40.0], [225.0, 36.5], [236.0, 34.5], [241.73, 33.73]]},
+  {k:"rtm-nyc", from:"rtm", to:"nyc", path:[[2.0, 51.1], [-1.5, 50.2], [-5.6, 49.3], [-15.0, 48.5], [-30.0, 46.5], [-45.0, 43.5], [-58.0, 41.5], [-68.0, 40.2], [-73.8, 40.45]]},
+  {k:"sin-sts", from:"sin", to:"sts", path:[[104.3, 1.35], [103.3, 1.6], [101.0, 2.6], [98.5, 4.6], [95.0, 2.0], [88.0, -8.0], [70.0, -20.0], [52.0, -28.0], [40.0, -31.5], [31.4, -30.2], [28.0, -34.5], [20.0, -36.2], [8.0, -33.0], [-10.0, -29.5], [-30.0, -26.5], [-46.1, -24.1]]},
+  {k:"jea-bom", from:"jea", to:"bom", path:[[55.2, 25.9], [56.3, 26.55], [57.6, 25.3], [61.0, 23.8], [66.0, 21.5], [71.5, 19.3], [72.8, 18.95]]}
+];
+
+
+  /* ---------- Sea distance along a lane (great circle per leg), in nautical miles ---------- */
+  function hav(a, b){ var R = 3440.065, t = Math.PI / 180, dLat = (b[1] - a[1]) * t, dLon = (b[0] - a[0]) * t; var h = Math.pow(Math.sin(dLat / 2), 2) + Math.cos(a[1] * t) * Math.cos(b[1] * t) * Math.pow(Math.sin(dLon / 2), 2); return 2 * R * Math.asin(Math.sqrt(h)); }
+  function full(L, cape){ return [PORTS[L.from].p].concat(cape ? L.cape : L.path, [PORTS[L.to].p]); }
+  function nm(pts){ var s = 0; for (var i = 1; i < pts.length; i++) s += hav(pts[i - 1], pts[i]); return s; }
+  var KN = 14, DAY = KN * 24;
+  var R0 = LANES[0], R1 = LANES[1];
+  var days = {d0:[nm(full(R0)) / DAY, nm(full(R0, true)) / DAY], d1:[nm(full(R1)) / DAY, nm(full(R1, true)) / DAY]};
+
+  /* ---------- The map ---------- */
+  var cv = $("#map"), ctx = cv.getContext("2d"), dotLayer = document.createElement("canvas"), dctx = dotLayer.getContext("2d");
+  var bits = Uint8Array.from(atob(LAND.b64), function(c){ return c.charCodeAt(0); });
+  var W = 0, H = 0, dpr = 1, S = 4, LONC = 40, LATC = 18, CX = 0, CY = 0, mob = false;
+  var closed = false, mix = 0, lanes = [], boxes = [], raf = 0, last = 0, on = true;
+  function proj(lon, lat){ var d = lon - LONC; while (d > 180) d -= 360; while (d < -180) d += 360; return [CX + d * S, CY - (lat - LATC) * S]; }
+  function projLane(pts){
+    // keep longitudes continuous along the lane, so a lane that crosses the date line runs off the edge instead of jumping
+    var out = [], prev = null;
+    pts.forEach(function(p){ var lon = p[0]; if (prev !== null){ while (lon - prev > 180) lon -= 360; while (lon - prev < -180) lon += 360; } prev = lon; var d = lon - LONC; out.push([CX + d * S, CY - (p[1] - LATC) * S]); });
+    if (out.length){ var mid = out[(out.length / 2) | 0][0]; if (mid - CX > 220 * S){ out = out.map(function(q){ return [q[0] - 360 * S, q[1]]; }); } else if (CX - mid > 220 * S){ out = out.map(function(q){ return [q[0] + 360 * S, q[1]]; }); } }
+    return smooth(out);
   }
-  requestAnimationFrame(frame);
-})();
+  function smooth(p){
+    // Catmull-Rom through the waypoints, then cumulative lengths for travel along it
+    var o = []; for (var i = 0; i < p.length - 1; i++){ var a = p[i - 1] || p[i], b = p[i], c = p[i + 1], d = p[i + 2] || c; for (var t = 0; t < 1; t += .125){ var t2 = t * t, t3 = t2 * t; o.push([.5 * ((2 * b[0]) + (-a[0] + c[0]) * t + (2 * a[0] - 5 * b[0] + 4 * c[0] - d[0]) * t2 + (-a[0] + 3 * b[0] - 3 * c[0] + d[0]) * t3), .5 * ((2 * b[1]) + (-a[1] + c[1]) * t + (2 * a[1] - 5 * b[1] + 4 * c[1] - d[1]) * t2 + (-a[1] + 3 * b[1] - 3 * c[1] + d[1]) * t3)]); } }
+    o.push(p[p.length - 1]); var L = [0]; for (var j = 1; j < o.length; j++) L.push(L[j - 1] + Math.hypot(o[j][0] - o[j - 1][0], o[j][1] - o[j - 1][1]));
+    return {p:o, L:L, len:L[L.length - 1]};
+  }
+  function at(g, s){
+    var d = s * g.len, lo = 0, hi = g.L.length - 1;
+    while (hi - lo > 1){ var m = (lo + hi) >> 1; if (g.L[m] < d) lo = m; else hi = m; }
+    var seg = g.L[hi] - g.L[lo] || 1, k = (d - g.L[lo]) / seg, a = g.p[lo], b = g.p[hi];
+    return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, Math.atan2(b[1] - a[1], b[0] - a[0])];
+  }
+  function layout(){
+    dpr = Math.min(devicePixelRatio || 1, 1.75); W = cv.clientWidth; H = cv.clientHeight; mob = W <= 760;
+    cv.width = W * dpr; cv.height = H * dpr; dotLayer.width = cv.width; dotLayer.height = cv.height;
+    S = mob ? W / 118 : Math.max(W / 270, H / 150); LONC = mob ? 52 : 38; LATC = mob ? 22 : 16;
+    CX = W * (mob ? .5 : .5); CY = H * (mob ? .5 : .52);
+    // dots
+    dctx.setTransform(dpr, 0, 0, dpr, 0, 0); dctx.clearRect(0, 0, W, H);
+    var r = Math.max(.8, S * .22); dctx.fillStyle = "#25466A";
+    for (var row = 0; row < LAND.rows; row++) for (var col = 0; col < LAND.cols; col++){
+      var i = row * LAND.cols + col; if (!((bits[i >> 3] >> (i & 7)) & 1)) continue;
+      var q = proj(LAND.lon0 + (col + .5) * LAND.step, LAND.lat0 - (row + .5) * LAND.step);
+      if (q[0] < -4 || q[0] > W + 4 || q[1] < -4 || q[1] > H + 4) continue;
+      dctx.beginPath(); dctx.arc(q[0], q[1], r, 0, 6.2832); dctx.fill();
+    }
+    lanes = LANES.map(function(L){ return {L:L, g:projLane(full(L)), c:L.cape ? projLane(full(L, true)) : null}; });
+    if (!boxes.length) seed();
+    draw();
+  }
+  function seed(){
+    boxes = [];
+    lanes.forEach(function(ln, li){
+      var n = Math.max(3, Math.round(nm(full(ln.L)) / 900));
+      for (var k = 0; k < n; k++) boxes.push({li:li, s:(k + Math.random() * .6) / n, v:.8 + Math.random() * .4, cape:false});
+      if (ln.c){ var n2 = Math.max(3, Math.round(nm(full(ln.L, true)) / 900)); for (var k2 = 0; k2 < n2; k2++) boxes.push({li:li, s:(k2 + Math.random() * .6) / n2, v:.8 + Math.random() * .4, cape:true}); }
+    });
+  }
+  function stroke(g, style, width, dash){
+    ctx.strokeStyle = style; ctx.lineWidth = width; ctx.setLineDash(dash || []); ctx.beginPath();
+    g.p.forEach(function(q, i){ if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function draw(){
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    ctx.drawImage(dotLayer, 0, 0, W, H);
+    lanes.forEach(function(ln){
+      if (ln.c){
+        stroke(ln.g, "rgba(127,178,229," + (.38 * (1 - mix)).toFixed(3) + ")", 1.3);
+        if (mix > .01) stroke(ln.g, "rgba(255,90,60," + (.75 * mix).toFixed(3) + ")", 1.3, [4, 5]);
+        stroke(ln.c, "rgba(127,178,229," + (.38 * mix).toFixed(3) + ")", 1.3);
+      } else stroke(ln.g, "rgba(127,178,229,.38)", 1.3);
+    });
+    // containers: a small box with a short wake, turned along the lane
+    boxes.forEach(function(b){
+      var ln = lanes[b.li], g = b.cape ? ln.c : ln.g; if (!g) return;
+      var a = ln.c ? (b.cape ? mix : 1 - mix) : 1; if (a < .02) return;
+      var q = at(g, b.s), w = Math.max(5, S * 1.2), h = Math.max(2.4, S * .55);
+      if (q[0] < -20 || q[0] > W + 20) return;
+      ctx.save(); ctx.translate(q[0], q[1]); ctx.rotate(q[2]); ctx.globalAlpha = a;
+      var grd = ctx.createLinearGradient(-w * 4, 0, 0, 0); grd.addColorStop(0, "rgba(255,107,26,0)"); grd.addColorStop(1, "rgba(255,107,26,.45)");
+      ctx.fillStyle = grd; ctx.fillRect(-w * 4, -h * .3, w * 4, h * .6);
+      ctx.fillStyle = "#FF6B1A"; ctx.fillRect(-w / 2, -h / 2, w, h);
+      ctx.restore();
+    });
+    ctx.globalAlpha = 1;
+    // Suez, when closed
+    if (mix > .01){
+      var sz = proj(32.45, 30.4); ctx.strokeStyle = "rgba(255,90,60," + mix.toFixed(3) + ")"; ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.moveTo(sz[0] - 7, sz[1] - 7); ctx.lineTo(sz[0] + 7, sz[1] + 7); ctx.moveTo(sz[0] + 7, sz[1] - 7); ctx.lineTo(sz[0] - 7, sz[1] + 7); ctx.stroke();
+    }
+    // ports
+    ctx.font = "500 " + (mob ? 10 : 11) + "px 'Plex Mono', monospace"; ctx.textBaseline = "middle";
+    Object.keys(PORTS).forEach(function(k){
+      var q = proj(PORTS[k].p[0], PORTS[k].p[1]); if (q[0] < 10 || q[0] > W - 10) return;
+      var home = k === "rtm" || k === "jea";
+      ctx.fillStyle = home ? "#FF6B1A" : "#E8EEF4"; ctx.beginPath(); ctx.arc(q[0], q[1], home ? 4 : 2.6, 0, 6.2832); ctx.fill();
+      if (home){ ctx.strokeStyle = "rgba(255,107,26,.4)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(q[0], q[1], 9, 0, 6.2832); ctx.stroke(); }
+      ctx.fillStyle = home ? "#FFB48A" : "rgba(232,238,244,.75)"; ctx.fillText(PORTS[k].n.toUpperCase(), q[0] + 8, q[1] - 9);
+    });
+  }
+  function tick(t){
+    raf = 0; if (!on) return;
+    var dt = Math.min(50, t - (last || t)) / 1000; last = t;
+    var target = closed ? 1 : 0; mix += (target - mix) * Math.min(1, dt * 3.2);
+    boxes.forEach(function(b){ var ln = lanes[b.li], g = b.cape ? ln.c : ln.g; if (!g) return; b.s += dt * b.v * 46 / g.len; if (b.s > 1) b.s -= 1; });
+    draw(); raf = requestAnimationFrame(tick);
+  }
+  window.addEventListener("resize", layout);
+  layout();
+  ZC.visible($(".hero"), function(v){ on = v && ZC.motion; if (on && !raf){ last = 0; raf = requestAnimationFrame(tick); } });
+
+  /* ---------- Close or reopen the Suez route ---------- */
+  var btn = $(".toggle"), tl = $(".js-tl"), D0 = $(".js-d0"), D1 = $(".js-d1"), X0 = $(".js-x0"), X1 = $(".js-x1");
+  function show(){
+    var i = closed ? 1 : 0;
+    D0.innerHTML = Math.round(days.d0[i]) + "<small>days</small>"; D1.innerHTML = Math.round(days.d1[i]) + "<small>days</small>";
+    // the difference is taken between the rounded figures shown, so the sums always add up on screen
+    X0.textContent = closed ? "+" + (Math.round(days.d0[1]) - Math.round(days.d0[0])) + " days around the Cape of Good Hope" : "";
+    X1.textContent = closed ? "+" + (Math.round(days.d1[1]) - Math.round(days.d1[0])) + " days around the Cape of Good Hope" : "";
+    tl.textContent = closed ? "Reopen the Suez route" : "Close the Suez route";
+  }
+  btn.addEventListener("click", function(){
+    closed = !closed; btn.setAttribute("aria-pressed", String(closed)); show();
+    if (!ZC.motion){ mix = closed ? 1 : 0; draw(); }
+    else if (window.gsap){ gsap.fromTo([D0, D1], {y:-8, opacity:.3}, {y:0, opacity:1, duration:.5, ease:"expo.out"}); }
+  });
+  show();
+
+  /* ---------- The software, in three small drawings ---------- */
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, a){ var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  (function see(){
+    var s = $(".js-see");
+    for (var i = 0; i < 9; i++){ var y = 22 + i * 12; s.appendChild(el("line", {x1:20, x2:280, y1:y, y2:y, stroke:"rgba(232,238,244,.08)"})); }
+    var segs = [[20,80,"#7FB2E5"],[80,108,"#FF6B1A"],[108,190,"#7FB2E5"],[190,214,"#FF6B1A"],[214,280,"#7FB2E5"]];
+    for (var r = 0; r < 5; r++){ var y2 = 34 + r * 20, off = (r * 23) % 40 - 20; segs.forEach(function(g){ s.appendChild(el("rect", {x:g[0] + off < 20 ? 20 : g[0] + off, y:y2 - 3, width:Math.max(2, g[1] - g[0] - 3), height:6, rx:2, fill:g[2], opacity:g[2] === "#FF6B1A" ? .95 : .55})); }); }
+  })();
+  (function eta(){
+    var s = $(".js-eta");
+    s.appendChild(el("line", {x1:20, x2:280, y1:110, y2:110, stroke:"rgba(232,238,244,.2)"}));
+    s.appendChild(el("path", {d:"M20 70 C 120 70, 200 70, 280 70", stroke:"rgba(232,238,244,.15)", fill:"none"}));
+    s.appendChild(el("path", {class:"cone", d:"M20 70 L280 22 L280 118 Z", fill:"rgba(255,107,26,.16)"}));
+    s.appendChild(el("path", {class:"cone2", d:"M20 70 L280 52 L280 88 Z", fill:"rgba(255,107,26,.35)"}));
+    s.appendChild(el("circle", {cx:280, cy:70, r:4, fill:"#FF6B1A"}));
+  })();
+  (function move(){
+    var s = $(".js-move");
+    s.appendChild(el("path", {d:"M24 104 C 90 104, 120 40, 276 36", stroke:"rgba(255,90,60,.8)", "stroke-width":2, "stroke-dasharray":"5 5", fill:"none"}));
+    s.appendChild(el("path", {class:"alt", d:"M24 104 C 110 130, 200 130, 276 36", stroke:"#7FB2E5", "stroke-width":2, fill:"none"}));
+    s.appendChild(el("circle", {cx:24, cy:104, r:5, fill:"#E8EEF4"})); s.appendChild(el("circle", {cx:276, cy:36, r:5, fill:"#FF6B1A"}));
+    var x = el("path", {d:"M136 56 l10 10 m0 -10 l-10 10", stroke:"#FF5A3C", "stroke-width":2.2}); s.appendChild(x);
+  })();
+
+  /* ---------- The journey: a box rides down the line as you read ---------- */
+  var jl = $(".jwrap"), box = $(".jwrap .box"), fill = $(".jwrap .fill"), steps = $$(".jline li");
+  function journey(){
+    var r = jl.getBoundingClientRect(), p = clamp((innerHeight * .55 - r.top) / (r.height - 40), 0, 1), y = p * (r.height - 40);
+    box.style.transform = "translateY(" + y.toFixed(1) + "px)"; fill.style.height = y.toFixed(1) + "px";
+    steps.forEach(function(li){ li.classList.toggle("on", li.offsetTop <= y + 12); });
+  }
+  window.addEventListener("scroll", journey, {passive:true}); journey();
+
+  window.addEventListener("load", function(){
+    if (!ZC.motion || !window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+    ZC.smooth();
+    document.fonts.ready.then(function(){
+      var h = SplitText.create(".hero h1", {type:"lines,words", mask:"lines"});
+      gsap.from(h.words, {yPercent:110, duration:1.1, stagger:.05, ease:"expo.out", delay:.1});
+      gsap.from(".kick, .hero .name", {opacity:0, y:14, duration:1, stagger:.1, ease:"expo.out", delay:.4});
+      gsap.from(".alexei", {opacity:0, x:40, duration:1.6, ease:"expo.out", delay:.2});
+      gsap.from(".ctl", {opacity:0, y:24, duration:1.1, ease:"expo.out", delay:.7});
+      gsap.from("#map", {opacity:0, duration:1.6, ease:"power2.out"});
+      gsap.from(".caps li", {opacity:0, y:30, duration:1, stagger:.1, ease:"expo.out", scrollTrigger:{trigger:".caps", start:"top 85%"}});
+      ScrollTrigger.create({trigger:".caps", start:"top 75%", once:true, onEnter:function(){
+        gsap.from(".js-see rect", {scaleX:0, transformOrigin:"left center", duration:.6, stagger:.012, ease:"power2.out"});
+        gsap.fromTo(".js-eta .cone2", {attr:{d:"M20 70 L280 22 L280 118 Z"}}, {attr:{d:"M20 70 L280 58 L280 82 Z"}, duration:2.4, ease:"power2.inOut", repeat:-1, yoyo:true, repeatDelay:.6});
+        gsap.from(".js-move .alt", {strokeDasharray:400, strokeDashoffset:400, duration:1.6, ease:"power2.inOut", delay:.4});
+      }});
+      gsap.from(".facts li", {opacity:0, x:-14, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:".facts", start:"top 86%"}});
+    });
+  });
+});
 </script>
 </body>
 </html>
