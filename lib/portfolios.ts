@@ -20,6 +20,8 @@ type T = Record<Lang, string>;
 export interface Portfolio {
   slug: string;
   name: string;
+  /** Shown first, in the order of the list, and grouped as "Featured" in the index. */
+  featured?: boolean;
   kind: Kind;
   category: Category;
   role: T;
@@ -42,16 +44,51 @@ const ALL: Device[] = ["desktop", "tablet", "mobile"];
 const PUBLISHED: T = { en: "Published portfolio", fr: "Portfolio publié", ar: "ملف مهني منشور" };
 
 export const PORTFOLIOS: Portfolio[] = [
-  // ── Live website ──────────────────────────────────────────────────────────────────────────
+  // ── Featured, in this order (chosen by Zenith Dubai CV) ──────────────────────────────────────
   {
-    slug: "wasim-akram", name: "Wasim Akram", kind: "live", category: "built", url: "https://wasim-akram-portfolio.netlify.app/",
+    slug: "wasim-akram", name: "Wasim Akram", featured: true, kind: "live", category: "built", url: "https://wasim-akram-portfolio.netlify.app/",
     tone: "#1E1914", stills: ["desktop", "mobile"], loop: false,
     role: { en: "3D Visualizer & Interior Designer", fr: "Visualiseur 3D et architecte d'intérieur", ar: "مصمم مرئيات ثلاثية الأبعاد ومصمم داخلي" },
     idea: PUBLISHED,
     line: { en: "His own website, shown live exactly as he published it.", fr: "Son propre site, présenté en direct tel qu'il l'a publié.", ar: "موقعه الخاص، معروض مباشرةً كما نشره تماماً." },
   },
+  {
+    slug: "awa-ndiaye", name: "Awa Ndiaye", featured: true, kind: "concept", category: "creative", url: "/samples/awa-ndiaye.html",
+    tone: "#E7E2DA", stills: ALL, loop: true,
+    role: { en: "Model & Brand Ambassador", fr: "Mannequin et ambassadrice de marque", ar: "عارضة أزياء وسفيرة علامات" },
+    idea: { en: "The campaign", fr: "La campagne", ar: "الحملة" },
+    line: { en: "A flash, a masthead and the model in front of it; then looks, a comp card and covers.", fr: "Un flash, un titre de magazine et le mannequin devant ; puis les looks, la composite et les couvertures.", ar: "ومضة فلاش وعنوان مجلة والعارضة أمامه، ثم الإطلالات وبطاقة التعريف والأغلفة." },
+  },
+  {
+    slug: "ananya-rao", name: "Ananya Rao", featured: true, kind: "concept", category: "music", url: "/samples/ananya-rao.html",
+    tone: "#0E0C0B", stills: ALL, loop: true,
+    role: { en: "Dancer & Choreographer", fr: "Danseuse et chorégraphe", ar: "راقصة ومصمّمة رقصات" },
+    idea: { en: "Chronophotography", fr: "Chronophotographie", ar: "التصوير المتتابع" },
+    line: { en: "A figure made of liquid particles, nine exposures of one turn, and floor patterns walked by a dot.", fr: "Une silhouette en particules liquides, neuf poses d'un même tour, et des tracés au sol parcourus par un point.", ar: "هيئة من جزيئات سائلة، وتسع لقطات لدورة واحدة، ومسارات على الأرض تقطعها نقطة." },
+  },
+  {
+    slug: "kofi-mensah", name: "Kofi Mensah", featured: true, kind: "concept", category: "music", url: "/samples/kofi-mensah.html",
+    tone: "#08070A", stills: ALL, loop: true,
+    role: { en: "DJ & Producer", fr: "DJ et producteur", ar: "دي جي ومنتج موسيقي" },
+    idea: { en: "The crate", fr: "Le bac à disques", ar: "صندوق الأسطوانات" },
+    line: { en: "A record floats above his fingertips, then flies into a crate of releases you can flip through.", fr: "Un disque flotte au-dessus de ses doigts puis s'envole vers un bac de sorties que l'on feuillette.", ar: "أسطوانة تطفو فوق أطراف أصابعه ثم تطير إلى صندوق إصدارات يمكنك تقليبها." },
+  },
+  {
+    slug: "mei-lin-zhou", name: "Mei Lin Zhou", featured: true, kind: "concept", category: "music", url: "/samples/mei-lin-zhou.html",
+    tone: "#F3EEE6", stills: ALL, loop: true,
+    role: { en: "Concert Pianist & Composer", fr: "Pianiste concertiste et compositrice", ar: "عازفة بيانو ومؤلفة موسيقية" },
+    idea: { en: "Resonance", fr: "Résonance", ar: "الرنين" },
+    line: { en: "Strings you can play stand behind her; the season is set on a staff and the recordings as Chladni figures.", fr: "Des cordes à jouer se tiennent derrière elle ; la saison est écrite sur une portée, les disques en figures de Chladni.", ar: "أوتار يمكنك العزف عليها خلفها، والموسم مدوَّن على مدرج موسيقي، والتسجيلات بأشكال كلادني." },
+  },
+  {
+    slug: "kenji-watanabe", name: "Kenji Watanabe", featured: true, kind: "concept", category: "creative", url: "/samples/kenji-watanabe.html",
+    tone: "#0C0C0D", stills: ALL, loop: true,
+    role: { en: "Portrait Photographer", fr: "Photographe portraitiste", ar: "مصوّر بورتريه" },
+    idea: { en: "Focus", fr: "La mise au point", ar: "ضبط التركيز" },
+    line: { en: "A curved strip of frames pulls focus on the centre one, then a contact sheet with loupe and grease pencil.", fr: "Une bande d'images incurvée fait le point sur celle du centre, puis une planche-contact avec loupe et crayon gras.", ar: "شريط صور منحنٍ يتّضح فيه الإطار الأوسط، ثم ورقة تلامس مع عدسة مكبّرة وقلم تأشير." },
+  },
 
-  // ── Hospitality & travel ──────────────────────────────────────────────────────────────────
+  // ── Hospitality & travel ──────────────────────────────────────────────────────────────────────
   {
     slug: "layla-haddad", name: "Layla Haddad", kind: "concept", category: "hospitality", url: "/samples/layla-haddad.html",
     tone: "#1C1915", stills: ALL, loop: true,
@@ -116,7 +153,7 @@ export const PORTFOLIOS: Portfolio[] = [
     line: { en: "A night cabin and a row of aircraft windows tell one Dubai to Los Angeles flight, ending on final approach.", fr: "Une cabine de nuit et une rangée de hublots racontent un Dubaï–Los Angeles, jusqu'à l'approche finale.", ar: "مقصورة ليلية وصفّ من نوافذ الطائرة يرويان رحلة من دبي إلى لوس أنجلوس، حتى الاقتراب النهائي." },
   },
 
-  // ── Healthcare ─────────────────────────────────────────────────────────────────────────────
+  // ── Healthcare ────────────────────────────────────────────────────────────────────────────────
   {
     slug: "amira-soliman", name: "Dr Amira Soliman", kind: "concept", category: "health", url: "/samples/amira-soliman.html",
     tone: "#F6F9FA", stills: ALL, loop: true,
@@ -132,7 +169,7 @@ export const PORTFOLIOS: Portfolio[] = [
     line: { en: "A running suture sews the page together, section by section, and ties off at the contact form.", fr: "Un surjet coud la page, section après section, et se noue au formulaire de contact.", ar: "خيط جراحي متصل يخيط الصفحة قسماً بعد قسم، ويُعقد عند نموذج التواصل." },
   },
 
-  // ── Business, finance & law ───────────────────────────────────────────────────────────────
+  // ── Business, finance & law ───────────────────────────────────────────────────────────────────
   {
     slug: "hannah-becker", name: "Hannah Becker", kind: "concept", category: "business", url: "/samples/hannah-becker.html",
     tone: "#F3F0E8", stills: ALL, loop: true,
@@ -176,7 +213,7 @@ export const PORTFOLIOS: Portfolio[] = [
     line: { en: "العدل is written stroke by stroke, and the site reads like a contract, in English and Arabic.", fr: "العدل s'écrit trait après trait, et le site se lit comme un contrat, en anglais et en arabe.", ar: "كلمة «العدل» تُكتب حرفاً حرفاً، والموقع يُقرأ كعقد بالإنجليزية والعربية." },
   },
 
-  // ── Architecture, engineering & tech ──────────────────────────────────────────────────────
+  // ── Architecture, engineering & tech ──────────────────────────────────────────────────────────
   {
     slug: "thomas-whitaker", name: "Thomas Whitaker", kind: "concept", category: "built", url: "/samples/thomas-whitaker.html",
     tone: "#ECE9E2", stills: ALL, loop: true,
@@ -199,13 +236,13 @@ export const PORTFOLIOS: Portfolio[] = [
     line: { en: "His portrait is sampled out of pure noise on a real diffusion schedule as you scroll.", fr: "Son portrait émerge du bruit pur, selon un vrai calendrier de diffusion, au fil du défilement.", ar: "صورته تتشكّل من ضجيج خالص وفق جدول انتشار حقيقي مع التمرير." },
   },
 
-  // ── Creative & media ──────────────────────────────────────────────────────────────────────
+  // ── Creative & media ──────────────────────────────────────────────────────────────────────────
   {
     slug: "karim-benjelloun", name: "Karim Benjelloun", kind: "concept", category: "creative", url: "/samples/karim-benjelloun.html",
-    tone: "#050909", stills: ALL, loop: true,
+    tone: "#EFEAE0", stills: ALL, loop: true,
     role: { en: "Film Director", fr: "Réalisateur", ar: "مخرج سينمائي" },
-    idea: { en: "Cinema", fr: "Cinéma", ar: "سينما" },
-    line: { en: "Opening titles, a widescreen frame, film grain and a running timecode: the site plays like a film.", fr: "Générique d'ouverture, format scope, grain et timecode : le site se déroule comme un film.", ar: "تترات افتتاحية وإطار سينمائي عريض وحبيبات فيلم ومؤقّت يعمل: الموقع يُعرض كفيلم." },
+    idea: { en: "The storyboard", fr: "Le storyboard", ar: "اللوحات المصوّرة" },
+    line: { en: "His close-up develops out of a pencil drawing, and five films play as animatics cut from his storyboard panels.", fr: "Son gros plan naît d'un dessin au crayon, et cinq films défilent en animatiques montés à partir de ses planches.", ar: "لقطته القريبة تنبثق من رسم بالقلم، وخمسة أفلام تُعرض كمشاهد متحركة مركّبة من لوحاته المرسومة." },
   },
   {
     slug: "freja-lindqvist", name: "Freja Lindqvist", kind: "concept", category: "creative", url: "/samples/freja-lindqvist.html",
@@ -215,55 +252,20 @@ export const PORTFOLIOS: Portfolio[] = [
     line: { en: "A moodboard you can rearrange turns into the finished campaign poster.", fr: "Un moodboard que l'on peut réarranger devient l'affiche de campagne finale.", ar: "لوحة إلهام يمكنك إعادة ترتيبها تتحوّل إلى ملصق الحملة النهائي." },
   },
   {
-    slug: "kenji-watanabe", name: "Kenji Watanabe", kind: "concept", category: "creative", url: "/samples/kenji-watanabe.html",
-    tone: "#0C0C0D", stills: ALL, loop: true,
-    role: { en: "Portrait Photographer", fr: "Photographe portraitiste", ar: "مصوّر بورتريه" },
-    idea: { en: "Focus", fr: "La mise au point", ar: "ضبط التركيز" },
-    line: { en: "A curved strip of frames pulls focus on the centre one, then a contact sheet with loupe and grease pencil.", fr: "Une bande d'images incurvée fait le point sur celle du centre, puis une planche-contact avec loupe et crayon gras.", ar: "شريط صور منحنٍ يتّضح فيه الإطار الأوسط، ثم ورقة تلامس مع عدسة مكبّرة وقلم تأشير." },
-  },
-  {
     slug: "sofia-bianchi", name: "Sofia Bianchi", kind: "concept", category: "creative", url: "/samples/sofia-bianchi.html",
     tone: "#F26B4F", stills: ALL, loop: true,
     role: { en: "Food & Travel Creator", fr: "Créatrice de contenu cuisine et voyage", ar: "صانعة محتوى في الطعام والسفر" },
     idea: { en: "Stickers", fr: "Les autocollants", ar: "الملصقات" },
     line: { en: "A die-cut sticker of her slaps onto the page, with stickers you can move and a pizza-chart media kit.", fr: "Un autocollant découpé à son effigie se colle sur la page, avec des stickers à déplacer et un kit média en pizza.", ar: "ملصق مقصوص لها يُلصق على الصفحة، مع ملصقات يمكن تحريكها وملف إعلامي بمخطط على شكل بيتزا." },
   },
-  {
-    slug: "awa-ndiaye", name: "Awa Ndiaye", kind: "concept", category: "creative", url: "/samples/awa-ndiaye.html",
-    tone: "#E7E2DA", stills: ALL, loop: true,
-    role: { en: "Model & Brand Ambassador", fr: "Mannequin et ambassadrice de marque", ar: "عارضة أزياء وسفيرة علامات" },
-    idea: { en: "The campaign", fr: "La campagne", ar: "الحملة" },
-    line: { en: "A flash, a masthead and the model in front of it; then looks, a comp card and covers.", fr: "Un flash, un titre de magazine et le mannequin devant ; puis les looks, la composite et les couvertures.", ar: "ومضة فلاش وعنوان مجلة والعارضة أمامه، ثم الإطلالات وبطاقة التعريف والأغلفة." },
-  },
 
-  // ── Music & performance ───────────────────────────────────────────────────────────────────
-  {
-    slug: "mei-lin-zhou", name: "Mei Lin Zhou", kind: "concept", category: "music", url: "/samples/mei-lin-zhou.html",
-    tone: "#F3EEE6", stills: ALL, loop: true,
-    role: { en: "Concert Pianist & Composer", fr: "Pianiste concertiste et compositrice", ar: "عازفة بيانو ومؤلفة موسيقية" },
-    idea: { en: "Resonance", fr: "Résonance", ar: "الرنين" },
-    line: { en: "Strings you can play stand behind her; the season is set on a staff and the recordings as Chladni figures.", fr: "Des cordes à jouer se tiennent derrière elle ; la saison est écrite sur une portée, les disques en figures de Chladni.", ar: "أوتار يمكنك العزف عليها خلفها، والموسم مدوَّن على مدرج موسيقي، والتسجيلات بأشكال كلادني." },
-  },
-  {
-    slug: "kofi-mensah", name: "Kofi Mensah", kind: "concept", category: "music", url: "/samples/kofi-mensah.html",
-    tone: "#08070A", stills: ALL, loop: true,
-    role: { en: "DJ & Producer", fr: "DJ et producteur", ar: "دي جي ومنتج موسيقي" },
-    idea: { en: "The crate", fr: "Le bac à disques", ar: "صندوق الأسطوانات" },
-    line: { en: "A record floats above his fingertips, then flies into a crate of releases you can flip through.", fr: "Un disque flotte au-dessus de ses doigts puis s'envole vers un bac de sorties que l'on feuillette.", ar: "أسطوانة تطفو فوق أطراف أصابعه ثم تطير إلى صندوق إصدارات يمكنك تقليبها." },
-  },
+  // ── Music & performance ───────────────────────────────────────────────────────────────────────
   {
     slug: "valentina-rios", name: "Valentina Ríos", kind: "concept", category: "music", url: "/samples/valentina-rios.html",
     tone: "#060405", stills: ALL, loop: true,
     role: { en: "Singer", fr: "Chanteuse", ar: "مغنّية" },
     idea: { en: "Spotlight", fr: "La poursuite", ar: "بقعة الضوء" },
     line: { en: "The house lights go down and a follow spot finds her; the lyrics light up word by word as you scroll.", fr: "La salle s'éteint et une poursuite la trouve ; les paroles s'allument mot à mot au défilement.", ar: "تنطفئ أضواء القاعة ويجدها ضوء المتابعة، وتضيء كلمات الأغنية كلمةً كلمة مع التمرير." },
-  },
-  {
-    slug: "ananya-rao", name: "Ananya Rao", kind: "concept", category: "music", url: "/samples/ananya-rao.html",
-    tone: "#0E0C0B", stills: ALL, loop: true,
-    role: { en: "Dancer & Choreographer", fr: "Danseuse et chorégraphe", ar: "راقصة ومصمّمة رقصات" },
-    idea: { en: "Chronophotography", fr: "Chronophotographie", ar: "التصوير المتتابع" },
-    line: { en: "A figure made of liquid particles, nine exposures of one turn, and floor patterns walked by a dot.", fr: "Une silhouette en particules liquides, neuf poses d'un même tour, et des tracés au sol parcourus par un point.", ar: "هيئة من جزيئات سائلة، وتسع لقطات لدورة واحدة، ومسارات على الأرض تقطعها نقطة." },
   },
 ];
 

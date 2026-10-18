@@ -49,6 +49,7 @@ const TX = {
   creative:  { en: "Creative & media", fr: "Création et médias", ar: "الإبداع والإعلام" },
   music:     { en: "Music & performance", fr: "Musique et scène", ar: "الموسيقى والأداء" },
   index:     { en: "Index", fr: "Index", ar: "الفهرس" },
+  featured:  { en: "Featured", fr: "À la une", ar: "مختارات" },
   showList:  { en: "Show the full list", fr: "Afficher la liste complète", ar: "عرض القائمة الكاملة" },
   hideList:  { en: "Hide the list", fr: "Masquer la liste", ar: "إخفاء القائمة" },
   firstOf:   { en: "First screen of the website of", fr: "Premier écran du site de", ar: "الشاشة الأولى لموقع" },
@@ -433,10 +434,10 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
     else if (e.key === "End") { e.preventDefault(); go(list.length - 1); }
   };
 
-  // Group the index by field when everything is shown.
-  const groups: { cat: Category | "live"; items: Portfolio[] }[] = [];
+  // Group the index when everything is shown: the featured sites first, then by field.
+  const groups: { cat: Category | "featured"; items: Portfolio[] }[] = [];
   for (const p of list) {
-    const g = p.kind === "live" ? "live" : p.category;
+    const g = p.featured ? "featured" : p.category;
     const last = groups[groups.length - 1];
     if (last && last.cat === g) last.items.push(p); else groups.push({ cat: g, items: [p] });
   }
@@ -645,8 +646,8 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
               {groups.map(g => (
                 <li key={g.cat} className="list-none">
                   {filter === "all" && (
-                    <p className="pt-5 pb-1.5 text-[9.5px] uppercase" style={{ color: g.cat === "live" ? (dark ? "#3DBE78" : LIVE) : (dark ? G : "#8A6A2E"), fontFamily: theme.ui, letterSpacing: tracking }}>
-                      {g.cat === "live" ? t("liveF", lang) : t(g.cat, lang)} <span className="font-mono" style={{ color: theme.sub }}>· {g.items.length}</span>
+                    <p className="pt-5 pb-1.5 text-[9.5px] uppercase" style={{ color: dark ? G : "#8A6A2E", fontFamily: theme.ui, letterSpacing: tracking }}>
+                      {t(g.cat, lang)} <span className="font-mono" style={{ color: theme.sub }}>· {g.items.length}</span>
                     </p>
                   )}
                   <ol>
