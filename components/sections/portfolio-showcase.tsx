@@ -180,10 +180,14 @@ function Recording({ slug }: { slug: string }) {
     <video
       className="zx-fade absolute inset-0 size-full object-cover object-top"
       style={{ opacity: on ? 1 : 0 }}
-      src={preview.loop(slug)}
       muted loop playsInline autoPlay preload="auto" aria-hidden="true" tabIndex={-1}
+      ref={v => { if (v) { v.defaultMuted = true; v.muted = true; } }}
+      onCanPlay={e => { e.currentTarget.play().catch(() => { /* autoplay refused: the still stays */ }); }}
       onPlaying={() => setOn(true)}
-    />
+    >
+      <source src={preview.loop(slug, "webm")} type="video/webm" />
+      <source src={preview.loop(slug, "mp4")} type="video/mp4" />
+    </video>
   );
 }
 

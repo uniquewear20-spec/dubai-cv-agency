@@ -33,7 +33,7 @@ export interface Portfolio {
   tone: string;
   /** Captures that exist in /public/samples/previews (live sites cannot be recaptured from here). */
   stills: Device[];
-  /** A short motion capture of the opening (desktop), /public/samples/previews/<slug>-loop.mp4. */
+  /** A short recording of the opening (desktop), /public/samples/previews/<slug>-loop.webm and .mp4. */
   loop: boolean;
 }
 
@@ -275,7 +275,7 @@ export const preview = {
   desktop: (slug: string) => `${P}${slug}-d.webp`,   // 1440 × 900 viewport
   tablet: (slug: string) => `${P}${slug}-tab.webp`,  // 820 × 1180 viewport
   mobile: (slug: string) => `${P}${slug}-m.webp`,    // 390 × 844 viewport
-  loop: (slug: string) => `${P}${slug}-loop.mp4`,    // 960 × 600, the opening seconds
+  loop: (slug: string, ext: "webm" | "mp4") => `${P}${slug}-loop.${ext}`, // 960 × 600, the opening seconds (VP9 and H.264)
 };
 
 /** Address shown in the stage and viewer address bars. */
