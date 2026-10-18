@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dr Imogen Hale — Ornithologist · Concept site</title>
+<meta name="description" content="Dr Imogen Hale, ornithologist and behavioural ecologist: how starlings turn as one. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1D2B44">
+<link rel="preload" href="fonts/literata-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-tight-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
+<style>
+@font-face{font-family:"Literata";src:url(fonts/literata-latin-wght-normal.woff2) format("woff2");font-weight:200 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Literata";src:url(fonts/literata-latin-wght-italic.woff2) format("woff2");font-weight:200 900;font-style:italic;font-display:swap}
+@font-face{font-family:"DM Mono";src:url(fonts/dm-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"DM Mono";src:url(fonts/dm-mono-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Inter Tight";src:url(fonts/inter-tight-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-display:block}
+:root{
+  --sky1:#1D2B44;--sky2:#E89A6A;--sun:#FFD2A0;--cream:#F6EDE0;--paper:#EEE8DA;--paper2:#E4DCC8;--ink:#14100F;--ink2:#3D3833;--mute:#655E54;
+  --reed:#B98A4E;--olive:#4E5233;--ember:#C8643B;--ember-t:#A14A25;
+  --serif:"Literata",Georgia,serif;--mono:"DM Mono",ui-monospace,Menlo,monospace;
+  --pad:clamp(18px,4.6vw,72px);
+  --zc-bg:#F6EDE0;--zc-fg:#14100F;--zc-dot:#C8643B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--sky1)}
+body{background:var(--paper);color:var(--ink);font:400 18px/1.65 var(--serif);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+.mono{font:400 12px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Header: light over the sky, paper once the sky has gone */
+.top{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px var(--pad);color:var(--cream);transition:background .35s,color .35s,border-color .35s;border-bottom:1px solid transparent}
+.top.lifted{background:rgba(29,43,68,.9);border-color:rgba(246,237,224,.12);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.top.solid{background:rgba(238,232,218,.94);color:var(--ink);border-color:rgba(20,16,15,.12);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.brand{font:600 19px/1 var(--serif);text-decoration:none;letter-spacing:-.01em}
+.top nav{display:flex;gap:clamp(12px,2vw,26px)}
+.top nav a{text-decoration:none;opacity:.78;padding:6px 0;border-bottom:1px solid transparent}
+.top nav a:hover,.top nav a[aria-current]{opacity:1;border-color:currentColor}
+
+/* HERO — the murmuration */
+.hero{position:relative;height:100vh;height:100svh;min-height:620px;overflow:hidden;background:var(--sky1);color:var(--cream);isolation:isolate}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero::before{content:"";position:absolute;z-index:1;left:0;top:0;width:min(760px,90vw);height:56%;background:radial-gradient(80% 90% at 0% 10%,rgba(13,20,34,.55),transparent 70%);pointer-events:none}
+.hero .over{position:absolute;z-index:2;left:var(--pad);top:clamp(96px,15vh,150px);max-width:min(620px,86vw);pointer-events:none}
+.hero .kicker{color:#F3C9A3}
+.hero h1{margin-top:14px;font:400 clamp(46px,6.2vw,96px)/.98 var(--serif);letter-spacing:-.025em}
+.hero h1 em{font-style:italic;font-weight:300}
+.hero .lede{margin-top:18px;max-width:34ch;font-size:clamp(18px,1.5vw,22px);line-height:1.5;color:#F1E4D4}
+.hero .hint{position:absolute;z-index:2;left:var(--pad);bottom:clamp(22px,3.6vh,36px);display:flex;align-items:center;gap:14px;color:var(--cream);text-shadow:0 1px 8px rgba(20,16,15,.8)}
+.hero .hint button{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid rgba(246,237,224,.45);border-radius:999px;background:rgba(20,16,15,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.hero .hint button:hover{background:rgba(20,16,15,.6)}
+.hero .hint svg{width:12px;height:12px}
+
+/* Sections */
+.sec{position:relative;padding:clamp(100px,11vw,160px) var(--pad)}
+.eyebrow{display:flex;justify-content:space-between;gap:20px;border-top:1px solid rgba(20,16,15,.25);padding-top:14px;margin-bottom:clamp(30px,4vw,56px);color:var(--mute)}
+.h2{font:400 clamp(40px,5.2vw,84px)/1 var(--serif);letter-spacing:-.025em;max-width:16ch}
+.h2 em{font-style:italic;font-weight:300}
+
+/* 01 SEVEN NEIGHBOURS */
+.sgrid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5vw,90px);align-items:start}
+.sgrid p{margin-top:20px;max-width:46ch;color:var(--ink2)}
+.ctrl{margin-top:30px;padding:20px 22px;background:var(--paper2);border-radius:4px}
+.ctrl label{display:flex;justify-content:space-between;gap:12px;color:var(--ink2)}
+.ctrl output{font:500 22px/1 var(--mono);color:var(--ink);letter-spacing:0}
+.ctrl input[type=range]{width:100%;margin-top:14px;accent-color:var(--ember-t);height:28px}
+.ctrl .readout{margin-top:10px;color:var(--ink)}
+.ctrl .readout b{font-weight:500;color:var(--ember-t)}
+.ctrl .again{margin-top:14px;padding:9px 14px;border:1px solid rgba(20,16,15,.35);border-radius:999px}
+.ctrl .again:hover{background:var(--ink);color:var(--paper)}
+.sim{margin:0;position:sticky;top:96px}
+.sim .box{position:relative;aspect-ratio:4/3;border-radius:4px;overflow:hidden;background-color:#F4EFE3;background-image:radial-gradient(rgba(20,16,15,.16) 1px,transparent 1.4px);background-size:18px 18px;box-shadow:inset 0 0 0 1px rgba(20,16,15,.14)}
+.sim canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:crosshair}
+.sim figcaption{margin-top:12px;color:var(--mute)}
+
+/* 02 FIELD LOG — a notebook */
+.log{background-color:var(--paper);background-image:radial-gradient(rgba(20,16,15,.12) 1px,transparent 1.4px);background-size:22px 22px}
+.entries{list-style:none;display:grid;gap:clamp(60px,8vw,120px);margin-top:clamp(40px,5vw,70px)}
+.entry{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.entry:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1.35fr)}
+.entry:nth-child(even) figure{order:2}
+.entry figure{margin:0;position:relative}
+.entry figure img{width:100%;height:auto;border-radius:3px;box-shadow:0 24px 50px -30px rgba(20,16,15,.55)}
+.entry.tall{grid-template-columns:minmax(0,.8fr) minmax(0,1fr)}
+.entry.tall figure{max-width:440px}
+.page .head{color:var(--ember-t);border-bottom:1px dashed rgba(20,16,15,.3);padding-bottom:10px}
+.page h3{margin-top:16px;font:400 clamp(28px,2.6vw,40px)/1.08 var(--serif);letter-spacing:-.02em}
+.page p{margin-top:14px;color:var(--ink2);max-width:44ch}
+.shapes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:22px;max-width:460px}
+.shapes figure{margin:0;text-align:center}
+.shapes svg{width:100%;height:auto;aspect-ratio:1/.7}
+.shapes svg path{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round}
+.shapes figcaption{margin-top:4px;color:var(--mute);font-size:10.5px}
+
+/* 03 WORK — back to dusk */
+.work{background:linear-gradient(180deg,#1D2B44 0%,#3B3550 55%,#7A4F4A 100%);color:var(--cream)}
+.work .eyebrow{border-color:rgba(246,237,224,.3);color:#E7CDB6}
+.work .h2{max-width:22ch}
+.projects{list-style:none;margin-top:clamp(40px,5vw,70px);border-top:1px solid rgba(246,237,224,.3)}
+.projects li{display:grid;grid-template-columns:9em minmax(0,1fr);gap:20px;padding:26px 0;border-bottom:1px solid rgba(246,237,224,.3)}
+.projects .yr{color:#F3C9A3;padding-top:8px}
+.projects h3{font:400 clamp(26px,2.4vw,36px)/1.1 var(--serif);letter-spacing:-.015em}
+.projects p{margin-top:8px;max-width:58ch;color:#EADCCB}
+
+/* CONTACT */
+.contact{background:#7A4F4A;color:var(--cream);padding-bottom:70px}
+.contact .eyebrow{border-color:rgba(246,237,224,.3);color:#F0D2BC}
+.contact .lead{margin-top:22px;max-width:46ch;color:#F3E2D2}
+.cgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,40px);margin-top:clamp(36px,4vw,56px)}
+.cgrid div{border-top:1px solid rgba(246,237,224,.4);padding-top:12px}
+.cgrid .mono{display:block;color:#F0D2BC;margin-bottom:8px}
+.cgrid a,.cgrid p{font:400 clamp(19px,1.6vw,23px)/1.35 var(--serif);text-decoration:none;overflow-wrap:anywhere}
+.cgrid a{border-bottom:1px solid rgba(246,237,224,.6)}
+.cgrid a:hover{border-color:var(--sun)}
+footer{background:#7A4F4A;color:#E9CDBC;padding:28px var(--pad) 96px;font-size:14px;line-height:1.65;border-top:1px solid rgba(246,237,224,.2)}
+
+@media (max-width:1000px){
+  .top nav a:not(:last-child){display:none}
+  .top nav a:last-child{padding:7px 14px;border:1px solid currentColor;border-radius:999px;opacity:.9}
+  .sgrid,.entry,.entry:nth-child(even),.entry.tall{grid-template-columns:minmax(0,1fr)}
+  .entry:nth-child(even) figure{order:0}
+  .sim{position:relative;top:0}
+}
+@media (max-width:700px){
+  .hero .over{top:88px}
+  .hero .hint{right:var(--pad);flex-wrap:wrap;gap:8px 14px}
+  .projects li{grid-template-columns:minmax(0,1fr);gap:6px}
+  .cgrid{grid-template-columns:minmax(0,1fr)}
+  .shapes{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+}
+@media (prefers-reduced-motion:reduce){.top{transition:none}}
+</style>
+</head>
+<body>
+<header class="top" data-headroom="1.2">
+  <a class="brand" href="#top">Imogen Hale</a>
+  <nav class="mono" aria-label="Sections"><a href="#seven" data-spy>Seven neighbours</a><a href="#log" data-spy>Field log</a><a href="#work" data-spy>Work</a><a href="#contact" data-spy>Contact</a></nav>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <canvas class="js-sky" aria-hidden="true"></canvas>
+    <div class="over">
+      <p class="kicker mono">Ornithologist · Behavioural ecologist</p>
+      <h1 id="h1">Dr Imogen <em>Hale</em></h1>
+      <p class="lede">I study how a hundred thousand starlings turn as one, and what each bird is watching when they do.</p>
+    </div>
+    <p class="sr">Over a dusk sky and a reed bed, a simulated flock of starlings rolls and folds, and every few seconds forms the word Hale.</p>
+    <div class="hint mono"><span class="js-hint">Move the pointer: you are the hawk</span><button type="button" class="js-pause" aria-pressed="false"><svg viewBox="0 0 12 12" aria-hidden="true"><path class="js-ico" d="M3 2v8M9 2v8" stroke="currentColor" stroke-width="2" fill="none"/></svg><span class="js-pl">Pause the flock</span></button></div>
+  </section>
+
+  <section class="sec" id="seven" aria-labelledby="seven-h">
+    <div class="eyebrow mono"><span>01 · The question</span><span>Collective motion</span></div>
+    <div class="sgrid">
+      <div>
+        <h2 class="h2" id="seven-h" data-lines>Nobody leads. <em>Each bird watches seven.</em></h2>
+        <p>There is no leader in a murmuration, and no plan. Studies of starling flocks over Rome found that each bird keeps track of about six or seven of its nearest neighbours, whether they are close by or far away. That is enough for a turn to sweep across thousands of birds.</p>
+        <p>Try it in a small model: change how many neighbours each bird watches and see what holds the flock together.</p>
+        <div class="ctrl">
+          <label for="k" class="mono"><span>Neighbours each bird watches</span><output class="js-kout" for="k">7</output></label>
+          <input id="k" class="js-k" type="range" min="1" max="20" value="7" step="1">
+          <p class="mono readout js-pieces" aria-live="polite">The flock is in <b>1</b> piece.</p>
+          <button type="button" class="again mono js-again">Release the flock again</button>
+        </div>
+      </div>
+      <figure class="sim">
+        <div class="box"><canvas class="js-sim" role="img" aria-label="A simulated flock on a page of a field notebook. Each bird steers by its nearest neighbours; lines link one bird to the neighbours it watches."></canvas></div>
+        <figcaption class="mono js-simcap">A simplified model for illustration · Hover a bird to see whom it watches</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec log" id="log" aria-labelledby="log-h">
+    <div class="eyebrow mono"><span>02 · Field log</span><span>October to March, at dusk</span></div>
+    <h2 class="h2" id="log-h" data-lines>The roost comes in <em>at dusk.</em></h2>
+    <ol class="entries">
+      <li class="entry">
+        <figure><img src="img/imogen-hale/field-1264.webp" srcset="img/imogen-hale/field-760.webp 760w, img/imogen-hale/field-1264.webp 1264w" sizes="(max-width:1000px) 92vw, 56vw" width="1264" height="848" alt="Imogen Hale in a green knitted hat and waxed jacket, smiling, notebook in hand, in a reed bed at dusk; a murmuration stretches across the sky behind her." loading="lazy"></figure>
+        <div class="page">
+          <p class="mono head">17 Nov · 16:18 · The Levels · 6°C, westerly 2</p>
+          <h3>Counting a roost</h3>
+          <p>The birds come in waves from every direction for about forty minutes before sunset. I count in blocks of a thousand, and I'm often wrong by a third.</p>
+        </div>
+      </li>
+      <li class="entry">
+        <figure><img src="img/imogen-hale/platform-1264.webp" srcset="img/imogen-hale/platform-760.webp 760w, img/imogen-hale/platform-1264.webp 1264w" sizes="(max-width:1000px) 92vw, 56vw" width="1264" height="848" alt="Imogen Hale on a wooden platform above the reeds, filming two flocks of starlings with a camera on a tripod." loading="lazy"></figure>
+        <div class="page">
+          <p class="mono head">3 Dec · 16:02 · The platform · 4°C, still</p>
+          <h3>Three cameras, one flock</h3>
+          <p>Cameras set apart on the same flock, synchronised, so that afterwards every bird can be placed in three dimensions and its neighbours counted rather than guessed.</p>
+        </div>
+      </li>
+      <li class="entry tall">
+        <figure><img src="img/imogen-hale/notebook-928.webp" srcset="img/imogen-hale/notebook-600.webp 600w, img/imogen-hale/notebook-928.webp 928w" sizes="(max-width:1000px) 92vw, 440px" width="928" height="1152" alt="Gloved hands sketch flock shapes and tally marks in a dotted field notebook, binoculars below, a murmuration over the reeds beyond." loading="lazy"></figure>
+        <div class="page">
+          <p class="mono head">Every evening · minute by minute</p>
+          <h3>Shapes, sketched</h3>
+          <p>The cameras can't tell me what a flock felt like, so I still draw it: the shape every minute, with a tally of how long each one holds.</p>
+          <div class="shapes" aria-hidden="true">
+            <figure><svg viewBox="0 0 70 49"><path d="M4 34C16 18 26 30 36 22S56 10 66 16"/><path d="M6 38C18 24 28 34 38 26S56 16 64 20"/></svg><figcaption class="mono">Ribbon</figcaption></figure>
+            <figure><svg viewBox="0 0 70 49"><path d="M35 8C52 8 60 20 58 30S44 44 32 42 10 34 12 24 22 8 35 8Z"/><path d="M30 18C40 16 48 22 46 30"/></svg><figcaption class="mono">Ball</figcaption></figure>
+            <figure><svg viewBox="0 0 70 49"><path d="M4 30C14 10 24 10 34 26S54 42 66 18"/><path d="M8 34C16 18 24 18 32 30"/></svg><figcaption class="mono">Wave</figcaption></figure>
+            <figure><svg viewBox="0 0 70 49"><path d="M20 6C40 6 50 10 40 24S38 42 52 44"/><path d="M20 6C8 14 34 20 30 26S16 40 22 44H52"/></svg><figcaption class="mono">Hourglass</figcaption></figure>
+            <figure><svg viewBox="0 0 70 49"><path d="M6 24C14 12 24 14 28 22S20 34 10 30Z"/><path d="M40 18C50 8 64 12 64 22S52 36 42 30 36 24 40 18Z"/></svg><figcaption class="mono">Split</figcaption></figure>
+          </div>
+        </div>
+      </li>
+      <li class="entry">
+        <figure><img src="img/imogen-hale/dawn-1264.webp" srcset="img/imogen-hale/dawn-760.webp 760w, img/imogen-hale/dawn-1264.webp 1264w" sizes="(max-width:1000px) 92vw, 56vw" width="1264" height="848" alt="On a jetty in the morning fog, Imogen Hale writes in her notebook, binoculars on her chest, ducks on the water." loading="lazy"></figure>
+        <div class="page">
+          <p class="mono head">12 Jan · 07:41 · The mere · 1°C, fog</p>
+          <h3>Dawn, the quieter count</h3>
+          <p>In the morning the roost lifts in a few minutes, and the counts are better than at dusk. A flask of coffee, the notebook, and nobody else on the jetty.</p>
+        </div>
+      </li>
+      <li class="entry">
+        <figure><img src="img/imogen-hale/woods-1264.webp" srcset="img/imogen-hale/woods-760.webp 760w, img/imogen-hale/woods-1264.webp 1264w" sizes="(max-width:1000px) 92vw, 56vw" width="1264" height="848" alt="Imogen Hale looks up through binoculars among trees, low sun flaring through the leaves." loading="lazy"></figure>
+        <div class="page">
+          <p class="mono head">May to July · Woodland edges</p>
+          <h3>When the flocks are gone</h3>
+          <p>In spring the murmurations break up into pairs. I follow the same birds into hedges and woodland to their nests, and wait for autumn.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="sec work" id="work" aria-labelledby="work-h">
+    <div class="eyebrow mono"><span>03 · Work</span><span>Selected projects</span></div>
+    <h2 class="h2" id="work-h" data-lines>What I'm <em>working on.</em></h2>
+    <ol class="projects">
+      <li><span class="mono yr">2019 –</span><div><h3>Flocks in three dimensions</h3><p>Synchronised cameras on the same flock, so that every bird can be rebuilt in three dimensions and its neighbours measured.</p></div></li>
+      <li><span class="mono yr">2016 –</span><div><h3>The roost census</h3><p>A volunteer network that counts the winter roosts across the Levels on the same Sunday every January.</p></div></li>
+      <li><span class="mono yr">2022 –</span><div><h3>Hawk and flock</h3><p>How a murmuration opens around a peregrine or a sparrowhawk, and how quickly it closes again. The pointer at the top of this page is that hawk.</p></div></li>
+      <li><span class="mono yr">Ongoing</span><div><h3>Talks and films</h3><p>Public walks at dusk, school visits, and scientific advice for wildlife film crews.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="sec contact" id="contact" aria-labelledby="contact-h">
+    <div class="eyebrow mono"><span>04 · Contact</span><span>Talks, fieldwork, filming</span></div>
+    <h2 class="h2" id="contact-h" data-lines>Come and watch <em>at dusk.</em></h2>
+    <p class="lead">For talks, fieldwork collaborations and advice on filming flocks without disturbing the roost.</p>
+    <div class="cgrid">
+      <div><span class="mono">Email</span><a href="mailto:imogen@halefield.example" data-demo>imogen@halefield.example</a></div>
+      <div><span class="mono">Talks &amp; walks</span><a href="#" data-demo="This is a concept site, so talks can't be booked here.">Book a dusk walk</a></div>
+      <div><span class="mono">Season</span><p>October to March</p></div>
+    </div>
+  </section>
+</main>
+<footer>Imogen Hale is fictional and this is a concept website. Her photographs were generated with AI. The flock at the top of the page and the seven-neighbours model are simulations; field-log dates, places, counts and projects are illustrative. The "six or seven neighbours" finding refers to published research on starling flocks in Rome (Ballerini and colleagues, 2008). The murmuration header adapts the Murmuration Wordmark component supplied for this collection. A concept website by Zenith Dubai CV.</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC, $ = function(s, r){ return (r || document).querySelector(s); }, $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var finePointer = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+
+  /* ---------- The murmuration (ported from the Murmuration Wordmark component) ---------- */
+  function rnd(seed){ var a = (seed >>> 0) || 1; return function(){ a = (a + 0x6d2b79f5) >>> 0; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function curl(x, y, t){
+    var a = 1.7 * x + t, b = 1.3 * y - .6 * t, c = 2.9 * y + 1.1 * x - .8 * t, d = 4.3 * x - 3.7 * y + 1.3 * t;
+    var dpdx = 1.7 * Math.cos(a) * Math.cos(b) + .6 * 1.1 * Math.cos(c) - .35 * 4.3 * Math.sin(d);
+    var dpdy = -1.3 * Math.sin(a) * Math.sin(b) + .6 * 2.9 * Math.cos(c) + .35 * 3.7 * Math.sin(d);
+    return [dpdy, -dpdx];
+  }
+  function centre(t){ return [.42 * Math.sin(t * .21) + .12 * Math.sin(t * .53 + 1), .16 * Math.sin(t * .33 + 2) - .08]; }
+  function ease(k){ var x = k < 0 ? 0 : k > 1 ? 1 : k; return x * x * (3 - 2 * x); }
+  function assign(birds, points, seed){
+    var out = new Int32Array(birds); if (points <= 0){ out.fill(-1); return out; }
+    var order = new Int32Array(points), r = rnd(seed), i, j, tmp;
+    for (i = 0; i < points; i++) order[i] = i;
+    for (i = points - 1; i > 0; i--){ j = Math.floor(r() * (i + 1)); tmp = order[i]; order[i] = order[j]; order[j] = tmp; }
+    for (i = 0; i < birds; i++) out[i] = order[i % points];
+    return out;
+  }
+  function alpha(hex, a){ var h = hex.replace("#", ""); return "rgba(" + parseInt(h.slice(0, 2), 16) + "," + parseInt(h.slice(2, 4), 16) + "," + parseInt(h.slice(4, 6), 16) + "," + a + ")"; }
+
+  function Murmuration(root, canvas, o){
+    var ctx = canvas.getContext("2d"), still = !ZC.motion;
+    var w = 1, h = 1, dpr = 1, n = 0, raf = 0, visible = true, paused = false, sky = null;
+    var px, py, vx, vy, depth, phase, target, tx = new Float32Array(0), ty = new Float32Array(0);
+    var hx = -1e5, hy = -1e5, last = performance.now(), clock = o.startAt || 0, r = rnd(11);
+    function layout(){
+      var rect = root.getBoundingClientRect();
+      w = Math.max(1, Math.round(rect.width)); h = Math.max(1, Math.round(rect.height)); dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+      sky = document.createElement("canvas"); sky.width = canvas.width; sky.height = canvas.height;
+      var s = sky.getContext("2d"); s.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var g = s.createLinearGradient(0, 0, 0, h); g.addColorStop(0, o.skyTop); g.addColorStop(.78, o.skyLow); g.addColorStop(1, o.skyLow);
+      s.fillStyle = g; s.fillRect(0, 0, w, h);
+      var sun = s.createRadialGradient(w * .62, h * .86, 0, w * .62, h * .86, Math.max(w, h) * .55);
+      sun.addColorStop(0, o.sun); sun.addColorStop(.25, alpha(o.sun, .5)); sun.addColorStop(1, alpha(o.sun, 0));
+      s.globalAlpha = .55; s.fillStyle = sun; s.fillRect(0, 0, w, h); s.globalAlpha = 1;
+      var gr = rnd(5), i;
+      for (i = 0; i < (w * h) / 10; i++){ s.fillStyle = gr() < .5 ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.035)"; s.fillRect(gr() * w, gr() * h, 1, 1); }
+      // the reed bed along the bottom, stalks leaning with the wind
+      s.strokeStyle = o.ink; s.fillStyle = o.ink;
+      var base = h - Math.max(6, h * .012); s.fillRect(0, base, w, h - base);
+      for (var x = -10; x < w + 10; x += 2 + gr() * 9){
+        if (gr() < .18) x += gr() * 30;
+        var tall = Math.pow(gr(), 1.6) * Math.max(34, h * .13) + 6, lean = (gr() - .3) * 10;
+        s.lineWidth = .6 + gr() * 1.2; s.beginPath(); s.moveTo(x, base + 2); s.quadraticCurveTo(x + lean * .3, base - tall * .6, x + lean, base - tall); s.stroke();
+        if (gr() < .07){ s.beginPath(); s.ellipse(x + lean, base - tall - 4, 1.8, 6, lean * .04, 0, Math.PI * 2); s.fill(); }
+      }
+      // the word, sampled into points on a 1x mask
+      var m = document.createElement("canvas"); m.width = w; m.height = h;
+      var mc = m.getContext("2d", {willReadFrequently:true}), pts = [];
+      mc.font = "900 100px " + o.font;
+      var ww = mc.measureText(o.word).width || 1, size = Math.min((w * o.wordW / ww) * 100, (h * o.maxH) / .72);
+      mc.font = "900 " + size + "px " + o.font; mc.textAlign = "center"; mc.textBaseline = "middle";
+      mc.fillText(o.word, w / 2, h * o.wordY);
+      var img = mc.getImageData(0, 0, w, h).data, step = Math.max(2, Math.round(Math.sqrt((w * h) / 90000))), y;
+      for (y = 0; y < h; y += step) for (x = 0; x < w; x += step) if (img[(y * w + x) * 4 + 3] > 128) pts.push(x + (r() - .5) * step, y + (r() - .5) * step);
+      tx = new Float32Array(pts.length / 2); ty = new Float32Array(pts.length / 2);
+      for (i = 0; i < tx.length; i++){ tx[i] = pts[i * 2]; ty[i] = pts[i * 2 + 1]; }
+      var want = Math.round(Math.max(600, Math.min(9000, o.birds)) * Math.min(1, (w * h) / (1440 * 860)));
+      if (want !== n){
+        n = Math.max(500, want);
+        px = new Float32Array(n); py = new Float32Array(n); vx = new Float32Array(n); vy = new Float32Array(n); depth = new Float32Array(n); phase = new Float32Array(n);
+        for (i = 0; i < n; i++){ var a = r() * Math.PI * 2, rr = Math.sqrt(r()); px[i] = w * .5 + Math.cos(a) * rr * w * .22; py[i] = h * o.centreY + Math.sin(a) * rr * h * .16; vx[i] = Math.cos(a) * 40; vy[i] = Math.sin(a) * 40; depth[i] = .55 + r() * .45; phase[i] = r() * Math.PI * 2; }
+      }
+      target = assign(n, tx.length, 23);
+      if (still){ for (i = 0; i < n; i++){ var ti = target[i]; if (ti >= 0){ px[i] = tx[ti] + (r() - .5) * 2; py[i] = ty[ti] + (r() - .5) * 2; vx[i] = 30 + r() * 10; vy[i] = (r() - .5) * 20; } } draw(1); }
+    }
+    function draw(pull){
+      ctx.setTransform(1, 0, 0, 1, 0, 0); if (sky) ctx.drawImage(sky, 0, 0);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      for (var pass = 0; pass < 2; pass++){
+        ctx.beginPath();
+        for (var i = 0; i < n; i++){
+          var near = depth[i] > .78; if ((pass === 1) !== near) continue;
+          var s = (1.6 + depth[i] * 2.2) * (1 - .35 * pull), sp = Math.hypot(vx[i], vy[i]) + .001, dx = vx[i] / sp, dy = vy[i] / sp, flap = .55 + .45 * Math.sin(phase[i]);
+          var bx = px[i], by = py[i], wx = -dx * s, wy = -dy * s, nx = -dy * s * flap, ny = dx * s * flap;
+          ctx.moveTo(bx + wx + nx, by + wy + ny); ctx.lineTo(bx, by); ctx.lineTo(bx + wx - nx, by + wy - ny);
+        }
+        ctx.strokeStyle = o.ink; ctx.globalAlpha = pass === 0 ? .55 : .92; ctx.lineWidth = pass === 0 ? .9 : 1.25; ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+    function frame(now){
+      raf = 0;
+      if (!visible || paused){ last = now; return; }
+      raf = requestAnimationFrame(frame);
+      var dt = Math.min(.05, (now - last) / 1000); last = now; clock += dt;
+      var cycle = o.flyFor + 2.4 + o.holdFor + .6, tc = clock % cycle, fly = o.flyFor, pull = 0;
+      if (tc > fly && tc <= fly + 2.4) pull = ease((tc - fly) / 2.4);
+      else if (tc > fly + 2.4 && tc <= fly + 2.4 + o.holdFor) pull = 1;
+      else if (tc > fly + 2.4 + o.holdFor) pull = 1 - ease((tc - fly - 2.4 - o.holdFor) / .6);
+      var u = Math.min(w, h), cen = centre(clock), cxp = w / 2 + cen[0] * w * .5, cyp = h * o.centreY + cen[1] * h, t = clock * .35, hawk = hx > -1e4, hawkR = u * .16;
+      for (var i = 0; i < n; i++){
+        var x = px[i], y = py[i], ax = 0, ay = 0, fx = (x - w / 2) / u, fy = (y - h / 2) / u, cv = curl(fx * 2.2 + depth[i] * .25, fy * 2.2, t), free = 1 - pull;
+        ax += cv[0] * 420 * free; ay += cv[1] * 420 * free;
+        var dxC = cxp - x, dyC = (cyp - y) * 1.6, dC = Math.hypot(dxC, dyC) / u, hold = dC < .14 ? .15 : .15 + (dC - .14) * 6;
+        ax += dxC * hold * 2.2 * free; ay += dyC * hold * 1.6 * free;
+        var ti = target[i];
+        if (pull > 0 && ti >= 0){ ax += (tx[ti] - x) * 9 * pull - vx[i] * 3.2 * pull; ay += (ty[ti] - y) * 9 * pull - vy[i] * 3.2 * pull; }
+        if (hawk){ var hdx = x - hx, hdy = y - hy, d2 = hdx * hdx + hdy * hdy; if (d2 < hawkR * hawkR){ var d = Math.sqrt(d2) + .01, f = (1 - d / hawkR) * 5200; ax += hdx / d * f; ay += hdy / d * f; } }
+        var nvx = (vx[i] + ax * dt) * (1 - 1.1 * dt), nvy = (vy[i] + ay * dt) * (1 - 1.1 * dt), sp = Math.hypot(nvx, nvy), cap = 520 + 380 * pull;
+        if (sp > cap){ nvx = nvx / sp * cap; nvy = nvy / sp * cap; }
+        vx[i] = nvx; vy[i] = nvy; px[i] = x + nvx * dt; py[i] = y + nvy * dt; phase[i] += dt * (9 + sp * .02);
+      }
+      draw(pull);
+    }
+    function kick(){ if (!raf && !still && visible && !paused){ last = performance.now(); raf = requestAnimationFrame(frame); } }
+    root.addEventListener("pointermove", function(e){ var b = canvas.getBoundingClientRect(); hx = e.clientX - b.left; hy = e.clientY - b.top; });
+    root.addEventListener("pointerleave", function(){ hx = hy = -1e5; });
+    var rt = 0; window.addEventListener("resize", function(){ clearTimeout(rt); rt = setTimeout(layout, 120); });
+    ZC.visible(root, function(v){ visible = v; kick(); }, "0px");
+    layout(); kick();
+    if (document.fonts && document.fonts.load) document.fonts.load("900 100px " + o.font).then(layout);
+    return {pause:function(p){ paused = p; if (!p) kick(); }, still:still};
+  }
+  var flock = Murmuration($(".hero"), $(".js-sky"), {word:"HALE", birds:4200, flyFor:7, holdFor:3.2, startAt:4.2, wordY:innerHeight > innerWidth ? .68 : .72, wordW:innerHeight > innerWidth ? .84 : .6, maxH:.3, centreY:.52, font:'"Inter Tight", "Helvetica Neue", Arial, sans-serif', skyTop:"#1D2B44", skyLow:"#E89A6A", sun:"#FFD2A0", ink:"#14100F"});
+  var pauseBtn = $(".js-pause");
+  if (flock.still){ pauseBtn.hidden = true; $(".js-hint").textContent = "The flock has formed her name"; }
+  else if (!finePointer) $(".js-hint").textContent = "Touch the sky: you are the hawk";
+  pauseBtn.addEventListener("click", function(){
+    var p = pauseBtn.getAttribute("aria-pressed") !== "true";
+    pauseBtn.setAttribute("aria-pressed", p ? "true" : "false"); $(".js-pl").textContent = p ? "Play the flock" : "Pause the flock";
+    $(".js-ico").setAttribute("d", p ? "M3 2l7 4-7 4z" : "M3 2v8M9 2v8"); flock.pause(p);
+  });
+
+  /* ---------- Header: paper once the sky has scrolled away ---------- */
+  var top = $(".top");
+  if ("IntersectionObserver" in window) new IntersectionObserver(function(es){ top.classList.toggle("solid", !es[0].isIntersecting); }, {rootMargin:"-70px 0px 0px 0px"}).observe($(".hero"));
+  /* while the sky is still in view, a dusk-coloured band keeps the name and links clear of the hero title */
+  function lifted(){ top.classList.toggle("lifted", scrollY > 12); }
+  addEventListener("scroll", lifted, {passive:true}); lifted();
+
+  /* ---------- Seven neighbours: a small topological flocking model ---------- */
+  var simC = $(".js-sim"), sctx = simC.getContext("2d"), kIn = $(".js-k"), kOut = $(".js-kout"), pieces = $(".js-pieces");
+  var SN = innerWidth < 700 ? 150 : 230, K = 7, SW = 1, SH = 1, sdpr = 1, sr = rnd(42), focus = -1, autoF = 0, hoverF = -1, frameN = 0, simRaf = 0, simOn = false;
+  var X = new Float32Array(SN), Y = new Float32Array(SN), VX = new Float32Array(SN), VY = new Float32Array(SN), NB = new Int32Array(SN * 20), ND = new Float32Array(20);
+  // One flock, released together: close birds, roughly the same heading.
+  function seed(){
+    var a0 = sr() * Math.PI * 2;
+    for (var i = 0; i < SN; i++){
+      var r = Math.sqrt(sr()) * Math.min(SW, SH) * .16, a = sr() * Math.PI * 2, hd = a0 + (sr() - .5) * .8;
+      X[i] = SW / 2 + Math.cos(a) * r; Y[i] = SH / 2 + Math.sin(a) * r; VX[i] = Math.cos(hd) * 1.4; VY[i] = Math.sin(hd) * 1.4;
+    }
+    frameN = 0; autoF = -999;
+  }
+  function sizeSim(){
+    var r = simC.getBoundingClientRect(), ow = SW, oh = SH; SW = Math.max(1, r.width); SH = Math.max(1, r.height); sdpr = Math.min(devicePixelRatio || 1, 2);
+    simC.width = Math.round(SW * sdpr); simC.height = Math.round(SH * sdpr);
+    if (ow > 1){ for (var i = 0; i < SN; i++){ X[i] *= SW / ow; Y[i] *= SH / oh; } }
+  }
+  function neighbours(){
+    for (var i = 0; i < SN; i++){
+      var cnt = 0, j, d, q;
+      for (j = 0; j < SN; j++){
+        if (j === i) continue;
+        d = (X[j] - X[i]) * (X[j] - X[i]) + (Y[j] - Y[i]) * (Y[j] - Y[i]);
+        if (cnt < K){ q = cnt++; } else if (d < ND[K - 1]){ q = K - 1; } else continue;
+        while (q > 0 && ND[q - 1] > d){ ND[q] = ND[q - 1]; NB[i * 20 + q] = NB[i * 20 + q - 1]; q--; }
+        ND[q] = d; NB[i * 20 + q] = j;
+      }
+    }
+  }
+  function step(){
+    neighbours();
+    var sc = Math.min(SW, SH) / 420;
+    for (var i = 0; i < SN; i++){
+      var ax = 0, ay = 0, cx = 0, cy = 0, sx = 0, sy = 0;
+      for (var q = 0; q < K; q++){
+        var j = NB[i * 20 + q]; ax += VX[j]; ay += VY[j]; cx += X[j]; cy += Y[j];
+        var dx = X[i] - X[j], dy = Y[i] - Y[j], d = Math.hypot(dx, dy) + .01;
+        if (d < 9 * sc){ sx += dx / d * (9 * sc - d); sy += dy / d * (9 * sc - d); }
+      }
+      ax /= K; ay /= K; cx = cx / K - X[i]; cy = cy / K - Y[i];
+      VX[i] += (ax - VX[i]) * .1 + cx * .006 + sx * .09;
+      VY[i] += (ay - VY[i]) * .1 + cy * .006 + sy * .09;
+      // stay on the page
+      var m = 46 * sc;
+      if (X[i] < m) VX[i] += .06 * (1 - X[i] / m); if (X[i] > SW - m) VX[i] -= .06 * (1 - (SW - X[i]) / m);
+      if (Y[i] < m) VY[i] += .06 * (1 - Y[i] / m); if (Y[i] > SH - m) VY[i] -= .06 * (1 - (SH - Y[i]) / m);
+      // a little noise in every bird's heading
+      var a = (sr() - .5) * .1, ca = Math.cos(a), sa = Math.sin(a), nvx = VX[i] * ca - VY[i] * sa, nvy = VX[i] * sa + VY[i] * ca;
+      var sp = Math.hypot(nvx, nvy) + .0001, want = 1.55 * sc + .1;
+      VX[i] = nvx / sp * (sp + (want - sp) * .1); VY[i] = nvy / sp * (sp + (want - sp) * .1);
+      X[i] += VX[i]; Y[i] += VY[i];
+    }
+  }
+  function countPieces(){
+    var parent = new Int32Array(SN), i, j, R = 26 * Math.min(SW, SH) / 420, R2 = R * R;
+    for (i = 0; i < SN; i++) parent[i] = i;
+    function find(a){ while (parent[a] !== a){ parent[a] = parent[parent[a]]; a = parent[a]; } return a; }
+    for (i = 0; i < SN; i++) for (j = i + 1; j < SN; j++){ var dx = X[i] - X[j], dy = Y[i] - Y[j]; if (dx * dx + dy * dy < R2){ var a = find(i), b = find(j); if (a !== b) parent[a] = b; } }
+    var sizes = {}, n = 0; for (i = 0; i < SN; i++){ var r = find(i); sizes[r] = (sizes[r] || 0) + 1; }
+    for (var k in sizes) if (sizes[k] >= 3) n++;
+    return Math.max(1, n);
+  }
+  function drawSim(){
+    sctx.setTransform(sdpr, 0, 0, sdpr, 0, 0); sctx.clearRect(0, 0, SW, SH);
+    var f = hoverF >= 0 ? hoverF : focus, i, q;
+    if (f >= 0){
+      sctx.strokeStyle = "rgba(200,100,59,.75)"; sctx.lineWidth = 1.2; sctx.beginPath();
+      for (q = 0; q < K; q++){ var j = NB[f * 20 + q]; sctx.moveTo(X[f], Y[f]); sctx.lineTo(X[j], Y[j]); }
+      sctx.stroke();
+      sctx.fillStyle = "rgba(200,100,59,.18)"; sctx.beginPath(); sctx.arc(X[f], Y[f], 11, 0, 7); sctx.fill();
+    }
+    sctx.beginPath();
+    for (i = 0; i < SN; i++){
+      var sp = Math.hypot(VX[i], VY[i]) + .001, dx = VX[i] / sp, dy = VY[i] / sp, s = 3.6, flap = .6 + .4 * Math.sin(frameN * .25 + i);
+      sctx.moveTo(X[i] - dx * s - dy * s * flap, Y[i] - dy * s + dx * s * flap); sctx.lineTo(X[i], Y[i]); sctx.lineTo(X[i] - dx * s + dy * s * flap, Y[i] - dy * s - dx * s * flap);
+    }
+    sctx.strokeStyle = "#14100F"; sctx.lineWidth = 1.2; sctx.stroke();
+    if (f >= 0){
+      sctx.strokeStyle = "#A14A25"; sctx.lineWidth = 2; sctx.beginPath();
+      for (q = 0; q < K; q++){ var n2 = NB[f * 20 + q]; sctx.moveTo(X[n2] + 3, Y[n2]); sctx.arc(X[n2], Y[n2], 3, 0, 7); }
+      sctx.stroke();
+    }
+  }
+  function report(){ var p = countPieces(); pieces.innerHTML = "The flock is in <b>" + p + "</b> " + (p === 1 ? "piece" : "pieces") + "."; }
+  function simTick(){
+    simRaf = 0; if (!simOn) return;
+    step(); frameN++;
+    if (hoverF < 0 && frameN - autoF > 240){ autoF = frameN; var bx = 0, by = 0, i; for (i = 0; i < SN; i++){ bx += X[i]; by += Y[i]; } bx /= SN; by /= SN; var best = 0, bd = 1e9; for (i = 0; i < SN; i++){ var d = Math.hypot(X[i] - bx, Y[i] - by) + sr() * 30; if (d < bd){ bd = d; best = i; } } focus = best; }
+    if (frameN % 30 === 0) report();
+    drawSim(); simRaf = requestAnimationFrame(simTick);
+  }
+  function settle(steps){ for (var s = 0; s < steps; s++) step(); focus = 0; drawSim(); report(); }
+  sizeSim(); seed();
+  if (ZC.motion){
+    ZC.visible($(".sim"), function(v){ simOn = v; if (v && !simRaf) simRaf = requestAnimationFrame(simTick); }, "0px");
+  } else settle(420);
+  // A new flock is released with the new rule (debounced while the slider moves). Without motion, the model is
+  // run to its end once the slider is let go, and only the result is drawn.
+  var rel = 0;
+  kIn.addEventListener("input", function(){ K = +kIn.value; kOut.textContent = K; if (ZC.motion){ clearTimeout(rel); rel = setTimeout(function(){ seed(); report(); }, 260); } });
+  kIn.addEventListener("change", function(){ if (!ZC.motion){ seed(); settle(420); } });
+  $(".js-again").addEventListener("click", function(){ seed(); if (ZC.motion) report(); else settle(420); });
+  simC.addEventListener("pointermove", function(e){ var r = simC.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, best = -1, bd = 34 * 34; for (var i = 0; i < SN; i++){ var d = (X[i] - x) * (X[i] - x) + (Y[i] - y) * (Y[i] - y); if (d < bd){ bd = d; best = i; } } hoverF = best; if (!ZC.motion){ if (best >= 0) focus = best; drawSim(); } });
+  simC.addEventListener("pointerleave", function(){ hoverF = -1; });
+  simC.addEventListener("pointerdown", function(e){ if (e.pointerType !== "mouse"){ var r = simC.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, best = 0, bd = 1e9; for (var i = 0; i < SN; i++){ var d = (X[i] - x) * (X[i] - x) + (Y[i] - y) * (Y[i] - y); if (d < bd){ bd = d; best = i; } } focus = best; autoF = frameN; if (!ZC.motion) drawSim(); } });
+  if (!finePointer) $(".js-simcap").textContent = "A simplified model for illustration · Tap a bird to see whom it watches";
+  window.addEventListener("resize", function(){ sizeSim(); drawSim(); });
+
+  /* ---------- Choreography ---------- */
+  window.addEventListener("load", function(){
+    if (!ZC.motion || !window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+    ZC.smooth();
+    document.fonts.ready.then(function(){
+      if (window.scrollY < 40){
+        gsap.timeline({defaults:{ease:"expo.out"}})
+          .from(".hero .kicker", {opacity:0, y:10, duration:1}, .3)
+          .from(".hero h1", {opacity:0, y:24, duration:1.6}, .4)
+          .from(".hero .lede", {opacity:0, y:14, duration:1.2}, .7)
+          .from(".hero .hint", {opacity:0, duration:1}, 1.2);
+      }
+      $$("[data-lines]").forEach(function(h){
+        SplitText.create(h, {type:"lines", mask:"lines", autoSplit:true, onSplit:function(self){
+          return gsap.from(self.lines, {yPercent:105, duration:1.1, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:h, start:"top 86%"}});
+        }});
+      });
+      $$(".entry").forEach(function(e){
+        gsap.from($("figure", e), {clipPath:"inset(0 0 100% 0)", duration:1.4, ease:"expo.inOut", scrollTrigger:{trigger:e, start:"top 80%"}});
+        gsap.from($$(".page > *", e), {opacity:0, y:16, duration:1, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:e, start:"top 75%"}});
+      });
+      gsap.from(".projects li", {opacity:0, y:24, duration:1, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:".projects", start:"top 85%"}});
+      ScrollTrigger.refresh();
+    });
+  });
+});
+</script>
+</body>
+</html>

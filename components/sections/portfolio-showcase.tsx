@@ -48,6 +48,7 @@ const TX = {
   built:     { en: "Architecture, engineering & tech", fr: "Architecture, ingénierie et tech", ar: "العمارة والهندسة والتقنية" },
   creative:  { en: "Creative & media", fr: "Création et médias", ar: "الإبداع والإعلام" },
   music:     { en: "Music & performance", fr: "Musique et scène", ar: "الموسيقى والأداء" },
+  science:   { en: "Science & research", fr: "Sciences et recherche", ar: "العلوم والبحث" },
   index:     { en: "Index", fr: "Index", ar: "الفهرس" },
   featured:  { en: "Featured", fr: "À la une", ar: "مختارات" },
   showList:  { en: "Show the full list", fr: "Afficher la liste complète", ar: "عرض القائمة الكاملة" },

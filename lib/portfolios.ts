@@ -7,12 +7,12 @@
 //              /samples/<slug>.html and says on the page that the person, employers, clients and
 //              figures are illustrative and that the portrait was generated with AI.
 //
-// Every number shown in the exhibition (headline, filter counts, "07 / 30") is derived from
+// Every number shown in the exhibition (headline, filter counts, "07 / <total>") is derived from
 // this list, so adding or removing an entry keeps the counts honest.
 
 export type Lang = "en" | "ar" | "fr";
 export type Kind = "live" | "concept";
-export type Category = "hospitality" | "health" | "business" | "built" | "creative" | "music";
+export type Category = "hospitality" | "health" | "business" | "built" | "creative" | "music" | "science";
 export type Device = "desktop" | "tablet" | "mobile";
 
 type T = Record<Lang, string>;
@@ -267,9 +267,18 @@ export const PORTFOLIOS: Portfolio[] = [
     idea: { en: "Spotlight", fr: "La poursuite", ar: "بقعة الضوء" },
     line: { en: "The house lights go down and a follow spot finds her; the lyrics light up word by word as you scroll.", fr: "La salle s'éteint et une poursuite la trouve ; les paroles s'allument mot à mot au défilement.", ar: "تنطفئ أضواء القاعة ويجدها ضوء المتابعة، وتضيء كلمات الأغنية كلمةً كلمة مع التمرير." },
   },
+
+  // ── Science & research ────────────────────────────────────────────────────────────────────────
+  {
+    slug: "imogen-hale", name: "Dr Imogen Hale", kind: "concept", category: "science", url: "/samples/imogen-hale.html",
+    tone: "#1D2B44", stills: ALL, loop: true,
+    role: { en: "Ornithologist & Behavioural Ecologist", fr: "Ornithologue et écologue du comportement", ar: "عالمة طيور وبيئة سلوكية" },
+    idea: { en: "The murmuration", fr: "La murmuration", ar: "سرب الزرازير" },
+    line: { en: "Thousands of starlings form her name over the reeds; then a small model shows why each bird watches about seven neighbours.", fr: "Des milliers d'étourneaux forment son nom au-dessus des roseaux ; puis un petit modèle montre pourquoi chaque oiseau observe environ sept voisins.", ar: "آلاف الزرازير تشكّل اسمها فوق القصب، ثم نموذج صغير يبيّن لماذا يراقب كل طائر نحو سبعة من جيرانه." },
+  },
 ];
 
-export const CATEGORIES: Category[] = ["hospitality", "health", "business", "built", "creative", "music"];
+export const CATEGORIES: Category[] = ["hospitality", "health", "business", "built", "creative", "music", "science"];
 
 const P = "/samples/previews/";
 /** Captures of each website's first screen, taken from the real pages. */
