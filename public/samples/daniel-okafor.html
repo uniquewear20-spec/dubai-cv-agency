@@ -428,8 +428,8 @@ document.addEventListener("DOMContentLoaded", function(){
       gsap.from(".readout > *", {opacity:0, y:10, duration:.8, stagger:.08, ease:"expo.out", delay:.8});
       if (!mob){
         ScrollTrigger.create({trigger:".hero", start:"top top", end:"+=130%", pin:true, scrub:true,
+          animation:gsap.to(".hero .copy", {yPercent:-6, ease:"none", paused:true}),
           onUpdate:function(self){ scrollT = self.progress > .002 ? START * (1 - self.progress) : T; apply(); }});
-        gsap.to(".hero .copy", {yPercent:-6, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"+=130%", scrub:true}});
       } else {
         ScrollTrigger.create({trigger:".field", start:"top top", end:"bottom top", scrub:true,
           onUpdate:function(self){ scrollT = self.progress > .002 ? START * (1 - Math.min(1, self.progress * 1.6)) : T; apply(); }});
