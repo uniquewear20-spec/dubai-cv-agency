@@ -3,313 +3,417 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#FBF5EC">
-<title>Grace Wanjiku · Nurse Manager, RN — Concept site by Zenith Dubai CV</title>
-<meta name="description" content="Concept portfolio website for a fictional nurse manager, designed by Zenith Dubai CV.">
-<link rel="preload" href="img/grace-wanjiku-640.webp" as="image" type="image/webp">
-<link rel="preload" href="fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css">
+<title>Dr Grace Wanjiku — Paediatric surgeon · Concept site</title>
+<meta name="description" content="Dr Grace Wanjiku, paediatric surgeon in Nairobi. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FBF6EE">
+<link rel="preload" href="fonts/lexend-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" imagesrcset="img/grace-wanjiku/cut-640.webp 653w, img/grace-wanjiku/cut.webp 928w" imagesizes="(max-width:760px) 80vw, 74vh" fetchpriority="high">
 <script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/vendor/DrawSVGPlugin.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
 <style>
-/* Concept: on shift. Her staff ID hangs from a lanyard and sways gently, as it
-   would on a ward round. The day on her unit is a shift timeline with a live
-   "now" marker set to Abu Dhabi time, and outcomes read as before-and-after bars.
-   Warm, human and steady, like the units she runs. */
+@font-face{font-family:"Lexend";src:url(fonts/lexend-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Lora";src:url(fonts/lora-latin-wght-italic.woff2) format("woff2");font-weight:400 700;font-style:italic;font-display:swap}
 :root{
-  --cream:#FBF5EC; --cream2:#F3EADC; --navy:#1E3866; --navy2:#152A4F; --ink:#1F2A3A; --text:#3A475A; --mute:#6A7587; --coral:#E07A5F; --mint:#CDE8DF; --mint2:#A9D6C8; --line:rgba(30,56,102,.14);
-  --serif:"Fraunces",Georgia,serif; --sans:"Nunito Sans","Helvetica Neue",Arial,sans-serif;
-  --zc-bg:#1E3866; --zc-fg:#fff; --zc-dot:#E07A5F;
+  --cream:#FBF6EE;--peach:#F7DCC6;--peach2:#FCEBDD;--apricot:#E9946A;--navy:#1D2A55;--ink:#1F2233;--grey:#5E6072;--line:rgba(29,42,85,.14);--violet:#6B4BA1;--violetL:#B9A6DA;--teal:#11706E;
+  --sans:"Lexend","Helvetica Neue",Arial,sans-serif;--serif:"Lora",Georgia,serif;
+  --pad:clamp(18px,4.4vw,72px);--gut:0px;
+  --zc-bg:#1D2A55;--zc-fg:#FBF6EE;--zc-dot:#E9946A;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--cream);color:var(--text);font:400 18px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
-img{max-width:100%;height:auto;display:block}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
-.wrap{max-width:1200px;margin:0 auto;padding-left:max(26px,env(safe-area-inset-left,0px));padding-right:max(26px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--cream)}
+body{background:var(--cream);color:var(--ink);font:300 17.5px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:4px}
+main{position:relative;overflow-x:clip}
+.lab{font:500 12px/1.4 var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+em{font-family:var(--serif);font-style:italic;font-weight:400}
 
-/* ---------- Hero ---------- */
-.hero{position:relative;min-height:max(700px,100svh);display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(60% 70% at 80% 30%,#fff 0,transparent 70%),var(--cream)}
-.hero>.wrap{width:100%}
-.topbar{position:relative;z-index:3;background:rgba(251,245,236,.96);border-bottom:1px solid var(--line)}
-.top{display:flex;align-items:center;gap:26px;padding-top:max(16px,env(safe-area-inset-top,0px));padding-bottom:16px}
-.top .btn{white-space:nowrap}
-.mark{font:600 20px/1 var(--serif);text-decoration:none;color:var(--navy)}
-.mark span{font:700 12px/1 var(--sans);letter-spacing:.12em;color:var(--coral);margin-left:4px;vertical-align:3px}
-.top nav{margin-left:auto}
-.top ul{display:flex;gap:24px;margin:0;padding:0;list-style:none}
-.top ul a{text-decoration:none;font:700 15px/1 var(--sans);color:var(--mute)}
-.top ul a:hover,.top ul a[aria-current]{color:var(--navy)}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:14px;background:var(--navy);color:#fff;text-decoration:none;font:800 15px/1 var(--sans)}
-.btn:hover{background:var(--coral)}
-.btn.ghost{background:transparent;color:var(--navy);box-shadow:inset 0 0 0 2px var(--navy)}
-.btn.ghost:hover{background:var(--navy);color:#fff}
-.main{flex:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(30px,5vw,80px);align-items:center;padding-bottom:clamp(30px,6vh,60px)}
-.spec{display:inline-flex;align-items:center;gap:10px;margin:0;padding:8px 14px;border-radius:999px;background:var(--mint);font:800 13px/1 var(--sans);letter-spacing:.06em;color:var(--navy)}
-.spec i{width:9px;height:9px;border-radius:50%;background:#2F9E78;box-shadow:0 0 0 4px rgba(47,158,120,.2)}
-h1{margin:20px 0 0;font:600 clamp(54px,6.4vw,100px)/.98 var(--serif);letter-spacing:-.025em;color:var(--navy)}
-.tag{margin:14px 0 0;font:italic 400 clamp(24px,2.4vw,34px)/1.25 var(--serif);color:var(--coral)}
-.lead{margin:20px 0 0;max-width:48ch;color:var(--text)}
-.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 0;padding:0;list-style:none}
-.chips li{padding:7px 13px;border-radius:999px;background:#fff;border:1px solid var(--line);font:700 13.5px/1 var(--sans);color:var(--navy)}
-.lanyard{position:relative;align-self:start;justify-self:center;height:100%;min-height:560px;width:min(100%,340px);margin-top:-40px}
-.swing{position:absolute;left:0;right:0;top:0;transform-origin:50% 0}
-.zc-reveal .swing{animation:sway 5.5s ease-in-out infinite alternate}
-@keyframes sway{from{transform:rotate(-2.2deg)}to{transform:rotate(2.2deg)}}
-.straps{display:block;width:100%;height:clamp(150px,22vh,230px)}
-.clip{position:relative;width:46px;height:34px;margin:-6px auto 0;border-radius:6px 6px 10px 10px;background:linear-gradient(#D8DCE2,#9AA3AE);box-shadow:inset 0 1px 0 #fff,0 4px 8px rgba(0,0,0,.2)}
-.clip::after{content:"";position:absolute;left:50%;bottom:-10px;width:18px;height:16px;margin-left:-9px;border:3px solid #9AA3AE;border-top:0;border-radius:0 0 8px 8px}
-.badge{position:relative;margin:8px auto 0;width:min(100%,300px);border-radius:20px;background:#fff;box-shadow:0 40px 60px -30px rgba(21,42,79,.55),0 2px 6px rgba(21,42,79,.12);overflow:hidden}
-.badge .band{position:relative;padding:22px 20px 14px;background:var(--navy);color:#fff;text-align:center}
-.badge .slot{position:absolute;left:50%;top:9px;width:52px;height:8px;margin-left:-26px;border-radius:8px;background:var(--cream)}
-.badge .org{margin:4px 0 0;font:800 12px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase}
-.badge .ph{margin:18px auto 0;width:68%;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:var(--mint)}
-.badge .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 16%}
-.badge .who{padding:14px 20px 4px;text-align:center}
-.badge .who b{display:block;font:600 24px/1.15 var(--serif);color:var(--navy)}
-.badge .who span{display:block;margin-top:4px;font:800 13px/1.3 var(--sans);color:var(--coral);letter-spacing:.04em}
-.badge dl{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:12px 20px 0;border-top:1px solid var(--line)}
-.badge dl div{padding:10px 0 12px}
-.badge dl div+div{padding-left:14px;border-left:1px solid var(--line)}
-.badge dt{font:800 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
-.badge dd{margin:5px 0 0;font:800 14px/1.25 var(--sans);color:var(--ink)}
-.badge .staff{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:var(--coral);color:#fff;font:900 14px/1 var(--sans);letter-spacing:.3em}
-.badge .bars{width:90px;height:20px;background:repeating-linear-gradient(90deg,#fff 0 2px,transparent 2px 4px,#fff 4px 5px,transparent 5px 8px)}
+/* The suture: one violet thread through the whole page, with a stitch wherever a section is tied in */
+.suture{position:absolute;left:0;top:0;width:100%;pointer-events:none;z-index:4;overflow:visible}
+.suture .thread{fill:none;stroke:var(--violet);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.suture .ghost{fill:none;stroke:rgba(107,75,161,.14);stroke-width:2;stroke-dasharray:2 7;stroke-linecap:round}
+.suture .st{fill:none;stroke:var(--violet);stroke-width:2.4;stroke-linecap:round;opacity:0}
+.suture .knot{fill:none;stroke:var(--violet);stroke-width:2.4;opacity:0}
+.suture .needle{fill:#9AA3B8;stroke:#6E7891;stroke-width:.8}
 
-/* ---------- Sections ---------- */
-section{padding:clamp(88px,10vw,128px) 0}
-.eyebrow{margin:0 0 14px;font:800 13px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--coral)}
-h2{margin:0;font:600 clamp(36px,4.4vw,60px)/1.06 var(--serif);letter-spacing:-.02em;color:var(--navy)}
-h2 em{font-weight:400;color:var(--coral)}
-.sub{margin:18px 0 0;max-width:58ch}
+/* Header */
+.top{position:fixed;inset-inline:var(--pad);top:18px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:20px;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:500 16px/1 var(--sans);padding:8px 14px 8px 8px;border-radius:999px;background:rgba(251,246,238,.9);box-shadow:0 6px 20px -14px rgba(29,42,85,.5)}
+.brand i{width:26px;height:26px;border-radius:50%;background:var(--peach);display:grid;place-items:center;font-style:normal;color:var(--violet);font-weight:600;font-size:13px}
+.top nav{display:flex;gap:4px;padding:5px;border-radius:999px;background:rgba(251,246,238,.9);box-shadow:0 6px 20px -14px rgba(29,42,85,.5)}
+.top nav a{text-decoration:none;padding:7px 14px;border-radius:999px;color:var(--grey);font-size:14.5px;font-weight:400}
+.top nav a:hover{color:var(--navy)}
+.top nav a[aria-current]{background:var(--navy);color:var(--cream)}
 
-.outcomes{background:#fff}
-.oc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:50px}
-.card{padding:28px 28px 26px;border-radius:24px;background:var(--cream)}
-.card .big{display:flex;align-items:baseline;gap:12px;font:600 clamp(52px,5.4vw,76px)/1 var(--serif);color:var(--navy)}
-.card .big small{font:800 14px/1.3 var(--sans);letter-spacing:.06em;color:var(--coral);text-transform:uppercase}
-.card h3{margin:10px 0 6px;font:800 19px/1.3 var(--sans);color:var(--ink)}
-.card p{margin:0;font-size:16.5px}
-.ba{display:grid;gap:8px;margin-top:20px}
-.ba div{display:grid;grid-template-columns:70px minmax(0,1fr) 46px;gap:12px;align-items:center;font:800 13px/1 var(--sans);color:var(--mute)}
-.ba i{display:block;height:12px;border-radius:12px;background:var(--mint)}
-.ba i b{display:block;height:100%;width:var(--w);border-radius:12px;background:var(--c,#A9D6C8);transform-origin:left;transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
-.zc-reveal .oc:not(.is-in) .ba i b{transform:scaleX(0)}
-.ba em{font-style:normal;color:var(--ink);text-align:right}
-.jci{display:grid;place-items:center;width:110px;height:110px;border-radius:50%;background:var(--navy);color:#fff;font:600 30px/1 var(--serif);box-shadow:0 0 0 8px var(--mint)}
+/* HERO */
+.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end;overflow:hidden}
+.hero .sun{position:absolute;right:6%;bottom:-18%;width:min(78vh,780px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FBE3CF 0%,var(--peach) 55%,#F2C8A8 100%)}
+.hero .copy{position:relative;z-index:3;padding:clamp(120px,18vh,180px) 0 clamp(60px,10vh,110px) calc(var(--pad) + var(--gut));align-self:center}
+.kick{color:var(--teal)}
+.hero h1{font:500 clamp(46px,5.4vw,92px)/1.02 var(--sans);letter-spacing:-.035em;color:var(--navy);margin:16px 0 22px;max-width:12ch}
+.hero h1 em{color:var(--violet);letter-spacing:-.02em}
+.hero .sub{max-width:40ch;font-size:clamp(17px,1.3vw,19.5px);color:#3C3F52}
+.hero .sub b{font-weight:500;color:var(--navy)}
+.cta{display:inline-flex;align-items:center;gap:12px;margin-top:28px;height:52px;padding:0 22px;border-radius:999px;background:var(--navy);color:var(--cream);text-decoration:none;font-weight:400;transition:background .25s}
+.cta:hover{background:var(--violet)}
+.grace{position:relative;z-index:2;align-self:end;justify-self:center;width:min(100%,74vh);margin-right:-4%}
+.grace img{width:100%;height:auto}
+.badge2{position:absolute;z-index:3;right:clamp(16px,4vw,60px);top:clamp(110px,18vh,170px);display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;background:#fff;box-shadow:0 18px 40px -22px rgba(29,42,85,.45);font-size:14px;color:var(--navy)}
+.badge2 b{font-weight:500}
+.badge2 i{width:34px;height:34px;border-radius:50%;background:var(--peach2);display:grid;place-items:center;font-style:normal}
 
-.day .unit{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.day .unit span{padding:10px 16px;border-radius:14px;background:#fff;font:800 15px/1 var(--sans);color:var(--navy)}
-.day .unit b{font:600 22px/1 var(--serif);margin-right:6px}
-.shift{position:relative;margin-top:60px}
-.rail{position:relative;height:12px;border-radius:12px;background:linear-gradient(90deg,#FFE3B8,#FFD08A 40%,#F4A97F 75%,#8C7BB8)}
-.now{position:absolute;top:-34px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;font:800 12px/1.2 var(--sans);color:var(--navy);white-space:nowrap}
-.now::after{content:"";width:3px;height:40px;margin-top:4px;border-radius:3px;background:var(--navy)}
-.now b{padding:4px 9px;border-radius:999px;background:var(--navy);color:#fff}
-.blocks{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;margin:26px 0 0;padding:0;list-style:none}
-.blocks li{position:relative;padding:18px 18px 20px;border-radius:18px;background:#fff;border:1px solid transparent}
-.blocks li.on{border-color:var(--navy);box-shadow:0 18px 30px -22px rgba(21,42,79,.55)}
-.blocks time{font:600 26px/1 var(--serif);color:var(--navy)}
-.blocks h3{margin:8px 0 6px;font:800 16px/1.3 var(--sans);color:var(--ink)}
-.blocks p{margin:0;font-size:14.5px;line-height:1.55}
-.nowtxt{margin:22px 0 0;font:700 15px/1.5 var(--sans);color:var(--mute)}
-.nowtxt b{color:var(--navy)}
+/* Sections */
+.sec{position:relative;padding:clamp(100px,12vw,160px) var(--pad) clamp(100px,12vw,160px) calc(var(--pad) + var(--gut))}
+.eyebrow{display:flex;justify-content:space-between;gap:20px;border-top:1.5px solid var(--navy);padding-top:12px;margin-bottom:clamp(34px,4.6vw,64px);color:var(--teal)}
+.eyebrow span:last-child{color:var(--grey)}
+.h2{font:500 clamp(40px,4.8vw,78px)/1.05 var(--sans);letter-spacing:-.035em;color:var(--navy);max-width:17ch}
+.h2 em{color:var(--violet)}
+.lead{max-width:56ch;margin-top:18px;color:#3C3F52;font-size:clamp(17px,1.3vw,19.5px)}
 
-.career{background:var(--navy);color:#DCE4F2}
-.career h2{color:#fff}
-.career .sub{color:#B8C6DD}
-.roles{margin-top:50px;display:grid;gap:18px}
-.role{display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);gap:30px;padding:28px 30px;border-radius:22px;background:var(--navy2)}
-.role time{font:600 26px/1.15 var(--serif);color:#fff}
-.role time small{display:block;margin-top:6px;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--coral)}
-.role h3{margin:0;font:600 26px/1.2 var(--serif);color:#fff}
-.role h3 span{display:block;margin-top:6px;font:700 15px/1.4 var(--sans);color:#9FB2D3}
-.role ul{margin:0;padding:0;list-style:none}
-.role li{position:relative;padding:4px 0 4px 22px;font-size:16px}
-.role li::before{content:"";position:absolute;left:0;top:13px;width:9px;height:9px;border-radius:50%;background:var(--mint2)}
-.quote{margin:70px 0 0;text-align:center}
-.quote blockquote{margin:0;font:italic 400 clamp(36px,4.4vw,62px)/1.15 var(--serif);color:#fff}
-.quote figcaption{margin-top:12px;color:#9FB2D3}
+/* ON THE DAY */
+.day{list-style:none;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin-top:clamp(40px,5vw,64px)}
+.day li{position:relative;background:#fff;border-radius:22px;padding:22px 18px 20px;box-shadow:0 18px 40px -30px rgba(29,42,85,.5)}
+.day .ic{width:46px;height:46px;border-radius:50%;background:var(--peach2);display:grid;place-items:center;margin-bottom:16px}
+.day .ic svg{width:24px;height:24px;stroke:var(--navy);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.day .t{font:500 12px/1 var(--sans);letter-spacing:.08em;color:var(--teal)}
+.day h3{font:500 19px/1.25 var(--sans);color:var(--navy);margin:6px 0 6px;letter-spacing:-.01em}
+.day p{font-size:15px;line-height:1.55;color:#4A4D60}
 
-.creds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:44px}
-.creds>div{display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;align-items:start;padding:22px;border-radius:20px;background:#fff}
-.creds svg{width:44px;height:44px;color:var(--coral)}
-.creds b{display:block;font:800 17px/1.3 var(--sans);color:var(--ink)}
-.creds span{display:block;margin-top:4px;color:var(--mute);font-size:15.5px}
+/* QUESTIONS */
+.faq{margin-top:clamp(36px,4vw,56px);max-width:860px}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;cursor:pointer;font:400 clamp(19px,1.6vw,23px)/1.35 var(--sans);color:var(--navy)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex:none;width:34px;height:34px;border-radius:50%;background:var(--peach2);display:grid;place-items:center;font-style:normal;transition:transform .3s,background .3s}
+.faq details[open] summary i{transform:rotate(45deg);background:var(--peach)}
+.faq details p{padding:0 54px 24px 0;color:#3C3F52;max-width:66ch}
+.note{margin-top:22px;font-size:14.5px;color:var(--grey)}
 
-.contact{text-align:center;background:var(--mint)}
-.contact h2{font-size:clamp(44px,6vw,86px)}
-.contact .sub{margin-left:auto;margin-right:auto}
-.contact .ctas{justify-content:center}
-footer{padding:26px 24px max(96px,env(safe-area-inset-bottom,0px));text-align:center;color:var(--mute);font-size:13.5px;background:var(--mint)}
+/* MEASURES */
+.measures{background:var(--navy);color:var(--cream)}
+.measures .eyebrow{border-color:var(--cream);color:#8FD3CF}
+.measures .eyebrow span:last-child{color:#AEB5CC}
+.measures .h2{color:var(--cream)}
+.measures .h2 em{color:var(--violetL)}
+.measures .lead{color:#C9CEDE}
+.mgrid{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:clamp(40px,5vw,64px)}
+.mgrid li{border-top:1.5px solid rgba(251,246,238,.3);padding-top:18px}
+.mgrid b{display:block;font:500 22px/1.2 var(--sans);margin-bottom:8px}
+.mgrid p{color:#C9CEDE;font-size:15.5px}
 
-@media (max-width:1060px){
-  .top ul{display:none}
-  .top .btn{margin-left:auto}
-  .blocks{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .role{grid-template-columns:160px minmax(0,1fr)}
-  .role ul{grid-column:2}
-  .creds{grid-template-columns:1fr 1fr}
+/* AWAY */
+.away{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(30px,6vw,100px);align-items:center}
+.quote{font:400 clamp(24px,2.2vw,34px)/1.35 var(--serif);font-style:italic;color:var(--navy)}
+.quote small{display:block;margin-top:14px;font:500 12px/1 var(--sans);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+.away ul{list-style:none;margin-top:26px;border-top:1px solid var(--line)}
+.away li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.away li span{font:500 12px/1.9 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+
+/* TEACHING — a practice pad */
+.teach{background:var(--peach2)}
+.padwrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:center;margin-top:clamp(36px,4vw,56px)}
+.pad{position:relative;border-radius:26px;background:radial-gradient(120% 90% at 30% 20%,#F9D7C1,#EFB99A);box-shadow:inset 0 -18px 40px -20px rgba(140,70,40,.4),0 30px 60px -36px rgba(120,60,30,.55);aspect-ratio:16/10;touch-action:none;cursor:crosshair;overflow:hidden}
+.pad svg{position:absolute;inset:0;width:100%;height:100%}
+.pad .wound{fill:none;stroke:#B2513A;stroke-width:3;stroke-linecap:round}
+.pad .lips{fill:none;stroke:rgba(178,81,58,.35);stroke-width:10;stroke-linecap:round}
+.pad .stitch{fill:none;stroke:var(--violet);stroke-width:3;stroke-linecap:round}
+.pad .live{fill:none;stroke:rgba(107,75,161,.55);stroke-width:2.4;stroke-dasharray:4 5;stroke-linecap:round}
+.pad .hint{position:absolute;left:18px;top:14px;font:500 12px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:rgba(90,40,20,.7)}
+.score{display:grid;gap:14px}
+.score .big{font:500 clamp(42px,4vw,64px)/1 var(--sans);color:var(--navy);letter-spacing:-.03em}
+.score .big small{font-size:.38em;font-weight:400;color:var(--grey);letter-spacing:0;margin-left:8px}
+.score .fb{font:400 clamp(18px,1.4vw,21px)/1.45 var(--serif);font-style:italic;color:var(--navy);min-height:3em}
+.score .row{display:flex;gap:10px;flex-wrap:wrap}
+.score button{height:46px;padding:0 18px;border-radius:999px;border:1.5px solid var(--navy);font:400 15px/1 var(--sans);color:var(--navy);transition:background .2s,color .2s}
+.score button:hover{background:var(--navy);color:var(--cream)}
+.meter{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px;align-items:center;font-size:14px;color:var(--grey)}
+.meter i{height:8px;border-radius:999px;background:rgba(29,42,85,.12);position:relative;overflow:hidden}
+.meter i b{position:absolute;inset:0;width:0;background:var(--violet);border-radius:999px;transition:width .4s}
+
+/* CONTACT */
+.contact .big{font:500 clamp(48px,7vw,118px)/1 var(--sans);letter-spacing:-.04em;color:var(--navy)}
+.contact .big em{color:var(--violet)}
+.cgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,40px);margin-top:clamp(36px,4vw,60px)}
+.cgrid div{background:#fff;border-radius:20px;padding:20px;box-shadow:0 18px 40px -30px rgba(29,42,85,.5)}
+.cgrid .lab{display:block;margin-bottom:8px;color:var(--teal)}
+.cgrid a,.cgrid p{font:400 clamp(17px,1.35vw,20px)/1.45 var(--sans);text-decoration:none;color:var(--navy);overflow-wrap:anywhere}
+.urgent{margin-top:24px;display:flex;gap:12px;align-items:flex-start;max-width:70ch;padding:16px 18px;border-radius:16px;background:#FFF1E8;border:1px solid #F3C6AA;color:#5A2E1C;font-size:15.5px}
+.urgent b{font-weight:500}
+footer{background:var(--navy);color:#AEB5CC;padding:30px var(--pad) 96px calc(var(--pad) + var(--gut));display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;font-size:14px;line-height:1.7}
+footer p{max-width:90ch}
+
+@media (min-width:1001px){:root{--gut:56px}}
+@media (max-width:1100px){.day{grid-template-columns:repeat(3,minmax(0,1fr))}.mgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1000px){
+  .top nav{display:none}
+  .away,.padwrap{grid-template-columns:minmax(0,1fr)}
+  .cgrid{grid-template-columns:minmax(0,1fr)}
 }
-@media (max-width:860px){
-  .main{grid-template-columns:1fr}
-  .lanyard{order:-1;min-height:0;height:auto;width:min(100%,300px);margin-top:-30px}
-  .swing{position:relative}
-  .straps{height:110px}
-  .oc{grid-template-columns:1fr}
+@media (max-width:760px){
+  :root{--gut:18px}
+  .hero{grid-template-columns:minmax(0,1fr);min-height:0}
+  .hero .copy{padding:110px var(--pad) 10px calc(var(--pad) + var(--gut))}
+  .hero h1{font-size:clamp(40px,11.5vw,56px)}
+  .grace{width:92%;margin:10px auto 0}
+  .hero .sun{right:-30%;bottom:-8%;width:120vw}
+  .badge2{position:relative;top:auto;right:auto;order:1;justify-self:start;margin:4px var(--pad) 6px calc(var(--pad) + var(--gut));font-size:13px;padding:8px 14px 8px 10px;box-shadow:0 10px 26px -18px rgba(29,42,85,.45)}
+  .hero .grace{order:2}
+  .day{grid-template-columns:minmax(0,1fr)}
+  .mgrid{grid-template-columns:minmax(0,1fr)}
+  .faq details p{padding-right:0}
 }
-@media (max-width:560px){
-  .blocks{grid-template-columns:1fr 1fr;gap:10px}
-  .blocks li{padding:14px}
-  .role{grid-template-columns:1fr;gap:12px;padding:22px}
-  .role ul{grid-column:1}
-  .creds{grid-template-columns:1fr}
-  .badge{width:min(100%,260px)}
-  .now span{display:none}
-  .top .btn{padding:11px 16px;font-size:14px}
-  .mark{font-size:18px}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ba i b{transition:none}}
+@media (prefers-reduced-motion:reduce){.faq summary i,.meter i b,.cta,.score button{transition:none}}
 </style>
 </head>
 <body>
-<main>
-  <header class="hero" id="top">
-    <div class="topbar"><div class="wrap top">
-      <a class="mark" href="#top" aria-label="Grace Wanjiku, back to top">Grace Wanjiku<span>RN</span></a>
-      <nav aria-label="Sections"><ul>
-        <li><a href="#outcomes" data-spy>Outcomes</a></li>
-        <li><a href="#day" data-spy>A day on the unit</a></li>
-        <li><a href="#career" data-spy>Career</a></li>
-      </ul></nav>
-      <a class="btn" href="#contact">Get in touch</a>
-    </div></div>
-    <div class="wrap main">
+<header class="top" data-headroom="1.2">
+  <a class="brand" href="#top"><i aria-hidden="true">GW</i>Dr Grace Wanjiku</a>
+  <nav aria-label="Sections"><a href="#day" data-spy>For parents</a><a href="#measures" data-spy>Outcomes</a><a href="#away" data-spy>Beyond Nairobi</a><a href="#teach" data-spy>Teaching</a><a href="#contact" data-spy>Contact</a></nav>
+</header>
+
+<main id="main">
+  <svg class="suture" aria-hidden="true"><path class="ghost"/><path class="thread"/><g class="sts"></g><path class="knot"/><g class="needle"><path d="M0 -2 L26 0 L0 2 Z"/></g></svg>
+
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="sun" aria-hidden="true"></div>
+    <div class="copy">
+      <p class="kick lab">Paediatric surgeon · Nairobi</p>
+      <h1 id="h1">Gentle hands for <em>small patients.</em></h1>
+      <p class="sub"><b>Dr Grace Wanjiku</b> operates on children from newborns to teenagers, and explains every step to the people who love them.</p>
+      <a class="cta" href="#day">What to expect on the day <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="grace"><img src="img/grace-wanjiku/cut.webp" srcset="img/grace-wanjiku/cut-640.webp 653w, img/grace-wanjiku/cut.webp 928w" sizes="(max-width:760px) 80vw, 74vh" width="928" height="910" alt="Dr Grace Wanjiku in navy scrubs"></div>
+    <p class="badge2"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#6B4BA1" stroke-width="1.8" stroke-linecap="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></i><span><b>Questions are welcome.</b><br>Bring the list, and the favourite toy.</span></p>
+  </section>
+
+  <section class="sec" id="day" aria-labelledby="d-h">
+    <div class="eyebrow lab"><span>01 · For parents</span><span>What happens on the day</span></div>
+    <h2 class="h2" id="d-h">The day of the operation, <em>step by step.</em></h2>
+    <p class="lead">Knowing what comes next helps children and parents feel calmer. This is what a typical day looks like for a planned operation; your team will explain anything that is different for your child.</p>
+    <ol class="day">
+      <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h18M13 6l6 6-6 6"/></svg></span><span class="t">Morning</span><h3>Arrive</h3><p>Check in, change into soft clothes, and meet the nurse who stays with you.</p></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c.4-2.6 2.5-4.5 5-4.5"/></svg></span><span class="t">Before</span><h3>Meet the team</h3><p>The surgeon and the anaesthetist explain the plan and answer every question.</p></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 1 0 7 9 5.5 5.5 0 0 1-7-9z"/></svg></span><span class="t">Asleep</span><h3>Falling asleep</h3><p>A parent can usually stay until your child is asleep, with the favourite toy.</p></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 20 20 4M14 4h6v6"/><path d="M6 14c2 0 4 2 4 4"/></svg></span><span class="t">Operation</span><h3>The operation</h3><p>You wait nearby. Someone from the team updates you when it is finished.</p></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v3M5 6l2 2M19 6l-2 2M4 14h16M7 14a5 5 0 0 1 10 0"/></svg></span><span class="t">Waking</span><h3>Waking up</h3><p>You are there when your child wakes. Feeling sleepy or grumpy is normal.</p></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg></span><span class="t">After</span><h3>Home</h3><p>Many children go home the same day, with clear instructions and a phone number.</p></li>
+    </ol>
+  </section>
+
+  <section class="sec" aria-labelledby="q-h" style="padding-top:0">
+    <div class="eyebrow lab"><span>02 · Questions</span><span>The ones parents ask most</span></div>
+    <h2 class="h2" id="q-h">No question is <em>too small.</em></h2>
+    <div class="faq">
+      <details><summary>Will my child feel pain during the operation?<i aria-hidden="true">+</i></summary><p>No. Your child will be fully asleep, under the care of a specialist anaesthetist. Afterwards some discomfort is normal; the team gives pain relief and checks on it regularly.</p></details>
+      <details><summary>Can I stay with my child?<i aria-hidden="true">+</i></summary><p>Usually one parent can stay until your child falls asleep, and you will be with them again when they wake up. The team will tell you if anything is different on the day.</p></details>
+      <details><summary>When can my child eat and drink again?<i aria-hidden="true">+</i></summary><p>It depends on the operation. Before surgery there are fasting times to follow for safety; after surgery the nurses will tell you when your child can start with small sips.</p></details>
+      <details><summary>How do I explain the operation to my child?<i aria-hidden="true">+</i></summary><p>Use simple, honest words and keep it short: what will happen, that they will sleep through it, and that you will be there when they wake. Our play team has picture books that help.</p></details>
+      <details><summary>What should we bring?<i aria-hidden="true">+</i></summary><p>Comfortable clothes, any medicines your child takes, the favourite toy or blanket, and your list of questions.</p></details>
+    </div>
+    <p class="note">This page explains what usually happens. It is not medical advice: always follow the instructions from your child's own care team.</p>
+  </section>
+
+  <section class="sec measures" id="measures" aria-labelledby="m-h">
+    <div class="eyebrow lab"><span>03 · Outcomes</span><span>What we measure, and publish</span></div>
+    <h2 class="h2" id="m-h">Good surgery is <em>measured, not claimed.</em></h2>
+    <p class="lead">Every year the team reviews its results and shares them with families and colleagues, including the things that went wrong and what changed because of them.</p>
+    <ul class="mgrid">
+      <li><b>Wound infections</b><p>How often a wound becomes infected after surgery, and what we changed to prevent it.</p></li>
+      <li><b>Unplanned returns</b><p>Children who needed to come back to theatre or hospital unexpectedly.</p></li>
+      <li><b>Time to home</b><p>How long children stay, because recovering at home is usually faster and happier.</p></li>
+      <li><b>Parents' experience</b><p>A short survey after every stay: were you informed, listened to, and reassured?</p></li>
+    </ul>
+  </section>
+
+  <section class="sec" id="away" aria-labelledby="a-h">
+    <div class="eyebrow lab"><span>04 · Beyond Nairobi</span><span>Surgery closer to home</span></div>
+    <div class="away">
       <div>
-        <p class="spec"><i aria-hidden="true"></i>Nurse Manager · RN, MSc</p>
-        <h1>Grace Wanjiku</h1>
-        <p class="tag">Calm units, safe patients, nurses who stay.</p>
-        <p class="lead">Seventeen years in nursing, the last six leading a 42-bed medical-surgical unit in Abu Dhabi. I build teams where patients feel safe and nurses want to stay.</p>
-        <div class="ctas"><a class="btn" href="#contact">Get in touch</a><a class="btn ghost" href="#outcomes">See the outcomes</a></div>
-        <ul class="chips"><li>Licensed RN, Abu Dhabi</li><li>BLS · ACLS</li><li>English · Swahili</li></ul>
+        <h2 class="h2" id="a-h">Children should not have to travel <em>for a simple operation.</em></h2>
+        <p class="lead">Twice a year Grace spends two weeks at county hospitals, operating alongside local surgeons and training teams to handle common children's operations themselves.</p>
+        <ul>
+          <li><span>Operates</span>Common operations for children, side by side with local teams</li>
+          <li><span>Teaches</span>Surgical skills and safe anaesthesia for children</li>
+          <li><span>Leaves behind</span>Checklists, equipment lists and a phone line for advice</li>
+        </ul>
       </div>
-      <div class="lanyard">
-        <div class="swing">
-          <svg class="straps" viewBox="0 0 300 220" preserveAspectRatio="none" aria-hidden="true"><path d="M96 0 L142 220" stroke="#E07A5F" stroke-width="18"/><path d="M204 0 L158 220" stroke="#D86E53" stroke-width="18"/><path d="M96 0 L142 220M204 0 L158 220" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-dasharray="6 10"/></svg>
-          <div class="clip" aria-hidden="true"></div>
-          <article class="badge" aria-label="Staff ID: Grace Wanjiku, Nurse Manager, RN, Unit 4B Medical-Surgical, since 2019">
-            <div class="band"><span class="slot" aria-hidden="true"></span><p class="org">Saffron Bay Hospital</p></div>
-            <div class="ph"><img src="img/grace-wanjiku-640.webp" srcset="img/grace-wanjiku-640.webp 640w, img/grace-wanjiku.webp 928w" sizes="210px" width="928" height="1152" alt="Grace Wanjiku smiling, in navy scrubs, on a hospital ward" fetchpriority="high"></div>
-            <div class="who"><b>Grace Wanjiku</b><span>Nurse Manager, RN</span></div>
-            <dl><div><dt>Unit</dt><dd>4B · Med-Surg</dd></div><div><dt>Since</dt><dd>2019</dd></div></dl>
-            <div class="staff"><span>STAFF</span><i class="bars" aria-hidden="true"></i></div>
-          </article>
-        </div>
-      </div>
+      <p class="quote">"The best outcome of a visit is the operation I no longer need to do, because the local team does it every week."<small>Illustrative quote</small></p>
     </div>
-  </header>
+  </section>
 
-  <section id="outcomes" class="outcomes">
-    <div class="wrap">
-      <p class="eyebrow">Outcomes</p>
-      <h2>What changed <em>on my unit.</em></h2>
-      <p class="sub">Results from 2019 to 2025, measured with the hospital's own quality and staff data.</p>
-      <div class="oc" data-reveal>
-        <div class="card"><p class="big">↓38%<small>patient falls</small></p><h3>Fewer patient falls</h3><p>After hourly rounding and bedside handover became routine on every shift.</p><div class="ba" aria-hidden="true"><div><span>Before</span><i><b style="--w:100%;--c:#F4A97F"></b></i><em></em></div><div><span>After</span><i><b style="--w:62%"></b></i><em>−38%</em></div></div></div>
-        <div class="card"><p class="big">96%<small>patient satisfaction</small></p><h3>Patients who feel looked after</h3><p>Up from 84% when Grace took over the unit in 2019.</p><div class="ba" aria-hidden="true"><div><span>2019</span><i><b style="--w:84%;--c:#F4A97F"></b></i><em>84%</em></div><div><span>2025</span><i><b style="--w:96%"></b></i><em>96%</em></div></div></div>
-        <div class="card"><p class="big">92%<small>nurse retention</small></p><h3>Nurses who stay</h3><p>Two years running, up from 78%, with a new preceptor programme.</p><div class="ba" aria-hidden="true"><div><span>Before</span><i><b style="--w:78%;--c:#F4A97F"></b></i><em>78%</em></div><div><span>Now</span><i><b style="--w:92%"></b></i><em>92%</em></div></div></div>
-        <div class="card" style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center"><span class="jci" aria-hidden="true">JCI</span><div><h3 style="margin-top:0">Survey readiness lead</h3><p>Prepared the unit for international accreditation, with no findings on the unit.</p></div></div>
+  <section class="sec teach" id="teach" aria-labelledby="t-h">
+    <div class="eyebrow lab"><span>05 · Teaching</span><span>Every surgeon started on a practice pad</span></div>
+    <h2 class="h2" id="t-h">Try a running stitch.</h2>
+    <p class="lead">Surgical trainees practise on pads like this for hours before they ever touch a patient. Drag across the cut to place a stitch. Even spacing and straight stitches are the goal.</p>
+    <div class="padwrap">
+      <div class="pad js-pad" role="application" aria-label="Practice pad. Drag across the cut to place stitches, or use the Place a stitch button.">
+        <span class="hint" aria-hidden="true">Drag across the cut</span>
+        <svg aria-hidden="true"><path class="lips"/><path class="wound"/><g class="stitches"></g><path class="live"/></svg>
+      </div>
+      <div class="score">
+        <p class="big"><span class="js-n">0</span><small>stitches</small></p>
+        <div class="meter"><span>Even spacing</span><i><b class="js-sp"></b></i></div>
+        <div class="meter"><span>Straightness</span><i><b class="js-an"></b></i></div>
+        <p class="fb js-fb" aria-live="polite">Start at one end of the cut and work along it.</p>
+        <div class="row"><button type="button" class="js-auto">Place a stitch</button><button type="button" class="js-clear">Start again</button></div>
       </div>
     </div>
   </section>
 
-  <section id="day" class="day">
-    <div class="wrap">
-      <p class="eyebrow">A day on the unit</p>
-      <h2>Leadership happens in <em>small moments.</em></h2>
-      <p class="sub">A typical day shift on Unit 4B, and the habits that keep 42 patients safe.</p>
-      <div class="unit"><span><b>42</b>beds</span><span><b>68</b>nurses</span><span><b>3</b>shifts</span></div>
-      <div class="shift" data-reveal>
-        <div class="rail" aria-hidden="true"><span class="now" id="now" style="left:30%"><b id="nowt">10:30</b><span>now in Abu Dhabi</span></span></div>
-        <ol class="blocks" id="blocks">
-          <li data-t="405"><time>06:45</time><h3>Safety huddle</h3><p>Ten minutes with the night team: who is at risk of a fall, who is going home, which family needs a call.</p></li>
-          <li data-t="450"><time>07:30</time><h3>Bedside handover</h3><p>Handover happens at the bedside, with the patient, not at the nurses' station.</p></li>
-          <li data-t="540"><time>09:00</time><h3>Leadership rounds</h3><p>Grace sees every patient and asks the same question: is anything worrying you today?</p></li>
-          <li data-t="750"><time>12:30</time><h3>Teaching moment</h3><p>Fifteen minutes of practical teaching for new graduates and their preceptors.</p></li>
-          <li data-t="900"><time>15:00</time><h3>Family time</h3><p>An hour kept free for families with questions or concerns.</p></li>
-          <li data-t="1125"><time>18:45</time><h3>Handover to nights</h3><p>A clear plan for the night, and a thank-you to the day team.</p></li>
-        </ol>
-        <p class="nowtxt" id="nowtxt" aria-live="polite"></p>
-      </div>
+  <section class="sec contact" id="contact" aria-labelledby="c-h">
+    <div class="eyebrow lab"><span>06 · Contact</span><span>Consultations and referrals</span></div>
+    <h2 class="big" id="c-h">Let's talk it <em>through.</em></h2>
+    <div class="cgrid">
+      <div><span class="lab">Consultations</span><a href="mailto:clinic@gracewanjiku.example" data-demo>clinic@gracewanjiku.example</a></div>
+      <div><span class="lab">Referring doctors</span><a href="mailto:referrals@gracewanjiku.example" data-demo>referrals@gracewanjiku.example</a></div>
+      <div><span class="lab">Clinic</span><p>Nairobi, Kenya · Monday to Friday</p></div>
     </div>
-  </section>
-
-  <section id="career" class="career">
-    <div class="wrap">
-      <p class="eyebrow">Career</p>
-      <h2>Seventeen years at the bedside.</h2>
-      <p class="sub">From staff nurse in Nairobi to managing one of the busiest units in an Abu Dhabi hospital.</p>
-      <div class="roles">
-        <article class="role" data-reveal><time>2019 — today<small>Abu Dhabi</small></time><h3>Nurse Manager<span>Saffron Bay Hospital</span></h3><ul><li>Leads 68 nurses on a 42-bed medical-surgical unit</li><li>Introduced bedside handover and hourly rounding</li><li>Unit lead for international accreditation</li></ul></article>
-        <article class="role" data-reveal><time>2013 — 2019<small>Nairobi</small></time><h3>Charge Nurse<span>Kilima Ridge Medical Centre</span></h3><ul><li>Ran shifts on a 36-bed surgical ward</li><li>Started the ward's preceptor programme</li><li>Mentored more than 30 new graduates</li></ul></article>
-        <article class="role" data-reveal><time>2008 — 2013<small>Nairobi</small></time><h3>Staff Nurse<span>Kilima Ridge Medical Centre</span></h3><ul><li>Medical and surgical nursing</li><li>Wound-care link nurse for the ward</li><li>Night-shift coordinator from 2011</li></ul></article>
-      </div>
-      <figure class="quote" data-reveal><blockquote>“Safe care is kind care.”</blockquote><figcaption>Grace Wanjiku</figcaption></figure>
-    </div>
-  </section>
-
-  <section id="credentials">
-    <div class="wrap">
-      <p class="eyebrow">Qualifications</p>
-      <h2>Credentials.</h2>
-      <div class="creds" data-reveal>
-        <div><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 16l18-8 18 8-18 8z"/><path d="M12 20v9c6 4 14 4 20 0v-9"/></svg><div><b>MSc Nursing Leadership</b><span>2017</span></div></div>
-        <div><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 16l18-8 18 8-18 8z"/><path d="M12 20v9c6 4 14 4 20 0v-9"/></svg><div><b>BSc Nursing</b><span>Nairobi, 2008</span></div></div>
-        <div><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="8" y="6" width="28" height="32" rx="4"/><path d="M16 18h12M22 12v12"/></svg><div><b>Registered Nurse</b><span>Licensed in Abu Dhabi</span></div></div>
-        <div><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 38S6 28 6 16a8 8 0 0 1 16-3 8 8 0 0 1 16 3c0 12-16 22-16 22z"/></svg><div><b>BLS &amp; ACLS</b><span>Current certification</span></div></div>
-        <div><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="16" cy="14" r="6"/><circle cx="30" cy="18" r="5"/><path d="M4 36c0-7 5-11 12-11s12 4 12 11M26 30c2-3 5-4 8-4 4 0 7 3 7 8"/></svg><div><b>Preceptor &amp; mentor</b><span>30+ new graduates supported</span></div></div>
-        <div><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 10h20v14H14l-6 5V10z"/><path d="M30 18h8v14l-5-4h-9v-4"/></svg><div><b>English · Swahili</b><span>Fluent · native</span></div></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <div class="wrap" data-reveal>
-      <p class="eyebrow">Contact</p>
-      <h2>Looking for a <em>nurse leader?</em></h2>
-      <p class="sub">Grace is open to Nurse Manager and Assistant Director of Nursing roles in the UAE.</p>
-      <div class="ctas"><a class="btn" href="#contact" data-demo>Send a message</a><a class="btn ghost" href="#contact" data-demo>Download CV</a><a class="btn ghost" href="#contact" data-demo>LinkedIn</a></div>
-    </div>
+    <p class="urgent"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#B2513A" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" style="flex:none;margin-top:2px"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span><b>If your child needs urgent care,</b> do not wait for an email reply: go to the nearest emergency department or call your local emergency number.</span></p>
   </section>
 </main>
-<footer>Concept site designed by Zenith Dubai CV. Grace Wanjiku is a fictional person; hospitals and figures are illustrative.</footer>
+
+<footer>
+  <p>Dr Grace Wanjiku is fictional and this is a concept website. The portrait was generated with AI. Procedures, outcomes, quotes and contact details are illustrative. Nothing on this page is medical advice.</p>
+  <p>A concept website by Zenith Dubai CV.</p>
+</footer>
+
 <script>
-(function () {
-  // Live "now" marker on the day-shift rail, in Abu Dhabi time (UTC+4).
-  // Static captures use a fixed 10:30 so previews stay identical.
-  var Z = window.ZC || {}, now = document.getElementById("now"), nt = document.getElementById("nowt"), txt = document.getElementById("nowtxt"), blocks = document.querySelectorAll("#blocks li");
-  if (!now) return;
-  var START = 405, END = 1125;
-  function two(n) { return (n < 10 ? "0" : "") + n; }
-  function update() {
-    var d = new Date(), m = Z.still ? 630 : ((d.getUTCHours() + 4) % 24) * 60 + d.getUTCMinutes();
-    nt.textContent = two(Math.floor(m / 60)) + ":" + two(m % 60);
-    var onShift = m >= START && m <= END, pos = onShift ? (m - START) / (END - START) : (m > END ? 1 : 0);
-    now.style.left = (pos * 100).toFixed(2) + "%";
-    var cur = -1;
-    for (var i = 0; i < blocks.length; i++) { blocks[i].classList.remove("on"); if (+blocks[i].getAttribute("data-t") <= m) cur = i; }
-    if (onShift && cur >= 0) {
-      blocks[cur].classList.add("on");
-      var next = blocks[cur + 1];
-      txt.innerHTML = "Right now on the unit: <b>" + blocks[cur].querySelector("h3").textContent + "</b>" + (next ? ". Next: " + next.querySelector("h3").textContent + " at " + next.querySelector("time").textContent + "." : ".");
-    } else {
-      txt.innerHTML = "The night team has the unit. <b>Day shift starts at 06:45</b> with the safety huddle.";
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC;
+  var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, a){ var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); return e; }
+
+  /* ---------- The suture through the page ---------- */
+  var main = $("main"), sut = $(".suture"), thread = $(".thread", sut), ghost = $(".ghost", sut), sts = $(".sts", sut), knot = $(".knot", sut), needle = $(".needle", sut);
+  var LEN = 0, STS = [];
+  function buildSuture(){
+    var W = main.clientWidth, H = main.scrollHeight, mob = W <= 760, x0 = mob ? 12 : Math.max(24, parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--pad")) || 40);
+    sut.setAttribute("width", W); sut.setAttribute("height", H); sut.style.height = H + "px"; sut.setAttribute("viewBox", "0 0 " + W + " " + H);
+    // a thread that meanders in the left gutter, ties in at each section, and ends at the contact
+    // positions are measured relative to <main> (offsetTop would be relative to each section)
+    var mTop = main.getBoundingClientRect().top, pts = [], amp = mob ? 6 : 16, end = $(".contact .big").getBoundingClientRect().top - mTop + 40;
+    var hy = $(".hero h1").getBoundingClientRect().top - mTop;
+    pts.push([x0 + (mob ? 0 : 6), Math.max(90, hy - 30)]);
+    for (var y = pts[0][1] + 60, i = 0; y < end; y += mob ? 70 : 110, i++) pts.push([x0 + (mob ? 4 : 18) + Math.sin(i * 1.3) * amp, y]);
+    pts.push([x0 + (mob ? 4 : 18), end]);
+    var d = "M" + pts[0][0] + " " + pts[0][1];
+    for (var k = 1; k < pts.length; k++){ var a = pts[k - 1], b = pts[k], my = (a[1] + b[1]) / 2; d += " C" + a[0] + " " + my + " " + b[0] + " " + my + " " + b[0] + " " + b[1]; }
+    thread.setAttribute("d", d); ghost.setAttribute("d", d);
+    LEN = thread.getTotalLength();
+    // stitches: short crossing strokes along the thread, one every few centimetres
+    sts.innerHTML = ""; STS = [];
+    var step = mob ? 46 : 64;
+    for (var l = step; l < LEN - 20; l += step){
+      var p = thread.getPointAtLength(l), q = thread.getPointAtLength(l + 1), ang = Math.atan2(q.y - p.y, q.x - p.x) + Math.PI / 2 + .5, r = mob ? 6 : 9;
+      var s = el("path", {class:"st", d:"M" + (p.x - Math.cos(ang) * r).toFixed(1) + " " + (p.y - Math.sin(ang) * r).toFixed(1) + " L" + (p.x + Math.cos(ang) * r).toFixed(1) + " " + (p.y + Math.sin(ang) * r).toFixed(1)});
+      sts.appendChild(s); STS.push([l, s]);
     }
+    var e = thread.getPointAtLength(LEN), kr = mob ? 5 : 7;
+    knot.setAttribute("d", "M" + (e.x - kr) + " " + e.y + " a" + kr + " " + kr + " 0 1 0 " + (kr * 2) + " 0 a" + kr + " " + kr + " 0 1 0 " + (-kr * 2) + " 0 M" + (e.x + kr) + " " + e.y + " l" + (kr * 2.4) + " " + (kr * 1.6) + " M" + (e.x + kr) + " " + e.y + " l" + (kr * 2.2) + " " + (-kr * 1.4));
+    progress(lastP);
   }
-  update(); setInterval(update, 60000);
-})();
+  var lastP = 0;
+  function progress(p){
+    lastP = p; if (!LEN) return;
+    var shown = LEN * p;
+    thread.style.strokeDasharray = LEN; thread.style.strokeDashoffset = (LEN - shown).toFixed(1);
+    STS.forEach(function(s){ s[1].style.opacity = s[0] < shown ? 1 : 0; });
+    knot.style.opacity = p > .995 ? 1 : 0;
+    var pt = thread.getPointAtLength(Math.max(1, shown)), pt2 = thread.getPointAtLength(Math.max(0, shown - 2));
+    needle.setAttribute("transform", "translate(" + pt.x.toFixed(1) + " " + pt.y.toFixed(1) + ") rotate(" + (Math.atan2(pt.y - pt2.y, pt.x - pt2.x) * 180 / Math.PI).toFixed(1) + ")");
+    needle.style.opacity = p > .995 || p < .002 ? 0 : 1;
+  }
+  function scrollP(){
+    var r = main.getBoundingClientRect(), endY = $(".contact .big").getBoundingClientRect().top - r.top + 40;
+    return clamp((innerHeight * .62 - r.top - 90) / (endY - 90), 0, 1);
+  }
+  var q = false;
+  window.addEventListener("scroll", function(){ if (q) return; q = true; requestAnimationFrame(function(){ q = false; progress(ZC.motion ? scrollP() : 1); }); }, {passive:true});
+  window.addEventListener("resize", buildSuture);
+
+  /* ---------- Practice pad ---------- */
+  var pad = $(".js-pad"), psvg = $("svg", pad), wound = $(".wound", pad), lips = $(".lips", pad), group = $(".stitches", pad), live = $(".live", pad);
+  var PW = 0, PH = 0, stitches = [], drag = null;
+  var nEl = $(".js-n"), sp = $(".js-sp"), an = $(".js-an"), fb = $(".js-fb");
+  function woundY(x){ return PH * .52 + Math.sin(x / PW * Math.PI * 2.2) * PH * .05; }
+  function buildPad(){
+    PW = pad.clientWidth; PH = pad.clientHeight; psvg.setAttribute("viewBox", "0 0 " + PW + " " + PH);
+    var d = ""; for (var x = PW * .1; x <= PW * .9; x += 6) d += (d ? "L" : "M") + x.toFixed(1) + " " + woundY(x).toFixed(1);
+    wound.setAttribute("d", d); lips.setAttribute("d", d);
+    group.innerHTML = ""; stitches.forEach(function(s){ addPath(s); });
+  }
+  function addPath(s){ group.appendChild(el("path", {class:"stitch", d:"M" + s[0].toFixed(1) + " " + s[1].toFixed(1) + " L" + s[2].toFixed(1) + " " + s[3].toFixed(1)})); }
+  function score(){
+    nEl.textContent = stitches.length;
+    if (stitches.length < 2){ sp.style.width = "0"; an.style.width = stitches.length ? "100%" : "0"; fb.textContent = stitches.length ? "Good. Now the next one, about a finger's width along." : "Start at one end of the cut and work along it."; return; }
+    var xs = stitches.map(function(s){ return (s[0] + s[2]) / 2; }).sort(function(a, b){ return a - b; }), gaps = [];
+    for (var i = 1; i < xs.length; i++) gaps.push(xs[i] - xs[i - 1]);
+    var mean = gaps.reduce(function(a, b){ return a + b; }, 0) / gaps.length, sd = Math.sqrt(gaps.reduce(function(a, b){ return a + (b - mean) * (b - mean); }, 0) / gaps.length);
+    var even = clamp(1 - sd / Math.max(mean, 1), 0, 1);
+    var tilt = stitches.reduce(function(a, s){ var ang = Math.abs(Math.atan2(s[2] - s[0], s[3] - s[1])); ang = Math.min(ang, Math.PI - ang); return a + ang; }, 0) / stitches.length;
+    var straight = clamp(1 - tilt / .7, 0, 1);
+    sp.style.width = Math.round(even * 100) + "%"; an.style.width = Math.round(straight * 100) + "%";
+    fb.textContent = stitches.length >= 8 && even > .75 && straight > .75 ? "That would pass a first-year skills check. Well done."
+      : even < .6 ? "Try to keep the gaps the same: about a finger's width between stitches."
+      : straight < .6 ? "Cross the cut at a right angle: straight stitches hold the edges evenly."
+      : "Nice. Keep going along the cut.";
+  }
+  function local(e){ var r = pad.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * PW, (e.clientY - r.top) / r.height * PH]; }
+  pad.addEventListener("pointerdown", function(e){ drag = local(e); pad.setPointerCapture(e.pointerId); live.setAttribute("d", ""); });
+  pad.addEventListener("pointermove", function(e){ if (!drag) return; var p = local(e); live.setAttribute("d", "M" + drag[0] + " " + drag[1] + " L" + p[0] + " " + p[1]); });
+  function finish(e){
+    if (!drag) return; var p = local(e), a = drag; drag = null; live.setAttribute("d", "");
+    // a stitch only counts if it crosses the cut, entering on one side and leaving on the other
+    var mx = (a[0] + p[0]) / 2, wy = woundY(mx), crosses = (a[1] - woundY(a[0])) * (p[1] - woundY(p[0])) < 0, len = Math.hypot(p[0] - a[0], p[1] - a[1]);
+    if (!crosses || len < 12 || mx < PW * .08 || mx > PW * .92){ fb.textContent = crosses ? "Stay on the cut: stitches go along it, between the ends." : "Drag from one side of the cut to the other."; return; }
+    var s = [a[0], a[1], p[0], p[1]]; stitches.push(s); addPath(s); score();
+  }
+  pad.addEventListener("pointerup", finish); pad.addEventListener("pointercancel", function(){ drag = null; live.setAttribute("d", ""); });
+  $(".js-auto").addEventListener("click", function(){
+    var xs = stitches.map(function(s){ return (s[0] + s[2]) / 2; }), x = xs.length ? Math.max.apply(null, xs) + PW * .065 : PW * .14;
+    if (x > PW * .88){ fb.textContent = "The cut is closed. Start again to practise once more."; return; }
+    var y = woundY(x), r = PH * .085, s = [x, y - r, x, y + r]; stitches.push(s); addPath(s); score();
+  });
+  $(".js-clear").addEventListener("click", function(){ stitches = []; group.innerHTML = ""; score(); });
+  window.addEventListener("resize", buildPad);
+  buildPad(); score();
+
+  window.addEventListener("load", function(){
+    buildSuture(); progress(ZC.motion ? scrollP() : 1);
+    if (!ZC.motion || !window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
+    ZC.smooth();
+    document.fonts.ready.then(function(){
+      buildSuture();
+      var h = SplitText.create(".hero h1", {type:"lines,words", mask:"lines"});
+      gsap.from(h.words, {yPercent:110, duration:1.1, stagger:.06, ease:"expo.out", delay:.1});
+      gsap.from(".kick, .hero .sub, .cta", {opacity:0, y:16, duration:1, stagger:.08, ease:"expo.out", delay:.35});
+      gsap.from(".grace", {opacity:0, y:50, duration:1.6, ease:"expo.out", delay:.15});
+      gsap.from(".hero .sun", {scale:.8, opacity:0, duration:1.8, ease:"expo.out"});
+      gsap.from(".badge2", {opacity:0, y:20, scale:.96, duration:1, ease:"back.out(1.6)", delay:1});
+      gsap.from(".day li", {opacity:0, y:30, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:".day", start:"top 85%"}});
+      gsap.from(".mgrid li", {opacity:0, y:24, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:".mgrid", start:"top 85%"}});
+      gsap.from(".cgrid div", {opacity:0, y:24, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:".cgrid", start:"top 90%"}});
+      // the pad shows how a stitch is placed, once, when it first comes into view
+      ScrollTrigger.create({trigger:".pad", start:"top 70%", once:true, onEnter:function(){
+        if (stitches.length) return;
+        var i = 0, t = setInterval(function(){ if (i++ >= 3 || stitches.length > i){ clearInterval(t); if (i >= 3) fb.textContent = "Your turn: drag across the cut."; return; } $(".js-auto").click(); }, 420);
+      }});
+      setTimeout(function(){ ScrollTrigger.refresh(); buildSuture(); }, 600);
+    });
+  });
+});
 </script>
 </body>
 </html>
