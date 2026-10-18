@@ -279,7 +279,7 @@ footer p{max-width:70ch}
       <li data-peek="dakar"><span class="cap">2024</span><span class="who">Dakar Fashion Week</span><span class="what">Closing look</span><span class="where cap">Dakar</span></li>
       <li data-peek="noir"><span class="cap">2023</span><span class="who">Noir Review</span><span class="what">Cover and twelve-page editorial</span><span class="where cap">New York</span></li>
     </ol>
-    <div class="peek" aria-hidden="true"><img alt="" width="600" height="804"></div>
+    <div class="peek" aria-hidden="true"></div>
   </section>
 
   <section class="sec covers" id="covers" aria-labelledby="covers-h">
@@ -369,7 +369,8 @@ document.addEventListener("DOMContentLoaded", function(){
   digis.addEventListener("click", function(){ turnB.click(); });
 
   // Work rows: the campaign photograph follows the cursor (mouse only)
-  var peek = document.querySelector(".peek"), peekImg = peek.querySelector("img"), P = "img/awa-ndiaye/";
+  var peek = document.querySelector(".peek"), peekImg = peek.appendChild(document.createElement("img")), P = "img/awa-ndiaye/";
+  peekImg.alt = "";
   var peeks = {saffron:["saffron",""],tuxedo:["tuxedo",""],emerald:["emerald",""],dakar:["dakar",""],gold:["gold",""],beauty:["beauty",""],noir:["tuxedo","grayscale(1) contrast(1.1)"]};
   if (matchMedia("(hover:hover) and (pointer:fine)").matches){
     var px = 0, py = 0, shown = false;
