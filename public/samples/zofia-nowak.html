@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zofia Nowak — Head of Floor · Concept site</title>
+<meta name="description" content="Zofia Nowak, head waitress and floor supervisor in Dubai. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F4F0E8">
+<link rel="preload" href="fonts/italiana-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/karla-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" imagesrcset="img/zofia-nowak/cut-640.webp 253w, img/zofia-nowak/cut.webp 408w" imagesizes="(max-width:760px) 56vw, 34vh" fetchpriority="high">
+<script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
+<style>
+@font-face{font-family:"Italiana";src:url(fonts/italiana-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Karla";src:url(fonts/karla-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Karla";src:url(fonts/karla-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Karla";src:url(fonts/karla-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{
+  --paper:#F4F0E8;--paper2:#ECE6DA;--ink:#1D1B19;--ink2:#5A554E;--line:rgba(29,27,25,.55);--faint:rgba(29,27,25,.16);--claret:#8E2433;--claret2:#B33A4B;
+  --display:"Italiana",Didot,"Bodoni 72",Georgia,serif;--sans:"Karla","Helvetica Neue",Arial,sans-serif;
+  --pad:clamp(18px,4.4vw,72px);
+  --zc-bg:#1D1B19;--zc-fg:#F4F0E8;--zc-dot:#B33A4B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:400 17.5px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img,svg{display:block}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--claret);outline-offset:3px}
+em{font-style:normal;color:var(--claret)}
+.lab{font:700 12px/1.3 var(--sans);letter-spacing:.2em;text-transform:uppercase}
+main{position:relative;overflow-x:clip}
+
+/* Header */
+.top{position:fixed;inset-inline:var(--pad);top:16px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:16px;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:baseline;gap:12px;padding:9px 16px;text-decoration:none;background:rgba(244,240,232,.9);box-shadow:inset 0 0 0 1px var(--faint)}
+.brand b{font:400 22px/1 var(--display);letter-spacing:.04em}
+.brand span{font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.top nav{display:flex;background:rgba(244,240,232,.9);box-shadow:inset 0 0 0 1px var(--faint)}
+.top nav a{padding:9px 14px;text-decoration:none;font:500 13.5px/1 var(--sans);letter-spacing:.06em;color:var(--ink2)}
+.top nav a:hover{color:var(--ink)}
+.top nav a[aria-current]{background:var(--ink);color:var(--paper)}
+
+/* Plan drawing, shared by the hero and the floor section */
+.plan .wall{fill:none;stroke:var(--ink);stroke-width:2}
+.plan .wall2{fill:none;stroke:var(--ink);stroke-width:.8}
+.plan .fix{fill:var(--paper2);stroke:var(--line);stroke-width:1}
+.plan .tb{fill:var(--paper);stroke:var(--line);stroke-width:1}
+.plan .ch{fill:var(--paper);stroke:var(--line);stroke-width:.8}
+.plan .num{font:700 11px/1 var(--sans);fill:var(--ink2);letter-spacing:.06em}
+.plan .lbl{font:700 10px/1 var(--sans);fill:var(--ink2);letter-spacing:.2em}
+.plan .door{fill:none;stroke:var(--line);stroke-width:.8;stroke-dasharray:3 3}
+.plan .route{fill:none;stroke:var(--claret);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.plan .ghost{fill:none;stroke:rgba(142,36,51,.18);stroke-width:1.4;stroke-dasharray:2 6;stroke-linecap:round}
+.plan .her{fill:var(--claret)}
+.plan .halo{fill:none;stroke:var(--claret);stroke-width:1.2;opacity:.45}
+.plan .stop{fill:var(--paper);stroke:var(--claret);stroke-width:1.6}
+.plan .stop.on{fill:var(--claret)}
+.plan .hl{fill:rgba(179,58,75,.12);stroke:none;opacity:0;transition:opacity .4s}
+.plan .hl.on{opacity:1}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden}
+.hero .bgplan{position:absolute;right:-5vw;top:50%;width:min(64vw,980px);transform:translateY(-46%);opacity:.55;-webkit-mask-image:linear-gradient(90deg,transparent,#000 28%);mask-image:linear-gradient(90deg,transparent,#000 28%)}
+.zofia{position:absolute;z-index:2;right:max(6vw,calc(50% - 600px));bottom:0;height:min(94vh,1060px);width:auto;max-width:none;filter:drop-shadow(18px 24px 30px rgba(29,27,25,.18));user-select:none}
+.hero .copy{position:relative;z-index:3;padding:clamp(140px,22vh,210px) var(--pad) 0;max-width:min(58vw,820px)}
+.hero .kick{color:var(--claret)}
+.hero h1{font:400 clamp(58px,7.4vw,128px)/.95 var(--display);letter-spacing:.005em;margin-top:22px}
+.hero .sub{font-size:clamp(17px,1.35vw,20px);line-height:1.6;max-width:40ch;margin-top:28px;color:var(--ink2)}
+.cta{display:inline-flex;align-items:center;gap:12px;margin-top:30px;padding:15px 22px;background:var(--ink);color:var(--paper);text-decoration:none;font:500 15px/1 var(--sans);letter-spacing:.08em;transition:background .25s,translate .25s}
+.cta:hover{background:var(--claret);translate:0 -2px}
+.sign{position:absolute;z-index:3;left:var(--pad);bottom:34px;display:flex;gap:16px;align-items:center;font-size:14.5px;color:var(--ink2)}
+.sign i{width:10px;height:10px;border-radius:50%;background:var(--claret);box-shadow:0 0 0 5px rgba(142,36,51,.15)}
+
+/* Section furniture */
+.sec{position:relative;padding:16vh var(--pad)}
+.h2{font:400 clamp(50px,6.4vw,110px)/.96 var(--display);letter-spacing:.005em;max-width:14ch}
+.lede{font-size:clamp(17px,1.35vw,20px);line-height:1.6;max-width:54ch;margin-top:22px;color:var(--ink2)}
+.note{font-size:13.5px;margin-top:24px;color:var(--ink2)}
+.eyebrow{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--ink);padding-top:14px;margin-bottom:5vh}
+
+/* The floor */
+.floor{background:var(--paper2)}
+.floor .stage{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.8fr);gap:clamp(20px,3vw,48px);align-items:center;margin-top:6vh}
+.floor .planwrap{position:relative;background:var(--paper);box-shadow:0 0 0 1px var(--faint),0 30px 60px -40px rgba(29,27,25,.5);padding:14px}
+.floor .plan{width:100%;height:auto}
+.stopcard{position:relative}
+.stopcard .ct{font:400 64px/1 var(--display);color:var(--claret)}
+.stopcard .where{margin-top:6px}
+.stopcard h3{font:400 clamp(32px,2.8vw,46px)/1.02 var(--display);margin-top:14px}
+.stopcard p{margin-top:14px;font-size:17px;color:#3B3732}
+.stopcard .swap{transition:opacity .3s,transform .3s}
+.stopcard.out .swap{opacity:0;transform:translateY(8px)}
+.meter{display:flex;gap:24px;flex-wrap:wrap;margin-top:28px;padding-top:16px;border-top:1px solid var(--faint)}
+.meter b{display:block;font:400 34px/1 var(--display)}
+.meter span{font-size:13.5px;color:var(--ink2)}
+.stops{list-style:none;display:none;margin-top:5vh;border-top:1px solid var(--faint)}
+.stops li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;padding:16px 0;border-bottom:1px solid var(--faint);transition:opacity .3s}
+.stops li .n{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1.6px var(--claret);font:700 12px/1 var(--sans);color:var(--claret)}
+.stops li.on .n{background:var(--claret);color:var(--paper)}
+.stops h3{font:400 26px/1.05 var(--display)}
+.stops p{font-size:15.5px;color:#3B3732;margin-top:4px}
+
+/* Career: the place setting grows */
+.settings{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,34px);margin-top:8vh}
+.settings li{border-top:1px solid var(--ink);padding-top:18px}
+.settings svg{width:100%;height:auto;max-width:220px;aspect-ratio:1.2}
+.settings svg .s{fill:none;stroke:var(--ink);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.settings svg .f{fill:var(--paper2)}
+.settings svg .c{fill:none;stroke:var(--claret);stroke-width:1.4}
+.settings .y{font:400 34px/1 var(--display);color:var(--claret);margin-top:14px;display:block}
+.settings h3{font:700 15px/1.25 var(--sans);letter-spacing:.12em;text-transform:uppercase;margin-top:10px}
+.settings .c2{display:block;font-size:14px;color:var(--ink2);margin-top:4px}
+.settings p{font-size:15.5px;color:#3B3732;margin-top:10px}
+
+/* Small things */
+.small{background:var(--ink);color:var(--paper)}
+.small .eyebrow{border-color:rgba(244,240,232,.5)}
+.small .lede{color:rgba(244,240,232,.75)}
+.small em{color:var(--claret2)}
+.rules{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);margin-top:8vh}
+.rules li{border-top:1px solid rgba(244,240,232,.35);padding-top:20px}
+.rules .k{font:400 56px/1 var(--display);color:var(--claret2)}
+.rules h3{font:400 clamp(28px,2.4vw,38px)/1.05 var(--display);margin-top:10px}
+.rules p{margin-top:12px;font-size:16.5px;color:rgba(244,240,232,.8)}
+.langs{display:flex;flex-wrap:wrap;gap:10px;margin-top:10vh;align-items:center}
+.langs span{padding:9px 14px;box-shadow:inset 0 0 0 1px rgba(244,240,232,.35);font-size:15px}
+.langs .lab{box-shadow:none;padding:0 8px 0 0;color:rgba(244,240,232,.7)}
+
+/* Contact */
+.contact{min-height:88vh;display:flex;flex-direction:column;justify-content:center}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:7vh;max-width:1100px}
+.cards a{display:flex;flex-direction:column;gap:10px;padding:22px 22px 24px;background:var(--paper2);text-decoration:none;box-shadow:inset 0 0 0 1px var(--faint);transition:background .25s,translate .25s}
+.cards a:hover{background:#E4DCCD;translate:0 -3px}
+.cards .lab{color:var(--claret)}
+.cards b{font:400 clamp(22px,1.8vw,28px)/1.1 var(--display);overflow-wrap:anywhere}
+body>footer{background:var(--ink);color:#B7AFA4;padding:30px var(--pad) 96px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;font-size:14px;line-height:1.7}
+body>footer p{max-width:92ch}
+
+@media (max-width:1100px){.settings{grid-template-columns:repeat(2,minmax(0,1fr))}.rules{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:1000px){
+  .top nav{display:none}
+  .floor .stage{grid-template-columns:minmax(0,1fr);align-items:start}
+  .floor .planwrap{position:sticky;top:64px;z-index:3;padding:8px}
+  .stopcard{display:none}
+  .stops{display:block}
+  .cards{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  body{font-size:16.5px}
+  .brand span{display:none}
+  .hero{display:flex;flex-direction:column;min-height:0}
+  .hero .copy{order:1;max-width:none;padding-top:104px}
+  .zofia{order:2}.sign{order:3}
+  .hero h1{font-size:clamp(50px,13.6vw,70px)}
+  .hero .bgplan{right:-30vw;top:auto;bottom:4vh;width:150vw;transform:none;-webkit-mask-image:none;mask-image:none;opacity:.45}
+  .zofia{position:relative;right:auto;bottom:auto;height:auto;width:min(58vw,300px);margin:20px 10vw 0 auto}
+  .sign{display:none}
+  .settings{grid-template-columns:minmax(0,1fr)}
+  .settings svg{max-width:200px}
+}
+@media (prefers-reduced-motion:reduce){.cta,.cards a,.stopcard .swap,.stops li,.plan .hl{transition:none}}
+</style>
+</head>
+<body>
+<header class="top" data-headroom="0.9">
+  <a class="brand" href="#top"><b>Zofia Nowak</b><span>Head of floor</span></a>
+  <nav aria-label="Sections"><a href="#floor" data-spy>The floor</a><a href="#career" data-spy>Career</a><a href="#small" data-spy>Small things</a><a href="#contact" data-spy>Contact</a></nav>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <svg class="plan bgplan" aria-hidden="true"></svg>
+    <img class="zofia" src="img/zofia-nowak/cut.webp" srcset="img/zofia-nowak/cut-640.webp 253w, img/zofia-nowak/cut.webp 408w" sizes="(max-width:760px) 56vw, 34vh" width="408" height="1183" alt="Zofia Nowak standing in a black uniform and apron, a white napkin folded over her arm">
+    <div class="copy">
+      <p class="kick lab">Head of floor · Fine dining · Dubai</p>
+      <h1 id="h1">The best service is the one <em>you don't notice.</em></h1>
+      <p class="sub">I'm Zofia Nowak. I run the dining room of a 70-cover restaurant: the team, the timing and the hundred small things a guest should never have to ask for.</p>
+      <a class="cta" href="#floor">Walk the floor with me <span aria-hidden="true">↓</span></a>
+    </div>
+    <p class="sign" aria-hidden="true"><i></i>The red line is my route through one evening.</p>
+  </section>
+
+  <section class="sec floor" id="floor" aria-labelledby="f-h">
+    <div class="eyebrow lab"><span>The floor</span><span>One loop of a Friday</span></div>
+    <h2 class="h2" id="f-h">Eight stops, <em>one quiet loop.</em></h2>
+    <div class="stage">
+      <div class="planwrap"><svg class="plan mainplan" role="img" aria-label="Floor plan of the dining room with Zofia's route between the service station, the door, the bar, the pass and five tables"></svg></div>
+      <div class="stopcard" aria-hidden="true">
+        <div class="swap">
+          <span class="ct js-ct">01</span>
+          <p class="where lab js-where">Service station</p>
+          <h3 class="js-h">Everything within one step.</h3>
+          <p class="js-p">Napkins, cutlery, a spare chair for table 7, and the night's notes. If I have to walk for it, it is in the wrong place.</p>
+        </div>
+        <div class="meter"><div><b class="js-m">0 m</b><span>walked on this loop</span></div><div><b>~11 km</b><span>on a typical Friday</span></div></div>
+      </div>
+      <ol class="stops"></ol>
+    </div>
+    <p class="note">The restaurant, the guests and the distances are illustrative.</p>
+  </section>
+
+  <section class="sec" id="career" aria-labelledby="c-h">
+    <div class="eyebrow lab"><span>Career</span><span>One more piece on the table each time</span></div>
+    <h2 class="h2" id="c-h">From commis <em>to head of floor.</em></h2>
+    <ol class="settings"></ol>
+    <p class="note">Employers are not named; roles and dates are illustrative.</p>
+  </section>
+
+  <section class="sec small" id="small" aria-labelledby="s-h">
+    <div class="eyebrow lab"><span>Small things</span><span>What I teach every new waiter</span></div>
+    <h2 class="h2" id="s-h">Service lives in <em>the small things.</em></h2>
+    <ol class="rules">
+      <li><span class="k">i</span><h3>Be there at the second glance.</h3><p>A guest looks up twice before they ask for anything. The first glance is a thought; the second is a need.</p></li>
+      <li><span class="k">ii</span><h3>Never interrupt a story.</h3><p>A plate can wait three seconds. The end of somebody's story cannot.</p></li>
+      <li><span class="k">iii</span><h3>Remember the second visit.</h3><p>Names, favourite tables, allergies: written down after every service, so the next welcome is personal.</p></li>
+    </ol>
+    <div class="langs" aria-label="Languages"><span class="lab">Languages</span><span>Polish</span><span>English</span><span>Italian</span><span>Some Arabic</span></div>
+  </section>
+
+  <section class="sec contact" id="contact" aria-labelledby="k-h">
+    <div class="eyebrow lab"><span>Contact</span><span>Dubai</span></div>
+    <h2 class="h2" id="k-h">Your table <em>is ready.</em></h2>
+    <p class="lede">Open to head of floor, restaurant manager and guest-experience roles in fine dining and luxury hotels.</p>
+    <div class="cards">
+      <a href="mailto:zofia@zofianowak.example" data-demo><span class="lab">Email</span><b>zofia@zofianowak.example</b></a>
+      <a href="#" data-demo><span class="lab">LinkedIn</span><b>Zofia Nowak</b></a>
+      <a href="#" data-demo><span class="lab">Résumé</span><b>Download the CV (PDF)</b></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Zofia Nowak is fictional and this is a concept website. The portrait was generated with AI. The restaurant, guests, roles, dates and distances are illustrative.</p>
+  <p>A concept website by Zenith Dubai CV.</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC;
+  var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, a, p){ var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+
+  /* ================= The dining room, in plan (units ≈ 2.5 cm) ================= */
+  var TABLES = [
+    {n:1, x:170, y:190, k:"r", s:2}, {n:2, x:300, y:175, k:"r", s:2}, {n:3, x:440, y:195, k:"q", s:4}, {n:4, x:590, y:205, k:"r", s:4},
+    {n:5, x:120, y:440, k:"q", s:2}, {n:6, x:200, y:330, k:"q", s:4}, {n:7, x:350, y:335, k:"r", s:6}, {n:8, x:505, y:345, k:"r", s:4},
+    {n:9, x:660, y:360, k:"q", s:4}, {n:10, x:830, y:270, k:"r", s:2}, {n:11, x:290, y:505, k:"l", s:8}, {n:12, x:700, y:515, k:"r", s:4}
+  ];
+  var STOPS = [
+    {p:[78, 320], where:"Service station", h:"Everything within one step.", t:"Napkins, cutlery, a spare chair for table 7, and the night's notes. If I have to walk for it, it is in the wrong place."},
+    {p:[480, 590], where:"The door", h:"Greeted within thirty seconds.", t:"Every guest is met at the door and walked to the table, never pointed at it. Coats go before anyone has to ask."},
+    {p:[590, 262], where:"Table 4", h:"An anniversary.", t:"The champagne waits in the bar fridge until the second course, exactly as they asked when they booked.", tb:4},
+    {p:[760, 128], where:"The bar", h:"Every drink checked.", t:"I check each drink against the ticket before it leaves the bar. A wrong drink costs a table three minutes of their evening."},
+    {p:[660, 300], where:"Table 9", h:"A nut allergy.", t:"Confirmed with the chef at the pass, marked on the ticket, and served to the table by me, plate by plate.", tb:9},
+    {p:[150, 102], where:"The pass", h:"The kitchen keeps time.", t:"The kitchen sets the rhythm; I set the pace of the room. A course goes out when the table is ready, not when the plate is."},
+    {p:[290, 450], where:"Table 11", h:"A party of eight.", t:"Three waiters, eight plates, one nod: every plate lands at the same moment, and nobody reaches across anyone.", tb:11},
+    {p:[300, 228], where:"Table 2", h:"A guest with a book.", t:"Water refilled without a word, the bread kept warm, and otherwise left in peace. Some guests come for the quiet.", tb:2}
+  ];
+  // the walk between stops, threading the aisles (extra points keep the line between tables)
+  var WALK = [[78, 320], [120, 380], [210, 410], [420, 420], [470, 520], [480, 590], [520, 540], [560, 440], [600, 400], [650, 300], [590, 262], [680, 220], [760, 160], [760, 128], [740, 200], [720, 290], [660, 300], [580, 290], [430, 270], [300, 255], [220, 255], [150, 200], [150, 102], [110, 160], [100, 250], [140, 380], [210, 420], [290, 450], [380, 440], [420, 400], [400, 270], [330, 240], [300, 228], [230, 250], [130, 280], [78, 320]];
+  function smooth(pts){
+    var d = "M" + pts[0][0] + " " + pts[0][1];
+    for (var i = 0; i < pts.length - 1; i++){
+      var p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)], k = .18;
+      d += " C" + (p1[0] + (p2[0] - p0[0]) * k).toFixed(1) + " " + (p1[1] + (p2[1] - p0[1]) * k).toFixed(1) + " " + (p2[0] - (p3[0] - p1[0]) * k).toFixed(1) + " " + (p2[1] - (p3[1] - p1[1]) * k).toFixed(1) + " " + p2[0] + " " + p2[1];
+    }
+    return d;
+  }
+  function drawPlan(svg, opts){
+    svg.setAttribute("viewBox", "0 0 1000 640"); svg.innerHTML = "";
+    var g = el("g", {}, svg);
+    // walls with an inner line, the entrance gap and the door swing
+    el("path", {class:"wall", d:"M440 620 H20 V20 H980 V620 H520"}, g);
+    el("path", {class:"wall2", d:"M440 610 H30 V30 H970 V610 H520"}, g);
+    el("path", {class:"door", d:"M440 620 A80 80 0 0 1 520 540 M520 620 V540"}, g);
+    // windows on the left wall
+    [120, 260, 400, 520].forEach(function(y){ el("path", {class:"wall2", d:"M20 " + y + " v60 M25 " + y + " v60 M30 " + y + " v60"}, g); });
+    // the pass, the bar with stools, the service station
+    el("rect", {class:"fix", x:40, y:40, width:240, height:44}, g); el("text", {class:"lbl", x:160, y:67, "text-anchor":"middle"}, g).textContent = "THE PASS";
+    el("path", {class:"fix", d:"M700 40 H960 V200 H910 V90 H700 Z"}, g); el("text", {class:"lbl", x:830, y:70, "text-anchor":"middle"}, g).textContent = "BAR";
+    [730, 770, 810, 850].forEach(function(x){ el("circle", {class:"ch", cx:x, cy:108, r:9}, g); }); [130, 170].forEach(function(y){ el("circle", {class:"ch", cx:890, cy:y, r:9}, g); });
+    el("rect", {class:"fix", x:36, y:286, width:28, height:72}, g); el("text", {class:"lbl", x:50, y:372, "text-anchor":"middle"}, g).textContent = "STATION";
+    // tables and chairs
+    TABLES.forEach(function(t){
+      var hl = el("circle", {class:"hl", cx:t.x, cy:t.y, r:t.k === "l" ? 96 : 52, "data-tb":t.n}, g);
+      if (t.k === "r"){
+        var r = t.s <= 2 ? 22 : t.s <= 4 ? 28 : 36;
+        for (var i = 0; i < t.s; i++){ var a = i / t.s * 6.283 + .4; el("circle", {class:"ch", cx:(t.x + Math.cos(a) * (r + 12)).toFixed(1), cy:(t.y + Math.sin(a) * (r + 12)).toFixed(1), r:8}, g); }
+        el("circle", {class:"tb", cx:t.x, cy:t.y, r:r}, g);
+      } else if (t.k === "q"){
+        var s = t.s <= 2 ? 40 : 52;
+        [[0, -1], [0, 1], [-1, 0], [1, 0]].slice(0, t.s <= 2 ? 2 : 4).forEach(function(d){ el("rect", {class:"ch", x:t.x + d[0] * (s / 2 + 12) - 8, y:t.y + d[1] * (s / 2 + 12) - 8, width:16, height:16, rx:3}, g); });
+        el("rect", {class:"tb", x:t.x - s / 2, y:t.y - s / 2, width:s, height:s}, g);
+      } else {
+        for (var j = 0; j < 4; j++){ el("rect", {class:"ch", x:t.x - 66 + j * 40, y:t.y - 40, width:16, height:16, rx:3}, g); el("rect", {class:"ch", x:t.x - 66 + j * 40, y:t.y + 24, width:16, height:16, rx:3}, g); }
+        el("rect", {class:"tb", x:t.x - 84, y:t.y - 22, width:168, height:44}, g);
+      }
+      el("text", {class:"num", x:t.x, y:t.y + 4, "text-anchor":"middle"}, g).textContent = t.n;
+    });
+    var r = {g:g};
+    if (opts.route){
+      var d = smooth(WALK);
+      el("path", {class:"ghost", d:d}, g);
+      r.path = el("path", {class:"route", d:d}, g);
+      r.stops = STOPS.map(function(s, i){ return el("circle", {class:"stop", cx:s.p[0], cy:s.p[1], r:7, "data-i":i}, g); });
+      r.halo = el("circle", {class:"halo", cx:WALK[0][0], cy:WALK[0][1], r:16}, g);
+      r.her = el("circle", {class:"her", cx:WALK[0][0], cy:WALK[0][1], r:8}, g);
+      r.len = r.path.getTotalLength();
+      // where along the line is each stop?
+      r.at = STOPS.map(function(s){ var best = 0, bd = 1e9; for (var l = 0; l <= r.len; l += 4){ var q = r.path.getPointAtLength(l), dd = (q.x - s.p[0]) * (q.x - s.p[0]) + (q.y - s.p[1]) * (q.y - s.p[1]); if (dd < bd){ bd = dd; best = l; } } return best; });
+    }
+    return r;
+  }
+  var bgp = drawPlan($(".bgplan"), {route:true}), P = drawPlan($(".mainplan"), {route:true});
+  // the hero shows a fixed first stretch of the route
+  (function(){ var L = bgp.len * .3; bgp.path.style.strokeDasharray = bgp.len; bgp.path.style.strokeDashoffset = bgp.len - L; var q = bgp.path.getPointAtLength(L); bgp.her.setAttribute("cx", q.x); bgp.her.setAttribute("cy", q.y); bgp.halo.setAttribute("cx", q.x); bgp.halo.setAttribute("cy", q.y); bgp.stops.forEach(function(s, i){ s.style.opacity = bgp.at[i] <= L ? 1 : 0; }); })();
+
+  // the walk: progress 0..1 along the loop
+  var list = $(".stops"), card = $(".stopcard"), cur = -1, swapT;
+  STOPS.forEach(function(s, i){ var li = document.createElement("li"); li.innerHTML = '<span class="n">' + (i + 1) + '</span><div><span class="lab" style="color:var(--claret)">' + s.where + '</span><h3>' + s.h + '</h3><p>' + s.t + '</p></div>'; list.appendChild(li); });
+  var lis = $$("li", list);
+  function walk(p){
+    var L = P.len * clamp(p, 0, 1);
+    P.path.style.strokeDasharray = P.len; P.path.style.strokeDashoffset = (P.len - L).toFixed(1);
+    var q = P.path.getPointAtLength(Math.max(.1, L)); P.her.setAttribute("cx", q.x.toFixed(1)); P.her.setAttribute("cy", q.y.toFixed(1)); P.halo.setAttribute("cx", q.x.toFixed(1)); P.halo.setAttribute("cy", q.y.toFixed(1));
+    var i = 0; P.at.forEach(function(a, j){ if (L >= a - 2) i = j; });
+    P.stops.forEach(function(s, j){ s.classList.toggle("on", P.at[j] <= L + 2); });
+    $(".js-m").textContent = Math.round(L * .025) + " m";
+    show(i);
+  }
+  function show(i){
+    if (i === cur) return; cur = i; var s = STOPS[i];
+    $$(".hl", P.g).forEach(function(h){ h.classList.toggle("on", +h.getAttribute("data-tb") === s.tb); });
+    lis.forEach(function(li, j){ li.classList.toggle("on", j === i); });
+    var fill = function(){ $(".js-ct").textContent = (i < 9 ? "0" : "") + (i + 1); $(".js-where").textContent = s.where; $(".js-h").textContent = s.h; $(".js-p").textContent = s.t; card.classList.remove("out"); };
+    clearTimeout(swapT); if (!ZC.motion) fill(); else { card.classList.add("out"); swapT = setTimeout(fill, 220); }
+  }
+  walk(ZC.motion ? 0 : 1);
+
+  /* ================= Career: the place setting grows ================= */
+  var CAREER = [
+    {y:"2012", r:"Commis de rang", c:"Kraków", t:"Polishing, carrying, watching. The first year is learning where everything lives.", k:1},
+    {y:"2015", r:"Chef de rang", c:"Warsaw", t:"My own section of five tables, and the first regulars who asked for me by name.", k:2},
+    {y:"2018", r:"Maître d'hôtel", c:"London", t:"A 120-cover room, the reservations book, and a team of twelve across two sittings.", k:3},
+    {y:"2022", r:"Head of floor", c:"Dubai", t:"The whole dining room: the team, the training, the timing and every guest's evening.", k:4}
+  ];
+  var sets = $(".settings");
+  CAREER.forEach(function(c){
+    var li = document.createElement("li"), svg = '<svg viewBox="0 0 240 200" aria-hidden="true">';
+    // plate
+    if (c.k >= 2) svg += '<circle class="f" cx="120" cy="110" r="52"/><circle class="s" cx="120" cy="110" r="52"/><circle class="s" cx="120" cy="110" r="36"/>';
+    // fork (left)
+    svg += '<path class="s" d="M52 60 V160 M44 60 V84 Q44 92 52 92 Q60 92 60 84 V60 M52 60 V84"/>';
+    // knife (right)
+    if (c.k >= 2) svg += '<path class="s" d="M188 60 Q198 80 194 104 H188 Z M188 104 V160"/>';
+    // napkin and glasses
+    if (c.k >= 3) svg += '<path class="s" d="M100 98 L140 98 L148 126 L92 126 Z"/><circle class="s" cx="182" cy="34" r="12"/><circle class="s" cx="208" cy="48" r="10"/>';
+    // bread plate, butter knife and the candle
+    if (c.k >= 4) svg += '<circle class="s" cx="40" cy="34" r="16"/><path class="s" d="M30 34 H50"/><circle class="c" cx="120" cy="22" r="7"/><path class="c" d="M120 15 Q124 8 120 2 Q116 8 120 15"/>';
+    svg += "</svg>";
+    li.innerHTML = svg + '<span class="y">' + c.y + '</span><h3>' + c.r + '</h3><span class="c2">' + c.c + '</span><p>' + c.t + '</p>';
+    sets.appendChild(li);
+  });
+
+  /* ================= Boot ================= */
+  addEventListener("load", function(){
+    if (!ZC.motion || !window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger);
+    ZC.smooth();
+    document.fonts.ready.then(function(){
+      gsap.from(".zofia", {opacity:0, y:30, duration:1.6, ease:"expo.out", delay:.2});
+      gsap.from(".hero .copy > *", {opacity:0, y:22, duration:1.1, stagger:.1, ease:"expo.out", delay:.35});
+      gsap.from(".bgplan", {opacity:0, duration:2, ease:"power2.out", delay:.1});
+      gsap.from(".sign", {opacity:0, duration:1, delay:1.4});
+      // the hero's red line draws itself once
+      var hl = bgp.len * .3; gsap.fromTo(bgp.path, {strokeDashoffset:bgp.len}, {strokeDashoffset:bgp.len - hl, duration:2.4, ease:"power2.inOut", delay:.6, onUpdate:function(){ var off = bgp.len - parseFloat(getComputedStyle(bgp.path).strokeDashoffset), q = bgp.path.getPointAtLength(Math.max(.1, off)); bgp.her.setAttribute("cx", q.x); bgp.her.setAttribute("cy", q.y); bgp.halo.setAttribute("cx", q.x); bgp.halo.setAttribute("cy", q.y); bgp.stops.forEach(function(s, i){ s.style.opacity = bgp.at[i] <= off ? 1 : 0; }); }});
+      gsap.to(bgp.halo, {attr:{r:26}, opacity:0, duration:1.6, repeat:-1, ease:"power1.out"});
+      gsap.to(P.halo, {attr:{r:26}, opacity:0, duration:1.6, repeat:-1, ease:"power1.out"});
+      $$(".h2").forEach(function(h){ gsap.from(h, {y:36, opacity:0, duration:1, ease:"expo.out", scrollTrigger:{trigger:h, start:"top 88%"}}); });
+      var mm = gsap.matchMedia();
+      mm.add("(min-width: 1001px)", function(){
+        // the plan holds still while she walks the loop
+        ScrollTrigger.create({trigger:".floor .stage", start:"top 12%", end:"+=" + (STOPS.length * 40) + "%", pin:true, anticipatePin:1, scrub:true, onUpdate:function(self){ walk(self.progress); }});
+      });
+      mm.add("(max-width: 1000px)", function(){
+        // phones: the plan stays pinned at the top while the stops scroll past; she walks to each one in turn
+        var ws = {p:0};
+        lis.forEach(function(li, i){ ScrollTrigger.create({trigger:li, start:"top 62%", end:"bottom 62%", onToggle:function(self){ if (self.isActive) gsap.to(ws, {p:(P.at[i] + (i === 0 ? 0 : 2)) / P.len, duration:.9, ease:"power2.inOut", overwrite:true, onUpdate:function(){ walk(ws.p); }}); }}); });
+      });
+      gsap.from(".settings li", {opacity:0, y:30, duration:.9, stagger:.1, ease:"expo.out", scrollTrigger:{trigger:".settings", start:"top 82%"}});
+      gsap.from(".settings svg .s, .settings svg .c", {opacity:0, duration:.5, stagger:.02, scrollTrigger:{trigger:".settings", start:"top 80%"}});
+      [".rules li", ".cards a"].forEach(function(sel){ gsap.from(sel, {opacity:0, y:26, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:$(sel).parentNode, start:"top 86%"}}); });
+      setTimeout(function(){ ScrollTrigger.refresh(); }, 400);
+    });
+  });
+});
+</script>
+</body>
+</html>
