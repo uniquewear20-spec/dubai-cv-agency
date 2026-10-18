@@ -127,8 +127,10 @@ main{position:relative;overflow-x:clip}
 .rules p{color:#C9C0AE}
 
 /* 04 PROFILE */
-.profile{display:grid;grid-template-columns:minmax(0,1.1fr) 260px minmax(0,1fr);gap:clamp(24px,4vw,70px);align-items:end}
-.profile .trim{width:100%;aspect-ratio:260/592;object-fit:cover;border-radius:2px;box-shadow:0 30px 60px -30px rgba(13,12,10,.6)}
+.profile{display:grid;grid-template-columns:minmax(0,1.1fr) clamp(250px,24vw,340px) minmax(0,1fr);gap:clamp(24px,4vw,70px);align-items:end}
+.profile .portrait{margin:0;position:relative;padding:12px 0 0;padding-inline-start:12px}
+.profile .portrait::before{content:"";position:absolute;inset-block:0 12px;inset-inline:0 12px;border:1px solid var(--gold);pointer-events:none}
+.profile .portrait img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;border-radius:2px;box-shadow:0 30px 60px -30px rgba(13,12,10,.6)}
 .facts{list-style:none;margin-top:28px;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:0 clamp(28px,4vw,56px);border-top:1px solid var(--ink)}
 .facts li{padding-top:12px}
 .facts b{display:block;font:800 clamp(28px,2.6vw,40px)/1 var(--disp);font-variant-numeric:tabular-nums}
@@ -156,7 +158,7 @@ footer p{max-width:88ch}
 @media (max-width:1000px){
   .links{display:none}
   .rules{grid-template-columns:minmax(0,1fr)}
-  .profile{grid-template-columns:minmax(0,1fr) 200px}
+  .profile{grid-template-columns:minmax(0,1fr) 250px}
   .profile .side{grid-column:1 / -1}
   .cgrid{grid-template-columns:minmax(0,1fr)}
 }
@@ -180,7 +182,7 @@ footer p{max-width:88ch}
   .plist .track,.plist .st{grid-column:2}
   .plist .st{justify-self:start}
   .profile{grid-template-columns:minmax(0,1fr)}
-  .profile .trim{width:160px}
+  .profile .portrait{width:min(300px,72vw)}
   .facts b{font-size:30px}
 }
 @media (prefers-reduced-motion:reduce){.bar .crane,.bar .tag{transition:none}}
@@ -240,7 +242,7 @@ footer p{max-width:88ch}
           <li><b>1</b><span data-i="fact3">Under construction</span></li>
         </ul>
       </div>
-      <img class="trim" src="img/noura-al-mazrouei/trim.webp" alt="" width="260" height="592" loading="lazy">
+      <figure class="portrait"><img src="img/noura-al-mazrouei/profile.webp" srcset="img/noura-al-mazrouei/profile-400.webp 400w, img/noura-al-mazrouei/profile.webp 660w" sizes="(max-width:760px) 72vw, (max-width:1000px) 250px, 340px" width="660" height="825" alt="Noura Al Mazrouei, smiling, with the Dubai skyline and construction cranes behind her" data-i-alt="alt2" loading="lazy" decoding="async"></figure>
       <div class="side"><p class="quote" data-i="quote">"A building is a promise with a completion date. I would rather announce less and hand over on time."</p><p class="lab" style="margin-top:14px;color:var(--grey)" data-i="quoteBy">Illustrative quote</p></div>
     </div>
   </section>
@@ -259,7 +261,7 @@ footer p{max-width:88ch}
 </main>
 
 <footer>
-  <p class="fade" data-i="foot">Noura Al Mazrouei and her company are fictional, and this is a concept website. The portrait was generated with AI. Projects, figures, dates, quotes and contact details are illustrative and do not describe real buildings or real people.</p>
+  <p class="fade" data-i="foot">Noura Al Mazrouei and her company are fictional, and this is a concept website. The portrait was generated with AI. Projects, figures, dates, quotes and contact details are illustrative and do not describe real buildings or real people. The Burj Khalifa and Burj Al Arab appear in the night skyline only as Dubai landmarks; they are not projects of this company.</p>
   <p class="fade" data-i="foot2">A concept website by Zenith Dubai CV.</p>
 </footer>
 
@@ -273,7 +275,7 @@ document.addEventListener("DOMContentLoaded", function(){
   var T = {
     en:{
       brand:"Noura Al Mazrouei", navLabel:"Sections", nav1:"Skyline", nav2:"Projects", nav3:"Approach", nav4:"Profile", nav5:"Contact",
-      alt:"Noura Al Mazrouei", kick:"Founder &amp; CEO · Real-estate developer · Dubai", name:"Noura<br>Al Mazrouei", tagline:"Rising, one floor at a time.",
+      alt:"Noura Al Mazrouei", alt2:"Noura Al Mazrouei, smiling, with the Dubai skyline and construction cranes behind her", kick:"Founder &amp; CEO · Real-estate developer · Dubai", name:"Noura<br>Al Mazrouei", tagline:"Rising, one floor at a time.",
       lede:"Since 2012 I have built homes and workplaces across Dubai, from eleven family villas to a tower of fifty-eight floors. Scroll, and watch the skyline go up in the order it was built.",
       cue:"Scroll to build", lgDone:"Completed", lgRise:"Under construction", lgScale:"Height = floors",
       pEye:"02 · Projects", pEye2:"Nine buildings, 2012 – 2027", pH:"Every bar is a building.", pLead:"Bars are drawn to scale in floors, one segment per floor. Names, figures and dates on this page are illustrative.",
@@ -287,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function(){
       quote:"“A building is a promise with a completion date. I would rather announce less and hand over on time.”", quoteBy:"Illustrative quote",
       cEye:"05 · Contact", cEye2:"Partnerships and investors", cH:"Let's build <em>the next floor.</em>", cl1:"Partnerships", cl2:"Investor relations", cl3:"Office",
       office:"Dubai, United Arab Emirates", cta:"Request a meeting <span aria-hidden=\"true\">→</span>",
-      foot:"Noura Al Mazrouei and her company are fictional, and this is a concept website. The portrait was generated with AI. Projects, figures, dates, quotes and contact details are illustrative and do not describe real buildings or real people.",
+      foot:"Noura Al Mazrouei and her company are fictional, and this is a concept website. The portrait was generated with AI. Projects, figures, dates, quotes and contact details are illustrative and do not describe real buildings or real people. The Burj Khalifa and Burj Al Arab appear in the night skyline only as Dubai landmarks; they are not projects of this company.",
       foot2:"A concept website by Zenith Dubai CV.",
       title:"Noura Al Mazrouei — Founder & CEO, real-estate developer · Concept site",
       demo:"This is a concept site, so contact links are switched off.", langBtn:"عربي", langLabel:"Read this page in Arabic",
@@ -295,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function(){
     },
     ar:{
       brand:"نورة المزروعي", navLabel:"أقسام الصفحة", nav1:"الأفق", nav2:"المشاريع", nav3:"النهج", nav4:"السيرة", nav5:"تواصل",
-      alt:"نورة المزروعي", kick:"المؤسِّسة والرئيسة التنفيذية · تطوير عقاري · دبي", name:"نورة<br>المزروعي", tagline:"نرتفع، طابقاً بعد طابق.",
+      alt:"نورة المزروعي", alt2:"نورة المزروعي مبتسمة، وخلفها أفق دبي ورافعات البناء", kick:"المؤسِّسة والرئيسة التنفيذية · تطوير عقاري · دبي", name:"نورة<br>المزروعي", tagline:"نرتفع، طابقاً بعد طابق.",
       lede:"منذ عام 2012 أبني المساكن وأماكن العمل في أنحاء دبي، من إحدى عشرة فيلا عائلية إلى برج من ثمانية وخمسين طابقاً. مرِّر إلى الأسفل لترى الأفق يرتفع بالترتيب الذي بُني به.",
       cue:"مرِّر لتبني", lgDone:"مكتمل", lgRise:"قيد الإنشاء", lgScale:"الارتفاع = عدد الطوابق",
       pEye:"02 · المشاريع", pEye2:"تسعة مبانٍ، 2012 – 2027", pH:"كل عمودٍ مبنى.", pLead:"الأعمدة مرسومة بمقياس عدد الطوابق، لكل طابق قطعة واحدة. الأسماء والأرقام والتواريخ في هذه الصفحة توضيحية.",
@@ -309,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function(){
       quote:"«المبنى وعدٌ له موعد تسليم. أفضّل أن أعلن أقل وأن أسلّم في الموعد.»", quoteBy:"اقتباس توضيحي",
       cEye:"05 · تواصل", cEye2:"الشراكات والمستثمرون", cH:"لنبنِ <em>الطابق التالي.</em>", cl1:"الشراكات", cl2:"علاقات المستثمرين", cl3:"المكتب",
       office:"دبي، الإمارات العربية المتحدة", cta:"اطلب اجتماعاً <span aria-hidden=\"true\">←</span>",
-      foot:"نورة المزروعي وشركتها من نسج الخيال، وهذا موقع تجريبي. الصورة مولَّدة بالذكاء الاصطناعي. المشاريع والأرقام والتواريخ والاقتباسات وبيانات التواصل توضيحية ولا تصف مباني حقيقية أو أشخاصاً حقيقيين.",
+      foot:"نورة المزروعي وشركتها من نسج الخيال، وهذا موقع تجريبي. الصورة مولَّدة بالذكاء الاصطناعي. المشاريع والأرقام والتواريخ والاقتباسات وبيانات التواصل توضيحية ولا تصف مباني حقيقية أو أشخاصاً حقيقيين. يظهر برج خليفة وبرج العرب في أفق الليل بوصفهما من معالم دبي فقط، وليسا من مشاريع هذه الشركة.",
       foot2:"موقع تجريبي من تصميم Zenith Dubai CV.",
       title:"نورة المزروعي — المؤسِّسة والرئيسة التنفيذية، تطوير عقاري · موقع تجريبي",
       demo:"هذا موقع تجريبي، لذلك روابط التواصل معطّلة.", langBtn:"English", langLabel:"Read this page in English",
@@ -416,10 +418,45 @@ document.addEventListener("DOMContentLoaded", function(){
       lit = P.map(function(b){ var rows = b.f, cols = Math.max(2, Math.round(b.w * 1.3)), a = []; for (var i = 0; i < rows * cols; i++) a.push(Math.random() < .42); return {rows:rows, cols:cols, a:a}; });
     }
     function resize(){ dpr = Math.min(devicePixelRatio || 1, 1.75); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; draw(); }
+    // Two Dubai landmarks on the horizon, for a sense of place. They are not projects of this fictional company,
+    // so they are drawn differently from her buildings: further back, edge-lit, without window grids, and labelled.
+    var blink = true;
+    function landmarks(rtl, fl){
+      var labels = W >= 560, en = root.lang !== "ar";
+      ctx.font = en ? "600 10px Manrope, sans-serif" : "600 12.5px 'Plex Arabic', sans-serif";
+      ctx.textBaseline = "middle";
+      function place(xPct){ var x = W * xPct / 100; return rtl ? W - x : x; }
+      // Burj Khalifa: stepped setbacks that alternate sides as they rise, then the spire.
+      var bk = place(43.6), hb = H * .985, L = [[.09,.096],[.19,.088],[.29,.078],[.38,.067],[.465,.056],[.545,.045],[.615,.034],[.68,.024],[.74,.016],[.80,.010]],
+          R = [[.14,.092],[.24,.083],[.335,.072],[.42,.061],[.505,.050],[.58,.039],[.65,.029],[.71,.020],[.77,.013],[.80,.010]];
+      ctx.save(); ctx.translate(bk, H); ctx.scale(rtl ? -hb : hb, -hb);
+      ctx.beginPath(); ctx.moveTo(-L[0][1], 0);
+      var y0 = 0; L.forEach(function(s, i){ ctx.lineTo(-s[1], y0); ctx.lineTo(-s[1], s[0]); y0 = s[0]; });
+      ctx.lineTo(-.007, .80); ctx.lineTo(-.0035, .93); ctx.lineTo(0, 1); ctx.lineTo(.0035, .93); ctx.lineTo(.007, .80);
+      var r = R.slice().reverse(); r.forEach(function(s, i){ var below = i < r.length - 1 ? r[i + 1][0] : 0; ctx.lineTo(s[1], s[0]); ctx.lineTo(s[1], below); });
+      ctx.closePath(); ctx.restore();
+      var g = ctx.createLinearGradient(0, H, 0, H - hb); g.addColorStop(0, "#211C15"); g.addColorStop(1, "#2B2419");
+      ctx.fillStyle = g; ctx.fill(); ctx.lineWidth = 1; ctx.strokeStyle = "rgba(218,188,120,.42)"; ctx.stroke();
+      ctx.fillStyle = "rgba(255,226,160,.55)";
+      L.concat(R).forEach(function(s){ if (s[0] > .78) return; var y = H - s[0] * hb + 3, w = s[1] * hb * .7; for (var d = -w; d <= w; d += 6) ctx.fillRect(bk + d - .6, y, 1.2, 1.2); });
+      if (blink){ ctx.fillStyle = "#E2382A"; ctx.beginPath(); ctx.arc(bk, H - hb - 1, 2.2, 0, 7); ctx.fill(); }
+      if (labels){ ctx.fillStyle = "rgba(169,159,140,.95)"; ctx.textAlign = rtl ? "right" : "left"; var lx = bk + (rtl ? -1 : 1) * hb * .03 + (rtl ? -6 : 6); ctx.fillText(en ? "BURJ KHALIFA" : "برج خليفة", lx, H - hb * .9);
+        ctx.strokeStyle = "rgba(169,159,140,.5)"; ctx.beginPath(); ctx.moveTo(bk + (rtl ? -3 : 3), H - hb * .9); ctx.lineTo(lx + (rtl ? 3 : -3), H - hb * .9); ctx.stroke(); }
+      // Burj Al Arab: the sail, its mast and the helipad.
+      var ba = place(61.6), ha = H * .46, dir = rtl ? -1 : 1;
+      ctx.save(); ctx.translate(ba, H); ctx.scale(dir * ha, -ha);
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, .86); ctx.bezierCurveTo(.13, .80, .42, .56, .37, .07); ctx.lineTo(.35, 0); ctx.closePath(); ctx.restore();
+      var g2 = ctx.createLinearGradient(ba, 0, ba + dir * ha * .4, 0); g2.addColorStop(0, "#211C15"); g2.addColorStop(1, "#30281C");
+      ctx.fillStyle = g2; ctx.fill(); ctx.strokeStyle = "rgba(218,188,120,.42)"; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(ba, H - ha * .86); ctx.lineTo(ba, H - ha); ctx.stroke();
+      ctx.fillStyle = "#2B2419"; ctx.fillRect(Math.min(ba, ba - dir * ha * .12), H - ha * .79, ha * .12, 2); ctx.strokeRect(Math.min(ba, ba - dir * ha * .12), H - ha * .79, ha * .12, 2);
+      if (labels){ ctx.fillStyle = "rgba(169,159,140,.95)"; ctx.textAlign = "center"; ctx.fillText(en ? "BURJ AL ARAB" : "برج العرب", ba + dir * ha * .1, H - ha - 12); }
+    }
     function draw(){
       if (!W) return;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
-      var rtl = root.dir === "rtl", fl = H * .96 / MAXF;
+      var rtl = root.dir === "rtl", fl = H * .74 / MAXF;
+      landmarks(rtl, fl);
       P.forEach(function(b, i){
         var bw = W * b.w / 100, bx = W * b.x / 100; if (rtl) bx = W - bx - bw;
         var floors = b.e > 2026 ? MAXF : b.f, bh = floors * fl, by = H - bh;
@@ -435,11 +472,12 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     function tick(t){
       raf = 0; if (!on) return;
-      if (t - last > 900){ last = t; for (var n = 0; n < 3; n++){ var L = lit[(Math.random() * lit.length) | 0], k = (Math.random() * L.a.length) | 0; L.a[k] = !L.a[k]; } draw(); }
+      if (t - last > 900){ last = t; blink = !blink; for (var n = 0; n < 3; n++){ var L = lit[(Math.random() * lit.length) | 0], k = (Math.random() * L.a.length) | 0; L.a[k] = !L.a[k]; } draw(); }
       raf = requestAnimationFrame(tick);
     }
     seed(); window.addEventListener("resize", resize);
-    return {draw:draw, resize:resize, visible:function(v){ on = v && ZC.motion; if (on && !raf) raf = requestAnimationFrame(tick); }};
+    if (document.fonts) document.fonts.addEventListener("loadingdone", draw);
+    return {draw:draw, resize:resize, visible:function(v){ on = v && ZC.motion; if (!on && !blink){ blink = true; draw(); } if (on && !raf) raf = requestAnimationFrame(tick); }};
   })();
   ZC.visible($(".nightsky"), night.visible);
 
@@ -471,7 +509,7 @@ document.addEventListener("DOMContentLoaded", function(){
       ScrollTrigger.create({trigger:".plist", start:"top 80%", once:true, onEnter:function(){ gsap.from(".plist .flr", {scaleX:0, duration:1.2, stagger:.07, ease:"expo.out"}); }});
       gsap.from(".rules li", {opacity:0, y:30, duration:1, stagger:.12, ease:"expo.out", scrollTrigger:{trigger:".rules", start:"top 85%"}});
       gsap.from(".facts li", {opacity:0, y:16, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:".facts", start:"top 90%"}});
-      gsap.from(".profile .trim", {clipPath:"inset(100% 0 0 0)", duration:1.4, ease:"expo.out", scrollTrigger:{trigger:".profile", start:"top 80%"}});
+      gsap.from(".profile .portrait img", {clipPath:"inset(100% 0 0 0)", duration:1.4, ease:"expo.out", scrollTrigger:{trigger:".profile", start:"top 80%"}});
     });
   });
 });

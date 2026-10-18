@@ -275,6 +275,7 @@ export const preview = {
   desktop: (slug: string) => `${P}${slug}-d.webp`,   // 1440 × 900 viewport
   tablet: (slug: string) => `${P}${slug}-tab.webp`,  // 820 × 1180 viewport
   mobile: (slug: string) => `${P}${slug}-m.webp`,    // 390 × 844 viewport
+  thumb: (slug: string) => `${P}${slug}-t.webp`,     // 288 × 180, the desktop capture for the wheel's gondolas
   loop: (slug: string, ext: "webm" | "mp4") => `${P}${slug}-loop.${ext}`, // 960 × 600, the opening seconds (VP9 and H.264)
 };
 

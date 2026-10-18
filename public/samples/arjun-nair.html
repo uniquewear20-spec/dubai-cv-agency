@@ -41,7 +41,8 @@ main{position:relative;overflow-x:clip}
 
 #mercury{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .hero{position:relative;z-index:1;height:100vh;height:100svh;min-height:620px;overflow:hidden}
-.hero .arjun{position:absolute;right:max(1vw,calc(50% - 720px));bottom:0;height:min(94%,1125px);width:auto;max-width:none;filter:contrast(1.08)}
+.hero .arjun-pos{position:absolute;right:max(1vw,calc(50% - 720px));bottom:0;height:min(94%,1125px);aspect-ratio:928/1125}
+.hero .arjun{width:100%;height:100%;max-width:none;object-fit:contain;object-position:bottom;filter:contrast(1.08)}
 .hero .nameblock{position:absolute;left:var(--pad);top:clamp(80px,12vh,120px)}
 .hero h1{font:700 clamp(84px,15.5vw,270px)/.8 var(--display);letter-spacing:-.01em;text-transform:uppercase}
 .hero h1 span{display:block}
@@ -110,7 +111,7 @@ footer p{max-width:72ch}
 }
 @media (max-width:640px){
   .top nav{display:none}
-  .hero .arjun{right:-22vw;height:70%}
+  .hero .arjun-pos{right:-22vw;height:70%}
   .hero h1{font-size:26vw}
   .hero .bottom{right:var(--pad);max-width:none}
   .hero .bottom p{font-size:17px;max-width:24ch}
@@ -133,7 +134,7 @@ footer p{max-width:72ch}
 
 <main>
   <section class="hero" id="top" aria-label="Introduction">
-    <img class="arjun" src="img/arjun-nair/cut.webp" srcset="img/arjun-nair/cut-760.webp 627w, img/arjun-nair/cut.webp 928w" sizes="(max-width:640px) 100vw, 55vw" width="928" height="1125" alt="Arjun Nair, black and white portrait, dark blazer and open-collar white shirt">
+    <div class="arjun-pos"><img class="arjun" src="img/arjun-nair/cut.webp" srcset="img/arjun-nair/cut-760.webp 627w, img/arjun-nair/cut.webp 928w" sizes="(max-width:640px) 100vw, 55vw" width="928" height="1125" alt="Arjun Nair, black and white portrait, dark blazer and open-collar white shirt"></div>
     <div class="nameblock">
       <h1><span>Arjun</span><span>Nair</span></h1>
       <p class="role mono">Managing Director · Mergers &amp; Acquisitions</p>
@@ -278,7 +279,8 @@ document.addEventListener("DOMContentLoaded", function(){
         .to(".steps .s1",{opacity:0,yPercent:-20,duration:.18},.28).fromTo(".steps .s2",{opacity:0,yPercent:20},{opacity:1,yPercent:0,duration:.18},.32)
         .to(".steps .s2",{opacity:0,yPercent:-20,duration:.18},.62).fromTo(".steps .s3",{opacity:0,yPercent:20},{opacity:1,yPercent:0,duration:.18},.66)
         .to(o,{v:4.2,duration:.4,ease:"power1.out",onUpdate:function(){ val.textContent = "$" + o.v.toFixed(1) + "bn"; }},.6);
-      gsap.to(".arjun",{yPercent:10,opacity:.2,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
+      // scrolling away fades the wrapper, never the image the intro animates (so scrolling back always brings him back)
+      gsap.to(".arjun-pos",{yPercent:10,opacity:.2,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
       // Fade the metal out once the paper arrives.
       gsap.to(M,{visible:0,ease:"none",scrollTrigger:{trigger:".paper",start:"top 60%",end:"top top",scrub:true,onLeave:function(){ M.on = false; },onEnterBack:function(){ M.on = true; if (!M.raf) frame(performance.now()); }}});
 

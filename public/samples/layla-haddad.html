@@ -76,7 +76,8 @@ html[data-head="dark"] .floors a{color:#C9BFAF}
   background:radial-gradient(70% 46% at 50% 26%,#FFFBF2 0%,#F9EBD0 42%,#EFD9B2 72%,#E3C79A 100%);
   box-shadow:inset 0 0 0 1px rgba(169,131,79,calc(.55 * var(--edge,1))),0 50px 120px -50px rgba(110,70,25,calc(.55 * var(--edge,1)));transform-origin:50% 72%}
 .arch::after{content:"";position:absolute;inset:16px 16px 0;border:1px solid rgba(169,131,79,.38);border-bottom:0;border-radius:999px 999px 0 0;opacity:var(--edge,1)}
-.layla{position:absolute;bottom:0;right:calc(clamp(24px,10vw,170px) + min(34vw,540px)/2);transform:translateX(50%);height:min(88%,1012px);width:auto;max-width:none;filter:drop-shadow(0 30px 34px rgba(70,45,18,.22))}
+.layla-pos{position:absolute;bottom:0;right:calc(clamp(24px,10vw,170px) + min(34vw,540px)/2);translate:50% 0;height:min(88%,1012px);aspect-ratio:719/1012}
+.layla{display:block;width:100%;height:100%;max-width:none;object-fit:contain;object-position:bottom;filter:drop-shadow(0 30px 34px rgba(70,45,18,.22))}
 .intro{position:absolute;left:var(--pad);top:50%;transform:translateY(-46%);width:min(48vw,760px);z-index:2}
 .intro .label{color:var(--brass-d);display:flex;align-items:center;gap:14px;margin-bottom:28px}
 .intro .label::before{content:"";width:46px;height:1px;background:currentColor}
@@ -237,7 +238,7 @@ footer p{max-width:70ch}
   .intro .label::before{width:26px}
   .intro .sub{display:none}
   .arch{right:50%;transform:translateX(50%);width:min(78vw,380px);height:56%}
-  .layla{right:50%;height:58%}
+  .layla-pos{right:50%;height:58%}
   .cue{display:none}
   .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
   .facts div:nth-child(3){padding-left:0;border-left:0}
@@ -287,7 +288,7 @@ footer p{max-width:70ch}
       <img class="plate" src="img/layla-haddad/plate.webp" alt="" width="928" height="1152">
       <div class="veil"></div>
       <div class="arch"></div>
-      <img class="layla" src="img/layla-haddad/cut.webp" srcset="img/layla-haddad/cut-720.webp 512w, img/layla-haddad/cut.webp 719w" sizes="(max-width:760px) 60vw, 40vw" width="719" height="1012" alt="Layla Haddad, smiling, in an ivory blazer">
+      <div class="layla-pos"><img class="layla" src="img/layla-haddad/cut.webp" srcset="img/layla-haddad/cut-720.webp 512w, img/layla-haddad/cut.webp 719w" sizes="(max-width:760px) 60vw, 40vw" width="719" height="1012" alt="Layla Haddad, smiling, in an ivory blazer"></div>
       <div class="intro">
         <p class="label">General Manager · Maison Ambre Dubai</p>
         <h1><span class="ln">Every arrival</span><span class="ln">is a <em>promise.</em></span></h1>
@@ -477,8 +478,8 @@ footer p{max-width:70ch}
         walk.to(".intro",{yPercent:-12,opacity:0,ease:"power1.in",duration:.45},0)
             .to(".cue",{opacity:0,duration:.2},0)
             .to(".arch",{scale:ctx.conditions.desk?4.4:3.6,"--edge":0,duration:1,ease:"power2.in"},0)
-            .to(".layla",{scale:1.14,yPercent:5,duration:.8,ease:"power1.in"},0)
-            .to(".layla",{opacity:0,duration:.25},.62)
+            .fromTo(".layla-pos",{scale:1,yPercent:0},{scale:1.14,yPercent:5,duration:.8,ease:"power1.in",immediateRender:false},0)
+            .fromTo(".layla-pos",{opacity:1},{opacity:0,duration:.25,immediateRender:false},.62)
             .to(".plate",{scale:1.25,opacity:0,duration:1},0)
             .to(".veil",{opacity:0,duration:.6},0)
             .to(".fill",{opacity:1,duration:.38,ease:"power1.in"},.62);

@@ -77,7 +77,7 @@ button.win{display:block;border:0;font:inherit;color:inherit;text-align:left}
 .hero .hwin .well::before,.hero .hwin2 .well::before{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(80% 60% at 50% 40%,rgba(120,160,255,.0),rgba(4,8,20,.35));pointer-events:none}
 .hero .hwin .plate,.hero .hwin .view{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none}
 .hero .hwin .view{opacity:0}
-.captain{position:absolute;z-index:2;left:64%;bottom:0;height:min(84svh,880px);aspect-ratio:755/1027;transform:translateX(-50%);pointer-events:none;-webkit-mask:linear-gradient(#000 82%,transparent 99%);mask:linear-gradient(#000 82%,transparent 99%)}
+.captain{position:absolute;z-index:2;left:64%;bottom:0;height:min(84svh,880px);aspect-ratio:755/1027;translate:-50% 0;pointer-events:none;-webkit-mask:linear-gradient(#000 82%,transparent 99%);mask:linear-gradient(#000 82%,transparent 99%)}
 .captain img{filter:drop-shadow(0 -6px 26px rgba(110,150,255,.28))}
 .captain img{width:100%;height:100%;object-fit:contain;object-position:bottom}
 .hero .text{position:absolute;z-index:3;left:var(--pad);top:50%;transform:translateY(-46%);max-width:min(560px,46vw)}
@@ -515,14 +515,14 @@ document.addEventListener("DOMContentLoaded", function(){
         .add(function(){ hwin.classList.add("open"); }, .5)
         .add(function(){ $(".hero .hwin2").classList.add("open"); }, .85)
         .from(".hero .hwrap", {opacity:0, y:30, duration:1.4}, 0)
-        .from(".captain", {opacity:0, y:50, duration:1.8}, .35)
+        .from(".captain img", {opacity:0, y:50, duration:1.8}, .35)
         .from(".bars i", {scaleX:0, transformOrigin:"0 50%", duration:.8, stagger:.08}, .6)
         .from(".hero h1 small, .hero h1, .hero .ar, .hero .lead, .hero .ctas", {opacity:0, y:24, duration:1.2, stagger:.08}, .7)
         .from(".top, .hero .tail", {opacity:0, duration:1}, 1.2);
       // Fly through the window: the window grows until its view is the whole screen, then the night outside replaces the gate.
       var tl = gsap.timeline({scrollTrigger:{trigger:".hero", start:"top top", end:"+=130%", pin:true, scrub:.5}});
-      tl.to(".hero .text, .hero .tail", {opacity:0, y:-30, duration:.25, ease:"power1.in"}, 0)
-        .to(".captain", {yPercent:30, opacity:0, duration:.35, ease:"power2.in"}, 0)
+      tl.fromTo(".hero .text, .hero .tail", {opacity:1, y:0}, {opacity:0, y:-30, duration:.25, ease:"power1.in", immediateRender:false}, 0)
+        .fromTo(".captain", {yPercent:0, opacity:1}, {yPercent:30, opacity:0, duration:.35, ease:"power2.in", immediateRender:false}, 0)
         .to(".hero .hwrap", {scale:function(){ var r = $(".hero .hwin .well").getBoundingClientRect(); return Math.max(innerWidth / r.width, innerHeight / r.height) * 1.35; }, x:function(){ var r = $(".hero .hwin .well").getBoundingClientRect(); return innerWidth / 2 - (r.left + r.width / 2); }, y:function(){ var r = $(".hero .hwin .well").getBoundingClientRect(); return innerHeight / 2 - (r.top + r.height / 2); }, duration:.75, ease:"power2.inOut"}, .05)
         .to(".hero .hwin .view", {opacity:1, duration:.3}, .5)
         .to({}, {duration:.2});

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from "react";
 import {
   motion,
   AnimatePresence,
@@ -444,7 +444,10 @@ function TierCard({ featured = false, badge, eyebrow, priceVal, priceSymbol, sub
 
 // ── ROOT ──────────────────────────────────────────────────────────────────────
 export default function Home() {
-  const [dark, setDark] = useState(() => { if (typeof window === "undefined") return true; const s = localStorage.getItem("z-theme"); return s !== null ? s === "dark" : true; });
+  // The saved theme is applied right after hydration (before the first paint), so the server and the
+  // browser render the same markup and React keeps the server HTML instead of re-rendering the page.
+  const [dark, setDark] = useState(true);
+  useLayoutEffect(() => { try { const s = localStorage.getItem("z-theme"); if (s !== null) setDark(s === "dark"); } catch { /* storage blocked: keep dark */ } }, []);
   const tog = () => { const n = !dark; setDark(n); localStorage.setItem("z-theme", n ? "dark" : "light"); };
   const [modal, setModal] = useState(false);
   const [lang, setLang] = useState<Lang>("en");

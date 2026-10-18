@@ -1,20 +1,24 @@
 "use client";
 
 // "Portfolio websites": the exhibition.
-// A stage shows one website at a time, in a desktop, tablet or phone frame, captured from the real page
-// (plus a short screen recording of the opening, on desktop). The index beside it lists every entry;
-// on phones the stage becomes a swipeable row of cards. Filters, counts and numbering all come from
-// lib/portfolios.ts, so every number on screen is the real number. The live website is always marked
-// as live; everything else is marked as a concept design.
+// Two ways to browse, the same entries:
+// - Wheel (default): the Ferris wheel gallery. Every website hangs in a gondola; the one on view comes to
+//   the top and is shown beside the wheel in a desktop, tablet or phone frame, captured from the real page
+//   (plus a short screen recording of the opening, on desktop, once the wheel is no longer turning by itself).
+// - Index: a large stage with the full list beside it; on phones, a swipeable row of cards.
+// Filters, counts and numbering all come from lib/portfolios.ts, so every number on screen is the real
+// number. The live website is always marked as live; everything else is marked as a concept design.
 
 import * as React from "react";
-import { ArrowLeft, ArrowRight, ExternalLink, Loader2, Maximize2, Monitor, Pause, Play, Smartphone, Tablet, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, FerrisWheel, List, Loader2, Maximize2, Monitor, Pause, Play, Smartphone, Tablet, X } from "lucide-react";
+import { FerrisWheelGallery, type FerrisWheelItem } from "@/components/ui/ferris-wheel-gallery";
 import { CATEGORIES, PORTFOLIOS, displayUrl, preview, type Category, type Device, type Lang, type Portfolio } from "@/lib/portfolios";
 
 const G = "#C8A96E", INK = "#0A0907";
 const LIVE = "#14804A"; // white text on it passes 4.5:1
 
 type Filter = "all" | "live" | Category;
+type View = "wheel" | "index";
 
 const TX = {
   eyebrow:   { en: "Portfolio websites", fr: "Sites portfolio", ar: "مواقع الملفات المهنية" },
@@ -62,6 +66,15 @@ const TX = {
   want:      { en: "Want a website like these?", fr: "Vous voulez un site comme ceux-ci ?", ar: "هل تريد موقعاً كهذه المواقع؟" },
   kit:       { en: "Portfolio / Personal Branding Kit", fr: "Kit portfolio / personal branding", ar: "مجموعة الملف والعلامة الشخصية" },
   close:     { en: "Close", fr: "Fermer", ar: "إغلاق" },
+  viewAs:    { en: "Display", fr: "Affichage", ar: "طريقة العرض" },
+  wheel:     { en: "Wheel", fr: "Roue", ar: "العجلة" },
+  onView:    { en: "ON VIEW", fr: "À L'AFFICHE", ar: "المعروض الآن" },
+  browse:    { en: "Wheel of portfolio websites", fr: "Roue des sites portfolio", ar: "عجلة مواقع الملفات المهنية" },
+  help:      { en: "Drag or swipe sideways  ·  arrow keys ← →", fr: "Glissez sur le côté  ·  flèches ← →", ar: "اسحب جانبياً  ·  مفاتيح الأسهم ← →" },
+  show:      { en: "Show", fr: "Afficher", ar: "اعرض" },
+  missing:   { en: "Preview unavailable", fr: "Aperçu indisponible", ar: "المعاينة غير متاحة" },
+  stopWheel: { en: "Stop the wheel", fr: "Arrêter la roue", ar: "إيقاف العجلة" },
+  turnWheel: { en: "Turn the wheel automatically", fr: "Faire tourner la roue", ar: "تدوير العجلة تلقائياً" },
   loading:   { en: "Loading website…", fr: "Chargement du site…", ar: "جارٍ تحميل الموقع…" },
   slow:      { en: "This website is taking a while to load.", fr: "Ce site met du temps à se charger.", ar: "يستغرق تحميل هذا الموقع وقتاً أطول من المعتاد." },
 } satisfies Record<string, Record<Lang, string>>;
@@ -87,6 +100,24 @@ function counted(n: number, key: keyof typeof COUNT, lang: Lang): string {
   return `${n} ${(lang === "fr" ? n <= 1 : n === 1) ? one : many}`;
 }
 const pad = (n: number) => String(n).padStart(2, "0");
+// The word under the number in the wheel's hub (with Arabic number agreement).
+function hubWord(n: number, lang: Lang): string {
+  if (lang === "ar") { const r = n % 100; return n === 1 ? "موقع" : n === 2 ? "موقعان" : r >= 3 && r <= 10 ? "مواقع" : "موقعاً"; }
+  return n === 1 ? "SITE" : "SITES";
+}
+
+// Colours for the wheel (it is styled with shadcn-style tokens), set on its wrapper for light and dark.
+function themeVars(dark: boolean): React.CSSProperties {
+  return (dark ? {
+    "--background": INK, "--foreground": "#EDE8E0", "--card": "#15130F", "--muted": "#1C1915",
+    "--muted-foreground": "#958A80", "--border": "rgba(255,255,255,0.10)", "--accent": "rgba(200,169,110,0.10)",
+    "--primary": G, "--primary-foreground": INK, "--ring": G, "--chart-2": G,
+  } : {
+    "--background": "#F7F3EE", "--foreground": "#1A1410", "--card": "#FFFFFF", "--muted": "#EFE9E1",
+    "--muted-foreground": "#6B6057", "--border": "rgba(0,0,0,0.10)", "--accent": "rgba(200,169,110,0.14)",
+    "--primary": G, "--primary-foreground": INK, "--ring": "#8A6A2E", "--chart-2": G,
+  }) as React.CSSProperties;
+}
 
 function useMedia(query: string): boolean {
   const [on, setOn] = React.useState(false);
@@ -263,6 +294,8 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
   const wide = useMedia("(min-width: 1024px)");
 
   const [filter, setFilter] = React.useState<Filter>("all");
+  const [view, setView] = React.useState<View>("wheel");
+  const [wheelRunning, setWheelRunning] = React.useState(false);
   const [device, setDevice] = React.useState<Device>("desktop");
   const [activeSlug, setActiveSlug] = React.useState(PORTFOLIOS[0].slug);
   const [prevSlug, setPrevSlug] = React.useState<string | null>(null);
@@ -271,7 +304,8 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
   const [paused, setPaused] = React.useState(false);
   const [inView, setInView] = React.useState(false);
   const opener = React.useRef<HTMLElement | null>(null);
-  const stageRef = React.useRef<HTMLDivElement | null>(null);
+  const exhibitRef = React.useRef<HTMLDivElement | null>(null);
+  const keepInPlace = React.useRef<{ el: HTMLElement; top: number } | null>(null);
   const indexRef = React.useRef<HTMLOListElement | null>(null);
   const railRef = React.useRef<HTMLDivElement | null>(null);
   const hoverTimer = React.useRef<number | undefined>(undefined);
@@ -279,9 +313,16 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
   // Phones start on the phone captures.
   React.useEffect(() => { if (window.matchMedia("(max-width: 639px)").matches) setDevice("mobile"); }, []);
 
-  // Only run recordings while the stage is on screen.
+  // Switching between the wheel and the index keeps the switch where it was on screen.
+  React.useLayoutEffect(() => {
+    const k = keepInPlace.current;
+    keepInPlace.current = null;
+    if (k && k.el.isConnected) window.scrollBy({ top: k.el.getBoundingClientRect().top - k.top, behavior: "instant" });
+  }, [view]);
+
+  // Only turn the wheel and run recordings while the exhibition is on screen.
   React.useEffect(() => {
-    const el = stageRef.current;
+    const el = exhibitRef.current;
     if (!el || !("IntersectionObserver" in window)) return;
     const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.25 });
     io.observe(el);
@@ -361,9 +402,23 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
     { id: "tablet", icon: <Tablet size={14} aria-hidden="true" /> },
     { id: "mobile", icon: <Smartphone size={14} aria-hidden="true" /> },
   ];
+  const views: { id: View; icon: React.ReactNode }[] = [
+    { id: "wheel", icon: <FerrisWheel size={14} aria-hidden="true" /> },
+    { id: "index", icon: <List size={14} aria-hidden="true" /> },
+  ];
+  const wheelItems: FerrisWheelItem[] = list.map(p => ({
+    id: p.slug,
+    src: preview.desktop(p.slug),
+    thumb: preview.thumb(p.slug),
+    alt: `${t("firstOf", lang)} ${p.name}`,
+    title: `${p.name} · ${t(p.kind === "live" ? "live" : "concept", lang)}`,
+    label: pad(numberOf[p.slug]),
+    marker: p.kind === "live" ? LIVE : undefined,
+  }));
   const tracking = isAr ? "0.02em" : "0.16em";
   const prevSite = prevSlug ? PORTFOLIOS.find(p => p.slug === prevSlug) : undefined;
-  const playing = wide && inView && !paused && !viewing;
+  // A recording plays once the visitor has stopped on an entry: not while the wheel turns by itself.
+  const playing = wide && inView && !paused && !viewing && !(view === "wheel" && wheelRunning);
   const showVideoControl = device === "desktop" && site.loop && motionOk && wide;
 
   const rowKeys = (e: React.KeyboardEvent<HTMLButtonElement>, i: number) => {
@@ -426,20 +481,99 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
               );
             })}
           </div>
-          <div role="group" aria-label={t("device", lang)} className="shrink-0 self-start inline-flex items-center gap-1 rounded-full p-1" style={{ border: `1px solid ${theme.line}` }}>
-            {devices.map(d => (
-              <button key={d.id} type="button" aria-pressed={device === d.id} onClick={() => setDevice(d.id)}
-                className="inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-[10px] font-medium uppercase transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#C8A96E]"
-                style={{ fontFamily: theme.ui, letterSpacing: isAr ? "0.02em" : "0.12em", color: device === d.id ? INK : theme.hi, background: device === d.id ? G : "transparent" }}>
-                {d.icon}<span className="sr-only sm:not-sr-only">{t(d.id, lang)}</span>
-              </button>
-            ))}
+          <div className="shrink-0 self-start flex flex-wrap items-center gap-2 sm:gap-3">
+            <div role="group" aria-label={t("viewAs", lang)} className="inline-flex items-center gap-1 rounded-full p-1" style={{ border: `1px solid ${theme.line}` }}>
+              {views.map(v => (
+                <button key={v.id} type="button" aria-pressed={view === v.id} onClick={e => { keepInPlace.current = { el: e.currentTarget, top: e.currentTarget.getBoundingClientRect().top }; setView(v.id); }}
+                  className="inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-[10px] font-medium uppercase transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#C8A96E]"
+                  style={{ fontFamily: theme.ui, letterSpacing: isAr ? "0.02em" : "0.12em", color: view === v.id ? theme.bg : theme.hi, background: view === v.id ? theme.hi : "transparent" }}>
+                  {v.icon}<span>{t(v.id, lang)}</span>
+                </button>
+              ))}
+            </div>
+            <div role="group" aria-label={t("device", lang)} className="inline-flex items-center gap-1 rounded-full p-1" style={{ border: `1px solid ${theme.line}` }}>
+              {devices.map(d => (
+                <button key={d.id} type="button" aria-pressed={device === d.id} onClick={() => setDevice(d.id)}
+                  className="inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-[10px] font-medium uppercase transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#C8A96E]"
+                  style={{ fontFamily: theme.ui, letterSpacing: isAr ? "0.02em" : "0.12em", color: device === d.id ? INK : theme.hi, background: device === d.id ? G : "transparent" }}>
+                  {d.icon}<span className="sr-only sm:not-sr-only">{t(d.id, lang)}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
+        <div ref={exhibitRef}>
+        {view === "wheel" ? (
+          <div style={themeVars(dark)}>
+            <FerrisWheelGallery
+              key={filter}
+              items={wheelItems}
+              active={activeIndex}
+              onActiveChange={i => { if (list[i]) select(list[i].slug); }}
+              dir={isAr ? "rtl" : "ltr"}
+              autoplay={inView && !viewing}
+              interval={4600}
+              onRunningChange={setWheelRunning}
+              aria-label={t("carousel", lang)}
+              labels={{
+                region: t("carousel", lang), onView: t("onView", lang), hub: hubWord(list.length, lang), item: "",
+                browse: t("browse", lang), help: t("help", lang), previous: t("prev", lang), next: t("next", lang),
+                unavailable: t("missing", lang), pause: t("stopWheel", lang), resume: t("turnWheel", lang),
+                view: (title, n, total) => `${t("show", lang)} ${title}, ${n} ${t("of", lang)} ${total}`,
+              }}
+              renderPreview={(_, i) => list[i] && (
+                <WheelPreview
+                  site={list[i]} prevSite={prevSite} device={device} lang={lang} theme={theme}
+                  playing={playing} motionOk={motionOk} reduce={reduce}
+                  onSettled={() => setPrevSlug(null)} onOpen={() => openViewer(list[i].slug)}
+                  videoControl={showVideoControl && list[i].slug === site.slug ? (
+                    <button type="button" onClick={e => { e.stopPropagation(); setPaused(p => !p); }} title={t("opening", lang)}
+                      className="absolute top-3 end-3 inline-flex items-center gap-2 h-8 ps-2.5 pe-3 rounded-full text-[10px] uppercase outline-none focus-visible:ring-2 focus-visible:ring-[#C8A96E]"
+                      style={{ background: dark ? "rgba(0,0,0,.45)" : "rgba(255,255,255,.7)", color: theme.hi, fontFamily: theme.ui, letterSpacing: isAr ? "0.02em" : "0.12em", backdropFilter: "blur(8px)" }}>
+                      {paused ? <Play size={12} aria-hidden="true" /> : <Pause size={12} aria-hidden="true" />}
+                      <span>{t(paused ? "play" : "pause", lang)}</span>
+                    </button>
+                  ) : null}
+                />
+              )}
+              renderCaption={(_, i) => {
+                const p = list[i];
+                if (!p) return null;
+                return (
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="font-mono text-[11px]" style={{ color: theme.sub }}>No. {pad(numberOf[p.slug])}</span>
+                      <KindBadge site={p} lang={lang} theme={theme} />
+                      <span className="text-[11px] uppercase" style={{ color: theme.sub, fontFamily: theme.ui, letterSpacing: tracking }}>{t(p.category, lang)}</span>
+                    </div>
+                    <h3 className="mt-3 text-[28px] sm:text-[34px] xl:text-[38px] leading-[1.06] tracking-tight" style={{ color: theme.hi }}>{p.name}</h3>
+                    <p className="mt-1.5 text-[14px]" style={{ color: theme.sub, fontFamily: theme.ui }}>{p.role[lang]}</p>
+                    <p className="mt-4 text-[14.5px] leading-[1.7] max-w-[60ch]" style={{ color: theme.hi, fontFamily: theme.ui }}>
+                      {p.kind === "concept" && <><span className="text-[10px] uppercase me-2" style={{ color: dark ? G : "#8A6A2E", letterSpacing: tracking }}>{t("theIdea", lang)}</span><em className="not-italic font-semibold">{p.idea[lang]}.</em>{" "}</>}
+                      <span style={{ color: theme.sub }}>{p.line[lang]}</span>
+                    </p>
+                  </div>
+                );
+              }}
+              renderActions={(_, i) => list[i] && (
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+                  <button type="button" onClick={() => openViewer(list[i].slug)}
+                    className="inline-flex items-center gap-2 h-11 px-6 rounded-full whitespace-nowrap text-[10px] font-semibold uppercase transition-opacity hover:opacity-85 outline-none focus-visible:ring-2 focus-visible:ring-[#C8A96E]"
+                    style={{ background: theme.hi, color: theme.bg, fontFamily: theme.ui, letterSpacing: tracking }}>
+                    <Maximize2 size={12} aria-hidden="true" />{t("view", lang)}<span className="sr-only">: {list[i].name}</span>
+                  </button>
+                  <a href={list[i].url} target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 text-[11.5px] underline-offset-4 hover:underline" style={{ color: theme.sub, fontFamily: theme.ui }}>
+                    <ExternalLink size={11} aria-hidden="true" />{t("newTab", lang)}
+                  </a>
+                </div>
+              )}
+            />
+          </div>
+        ) : (<>
         {/* Desktop: stage + index */}
         <div className="hidden lg:grid lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_380px] gap-10 items-start">
-          <div ref={stageRef} role="region" aria-roledescription="carousel" aria-label={t("carousel", lang)}>
+          <div role="region" aria-roledescription="carousel" aria-label={t("carousel", lang)}>
             <div
               className="zx-wall relative overflow-hidden rounded-[18px] aspect-[16/10.6]"
               style={{ backgroundColor: `color-mix(in oklab, ${site.tone} ${dark ? 26 : 30}%, ${theme.bg})`, boxShadow: `inset 0 0 0 1px ${theme.line}`, touchAction: "pan-y" }}
@@ -583,6 +717,8 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
             )}
           </div>
         </div>
+        </>)}
+        </div>
 
         <div className="mt-14 flex flex-wrap items-start justify-between gap-4 pt-6" style={{ borderTop: `1px solid ${theme.line}` }}>
           <p className="max-w-3xl text-[11.5px] leading-[1.8]" style={{ color: theme.sub, fontFamily: theme.ui }}>{t("note", lang)}</p>
@@ -606,6 +742,34 @@ function StageFrame(props: { site: Portfolio; device: Device; lang: Lang; theme:
   return device === "desktop"
     ? <span className="block w-[84%]"><DeviceFrame {...props} /></span>
     : <span className="block h-[86%]"><DeviceFrame {...props} /></span>;
+}
+
+// The large preview beside the wheel: the device on a wall in the site's own colour, wiping in from the
+// reading direction when the wheel brings another website up. Clicking it opens the website.
+function WheelPreview({ site, prevSite, device, lang, theme, playing, motionOk, reduce, onSettled, onOpen, videoControl }: {
+  site: Portfolio; prevSite?: Portfolio; device: Device; lang: Lang; theme: Theme; playing: boolean; motionOk: boolean; reduce: boolean;
+  onSettled: () => void; onOpen: () => void; videoControl: React.ReactNode;
+}) {
+  const wiping = !!prevSite && prevSite.slug !== site.slug && !reduce;
+  return (
+    // the picture opens the viewer for pointer and touch; keyboard users have the "View the website" button
+    <div
+      className={`zx-wall relative cursor-pointer overflow-hidden rounded-[18px] ${device === "desktop" ? "aspect-[16/11]" : "aspect-[4/4.3] @min-[860px]/ferris:aspect-[16/11]"}`}
+      style={{ backgroundColor: `color-mix(in oklab, ${site.tone} ${theme.dark ? 26 : 30}%, ${theme.bg})`, boxShadow: `inset 0 0 0 1px ${theme.line}` }}
+      onClick={onOpen}
+    >
+      <span aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: `radial-gradient(ellipse 70% 60% at 50% 42%, ${theme.dark ? "rgba(255,255,255,.07)" : "rgba(255,255,255,.55)"}, transparent 70%)` }} />
+      {wiping && prevSite && (
+        <div className="zx-layer" aria-hidden="true">
+          <StageFrame site={prevSite} device={device} lang={lang} theme={theme} playing={false} motionOk={false} />
+        </div>
+      )}
+      <div key={`${site.slug}-${device}`} className={`zx-layer ${wiping ? "zx-in" : ""}`} onAnimationEnd={e => { if (e.target === e.currentTarget) onSettled(); }}>
+        <StageFrame site={site} device={device} lang={lang} theme={theme} playing={playing} motionOk={motionOk} />
+      </div>
+      {videoControl}
+    </div>
+  );
 }
 
 function MobileRail({ list, device, lang, theme, numberOf, railRef, onOpen, onActive, activeSlug }: {
