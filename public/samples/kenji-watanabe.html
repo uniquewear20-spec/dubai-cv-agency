@@ -74,8 +74,8 @@ html.lb-open .zc-badge{display:none}
 .cap{position:absolute;z-index:3;left:50%;top:80%;transform:translateX(-50%);text-align:center;width:min(560px,60vw)}
 .cap b{display:block;font:600 21px/1.25 var(--sans);letter-spacing:-.01em}
 .cap .js-role{color:var(--grey);font-size:15px}
-.cap a{display:inline-block;margin-top:7px;font-size:15px;text-decoration:none;border-bottom:1px solid rgba(242,241,238,.4);padding-bottom:1px}
-.cap a:hover{border-color:var(--red)}
+.cap button{display:inline-block;margin-top:7px;font-size:15px;border-bottom:1px solid rgba(242,241,238,.4);padding-bottom:1px}
+.cap button:hover{border-color:var(--red)}
 .kenji{position:absolute;z-index:2;right:clamp(-40px,.5vw,24px);bottom:0;height:min(60svh,600px);aspect-ratio:866/1104;pointer-events:none;-webkit-mask:linear-gradient(#000 84%,transparent 99%);mask:linear-gradient(#000 84%,transparent 99%)}
 .kenji img{width:100%;height:100%;object-fit:contain;object-position:bottom}
 .hero .ctl{position:absolute;z-index:3;left:var(--pad);bottom:clamp(40px,7vh,76px);display:flex;align-items:center;gap:10px}
@@ -88,12 +88,13 @@ html.lb-open .zc-badge{display:none}
 /* Lightbox */
 .lb{position:fixed;inset:0;z-index:95;display:none;place-items:center;background:rgba(8,8,9,.95);padding:clamp(20px,5vw,60px)}
 .lb.on{display:grid}
-.lb figure{display:grid;grid-template-columns:auto minmax(0,340px);gap:clamp(20px,4vw,60px);align-items:end;max-height:100%}
-.lb img{height:min(80svh,880px);width:auto;aspect-ratio:4/5;object-fit:cover;border-radius:6px}
+.lb figure{display:grid;grid-template-columns:auto minmax(0,300px);gap:clamp(20px,3.4vw,52px);align-items:end;max-height:100%}
+.lb img{width:min(66vw,calc(80svh * 1.49),1264px);height:auto;aspect-ratio:1264/848;object-fit:cover;border-radius:6px}
 .lb figcaption .mono{color:var(--grey)}
 .lb figcaption b{display:block;font:700 clamp(28px,2.6vw,40px)/1.05 var(--sans);letter-spacing:-.02em;margin:10px 0}
 .lb figcaption p{color:rgba(242,241,238,.8)}
-.lb figcaption a{display:inline-flex;margin-top:22px;padding:13px 20px;border-radius:999px;background:var(--paper);color:var(--black);text-decoration:none;font-weight:600}
+.lb figcaption .next{display:inline-flex;margin-top:22px;padding:13px 20px;border-radius:999px;background:var(--paper);color:var(--black);font-weight:600}
+.lb figcaption .next:hover{background:var(--red);color:#fff}
 .lb .x{position:absolute;right:22px;top:22px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(242,241,238,.4);display:grid;place-items:center;font-size:18px}
 
 /* Sections */
@@ -111,11 +112,10 @@ html.lb-open .zc-badge{display:none}
 .sheetwrap{margin-top:clamp(40px,5vw,70px);display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:clamp(24px,4vw,60px);align-items:start}
 .sheet{position:relative;background:#FBFAF7;border-radius:4px;padding:clamp(14px,2vw,28px);box-shadow:0 30px 70px -40px rgba(0,0,0,.5);touch-action:pan-y}
 @media (hover:hover) and (pointer:fine){.sheet{cursor:none}}
-.film{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:#141414;padding:16px 10px 22px;border-radius:2px;background-image:radial-gradient(circle at 50% 50%,#FBFAF7 0 2.2px,transparent 2.6px),radial-gradient(circle at 50% 50%,#FBFAF7 0 2.2px,transparent 2.6px);background-size:14px 8px,14px 8px;background-position:4px 3px,4px calc(100% - 3px);background-repeat:repeat-x}
+.film{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:#141414;padding:16px 10px 22px;border-radius:2px;background-image:radial-gradient(circle at 50% 50%,#FBFAF7 0 2.2px,transparent 2.6px),radial-gradient(circle at 50% 50%,#FBFAF7 0 2.2px,transparent 2.6px);background-size:14px 8px,14px 8px;background-position:4px 3px,4px calc(100% - 3px);background-repeat:repeat-x}
 .film+.film{margin-top:12px}
-.shot{position:relative;margin:0 5px;aspect-ratio:4/5;background:#333;overflow:hidden}
-.shot i{position:absolute;inset:0;background-repeat:no-repeat}
-.shot.m i{transform:scaleX(-1)}
+.shot{position:relative;margin:0 5px;aspect-ratio:2/3;background:#333;overflow:hidden}
+.shot i{position:absolute;inset:0;background-repeat:no-repeat;background-size:cover;background-position:50% 30%}
 .shot::after{content:attr(data-n);position:absolute;left:0;bottom:-15px;font:600 9px/1 var(--mono);color:#E8C547;letter-spacing:.08em}
 .film .shot{overflow:visible}.film .shot i{overflow:hidden}
 .marks{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible}
@@ -147,13 +147,13 @@ html.lb-open .zc-badge{display:none}
 .vfd .dot{display:inline-block;width:8px;height:8px;border-radius:50%;border:1.5px solid #fff;margin-right:8px;vertical-align:-1px;transition:background .15s,border-color .15s}
 .vfd .dot.lock{background:#4BD37B;border-color:#4BD37B}
 .roll{list-style:none;border-top:1px solid var(--line)}
-.roll a{display:grid;grid-template-columns:46px minmax(0,1fr) 22px;align-items:baseline;gap:14px;padding:16px 0 15px;border-bottom:1px solid var(--line);text-decoration:none}
+.roll button{display:grid;grid-template-columns:46px minmax(0,1fr) 22px;align-items:baseline;gap:14px;width:100%;padding:16px 0 15px;border-bottom:1px solid var(--line);text-align:left}
 .roll .n{color:var(--grey);font:400 11px/1 var(--mono);letter-spacing:.08em}
 .roll b{font:600 clamp(20px,1.9vw,28px)/1.15 var(--sans);letter-spacing:-.02em;color:rgba(242,241,238,.5);transition:color .25s}
 .roll small{display:block;font:400 14px/1.4 var(--sans);color:var(--grey);letter-spacing:0;margin-top:3px}
 .roll .go{opacity:0;transform:translateX(-8px);transition:opacity .25s,transform .35s cubic-bezier(.2,.7,.2,1);color:var(--red)}
-.roll a.on b,.roll a:hover b,.roll a:focus-visible b{color:var(--paper)}
-.roll a.on .go,.roll a:hover .go,.roll a:focus-visible .go{opacity:1;transform:none}
+.roll button.on b,.roll button:hover b,.roll button:focus-visible b{color:var(--paper)}
+.roll button.on .go,.roll button:hover .go,.roll button:focus-visible .go{opacity:1;transform:none}
 
 /* 03 METHOD */
 .method{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);margin-top:clamp(40px,5vw,70px)}
@@ -213,8 +213,9 @@ footer p{max-width:84ch}
   .hero .ctl .n{display:none}
   .vfd .hud .ex{display:none}
   .lb figure{grid-template-columns:minmax(0,1fr)}
-  .lb img{height:auto;width:100%;max-height:56svh}
-  .film{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:24px}
+  .lb img{width:100%}
+  .film{padding:12px 6px 18px}
+  .shot{margin:0 3px}
   .months{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (prefers-reduced-motion:reduce){.roll .go,.roll b,.method .bl,.loupe,.vfd .af,.vfd img{transition:none}}
@@ -239,31 +240,31 @@ footer p{max-width:84ch}
     <div class="stage" role="region" aria-roledescription="carousel" aria-label="Portraits of people at work">
       <div class="strip"></div>
     </div>
-    <p class="cap"><span class="sr js-live" aria-live="off"></span><b class="js-name">Captain Rashid Al Hammadi</b><span class="js-role">Long-haul captain, at the gate</span><br><a class="js-link" href="rashid-al-hammadi.html">Open the portfolio</a></p>
+    <p class="cap"><span class="sr js-live" aria-live="off"></span><b class="js-name">Hiroko Ueda</b><span class="js-role">Potter, in her studio in Mashiko</span><br><button type="button" class="js-link">View the portrait</button></p>
     <div class="kenji"><img src="img/kenji-watanabe/cut.webp" srcset="img/kenji-watanabe/cut-760.webp 596w, img/kenji-watanabe/cut.webp 866w" sizes="(max-width:700px) 260px, 490px" width="866" height="1104" alt="Kenji Watanabe holding a rangefinder camera" fetchpriority="high"></div>
     <div class="ctl">
       <button type="button" class="js-prev" aria-label="Previous portrait"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
       <button type="button" class="js-next" aria-label="Next portrait"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
       <button type="button" class="js-play" aria-label="Pause the strip"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="js-ico" d="M5 3v10M11 3v10" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
-      <span class="n mono js-n" aria-hidden="true">01 / 28</span>
+      <span class="n mono js-n" aria-hidden="true">01 / 10</span>
     </div>
   </section>
 
   <section class="sec edit" id="edit" aria-labelledby="e-h">
-    <div class="eyebrow mono"><span>01 · The edit</span><span>Sitting 0412 · Lyon</span></div>
-    <h2 class="h2" id="e-h" data-lines>Twelve frames, <em>one keeper.</em></h2>
-    <p class="lead">Every sitting ends on a contact sheet and a grease pencil. Look closer with the loupe: the circled frame went to print, the crossed ones never left the studio.</p>
+    <div class="eyebrow mono"><span>01 · The edit</span><span>Sitting 0412 · Dubai</span></div>
+    <h2 class="h2" id="e-h" data-lines>Six frames, <em>one keeper.</em></h2>
+    <p class="lead">Every sitting ends on a contact sheet and a grease pencil. Look closer with the loupe: the circled frame went to print, the crossed one never left the studio.</p>
     <div class="sheetwrap">
       <div class="sheet" data-sheet>
-        <div class="film"></div><div class="film"></div><div class="film"></div>
+        <div class="film"></div><div class="film"></div>
         <svg class="marks" aria-hidden="true"></svg>
         <div class="loupe" aria-hidden="true"><div class="inner"></div></div>
       </div>
       <div class="notes">
         <span class="mono">Sitting notes</span>
-        <h3>Julien Arnaud, chef de cuisine</h3>
-        <p>Twenty minutes in his kitchen at four in the afternoon, between the deliveries and the first prep. One window, one reflector, no assistant.</p>
-        <ul><li>Lens<span>50 mm</span></li><li>Light<span>North window</span></li><li>Exposure<span>1/125 · f/2.8</span></li><li>Frames<span>12, one select</span></li></ul>
+        <h3>Elena Vidal, ceramicist</h3>
+        <p>Twenty minutes in her studio in Al Quoz, between two firings, with the first bowl of a new series. One north window, a grey backdrop, no assistant.</p>
+        <ul><li>Lens<span>50 mm</span></li><li>Light<span>North window</span></li><li>Exposure<span>1/125 · f/2.8</span></li><li>Frames<span>6 shown, 1 select</span></li></ul>
         <p class="tip js-tip">Move the pointer over the sheet</p>
       </div>
     </div>
@@ -271,17 +272,17 @@ footer p{max-width:84ch}
 
   <section class="sec" id="sitters" aria-labelledby="s-h">
     <div class="eyebrow mono"><span>02 · Sitters</span><span>People at work</span></div>
-    <h2 class="h2" id="s-h" data-lines>Twenty-eight people, <em>twenty-eight workplaces.</em></h2>
-    <p class="lead">A captain at the gate, a chef before service, a sommelier in the cellar. Each name opens the portfolio site made around the portrait.</p>
+    <h2 class="h2" id="s-h" data-lines>Ten people, <em>ten workplaces.</em></h2>
+    <p class="lead">A potter in Mashiko, an abra captain on the Creek, a falconer at the edge of the desert. People who work with their hands, photographed where the work happens. Choose a name to see the full frame.</p>
     <div class="sitters">
       <div class="vfd" aria-hidden="true">
-        <img class="a" alt="" width="520" height="650"><img class="b" alt="" width="520" height="650" style="opacity:0">
+        <img class="a" alt="" width="1264" height="848"><img class="b" alt="" width="1264" height="848" style="opacity:0">
         <div class="thirds"></div>
         <div class="af"></div>
-        <div class="hud t"><span>AF-S · 50 mm</span><span class="js-vn">01 / 28</span></div>
+        <div class="hud t"><span>AF-S · 50 mm</span><span class="js-vn">01 / 10</span></div>
         <div class="hud b"><span><i class="dot"></i><span class="ex">f/2.8 · 1/125 · ISO 400</span></span><span class="js-vname"></span></div>
       </div>
-      <ol class="roll" aria-label="Sitters and their portfolio sites"></ol>
+      <ol class="roll" aria-label="Sitters"></ol>
     </div>
   </section>
 
@@ -320,11 +321,11 @@ footer p{max-width:84ch}
 
 <div class="lb" role="dialog" aria-modal="true" aria-labelledby="lb-h" hidden>
   <button class="x" type="button" aria-label="Close">✕</button>
-  <figure><img alt="" width="520" height="650"><figcaption><span class="mono js-lbn"></span><b id="lb-h" class="js-lbt"></b><p class="js-lbr"></p><a class="js-lbl" href="#">Open the portfolio</a></figcaption></figure>
+  <figure><img alt="" width="1264" height="848"><figcaption><span class="mono js-lbn"></span><b id="lb-h" class="js-lbt"></b><p class="js-lbr"></p><button type="button" class="next js-lbl">Next portrait <span aria-hidden="true">→</span></button></figcaption></figure>
 </div>
 
 <footer>
-  <p>Kenji Watanabe is fictional. His sitters are the fictional professionals of this collection, and every photograph on this page was generated with AI: none shows a real person or is a real photograph. Contact sheet, sitting notes, dates and availability are illustrative. The tilted strip is adapted from the Tilted Grid Hero component supplied for this collection.</p>
+  <p>Kenji Watanabe is fictional, and so are his sitters: every photograph on this page was generated with AI, and none shows a real person or is a real photograph. Names, places, the contact sheet, sitting notes and availability are illustrative. The tilted strip is adapted from the Tilted Grid Hero component supplied for this collection.</p>
   <p>A concept website by Zenith Dubai CV.</p>
 </footer>
 
@@ -334,39 +335,22 @@ document.addEventListener("DOMContentLoaded", function(){
   var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
   var pad2 = function(n){ return (n < 10 ? "0" : "") + n; };
-  var IMG = function(slug){ return "img/kenji-watanabe/frames/" + slug + ".webp"; };
-  var WIDE = function(slug){ return "img/kenji-watanabe/wide/" + slug + ".webp"; };
+  var narrow = innerWidth < 900;
+  var IMG = function(id){ return "img/kenji-watanabe/sitters/" + id + (narrow ? "-900" : "") + ".webp"; };
+  var WIDE = function(id){ return "img/kenji-watanabe/wide/" + id + ".webp"; };
 
-  // slug, name, caption, face x %, eye line y %, face width % (measured on each 4:5 frame)
+  // id, name, caption, face x %, eye line y %, face width % (measured on each 1264 × 848 frame)
   var S = [
-    ["rashid-al-hammadi","Captain Rashid Al Hammadi","Long-haul captain, at the gate",49.4,28.1,29.6],
-    ["amira-soliman","Dr Amira Soliman","Interventional cardiologist",49.3,36.8,34],
-    ["julien-arnaud","Julien Arnaud","Chef de cuisine, before service",50.6,30.9,35.8],
-    ["layla-haddad","Layla Haddad","Hotel general manager, in the lobby",51.4,32.2,29.8],
-    ["kofi-mensah","Kofi Mensah","DJ and producer, in the studio",56.8,24.8,26.7],
-    ["awa-ndiaye","Awa Ndiaye","Model, between looks",45.8,6.6,10],
-    ["thomas-whitaker","Thomas Whitaker","Architect",50.5,36.1,47.1],
-    ["valentina-rios","Valentina Ríos","Singer, on stage",49.8,29.9,30.4],
-    ["arjun-nair","Arjun Nair","Managing director, M&amp;A",51,35.9,49.2],
-    ["karim-benjelloun","Karim Benjelloun","Film director",50.6,37.6,45.4],
-    ["ananya-rao","Ananya Rao","Dancer and choreographer, mid-turn",45.1,18.2,10.2],
-    ["hannah-becker","Hannah Becker","Group chief executive",50.3,29.8,29],
-    ["noura-al-mazrouei","Noura Al Mazrouei","Founder, real-estate developer",48.4,27.4,29.4],
-    ["faisal-al-qahtani","Faisal Al Qahtani","Partner, corporate law",49.9,34.9,47.5],
-    ["grace-wanjiku","Dr Grace Wanjiku","Paediatric surgeon",49.8,35.6,37.7],
-    ["ines-ben-salah","Inès Ben Salah","Strategy partner",50,35.6,30.4],
-    ["alexei-morozov","Alexei Morozov","Founder, logistics technology, at the port",51.2,37.1,41.2],
-    ["daniel-okafor","Daniel Okafor","Principal AI engineer",49.8,33.7,35.4],
-    ["youssef-haddadin","Youssef Haddadin","Project director, on site",51.1,41.2,29.8],
-    ["maria-dela-cruz","Maria Dela Cruz","Cabin services manager, on board",50.7,31.1,32.5],
-    ["mei-lin-zhou","Mei Lin Zhou","Concert pianist and composer",51,35.1,41.2],
-    ["sofia-bianchi","Sofia Bianchi","Food and travel creator",51.1,33.8,35.6],
-    ["ji-woo-han","Ji-woo Han","Restaurant general manager, before doors",51.9,33.2,27.3],
-    ["lucas-ferreira","Lucas Ferreira","Head sommelier, in the cellar",51.4,27.3,33.3],
-    ["mateo-herrera","Mateo Herrera","Mixologist, behind the bar",51.8,25.5,30.6],
-    ["zofia-nowak","Zofia Nowak","Head of floor",50.8,9.8,16.9],
-    ["marco-bellini","Marco Bellini","Chief concierge",50,21,25.8],
-    ["freja-lindqvist","Freja Lindqvist","Creative director",45.8,21.7,24.2]
+    ["potter","Hiroko Ueda","Potter, in her studio in Mashiko",51,30,10],
+    ["abra","Rafiq Ahmed","Abra captain, crossing Dubai Creek",53.8,23.6,12.7],
+    ["beekeeper","Mariko Sato","Beekeeper, on a rooftop in Setagaya",43.9,37.5,9.5],
+    ["oud","Samir Khoury","Oud maker, in his workshop in Al Fahidi",49.7,25.7,9.1],
+    ["bookbinder","Aya Kobayashi","Bookbinder, at her press in Kyoto",50.6,23.6,7.9],
+    ["falconer","Saeed Al Mansoori","Falconer, in the desert outside Dubai",46.5,30.7,11.9],
+    ["boxing","Takeshi Mori","Boxing coach, between rounds in Ueno",46.7,34.8,11.9],
+    ["textiles","Ismail Rahmani","Textile merchant, at his counter in Bur Dubai",50.6,37.5,9.5],
+    ["weaver","Shigeru Ito","Weaver, at his loom in Nishijin",43.9,31.3,10.3],
+    ["tailor","Ngozi Eze","Tailor, at her cutting table in Al Quoz",37.6,22.4,8.7]
   ];
   var N = S.length;
   var plain = function(t){ var d = document.createElement("div"); d.innerHTML = t; return d.textContent; };
@@ -415,7 +399,7 @@ document.addEventListener("DOMContentLoaded", function(){
   function caption(k){
     var s = S[k];
     $(".js-name").innerHTML = s[1]; $(".js-role").innerHTML = s[2];
-    var l = $(".js-link"); l.href = s[0] + ".html"; l.setAttribute("aria-label", "Open " + plain(s[1]) + "'s portfolio");
+    $(".js-link").setAttribute("aria-label", "View the portrait of " + plain(s[1]));
     $(".js-n").textContent = pad2(k + 1) + " / " + N;
     live.textContent = plain(s[1]) + ", " + plain(s[2]) + ". Portrait " + (k + 1) + " of " + N + ".";
   }
@@ -439,6 +423,7 @@ document.addEventListener("DOMContentLoaded", function(){
   }
   function centre(){ return ((Math.round(pos) % N) + N) % N; }
   $(".js-prev").addEventListener("click", function(){ user(); go(-1); });
+  $(".js-link").addEventListener("click", function(){ user(); openLB(centre()); });
   $(".js-next").addEventListener("click", function(){ user(); go(1); });
   var play = $(".js-play");
   function setPaused(p){ paused = p; play.setAttribute("aria-label", p ? "Play the strip" : "Pause the strip"); $(".js-ico").setAttribute("d", p ? "M5 3l8 5-8 5z" : "M5 3v10M11 3v10"); }
@@ -492,13 +477,12 @@ document.addEventListener("DOMContentLoaded", function(){
   ZC.visible($(".hero"), function(v){ inView = v; }, "0px");
 
   /* ---------- Lightbox ---------- */
-  var lb = $(".lb"), lastF = null;
+  var lb = $(".lb"), lastF = null, lbI = 0;
   function openLB(i){
-    var s = S[i]; lastF = document.activeElement; lbOpen = true;
-    var im = $("img", lb); im.src = IMG(s[0]); im.alt = "Portrait of " + plain(s[1]) + " (generated with AI)";
+    var s = S[i]; if (!lbOpen) lastF = document.activeElement; lbOpen = true; lbI = i;
+    var im = $("img", lb); im.src = IMG(s[0]); im.alt = "Portrait of " + plain(s[1]) + ", " + plain(s[2]).toLowerCase() + " (generated with AI)";
     $(".js-lbn", lb).textContent = "Portrait " + pad2(i + 1) + " of " + N + " · People at work";
     $(".js-lbt", lb).innerHTML = s[1]; $(".js-lbr", lb).innerHTML = s[2] + ".";
-    $(".js-lbl", lb).href = s[0] + ".html";
     lb.hidden = false; lb.classList.add("on"); root.classList.add("lb-open"); root.style.overflow = "hidden"; window.__lenis && window.__lenis.stop();
     if (ZC.motion && window.gsap) gsap.fromTo($("figure", lb), {opacity:0, y:24}, {opacity:1, y:0, duration:.6, ease:"expo.out"});
     $(".x", lb).focus({preventScroll:true});
@@ -508,6 +492,7 @@ document.addEventListener("DOMContentLoaded", function(){
     window.__lenis && window.__lenis.start(); lastF && lastF.focus({preventScroll:true});
   }
   $(".x", lb).addEventListener("click", closeLB);
+  $(".js-lbl", lb).addEventListener("click", function(){ openLB((lbI + 1) % N); });
   lb.addEventListener("click", function(e){ if (e.target === lb) closeLB(); });
   lb.addEventListener("keydown", function(e){
     if (e.key === "Escape"){ closeLB(); return; }
@@ -519,18 +504,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
   /* ---------- 01 The edit: contact sheet, grease pencil, loupe ---------- */
   var films = $$(".film"), shots = [];
-  // Twelve frames of one sitting (illustrative: one generated portrait, recropped, turned and re-exposed).
-  // The crossed frames are the misses: soft focus, a blown exposure, a blink of softness.
-  var CROPS = [[100,50,30,0,""],[108,48,26,0,"blur(1.6px)"],[118,52,22,1,""],[130,50,18,0,"brightness(.8) contrast(1.05)"],
-               [105,40,30,1,"brightness(1.32) contrast(.88)"],[112,58,24,1,""],[145,50,16,0,""],[122,46,20,1,""],
-               [100,54,34,0,"brightness(.9)"],[160,50,14,1,"brightness(.8) contrast(1.05)"],[115,50,26,0,"blur(1.2px) brightness(1.06)"],[135,44,18,1,""]];
-  CROPS.forEach(function(c, i){
-    var d = document.createElement("div"); d.className = "shot" + (c[3] ? " m" : ""); d.dataset.n = String(14 + i);
-    var im = document.createElement("i");
-    im.style.backgroundImage = "url(" + IMG("julien-arnaud") + ")";
-    im.style.backgroundSize = c[0] + "% auto"; im.style.backgroundPosition = c[1] + "% " + c[2] + "%";
-    if (c[4]) im.style.filter = c[4];
-    d.appendChild(im); films[Math.floor(i / 4)].appendChild(d); shots.push(d);
+  // Six frames from one sitting, in the order they were taken; frame 18 went to print, 16 is a blink.
+  ["s1","s2","s3","s4","s5","s6"].forEach(function(id, i){
+    var d = document.createElement("div"); d.className = "shot"; d.dataset.n = String(14 + i);
+    var im = document.createElement("i"); im.style.backgroundImage = "url(img/kenji-watanabe/sitting/" + id + ".webp)";
+    d.appendChild(im); films[Math.floor(i / 3)].appendChild(d); shots.push(d);
   });
   var sheet = $("[data-sheet]"), marks = $(".marks", sheet), NS = "http://www.w3.org/2000/svg";
   function drawMarks(){
@@ -538,10 +516,11 @@ document.addEventListener("DOMContentLoaded", function(){
     var r0 = sheet.getBoundingClientRect(); marks.setAttribute("viewBox", "0 0 " + r0.width.toFixed(0) + " " + r0.height.toFixed(0)); marks.innerHTML = "";
     function rel(el){ var r = el.getBoundingClientRect(); return {x:r.left - r0.left, y:r.top - r0.top, w:r.width, h:r.height}; }
     function P(d, cls){ var p = document.createElementNS(NS, "path"); p.setAttribute("d", d); p.setAttribute("class", cls); marks.appendChild(p); return p; }
-    var sel = rel(shots[6]), cx = sel.x + sel.w / 2, cy = sel.y + sel.h / 2, rx = sel.w * .64, ry = sel.h * .6, d = "";
+    var sel = rel(shots[4]), cx = sel.x + sel.w / 2, cy = sel.y + sel.h / 2, rx = sel.w * .64, ry = sel.h * .58, d = "";
     for (var t = 0; t <= Math.PI * 2.18; t += .1){ var wob = 1 + .045 * Math.sin(t * 3 + .6); d += (d ? "L" : "M") + (cx + Math.cos(t - 2.2) * rx * wob).toFixed(1) + " " + (cy + Math.sin(t - 2.2) * ry * wob).toFixed(1); }
     P(d, "sel");
-    [1, 4, 10].forEach(function(k){ var r = rel(shots[k]), m = r.w * .14; P("M" + (r.x + m) + " " + (r.y + m * 1.2) + "L" + (r.x + r.w - m) + " " + (r.y + r.h - m) + "M" + (r.x + r.w - m * 1.2) + " " + (r.y + m) + "L" + (r.x + m) + " " + (r.y + r.h - m * 1.1), "x"); });
+    var q = rel(shots[1]), qt = document.createElementNS(NS, "text"); qt.setAttribute("x", (q.x + q.w - 22).toFixed(0)); qt.setAttribute("y", (q.y + 34).toFixed(0)); qt.textContent = "?"; marks.appendChild(qt);
+    [2].forEach(function(k){ var r = rel(shots[k]), m = r.w * .14; P("M" + (r.x + m) + " " + (r.y + m * 1.2) + "L" + (r.x + r.w - m) + " " + (r.y + r.h - m) + "M" + (r.x + r.w - m * 1.2) + " " + (r.y + m) + "L" + (r.x + m) + " " + (r.y + r.h - m * 1.1), "x"); });
     if (innerWidth >= 700){
       var ax = cx + rx * .7, ay = cy + ry * .78;
       P("M" + (ax + 64) + " " + (ay + 52) + "Q" + (ax + 52) + " " + (ay + 10) + " " + (ax + 8) + " " + (ay + 2), "arr");
@@ -577,10 +556,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
   /* ---------- 02 Sitters: the roll and the viewfinder ---------- */
   var roll = $(".roll");
-  roll.innerHTML = S.map(function(s, i){ return '<li><a href="' + s[0] + '.html" data-i="' + i + '"><span class="n">' + pad2(i + 1) + '</span><b>' + s[1] + '<small>' + s[2] + '</small></b><span class="go" aria-hidden="true">→</span></a></li>'; }).join("");
-  var rows = $$(".roll a"), vfd = $(".vfd"), vA = $("img.a", vfd), vB = $("img.b", vfd), af = $(".af", vfd), dot = $(".dot", vfd), cur = -1, front = vA, hunt = null, hoverRoll = false;
+  roll.innerHTML = S.map(function(s, i){ return '<li><button type="button" data-i="' + i + '"><span class="n">' + pad2(i + 1) + '</span><b>' + s[1] + '<small>' + s[2] + '</small></b><span class="go" aria-hidden="true">↗</span></button></li>'; }).join("");
+  var rows = $$(".roll button"), vfd = $(".vfd"), vA = $("img.a", vfd), vB = $("img.b", vfd), af = $(".af", vfd), dot = $(".dot", vfd), cur = -1, front = vA, hunt = null, hoverRoll = false;
   function placeAF(i){
-    var s = S[i], W = vfd.clientWidth, H = vfd.clientHeight, sc = Math.max(W / 520, H / 650), dw = 520 * sc, dh = 650 * sc;
+    var s = S[i], W = vfd.clientWidth, H = vfd.clientHeight, sc = Math.max(W / 1264, H / 848), dw = 1264 * sc, dh = 848 * sc;
     var py = clamp(s[4] / 100 * 1.4, 0, 1), ox = (W - dw) * s[3] / 100, oy = (H - dh) * py;
     [vA, vB].forEach(function(im){ im.style.objectPosition = s[3] + "% " + (py * 100).toFixed(1) + "%"; });
     var side = clamp(s[5] / 100 * dw * .62, 34, 150);
@@ -608,6 +587,7 @@ document.addEventListener("DOMContentLoaded", function(){
     var i = +r.dataset.i;
     r.addEventListener("pointerenter", function(e){ if (e.pointerType === "mouse"){ hoverRoll = true; pick(i); } });
     r.addEventListener("focus", function(){ pick(i); });
+    r.addEventListener("click", function(){ pick(i, true); openLB(i); });
   });
   roll.addEventListener("pointerleave", function(){ hoverRoll = false; });
   // While scrolling, the row that crosses the focus line is the one in the viewfinder.
