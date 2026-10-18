@@ -57,7 +57,7 @@ export const PORTFOLIOS: Portfolio[] = [
     tone: "#E7E2DA", stills: ALL, loop: true,
     role: { en: "Model & Brand Ambassador", fr: "Mannequin et ambassadrice de marque", ar: "عارضة أزياء وسفيرة علامات" },
     idea: { en: "The campaign", fr: "La campagne", ar: "الحملة" },
-    line: { en: "A flash, a masthead and the model in front of it; then looks, a comp card and covers.", fr: "Un flash, un titre de magazine et le mannequin devant ; puis les looks, la composite et les couvertures.", ar: "ومضة فلاش وعنوان مجلة والعارضة أمامه، ثم الإطلالات وبطاقة التعريف والأغلفة." },
+    line: { en: "A flash, a masthead and the model in front of it; then five campaign photographs, her front and profile digitals, and three covers.", fr: "Un flash, un titre de magazine et le mannequin devant ; puis cinq photos de campagne, ses polaroïds de face et de profil, et trois couvertures.", ar: "ومضة فلاش وعنوان مجلة والعارضة أمامه، ثم خمس صور من حملاتها، وصورتاها الأماميّة والجانبيّة، وثلاثة أغلفة." },
   },
   {
     slug: "ananya-rao", name: "Ananya Rao", featured: true, kind: "concept", category: "music", url: "/samples/ananya-rao.html",

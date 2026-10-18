@@ -83,16 +83,19 @@ main{position:relative;overflow-x:clip}
 .reel{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
 .reel::-webkit-scrollbar{display:none}
 .strip{display:flex;gap:clamp(14px,2vw,28px);padding:0 var(--pad);width:max-content}
-.look{position:relative;flex:none;width:min(52vh,78vw);aspect-ratio:3/4;overflow:hidden;scroll-snap-align:center;background:var(--bg);color:var(--fg,var(--ink))}
-.look img{position:absolute;left:50%;bottom:-2%;height:104%;width:auto;max-width:none;transform:translateX(-50%)}
-.look .t{position:absolute;z-index:2;font:340 clamp(44px,7.4vh,96px)/.84 var(--serif);font-stretch:62.5%;letter-spacing:-.02em}
-.look .c{position:absolute;z-index:2;left:16px;bottom:14px;right:16px;display:flex;justify-content:space-between;gap:10px}
-.look .n{position:absolute;z-index:2;left:16px;top:14px}
-.l1{--bg:#EFE9DF}.l1 .t{left:16px;top:34px}
-.l2{--bg:var(--saffron)}.l2 img{filter:grayscale(1) contrast(1.12) brightness(1.04)}.l2 .t{right:14px;top:30px;font-style:italic;text-align:right}
-.l3{--bg:#0E0D0C;--fg:var(--paper2)}.l3 img{filter:drop-shadow(-8px 0 18px rgba(217,154,43,.45))}.l3 .t{left:16px;bottom:56px;font-size:clamp(38px,6vh,80px)}
-.l4{--bg:var(--indigo);--fg:var(--paper2)}.l4 img{filter:brightness(0) opacity(.92)}.l4 .t{left:0;right:0;top:36%;text-align:center;font-size:clamp(60px,12vh,150px);color:#E9C46A}
-.l5{--bg:var(--oxblood);--fg:#F3D9A4}.mir{position:absolute;inset:0;transform:scaleX(-1)}.l5 .t{left:16px;top:34px;font-style:italic}
+/* each look is one photograph; type sits where the picture leaves room, never across her face */
+.look{position:relative;flex:none;width:min(52vh,78vw);aspect-ratio:3/4;overflow:hidden;scroll-snap-align:center;background:var(--bg,#1D1B19);color:var(--fg,var(--ink));container-type:inline-size}
+.look img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
+.look::after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:22%;background:linear-gradient(to top,rgba(14,12,10,.6),rgba(14,12,10,0));pointer-events:none}
+.look .t{position:absolute;z-index:2;font:340 14cqi/.84 var(--serif);font-stretch:62.5%;letter-spacing:-.02em}
+.look .c{position:absolute;z-index:2;left:3.4cqi;bottom:3cqi;right:3.4cqi;display:flex;justify-content:space-between;gap:10px;color:#F1EDE6}
+.look .n{position:absolute;z-index:2;left:3.4cqi;top:3cqi}
+.l1{--bg:#B9C7B4;--fg:#1E2A2A}.l1 .t{left:3.4cqi;top:7.3cqi}
+.l2{--bg:#E8D6B8;--fg:#2A1B12}.l2 .t{right:3cqi;top:4.7cqi;font-size:12.3cqi;font-style:italic;text-align:right}
+.l3{--bg:#D9B27A;--fg:#3A1A12}.l3 .t{left:3.4cqi;top:7.3cqi}
+.l4{--bg:#2A2018;--fg:#3A2A1A}.l4 .t{right:3.4cqi;bottom:9.4cqi;text-align:right;font-size:23cqi;color:#E9C46A}
+.l5{--bg:#E6D9C3;--fg:#62191F}.l5 .t{left:2.4cqi;top:9cqi;font-style:italic}.l5 .t .v{display:block;writing-mode:vertical-rl;transform:rotate(180deg)}
+@container (max-width:420px){.look .c{font-stretch:100%;letter-spacing:.08em}.look .c span{white-space:nowrap}}
 
 /* comp card */
 .comp{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(30px,6vw,110px);align-items:start}
@@ -104,9 +107,19 @@ main{position:relative;overflow-x:clip}
 .stats dd small{font:400 13px/1 var(--sans);letter-spacing:0;margin-left:6px;color:var(--ink2)}
 .stats div:nth-child(n+5) dd{font-size:clamp(24px,2.4vw,36px);font-stretch:80%;letter-spacing:0}
 .polaroid{background:#FBF9F5;padding:14px 14px 18px;box-shadow:0 30px 60px -30px rgba(18,17,16,.45);transform:rotate(2.5deg)}
-.polaroid .ph{position:relative;aspect-ratio:4/5;background:linear-gradient(#E5DFD6,#D3CBBF);overflow:hidden}
-.polaroid img{position:absolute;left:50%;bottom:0;height:98%;width:auto;max-width:none;transform:translateX(-50%)}
-.polaroid p{margin-top:12px;display:flex;justify-content:space-between}
+.polaroid .ph{position:relative;aspect-ratio:3/4;background:linear-gradient(#E5DFD6,#D3CBBF);overflow:hidden}
+.polaroid img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
+.polaroid figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:10px}
+/* digitals: front and profile, stacked like two polaroids on a desk; the button brings the other one forward */
+.digis{position:relative;display:grid;margin:clamp(10px,2vw,30px) 0 0 10%;cursor:pointer}
+.digis .polaroid{grid-area:1/1}
+.digis .p-front,.digis.front .p-front,.digis.side .p-side{transform:rotate(2.5deg);z-index:2}
+.digis .p-side,.digis.front .p-side,.digis.side .p-front{transform:translate(-11%,-5%) rotate(-5deg);z-index:1}
+.digis.side .p-side,.digis.front .p-front{animation:dg-in .95s cubic-bezier(.3,.7,.2,1) both}
+.digis.side .p-front,.digis.front .p-side{animation:dg-out .95s cubic-bezier(.3,.7,.2,1) both}
+@keyframes dg-in{0%{transform:translate(-11%,-5%) rotate(-5deg);z-index:1}46%{transform:translate(-40%,-9%) rotate(-11deg);z-index:1}47%{z-index:3}100%{transform:rotate(2.5deg);z-index:3}}
+@keyframes dg-out{0%{transform:rotate(2.5deg);z-index:2}46%{transform:translate(12%,5%) rotate(7deg);z-index:2}100%{transform:translate(-11%,-5%) rotate(-5deg);z-index:2}}
+.turn{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:6px 0;background:none;border:0;border-bottom:1px solid currentColor;cursor:pointer}
 .agency{margin-top:34px}
 .agency p{color:var(--ink2);margin-top:8px}
 .btn{display:inline-flex;align-items:center;gap:12px;margin-top:22px;padding:16px 24px;border:1px solid var(--ink);border-radius:999px;background:none;cursor:pointer;text-decoration:none;font:600 11px/1 var(--sans);font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;transition:background .25s,color .25s}
@@ -120,7 +133,7 @@ main{position:relative;overflow-x:clip}
 .rows .who{font:360 clamp(26px,2.6vw,42px)/1.05 var(--serif);font-stretch:70%}
 .rows .what{color:var(--ink2)}
 .peek{position:fixed;z-index:50;left:0;top:0;width:180px;aspect-ratio:3/4;pointer-events:none;opacity:0;overflow:hidden;background:var(--bg,#EFE9DF);box-shadow:0 30px 50px -20px rgba(0,0,0,.4)}
-.peek img{position:absolute;left:50%;bottom:-2%;height:104%;width:auto;max-width:none;transform:translateX(-50%)}
+.peek img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
 
 /* covers */
 .covers{background:var(--paper)}
@@ -128,10 +141,12 @@ main{position:relative;overflow-x:clip}
 .mag{position:relative;width:min(300px,80vw);aspect-ratio:3/4;overflow:hidden;background:var(--bg);color:var(--fg);box-shadow:0 40px 70px -30px rgba(18,17,16,.5);transition:translate .6s cubic-bezier(.2,.7,.2,1),rotate .6s cubic-bezier(.2,.7,.2,1)}
 .mag:hover{translate:0 -10px}
 .mag img{position:absolute;left:50%;bottom:-6%;height:96%;width:auto;max-width:none;transform:translateX(-50%)}
+.mag img.ph{left:0;top:0;bottom:auto;width:100%;height:100%;transform:none;object-fit:cover}
 .mag .m{position:absolute;z-index:1;left:0;right:0;top:12px;text-align:center;font:500 54px/.9 var(--serif);font-stretch:62.5%;letter-spacing:.02em}
 .mag .lines{position:absolute;z-index:3;left:14px;right:14px;bottom:14px;font:600 10px/1.35 var(--sans);font-stretch:110%;letter-spacing:.08em;text-transform:uppercase}
 .mag .lines b{display:block;font:italic 400 22px/1 var(--serif);letter-spacing:0;text-transform:none;margin-bottom:4px}
 .mag.a{--bg:#C9D6D3;--fg:#1E2A2A}.mag.a .m{font-style:italic}
+.mag.a::after{content:"";position:absolute;z-index:2;left:0;right:0;bottom:0;height:30%;background:linear-gradient(to top,rgba(201,214,211,.94) 35%,rgba(201,214,211,0));pointer-events:none}
 .mag.b{--bg:#121110;--fg:#F1EDE6}.mag.b .m{top:auto;bottom:70px;z-index:3;font-size:64px}.mag.b img{filter:grayscale(1)}
 .mag.c{--bg:#E8B04A;--fg:#3A1A12}.mag.c .m{font-weight:800;font-stretch:100%;font-size:46px;letter-spacing:-.02em}
 .fan .mag:nth-child(1){transform:rotate(-4deg) translateY(16px)}.fan .mag:nth-child(3){transform:rotate(4deg) translateY(16px)}
@@ -165,7 +180,9 @@ footer p{max-width:70ch}
   .rows li{grid-template-columns:70px minmax(0,1fr);gap:4px 14px}
   .rows .what,.rows .where{grid-column:2}
   .polaroid{max-width:340px}
+  .digis{max-width:340px;margin-left:12%}
 }
+@media (prefers-reduced-motion:reduce){.digis .polaroid{animation:none!important}}
 @media (max-width:640px){
   .mast{font-size:min(50vh,47vw);top:84px}
   .model{height:84%}
@@ -213,11 +230,11 @@ footer p{max-width:70ch}
     <h2 class="h2" id="looks-h" data-lines>The <em>campaign</em> season.</h2>
     <div class="reel" tabindex="0" aria-label="Five campaign looks. Scroll sideways.">
       <ol class="strip" role="list">
-        <li class="look l1"><span class="n cap">Look 01</span><span class="t">Atelier<br>Nuit</span><img src="img/awa-ndiaye/cut-760.webp" alt="" width="361" height="760" loading="lazy"><span class="c cap"><span>Couture FW25</span><span>Paris</span></span></li>
-        <li class="look l2"><span class="n cap">Look 02</span><span class="t">Teranga</span><img src="img/awa-ndiaye/cut-760.webp" alt="" width="361" height="760" loading="lazy"><span class="c cap"><span>Sable Paris · Fragrance</span><span>Dakar</span></span></li>
-        <li class="look l3"><span class="n cap">Look 03</span><img src="img/awa-ndiaye/cut-760.webp" alt="" width="361" height="760" loading="lazy"><span class="t">Maison<br>Oré</span><span class="c cap"><span>Campaign SS26</span><span>Paris</span></span></li>
-        <li class="look l4"><span class="n cap">Look 04</span><img src="img/awa-ndiaye/cut-760.webp" alt="" width="361" height="760" loading="lazy"><span class="t">Kora</span><span class="c cap"><span>Jewellery · Ambassador</span><span>Dubai</span></span></li>
-        <li class="look l5"><span class="n cap">Look 05</span><span class="t">Lumière</span><span class="mir"><img src="img/awa-ndiaye/cut-760.webp" alt="" width="361" height="760" loading="lazy"></span><span class="c cap"><span>Beauty · Skincare</span><span>Paris</span></span></li>
+        <li class="look l1"><img src="img/awa-ndiaye/emerald-600.webp" srcset="img/awa-ndiaye/emerald-600.webp 600w, img/awa-ndiaye/emerald-896.webp 896w" sizes="(max-width:900px) 78vw, 52vh" alt="Awa Ndiaye in a sculptural emerald satin gown with a long train, against a pale sage backdrop" width="600" height="804" loading="lazy"><span class="n cap">Look 01</span><span class="t">Atelier<br>Nuit</span><span class="c cap"><span>Couture FW25</span><span>Paris</span></span></li>
+        <li class="look l2"><img src="img/awa-ndiaye/dakar-600.webp" srcset="img/awa-ndiaye/dakar-600.webp 600w, img/awa-ndiaye/dakar-896.webp 896w" sizes="(max-width:900px) 78vw, 52vh" alt="Awa Ndiaye walking on a beach near Dakar at golden hour, in an ivory silk dress with a sand-coloured scarf lifting in the wind, fishing pirogues behind her" width="600" height="804" loading="lazy"><span class="n cap">Look 02</span><span class="t">Teranga</span><span class="c cap"><span>Sable Paris · Fragrance</span><span>Dakar</span></span></li>
+        <li class="look l3"><img src="img/awa-ndiaye/saffron-600.webp" srcset="img/awa-ndiaye/saffron-600.webp 600w, img/awa-ndiaye/saffron-896.webp 896w" sizes="(max-width:900px) 78vw, 52vh" alt="Awa Ndiaye turning in a saffron silk organza dress, its skirt sweeping around her" width="600" height="804" loading="lazy"><span class="n cap">Look 03</span><span class="t">Maison<br>Oré</span><span class="c cap"><span>Campaign SS26</span><span>Paris</span></span></li>
+        <li class="look l4"><img src="img/awa-ndiaye/gold-600.webp" srcset="img/awa-ndiaye/gold-600.webp 600w, img/awa-ndiaye/gold-896.webp 896w" sizes="(max-width:900px) 78vw, 52vh" alt="Awa Ndiaye in a black high-neck top with a sculptural gold collar, gold rings and stacked gold cuffs, against a sunlit sandstone wall" width="600" height="804" loading="lazy"><span class="n cap">Look 04</span><span class="t">Kora</span><span class="c cap"><span>Jewellery · Ambassador</span><span>Dubai</span></span></li>
+        <li class="look l5"><img src="img/awa-ndiaye/beauty-600.webp" srcset="img/awa-ndiaye/beauty-600.webp 600w, img/awa-ndiaye/beauty-896.webp 896w" sizes="(max-width:900px) 78vw, 52vh" alt="Close-up of Awa Ndiaye with bare shoulders and dewy skin, fingertips resting on her cheekbone" width="600" height="804" loading="lazy"><span class="n cap">Look 05</span><span class="t"><span class="v">Lumière</span></span><span class="c cap"><span>Beauty · Skincare</span><span>Paris</span></span></li>
       </ol>
     </div>
   </section>
@@ -237,7 +254,11 @@ footer p{max-width:70ch}
         </dl>
       </div>
       <div>
-        <figure class="polaroid"><div class="ph"><img src="img/awa-ndiaye/cut-760.webp" alt="Awa Ndiaye, full length, comp card photograph" width="361" height="760" loading="lazy"></div><p class="cap"><span>Awa N.</span><span>Paris · 2026</span></p></figure>
+        <div class="digis">
+          <figure class="polaroid p-front"><div class="ph"><img src="img/awa-ndiaye/front-600.webp" srcset="img/awa-ndiaye/front-600.webp 600w, img/awa-ndiaye/front-896.webp 896w" sizes="(max-width:900px) 320px, 30vw" alt="Awa Ndiaye, digitals: full length from the front, in a black tank top and black jeans" width="600" height="804" loading="lazy"></div><figcaption class="cap"><span>Digitals · front</span><span>Paris · 2026</span></figcaption></figure>
+          <figure class="polaroid p-side"><div class="ph"><img src="img/awa-ndiaye/profile-600.webp" srcset="img/awa-ndiaye/profile-600.webp 600w, img/awa-ndiaye/profile-896.webp 896w" sizes="(max-width:900px) 320px, 30vw" alt="Awa Ndiaye, digitals: full length in profile" width="600" height="804" loading="lazy"></div><figcaption class="cap"><span>Digitals · profile</span><span>Paris · 2026</span></figcaption></figure>
+        </div>
+        <button class="turn cap" type="button" aria-pressed="false"><span>Show the profile</span><span aria-hidden="true">↻</span></button>
         <div class="agency"><p class="cap" style="color:var(--ink)">Mother agency</p><p>Maison Atelier Management, Paris. Also represented in Milan, Dubai and Lagos.</p></div>
         <a class="btn" href="#" data-demo>Download comp card <span aria-hidden="true">↓</span></a>
       </div>
@@ -248,17 +269,17 @@ footer p{max-width:70ch}
     <div class="kicker cap"><span>03 · Work</span><span>Campaigns · runway · editorial</span></div>
     <h2 class="h2" id="work-h" data-lines>Selected <em>work.</em></h2>
     <ol class="rows" style="margin-top:clamp(30px,4vw,60px)">
-      <li data-look="l3"><span class="cap">2026</span><span class="who">Maison Oré</span><span class="what">Campaign, spring–summer</span><span class="where cap">Paris</span></li>
-      <li data-look="l1"><span class="cap">2026</span><span class="who">Paris Fashion Week</span><span class="what">14 shows, opening two</span><span class="where cap">Paris</span></li>
-      <li data-look="l1"><span class="cap">2025</span><span class="who">Atelier Nuit</span><span class="what">Couture campaign, autumn–winter</span><span class="where cap">Paris</span></li>
-      <li data-look="l5"><span class="cap">2025</span><span class="who">Milan Fashion Week</span><span class="what">9 shows</span><span class="where cap">Milan</span></li>
-      <li data-look="l2"><span class="cap">2025</span><span class="who">Sable Paris, “Teranga”</span><span class="what">Fragrance campaign</span><span class="where cap">Dakar</span></li>
-      <li data-look="l4"><span class="cap">2024</span><span class="who">Kora Jewellery</span><span class="what">Brand ambassador, ongoing</span><span class="where cap">Dubai · Paris</span></li>
-      <li data-look="l5"><span class="cap">2024</span><span class="who">Lumière Beauty</span><span class="what">Skincare campaign</span><span class="where cap">Paris</span></li>
-      <li data-look="l2"><span class="cap">2024</span><span class="who">Dakar Fashion Week</span><span class="what">Closing look</span><span class="where cap">Dakar</span></li>
-      <li data-look="l3"><span class="cap">2023</span><span class="who">Noir Review</span><span class="what">Cover and twelve-page editorial</span><span class="where cap">New York</span></li>
+      <li data-peek="saffron"><span class="cap">2026</span><span class="who">Maison Oré</span><span class="what">Campaign, spring–summer</span><span class="where cap">Paris</span></li>
+      <li data-peek="tuxedo"><span class="cap">2026</span><span class="who">Paris Fashion Week</span><span class="what">14 shows, opening two</span><span class="where cap">Paris</span></li>
+      <li data-peek="emerald"><span class="cap">2025</span><span class="who">Atelier Nuit</span><span class="what">Couture campaign, autumn–winter</span><span class="where cap">Paris</span></li>
+      <li data-peek="tuxedo"><span class="cap">2025</span><span class="who">Milan Fashion Week</span><span class="what">9 shows</span><span class="where cap">Milan</span></li>
+      <li data-peek="dakar"><span class="cap">2025</span><span class="who">Sable Paris, “Teranga”</span><span class="what">Fragrance campaign</span><span class="where cap">Dakar</span></li>
+      <li data-peek="gold"><span class="cap">2024</span><span class="who">Kora Jewellery</span><span class="what">Brand ambassador, ongoing</span><span class="where cap">Dubai · Paris</span></li>
+      <li data-peek="beauty"><span class="cap">2024</span><span class="who">Lumière Beauty</span><span class="what">Skincare campaign</span><span class="where cap">Paris</span></li>
+      <li data-peek="dakar"><span class="cap">2024</span><span class="who">Dakar Fashion Week</span><span class="what">Closing look</span><span class="where cap">Dakar</span></li>
+      <li data-peek="noir"><span class="cap">2023</span><span class="who">Noir Review</span><span class="what">Cover and twelve-page editorial</span><span class="where cap">New York</span></li>
     </ol>
-    <div class="peek" aria-hidden="true"><img src="img/awa-ndiaye/cut-760.webp" alt="" width="361" height="760"></div>
+    <div class="peek" aria-hidden="true"><img alt="" width="600" height="804"></div>
   </section>
 
   <section class="sec covers" id="covers" aria-labelledby="covers-h">
@@ -266,8 +287,8 @@ footer p{max-width:70ch}
     <h2 class="h2" id="covers-h" data-lines>On the <em>newsstand.</em></h2>
     <div class="fan">
       <article class="mag a"><span class="m">Atelier</span><img src="img/awa-ndiaye/cut-760.webp" alt="" width="361" height="760" loading="lazy"><p class="lines"><b>The quiet power issue</b>Awa Ndiaye on Dakar, discipline and the art of standing still · Issue 18</p></article>
-      <article class="mag b"><img src="img/awa-ndiaye/cut-760.webp" alt="" width="361" height="760" loading="lazy"><span class="m">NOIR</span><p class="lines"><b>New faces of couture</b>Twelve pages, one gown, no retouching</p></article>
-      <article class="mag c"><span class="m">RIVIERA</span><img src="img/awa-ndiaye/cut-760.webp" alt="" width="361" height="760" loading="lazy"><p class="lines"><b>Summer in sculpture</b>The season's most photographed silhouette</p></article>
+      <article class="mag b"><img class="ph" src="img/awa-ndiaye/tuxedo-600.webp" alt="" width="600" height="804" loading="lazy"><span class="m">NOIR</span><p class="lines"><b>New faces of couture</b>Twelve pages, one gown, no retouching</p></article>
+      <article class="mag c"><span class="m">RIVIERA</span><img class="ph" src="img/awa-ndiaye/saffron-600.webp" alt="" width="600" height="804" loading="lazy"><p class="lines"><b>Summer in sculpture</b>The season's most photographed silhouette</p></article>
     </div>
     <p class="note cap">Magazines, brands and covers are fictional</p>
   </section>
@@ -307,7 +328,7 @@ footer p{max-width:70ch}
   </section>
 
   <footer>
-    <p>Awa Ndiaye is a fictional person. Agencies, brands, campaigns, magazines, figures and quotes on this page are illustrative. Photograph generated with AI.</p>
+    <p>Awa Ndiaye is a fictional person. Agencies, brands, campaigns, magazines, figures and quotes on this page are illustrative. Photographs generated with AI.</p>
     <p>A concept website by Zenith Dubai CV.</p>
   </footer>
 </main>
@@ -330,13 +351,35 @@ document.addEventListener("DOMContentLoaded", function(){
   idx.addEventListener("click", function(e){ if (e.target.closest("ol a")) { idx.classList.remove("open"); openB.setAttribute("aria-expanded","false"); } });
   document.addEventListener("keydown", function(e){ if (e.key === "Escape" && idx.classList.contains("open")) setIndex(false); });
 
-  // Work rows: a campaign poster follows the cursor (mouse only)
-  var peek = document.querySelector(".peek"), peekImg = peek.querySelector("img");
-  var looks = {l1:["#EFE9DF",""],l2:["#D99A2B","grayscale(1) contrast(1.12)"],l3:["#0E0D0C","drop-shadow(-8px 0 18px rgba(217,154,43,.45))"],l4:["#2B2E66","brightness(0) opacity(.92)"],l5:["#62191F",""]};
+  // Looks: the five photographs start loading as the section approaches, so the sideways reel never shows an empty frame
+  var reelImgs = document.querySelectorAll(".look img");
+  if ("IntersectionObserver" in window){
+    var reelIO = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ reelImgs.forEach(function(i){ i.loading = "eager"; }); reelIO.disconnect(); } }, {rootMargin:"0px 0px 120% 0px"});
+    reelIO.observe(document.querySelector(".looks"));
+  }
+
+  // Comp card: front and profile digitals; the button (or a click on the stack) brings the other one forward
+  var digis = document.querySelector(".digis"), turnB = document.querySelector(".turn");
+  turnB.addEventListener("click", function(){
+    var side = !digis.classList.contains("side");
+    digis.classList.toggle("side", side); digis.classList.toggle("front", !side);
+    turnB.setAttribute("aria-pressed", side ? "true" : "false");
+    turnB.firstElementChild.textContent = side ? "Show the front" : "Show the profile";
+  });
+  digis.addEventListener("click", function(){ turnB.click(); });
+
+  // Work rows: the campaign photograph follows the cursor (mouse only)
+  var peek = document.querySelector(".peek"), peekImg = peek.querySelector("img"), P = "img/awa-ndiaye/";
+  var peeks = {saffron:["saffron",""],tuxedo:["tuxedo",""],emerald:["emerald",""],dakar:["dakar",""],gold:["gold",""],beauty:["beauty",""],noir:["tuxedo","grayscale(1) contrast(1.1)"]};
   if (matchMedia("(hover:hover) and (pointer:fine)").matches){
     var px = 0, py = 0, shown = false;
+    if ("IntersectionObserver" in window){
+      var warmIO = new IntersectionObserver(function(es){ if (!es[0].isIntersecting) return; warmIO.disconnect();
+        Object.keys(peeks).forEach(function(k){ (new Image()).src = P + peeks[k][0] + "-600.webp"; }); }, {rootMargin:"0px 0px 50% 0px"});
+      warmIO.observe(document.querySelector(".work"));
+    }
     document.querySelectorAll(".rows li").forEach(function(li){
-      li.addEventListener("pointerenter", function(){ var L = looks[li.dataset.look]; peek.style.setProperty("--bg", L[0]); peekImg.style.filter = L[1]; peekImg.style.transform = li.dataset.look === "l5" ? "translateX(-50%) scaleX(-1)" : ""; shown = true; if (window.gsap) gsap.to(peek,{opacity:1,scale:1,duration:.35,ease:"power3.out"}); else peek.style.opacity = 1; });
+      li.addEventListener("pointerenter", function(){ var L = peeks[li.dataset.peek]; peekImg.src = P + L[0] + "-600.webp"; peekImg.style.filter = L[1]; shown = true; if (window.gsap) gsap.to(peek,{opacity:1,scale:1,duration:.35,ease:"power3.out"}); else peek.style.opacity = 1; });
       li.addEventListener("pointerleave", function(){ shown = false; if (window.gsap) gsap.to(peek,{opacity:0,scale:.9,duration:.3}); else peek.style.opacity = 0; });
     });
     window.addEventListener("pointermove", function(e){ px = e.clientX; py = e.clientY;
@@ -381,9 +424,10 @@ document.addEventListener("DOMContentLoaded", function(){
         var reel = document.querySelector(".reel"), strip = document.querySelector(".strip");
         reel.style.overflow = "visible";
         var dist = function(){ return Math.max(0, strip.scrollWidth - window.innerWidth); };
-        var hz = gsap.to(strip,{x:function(){ return -dist(); },ease:"none",scrollTrigger:{trigger:".looks",start:"top top",end:function(){ return "+=" + dist(); },pin:true,scrub:.6,invalidateOnRefresh:true}});
+        // the reel itself is held in the middle of the screen (whole photographs, captions included) while the heading scrolls away
+        var hz = gsap.to(strip,{x:function(){ return -dist(); },ease:"none",scrollTrigger:{trigger:reel,start:"center center",end:function(){ return "+=" + dist(); },pin:true,scrub:.6,invalidateOnRefresh:true}});
         gsap.utils.toArray(".look").forEach(function(l){
-          gsap.fromTo(l.querySelector("img"),{yPercent:6,scale:1.06},{yPercent:0,scale:1,ease:"none",scrollTrigger:{trigger:l,containerAnimation:hz,start:"left right",end:"center center",scrub:true}});
+          gsap.fromTo(l.querySelector("img"),{yPercent:3,scale:1.12},{yPercent:0,scale:1,ease:"none",scrollTrigger:{trigger:l,containerAnimation:hz,start:"left right",end:"center center",scrub:true}});
           gsap.from(l.querySelector(".t"),{yPercent:40,opacity:0,ease:"power2.out",scrollTrigger:{trigger:l,containerAnimation:hz,start:"left 90%",end:"left 45%",scrub:true}});
         });
         return function(){ reel.style.overflow = ""; };
@@ -400,7 +444,7 @@ document.addEventListener("DOMContentLoaded", function(){
       });
       gsap.from(".rows li",{yPercent:60,opacity:0,duration:.9,stagger:.05,ease:"expo.out",scrollTrigger:{trigger:".rows",start:"top 85%"}});
       gsap.from(".mag",{y:120,opacity:0,rotation:function(i){ return [-10,0,10][i]; },duration:1.3,stagger:.12,ease:"expo.out",scrollTrigger:{trigger:".fan",start:"top 85%"}});
-      gsap.from(".polaroid",{y:80,rotation:-8,opacity:0,duration:1.4,ease:"expo.out",scrollTrigger:{trigger:".polaroid",start:"top 88%"}});
+      gsap.from(".digis",{y:80,rotation:-6,opacity:0,duration:1.4,ease:"expo.out",scrollTrigger:{trigger:".digis",start:"top 88%"}});
       ScrollTrigger.refresh();
     });
   });
