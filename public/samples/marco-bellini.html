@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marco Bellini — Chief Concierge · Concept site</title>
+<meta name="description" content="Marco Bellini, chief concierge of a luxury hotel in Dubai. A concept portfolio website by Zenith Dubai CV — fictional person, illustrative content.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F3B2E">
+<link rel="preload" href="fonts/marcellus-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/mulish-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" imagesrcset="img/marco-bellini/cut-640.webp 449w, img/marco-bellini/cut.webp 749w" imagesizes="(max-width:760px) 88vw, 62vh" fetchpriority="high">
+<script src="assets/sample.js"></script>
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/Draggable.min.js"></script>
+<script defer src="assets/vendor/InertiaPlugin.min.js"></script>
+<script defer src="assets/vendor/lenis.min.js"></script>
+<style>
+@font-face{font-family:"Marcellus";src:url(fonts/marcellus-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Mulish";src:url(fonts/mulish-latin-300-normal.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Mulish";src:url(fonts/mulish-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Mulish";src:url(fonts/mulish-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+:root{
+  --green:#0F3B2E;--green2:#14503E;--deep:#0A2A21;--brass:#B8955A;--brass2:#D9BA82;--brass3:#8C6B36;--cream:#F4EEDF;--card:#FBF7EC;--ink:#14231D;--ink2:#4D5A53;--red:#9C2F2F;
+  --display:"Marcellus","Trajan Pro",Georgia,serif;--sans:"Mulish","Helvetica Neue",Arial,sans-serif;
+  --pad:clamp(18px,4.4vw,72px);
+  --zc-bg:#B8955A;--zc-fg:#0A2A21;--zc-dot:#0A2A21;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--green)}
+body{background:var(--green);color:var(--cream);font:400 17.5px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img,svg{display:block}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--brass2);outline-offset:3px;border-radius:4px}
+.lab{font:600 12px/1.3 var(--sans);letter-spacing:.22em;text-transform:uppercase}
+main{position:relative;overflow-x:clip}
+.brassline{height:1px;background:linear-gradient(90deg,transparent,var(--brass) 20%,var(--brass2) 50%,var(--brass) 80%,transparent)}
+
+/* Header */
+.top{position:fixed;inset-inline:var(--pad);top:16px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:16px;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:12px;padding:8px 16px 8px 9px;text-decoration:none;border-radius:999px;background:rgba(10,42,33,.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(184,149,90,.5)}
+.brand svg{width:28px;height:28px}
+.brand b{font:400 19px/1 var(--display);letter-spacing:.06em}
+.top nav{display:flex;gap:2px;padding:5px;border-radius:999px;background:rgba(10,42,33,.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(184,149,90,.5)}
+.top nav a{text-decoration:none;padding:8px 14px;border-radius:999px;font-size:14px;color:rgba(244,238,223,.78)}
+.top nav a:hover{color:var(--cream)}
+.top nav a[aria-current]{background:var(--brass);color:var(--deep)}
+
+/* HERO: the desk */
+.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:
+  radial-gradient(42% 56% at 68% 40%,rgba(217,186,130,.22),transparent 70%),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 46px),
+  linear-gradient(180deg,var(--green2),var(--green) 60%,var(--deep))}
+.marco{position:absolute;z-index:2;right:max(4vw,calc(50% - 680px));bottom:0;height:min(90vh,1000px);width:auto;max-width:none;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45));user-select:none}
+.desk{position:absolute;z-index:3;left:0;right:0;bottom:0;height:13vh;background:linear-gradient(180deg,#3B2617,#2A1A0F);box-shadow:0 -1px 0 var(--brass2),0 -18px 40px -10px rgba(0,0,0,.6)}
+.desk::before{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:linear-gradient(90deg,transparent,var(--brass) 10%,var(--brass2) 50%,var(--brass) 90%,transparent);opacity:.8}
+.hero .copy{position:relative;z-index:4;padding:clamp(130px,20vh,200px) var(--pad) 0;max-width:min(54vw,780px)}
+.hero .kick{color:var(--brass2)}
+.hero h1{font:400 clamp(64px,8.6vw,150px)/.92 var(--display);letter-spacing:.01em;margin-top:20px}
+.hero h1 span{display:block;color:var(--brass2)}
+.hero .sub{font-size:clamp(17px,1.35vw,20px);line-height:1.6;max-width:40ch;margin-top:26px;color:rgba(244,238,223,.82)}
+.ring{position:absolute;z-index:5;left:var(--pad);bottom:calc(13vh - 18px);display:flex;align-items:flex-end;gap:16px}
+.bell{width:96px;height:78px;cursor:pointer;transform-origin:50% 100%}
+.bell .dome{fill:url(#brass)}
+.bell .base{fill:#2A1A0F;stroke:var(--brass2);stroke-width:1.5}
+.bell:hover .dome{filter:brightness(1.1)}
+.ring p{font-size:14.5px;color:rgba(244,238,223,.75);padding-bottom:22px;max-width:22ch}
+
+/* Section furniture */
+.sec{position:relative;padding:16vh var(--pad)}
+.h2{font:400 clamp(50px,6.4vw,112px)/.95 var(--display);letter-spacing:.01em;max-width:14ch}
+.h2 span{color:var(--brass2)}
+.lede{font-size:clamp(17px,1.35vw,20px);line-height:1.6;max-width:54ch;margin-top:22px;color:rgba(244,238,223,.8)}
+.note{font-size:13.5px;margin-top:24px;color:rgba(244,238,223,.6)}
+
+/* The rolodex */
+.rolo{background:var(--deep)}
+.rolo .inner{position:relative;min-height:100vh;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(20px,4vw,70px);align-items:center;padding:12vh var(--pad)}
+.wheelwrap{position:relative;height:min(74vh,640px);perspective:2400px;perspective-origin:50% 50%;touch-action:pan-y;cursor:grab}
+.wheelwrap:active{cursor:grabbing}
+.axle{position:absolute;left:3%;right:3%;top:50%;height:12px;margin-top:-6px;border-radius:6px;background:linear-gradient(180deg,var(--brass2),var(--brass3));box-shadow:0 2px 6px rgba(0,0,0,.5)}
+/* the two brass wheels at the ends of the axle, seen edge-on */
+.disc{position:absolute;top:50%;width:30px;height:min(64vh,560px);margin-top:calc(min(64vh,560px) / -2);border-radius:50%;background:linear-gradient(90deg,var(--brass3),var(--brass2) 40%,var(--brass) 60%,var(--brass3));box-shadow:0 14px 30px rgba(0,0,0,.5)}
+.disc.l{left:5%}.disc.r{right:5%}
+.disc::after{content:"";position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#F0DAAA,var(--brass) 55%,var(--brass3));box-shadow:0 3px 8px rgba(0,0,0,.5)}
+.wheel{position:absolute;left:15%;right:15%;top:50%;height:0;margin:0;list-style:none;transform-style:preserve-3d}
+.cardr{position:absolute;left:0;right:0;top:0;height:var(--ch);margin-top:calc(var(--ch) / -2);transform-style:preserve-3d;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.cardr .face{position:absolute;inset:0;padding:22px 26px 20px;border-radius:10px;background:var(--card);color:var(--ink);box-shadow:0 1px 0 rgba(0,0,0,.08),0 18px 30px -18px rgba(0,0,0,.6);display:flex;flex-direction:column;overflow:hidden}
+/* cards turning away get darker, not see-through */
+.cardr .face::before{content:"";position:absolute;inset:0;background:#0A2A21;opacity:var(--shade,0);pointer-events:none;z-index:2;border-radius:inherit}
+.cardr .face::after{content:"";position:absolute;left:50%;bottom:-14px;width:44px;height:28px;margin-left:-22px;border-radius:14px;background:var(--deep)}
+.cardr .tab{position:absolute;right:22px;top:-1px;padding:6px 12px 5px;border-radius:0 0 6px 6px;background:var(--brass);color:var(--deep);font:600 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase}
+.cardr .rq{font:400 clamp(19px,1.5vw,24px)/1.25 var(--display);padding-right:84px}
+.cardr .how{margin-top:auto;font-size:14.5px;color:var(--ink2);padding-top:10px}
+.cardr .times{display:flex;justify-content:space-between;gap:12px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(20,35,29,.15);font:600 12.5px/1 var(--sans);letter-spacing:.06em;color:var(--ink2);font-variant-numeric:tabular-nums}
+.cardr .times b{color:var(--red)}
+.side .ctl{display:flex;gap:10px;align-items:center;margin-top:28px}
+.side .ctl button{width:48px;height:48px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(184,149,90,.7);color:var(--brass2);font:400 22px/1 var(--display);transition:background .25s}
+.side .ctl button:hover{background:rgba(184,149,90,.15)}
+.side .ctl span{font:400 22px/1 var(--display);color:var(--brass2);min-width:76px;text-align:center;font-variant-numeric:tabular-nums}
+.side .hintd{font-size:14px;color:rgba(244,238,223,.6);margin-top:12px}
+
+/* The little black book: key tags */
+.keys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 20px;margin-top:9vh;padding-top:24px}
+.key{position:relative;display:flex;flex-direction:column;align-items:center;transform-origin:50% 0;outline:none}
+.key .hook{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 40% 35%,var(--brass2),var(--brass3));box-shadow:0 2px 3px rgba(0,0,0,.5)}
+.key .ringk{width:26px;height:26px;margin-top:-8px;border-radius:50%;border:2.5px solid var(--brass2)}
+.key .fob{margin-top:-5px;width:min(150px,90%);padding:22px 12px 26px;border-radius:999px 999px 26px 26px;text-align:center;background:linear-gradient(160deg,var(--brass2),var(--brass) 45%,var(--brass3));color:var(--deep);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 14px 24px -12px rgba(0,0,0,.6)}
+.key .fob b{display:block;font:400 22px/1.05 var(--display);letter-spacing:.04em}
+.key .fob small{display:block;margin-top:6px;font:600 11px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.key p{margin-top:16px;font-size:15px;text-align:center;color:rgba(244,238,223,.78);max-width:24ch}
+
+/* Career */
+.career{list-style:none;margin-top:8vh}
+.career li{display:grid;grid-template-columns:120px 170px minmax(0,1fr);gap:24px;align-items:baseline;padding:24px 0;border-top:1px solid rgba(184,149,90,.35)}
+.career .y{font:400 38px/1 var(--display);color:var(--brass2)}
+.career .c{font:600 12.5px/1.3 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:rgba(244,238,223,.7)}
+.career h3{font:400 28px/1.1 var(--display)}
+.career p{margin-top:6px;font-size:16px;color:rgba(244,238,223,.78)}
+.langs{display:flex;flex-wrap:wrap;gap:10px;margin-top:8vh;align-items:center}
+.langs span{padding:9px 16px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(184,149,90,.6);font-size:15px}
+.langs .lab{box-shadow:none;padding:0 6px 0 0;color:var(--brass2)}
+
+/* Contact */
+.contact{min-height:90vh;display:flex;flex-direction:column;justify-content:center;background:radial-gradient(50% 60% at 50% 100%,rgba(217,186,130,.16),transparent 70%),var(--deep)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:7vh;max-width:1100px}
+.cards a{display:flex;flex-direction:column;gap:10px;padding:22px 22px 24px;border-radius:14px;background:var(--card);color:var(--ink);text-decoration:none;box-shadow:0 18px 30px -18px rgba(0,0,0,.6);transition:translate .25s}
+.cards a:hover{translate:0 -3px}
+.cards .lab{color:var(--brass3)}
+.cards b{font:400 clamp(20px,1.6vw,25px)/1.15 var(--display);overflow-wrap:anywhere}
+body>footer{background:#061A14;color:#A9B5AE;padding:30px var(--pad) 96px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;font-size:14px;line-height:1.7}
+body>footer p{max-width:92ch}
+
+@media (max-width:1100px){.keys{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1000px){
+  .top nav{display:none}
+  .rolo .inner{grid-template-columns:minmax(0,1fr);min-height:0}
+  .cards{grid-template-columns:minmax(0,1fr)}
+  .career li{grid-template-columns:90px minmax(0,1fr)}.career li>div{grid-column:2}
+}
+@media (max-width:760px){
+  body{font-size:16.5px}
+  .hero{display:flex;flex-direction:column;min-height:0}
+  .hero .copy{order:1;max-width:none;padding-top:104px}
+  .hero h1{font-size:clamp(54px,15vw,76px)}
+  .marco{order:3;position:relative;right:auto;bottom:auto;height:auto;width:min(88vw,440px);margin:24px auto 0}
+  .ring{order:2;position:relative;left:auto;bottom:auto;margin:26px var(--pad) 0}
+  .desk{height:60px}
+  .wheelwrap{height:66vh;overflow:hidden;-webkit-mask-image:linear-gradient(transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(transparent,#000 12%,#000 88%,transparent)}
+  .wheel{left:7%;right:7%}
+  .disc{width:18px}.disc.l{left:0}.disc.r{right:0}.disc::after{width:30px;height:30px;margin:-15px 0 0 -15px}
+  .cardr .face{padding:30px 16px 20px}
+  .cardr .rq{padding-right:0;font-size:17px}
+  .cardr .tab{right:14px}
+  .cardr .how{font-size:13.5px}
+  .keys{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .career li{grid-template-columns:minmax(0,1fr);gap:6px}.career li>div{grid-column:auto}
+}
+@media (prefers-reduced-motion:reduce){.cards a,.side .ctl button{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0DAAA"/><stop offset=".45" stop-color="#C9A465"/><stop offset="1" stop-color="#7E5E2E"/></linearGradient></defs></svg>
+<header class="top" data-headroom="0.9">
+  <a class="brand" href="#top"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="13" fill="none" stroke="#B8955A"/><text x="14" y="18.5" text-anchor="middle" font-family="Marcellus,serif" font-size="12" fill="#D9BA82">MB</text></svg><b>Marco Bellini</b></a>
+  <nav aria-label="Sections"><a href="#requests" data-spy>Requests</a><a href="#book" data-spy>The black book</a><a href="#career" data-spy>Career</a><a href="#contact" data-spy>Contact</a></nav>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <img class="marco" src="img/marco-bellini/cut.webp" srcset="img/marco-bellini/cut-640.webp 449w, img/marco-bellini/cut.webp 749w" sizes="(max-width:760px) 88vw, 62vh" width="749" height="1109" alt="Marco Bellini in a navy three-piece suit and dark tie, hands clasped">
+    <div class="desk" aria-hidden="true"></div>
+    <div class="copy">
+      <p class="kick lab">Chief Concierge · Dubai</p>
+      <h1 id="h1">Consider it <span>done.</span></h1>
+      <p class="sub">Twenty years at the desks of grand hotels in Rome, Florence, London and Dubai. If a guest can imagine it, my job is to make it happen, quietly and on time.</p>
+    </div>
+    <div class="ring">
+      <button class="bell js-bell" type="button" aria-label="Ring the desk bell for a request"><svg viewBox="0 0 96 78" aria-hidden="true"><ellipse cx="48" cy="70" rx="44" ry="7" class="base"/><path class="dome" d="M10 66 A38 38 0 0 1 86 66 Z"/><rect x="44" y="20" width="8" height="10" rx="2" fill="url(#brass)"/><ellipse cx="48" cy="18" rx="9" ry="4" fill="url(#brass)"/><path d="M22 52 A28 28 0 0 1 40 34" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="3" stroke-linecap="round"/></svg></button>
+      <p>Ring for a request. The cards turn to one we have already done.</p>
+    </div>
+  </section>
+
+  <section class="rolo" id="requests" aria-labelledby="r-h">
+    <div class="inner">
+      <div class="side">
+        <p class="lab" style="color:var(--brass2)">Requests, fulfilled</p>
+        <h2 class="h2" id="r-h" style="margin-top:18px">Every card, <span>a yes.</span></h2>
+        <p class="lede">Twelve requests from the desk, each with the time it came in and the time it was done. Turn the cards by scrolling, dragging or with the buttons.</p>
+        <div class="ctl"><button type="button" class="js-prev" aria-label="Previous card">‹</button><span class="js-n" aria-live="polite">01 / 12</span><button type="button" class="js-next" aria-label="Next card">›</button></div>
+        <p class="hintd">Requests and times are illustrative.</p>
+      </div>
+      <div class="wheelwrap"><div class="axle" aria-hidden="true"></div><div class="disc l" aria-hidden="true"></div><div class="disc r" aria-hidden="true"></div><ol class="wheel" aria-label="Requests"></ol></div>
+    </div>
+  </section>
+
+  <section class="sec" id="book" aria-labelledby="b-h">
+    <p class="lab" style="color:var(--brass2)">The little black book</p>
+    <h2 class="h2" id="b-h" style="margin-top:18px">A key for <span>every door.</span></h2>
+    <p class="lede">Two decades of favours, handshakes and thank-you notes. Not names: those stay in the book.</p>
+    <div class="keys"></div>
+    <p class="note">Categories and numbers are illustrative.</p>
+  </section>
+
+  <section class="sec" id="career" aria-labelledby="c-h" style="background:var(--deep)">
+    <p class="lab" style="color:var(--brass2)">Career</p>
+    <h2 class="h2" id="c-h" style="margin-top:18px">From the bell desk <span>to the keys.</span></h2>
+    <ol class="career">
+      <li><span class="y">2004</span><span class="c">Rome</span><div><h3>Bellboy</h3><p>A grand hotel near the Spanish Steps. Carried every bag, and learned every shortcut in the building.</p></div></li>
+      <li><span class="y">2008</span><span class="c">Florence</span><div><h3>Concierge</h3><p>My own desk, my first little black book, and a lifelong friendship with the city's tailors.</p></div></li>
+      <li><span class="y">2013</span><span class="c">London</span><div><h3>Head concierge</h3><p>A team of eight, theatre nights, and a royal wedding week that nobody slept through.</p></div></li>
+      <li><span class="y">2019</span><span class="c">Dubai</span><div><h3>Chief concierge</h3><p>Leading the concierge team of a 400-room hotel: guests, partners, and the impossible, daily.</p></div></li>
+    </ol>
+    <div class="langs" aria-label="Languages"><span class="lab">Languages</span><span>Italian</span><span>English</span><span>French</span><span>Spanish</span><span>Some Arabic</span></div>
+    <p class="note">Employers are not named; roles and dates are illustrative.</p>
+  </section>
+
+  <section class="sec contact" id="contact" aria-labelledby="k-h">
+    <p class="lab" style="color:var(--brass2)">Contact</p>
+    <h2 class="h2" id="k-h" style="margin-top:18px">At your <span>service.</span></h2>
+    <p class="lede">Open to chief concierge and guest-experience leadership roles in luxury hotels and private residences.</p>
+    <div class="cards">
+      <a href="mailto:marco@marcobellini.example" data-demo><span class="lab">Email</span><b>marco@marcobellini.example</b></a>
+      <a href="#" data-demo><span class="lab">LinkedIn</span><b>Marco Bellini</b></a>
+      <a href="#" data-demo><span class="lab">Résumé</span><b>Download the CV (PDF)</b></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Marco Bellini is fictional and this is a concept website. The portrait was generated with AI. Hotels, requests, times and figures are illustrative; no real hotel, guest or association is represented.</p>
+  <p>A concept website by Zenith Dubai CV.</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var ZC = window.ZC;
+  var $ = function(s, c){ return (c || document).querySelector(s); }, $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
+
+  /* ================= The rolodex ================= */
+  var REQ = [
+    {c:"Dining", rq:"A table for two, tonight, at a restaurant booked out for a month.", how:"A maître d' who still owed me a favour from a wedding in 2019.", in:"16:10", out:"16:42"},
+    {c:"Travel", rq:"A passport left in the room. The guest is already at the airport.", how:"A driver, a call to the airline desk, and a very quick lift.", in:"06:05", out:"06:58"},
+    {c:"Celebrations", rq:"A proposal at sunset, on the water, with a violinist who knows their song.", how:"The violinist learned the song from a voice note sent at midnight.", in:"Mon", out:"Sat"},
+    {c:"Style", rq:"A tailor for a torn jacket, one hour before a wedding.", how:"A tailor in the old souk who keeps a needle ready for us.", in:"13:20", out:"14:05"},
+    {c:"Flowers", rq:"Twelve white peonies. In December.", how:"Flown in with a florist friend's order from the southern hemisphere.", in:"10:00", out:"17:30"},
+    {c:"Family", rq:"A child's stuffed rabbit, last seen somewhere in the gardens.", how:"Found under a sun lounger, washed, and returned with a note from the rabbit.", in:"19:40", out:"21:15"},
+    {c:"Care", rq:"A quiet room to pray, close to the ballroom, during a gala.", how:"A private dining room, a clean rug and a compass, ready in ten minutes.", in:"20:05", out:"20:15"},
+    {c:"Health", rq:"A doctor who speaks Japanese, at two in the morning.", how:"An on-call clinic we work with, and a translator on the phone.", in:"02:00", out:"02:40"},
+    {c:"Tickets", rq:"Two seats at a sold-out match, for a father and his son's birthday.", how:"A season-ticket holder who was travelling, and a very grateful boy.", in:"Fri", out:"Sat 09:00"},
+    {c:"Dining", rq:"Recreate a grandmother's recipe for an anniversary dinner.", how:"The chef, a video call to Naples, and three practice runs.", in:"Tue", out:"Thu"},
+    {c:"Lost & found", rq:"A wedding ring, lost in the pool.", how:"Engineering drained the filter; the ring was back on her hand before lunch.", in:"10:30", out:"12:10"},
+    {c:"Events", rq:"Dinner in the desert for forty, with no phone signal and perfect timing.", how:"Radios, two rehearsals, and a chef who has cooked on sand before.", in:"3 weeks", out:"On the night"}
+  ];
+  var wheel = $(".wheel"), wrap = $(".wheelwrap"), N = REQ.length, STEP = 360 / N, angle = 0, R = 260, CH = 200;
+  REQ.forEach(function(r, i){
+    var li = document.createElement("li"); li.className = "cardr";
+    li.innerHTML = '<div class="face"><span class="tab">' + r.c + '</span><p class="rq">' + r.rq + '</p><p class="how">' + r.how + '</p><p class="times"><span>Requested ' + r.in + '</span><b>Done ' + r.out + '</b></p></div>';
+    wheel.appendChild(li);
+  });
+  var cards = $$(".cardr", wheel);
+  function size(){
+    var h = wrap.clientHeight, narrow = wrap.clientWidth < 520; CH = narrow ? clamp(h * .42, 210, 270) : clamp(h * .34, 150, 230); R = CH / 2 / Math.tan(Math.PI / N) + 6;
+    wheel.style.setProperty("--ch", CH + "px"); cards.forEach(function(c){ c.style.setProperty("--ch", CH + "px"); });
+    place();
+  }
+  // the card at the front faces the reader; the rest fall away round the wheel
+  function place(){
+    cards.forEach(function(c, i){
+      var a = i * STEP - angle, n = ((a % 360) + 540) % 360 - 180, vis = Math.abs(n) < 100;
+      c.style.transform = "rotateX(" + (-a).toFixed(2) + "deg) translateZ(" + R.toFixed(1) + "px)";
+      c.style.setProperty("--shade", Math.min(.82, Math.abs(n) / 110).toFixed(3));
+      c.style.visibility = vis ? "visible" : "hidden";
+      c.setAttribute("aria-current", Math.abs(n) < STEP / 2 ? "true" : "false");
+    });
+    var idx = ((Math.round(angle / STEP) % N) + N) % N;
+    $(".js-n").textContent = (idx < 9 ? "0" : "") + (idx + 1) + " / " + N;
+  }
+  var rot = {a:0}, scrollST = null;
+  function goCard(i, fast){
+    var target = i * STEP;
+    if (scrollST){ var L = ZC.smooth(), y = scrollST.start + (scrollST.end - scrollST.start) * clamp(target / ((N - 1) * STEP), 0, 1); if (L) L.scrollTo(y, {duration:1}); else scrollTo(0, y); return; }
+    if (ZC.motion && window.gsap) gsap.to(rot, {a:target, duration:fast ? .5 : .9, ease:"power3.inOut", overwrite:true, onUpdate:function(){ angle = rot.a; place(); }});
+    else { rot.a = angle = target; place(); }
+  }
+  $(".js-prev").addEventListener("click", function(){ goCard(Math.round(angle / STEP) - 1); });
+  $(".js-next").addEventListener("click", function(){ goCard(Math.round(angle / STEP) + 1); });
+  addEventListener("resize", size); size();
+
+  /* ================= The desk bell ================= */
+  var AC = null;
+  function ding(){
+    try {
+      AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === "suspended") AC.resume();
+      var t = AC.currentTime, out = AC.createGain(); out.gain.value = .22; out.connect(AC.destination);
+      [[1, 1, 2.2], [2.76, .5, 1.2], [5.4, .25, .7], [8.93, .12, .45]].forEach(function(p){ var o = AC.createOscillator(), g = AC.createGain(); o.frequency.value = 1320 * p[0]; g.gain.setValueAtTime(p[1], t); g.gain.exponentialRampToValueAtTime(.0001, t + p[2]); o.connect(g); g.connect(out); o.start(t); o.stop(t + p[2] + .1); });
+    } catch (e) {}
+  }
+  $(".js-bell").addEventListener("click", function(){
+    ding();
+    if (window.gsap && ZC.motion) gsap.fromTo(".js-bell", {scaleY:.9}, {scaleY:1, duration:.5, ease:"elastic.out(1.2,.4)"});
+    var next = Math.floor(Math.random() * N); if (next === Math.round(angle / STEP) % N) next = (next + 3) % N;
+    var sec = $("#requests"), go = function(){ if (scrollST) goCard(next); else goCard(next); };
+    var L = ZC.smooth();
+    if (scrollST){ goCard(next); }
+    else { if (L) L.scrollTo(sec, {duration:1.2}); else sec.scrollIntoView({behavior: ZC.motion ? "smooth" : "auto"}); setTimeout(go, ZC.motion ? 900 : 0); }
+  });
+
+  /* ================= Key tags ================= */
+  var KEYS = [["Tables", "240 maîtres d'", "From the counter seat to the private room nobody admits exists."], ["Tailors", "18 workshops", "Suits altered, hems fixed and buttons found, often within the hour."], ["Florists", "12 studios", "Peonies in winter, and orange blossom in a hurry."], ["Drivers", "35 drivers", "Cars, boats and once, memorably, a horse and carriage."], ["Doctors", "9 clinics", "Every language, every hour, with discretion."], ["Boats", "14 captains", "Dhows, yachts and one very patient fisherman."], ["Tickets", "60 box offices", "Football, opera and concerts that sold out in minutes."], ["Bakers", "7 bakeries", "Birthday cakes at midnight, and bread that tastes like home."]];
+  var keys = $(".keys");
+  KEYS.forEach(function(k){
+    var d = document.createElement("div"); d.className = "key"; d.tabIndex = 0;
+    d.innerHTML = '<span class="hook" aria-hidden="true"></span><span class="ringk" aria-hidden="true"></span><div class="fob"><b>' + k[0] + '</b><small>' + k[1] + '</small></div><p>' + k[2] + '</p>';
+    keys.appendChild(d);
+    var swing = function(){ if (window.gsap && ZC.motion) gsap.fromTo(d, {rotation:0}, {keyframes:[{rotation:7, duration:.18}, {rotation:-5, duration:.22}, {rotation:3, duration:.2}, {rotation:0, duration:.3}], ease:"sine.inOut", overwrite:true}); };
+    d.addEventListener("pointerenter", swing); d.addEventListener("focus", swing);
+  });
+
+  /* ================= Boot ================= */
+  addEventListener("load", function(){
+    size();
+    if (!window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin);
+    // drag the wheel (pointer or touch), with inertia that settles on a card
+    var proxy = document.createElement("div");
+    Draggable.create(proxy, {trigger:wrap, type:"y", inertia:ZC.motion, onPress:function(){ this.startA = angle; gsap.killTweensOf(rot); },
+      onDrag:function(){ angle = this.startA - (this.y - this.startY) * .35; rot.a = angle; place(); },
+      onThrowUpdate:function(){ angle = this.startA - (this.y - this.startY) * .35; rot.a = angle; place(); },
+      onDragEnd:function(){ if (!ZC.motion) goCard(Math.round(angle / STEP)); },
+      onThrowComplete:function(){ goCard(Math.round(angle / STEP), true); },
+      snap:ZC.motion ? {y:function(v){ var a = this.startA - (v - this.startY) * .35, s = Math.round(a / STEP) * STEP; return this.startY - (s - this.startA) / .35; }} : null});
+    if (!ZC.motion) return;
+    ZC.smooth();
+    document.fonts.ready.then(function(){
+      gsap.from(".marco", {opacity:0, y:40, duration:1.6, ease:"expo.out", delay:.1});
+      gsap.from(".hero h1", {opacity:0, y:30, duration:1.2, ease:"expo.out", delay:.3});
+      gsap.from(".hero .kick, .hero .sub, .ring", {opacity:0, y:18, duration:1, stagger:.1, ease:"expo.out", delay:.5});
+      gsap.from(".desk", {yPercent:100, duration:1.2, ease:"expo.out"});
+      $$(".h2").forEach(function(h){ gsap.from(h, {y:36, opacity:0, duration:1, ease:"expo.out", scrollTrigger:{trigger:h, start:"top 88%"}}); });
+      var mm = gsap.matchMedia();
+      mm.add("(min-width: 1001px)", function(){
+        // scrolling turns the wheel through all twelve cards while the section holds still
+        scrollST = ScrollTrigger.create({trigger:".rolo .inner", start:"top top", end:"+=" + (N * 32) + "%", pin:true, anticipatePin:1, scrub:.6,
+          onUpdate:function(self){ if (Draggable.get(proxy) && Draggable.get(proxy).isPressed) return; angle = rot.a = self.progress * (N - 1) * STEP; place(); }});
+        return function(){ scrollST = null; };
+      });
+      gsap.from(".key", {opacity:0, y:-30, rotation:8, duration:1, stagger:.07, ease:"elastic.out(1,.5)", scrollTrigger:{trigger:".keys", start:"top 82%"}});
+      [".career li", ".cards a"].forEach(function(sel){ gsap.from(sel, {opacity:0, y:26, duration:.9, stagger:.08, ease:"expo.out", scrollTrigger:{trigger:$(sel).parentNode, start:"top 86%"}}); });
+      setTimeout(function(){ ScrollTrigger.refresh(); size(); }, 400);
+    });
+  });
+});
+</script>
+</body>
+</html>
