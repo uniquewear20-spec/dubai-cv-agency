@@ -12,8 +12,16 @@ import type Mail from "nodemailer/lib/mailer";
 type Attachment = Mail.Attachment;
 
 function isValidEmail(email: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  return /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(email.trim());
 }
+
+// Everything a visitor typed is escaped before it goes into the HTML email.
+function esc(v: string): string {
+  return v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+const MAX_SUBJECT = 160;
+const MAX_MESSAGE = 5000;
 
 const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const ALLOWED_CV_TYPES    = [
@@ -33,7 +41,14 @@ export async function POST(req: NextRequest) {
     const photoFile   =  formData.get("photo") as File | null;
     const cvFile      =  formData.get("cv")    as File | null;
 
+    // ── Spam trap: a hidden field people leave empty (the Zenith AI launch-list form sends it) ──
+    const trap = (formData.get("website") as string | null)?.trim() ?? "";
+    if (trap) return NextResponse.json({ success: true }, { status: 200 });
+
     // ── Validate required fields ──────────────────────────────────────────
+    if (subject.length > MAX_SUBJECT || message.length > MAX_MESSAGE) {
+      return NextResponse.json({ error: "Message is too long." }, { status: 400 });
+    }
     if (!senderEmail || !subject || !message) {
       return NextResponse.json({ error: "All fields are required." }, { status: 400 });
     }
@@ -115,7 +130,7 @@ export async function POST(req: NextRequest) {
 
     // ── Attachment summary for HTML ───────────────────────────────────────
     const attachmentSummary = attachments.length > 0
-      ? attachments.map((a) => `<strong>${String(a.filename)}</strong>`).join(", ")
+      ? attachments.map((a) => `<strong>${esc(String(a.filename))}</strong>`).join(", ")
       : "None";
 
     // ── Send ──────────────────────────────────────────────────────────────
@@ -145,12 +160,12 @@ export async function POST(req: NextRequest) {
             <tr>
               <td style="padding:8px 0;color:#a1a1aa;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;width:110px">From</td>
               <td style="padding:8px 0;color:#ffffff;font-size:14px">
-                <a href="mailto:${senderEmail}" style="color:#D4AF37;text-decoration:none">${senderEmail}</a>
+                <a href="mailto:${esc(senderEmail)}" style="color:#D4AF37;text-decoration:none">${esc(senderEmail)}</a>
               </td>
             </tr>
             <tr>
               <td style="padding:8px 0;color:#a1a1aa;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em">Subject</td>
-              <td style="padding:8px 0;color:#ffffff;font-size:14px">${subject}</td>
+              <td style="padding:8px 0;color:#ffffff;font-size:14px">${esc(subject)}</td>
             </tr>
             <tr>
               <td style="padding:8px 0;color:#a1a1aa;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em">Files</td>
@@ -159,7 +174,7 @@ export async function POST(req: NextRequest) {
           </table>
           <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px;margin-bottom:24px">
             <p style="color:#a1a1aa;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 12px">Message</p>
-            <p style="color:#d4d4d8;font-size:14px;line-height:1.7;margin:0;white-space:pre-wrap">${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
+            <p style="color:#d4d4d8;font-size:14px;line-height:1.7;margin:0;white-space:pre-wrap">${esc(message)}</p>
           </div>
           <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:16px;text-align:center">
             <p style="color:#52525b;font-size:11px;margin:0">Sent via Zenith Dubai CV website</p>

@@ -15,6 +15,7 @@ import TeamMarqueeSection from "@/components/sections/team";
 import HeroBackgroundPaths from "@/components/ui/hero-background-paths";
 import PaymentBadges from "@/components/ui/payment-badges";
 import PortfolioShowcase from "@/components/sections/portfolio-showcase";
+import AICareerAutomation from "@/components/sections/ai-career-automation";
 import { CURRENCIES, FALLBACK_RATES, isCurrency, priceIn, type Currency, type Rates } from "@/lib/currency";
 import { TIERS as TIER_CATALOG, type TierKey } from "@/lib/checkout/catalog";
 import { startCheckout, CHECKOUT_TX } from "@/lib/checkout/client";
@@ -610,6 +611,9 @@ export default function Home() {
 
         {/* ── SAMPLE PORTFOLIO WEBSITES ── */}
         <PortfolioShowcase dark={dark} lang={lang} />
+
+        {/* ── ZENITH AI CAREER AUTOMATION (directly after the portfolio websites) ── */}
+        <AICareerAutomation dark={dark} lang={lang} currency={currency} rates={rates} whatsappHref={wl("Hello. I would like to know more about Zenith AI Career Automation.")} />
 
         {/* ── DISCIPLINES ── */}
         <section id="disciplines" className="py-40 px-5 sm:px-8"><div className="mx-auto max-w-6xl"><Reveal className="mb-24"><div style={{ textAlign: isAr ? "right" : "left" }}><p className="text-[9px] font-medium uppercase mb-5" style={{ color: dark ? `${G}55` : G, fontFamily: "sans-serif", letterSpacing: isAr ? "0.08em" : "0.40em" }}>{tr("svcEyebrow", lang)}</p><h2 className="text-3xl sm:text-[42px] font-normal tracking-tight leading-[1.15]" style={{ color: hi, maxWidth: "520px" }}>{tr("svcH2", lang).split("\n").map((line, i) => (<React.Fragment key={i}>{i > 0 && <br />}{i === 1 ? <em style={{ fontStyle: "italic", color: G }}>{line}</em> : line}</React.Fragment>))}</h2></div></Reveal>
