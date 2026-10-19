@@ -29,7 +29,7 @@ application, and the form says so.
 | `lib/zenith-ai/plans.ts` | Plan structure: allowances, `price: null`, `status: "proposed"`, `checkout: false`. |
 | `lib/zenith-ai/preview-data.ts` | The chart's **illustrative** weekly data. Not customer data. |
 | `lib/zenith-ai/contracts.ts` | TypeScript contracts for the future backend: application states, receipts, email grants, entitlements. |
-| `app/page.tsx` | Renders the section right after `<PortfolioShowcase />`. |
+| `app/page.tsx` | Renders the section right after `<PortfolioShowcase />`. It is loaded with `next/dynamic`, so its code ships as a separate file instead of growing the homepage's main bundle; it is still rendered on the server. |
 | `app/api/contact/route.ts` | Now escapes visitor input in the HTML email, limits lengths, and drops submissions that fill the hidden spam-trap field. |
 
 ### Changes made to the supplied component
@@ -99,5 +99,8 @@ application, and the form says so.
   - The main button focuses the form, and a plan's button pre-selects that plan.
   - Validation messages appear, the honeypot stays empty, and the failure path offers WhatsApp.
   - With reduced motion, there are no moving parts.
+- Production, on zenithdubaicv.com after the deployment of commit `5a2d357` (desktop browser, 19 October 2026):
+  the section is live between `#websites` and `#disciplines`, the gallery starts with Awa Ndiaye and has Wasim
+  Akram eighth, the console shows no errors, and nothing overflows sideways at 1024 px.
 - **Not tested:** real phones and Safari, and a real email delivered through `/api/contact`. The local run has
   no SMTP credentials, so the success path was checked with a mocked response.
