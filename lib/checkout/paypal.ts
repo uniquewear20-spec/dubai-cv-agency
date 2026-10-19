@@ -34,7 +34,9 @@ export function getPayPalConfig(): PayPalConfig | null {
     clientId,
     secret,
     env,
-    apiBase: env === "live" ? "https://api-m.paypal.com" : "https://api-m.sandbox.paypal.com",
+    // PAYPAL_API_BASE_TEST points local tests at a stub; it is ignored on Vercel.
+    apiBase: (!process.env.VERCEL && process.env.PAYPAL_API_BASE_TEST?.trim()) ||
+      (env === "live" ? "https://api-m.paypal.com" : "https://api-m.sandbox.paypal.com"),
   };
 }
 
@@ -58,6 +60,9 @@ export interface PayPalCapture {
   amount?: PayPalMoney;
   custom_id?: string;
   invoice_id?: string;
+  status_details?: { reason?: string };
+  create_time?: string;
+  update_time?: string;
 }
 export interface PayPalPurchaseUnit {
   custom_id?: string;
@@ -71,6 +76,8 @@ export interface PayPalOrder {
   status: string; // CREATED | SAVED | APPROVED | VOIDED | COMPLETED | PAYER_ACTION_REQUIRED
   links?: { href: string; rel: string; method?: string }[];
   purchase_units?: PayPalPurchaseUnit[];
+  payer?: { name?: { given_name?: string; surname?: string }; email_address?: string; payer_id?: string };
+  payment_source?: { paypal?: { email_address?: string; name?: { given_name?: string; surname?: string } } };
 }
 
 // PayPal order ids are short upper-case alphanumeric strings, e.g. 5O190127TN364715T.
@@ -211,8 +218,33 @@ export function getPayPalOrder(cfg: PayPalConfig, orderId: string): Promise<PayP
   return call<PayPalOrder>(cfg, "GET", `/v2/checkout/orders/${orderId}`);
 }
 
-// Takes the money for an order the visitor has approved. The request id makes
-// repeated calls (page refresh, double load) safe: PayPal captures only once.
-export function capturePayPalOrder(cfg: PayPalConfig, orderId: string): Promise<PayPalOrder> {
-  return call<PayPalOrder>(cfg, "POST", `/v2/checkout/orders/${orderId}/capture`, undefined, `capture-${orderId}`);
+// Takes the money for an order the visitor has approved. PayPal captures an order only once:
+// a second attempt fails with ORDER_ALREADY_CAPTURED. Each caller passes its own request id,
+// so whichever path captures first (confirmation page or webhook) is the one that sends the
+// order emails, and no order is announced twice.
+export function capturePayPalOrder(cfg: PayPalConfig, orderId: string, requestId: string): Promise<PayPalOrder> {
+  return call<PayPalOrder>(cfg, "POST", `/v2/checkout/orders/${orderId}/capture`, undefined, requestId);
+}
+
+// ── Webhooks ─────────────────────────────────────────────────────────────────
+// PayPal signs every webhook. We ask PayPal to verify the signature against our webhook id
+// (PAYPAL_WEBHOOK_ID, from developer.paypal.com → your app → Webhooks) before acting on it.
+export async function verifyWebhookSignature(
+  cfg: PayPalConfig,
+  headers: Headers,
+  event: unknown,
+  webhookId: string,
+): Promise<boolean> {
+  const h = (k: string) => headers.get(k) ?? "";
+  if (!h("paypal-transmission-id") || !h("paypal-transmission-sig")) return false;
+  const res = await call<{ verification_status?: string }>(cfg, "POST", "/v1/notifications/verify-webhook-signature", {
+    auth_algo: h("paypal-auth-algo"),
+    cert_url: h("paypal-cert-url"),
+    transmission_id: h("paypal-transmission-id"),
+    transmission_sig: h("paypal-transmission-sig"),
+    transmission_time: h("paypal-transmission-time"),
+    webhook_id: webhookId,
+    webhook_event: event,
+  });
+  return res.verification_status === "SUCCESS";
 }

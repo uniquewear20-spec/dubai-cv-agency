@@ -18,15 +18,23 @@ export function aedToUsd(aed: number): string {
   return (Math.round((aed / AED_PER_USD) * 100) / 100).toFixed(2);
 }
 
-// ── Tiers ────────────────────────────────────────────────────────────────────
+// ── Packages ─────────────────────────────────────────────────────────────────
+// The four packages. The keys are the original tier ids, kept so that order
+// references created before the rename still decode. Names are shown on the
+// PayPal page and in order emails; the site's copy lives in lib/packages.ts.
 export type TierKey = "foundation" | "growth" | "executive" | "apex";
 
 export const TIERS: Record<TierKey, { name: string; price: number }> = {
-  foundation: { name: "Foundation", price: 179 },
-  growth:     { name: "Growth",     price: 299 },
-  executive:  { name: "Executive",  price: 449 },
-  apex:       { name: "Apex",       price: 899 },
+  foundation: { name: "CV Essentials",          price: 179 },
+  growth:     { name: "Career Advantage",       price: 299 },
+  executive:  { name: "Career Automation",      price: 449 },
+  apex:       { name: "Executive Career Suite", price: 899 },
 };
+
+/** Packages that include The Global Horizon ebook (packages 2, 3 and 4). */
+export const EBOOK_TIERS: readonly TierKey[] = ["growth", "executive", "apex"];
+/** Packages that include Pro access to the Zenith AI job agent (sending for you; AI drafting when switched on). */
+export const AI_TIERS: readonly TierKey[] = ["executive", "apex"];
 
 export const isTierKey = (v: unknown): v is TierKey =>
   typeof v === "string" && Object.prototype.hasOwnProperty.call(TIERS, v);

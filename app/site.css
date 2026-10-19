@@ -1,0 +1,259 @@
+/* app/site.css — Zenith design system: tokens, type scale and shared components.
+   Ink and gold are the brand; paper is the light theme. Every text colour below meets WCAG AA
+   on its background (checked: body text ≥ 7:1, secondary ≥ 4.5:1). */
+
+:root,
+html[data-theme="dark"] {
+  --z-bg: #0a0907;
+  --z-surface: #14120e;
+  --z-surface-2: #1c1914;
+  --z-fg: #ede8e0;
+  --z-fg-2: #bdb0a3;
+  --z-fg-3: #958879;
+  --z-rule: rgba(237, 232, 224, 0.12);
+  --z-rule-strong: rgba(237, 232, 224, 0.24);
+  --z-gold: #c8a96e;
+  --z-gold-text: #e2c98e;
+  --z-gold-wash: rgba(200, 169, 110, 0.1);
+  --z-on-gold: #0a0907;
+  --z-sheet: #fbf8f2;
+  --z-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.75);
+  --z-focus: #e2c98e;
+  --z-error: #e3a090;
+  --z-success: #9fd3a8;
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --z-bg: #f7f3ee;
+  --z-surface: #fffdf9;
+  --z-surface-2: #efe8de;
+  --z-fg: #1a1410;
+  --z-fg-2: #5b4d43;
+  --z-fg-3: #776a5f;
+  --z-rule: rgba(26, 20, 16, 0.12);
+  --z-rule-strong: rgba(26, 20, 16, 0.24);
+  --z-gold: #c8a96e;
+  --z-gold-text: #7d5f22;
+  --z-gold-wash: rgba(200, 169, 110, 0.14);
+  --z-on-gold: #1a1410;
+  --z-sheet: #ffffff;
+  --z-shadow: 0 30px 70px -34px rgba(60, 40, 20, 0.35);
+  --z-focus: #7d5f22;
+  --z-error: #a03232;
+  --z-success: #2f6b3a;
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  background: var(--z-bg);
+  color: var(--z-fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* ── Site root ─────────────────────────────────────────────────────────── */
+.zs {
+  background: var(--z-bg);
+  color: var(--z-fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+.zs[dir="rtl"] {
+  font-family: var(--font-arabic), Tahoma, sans-serif;
+  line-height: 1.9;
+}
+
+.z-serif { font-family: var(--font-serif), Georgia, serif; font-optical-sizing: auto; }
+[dir="rtl"] .z-serif { font-family: var(--font-arabic-serif), var(--font-arabic), serif; }
+
+.z-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 40px);
+}
+.z-wrap-wide { max-width: 1320px; }
+
+.z-section {
+  padding-block: clamp(80px, 10vw, 140px);
+  border-top: 1px solid var(--z-rule);
+}
+
+/* ── Type scale (classical ratios: 13 · 14 · 16 · 18 · 21 · 28 · 40 · 52 · 80) ── */
+.z-h1 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(42px, 6.4vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  color: var(--z-fg);
+}
+.z-h2 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(32px, 4.3vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.018em;
+  color: var(--z-fg);
+}
+.z-h3 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--z-fg);
+}
+[dir="rtl"] .z-h1,
+[dir="rtl"] .z-h2,
+[dir="rtl"] .z-h3 {
+  font-family: var(--font-arabic-serif), var(--font-arabic), serif;
+  letter-spacing: 0;
+  line-height: 1.45;
+  font-weight: 600;
+}
+[dir="rtl"] .z-h1 { font-size: clamp(36px, 5.4vw, 68px); line-height: 1.35; }
+
+.z-lede { font-size: clamp(17px, 1.5vw, 19px); line-height: 1.65; color: var(--z-fg-2); max-width: 62ch; }
+.z-body { font-size: 16px; line-height: 1.7; color: var(--z-fg-2); }
+.z-small { font-size: 14px; line-height: 1.6; color: var(--z-fg-2); }
+.z-micro { font-size: 13px; line-height: 1.55; color: var(--z-fg-3); }
+.z-label { font-size: 14px; font-weight: 500; color: var(--z-gold-text); letter-spacing: 0.01em; }
+[dir="rtl"] .z-lede, [dir="rtl"] .z-body { line-height: 1.95; }
+
+.z-link {
+  color: var(--z-gold-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.z-link:hover { text-decoration-thickness: 2px; }
+
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+.z-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+.z-btn:disabled { cursor: not-allowed; opacity: 0.55; }
+.z-btn-primary {
+  background: var(--z-gold);
+  color: var(--z-on-gold);
+  box-shadow: 0 10px 30px -14px rgba(200, 169, 110, 0.65);
+}
+.z-btn-primary:hover:not(:disabled) { background: #d7bb84; transform: translateY(-1px); }
+.z-btn-quiet {
+  background: transparent;
+  color: var(--z-fg);
+  border-color: var(--z-rule-strong);
+}
+.z-btn-quiet:hover:not(:disabled) { border-color: var(--z-gold); color: var(--z-gold-text); }
+.z-btn-small { min-height: 42px; padding: 0 18px; font-size: 14px; }
+.z-btn-block { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  .z-btn { transition: none; }
+  .z-btn-primary:hover:not(:disabled) { transform: none; }
+}
+
+/* ── Focus ─────────────────────────────────────────────────────────────── */
+.zs :focus-visible {
+  outline: 2px solid var(--z-focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.zs .z-btn:focus-visible { border-radius: 999px; }
+
+/* ── Chips (filters, segmented controls) ───────────────────────────────── */
+.z-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--z-rule-strong);
+  background: transparent;
+  color: var(--z-fg-2);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.z-chip:hover { color: var(--z-fg); border-color: var(--z-gold); }
+.z-chip[aria-pressed="true"],
+.z-chip[aria-selected="true"] {
+  background: var(--z-fg);
+  border-color: var(--z-fg);
+  color: var(--z-bg);
+}
+
+/* ── Status tags ───────────────────────────────────────────────────────── */
+.z-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 500;
+  border: 1px solid var(--z-rule-strong);
+  color: var(--z-fg-2);
+  white-space: nowrap;
+}
+.z-tag-gold { border-color: rgba(200, 169, 110, 0.5); color: var(--z-gold-text); background: var(--z-gold-wash); }
+
+/* ── Disclosure (details/summary) ──────────────────────────────────────── */
+.z-details > summary { list-style: none; cursor: pointer; }
+.z-details > summary::-webkit-details-marker { display: none; }
+
+/* ── Visually hidden ───────────────────────────────────────────────────── */
+.z-sr {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
+}
+
+/* Skip link */
+.z-skip {
+  position: absolute;
+  inset-inline-start: 16px;
+  top: -60px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--z-gold);
+  color: var(--z-on-gold);
+  font-weight: 600;
+  text-decoration: none;
+}
+.z-skip:focus { top: 12px; }
