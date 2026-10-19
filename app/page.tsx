@@ -15,7 +15,9 @@ import TeamMarqueeSection from "@/components/sections/team";
 import HeroBackgroundPaths from "@/components/ui/hero-background-paths";
 import PaymentBadges from "@/components/ui/payment-badges";
 import PortfolioShowcase from "@/components/sections/portfolio-showcase";
-import AICareerAutomation from "@/components/sections/ai-career-automation";
+import dynamic from "next/dynamic";
+// Below the fold, so it ships in its own bundle (still rendered on the server).
+const AICareerAutomation = dynamic(() => import("@/components/sections/ai-career-automation"));
 import { CURRENCIES, FALLBACK_RATES, isCurrency, priceIn, type Currency, type Rates } from "@/lib/currency";
 import { TIERS as TIER_CATALOG, type TierKey } from "@/lib/checkout/catalog";
 import { startCheckout, CHECKOUT_TX } from "@/lib/checkout/client";
