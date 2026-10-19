@@ -59,9 +59,9 @@ const QA: { q: L10n; a: L10n; link?: { href: string; label: L10n } }[] = [
     q: { en: "How can I pay?", fr: "Comment puis-je payer ?", ar: "كيف يمكنني الدفع؟" },
     a: gumroadLive
       ? {
-          en: "With PayPal, using your PayPal balance or a card where PayPal offers card checkout, charged in US dollars at the official AED rate. You can also pay through Gumroad by card, and with Apple Pay or Google Pay when your device and browser support them.",
-          fr: "Avec PayPal, par solde PayPal ou carte lorsque PayPal le propose, débité en dollars US au taux officiel du dirham. Vous pouvez aussi payer via Gumroad par carte, et avec Apple Pay ou Google Pay si votre appareil et votre navigateur les prennent en charge.",
-          ar: "عبر PayPal برصيدك أو ببطاقة حيث يتيح PayPal ذلك، ويُخصم المبلغ بالدولار الأمريكي وفق السعر الرسمي للدرهم. ويمكنك أيضاً الدفع عبر Gumroad بالبطاقة، وبـ Apple Pay أو Google Pay إذا دعمها جهازك ومتصفحك.",
+          en: "With PayPal, using your PayPal balance or a card where PayPal offers card checkout, charged in US dollars at the official AED rate. You can also pay by card through Gumroad, which may offer Apple Pay or Google Pay where your device and browser support them.",
+          fr: "Avec PayPal, par solde PayPal ou carte lorsque PayPal le propose, débité en dollars US au taux officiel du dirham. Vous pouvez aussi payer par carte via Gumroad, qui peut proposer Apple Pay ou Google Pay si votre appareil et votre navigateur les prennent en charge.",
+          ar: "عبر PayPal برصيدك أو ببطاقة حيث يتيح PayPal ذلك، ويُخصم المبلغ بالدولار الأمريكي وفق السعر الرسمي للدرهم. ويمكنك أيضاً الدفع بالبطاقة عبر Gumroad، الذي قد يتيح Apple Pay أو Google Pay إذا دعمها جهازك ومتصفحك.",
         }
       : {
           en: "With PayPal, using your PayPal balance or a card where PayPal offers card checkout. Amounts are charged in US dollars at the official AED rate. Apple Pay and Google Pay aren't available on this site yet.",

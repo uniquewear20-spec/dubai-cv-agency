@@ -25,6 +25,11 @@ const nextConfig = {
         ],
       },
       {
+        // Product images for the Gumroad listings; readable from gumroad.com so they can be uploaded there.
+        source: "/gumroad/:file*",
+        headers: [{ key: "Access-Control-Allow-Origin", value: "https://gumroad.com" }],
+      },
+      {
         source: "/_next/static/:path*",
         headers: [
           {

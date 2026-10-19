@@ -32,7 +32,7 @@ const T: Record<string, L10n> = {
   everything: { en: "Everything else included", fr: "Tout ce qui est inclus en plus", ar: "كل ما تشمله الباقة أيضاً" },
   pay: { en: "Pay with PayPal", fr: "Payer avec PayPal", ar: "ادفع عبر PayPal" },
   redirecting: { en: "Opening PayPal…", fr: "Ouverture de PayPal…", ar: "جارٍ فتح PayPal…" },
-  wallet: { en: "Card, Apple Pay or Google Pay", fr: "Carte, Apple Pay ou Google Pay", ar: "بطاقة أو Apple Pay أو Google Pay" },
+  wallet: { en: "Pay by card on Gumroad", fr: "Payer par carte sur Gumroad", ar: "ادفع بالبطاقة عبر Gumroad" },
   payError: {
     en: "PayPal could not be opened. Try again, or message us on WhatsApp and we'll send you a payment link.",
     fr: "PayPal n'a pas pu s'ouvrir. Réessayez, ou écrivez-nous sur WhatsApp et nous vous enverrons un lien de paiement.",
@@ -72,9 +72,9 @@ const T: Record<string, L10n> = {
     ar: "تتم عملية الدفع عبر PayPal: برصيدك في PayPal أو ببطاقة خصم أو ائتمان حيث يتيح PayPal الدفع بالبطاقة. تُخصم المبالغ بالدولار الأمريكي وفق السعر الرسمي للدرهم.",
   },
   payGumroad: {
-    en: "Prefer a card, Apple Pay or Google Pay? Use the Gumroad checkout under each package. Gumroad shows the wallet buttons when your device and browser support them, and may add sales tax or VAT where it applies.",
-    fr: "Vous préférez la carte, Apple Pay ou Google Pay ? Utilisez le paiement Gumroad sous chaque formule. Gumroad affiche ces boutons lorsque votre appareil et votre navigateur les prennent en charge, et peut ajouter la TVA lorsqu'elle s'applique.",
-    ar: "تفضّل البطاقة أو Apple Pay أو Google Pay؟ استخدم الدفع عبر Gumroad أسفل كل باقة. يعرض Gumroad هذه الأزرار عندما يدعمها جهازك ومتصفحك، وقد يضيف ضريبة المبيعات أو القيمة المضافة حيث تنطبق.",
+    en: "Prefer to pay by card outside PayPal? Use the Gumroad checkout under each package. Gumroad may also offer Apple Pay or Google Pay where your device and browser support them, and may add sales tax or VAT where it applies.",
+    fr: "Vous préférez payer par carte hors PayPal ? Utilisez le paiement Gumroad sous chaque formule. Gumroad peut aussi proposer Apple Pay ou Google Pay si votre appareil et votre navigateur les prennent en charge, et peut ajouter la TVA lorsqu'elle s'applique.",
+    ar: "تفضّل الدفع بالبطاقة خارج PayPal؟ استخدم الدفع عبر Gumroad أسفل كل باقة. وقد يتيح Gumroad أيضاً Apple Pay أو Google Pay إذا دعمها جهازك ومتصفحك، وقد يضيف ضريبة المبيعات أو القيمة المضافة حيث تنطبق.",
   },
   refund: { en: "Full refund within 7 days of purchase.", fr: "Remboursement intégral dans les 7 jours suivant l'achat.", ar: "استرداد كامل خلال 7 أيام من الشراء." },
   refundLink: { en: "Refund policy", fr: "Politique de remboursement", ar: "سياسة الاسترداد" },
