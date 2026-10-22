@@ -3,7 +3,9 @@
 // Environment variables (Vercel → Settings → Environment Variables):
 //   SMTP_USER   e.g. info@zenithdubaicv.com
 //   SMTP_PASS   the mailbox password (stored as a secret in Vercel, never in code)
-//   CONTACT_TO  where order and contact notifications go (defaults to SMTP_USER)
+//   CONTACT_TO  where order and contact notifications go (defaults to SMTP_FROM, then SMTP_USER)
+//   SMTP_FROM   optional sender address, for mail services whose login is not an address
+//               (defaults to SMTP_USER)
 //   SMTP_HOST / SMTP_PORT / SMTP_SECURE  optional. The default is Microsoft 365
 //               (smtp.office365.com, 587, STARTTLS): zenithdubaicv.com's mail is hosted there
 //               (MX zenithdubaicv-com.mail.protection.outlook.com, checked 22 Oct 2026). The mailbox
@@ -20,8 +22,13 @@ export function emailConfigured(): boolean {
   return Boolean(process.env.SMTP_USER?.trim() && process.env.SMTP_PASS?.trim());
 }
 
+/** The address mail is sent from. */
+export function fromAddress(): string {
+  return process.env.SMTP_FROM?.trim() || process.env.SMTP_USER!.trim();
+}
+
 export function adminAddress(): string | null {
-  return process.env.CONTACT_TO?.trim() || process.env.SMTP_USER?.trim() || null;
+  return process.env.CONTACT_TO?.trim() || process.env.SMTP_FROM?.trim() || process.env.SMTP_USER?.trim() || null;
 }
 
 /** Escapes text before it goes into an HTML email. */
@@ -124,7 +131,7 @@ export async function sendMail(opts: {
   if (!emailConfigured()) throw new Error("SMTP_USER / SMTP_PASS are not configured.");
   const name = (opts.fromName ?? "Zenith Dubai CV").replace(/["\r\n<>]/g, "").slice(0, 80);
   await getTransport().sendMail({
-    from: `"${name}" <${process.env.SMTP_USER!.trim()}>`,
+    from: `"${name}" <${fromAddress()}>`,
     to: opts.to,
     bcc: opts.bcc,
     replyTo: opts.replyTo,

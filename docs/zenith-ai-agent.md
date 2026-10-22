@@ -22,7 +22,7 @@ to the outcome. Nothing is sent without the candidate's approval.
 | AI drafts (Claude), Pro only | Built, **off** until a key is added | `ANTHROPIC_API_KEY` (paid API usage). Optional `ANTHROPIC_MODEL` (default `claude-sonnet-5-5`) |
 | Apply on the employer's site | Works: opens the listing; the candidate applies there | Nothing |
 | Apply by email from the candidate's own mail app (mailto) | Works | Nothing |
-| "Send it for me": Zenith emails an approved application, Pro only | Works when SMTP is configured | Existing `SMTP_USER` / `SMTP_PASS` (already set for the contact form) and a verified Pro purchase |
+| "Send it for me": Zenith emails an approved application, Pro only | Built; **blocked in production** until the mailbox accepts SMTP logins (22 Oct 2026: Microsoft 365 answers "SmtpClientAuthentication is disabled for the Tenant") | Owner action 0 in `docs/commercial-launch.md`, and a verified Pro purchase |
 | Tracker: statuses, dates, notes, history, follow-up reminders, .ics calendar files | Works, in the browser | Nothing |
 | Pro access check: PayPal order (Career Automation / Executive Career Suite) | Works | Existing PayPal keys |
 | Pro access check: Gumroad license key | Works (tested against a stub of Gumroad's API; no real key yet) | Nothing more: Career Automation and Executive Career Suite are live on Gumroad with license keys, product ids in `lib/packages.ts` (`gumroadProductId`). A real key comes from a test purchase. |
