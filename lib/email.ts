@@ -72,7 +72,16 @@ export interface EmailCheck {
   /** "auth": the server refused the login (password, or SMTP AUTH switched off for the mailbox). */
   problem?: "not-configured" | "auth" | "connection" | "other";
   code?: string;
+  /** The server's own explanation, with any email address removed. */
+  detail?: string;
   checkedAt: string;
+}
+
+/** The mail server's reply text, safe to show: addresses removed, one line, short. */
+function serverDetail(err: unknown): string | undefined {
+  const r = (err as { response?: unknown })?.response;
+  if (typeof r !== "string" || !r.trim()) return undefined;
+  return r.replace(/[^\s@<>"]+@[^\s@<>"]+/g, "[address]").replace(/\s+/g, " ").trim().slice(0, 200);
 }
 
 let lastCheck: { at: number; result: EmailCheck } | null = null;
@@ -93,8 +102,8 @@ export async function checkEmail(): Promise<EmailCheck> {
     } catch (err) {
       const code = emailErrorCode(err);
       const problem = /EAUTH|\b53\d\b/.test(code) ? "auth" : /ECONNECTION|ETIMEDOUT|ESOCKET|EDNS|ECONNREFUSED|ENOTFOUND|ETLS/.test(code) ? "connection" : "other";
-      console.error(`[email] check failed (${server}): ${code}`);
-      result = { ok: false, server, problem, code, checkedAt: new Date().toISOString() };
+      console.error(`[email] check failed (${server}): ${code} ${serverDetail(err) ?? ""}`);
+      result = { ok: false, server, problem, code, detail: serverDetail(err), checkedAt: new Date().toISOString() };
     }
   }
   lastCheck = { at: Date.now(), result };
