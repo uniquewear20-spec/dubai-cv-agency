@@ -32,6 +32,16 @@ Last updated: 22 October 2026.
 - Privacy policy, terms (deferring to the 7-day refund policy) and refund policy, in EN/FR/AR.
 - robots.txt, sitemap.xml, Open Graph image.
 
+## Email from the site (contact form, order emails, briefs, agent sending)
+
+On 22 October 2026 the one authorised test message through the live contact form failed ("Failed to send
+email"), so nothing reached the inbox. The site was sending through GoDaddy's SMTP server
+(smtpout.secureserver.net), but zenithdubaicv.com's mailbox is hosted by Microsoft 365 (its MX record is
+zenithdubaicv-com.mail.protection.outlook.com), which only accepts logins on smtp.office365.com, port 587. Every
+email path now uses one mailer (`lib/email.ts`) with that as the default. `GET /api/agent/status/?check=email`
+logs in without sending anything and reports `emailCheck` (cached 15 minutes). See owner action 0 for the result
+and what to change.
+
 ## Owner actions (only you can do these)
 
 | # | Action | Why | Where |

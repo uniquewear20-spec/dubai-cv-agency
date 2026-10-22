@@ -4,13 +4,16 @@
 import { aiConfigured, aiModel } from "@/lib/agent/claude";
 import { planLimits, sharedLimits } from "@/lib/agent/limits";
 import { SOURCE_META, sourceConfigured } from "@/lib/agent/sources";
-import { emailConfigured } from "@/lib/email";
+import { checkEmail, emailConfigured } from "@/lib/email";
 import { ok } from "@/lib/agent/http";
 import type { AgentStatus } from "@/lib/agent/types";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+// GET /api/agent/status/?check=email also logs in to the mail server (nothing is sent) and reports
+// whether it accepted the login. The result is cached for 15 minutes per server instance.
+export async function GET(req: Request) {
+  const wantsEmailCheck = new URL(req.url).searchParams.get("check") === "email";
   const status: AgentStatus = {
     ai: aiConfigured(),
     model: aiConfigured() ? aiModel() : null,
@@ -22,5 +25,5 @@ export async function GET() {
       return { plan, drafts: l.drafts, period: l.period, sends: l.sends };
     }),
   };
-  return ok(status);
+  return ok(wantsEmailCheck ? { ...status, emailCheck: await checkEmail() } : status);
 }

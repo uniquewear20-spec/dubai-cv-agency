@@ -1,15 +1,8 @@
-// app/api/contact/route.ts
-// Vercel environment variables required:
-//   SMTP_USER   → e.g. info@zenithdubaicv.com
-//   SMTP_PASS   → your GoDaddy email password
-//   CONTACT_TO  → recipient address (can be same as SMTP_USER)
+// app/api/contact/route.ts — the contact form. Sends one email to the Zenith inbox through the
+// shared mailer (lib/email.ts: SMTP_USER, SMTP_PASS, CONTACT_TO, optional SMTP_HOST / SMTP_PORT).
 
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
-// ── Fix: Attachment lives in nodemailer/lib/mailer, not the top-level namespace
-import type Mail from "nodemailer/lib/mailer";
-
-type Attachment = Mail.Attachment;
+import { adminAddress, emailConfigured, emailErrorCode, sendMail, type Attachment } from "@/lib/email";
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(email.trim());
@@ -104,29 +97,15 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // ── SMTP credentials ──────────────────────────────────────────────────
-    const smtpUser  = process.env.SMTP_USER;
-    const smtpPass  = process.env.SMTP_PASS;
-    const contactTo = process.env.CONTACT_TO ?? smtpUser;
-
-    if (!smtpUser || !smtpPass) {
+    // ── Mail settings ─────────────────────────────────────────────────────
+    if (!emailConfigured()) {
       console.error("[contact] SMTP_USER or SMTP_PASS env var is missing.");
       return NextResponse.json(
         { error: "Server configuration error. Please try WhatsApp instead." },
         { status: 500 }
       );
     }
-
-    // ── Nodemailer transporter — GoDaddy SMTP SSL port 465 ───────────────
-    const transporter = nodemailer.createTransport({
-      host:              "smtpout.secureserver.net",
-      port:              465,
-      secure:            true,
-      auth:              { user: smtpUser, pass: smtpPass },
-      connectionTimeout: 10_000,
-      greetingTimeout:   10_000,
-      socketTimeout:     15_000,
-    });
+    const contactTo = adminAddress()!;
 
     // ── Attachment summary for HTML ───────────────────────────────────────
     const attachmentSummary = attachments.length > 0
@@ -134,8 +113,7 @@ export async function POST(req: NextRequest) {
       : "None";
 
     // ── Send ──────────────────────────────────────────────────────────────
-    await transporter.sendMail({
-      from:        `"Zenith Dubai CV" <${smtpUser}>`,
+    await sendMail({
       to:          contactTo,
       replyTo:     senderEmail,
       subject:     `[${subject}] New inquiry from ${senderEmail}`,
@@ -186,8 +164,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true }, { status: 200 });
 
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : "Unknown error";
-    console.error("[contact] sendMail failed:", msg);
+    console.error("[contact] sendMail failed:", emailErrorCode(err), err instanceof Error ? err.message : "");
     return NextResponse.json(
       { error: "Failed to send email. Please try WhatsApp instead." },
       { status: 500 }

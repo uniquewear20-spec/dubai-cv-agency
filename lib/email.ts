@@ -1,9 +1,15 @@
-// lib/email.ts — server only. Sends email through the Zenith mailbox (GoDaddy SMTP).
+// lib/email.ts — server only. Sends every email the site sends (contact form, orders, briefs,
+// agent applications) through the Zenith mailbox.
 // Environment variables (Vercel → Settings → Environment Variables):
 //   SMTP_USER   e.g. info@zenithdubaicv.com
 //   SMTP_PASS   the mailbox password (stored as a secret in Vercel, never in code)
 //   CONTACT_TO  where order and contact notifications go (defaults to SMTP_USER)
-//   SMTP_HOST / SMTP_PORT / SMTP_SECURE  optional; default GoDaddy (smtpout.secureserver.net, 465, TLS)
+//   SMTP_HOST / SMTP_PORT / SMTP_SECURE  optional. The default is Microsoft 365
+//               (smtp.office365.com, 587, STARTTLS): zenithdubaicv.com's mail is hosted there
+//               (MX zenithdubaicv-com.mail.protection.outlook.com, checked 22 Oct 2026). The mailbox
+//               needs SMTP AUTH turned on (GoDaddy: Email & Office Dashboard → the mailbox →
+//               SMTP Authentication). GoDaddy's own SMTP (smtpout.secureserver.net) only works for
+//               GoDaddy Workspace mailboxes.
 
 import nodemailer from "nodemailer";
 import type Mail from "nodemailer/lib/mailer";
@@ -23,14 +29,27 @@ export function esc(v: string): string {
   return v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
+const DEFAULT_HOST = "smtp.office365.com";
+
+/** Where mail is sent from. No secrets: safe to show in a status check. */
+export function smtpServer(): { host: string; port: number; secure: boolean } {
+  const host = process.env.SMTP_HOST?.trim() || DEFAULT_HOST;
+  const port = Number(process.env.SMTP_PORT) || (host === DEFAULT_HOST ? 587 : 465);
+  const secure = process.env.SMTP_SECURE ? process.env.SMTP_SECURE === "true" : port === 465;
+  return { host, port, secure };
+}
+
 let transport: nodemailer.Transporter | null = null;
 function getTransport(): nodemailer.Transporter {
   if (!transport) {
-    const port = Number(process.env.SMTP_PORT) || 465;
+    const { host, port, secure } = smtpServer();
     transport = nodemailer.createTransport({
-      host: process.env.SMTP_HOST?.trim() || "smtpout.secureserver.net",
+      host,
       port,
-      secure: process.env.SMTP_SECURE ? process.env.SMTP_SECURE === "true" : port === 465,
+      secure,
+      // Port 587: refuse to send the password unless the server upgrades to TLS (STARTTLS).
+      // Only a local test mail sink is exempt.
+      requireTLS: !secure && !/^(localhost|127\.0\.0\.1|::1)$/.test(host),
       auth: { user: process.env.SMTP_USER!.trim(), pass: process.env.SMTP_PASS!.trim() },
       connectionTimeout: 10_000,
       greetingTimeout: 10_000,
@@ -38,6 +57,48 @@ function getTransport(): nodemailer.Transporter {
     });
   }
   return transport;
+}
+
+/** A short, secret-free description of a mail error for logs and the status check, e.g. "EAUTH 535 5.7.139". */
+export function emailErrorCode(err: unknown): string {
+  const e = (err ?? {}) as { code?: string; responseCode?: number; response?: string };
+  const enhanced = typeof e.response === "string" ? e.response.match(/^\d{3}[ -](\d\.\d{1,3}\.\d{1,3})/)?.[1] : undefined;
+  return [e.code, e.responseCode, enhanced].filter(Boolean).join(" ") || (err instanceof Error ? err.name : "unknown");
+}
+
+export interface EmailCheck {
+  ok: boolean;
+  server: string;
+  /** "auth": the server refused the login (password, or SMTP AUTH switched off for the mailbox). */
+  problem?: "not-configured" | "auth" | "connection" | "other";
+  code?: string;
+  checkedAt: string;
+}
+
+let lastCheck: { at: number; result: EmailCheck } | null = null;
+const CHECK_TTL = 15 * 60_000;
+
+/** Logs in to the mail server without sending anything. Cached for 15 minutes per server instance. */
+export async function checkEmail(): Promise<EmailCheck> {
+  if (lastCheck && Date.now() - lastCheck.at < CHECK_TTL) return lastCheck.result;
+  const { host, port } = smtpServer();
+  const server = `${host}:${port}`;
+  let result: EmailCheck;
+  if (!emailConfigured()) {
+    result = { ok: false, server, problem: "not-configured", checkedAt: new Date().toISOString() };
+  } else {
+    try {
+      await getTransport().verify();
+      result = { ok: true, server, checkedAt: new Date().toISOString() };
+    } catch (err) {
+      const code = emailErrorCode(err);
+      const problem = /EAUTH|\b53\d\b/.test(code) ? "auth" : /ECONNECTION|ETIMEDOUT|ESOCKET|EDNS|ECONNREFUSED|ENOTFOUND|ETLS/.test(code) ? "connection" : "other";
+      console.error(`[email] check failed (${server}): ${code}`);
+      result = { ok: false, server, problem, code, checkedAt: new Date().toISOString() };
+    }
+  }
+  lastCheck = { at: Date.now(), result };
+  return result;
 }
 
 export async function sendMail(opts: {
