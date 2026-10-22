@@ -10,9 +10,15 @@ const QA: { q: L10n; a: L10n; link?: { href: string; label: L10n } }[] = [
   {
     q: { en: "What happens after I pay?", fr: "Que se passe-t-il après le paiement ?", ar: "ماذا يحدث بعد الدفع؟" },
     a: {
-      en: "Your payment is confirmed with the payment provider before anything is marked as paid. You then see your order reference and a link to a short form where you upload your CV and tell us your target roles. We start as soon as we have your brief.",
-      fr: "Votre paiement est confirmé auprès du prestataire avant d'être enregistré comme payé. Vous voyez ensuite votre référence de commande et un lien vers un court formulaire pour envoyer votre CV et vos postes cibles. Nous commençons dès réception de votre brief.",
-      ar: "نتحقق من الدفع لدى مزوّد الدفع قبل اعتباره مدفوعاً. بعد ذلك ترى رقم طلبك ورابطاً إلى نموذج قصير لرفع سيرتك وتحديد الوظائف المستهدفة. نبدأ فور استلام معلوماتك.",
+      en: gumroadLive
+        ? "Your payment is confirmed with the payment provider before anything is marked as paid. With PayPal, you then see your order reference and a link to a short form where you upload your CV and tell us your target roles. With Gumroad, your receipt has your order number and the same link. We start as soon as we have your brief."
+        : "Your payment is confirmed with the payment provider before anything is marked as paid. You then see your order reference and a link to a short form where you upload your CV and tell us your target roles. We start as soon as we have your brief.",
+      fr: gumroadLive
+        ? "Votre paiement est confirmé auprès du prestataire avant d'être enregistré comme payé. Avec PayPal, vous voyez ensuite votre référence de commande et un lien vers un court formulaire pour envoyer votre CV et vos postes cibles. Avec Gumroad, votre reçu contient votre numéro de commande et le même lien. Nous commençons dès réception de votre brief."
+        : "Votre paiement est confirmé auprès du prestataire avant d'être enregistré comme payé. Vous voyez ensuite votre référence de commande et un lien vers un court formulaire pour envoyer votre CV et vos postes cibles. Nous commençons dès réception de votre brief.",
+      ar: gumroadLive
+        ? "نتحقق من الدفع لدى مزوّد الدفع قبل اعتباره مدفوعاً. عند الدفع عبر PayPal ترى بعد ذلك رقم طلبك ورابطاً إلى نموذج قصير لرفع سيرتك وتحديد الوظائف المستهدفة، وعند الدفع عبر Gumroad يتضمن إيصالك رقم الطلب والرابط نفسه. نبدأ فور استلام معلوماتك."
+        : "نتحقق من الدفع لدى مزوّد الدفع قبل اعتباره مدفوعاً. بعد ذلك ترى رقم طلبك ورابطاً إلى نموذج قصير لرفع سيرتك وتحديد الوظائف المستهدفة. نبدأ فور استلام معلوماتك.",
     },
   },
   {
@@ -59,9 +65,9 @@ const QA: { q: L10n; a: L10n; link?: { href: string; label: L10n } }[] = [
     q: { en: "How can I pay?", fr: "Comment puis-je payer ?", ar: "كيف يمكنني الدفع؟" },
     a: gumroadLive
       ? {
-          en: "With PayPal, using your PayPal balance or a card where PayPal offers card checkout, charged in US dollars at the official AED rate. You can also pay by card through Gumroad, which may offer Apple Pay or Google Pay where your device and browser support them.",
-          fr: "Avec PayPal, par solde PayPal ou carte lorsque PayPal le propose, débité en dollars US au taux officiel du dirham. Vous pouvez aussi payer par carte via Gumroad, qui peut proposer Apple Pay ou Google Pay si votre appareil et votre navigateur les prennent en charge.",
-          ar: "عبر PayPal برصيدك أو ببطاقة حيث يتيح PayPal ذلك، ويُخصم المبلغ بالدولار الأمريكي وفق السعر الرسمي للدرهم. ويمكنك أيضاً الدفع بالبطاقة عبر Gumroad، الذي قد يتيح Apple Pay أو Google Pay إذا دعمها جهازك ومتصفحك.",
+          en: "With PayPal, using your PayPal balance or a card where PayPal offers card checkout, charged in US dollars at the official AED rate. Or use the Gumroad checkout under each package, at the same US dollar price: Gumroad takes major cards, and shows Apple Pay or Google Pay on devices and browsers that support them. Gumroad may add sales tax or VAT where it applies.",
+          fr: "Avec PayPal, par solde PayPal ou carte lorsque PayPal le propose, débité en dollars US au taux officiel du dirham. Ou utilisez le paiement Gumroad sous chaque formule, au même prix en dollars US : Gumroad accepte les principales cartes et affiche Apple Pay ou Google Pay sur les appareils et navigateurs compatibles. Gumroad peut ajouter la TVA lorsqu'elle s'applique.",
+          ar: "عبر PayPal برصيدك أو ببطاقة حيث يتيح PayPal ذلك، ويُخصم المبلغ بالدولار الأمريكي وفق السعر الرسمي للدرهم. أو استخدم الدفع عبر Gumroad أسفل كل باقة بالسعر نفسه بالدولار الأمريكي: يقبل Gumroad البطاقات الرئيسية ويعرض Apple Pay أو Google Pay على الأجهزة والمتصفحات التي تدعمهما. وقد يضيف Gumroad ضريبة المبيعات أو القيمة المضافة حيث تنطبق.",
         }
       : {
           en: "With PayPal, using your PayPal balance or a card where PayPal offers card checkout. Amounts are charged in US dollars at the official AED rate. Apple Pay and Google Pay aren't available on this site yet.",

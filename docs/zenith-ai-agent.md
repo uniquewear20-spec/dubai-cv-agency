@@ -25,7 +25,7 @@ to the outcome. Nothing is sent without the candidate's approval.
 | "Send it for me": Zenith emails an approved application, Pro only | Works when SMTP is configured | Existing `SMTP_USER` / `SMTP_PASS` (already set for the contact form) and a verified Pro purchase |
 | Tracker: statuses, dates, notes, history, follow-up reminders, .ics calendar files | Works, in the browser | Nothing |
 | Pro access check: PayPal order (Career Automation / Executive Career Suite) | Works | Existing PayPal keys |
-| Pro access check: Gumroad license key | Built, **off** | The two Gumroad products with license keys, and their product ids in `lib/packages.ts` (`gumroadProductId`) |
+| Pro access check: Gumroad license key | Works (tested against a stub of Gumroad's API; no real key yet) | Nothing more: Career Automation and Executive Career Suite are live on Gumroad with license keys, product ids in `lib/packages.ts` (`gumroadProductId`). A real key comes from a test purchase. |
 | Usage limits shared across server instances | Built, per-instance until configured | `KV_REST_API_URL` + `KV_REST_API_TOKEN` (Vercel KV / Upstash Redis), or `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` |
 | Export, import and delete all data | Works | Nothing |
 
@@ -90,14 +90,18 @@ inside the agent and are **not** published on the marketing pages.
 Locally, against stubs: `AGENT_SOURCES_FIXTURE_URL` (real sample responses captured from Himalayas, Jobicy,
 Remotive and Arbeitnow), `ANTHROPIC_BASE_URL_TEST` (a stub that returns a draft with a fabricated highlight, an
 invented figure and an unsupported skill), `PAYPAL_API_BASE_TEST` (stub orders: paid, ineligible, refunded,
-pending, unknown) and a local SMTP sink. These test hooks are ignored on Vercel (`VERCEL=1`).
+pending, unknown), `GUMROAD_API_BASE_TEST` (stub license keys: Career Automation, Executive Career Suite,
+refunded, unknown) and a local SMTP sink. These test hooks are ignored on Vercel (`VERCEL=1`).
 
 Browser end-to-end test (34 checks, all passing): CV extraction from PDF and Word; profile; search and ranking;
 template draft quoting the CV; Pro unlock refused for an ineligible order and accepted for Career Automation;
 consent before AI; the fabricated highlight removed and the invented figure and skill flagged; email sending
 blocked until [gaps] are filled and the approval box is ticked; submission, follow-up date and .ics file;
 export, delete everything, import; access link from the order email removed from the address bar.
+Gumroad license keys (separate run): refunded key refused, unknown key not found, Career Automation key unlocks
+Pro and is kept only in the browser; the server sends `increment_uses_count=false`, so checking never uses up a key.
 Visual pass: 6 widths × English, French, Arabic × dark and light, no horizontal overflow, no console errors.
 
-Not tested live: AI drafting (no Anthropic key), Jooble and Adzuna (no keys), Gumroad license checks (products not
-created yet), and "Send it for me" in production (needs a paid Pro order; never sent to a real employer in tests).
+Not tested live: AI drafting (no Anthropic key), Jooble and Adzuna (no keys), a real Gumroad license key (needs a
+purchase; production answers an unknown key with "not found", which shows it reaches Gumroad with the product
+ids), and "Send it for me" in production (needs a paid Pro order; never sent to a real employer in tests).

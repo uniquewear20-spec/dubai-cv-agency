@@ -238,7 +238,8 @@ const CSS = `
 .ag-card{border:1px solid var(--z-rule-strong);border-radius:18px;padding:22px 24px;background:var(--z-surface);box-shadow:var(--z-shadow)}
 .ag-card-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
 .ag-job{font-size:18px;font-weight:600;color:var(--z-fg);margin:10px 0 2px}
-.ag-score{text-align:end;flex:none}
+.ag-card-head > div:first-child{min-width:0}
+.ag-score{text-align:end;flex:0 1 auto;min-width:0}
 .ag-score-n{font-family:var(--font-serif),Georgia,serif;font-size:52px;line-height:.95;color:var(--z-gold-text);font-variant-numeric:lining-nums tabular-nums}
 .ag-meter{display:flex;gap:3px;height:7px;margin:18px 0 16px}
 .ag-meter i{position:relative;flex:var(--w) 1 0;border-radius:2px;background:var(--z-rule-strong);overflow:hidden}

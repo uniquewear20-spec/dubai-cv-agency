@@ -454,10 +454,10 @@ export default function PortfolioShowcase({ dark, lang }: { dark: boolean; lang:
         {/* Heading */}
         <div className="mb-10 sm:mb-14 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-end">
           <div>
-            <p className="text-[9px] font-medium uppercase mb-5" style={{ color: dark ? `${G}AA` : "#8A6A2E", fontFamily: theme.ui, letterSpacing: isAr ? "0.08em" : "0.40em" }}>{t("eyebrow", lang)}</p>
+            <p className="text-[9px] font-medium uppercase mb-5" style={{ color: dark ? G : "#8A6A2E", fontFamily: theme.ui, letterSpacing: isAr ? "0.08em" : "0.40em" }}>{t("eyebrow", lang)}</p>
             <h2 id="zx-title" className="text-[36px] sm:text-[54px] font-normal tracking-tight" style={{ color: theme.hi, lineHeight: isAr ? 1.3 : 1.06 }}>
               {counted(totals.all, "websites", lang)}.<br />
-              <em style={{ fontStyle: "italic", color: G }}>{t("h2b", lang)}</em>
+              <em style={{ fontStyle: "italic", color: dark ? G : "#8A6A2E" }}>{t("h2b", lang)}</em>
             </h2>
           </div>
           <div>

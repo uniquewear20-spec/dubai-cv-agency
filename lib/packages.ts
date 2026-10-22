@@ -4,9 +4,12 @@
 // route charges. Package keys keep the original tier ids (foundation, growth, executive, apex)
 // so existing orders, order references and the confirmation page keep working.
 //
-// Gumroad: `gumroadUrl` is the product's checkout page on zenithdubaicv.gumroad.com. It stays
-// null until that product exists and has been checked. While it is null the site offers PayPal
-// only, and shows no Apple Pay or Google Pay claims.
+// Gumroad: `gumroadUrl` is the product's page on zenithdubaicv.gumroad.com (published and checked
+// on 22 Oct 2026, same US$ price as PayPal). Gumroad sells as merchant of record and takes cards,
+// PayPal, and Apple Pay or Google Pay on devices and browsers that support them. A null URL hides
+// the Gumroad button and every Apple Pay / Google Pay mention for that package.
+// `gumroadProductId` is the id Gumroad shows in the product's license key block; the agent uses
+// it to check license keys (packages 3 and 4 only).
 
 import { TIERS, type TierKey } from "@/lib/checkout/catalog";
 import type { L10n } from "@/lib/site";
@@ -86,7 +89,7 @@ export const PACKAGES: PackageDef[] = [
     alsoIncluded: [DESIGN_CHOICE, FIRST_DRAFT, REVISIONS],
     ebook: false,
     ai: "none",
-    gumroadUrl: null,
+    gumroadUrl: "https://zenithdubaicv.gumroad.com/l/cv-essentials",
     gumroadProductId: null,
   },
   {
@@ -125,7 +128,7 @@ export const PACKAGES: PackageDef[] = [
     ebook: true,
     ai: "none",
     recommended: true,
-    gumroadUrl: null,
+    gumroadUrl: "https://zenithdubaicv.gumroad.com/l/career-advantage",
     gumroadProductId: null,
   },
   {
@@ -173,8 +176,8 @@ export const PACKAGES: PackageDef[] = [
     ],
     ebook: true,
     ai: "pro",
-    gumroadUrl: null,
-    gumroadProductId: null,
+    gumroadUrl: "https://zenithdubaicv.gumroad.com/l/career-automation",
+    gumroadProductId: "fXzEa7lD_kUyi8-7elslzw==",
   },
   {
     key: "apex",
@@ -209,8 +212,8 @@ export const PACKAGES: PackageDef[] = [
     ],
     ebook: true,
     ai: "pro",
-    gumroadUrl: null,
-    gumroadProductId: null,
+    gumroadUrl: "https://zenithdubaicv.gumroad.com/l/executive-career-suite",
+    gumroadProductId: "POC2Tb9C8IkI7KYA3Jdc-g==",
   },
 ];
 

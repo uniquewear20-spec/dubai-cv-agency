@@ -4,7 +4,7 @@
 //
 //   PayPal   the PayPal order id from the confirmation page or the order email link
 //            (/agent/?access=<order id>). The order must be COMPLETED with a COMPLETED capture.
-//   Gumroad  the license key on the Gumroad receipt, checked with Gumroad's public
+//   Gumroad  the license key from the Gumroad purchase (download page, library), checked with Gumroad's public
 //            license API (POST /v2/licenses/verify) against the package's product id.
 
 import { createHash } from "node:crypto";
@@ -34,6 +34,9 @@ const PLAN_OF: Partial<Record<TierKey, Plan>> = { executive: "career-automation"
 const keyOf = (kind: string, proof: string) => createHash("sha256").update(`${kind}:${proof}`).digest("hex").slice(0, 40);
 
 const LICENSE_RE = /^[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{8}$/i;
+
+// Local tests only: a stub of Gumroad's license API. Never active on Vercel.
+const GUMROAD_API = (!process.env.VERCEL && process.env.GUMROAD_API_BASE_TEST?.trim()) || "https://api.gumroad.com";
 
 /** Gumroad product ids of the packages that include AI drafting. */
 function gumroadProducts(): { id: string; plan: Plan }[] {
@@ -87,7 +90,7 @@ async function verifyGumroad(licenseKey: string): Promise<Verified> {
   for (const p of products) {
     let res: Response;
     try {
-      res = await fetch("https://api.gumroad.com/v2/licenses/verify", {
+      res = await fetch(`${GUMROAD_API}/v2/licenses/verify`, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" },
         body: new URLSearchParams({ product_id: p.id, license_key: licenseKey, increment_uses_count: "false" }),

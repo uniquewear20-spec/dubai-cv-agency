@@ -22,7 +22,7 @@ const T: Record<string, L10n> = {
   },
   showIn: { en: "Show prices in", fr: "Afficher les prix en", ar: "عرض الأسعار بـ" },
   approx: { en: "approx.", fr: "env.", ar: "تقريباً" },
-  charged: { en: "PayPal charges US$", fr: "PayPal débite US$", ar: "يخصم PayPal مبلغ US$" },
+  charged: { en: "PayPal charges", fr: "PayPal débite", ar: "يخصم PayPal مبلغ" },
   recommended: { en: "Our recommendation for most searches", fr: "Notre recommandation pour la plupart des recherches", ar: "توصيتنا لمعظم عمليات البحث" },
   ebook: { en: "The Global Horizon ebook", fr: "L'ebook The Global Horizon", ar: "كتاب The Global Horizon الإلكتروني" },
   ebookYes: { en: "The Global Horizon ebook included", fr: "Ebook The Global Horizon inclus", ar: "كتاب The Global Horizon مشمول" },
@@ -32,7 +32,13 @@ const T: Record<string, L10n> = {
   everything: { en: "Everything else included", fr: "Tout ce qui est inclus en plus", ar: "كل ما تشمله الباقة أيضاً" },
   pay: { en: "Pay with PayPal", fr: "Payer avec PayPal", ar: "ادفع عبر PayPal" },
   redirecting: { en: "Opening PayPal…", fr: "Ouverture de PayPal…", ar: "جارٍ فتح PayPal…" },
-  wallet: { en: "Pay by card on Gumroad", fr: "Payer par carte sur Gumroad", ar: "ادفع بالبطاقة عبر Gumroad" },
+  // Non-breaking spaces keep "Apple Pay" and "Google Pay" whole when a narrow card wraps the label.
+  wallet: { en: "Card, Apple\u00a0Pay or Google\u00a0Pay", fr: "Carte, Apple\u00a0Pay ou Google\u00a0Pay", ar: "بطاقة أو Apple\u00a0Pay أو Google\u00a0Pay" },
+  walletVia: {
+    en: "Checkout on Gumroad. Apple Pay and Google Pay show on devices that support them.",
+    fr: "Paiement sur Gumroad. Apple Pay et Google Pay s'affichent sur les appareils compatibles.",
+    ar: "الدفع عبر Gumroad. يظهر Apple Pay وGoogle Pay على الأجهزة التي تدعمهما.",
+  },
   payError: {
     en: "PayPal could not be opened. Try again, or message us on WhatsApp and we'll send you a payment link.",
     fr: "PayPal n'a pas pu s'ouvrir. Réessayez, ou écrivez-nous sur WhatsApp et nous vous enverrons un lien de paiement.",
@@ -48,6 +54,11 @@ const T: Record<string, L10n> = {
     en: "Included with Career Advantage, Career Automation and Executive Career Suite. A PDF, sent to you by email once your payment is confirmed.",
     fr: "Inclus dans Avantage Carrière, Carrière Automatisée et Suite Carrière Exécutive. Un PDF, envoyé par e-mail dès la confirmation de votre paiement.",
     ar: "مشمول في الميزة المهنية وأتمتة المسار المهني والباقة التنفيذية المتكاملة. ملف PDF يُرسل إليك بالبريد الإلكتروني بعد تأكيد الدفع.",
+  },
+  ebookWhereGumroad: {
+    en: "Included with Career Advantage, Career Automation and Executive Career Suite. A PDF: paid on Gumroad, you download it straight after payment; paid with PayPal, we email it to you once your payment is confirmed.",
+    fr: "Inclus dans Avantage Carrière, Carrière Automatisée et Suite Carrière Exécutive. Un PDF : payé sur Gumroad, vous le téléchargez dès le paiement ; payé avec PayPal, nous vous l'envoyons par e-mail une fois le paiement confirmé.",
+    ar: "مشمول في الميزة المهنية وأتمتة المسار المهني والباقة التنفيذية المتكاملة. ملف PDF: عند الدفع عبر Gumroad تنزّله فور الدفع، وعند الدفع عبر PayPal نرسله إليك بالبريد الإلكتروني بعد تأكيد الدفع.",
   },
   aiNote: {
     en: "The Zenith AI job agent is live and free for everyone: job search, ranking against your CV, template drafts and an application tracker. Pro access, included with Career Automation and Executive Career Suite, adds Zenith emailing the applications you approve, with replies going to you.",
@@ -72,9 +83,9 @@ const T: Record<string, L10n> = {
     ar: "تتم عملية الدفع عبر PayPal: برصيدك في PayPal أو ببطاقة خصم أو ائتمان حيث يتيح PayPal الدفع بالبطاقة. تُخصم المبالغ بالدولار الأمريكي وفق السعر الرسمي للدرهم.",
   },
   payGumroad: {
-    en: "Prefer to pay by card outside PayPal? Use the Gumroad checkout under each package. Gumroad may also offer Apple Pay or Google Pay where your device and browser support them, and may add sales tax or VAT where it applies.",
-    fr: "Vous préférez payer par carte hors PayPal ? Utilisez le paiement Gumroad sous chaque formule. Gumroad peut aussi proposer Apple Pay ou Google Pay si votre appareil et votre navigateur les prennent en charge, et peut ajouter la TVA lorsqu'elle s'applique.",
-    ar: "تفضّل الدفع بالبطاقة خارج PayPal؟ استخدم الدفع عبر Gumroad أسفل كل باقة. وقد يتيح Gumroad أيضاً Apple Pay أو Google Pay إذا دعمها جهازك ومتصفحك، وقد يضيف ضريبة المبيعات أو القيمة المضافة حيث تنطبق.",
+    en: "Prefer a card, Apple Pay or Google Pay? Use the Gumroad checkout under each package, at the same US dollar price. Gumroad takes major cards, and shows Apple Pay or Google Pay on devices and browsers that support them. Gumroad may add sales tax or VAT where it applies.",
+    fr: "Vous préférez une carte, Apple Pay ou Google Pay ? Utilisez le paiement Gumroad sous chaque formule, au même prix en dollars US. Gumroad accepte les principales cartes et affiche Apple Pay ou Google Pay sur les appareils et navigateurs compatibles. Gumroad peut ajouter la TVA lorsqu'elle s'applique.",
+    ar: "تفضّل البطاقة أو Apple Pay أو Google Pay؟ استخدم الدفع عبر Gumroad أسفل كل باقة بالسعر نفسه بالدولار الأمريكي. يقبل Gumroad البطاقات الرئيسية ويعرض Apple Pay أو Google Pay على الأجهزة والمتصفحات التي تدعمهما. وقد يضيف Gumroad ضريبة المبيعات أو القيمة المضافة حيث تنطبق.",
   },
   refund: { en: "Full refund within 7 days of purchase.", fr: "Remboursement intégral dans les 7 jours suivant l'achat.", ar: "استرداد كامل خلال 7 أيام من الشراء." },
   refundLink: { en: "Refund policy", fr: "Politique de remboursement", ar: "سياسة الاسترداد" },
@@ -111,11 +122,11 @@ function PackageCard({
   const headingId = `pk-${pkg.key}`;
   return (
     <article className="pk" data-recommended={pkg.recommended || undefined} aria-labelledby={headingId}>
-      {pkg.recommended && <p className="pk-rec">{t("recommended", lang)}</p>}
+      <div className="pk-slot">{pkg.recommended && <p className="pk-rec">{t("recommended", lang)}</p>}</div>
       <h3 id={headingId} className="pk-name z-serif">{pick(pkg.name, lang)}</h3>
       <p className="pk-line">{pick(pkg.line, lang)}</p>
       <p className="pk-price" dir="ltr"><PriceLine aed={aed} currency={currency} rates={rates} lang={lang} /></p>
-      <p className="pk-charge">{t("charged", lang)}<span dir="ltr">{aedToUsd(aed)}</span></p>
+      <p className="pk-charge">{t("charged", lang)} <span dir="ltr">US${aedToUsd(aed)}</span></p>
 
       <ul className="pk-list">
         {pkg.highlights.map(h => (
@@ -144,7 +155,10 @@ function PackageCard({
           {busy ? <><Loader2 size={16} className="animate-spin" aria-hidden="true" />{t("redirecting", lang)}</> : t("pay", lang)}
         </button>
         {pkg.gumroadUrl && (
-          <a className="z-btn z-btn-quiet z-btn-block" href={pkg.gumroadUrl} rel="noopener">{t("wallet", lang)}</a>
+          <>
+            <a className="z-btn z-btn-quiet z-btn-block" href={pkg.gumroadUrl} rel="noopener" aria-describedby={`${headingId}-via`}>{t("wallet", lang)}</a>
+            <p id={`${headingId}-via`} className="pk-via">{t("walletVia", lang)}</p>
+          </>
         )}
         {error && (
           <p role="alert" className="pk-err"><AlertCircle size={15} aria-hidden="true" />{t("payError", lang)}</p>
@@ -163,6 +177,7 @@ export default function Packages({
   const [error, setError] = useState<TierKey | null>(null);
   const agent = useAgentStatus();
   const anyGumroad = PACKAGES.some(p => p.gumroadUrl);
+  const ebookOnGumroad = PACKAGES.filter(p => p.ebook).every(p => p.gumroadUrl);
 
   // Coming back from PayPal with the Back button restores this page from the cache.
   useEffect(() => {
@@ -223,7 +238,7 @@ export default function Packages({
             <p className="z-label">{t("ebook", lang)}</p>
             <h3 className="z-h3" style={{ marginTop: 6 }}>{t("ebookTitle", lang)}: <span className="pk-ebook-sub">{EBOOK.subtitle}</span></h3>
             <p className="z-body" style={{ marginTop: 10 }}>{t("ebookLine", lang)}</p>
-            <p className="z-small" style={{ marginTop: 10 }}>{t("ebookWhere", lang)}</p>
+            <p className="z-small" style={{ marginTop: 10 }}>{t(ebookOnGumroad ? "ebookWhereGumroad" : "ebookWhere", lang)}</p>
           </div>
         </div>
 
@@ -256,10 +271,13 @@ const CSS = `
 .pk-currency select{min-height:42px;padding:0 34px 0 14px;border-radius:999px;border:1px solid var(--z-rule-strong);background:var(--z-surface);color:var(--z-fg);font:inherit;font-size:14px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23C8A96E' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;cursor:pointer}
 [dir="rtl"] .pk-currency select{padding:0 14px 0 34px;background-position:left 12px center}
 .pk-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:auto;gap:0;border:1px solid var(--z-rule);border-radius:20px;overflow:hidden;background:var(--z-surface)}
-.pk{position:relative;display:grid;grid-row:span 8;grid-template-rows:subgrid;align-content:start;padding:52px 26px 28px;min-width:0}
+.pk{position:relative;display:grid;grid-row:span 9;grid-template-rows:subgrid;grid-template-columns:minmax(0,1fr);align-content:start;padding:28px 26px 28px;min-width:0}
 .pk+.pk{border-inline-start:1px solid var(--z-rule)}
 .pk[data-recommended]{background:linear-gradient(180deg,var(--z-gold-wash),transparent 60%)}
-.pk-rec{position:absolute;top:0;inset-inline:0;padding:7px 26px;font-size:13px;font-weight:600;color:var(--z-on-gold);background:var(--z-gold)}
+/* The banner has its own subgrid row, so a banner that wraps (French, narrow cards) moves every
+   title in that row down together instead of covering one of them. */
+.pk-slot{min-width:0}
+.pk-rec{margin:-28px -26px 18px;padding:7px 26px;font-size:13px;line-height:1.6;font-weight:600;color:var(--z-on-gold);background:var(--z-gold)}
 .pk-name{font-size:27px;line-height:1.15;font-weight:500;letter-spacing:-.01em}
 [dir="rtl"] .pk-name{font-family:var(--font-arabic-serif),serif;font-weight:700;font-size:24px}
 .pk-line{margin-top:8px;font-size:15px;line-height:1.55;color:var(--z-fg-2)}
@@ -281,6 +299,8 @@ const CSS = `
 .pk-more[open] summary::after{content:"−"}
 .pk-more ul{margin:4px 0 0;padding-inline-start:18px;display:grid;gap:6px;color:var(--z-fg-2)}
 .pk-ctas{align-self:end;padding-top:22px;display:grid;gap:10px}
+.pk-ctas .z-btn{white-space:normal;text-align:center;padding:8px 16px}
+.pk-via{margin-top:-2px;font-size:12.5px;line-height:1.45;color:var(--z-fg-3)}
 .pk-err{display:flex;gap:8px;margin-top:12px;font-size:13px;line-height:1.5;color:var(--z-error)}
 .pk-err svg{flex:none;margin-top:2px}
 @media (max-width:1180px){
@@ -291,8 +311,8 @@ const CSS = `
 @media (max-width:680px){
   .pk-grid{grid-template-columns:1fr;border-radius:16px}
   .pk+.pk{border-inline-start:0;border-top:1px solid var(--z-rule)}
-  .pk{padding:48px 22px 26px}
-  .pk:not([data-recommended]){padding-top:28px}
+  .pk{padding:28px 22px 26px}
+  .pk-rec{margin:-28px -22px 18px;padding:7px 22px}
 }
 .pk-ebook{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:center;margin-top:28px;padding:clamp(20px,3vw,32px);border:1px solid var(--z-rule);border-radius:20px;background:var(--z-surface)}
 .pk-ebook img{width:100%;height:auto;border-radius:10px;box-shadow:0 20px 50px -28px rgba(0,0,0,.8)}
