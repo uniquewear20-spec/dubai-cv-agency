@@ -26,7 +26,11 @@ export interface Family {
   related?: string[];
   /** Titles that also name other jobs ("server", "host"): they count only when the listing is about hospitality. */
   ambiguous?: string[];
+  /** The part of hospitality the job belongs to (set below), for broader searches by sector. */
+  sector?: Sector;
 }
+
+export type Sector = "fnb" | "hotel" | "kitchen" | "events";
 
 export const FAMILIES: Family[] = [
   // ── Bar and coffee ──
@@ -94,7 +98,7 @@ export const FAMILIES: Family[] = [
   },
   {
     id: "head-waiter", level: 3,
-    titles: ["head waiter", "head waitress", "senior waiter", "captain waiter", "restaurant captain", "section captain", "maitre d", "maitre d'hotel",
+    titles: ["head waiter", "head waitress", "senior waiter", "senior waitress", "captain waiter", "captain waitress", "restaurant captain", "section captain", "maitre d", "maitre d'hotel",
       "chef de salle", "رئيس النادلين", "كابتن مطعم"],
     search: ["head waiter", "captain waiter"],
     related: ["waiter", "restaurant-supervisor"],
@@ -294,7 +298,30 @@ export const FAMILIES: Family[] = [
   },
 ];
 
+const SECTORS: Record<Sector, string[]> = {
+  fnb: ["bartender", "barback", "head-bartender", "bar-manager", "beverage-manager", "sommelier", "barista", "cafe-supervisor", "cafe-manager",
+    "waiter", "head-waiter", "host", "restaurant-supervisor", "assistant-restaurant-manager", "restaurant-manager", "multi-unit-manager",
+    "fb-manager", "fb-director"],
+  hotel: ["hospitality-ops-manager", "hotel-manager", "guest-relations", "guest-relations-manager", "front-desk", "front-office-manager",
+    "concierge", "housekeeping-manager", "room-attendant", "hospitality-director"],
+  kitchen: ["executive-chef", "sous-chef", "chef-de-partie", "commis-chef", "pastry-chef"],
+  events: ["catering-manager", "banquet-manager"],
+};
+
+/**
+ * Broad searches per sector. Job boards title the same work many ways ("Food & Beverage / Fine
+ * Dining Server", "Restaurant Captain"), so for hospitality jobs the agent also searches the sector
+ * and keeps the listings whose titles are the job.
+ */
+export const SECTOR_SEARCHES: Record<Sector, string[]> = {
+  fnb: ["food and beverage", "restaurant"],
+  hotel: ["hotel", "hospitality"],
+  kitchen: ["kitchen", "restaurant"],
+  events: ["catering", "banquet"],
+};
+
 const BY_ID = new Map(FAMILIES.map(f => [f.id, f]));
+for (const [sector, ids] of Object.entries(SECTORS) as [Sector, string[]][]) for (const id of ids) BY_ID.get(id)!.sector = sector;
 export const familyById = (id: string): Family | undefined => BY_ID.get(id);
 
 /**
@@ -492,6 +519,11 @@ export function titleFit(plan: RolePlan, title: string, context = ""): TitleFit 
 export function mentionsJob(plan: RolePlan, title: string, text: string): boolean {
   const f = plan.family;
   if (!f) return false;
+  // A title that names another profession is that profession, whatever its text mentions
+  // ("HR Recruiter – Real Estate Agency", "Sales Executive – Specialty Coffee").
+  const own = new Set(f.titles.flatMap(t => cleanTitle(t).split(" ")));
+  const t = cleanTitle(title);
+  for (const m of t.matchAll(OTHER_JOB_ALL)) if (!own.has(m[1])) return false;
   const hay = cleanTitle(`${title}\n${text}`);
   const ambiguous = new Set((f.ambiguous ?? []).map(cleanTitle));
   let hospitality: boolean | null = null;
@@ -505,6 +537,9 @@ export function mentionsJob(plan: RolePlan, title: string, text: string): boolea
   }
   return false;
 }
+
+/** Words that name a profession of their own; see mentionsJob. */
+const OTHER_JOB_ALL = /(?<![\p{L}])(recruiter|recruitment|recruiting|talent|hr|engineer|engineering|developer|programmer|accountant|accounting|marketing|designer|analyst|driver|nurse|teacher|lawyer|legal|technician|electrician|plumber|security|cashier|storekeeper|procurement|sales|telesales)(?![\p{L}])/gu;
 
 /** Display name of a family: its first title, capitalised ("F&B manager", "Bartender"). */
 export function familyLabel(f: Family): string {

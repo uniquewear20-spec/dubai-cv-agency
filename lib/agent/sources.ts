@@ -29,7 +29,7 @@ import { unstable_cache } from "next/cache";
 import { countryByCode } from "./countries";
 import { bare, findApplyEmail, htmlToText, norm, phraseRe, words } from "./text";
 import { parseSalary } from "./salary";
-import { familyById, familyLabel, mentionsJob, planRole, titleFit, type Family, type RolePlan } from "./titles";
+import { SECTOR_SEARCHES, familyById, familyLabel, mentionsJob, planRole, titleFit, type Family, type RolePlan } from "./titles";
 import type { Job, RoleSearch, SalaryRange, SearchRequest, SearchResponse, SourceId, SourceReport } from "./types";
 
 const UA = "ZenithDubaiCV-JobAgent/1.0 (+https://zenithdubaicv.com/agent/)";
@@ -134,7 +134,12 @@ interface Ctx {
 }
 
 /** A listing and the target role (index into ctx.plans) whose search found it, or null for a feed. */
-interface Found { job: Job; plan: number | null }
+interface Found {
+  job: Job;
+  plan: number | null;
+  /** Found by a search of the whole sector ("food and beverage"), not of the role: not counted as left out. */
+  sweep?: boolean;
+}
 
 interface Adapter {
   meta: SourceMeta;
@@ -247,7 +252,9 @@ function planFor(f: Found, ctx: Ctx, keywordSearch: boolean): number | null {
     if (!p.family) continue;
     const fit = titleFit(p, j.title, intro);
     if (fit === "same" || (fit === "related" && ctx.req.related)) return i;
-    if (fit === "unknown" && mentionsJob(p, j.title, intro)) return i;
+    // A title the agent doesn't know counts when the listing names the job, but not in a sector
+    // search, where many listings mention jobs they aren't ("reporting to the restaurant manager").
+    if (fit === "unknown" && !f.sweep && mentionsJob(p, j.title, intro)) return i;
   }
   if (keywordSearch && f.plan !== null && !ctx.plans[f.plan]?.family) return f.plan;
   for (let i = 0; i < ctx.plans.length; i++) {
@@ -329,6 +336,12 @@ const GENERIC = new Set(["staff", "attendant", "associate", "specialist", "servi
  * the job, 1 a row for a role the agent doesn't know, 0 a different job (left out, not opened).
  */
 function rowWorth(f: Found, ctx: Ctx): number {
+  if (f.sweep) {
+    return ctx.plans.some(p => {
+      const fit = p.family ? titleFit(p, f.job.title) : "unknown";
+      return fit === "same" || (fit === "related" && ctx.req.related) || (!p.family && wordsFit(p, f.job, ctx.req.keywords));
+    }) ? 3 : 0;
+  }
   let worth = 0;
   for (const p of ctx.plans) {
     if (!p.family) {
@@ -351,16 +364,24 @@ const workable: Adapter = {
     const { req, plans } = ctx;
     const places = req.countries.length ? req.countries.map(c => countryByCode(c)?.en ?? c) : [""];
     const { terms, planOf } = termsFor(plans, req.related ? 3 : 2);
+    // At most 10 searches for the roles (every term and country at least once). For hospitality
+    // jobs, up to 6 more of the sector in the chosen countries: employers title the same work many
+    // ways ("Food & Beverage / Fine Dining Server", "Restaurant Captain"), and Workable matches titles
+    // closely. Five at a time, each cached an hour.
+    const queries = queryPairs(terms, places, 10).map(([term, place]) => ({ term, place, plan: planOf.get(term) ?? null, sweep: false }));
+    if (req.countries.length) {
+      const sectorTerms = [...new Set(plans.flatMap(p => (p.family?.sector ? SECTOR_SEARCHES[p.family.sector] : [])))];
+      for (const [term, place] of queryPairs(sectorTerms, places, 6)) queries.push({ term, place, plan: null, sweep: true });
+    }
     const slot = limiter(5);
-    // At most 10 searches (every term and country at least once), five at a time, cached an hour.
-    const rows = await settle("workable", queryPairs(terms, places, 10).map(([term, place]) => slot(async () => {
-      const qs = new URLSearchParams({ query: term });
-      if (place) qs.set("location", place);
+    const rows = await settle("workable", queries.map(q => slot(async () => {
+      const qs = new URLSearchParams({ query: q.term });
+      if (q.place) qs.set("location", q.place);
       if (req.remote && !req.onsite) qs.set("workplace", "remote");
       const page = await getPage(`${WORKABLE}/jobs.md?${qs}`, { next: { revalidate: 3600 } });
       const list = page ? parseWorkableSearch(page.text) : null;
       if (!list) { console.error("[agent/search] workable: unexpected search response"); throw new SourceError("Unexpected response"); }
-      return list.map(r => ({ job: workableJob(r), plan: planOf.get(term) ?? null }));
+      return list.map(r => ({ job: workableJob(r), plan: q.plan, sweep: q.sweep }));
     })));
 
     // Workable fills short result lists with other jobs ("Senior Python Engineer" on a bartender
@@ -373,7 +394,7 @@ const workable: Adapter = {
       seen.add(f.job.id);
       if (f.job.remote ? !req.remote : !req.onsite) continue;
       const worth = rowWorth(f, ctx);
-      if (worth === 0) { unrelated++; continue; }
+      if (worth === 0) { if (!f.sweep) unrelated++; continue; }
       ranked.push({ f, worth });
     }
     ctx.unrelated.workable = unrelated;
@@ -720,8 +741,13 @@ export async function searchJobs(req: SearchRequest): Promise<SearchResponse> {
     if (skip) { reports.push({ ...base, ok: true, count: 0, skipped: true, note: skip }); return []; }
     try {
       const found = await a.run(ctx);
-      const wanted = found.filter(f => planFor(f, ctx, Boolean(a.keywordSearch)) !== null).map(f => f.job);
-      reports.push({ ...base, ok: true, count: wanted.length, unrelated: found.length - wanted.length + (ctx.unrelated[m.id] ?? 0), closed: ctx.closed[m.id] ?? 0 });
+      const wanted: Job[] = [];
+      let other = ctx.unrelated[m.id] ?? 0;
+      for (const f of found) {
+        if (planFor(f, ctx, Boolean(a.keywordSearch)) !== null) wanted.push(f.job);
+        else if (!f.sweep) other++;
+      }
+      reports.push({ ...base, ok: true, count: wanted.length, unrelated: other, closed: ctx.closed[m.id] ?? 0 });
       return wanted;
     } catch (err) {
       const note = describe(err);
