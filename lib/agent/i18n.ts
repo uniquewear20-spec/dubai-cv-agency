@@ -100,8 +100,20 @@ const EN = {
     sourcesH: "Sources for this search",
     srcOk: (n: number) => `${n} listing${n === 1 ? "" : "s"}`,
     srcSkipped: "Not used for this search",
-    srcOff: "Not connected",
+    srcOff: "Not connected: needs an API key",
     srcFail: "Didn't respond",
+    srcFailWhy: (note?: string): string => (note === "Timed out" ? "Didn't answer in time" : note === "Rate limited" ? "Busy (too many requests): try later"
+      : note === "Unexpected response" ? "Answered in an unexpected format" : note && /^HTTP \d+$/.test(note) ? `Error (${note})` : "Couldn't be reached"),
+    srcSkipWhy: (note?: string): string => (note === "Remote jobs only" ? "Remote jobs only" : note === "Germany, Austria and Switzerland only" ? "Germany, Austria and Switzerland only"
+      : note === "Doesn't cover the countries you chose" ? "Doesn't cover your countries" : "Not used for this search"),
+    srcDropped: ({ other = 0, closed = 0, duplicates = 0 }: { other?: number; closed?: number; duplicates?: number }) =>
+      [other ? `${other} other job${other === 1 ? "" : "s"} left out` : "", closed ? `${closed} closed` : "",
+        duplicates ? `${duplicates} duplicate${duplicates === 1 ? "" : "s"} merged` : ""].filter(Boolean).join(" · "),
+    readAs: "How your roles were searched",
+    typed: (s: string) => `(you typed “${s}”)`,
+    alsoMatches: (xs: string[]) => `also matches ${list(xs, "and")}`,
+    related: "Include related jobs",
+    relatedList: (xs: string[]) => list(xs, "and"),
     srcLabel: (name: string, remoteOnly: boolean) => (name === "Adzuna" ? "Jobs by Adzuna" : remoteOnly ? `Remote jobs from ${name}` : `Jobs from ${name}`),
     minScore: "Minimum match",
     all: "All",
@@ -112,7 +124,17 @@ const EN = {
     hideSaved: "Hide saved",
     results: (n: number, total: number) => `${n} of ${total} listings`,
     none: "No listings match these filters.",
-    noneAtAll: "No listings found. Try a broader role (Finance Manager rather than Group Financial Controller) or include remote work.",
+    zero: "No open listings for these roles in the sources the agent can search today.",
+    zeroWhy: "Workable lists jobs from employers who hire through it. Many hotels and restaurant groups post only on their own careers sites, LinkedIn or Bayt, which don't allow automated searches.",
+    zeroTry: "To widen the search:",
+    widenRelated: "Include related jobs",
+    widenRemote: "Include remote work",
+    widenCountries: "Add countries",
+    widenElsewhere: "Search LinkedIn, Indeed and Bayt",
+    someFailed: (names: string[]) => `${list(names, "and")} didn't answer, so this may not be everything. Search again in a few minutes.`,
+    allFailed: "No job source answered, so this says nothing about how many jobs there are. Search again in a few minutes.",
+    checked: (d: string) => `Open when checked, ${d}`,
+    noDate: "Posting date not listed",
     posted: (d: number) => (d === 0 ? "Posted today" : d === 1 ? "Posted yesterday" : `Posted ${d} days ago`),
     remote: "Remote",
     onsite: "On-site",
@@ -138,12 +160,19 @@ const EN = {
     added: "Added to your applications.",
     addInvalid: "Add a title, a link starting with https:// and the listing text.",
     error: "The search didn't work. Check your connection and try again.",
+    tooMany: "Too many searches in a minute. Wait a minute, then search again.",
+    serverError: "The job search had a problem on our side. Search again in a minute.",
+    needMode: "Choose remote work, on-site work or both in your profile.",
     needProfile: "Add at least one target role in your profile first.",
+    elsewhereRole: "Role",
+    elsewhereCountry: "Country",
   },
   reason: (r: Reason, place: (code: string) => string): string => {
     const d = r.data ?? {};
     switch (r.code) {
       case "title-exact": return `Title matches “${d.role}”`;
+      case "title-variant": return `The same job as “${d.role}”, under another title`;
+      case "title-related": return `A related job, not “${d.role}” itself`;
       case "title-close": return `Title is close to “${d.role}”`;
       case "title-weak": return `Mentions “${d.role}”, but the title differs`;
       case "title-none": return "Title doesn't match your target roles";
@@ -419,8 +448,20 @@ const FR: Copy = {
     sourcesH: "Sources de cette recherche",
     srcOk: (n: number) => `${n} offre${n > 1 ? "s" : ""}`,
     srcSkipped: "Non utilisée pour cette recherche",
-    srcOff: "Non connectée",
+    srcOff: "Non connectée : clé d'API requise",
     srcFail: "N'a pas répondu",
+    srcFailWhy: (note?: string) => (note === "Timed out" ? "N'a pas répondu à temps" : note === "Rate limited" ? "Trop de demandes : réessayez plus tard"
+      : note === "Unexpected response" ? "Réponse dans un format inattendu" : note && /^HTTP \d+$/.test(note) ? `Erreur (${note})` : "Injoignable"),
+    srcSkipWhy: (note?: string) => (note === "Remote jobs only" ? "Télétravail uniquement" : note === "Germany, Austria and Switzerland only" ? "Allemagne, Autriche et Suisse uniquement"
+      : note === "Doesn't cover the countries you chose" ? "Ne couvre pas vos pays" : "Non utilisée pour cette recherche"),
+    srcDropped: ({ other = 0, closed = 0, duplicates = 0 }: { other?: number; closed?: number; duplicates?: number }) =>
+      [other ? `${other} offre${other > 1 ? "s" : ""} d'un autre métier écartée${other > 1 ? "s" : ""}` : "", closed ? `${closed} close${closed > 1 ? "s" : ""}` : "",
+        duplicates ? `${duplicates} doublon${duplicates > 1 ? "s" : ""} fusionné${duplicates > 1 ? "s" : ""}` : ""].filter(Boolean).join(" · "),
+    readAs: "Comment vos postes ont été cherchés",
+    typed: (s: string) => `(vous avez tapé « ${s} »)`,
+    alsoMatches: (xs: string[]) => `inclut aussi ${list(xs, "et")}`,
+    related: "Inclure les métiers voisins",
+    relatedList: (xs: string[]) => list(xs, "et"),
     srcLabel: (name: string, remoteOnly: boolean) => (name === "Adzuna" ? "Jobs by Adzuna" : remoteOnly ? `Offres en télétravail de ${name}` : `Offres de ${name}`),
     minScore: "Correspondance minimale",
     all: "Toutes",
@@ -431,7 +472,17 @@ const FR: Copy = {
     hideSaved: "Masquer les enregistrées",
     results: (n: number, total: number) => `${n} offres sur ${total}`,
     none: "Aucune offre ne correspond à ces filtres.",
-    noneAtAll: "Aucune offre trouvée. Essayez un intitulé plus large (Responsable financier plutôt que Contrôleur financier groupe) ou incluez le télétravail.",
+    zero: "Aucune offre ouverte pour ces postes dans les sources que l'agent peut interroger aujourd'hui.",
+    zeroWhy: "Workable publie les offres des employeurs qui recrutent avec lui. Beaucoup d'hôtels et de groupes de restauration ne publient que sur leur propre site carrières, LinkedIn ou Bayt, qui n'autorisent pas les recherches automatisées.",
+    zeroTry: "Pour élargir la recherche :",
+    widenRelated: "Inclure les métiers voisins",
+    widenRemote: "Inclure le télétravail",
+    widenCountries: "Ajouter des pays",
+    widenElsewhere: "Chercher sur LinkedIn, Indeed et Bayt",
+    someFailed: (names: string[]) => `${list(names, "et")} n'${names.length > 1 ? "ont" : "a"} pas répondu : la liste peut être incomplète. Relancez la recherche dans quelques minutes.`,
+    allFailed: "Aucune source n'a répondu : cela ne dit rien du nombre d'offres. Relancez la recherche dans quelques minutes.",
+    checked: (d: string) => `Ouverte lors de la vérification, ${d}`,
+    noDate: "Date de publication non indiquée",
     posted: (d: number) => (d === 0 ? "Publiée aujourd'hui" : d === 1 ? "Publiée hier" : `Publiée il y a ${d} jours`),
     remote: "Télétravail",
     onsite: "Sur site",
@@ -457,12 +508,19 @@ const FR: Copy = {
     added: "Ajoutée à vos candidatures.",
     addInvalid: "Ajoutez un intitulé, un lien commençant par https:// et le texte de l'offre.",
     error: "La recherche n'a pas abouti. Vérifiez votre connexion et réessayez.",
+    tooMany: "Trop de recherches en une minute. Attendez une minute, puis relancez.",
+    serverError: "La recherche a rencontré un problème de notre côté. Relancez dans une minute.",
+    needMode: "Choisissez le télétravail, le travail sur site ou les deux dans votre profil.",
     needProfile: "Ajoutez d'abord au moins un poste visé dans votre profil.",
+    elsewhereRole: "Poste",
+    elsewhereCountry: "Pays",
   },
   reason: (r: Reason, place: (code: string) => string): string => {
     const d = r.data ?? {};
     switch (r.code) {
       case "title-exact": return `L'intitulé correspond à « ${d.role} »`;
+      case "title-variant": return `Le même métier que « ${d.role} », sous un autre intitulé`;
+      case "title-related": return `Un métier voisin, pas « ${d.role} » lui-même`;
       case "title-close": return `L'intitulé est proche de « ${d.role} »`;
       case "title-weak": return `Mentionne « ${d.role} », mais l'intitulé diffère`;
       case "title-none": return "L'intitulé ne correspond pas à vos postes visés";
@@ -736,8 +794,19 @@ const AR: Copy = {
     sourcesH: "مصادر هذا البحث",
     srcOk: (n: number) => `${n} إعلاناً`,
     srcSkipped: "غير مستخدم في هذا البحث",
-    srcOff: "غير متصل",
+    srcOff: "غير متصل: يحتاج مفتاح API",
     srcFail: "لم يستجب",
+    srcFailWhy: (note?: string) => (note === "Timed out" ? "لم يستجب في الوقت المحدد" : note === "Rate limited" ? "طلبات كثيرة: حاول لاحقاً"
+      : note === "Unexpected response" ? "ردّ بصيغة غير متوقعة" : note && /^HTTP \d+$/.test(note) ? `خطأ (${note})` : "تعذّر الوصول إليه"),
+    srcSkipWhy: (note?: string) => (note === "Remote jobs only" ? "وظائف عن بُعد فقط" : note === "Germany, Austria and Switzerland only" ? "ألمانيا والنمسا وسويسرا فقط"
+      : note === "Doesn't cover the countries you chose" ? "لا يغطي دولك" : "غير مستخدم في هذا البحث"),
+    srcDropped: ({ other = 0, closed = 0, duplicates = 0 }: { other?: number; closed?: number; duplicates?: number }) =>
+      [other ? `إعلانات لوظائف أخرى استُبعدت: ${other}` : "", closed ? `مغلقة: ${closed}` : "", duplicates ? `مكررة دُمجت: ${duplicates}` : ""].filter(Boolean).join(" · "),
+    readAs: "كيف بُحث عن وظائفك",
+    typed: (s: string) => `(كتبتَ «${s}»)`,
+    alsoMatches: (xs: string[]) => `ويشمل أيضاً ${xs.join("، ")}`,
+    related: "تضمين الوظائف القريبة",
+    relatedList: (xs: string[]) => xs.join("، "),
     srcLabel: (name: string, remoteOnly: boolean) => (name === "Adzuna" ? "Jobs by Adzuna" : remoteOnly ? `وظائف عن بُعد من ${name}` : `وظائف من ${name}`),
     minScore: "أدنى تطابق",
     all: "الكل",
@@ -748,7 +817,17 @@ const AR: Copy = {
     hideSaved: "إخفاء المحفوظة",
     results: (n: number, total: number) => `${n} من ${total} إعلاناً`,
     none: "لا توجد إعلانات تطابق هذه المرشّحات.",
-    noneAtAll: "لم يُعثر على إعلانات. جرّب مسمّى أوسع (مدير مالي بدلاً من مراقب مالي للمجموعة) أو أضف العمل عن بُعد.",
+    zero: "لا توجد إعلانات مفتوحة لهذه الوظائف في المصادر التي يستطيع الوكيل البحث فيها اليوم.",
+    zeroWhy: "يعرض Workable وظائف أصحاب العمل الذين يوظّفون عبره. كثير من الفنادق ومجموعات المطاعم تنشر فقط في مواقعها الخاصة للتوظيف أو في LinkedIn أو Bayt، وهذه لا تسمح بالبحث الآلي.",
+    zeroTry: "لتوسيع البحث:",
+    widenRelated: "تضمين الوظائف القريبة",
+    widenRemote: "تضمين العمل عن بُعد",
+    widenCountries: "أضف دولاً",
+    widenElsewhere: "ابحث في LinkedIn وIndeed وBayt",
+    someFailed: (names: string[]) => `لم يستجب ${names.join("، ")}، لذا قد تكون القائمة ناقصة. أعد البحث بعد بضع دقائق.`,
+    allFailed: "لم يستجب أي مصدر، وهذا لا يعني عدم وجود وظائف. أعد البحث بعد بضع دقائق.",
+    checked: (d: string) => `مفتوحة عند التحقق، ${d}`,
+    noDate: "تاريخ النشر غير مذكور",
     posted: (d: number) => (d === 0 ? "نُشر اليوم" : d === 1 ? "نُشر أمس" : `نُشر قبل ${d} يوماً`),
     remote: "عن بُعد",
     onsite: "في الموقع",
@@ -774,13 +853,20 @@ const AR: Copy = {
     added: "أُضيفت إلى طلباتك.",
     addInvalid: "أضف مسمّى ورابطاً يبدأ بـ https:// ونص الإعلان.",
     error: "لم ينجح البحث. تحقق من اتصالك وحاول مجدداً.",
+    tooMany: "عمليات بحث كثيرة خلال دقيقة. انتظر دقيقة ثم أعد البحث.",
+    serverError: "واجه البحث مشكلة من جهتنا. أعد المحاولة بعد دقيقة.",
+    needMode: "اختر العمل عن بُعد أو في الموقع أو كليهما في ملفك.",
     needProfile: "أضف أولاً وظيفة مستهدفة واحدة على الأقل في ملفك.",
+    elsewhereRole: "الوظيفة",
+    elsewhereCountry: "الدولة",
   },
   reason: (r: Reason, place: (code: string) => string): string => {
     const d = r.data ?? {};
     const and = (xs: string[]) => xs.join("، ");
     switch (r.code) {
       case "title-exact": return `المسمّى يطابق «${d.role}»`;
+      case "title-variant": return `الوظيفة نفسها «${d.role}» بمسمّى آخر`;
+      case "title-related": return `وظيفة قريبة، وليست «${d.role}» نفسها`;
       case "title-close": return `المسمّى قريب من «${d.role}»`;
       case "title-weak": return `يذكر «${d.role}» لكن المسمّى مختلف`;
       case "title-none": return "المسمّى لا يطابق الوظائف التي تستهدفها";

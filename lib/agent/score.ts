@@ -1,7 +1,9 @@
 // lib/agent/score.ts — ranks a job against a candidate. Runs in the browser, so the CV never
 // leaves the device for matching. Every point comes with a reason the candidate can read.
 //
-//   Title          35   the listing's title against the target roles
+//   Title          35   the listing's title against the target roles: the same job under any
+//                       of its titles (lib/agent/titles.ts) scores high, a neighbouring job less,
+//                       a different job nothing, whatever words it shares
 //   Skills         30   the candidate's skills found in the listing, and how many it asks for
 //   Place          15   the listing's location or remote region against the wanted countries
 //   Seniority      10   the level in the title against the candidate's own level
@@ -11,11 +13,12 @@
 
 import { extractSkills, norm, phraseRe, requiredLanguages, skillMatcher, words } from "./text";
 import { placeFit } from "./countries";
+import { cleanTitle, familyOfTitle, planRole, titleFit, titleRe, type RolePlan } from "./titles";
 import { annual } from "./salary";
 import type { Job, Profile } from "./types";
 
 export type ReasonCode =
-  | "title-exact" | "title-close" | "title-weak" | "title-none"
+  | "title-exact" | "title-variant" | "title-related" | "title-close" | "title-weak" | "title-none"
   | "skills" | "skills-none" | "skills-missing"
   | "place-direct" | "place-worldwide" | "place-region" | "place-miss" | "remote-unwanted" | "onsite-unwanted"
   | "level-fit" | "level-higher" | "level-lower"
@@ -53,6 +56,21 @@ const LEVELS: [RegExp, number][] = [
   [/(?<![\p{L}])(head|director|directeur|directrice|principal|controller|contrôleur)(?![\p{L}])/u, 4],
   [/(?<![\p{L}])(vp|vice president|chief|cfo|ceo|coo|cto|cmo|chro|partner|general manager|managing director|président|رئيس)(?![\p{L}])/u, 5],
 ];
+
+/** Job-family levels (1 entry … 7 executive) on the scale above. */
+const FAMILY_LEVEL = [0, 1, 2, 3, 3.25, 3.5, 4, 5];
+
+// Target roles change rarely and are planned once (typos fixed, the job they are).
+const planCache = new Map<string, RolePlan>();
+function planOf(role: string): RolePlan {
+  let p = planCache.get(role);
+  if (!p) {
+    p = planRole(role);
+    if (planCache.size > 50) planCache.clear();
+    planCache.set(role, p);
+  }
+  return p;
+}
 
 /** The most senior level a text names (1 junior … 5 executive), or null. */
 export function levelOf(text: string): number | null {
@@ -102,20 +120,33 @@ export function scoreJob(job: Job, p: Profile, skills = candidateSkills(p), now 
   // Title
   let title = 0;
   let bestRole = "";
+  let titleCode = "title-none" as ReasonCode;
+  const intro = `${job.tags.join(" ")}\n${job.description.slice(0, 1500)}`;
+  const take = (pts: number, role: string, code: ReasonCode) => { if (pts > title) { title = pts; bestRole = role; titleCode = code; } };
   for (const role of p.roles) {
     if (!role.trim()) continue;
-    if (phraseRe(role).test(nTitle)) { title = 35; bestRole = role; break; }
+    const plan = planOf(role);
+    const fit = titleFit(plan, job.title, intro);
+    if (fit === "same") {
+      // The candidate's own words in the title, or the same job under another title ("Mixologist" for "Bartender").
+      const exact = titleRe(role).test(nTitle) || titleRe(plan.role).test(cleanTitle(job.title));
+      take(exact ? 35 : 32, role, exact ? "title-exact" : "title-variant");
+      if (title >= 35) break;
+      continue;
+    }
+    if (fit === "related") { take(20, role, "title-related"); continue; }
+    if (fit === "other") continue; // a different job ("Assistant Restaurant Manager" is not "Restaurant Manager")
+    // A role or a title the agent doesn't know: compare the words.
+    if (phraseRe(role).test(nTitle)) { take(35, role, "title-exact"); break; }
     const rw = words(role).map(stem);
     if (!rw.length) continue;
     const tw = new Set(words(job.title).map(stem));
     const hit = rw.filter(w => tw.has(w)).length / rw.length;
     const pts = hit >= 0.99 ? 32 : hit >= 0.5 ? Math.round(28 * hit) : 0;
-    if (pts > title) { title = pts; bestRole = role; }
-    if (!title && phraseRe(role).test(nText)) { title = 6; bestRole = role; }
+    if (pts) take(pts, role, pts >= 14 ? "title-close" : "title-weak");
+    else if (!title && phraseRe(role).test(nText)) take(6, role, "title-weak");
   }
-  if (title >= 35) reasons.push({ code: "title-exact", tone: "plus", points: title, data: { role: bestRole } });
-  else if (title >= 14) reasons.push({ code: "title-close", tone: "plus", points: title, data: { role: bestRole } });
-  else if (title > 0) reasons.push({ code: "title-weak", tone: "info", points: title, data: { role: bestRole } });
+  if (title > 0) reasons.push({ code: titleCode, tone: titleCode === "title-weak" || titleCode === "title-related" ? "info" : "plus", points: title, data: { role: bestRole } });
   else if (p.roles.length) reasons.push({ code: "title-none", tone: "minus", points: 0 });
 
   // Skills
@@ -148,10 +179,14 @@ export function scoreJob(job: Job, p: Profile, skills = candidateSkills(p), now 
     else reasons.push({ code: "place-miss", tone: "minus", points: 0, data: { place: job.location || "-" } });
   }
 
-  // Seniority
+  // Seniority: hospitality titles by their job's level ("Head Bartender" is a supervisor, not a
+  // head of department); other titles by the words they use.
   let level = 6;
-  const jobLvl = levelOf(job.title);
-  const candLvl = levelOf([p.headline, ...p.roles].join(" "));
+  const jobFamily = familyOfTitle(job.title, intro);
+  const jobLvl = jobFamily ? FAMILY_LEVEL[jobFamily.level] : levelOf(job.title);
+  const ownFamilies = [...p.roles.map(r => (r.trim() ? planOf(r).family : null)), p.headline.trim() ? familyOfTitle(p.headline) : null]
+    .filter((f): f is NonNullable<typeof f> => Boolean(f));
+  const candLvl = ownFamilies.length ? Math.max(...ownFamilies.map(f => FAMILY_LEVEL[f.level])) : levelOf([p.headline, ...p.roles].join(" "));
   if (jobLvl !== null && candLvl !== null) {
     const diff = jobLvl - candLvl;
     level = Math.max(0, Math.round(10 - Math.abs(diff) * 4));

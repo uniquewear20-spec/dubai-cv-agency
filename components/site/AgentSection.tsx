@@ -54,9 +54,9 @@ const T: Record<string, L10n> = {
   neverH: { en: "What it will never do", fr: "Ce qu'il ne fera jamais", ar: "ما لن يفعله أبداً" },
   sourcesH: { en: "Where the jobs come from", fr: "D'où viennent les offres", ar: "من أين تأتي الوظائف" },
   sources: {
-    en: "Public job APIs that allow it: Himalayas, Jobicy, Remotive and Arbeitnow, each credited and linked to the original listing. LinkedIn, Indeed, Bayt, GulfTalent and Naukrigulf have no open API: the agent opens the same search there, and you can add any listing by hand.",
-    fr: "Des API d'offres publiques qui l'autorisent : Himalayas, Jobicy, Remotive et Arbeitnow, chacune citée et liée à l'offre d'origine. LinkedIn, Indeed, Bayt, GulfTalent et Naukrigulf n'ont pas d'API ouverte : l'agent ouvre la même recherche sur ces sites, et vous pouvez ajouter n'importe quelle offre à la main.",
-    ar: "واجهات وظائف عامة تسمح بذلك: Himalayas وJobicy وRemotive وArbeitnow، مع ذكر كل مصدر ورابط الإعلان الأصلي. لا تملك LinkedIn وIndeed وBayt وGulfTalent وNaukrigulf واجهة مفتوحة، فيفتح الوكيل البحث نفسه فيها، ويمكنك إضافة أي إعلان يدوياً.",
+    en: "Public job sources that allow it: Workable's job board (on-site and remote jobs worldwide, including the Gulf), plus Himalayas, Jobicy, Remotive and Arbeitnow, each credited and linked to the original listing. LinkedIn, Indeed, Bayt, GulfTalent and Naukrigulf have no open API: the agent opens the same search there, and you can add any listing by hand.",
+    fr: "Des sources d'offres publiques qui l'autorisent : le site d'offres de Workable (sur site et en télétravail, dans le monde entier, Golfe compris), ainsi que Himalayas, Jobicy, Remotive et Arbeitnow, chacune citée et liée à l'offre d'origine. LinkedIn, Indeed, Bayt, GulfTalent et Naukrigulf n'ont pas d'API ouverte : l'agent ouvre la même recherche sur ces sites, et vous pouvez ajouter n'importe quelle offre à la main.",
+    ar: "مصادر وظائف عامة تسمح بذلك: موقع وظائف Workable (وظائف في الموقع وعن بُعد حول العالم، ومنها الخليج)، إضافة إلى Himalayas وJobicy وRemotive وArbeitnow، مع ذكر كل مصدر ورابط الإعلان الأصلي. لا تملك LinkedIn وIndeed وBayt وGulfTalent وNaukrigulf واجهة مفتوحة، فيفتح الوكيل البحث نفسه فيها، ويمكنك إضافة أي إعلان يدوياً.",
   },
   privacy: {
     en: "Your profile, CV and applications stay in your browser. Search sends only your target roles and countries.",

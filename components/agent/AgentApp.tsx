@@ -183,16 +183,23 @@ export default function AgentApp() {
     return app;
   }, [apps, upsertApp]);
 
-  const runSearch = useCallback(async () => {
+  const runSearch = useCallback(async (opts: { related?: boolean } = {}) => {
     const copy = COPY[lang];
     if (!profile.roles.length) { setSearchError(copy.jobs.needProfile); return; }
+    if (!profile.remoteOk && !profile.onsiteOk) { setSearchError(copy.jobs.needMode); return; }
     setSearching(true);
     setSearchError(null);
-    const request: SearchRequest = { roles: profile.roles, countries: profile.countries, remote: profile.remoteOk, onsite: profile.onsiteOk, keywords: [] };
+    const request: SearchRequest = {
+      roles: profile.roles, countries: profile.countries, remote: profile.remoteOk, onsite: profile.onsiteOk, keywords: [],
+      related: opts.related ?? Boolean(profile.relatedTitles),
+    };
     try {
       const res = await fetch("/api/agent/search/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(request) });
       const data = await res.json().catch(() => null);
-      if (!res.ok || !data?.jobs) { setSearchError(res.status === 429 ? data?.error ?? copy.jobs.error : data?.error ?? copy.jobs.error); return; }
+      if (!res.ok || !data?.jobs) {
+        setSearchError(res.status === 429 ? copy.jobs.tooMany : res.status >= 500 ? copy.jobs.serverError : copy.jobs.error);
+        return;
+      }
       const saved: SavedSearch = { request, response: data as SearchResponse, at: new Date().toISOString() };
       await setKV("search", saved);
       setSearch(saved);

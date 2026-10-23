@@ -10,7 +10,7 @@ export interface LegalDoc { title: string; updated: string; intro: string; highl
 export const PRIVACY: Record<Lang, LegalDoc> = {
   "en": {
     "title": "Privacy Policy",
-    "updated": "Last updated: 19 October 2026",
+    "updated": "Last updated: 23 October 2026",
     "intro": "This policy explains what Zenith Dubai CV (“Zenith”, “we”) collects when you use zenithdubaicv.com, our services and the Zenith AI job agent, why we collect it, who processes it for us, and how to have it corrected or deleted.",
     "sections": [
       {
@@ -47,7 +47,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "title": "Who processes it for us",
         "body": [
           "We share personal data only with the services that run this site and your order: Vercel (hosting), GoDaddy (email), PayPal and Gumroad (payments; Gumroad sells digital products as merchant of record and handles their delivery), and Anthropic (AI drafting, only when you use it).",
-          "Job sources (Himalayas, Jobicy, Remotive and Arbeitnow, and Jooble or Adzuna if we connect them) receive only search terms from our server, never your CV or contact details. To show prices in other currencies, your browser requests exchange rates from open.er-api.com.",
+          "Job sources (Workable, Himalayas, Jobicy, Remotive and Arbeitnow, and Jooble or Adzuna if we connect them) receive only search terms from our server, never your CV or contact details. To show prices in other currencies, your browser requests exchange rates from open.er-api.com.",
           "We may disclose your information if required by applicable law or a valid legal process. In such cases, we will notify you to the extent permitted by law."
         ]
       },
@@ -111,7 +111,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
   },
   "fr": {
     "title": "Politique de Confidentialité",
-    "updated": "Dernière mise à jour : 19 octobre 2026",
+    "updated": "Dernière mise à jour : 23 octobre 2026",
     "intro": "Cette politique explique ce que Zenith Dubai CV (« Zenith », « nous ») collecte lorsque vous utilisez zenithdubaicv.com, nos services et l'agent emploi Zenith AI, pourquoi, qui le traite pour nous, et comment le faire corriger ou supprimer.",
     "sections": [
       {
@@ -148,7 +148,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "title": "Qui les traite pour nous",
         "body": [
           "Nous ne partageons des données personnelles qu'avec les services qui font fonctionner ce site et votre commande : Vercel (hébergement), GoDaddy (messagerie), PayPal et Gumroad (paiements ; Gumroad vend les produits numériques en tant que vendeur officiel et en assure la livraison) et Anthropic (rédaction par IA, uniquement lorsque vous l'utilisez).",
-          "Les sources d'offres (Himalayas, Jobicy, Remotive et Arbeitnow, ainsi que Jooble ou Adzuna si nous les connectons) ne reçoivent de notre serveur que des termes de recherche, jamais votre CV ni vos coordonnées. Pour afficher les prix dans d'autres devises, votre navigateur demande les taux de change à open.er-api.com.",
+          "Les sources d'offres (Workable, Himalayas, Jobicy, Remotive et Arbeitnow, ainsi que Jooble ou Adzuna si nous les connectons) ne reçoivent de notre serveur que des termes de recherche, jamais votre CV ni vos coordonnées. Pour afficher les prix dans d'autres devises, votre navigateur demande les taux de change à open.er-api.com.",
           "Nous pouvons divulguer vos informations si la loi applicable ou une procédure légale valide l'exige. Nous vous en informerons dans la mesure permise par la loi."
         ]
       },
@@ -212,7 +212,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
   },
   "ar": {
     "title": "سياسة الخصوصية",
-    "updated": "آخر تحديث: 19 أكتوبر 2026",
+    "updated": "آخر تحديث: 23 أكتوبر 2026",
     "intro": "توضح هذه السياسة ما تجمعه Zenith Dubai CV («Zenith» أو «نحن») عند استخدامك zenithdubaicv.com وخدماتنا ووكيل الوظائف Zenith AI، ولماذا، ومن يعالجه نيابةً عنا، وكيف تطلب تصحيحه أو حذفه.",
     "sections": [
       {
@@ -249,7 +249,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "title": "من يعالجها نيابةً عنا",
         "body": [
           "لا نشارك البيانات الشخصية إلا مع الخدمات التي تشغّل هذا الموقع وطلبك: Vercel (الاستضافة)، وGoDaddy (البريد)، وPayPal وGumroad (المدفوعات؛ إذ يبيع Gumroad المنتجات الرقمية بصفته البائع الرسمي ويتولى تسليمها)، وAnthropic (الكتابة بالذكاء الاصطناعي، عند استخدامك لها فقط).",
-          "لا تتلقى مصادر الوظائف (Himalayas وJobicy وRemotive وArbeitnow، وJooble أو Adzuna إن ربطناها) من خادمنا سوى كلمات البحث، ولا تتلقى أبداً سيرتك الذاتية أو بيانات تواصلك. ولعرض الأسعار بعملات أخرى، يطلب متصفحك أسعار الصرف من open.er-api.com.",
+          "لا تتلقى مصادر الوظائف (Workable وHimalayas وJobicy وRemotive وArbeitnow، وJooble أو Adzuna إن ربطناها) من خادمنا سوى كلمات البحث، ولا تتلقى أبداً سيرتك الذاتية أو بيانات تواصلك. ولعرض الأسعار بعملات أخرى، يطلب متصفحك أسعار الصرف من open.er-api.com.",
           "قد نُفصح عن معلوماتك إذا اقتضى القانون المعمول به أو إجراء قانوني صحيح ذلك. في مثل هذه الحالات، سنخطرك بالقدر المسموح به قانوناً."
         ]
       },

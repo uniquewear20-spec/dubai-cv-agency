@@ -1,6 +1,6 @@
 # Zenith AI job agent
 
-Last updated: 19 October 2026. Replaces the earlier "Zenith AI Career Automation" concept (launch list,
+Last updated: 23 October 2026. Replaces the earlier "Zenith AI Career Automation" concept (launch list,
 proposed plans, Ink Orbit drawings), which described a product that did not exist and has been removed.
 
 The agent is a working tool at **zenithdubaicv.com/agent**. It finds jobs in public job sources, ranks every
@@ -12,7 +12,8 @@ to the outcome. Nothing is sent without the candidate's approval.
 | Capability | Status | Depends on |
 |---|---|---|
 | Profile and CV (PDF, Word .docx, text), read in the browser | Works | pdf.js worker at `/pdf.worker.min.mjs`, font data in `/public/pdfjs` |
-| Job search: Himalayas, Jobicy, Remotive, Arbeitnow | Works | Nothing (public APIs, no key). Arbeitnow only for Germany, Austria, Switzerland. |
+| Job search: Workable (on-site, hybrid and remote jobs worldwide, including the Gulf, North Africa, the UK, Europe and North America) | Works | Nothing (no key). Workable publishes a Markdown job search for AI agents (`jobs.workable.com/llms.txt`; its robots.txt allows `ai-input`). Only employers that hire through Workable; at most 30 results a query. |
+| Job search: Himalayas, Jobicy, Remotive, Arbeitnow | Works | Nothing (public APIs, no key). The first three are remote jobs only; Arbeitnow only for Germany, Austria, Switzerland. |
 | Job search: Jooble (on-site jobs incl. the Gulf) | Built, **off** | `JOOBLE_API_KEY` (free key on request at jooble.org/api/about) |
 | Job search: Adzuna (19 countries, no Gulf) | Built, **off** | `ADZUNA_APP_ID` + `ADZUNA_APP_KEY`; read Adzuna's API terms first |
 | LinkedIn, Indeed, Bayt, GulfTalent, Naukrigulf | Search links only | They have no open job-search API; the agent never scrapes them |
@@ -32,6 +33,33 @@ to the outcome. Nothing is sent without the candidate's approval.
 What the agent never does: apply on job boards or employer portals, fill in application forms, get past
 CAPTCHAs, sign-ins or assessments, or send anything the candidate hasn't approved. Email is the only automated
 submission, because it is the only channel where the employer has published how to apply.
+
+## How a search works
+
+1. **Each target role is read as a job** (`lib/agent/titles.ts`): likely typos are fixed ("Baristta" → barista,
+   shown to the candidate), and the role is matched to a job family with its other titles in English, French and
+   Arabic (bartender = mixologist, barman, serveur de bar, بارتندر…), its level, and its neighbouring jobs (head
+   bartender, barback, bar manager…). Roles the agent doesn't know are searched by their words, as before.
+   Titles that also name other jobs ("Server", "Host") count only in a hospitality listing, never in "Server Engineer".
+2. **Every role and every country is searched** within a budget per source (Workable 10 queries, Himalayas 9,
+   Jobicy 6, Jooble 6, Adzuna 6), so that each role and each country is asked at least once. (Before 23 October
+   2026 only the first two roles and countries were searched, and Jobicy used only the first country.)
+3. **Neighbouring jobs** are searched only when the candidate ticks "Include related jobs" on Find jobs.
+4. **Listings that are a different job are left out and counted** ("6 other jobs left out"): Workable fills short
+   result lists with unrelated jobs, such as backend engineers on a bartender search.
+5. **Workable listings are opened** (at most 30 per search, six at a time, within 7 seconds; pages cached six
+   hours) for the description, a stated salary, and whether the listing is still open: a listing whose page is gone
+   is left out and counted as closed. Opened listings show "Open when checked" with the date, because Workable
+   doesn't publish posting dates.
+6. **Duplicates are merged** (same title, employer and city) and counted.
+7. **The result says what happened**: the number per source, why a source wasn't used (remote only, region,
+   no key), why one failed (timed out, busy, unexpected format), and, when nothing is found, whether that is a real
+   zero, a partial answer or an outage, with ways to widen the search (related jobs, remote work, more countries,
+   LinkedIn / Indeed / Bayt links for any role and country).
+
+Ranking (in the browser) uses the same job families: the same job under another title scores 32 of 35, a
+neighbouring job 20, a different job 0 however many words it shares ("Assistant Restaurant Manager" is not
+"Restaurant Manager"), and seniority uses the job's level (a head bartender is a supervisor, not a head of department).
 
 ## Data protection
 
@@ -75,6 +103,7 @@ inside the agent and are **not** published on the marketing pages.
 | `lib/agent/types.ts` | Shared types |
 | `lib/agent/text.ts` | HTML to text, normalisation, skills lexicon, language requirements, honesty checks |
 | `lib/agent/countries.ts` | Countries, cities, source codes, place matching |
+| `lib/agent/titles.ts` | Job families: titles in three languages, levels, neighbours, typo fixing (shared by search and ranking) |
 | `lib/agent/score.ts` | Ranking |
 | `lib/agent/template.ts` | Template drafts |
 | `lib/agent/sources.ts` | Job sources (server) |
@@ -87,8 +116,8 @@ inside the agent and are **not** published on the marketing pages.
 
 ## How it was tested
 
-Locally, against stubs: `AGENT_SOURCES_FIXTURE_URL` (real sample responses captured from Himalayas, Jobicy,
-Remotive and Arbeitnow), `ANTHROPIC_BASE_URL_TEST` (a stub that returns a draft with a fabricated highlight, an
+Locally, against stubs: `AGENT_SOURCES_FIXTURE_URL` (real sample responses captured from Workable, Himalayas,
+Jobicy, Remotive and Arbeitnow), `ANTHROPIC_BASE_URL_TEST` (a stub that returns a draft with a fabricated highlight, an
 invented figure and an unsupported skill), `PAYPAL_API_BASE_TEST` (stub orders: paid, ineligible, refunded,
 pending, unknown), `GUMROAD_API_BASE_TEST` (stub license keys: Career Automation, Executive Career Suite,
 refunded, unknown) and a local SMTP sink. These test hooks are ignored on Vercel (`VERCEL=1`).
@@ -98,6 +127,11 @@ template draft quoting the CV; Pro unlock refused for an ineligible order and ac
 consent before AI; the fabricated highlight removed and the invented figure and skill flagged; email sending
 blocked until [gaps] are filled and the approval box is ticked; submission, follow-up date and .ics file;
 export, delete everything, import; access link from the order email removed from the address bar.
+Hospitality search (separate run, 19 checks, all passing, on real Workable samples): bartender listings found and
+backend-engineer padding left out; counts of listings left out, closed and merged; a typo fixed and shown; plural
+titles ("Bartenders") ranked as the same job; listing links go to Workable; both roles and both countries sent;
+the related-jobs switch reruns the search; outside-site links follow the chosen role and country; a genuine zero
+explained with ways to widen it, in English, French and Arabic; no horizontal scroll at 375 px.
 Gumroad license keys (separate run): refunded key refused, unknown key not found, Career Automation key unlocks
 Pro and is kept only in the browser; the server sends `increment_uses_count=false`, so checking never uses up a key.
 Visual pass: 6 widths × English, French, Arabic × dark and light, no horizontal overflow, no console errors.

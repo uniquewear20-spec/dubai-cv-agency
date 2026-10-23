@@ -29,7 +29,8 @@ export interface AgentState {
   scored: Scored[];
   searching: boolean;
   searchError: string | null;
-  runSearch: () => Promise<void>;
+  /** Searches with the profile's roles and countries; `related` overrides the profile's choice for this search. */
+  runSearch: (opts?: { related?: boolean }) => Promise<void>;
   hidden: string[];
   hideJob: (id: string) => Promise<void>;
   access: Access | null;

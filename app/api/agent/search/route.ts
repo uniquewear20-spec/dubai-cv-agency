@@ -20,10 +20,11 @@ export async function POST(req: NextRequest) {
   const countries = strings(body.countries, 5, 2).map(c => c.toUpperCase()).filter(c => countryByCode(c));
   const remote = body.remote !== false;
   const onsite = body.onsite !== false;
+  const related = body.related === true;
   if (!roles.length) return fail("Add at least one target role.", 400);
   if (!remote && !onsite) return fail("Choose remote, on-site or both.", 400);
 
-  const result = await searchJobs({ roles, keywords, countries, remote, onsite });
+  const result = await searchJobs({ roles, keywords, countries, remote, onsite, related });
   return ok(result);
 }
 
