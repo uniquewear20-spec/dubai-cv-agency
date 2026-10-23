@@ -152,7 +152,8 @@ export const FAMILIES: Family[] = [
   },
   {
     id: "fb-director", level: 6,
-    titles: ["director of food and beverage", "director of f&b", "f&b director", "food and beverage director", "head of food and beverage", "head of f&b",
+    titles: ["director of food and beverage", "director of f&b", "director food and beverage", "director f&b", "f&b director", "food and beverage director",
+      "head of food and beverage", "head of f&b",
       "assistant director of food and beverage", "vp food and beverage", "directeur de la restauration", "directeur f&b", "مدير عام الاغذيه والمشروبات"],
     search: ["director of food and beverage", "f&b director"],
     related: ["fb-manager", "hospitality-director"],
@@ -396,7 +397,8 @@ export function familyOfTitle(title: string, context = ""): Family | null {
       hospitality ??= context === TARGET ? !NOT_HOSPITALITY.test(t) : hospitalityContext(t, context);
       if (!hospitality) continue;
     }
-    return e.family;
+    // "Marketing Manager - F&B" is a marketing job, "Junior Cost Controller - Food and Beverage" a finance job.
+    return namesOtherJob(e.family, t) ? null : e.family;
   }
   return null;
 }
@@ -521,9 +523,7 @@ export function mentionsJob(plan: RolePlan, title: string, text: string): boolea
   if (!f) return false;
   // A title that names another profession is that profession, whatever its text mentions
   // ("HR Recruiter – Real Estate Agency", "Sales Executive – Specialty Coffee").
-  const own = new Set(f.titles.flatMap(t => cleanTitle(t).split(" ")));
-  const t = cleanTitle(title);
-  for (const m of t.matchAll(OTHER_JOB_ALL)) if (!own.has(m[1])) return false;
+  if (namesOtherJob(f, cleanTitle(title))) return false;
   const hay = cleanTitle(`${title}\n${text}`);
   const ambiguous = new Set((f.ambiguous ?? []).map(cleanTitle));
   let hospitality: boolean | null = null;
@@ -538,8 +538,17 @@ export function mentionsJob(plan: RolePlan, title: string, text: string): boolea
   return false;
 }
 
-/** Words that name a profession of their own; see mentionsJob. */
-const OTHER_JOB_ALL = /(?<![\p{L}])(recruiter|recruitment|recruiting|talent|hr|engineer|engineering|developer|programmer|accountant|accounting|marketing|designer|analyst|driver|nurse|teacher|lawyer|legal|technician|electrician|plumber|security|cashier|storekeeper|procurement|sales|telesales)(?![\p{L}])/gu;
+/** Words that name a profession of their own, in a title that also names a hospitality job. */
+const OTHER_JOB_ALL = /(?<![\p{L}])(recruiter|recruitment|recruiting|talent|hr|engineer|engineering|developer|programmer|accountant|accounting|finance|financial|payroll|marketing|design|designer|systems|analyst|controller|cost|auditor|audit|purchasing|procurement|buyer|photographer|videographer|content|driver|nurse|teacher|lawyer|legal|technician|electrician|plumber|security|cashier|storekeeper|sales|telesales)(?![\p{L}])/gu;
+
+const OWN_WORDS = new Map<string, Set<string>>();
+/** Whether a cleaned title also names another profession that isn't part of this job's own titles ("catering sales manager" is catering). */
+function namesOtherJob(f: Family, t: string): boolean {
+  let own = OWN_WORDS.get(f.id);
+  if (!own) { own = new Set(f.titles.flatMap(x => cleanTitle(x).split(" "))); OWN_WORDS.set(f.id, own); }
+  for (const m of t.matchAll(OTHER_JOB_ALL)) if (!own.has(m[1])) return true;
+  return false;
+}
 
 /** Display name of a family: its first title, capitalised ("F&B manager", "Bartender"). */
 export function familyLabel(f: Family): string {

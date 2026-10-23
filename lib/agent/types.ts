@@ -29,6 +29,8 @@ export interface Job {
   applyEmail: string | null;
   /** When the listing's own page was last loaded and still open (sources that allow checking), ISO date. */
   checkedAt?: string | null;
+  /** The same job (title and employer) posted for other cities of the same country, shown as one listing. */
+  alsoAt?: { location: string; url: string }[];
 }
 
 export interface SourceReport {

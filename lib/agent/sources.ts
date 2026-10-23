@@ -399,6 +399,17 @@ const workable: Adapter = {
     }
     ctx.unrelated.workable = unrelated;
     ranked.sort((a, b) => b.worth - a.worth);
+    // Employers often post one job for every city ("Waitress / Waiter - Dubai" in five emirates);
+    // those are shown as one listing, so pages are opened for different jobs first.
+    const kinds = new Set<string>();
+    const firsts: typeof ranked = [];
+    const repeats: typeof ranked = [];
+    for (const r of ranked) {
+      const k = sameJobKey(r.f.job);
+      (kinds.has(k) ? repeats : firsts).push(r);
+      kinds.add(k);
+    }
+    ranked.splice(0, ranked.length, ...firsts, ...repeats);
 
     // Each listing's page gives its description (for matching and drafting), shows whether it is
     // still open (a closed listing's page is gone), and may state a salary. Pages are cached six hours.
@@ -707,6 +718,11 @@ const adzuna: Adapter = {
 
 // ── All sources ──────────────────────────────────────────────────────────────
 
+const cityOf = (location: string) => norm(location.split(/[,(/]/)[0] ?? "");
+const countryOf = (location: string) => norm(location.split(",").pop() ?? "");
+/** The same job at the same employer in the same country (another city is the same posting for another branch). */
+const sameJobKey = (j: Job) => `${norm(j.title)}|${norm(j.company)}|${countryOf(j.location)}`;
+
 const ADAPTERS: Adapter[] = [workable, himalayas, jobicy, remotive, arbeitnow, jooble, adzuna];
 
 /** Why a source isn't asked for this search, or null when it is. */
@@ -758,16 +774,26 @@ export async function searchJobs(req: SearchRequest): Promise<SearchResponse> {
   }));
 
   // The same job from two sources, or twice from one (posted again in the same city): keep the
-  // first, and count it, so each source's number is what the candidate actually sees.
+  // first. The same job and employer in other cities of the same country: one listing that names
+  // the other cities and links to their postings. Both are counted, so each source's number is
+  // what the candidate actually sees.
   const seen = new Set<string>();
+  const firstOfKind = new Map<string, Job>();
   const jobs: Job[] = [];
   const kept: Partial<Record<SourceId, number>> = {};
   const dupes: Partial<Record<SourceId, number>> = {};
   for (const j of lists.flat()) {
     if (!j.title || !j.url || !/^https:\/\//.test(j.url)) continue;
-    const key = `${norm(j.title)}|${norm(j.company)}|${norm(j.location.split(/[,(/]/)[0] ?? "")}`;
-    if (seen.has(key) || seen.has(j.id)) { dupes[j.source] = (dupes[j.source] ?? 0) + 1; continue; }
-    seen.add(key); seen.add(j.id);
+    const here = `${norm(j.title)}|${norm(j.company)}|${cityOf(j.location)}`;
+    if (seen.has(here) || seen.has(j.id)) { dupes[j.source] = (dupes[j.source] ?? 0) + 1; continue; }
+    seen.add(here); seen.add(j.id);
+    const first = j.company !== "-" ? firstOfKind.get(sameJobKey(j)) : undefined;
+    if (first && (first.alsoAt?.length ?? 0) < 12) {
+      (first.alsoAt ??= []).push({ location: j.location, url: j.url });
+      dupes[j.source] = (dupes[j.source] ?? 0) + 1;
+      continue;
+    }
+    firstOfKind.set(sameJobKey(j), j);
     kept[j.source] = (kept[j.source] ?? 0) + 1;
     jobs.push(j);
   }

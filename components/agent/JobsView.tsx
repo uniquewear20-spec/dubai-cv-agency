@@ -212,6 +212,14 @@ function JobCard({ s, saved, onSave, onPrepare, onHide }: { s: Scored; saved: bo
           {job.salary && <span dir="ltr">{job.salary}</span>}
           {sourceName && <span className="za-via">{t.jobs.via(sourceName)}</span>}
         </p>
+        {job.alsoAt?.length ? (
+          <p className="za-also">
+            {t.jobs.alsoAt}{" "}
+            {job.alsoAt.map((a, i) => (
+              <span key={a.url}>{i > 0 && " · "}<a href={a.url} target="_blank" rel="noopener noreferrer" dir="auto">{a.location.split(",")[0]}</a></span>
+            ))}
+          </p>
+        ) : null}
         <ReasonList reasons={match.reasons.filter(r => r.tone !== "info" || r.code === "skills-missing" || r.code === "title-related").slice(0, 3)} text={reason} />
         <details className="za-why">
           <summary>{t.jobs.why}</summary>

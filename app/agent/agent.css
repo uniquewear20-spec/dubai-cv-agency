@@ -222,6 +222,8 @@
 .za-job-title { font-size: 18.5px; font-weight: 600; line-height: 1.35; color: var(--z-fg); }
 .za-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin-top: 6px; font-size: 14px; color: var(--z-fg-2); }
 .za-via { color: var(--z-fg-3); }
+.za-also { margin-top: 6px; font-size: 13.5px; line-height: 1.6; color: var(--z-fg-3); }
+.za-also a { color: var(--z-fg-2); text-decoration: underline; text-decoration-color: var(--z-rule-strong); text-underline-offset: 3px; }
 .za-job-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
 @media (max-width: 640px) {
   .za-job { grid-template-columns: minmax(0, 1fr); padding: 18px 16px; }
