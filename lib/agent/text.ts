@@ -4,7 +4,7 @@
 
 // ── Normalising ──────────────────────────────────────────────────────────────
 
-const ARABIC_MARKS = /[ً-ْٰـ]/g; // tashkeel, dagger alef, tatweel
+const ARABIC_MARKS = /[\u064B-\u065F\u0670\u0640]/g; // tashkeel, the hamza and madda left by NFKD (أ → ا + ٔ), dagger alef, tatweel
 const ARABIC_DIGITS = /[٠-٩۰-۹]/g;
 
 /** Lower case, no accents, Arabic letter forms unified, digits in ASCII, one space between words. */
@@ -120,7 +120,7 @@ const SKILLS: SkillDef[] = [
   ["Strategic planning", "corporate strategy", "planification stratégique", "التخطيط الاستراتيجي"], ["Business development", "développement commercial", "تطوير الأعمال"], ["Sales", "ventes", "المبيعات"],
   ["Account management", "key account management", "gestion de comptes"], ["B2B"], ["B2C"], ["Negotiation", "négociation"], ["P&L management", "p&l", "profit and loss"],
   ["Operations management", "gestion des opérations"], ["Supply chain", "chaîne d'approvisionnement", "سلسلة الإمداد"], ["Logistics", "logistique", "اللوجستيات"],
-  ["Procurement", "purchasing", "achats", "المشتريات"], ["Inventory management", "gestion des stocks"], ["Lean management", "lean manufacturing", "lean methodology"], ["Six Sigma"],
+  ["Procurement", "purchasing", "achats", "المشتريات"], ["Inventory management", "gestion des stocks", "stock control", "inventory control", "stock management"], ["Lean management", "lean manufacturing", "lean methodology"], ["Six Sigma"],
   ["Change management", "conduite du changement"], ["Team management", "people management", "management d'équipe", "إدارة الفرق"],
   // Marketing and communications
   ["Digital marketing", "marketing digital", "التسويق الرقمي"], ["SEO", "search engine optimisation", "search engine optimization", "référencement"], ["SEM", "paid search", "ppc"],
@@ -139,6 +139,15 @@ const SKILLS: SkillDef[] = [
   ["Oil and gas", "oil & gas", "pétrole et gaz", "النفط والغاز"], ["QA/QC"], ["Commissioning"], ["Facilities management", "facility management"],
   // Hospitality, retail, travel
   ["Hospitality", "hôtellerie", "الضيافة"], ["Hotel management"], ["Food and beverage", "f&b"], ["Guest relations"], ["Front office"], ["Revenue management"], ["Opera PMS", "=Opera"],
+  ["Mixology", "cocktail making", "cocktail preparation", "mixologie"], ["Wine knowledge", "wine service", "wine pairing", "sommellerie", "oenologie"],
+  ["Coffee preparation", "espresso", "latte art", "coffee brewing", "specialty coffee"], ["Fine dining", "gastronomie"], ["Upselling", "up-selling", "suggestive selling", "vente additionnelle"],
+  ["Cash handling", "handling cash"], ["POS systems", "point of sale", "pos system", "micros", "simphony", "lightspeed", "toast pos"],
+  ["Table service", "silver service", "à la carte service", "service à table"], ["Banqueting", "banquet operations", "conference and banqueting"],
+  ["Food and beverage cost control", "food cost", "beverage cost", "f&b cost control", "food cost control"], ["Menu engineering", "menu development", "menu planning"],
+  ["Staff scheduling", "rostering", "shift scheduling", "labour cost control", "labor cost control"], ["Food safety", "haccp", "food hygiene", "hygiène alimentaire", "سلامة الغذاء"],
+  ["Allergen management", "allergens"], ["Reservation systems", "sevenrooms", "opentable"], ["Pre-opening", "pre opening", "preopening", "hotel opening", "restaurant opening"],
+  ["Multi-outlet operations", "multi-unit operations", "multi-outlet", "multi outlet", "multi-site operations"], ["Housekeeping", "gouvernance hôtelière"], ["Night audit"],
+  ["Room service", "in-room dining"], ["Bar operations", "bar management"], ["Service recovery", "complaint handling", "guest complaints"],
   ["Customer service", "service client", "خدمة العملاء"], ["Retail management"], ["Visual merchandising"], ["Luxury retail"], ["Tourism", "tourisme"],
   // Legal
   ["Contract drafting", "contract management", "rédaction de contrats"], ["Corporate law", "droit des sociétés"], ["Litigation", "contentieux"], ["Arbitration", "arbitrage"],

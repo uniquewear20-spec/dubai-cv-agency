@@ -7,7 +7,7 @@ import type { Match, Reason } from "@/lib/agent/score";
 
 /** Text list editor: type, press Enter or comma (or the Add button), remove with ×. */
 export function ChipsInput({
-  label, hint, values, onChange, max = 20, placeholder, addLabel, removeLabel, parse, invalidText, list, display,
+  label, hint, values, onChange, max = 20, placeholder, addLabel, removeLabel, parse, invalidText, list, display, split = true,
 }: {
   label: string; hint?: string; values: string[]; onChange: (v: string[]) => void; max?: number; placeholder?: string;
   addLabel: string; removeLabel: (x: string) => string;
@@ -18,6 +18,8 @@ export function ChipsInput({
   list?: string[];
   /** How a stored value is shown (e.g. a country code as its name). */
   display?: (v: string) => string;
+  /** Commas separate several values (true), or belong to one value such as a degree (false). */
+  split?: boolean;
 }) {
   const id = useId();
   const [draft, setDraft] = useState("");
@@ -25,7 +27,7 @@ export function ChipsInput({
   const show = (v: string) => (display ? display(v) : v);
 
   const commit = (raw = draft) => {
-    const parts = raw.split(/[,;\n]/).map(s => s.trim()).filter(Boolean);
+    const parts = (split ? raw.split(/[,;\n]/) : [raw]).map(s => s.trim()).filter(Boolean);
     if (!parts.length) return;
     const next = [...values];
     for (const p of parts) {
@@ -60,7 +62,7 @@ export function ChipsInput({
             value={draft}
             placeholder={placeholder}
             list={list ? `${id}-list` : undefined}
-            onChange={e => { setDraft(e.target.value); setError(null); if (/[,;]$/.test(e.target.value)) commit(e.target.value); }}
+            onChange={e => { setDraft(e.target.value); setError(null); if (split && /[,;]$/.test(e.target.value)) commit(e.target.value); }}
             onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); commit(); } }}
             onBlur={() => commit()}
             aria-describedby={hint ? `${id}-hint` : undefined}

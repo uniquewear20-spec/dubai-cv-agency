@@ -27,7 +27,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "id": "02",
         "title": "The Zenith AI job agent",
         "body": [
-          "Your agent profile, CV text, saved jobs, drafts, applications and notes are stored in your own browser (IndexedDB), not on our servers. You can export or delete them at any time in the agent's “Your data” section.",
+          "Your agent profile, CV text and the CV file you upload, saved jobs, drafts, applications and notes are stored in your own browser (IndexedDB), not on our servers. Your CV is read on your device: the details the agent finds in it (contacts, work history, education, languages) are shown to you to check and are only added to your profile when you choose. You can export or delete all of this at any time in the agent's “Your data” section.",
           "When you search, your browser sends our server only your target roles, countries and work type. Our server asks the job sources and returns the listings; it does not store your search.",
           "When you ask for an AI draft (Pro), your CV text with email addresses and phone numbers removed, your name, headline, target roles, languages, listed skills and the job listing are sent through our server to Anthropic, which writes the draft. Zenith does not store them. Anthropic deletes API inputs and outputs within 30 days, unless it must keep them longer to enforce its usage policy or to comply with the law, and does not use them to train its models.",
           "When you ask Zenith to email an application (Pro), the message and the CV file you attach pass through our mailbox's mail server to the employer, with a copy to you. Zenith does not keep a copy.",
@@ -128,7 +128,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "id": "02",
         "title": "L'agent emploi Zenith AI",
         "body": [
-          "Votre profil, le texte de votre CV, les offres enregistrées, vos brouillons, candidatures et notes sont stockés dans votre propre navigateur (IndexedDB), pas sur nos serveurs. Vous pouvez les exporter ou les supprimer à tout moment dans la section « Vos données » de l'agent.",
+          "Votre profil, le texte et le fichier de votre CV, les offres enregistrées, vos brouillons, candidatures et notes sont stockés dans votre propre navigateur (IndexedDB), pas sur nos serveurs. Votre CV est lu sur votre appareil : les informations que l'agent y trouve (coordonnées, parcours, formation, langues) vous sont présentées pour vérification et ne sont ajoutées à votre profil que si vous le choisissez. Vous pouvez exporter ou supprimer tout cela à tout moment dans la section « Vos données » de l'agent.",
           "Lorsque vous lancez une recherche, votre navigateur n'envoie à notre serveur que vos postes visés, vos pays et le type de poste. Notre serveur interroge les sources d'offres et renvoie les annonces ; il ne conserve pas votre recherche.",
           "Lorsque vous demandez un brouillon IA (Pro), le texte de votre CV sans adresses e-mail ni numéros de téléphone, votre nom, votre accroche, vos postes visés, vos langues, vos compétences et l'offre sont transmis par notre serveur à Anthropic, qui rédige le brouillon. Zenith ne les conserve pas. Anthropic supprime les données envoyées à son API et les réponses sous 30 jours, sauf obligation de les conserver plus longtemps pour faire respecter sa politique d'utilisation ou pour se conformer à la loi, et ne s'en sert pas pour entraîner ses modèles.",
           "Lorsque vous demandez à Zenith d'envoyer une candidature par e-mail (Pro), le message et le CV joint transitent par le serveur de messagerie de notre boîte jusqu'à l'employeur, avec une copie pour vous. Zenith n'en conserve aucune copie.",
@@ -229,7 +229,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "id": "02",
         "title": "وكيل الوظائف Zenith AI",
         "body": [
-          "يُخزَّن ملفك في الوكيل ونص سيرتك الذاتية والوظائف المحفوظة والمسودات والطلبات والملاحظات في متصفحك أنت (IndexedDB)، لا على خوادمنا. ويمكنك تصديرها أو حذفها في أي وقت من قسم «بياناتك» في الوكيل.",
+          "يُخزَّن ملفك في الوكيل ونص سيرتك الذاتية وملفها الذي ترفعه والوظائف المحفوظة والمسودات والطلبات والملاحظات في متصفحك أنت (IndexedDB)، لا على خوادمنا. تُقرأ سيرتك الذاتية على جهازك: تُعرض عليك البيانات التي يجدها الوكيل فيها (بيانات التواصل والخبرة والتعليم واللغات) لتراجعها، ولا تُضاف إلى ملفك إلا إذا اخترت ذلك. ويمكنك تصدير ذلك كله أو حذفه في أي وقت من قسم «بياناتك» في الوكيل.",
           "عند البحث، لا يرسل متصفحك إلى خادمنا إلا الوظائف والدول ونوع العمل الذي تستهدفه. يستعلم خادمنا من مصادر الوظائف ويعيد الإعلانات، ولا يحتفظ ببحثك.",
           "عند طلب مسودة بالذكاء الاصطناعي (Pro)، يُرسل عبر خادمنا إلى Anthropic، التي تكتب المسودة، نص سيرتك الذاتية بعد حذف عناوين البريد وأرقام الهاتف، واسمك وعنوانك التعريفي والوظائف المستهدفة ولغاتك ومهاراتك وإعلان الوظيفة. لا تحتفظ Zenith بها. وتحذف Anthropic مدخلات واجهتها البرمجية ومخرجاتها خلال 30 يوماً، ما لم تضطر إلى الاحتفاظ بها مدة أطول لتطبيق سياسة الاستخدام أو للامتثال للقانون، ولا تستخدمها لتدريب نماذجها.",
           "عندما تطلب من Zenith إرسال طلب توظيف بالبريد (Pro)، تمر الرسالة وملف السيرة المرفق عبر خادم بريدنا إلى صاحب العمل، مع نسخة إليك. ولا تحتفظ Zenith بأي نسخة.",

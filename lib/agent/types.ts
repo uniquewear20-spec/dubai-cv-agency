@@ -85,6 +85,18 @@ export interface SearchResponse {
   roles?: RoleSearch[];
 }
 
+/** A job from the candidate's work history, as read from the CV and confirmed by them. */
+export interface WorkEntry {
+  title: string;
+  employer: string;
+  /** YYYY-MM, or YYYY when only the year is known. */
+  start: string | null;
+  end: string | null;
+  current: boolean;
+  /** False when a date has no month or the end is missing: shown to the candidate to check. */
+  datesSure: boolean;
+}
+
 export interface Profile {
   name: string;
   email: string;
@@ -104,6 +116,12 @@ export interface Profile {
   excludeCompanies: string[];
   cvText: string;
   cvFileName: string | null;
+  /** Read from the CV and confirmed by the candidate (absent in profiles saved before 23 Oct 2026). */
+  location?: string;
+  experience?: WorkEntry[];
+  yearsExperience?: number | null;
+  education?: string[];
+  certifications?: string[];
   updatedAt: string | null;
 }
 

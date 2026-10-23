@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Download, Trash2, Upload } from "lucide-react";
 import { useAgent } from "./context";
 import { Modal, Notice, fmtDate } from "./parts";
-import { exportAll, importAll, isExport, wipeAll } from "@/lib/agent/store";
+import { delKV, exportAll, importAll, isExport, wipeAll } from "@/lib/agent/store";
 import { download } from "@/lib/agent/links";
 
 export default function DataView() {
@@ -34,10 +34,13 @@ export default function DataView() {
     }
   };
 
+  // The CV, its original file and everything read from it; the name, contacts and target roles stay.
   const deleteCv = async () => {
-    await saveProfile({ ...profile, cvText: "", cvFileName: null });
+    await delKV("cv-file");
+    await saveProfile({ ...profile, cvText: "", cvFileName: null, location: undefined, experience: undefined, yearsExperience: undefined, education: undefined, certifications: undefined });
     setMsg({ tone: "ok", text: t.data.deleted });
   };
+  const hasCv = Boolean(profile.cvText || profile.experience?.length || profile.education?.length || profile.certifications?.length || profile.cvFileName);
 
   const deleteAll = async () => {
     await wipeAll();
@@ -80,9 +83,10 @@ export default function DataView() {
         </div>
         <p className="za-hint">{t.data.exportHint} {t.data.importHint}</p>
         <div className="za-actions za-danger-zone">
-          <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={() => void deleteCv()} disabled={!profile.cvText}><Trash2 size={15} aria-hidden /> {t.data.deleteCv}</button>
+          <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={() => void deleteCv()} disabled={!hasCv} aria-describedby={`${id}-cvnote`}><Trash2 size={15} aria-hidden /> {t.data.deleteCv}</button>
           <button type="button" className="z-btn z-btn-quiet z-btn-small za-danger" onClick={() => setConfirm(true)}><Trash2 size={15} aria-hidden /> {t.data.deleteAll}</button>
         </div>
+        <p id={`${id}-cvnote`} className="za-hint">{t.data.cvDeletedNote}</p>
       </section>
 
       <Modal open={confirm} onClose={() => setConfirm(false)} title={t.data.deleteAll} closeLabel={t.common.close}>

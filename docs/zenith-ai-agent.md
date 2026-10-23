@@ -12,6 +12,7 @@ to the outcome. Nothing is sent without the candidate's approval.
 | Capability | Status | Depends on |
 |---|---|---|
 | Profile and CV (PDF, Word .docx, text), read in the browser | Works | pdf.js worker at `/pdf.worker.min.mjs`, font data in `/public/pdfjs` |
+| Profile completed from the CV (contacts, headline, location, work history with dates, years of experience, education, certificates, languages with levels, skills, suggested target roles) | Works, in the browser, no AI and no cost | Nothing. The candidate ticks what to copy; target roles and countries are never ticked for them. Old Word (.doc) and scanned PDFs are not read (no OCR yet): the candidate pastes the text. |
 | Job search: Workable (on-site, hybrid and remote jobs worldwide, including the Gulf, North Africa, the UK, Europe and North America) | Works | Nothing (no key). Workable publishes a Markdown job search for AI agents (`jobs.workable.com/llms.txt`; its robots.txt allows `ai-input`). Only employers that hire through Workable; at most 30 results a query. |
 | Job search: Himalayas, Jobicy, Remotive, Arbeitnow | Works | Nothing (public APIs, no key). The first three are remote jobs only; Arbeitnow only for Germany, Austria, Switzerland. |
 | Job search: Jooble (on-site jobs incl. the Gulf) | Built, **off** | `JOOBLE_API_KEY` (free key on request at jooble.org/api/about) |
@@ -60,6 +61,21 @@ submission, because it is the only channel where the employer has published how 
 Ranking (in the browser) uses the same job families: the same job under another title scores 32 of 35, a
 neighbouring job 20, a different job 0 however many words it shares ("Assistant Restaurant Manager" is not
 "Restaurant Manager"), and seniority uses the job's level (a head bartender is a supervisor, not a head of department).
+
+## Reading a CV
+
+`lib/agent/extract.ts` reads the file on the device (PDF with pdf.js, Word .docx by unzipping it, text). The file
+must be what its name says (its first bytes are checked), at most 5 MB, and a Word file may not unpack to more than
+20 MB. `lib/agent/cvparse.ts` then finds, in English, French and Arabic CVs: name, email, phone, where the candidate
+lives, the CV's own headline, the jobs with their dates (month and year, a year alone, "present"/"aujourd'hui"/"حتى
+الآن"), years of experience added up from the dates (overlaps counted once), education, certificates (HACCP, WSET,
+food safety, CPA…), languages with their levels, skills, achievements with figures and management responsibilities.
+Every finding says whether it is written in the CV or worked out by the agent, and flags what to check (a year
+without a month, a name it had to guess). The review lists them with tick boxes: contacts are ticked only where the
+profile is empty; target roles and countries are suggestions the candidate must tick. Nothing reaches the profile
+until the candidate copies it, checks the form and saves. The original file is kept in the browser so it can be
+downloaded again; "Delete my CV and what was read from it" removes the text, the file, the work history, education
+and certificates.
 
 ## Data protection
 
@@ -127,7 +143,13 @@ template draft quoting the CV; Pro unlock refused for an ineligible order and ac
 consent before AI; the fabricated highlight removed and the invented figure and skill flagged; email sending
 blocked until [gaps] are filled and the approval box is ticked; submission, follow-up date and .ics file;
 export, delete everything, import; access link from the order email removed from the address bar.
-Hospitality search (separate run, 19 checks, all passing, on real Workable samples): bartender listings found and
+CV reading (separate run, 25 checks, all passing): PDF and Word read and reviewed; contacts ticked only into an
+empty profile; location found and the country left for the candidate to add; work history with dates and
+uncertain dates flagged; years worked out; languages with levels; education and certificates; suggested roles never
+pre-ticked; copied into the form without saving; a date corrected and saved; the original file kept and downloaded
+unchanged; a fake PDF and a file over 5 MB refused; a CV without contacts and with year-only dates; French and
+Arabic CVs; deleting the CV and what was read from it while keeping the name; no console errors.
+Hospitality search (separate run, 22 checks, all passing, on real Workable samples): bartender listings found and
 backend-engineer padding left out; counts of listings left out, closed and merged; a typo fixed and shown; plural
 titles ("Bartenders") ranked as the same job; listing links go to Workable; both roles and both countries sent;
 the related-jobs switch reruns the search; outside-site links follow the chosen role and country; a genuine zero

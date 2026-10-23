@@ -1,22 +1,37 @@
 // lib/agent/extract.ts — browser only. Reads the text of a CV file on the visitor's device:
 // PDF with pdf.js (worker served from /pdf.worker.min.mjs), Word .docx by unzipping it, or plain text.
+// A file must be what its name says (its first bytes are checked), at most 5 MB, and a Word file
+// may not unpack to more than 20 MB of text.
 
 import { decodeEntities } from "./text";
 
 export type ExtractResult =
   | { ok: true; text: string; kind: "pdf" | "docx" | "txt"; pages?: number }
-  | { ok: false; reason: "too-big" | "old-doc" | "scanned" | "unreadable" };
+  | { ok: false; reason: "too-big" | "old-doc" | "scanned" | "unreadable" | "not-cv" };
 
 export const MAX_CV_BYTES = 5 * 1024 * 1024;
+const MAX_DOCX_XML = 20 * 1024 * 1024;
+
+/** What the file's first bytes say it is, whatever its name. */
+async function sniff(file: File): Promise<"pdf" | "zip" | "ole" | "other"> {
+  const head = new Uint8Array(await file.slice(0, 1024).arrayBuffer());
+  const ascii = String.fromCharCode(...head);
+  if (ascii.includes("%PDF-")) return "pdf";
+  if (head[0] === 0x50 && head[1] === 0x4b && head[2] === 0x03 && head[3] === 0x04) return "zip";
+  if (head[0] === 0xd0 && head[1] === 0xcf && head[2] === 0x11 && head[3] === 0xe0) return "ole";
+  return "other";
+}
 
 export async function extractCv(file: File): Promise<ExtractResult> {
   if (file.size > MAX_CV_BYTES) return { ok: false, reason: "too-big" };
   const name = file.name.toLowerCase();
   try {
-    if (name.endsWith(".pdf") || file.type === "application/pdf") return await pdf(file);
-    if (name.endsWith(".docx") || file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") return await docx(file);
+    const kind = await sniff(file);
+    if (name.endsWith(".pdf") || file.type === "application/pdf") return kind === "pdf" ? await pdf(file) : { ok: false, reason: "not-cv" };
+    if (name.endsWith(".docx") || file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") return kind === "zip" ? await docx(file) : { ok: false, reason: "not-cv" };
     if (name.endsWith(".doc") || file.type === "application/msword") return { ok: false, reason: "old-doc" };
     if (name.endsWith(".txt") || name.endsWith(".md") || file.type.startsWith("text/")) {
+      if (kind !== "other") return { ok: false, reason: "not-cv" };
       const text = tidy(await file.text());
       return text ? { ok: true, text, kind: "txt" } : { ok: false, reason: "unreadable" };
     }
@@ -79,7 +94,15 @@ async function pdf(file: File): Promise<ExtractResult> {
 
 async function docx(file: File): Promise<ExtractResult> {
   const { unzipSync, strFromU8 } = await import("fflate");
-  const files = unzipSync(new Uint8Array(await file.arrayBuffer()), { filter: f => f.name === "word/document.xml" });
+  let tooLarge = false;
+  const files = unzipSync(new Uint8Array(await file.arrayBuffer()), {
+    filter: f => {
+      if (f.name !== "word/document.xml") return false;
+      if (f.originalSize > MAX_DOCX_XML) { tooLarge = true; return false; }
+      return true;
+    },
+  });
+  if (tooLarge) return { ok: false, reason: "unreadable" };
   const xml = files["word/document.xml"];
   if (!xml) return { ok: false, reason: "unreadable" };
   const text = tidy(

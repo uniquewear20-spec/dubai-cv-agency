@@ -170,6 +170,48 @@
 .za-chip-add { display: flex; gap: 8px; }
 .za-chip-add .za-input { flex: 1; }
 .za-found { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--z-rule); }
+
+/* CV review: what the agent read, ticked before it reaches the profile */
+.za-cvr { margin-top: 14px; padding: 16px 18px; border-radius: 14px; border: 1px solid var(--z-rule-strong); background: var(--z-surface-2); }
+.za-cvr-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.za-cvr-head .za-h3 { margin: 0; font-size: 16px; }
+.za-cvr > .za-body-text { margin-top: 4px; font-size: 14.5px; }
+.za-revs { list-style: none; display: flex; flex-direction: column; margin-top: 10px; }
+.za-rev { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 14px; align-items: start; padding: 10px 0; border-top: 1px solid var(--z-rule); }
+.za-rev:first-child { border-top: 0; }
+.za-rev > * { grid-column: 1; }
+.za-rev > .za-rev-tags { grid-column: 2; grid-row: 1; justify-self: end; }
+.za-rev-pick { min-height: 32px; font-weight: 600; font-size: 14.5px; }
+.za-rev-k { font-weight: 600; font-size: 14.5px; color: var(--z-fg); min-height: 32px; display: flex; align-items: center; }
+.za-rev-v { font-size: 14px; line-height: 1.55; color: var(--z-fg-2); padding-inline-start: 28px; overflow-wrap: anywhere; }
+.za-rev .za-hint { margin-top: 0; padding-inline-start: 0; }
+.za-rev-roles { display: flex; flex-wrap: wrap; gap: 0 18px; }
+.za-rev-tags { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.za-rev-tag { font-size: 12px; line-height: 1.4; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--z-rule-strong); color: var(--z-fg-3); white-space: nowrap; }
+.za-rev-tag[data-kind="worked-out"] { border-style: dashed; }
+.za-rev-tag[data-kind="check"] { border-color: color-mix(in srgb, var(--z-gold) 60%, transparent); color: var(--z-gold-text); background: var(--z-gold-wash); }
+.za-rev-jobs, .za-rev-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.za-rev-jobs strong { color: var(--z-fg); font-weight: 600; }
+.za-rev-warn { color: var(--z-gold-text); }
+@media (max-width: 560px) {
+  .za-rev { grid-template-columns: minmax(0, 1fr); }
+  .za-rev > .za-rev-tags { grid-column: 1; grid-row: auto; justify-self: start; padding-inline-start: 28px; margin-top: 4px; }
+}
+.za-file-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; margin-top: 12px; font-size: 14px; color: var(--z-fg-2); }
+.za-file-row .za-textlink { display: inline-flex; align-items: center; gap: 5px; }
+
+/* Experience and qualifications */
+.za-facts-top { margin-top: 14px; }
+.za-facts-lists { margin-top: 18px; }
+.za-label-strong { font-size: 14px; font-weight: 600; color: var(--z-fg); margin-bottom: 8px; }
+.za-jobs-edit { margin-top: 18px; }
+.za-jobs-edit > ul { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+.za-jobs-edit > .z-btn { align-self: flex-start; }
+.za-job-edit { padding: 14px; border-radius: 12px; border: 1px solid var(--z-rule); }
+.za-job-dates { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 14px; margin-top: 10px; }
+.za-job-dates .za-field { margin-top: 0; }
+.za-job-dates .za-check { min-height: 44px; }
+.za-input-date { width: 150px; max-width: 100%; }
 .za-drop { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-bottom: 14px; }
 .za-drop .za-hint { margin-top: 0; }
 .za-drop label.z-btn { cursor: pointer; }

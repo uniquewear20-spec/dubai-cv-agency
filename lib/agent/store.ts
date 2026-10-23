@@ -9,8 +9,13 @@ const VERSION = 1;
 
 export interface SavedSearch { request: SearchRequest; response: SearchResponse; at: string }
 
+/** The CV file as the candidate uploaded it, kept in this browser so they can download it again. */
+export interface StoredCv { name: string; type: string; size: number; at: string; data: Blob }
+
 export interface KV {
   profile: Profile;
+  /** Not part of exports (a file, possibly large); deleted with the CV or with everything. */
+  "cv-file": StoredCv;
   access: Access;
   "ai-consent": { at: string };
   search: SavedSearch;
