@@ -6,7 +6,7 @@
 import React, { useEffect, useState } from "react";
 import { AlertCircle, Check, Loader2, Minus } from "lucide-react";
 import { PACKAGES, packagePrice, type PackageDef } from "@/lib/packages";
-import { aedToUsd, type TierKey } from "@/lib/checkout/catalog";
+import { COACH_TIERS, aedToUsd, type TierKey } from "@/lib/checkout/catalog";
 import { startCheckout } from "@/lib/checkout/client";
 import { CURRENCIES, convertAed, formatAmount, type Currency, type Rates } from "@/lib/currency";
 import { EBOOK, pick, type L10n, type Lang } from "@/lib/site";
@@ -27,7 +27,8 @@ const T: Record<string, L10n> = {
   ebook: { en: "The Global Horizon ebook", fr: "L'ebook The Global Horizon", ar: "كتاب The Global Horizon الإلكتروني" },
   ebookYes: { en: "The Global Horizon ebook included", fr: "Ebook The Global Horizon inclus", ar: "كتاب The Global Horizon مشمول" },
   ebookNo: { en: "The Global Horizon ebook not included", fr: "Ebook The Global Horizon non inclus", ar: "كتاب The Global Horizon غير مشمول" },
-  aiYes: { en: "Zenith AI job agent, Pro access", fr: "Agent emploi Zenith AI, accès Pro", ar: "وكيل الوظائف Zenith AI، وصول Pro" },
+  aiYes: { en: "Zenith AI job agent: Pro access and the interview coach", fr: "Agent emploi Zenith AI : accès Pro et coach d'entretien", ar: "وكيل الوظائف Zenith AI: وصول Pro ومدرّب المقابلات" },
+  aiCoach: { en: "Zenith AI job agent: the interview coach", fr: "Agent emploi Zenith AI : coach d'entretien", ar: "وكيل الوظائف Zenith AI: مدرّب المقابلات" },
   aiNo: { en: "Zenith AI job agent, free tools only", fr: "Agent emploi Zenith AI, outils gratuits seulement", ar: "وكيل الوظائف Zenith AI، الأدوات المجانية فقط" },
   everything: { en: "Everything else included", fr: "Tout ce qui est inclus en plus", ar: "كل ما تشمله الباقة أيضاً" },
   pay: { en: "Pay with PayPal", fr: "Payer avec PayPal", ar: "ادفع عبر PayPal" },
@@ -139,9 +140,9 @@ function PackageCard({
           {pkg.ebook ? <Check size={16} strokeWidth={2} aria-hidden="true" /> : <Minus size={16} aria-hidden="true" />}
           <span>{pkg.ebook ? t("ebookYes", lang) : t("ebookNo", lang)}</span>
         </li>
-        <li data-yes={pkg.ai === "pro" || undefined}>
-          {pkg.ai === "pro" ? <Check size={16} strokeWidth={2} aria-hidden="true" /> : <Minus size={16} aria-hidden="true" />}
-          <span>{pkg.ai === "pro" ? t("aiYes", lang) : t("aiNo", lang)}</span>
+        <li data-yes={pkg.ai === "pro" || COACH_TIERS.includes(pkg.key) || undefined}>
+          {pkg.ai === "pro" || COACH_TIERS.includes(pkg.key) ? <Check size={16} strokeWidth={2} aria-hidden="true" /> : <Minus size={16} aria-hidden="true" />}
+          <span>{pkg.ai === "pro" ? t("aiYes", lang) : COACH_TIERS.includes(pkg.key) ? t("aiCoach", lang) : t("aiNo", lang)}</span>
         </li>
       </ul>
 
