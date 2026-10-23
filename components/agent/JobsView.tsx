@@ -206,9 +206,8 @@ function JobCard({ s, saved, onSave, onPrepare, onHide }: { s: Scored; saved: bo
           <span dir="auto">{job.company}</span>
           <span dir="auto">{job.location}</span>
           <span className="z-tag">{job.remote ? t.jobs.remote : t.jobs.onsite}</span>
-          {days !== null ? <span>{t.jobs.posted(days)}</span>
-            : job.checkedAt ? <span>{t.jobs.checked(fmtDate(job.checkedAt, lang))}</span>
-            : job.source !== "manual" ? <span>{t.jobs.noDate}</span> : null}
+          {days !== null ? <span>{t.jobs.posted(days)}</span> : job.source !== "manual" && <span>{t.jobs.noDate}</span>}
+          {job.checkedAt && <span>{t.jobs.checked(fmtDate(job.checkedAt, lang))}</span>}
           {job.salary && <span dir="ltr">{job.salary}</span>}
           {sourceName && <span className="za-via">{t.jobs.via(sourceName)}</span>}
         </p>

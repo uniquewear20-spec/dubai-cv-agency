@@ -75,10 +75,10 @@ async function getJson<T>(url: string, init: CacheInit = {}): Promise<T> {
  * A text page and when its server sent it (a cached page keeps its original date), or null when
  * the page doesn't exist (404, 410): a closed listing, told apart from a failure.
  */
-async function getPage(url: string, init: CacheInit = {}, timeout = TIMEOUT): Promise<{ text: string; at: string } | null> {
+async function getPage(url: string, init: CacheInit = {}, timeout = TIMEOUT, accept = "text/markdown, text/plain;q=0.9, */*;q=0.1"): Promise<{ text: string; at: string } | null> {
   const res = await fetch(via(url), {
     ...init,
-    headers: { Accept: "text/markdown, text/plain;q=0.9, */*;q=0.1", "User-Agent": UA, ...(init.headers ?? {}) },
+    headers: { Accept: accept, "User-Agent": UA, ...(init.headers ?? {}) },
     signal: AbortSignal.timeout(timeout),
   });
   if (res.status === 404 || res.status === 410) return null;
@@ -291,6 +291,37 @@ export function parseWorkableSearch(md: string): WorkableRow[] | null {
   return rows;
 }
 
+interface WorkableDetails { description: string; salary: string | null; salaryRange: SalaryRange | null; postedAt: string | null }
+
+/** The line of a description that states the pay, if one does ("Salary: AED 2,000 plus accommodation"). */
+function salaryLineOf(description: string): string | null {
+  const line = description.split("\n").find(l => /\b(salary|compensation|salaire)\b|راتب/i.test(l) && /\d/.test(l));
+  return line ? clean(line.replace(/^[•\-*\s]+/, "").replace(/^(salary|compensation|salaire)\s*:\s*/i, ""), 120) : null;
+}
+
+/**
+ * A listing's web page (jobs.workable.com/view/<id>): the schema.org JobPosting that Workable
+ * publishes in it, with the description, requirements, benefits, posting date and stated pay.
+ */
+export function parseWorkableLd(html: string): WorkableDetails | null {
+  for (const block of html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    let data: unknown;
+    try { data = JSON.parse(block[1]); } catch { continue; }
+    const items = (Array.isArray(data) ? data : ((data as { "@graph"?: unknown[] })["@graph"] ?? [data])) as Record<string, unknown>[];
+    const jp = items.find(x => x && typeof x === "object" && x["@type"] === "JobPosting");
+    if (!jp) continue;
+    const text = (v: unknown) => (typeof v === "string" ? htmlToText(v, 6000) : "");
+    const [main, reqs, perks] = [text(jp.description), text(jp.requirementsSection), text(jp.benefitsSection)];
+    if (!main) continue;
+    const description = [main, reqs && `Requirements\n${reqs}`, perks && `Benefits\n${perks}`].filter(Boolean).join("\n\n");
+    const pay = jp.baseSalary as { currency?: string; value?: { minValue?: number; maxValue?: number; value?: number; unitText?: string } } | undefined;
+    const r = pay?.value ? range(pay.value.minValue ?? pay.value.value, pay.value.maxValue ?? pay.value.value, pay.currency, pay.value.unitText) : null;
+    const line = r ? null : salaryLineOf(description);
+    return { description, salary: r ? salaryText(r) : line, salaryRange: r ?? (line ? parseSalary(line) : null), postedAt: iso(jp.datePosted) };
+  }
+  return null;
+}
+
 /** A listing's own page: its description as plain text, a salary line if it states one, its department. */
 export function parseWorkableJob(md: string): { description: string; salary: string | null; department: string | null } | null {
   if (!/^\s*#\s/.test(md)) return null;
@@ -304,8 +335,7 @@ export function parseWorkableJob(md: string): { description: string; salary: str
     .replace(/\n{3,}/g, "\n\n")
     .trim()
     .replace(/^Description\s*\n+/, "");
-  const salaryLine = description.split("\n").find(l => /\b(salary|compensation|salaire)\b|راتب/i.test(l) && /\d/.test(l)) ?? null;
-  return { description, salary: salaryLine ? clean(salaryLine.replace(/^[•\-*\s]+/, "").replace(/^(salary|compensation|salaire)\s*:\s*/i, ""), 120) : null, department };
+  return { description, salary: salaryLineOf(description), department };
 }
 
 function workableJob(r: WorkableRow): Job {
@@ -411,15 +441,25 @@ const workable: Adapter = {
     }
     ranked.splice(0, ranked.length, ...firsts, ...repeats);
 
-    // Each listing's page gives its description (for matching and drafting), shows whether it is
-    // still open (a closed listing's page is gone), and may state a salary. Pages are cached six hours.
+    // Each listing's page gives its description (for matching and drafting), when it was posted,
+    // a stated salary, and whether it is still open (a closed listing's page is gone). The web page
+    // carries the posting date in its schema.org data; the Markdown page is the fallback. Cached six hours.
     const stopAt = Date.now() + WORKABLE_PAGES_MS;
     const page = limiter(6);
-    const pages = await Promise.all(ranked.slice(0, WORKABLE_PAGES).map(({ f }) => page(async () => {
+    const opened = await Promise.all(ranked.slice(0, WORKABLE_PAGES).map(({ f }) => page(async (): Promise<{ at: string; d: WorkableDetails | null } | null | undefined> => {
       const left = stopAt - Date.now();
       if (left <= 0) return undefined; // out of time: kept as found, unchecked
+      const id = f.job.id.slice("workable:".length);
+      const cache = { next: { revalidate: 21600 } };
       try {
-        return await getPage(`${WORKABLE}/jobs/${f.job.id.slice("workable:".length)}.md`, { next: { revalidate: 21600 } }, Math.min(5_000, left + 2_000));
+        const web = await getPage(`${WORKABLE}/view/${id}`, cache, Math.min(5_000, left + 2_000), "text/html");
+        if (web === null) return null;
+        const d = parseWorkableLd(web.text);
+        if (d) return { at: web.at, d };
+        const md = await getPage(`${WORKABLE}/jobs/${id}.md`, cache, Math.min(5_000, Math.max(1_000, stopAt - Date.now() + 2_000)));
+        if (md === null) return null;
+        const m = parseWorkableJob(md.text);
+        return { at: md.at, d: m && { description: m.description, salary: m.salary, salaryRange: parseSalary(m.salary), postedAt: null } };
       } catch {
         return undefined;
       }
@@ -428,18 +468,14 @@ const workable: Adapter = {
     const out: Found[] = [];
     let closed = 0;
     ranked.forEach(({ f }, i) => {
-      const p = pages[i];
-      if (p === null || (p && /no longer (available|accepting applications)|job (is )?(closed|expired)|position has been filled/i.test(p.text.slice(0, 600)))) {
-        closed++;
-        return;
-      }
-      const d = p ? parseWorkableJob(p.text) : null;
-      if (d) {
-        f.job.description = d.description.slice(0, MAX_DESC);
+      const p = opened[i];
+      if (p === null) { closed++; return; }
+      if (p?.d) {
+        f.job.description = p.d.description.slice(0, MAX_DESC);
         f.job.applyEmail = findApplyEmail(f.job.description);
-        if (d.salary) { f.job.salary = d.salary; f.job.salaryRange = parseSalary(d.salary); }
-        if (d.department) f.job.tags.push(clean(d.department, 60));
-        f.job.checkedAt = p!.at;
+        if (p.d.salary) { f.job.salary = p.d.salary; f.job.salaryRange = p.d.salaryRange; }
+        f.job.postedAt = p.d.postedAt;
+        f.job.checkedAt = p.at;
       }
       out.push(f);
     });
