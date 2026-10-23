@@ -300,13 +300,15 @@ function salaryLineOf(description: string): string | null {
 }
 
 /**
- * A listing's web page (jobs.workable.com/view/<id>): the schema.org JobPosting that Workable
- * publishes in it, with the description, requirements, benefits, posting date and stated pay.
+ * A listing's page (jobs.workable.com/view/<id>): the schema.org JobPosting that Workable publishes
+ * in it, with the description, requirements, benefits, posting date and stated pay.
  */
 export function parseWorkableLd(html: string): WorkableDetails | null {
-  for (const block of html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+  // In the web page, a <script type="application/ld+json">; in the Markdown version Workable serves
+  // to agents, a fenced ```json block.
+  for (const block of html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>|```json\s*\n([\s\S]*?)\n```/gi)) {
     let data: unknown;
-    try { data = JSON.parse(block[1]); } catch { continue; }
+    try { data = JSON.parse(block[1] ?? block[2]); } catch { continue; }
     const items = (Array.isArray(data) ? data : ((data as { "@graph"?: unknown[] })["@graph"] ?? [data])) as Record<string, unknown>[];
     const jp = items.find(x => x && typeof x === "object" && x["@type"] === "JobPosting");
     if (!jp) continue;
