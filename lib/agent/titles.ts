@@ -382,28 +382,38 @@ export function cleanTitle(s: string): string {
 const TARGET = "\u0000target";
 
 /**
- * The family a title belongs to (its most specific matching title), or null. `context` (the
- * listing's other text) decides titles that also name other jobs: "Server" is a waiter only in a
- * restaurant, not in a data centre.
+ * The jobs a title names, most specific first: "Assistant Restaurant Manager" is that job, not also
+ * "Restaurant Manager" (the longer title wins its words); "Barista, Waiter, Waitress, Kitchen Helper"
+ * names barista and waiter. `context` (the listing's other text) decides titles that also name
+ * other jobs: "Server" is a waiter only in a restaurant, not in a data centre.
  */
-export function familyOfTitle(title: string, context = ""): Family | null {
+export function familiesOfTitle(title: string, context = ""): Family[] {
   const t = cleanTitle(title);
-  if (!t) return null;
+  if (!t) return [];
+  const taken: [number, number][] = [];
+  const out: Family[] = [];
   let hospitality: boolean | null = null;
   for (const e of index()) {
-    if (!e.re.test(t)) continue;
+    const m = e.re.exec(t);
+    if (!m) continue;
+    const span: [number, number] = [m.index, m.index + m[0].length];
+    if (taken.some(([a, b]) => span[0] < b && span[1] > a)) continue;
     if (e.ambiguous) {
       // A candidate who types just "Server" or "Host" as a target role means the hospitality job.
       hospitality ??= context === TARGET ? !NOT_HOSPITALITY.test(t) : hospitalityContext(t, context);
       if (!hospitality) continue;
     }
-    // "Marketing Manager - F&B" is a marketing job, "Junior Cost Controller - Food and Beverage" a finance job.
-    return namesOtherJob(e.family, t) ? null : e.family;
+    taken.push(span);
+    // "Marketing Manager - F&B" is a marketing job, "Manager - F&B Systems Design" a design job.
+    if (!out.includes(e.family) && !namesOtherJob(e.family, t, span)) out.push(e.family);
   }
-  return null;
+  return out;
 }
 
-
+/** The job a title names (its most specific one), or null. See familiesOfTitle. */
+export function familyOfTitle(title: string, context = ""): Family | null {
+  return familiesOfTitle(title, context)[0] ?? null;
+}
 
 // ── Spelling ──
 
@@ -504,11 +514,12 @@ export type TitleFit = "same" | "related" | "other" | "unknown";
  *   unknown  the title isn't a job this file knows; judge it by its words instead
  */
 export function titleFit(plan: RolePlan, title: string, context = ""): TitleFit {
-  if (!plan.family) return "unknown";
-  const f = familyOfTitle(title, context);
-  if (!f) return "unknown";
-  if (f.id === plan.family.id) return "same";
-  if (plan.related.includes(f.id) || (f.related ?? []).includes(plan.family.id)) return "related";
+  const own = plan.family;
+  if (!own) return "unknown";
+  const named = familiesOfTitle(title, context);
+  if (!named.length) return "unknown";
+  if (named.some(f => f.id === own.id)) return "same";
+  if (named.some(f => plan.related.includes(f.id) || (f.related ?? []).includes(own.id))) return "related";
   return "other";
 }
 
@@ -523,7 +534,8 @@ export function mentionsJob(plan: RolePlan, title: string, text: string): boolea
   if (!f) return false;
   // A title that names another profession is that profession, whatever its text mentions
   // ("HR Recruiter – Real Estate Agency", "Sales Executive – Specialty Coffee").
-  if (namesOtherJob(f, cleanTitle(title))) return false;
+  const t = cleanTitle(title);
+  if (namesOtherJob(f, t, [0, t.length])) return false;
   const hay = cleanTitle(`${title}\n${text}`);
   const ambiguous = new Set((f.ambiguous ?? []).map(cleanTitle));
   let hospitality: boolean | null = null;
@@ -542,11 +554,25 @@ export function mentionsJob(plan: RolePlan, title: string, text: string): boolea
 const OTHER_JOB_ALL = /(?<![\p{L}])(recruiter|recruitment|recruiting|talent|hr|engineer|engineering|developer|programmer|accountant|accounting|finance|financial|payroll|marketing|design|designer|systems|analyst|controller|cost|auditor|audit|purchasing|procurement|buyer|photographer|videographer|content|driver|nurse|teacher|lawyer|legal|technician|electrician|plumber|security|cashier|storekeeper|sales|telesales)(?![\p{L}])/gu;
 
 const OWN_WORDS = new Map<string, Set<string>>();
-/** Whether a cleaned title also names another profession that isn't part of this job's own titles ("catering sales manager" is catering). */
-function namesOtherJob(f: Family, t: string): boolean {
+/** Separators between the jobs of a title that lists several ("Barista, Waiter, Cashier"). */
+const LIST_SEPARATOR = /\s*(?:,|\/|;|\||\s(?:or|ou)\s)\s*/gu;
+
+/**
+ * Whether the part of a cleaned title around `span` (where this job is named) also names another
+ * profession that isn't part of the job's own titles: "marketing manager - f&b" does; "catering
+ * sales manager" doesn't (sales is part of catering); "barista, waiter, cashier" doesn't for barista
+ * (cashier is another job in the list, not a word of this one).
+ */
+function namesOtherJob(f: Family, t: string, span: [number, number]): boolean {
   let own = OWN_WORDS.get(f.id);
   if (!own) { own = new Set(f.titles.flatMap(x => cleanTitle(x).split(" "))); OWN_WORDS.set(f.id, own); }
-  for (const m of t.matchAll(OTHER_JOB_ALL)) if (!own.has(m[1])) return true;
+  let from = 0;
+  let to = t.length;
+  for (const m of t.matchAll(LIST_SEPARATOR)) {
+    if (m.index + m[0].length <= span[0]) from = m.index + m[0].length;
+    else if (m.index >= span[1]) { to = m.index; break; }
+  }
+  for (const m of t.slice(from, to).matchAll(OTHER_JOB_ALL)) if (!own.has(m[1])) return true;
   return false;
 }
 

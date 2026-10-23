@@ -305,7 +305,7 @@ export function parseWorkableJob(md: string): { description: string; salary: str
     .trim()
     .replace(/^Description\s*\n+/, "");
   const salaryLine = description.split("\n").find(l => /\b(salary|compensation|salaire)\b|راتب/i.test(l) && /\d/.test(l)) ?? null;
-  return { description, salary: salaryLine ? clean(salaryLine.replace(/^[•\-*\s]+/, ""), 120) : null, department };
+  return { description, salary: salaryLine ? clean(salaryLine.replace(/^[•\-*\s]+/, "").replace(/^(salary|compensation|salaire)\s*:\s*/i, ""), 120) : null, department };
 }
 
 function workableJob(r: WorkableRow): Job {

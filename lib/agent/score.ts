@@ -13,7 +13,10 @@
 
 import { extractSkills, norm, phraseRe, requiredLanguages, skillMatcher, words } from "./text";
 import { placeFit } from "./countries";
-import { cleanTitle, familyOfTitle, planRole, titleFit, titleRe, type RolePlan } from "./titles";
+import { cleanTitle, familyOfTitle, mentionsJob, planRole, titleFit, titleRe, type RolePlan } from "./titles";
+
+/** A searched role as a title: "f&b supervisor" → "F&B supervisor". */
+const roleLabel = (s: string) => s.replace(/^\p{L}/u, c => c.toUpperCase()).replace(/\bf&b\b/gi, "F&B");
 import { annual } from "./salary";
 import type { Job, Profile } from "./types";
 
@@ -126,17 +129,24 @@ export function scoreJob(job: Job, p: Profile, skills = candidateSkills(p), now 
   for (const role of p.roles) {
     if (!role.trim()) continue;
     const plan = planOf(role);
+    // Reasons name the role as searched: "Barista" for a typed "Baristta".
+    const label = plan.corrected ? roleLabel(plan.role) : role;
     const fit = titleFit(plan, job.title, intro);
     if (fit === "same") {
       // The candidate's own words in the title, or the same job under another title ("Mixologist" for "Bartender").
       const exact = titleRe(role).test(nTitle) || titleRe(plan.role).test(cleanTitle(job.title));
-      take(exact ? 35 : 32, role, exact ? "title-exact" : "title-variant");
+      take(exact ? 35 : 32, label, exact ? "title-exact" : "title-variant");
       if (title >= 35) break;
       continue;
     }
-    if (fit === "related") { take(20, role, "title-related"); continue; }
+    if (fit === "related") { take(20, label, "title-related"); continue; }
     if (fit === "other") continue; // a different job ("Assistant Restaurant Manager" is not "Restaurant Manager")
-    // A role or a title the agent doesn't know: compare the words.
+    if (plan.family) {
+      // A title the agent doesn't know, in a listing that names the job ("Coffee Boy" asking for barista skills).
+      if (mentionsJob(plan, job.title, intro)) take(6, label, "title-weak");
+      continue;
+    }
+    // A role the agent doesn't know: compare the words.
     if (phraseRe(role).test(nTitle)) { take(35, role, "title-exact"); break; }
     const rw = words(role).map(stem);
     if (!rw.length) continue;
