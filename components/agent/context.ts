@@ -3,11 +3,11 @@
 
 import { createContext, useContext } from "react";
 import type { AgentCopy } from "@/lib/agent/i18n";
-import type { Access, AgentStatus, Application, Job, Profile, Usage } from "@/lib/agent/types";
+import type { Access, AgentStatus, Application, Job, PackageKey, Profile, Usage } from "@/lib/agent/types";
 import type { SavedSearch } from "@/lib/agent/store";
 import type { Match } from "@/lib/agent/score";
 
-export type View = "overview" | "profile" | "jobs" | "apps" | "data";
+export type View = "overview" | "profile" | "jobs" | "apps" | "interview" | "data";
 export type Lang = "en" | "fr" | "ar";
 
 export interface Scored { job: Job; match: Match }
@@ -41,9 +41,15 @@ export interface AgentState {
   consent: boolean;
   giveConsent: () => Promise<void>;
   go: (view: View, appId?: string) => void;
+  /** Opens the interview coach, set up for a saved job. */
+  practise: (jobId: string) => void;
   view: View;
   appId: string | null;
+  /** The saved job to practise an interview for (#interview=<jobId>). */
+  ivJob: string | null;
   countryLabel: (code: string) => string;
+  /** Package names in the current language: one package, and the lists that include the coach and Pro. */
+  pkg: { name: (k: PackageKey) => string; coach: string; pro: string };
   reload: () => Promise<void>;
 }
 

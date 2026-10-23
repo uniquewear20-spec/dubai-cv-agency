@@ -3,6 +3,7 @@
 // available (some private windows), data lives in memory for this tab only.
 
 import type { Access, Application, Profile, SearchRequest, SearchResponse } from "./types";
+import type { IvActive, IvPrefs, IvRecord } from "./interview/types";
 
 const DB = "zenith-agent";
 const VERSION = 1;
@@ -20,6 +21,12 @@ export interface KV {
   "ai-consent": { at: string };
   search: SavedSearch;
   hidden: string[];
+  /** Interview coach: finished interviews with their reports, newest first (at most 50). */
+  interviews: IvRecord[];
+  /** Interview coach: the interview in progress. Not part of exports. */
+  "interview-active": IvActive;
+  /** Interview coach: the last setup choices. */
+  "interview-prefs": IvPrefs;
 }
 
 export interface ExportFile {
@@ -109,7 +116,7 @@ export async function delApp(jobId: string): Promise<void> {
   await run(db, "apps", "readwrite", s => { s.delete(jobId); });
 }
 
-const KV_KEYS: (keyof KV)[] = ["profile", "access", "ai-consent", "search", "hidden"];
+const KV_KEYS: (keyof KV)[] = ["profile", "access", "ai-consent", "search", "hidden", "interviews", "interview-prefs"];
 
 export async function exportAll(): Promise<ExportFile> {
   const kv: Partial<KV> = {};

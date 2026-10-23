@@ -42,6 +42,16 @@ const T: Record<string, L10n> = {
     fr: "Les brouillons adaptés par IA ne sont pas encore activés. D'ici là, les brouillons Pro sont des brouillons modèles, et votre spécialiste adapte les candidatures incluses dans votre formule.",
     ar: "المسودات المكيّفة بالذكاء الاصطناعي غير مفعّلة بعد. وحتى تفعيلها، تكون مسودات Pro مسودات جاهزة، ويكيّف مختصك الطلبات المشمولة في باقتك.",
   },
+  coach: {
+    en: "Interview coach, with Career Advantage, Career Automation and Executive Career Suite",
+    fr: "Coach d'entretien, avec Avantage Carrière, Carrière Automatisée et Suite Carrière Exécutive",
+    ar: "مدرّب المقابلات، مع الميزة المهنية وأتمتة المسار المهني والباقة التنفيذية المتكاملة",
+  },
+  coachBody: {
+    en: "Practise out loud with an animated interviewer that follows up on what you actually say, then get a report scored on eight clear criteria, with an action plan. Answer by voice or by typing, in English, French or Arabic.",
+    fr: "Entraînez-vous à voix haute avec un recruteur animé qui rebondit sur ce que vous dites vraiment, puis recevez un rapport noté selon huit critères clairs, avec un plan d'action. Répondez à l'oral ou par écrit, en anglais, en français ou en arabe.",
+    ar: "تدرّب بصوت مسموع مع محاوِر متحرك يتابع ما تقوله فعلاً، ثم احصل على تقرير مقيّم وفق ثمانية معايير واضحة مع خطة عمل. أجب بالصوت أو بالكتابة، بالإنجليزية أو الفرنسية أو العربية.",
+  },
   open: { en: "Open the agent", fr: "Ouvrir l'agent", ar: "افتح الوكيل" },
   packages: { en: "See the packages", fr: "Voir les formules", ar: "اطّلع على الباقات" },
   stepsH: { en: "How it works", fr: "Comment ça marche", ar: "كيف يعمل" },
@@ -156,6 +166,10 @@ export default function AgentSection({ lang }: { lang: Lang }) {
                 <li>{t("proSend")}</li>
                 <li><span className="ag-dot" data-on={status?.ai ? "true" : "false"} aria-hidden />{status?.ai ? t("proAiOn") : t("proAiOff")}</li>
               </ul>
+            </div>
+            <div>
+              <p className="ag-status-h"><span className="ag-dot" data-on="true" aria-hidden />{t("coach")}</p>
+              <p className="z-small">{t("coachBody")}</p>
             </div>
           </div>
         </div>

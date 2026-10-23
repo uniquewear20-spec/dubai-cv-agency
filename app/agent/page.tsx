@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import AgentApp from "@/components/agent/AgentApp";
 import "./agent.css";
+import "./interview.css";
 
 export const metadata: Metadata = {
   title: "AI job agent",

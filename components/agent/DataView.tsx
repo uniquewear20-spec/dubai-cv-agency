@@ -1,12 +1,13 @@
 "use client";
 // components/agent/DataView.tsx — what the agent keeps and where, with export, import and delete.
 
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import { Download, Trash2, Upload } from "lucide-react";
 import { useAgent } from "./context";
 import { Modal, Notice, fmtDate } from "./parts";
-import { delKV, exportAll, importAll, isExport, wipeAll } from "@/lib/agent/store";
+import { delKV, exportAll, getKV, importAll, isExport, wipeAll } from "@/lib/agent/store";
+import { IV_COPY } from "@/lib/agent/interview/copy";
 import { download } from "@/lib/agent/links";
 
 export default function DataView() {
@@ -15,6 +16,8 @@ export default function DataView() {
   const [msg, setMsg] = useState<{ tone: "ok" | "error"; text: string } | null>(null);
   const id = useId();
   const drafts = apps.filter(a => a.draft).length;
+  const [interviews, setInterviews] = useState(0);
+  useEffect(() => { void getKV("interviews").then(r => setInterviews(Array.isArray(r) ? r.length : 0)); }, [msg]);
 
   const doExport = async () => {
     const data = await exportAll();
@@ -74,6 +77,7 @@ export default function DataView() {
           <li>{t.data.appsN(apps.length)} · {t.data.draftsN(drafts)}</li>
           <li>{t.data.searchAt(search ? fmtDate(search.at, lang) : null)}</li>
           <li>{t.data.accessOn(Boolean(access))}</li>
+          <li>{IV_COPY[lang].history.stored(interviews)}</li>
         </ul>
         {msg && <Notice tone={msg.tone}>{msg.text}</Notice>}
         <div className="za-actions">

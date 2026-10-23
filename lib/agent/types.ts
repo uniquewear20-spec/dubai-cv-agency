@@ -167,11 +167,19 @@ export interface Application {
 
 export type Plan = "career-automation" | "executive-suite";
 
+/** Package keys (see lib/checkout/catalog.ts): 1 foundation, 2 growth, 3 executive, 4 apex. */
+export type PackageKey = "foundation" | "growth" | "executive" | "apex";
+
 export interface Access {
   kind: "paypal" | "gumroad";
   /** PayPal order id or Gumroad license key. Kept only in this browser. */
   proof: string;
-  plan: Plan;
+  /** Pro plan (AI drafting and sending), or null when the package doesn't include it. */
+  plan: Plan | null;
+  /** The package bought (absent in access saved before 23 Oct 2026; filled in at the next check). */
+  tier?: PackageKey;
+  /** The package includes the interview coach. */
+  coach?: boolean;
   ref: string;
   verifiedAt: string;
 }

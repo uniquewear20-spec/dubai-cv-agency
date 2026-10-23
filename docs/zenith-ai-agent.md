@@ -24,7 +24,8 @@ to the outcome. Nothing is sent without the candidate's approval.
 | AI drafts (Claude), Pro only | Built, **off** until a key is added | `ANTHROPIC_API_KEY` (paid API usage). Optional `ANTHROPIC_MODEL` (default `claude-sonnet-5-5`) |
 | Apply on the employer's site | Works: opens the listing; the candidate applies there | Nothing |
 | Apply by email from the candidate's own mail app (mailto) | Works | Nothing |
-| "Send it for me": Zenith emails an approved application, Pro only | Built; **blocked in production** until the mailbox accepts SMTP logins (22 Oct 2026: Microsoft 365 answers "SmtpClientAuthentication is disabled for the Tenant") | Owner action 0 in `docs/commercial-launch.md`, and a verified Pro purchase |
+| "Send it for me": Zenith emails an approved application, Pro only | Built. The mailbox accepted the site's SMTP login on 23 Oct 2026 (a login check only: nothing was sent). Not yet tried end to end with a real Pro order | A verified Pro purchase |
+| Interview coach (packages 2–4): animated interviewer, voice or typed answers, follow-ups, scored report, progress | Works, **free to run**: no AI service, no avatar or voice service | The browser's own speech features (see "Interview coach" below). Gumroad buyers of Career Advantage need license keys switched on for that product (owner action) |
 | Tracker: statuses, dates, notes, history, follow-up reminders, .ics calendar files | Works, in the browser | Nothing |
 | Pro access check: PayPal order (Career Automation / Executive Career Suite) | Works | Existing PayPal keys |
 | Pro access check: Gumroad license key | Works (tested against a stub of Gumroad's API; no real key yet) | Nothing more: Career Automation and Executive Career Suite are live on Gumroad with license keys, product ids in `lib/packages.ts` (`gumroadProductId`). A real key comes from a test purchase. |
@@ -90,6 +91,59 @@ and certificates.
 - The server logs error types only, never CV text or listings.
 - Usage is counted against a SHA-256 hash of the purchase proof, never the proof itself.
 
+## Interview coach (packages 2–4)
+
+A practice interview at `/agent/#interview` (or `#interview=<saved job id>` from a job's page). It costs nothing to
+run: the interviewer is a set of rules on Zenith's server, the voice and the speech recognition are the browser's
+own, and the interviewer is an SVG animation drawn in the page.
+
+**Access.** Every call to `/api/agent/interview` checks the purchase with PayPal or Gumroad (`verifyCoach` in
+`lib/agent/access.ts`): Career Advantage, Career Automation and Executive Career Suite (`COACH_TIERS`). A successful
+check is remembered for 15 minutes per server instance, so a refund can take up to 15 minutes to close access.
+Without access the page explains the coach, lets the visitor hear the interviewer say a fixed line, and shows where
+to enter a proof of purchase. The question bank and the scoring rules never reach the browser bundle (checked after
+the build).
+
+**The interviewer** (`lib/agent/interview/engine.ts`). It picks a track from the role (bar, coffee, floor service,
+restaurant management, F&B operations, front office, housekeeping, kitchen, real estate, sales, customer service,
+administration, finance, marketing, technology, healthcare; otherwise general questions plus questions built from the
+CV and the listing) and a seniority level, then plans 5 or 8 questions for the interview type (screening, role,
+competency, management, executive) and difficulty (friendly, realistic, demanding). Questions come from the bank
+(197 questions across 16 role tracks and the general set, each in English, French and Arabic), from the CV ("Your CV mentions …, and this role needs it") and from
+the listing's requirements ("This role asks for: …"). Questions that scored low before come back once. Follow-ups
+are chosen from what the candidate actually said: too short, no specific example, no result, no figure where the
+question is about performance, mostly "we", self-descriptions without proof (quoted back), no reasoning in a
+scenario, nothing done about a weakness, the figures behind a role topic, and in demanding mode a challenge. It can
+pick up a role topic the candidate mentioned for a later question ("You mentioned food cost earlier"), keeping the
+spread of competencies. It never writes or suggests answers for the candidate.
+
+**The report** (`lib/agent/interview/report.ts`). Each answer is scored 0–4 with fixed rules on relevance, evidence,
+structure (STAR), ownership, reasoning, impact, communication and role knowledge; a point the interviewer had to ask
+for is capped at 3. The report shows the overall level, each criterion and what it measures, an action plan, each
+answer with what worked and what to improve, what a strong answer covers, the candidate's own sentences in STAR
+order (missing parts named, nothing invented), role topics covered and missing, speaking pace and hedging, questions
+to practise next and tips for the role. It says plainly that it measures the words of the answers, not the person's
+voice, accent, face or personality, and doesn't predict an employer's decision. Arabic answers are read with
+shorter word lists, which the report states.
+
+**Voice.** `lib/agent/interview/speech.ts`: the interviewer speaks with the device's voices (speechSynthesis), in
+sentence-sized pieces; the animated mouth follows the browser's word-boundary events, or a speaking rate measured
+from earlier sentences where those events don't exist (Android). Answers are recognised with SpeechRecognition:
+continuous, restarted when the browser ends a session on its own, half duplex (the microphone is off while the
+interviewer speaks; "Start answering" interrupts it). On-device recognition is used when the browser offers it for
+the language; otherwise (most browsers today) the browser maker's speech service does it, which the setup says
+before the interview. A long silence after a real answer offers to send it after a 3-second countdown that the
+candidate can stop. When recognition isn't available (Firefox), is refused or fails, the candidate types instead.
+The optional camera view is local only. With reduced motion, the interviewer's head and body stay still.
+
+**Data.** Answers are sent as text to the server, scored and returned; nothing is stored or logged there. Reports
+(at most 50) and the interview in progress are kept in the browser (`interviews`, `interview-active`,
+`interview-prefs` in IndexedDB); reports are part of the data export and of "Delete everything".
+
+**What it doesn't do (yet).** It doesn't use AI: `engine: "ai"` is reserved for an optional mode with Claude, which
+would add API costs per interview and needs the owner's approval first. It doesn't analyse voice tone, facial
+expressions or body language, and it never claims to.
+
 ## Honesty checks on drafts
 
 - Every AI highlight must quote the CV line it comes from; highlights whose quote isn't in the CV are dropped
@@ -127,7 +181,11 @@ inside the agent and are **not** published on the marketing pages.
 | `lib/agent/limits.ts` | Allowances and rate limits (server) |
 | `lib/agent/claude.ts` | AI drafting and its checks (server) |
 | `lib/agent/store.ts`, `extract.ts`, `links.ts`, `i18n.ts` | Browser storage, CV reading, external links / calendar / mailto, interface text |
-| `app/api/agent/{search,access,tailor,send,status}/route.ts` | API routes |
+| `app/api/agent/{search,access,tailor,send,status,interview}/route.ts` | API routes |
+| `lib/agent/interview/{engine,report,analyze,state,tracks,phrases}.ts`, `bank*.ts` | Interview coach: interviewer, scoring, answer analysis, request checks, tracks, the interviewer's lines, the question bank (server) |
+| `lib/agent/interview/{types,copy,client,speech,lips,looks}.ts` | Interview coach: shared types, interface text, API calls, voice and recognition, mouth shapes, the interviewer's looks (browser) |
+| `components/agent/interview/*`, `app/agent/interview.css` | Interview coach screens: setup, interview room, animated interviewer, report, progress |
+| `scripts/check-interview.ts` | Checks of the coach's rules: `npx tsx scripts/check-interview.ts` |
 | `components/site/AgentSection.tsx` | The homepage section (`#zenith-ai`) |
 
 ## How it was tested
@@ -157,6 +215,14 @@ explained with ways to widen it, in English, French and Arabic; no horizontal sc
 Gumroad license keys (separate run): refunded key refused, unknown key not found, Career Automation key unlocks
 Pro and is kept only in the browser; the server sends `increment_uses_count=false`, so checking never uses up a key.
 Visual pass: 6 widths × English, French, Arabic × dark and light, no horizontal overflow, no console errors.
+
+Interview coach (23 Oct 2026): `scripts/check-interview.ts` (10 checks: English, French and Arabic analysis,
+follow-ups, strong answers scored "interview ready" and weak ones "early stage", request checks, packages). In
+Chromium with a scripted voice and microphone, against the production build and a Gumroad stub: locked page and
+preview; unlock with a license key; a spoken English management interview from setup to report and progress;
+French typed answers ended early; Arabic (right to left) with the microphone refused, switching to typing; resuming
+after a reload; a phone-width interview and report with no horizontal scroll; no console errors. The API refused a
+missing proof, an unknown key and a refunded key, and a malformed session.
 
 Not tested live: AI drafting (no Anthropic key), Jooble and Adzuna (no keys), a real Gumroad license key (needs a
 purchase; production answers an unknown key with "not found", which shows it reaches Gumroad with the product

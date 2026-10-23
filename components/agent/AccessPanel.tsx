@@ -1,14 +1,16 @@
 "use client";
-// components/agent/AccessPanel.tsx — unlock AI drafting and sending with a purchase
-// (PayPal order number or Gumroad license key), checked with the payment provider.
+// components/agent/AccessPanel.tsx — unlock the agent's paid features with a purchase (PayPal order
+// number or Gumroad license key), checked with the payment provider: the interview coach
+// (packages 2–4) and AI drafting and sending (packages 3–4).
 
 import { useId, useState } from "react";
 import Link from "next/link";
+import { Check, Minus } from "lucide-react";
 import { useAgent } from "./context";
 import { Notice } from "./parts";
 
 export default function AccessPanel({ compact = false }: { compact?: boolean }) {
-  const { t, access, usage, verifyAccess, forgetAccess, status } = useAgent();
+  const { t, access, usage, verifyAccess, forgetAccess, status, pkg } = useAgent();
   const [proof, setProof] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,24 +25,31 @@ export default function AccessPanel({ compact = false }: { compact?: boolean }) 
     else setProof("");
   };
 
+  const name = access ? (access.tier ? pkg.name(access.tier) : access.plan ? t.access.plans[access.plan] : "") : "";
+  const coach = Boolean(access?.coach || access?.plan); // access saved before 23 Oct 2026 was Pro, which includes the coach
+
   return (
     <section className="za-panel za-access" aria-labelledby={`${id}-h`}>
       <h2 id={`${id}-h`} className="za-h2">{t.access.h}</h2>
       {access ? (
         <>
-          <Notice tone="ok">{t.access.ok(t.access.plans[access.plan], access.ref)}</Notice>
-          {usage && (
+          <Notice tone="ok">{t.access.ok(name, access.ref)}</Notice>
+          <ul className="za-features">
+            <li data-on={coach}>{coach ? <Check size={16} aria-hidden /> : <Minus size={16} aria-hidden />}<span>{t.access.features.coach}</span><em>{coach ? t.access.features.yes : t.access.features.no}</em></li>
+            <li data-on={Boolean(access.plan)}>{access.plan ? <Check size={16} aria-hidden /> : <Minus size={16} aria-hidden />}<span>{t.access.features.pro}</span><em>{access.plan ? t.access.features.yes : t.access.features.no}</em></li>
+          </ul>
+          {usage && access.plan && (
             <ul className="za-usage">
               <li>{t.ws.usage(usage.drafts)}</li>
               <li>{t.ws.sendsLeft(usage.sends)}</li>
             </ul>
           )}
-          {status && !status.ai && <p className="za-muted">{t.status.aiOff}</p>}
+          {access.plan && status && !status.ai && <p className="za-muted">{t.status.aiOff}</p>}
           <button type="button" className="za-textlink" onClick={() => forgetAccess()}>{t.access.forget}</button>
         </>
       ) : (
         <>
-          <p className="za-body-text">{t.access.body}</p>
+          <p className="za-body-text">{t.access.body(pkg.coach, pkg.pro)}</p>
           {!compact && <p className="za-muted">{t.access.how}</p>}
           <div className="za-field">
             <label htmlFor={id}>{t.access.field}</label>

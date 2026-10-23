@@ -31,7 +31,8 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
           "When you search, your browser sends our server only your target roles, countries and work type. Our server asks the job sources and returns the listings; it does not store your search.",
           "When you ask for an AI draft (Pro), your CV text with email addresses and phone numbers removed, your name, headline, target roles, languages, listed skills and the job listing are sent through our server to Anthropic, which writes the draft. Zenith does not store them. Anthropic deletes API inputs and outputs within 30 days, unless it must keep them longer to enforce its usage policy or to comply with the law, and does not use them to train its models.",
           "When you ask Zenith to email an application (Pro), the message and the CV file you attach pass through our mailbox's mail server to the employer, with a copy to you. Zenith does not keep a copy.",
-          "If you enter a PayPal order number or a Gumroad license key, it is kept in your browser and checked with PayPal or Gumroad when you use Pro features. Our server keeps only a count of the AI drafts and emails used, stored against a one-way code derived from it, never the order number or key itself."
+          "If you enter a PayPal order number or a Gumroad license key, it is kept in your browser and checked with PayPal or Gumroad when you use the interview coach or Pro features. Our server keeps only a count of the AI drafts and emails used, stored against a one-way code derived from it, never the order number or key itself.",
+          "The interview coach (packages 2 to 4) keeps your interview reports and progress in your browser. Each answer is sent as text to our server, which chooses the interviewer's next question and scores the interview with fixed rules; the answers are not stored and no AI service receives them. If you answer by speaking, your browser turns your speech into text: in most browsers this is done by the browser maker's speech service (for example Google in Chrome, Microsoft in Edge, Apple in Safari) under its own privacy terms, and Zenith never receives the audio. If you turn on the camera in the coach, the picture is shown only on your screen and is never recorded or sent. The interviewer's voice comes from your device; online voices send the interviewer's lines, not your answers, to the browser maker."
         ]
       },
       {
@@ -132,7 +133,8 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
           "Lorsque vous lancez une recherche, votre navigateur n'envoie à notre serveur que vos postes visés, vos pays et le type de poste. Notre serveur interroge les sources d'offres et renvoie les annonces ; il ne conserve pas votre recherche.",
           "Lorsque vous demandez un brouillon IA (Pro), le texte de votre CV sans adresses e-mail ni numéros de téléphone, votre nom, votre accroche, vos postes visés, vos langues, vos compétences et l'offre sont transmis par notre serveur à Anthropic, qui rédige le brouillon. Zenith ne les conserve pas. Anthropic supprime les données envoyées à son API et les réponses sous 30 jours, sauf obligation de les conserver plus longtemps pour faire respecter sa politique d'utilisation ou pour se conformer à la loi, et ne s'en sert pas pour entraîner ses modèles.",
           "Lorsque vous demandez à Zenith d'envoyer une candidature par e-mail (Pro), le message et le CV joint transitent par le serveur de messagerie de notre boîte jusqu'à l'employeur, avec une copie pour vous. Zenith n'en conserve aucune copie.",
-          "Si vous saisissez un numéro de commande PayPal ou une clé de licence Gumroad, il est conservé dans votre navigateur et vérifié auprès de PayPal ou de Gumroad lorsque vous utilisez les fonctions Pro. Notre serveur ne garde que le nombre de brouillons IA et d'e-mails utilisés, rattaché à un code irréversible dérivé de ce numéro, jamais le numéro ou la clé eux-mêmes."
+          "Si vous saisissez un numéro de commande PayPal ou une clé de licence Gumroad, il est conservé dans votre navigateur et vérifié auprès de PayPal ou de Gumroad lorsque vous utilisez le coach d'entretien ou les fonctions Pro. Notre serveur ne garde que le nombre de brouillons IA et d'e-mails utilisés, rattaché à un code irréversible dérivé de ce numéro, jamais le numéro ou la clé eux-mêmes.",
+          "Le coach d'entretien (formules 2 à 4) conserve vos rapports d'entretien et votre progression dans votre navigateur. Chaque réponse est envoyée sous forme de texte à notre serveur, qui choisit la question suivante du recruteur et note l'entretien selon des règles fixes ; les réponses ne sont pas conservées et aucun service d'IA ne les reçoit. Si vous répondez à l'oral, votre navigateur transforme votre voix en texte : dans la plupart des navigateurs, c'est le service vocal de son éditeur qui s'en charge (par exemple Google dans Chrome, Microsoft dans Edge, Apple dans Safari), selon ses propres conditions de confidentialité, et Zenith ne reçoit jamais l'audio. Si vous activez la caméra dans le coach, l'image s'affiche uniquement sur votre écran et n'est jamais enregistrée ni envoyée. La voix du recruteur provient de votre appareil ; les voix en ligne envoient les phrases du recruteur, et non vos réponses, à l'éditeur du navigateur."
         ]
       },
       {
@@ -233,7 +235,8 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
           "عند البحث، لا يرسل متصفحك إلى خادمنا إلا الوظائف والدول ونوع العمل الذي تستهدفه. يستعلم خادمنا من مصادر الوظائف ويعيد الإعلانات، ولا يحتفظ ببحثك.",
           "عند طلب مسودة بالذكاء الاصطناعي (Pro)، يُرسل عبر خادمنا إلى Anthropic، التي تكتب المسودة، نص سيرتك الذاتية بعد حذف عناوين البريد وأرقام الهاتف، واسمك وعنوانك التعريفي والوظائف المستهدفة ولغاتك ومهاراتك وإعلان الوظيفة. لا تحتفظ Zenith بها. وتحذف Anthropic مدخلات واجهتها البرمجية ومخرجاتها خلال 30 يوماً، ما لم تضطر إلى الاحتفاظ بها مدة أطول لتطبيق سياسة الاستخدام أو للامتثال للقانون، ولا تستخدمها لتدريب نماذجها.",
           "عندما تطلب من Zenith إرسال طلب توظيف بالبريد (Pro)، تمر الرسالة وملف السيرة المرفق عبر خادم بريدنا إلى صاحب العمل، مع نسخة إليك. ولا تحتفظ Zenith بأي نسخة.",
-          "إذا أدخلت رقم طلب PayPal أو مفتاح ترخيص Gumroad، فإنه يُحفظ في متصفحك ويُتحقق منه لدى PayPal أو Gumroad عند استخدام ميزات Pro. ولا يحتفظ خادمنا إلا بعدد المسودات والرسائل المستخدمة، مرتبطاً برمز أحادي الاتجاه مشتق منه، لا برقم الطلب أو المفتاح نفسه."
+          "إذا أدخلت رقم طلب PayPal أو مفتاح ترخيص Gumroad، فإنه يُحفظ في متصفحك ويُتحقق منه لدى PayPal أو Gumroad عند استخدام مدرّب المقابلات أو ميزات Pro. ولا يحتفظ خادمنا إلا بعدد المسودات والرسائل المستخدمة، مرتبطاً برمز أحادي الاتجاه مشتق منه، لا برقم الطلب أو المفتاح نفسه.",
+          "يحفظ مدرّب المقابلات (الباقات من 2 إلى 4) تقارير مقابلاتك وتقدّمك في متصفحك. تُرسل كل إجابة نصاً إلى خادمنا، الذي يختار سؤال المحاوِر التالي ويقيّم المقابلة بقواعد ثابتة؛ ولا تُخزَّن الإجابات ولا تتلقاها أي خدمة ذكاء اصطناعي. إذا أجبت بالصوت، يحوّل متصفحك كلامك إلى نص: في معظم المتصفحات تتولى ذلك خدمة الصوت لدى الشركة المطوّرة للمتصفح (مثل Google في Chrome وMicrosoft في Edge وApple في Safari) وفق شروط الخصوصية الخاصة بها، ولا تتلقى Zenith الصوت أبداً. وإذا شغّلت الكاميرا في المدرّب، تظهر الصورة على شاشتك فقط ولا تُسجَّل ولا تُرسَل. يأتي صوت المحاوِر من جهازك؛ والأصوات عبر الإنترنت ترسل عبارات المحاوِر، لا إجاباتك، إلى الشركة المطوّرة للمتصفح."
         ]
       },
       {
@@ -316,7 +319,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
 export const TERMS: Record<Lang, LegalDoc> = {
   "en": {
     "title": "Terms of Service",
-    "updated": "Last updated: 19 October 2026",
+    "updated": "Last updated: 23 October 2026",
     "intro": "These Terms of Service govern your use of the Zenith Dubai CV website and the professional career services we provide. By engaging our services or submitting an enquiry, you agree to be bound by these terms. Please read them carefully before proceeding.",
     "sections": [
       {
@@ -375,7 +378,8 @@ export const TERMS: Record<Lang, LegalDoc> = {
           "Where a package includes job applications submitted for you, we agree the target roles with you and submit applications only where the employer accepts them that way. Anything that requires your own account, an assessment or a security check is returned to you.",
           "The Zenith AI job agent is a self-service tool. Listings come from third-party job sources, and we do not guarantee that a listing is accurate, current or still open. Drafts, whether built from templates or written with AI, may contain mistakes: you are responsible for reviewing and approving everything before you use or send it.",
           "Pro features (emailing applications for you, and AI drafting when it is switched on) require a qualifying purchase, are subject to the usage allowances shown in the agent, and may be suspended if they are used for spam or for anything other than applying to listings that invite applications.",
-          "The agent never submits applications on job boards or employer portals for you, and never bypasses CAPTCHAs, sign-ins or other access controls."
+          "The agent never submits applications on job boards or employer portals for you, and never bypasses CAPTCHAs, sign-ins or other access controls.",
+          "The interview coach, included in packages 2 to 4, is a practice tool. Its interviewer is an animation, not a person. Its scores measure the words of your answers with fixed rules: they do not assess your personality, voice or appearance, and they do not predict an employer's decision or guarantee a job offer."
         ]
       },
       {
@@ -437,7 +441,7 @@ export const TERMS: Record<Lang, LegalDoc> = {
   },
   "fr": {
     "title": "Conditions d'utilisation",
-    "updated": "Dernière mise à jour : 19 octobre 2026",
+    "updated": "Dernière mise à jour : 23 octobre 2026",
     "intro": "Ces Conditions d'utilisation régissent votre utilisation du site Zenith Dubai CV et des services professionnels que nous proposons. En faisant appel à nos services ou en soumettant une demande, vous acceptez d'être lié par ces conditions.",
     "sections": [
       {
@@ -496,7 +500,8 @@ export const TERMS: Record<Lang, LegalDoc> = {
           "Lorsqu'une formule inclut des candidatures envoyées pour vous, nous convenons avec vous des postes visés et n'envoyons de candidatures que lorsque l'employeur les accepte sous cette forme. Tout ce qui exige votre propre compte, un test ou une vérification de sécurité vous est renvoyé.",
           "L'agent emploi Zenith AI est un outil en libre-service. Les offres proviennent de sources tierces, et nous ne garantissons pas qu'une offre soit exacte, à jour ou encore ouverte. Les brouillons, qu'ils soient bâtis sur des modèles ou rédigés avec l'IA, peuvent contenir des erreurs : il vous appartient de tout relire et valider avant de l'utiliser ou de l'envoyer.",
           "Les fonctions Pro (envoi de candidatures pour vous par e-mail, et rédaction par IA lorsqu'elle est activée) nécessitent un achat éligible, sont soumises aux quotas affichés dans l'agent et peuvent être suspendues en cas d'usage pour du spam ou pour autre chose que répondre à des offres qui invitent à postuler.",
-          "L'agent ne dépose jamais de candidature pour vous sur les sites d'emploi ou les portails employeurs, et ne contourne jamais les CAPTCHA, les connexions ou d'autres contrôles d'accès."
+          "L'agent ne dépose jamais de candidature pour vous sur les sites d'emploi ou les portails employeurs, et ne contourne jamais les CAPTCHA, les connexions ou d'autres contrôles d'accès.",
+          "Le coach d'entretien, inclus dans les formules 2 à 4, est un outil d'entraînement. Son recruteur est une animation, pas une personne. Ses notes mesurent les mots de vos réponses selon des règles fixes : elles n'évaluent ni votre personnalité, ni votre voix, ni votre apparence, et ne prédisent pas la décision d'un employeur ni ne garantissent une offre d'emploi."
         ]
       },
       {
@@ -558,7 +563,7 @@ export const TERMS: Record<Lang, LegalDoc> = {
   },
   "ar": {
     "title": "شروط الخدمة",
-    "updated": "آخر تحديث: 19 أكتوبر 2026",
+    "updated": "آخر تحديث: 23 أكتوبر 2026",
     "intro": "تحكم شروط الخدمة هذه استخدامك لموقع Zenith Dubai CV والخدمات المهنية التي نقدّمها. بتعاملك مع خدماتنا أو تقديم استفسار، فإنك توافق على الالتزام بهذه الشروط. يُرجى قراءتها بعناية قبل المتابعة.",
     "sections": [
       {
@@ -617,7 +622,8 @@ export const TERMS: Record<Lang, LegalDoc> = {
           "حين تشمل الباقة طلبات توظيف نقدّمها نيابةً عنك، نتفق معك على الوظائف المستهدفة، ولا نقدّم الطلبات إلا حيث يقبلها صاحب العمل بهذه الطريقة. وأي خطوة تتطلب حسابك الخاص أو اختباراً أو تحققاً أمنياً نعيدها إليك.",
           "وكيل الوظائف Zenith AI أداة خدمة ذاتية. تأتي الإعلانات من مصادر وظائف خارجية، ولا نضمن دقة أي إعلان أو حداثته أو استمراره. وقد تحتوي المسودات، سواء بُنيت من قوالب أو كُتبت بالذكاء الاصطناعي، على أخطاء: أنت المسؤول عن مراجعة كل شيء والموافقة عليه قبل استخدامه أو إرساله.",
           "تتطلب ميزات Pro (إرسال الطلبات نيابةً عنك بالبريد، والكتابة بالذكاء الاصطناعي عند تفعيلها) عملية شراء مؤهلة، وتخضع لحدود الاستخدام المعروضة في الوكيل، ويجوز إيقافها إذا استُخدمت لإرسال رسائل مزعجة أو لأي غرض غير التقدّم لإعلانات تدعو إلى التقديم.",
-          "لا يقدّم الوكيل أبداً طلبات نيابةً عنك في مواقع التوظيف أو بوابات أصحاب العمل، ولا يتجاوز أبداً اختبارات CAPTCHA أو تسجيل الدخول أو غيرها من ضوابط الوصول."
+          "لا يقدّم الوكيل أبداً طلبات نيابةً عنك في مواقع التوظيف أو بوابات أصحاب العمل، ولا يتجاوز أبداً اختبارات CAPTCHA أو تسجيل الدخول أو غيرها من ضوابط الوصول.",
+          "مدرّب المقابلات، المتاح ضمن الباقات من 2 إلى 4، أداة للتدريب. المحاوِر فيه رسم متحرك وليس شخصاً. تقيس درجاته كلمات إجاباتك بقواعد ثابتة: لا تقيّم شخصيتك أو صوتك أو مظهرك، ولا تتنبأ بقرار صاحب العمل ولا تضمن عرض عمل."
         ]
       },
       {

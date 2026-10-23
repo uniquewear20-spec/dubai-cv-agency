@@ -1,8 +1,9 @@
 // app/api/agent/access/route.ts — checks a purchase (PayPal order or Gumroad license key) with the
-// payment provider and says which agent plan it unlocks, with the allowance left.
+// payment provider and says what it unlocks in the agent: the interview coach (packages 2–4) and
+// Pro drafting and sending (packages 3–4), with the Pro allowance left.
 
 import type { NextRequest } from "next/server";
-import { AccessError, verifyAccess } from "@/lib/agent/access";
+import { AccessError, featuresOf, verifyPurchase } from "@/lib/agent/access";
 import { allow, clientIp, usageOf } from "@/lib/agent/limits";
 import { fail, ok, readJson, text } from "@/lib/agent/http";
 
@@ -14,9 +15,15 @@ export async function POST(req: NextRequest) {
   if (!kind || !proof) return fail("invalid");
 
   try {
-    const v = await verifyAccess({ kind, proof });
-    const [drafts, sends] = await Promise.all([usageOf("drafts", v.key, v.plan), usageOf("sends", v.key, v.plan)]);
-    return ok({ plan: v.plan, ref: v.ref, test: v.test, drafts, sends, verifiedAt: new Date().toISOString() });
+    const v = await verifyPurchase({ kind, proof });
+    const { plan, coach } = featuresOf(v.tier);
+    if (!plan && !coach) return fail("not-eligible");
+    const usage = plan ? await Promise.all([usageOf("drafts", v.key, plan), usageOf("sends", v.key, plan)]) : null;
+    return ok({
+      tier: v.tier, plan, coach, ref: v.ref, test: v.test,
+      ...(usage ? { drafts: usage[0], sends: usage[1] } : {}),
+      verifiedAt: new Date().toISOString(),
+    });
   } catch (err) {
     if (err instanceof AccessError) return fail(err.code);
     console.error("[agent/access] failed:", err instanceof Error ? err.message : err);

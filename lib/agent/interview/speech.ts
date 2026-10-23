@@ -1,0 +1,371 @@
+// lib/agent/interview/speech.ts — browser only. The interview room's voice and ears, built on the
+// browser's own Web Speech API (no paid service):
+//
+//   Speaker     the interviewer's voice (speechSynthesis), in sentence-sized pieces because some
+//               browsers cut long utterances short. It keeps a clock of where the speech is, from
+//               the browser's word-boundary events where they exist and from a measured speaking
+//               rate otherwise, so the animated mouth can follow it.
+//   Recognizer  the candidate's answers (SpeechRecognition), continuous, restarted when the
+//               browser ends a session on its own, with the time spoken for the speaking pace.
+//
+// In most browsers speech recognition runs on the browser maker's servers; on-device recognition
+// is used when the browser offers it for the language (see onDeviceStatus).
+
+export interface VoiceClock {
+  /** Everything being said in this turn. */
+  text: string;
+  speaking: boolean;
+  /** Character index reached at `baseAt` (ms, performance.now()). */
+  base: number;
+  baseAt: number;
+  /** Where the current piece ends: the clock doesn't run past it. */
+  end: number;
+  /** Estimated characters per second for this voice. */
+  cps: number;
+}
+
+export const newClock = (): VoiceClock => ({ text: "", speaking: false, base: 0, baseAt: 0, end: 0, cps: 14 });
+
+/** Where the speech is now, as a character index, or -1 when silent. */
+export function clockPosition(c: VoiceClock, now: number): number {
+  if (!c.speaking) return -1;
+  return Math.min(c.end, c.base + ((now - c.baseAt) / 1000) * c.cps);
+}
+
+/** BCP 47 tags for the interview languages. English follows the browser's own English when it has one. */
+export function speechLang(lang: "en" | "fr" | "ar"): string {
+  if (lang === "fr") return "fr-FR";
+  if (lang === "ar") return "ar-AE";
+  const nav = typeof navigator !== "undefined" ? navigator.language : "";
+  return /^en-[A-Z]{2}$/i.test(nav) ? nav : "en-GB";
+}
+
+/** Sentence-sized pieces of at most ~180 characters, with their offsets in the full text. */
+export function chunks(text: string): { at: number; text: string }[] {
+  const out: { at: number; text: string }[] = [];
+  const re = /[^.!?؟…]+[.!?؟…]*\s*/gu;
+  let cur = "";
+  let curAt = 0;
+  for (const m of text.matchAll(re)) {
+    const piece = m[0];
+    if (cur && cur.length + piece.length > 180) {
+      out.push({ at: curAt, text: cur });
+      cur = "";
+    }
+    if (!cur) curAt = m.index!;
+    cur += piece;
+  }
+  if (cur.trim()) out.push({ at: curAt, text: cur });
+  // A single sentence longer than 180 characters is split at a comma or a space.
+  return out.flatMap(c => {
+    if (c.text.length <= 220) return [c];
+    const parts: { at: number; text: string }[] = [];
+    let rest = c.text;
+    let at = c.at;
+    while (rest.length > 220) {
+      const cut = Math.max(rest.lastIndexOf(", ", 180), rest.lastIndexOf("، ", 180), rest.lastIndexOf(" ", 180));
+      const n = cut > 40 ? cut + 1 : 180;
+      parts.push({ at, text: rest.slice(0, n) });
+      at += n;
+      rest = rest.slice(n);
+    }
+    parts.push({ at, text: rest });
+    return parts;
+  });
+}
+
+// ── The interviewer's voice ──────────────────────────────────────────────────
+
+export const canSpeak = (): boolean => typeof window !== "undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined";
+
+/** Voices for a language, on-device ones first. Voices load asynchronously in some browsers. */
+export function voicesFor(lang: "en" | "fr" | "ar"): SpeechSynthesisVoice[] {
+  if (!canSpeak()) return [];
+  const all = window.speechSynthesis.getVoices();
+  return all
+    .filter(v => v.lang.toLowerCase().replace("_", "-").startsWith(lang))
+    .sort((a, b) => Number(b.localService) - Number(a.localService) || Number(b.default) - Number(a.default) || a.name.localeCompare(b.name));
+}
+
+/** Calls back when the list of voices is (re)loaded; returns an unsubscribe function. */
+export function onVoices(cb: () => void): () => void {
+  if (!canSpeak()) return () => undefined;
+  const synth = window.speechSynthesis;
+  const handler = () => cb();
+  // Safari doesn't support addEventListener on speechSynthesis in every version.
+  if (typeof synth.addEventListener === "function") synth.addEventListener("voiceschanged", handler);
+  else synth.onvoiceschanged = handler;
+  let tries = 0;
+  const poll = window.setInterval(() => { tries++; if (synth.getVoices().length || tries > 12) { window.clearInterval(poll); cb(); } }, 250);
+  return () => {
+    window.clearInterval(poll);
+    if (typeof synth.removeEventListener === "function") synth.removeEventListener("voiceschanged", handler);
+    else if (synth.onvoiceschanged === handler) synth.onvoiceschanged = null;
+  };
+}
+
+export class Speaker {
+  private token = 0;
+  constructor(public clock: VoiceClock) {}
+
+  /**
+   * Says `text` with `voice` (or silently at the measured pace when there is no voice, so the
+   * captions and the mouth still follow). Resolves when finished or interrupted.
+   */
+  say(text: string, voice: SpeechSynthesisVoice | null, lang: string, onPiece?: (index: number) => void): Promise<"done" | "stopped"> {
+    this.stop();
+    const token = ++this.token;
+    const clock = this.clock;
+    clock.text = text;
+    clock.base = 0;
+    clock.baseAt = performance.now();
+    clock.end = 0;
+    const pieces = chunks(text);
+    const live = () => token === this.token;
+
+    const silent = (piece: { at: number; text: string }) => new Promise<void>(resolve => {
+      clock.speaking = true;
+      clock.base = piece.at;
+      clock.baseAt = performance.now();
+      clock.end = piece.at + piece.text.length;
+      const ms = Math.max(600, (piece.text.length / clock.cps) * 1000);
+      window.setTimeout(resolve, ms);
+    });
+
+    const spoken = (piece: { at: number; text: string }) => new Promise<void>(resolve => {
+      const u = new SpeechSynthesisUtterance(piece.text);
+      if (voice) u.voice = voice;
+      u.lang = voice?.lang || lang;
+      u.rate = 1;
+      u.pitch = 1;
+      let started = 0;
+      let finished = false;
+      const done = () => { if (finished) return; finished = true; window.clearTimeout(guard); resolve(); };
+      // A guard for browsers that never fire "end" (or fire nothing at all).
+      const guard = window.setTimeout(done, Math.max(4000, (piece.text.length / 7) * 1000));
+      u.onstart = () => {
+        if (!live()) return;
+        started = performance.now();
+        clock.speaking = true;
+        clock.base = piece.at;
+        clock.baseAt = started;
+        clock.end = piece.at + piece.text.length;
+      };
+      u.onboundary = e => {
+        if (!live() || (e.name && e.name !== "word")) return;
+        clock.base = piece.at + e.charIndex;
+        clock.baseAt = performance.now();
+      };
+      u.onend = () => {
+        if (live() && started) {
+          const secs = (performance.now() - started) / 1000;
+          // Learn this voice's pace from whole pieces, for browsers without boundary events.
+          if (secs > 0.8 && piece.text.length > 20) clock.cps = Math.min(30, Math.max(7, clock.cps * 0.5 + (piece.text.length / secs) * 0.5));
+        }
+        done();
+      };
+      u.onerror = () => done();
+      window.speechSynthesis.speak(u);
+      // Chrome can leave the queue paused after a cancel.
+      if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+    });
+
+    return (async () => {
+      for (const [i, piece] of pieces.entries()) {
+        if (!live()) return "stopped" as const;
+        onPiece?.(i);
+        if (voice && canSpeak()) await spoken(piece);
+        else await silent(piece);
+        clock.speaking = false;
+        if (!live()) return "stopped" as const;
+        await new Promise(r => window.setTimeout(r, 140));
+      }
+      clock.speaking = false;
+      return live() ? ("done" as const) : ("stopped" as const);
+    })();
+  }
+
+  stop(): void {
+    this.token++;
+    this.clock.speaking = false;
+    if (canSpeak()) window.speechSynthesis.cancel();
+  }
+}
+
+// ── The candidate's answers ──────────────────────────────────────────────────
+
+type RecognitionCtor = new () => SpeechRecognitionLike;
+interface SpeechRecognitionLike {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  maxAlternatives: number;
+  processLocally?: boolean;
+  onresult: ((e: { resultIndex: number; results: ArrayLike<{ isFinal: boolean; 0: { transcript: string } }> }) => void) | null;
+  onerror: ((e: { error: string }) => void) | null;
+  onend: (() => void) | null;
+  onstart: (() => void) | null;
+  start(): void;
+  stop(): void;
+  abort(): void;
+}
+interface RecognitionStatic {
+  available?: (o: { langs: string[]; processLocally: boolean }) => Promise<string>;
+  install?: (o: { langs: string[]; processLocally: boolean }) => Promise<boolean>;
+}
+
+function recognitionCtor(): (RecognitionCtor & RecognitionStatic) | null {
+  if (typeof window === "undefined") return null;
+  const w = window as unknown as { SpeechRecognition?: RecognitionCtor & RecognitionStatic; webkitSpeechRecognition?: RecognitionCtor & RecognitionStatic };
+  return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
+}
+
+export const canListen = (): boolean => recognitionCtor() !== null;
+
+/** Whether this browser can recognise the language on the device: "available", "downloadable", "downloading", "unavailable" or "unknown". */
+export async function onDeviceStatus(lang: string): Promise<string> {
+  const R = recognitionCtor();
+  if (!R?.available) return "unknown";
+  try {
+    return await R.available({ langs: [lang], processLocally: true });
+  } catch {
+    return "unknown";
+  }
+}
+
+/** Asks the browser to download on-device recognition for the language. */
+export async function installOnDevice(lang: string): Promise<boolean> {
+  const R = recognitionCtor();
+  if (!R?.install) return false;
+  try {
+    return Boolean(await R.install({ langs: [lang], processLocally: true }));
+  } catch {
+    return false;
+  }
+}
+
+export type ListenError = "denied" | "no-mic" | "network" | "language" | "failed";
+
+export interface ListenEvents {
+  /** Everything heard so far: settled text, and the part still being recognised. */
+  onText: (final: string, interim: string) => void;
+  onError: (e: ListenError) => void;
+  /** Recognition really started (after the permission prompt, if any). */
+  onListening?: () => void;
+}
+
+export class Recognizer {
+  private rec: SpeechRecognitionLike | null = null;
+  private wanted = false;
+  /** Text settled in earlier recognition sessions of this answer. */
+  private carry = "";
+  private sessionFinal = "";
+  private interim = "";
+  private firstAt = 0;
+  private lastAt = 0;
+  private restarts: number[] = [];
+
+  constructor(private lang: string, private ev: ListenEvents, private local = false) {}
+
+  get listening(): boolean { return this.wanted; }
+  get heardAt(): number { return this.lastAt; }
+
+  start(): void {
+    this.wanted = true;
+    this.carry = "";
+    this.sessionFinal = "";
+    this.interim = "";
+    this.firstAt = 0;
+    this.lastAt = 0;
+    this.restarts = [];
+    this.spawn();
+  }
+
+  /** Continues an answer after a pause, keeping what was heard. */
+  resume(textSoFar: string): void {
+    this.wanted = true;
+    this.carry = textSoFar.trim();
+    this.sessionFinal = "";
+    this.interim = "";
+    this.spawn();
+  }
+
+  private spawn(): void {
+    const R = recognitionCtor();
+    if (!R) { this.ev.onError("failed"); return; }
+    let rec: SpeechRecognitionLike;
+    try {
+      rec = new R();
+    } catch {
+      this.ev.onError("failed");
+      return;
+    }
+    rec.lang = this.lang;
+    rec.continuous = true;
+    rec.interimResults = true;
+    rec.maxAlternatives = 1;
+    if (this.local && "processLocally" in rec) rec.processLocally = true;
+    rec.onstart = () => this.ev.onListening?.();
+    rec.onresult = e => {
+      let fin = "";
+      let interim = "";
+      for (let i = 0; i < e.results.length; i++) {
+        const r = e.results[i];
+        if (r.isFinal) fin += `${r[0].transcript} `;
+        else interim += `${r[0].transcript} `;
+      }
+      const now = performance.now();
+      if (!this.firstAt) this.firstAt = now;
+      this.lastAt = now;
+      this.sessionFinal = fin.trim();
+      this.interim = interim.trim();
+      this.ev.onText(this.text(false), this.interim);
+    };
+    rec.onerror = e => {
+      if (e.error === "no-speech" || e.error === "aborted") return; // silence: onend restarts
+      this.wanted = false;
+      this.ev.onError(e.error === "not-allowed" || e.error === "service-not-allowed" ? "denied"
+        : e.error === "audio-capture" ? "no-mic" : e.error === "network" ? "network" : e.error === "language-not-supported" ? "language" : "failed");
+    };
+    rec.onend = () => {
+      // Keep what this session settled, then carry on if the answer isn't finished.
+      this.carry = this.text(false);
+      this.sessionFinal = "";
+      if (this.interim) { this.carry = `${this.carry} ${this.interim}`.trim(); this.interim = ""; }
+      this.rec = null;
+      if (!this.wanted) return;
+      const now = Date.now();
+      this.restarts = [...this.restarts.filter(t => now - t < 10_000), now];
+      if (this.restarts.length > 6) { this.wanted = false; this.ev.onError("failed"); return; }
+      window.setTimeout(() => { if (this.wanted && !this.rec) this.spawn(); }, 120);
+    };
+    this.rec = rec;
+    try {
+      rec.start();
+    } catch {
+      this.rec = null;
+      this.wanted = false;
+      this.ev.onError("failed");
+    }
+  }
+
+  private text(withInterim: boolean): string {
+    return [this.carry, this.sessionFinal, withInterim ? this.interim : ""].filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
+  }
+
+  /** Stops listening; returns everything heard and the seconds between the first and last words. */
+  stop(): { text: string; seconds: number } {
+    this.wanted = false;
+    const text = this.text(true);
+    const seconds = this.firstAt && this.lastAt > this.firstAt ? (this.lastAt - this.firstAt) / 1000 : 0;
+    try { this.rec?.stop(); } catch { /* already stopped */ }
+    this.rec = null;
+    return { text, seconds };
+  }
+
+  abort(): void {
+    this.wanted = false;
+    try { this.rec?.abort(); } catch { /* ignore */ }
+    this.rec = null;
+  }
+}

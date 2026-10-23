@@ -3,7 +3,8 @@
 // template), applying with explicit approval, and tracking to the outcome.
 
 import { useId, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, CalendarPlus, Copy, Download, ExternalLink, Mail, Send, Trash2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CalendarPlus, Copy, Download, ExternalLink, Mail, Mic, Send, Trash2 } from "lucide-react";
+import { IV_COPY } from "@/lib/agent/interview/copy";
 import { useAgent, type Lang } from "./context";
 import { Modal, Notice, ReasonList, ScoreMeter, fmtDate } from "./parts";
 import { candidateSkills, daysSince, scoreJob } from "@/lib/agent/score";
@@ -15,7 +16,7 @@ const STATUSES: AppStatus[] = ["saved", "prepared", "submitted", "interview", "o
 const EMAIL = /^[^\s@<>"(),;:]+@[^\s@<>"(),;:]+\.[A-Za-z]{2,24}$/;
 
 export default function Workspace({ app }: { app: Application }) {
-  const { t, lang, profile, go, upsertApp, removeApp, countryLabel } = useAgent();
+  const { t, lang, profile, go, practise, upsertApp, removeApp, countryLabel } = useAgent();
   const job = app.job;
   const match = useMemo(() => scoreJob(job, profile, candidateSkills(profile)), [job, profile]);
   const days = daysSince(job.postedAt);
@@ -51,7 +52,10 @@ export default function Workspace({ app }: { app: Application }) {
             {job.salary && <span dir="ltr">{job.salary}</span>}
             <span className="za-status" data-s={app.status}>{t.apps.status[app.status]}</span>
           </p>
-          <a className="z-btn z-btn-quiet z-btn-small" href={job.url} target="_blank" rel="noopener noreferrer">{t.ws.viewListing} <ExternalLink size={14} aria-hidden /></a>
+          <div className="za-actions za-ws-links">
+            <a className="z-btn z-btn-quiet z-btn-small" href={job.url} target="_blank" rel="noopener noreferrer">{t.ws.viewListing} <ExternalLink size={14} aria-hidden /></a>
+            <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={() => practise(app.jobId)}><Mic size={14} aria-hidden /> {IV_COPY[lang].entry.forJob}</button>
+          </div>
         </div>
         <ScoreMeter match={match} label={t.jobs.label(match.score)} />
       </header>
@@ -85,7 +89,8 @@ export default function Workspace({ app }: { app: Application }) {
 // ── Draft ────────────────────────────────────────────────────────────────────
 
 function DraftPanel({ app, onSaved }: { app: Application; onSaved: (d: Draft) => Promise<void> }) {
-  const { t, lang, profile, status, access, consent, giveConsent, setUsage, go } = useAgent();
+  const { t, lang, profile, status, access: bought, consent, giveConsent, setUsage, go, pkg } = useAgent();
+  const access = bought?.plan ? bought : null; // AI drafting is Pro only (packages 3 and 4)
   const [draft, setDraft] = useState<Draft | null>(app.draft);
   const [draftLang, setDraftLang] = useState<Lang>(app.draft?.lang ?? lang);
   const [busy, setBusy] = useState(false);
@@ -174,7 +179,7 @@ function DraftPanel({ app, onSaved }: { app: Application; onSaved: (d: Draft) =>
         </div>
       )}
       {hasCv && !status?.ai && status && <p className="za-hint">{t.ws.aiOff}</p>}
-      {hasCv && status?.ai && !access && <p className="za-hint">{t.ws.aiLocked} <button type="button" className="za-textlink" onClick={() => go("overview")}>{t.access.check}</button></p>}
+      {hasCv && status?.ai && !access && <p className="za-hint">{t.ws.aiLocked(pkg.pro)} <button type="button" className="za-textlink" onClick={() => go("overview")}>{t.access.check}</button></p>}
       {busy && <p className="za-muted" role="status">{t.ws.writing}</p>}
       {error && <Notice tone="error">{error}</Notice>}
       {note && <Notice tone="info">{note}</Notice>}
@@ -251,7 +256,8 @@ function DraftPanel({ app, onSaved }: { app: Application; onSaved: (d: Draft) =>
 // ── Apply ────────────────────────────────────────────────────────────────────
 
 function ApplyPanel({ app, onSubmitted }: { app: Application; onSubmitted: (channel: Application["channel"]) => Promise<void> }) {
-  const { t, profile, access, status, usage, setUsage, lang } = useAgent();
+  const { t, profile, access: bought, status, usage, setUsage, lang, pkg } = useAgent();
+  const access = bought?.plan ? bought : null; // sending is Pro only (packages 3 and 4)
   const [askDone, setAskDone] = useState<Application["channel"]>(null);
   const [to, setTo] = useState(app.job.applyEmail ?? "");
   const [review, setReview] = useState(false);
@@ -299,7 +305,7 @@ function ApplyPanel({ app, onSubmitted }: { app: Application; onSubmitted: (chan
           </button>
         </div>
         <p className="za-hint">{t.ws.openMailHint}</p>
-        <p className="za-hint">{!access ? t.ws.zLocked : status && !status.email ? t.ws.zOff : t.ws.zSendHint}</p>
+        <p className="za-hint">{!access ? t.ws.zLocked(pkg.pro) : status && !status.email ? t.ws.zOff : t.ws.zSendHint}</p>
         {usage && access && <p className="za-hint">{t.ws.sendsLeft(usage.sends)}</p>}
       </div>
 
@@ -321,7 +327,8 @@ function ApplyPanel({ app, onSubmitted }: { app: Application; onSubmitted: (chan
 }
 
 function SendReview({ to, subject: initialSubject, letter, onSent }: { to: string; subject: string; letter: string; onSent: (u: { used: number; limit: number; period: "order" | "day" }) => Promise<void> }) {
-  const { t, lang, profile, access } = useAgent();
+  const { t, lang, profile, access: bought } = useAgent();
+  const access = bought?.plan ? bought : null;
   const [subject, setSubject] = useState(initialSubject);
   const [body, setBody] = useState(letter);
   const [cv, setCv] = useState<File | null>(null);

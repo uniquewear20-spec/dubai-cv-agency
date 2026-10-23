@@ -35,6 +35,8 @@ export const TIERS: Record<TierKey, { name: string; price: number }> = {
 export const EBOOK_TIERS: readonly TierKey[] = ["growth", "executive", "apex"];
 /** Packages that include Pro access to the Zenith AI job agent (sending for you; AI drafting when switched on). */
 export const AI_TIERS: readonly TierKey[] = ["executive", "apex"];
+/** Packages that include the agent's interview coach (packages 2, 3 and 4). */
+export const COACH_TIERS: readonly TierKey[] = ["growth", "executive", "apex"];
 
 export const isTierKey = (v: unknown): v is TierKey =>
   typeof v === "string" && Object.prototype.hasOwnProperty.call(TIERS, v);

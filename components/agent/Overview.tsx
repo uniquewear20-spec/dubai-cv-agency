@@ -2,15 +2,23 @@
 // components/agent/Overview.tsx — the dashboard: what works now, the pipeline in numbers,
 // follow-ups that are due, and the best matches from the last search.
 
-import { CalendarPlus, Check } from "lucide-react";
+import { useEffect, useState } from "react";
+import { CalendarPlus, Check, Mic } from "lucide-react";
 import { useAgent } from "./context";
 import { ScoreMeter, fmtDate } from "./parts";
 import AccessPanel from "./AccessPanel";
 import { addDays, download, icsFile, today } from "@/lib/agent/links";
 import type { AppStatus } from "@/lib/agent/types";
+import { getKV } from "@/lib/agent/store";
+import { IV_COPY } from "@/lib/agent/interview/copy";
+import type { IvRecord } from "@/lib/agent/interview/types";
 
 export default function Overview() {
-  const { t, lang, profile, apps, scored, search, status, go, upsertApp, hidden } = useAgent();
+  const { t, lang, profile, apps, scored, search, status, go, upsertApp, hidden, pkg, access } = useAgent();
+  const iv = IV_COPY[lang];
+  const [lastIv, setLastIv] = useState<IvRecord | null>(null);
+  useEffect(() => { void getKV("interviews").then(r => setLastIv(Array.isArray(r) && r[0]?.report ? r[0] : null)); }, []);
+  const coach = Boolean(access?.coach || access?.plan);
   const count = (s: AppStatus) => apps.filter(a => a.status === s).length;
   const matches = scored.filter(s => s.match.score >= 60 && !hidden.includes(s.job.id));
   const due = apps
@@ -38,7 +46,7 @@ export default function Overview() {
 
       <section className="za-live" aria-label={t.status.live}>
         <p><span className="za-dot" data-on="true" aria-hidden /> <strong>{t.status.live}:</strong> {t.status.liveList}{liveSources ? ` ${t.status.sources(liveSources)}.` : ""}</p>
-        {status && <p><span className="za-dot" data-on={status.ai} aria-hidden /> {status.ai ? t.status.aiOn : t.status.aiOff}</p>}
+        {status && <p><span className="za-dot" data-on={status.ai} aria-hidden /> {status.ai ? t.status.aiOn(pkg.pro) : t.status.aiOff}</p>}
       </section>
 
       {!hasProfile && (
@@ -62,6 +70,16 @@ export default function Overview() {
             </div>
           ))}
         </dl>
+      </section>
+
+      <section className="za-panel za-iv-entry">
+        <div>
+          <h2 className="za-h2">{iv.h}</h2>
+          <p className="za-body-text">{iv.entry.body}</p>
+          {lastIv?.report.overall != null && <p className="za-muted">{iv.entry.last(lastIv.report.overall.toFixed(1), fmtDate(lastIv.at, lang))}</p>}
+          {!coach && <p className="za-muted">{iv.entry.locked(pkg.coach)}</p>}
+        </div>
+        <button type="button" className="z-btn z-btn-quiet" onClick={() => go("interview")}><Mic size={16} aria-hidden /> {iv.entry.cta}</button>
       </section>
 
       <div className="za-split">

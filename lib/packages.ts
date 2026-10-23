@@ -9,7 +9,9 @@
 // PayPal, and Apple Pay or Google Pay on devices and browsers that support them. A null URL hides
 // the Gumroad button and every Apple Pay / Google Pay mention for that package.
 // `gumroadProductId` is the id Gumroad shows in the product's license key block; the agent uses
-// it to check license keys (packages 3 and 4 only).
+// it to check license keys: the interview coach for packages 2–4, Pro for packages 3–4. Package 2's
+// Gumroad product has no license keys yet (null), so its Gumroad buyers can't unlock the coach
+// themselves until the owner switches them on and the id is added here.
 
 import { TIERS, type TierKey } from "@/lib/checkout/catalog";
 import type { L10n } from "@/lib/site";
@@ -56,6 +58,11 @@ const PHOTO: L10n = {
   en: "LinkedIn profile photo enhancement",
   fr: "Amélioration de votre photo de profil LinkedIn",
   ar: "تحسين صورة ملفك الشخصي على لينكدإن",
+};
+const COACH: L10n = {
+  en: "Interview coach in the Zenith AI job agent: practice interviews out loud, with follow-up questions and a scored report",
+  fr: "Coach d'entretien dans l'agent Zenith AI : entretiens d'entraînement à voix haute, avec relances et rapport noté",
+  ar: "مدرّب المقابلات في وكيل Zenith AI: مقابلات تدريبية بصوت مسموع، مع أسئلة متابعة وتقرير بالدرجات",
 };
 const DUAL_FORMAT: L10n = {
   en: "Two CV formats: ATS-friendly and executive design",
@@ -115,6 +122,7 @@ export const PACKAGES: PackageDef[] = [
       COVER_LETTER,
     ],
     alsoIncluded: [
+      COACH,
       PHOTO,
       {
         en: "International career strategy guide",
@@ -162,6 +170,7 @@ export const PACKAGES: PackageDef[] = [
       },
     ],
     alsoIncluded: [
+      COACH,
       COVER_LETTER,
       PHOTO,
       { en: "International mobility guide", fr: "Guide de mobilité internationale", ar: "دليل التنقل الدولي" },
@@ -206,6 +215,7 @@ export const PACKAGES: PackageDef[] = [
       },
     ],
     alsoIncluded: [
+      COACH,
       { en: "Interview tips guide (PDF)", fr: "Guide de conseils pour l'entretien (PDF)", ar: "دليل نصائح المقابلات (PDF)" },
       FIRST_DRAFT,
       REVISIONS,
@@ -219,3 +229,4 @@ export const PACKAGES: PackageDef[] = [
 
 export const packagePrice = (key: TierKey): number => TIERS[key].price;
 export const packageByKey = (key: TierKey): PackageDef => PACKAGES.find(p => p.key === key)!;
+export const packageName = (key: TierKey, lang: keyof L10n): string => packageByKey(key).name[lang];

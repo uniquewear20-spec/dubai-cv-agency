@@ -5,11 +5,13 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Moon, Sun } from "lucide-react";
-import { COPY } from "@/lib/agent/i18n";
+import { COPY, nameList } from "@/lib/agent/i18n";
+import { AI_TIERS, COACH_TIERS } from "@/lib/checkout/catalog";
+import { packageName } from "@/lib/packages";
 import { allApps, delApp, delKV, getKV, persistent as hasStorage, putApp, setKV, type SavedSearch } from "@/lib/agent/store";
 import { candidateSkills, scoreJob } from "@/lib/agent/score";
 import { countryName } from "@/lib/agent/countries";
-import type { Access, AgentStatus, Application, Profile, SearchRequest, SearchResponse, Usage } from "@/lib/agent/types";
+import type { Access, AgentStatus, Application, PackageKey, Profile, SearchRequest, SearchResponse, Usage } from "@/lib/agent/types";
 import { AgentContext, type AgentState, type Lang, type Scored, type View } from "./context";
 import Overview from "./Overview";
 import ProfileView from "./ProfileView";
@@ -17,6 +19,7 @@ import JobsView from "./JobsView";
 import AppsView from "./AppsView";
 import Workspace from "./Workspace";
 import DataView from "./DataView";
+import InterviewView from "./interview/InterviewView";
 
 export const EMPTY_PROFILE: Profile = {
   name: "", email: "", phone: "", headline: "", roles: [], countries: [], remoteOk: true, onsiteOk: true,
@@ -24,15 +27,16 @@ export const EMPTY_PROFILE: Profile = {
   cvText: "", cvFileName: null, updatedAt: null,
 };
 
-const VIEWS: View[] = ["overview", "profile", "jobs", "apps", "data"];
+const VIEWS: View[] = ["overview", "profile", "jobs", "apps", "interview", "data"];
 const isLang = (v: unknown): v is Lang => v === "en" || v === "fr" || v === "ar";
 const PAYPAL_ID = /^[A-Z0-9]{8,32}$/;
 const LICENSE = /^[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{8}$/i;
 
-function parseHash(): { view: View; appId: string | null } {
+function parseHash(): { view: View; appId: string | null; ivJob: string | null } {
   const h = decodeURIComponent(window.location.hash.slice(1));
-  if (h.startsWith("app=")) return { view: "apps", appId: h.slice(4) || null };
-  return { view: (VIEWS as string[]).includes(h) ? (h as View) : "overview", appId: null };
+  if (h.startsWith("app=")) return { view: "apps", appId: h.slice(4) || null, ivJob: null };
+  if (h.startsWith("interview=")) return { view: "interview", appId: null, ivJob: h.slice(10) || null };
+  return { view: (VIEWS as string[]).includes(h) ? (h as View) : "overview", appId: null, ivJob: null };
 }
 
 export default function AgentApp() {
@@ -52,6 +56,7 @@ export default function AgentApp() {
   const [consent, setConsent] = useState(false);
   const [view, setView] = useState<View>("overview");
   const [appId, setAppId] = useState<string | null>(null);
+  const [ivJob, setIvJob] = useState<string | null>(null);
   const t = COPY[lang];
   const langRef = useRef<Lang>("en");
   useEffect(() => { langRef.current = lang; }, [lang]);
@@ -66,6 +71,7 @@ export default function AgentApp() {
     const r = parseHash();
     setView(r.view);
     setAppId(r.appId);
+    setIvJob(r.ivJob);
   }, []);
 
   useEffect(() => {
@@ -75,7 +81,7 @@ export default function AgentApp() {
   }, [lang]);
 
   useEffect(() => {
-    const onHash = () => { const r = parseHash(); setView(r.view); setAppId(r.appId); };
+    const onHash = () => { const r = parseHash(); setView(r.view); setAppId(r.appId); setIvJob(r.ivJob); };
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
@@ -85,6 +91,16 @@ export default function AgentApp() {
     if (window.location.hash !== hash) window.location.hash = hash;
     setView(v);
     setAppId(id ?? null);
+    setIvJob(null);
+    window.scrollTo({ top: 0 });
+  }, []);
+
+  const practise = useCallback((jobId: string) => {
+    const hash = `#interview=${encodeURIComponent(jobId)}`;
+    if (window.location.hash !== hash) window.location.hash = hash;
+    setView("interview");
+    setAppId(null);
+    setIvJob(jobId);
     window.scrollTo({ top: 0 });
   }, []);
 
@@ -107,15 +123,15 @@ export default function AgentApp() {
     try {
       const res = await fetch("/api/agent/access/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kind, proof }) });
       const data = await res.json().catch(() => null);
-      if (!res.ok || !data?.plan) {
+      if (!res.ok || !data?.tier) {
         const code = String(data?.error ?? "unavailable");
         if (["not-found", "refunded", "not-eligible", "not-paid"].includes(code) && quiet) { await delKV("access"); setAccess(null); setUsageState(null); }
         return copy.access.err[code] ?? data?.error ?? copy.common.error;
       }
-      const a: Access = { kind, proof, plan: data.plan, ref: data.ref, verifiedAt: data.verifiedAt };
+      const a: Access = { kind, proof, plan: data.plan ?? null, tier: data.tier, coach: Boolean(data.coach), ref: data.ref, verifiedAt: data.verifiedAt };
       await setKV("access", a);
       setAccess(a);
-      setUsageState({ drafts: data.drafts, sends: data.sends });
+      setUsageState(data.drafts && data.sends ? { drafts: data.drafts, sends: data.sends } : null);
       return null;
     } catch {
       return copy.access.err.unavailable;
@@ -241,11 +257,16 @@ export default function AgentApp() {
   }, [search, profile, skills]);
 
   const countryLabel = useCallback((code: string) => countryName(code, lang), [lang]);
+  const pkg = useMemo(() => ({
+    name: (k: PackageKey) => packageName(k, lang),
+    coach: nameList(COACH_TIERS.map(k => packageName(k, lang)), lang),
+    pro: nameList(AI_TIERS.map(k => packageName(k, lang)), lang),
+  }), [lang]);
 
   const state: AgentState = {
     lang, t, ready, persistent, status, profile, saveProfile, apps, upsertApp, removeApp, saveJob,
     search, scored, searching, searchError, runSearch, hidden, hideJob, access, usage, verifyAccess: verify,
-    forgetAccess, setUsage, consent, giveConsent, go, view, appId, countryLabel, reload: async () => { await load(); },
+    forgetAccess, setUsage, consent, giveConsent, go, practise, view, appId, ivJob, countryLabel, pkg, reload: async () => { await load(); },
   };
 
   const counts: Partial<Record<View, number>> = {
@@ -301,6 +322,8 @@ export default function AgentApp() {
               <JobsView />
             ) : view === "apps" ? (
               <AppsView />
+            ) : view === "interview" ? (
+              <InterviewView key={ivJob ?? "coach"} jobId={ivJob} />
             ) : view === "data" ? (
               <DataView />
             ) : (
