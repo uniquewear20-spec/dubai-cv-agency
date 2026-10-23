@@ -352,7 +352,7 @@ const EN = {
     checking: "Checking…",
     ok: (plan: string, ref: string) => `${plan} unlocked (${ref}).`,
     test: "Test purchase",
-    plans: { "career-automation": "Career Automation", "executive-suite": "Executive Career Suite" } as Record<Plan, string>,
+    plans: { "career-automation": "Advanced Career Support", "executive-suite": "Executive Career Suite" } as Record<Plan, string>,
     forget: "Remove from this browser",
     packages: "See the packages",
     err: {
@@ -753,7 +753,7 @@ const FR: Copy = {
     checking: "Vérification…",
     ok: (plan: string, ref: string) => `${plan} débloquée (${ref}).`,
     test: "Achat de test",
-    plans: { "career-automation": "Carrière Automatisée", "executive-suite": "Suite Carrière Exécutive" },
+    plans: { "career-automation": "Accompagnement Carrière Avancé", "executive-suite": "Suite Carrière Exécutive" },
     forget: "Retirer de ce navigateur",
     packages: "Voir les formules",
     err: {
@@ -1152,7 +1152,7 @@ const AR: Copy = {
     checking: "جارٍ التحقق…",
     ok: (plan: string, ref: string) => `تم تفعيل ${plan} (${ref}).`,
     test: "عملية شراء تجريبية",
-    plans: { "career-automation": "أتمتة المسار المهني", "executive-suite": "الباقة التنفيذية المتكاملة" },
+    plans: { "career-automation": "الدعم المهني المتقدّم", "executive-suite": "الباقة التنفيذية المتكاملة" },
     forget: "احذفه من هذا المتصفح",
     packages: "اطّلع على الباقات",
     err: {

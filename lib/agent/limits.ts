@@ -2,11 +2,12 @@
 //
 // The allowances below are DEFAULTS awaiting the owner's approval (see docs/zenith-ai-agent.md).
 // They can be changed in Vercel without a code change:
-//   AGENT_AI_DRAFTS_CAREER_AUTOMATION         AI drafts per Career Automation order (default 30,
-//                                             matching the package's 30 applications)
+//   AGENT_AI_DRAFTS_CAREER_AUTOMATION         AI drafts per Advanced Career Support order (default 30,
+//                                             set when the package covered 30 applications; it now
+//                                             covers up to 100: raise it if AI drafting is switched on)
 //   AGENT_AI_DRAFTS_EXECUTIVE_SUITE_PER_DAY   AI drafts per day for Executive Career Suite (default 20;
-//                                             the package's applications are unlimited, so there is
-//                                             no total, only a daily cap against abuse)
+//                                             its applications continue until the customer accepts an
+//                                             offer, so there is no total, only a daily cap against abuse)
 //   AGENT_SENDS_PER_DAY                       applications Zenith may email per day per order (default 10)
 //
 // Counts live in Redis when one is connected (Vercel KV / Upstash: KV_REST_API_URL + KV_REST_API_TOKEN,

@@ -36,6 +36,8 @@ export interface PackageDef {
   gumroadUrl: string | null;
   /** Gumroad product id, used to check license keys for agent access. Null until the product exists. */
   gumroadProductId: string | null;
+  /** Service terms shown on the card, for a service without a fixed number of applications. */
+  terms?: L10n;
 }
 
 const FIRST_DRAFT: L10n = {
@@ -101,23 +103,23 @@ export const PACKAGES: PackageDef[] = [
   },
   {
     key: "growth",
-    name: { en: "Career Advantage", fr: "Avantage Carrière", ar: "الميزة المهنية" },
+    name: { en: "Career Automation", fr: "Carrière Automatisée", ar: "أتمتة المسار المهني" },
     line: {
-      en: "Your CV and LinkedIn profile, aligned for competitive markets.",
-      fr: "Votre CV et votre profil LinkedIn, alignés pour les marchés compétitifs.",
-      ar: "سيرتك الذاتية وملفك على لينكدإن، متناسقان للأسواق التنافسية.",
+      en: "Your CV and LinkedIn profile aligned, with up to 50 applications handled by our team.",
+      fr: "Votre CV et votre profil LinkedIn alignés, avec jusqu'à 50 candidatures gérées par notre équipe.",
+      ar: "سيرتك الذاتية وملفك على لينكدإن متناسقان، مع ما يصل إلى 50 طلب توظيف يتولاها فريقنا.",
     },
     highlights: [
+      {
+        en: "Up to 50 job applications handled by the Zenith team",
+        fr: "Jusqu'à 50 candidatures gérées par l'équipe Zenith",
+        ar: "ما يصل إلى 50 طلب توظيف يتولاها فريق Zenith",
+      },
       DUAL_FORMAT,
       {
         en: "Full LinkedIn profile optimisation: content and keywords",
         fr: "Optimisation complète du profil LinkedIn : contenu et mots-clés",
         ar: "تحسين كامل لملف لينكدإن: المحتوى والكلمات المفتاحية",
-      },
-      {
-        en: "10 targeted job applications submitted for you",
-        fr: "10 candidatures ciblées envoyées pour vous",
-        ar: "تقديم 10 طلبات توظيف مستهدفة نيابةً عنك",
       },
       COVER_LETTER,
     ],
@@ -141,17 +143,17 @@ export const PACKAGES: PackageDef[] = [
   },
   {
     key: "executive",
-    name: { en: "Career Automation", fr: "Carrière Automatisée", ar: "أتمتة المسار المهني" },
+    name: { en: "Advanced Career Support", fr: "Accompagnement Carrière Avancé", ar: "الدعم المهني المتقدّم" },
     line: {
-      en: "Your complete career kit, plus a 30-application campaign we run for you.",
-      fr: "Votre kit carrière complet, avec une campagne de 30 candidatures que nous menons pour vous.",
-      ar: "مجموعتك المهنية الكاملة، مع حملة من 30 طلب توظيف نديرها نيابةً عنك.",
+      en: "Your complete career kit, with up to 100 applications handled by our team.",
+      fr: "Votre kit carrière complet, avec jusqu'à 100 candidatures gérées par notre équipe.",
+      ar: "مجموعتك المهنية الكاملة، مع ما يصل إلى 100 طلب توظيف يتولاها فريقنا.",
     },
     highlights: [
       {
-        en: "30 targeted job applications submitted for you",
-        fr: "30 candidatures ciblées envoyées pour vous",
-        ar: "تقديم 30 طلب توظيف مستهدفاً نيابةً عنك",
+        en: "Up to 100 job applications handled by the Zenith team",
+        fr: "Jusqu'à 100 candidatures gérées par l'équipe Zenith",
+        ar: "ما يصل إلى 100 طلب توظيف يتولاها فريق Zenith",
       },
       {
         en: "CV in two formats, plus language versions (EN, FR, DE, AR, ES)",
@@ -192,16 +194,16 @@ export const PACKAGES: PackageDef[] = [
     key: "apex",
     name: { en: "Executive Career Suite", fr: "Suite Carrière Exécutive", ar: "الباقة التنفيذية المتكاملة" },
     line: {
-      en: "Everything in Career Automation, with a dedicated consultant through your search.",
-      fr: "Tout Carrière Automatisée, avec un consultant dédié pendant votre recherche.",
-      ar: "كل ما في أتمتة المسار المهني، مع مستشار مخصّص طوال فترة بحثك.",
+      en: "Everything in Advanced Career Support, with a dedicated consultant through your search.",
+      fr: "Tout Accompagnement Carrière Avancé, avec un consultant dédié pendant votre recherche.",
+      ar: "كل ما في الدعم المهني المتقدّم، مع مستشار مخصّص طوال فترة بحثك.",
     },
     highlights: [
-      { en: "Everything in Career Automation", fr: "Tout le contenu de Carrière Automatisée", ar: "كل ما في باقة أتمتة المسار المهني" },
+      { en: "Everything in Advanced Career Support", fr: "Tout le contenu d'Accompagnement Carrière Avancé", ar: "كل ما في باقة الدعم المهني المتقدّم" },
       {
-        en: "Unlimited targeted job applications submitted for you",
-        fr: "Candidatures ciblées illimitées envoyées pour vous",
-        ar: "طلبات توظيف مستهدفة غير محدودة نقدّمها نيابةً عنك",
+        en: "Job applications handled by the Zenith team until you accept an offer, within the service terms",
+        fr: "Candidatures gérées par l'équipe Zenith jusqu'à ce que vous acceptiez une offre, selon les conditions de service",
+        ar: "طلبات توظيف يتولاها فريق Zenith إلى أن تقبل عرض عمل، وفق شروط الخدمة",
       },
       {
         en: "Personal career-narrative strategy session",
@@ -224,6 +226,12 @@ export const PACKAGES: PackageDef[] = [
     ai: "pro",
     gumroadUrl: "https://zenithdubaicv.gumroad.com/l/executive-career-suite",
     gumroadProductId: "POC2Tb9C8IkI7KYA3Jdc-g==",
+    // DRAFT awaiting the owner's approval: durations, volumes and response times are proposals.
+    terms: {
+      en: "We handle applications for you until you accept a job offer, for up to 6 months from the day you approve your CV: up to 40 a month, to roles and countries agreed with you. When we ask you to confirm roles or details, we need your reply within 7 days; after 14 days without a reply the service pauses until you come back (the 6 months keep running). Applications that need your own account, an assessment, a video interview or a security check are prepared for you to complete yourself. No package can guarantee interviews or a job offer.",
+      fr: "Nous gérons vos candidatures jusqu'à ce que vous acceptiez une offre d'emploi, pendant 6 mois au plus à compter du jour où vous validez votre CV : jusqu'à 40 par mois, vers des postes et des pays convenus avec vous. Quand nous vous demandons de confirmer des postes ou des informations, nous avons besoin de votre réponse sous 7 jours ; après 14 jours sans réponse, le service est suspendu jusqu'à votre retour (les 6 mois continuent de courir). Les candidatures qui demandent votre propre compte, un test, un entretien vidéo ou un contrôle de sécurité sont préparées pour que vous les finalisiez vous-même. Aucune formule ne peut garantir d'entretien ni d'offre d'emploi.",
+      ar: "نتولى طلبات التوظيف نيابةً عنك إلى أن تقبل عرض عمل، لمدة أقصاها 6 أشهر من يوم موافقتك على سيرتك الذاتية: ما يصل إلى 40 طلباً في الشهر، إلى وظائف ودول نتفق عليها معك. حين نطلب منك تأكيد وظائف أو معلومات، نحتاج إلى ردك خلال 7 أيام؛ وبعد 14 يوماً دون رد تتوقف الخدمة مؤقتاً حتى تعود (وتستمر الأشهر الستة في السريان). أما الطلبات التي تحتاج إلى حسابك الخاص أو اختبار أو مقابلة بالفيديو أو تحقق أمني، فنجهّزها لتكملها بنفسك. لا يمكن لأي باقة أن تضمن مقابلات أو عرض عمل.",
+    },
   },
 ];
 

@@ -31,6 +31,7 @@ const T: Record<string, L10n> = {
   aiCoach: { en: "Zenith AI job agent: the interview coach", fr: "Agent emploi Zenith AI : coach d'entretien", ar: "وكيل الوظائف Zenith AI: مدرّب المقابلات" },
   aiNo: { en: "Zenith AI job agent, free tools only", fr: "Agent emploi Zenith AI, outils gratuits seulement", ar: "وكيل الوظائف Zenith AI، الأدوات المجانية فقط" },
   everything: { en: "Everything else included", fr: "Tout ce qui est inclus en plus", ar: "كل ما تشمله الباقة أيضاً" },
+  terms: { en: "Service terms", fr: "Conditions de service", ar: "شروط الخدمة" },
   pay: { en: "Pay with PayPal", fr: "Payer avec PayPal", ar: "ادفع عبر PayPal" },
   redirecting: { en: "Opening PayPal…", fr: "Ouverture de PayPal…", ar: "جارٍ فتح PayPal…" },
   // Non-breaking spaces keep "Apple Pay" and "Google Pay" whole when a narrow card wraps the label.
@@ -52,19 +53,19 @@ const T: Record<string, L10n> = {
     ar: "دليلنا التنفيذي للفوز بوظائف رفيعة في الشرق الأوسط وأوروبا وكندا والمملكة المتحدة والولايات المتحدة وسنغافورة.",
   },
   ebookWhere: {
-    en: "Included with Career Advantage, Career Automation and Executive Career Suite. A PDF, sent to you by email once your payment is confirmed.",
-    fr: "Inclus dans Avantage Carrière, Carrière Automatisée et Suite Carrière Exécutive. Un PDF, envoyé par e-mail dès la confirmation de votre paiement.",
-    ar: "مشمول في الميزة المهنية وأتمتة المسار المهني والباقة التنفيذية المتكاملة. ملف PDF يُرسل إليك بالبريد الإلكتروني بعد تأكيد الدفع.",
+    en: "Included with Career Automation, Advanced Career Support and Executive Career Suite. A PDF, sent to you by email once your payment is confirmed.",
+    fr: "Inclus dans Carrière Automatisée, Accompagnement Carrière Avancé et Suite Carrière Exécutive. Un PDF, envoyé par e-mail dès la confirmation de votre paiement.",
+    ar: "مشمول في أتمتة المسار المهني والدعم المهني المتقدّم والباقة التنفيذية المتكاملة. ملف PDF يُرسل إليك بالبريد الإلكتروني بعد تأكيد الدفع.",
   },
   ebookWhereGumroad: {
-    en: "Included with Career Advantage, Career Automation and Executive Career Suite. A PDF: paid on Gumroad, you download it straight after payment; paid with PayPal, we email it to you once your payment is confirmed.",
-    fr: "Inclus dans Avantage Carrière, Carrière Automatisée et Suite Carrière Exécutive. Un PDF : payé sur Gumroad, vous le téléchargez dès le paiement ; payé avec PayPal, nous vous l'envoyons par e-mail une fois le paiement confirmé.",
-    ar: "مشمول في الميزة المهنية وأتمتة المسار المهني والباقة التنفيذية المتكاملة. ملف PDF: عند الدفع عبر Gumroad تنزّله فور الدفع، وعند الدفع عبر PayPal نرسله إليك بالبريد الإلكتروني بعد تأكيد الدفع.",
+    en: "Included with Career Automation, Advanced Career Support and Executive Career Suite. A PDF: paid on Gumroad, you download it straight after payment; paid with PayPal, we email it to you once your payment is confirmed.",
+    fr: "Inclus dans Carrière Automatisée, Accompagnement Carrière Avancé et Suite Carrière Exécutive. Un PDF : payé sur Gumroad, vous le téléchargez dès le paiement ; payé avec PayPal, nous vous l'envoyons par e-mail une fois le paiement confirmé.",
+    ar: "مشمول في أتمتة المسار المهني والدعم المهني المتقدّم والباقة التنفيذية المتكاملة. ملف PDF: عند الدفع عبر Gumroad تنزّله فور الدفع، وعند الدفع عبر PayPal نرسله إليك بالبريد الإلكتروني بعد تأكيد الدفع.",
   },
   aiNote: {
-    en: "The Zenith AI job agent is live and free for everyone: job search, ranking against your CV, template drafts and an application tracker. Pro access, included with Career Automation and Executive Career Suite, adds Zenith emailing the applications you approve, with replies going to you.",
-    fr: "L'agent emploi Zenith AI est en service et gratuit pour tous : recherche d'offres, classement selon votre CV, brouillons modèles et suivi des candidatures. L'accès Pro, inclus dans Carrière Automatisée et Suite Carrière Exécutive, ajoute l'envoi par Zenith des candidatures que vous validez, les réponses vous parvenant directement.",
-    ar: "وكيل الوظائف Zenith AI يعمل الآن ومجاني للجميع: البحث عن الوظائف، والترتيب حسب سيرتك الذاتية، ومسودات جاهزة، ومتابعة الطلبات. ويضيف وصول Pro، المشمول في أتمتة المسار المهني والباقة التنفيذية المتكاملة، إرسال Zenith للطلبات التي توافق عليها، مع وصول الردود إليك.",
+    en: "The Zenith AI job agent is live and free for everyone: job search, ranking against your CV, template drafts and an application tracker. Pro access, included with Advanced Career Support and Executive Career Suite, adds Zenith emailing the applications you approve, with replies going to you.",
+    fr: "L'agent emploi Zenith AI est en service et gratuit pour tous : recherche d'offres, classement selon votre CV, brouillons modèles et suivi des candidatures. L'accès Pro, inclus dans Accompagnement Carrière Avancé et Suite Carrière Exécutive, ajoute l'envoi par Zenith des candidatures que vous validez, les réponses vous parvenant directement.",
+    ar: "وكيل الوظائف Zenith AI يعمل الآن ومجاني للجميع: البحث عن الوظائف، والترتيب حسب سيرتك الذاتية، ومسودات جاهزة، ومتابعة الطلبات. ويضيف وصول Pro، المشمول في الدعم المهني المتقدّم والباقة التنفيذية المتكاملة، إرسال Zenith للطلبات التي توافق عليها، مع وصول الردود إليك.",
   },
   aiOn: {
     en: "Pro also includes AI-tailored drafts that only use what your CV says.",
@@ -145,6 +146,13 @@ function PackageCard({
           <span>{pkg.ai === "pro" ? t("aiYes", lang) : COACH_TIERS.includes(pkg.key) ? t("aiCoach", lang) : t("aiNo", lang)}</span>
         </li>
       </ul>
+
+      {pkg.terms && (
+        <details className="pk-more pk-terms z-details">
+          <summary>{t("terms", lang)}</summary>
+          <p>{pick(pkg.terms, lang)}</p>
+        </details>
+      )}
 
       <details className="pk-more z-details">
         <summary>{t("everything", lang)}</summary>
@@ -299,6 +307,8 @@ const CSS = `
 .pk-more summary::after{content:"+";font-size:18px;line-height:1}
 .pk-more[open] summary::after{content:"−"}
 .pk-more ul{margin:4px 0 0;padding-inline-start:18px;display:grid;gap:6px;color:var(--z-fg-2)}
+.pk-terms{margin-top:8px}
+.pk-terms p{margin:4px 0 0;font-size:13.5px;line-height:1.6;color:var(--z-fg-2)}
 .pk-ctas{align-self:end;padding-top:22px;display:grid;gap:10px}
 .pk-ctas .z-btn{white-space:normal;text-align:center;padding:8px 16px}
 .pk-via{margin-top:-2px;font-size:12.5px;line-height:1.45;color:var(--z-fg-3)}

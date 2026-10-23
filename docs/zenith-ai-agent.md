@@ -25,10 +25,10 @@ to the outcome. Nothing is sent without the candidate's approval.
 | Apply on the employer's site | Works: opens the listing; the candidate applies there | Nothing |
 | Apply by email from the candidate's own mail app (mailto) | Works | Nothing |
 | "Send it for me": Zenith emails an approved application, Pro only | Built. The mailbox accepted the site's SMTP login on 23 Oct 2026 (a login check only: nothing was sent). Not yet tried end to end with a real Pro order | A verified Pro purchase |
-| Interview coach (packages 2–4): animated interviewer, voice or typed answers, follow-ups, scored report, progress | Works, **free to run**: no AI service, no avatar or voice service | The browser's own speech features (see "Interview coach" below). Gumroad buyers of Career Advantage need license keys switched on for that product (owner action) |
+| Interview coach (packages 2–4): animated interviewer, voice or typed answers, follow-ups, scored report, progress | Works, **free to run**: no AI service, no avatar or voice service | The browser's own speech features (see "Interview coach" below). Gumroad buyers of Career Automation need license keys switched on for that product (owner action) |
 | Tracker: statuses, dates, notes, history, follow-up reminders, .ics calendar files | Works, in the browser | Nothing |
-| Pro access check: PayPal order (Career Automation / Executive Career Suite) | Works | Existing PayPal keys |
-| Pro access check: Gumroad license key | Works (tested against a stub of Gumroad's API; no real key yet) | Nothing more: Career Automation and Executive Career Suite are live on Gumroad with license keys, product ids in `lib/packages.ts` (`gumroadProductId`). A real key comes from a test purchase. |
+| Pro access check: PayPal order (Advanced Career Support / Executive Career Suite) | Works | Existing PayPal keys |
+| Pro access check: Gumroad license key | Works (tested against a stub of Gumroad's API; no real key yet) | Nothing more: Advanced Career Support and Executive Career Suite are live on Gumroad with license keys, product ids in `lib/packages.ts` (`gumroadProductId`). A real key comes from a test purchase. |
 | Usage limits shared across server instances | Built, per-instance until configured | `KV_REST_API_URL` + `KV_REST_API_TOKEN` (Vercel KV / Upstash Redis), or `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` |
 | Export, import and delete all data | Works | Nothing |
 
@@ -98,7 +98,7 @@ run: the interviewer is a set of rules on Zenith's server, the voice and the spe
 own, and the interviewer is an SVG animation drawn in the page.
 
 **Access.** Every call to `/api/agent/interview` checks the purchase with PayPal or Gumroad (`verifyCoach` in
-`lib/agent/access.ts`): Career Advantage, Career Automation and Executive Career Suite (`COACH_TIERS`). A successful
+`lib/agent/access.ts`): Career Automation, Advanced Career Support and Executive Career Suite (`COACH_TIERS`). A successful
 check is remembered for 15 minutes per server instance, so a refund can take up to 15 minutes to close access.
 Without access the page explains the coach, lets the visitor hear the interviewer say a fixed line, and shows where
 to enter a proof of purchase. The question bank and the scoring rules never reach the browser bundle (checked after
@@ -160,8 +160,8 @@ inside the agent and are **not** published on the marketing pages.
 
 | Env var | Default | Meaning |
 |---|---|---|
-| `AGENT_AI_DRAFTS_CAREER_AUTOMATION` | 30 | AI drafts per Career Automation order (matches its 30 applications) |
-| `AGENT_AI_DRAFTS_EXECUTIVE_SUITE_PER_DAY` | 20 | AI drafts per day for Executive Career Suite (its applications are unlimited) |
+| `AGENT_AI_DRAFTS_CAREER_AUTOMATION` | 30 | AI drafts per Advanced Career Support order (set when the package covered 30 applications; it now covers up to 100, so raise it if AI drafting is switched on) |
+| `AGENT_AI_DRAFTS_EXECUTIVE_SUITE_PER_DAY` | 20 | AI drafts per day for Executive Career Suite (its applications continue until the customer accepts an offer, within its service terms) |
 | `AGENT_SENDS_PER_DAY` | 10 | Applications Zenith may email per day per order |
 
 ## Files
@@ -193,11 +193,11 @@ inside the agent and are **not** published on the marketing pages.
 Locally, against stubs: `AGENT_SOURCES_FIXTURE_URL` (real sample responses captured from Workable, Himalayas,
 Jobicy, Remotive and Arbeitnow), `ANTHROPIC_BASE_URL_TEST` (a stub that returns a draft with a fabricated highlight, an
 invented figure and an unsupported skill), `PAYPAL_API_BASE_TEST` (stub orders: paid, ineligible, refunded,
-pending, unknown), `GUMROAD_API_BASE_TEST` (stub license keys: Career Automation, Executive Career Suite,
+pending, unknown), `GUMROAD_API_BASE_TEST` (stub license keys: Advanced Career Support, Executive Career Suite,
 refunded, unknown) and a local SMTP sink. These test hooks are ignored on Vercel (`VERCEL=1`).
 
 Browser end-to-end test (34 checks, all passing): CV extraction from PDF and Word; profile; search and ranking;
-template draft quoting the CV; Pro unlock refused for an ineligible order and accepted for Career Automation;
+template draft quoting the CV; Pro unlock refused for an ineligible order and accepted for Advanced Career Support;
 consent before AI; the fabricated highlight removed and the invented figure and skill flagged; email sending
 blocked until [gaps] are filled and the approval box is ticked; submission, follow-up date and .ics file;
 export, delete everything, import; access link from the order email removed from the address bar.
@@ -212,7 +212,7 @@ backend-engineer padding left out; counts of listings left out, closed and merge
 titles ("Bartenders") ranked as the same job; listing links go to Workable; both roles and both countries sent;
 the related-jobs switch reruns the search; outside-site links follow the chosen role and country; a genuine zero
 explained with ways to widen it, in English, French and Arabic; no horizontal scroll at 375 px.
-Gumroad license keys (separate run): refunded key refused, unknown key not found, Career Automation key unlocks
+Gumroad license keys (separate run): refunded key refused, unknown key not found, Advanced Career Support key unlocks
 Pro and is kept only in the browser; the server sends `increment_uses_count=false`, so checking never uses up a key.
 Visual pass: 6 widths × English, French, Arabic × dark and light, no horizontal overflow, no console errors.
 

@@ -26,8 +26,8 @@ export type TierKey = "foundation" | "growth" | "executive" | "apex";
 
 export const TIERS: Record<TierKey, { name: string; price: number }> = {
   foundation: { name: "CV Essentials",          price: 179 },
-  growth:     { name: "Career Advantage",       price: 299 },
-  executive:  { name: "Career Automation",      price: 449 },
+  growth:     { name: "Career Automation",       price: 299 },
+  executive:  { name: "Advanced Career Support", price: 449 },
   apex:       { name: "Executive Career Suite", price: 899 },
 };
 

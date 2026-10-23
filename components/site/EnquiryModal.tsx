@@ -12,8 +12,8 @@ const MAX_TOTAL = 4 * 1024 * 1024;
 const SUBJECTS: L10n[] = [
   { en: "General enquiry", fr: "Demande générale", ar: "استفسار عام" },
   { en: "CV Essentials", fr: "CV Essentiel", ar: "أساسيات السيرة الذاتية" },
-  { en: "Career Advantage", fr: "Avantage Carrière", ar: "الميزة المهنية" },
   { en: "Career Automation", fr: "Carrière Automatisée", ar: "أتمتة المسار المهني" },
+  { en: "Advanced Career Support", fr: "Accompagnement Carrière Avancé", ar: "الدعم المهني المتقدّم" },
   { en: "Executive Career Suite", fr: "Suite Carrière Exécutive", ar: "الباقة التنفيذية المتكاملة" },
   { en: "Portfolio website", fr: "Site portfolio", ar: "موقع تعريفي" },
   { en: "Zenith AI", fr: "Zenith AI", ar: "Zenith AI" },

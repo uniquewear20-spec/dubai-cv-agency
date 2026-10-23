@@ -26,7 +26,7 @@ const T: Record<string, L10n> = {
     fr: "Recherche d'offres, classement motivé, brouillons modèles, suivi des candidatures avec rappels de relance, export ou suppression de vos données.",
     ar: "البحث عن الوظائف، والترتيب مع أسبابه، ومسودات جاهزة، ومتابعة الطلبات مع تذكيرات، وتصدير بياناتك أو حذفها.",
   },
-  pro: { en: "Pro, with Career Automation and Executive Career Suite", fr: "Pro, avec Carrière Automatisée et Suite Carrière Exécutive", ar: "Pro، مع أتمتة المسار المهني والباقة التنفيذية المتكاملة" },
+  pro: { en: "Pro, with Advanced Career Support and Executive Career Suite", fr: "Pro, avec Accompagnement Carrière Avancé et Suite Carrière Exécutive", ar: "Pro، مع الدعم المهني المتقدّم والباقة التنفيذية المتكاملة" },
   proSend: {
     en: "Zenith emails the applications you approve, with your name, replies to you and a copy to you.",
     fr: "Zenith envoie par e-mail les candidatures que vous validez, à votre nom, avec les réponses et une copie pour vous.",
@@ -43,9 +43,9 @@ const T: Record<string, L10n> = {
     ar: "المسودات المكيّفة بالذكاء الاصطناعي غير مفعّلة بعد. وحتى تفعيلها، تكون مسودات Pro مسودات جاهزة، ويكيّف مختصك الطلبات المشمولة في باقتك.",
   },
   coach: {
-    en: "Interview coach, with Career Advantage, Career Automation and Executive Career Suite",
-    fr: "Coach d'entretien, avec Avantage Carrière, Carrière Automatisée et Suite Carrière Exécutive",
-    ar: "مدرّب المقابلات، مع الميزة المهنية وأتمتة المسار المهني والباقة التنفيذية المتكاملة",
+    en: "Interview coach, with Career Automation, Advanced Career Support and Executive Career Suite",
+    fr: "Coach d'entretien, avec Carrière Automatisée, Accompagnement Carrière Avancé et Suite Carrière Exécutive",
+    ar: "مدرّب المقابلات، مع أتمتة المسار المهني والدعم المهني المتقدّم والباقة التنفيذية المتكاملة",
   },
   coachBody: {
     en: "Practise out loud with an animated interviewer that follows up on what you actually say, then get a report scored on eight clear criteria, with an action plan. Answer by voice or by typing, in English, French or Arabic.",

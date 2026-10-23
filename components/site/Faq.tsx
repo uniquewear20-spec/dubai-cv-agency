@@ -87,17 +87,17 @@ const QA: { q: L10n; a: L10n; link?: { href: string; label: L10n } }[] = [
   {
     q: { en: "How do I receive The Global Horizon ebook?", fr: "Comment recevoir l'ebook The Global Horizon ?", ar: "كيف أستلم كتاب The Global Horizon؟" },
     a: {
-      en: "It is included with Career Advantage, Career Automation and Executive Career Suite. Paid through Gumroad, you can download it straight after payment; paid through PayPal, we email you the PDF once your payment is confirmed.",
-      fr: "Il est inclus dans Avantage Carrière, Carrière Automatisée et Suite Carrière Exécutive. Via Gumroad, vous le téléchargez dès le paiement ; via PayPal, nous vous envoyons le PDF par e-mail une fois le paiement confirmé.",
-      ar: "الكتاب مشمول في الميزة المهنية وأتمتة المسار المهني والباقة التنفيذية المتكاملة. عند الدفع عبر Gumroad تنزّله فور الدفع، وعند الدفع عبر PayPal نرسل إليك ملف PDF بالبريد بعد تأكيد الدفع.",
+      en: "It is included with Career Automation, Advanced Career Support and Executive Career Suite. Paid through Gumroad, you can download it straight after payment; paid through PayPal, we email you the PDF once your payment is confirmed.",
+      fr: "Il est inclus dans Carrière Automatisée, Accompagnement Carrière Avancé et Suite Carrière Exécutive. Via Gumroad, vous le téléchargez dès le paiement ; via PayPal, nous vous envoyons le PDF par e-mail une fois le paiement confirmé.",
+      ar: "الكتاب مشمول في أتمتة المسار المهني والدعم المهني المتقدّم والباقة التنفيذية المتكاملة. عند الدفع عبر Gumroad تنزّله فور الدفع، وعند الدفع عبر PayPal نرسل إليك ملف PDF بالبريد بعد تأكيد الدفع.",
     },
   },
   {
     q: { en: "What is the Zenith AI job agent, and what does it do?", fr: "Qu'est-ce que l'agent emploi Zenith AI, et que fait-il ?", ar: "ما هو وكيل الوظائف Zenith AI، وماذا يفعل؟" },
     a: {
-      en: "It is a working tool at zenithdubaicv.com/agent. Anyone can use it free to search public job sources, rank listings against their CV, build template drafts and track applications with follow-up reminders; your CV stays in your browser. Career Automation and Executive Career Suite add Pro access: Zenith emails the applications you approve, with replies going to you. The agent never applies on job boards or employer portals for you, and nothing is sent without your approval.",
-      fr: "C'est un outil en service sur zenithdubaicv.com/agent. Chacun peut l'utiliser gratuitement pour interroger des sources d'offres publiques, classer les annonces selon son CV, créer des brouillons modèles et suivre ses candidatures avec des rappels de relance ; votre CV reste dans votre navigateur. Carrière Automatisée et Suite Carrière Exécutive ajoutent l'accès Pro : Zenith envoie par e-mail les candidatures que vous validez, les réponses vous parvenant directement. L'agent ne postule jamais pour vous sur les sites d'emploi ou les portails employeurs, et rien n'est envoyé sans votre accord.",
-      ar: "أداة تعمل فعلاً على zenithdubaicv.com/agent. يمكن لأي شخص استخدامها مجاناً للبحث في مصادر وظائف عامة، وترتيب الإعلانات حسب سيرته الذاتية، وإنشاء مسودات جاهزة، ومتابعة الطلبات مع تذكيرات؛ وتبقى سيرتك في متصفحك. وتضيف باقتا أتمتة المسار المهني والباقة التنفيذية المتكاملة وصول Pro: ترسل Zenith بالبريد الطلبات التي توافق عليها، مع وصول الردود إليك. لا يقدّم الوكيل أبداً نيابةً عنك في مواقع التوظيف أو بوابات أصحاب العمل، ولا يُرسل شيء دون موافقتك.",
+      en: "It is a working tool at zenithdubaicv.com/agent. Anyone can use it free to search public job sources, rank listings against their CV, build template drafts and track applications with follow-up reminders; your CV stays in your browser. Advanced Career Support and Executive Career Suite add Pro access: Zenith emails the applications you approve, with replies going to you. The agent never applies on job boards or employer portals for you, and nothing is sent without your approval.",
+      fr: "C'est un outil en service sur zenithdubaicv.com/agent. Chacun peut l'utiliser gratuitement pour interroger des sources d'offres publiques, classer les annonces selon son CV, créer des brouillons modèles et suivre ses candidatures avec des rappels de relance ; votre CV reste dans votre navigateur. Accompagnement Carrière Avancé et Suite Carrière Exécutive ajoutent l'accès Pro : Zenith envoie par e-mail les candidatures que vous validez, les réponses vous parvenant directement. L'agent ne postule jamais pour vous sur les sites d'emploi ou les portails employeurs, et rien n'est envoyé sans votre accord.",
+      ar: "أداة تعمل فعلاً على zenithdubaicv.com/agent. يمكن لأي شخص استخدامها مجاناً للبحث في مصادر وظائف عامة، وترتيب الإعلانات حسب سيرته الذاتية، وإنشاء مسودات جاهزة، ومتابعة الطلبات مع تذكيرات؛ وتبقى سيرتك في متصفحك. وتضيف باقتا الدعم المهني المتقدّم والباقة التنفيذية المتكاملة وصول Pro: ترسل Zenith بالبريد الطلبات التي توافق عليها، مع وصول الردود إليك. لا يقدّم الوكيل أبداً نيابةً عنك في مواقع التوظيف أو بوابات أصحاب العمل، ولا يُرسل شيء دون موافقتك.",
     },
   },
   {
@@ -120,9 +120,9 @@ const QA: { q: L10n; a: L10n; link?: { href: string; label: L10n } }[] = [
   {
     q: { en: "Which languages do you work in?", fr: "Dans quelles langues travaillez-vous ?", ar: "ما اللغات التي تعملون بها؟" },
     a: {
-      en: "English, French and Arabic. Career Automation and Executive Career Suite also include versions of your CV in other languages (EN, FR, DE, AR, ES).",
-      fr: "Français, anglais et arabe. Carrière Automatisée et Suite Carrière Exécutive incluent aussi des versions de votre CV dans d'autres langues (EN, FR, DE, AR, ES).",
-      ar: "العربية والإنجليزية والفرنسية. وتشمل باقتا أتمتة المسار المهني والباقة التنفيذية المتكاملة نسخاً من سيرتك بلغات أخرى (EN، FR، DE، AR، ES).",
+      en: "English, French and Arabic. Advanced Career Support and Executive Career Suite also include versions of your CV in other languages (EN, FR, DE, AR, ES).",
+      fr: "Français, anglais et arabe. Accompagnement Carrière Avancé et Suite Carrière Exécutive incluent aussi des versions de votre CV dans d'autres langues (EN, FR, DE, AR, ES).",
+      ar: "العربية والإنجليزية والفرنسية. وتشمل باقتا الدعم المهني المتقدّم والباقة التنفيذية المتكاملة نسخاً من سيرتك بلغات أخرى (EN، FR، DE، AR، ES).",
     },
   },
 ];

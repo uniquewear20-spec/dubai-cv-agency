@@ -5,7 +5,7 @@
 // sign-in or CAPTCHA stand in the way. Job boards and employer application forms are never filled
 // in automatically: the candidate opens them and applies there.
 //
-// Conditions: a verified Career Automation or Executive Career Suite purchase, the candidate's
+// Conditions: a verified Advanced Career Support or Executive Career Suite purchase, the candidate's
 // explicit approval of this exact message (approve=yes), and a daily allowance. The email goes
 // from the Zenith mailbox, names the candidate as the sender, sets Reply-To to the candidate and
 // sends them a blind copy. The CV file passes through to the email and is not stored.
