@@ -1,6 +1,6 @@
 # Commercial launch: what is live, and what the owner still has to do
 
-Last updated: 22 October 2026.
+Last updated: 23 October 2026.
 
 ## Live on zenithdubaicv.com
 
@@ -42,15 +42,21 @@ email path now uses one mailer (`lib/email.ts`) with that as the default. `GET /
 logs in without sending anything and reports `emailCheck` (cached 15 minutes per server instance).
 
 Result on production, 22 October 2026: `535 5.7.139 Authentication unsuccessful, SmtpClientAuthentication is
-disabled for the Tenant.` Microsoft 365 refuses password logins over SMTP for this account, so **no email from the
-site is delivered until owner action 0 is done**: contact form, PayPal order emails, briefs (the brief form asks
-the customer to use WhatsApp instead) and the agent's "Send it for me". Gumroad's own receipts are not affected.
+disabled for the Tenant.` The owner then turned on SMTP Authentication for info@zenithdubaicv.com in GoDaddy's
+Email & Office dashboard. Result on production, 23 October 2026 16:52 UTC: `emailCheck: { ok: true, server:
+smtp.office365.com:587 }`, so the site can log in to the mailbox. No message has been sent since (the one
+authorised test message was used on 22 October), so delivery to the inbox has not been seen yet: send yourself one
+message through the contact form to confirm.
+
+Microsoft has said it will switch password SMTP off by default for existing tenants at the end of December 2026
+(admins can turn it back on; the final removal date is still to be announced). If the check starts failing again
+after that, turn SMTP Authentication back on, or move to a transactional email service (owner action 0, option b).
 
 ## Owner actions (only you can do these)
 
 | # | Action | Why | Where |
 |---|---|---|---|
-| 0 | **Make the site's email work** (urgent). Choose one: (a) turn on SMTP Authentication for info@zenithdubaicv.com, or (b) use a transactional email service. | (a) is free and immediate, but GoDaddy says it switches off Microsoft's security defaults for your organisation (keep MFA with an app password in `SMTP_PASS`, or turn MFA off for that mailbox), and Microsoft plans to switch password SMTP off by default for existing tenants at the end of December 2026 (admins can turn it back on; final removal to be announced in 2027). (b) lasts, but needs an account, DNS records (SPF, DKIM) and may cost money. Then open `https://zenithdubaicv.com/api/agent/status/?check=email` (after a redeploy, or 15 minutes) and look for `"ok": true`, and send yourself one message through the contact form. | (a) GoDaddy → Email & Office Dashboard → the user → Manage → Advanced Settings → SMTP Authentication. No site change needed. (b) Vercel env: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` from the service, `SMTP_FROM=info@zenithdubaicv.com`, `CONTACT_TO=info@zenithdubaicv.com`, then redeploy. |
+| 0 | **Done 23 Oct 2026 (option a)**: SMTP Authentication is on and the login check passes. Still to do: send one message through the contact form and check it arrives. Original action: make the site's email work. Choose one: (a) turn on SMTP Authentication for info@zenithdubaicv.com, or (b) use a transactional email service. | (a) is free and immediate, but GoDaddy says it switches off Microsoft's security defaults for your organisation (keep MFA with an app password in `SMTP_PASS`, or turn MFA off for that mailbox), and Microsoft plans to switch password SMTP off by default for existing tenants at the end of December 2026 (admins can turn it back on; final removal to be announced in 2027). (b) lasts, but needs an account, DNS records (SPF, DKIM) and may cost money. Then open `https://zenithdubaicv.com/api/agent/status/?check=email` (after a redeploy, or 15 minutes) and look for `"ok": true`, and send yourself one message through the contact form. | (a) GoDaddy → Email & Office Dashboard → the user → Manage → Advanced Settings → SMTP Authentication. No site change needed. (b) Vercel env: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` from the service, `SMTP_FROM=info@zenithdubaicv.com`, `CONTACT_TO=info@zenithdubaicv.com`, then redeploy. |
 | 1 | Create the PayPal webhook and add `PAYPAL_WEBHOOK_ID` in Vercel | Captures payments when a buyer closes the tab before the confirmation page, and reports refunds and disputes. Until set, `/api/paypal/webhook/` answers 503. | developer.paypal.com → Apps & Credentials → live app → Add webhook: `https://zenithdubaicv.com/api/paypal/webhook/`, events CHECKOUT.ORDER.APPROVED, PAYMENT.CAPTURE.COMPLETED, PAYMENT.CAPTURE.DENIED, PAYMENT.CAPTURE.REFUNDED, PAYMENT.CAPTURE.REVERSED |
 | 2 | Decide on AI drafting and, if yes, add `ANTHROPIC_API_KEY` in Vercel | Switches on AI drafts for Career Automation and Executive Career Suite. Paid per use (Anthropic API). | console.anthropic.com → API keys. Optional `ANTHROPIC_MODEL`. Never paste the key in chat or code. |
 | 3 | Approve or change the agent allowances | Defaults: 30 AI drafts per Career Automation order, 20 a day for Executive Career Suite, 10 emails a day. Not published on the marketing pages or on Gumroad until you approve. | Vercel env: `AGENT_AI_DRAFTS_CAREER_AUTOMATION`, `AGENT_AI_DRAFTS_EXECUTIVE_SUITE_PER_DAY`, `AGENT_SENDS_PER_DAY` |
