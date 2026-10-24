@@ -90,19 +90,51 @@ function Locked() {
   );
 }
 
-const TRIAL: Record<string, { btn: string; note: string }> = {
-  en: { btn: "Try a free 15-minute interview", note: "One free interview with the animated interviewer, about your role. No purchase needed." },
-  fr: { btn: "Essayer un entretien gratuit de 15 minutes", note: "Un entretien gratuit avec le recruteur animé, sur votre poste. Sans achat." },
-  ar: { btn: "جرّب مقابلة مجانية لمدة 15 دقيقة", note: "مقابلة مجانية واحدة مع المحاوِر المتحرك حول وظيفتك، دون شراء." },
+const TRIAL: Record<string, { btn: string; note: string; left: (m: string) => string; ready: string; over: string }> = {
+  en: { btn: "Try a free 30-minute interview", note: "One free interview with the animated interviewer, about your role. No purchase needed. The 30 minutes start with the interview and keep running if you pause or visit other pages.", left: m => `Free interview: ${m} left`, ready: "Free interview: 30 minutes, starting with your first question", over: "Your free 30 minutes are over." },
+  fr: { btn: "Essayer un entretien gratuit de 30 minutes", note: "Un entretien gratuit avec le recruteur animé, sur votre poste. Sans achat. Les 30 minutes commencent avec l'entretien et continuent si vous faites une pause ou visitez d'autres pages.", left: m => `Entretien gratuit : il reste ${m}`, ready: "Entretien gratuit : 30 minutes, à partir de la première question", over: "Vos 30 minutes gratuites sont écoulées." },
+  ar: { btn: "جرّب مقابلة مجانية لمدة 30 دقيقة", note: "مقابلة مجانية واحدة مع المحاوِر المتحرك حول وظيفتك، دون شراء. تبدأ الدقائق الثلاثون مع بدء المقابلة وتستمر حتى لو توقفت مؤقتاً أو انتقلت إلى صفحات أخرى.", left: m => `المقابلة المجانية: متبقٍ ${m}`, ready: "المقابلة المجانية: 30 دقيقة تبدأ مع أول سؤال", over: "انتهت دقائقك الثلاثون المجانية." },
 };
+const TRIAL_KEY = "z-iv-trial";
+const TRIAL_MS = 30 * 60_000;
+interface TrialSave { proof: string; startedAt: number | null }
+function readTrial(): TrialSave | null {
+  try {
+    const t = JSON.parse(localStorage.getItem(TRIAL_KEY) || "null") as TrialSave | null;
+    return t?.proof ? t : null;
+  } catch { return null; }
+}
+function saveTrial(t: TrialSave) { try { localStorage.setItem(TRIAL_KEY, JSON.stringify(t)); } catch { /* memory only */ } }
+/** The clock starts with the interview (the first question), once. */
+function markTrialStart() { const t = readTrial(); if (t && !t.startedAt) saveTrial({ ...t, startedAt: Date.now() }); }
+
+/** The free interview's clock: it keeps running while paused or on other pages. */
+function TrialClock({ lang }: { lang: string }) {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => { const i = window.setInterval(() => setNow(Date.now()), 1000); return () => window.clearInterval(i); }, []);
+  const copy = TRIAL[lang] ?? TRIAL.en;
+  const t = readTrial();
+  if (!t?.startedAt) return <p className="za-iv-clock" role="status">{copy.ready}</p>;
+  const left = Math.max(0, TRIAL_MS - (now - t.startedAt));
+  if (!left) return <p className="za-iv-clock" role="status" data-over="true">{copy.over}</p>;
+  const m = `${Math.floor(left / 60000)}:${String(Math.floor((left % 60000) / 1000)).padStart(2, "0")}`;
+  return <p className="za-iv-clock" role="timer" aria-live="off">{copy.left(m)}</p>;
+}
 
 export default function InterviewView({ jobId }: { jobId: string | null }) {
   const agent = useAgent();
-  const [trial, setTrial] = useState<Access | null>(null);
+  // A free interview survives pauses and visits to other pages (kept in this browser).
+  const [trial, setTrial] = useState<TrialSave | null>(() => (typeof window === "undefined" ? null : readTrial()));
   if (trial && !agent.access) {
-    return <AgentContext.Provider value={{ ...agent, access: trial }}><CoachScreens jobId={jobId} /></AgentContext.Provider>;
+    const access = { kind: "trial", proof: trial.proof, plan: null, coach: true } as Access;
+    return (
+      <AgentContext.Provider value={{ ...agent, access }}>
+        <TrialClock lang={agent.lang} />
+        <CoachScreens jobId={jobId} />
+      </AgentContext.Provider>
+    );
   }
-  return <CoachScreens jobId={jobId} onTrial={() => setTrial({ kind: "trial", proof: crypto.randomUUID(), plan: null, coach: true } as Access)} />;
+  return <CoachScreens jobId={jobId} onTrial={() => { const t = { proof: crypto.randomUUID(), startedAt: null }; saveTrial(t); setTrial(t); }} />;
 }
 
 function CoachScreens({ jobId, onTrial }: { jobId: string | null; onTrial?: () => void }) {
@@ -150,6 +182,7 @@ function CoachScreens({ jobId, onTrial }: { jobId: string | null; onTrial?: () =
     if (!access) return c.errors["not-eligible"];
     try {
       const { state } = await ivStart(access, setup, candidateOf(profile), historyOf(records, setup));
+      if (access?.kind === "trial") markTrialStart();
       await saveActive({ state, look: o.look, voiceURI: o.voiceURI, mode: o.mode, camera: o.camera, local: o.local, savedAt: new Date().toISOString() });
       setScreen({ kind: "room" });
       top();

@@ -291,7 +291,7 @@ export class Speaker {
       u.rate = speechRate(u.lang);
       // A woman interviewer with only a man's voice on the device (an Arabic Mac has only Majed):
       // a higher pitch is the closest the free voices allow.
-      u.pitch = presentation === "female" && voice && voiceGender(voice) !== "female" ? 1.75 : 1;
+      u.pitch = presentation === "female" && voice && voiceGender(voice) !== "female" ? 2 : 1;
       let started = 0;
       let finished = false;
       const done = () => { if (finished) return; finished = true; window.clearTimeout(guard); resolve(); };

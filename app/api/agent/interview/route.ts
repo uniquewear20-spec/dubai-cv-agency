@@ -41,9 +41,8 @@ export async function POST(req: NextRequest) {
     // The free trial: one interview per connection every 30 days, its session open for 20 minutes.
     if (!/^[a-z0-9-]{16,64}$/i.test(proof)) return fail("invalid");
     if (action === "start") {
-      if (body.setup && typeof body.setup === "object") (body.setup as { length?: number }).length = 5;
       if (!(await firstTime(`iv-trial-ip:${clientIp(req.headers)}`, 30 * 86400))) return fail("trial-used");
-      await firstTime(`iv-trial:${proof}`, 20 * 60);
+      await firstTime(`iv-trial:${proof}`, 31 * 60); // 30 minutes from the start, paused or not
     } else if (!(await wasMarked(`iv-trial:${proof}`))) return fail("trial-ended");
   } else {
     try {
