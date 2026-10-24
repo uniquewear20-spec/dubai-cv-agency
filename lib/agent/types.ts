@@ -31,6 +31,10 @@ export interface Job {
   checkedAt?: string | null;
   /** The same job (title and employer) posted for other cities of the same country, shown as one listing. */
   alsoAt?: { location: string; url: string }[];
+  /** Contract types the listing states (full-time, part-time, contract, temporary, internship, freelance). */
+  employment?: string[];
+  /** Found by widening a search that had no exact match (a related or broader title), shown as such. */
+  widened?: boolean;
 }
 
 export interface SourceReport {
@@ -48,6 +52,10 @@ export interface SourceReport {
   closed?: number;
   /** Listings shown once because another listing was the same job (same title, employer and city). */
   duplicates?: number;
+  /** Listings only open to other countries or regions (a remote job for "USA only" on a UAE search), not shown. */
+  elsewhere?: number;
+  /** Listings that didn't match the filters (city, level, contract type, field), not shown. */
+  filtered?: number;
   note?: string;
   attribution: string;
   home: string;
@@ -61,6 +69,27 @@ export interface SearchRequest {
   keywords: string[];
   /** Also search neighbouring titles (head bartender, barback… for "bartender"). */
   related?: boolean;
+  /** Only on-site listings in this city (remote listings are kept when remote work is wanted). */
+  city?: string;
+  /** Only listings at this career level (listings that don't state a level are kept). */
+  level?: "entry" | "mid" | "senior" | "manager" | "executive";
+  /** Only this contract type (listings that don't state one are kept). */
+  employment?: "full-time" | "part-time" | "contract" | "temporary" | "internship" | "freelance";
+  /** Only listings in this field (listings whose field isn't clear are kept). */
+  industry?: string;
+}
+
+/** What the candidate typed in the search form (kept in this browser, separate from the profile). */
+export interface SearchQuery {
+  roles: string[];
+  countries: string[];
+  city: string;
+  remote: boolean;
+  onsite: boolean;
+  level: "" | "entry" | "mid" | "senior" | "manager" | "executive";
+  employment: "" | "full-time" | "part-time" | "contract" | "temporary" | "internship" | "freelance";
+  industry: string;
+  related: boolean;
 }
 
 /** How one target role was searched: spelling fixed, other titles for the same job, neighbours. */
@@ -75,6 +104,18 @@ export interface RoleSearch {
   sameTitles: string[];
   /** Neighbouring jobs the candidate can include. */
   related: string[];
+  /** A whole field searched (its name), when the role was a field such as "Healthcare". */
+  field?: string | null;
+  /** The broader job this one is a kind of ("Doctor" for "Cardiologist"). */
+  kindOf?: string | null;
+  /** Searched by its words because the agent doesn't know this job. */
+  byWords?: boolean;
+  /** Words typed beyond the job's title that a listing must have ("underwater"). */
+  extras?: string[];
+  /** Nothing matched exactly, so these related or broader titles were searched too (their listings are labelled). */
+  widened?: string[];
+  /** How many listings this role found (after every check). */
+  found?: number;
 }
 
 export interface SearchResponse {

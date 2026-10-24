@@ -1,12 +1,13 @@
 // app/api/agent/search/route.ts — job search for the Zenith AI agent.
-// Receives only the search terms (roles, countries, keywords): never the CV. Matching against
-// the CV happens in the visitor's browser. Open to everyone; rate-limited per visitor.
+// Receives only the search terms (roles, countries, city, filters): never the CV. Matching against
+// the CV happens in the visitor's browser. Open to everyone, free; rate-limited per visitor.
 
 import type { NextRequest } from "next/server";
 import { searchJobs } from "@/lib/agent/sources";
 import { allow, clientIp } from "@/lib/agent/limits";
 import { countryByCode } from "@/lib/agent/countries";
 import { fail, ok, readJson, strings } from "@/lib/agent/http";
+import { EMPLOYMENTS, LEVEL_BUCKETS, isIndustry, type Employment, type LevelBucket } from "@/lib/agent/titles";
 
 export const maxDuration = 30;
 
@@ -21,10 +22,14 @@ export async function POST(req: NextRequest) {
   const remote = body.remote !== false;
   const onsite = body.onsite !== false;
   const related = body.related === true;
+  const city = typeof body.city === "string" ? body.city.replace(/\s+/g, " ").trim().slice(0, 60) : "";
+  const level = LEVEL_BUCKETS.includes(body.level as LevelBucket) ? (body.level as LevelBucket) : undefined;
+  const employment = EMPLOYMENTS.includes(body.employment as Employment) ? (body.employment as Employment) : undefined;
+  const industry = isIndustry(body.industry) ? body.industry : undefined;
   if (!roles.length) return fail("Add at least one target role.", 400);
   if (!remote && !onsite) return fail("Choose remote, on-site or both.", 400);
 
-  const result = await searchJobs({ roles, keywords, countries, remote, onsite, related });
+  const result = await searchJobs({ roles, keywords, countries, remote, onsite, related, ...(city ? { city } : {}), level, employment, industry });
   return ok(result);
 }
 

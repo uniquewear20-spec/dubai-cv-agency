@@ -2,6 +2,9 @@
 
 import type { AppStatus, Plan, Usage } from "./types";
 import type { Reason } from "./score";
+import { industryName } from "./titles";
+
+interface Dropped { other?: number; closed?: number; duplicates?: number; elsewhere?: number; filtered?: number }
 
 const list = (xs: string[], and: string) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} ${and} ${xs[xs.length - 1]}`);
 /** Arabic list: "أ، ب وج" with the conjunction joined to the last item. */
@@ -140,7 +143,7 @@ const EN = {
   },
   jobs: {
     h: "Find jobs",
-    intro: "Searches public job sources that allow it. Your CV stays here: only your target roles and countries are sent.",
+    intro: "Searches public job sources that allow it, for any job in any country. Your CV stays here: only what you type in the search is sent.",
     for: "Searching for",
     in: "in",
     anywhere: "any country",
@@ -157,8 +160,9 @@ const EN = {
       : note === "Unexpected response" ? "Answered in an unexpected format" : note && /^HTTP \d+$/.test(note) ? `Error (${note})` : "Couldn't be reached"),
     srcSkipWhy: (note?: string): string => (note === "Remote jobs only" ? "Remote jobs only" : note === "Germany, Austria and Switzerland only" ? "Germany, Austria and Switzerland only"
       : note === "Doesn't cover the countries you chose" ? "Doesn't cover your countries" : "Not used for this search"),
-    srcDropped: ({ other = 0, closed = 0, duplicates = 0 }: { other?: number; closed?: number; duplicates?: number }) =>
-      [other ? `${other} other job${other === 1 ? "" : "s"} left out` : "", closed ? `${closed} closed` : "",
+    srcDropped: ({ other = 0, closed = 0, duplicates = 0, elsewhere = 0, filtered = 0 }: Dropped) =>
+      [other ? `${other} other job${other === 1 ? "" : "s"} left out` : "", elsewhere ? `${elsewhere} only open to other countries` : "",
+        filtered ? `${filtered} outside your filters` : "", closed ? `${closed} closed` : "",
         duplicates ? `${duplicates} duplicate${duplicates === 1 ? "" : "s"} merged` : ""].filter(Boolean).join(" · "),
     readAs: "How your roles were searched",
     typed: (s: string) => `(you typed “${s}”)`,
@@ -176,7 +180,7 @@ const EN = {
     results: (n: number, total: number) => `${n} of ${total} listings`,
     none: "No listings match these filters.",
     zero: "No open listings for these roles in the sources the agent can search today.",
-    zeroWhy: "Workable lists jobs from employers who hire through it. Many hotels and restaurant groups post only on their own careers sites, LinkedIn or Bayt, which don't allow automated searches.",
+    zeroWhy: "These sources list jobs from employers who post through them. Many employers post only on their own careers sites, LinkedIn, Indeed or Bayt, which don't allow automated searches. Today, on-site jobs in the Gulf come mainly from Workable.",
     zeroTry: "To widen the search:",
     widenRelated: "Include related jobs",
     widenRemote: "Include remote work",
@@ -218,6 +222,38 @@ const EN = {
     needProfile: "Add at least one target role in your profile first.",
     elsewhereRole: "Role",
     elsewhereCountry: "Country",
+    formTitle: "Job titles",
+    formTitleHint: "Any job, in English, French or Arabic: up to three.",
+    formTitlePh: "e.g. Nurse, Software engineer, Fashion model",
+    formCountries: "Countries",
+    formCountriesHint: "Up to five. Leave empty to search every country.",
+    formCity: "City (optional)",
+    formCityPh: "e.g. Dubai",
+    formWork: "Work",
+    formWorkOpts: { both: "On-site and remote", onsite: "On-site", remote: "Remote" },
+    formMore: "More filters",
+    formLevel: "Career level",
+    levels: { "": "Any level", entry: "Entry level and graduates", mid: "Mid-level", senior: "Senior", manager: "Manager", executive: "Director and executive" } as Record<string, string>,
+    formEmployment: "Contract",
+    employments: { "": "Any contract", "full-time": "Full-time", "part-time": "Part-time", contract: "Contract", temporary: "Temporary", internship: "Internship", freelance: "Freelance" } as Record<string, string>,
+    formIndustry: "Field",
+    anyIndustry: "Any field",
+    filtersNote: "Filters leave out listings that state something else; listings that don't say are kept.",
+    filtersOn: (n: number) => (n === 1 ? "1 filter on" : `${n} filters on`),
+    fromProfile: "Use my profile",
+    needRole: "Type at least one job title.",
+    needWork: "Choose on-site, remote or both.",
+    external: "These are public listings from the sources named above. You apply on the employer's site or by email, and only when you choose to: Zenith doesn't manage these applications.",
+    readField: (f: string) => `searched as a whole field: ${f}`,
+    readKind: (job: string) => `a kind of ${job}; other kinds count as related`,
+    readWords: "a job the agent doesn't know yet: listings must name it in their title",
+    readExtras: (ws: string[]) => `titles must also say ${list(ws.map(w => `“${w}”`), "and")}`,
+    readWidened: (ts: string[]) => `no exact match, so the agent also searched ${list(ts.map(x => `“${x}”`), "and")}; those listings are marked “Related title”`,
+    readFound: (n: number) => (n === 1 ? "1 listing" : `${n} listings`),
+    readArabic: "Arabic titles are matched to their English equivalents: most listings are written in English.",
+    widenedTag: "Related title",
+    zeroFiltered: "Some listings were left out by your filters. Clear a filter to see them.",
+    clearFilters: "Clear filters",
   },
   reason: (r: Reason, place: (code: string) => string): string => {
     const d = r.data ?? {};
@@ -227,6 +263,7 @@ const EN = {
       case "title-related": return `A related job, not “${d.role}” itself`;
       case "title-close": return `Title is close to “${d.role}”`;
       case "title-weak": return `Mentions “${d.role}”, but the title differs`;
+      case "title-field": return `In the field you searched: ${industryName(d.role ?? "", "en")}`;
       case "title-none": return "Title doesn't match your target roles";
       case "skills": return d.total ? `Your skills in the listing: ${list(d.skills ?? [], "and")}` : `Mentions your skills: ${list(d.skills ?? [], "and")}`;
       case "skills-none": return "None of your skills appear in the listing";
@@ -541,7 +578,7 @@ const FR: Copy = {
   },
   jobs: {
     h: "Trouver des offres",
-    intro: "Interroge les sources d'offres publiques qui l'autorisent. Votre CV reste ici : seuls vos postes visés et vos pays sont envoyés.",
+    intro: "Interroge les sources d'offres publiques qui l'autorisent, pour tout métier et tout pays. Votre CV reste ici : seul ce que vous tapez dans la recherche est envoyé.",
     for: "Recherche :",
     in: "en",
     anywhere: "tous pays",
@@ -558,8 +595,10 @@ const FR: Copy = {
       : note === "Unexpected response" ? "Réponse dans un format inattendu" : note && /^HTTP \d+$/.test(note) ? `Erreur (${note})` : "Injoignable"),
     srcSkipWhy: (note?: string) => (note === "Remote jobs only" ? "Télétravail uniquement" : note === "Germany, Austria and Switzerland only" ? "Allemagne, Autriche et Suisse uniquement"
       : note === "Doesn't cover the countries you chose" ? "Ne couvre pas vos pays" : "Non utilisée pour cette recherche"),
-    srcDropped: ({ other = 0, closed = 0, duplicates = 0 }: { other?: number; closed?: number; duplicates?: number }) =>
-      [other ? `${other} offre${other > 1 ? "s" : ""} d'un autre métier écartée${other > 1 ? "s" : ""}` : "", closed ? `${closed} close${closed > 1 ? "s" : ""}` : "",
+    srcDropped: ({ other = 0, closed = 0, duplicates = 0, elsewhere = 0, filtered = 0 }: Dropped) =>
+      [other ? `${other} offre${other > 1 ? "s" : ""} d'un autre métier écartée${other > 1 ? "s" : ""}` : "",
+        elsewhere ? `${elsewhere} réservée${elsewhere > 1 ? "s" : ""} à d'autres pays` : "", filtered ? `${filtered} hors de vos filtres` : "",
+        closed ? `${closed} close${closed > 1 ? "s" : ""}` : "",
         duplicates ? `${duplicates} doublon${duplicates > 1 ? "s" : ""} fusionné${duplicates > 1 ? "s" : ""}` : ""].filter(Boolean).join(" · "),
     readAs: "Comment vos postes ont été cherchés",
     typed: (s: string) => `(vous avez tapé « ${s} »)`,
@@ -577,7 +616,7 @@ const FR: Copy = {
     results: (n: number, total: number) => `${n} offres sur ${total}`,
     none: "Aucune offre ne correspond à ces filtres.",
     zero: "Aucune offre ouverte pour ces postes dans les sources que l'agent peut interroger aujourd'hui.",
-    zeroWhy: "Workable publie les offres des employeurs qui recrutent avec lui. Beaucoup d'hôtels et de groupes de restauration ne publient que sur leur propre site carrières, LinkedIn ou Bayt, qui n'autorisent pas les recherches automatisées.",
+    zeroWhy: "Ces sources publient les offres des employeurs qui passent par elles. Beaucoup d'employeurs ne publient que sur leur propre site carrières, LinkedIn, Indeed ou Bayt, qui n'autorisent pas les recherches automatisées. Aujourd'hui, les postes sur site dans le Golfe viennent surtout de Workable.",
     zeroTry: "Pour élargir la recherche :",
     widenRelated: "Inclure les métiers voisins",
     widenRemote: "Inclure le télétravail",
@@ -619,6 +658,38 @@ const FR: Copy = {
     needProfile: "Ajoutez d'abord au moins un poste visé dans votre profil.",
     elsewhereRole: "Poste",
     elsewhereCountry: "Pays",
+    formTitle: "Postes recherchés",
+    formTitleHint: "N'importe quel métier, en français, en anglais ou en arabe : trois au plus.",
+    formTitlePh: "ex. Infirmier, Développeur, Mannequin",
+    formCountries: "Pays",
+    formCountriesHint: "Cinq au plus. Laissez vide pour chercher dans tous les pays.",
+    formCity: "Ville (facultatif)",
+    formCityPh: "ex. Dubaï",
+    formWork: "Lieu de travail",
+    formWorkOpts: { both: "Sur site et télétravail", onsite: "Sur site", remote: "Télétravail" },
+    formMore: "Plus de filtres",
+    formLevel: "Niveau",
+    levels: { "": "Tous niveaux", entry: "Débutants et jeunes diplômés", mid: "Intermédiaire", senior: "Confirmé", manager: "Manager", executive: "Direction" } as Record<string, string>,
+    formEmployment: "Contrat",
+    employments: { "": "Tous contrats", "full-time": "Temps plein", "part-time": "Temps partiel", contract: "CDD ou mission", temporary: "Temporaire", internship: "Stage", freelance: "Indépendant" } as Record<string, string>,
+    formIndustry: "Domaine",
+    anyIndustry: "Tous domaines",
+    filtersNote: "Les filtres écartent les offres qui indiquent autre chose ; celles qui ne précisent rien sont conservées.",
+    filtersOn: (n: number) => (n === 1 ? "1 filtre actif" : `${n} filtres actifs`),
+    fromProfile: "Reprendre mon profil",
+    needRole: "Indiquez au moins un poste.",
+    needWork: "Choisissez sur site, télétravail ou les deux.",
+    external: "Ce sont des offres publiques des sources citées ci-dessus. Vous postulez sur le site de l'employeur ou par e-mail, et seulement si vous le décidez : Zenith ne gère pas ces candidatures.",
+    readField: (f: string) => `cherché comme un domaine entier : ${f}`,
+    readKind: (job: string) => `une spécialité de « ${job} » ; les autres comptent comme métiers voisins`,
+    readWords: "un métier que l'agent ne connaît pas encore : l'intitulé des offres doit le nommer",
+    readExtras: (ws: string[]) => `l'intitulé doit aussi contenir ${list(ws.map(w => `« ${w} »`), "et")}`,
+    readWidened: (ts: string[]) => `aucune offre exacte : l'agent a aussi cherché ${list(ts.map(x => `« ${x} »`), "et")} ; ces offres portent la mention « Intitulé voisin »`,
+    readFound: (n: number) => `${n} offre${n > 1 ? "s" : ""}`,
+    readArabic: "Les intitulés en arabe sont rapprochés de leur équivalent anglais : la plupart des offres sont rédigées en anglais.",
+    widenedTag: "Intitulé voisin",
+    zeroFiltered: "Des offres ont été écartées par vos filtres. Retirez un filtre pour les voir.",
+    clearFilters: "Retirer les filtres",
   },
   reason: (r: Reason, place: (code: string) => string): string => {
     const d = r.data ?? {};
@@ -628,6 +699,7 @@ const FR: Copy = {
       case "title-related": return `Un métier voisin, pas « ${d.role} » lui-même`;
       case "title-close": return `L'intitulé est proche de « ${d.role} »`;
       case "title-weak": return `Mentionne « ${d.role} », mais l'intitulé diffère`;
+      case "title-field": return `Dans le domaine recherché : ${industryName(d.role ?? "", "fr")}`;
       case "title-none": return "L'intitulé ne correspond pas à vos postes visés";
       case "skills": return `Vos compétences dans l'offre : ${list(d.skills ?? [], "et")}`;
       case "skills-none": return "Aucune de vos compétences n'apparaît dans l'offre";
@@ -940,7 +1012,7 @@ const AR: Copy = {
   },
   jobs: {
     h: "ابحث عن وظائف",
-    intro: "يبحث في مصادر الوظائف العامة التي تسمح بذلك. سيرتك الذاتية تبقى هنا: تُرسل فقط الوظائف والدول التي تستهدفها.",
+    intro: "يبحث في مصادر الوظائف العامة التي تسمح بذلك، عن أي وظيفة وفي أي دولة. سيرتك الذاتية تبقى هنا: لا يُرسل إلا ما تكتبه في البحث.",
     for: "البحث عن",
     in: "في",
     anywhere: "أي دولة",
@@ -957,8 +1029,9 @@ const AR: Copy = {
       : note === "Unexpected response" ? "ردّ بصيغة غير متوقعة" : note && /^HTTP \d+$/.test(note) ? `خطأ (${note})` : "تعذّر الوصول إليه"),
     srcSkipWhy: (note?: string) => (note === "Remote jobs only" ? "وظائف عن بُعد فقط" : note === "Germany, Austria and Switzerland only" ? "ألمانيا والنمسا وسويسرا فقط"
       : note === "Doesn't cover the countries you chose" ? "لا يغطي دولك" : "غير مستخدم في هذا البحث"),
-    srcDropped: ({ other = 0, closed = 0, duplicates = 0 }: { other?: number; closed?: number; duplicates?: number }) =>
-      [other ? `إعلانات لوظائف أخرى استُبعدت: ${other}` : "", closed ? `مغلقة: ${closed}` : "", duplicates ? `مكررة دُمجت: ${duplicates}` : ""].filter(Boolean).join(" · "),
+    srcDropped: ({ other = 0, closed = 0, duplicates = 0, elsewhere = 0, filtered = 0 }: Dropped) =>
+      [other ? `إعلانات لوظائف أخرى استُبعدت: ${other}` : "", elsewhere ? `مفتوحة لدول أخرى فقط: ${elsewhere}` : "",
+        filtered ? `خارج مرشحاتك: ${filtered}` : "", closed ? `مغلقة: ${closed}` : "", duplicates ? `مكررة دُمجت: ${duplicates}` : ""].filter(Boolean).join(" · "),
     readAs: "كيف بُحث عن وظائفك",
     typed: (s: string) => `(كتبتَ «${s}»)`,
     alsoMatches: (xs: string[]) => `ويشمل أيضاً ${xs.join("، ")}`,
@@ -975,7 +1048,7 @@ const AR: Copy = {
     results: (n: number, total: number) => `${n} من ${total} إعلاناً`,
     none: "لا توجد إعلانات تطابق هذه المرشّحات.",
     zero: "لا توجد إعلانات مفتوحة لهذه الوظائف في المصادر التي يستطيع الوكيل البحث فيها اليوم.",
-    zeroWhy: "يعرض Workable وظائف أصحاب العمل الذين يوظّفون عبره. كثير من الفنادق ومجموعات المطاعم تنشر فقط في مواقعها الخاصة للتوظيف أو في LinkedIn أو Bayt، وهذه لا تسمح بالبحث الآلي.",
+    zeroWhy: "تعرض هذه المصادر وظائف أصحاب العمل الذين ينشرون عبرها. كثير من أصحاب العمل ينشرون فقط في مواقعهم الخاصة أو في LinkedIn أو Indeed أو Bayt، وهذه لا تسمح بالبحث الآلي. اليوم، تأتي الوظائف في الموقع في الخليج أساساً من Workable.",
     zeroTry: "لتوسيع البحث:",
     widenRelated: "تضمين الوظائف القريبة",
     widenRemote: "تضمين العمل عن بُعد",
@@ -1017,6 +1090,38 @@ const AR: Copy = {
     needProfile: "أضف أولاً وظيفة مستهدفة واحدة على الأقل في ملفك.",
     elsewhereRole: "الوظيفة",
     elsewhereCountry: "الدولة",
+    formTitle: "المسميات الوظيفية",
+    formTitleHint: "أي وظيفة، بالعربية أو الإنجليزية أو الفرنسية: ثلاث كحد أقصى.",
+    formTitlePh: "مثال: ممرضة، مهندس برمجيات، عارضة أزياء",
+    formCountries: "الدول",
+    formCountriesHint: "خمس كحد أقصى. اتركها فارغة للبحث في كل الدول.",
+    formCity: "المدينة (اختياري)",
+    formCityPh: "مثال: دبي",
+    formWork: "مكان العمل",
+    formWorkOpts: { both: "في الموقع وعن بُعد", onsite: "في الموقع", remote: "عن بُعد" },
+    formMore: "مرشحات إضافية",
+    formLevel: "المستوى المهني",
+    levels: { "": "كل المستويات", entry: "مبتدئون وحديثو التخرج", mid: "مستوى متوسط", senior: "خبرة عالية", manager: "مدير", executive: "إدارة عليا" } as Record<string, string>,
+    formEmployment: "نوع العقد",
+    employments: { "": "كل العقود", "full-time": "دوام كامل", "part-time": "دوام جزئي", contract: "عقد محدد المدة", temporary: "مؤقت", internship: "تدريب", freelance: "عمل حر" } as Record<string, string>,
+    formIndustry: "المجال",
+    anyIndustry: "كل المجالات",
+    filtersNote: "تستبعد المرشحات الإعلانات التي تذكر شيئاً آخر؛ أما التي لا تذكر شيئاً فتبقى.",
+    filtersOn: (n: number) => (n === 1 ? "مرشح واحد مفعّل" : `مرشحات مفعّلة: ${n}`),
+    fromProfile: "استخدم ملفي",
+    needRole: "اكتب مسمّى وظيفياً واحداً على الأقل.",
+    needWork: "اختر في الموقع أو عن بُعد أو كليهما.",
+    external: "هذه إعلانات عامة من المصادر المذكورة أعلاه. تتقدّم في موقع صاحب العمل أو بالبريد الإلكتروني، وفقط حين تقرر ذلك: لا تدير Zenith هذه الطلبات.",
+    readField: (f: string) => `بُحث فيه كمجال كامل: ${f}`,
+    readKind: (job: string) => `تخصص ضمن «${job}»؛ التخصصات الأخرى تُعد وظائف قريبة`,
+    readWords: "وظيفة لا يعرفها الوكيل بعد: يجب أن يذكرها مسمّى الإعلان",
+    readExtras: (ws: string[]) => `يجب أن يتضمن المسمّى أيضاً ${arList(ws.map(w => `«${w}»`))}`,
+    readWidened: (ts: string[]) => `لا يوجد تطابق تام، لذا بحث الوكيل أيضاً عن ${arList(ts.map(x => `«${x}»`))}؛ وتحمل هذه الإعلانات وسم «مسمّى قريب»`,
+    readFound: (n: number) => `الإعلانات: ${n}`,
+    readArabic: "تُطابَق المسميات العربية بما يقابلها بالإنجليزية: معظم الإعلانات مكتوبة بالإنجليزية.",
+    widenedTag: "مسمّى قريب",
+    zeroFiltered: "استبعدت مرشحاتك بعض الإعلانات. أزل مرشحاً لرؤيتها.",
+    clearFilters: "إزالة المرشحات",
   },
   reason: (r: Reason, place: (code: string) => string): string => {
     const d = r.data ?? {};
@@ -1027,6 +1132,7 @@ const AR: Copy = {
       case "title-related": return `وظيفة قريبة، وليست «${d.role}» نفسها`;
       case "title-close": return `المسمّى قريب من «${d.role}»`;
       case "title-weak": return `يذكر «${d.role}» لكن المسمّى مختلف`;
+      case "title-field": return `ضمن المجال الذي بحثت فيه: ${industryName(d.role ?? "", "ar")}`;
       case "title-none": return "المسمّى لا يطابق الوظائف التي تستهدفها";
       case "skills": return `مهاراتك في الإعلان: ${and(d.skills ?? [])}`;
       case "skills-none": return "لا تظهر أي من مهاراتك في الإعلان";

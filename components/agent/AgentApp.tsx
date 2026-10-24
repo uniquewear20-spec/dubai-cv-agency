@@ -10,9 +10,9 @@ import { AI_TIERS, COACH_TIERS } from "@/lib/checkout/catalog";
 import { packageName } from "@/lib/packages";
 import { allApps, delApp, delKV, getKV, persistent as hasStorage, putApp, setKV, type SavedSearch } from "@/lib/agent/store";
 import { candidateSkills, scoreJob } from "@/lib/agent/score";
-import { countryName } from "@/lib/agent/countries";
-import type { Access, AgentStatus, Application, PackageKey, Profile, SearchRequest, SearchResponse, Usage } from "@/lib/agent/types";
-import { AgentContext, type AgentState, type Lang, type Scored, type View } from "./context";
+import { countriesIn, countryName } from "@/lib/agent/countries";
+import type { Access, AgentStatus, Application, PackageKey, Profile, SearchQuery, SearchRequest, SearchResponse, Usage } from "@/lib/agent/types";
+import { AgentContext, queryFromProfile, type AgentState, type Lang, type Scored, type View } from "./context";
 import Overview from "./Overview";
 import ProfileView from "./ProfileView";
 import JobsView from "./JobsView";
@@ -48,6 +48,7 @@ export default function AgentApp() {
   const [profile, setProfile] = useState<Profile>(EMPTY_PROFILE);
   const [apps, setApps] = useState<Application[]>([]);
   const [search, setSearch] = useState<SavedSearch | null>(null);
+  const [storedQuery, setStoredQuery] = useState<SearchQuery | null>(null);
   const [searching, setSearching] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [hidden, setHidden] = useState<string[]>([]);
@@ -139,11 +140,12 @@ export default function AgentApp() {
   }, []);
 
   const load = useCallback(async () => {
-    const [p, a, s, h, acc, c] = await Promise.all([getKV("profile"), allApps(), getKV("search"), getKV("hidden"), getKV("access"), getKV("ai-consent")]);
+    const [p, a, s, h, acc, c, q] = await Promise.all([getKV("profile"), allApps(), getKV("search"), getKV("hidden"), getKV("access"), getKV("ai-consent"), getKV("search-query")]);
     setPersistent(await hasStorage());
     setProfile(p ? { ...EMPTY_PROFILE, ...p } : EMPTY_PROFILE);
     setApps(a);
     setSearch(s ?? null);
+    setStoredQuery(q ?? null);
     setHidden(h ?? []);
     setAccess(acc ?? null);
     setConsent(Boolean(c));
@@ -199,15 +201,24 @@ export default function AgentApp() {
     return app;
   }, [apps, upsertApp]);
 
-  const runSearch = useCallback(async (opts: { related?: boolean } = {}) => {
+  // The search form: as last used, or filled from the profile until the candidate changes it.
+  const query = useMemo(() => storedQuery ?? queryFromProfile(profile), [storedQuery, profile]);
+  const setQuery = useCallback(async (q: SearchQuery) => {
+    setStoredQuery(q);
+    await setKV("search-query", q);
+  }, []);
+
+  const runSearch = useCallback(async (opts: { related?: boolean; query?: SearchQuery } = {}) => {
     const copy = COPY[lang];
-    if (!profile.roles.length) { setSearchError(copy.jobs.needProfile); return; }
-    if (!profile.remoteOk && !profile.onsiteOk) { setSearchError(copy.jobs.needMode); return; }
+    const q = { ...(opts.query ?? query), ...(opts.related !== undefined ? { related: opts.related } : {}) };
+    if (!q.roles.length) { setSearchError(copy.jobs.needRole); return; }
+    if (!q.remote && !q.onsite) { setSearchError(copy.jobs.needWork); return; }
     setSearching(true);
     setSearchError(null);
+    const city = q.city.trim();
     const request: SearchRequest = {
-      roles: profile.roles, countries: profile.countries, remote: profile.remoteOk, onsite: profile.onsiteOk, keywords: [],
-      related: opts.related ?? Boolean(profile.relatedTitles),
+      roles: q.roles, countries: q.countries, remote: q.remote, onsite: q.onsite, keywords: [], related: q.related,
+      ...(city ? { city } : {}), ...(q.level ? { level: q.level } : {}), ...(q.employment ? { employment: q.employment } : {}), ...(q.industry ? { industry: q.industry } : {}),
     };
     try {
       const res = await fetch("/api/agent/search/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(request) });
@@ -224,7 +235,7 @@ export default function AgentApp() {
     } finally {
       setSearching(false);
     }
-  }, [lang, profile]);
+  }, [lang, query]);
 
   const hideJob = useCallback(async (id: string) => {
     const next = [...hidden, id].slice(-500);
@@ -251,8 +262,14 @@ export default function AgentApp() {
   const scored = useMemo<Scored[]>(() => {
     if (!search) return [];
     const now = Date.now();
+    // Listings are ranked for what was searched (its titles and places), with the profile's skills,
+    // languages, salary and excluded employers.
+    const r = search.request;
+    const asSearched: Profile = {
+      ...profile, roles: r.roles, countries: r.countries.length ? r.countries : r.city ? countriesIn(r.city) : [], remoteOk: r.remote, onsiteOk: r.onsite,
+    };
     return search.response.jobs
-      .map(job => ({ job, match: scoreJob(job, profile, skills, now) }))
+      .map(job => ({ job, match: scoreJob(job, asSearched, skills, now) }))
       .filter(s => !s.match.excluded);
   }, [search, profile, skills]);
 
@@ -265,7 +282,7 @@ export default function AgentApp() {
 
   const state: AgentState = {
     lang, t, ready, persistent, status, profile, saveProfile, apps, upsertApp, removeApp, saveJob,
-    search, scored, searching, searchError, runSearch, hidden, hideJob, access, usage, verifyAccess: verify,
+    search, scored, searching, searchError, query, setQuery, runSearch, hidden, hideJob, access, usage, verifyAccess: verify,
     forgetAccess, setUsage, consent, giveConsent, go, practise, view, appId, ivJob, countryLabel, pkg, reload: async () => { await load(); },
   };
 

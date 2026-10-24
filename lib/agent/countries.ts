@@ -167,3 +167,53 @@ export function placeFit(location: string, remote: boolean, wanted: string[]): P
   }
   return { match: false, via: null, worldwide: false, elsewhere: named };
 }
+
+export type PlaceVerdict = "fits" | "elsewhere" | "unclear";
+
+/**
+ * Whether a listing is open to the wanted countries: "elsewhere" when it names only other countries
+ * or a region that doesn't include them (a remote job for "USA only" or "Europe" on a UAE search),
+ * "unclear" when its location says nothing usable (kept: it may well fit).
+ */
+export function placeVerdict(location: string, remote: boolean, wanted: string[]): PlaceVerdict {
+  if (!wanted.length) return "fits";
+  const fit = placeFit(location, remote, wanted);
+  if (fit.match) return "fits";
+  if (fit.elsewhere.length) return "elsewhere";
+  const n = norm(location);
+  if (REGION_WORDS.some(([re]) => re.test(n))) return "elsewhere";
+  return "unclear";
+}
+
+/** Other spellings of the main cities, as listings write them. */
+const CITY_ALIASES: string[][] = [
+  ["dubai", "dubaï", "دبي"], ["abu dhabi", "abudhabi", "abou dabi", "أبوظبي", "أبو ظبي"], ["sharjah", "charjah", "الشارقة"], ["ajman", "عجمان"],
+  ["ras al khaimah", "rak", "رأس الخيمة"], ["al ain", "العين"], ["fujairah", "الفجيرة"], ["riyadh", "riyad", "الرياض"], ["jeddah", "jiddah", "djeddah", "جدة"],
+  ["dammam", "الدمام"], ["khobar", "al khobar", "الخبر"], ["doha", "الدوحة"], ["kuwait city", "kuwait", "الكويت"], ["manama", "المنامة"], ["muscat", "mascate", "مسقط"],
+  ["cairo", "le caire", "القاهرة"], ["alexandria", "alexandrie", "الإسكندرية"], ["casablanca", "casa", "الدار البيضاء"], ["rabat", "الرباط"],
+  ["marrakech", "marrakesh", "مراكش"], ["tangier", "tanger", "طنجة"], ["agadir", "أكادير"], ["fes", "fez", "فاس"], ["tunis", "تونس"], ["algiers", "alger", "الجزائر"],
+  ["paris", "باريس"], ["london", "londres", "لندن"], ["istanbul", "إسطنبول"], ["beirut", "beyrouth", "بيروت"], ["amman", "عمان"], ["geneva", "genève", "geneve", "genf"],
+  ["zurich", "zürich"], ["munich", "münchen"], ["cologne", "köln"], ["brussels", "bruxelles", "brussel"], ["new york", "nyc", "new york city"],
+];
+
+/**
+ * Whether a listing is in the wanted city: "fits" when its location names the city, "elsewhere"
+ * when it names another place first ("Sharjah, United Arab Emirates" for Dubai), "unclear" when it
+ * names only a country or nothing.
+ */
+export function cityVerdict(location: string, city: string): PlaceVerdict {
+  const c = norm(city);
+  if (!c) return "fits";
+  const names = CITY_ALIASES.find(a => a.some(x => norm(x) === c)) ?? [city];
+  const n = norm(location);
+  if (names.some(x => phraseRe(x).test(n))) return "fits";
+  const first = norm(location.split(/[,(|/]/)[0] ?? "").trim();
+  if (!first || /^(remote|hybrid|on-?site|anywhere|worldwide)$/.test(first)) return "unclear";
+  const country = COUNTRIES.find(k => [k.en, k.fr, k.ar, ...k.aliases.filter(a => a.length > 3)].some(x => norm(x) === first));
+  if (country && [country.en, country.fr, country.ar].some(x => norm(x) === first)) return "unclear";
+  return "elsewhere";
+}
+
+/** French-speaking and German-speaking markets, for searching job titles in those languages. */
+export const FRENCH_MARKETS = new Set(["FR", "BE", "CH", "LU", "MA", "TN", "DZ", "SN", "CI", "LB", "CA"]);
+export const GERMAN_MARKETS = new Set(["DE", "AT", "CH"]);

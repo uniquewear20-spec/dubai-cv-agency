@@ -11,9 +11,9 @@
 //   Deductions          languages the listing requires that the candidate doesn't list,
 //                       a listed salary below the candidate's minimum
 
-import { extractSkills, norm, phraseRe, requiredLanguages, skillMatcher, words } from "./text";
+import { extractSkills, norm, phraseRe, requiredLanguages, skillMatcher } from "./text";
 import { placeFit } from "./countries";
-import { cleanTitle, familyOfTitle, mentionsJob, planRole, titleFit, titleRe, type RolePlan } from "./titles";
+import { cleanTitle, familyOfTitle, genericTitle, mentionsJob, planRole, titleFit, titleRe, wordsFitTitle, type RolePlan } from "./titles";
 
 /** A searched role as a title: "f&b supervisor" → "F&B supervisor". */
 const roleLabel = (s: string) => s.replace(/^\p{L}/u, c => c.toUpperCase()).replace(/\bf&b\b/gi, "F&B");
@@ -21,7 +21,7 @@ import { annual } from "./salary";
 import type { Job, Profile } from "./types";
 
 export type ReasonCode =
-  | "title-exact" | "title-variant" | "title-related" | "title-close" | "title-weak" | "title-none"
+  | "title-exact" | "title-variant" | "title-related" | "title-close" | "title-weak" | "title-field" | "title-none"
   | "skills" | "skills-none" | "skills-missing"
   | "place-direct" | "place-worldwide" | "place-region" | "place-miss" | "remote-unwanted" | "onsite-unwanted"
   | "level-fit" | "level-higher" | "level-lower"
@@ -47,9 +47,6 @@ export interface Match {
   requiredLangs: string[];
   excluded: boolean;
 }
-
-const stem = (w: string) =>
-  w.length <= 4 ? w : w.replace(/(ational|ation|ement|ments?|ial|ing|ances?|ences?|ers?|als?|ité|ique|e|s)$/u, "");
 
 const LEVELS: [RegExp, number][] = [
   [/(?<![\p{L}])(intern|internship|trainee|stagiaire|stage|graduate|entry[- ]level|junior|jr|assistant|apprenti\w*|متدرب)(?![\p{L}])/u, 1],
@@ -132,6 +129,11 @@ export function scoreJob(job: Job, p: Profile, skills = candidateSkills(p), now 
     // Reasons name the role as searched: "Barista" for a typed "Baristta".
     const label = plan.corrected ? roleLabel(plan.role) : role;
     const fit = titleFit(plan, job.title, intro);
+    if (plan.field) {
+      // A whole field searched ("Healthcare"): every job in it fits, none of them exactly.
+      if (fit === "same") take(28, plan.field, "title-field");
+      continue;
+    }
     if (fit === "same") {
       // The candidate's own words in the title, or the same job under another title ("Mixologist" for "Bartender").
       const exact = titleRe(role).test(nTitle) || titleRe(plan.role).test(cleanTitle(job.title));
@@ -142,19 +144,15 @@ export function scoreJob(job: Job, p: Profile, skills = candidateSkills(p), now 
     if (fit === "related") { take(20, label, "title-related"); continue; }
     if (fit === "other") continue; // a different job ("Assistant Restaurant Manager" is not "Restaurant Manager")
     if (plan.family) {
-      // A title the agent doesn't know, in a listing that names the job ("Coffee Boy" asking for barista skills).
-      if (mentionsJob(plan, job.title, intro)) take(6, label, "title-weak");
+      // A generic title ("Team Member – Lounge") in a listing that names the job.
+      if (genericTitle(job.title) && mentionsJob(plan, job.title, intro)) take(6, label, "title-weak");
       continue;
     }
-    // A role the agent doesn't know: compare the words.
+    // A role the agent doesn't know: the title must have its words.
     if (phraseRe(role).test(nTitle)) { take(35, role, "title-exact"); break; }
-    const rw = words(role).map(stem);
-    if (!rw.length) continue;
-    const tw = new Set(words(job.title).map(stem));
-    const hit = rw.filter(w => tw.has(w)).length / rw.length;
-    const pts = hit >= 0.99 ? 32 : hit >= 0.5 ? Math.round(28 * hit) : 0;
-    if (pts) take(pts, role, pts >= 14 ? "title-close" : "title-weak");
-    else if (!title && phraseRe(role).test(nText)) take(6, role, "title-weak");
+    const w = plan.words ? wordsFitTitle(plan.words, job.title) : null;
+    if (w === "all") take(32, role, "title-close");
+    else if (w === "head") take(16, role, "title-related");
   }
   if (title > 0) reasons.push({ code: titleCode, tone: titleCode === "title-weak" || titleCode === "title-related" ? "info" : "plus", points: title, data: { role: bestRole } });
   else if (p.roles.length) reasons.push({ code: "title-none", tone: "minus", points: 0 });

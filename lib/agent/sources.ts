@@ -17,19 +17,25 @@
 //                                                    ADZUNA_APP_ID and ADZUNA_APP_KEY; credit "Jobs by Adzuna"
 //
 // Every target role is planned first (lib/agent/titles.ts): typos fixed, the other titles of the
-// same job, its neighbours. Sources are asked for every role and country, within a per-source
-// budget of calls. Listings that turn out to be a different job (a Python engineer on a
-// bartender search) are left out and counted, never silently: the report says how many.
+// same job (in the market's language too), its neighbours, or a whole field. Sources are asked for
+// every role and country, within a per-source budget of calls. Every listing is then judged the
+// same way, whatever the source: a different job (a Python engineer on a bartender search, an
+// attorney on a doctor search), a remote job open only to other countries, or a listing outside
+// the candidate's filters is left out and counted, never silently: the report says how many. A
+// role that finds nothing is widened once to its related or broader titles, labelled as such.
 //
 // Calls are cached (Next.js data cache) so repeated searches don't hit the sources again.
 // LinkedIn, Indeed, Bayt and GulfTalent have no public job-search API; the agent links to a
 // search on those sites instead, and the candidate can add any listing by hand.
 
 import { unstable_cache } from "next/cache";
-import { countryByCode } from "./countries";
-import { bare, findApplyEmail, htmlToText, norm, phraseRe, words } from "./text";
+import { FRENCH_MARKETS, GERMAN_MARKETS, cityVerdict, countriesIn, countryByCode, placeVerdict } from "./countries";
+import { bare, findApplyEmail, htmlToText, norm } from "./text";
 import { parseSalary } from "./salary";
-import { SECTOR_SEARCHES, familyById, familyLabel, mentionsJob, planRole, titleFit, type Family, type RolePlan } from "./titles";
+import {
+  SECTOR_SEARCHES, employmentOf, familyById, familyLabel, genericTitle, industriesOf, industryById, levelOfListing, mentionsJob, planRole,
+  titleFit, widenTerms, wordsFitTitle, type Family, type Industry, type RolePlan,
+} from "./titles";
 import type { Job, RoleSearch, SalaryRange, SearchRequest, SearchResponse, SourceId, SourceReport } from "./types";
 
 const UA = "ZenithDubaiCV-JobAgent/1.0 (+https://zenithdubaicv.com/agent/)";
@@ -98,9 +104,10 @@ const iso = (v: unknown): string | null => {
 
 const clean = (s: unknown, max = 200) => (typeof s === "string" ? s.replace(/\s+/g, " ").trim().slice(0, max) : "");
 
-function job(p: Omit<Job, "applyEmail" | "description"> & { description: string }): Job {
+function job(p: Omit<Job, "applyEmail" | "description"> & { description: string }, types: (string | null | undefined)[] = []): Job {
   const description = p.description.slice(0, MAX_DESC);
-  return { ...p, description, applyEmail: findApplyEmail(description) };
+  const employment = employmentOf(...types, p.title);
+  return { ...p, description, applyEmail: findApplyEmail(description), ...(employment.length ? { employment } : {}) };
 }
 
 function range(min: unknown, max: unknown, currency: unknown, period: unknown): SalaryRange | null {
@@ -131,6 +138,11 @@ interface Ctx {
   closed: Partial<Record<Id, number>>;
   /** Listings a source left out before the shared check (a different job by its title alone), per source. */
   unrelated: Partial<Record<Id, number>>;
+  /**
+   * The widening pass: for each role that found nothing, the related or broader titles to search
+   * (by index into plans). Only Workable and Himalayas are asked again.
+   */
+  widen?: Map<number, string[]>;
 }
 
 /** A listing and the target role (index into ctx.plans) whose search found it, or null for a feed. */
@@ -139,18 +151,17 @@ interface Found {
   plan: number | null;
   /** Found by a search of the whole sector ("food and beverage"), not of the role: not counted as left out. */
   sweep?: boolean;
+  /** Found by the widening pass for this role (index into ctx.plans). */
+  widen?: number;
 }
+
+/** Which role a listing is for, and how: the job itself, a neighbour the candidate asked for, or a widened search. */
+interface Verdict { plan: number; how: "same" | "related" | "widened" }
 
 interface Adapter {
   meta: SourceMeta;
   /** Remote jobs only: not asked when the candidate wants on-site jobs only. */
   remoteOnly?: boolean;
-  /**
-   * The source's keyword search can be trusted for a role the agent doesn't know (its results
-   * contain the words searched). Workable's search also returns loosely related jobs, and feeds
-   * aren't searched at all, so their listings must share the role's words.
-   */
-  keywordSearch?: boolean;
   skip?: (ctx: Ctx) => string | null;
   run: (ctx: Ctx) => Promise<Found[]>;
 }
@@ -173,22 +184,43 @@ export function queryPairs<T>(terms: string[], places: T[], max: number): [strin
   return out;
 }
 
+/** A role's terms for one market: the typed title, then its title in the market's language, then the common English titles. */
+function marketTerms(p: RolePlan, countries: string[]): string[] {
+  const local = [
+    ...(countries.some(c => FRENCH_MARKETS.has(c)) ? p.local.fr.slice(0, 1) : []),
+    ...(countries.some(c => GERMAN_MARKETS.has(c)) ? p.local.de.slice(0, 1) : []),
+  ];
+  return p.extras.length ? p.terms : [...p.terms.slice(0, 1), ...local, ...p.terms.slice(1)];
+}
+
+/** English terms for sources that list jobs in English (the remote job boards). */
+function englishTerms(p: RolePlan): string[] {
+  if (p.family && !p.extras.length) return [...new Set([...(p.family.search ?? [p.family.titles[0]]), ...p.terms])];
+  return p.terms;
+}
+
 /**
  * The terms to send for the roles, with the role each belongs to: every role's own title first,
  * then the other common titles for the same job (and its neighbours when asked), `perRole` at most.
+ * In the widening pass, the related or broader titles of the roles that found nothing.
  */
-function termsFor(plans: RolePlan[], perRole: number): { terms: string[]; planOf: Map<string, number> } {
+function termsFor(ctx: Ctx, perRole: number, pick: (p: RolePlan) => string[] = p => p.terms): { terms: string[]; planOf: Map<string, number> } {
+  const lists: [number, string[]][] = ctx.widen ? [...ctx.widen.entries()] : ctx.plans.map((p, i) => [i, pick(p)]);
   const terms: string[] = [];
   const planOf = new Map<string, number>();
   const seen = new Set<string>();
   for (let rank = 0; rank < perRole; rank++) {
-    plans.forEach((p, i) => {
-      const t = p.terms[rank];
+    for (const [i, list] of lists) {
+      const t = list[rank];
       if (t && !seen.has(norm(t))) { seen.add(norm(t)); terms.push(t); planOf.set(t, i); }
-    });
+    }
   }
   return { terms, planOf };
 }
+
+/** How many terms per role fit a source's budget of calls (fewer roles and places: more titles each). */
+const perRoleFor = (ctx: Ctx, places: number, budget: number, min = 1, max = 5) =>
+  Math.max(min, Math.min(max, Math.floor(budget / Math.max(1, (ctx.widen?.size ?? ctx.plans.length) * Math.max(1, places)))));
 
 /**
  * Runs a source's calls side by side. A call that fails doesn't sink the others: the source fails
@@ -226,39 +258,53 @@ function limiter(n: number) {
   };
 }
 
-const stem = (w: string) => (w.length <= 4 ? w : w.replace(/(ing|ers?|es|s)$/u, ""));
-
-/** For a role the agent doesn't know: the listing's title or tags share a word with it, or its text names it. */
-function wordsFit(p: RolePlan, j: Job, keywords: string[]): boolean {
-  const targets = [...words(p.role), ...keywords.flatMap(k => words(k))].filter(w => w.length >= 3).map(stem);
-  if (!targets.length) return true;
-  const hay = words(`${j.title} ${j.tags.join(" ")}`).map(stem);
-  if (targets.some(w => hay.some(h => h === w || h.startsWith(w.slice(0, Math.max(4, w.length - 2)))))) return true;
-  return phraseRe(p.role).test(norm(j.description.slice(0, 1500)));
-}
-
 /**
- * The target role a listing is (index into ctx.plans), or null when it is none of them:
- *  - a job the agent knows: the listing's title is that job (any way of writing it), a neighbour
- *    when the candidate asked for them, or a title the agent doesn't know in a listing that names the job;
- *  - a role the agent doesn't know: a listing a keyword search found for it stands; otherwise
- *    the listing must share its words.
+ * The target role a listing is (index into ctx.plans) and how, or null when it is none of them:
+ *  - a job the agent knows: the listing's title is that job (any way of writing it, or a kind of
+ *    it); a neighbour when the candidate asked for neighbours or the search is being widened; or a
+ *    generic title ("Team Member – Lounge") in a listing whose text names the job;
+ *  - a whole field: a job in the field, or a title or category that names the field;
+ *  - a role the agent doesn't know: the listing's title must have its words (its description
+ *    doesn't count: "Juris Doctor" in a lawyer's listing is not a doctor's job).
  */
-function planFor(f: Found, ctx: Ctx, keywordSearch: boolean): number | null {
+function judge(f: Found, ctx: Ctx): Verdict | null {
   const j = f.job;
   const intro = `${j.tags.join(" ")}\n${j.description.slice(0, 1500)}`;
+  let fallback: Verdict | null = null;
   for (let i = 0; i < ctx.plans.length; i++) {
     const p = ctx.plans[i];
-    if (!p.family) continue;
-    const fit = titleFit(p, j.title, intro);
-    if (fit === "same" || (fit === "related" && ctx.req.related)) return i;
-    // A title the agent doesn't know counts when the listing names the job, but not in a sector
-    // search, where many listings mention jobs they aren't ("reporting to the restaurant manager").
-    if (fit === "unknown" && !f.sweep && mentionsJob(p, j.title, intro)) return i;
+    const widening = f.widen === i;
+    if (p.family || p.field) {
+      const fit = titleFit(p, j.title, intro);
+      if (fit === "same") return { plan: i, how: "same" };
+      if (fit === "related" && (ctx.req.related || widening)) fallback ??= { plan: i, how: widening ? "widened" : "related" };
+      if (fit === "unknown" && !f.sweep) {
+        if (p.family && p.family.kind !== "level" && genericTitle(j.title) && mentionsJob(p, j.title, intro)) fallback ??= { plan: i, how: "same" };
+        if (p.field && industriesOf(j.title, j.tags).includes(p.field)) fallback ??= { plan: i, how: "same" };
+      }
+      continue;
+    }
+    if (p.words) {
+      const w = wordsFitTitle(p.words, j.title);
+      if (w === "all") return { plan: i, how: "same" };
+      if (w === "head" && widening) fallback ??= { plan: i, how: "widened" };
+    }
   }
-  if (keywordSearch && f.plan !== null && !ctx.plans[f.plan]?.family) return f.plan;
-  for (let i = 0; i < ctx.plans.length; i++) {
-    if (!ctx.plans[i].family && wordsFit(ctx.plans[i], j, ctx.req.keywords)) return i;
+  return fallback;
+}
+
+/** Why a listing that is the job is still left out: other countries or the candidate's filters. */
+function placeOrFilter(j: Job, req: SearchRequest, wanted: string[]): "elsewhere" | "filtered" | null {
+  if (placeVerdict(j.location, j.remote, wanted) === "elsewhere") return "elsewhere";
+  if (req.city && !j.remote && cityVerdict(j.location, req.city) === "elsewhere") return "filtered";
+  if (req.level) {
+    const lvl = levelOfListing(j.title, `${j.tags.join(" ")}\n${j.description.slice(0, 600)}`);
+    if (lvl && lvl !== req.level) return "filtered";
+  }
+  if (req.employment && j.employment?.length && !j.employment.includes(req.employment)) return "filtered";
+  if (req.industry) {
+    const inds = industriesOf(j.title, j.tags, `${j.tags.join(" ")}\n${j.description.slice(0, 600)}`);
+    if (inds.length && !inds.includes(req.industry as Industry)) return "filtered";
   }
   return null;
 }
@@ -355,54 +401,40 @@ function workableJob(r: WorkableRow): Job {
     salary: null,
     salaryRange: null,
     tags: [r.type, r.workplace === "hybrid" ? "Hybrid" : ""].filter(Boolean),
-  });
+  }, [r.type]);
 }
-
-/** Title words that say little about the job on their own ("Staff Backend Engineer" is not bar staff). */
-const GENERIC = new Set(["staff", "attendant", "associate", "specialist", "service", "services", "maker", "member", "crew", "agent", "officer",
-  "executive", "assistant", "supervisor", "director", "operations", "general", "chief", "deputy", "team", "leader", "de", "du"]);
 
 /**
  * How much a search row is worth opening, judged by its title alone (before its page is loaded):
- * 3 the job (or a neighbour asked for), 2 a title the agent doesn't know that shares a word with
- * the job, 1 a row for a role the agent doesn't know, 0 a different job (left out, not opened).
+ * 3 the job (or a neighbour asked for), 2 a generic title for a job the agent knows (its text may
+ * name the job), 0 a different job (left out, not opened).
  */
 function rowWorth(f: Found, ctx: Ctx): number {
-  if (f.sweep) {
-    return ctx.plans.some(p => {
-      const fit = p.family ? titleFit(p, f.job.title) : "unknown";
-      return fit === "same" || (fit === "related" && ctx.req.related) || (!p.family && wordsFit(p, f.job, ctx.req.keywords));
-    }) ? 3 : 0;
-  }
-  let worth = 0;
-  for (const p of ctx.plans) {
-    if (!p.family) {
-      worth = Math.max(worth, wordsFit(p, f.job, ctx.req.keywords) ? 3 : 1);
-      continue;
-    }
-    const fit = titleFit(p, f.job.title);
-    if (fit === "same" || (fit === "related" && ctx.req.related)) return 3;
-    if (fit === "unknown") {
-      const own = new Set([...p.family.titles, p.role].flatMap(t => words(t)).filter(w => !GENERIC.has(w)).map(stem));
-      if (words(f.job.title).map(stem).some(w => own.has(w))) worth = Math.max(worth, 2);
-    }
-  }
-  return worth;
+  if (judge(f, ctx)) return 3;
+  if (!f.sweep && genericTitle(f.job.title) && ctx.plans.some(p => p.family && p.family.kind !== "level" && titleFit(p, f.job.title) === "unknown")) return 2;
+  return 0;
 }
+
+const WORKABLE_TYPES: Record<string, string> = { "full-time": "Full-time", "part-time": "Part-time", contract: "Contract", temporary: "Temporary" };
 
 const workable: Adapter = {
   meta: META.workable,
   async run(ctx) {
     const { req, plans } = ctx;
-    const places = req.countries.length ? req.countries.map(c => countryByCode(c)?.en ?? c) : [""];
-    const { terms, planOf } = termsFor(plans, req.related ? 3 : 2);
-    // At most 10 searches for the roles (every term and country at least once). For hospitality
-    // jobs, up to 6 more of the sector in the chosen countries: employers title the same work many
-    // ways ("Food & Beverage / Fine Dining Server", "Restaurant Captain"), and Workable matches titles
-    // closely. Five at a time, each cached an hour.
-    const queries = queryPairs(terms, places, 10).map(([term, place]) => ({ term, place, plan: planOf.get(term) ?? null, sweep: false }));
-    if (req.countries.length) {
-      const sectorTerms = [...new Set(plans.flatMap(p => (p.family?.sector ? SECTOR_SEARCHES[p.family.sector] : [])))];
+    // A city replaces its country in the search (Workable takes a city, region or country).
+    const places = req.city ? [req.city] : req.countries.length ? req.countries.map(c => countryByCode(c)?.en ?? c) : [""];
+    const { terms, planOf } = termsFor(ctx, perRoleFor(ctx, places.length, 10, 2, 5), p => marketTerms(p, req.countries));
+    // At most 10 searches for the roles (every term and country at least once); 6 when widening.
+    // For hospitality and fields such as healthcare and teaching, up to 6 more of the sector in the
+    // chosen countries: employers title the same work many ways ("Food & Beverage / Fine Dining
+    // Server", "Specialist Pediatrician"), and Workable matches titles closely. Five at a time,
+    // each cached an hour.
+    const queries = queryPairs(terms, places, ctx.widen ? 6 : 10).map(([term, place]) => ({ term, place, plan: planOf.get(term) ?? null, sweep: false }));
+    if (req.countries.length && !ctx.widen) {
+      const sectorTerms = [...new Set(plans.flatMap(p => [
+        ...(p.family?.sector ? SECTOR_SEARCHES[p.family.sector] : []),
+        ...((p.family?.industries ?? (p.field ? [p.field] : [])).flatMap(i => industryById(i)?.sweep ?? [])),
+      ]))];
       for (const [term, place] of queryPairs(sectorTerms, places, 6)) queries.push({ term, place, plan: null, sweep: true });
     }
     const slot = limiter(5);
@@ -410,10 +442,12 @@ const workable: Adapter = {
       const qs = new URLSearchParams({ query: q.term });
       if (q.place) qs.set("location", q.place);
       if (req.remote && !req.onsite) qs.set("workplace", "remote");
+      if (req.employment && WORKABLE_TYPES[req.employment]) qs.set("employment_type", WORKABLE_TYPES[req.employment]);
       const page = await getPage(`${WORKABLE}/jobs.md?${qs}`, { next: { revalidate: 3600 } });
       const list = page ? parseWorkableSearch(page.text) : null;
       if (!list) { console.error("[agent/search] workable: unexpected search response"); throw new SourceError("Unexpected response"); }
-      return list.map(r => ({ job: workableJob(r), plan: q.plan, sweep: q.sweep }));
+      const widen = ctx.widen && q.plan !== null ? q.plan : undefined;
+      return list.map(r => ({ job: workableJob(r), plan: q.plan, sweep: q.sweep, ...(widen !== undefined ? { widen } : {}) }));
     })));
 
     // Workable fills short result lists with other jobs ("Senior Python Engineer" on a bartender
@@ -446,7 +480,7 @@ const workable: Adapter = {
     // Each listing's page gives its description (for matching and drafting), when it was posted,
     // a stated salary, and whether it is still open (a closed listing's page is gone). The web page
     // carries the posting date in its schema.org data; the Markdown page is the fallback. Cached six hours.
-    const stopAt = Date.now() + WORKABLE_PAGES_MS;
+    const stopAt = Date.now() + (ctx.widen ? WORKABLE_PAGES_MS / 2 : WORKABLE_PAGES_MS);
     const page = limiter(6);
     const opened = await Promise.all(ranked.slice(0, WORKABLE_PAGES).map(({ f }) => page(async (): Promise<{ at: string; d: WorkableDetails | null } | null | undefined> => {
       const left = stopAt - Date.now();
@@ -497,15 +531,17 @@ interface HimalayasJob {
 const himalayas: Adapter = {
   meta: META.himalayas,
   remoteOnly: true,
-  keywordSearch: true,
-  run({ req, plans }) {
-    const { terms, planOf } = termsFor(plans, 1);
-    const queries: [string, string | null][] = req.countries.length ? queryPairs(terms, req.countries, 9) : terms.map(t => [t, null]);
+  run(ctx) {
+    const { req } = ctx;
+    const { terms, planOf } = termsFor(ctx, perRoleFor(ctx, req.countries.length, 9, 1, 2), englishTerms);
+    const queries: [string, string | null][] = req.countries.length ? queryPairs(terms, req.countries, ctx.widen ? 4 : 9) : terms.slice(0, 9).map(t => [t, null]);
     return settle("himalayas", queries.map(([term, c]) => {
       const qs = new URLSearchParams({ q: term });
       if (c) qs.set("country", c);
+      const plan = planOf.get(term) ?? null;
+      const widen = ctx.widen && plan !== null ? { widen: plan } : {};
       return getJson<unknown>(`https://himalayas.app/jobs/api/search?${qs}`, { next: { revalidate: 3600 } })
-        .then(body => listOf<HimalayasJob>("himalayas", body, "jobs").map(j => ({ job: himalayasJob(j), plan: planOf.get(term) ?? null })));
+        .then(body => listOf<HimalayasJob>("himalayas", body, "jobs").map(j => ({ job: himalayasJob(j), plan, ...widen })));
     }));
   },
 };
@@ -525,7 +561,7 @@ function himalayasJob(j: HimalayasJob): Job {
     salary: salaryText(r),
     salaryRange: r,
     tags: [...(j.seniority ?? []), ...(j.categories ?? []).slice(0, 6).map(c => c.replace(/-/g, " ")), j.employmentType ?? ""].filter(Boolean),
-  });
+  }, [j.employmentType]);
 }
 
 // ── Jobicy ───────────────────────────────────────────────────────────────────
@@ -539,11 +575,12 @@ interface JobicyJob {
 const jobicy: Adapter = {
   meta: META.jobicy,
   remoteOnly: true,
-  keywordSearch: true,
-  run({ req, plans }) {
+  skip: ctx => (ctx.widen ? "Not used to widen a search" : null),
+  run(ctx) {
+    const { req } = ctx;
     // Jobicy takes one location per call; countries it has no location for are searched worldwide.
     const geos = [...new Set(req.countries.map(c => countryByCode(c)?.jobicy ?? ""))];
-    const { terms, planOf } = termsFor(plans, 1);
+    const { terms, planOf } = termsFor(ctx, 1, englishTerms);
     return settle("jobicy", queryPairs(terms, geos.length ? geos : [""], 6).map(([term, geo]) => {
       const qs = new URLSearchParams({ count: "50", tag: term });
       if (geo) qs.set("geo", geo);
@@ -575,7 +612,7 @@ function jobicyJob(j: JobicyJob): Job {
     salary: salaryText(r),
     salaryRange: r,
     tags: [j.jobLevel ?? "", ...(j.jobIndustry ?? []), ...(j.jobType ?? [])].filter(Boolean).map(t => htmlToText(t, 60)),
-  });
+  }, j.jobType ?? []);
 }
 
 // ── Remotive ─────────────────────────────────────────────────────────────────
@@ -588,6 +625,7 @@ interface RemotiveJob {
 const remotive: Adapter = {
   meta: META.remotive,
   remoteOnly: true,
+  skip: ctx => (ctx.widen ? "Not used to widen a search" : null),
   async run(ctx) {
     // The whole public feed in one call, refreshed every 6 hours (Remotive asks for at most 4 a day).
     // A feed isn't a search, so only the listings that are one of the roles are returned.
@@ -608,9 +646,9 @@ const remotive: Adapter = {
           salary: clean(j.salary, 80) || null,
           salaryRange: parseSalary(j.salary),
           tags: [j.category, ...(j.tags ?? []).slice(0, 8)].filter(Boolean),
-        }),
+        }, [j.job_type]),
       }))
-      .filter(f => planFor(f, ctx, false) !== null);
+      .filter(f => judge(f, ctx) !== null);
   },
 };
 
@@ -642,20 +680,20 @@ const arbeitnowFeed = unstable_cache(
       salary: null,
       salaryRange: null,
       tags: [...(j.tags ?? []), ...(j.job_types ?? [])].slice(0, 8),
-    }));
+    }, j.job_types ?? []));
   },
-  ["agent-arbeitnow-v1"],
+  ["agent-arbeitnow-v2"],
   { revalidate: 3600 },
 );
 
 const arbeitnow: Adapter = {
   meta: META.arbeitnow,
-  skip: ({ req }) => (req.countries.some(c => ["DE", "AT", "CH"].includes(c)) ? null : "Germany, Austria and Switzerland only"),
+  skip: ({ req, widen }) => (widen ? "Not used to widen a search" : req.countries.some(c => ["DE", "AT", "CH"].includes(c)) ? null : "Germany, Austria and Switzerland only"),
   async run(ctx) {
     return (await arbeitnowFeed())
       .filter(j => (j.remote ? ctx.req.remote : ctx.req.onsite))
       .map(j => ({ job: { ...j, tags: [...j.tags] }, plan: null }))
-      .filter(f => planFor(f, ctx, false) !== null);
+      .filter(f => judge(f, ctx) !== null);
   },
 };
 
@@ -667,12 +705,12 @@ const joobleMemo = new Map<string, { at: number; jobs: Job[] }>();
 
 const jooble: Adapter = {
   meta: META.jooble,
-  keywordSearch: true,
-  skip: ({ req }) => (req.roles.length ? null : "Needs a target role"),
-  run({ req, plans }) {
+  skip: ({ req, widen }) => (widen ? "Not used to widen a search" : req.roles.length ? null : "Needs a target role"),
+  run(ctx) {
+    const { req } = ctx;
     const key = process.env.JOOBLE_API_KEY!.trim();
-    const places = req.countries.length ? req.countries.map(c => countryByCode(c)?.en ?? c) : [""];
-    const { terms, planOf } = termsFor(plans, 2);
+    const places = req.city ? [req.city] : req.countries.length ? req.countries.map(c => countryByCode(c)?.en ?? c) : [""];
+    const { terms, planOf } = termsFor(ctx, 2, p => marketTerms(p, req.countries));
     // Each call counts against the key's allowance: at most 6 a search (every term and country once).
     return settle("jooble", queryPairs(terms, places, 6).map(([term, place]) => {
       const plan = planOf.get(term) ?? null;
@@ -698,7 +736,7 @@ const jooble: Adapter = {
           salary: clean(j.salary, 80) || null,
           salaryRange: parseSalary(j.salary),
           tags: [j.type, j.source].filter(Boolean).map(t => clean(t, 60)),
-        }));
+        }, [j.type]));
         joobleMemo.set(memoKey, { at: Date.now(), jobs });
         return jobs.map(j => ({ job: j, plan }));
       });
@@ -718,16 +756,17 @@ const ADZUNA_CURRENCY: Record<string, string> = { gb: "GBP", us: "USD", ca: "CAD
 
 const adzuna: Adapter = {
   meta: META.adzuna,
-  keywordSearch: true,
-  skip: ({ req }) => (req.countries.some(c => countryByCode(c)?.adzuna) ? null : "Doesn't cover the countries you chose"),
-  run({ req, plans }) {
+  skip: ({ req, widen }) => (widen ? "Not used to widen a search" : req.countries.some(c => countryByCode(c)?.adzuna) ? null : "Doesn't cover the countries you chose"),
+  run(ctx) {
+    const { req } = ctx;
     const id = process.env.ADZUNA_APP_ID!.trim();
     const key = process.env.ADZUNA_APP_KEY!.trim();
     const markets = req.countries.map(c => ({ code: c, az: countryByCode(c)?.adzuna })).filter(m => m.az);
-    const { terms, planOf } = termsFor(plans, 2);
+    const { terms, planOf } = termsFor(ctx, 2, p => marketTerms(p, req.countries));
     // Each call counts against the key's allowance: at most 6 a search (every term and country once).
     return settle("adzuna", queryPairs(terms, markets, 6).map(([term, m]) => {
       const qs = new URLSearchParams({ app_id: id, app_key: key, what: term, results_per_page: "20", "content-type": "application/json" });
+      if (req.city) qs.set("where", req.city);
       return getJson<unknown>(`https://api.adzuna.com/v1/api/jobs/${m.az}/search/1?${qs}`, { next: { revalidate: 3600 } })
         .then(body => listOf<AdzunaJob>("adzuna", body, "results").map(j => {
           const predicted = String(j.salary_is_predicted ?? "0") === "1";
@@ -747,7 +786,7 @@ const adzuna: Adapter = {
               salary: salaryText(r),
               salaryRange: r,
               tags: [j.category?.label ?? "", j.contract_time ?? ""].filter(Boolean),
-            }),
+            }, [j.contract_time]),
           };
         }));
     }));
@@ -770,10 +809,11 @@ function skipReason(a: Adapter, ctx: Ctx): string | null {
 }
 
 /** How a role was searched, for the candidate: spelling fixed, the job understood, its other titles and neighbours. */
-function roleSearch(p: RolePlan): RoleSearch {
+function roleSearch(p: RolePlan, found: number, widened: string[]): RoleSearch {
   const f = p.family;
   const own = bare(p.role);
   const titles = f ? [...new Set([...(f.search ?? []), ...f.titles])].filter(t => /^[\x20-\x7e]+$/.test(t) && bare(t) !== own) : [];
+  const parent = f?.parent ? familyById(f.parent) : undefined;
   return {
     input: p.input,
     role: p.role,
@@ -781,35 +821,80 @@ function roleSearch(p: RolePlan): RoleSearch {
     job: f ? familyLabel(f) : null,
     sameTitles: titles.slice(0, 6),
     related: p.related.map(id => familyById(id)).filter((r): r is Family => Boolean(r)).map(familyLabel),
+    field: p.field,
+    kindOf: parent ? familyLabel(parent) : null,
+    byWords: !f && !p.field,
+    extras: p.extras,
+    widened,
+    found,
   };
 }
 
-export async function searchJobs(req: SearchRequest): Promise<SearchResponse> {
-  const ctx: Ctx = { req, plans: req.roles.map(r => planRole(r, Boolean(req.related))), closed: {}, unrelated: {} };
+interface Pass { reports: SourceReport[]; found: { job: Job; verdict: Verdict; source: Id }[] }
+
+/** Asks every source (or, when widening, the sources that can widen) and judges what they return. */
+async function runPass(ctx: Ctx, wanted: string[]): Promise<Pass> {
   const reports: SourceReport[] = [];
-  const lists = await Promise.all(ADAPTERS.map(async a => {
+  const found: Pass["found"] = [];
+  await Promise.all(ADAPTERS.map(async a => {
     const m = a.meta;
     const base = { id: m.id, name: m.name, attribution: m.attribution, home: m.home, configured: sourceConfigured(m) };
-    if (!base.configured) { reports.push({ ...base, ok: false, count: 0, note: `Needs ${m.needs!.join(" and ")}` }); return []; }
+    if (!base.configured) { reports.push({ ...base, ok: false, count: 0, note: `Needs ${m.needs!.join(" and ")}` }); return; }
     const skip = skipReason(a, ctx);
-    if (skip) { reports.push({ ...base, ok: true, count: 0, skipped: true, note: skip }); return []; }
+    if (skip) { reports.push({ ...base, ok: true, count: 0, skipped: true, note: skip }); return; }
     try {
-      const found = await a.run(ctx);
-      const wanted: Job[] = [];
+      const listings = await a.run(ctx);
       let other = ctx.unrelated[m.id] ?? 0;
-      for (const f of found) {
-        if (planFor(f, ctx, Boolean(a.keywordSearch)) !== null) wanted.push(f.job);
-        else if (!f.sweep) other++;
+      let elsewhere = 0;
+      let filtered = 0;
+      for (const f of listings) {
+        const verdict = judge(f, ctx);
+        if (!verdict) { if (!f.sweep) other++; continue; }
+        const why = placeOrFilter(f.job, ctx.req, wanted);
+        if (why === "elsewhere") { elsewhere++; continue; }
+        if (why === "filtered") { filtered++; continue; }
+        found.push({ job: f.job, verdict, source: m.id });
       }
-      reports.push({ ...base, ok: true, count: wanted.length, unrelated: other, closed: ctx.closed[m.id] ?? 0 });
-      return wanted;
+      reports.push({ ...base, ok: true, count: 0, unrelated: other, closed: ctx.closed[m.id] ?? 0, elsewhere, filtered });
     } catch (err) {
       const note = describe(err);
       console.error(`[agent/search] ${m.id}: ${note}`);
       reports.push({ ...base, ok: false, count: 0, note });
-      return [];
     }
   }));
+  return { reports, found };
+}
+
+/** The widening pass is skipped when the first pass took longer than this (the search must answer within its time limit). */
+const WIDEN_BEFORE_MS = 14_000;
+
+export async function searchJobs(req: SearchRequest): Promise<SearchResponse> {
+  const started = Date.now();
+  const ctx: Ctx = { req, plans: req.roles.map(r => planRole(r, Boolean(req.related))), closed: {}, unrelated: {} };
+  // The countries a listing must be open to: the chosen ones, or the city's.
+  const wanted = req.countries.length ? req.countries : req.city ? countriesIn(req.city) : [];
+  const first = await runPass(ctx, wanted);
+  const all = [...first.found];
+  const reports = first.reports;
+
+  // Roles that found nothing: search their related or broader titles once (Workable and Himalayas),
+  // and label what that finds. The candidate's own wording is never replaced silently.
+  const perPlan = ctx.plans.map((_, i) => all.filter(x => x.verdict.plan === i).length);
+  const widen = new Map<number, string[]>();
+  ctx.plans.forEach((p, i) => { if (!perPlan[i]) { const t = widenTerms(p); if (t.length) widen.set(i, t); } });
+  if (widen.size && Date.now() - started >= WIDEN_BEFORE_MS) widen.clear();
+  if (widen.size && Date.now() - started < WIDEN_BEFORE_MS) {
+    const second = await runPass({ ...ctx, widen, closed: {}, unrelated: {} }, wanted);
+    for (const x of second.found) if (!all.some(y => y.job.id === x.job.id)) all.push(x);
+    for (const r of second.reports) {
+      const r1 = reports.find(x => x.id === r.id);
+      if (!r1 || r.skipped || !r.ok) continue;
+      r1.elsewhere = (r1.elsewhere ?? 0) + (r.elsewhere ?? 0);
+      r1.filtered = (r1.filtered ?? 0) + (r.filtered ?? 0);
+      r1.closed = (r1.closed ?? 0) + (r.closed ?? 0);
+      if (!r1.ok) { r1.ok = true; r1.note = undefined; }
+    }
+  }
 
   // The same job from two sources, or twice from one (posted again in the same city): keep the
   // first. The same job and employer in other cities of the same country: one listing that names
@@ -820,19 +905,22 @@ export async function searchJobs(req: SearchRequest): Promise<SearchResponse> {
   const jobs: Job[] = [];
   const kept: Partial<Record<SourceId, number>> = {};
   const dupes: Partial<Record<SourceId, number>> = {};
-  for (const j of lists.flat()) {
+  const byPlan = ctx.plans.map(() => 0);
+  for (const { job: j, verdict } of all) {
     if (!j.title || !j.url || !/^https:\/\//.test(j.url)) continue;
     const here = `${norm(j.title)}|${norm(j.company)}|${cityOf(j.location)}`;
     if (seen.has(here) || seen.has(j.id)) { dupes[j.source] = (dupes[j.source] ?? 0) + 1; continue; }
     seen.add(here); seen.add(j.id);
-    const first = j.company !== "-" ? firstOfKind.get(sameJobKey(j)) : undefined;
-    if (first && (first.alsoAt?.length ?? 0) < 12) {
-      (first.alsoAt ??= []).push({ location: j.location, url: j.url });
+    const firstJob = j.company !== "-" ? firstOfKind.get(sameJobKey(j)) : undefined;
+    if (firstJob && (firstJob.alsoAt?.length ?? 0) < 12) {
+      (firstJob.alsoAt ??= []).push({ location: j.location, url: j.url });
       dupes[j.source] = (dupes[j.source] ?? 0) + 1;
       continue;
     }
+    if (verdict.how === "widened") j.widened = true;
     firstOfKind.set(sameJobKey(j), j);
     kept[j.source] = (kept[j.source] ?? 0) + 1;
+    byPlan[verdict.plan]++;
     jobs.push(j);
   }
   for (const r of reports) {
@@ -840,8 +928,13 @@ export async function searchJobs(req: SearchRequest): Promise<SearchResponse> {
     r.count = kept[r.id] ?? 0;
     if (dupes[r.id]) r.duplicates = dupes[r.id];
   }
-  jobs.sort((a, b) => (b.postedAt ?? "").localeCompare(a.postedAt ?? ""));
+  jobs.sort((a, b) => Number(Boolean(a.widened)) - Number(Boolean(b.widened)) || (b.postedAt ?? "").localeCompare(a.postedAt ?? ""));
   const order = SOURCE_META.map(m => m.id as SourceId);
   reports.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
-  return { jobs: jobs.slice(0, 200), sources: reports, fetchedAt: new Date().toISOString(), roles: ctx.plans.map(roleSearch) };
+  return {
+    jobs: jobs.slice(0, 200),
+    sources: reports,
+    fetchedAt: new Date().toISOString(),
+    roles: ctx.plans.map((p, i) => roleSearch(p, byPlan[i], widen.get(i) ?? [])),
+  };
 }

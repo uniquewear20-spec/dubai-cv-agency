@@ -3,7 +3,7 @@
 
 import { createContext, useContext } from "react";
 import type { AgentCopy } from "@/lib/agent/i18n";
-import type { Access, AgentStatus, Application, Job, PackageKey, Profile, Usage } from "@/lib/agent/types";
+import type { Access, AgentStatus, Application, Job, PackageKey, Profile, SearchQuery, Usage } from "@/lib/agent/types";
 import type { SavedSearch } from "@/lib/agent/store";
 import type { Match } from "@/lib/agent/score";
 
@@ -29,8 +29,11 @@ export interface AgentState {
   scored: Scored[];
   searching: boolean;
   searchError: string | null;
-  /** Searches with the profile's roles and countries; `related` overrides the profile's choice for this search. */
-  runSearch: (opts?: { related?: boolean }) => Promise<void>;
+  /** The search form (titles, countries, city, work, filters), kept in this browser. */
+  query: SearchQuery;
+  setQuery: (q: SearchQuery) => Promise<void>;
+  /** Searches with the form (or the given query); `related` overrides its choice for this search. */
+  runSearch: (opts?: { related?: boolean; query?: SearchQuery }) => Promise<void>;
   hidden: string[];
   hideJob: (id: string) => Promise<void>;
   access: Access | null;
@@ -54,6 +57,11 @@ export interface AgentState {
 }
 
 export const AgentContext = createContext<AgentState | null>(null);
+
+/** The search form filled from the profile's targets. */
+export const queryFromProfile = (p: Profile): SearchQuery => ({
+  roles: p.roles, countries: p.countries, city: "", remote: p.remoteOk, onsite: p.onsiteOk, level: "", employment: "", industry: "", related: Boolean(p.relatedTitles),
+});
 
 export function useAgent(): AgentState {
   const v = useContext(AgentContext);

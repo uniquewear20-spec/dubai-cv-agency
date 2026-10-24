@@ -2,7 +2,7 @@
 // IndexedDB ("zenith-agent"). Nothing is sent to Zenith to be stored. When IndexedDB isn't
 // available (some private windows), data lives in memory for this tab only.
 
-import type { Access, Application, Profile, SearchRequest, SearchResponse } from "./types";
+import type { Access, Application, Profile, SearchQuery, SearchRequest, SearchResponse } from "./types";
 import type { IvActive, IvPrefs, IvRecord } from "./interview/types";
 
 const DB = "zenith-agent";
@@ -20,6 +20,8 @@ export interface KV {
   access: Access;
   "ai-consent": { at: string };
   search: SavedSearch;
+  /** The search form as last used. */
+  "search-query": SearchQuery;
   hidden: string[];
   /** Interview coach: finished interviews with their reports, newest first (at most 50). */
   interviews: IvRecord[];

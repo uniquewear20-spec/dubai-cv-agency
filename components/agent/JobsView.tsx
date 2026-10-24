@@ -2,24 +2,26 @@
 // components/agent/JobsView.tsx — search public job sources, rank every listing against the CV
 // (in the browser), and save or prepare the ones worth applying to.
 
-import { useId, useMemo, useState } from "react";
+import { useId, useMemo, useState, type FormEvent } from "react";
 import { ExternalLink, EyeOff, Search } from "lucide-react";
-import { useAgent, type Scored } from "./context";
-import { Notice, ReasonList, ScoreMeter, fmtDate } from "./parts";
+import { queryFromProfile, useAgent, type Scored } from "./context";
+import { ChipsInput, Notice, ReasonList, ScoreMeter, fmtDate } from "./parts";
 import { daysSince, scoreJob, candidateSkills } from "@/lib/agent/score";
 import { externalSearches } from "@/lib/agent/links";
 import { findApplyEmail } from "@/lib/agent/text";
-import { familyById, familyLabel, planRole, type Family } from "@/lib/agent/titles";
-import type { Job, SourceReport } from "@/lib/agent/types";
+import { COUNTRIES, parseCountry } from "@/lib/agent/countries";
+import { INDUSTRIES, familyById, familyLabel, industryName, planRole, type Family } from "@/lib/agent/titles";
+import type { Job, SearchQuery, SourceReport } from "@/lib/agent/types";
 
 const PAGE = 30;
 const ELSEWHERE_ID = "za-elsewhere";
+const ARABIC = /[\p{Script=Arabic}]/u;
 
 /** A searched role as a title: "f&b supervisor" → "F&B supervisor". */
 const asTitle = (s: string) => s.replace(/^\p{L}/u, c => c.toUpperCase()).replace(/\bf&b\b/gi, "F&B");
 
 export default function JobsView() {
-  const { t, lang, profile, saveProfile, search, scored, searching, searchError, runSearch, apps, go, hidden, hideJob, saveJob, countryLabel } = useAgent();
+  const { t, lang, search, scored, query, setQuery, runSearch, apps, hidden, hideJob, saveJob, go } = useAgent();
   const [minScore, setMinScore] = useState(0);
   const [sort, setSort] = useState<"best" | "newest">("best");
   const [remoteOnly, setRemoteOnly] = useState(false);
@@ -28,21 +30,17 @@ export default function JobsView() {
   const ids = { min: useId(), sort: useId() };
   const savedIds = useMemo(() => new Set(apps.map(a => a.jobId)), [apps]);
 
-  // Neighbouring jobs of the target roles ("Head bartender", "Barback"… for "Bartender"), offered as a switch.
+  // Neighbouring jobs of the searched titles ("Head bartender", "Barback"… for "Bartender").
   const relatedJobs = useMemo(() => {
-    const plans = profile.roles.map(r => planRole(r));
+    const plans = query.roles.map(r => planRole(r));
     const own = new Set(plans.map(p => p.family?.id).filter(Boolean));
     const near = [...new Set(plans.flatMap(p => p.related))].filter(id => !own.has(id));
     return near.map(id => familyById(id)).filter((f): f is Family => f !== undefined).map(familyLabel);
-  }, [profile.roles]);
-  // The switch answers at once; the profile is saved (and the last search rerun) behind it.
-  const [relatedNow, setRelatedNow] = useState<boolean | null>(null);
-  const related = relatedNow ?? Boolean(profile.relatedTitles);
-  const setRelated = async (on: boolean) => {
-    setRelatedNow(on);
-    if (search) void runSearch({ related: on });
-    await saveProfile({ ...profile, relatedTitles: on });
-    setRelatedNow(null);
+  }, [query.roles]);
+  const widen = (patch: Partial<SearchQuery>) => {
+    const next = { ...query, ...patch };
+    void setQuery(next);
+    void runSearch({ query: next });
   };
 
   const visible = useMemo(() => {
@@ -53,10 +51,12 @@ export default function JobsView() {
       : list.sort((a, b) => (b.job.postedAt ?? b.job.checkedAt ?? "").localeCompare(a.job.postedAt ?? a.job.checkedAt ?? ""));
   }, [scored, hidden, minScore, remoteOnly, hideSaved, savedIds, sort]);
 
-  const mode = profile.remoteOk && profile.onsiteOk ? "both" : profile.remoteOk ? "remote" : "onsite";
   const prepare = async (s: Scored) => { const a = await saveJob(s); go("apps", a.jobId); };
   const sources = search?.response.sources ?? [];
   const roles = search?.response.roles ?? [];
+  const filtered = sources.reduce((n, s) => n + (s.filtered ?? 0), 0);
+  const req = search?.request;
+  const hasFilters = Boolean(req && (req.city || req.level || req.employment || req.industry));
 
   return (
     <div className="za-stack">
@@ -65,40 +65,32 @@ export default function JobsView() {
         <p className="za-lede">{t.jobs.intro}</p>
       </header>
 
-      <section className="za-panel za-query">
-        <p className="za-query-line">
-          <span className="za-muted">{t.jobs.for}</span>{" "}
-          <strong>{profile.roles.join(" · ") || "—"}</strong>{" "}
-          <span className="za-muted">{t.jobs.in}</span>{" "}
-          <strong>{profile.countries.length ? profile.countries.map(countryLabel).join(" · ") : t.jobs.anywhere}</strong>
-          <span className="za-muted"> · {t.jobs.remoteAnd[mode]}</span>{" "}
-          <button type="button" className="za-textlink" onClick={() => go("profile")}>{t.jobs.editProfile}</button>
-        </p>
-        <button type="button" className="z-btn z-btn-primary" onClick={() => { setShown(PAGE); void runSearch(); }} disabled={searching || !profile.roles.length}>
-          <Search size={17} aria-hidden /> {searching ? t.jobs.searching : t.jobs.search}
-        </button>
-        {relatedJobs.length > 0 && (
-          <label className="za-check za-related">
-            <input type="checkbox" checked={related} disabled={searching} onChange={e => void setRelated(e.target.checked)} />
-            <span>{t.jobs.related} <span className="za-muted">({t.jobs.relatedList(relatedJobs.slice(0, 5))}{relatedJobs.length > 5 ? "…" : ""})</span></span>
-          </label>
-        )}
-        {!profile.roles.length && <p className="za-muted">{t.jobs.needProfile}</p>}
-        {searchError && <Notice tone="error">{searchError}</Notice>}
-      </section>
+      <SearchPanel onSearch={() => setShown(PAGE)} />
 
       {search && (
         <section className="za-sources" aria-label={t.jobs.sourcesH}>
           <h2 className="za-label-sm">{t.jobs.sourcesH} · {fmtDate(search.at, lang)}</h2>
-          {roles.some(r => r.corrected || r.sameTitles.length) && (
+          {roles.length > 0 && (
             <ul className="za-readas" aria-label={t.jobs.readAs}>
-              {roles.map(r => (
-                <li key={r.input}>
-                  <strong dir="auto">{r.corrected ? asTitle(r.role) : r.input}</strong>
-                  {r.corrected && <> {t.jobs.typed(r.input)}</>}
-                  {r.sameTitles.length > 0 && <span className="za-muted"> · {t.jobs.alsoMatches(r.sameTitles)}</span>}
-                </li>
-              ))}
+              {roles.map(r => {
+                const notes = [
+                  r.corrected ? t.jobs.typed(r.input) : "",
+                  r.field ? t.jobs.readField(industryName(r.field, lang)) : "",
+                  r.kindOf ? t.jobs.readKind(r.kindOf) : "",
+                  r.byWords ? t.jobs.readWords : "",
+                  r.extras?.length ? t.jobs.readExtras(r.extras) : "",
+                  r.sameTitles.length && !r.extras?.length ? t.jobs.alsoMatches(r.sameTitles) : "",
+                  r.widened?.length ? t.jobs.readWidened(r.widened) : "",
+                  r.found !== undefined ? t.jobs.readFound(r.found) : "",
+                ].filter(Boolean);
+                return (
+                  <li key={r.input}>
+                    <strong dir="auto">{r.corrected ? asTitle(r.role) : r.input}</strong>
+                    {notes.length > 0 && <span className="za-muted"> · {notes.join(" · ")}</span>}
+                  </li>
+                );
+              })}
+              {roles.some(r => ARABIC.test(r.input)) && <li className="za-muted">{t.jobs.readArabic}</li>}
             </ul>
           )}
           <ul className="za-src-list">
@@ -106,11 +98,12 @@ export default function JobsView() {
               <li key={s.id} data-state={!s.configured ? "off" : s.skipped ? "skip" : s.ok ? "ok" : "fail"}>
                 <a href={s.home} target="_blank" rel="noopener noreferrer">{t.jobs.srcLabel(s.name, ["himalayas", "jobicy", "remotive"].includes(s.id))}</a>
                 <span>{!s.configured ? t.jobs.srcOff : s.skipped ? t.jobs.srcSkipWhy(s.note) : s.ok ? t.jobs.srcOk(s.count) : t.jobs.srcFailWhy(s.note)}</span>
-                {s.ok && !s.skipped && (s.unrelated || s.closed || s.duplicates)
-                  ? <small>{t.jobs.srcDropped({ other: s.unrelated, closed: s.closed, duplicates: s.duplicates })}</small> : null}
+                {s.ok && !s.skipped && (s.unrelated || s.closed || s.duplicates || s.elsewhere || s.filtered)
+                  ? <small>{t.jobs.srcDropped({ other: s.unrelated, closed: s.closed, duplicates: s.duplicates, elsewhere: s.elsewhere, filtered: s.filtered })}</small> : null}
               </li>
             ))}
           </ul>
+          <p className="za-hint za-external">{t.jobs.external}</p>
         </section>
       )}
 
@@ -141,7 +134,14 @@ export default function JobsView() {
           )}
 
           {scored.length === 0 ? (
-            <NoListings sources={sources} canRelate={!related && relatedJobs.length > 0} onRelate={() => void setRelated(true)} />
+            <NoListings
+              sources={sources}
+              canRelate={!query.related && relatedJobs.length > 0}
+              onRelate={() => widen({ related: true })}
+              filtered={hasFilters && filtered > 0}
+              onClear={() => widen({ city: "", level: "", employment: "", industry: "" })}
+              onRemote={!query.remote ? () => widen({ remote: true }) : null}
+            />
           ) : visible.length === 0 ? (
             <Notice tone="info">{t.jobs.none}</Notice>
           ) : (
@@ -166,25 +166,130 @@ export default function JobsView() {
 }
 
 /**
+ * The search form: any job titles, countries, a city, on-site or remote, and the filters (level,
+ * contract, field, related titles). Filled from the profile until the candidate changes it; kept in
+ * this browser. Only what is typed here is sent to the search, never the CV.
+ */
+function SearchPanel({ onSearch }: { onSearch: () => void }) {
+  const { t, lang, query, setQuery, runSearch, searching, searchError, profile, countryLabel } = useAgent();
+  const [q, setQ] = useState<SearchQuery>(query);
+  // The form follows changes made elsewhere ("Clear filters", "Include related jobs") without being
+  // remounted, so a field being edited keeps its focus.
+  const [seen, setSeen] = useState(query);
+  if (query !== seen) { setSeen(query); setQ(query); }
+  const id = useId();
+  const update = (patch: Partial<SearchQuery>) => {
+    const next = { ...q, ...patch };
+    setQ(next);
+    void setQuery(next);
+  };
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    onSearch();
+    void runSearch({ query: q });
+  };
+  const filters = [q.city.trim(), q.level, q.employment, q.industry].filter(Boolean).length;
+  const work = q.remote && q.onsite ? "both" : q.remote ? "remote" : "onsite";
+  const fromProfile = queryFromProfile(profile);
+  const canReset = profile.roles.length > 0 && JSON.stringify(fromProfile) !== JSON.stringify(q);
+
+  return (
+    <form className="za-panel za-search" onSubmit={submit} aria-labelledby={`${id}-h`} noValidate>
+      <h2 id={`${id}-h`} className="z-sr">{t.jobs.search}</h2>
+      <div className="za-grid-2">
+        <ChipsInput label={t.jobs.formTitle} hint={t.jobs.formTitleHint} placeholder={q.roles.length ? undefined : t.jobs.formTitlePh}
+          values={q.roles} onChange={v => update({ roles: v })} max={3} addLabel={t.profile.add} removeLabel={t.profile.remove} />
+        <ChipsInput
+          label={t.jobs.formCountries}
+          hint={t.jobs.formCountriesHint}
+          values={q.countries}
+          onChange={v => update({ countries: v })}
+          max={5}
+          addLabel={t.profile.add}
+          removeLabel={t.profile.remove}
+          parse={parseCountry}
+          invalidText={t.profile.countryUnknown}
+          display={countryLabel}
+          list={COUNTRIES.map(c => c[lang])}
+        />
+      </div>
+      <div className="za-grid-2 za-search-row">
+        <div className="za-field">
+          <label htmlFor={`${id}-city`}>{t.jobs.formCity}</label>
+          <input id={`${id}-city`} className="za-input" value={q.city} placeholder={t.jobs.formCityPh} maxLength={60} dir="auto" autoComplete="address-level2"
+            onChange={e => setQ(prev => ({ ...prev, city: e.target.value }))} onBlur={() => update({ city: q.city.trim() })} />
+        </div>
+        <fieldset className="za-fieldset za-work">
+          <legend>{t.jobs.formWork}</legend>
+          <div className="za-seg za-seg-wide" role="group" aria-label={t.jobs.formWork}>
+            {(["both", "onsite", "remote"] as const).map(w => (
+              <button key={w} type="button" aria-pressed={work === w} onClick={() => update({ remote: w !== "onsite", onsite: w !== "remote" })}>{t.jobs.formWorkOpts[w]}</button>
+            ))}
+          </div>
+        </fieldset>
+      </div>
+      <details className="za-more-filters" open={filters > 0 || q.related || undefined}>
+        <summary>{t.jobs.formMore}{filters > 0 && <span className="za-muted"> · {t.jobs.filtersOn(filters)}</span>}</summary>
+        <div className="za-grid-3">
+          <div className="za-field">
+            <label htmlFor={`${id}-lvl`}>{t.jobs.formLevel}</label>
+            <select id={`${id}-lvl`} className="za-select" value={q.level} onChange={e => update({ level: e.target.value as SearchQuery["level"] })}>
+              {Object.entries(t.jobs.levels).map(([v, label]) => <option key={v} value={v}>{label}</option>)}
+            </select>
+          </div>
+          <div className="za-field">
+            <label htmlFor={`${id}-emp`}>{t.jobs.formEmployment}</label>
+            <select id={`${id}-emp`} className="za-select" value={q.employment} onChange={e => update({ employment: e.target.value as SearchQuery["employment"] })}>
+              {Object.entries(t.jobs.employments).map(([v, label]) => <option key={v} value={v}>{label}</option>)}
+            </select>
+          </div>
+          <div className="za-field">
+            <label htmlFor={`${id}-ind`}>{t.jobs.formIndustry}</label>
+            <select id={`${id}-ind`} className="za-select" value={q.industry} onChange={e => update({ industry: e.target.value })}>
+              <option value="">{t.jobs.anyIndustry}</option>
+              {INDUSTRIES.map(i => <option key={i.id} value={i.id}>{i[lang]}</option>)}
+            </select>
+          </div>
+        </div>
+        <label className="za-check za-related"><input type="checkbox" checked={q.related} onChange={e => update({ related: e.target.checked })} /> <span>{t.jobs.related}</span></label>
+        <p className="za-hint">{t.jobs.filtersNote}</p>
+      </details>
+      <div className="za-actions">
+        <button type="submit" className="z-btn z-btn-primary" disabled={searching}>
+          <Search size={17} aria-hidden /> {searching ? t.jobs.searching : t.jobs.search}
+        </button>
+        {canReset && <button type="button" className="z-btn z-btn-quiet" onClick={() => { setQ(fromProfile); void setQuery(fromProfile); }}>{t.jobs.fromProfile}</button>}
+      </div>
+      {searchError && <Notice tone="error">{searchError}</Notice>}
+    </form>
+  );
+}
+
+/**
  * No listings at all. Says which it is: no source answered (an outage, not a zero), some didn't
  * (the zero may be incomplete), or a real zero, with the ways to widen the search.
  */
-function NoListings({ sources, canRelate, onRelate }: { sources: SourceReport[]; canRelate: boolean; onRelate: () => void }) {
-  const { t, profile, go, searching } = useAgent();
+function NoListings({ sources, canRelate, onRelate, filtered, onClear, onRemote }: {
+  sources: SourceReport[]; canRelate: boolean; onRelate: () => void; filtered: boolean; onClear: () => void; onRemote: (() => void) | null;
+}) {
+  const { t, searching } = useAgent();
   const asked = sources.filter(s => s.configured && !s.skipped);
   const failed = asked.filter(s => !s.ok);
   if (asked.length > 0 && failed.length === asked.length) return <Notice tone="error">{t.jobs.allFailed}</Notice>;
   const toElsewhere = () => document.getElementById(ELSEWHERE_ID)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const toForm = () => document.querySelector<HTMLElement>(".za-search input")?.focus();
   return (
     <div className="za-notice za-zero" data-tone="info">
       <p role="status">{t.jobs.zero}</p>
       {failed.length > 0 && <p>{t.jobs.someFailed(failed.map(s => s.name))}</p>}
+      {filtered && <p>{t.jobs.zeroFiltered}</p>}
       <p className="za-muted">{t.jobs.zeroWhy}</p>
       <p>{t.jobs.zeroTry}</p>
       <div className="za-actions">
+        {filtered && <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={onClear} disabled={searching}>{t.jobs.clearFilters}</button>}
         {canRelate && <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={onRelate} disabled={searching}>{t.jobs.widenRelated}</button>}
-        {!profile.remoteOk && <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={() => go("profile")}>{t.jobs.widenRemote}</button>}
-        {profile.countries.length > 0 && profile.countries.length < 5 && <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={() => go("profile")}>{t.jobs.widenCountries}</button>}
+        {onRemote && <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={onRemote} disabled={searching}>{t.jobs.widenRemote}</button>}
+        <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={toForm}>{t.jobs.widenCountries}</button>
         <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={toElsewhere}>{t.jobs.widenElsewhere}</button>
       </div>
     </div>
@@ -206,6 +311,7 @@ function JobCard({ s, saved, onSave, onPrepare, onHide }: { s: Scored; saved: bo
           <span dir="auto">{job.company}</span>
           <span dir="auto">{job.location}</span>
           <span className="z-tag">{job.remote ? t.jobs.remote : t.jobs.onsite}</span>
+          {job.widened && <span className="z-tag za-tag-related">{t.jobs.widenedTag}</span>}
           {days !== null ? <span>{t.jobs.posted(days)}</span> : job.source !== "manual" && <span>{t.jobs.noDate}</span>}
           {job.checkedAt && <span>{t.jobs.checked(fmtDate(job.checkedAt, lang))}</span>}
           {job.salary && <span dir="ltr">{job.salary}</span>}
@@ -240,9 +346,10 @@ function JobCard({ s, saved, onSave, onPrepare, onHide }: { s: Scored; saved: bo
 
 /** The same search on sites without an open API, for any of the target roles and countries. */
 function Elsewhere() {
-  const { t, profile, countryLabel } = useAgent();
+  const { t, query, countryLabel } = useAgent();
   const [pick, setPick] = useState({ role: "", country: "" });
   const ids = { role: useId(), country: useId() };
+  const profile = { roles: query.roles, countries: query.countries };
   const role = profile.roles.includes(pick.role) ? pick.role : profile.roles[0];
   if (!role) return null;
   const country = profile.countries.includes(pick.country) ? pick.country : profile.countries[0] ?? null;
