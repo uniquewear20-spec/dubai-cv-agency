@@ -4,13 +4,14 @@
 // server re-prices every order, so nothing the browser sends can change an amount.
 
 import React, { useEffect, useState } from "react";
-import { AlertCircle, Check, Loader2, Minus } from "lucide-react";
+import { AlertCircle, Check, Loader2, Minus, Sparkles } from "lucide-react";
 import { PACKAGES, packagePrice, type PackageDef } from "@/lib/packages";
 import { COACH_TIERS, aedToUsd, type TierKey } from "@/lib/checkout/catalog";
 import { startCheckout } from "@/lib/checkout/client";
 import { CURRENCIES, convertAed, formatAmount, type Currency, type Rates } from "@/lib/currency";
 import { EBOOK, pick, type L10n, type Lang } from "@/lib/site";
 import ServicesPanel from "./ServicesPanel";
+import { PayLogo } from "./payLogos";
 import { useAgentStatus } from "./useAgentStatus";
 
 const T: Record<string, L10n> = {
@@ -30,6 +31,11 @@ const T: Record<string, L10n> = {
   aiYes: { en: "Zenith AI job agent: Pro access and the interview coach", fr: "Agent emploi Zenith AI : accès Pro et coach d'entretien", ar: "وكيل الوظائف Zenith AI: وصول Pro ومدرّب المقابلات" },
   aiCoach: { en: "Zenith AI job agent: the interview coach", fr: "Agent emploi Zenith AI : coach d'entretien", ar: "وكيل الوظائف Zenith AI: مدرّب المقابلات" },
   aiNo: { en: "Zenith AI job agent, free tools only", fr: "Agent emploi Zenith AI, outils gratuits seulement", ar: "وكيل الوظائف Zenith AI، الأدوات المجانية فقط" },
+  aiHead: { en: "AI tools included", fr: "Outils IA inclus", ar: "أدوات الذكاء الاصطناعي المشمولة" },
+  aiAgent: { en: "Zenith AI job agent: jobs from around the world, ranked against your CV", fr: "Agent emploi Zenith AI : des offres du monde entier, classées selon votre CV", ar: "وكيل الوظائف Zenith AI: وظائف من حول العالم مرتّبة حسب سيرتك الذاتية" },
+  aiCoachLine: { en: "AI interview coach: practise out loud with an animated interviewer, follow-up questions and a scored report", fr: "Coach d'entretien IA : entraînez-vous à voix haute avec un recruteur animé, des questions de relance et un rapport noté", ar: "مدرّب المقابلات بالذكاء الاصطناعي: تدرّب بصوتك مع محاوِر متحرك وأسئلة متابعة وتقرير بالدرجات" },
+  aiProLine: { en: "AI job agent Pro: we send the applications you approve, and replies come straight to you", fr: "Agent emploi IA Pro : nous envoyons les candidatures que vous validez, et les réponses vous arrivent directement", ar: "وكيل الوظائف Pro: نرسل الطلبات التي توافق عليها، وتصلك الردود مباشرة" },
+  secure: { en: "Secure checkout", fr: "Paiement sécurisé", ar: "دفع آمن" },
   everything: { en: "Everything else included", fr: "Tout ce qui est inclus en plus", ar: "كل ما تشمله الباقة أيضاً" },
   pay: { en: "Pay with PayPal", fr: "Payer avec PayPal", ar: "ادفع عبر PayPal" },
   redirecting: { en: "Opening PayPal…", fr: "Ouverture de PayPal…", ar: "جارٍ فتح PayPal…" },
@@ -103,6 +109,14 @@ const T: Record<string, L10n> = {
 };
 const t = (k: string, l: Lang) => pick(T[k], l);
 
+/** One line per package on what it changes for the candidate. */
+const PROMISE: Record<TierKey, L10n> = {
+  foundation: { en: "Your next opportunity starts with how you present yourself.", fr: "Votre prochaine opportunité commence par la façon dont vous vous présentez.", ar: "تبدأ فرصتك القادمة بالطريقة التي تقدّم بها نفسك." },
+  growth: { en: "Stop sending applications with a profile that undersells you.", fr: "Arrêtez de postuler avec un profil qui ne vous rend pas justice.", ar: "توقّف عن التقديم بملف لا يُظهر قيمتك الحقيقية." },
+  executive: { en: "Less time managing your job search, more time on the right opportunities.", fr: "Moins de temps à gérer vos recherches, plus de temps pour les bonnes opportunités.", ar: "وقت أقل في إدارة بحثك عن عمل، ووقت أكثر للفرص المناسبة." },
+  apex: { en: "Your career deserves more than another application. It deserves a strategy.", fr: "Votre carrière mérite plus qu'une candidature de plus : une stratégie.", ar: "مسيرتك تستحق أكثر من طلب توظيف آخر، إنها تستحق استراتيجية." },
+};
+
 function PriceLine({ aed, currency, rates, lang }: { aed: number; currency: Currency; rates: Rates; lang: Lang }) {
   if (currency === "AED") {
     return <><span className="pk-cur">AED</span><span className="pk-amt">{formatAmount(aed)}</span></>;
@@ -130,9 +144,19 @@ function PackageCard({
     <article className="pk" data-recommended={pkg.recommended || undefined} aria-labelledby={headingId}>
       <div className="pk-slot">{pkg.recommended && <p className="pk-rec">{t("recommended", lang)}</p>}</div>
       <h3 id={headingId} className="pk-name z-serif">{pick(pkg.name, lang)}</h3>
+      <p className="pk-promise z-serif">{pick(PROMISE[pkg.key], lang)}</p>
       <p className="pk-line">{pick(pkg.line, lang)}</p>
       <p className="pk-price" dir="ltr"><PriceLine aed={aed} currency={currency} rates={rates} lang={lang} /></p>
       <p className="pk-charge">{t("charged", lang)} <span dir="ltr">US${aedToUsd(aed)}</span></p>
+
+      <div className="pk-ai">
+        <p className="pk-ai-h"><Sparkles size={15} aria-hidden="true" />{t("aiHead", lang)}</p>
+        <ul>
+          {(pkg.ai === "pro" ? ["aiCoachLine", "aiProLine"] : COACH_TIERS.includes(pkg.key) ? ["aiCoachLine", "aiAgent"] : ["aiAgent"]).map(k => (
+            <li key={k}><Check size={16} strokeWidth={2} aria-hidden="true" />{t(k, lang)}</li>
+          ))}
+        </ul>
+      </div>
 
       <ul className="pk-list">
         {pkg.highlights.map(h => (
@@ -144,10 +168,6 @@ function PackageCard({
         <li data-yes={pkg.ebook || undefined}>
           {pkg.ebook ? <Check size={16} strokeWidth={2} aria-hidden="true" /> : <Minus size={16} aria-hidden="true" />}
           <span>{pkg.ebook ? t("ebookYes", lang) : t("ebookNo", lang)}</span>
-        </li>
-        <li data-yes={pkg.ai === "pro" || COACH_TIERS.includes(pkg.key) || undefined}>
-          {pkg.ai === "pro" || COACH_TIERS.includes(pkg.key) ? <Check size={16} strokeWidth={2} aria-hidden="true" /> : <Minus size={16} aria-hidden="true" />}
-          <span>{pkg.ai === "pro" ? t("aiYes", lang) : COACH_TIERS.includes(pkg.key) ? t("aiCoach", lang) : t("aiNo", lang)}</span>
         </li>
       </ul>
 
@@ -248,6 +268,13 @@ export default function Packages({
           </div>
         </div>
 
+        <div className="pk-secure">
+          <span>{t("secure", lang)}</span>
+          <span className="pk-badge" title="Apple Pay"><PayLogo id="apple-pay" /><span className="z-sr">Apple Pay</span></span>
+          <span className="pk-badge" title="Google Pay"><PayLogo id="google-pay" /><span className="z-sr">Google Pay</span></span>
+          <span className="pk-badge" title="PayPal"><PayLogo id="paypal" height={17} /><b className="pk-pp" aria-hidden="true"><i>Pay</i>Pal</b><span className="z-sr">PayPal</span></span>
+        </div>
+
         <div className="pk-info">
           <div>
             <h3 className="pk-info-h">{t("payHead", lang)}</h3>
@@ -278,7 +305,7 @@ const CSS = `
 .pk-currency select{min-height:42px;padding:0 34px 0 14px;border-radius:999px;border:1px solid var(--z-rule-strong);background:var(--z-surface);color:var(--z-fg);font:inherit;font-size:14px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23C8A96E' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;cursor:pointer}
 [dir="rtl"] .pk-currency select{padding:0 14px 0 34px;background-position:left 12px center}
 .pk-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:auto;gap:0;border:1px solid var(--z-rule);border-radius:20px;overflow:hidden;background:var(--z-surface)}
-.pk{position:relative;display:grid;grid-row:span 9;grid-template-rows:subgrid;grid-template-columns:minmax(0,1fr);align-content:start;padding:28px 26px 28px;min-width:0}
+.pk{position:relative;display:grid;grid-row:span 11;grid-template-rows:subgrid;grid-template-columns:minmax(0,1fr);align-content:start;padding:28px 26px 28px;min-width:0}
 .pk+.pk{border-inline-start:1px solid var(--z-rule)}
 .pk[data-recommended]{background:linear-gradient(180deg,var(--z-gold-wash),transparent 60%)}
 /* The banner has its own subgrid row, so a banner that wraps (French, narrow cards) moves every
@@ -287,7 +314,19 @@ const CSS = `
 .pk-rec{margin:-28px -26px 18px;padding:7px 26px;font-size:13px;line-height:1.6;font-weight:600;color:var(--z-on-gold);background:var(--z-gold)}
 .pk-name{font-size:27px;line-height:1.15;font-weight:500;letter-spacing:-.01em}
 [dir="rtl"] .pk-name{font-family:var(--font-arabic-serif),serif;font-weight:700;font-size:24px}
+.pk-promise{margin-top:10px;font-size:18px;line-height:1.35;font-style:italic;color:var(--z-gold-text)}
+[dir="rtl"] .pk-promise{font-style:normal}
 .pk-line{margin-top:8px;font-size:15px;line-height:1.55;color:var(--z-fg-2)}
+.pk-ai{margin-top:20px;padding:14px 14px 12px;border:1px solid color-mix(in srgb,var(--z-gold) 45%,transparent);border-radius:12px;background:var(--z-gold-wash)}
+.pk-ai-h{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--z-gold-text);margin-bottom:8px}
+.pk-ai ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.pk-ai li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:14.5px;line-height:1.45;color:var(--z-fg);font-weight:500}
+.pk-ai li svg{margin-top:2px;color:var(--z-gold-text)}
+.pk-secure{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px 10px;margin-top:22px}
+.pk-secure>span:first-child{font-size:13px;color:var(--z-fg-3);margin-inline-end:4px}
+.pk-badge{display:inline-flex;align-items:center;gap:4px;height:34px;padding:0 12px;border-radius:8px;background:#fff;border:1px solid rgba(0,0,0,.12)}
+.pk-pp{font:italic 800 15px/1 var(--font-sans),Arial,sans-serif;color:#009cde;letter-spacing:-.02em}
+.pk-pp i{color:#003087}
 .pk-price{display:flex;align-items:baseline;align-self:end;gap:8px;margin-top:20px;font-family:var(--font-serif),Georgia,serif;color:var(--z-fg)}
 .pk-cur{font-family:var(--font-sans),sans-serif;font-size:14px;font-weight:600;color:var(--z-fg-2)}
 .pk-amt{font-size:48px;line-height:1;letter-spacing:-.02em;font-weight:400;font-variant-numeric:lining-nums}

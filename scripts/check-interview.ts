@@ -11,7 +11,7 @@ import { buildReport } from "../lib/agent/interview/report";
 import { parseInput, parseState } from "../lib/agent/interview/state";
 import { featuresOf } from "../lib/agent/access";
 import { norm } from "../lib/agent/text";
-import { chooseVoice, shortVoiceName, voiceGender } from "../lib/agent/interview/speech";
+import { chooseVoice, shortVoiceName, utteranceLang, voiceGender } from "../lib/agent/interview/speech";
 import { LOOKS, LOOK_IDS } from "../lib/agent/interview/looks";
 import type { IvCandidate, IvSetup, IvState } from "../lib/agent/interview/types";
 
@@ -166,6 +166,17 @@ check("each interviewer gets a voice that sounds like them, and a mismatch is re
   const win = [V("Microsoft David - English (United States)", "en-US"), V("Microsoft Zira - English (United States)", "en-US"), V("Google UK English Male", "en-GB", false), V("Google UK English Female", "en-GB", false)];
   assert.equal(voiceGender(chooseVoice("en", "female", win).voice!), "female");
   assert.equal(voiceGender(chooseVoice("en", "male", win).voice!), "male");
+});
+
+check("a Mac's voices: Arabic Majed is spoken with a tag Chrome accepts, French prefers Jacques for a man", () => {
+  assert.equal(utteranceLang({ lang: "ar-001" }, "ar-AE"), "ar-AE");
+  assert.equal(utteranceLang({ lang: "fr-CA" }, "fr-FR"), "fr-CA");
+  assert.equal(utteranceLang(null, "ar-AE"), "ar-AE");
+  const mac = [V("Majed", "ar-001")];
+  assert.deepEqual([chooseVoice("ar", "male", mac).voice?.name, chooseVoice("ar", "male", mac).match], ["Majed", "yes"]);
+  const fr = [V("Amélie", "fr-CA"), V("Jacques", "fr-FR"), V("Thomas", "fr-FR")];
+  assert.equal(chooseVoice("fr", "male", fr).voice?.name, "Jacques");
+  assert.equal(chooseVoice("fr", "female", fr).voice?.name, "Amélie");
 });
 
 check("voice names are shown the way people say them", () => {

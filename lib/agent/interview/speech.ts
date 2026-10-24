@@ -96,7 +96,7 @@ const FEMALE = new Set(("amina laila salma rana sana noura layla iman mouna aysh
 const MALE = new Set(("ismael ali shakir bassel taim fahed rami omar jamal abdullah moaz hamed laith hedi hamdan saleh tarik majed maged naayf " +
   "andrew andrewmultilingual brian brianmultilingual guy eric steffan christopher roger ryan thomas william liam prabhat connor luke sam chilemba mitchell " +
   "abeo james wayne elimu evan nathan tom alex aaron jamie oliver daniel arthur lee gordon aman rishi david mark george richard ravi sean remy " +
-  "remymultilingual henri gerard fabrice antoine jean thierry nicolas paul claude").split(" "));
+  "remymultilingual henri gerard fabrice antoine jean thierry nicolas paul claude jacques").split(" "));
 /** Google's numbered natural voices (Android, ChromeOS): which numbers are female. */
 const GOOGLE_NUMBERED_FEMALE: Record<string, number[]> = { "us english": [1, 2, 5, 7], "uk english": [2, 4, 6], "australian english": [1, 3], "francais": [1, 2, 4] };
 /** Google's Android voice codes ("ar-xa-x-arc-network"). */
@@ -194,6 +194,16 @@ export function matchOf(v: SpeechSynthesisVoice | null, presentation: Presentati
   return g === presentation ? "yes" : g === "unknown" ? "unknown" : "no";
 }
 
+/**
+ * The language tag to speak with: the voice's own when it is a plain language-region tag ("fr-CA"),
+ * otherwise the interview's. Chrome on macOS cancels speech tagged "ar-001" (the tag of the Mac's
+ * Arabic voice, Majed), so a numeric region is never passed on.
+ */
+export function utteranceLang(voice: Pick<SpeechSynthesisVoice, "lang"> | null | undefined, fallback: string): string {
+  const l = voice?.lang?.replace("_", "-") ?? "";
+  return /^[a-z]{2,3}-[a-z]{2}$/i.test(l) ? l : fallback;
+}
+
 /** Speaking rate per language: a little slower than the engines' default, which sounds rushed in an interview. */
 export const speechRate = (lang: string): number => (/^ar/i.test(lang) ? 0.9 : /^fr/i.test(lang) ? 0.96 : 0.97);
 
@@ -245,7 +255,7 @@ export class Speaker {
     const spoken = (piece: { at: number; text: string }) => new Promise<void>(resolve => {
       const u = new SpeechSynthesisUtterance(piece.text);
       if (voice) u.voice = voice;
-      u.lang = voice?.lang || lang;
+      u.lang = utteranceLang(voice, lang);
       u.rate = speechRate(u.lang);
       u.pitch = 1;
       let started = 0;
