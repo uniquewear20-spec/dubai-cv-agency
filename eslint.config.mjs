@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Static files served as they are: vendored minified libraries (GSAP, pdf.js worker) and the
+    // standalone sample portfolio sites. They are not part of the app's TypeScript source.
+    "public/**",
   ]),
 ]);
 
