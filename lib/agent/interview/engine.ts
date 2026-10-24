@@ -13,7 +13,7 @@ import type { BankQ, Track } from "./bank";
 import { CORE } from "./bank-core";
 import { SHIFTS } from "./bank-hospitality";
 import {
-  ACK, CALLBACK, CLOSING, CLOSING_COVERS, CV_Q, END, FOLLOW, GENERIC_KEYS, INTRO, JOB_Q, NEXT, QUOTE, REPEAT, START, TONE,
+  ACK, WEAK_ACK, CALLBACK, CLOSING, CLOSING_COVERS, CV_Q, END, FOLLOW, GENERIC_KEYS, INTRO, JOB_Q, NEXT, QUOTE, REPEAT, START, TONE,
 } from "./phrases";
 import { bankQuestion, detectTrack, trackById } from "./tracks";
 import type { Competency, FollowReason, IvAnswerInput, IvCandidate, IvHistory, IvLang, IvQuestion, IvSetup, IvState, IvTurn, IvType } from "./types";
@@ -304,7 +304,7 @@ export type AnswerInput = IvAnswerInput;
 /** Candidate answers so far on one question, oldest first. */
 export const answersFor = (s: IvState, q: number) => s.turns.filter(t => t.by === "candidate" && t.q === q && t.kind === "answer").map(t => t.text);
 
-const MAX_FOLLOW = { friendly: 1, realistic: 1, demanding: 2 } as const;
+const MAX_FOLLOW = { friendly: 1, realistic: 2, demanding: 2 } as const;
 
 /** Role-specific competencies, where a topic the candidate raises is worth a probe. */
 const TOPIC_COMPS: Competency[] = ["operations", "finance", "sales", "product", "quality", "safety", "guest", "experience", "strategy"];
@@ -437,12 +437,18 @@ function callbackFor(s: IvState): void {
 function advance(s: IvState): IvState {
   const lang = s.setup.lang;
   const r = rng(`${s.id}:talk:${s.step + 1}`);
+  // How the last answer went: short or without an example earns an honest remark, not just "thanks".
+  const q = s.plan[s.step];
+  const said = answersFor(s, s.step).join("\n");
+  const a = analyse(said, lang);
+  const weak = Boolean(said) && q?.kind !== "closing" && s.setup.difficulty !== "friendly"
+    && (a.words < 25 || (Boolean(q?.behavioural) && !a.example));
   s.step += 1;
   s.follow = 0;
   if (s.step >= s.plan.length) { s.done = true; return s; }
   callbackFor(s);
   const next = s.plan[s.step];
-  const ack = pick(ACK[lang], r);
+  const ack = pick(weak ? WEAK_ACK[lang] : ACK[lang], r);
   const transition = next.kind === "closing" || next.callback || next.repeat ? "" : pick(NEXT[lang], r);
   const text = [ack, transition, questionText(next, lang, r)].filter(Boolean).join(" ");
   s.turns.push({ by: "interviewer", q: s.step, kind: next.kind === "closing" ? "closing" : "question", text, at: now() });

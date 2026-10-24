@@ -48,6 +48,25 @@ export const ACK: Record<IvLang, string[]> = {
   ar: ["شكراً لك.", "حسناً، شكراً.", "مفهوم.", "شكراً على إجابتك.", "حسناً."],
 };
 
+/** When the answer stayed short or general: the interviewer says so, as a real one would. */
+export const WEAK_ACK: Record<IvLang, string[]> = {
+  en: [
+    "Thank you, although that was quite brief. In a real interview, give one concrete example and its result.",
+    "Okay. That stayed general: an interviewer would expect a specific situation, what you did and what changed.",
+    "Understood. I'd have liked more detail there, with an example from your own work.",
+  ],
+  fr: [
+    "Merci, même si c'était assez bref. En entretien réel, donnez un exemple concret et son résultat.",
+    "D'accord. C'est resté général : un recruteur attendrait une situation précise, ce que vous avez fait et ce qui a changé.",
+    "Entendu. J'aurais aimé plus de détails, avec un exemple tiré de votre propre travail.",
+  ],
+  ar: [
+    "شكراً، وإن كانت الإجابة مختصرة. في المقابلة الحقيقية، قدّم مثالاً محدداً ونتيجته.",
+    "حسناً. بقيت الإجابة عامة، والمحاوِر يتوقع موقفاً محدداً وما فعلته وما الذي تغيّر.",
+    "مفهوم. كنت أتمنى تفاصيل أكثر، مع مثال من عملك أنت.",
+  ],
+};
+
 export const NEXT: Record<IvLang, string[]> = {
   en: ["Next question.", "Let's move on.", "Let's turn to something else.", ""],
   fr: ["Question suivante.", "Passons à autre chose.", "Changeons de sujet.", ""],
