@@ -106,7 +106,7 @@ async function call<T>(body: Record<string, unknown>): Promise<T> {
 const proofOf = (a: Proof) => ({ kind: a.kind, proof: a.proof });
 
 export const ivStart = (access: Proof, setup: IvSetup, candidate: IvCandidate, history: IvHistory | null) =>
-  call<{ state: IvState }>({ action: "start", access: proofOf(access), setup, candidate, history });
+  call<{ state: IvState; trial?: string }>({ action: "start", access: proofOf(access), setup, candidate, history });
 
 export const ivAnswer = (access: Proof, state: IvState, input: IvAnswerInput) =>
   call<{ state: IvState }>({ action: "answer", access: proofOf(access), state, input });

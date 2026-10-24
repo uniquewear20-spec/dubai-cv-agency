@@ -101,12 +101,19 @@ interface TrialSave { proof: string; startedAt: number | null }
 function readTrial(): TrialSave | null {
   try {
     const t = JSON.parse(localStorage.getItem(TRIAL_KEY) || "null") as TrialSave | null;
-    return t?.proof ? t : null;
+    if (!t?.proof) return null;
+    // A started trial needs its signed ticket and its 30 minutes; otherwise it is over.
+    if (t.startedAt && (!t.proof.includes(".") || Date.now() - t.startedAt > TRIAL_MS)) { localStorage.removeItem(TRIAL_KEY); return null; }
+    return t;
   } catch { return null; }
 }
 function saveTrial(t: TrialSave) { try { localStorage.setItem(TRIAL_KEY, JSON.stringify(t)); } catch { /* memory only */ } }
 /** The clock starts with the interview (the first question), once. */
-function markTrialStart() { const t = readTrial(); if (t && !t.startedAt) saveTrial({ ...t, startedAt: Date.now() }); }
+function markTrialStart(ticket?: string) {
+  const t = readTrial();
+  if (t && !t.startedAt) saveTrial({ proof: ticket ?? t.proof, startedAt: Date.now() });
+  window.dispatchEvent(new Event("z-trial"));
+}
 
 /** The free interview's clock: it keeps running while paused or on other pages. */
 function TrialClock({ lang }: { lang: string }) {
@@ -125,6 +132,11 @@ export default function InterviewView({ jobId }: { jobId: string | null }) {
   const agent = useAgent();
   // A free interview survives pauses and visits to other pages (kept in this browser).
   const [trial, setTrial] = useState<TrialSave | null>(() => (typeof window === "undefined" ? null : readTrial()));
+  useEffect(() => {
+    const again = () => setTrial(readTrial());
+    window.addEventListener("z-trial", again);
+    return () => window.removeEventListener("z-trial", again);
+  }, []);
   if (trial && !agent.access) {
     const access = { kind: "trial", proof: trial.proof, plan: null, coach: true } as Access;
     return (
@@ -181,8 +193,8 @@ function CoachScreens({ jobId, onTrial }: { jobId: string | null; onTrial?: () =
   const start = useCallback(async (setup: IvSetup, o: StartOptions): Promise<string | null> => {
     if (!access) return c.errors["not-eligible"];
     try {
-      const { state } = await ivStart(access, setup, candidateOf(profile), historyOf(records, setup));
-      if (access?.kind === "trial") markTrialStart();
+      const { state, trial } = await ivStart(access, setup, candidateOf(profile), historyOf(records, setup));
+      if (access?.kind === "trial") markTrialStart(trial);
       await saveActive({ state, look: o.look, voiceURI: o.voiceURI, mode: o.mode, camera: o.camera, local: o.local, savedAt: new Date().toISOString() });
       setScreen({ kind: "room" });
       top();

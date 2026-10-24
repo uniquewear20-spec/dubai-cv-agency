@@ -9,9 +9,13 @@
 //   POST { action: "report", access, state, uiLang, early? }       → { state, report }
 
 import type { NextRequest } from "next/server";
-import { randomUUID } from "node:crypto";
+import { createHmac, randomUUID } from "node:crypto";
+
+// The free interview's ticket is signed, so every server instance can check it without shared storage.
+const trialSign = (s: string) => createHmac("sha256", process.env.TRIAL_SECRET || process.env.PAYPAL_CLIENT_SECRET || process.env.SMTP_PASS || "").update(`iv-trial:${s}`).digest("base64url").slice(0, 32);
+const TRIAL_MS = 31 * 60_000;
 import { AccessError, verifyCoach } from "@/lib/agent/access";
-import { allow, clientIp, firstTime, wasMarked } from "@/lib/agent/limits";
+import { allow, clientIp, firstTime } from "@/lib/agent/limits";
 import { fail, ok, readJson } from "@/lib/agent/http";
 import { answerTurn, endEarly, startInterview } from "@/lib/agent/interview/engine";
 import { buildReport } from "@/lib/agent/interview/report";
@@ -34,16 +38,22 @@ export async function POST(req: NextRequest) {
   if (!allow(`iv-${action}`, clientIp(req.headers), LIMITS[action], 10 * 60_000)) return fail("Too many requests. Wait a few minutes and try again.", 429);
 
   const kind = body.access?.kind === "paypal" || body.access?.kind === "gumroad" || body.access?.kind === "trial" ? body.access.kind : null;
-  const proof = typeof body.access?.proof === "string" ? body.access.proof.trim().slice(0, 64) : "";
+  const proof = typeof body.access?.proof === "string" ? body.access.proof.trim().slice(0, kind === "trial" ? 160 : 64) : "";
   if (!kind || !proof) return fail("not-eligible");
 
+  let ticket: string | null = null;
   if (kind === "trial") {
-    // The free trial: one interview per connection every 30 days, its session open for 20 minutes.
-    if (!/^[a-z0-9-]{16,64}$/i.test(proof)) return fail("invalid");
+    // The free trial: one interview per connection every 30 days, open for 30 minutes from its start
+    // (paused or not). Later calls carry the signed ticket returned by "start".
     if (action === "start") {
+      if (!/^[a-z0-9-]{16,64}$/i.test(proof)) return fail("invalid");
       if (!(await firstTime(`iv-trial-ip:${clientIp(req.headers)}`, 30 * 86400))) return fail("trial-used");
-      await firstTime(`iv-trial:${proof}`, 31 * 60); // 30 minutes from the start, paused or not
-    } else if (!(await wasMarked(`iv-trial:${proof}`))) return fail("trial-ended");
+      const at = String(Date.now());
+      ticket = `${proof}.${at}.${trialSign(`${proof}.${at}`)}`;
+    } else {
+      const [id, at, sig] = proof.split(".");
+      if (!id || !at || sig !== trialSign(`${id}.${at}`) || Date.now() - Number(at) > TRIAL_MS) return fail("trial-ended");
+    }
   } else {
     try {
       await verifyCoach({ kind, proof });
@@ -58,7 +68,7 @@ export async function POST(req: NextRequest) {
     const setup = parseSetup(body.setup);
     if (!setup) return fail("invalid");
     const state = startInterview(setup, parseCandidate(body.candidate), parseHistory(body.history), randomUUID());
-    return ok({ state });
+    return ok(ticket ? { state, trial: ticket } : { state });
   }
 
   const state = parseState(body.state);
