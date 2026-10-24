@@ -54,7 +54,7 @@ const ASPECTS: { term: L10n; desc: L10n }[] = [
   { term: { en: "Still you", fr: "Toujours vous", ar: "تبقى أنت" }, desc: { en: "Your face, features and skin tone stay yours.", fr: "Votre visage, vos traits et votre teint restent les vôtres.", ar: "ملامح وجهك ولون بشرتك تبقى كما هي." } },
 ];
 
-interface Portrait { id: string; big: number; note: L10n; alt: L10n }
+interface Portrait { id: string; big: number; note?: L10n; alt: L10n }
 // Example portraits made with AI image tools (public/team originals, cropped to 3:4 in public/photos).
 const PORTRAITS: Portrait[] = [
   {
@@ -99,6 +99,22 @@ const PORTRAITS: Portrait[] = [
   },
 ];
 
+const EXAMPLE_ALT: L10n = { en: "Example portrait made with AI image tools", fr: "Exemple de portrait réalisé avec des outils d'IA", ar: "صورة توضيحية أُنشئت بأدوات الذكاء الاصطناعي" };
+// The rest of the example portraits, between the ones with notes.
+PORTRAITS.splice(2, 0, ...[
+  { id: "01", big: 800, alt: EXAMPLE_ALT },
+  { id: "02", big: 800, alt: EXAMPLE_ALT },
+  { id: "05", big: 800, alt: EXAMPLE_ALT },
+  { id: "06", big: 800, alt: EXAMPLE_ALT },
+  { id: "07", big: 800, alt: EXAMPLE_ALT },
+  { id: "09", big: 800, alt: EXAMPLE_ALT },
+  { id: "12", big: 800, alt: EXAMPLE_ALT },
+  { id: "16", big: 800, alt: EXAMPLE_ALT },
+  { id: "18", big: 800, alt: EXAMPLE_ALT },
+  { id: "19", big: 800, alt: EXAMPLE_ALT },
+  { id: "20", big: 800, alt: EXAMPLE_ALT }
+]);
+
 const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
 
 /**
@@ -106,8 +122,8 @@ const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
  * out where it is relative to the middle of the view and opens, settles and fades accordingly.
  * `enter` (0 → 1) opens the cards as the section comes into view on phones.
  */
-function ReelCard({ p, lang, shift, view, dir, enter, still, version }: {
-  p: Portrait; lang: Lang; shift: MotionValue<number>; view: React.RefObject<HTMLElement | null>; dir: 1 | -1;
+function ReelCard({ p, lang, shift, view, dir, enter, still, version, eager }: {
+  p: Portrait; lang: Lang; eager: boolean; shift: MotionValue<number>; view: React.RefObject<HTMLElement | null>; dir: 1 | -1;
   enter: MotionValue<number>; still: boolean; version: number;
 }) {
   const ref = useRef<HTMLLIElement>(null);
@@ -149,11 +165,11 @@ function ReelCard({ p, lang, shift, view, dir, enter, still, version }: {
     <img
       src={`${src}-640.webp`}
       srcSet={`${src}-640.webp 640w, ${src}-1000.webp ${p.big}w`}
-      sizes="(max-width: 899px) 74vw, 50vh"
+      sizes="(max-width: 899px) 52vw, 36vh"
       alt={pick(p.alt, lang)}
       width={640}
       height={853}
-      loading="lazy"
+      loading={eager ? "eager" : "lazy"}
       decoding="async"
     />
   );
@@ -162,7 +178,7 @@ function ReelCard({ p, lang, shift, view, dir, enter, still, version }: {
       <li className="ph-card" ref={ref}>
         <figure>
           <div className="ph-frame">{img}</div>
-          <figcaption className="ph-cap" dir="auto">{pick(p.note, lang)}</figcaption>
+          {p.note && <figcaption className="ph-cap" dir="auto">{pick(p.note, lang)}</figcaption>}
         </figure>
       </li>
     );
@@ -173,7 +189,7 @@ function ReelCard({ p, lang, shift, view, dir, enter, still, version }: {
         <motion.div className="ph-frame" style={{ clipPath: clip }}>
           <motion.div className="ph-img" style={{ scale, x: imgX }}>{img}</motion.div>
         </motion.div>
-        <motion.figcaption className="ph-cap" dir="auto" style={{ opacity: noteO, y: noteY }}>{pick(p.note, lang)}</motion.figcaption>
+        {p.note && <motion.figcaption className="ph-cap" dir="auto" style={{ opacity: noteO, y: noteY }}>{pick(p.note, lang)}</motion.figcaption>}
       </figure>
     </motion.li>
   );
@@ -230,9 +246,10 @@ function InUse({ lang }: { lang: Lang }) {
 }
 
 export default function PhotoSection({ lang }: { lang: Lang }) {
-  const still = useMedia(REDUCED_MOTION);
+  const reduced = useMedia(REDUCED_MOTION);
   const wide = useMedia("(min-width: 900px) and (min-height: 640px)");
-  const pinned = wide && !still;
+  const pinned = wide && !reduced;
+  const still = !pinned;
   const dir: 1 | -1 = lang === "ar" ? -1 : 1;
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -292,8 +309,8 @@ export default function PhotoSection({ lang }: { lang: Lang }) {
           <motion.div className="ph-track" ref={trackRef} style={pinned ? { x: pinX } : undefined}>
             {pinned && <div className="ph-intro"><Intro lang={lang} id={titleId} /></div>}
             <ol className="ph-list" aria-label={t("reel", lang)}>
-              {PORTRAITS.map(p => (
-                <ReelCard key={p.id} p={p} lang={lang} shift={shift} view={viewRef} dir={dir} enter={enter} still={still} version={version} />
+              {PORTRAITS.map((p, i) => (
+                <ReelCard key={p.id} eager={i < 4} p={p} lang={lang} shift={shift} view={viewRef} dir={dir} enter={enter} still={still} version={version} />
               ))}
             </ol>
             <div className="ph-end"><InUse lang={lang} /></div>
@@ -338,7 +355,9 @@ const CSS = `
 .ph[data-mode="pinned"] .ph-view{position:sticky;top:69px;height:calc(100svh - 69px);overflow:hidden;display:flex;align-items:center}
 .ph[data-mode="pinned"] .ph-track{height:100%;will-change:transform}
 .ph[data-mode="pinned"] .ph-intro{flex:none;width:min(500px,36vw);margin-inline-end:clamp(24px,4vw,72px);align-self:center}
-.ph[data-mode="pinned"] .ph-card{width:calc(min(66svh,640px) * .75)}
+.ph[data-mode="pinned"] .ph-card{width:calc(min(48svh,460px) * .75)}
+.ph[data-mode="pinned"] .ph-card:nth-child(even){margin-top:64px}
+.ph[data-mode="pinned"] .ph-list{align-items:flex-start}
 .ph[data-mode="pinned"] .ph-end{width:min(440px,34vw);margin-inline-start:clamp(16px,3vw,48px)}
 .ph-progress{position:absolute;inset:auto max(20px,calc((100vw - 1320px)/2 + 40px)) 26px;height:1px;background:var(--z-rule)}
 .ph-progress span{position:absolute;inset:0;background:var(--z-gold);transform-origin:0 50%}
@@ -348,7 +367,8 @@ const CSS = `
 .ph[data-mode="swipe"] .ph-view,.ph[data-mode="still"] .ph-view{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:6px}
 .ph[data-mode="swipe"] .ph-view::-webkit-scrollbar{display:none}
 .ph[data-mode="still"] .ph-view{scrollbar-width:thin}
-.ph[data-mode="swipe"] .ph-card,.ph[data-mode="still"] .ph-card{width:min(74vw,340px);scroll-snap-align:center}
+.ph[data-mode="swipe"] .ph-card,.ph[data-mode="still"] .ph-card{width:min(52vw,240px);scroll-snap-align:start}
+.ph[data-mode="still"] .ph-card:nth-child(even){margin-top:28px}
 .ph[data-mode="swipe"] .ph-end,.ph[data-mode="still"] .ph-end{width:min(84vw,400px);scroll-snap-align:center;align-self:stretch;display:flex;align-items:center}
 .ph-view:focus-visible{outline:2px solid var(--z-focus);outline-offset:4px}
 .ph-hint{margin-top:14px}

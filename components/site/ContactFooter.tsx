@@ -18,6 +18,7 @@ const T: Record<string, L10n> = {
     ar: "سير ذاتية وملفات لينكدإن وطلبات توظيف، بالعربية والإنجليزية والفرنسية.",
   },
   explore: { en: "Explore", fr: "Explorer", ar: "تصفّح" },
+  emailUs: { en: "Email us", fr: "Nous écrire par e-mail", ar: "راسلنا بالبريد الإلكتروني" },
   legal: { en: "Policies", fr: "Informations légales", ar: "السياسات" },
   contact: { en: "Contact", fr: "Contact", ar: "التواصل" },
   privacy: { en: "Privacy policy", fr: "Politique de confidentialité", ar: "سياسة الخصوصية" },
@@ -46,6 +47,7 @@ export function ContactSection({ lang, onEnquire }: { lang: Lang; onEnquire: () 
         <div className="ct-actions">
           <a className="z-btn z-btn-primary" href={waLink("Hello Zenith Dubai CV. I'd like help choosing a package.")} target="_blank" rel="noopener noreferrer">{t("whatsapp", lang)}</a>
           <button type="button" className="z-btn z-btn-quiet" onClick={onEnquire}>{t("email", lang)}</button>
+          <a className="z-btn z-btn-quiet" href={`mailto:${CONTACT_EMAIL}`}>{t("emailUs", lang)}</a>
         </div>
         <Signature lang={lang} />
       </div>

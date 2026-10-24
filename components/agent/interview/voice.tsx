@@ -5,7 +5,7 @@
 
 import React, { useEffect, useState } from "react";
 import { LOOKS, otherLook, type LookId } from "@/lib/agent/interview/looks";
-import { chooseVoice, matchOf, onVoices, shortVoiceName, voiceGender, voicesFor, type VoiceChoice } from "@/lib/agent/interview/speech";
+import { chooseVoice, matchOf, onVoices, shortVoiceName, voiceGender, voiceWorks, voicesFor, type VoiceChoice } from "@/lib/agent/interview/speech";
 import type { IvCopy } from "@/lib/agent/interview/copy";
 import type { IvLang } from "@/lib/agent/interview/types";
 import type { Lang } from "@/components/agent/context";
@@ -33,9 +33,16 @@ export interface LookVoice {
 export function useLookVoice(lang: IvLang, look: LookId, chosen?: string | null): LookVoice {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   useEffect(() => {
-    const load = () => setVoices(voicesFor(lang));
+    let off = false;
+    const load = () => {
+      const list = voicesFor(lang);
+      setVoices(list);
+      // Arabic on a Mac: set aside voices that are listed but not installed, then list again.
+      if (lang === "ar") Promise.all(list.map(voiceWorks)).then(() => { if (!off) setVoices(voicesFor(lang)); });
+    };
     load();
-    return onVoices(load);
+    const stop = onVoices(load);
+    return () => { off = true; stop(); };
   }, [lang]);
   const presentation = LOOKS[look].presentation;
   if (chosen === null) return { voices, voice: null, match: "none" };

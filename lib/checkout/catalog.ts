@@ -61,7 +61,7 @@ export const SERVICES: Service[] = [
   { id: "apps-30",      name: "Job Applications (30)",             labelKey: "svcApps30",   price: 199, category: "applications", noteKey: "noteCampaign" },
   { id: "coaching",     name: "Interview Coaching (60 min)",       labelKey: "svcCoaching", price: 199, category: "coaching" },
   { id: "strategy",     name: "Career Strategy Session",           labelKey: "svcStrategy", price: 149, category: "coaching" },
-  { id: "branding",     name: "Portfolio / Personal Branding Kit", labelKey: "svcBranding", price: 149, category: "digital" },
+  { id: "branding",     name: "Portfolio / Personal Branding Kit", labelKey: "svcBranding", price: 300, category: "digital" },
 ];
 
 // ── Quick bundles ────────────────────────────────────────────────────────────

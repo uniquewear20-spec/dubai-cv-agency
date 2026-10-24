@@ -85,12 +85,12 @@ export const PACKAGES: PackageDef[] = [
         fr: "Votre CV réécrit pour le poste visé, compatible ATS ou en design exécutif",
         ar: "إعادة كتابة سيرتك الذاتية للوظيفة المستهدفة، متوافقة مع الفرز الآلي أو بتصميم تنفيذي",
       },
-      COVER_LETTER,
       {
-        en: "5 targeted job applications submitted for you",
-        fr: "5 candidatures ciblées envoyées pour vous",
-        ar: "تقديم 5 طلبات توظيف مستهدفة نيابةً عنك",
+        en: "CV in English, French, Arabic, Spanish and German",
+        fr: "CV en anglais, français, arabe, espagnol et allemand",
+        ar: "سيرة ذاتية بالإنجليزية والفرنسية والعربية والإسبانية والألمانية",
       },
+      COVER_LETTER,
       PHOTO,
     ],
     alsoIncluded: [DESIGN_CHOICE, FIRST_DRAFT, REVISIONS],
@@ -115,9 +115,14 @@ export const PACKAGES: PackageDef[] = [
         ar: "تحسين كامل لملف لينكدإن: المحتوى والكلمات المفتاحية",
       },
       {
-        en: "10 targeted job applications submitted for you",
-        fr: "10 candidatures ciblées envoyées pour vous",
-        ar: "تقديم 10 طلبات توظيف مستهدفة نيابةً عنك",
+        en: "50 job applications submitted for you by the Zenith AI job agent",
+        fr: "50 candidatures envoyées pour vous par l'agent emploi Zenith AI",
+        ar: "50 طلب توظيف يقدّمها لك وكيل الوظائف Zenith AI",
+      },
+      {
+        en: "CV in English, French, Arabic, Spanish and German",
+        fr: "CV en anglais, français, arabe, espagnol et allemand",
+        ar: "سيرة ذاتية بالإنجليزية والفرنسية والعربية والإسبانية والألمانية",
       },
       COVER_LETTER,
     ],
@@ -143,20 +148,20 @@ export const PACKAGES: PackageDef[] = [
     key: "executive",
     name: { en: "Career Automation", fr: "Carrière Automatisée", ar: "أتمتة المسار المهني" },
     line: {
-      en: "Your complete career kit, plus a 30-application campaign we run for you.",
-      fr: "Votre kit carrière complet, avec une campagne de 30 candidatures que nous menons pour vous.",
-      ar: "مجموعتك المهنية الكاملة، مع حملة من 30 طلب توظيف نديرها نيابةً عنك.",
+      en: "Your complete career kit, plus a 100-application campaign run for you by the Zenith AI job agent.",
+      fr: "Votre kit carrière complet, avec une campagne de 100 candidatures que nous menons pour vous.",
+      ar: "مجموعتك المهنية الكاملة، مع حملة من 100 طلب توظيف يديرها لك وكيل الوظائف Zenith AI.",
     },
     highlights: [
       {
-        en: "30 targeted job applications submitted for you",
-        fr: "30 candidatures ciblées envoyées pour vous",
-        ar: "تقديم 30 طلب توظيف مستهدفاً نيابةً عنك",
+        en: "100 job applications submitted for you by the Zenith AI job agent",
+        fr: "100 candidatures envoyées pour vous par l'agent emploi Zenith AI",
+        ar: "100 طلب توظيف يقدّمها لك وكيل الوظائف Zenith AI",
       },
       {
-        en: "CV in two formats, plus language versions (EN, FR, DE, AR, ES)",
-        fr: "CV en deux formats, plus des versions linguistiques (EN, FR, DE, AR, ES)",
-        ar: "سيرة ذاتية بنسختين، ونسخ بلغات أخرى (EN، FR، DE، AR، ES)",
+        en: "CV in two formats, in English, French, Arabic, Spanish and German",
+        fr: "CV en deux formats, en anglais, français, arabe, espagnol et allemand",
+        ar: "سيرة ذاتية بنسختين، بالإنجليزية والفرنسية والعربية والإسبانية والألمانية",
       },
       {
         en: "Full LinkedIn transformation and personal branding",
@@ -199,9 +204,14 @@ export const PACKAGES: PackageDef[] = [
     highlights: [
       { en: "Everything in Career Automation", fr: "Tout le contenu de Carrière Automatisée", ar: "كل ما في باقة أتمتة المسار المهني" },
       {
-        en: "Unlimited targeted job applications submitted for you",
-        fr: "Candidatures ciblées illimitées envoyées pour vous",
-        ar: "طلبات توظيف مستهدفة غير محدودة نقدّمها نيابةً عنك",
+        en: "Unlimited job applications for 30 days, submitted for you by the Zenith AI job agent",
+        fr: "Candidatures illimitées pendant 30 jours, envoyées pour vous par l'agent emploi Zenith AI",
+        ar: "طلبات توظيف غير محدودة لمدة 30 يوماً يقدّمها لك وكيل الوظائف Zenith AI",
+      },
+      {
+        en: "CV in English, French, Arabic, Spanish and German",
+        fr: "CV en anglais, français, arabe, espagnol et allemand",
+        ar: "سيرة ذاتية بالإنجليزية والفرنسية والعربية والإسبانية والألمانية",
       },
       {
         en: "Personal career-narrative strategy session",

@@ -13,6 +13,7 @@ const NAV: { href: string; label: L10n }[] = [
   { href: "#websites", label: { en: "Websites", fr: "Sites", ar: "المواقع" } },
   { href: "#zenith-ai", label: { en: "AI job agent", fr: "Agent emploi IA", ar: "وكيل الوظائف" } },
   { href: "#faq", label: { en: "FAQ", fr: "FAQ", ar: "الأسئلة الشائعة" } },
+  { href: "#contact", label: { en: "Contact us", fr: "Contact", ar: "تواصل معنا" } },
 ];
 
 const T: Record<string, L10n> = {
@@ -144,7 +145,7 @@ html[data-theme="light"] .hd-logo img{filter:brightness(0) saturate(0)}
 @media (max-width:639px){
   .hd-tools .hd-lang,.hd-tools .hd-cta{display:none}
 }
-.hd-sheet{position:fixed;inset:68px 0 0;z-index:59;overflow-y:auto;background:var(--z-bg);padding:28px clamp(20px,6vw,48px) 40px;display:flex;flex-direction:column;gap:32px}
+.hd-sheet{position:fixed;top:68px;left:0;right:0;bottom:auto;height:calc(100dvh - 68px);z-index:59;overflow-y:auto;background:var(--z-bg);padding:28px clamp(20px,6vw,48px) 40px;display:flex;flex-direction:column;gap:32px}
 .hd-sheet nav{display:flex;flex-direction:column}
 .hd-sheet nav a{font-size:30px;line-height:1.2;padding:12px 0;border-bottom:1px solid var(--z-rule);color:var(--z-fg);text-decoration:none}
 [dir="rtl"] .hd-sheet nav a{font-family:var(--font-arabic-serif),serif;font-size:26px}

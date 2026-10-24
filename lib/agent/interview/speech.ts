@@ -96,7 +96,7 @@ const FEMALE = new Set(("amina laila salma rana sana noura layla iman mouna aysh
 const MALE = new Set(("ismael ali shakir bassel taim fahed rami omar jamal abdullah moaz hamed laith hedi hamdan saleh tarik majed maged naayf " +
   "andrew andrewmultilingual brian brianmultilingual guy eric steffan christopher roger ryan thomas william liam prabhat connor luke sam chilemba mitchell " +
   "abeo james wayne elimu evan nathan tom alex aaron jamie oliver daniel arthur lee gordon aman rishi david mark george richard ravi sean remy " +
-  "remymultilingual henri gerard fabrice antoine jean thierry nicolas paul claude jacques").split(" "));
+  "remymultilingual henri gerard fabrice antoine jean thierry nicolas paul claude").split(" "));
 /** Google's numbered natural voices (Android, ChromeOS): which numbers are female. */
 const GOOGLE_NUMBERED_FEMALE: Record<string, number[]> = { "us english": [1, 2, 5, 7], "uk english": [2, 4, 6], "australian english": [1, 3], "francais": [1, 2, 4] };
 /** Google's Android voice codes ("ar-xa-x-arc-network"). */
@@ -157,12 +157,44 @@ function regionBonus(v: SpeechSynthesisVoice, lang: "en" | "fr" | "ar"): number 
   return tag === nav ? 6 : /-(gb|us)$/.test(tag) ? 4 : 2;
 }
 
+// ── Voices that are listed but not installed ─────────────────────────────────
+// A Mac can list a voice (Arabic "Majed") whose speech data isn't downloaded: Chrome then races
+// through the text and only punctuation is heard. On a Mac, each Arabic voice is tried once,
+// silently, and a voice that "reads" a sentence far faster than speech is set aside, so the
+// interviewer's words are shown as captions instead.
+const broken = new Set<string>();
+const probed = new Map<string, Promise<boolean>>();
+const isMac = () => typeof navigator !== "undefined" && /Macintosh/.test(navigator.userAgent) && (navigator.maxTouchPoints ?? 0) === 0;
+
+/** Whether a voice really speaks (true), tried once per page on a Mac; other devices aren't tried. */
+export function voiceWorks(v: SpeechSynthesisVoice): Promise<boolean> {
+  if (!canSpeak() || !isMac() || !/^ar/i.test(v.lang)) return Promise.resolve(true);
+  const known = probed.get(v.voiceURI);
+  if (known) return known;
+  const p = new Promise<boolean>(resolve => {
+    const u = new SpeechSynthesisUtterance("مرحباً، وشكراً جزيلاً على وقتك اليوم في هذه المقابلة.");
+    u.voice = v;
+    u.lang = utteranceLang(v, "ar-AE");
+    u.volume = 0;
+    const t0 = performance.now();
+    let settled = false;
+    const finish = (ok: boolean) => { if (settled) return; settled = true; if (!ok) broken.add(v.voiceURI); resolve(ok); };
+    // Nine words take about three seconds to say; a voice without its speech data ends in about one.
+    u.onend = () => finish(performance.now() - t0 > 1700);
+    u.onerror = () => finish(false);
+    window.setTimeout(() => { window.speechSynthesis.cancel(); finish(true); }, 6000);
+    window.speechSynthesis.speak(u);
+  });
+  probed.set(v.voiceURI, p);
+  return p;
+}
+
 /** Voices for a language, most natural first, novelty voices left out. Voices load asynchronously in some browsers. */
 export function voicesFor(lang: "en" | "fr" | "ar"): SpeechSynthesisVoice[] {
   if (!canSpeak()) return [];
   const all = window.speechSynthesis.getVoices();
   return all
-    .filter(v => v.lang.toLowerCase().replace("_", "-").startsWith(lang) && !NOVELTY.test(plain(v.name)))
+    .filter(v => v.lang.toLowerCase().replace("_", "-").startsWith(lang) && !NOVELTY.test(plain(v.name)) && !broken.has(v.voiceURI))
     .sort((a, b) => voiceQuality(b) - voiceQuality(a) || regionBonus(b, lang) - regionBonus(a, lang) || Number(b.localService) - Number(a.localService)
       || Number(b.default) - Number(a.default) || a.name.localeCompare(b.name));
 }
@@ -294,7 +326,7 @@ export class Speaker {
       for (const [i, piece] of pieces.entries()) {
         if (!live()) return "stopped" as const;
         onPiece?.(i);
-        if (voice && canSpeak()) await spoken(piece);
+        if (voice && canSpeak() && !broken.has(voice.voiceURI) && (await voiceWorks(voice))) await spoken(piece);
         else await silent(piece);
         clock.speaking = false;
         if (!live()) return "stopped" as const;

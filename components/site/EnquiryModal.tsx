@@ -189,4 +189,7 @@ const CSS = `
 .eq-err svg{flex:none;margin-top:2px}
 .eq-done{display:grid;justify-items:center;gap:10px;text-align:center;padding:20px 0 6px;color:var(--z-fg)}
 .eq-done svg{color:var(--z-gold-text)}
+.zs input[type="file"]{display:block;width:100%;padding:10px;border:1px dashed var(--z-rule-strong);border-radius:12px;color:var(--z-fg-2);font:inherit;font-size:14px;cursor:pointer}
+.zs input[type="file"]::file-selector-button{margin-inline-end:12px;padding:9px 16px;border:1px solid var(--z-gold);border-radius:999px;background:var(--z-gold-wash);color:var(--z-gold-text);font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.zs input[type="file"]:hover::file-selector-button{background:var(--z-gold);color:var(--z-on-gold)}
 `;

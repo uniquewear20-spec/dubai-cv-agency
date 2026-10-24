@@ -59,7 +59,7 @@ function money(aed: number, currency: Currency, rates: Rates, lang: Lang): strin
 }
 
 export default function ServicesPanel({ lang, currency, rates }: { lang: Lang; currency: Currency; rates: Rates }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [selected, setSelected] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
