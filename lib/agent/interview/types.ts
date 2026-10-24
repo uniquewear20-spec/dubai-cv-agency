@@ -287,7 +287,8 @@ export interface IvPrefs {
   length: IvLength;
   lang: IvLang;
   look: LookId;
-  voices: Partial<Record<IvLang, string | null>>;
+  /** The voice chosen for each language and look ("ar:karim"), or null for captions only. */
+  voices: Record<string, string | null>;
   mode: "voice" | "text";
   camera: boolean;
   local: boolean;

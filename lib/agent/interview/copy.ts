@@ -11,7 +11,7 @@ export interface IvCopy {
   h: string;
   lede: string;
   entry: { body: string; cta: string; forJob: string; last: (score: string, date: string) => string; locked: (pkgs: string) => string };
-  locked: { h: string; body: (pkgs: string) => string; how: string; packages: string; preview: string; previewing: string; previewNote: string; previewLine: string };
+  locked: { h: string; body: (pkgs: string) => string; how: string; packages: string; preview: string; previewing: string; previewNote: string; previewLine: string; chooseLook: string };
   setup: {
     h: string; role: string; roleHint: string; job: string; jobNone: string; jobHint: string;
     type: string; types: Record<IvType, { name: string; desc: string }>;
@@ -19,6 +19,13 @@ export interface IvCopy {
     length: string; lengths: Record<5 | 8, string>;
     lang: string; langs: Record<Lang, string>;
     look: string; voice: string; voiceNone: string; voiceLocal: string; voiceOnline: string; voiceTest: string; voiceMissing: string;
+    voiceKinds: { female: string; male: string; unknown: string };
+    voiceMismatch: (look: string, voice: string, lookKind: "female" | "male") => string;
+    voiceUnknown: (voice: string, look: string) => string;
+    voiceChosen: (look: string, voice: string, lookKind: "female" | "male") => string;
+    useVoice: (name: string) => string;
+    matchLook: (name: string) => string;
+    voiceTip: string;
     mode: string; modes: { voice: string; text: string };
     speech: { cloud: string; local: string; downloadable: string; download: string; downloading: string; none: string; denied: string };
     camera: string; cameraHint: string;
@@ -97,6 +104,7 @@ const EN: IvCopy = {
     preview: "Hear the interviewer",
     previewing: "Speaking…",
     previewNote: "A short preview. The interview questions start once your package is checked.",
+    chooseLook: "Choose an interviewer",
     previewLine: "Hello, and thanks for making the time. I'll ask you questions about the role you're preparing for, and follow up on your answers. Take your time, and answer as you would in a real interview.",
   },
   setup: {
@@ -131,6 +139,13 @@ const EN: IvCopy = {
     voiceOnline: "online voice",
     voiceTest: "Hear this voice",
     voiceMissing: "This device has no voice for this language, so the interviewer's words will appear as captions.",
+    voiceKinds: { female: "female voice", male: "male voice", unknown: "voice" },
+    voiceMismatch: (look, voice, kind) => `This browser has no ${kind === "female" ? "female" : "male"} voice in this language, so ${look} would speak with ${voice}.`,
+    voiceUnknown: (voice, look) => `Your browser doesn't say whether ${voice} sounds female or male. Hear it, and choose another voice if it doesn't suit ${look}.`,
+    voiceChosen: (look, voice, kind) => `The voice chosen for ${look} is ${voice}, a ${kind === "female" ? "male" : "female"} voice.`,
+    useVoice: name => `Use ${name}`,
+    matchLook: name => `Show ${name} instead`,
+    voiceTip: "Voices come from your device and browser, so they vary. Microsoft Edge offers the most natural free voices; on an iPhone or a Mac you can add enhanced voices in the accessibility settings (Spoken Content).",
     mode: "How you'll answer",
     modes: { voice: "Speak", text: "Type" },
     speech: {
@@ -364,8 +379,9 @@ const FR: IvCopy = {
     how: "Vous avez déjà acheté l'une de ces formules ? Saisissez votre numéro de commande PayPal ou votre clé de licence Gumroad ci-dessous.",
     packages: "Voir les formules",
     preview: "Écouter le recruteur",
-    previewing: "Il parle…",
+    previewing: "Lecture…",
     previewNote: "Un court aperçu. Les questions commencent une fois votre formule vérifiée.",
+    chooseLook: "Choisissez un recruteur",
     previewLine: "Bonjour, et merci d'avoir pris le temps. Je vais vous poser des questions sur le poste que vous préparez, et rebondir sur vos réponses. Prenez votre temps, et répondez comme lors d'un vrai entretien.",
   },
   setup: {
@@ -400,6 +416,13 @@ const FR: IvCopy = {
     voiceOnline: "voix en ligne",
     voiceTest: "Écouter cette voix",
     voiceMissing: "Cet appareil n'a pas de voix pour cette langue : les paroles du recruteur s'afficheront en sous-titres.",
+    voiceKinds: { female: "voix féminine", male: "voix masculine", unknown: "voix" },
+    voiceMismatch: (look, voice, kind) => `Ce navigateur n'a pas de ${kind === "female" ? "voix féminine" : "voix masculine"} dans cette langue : ${look} parlerait avec la voix ${voice}.`,
+    voiceUnknown: (voice, look) => `Votre navigateur n'indique pas si ${voice} est une voix féminine ou masculine. Écoutez-la, et choisissez-en une autre si elle ne convient pas à ${look}.`,
+    voiceChosen: (look, voice, kind) => `La voix choisie pour ${look} est ${voice}, une voix ${kind === "female" ? "masculine" : "féminine"}.`,
+    useVoice: name => `Utiliser ${name}`,
+    matchLook: name => `Afficher ${name} à la place`,
+    voiceTip: "Les voix viennent de votre appareil et de votre navigateur : elles varient. Microsoft Edge propose les voix gratuites les plus naturelles ; sur iPhone ou Mac, vous pouvez ajouter des voix améliorées dans les réglages d'accessibilité (Contenu énoncé).",
     mode: "Comment vous répondrez",
     modes: { voice: "À l'oral", text: "Par écrit" },
     speech: {
@@ -633,8 +656,9 @@ const AR: IvCopy = {
     how: "هل اشتريت إحدى هذه الباقات؟ أدخل رقم طلب PayPal أو مفتاح ترخيص Gumroad في الأسفل.",
     packages: "عرض الباقات",
     preview: "استمع إلى المحاوِر",
-    previewing: "يتحدث…",
+    previewing: "جارٍ التشغيل…",
     previewNote: "معاينة قصيرة. تبدأ أسئلة المقابلة بعد التحقق من باقتك.",
+    chooseLook: "اختر المحاوِر",
     previewLine: "مرحباً، وشكراً على وقتك. سأطرح عليك أسئلة عن الوظيفة التي تستعد لها، وسأتابع إجاباتك. خذ وقتك، وأجب كما لو كنت في مقابلة حقيقية.",
   },
   setup: {
@@ -669,6 +693,13 @@ const AR: IvCopy = {
     voiceOnline: "صوت عبر الإنترنت",
     voiceTest: "استمع إلى هذا الصوت",
     voiceMissing: "لا يتوفر على هذا الجهاز صوت لهذه اللغة، لذا ستظهر كلمات المحاوِر نصاً مكتوباً.",
+    voiceKinds: { female: "صوت نسائي", male: "صوت رجالي", unknown: "صوت" },
+    voiceMismatch: (look, voice, kind) => `لا يتوفر في هذا المتصفح ${kind === "female" ? "صوت نسائي" : "صوت رجالي"} بهذه اللغة، لذا ${kind === "female" ? "ستتحدث" : "سيتحدث"} ${look} بصوت ${voice}.`,
+    voiceUnknown: (voice, look) => `لا يوضّح متصفحك إن كان ${voice} صوتاً نسائياً أم رجالياً. استمع إليه، واختر صوتاً آخر إن لم يناسب ${look}.`,
+    voiceChosen: (look, voice, kind) => `الصوت المختار لـ${look} هو ${voice}، وهو ${kind === "female" ? "صوت رجالي" : "صوت نسائي"}.`,
+    useVoice: name => `استخدم ${name}`,
+    matchLook: name => `اعرض ${name} بدلاً من ذلك`,
+    voiceTip: "تأتي الأصوات من جهازك ومتصفحك، لذا تختلف من جهاز لآخر. يقدّم Microsoft Edge أكثر الأصوات المجانية طبيعيةً، وعلى iPhone أو Mac يمكنك إضافة أصوات محسّنة من إعدادات تسهيلات الاستخدام (المحتوى المنطوق).",
     mode: "طريقة الإجابة",
     modes: { voice: "بالصوت", text: "بالكتابة" },
     speech: {

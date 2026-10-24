@@ -13,8 +13,9 @@ import { useAgent } from "../context";
 import { Modal, Notice } from "../parts";
 import Interviewer, { type AvatarMode } from "./Interviewer";
 import { IV_COPY } from "@/lib/agent/interview/copy";
+import { LOOKS } from "@/lib/agent/interview/looks";
 import {
-  Recognizer, Speaker, canListen, chunks, newClock, onVoices, speechLang, voicesFor, type ListenError,
+  Recognizer, Speaker, canListen, chooseVoice, chunks, newClock, onVoices, speechLang, voicesFor, type ListenError,
 } from "@/lib/agent/interview/speech";
 import { IvError, ivAnswer, ivReport, recordOf } from "@/lib/agent/interview/client";
 import type { IvActive, IvRecord, IvState } from "@/lib/agent/interview/types";
@@ -114,10 +115,12 @@ export default function Room({ active, onSave, onFinish, onDiscard }: {
     onSave({ ...active, state, mode: modeRef.current, camera, savedAt: new Date().toISOString() });
   }, [active, camera, onSave]);
 
+  // The voice chosen in the setup; if the browser no longer has it (another device, an update), the
+  // voice that best matches the interviewer's look, never just the first voice.
   const voice = useCallback((): SpeechSynthesisVoice | null => {
     if (mutedRef.current || !active.voiceURI) return null;
-    return voicesFor(ivLang).find(v => v.voiceURI === active.voiceURI) ?? voicesFor(ivLang)[0] ?? null;
-  }, [active.voiceURI, ivLang]);
+    return voicesFor(ivLang).find(v => v.voiceURI === active.voiceURI) ?? chooseVoice(ivLang, LOOKS[active.look].presentation).voice;
+  }, [active.voiceURI, active.look, ivLang]);
 
   // ── Listening ──
   const stopListening = useCallback(() => {

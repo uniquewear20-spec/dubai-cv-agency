@@ -17,11 +17,17 @@ import HistoryView from "./History";
 import { IV_COPY } from "@/lib/agent/interview/copy";
 import { delKV, getKV, setKV } from "@/lib/agent/store";
 import { IvError, MAX_RECORDS, candidateOf, defaultPrefs, historyOf, isRecord, ivStart } from "@/lib/agent/interview/client";
-import { Speaker, newClock, onVoices, speechLang, voicesFor } from "@/lib/agent/interview/speech";
+import { Speaker, newClock, speechLang } from "@/lib/agent/interview/speech";
+import { LOOK_IDS, type LookId } from "@/lib/agent/interview/looks";
+import { VoiceNote, useLookVoice } from "./voice";
 import type { IvActive, IvPrefs, IvRecord, IvSetup } from "@/lib/agent/interview/types";
 
 type Screen = { kind: "setup"; preset?: { role?: string; jobId?: string | null } } | { kind: "room" } | { kind: "report"; id: string; from?: "history" } | { kind: "history" };
 
+/**
+ * The coach without a purchase: what it is, the three interviewers to choose from, and a short line
+ * spoken with the voice that best matches the chosen look.
+ */
 function Locked() {
   const { lang, pkg } = useAgent();
   const c = IV_COPY[lang];
@@ -29,16 +35,18 @@ function Locked() {
   const [clock] = useState(newClock);
   const speaker = useRef<Speaker | null>(null);
   const [speaking, setSpeaking] = useState(false);
-  const [hasVoice, setHasVoice] = useState(false);
-  useEffect(() => onVoices(() => setHasVoice(voicesFor(lang).length > 0)), [lang]);
+  const [look, setLook] = useState<LookId>("amal");
+  const lv = useLookVoice(lang, look);
   useEffect(() => () => speaker.current?.stop(), []);
+  const stop = () => { speaker.current?.stop(); setSpeaking(false); };
   const play = async () => {
     const sp = speaker.current ?? (speaker.current = new Speaker(clock));
-    if (speaking) { sp.stop(); setSpeaking(false); return; }
+    if (speaking) { stop(); return; }
     setSpeaking(true);
-    await sp.say(c.locked.previewLine, voicesFor(lang)[0] ?? null, speechLang(lang));
+    await sp.say(c.locked.previewLine, lv.voice, speechLang(lang));
     setSpeaking(false);
   };
+  const pick = (l: LookId) => { stop(); setLook(l); };
   return (
     <div className="za-stack">
       <header>
@@ -47,15 +55,28 @@ function Locked() {
       </header>
       <section className="za-iv-preview">
         <div className="za-iv-stage za-iv-stage-sm">
-          <Interviewer look="amal" mode={speaking ? "speaking" : "idle"} clock={clock} nod={0} reduced={reduced} label={c.room.label} className="za-iv-avatar" />
+          <Interviewer key={look} look={look} mode={speaking ? "speaking" : "idle"} clock={clock} nod={0} reduced={reduced} label={`${c.looks[look]}: ${c.room.label}`} className="za-iv-avatar" />
           <p className="za-iv-label">{c.room.label}</p>
         </div>
         <div className="za-iv-preview-text">
+          <fieldset className="za-iv-fieldset za-iv-pick">
+            <legend>{c.locked.chooseLook}</legend>
+            <div className="za-iv-looks za-iv-looks-sm">
+              {LOOK_IDS.map(l => (
+                <label key={l} className="za-iv-look">
+                  <input type="radio" name="za-iv-preview-look" checked={look === l} onChange={() => pick(l)} />
+                  <span className="za-iv-look-pic"><Interviewer look={l} mode="idle" clock={clock} nod={0} reduced still label={`${c.looks[l]}: ${c.room.label}`} /></span>
+                  <span className="za-iv-look-name">{c.looks[l]}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
           <button type="button" className="z-btn z-btn-quiet" onClick={() => void play()} aria-pressed={speaking}>
             {speaking ? <Square size={15} aria-hidden /> : <Play size={15} aria-hidden />} {speaking ? c.locked.previewing : c.locked.preview}
           </button>
+          <VoiceNote c={c} look={look} lv={lv} onLook={pick} />
           <p className="za-iv-captions za-iv-captions-sm" dir="auto">{c.locked.previewLine}</p>
-          <p className="za-hint">{c.locked.previewNote}{hasVoice ? "" : ` ${c.setup.voiceMissing}`}</p>
+          <p className="za-hint">{c.locked.previewNote}{lv.voices.length ? "" : ` ${c.setup.voiceMissing}`}</p>
           <p><Link href="/#packages" className="za-textlink">{c.locked.packages}</Link></p>
         </div>
       </section>

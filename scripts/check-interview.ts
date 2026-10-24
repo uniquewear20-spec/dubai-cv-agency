@@ -11,6 +11,8 @@ import { buildReport } from "../lib/agent/interview/report";
 import { parseInput, parseState } from "../lib/agent/interview/state";
 import { featuresOf } from "../lib/agent/access";
 import { norm } from "../lib/agent/text";
+import { chooseVoice, shortVoiceName, voiceGender } from "../lib/agent/interview/speech";
+import { LOOKS, LOOK_IDS } from "../lib/agent/interview/looks";
 import type { IvCandidate, IvSetup, IvState } from "../lib/agent/interview/types";
 
 let passed = 0;
@@ -124,6 +126,56 @@ check("the coach is in packages 2 to 4, Pro in packages 3 and 4", () => {
   assert.deepEqual(featuresOf("growth"), { plan: null, coach: true });
   assert.deepEqual(featuresOf("executive"), { plan: "career-automation", coach: true });
   assert.deepEqual(featuresOf("apex"), { plan: "executive-suite", coach: true });
+});
+
+const V = (name: string, lang: string, localService = true, voiceURI = name) => ({ name, lang, localService, default: false, voiceURI }) as unknown as SpeechSynthesisVoice;
+
+check("voices are told apart as female or male on Apple, Windows, Edge, Chrome and Android", () => {
+  const cases: [string, string][] = [
+    ["Maged", "male"], ["Majed (Enhanced)", "male"], ["Mariam", "female"], ["Laila", "female"], ["Tarik", "male"],
+    ["Microsoft Hoda - Arabic (Egypt)", "female"], ["Microsoft Naayf - Arabic (Saudi Arabia)", "male"],
+    ["Microsoft Fatima Online (Natural) - Arabic (United Arab Emirates)", "female"], ["Microsoft Hamdan Online (Natural) - Arabic (United Arab Emirates)", "male"],
+    ["Google UK English Female", "female"], ["Google UK English Male", "male"], ["Google US English", "female"], ["Google français", "female"],
+    ["Google US English 4 (Natural)", "male"], ["Android Speech Recognition and Synthesis from Google ar-xa-x-ard-network", "male"],
+    ["Android Speech Recognition and Synthesis from Google ar-xa-x-arc-network", "female"], ["Samantha", "female"], ["Daniel", "male"],
+    ["Thomas", "male"], ["Amélie", "female"], ["Microsoft Zira - English (United States)", "female"], ["Some Engine Voice", "unknown"],
+  ];
+  for (const [name, g] of cases) assert.equal(voiceGender({ name, voiceURI: name }), g, name);
+});
+
+check("each interviewer gets a voice that sounds like them, and a mismatch is reported", () => {
+  assert.deepEqual(LOOK_IDS.map(l => LOOKS[l].presentation), ["female", "male", "female"]);
+  // An iPhone with only the default Arabic voice: Amal can't get a female voice, and says so.
+  const iphone = [V("Maged", "ar-SA")];
+  assert.deepEqual([chooseVoice("ar", "female", iphone).voice?.name, chooseVoice("ar", "female", iphone).match], ["Maged", "no"]);
+  assert.equal(chooseVoice("ar", "male", iphone).match, "yes");
+  // A Mac with an added female voice: Amal and Lina speak with it, Karim with Maged.
+  const mac = [V("Maged", "ar-SA"), V("Laila", "ar-001")];
+  assert.equal(chooseVoice("ar", "female", mac).voice?.name, "Laila");
+  assert.equal(chooseVoice("ar", "male", mac).voice?.name, "Maged");
+  // Edge: the natural Gulf voices.
+  const edge = [V("Microsoft Naayf - Arabic (Saudi Arabia)", "ar-SA"), V("Microsoft Hoda - Arabic (Egypt)", "ar-EG"),
+    V("Microsoft Fatima Online (Natural) - Arabic (United Arab Emirates)", "ar-AE", false), V("Microsoft Hamdan Online (Natural) - Arabic (United Arab Emirates)", "ar-AE", false),
+    V("Microsoft Salma Online (Natural) - Arabic (Egypt)", "ar-EG", false)];
+  assert.equal(chooseVoice("ar", "female", edge).voice?.name, "Microsoft Fatima Online (Natural) - Arabic (United Arab Emirates)");
+  assert.equal(chooseVoice("ar", "male", edge).voice?.name, "Microsoft Hamdan Online (Natural) - Arabic (United Arab Emirates)");
+  // Voices whose names don't say: used, and reported as unknown.
+  assert.equal(chooseVoice("ar", "female", [V("Arabic", "ar")]).match, "unknown");
+  assert.equal(chooseVoice("ar", "female", []).match, "none");
+  // English on Windows Chrome: a female and a male voice for each look.
+  const win = [V("Microsoft David - English (United States)", "en-US"), V("Microsoft Zira - English (United States)", "en-US"), V("Google UK English Male", "en-GB", false), V("Google UK English Female", "en-GB", false)];
+  assert.equal(voiceGender(chooseVoice("en", "female", win).voice!), "female");
+  assert.equal(voiceGender(chooseVoice("en", "male", win).voice!), "male");
+});
+
+check("voice names are shown the way people say them", () => {
+  assert.equal(shortVoiceName({ name: "Microsoft Fatima Online (Natural) - Arabic (United Arab Emirates)" }), "Fatima");
+  assert.equal(shortVoiceName({ name: "Microsoft Naayf - Arabic (Saudi Arabia)" }), "Naayf");
+  assert.equal(shortVoiceName({ name: "Microsoft AvaMultilingual Online (Natural) - English (United States)" }), "AvaMultilingual");
+  assert.equal(shortVoiceName({ name: "Samantha (Enhanced)" }), "Samantha (Enhanced)");
+  assert.equal(shortVoiceName({ name: "Google UK English Female" }), "Google UK English Female");
+  assert.equal(shortVoiceName({ name: "Google العربية" }), "Google العربية");
+  assert.equal(shortVoiceName({ name: "ar-xa-x-arc-network" }), "ar-xa-x-arc-network");
 });
 
 console.log(`\n${passed} checks passed`);

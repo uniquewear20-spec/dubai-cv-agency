@@ -11,9 +11,8 @@ import Interviewer from "./Interviewer";
 import { useReducedMotion } from "./Room";
 import { IV_COPY } from "@/lib/agent/interview/copy";
 import { LOOK_IDS, type LookId } from "@/lib/agent/interview/looks";
-import {
-  Speaker, canListen, canSpeak, installOnDevice, newClock, onDeviceStatus, onVoices, speechLang, voicesFor,
-} from "@/lib/agent/interview/speech";
+import { Speaker, canListen, canSpeak, installOnDevice, newClock, onDeviceStatus, speechLang } from "@/lib/agent/interview/speech";
+import { VoiceNote, useLookVoice, voiceKey, voiceLabel, voiceOptions } from "./voice";
 import { suggestType } from "@/lib/agent/interview/client";
 import { IV_DIFFICULTIES, IV_TYPES } from "@/lib/agent/interview/types";
 import type { IvActive, IvLang, IvPrefs, IvSetup } from "@/lib/agent/interview/types";
@@ -43,7 +42,6 @@ export default function Setup({ prefs, onPrefs, preset, onStart, records, onHist
   const [role, setRole] = useState(preset?.role || presetJob?.title || profile.roles[0] || "");
   const [typeTouched, setTypeTouched] = useState(false);
   const [p, setP] = useState<IvPrefs>(() => ({ ...prefs, type: typeTouched ? prefs.type : suggestType(preset?.role || presetJob?.title || profile.roles[0] || "") }));
-  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   // This screen only renders in the browser (the agent loads its data first), so checking the API here is safe.
   const [note, setNote] = useState<SpeechNote>(() => (canListen() ? "cloud" : "none"));
   const [busy, setBusy] = useState(false);
@@ -60,14 +58,12 @@ export default function Setup({ prefs, onPrefs, preset, onStart, records, onHist
     return next;
   });
 
-  // Voices for the interview language (they load asynchronously in some browsers).
-  useEffect(() => {
-    const load = () => setVoices(voicesFor(ivLang));
-    load();
-    return onVoices(load);
-  }, [ivLang]);
-
-  const voiceURI = p.voices[ivLang] === null ? null : (voices.find(v => v.voiceURI === p.voices[ivLang])?.voiceURI ?? voices[0]?.voiceURI ?? null);
+  // The voice for this language and look: the candidate's choice for them, or the voice that best
+  // matches the look (voices load asynchronously in some browsers). Changing the language or the
+  // look never keeps the previous voice.
+  const lv = useLookVoice(ivLang, p.look, p.voices[voiceKey(ivLang, p.look)]);
+  const voices = lv.voices;
+  const voiceURI = lv.voice?.voiceURI ?? null;
 
   // What happens to the candidate's speech in this browser, for this language.
   useEffect(() => {
@@ -96,7 +92,7 @@ export default function Setup({ prefs, onPrefs, preset, onStart, records, onHist
   const test = async () => {
     const sp = speaker.current ?? (speaker.current = new Speaker(clock));
     if (testing) { sp.stop(); setTesting(false); return; }
-    const v = voices.find(x => x.voiceURI === voiceURI) ?? null;
+    const v = lv.voice;
     setTesting(true);
     await sp.say(IV_COPY[ivLang].locked.previewLine, v, tag);
     setTesting(false);
@@ -225,7 +221,7 @@ export default function Setup({ prefs, onPrefs, preset, onStart, records, onHist
             </fieldset>
             <div className="za-field za-iv-lang">
               <label htmlFor={`${id}-lang`}>{c.setup.lang}</label>
-              <select id={`${id}-lang`} className="za-select za-iv-select" value={ivLang} onChange={e => update({ lang: e.target.value as IvLang })}>
+              <select id={`${id}-lang`} className="za-select za-iv-select" value={ivLang} onChange={e => { speaker.current?.stop(); setTesting(false); update({ lang: e.target.value as IvLang }); }}>
                 {(["en", "fr", "ar"] as const).map(l => <option key={l} value={l}>{c.setup.langs[l]}</option>)}
               </select>
             </div>
@@ -237,7 +233,7 @@ export default function Setup({ prefs, onPrefs, preset, onStart, records, onHist
           <div className="za-iv-looks">
             {LOOK_IDS.map(l => (
               <label key={l} className="za-iv-look">
-                <input type="radio" name={`${id}-look`} checked={p.look === l} onChange={() => update({ look: l })} />
+                <input type="radio" name={`${id}-look`} checked={p.look === l} onChange={() => { speaker.current?.stop(); setTesting(false); update({ look: l }); }} />
                 <span className="za-iv-look-pic">
                   {p.look === l
                     ? <Interviewer look={l} mode={testing ? "speaking" : "idle"} clock={clock} nod={0} reduced={reduced} label={`${c.looks[l]}: ${c.room.label}`} />
@@ -254,8 +250,9 @@ export default function Setup({ prefs, onPrefs, preset, onStart, records, onHist
           <div className="za-field">
             <label htmlFor={`${id}-voice`}>{c.setup.voice}</label>
             <div className="za-inline">
-              <select id={`${id}-voice`} className="za-select za-iv-select" value={voiceURI ?? ""} onChange={e => update({ voices: { ...p.voices, [ivLang]: e.target.value || null } })}>
-                {voices.map(v => <option key={v.voiceURI} value={v.voiceURI}>{v.name} · {v.localService ? c.setup.voiceLocal : c.setup.voiceOnline}</option>)}
+              <select id={`${id}-voice`} className="za-select za-iv-select" value={voiceURI ?? ""}
+                onChange={e => { speaker.current?.stop(); setTesting(false); update({ voices: { ...p.voices, [voiceKey(ivLang, p.look)]: e.target.value || null } }); }}>
+                {voiceOptions(voices, p.look).map(v => <option key={v.voiceURI} value={v.voiceURI}>{voiceLabel(c, v, lang)}</option>)}
                 <option value="">{c.setup.voiceNone}</option>
               </select>
               <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={() => void test()} disabled={!voiceURI} aria-pressed={testing}>
@@ -263,6 +260,9 @@ export default function Setup({ prefs, onPrefs, preset, onStart, records, onHist
               </button>
             </div>
             {!voices.length && <p className="za-hint">{c.setup.voiceMissing}</p>}
+            <VoiceNote c={c} look={p.look} lv={lv} onLook={l => { speaker.current?.stop(); setTesting(false); update({ look: l }); }}
+              onBetter={() => { speaker.current?.stop(); setTesting(false); const rest = { ...p.voices }; delete rest[voiceKey(ivLang, p.look)]; update({ voices: rest }); }} />
+            {voices.length > 0 && <p className="za-hint">{c.setup.voiceTip}</p>}
           </div>
           <fieldset className="za-iv-fieldset">
             <legend>{c.setup.mode}</legend>

@@ -78,14 +78,124 @@ export function chunks(text: string): { at: number; text: string }[] {
 
 export const canSpeak = (): boolean => typeof window !== "undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined";
 
-/** Voices for a language, on-device ones first. Voices load asynchronously in some browsers. */
+// ── Choosing a voice ─────────────────────────────────────────────────────────
+// Browsers don't say whether a voice sounds female or male, or how natural it is. These lists name
+// the voices the main platforms ship (Windows, Edge's natural voices, macOS and iOS, Chrome on
+// desktop and Android), from the voice list of the Readium Speech project (BSD-3-Clause), so the
+// interviewer's voice can match the look the candidate chose. A voice that isn't listed is
+// "unknown": it can still be used, and the candidate is told.
+
+export type Presentation = "female" | "male";
+export type VoiceGender = Presentation | "unknown";
+
+const FEMALE = new Set(("amina laila salma rana sana noura layla iman mouna aysha amal zariyah amany reem fatima maryam mariam hoda " +
+  "emma emmamultilingual ava avamultilingual jenny aria michelle ana sonia libby maisie natasha hayley clara heather neerja emily leah yan asilia molly ezinne " +
+  "rosa luna imani zoe allison nicky samantha joelle kate stephanie serena martha matilda karen catherine tara isha sangeeta veena moira tessa fiona zira " +
+  "hazel susan linda heera victoria vivienne viviennemultilingual denise charline ariane eloise sylvie audrey aurelie marie aude chantal amelie julie " +
+  "hortence hortense caroline").split(" "));
+const MALE = new Set(("ismael ali shakir bassel taim fahed rami omar jamal abdullah moaz hamed laith hedi hamdan saleh tarik majed maged naayf " +
+  "andrew andrewmultilingual brian brianmultilingual guy eric steffan christopher roger ryan thomas william liam prabhat connor luke sam chilemba mitchell " +
+  "abeo james wayne elimu evan nathan tom alex aaron jamie oliver daniel arthur lee gordon aman rishi david mark george richard ravi sean remy " +
+  "remymultilingual henri gerard fabrice antoine jean thierry nicolas paul claude").split(" "));
+/** Google's numbered natural voices (Android, ChromeOS): which numbers are female. */
+const GOOGLE_NUMBERED_FEMALE: Record<string, number[]> = { "us english": [1, 2, 5, 7], "uk english": [2, 4, 6], "australian english": [1, 3], "francais": [1, 2, 4] };
+/** Google's Android voice codes ("ar-xa-x-arc-network"). */
+const ANDROID_FEMALE = /-x-(arc|arz|sfg|ena|enc|caa|cac)-/;
+const ANDROID_MALE = /-x-(ard|are|end|ene|cab|cad)-/;
+/** Novelty voices (macOS): not for an interview. */
+const NOVELTY = /^(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|pipe organ|superstar|trinoids|whisper|wobble|zarvox|deranged|hysterical|junior|ralph|fred|kathy|princess|grandma|grandpa|rocko|shelley|flo|eddy|reed|sandy)\b/;
+
+const plain = (s: string) => s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+/** Whether a voice sounds female or male, when its name tells; "unknown" otherwise. */
+export function voiceGender(v: Pick<SpeechSynthesisVoice, "name" | "voiceURI">): VoiceGender {
+  const name = plain(v.name);
+  const uri = plain(v.voiceURI ?? "");
+  if (/\bfemale\b|\bfeminine\b|\bfemme\b|انثوي|أنثوي/.test(name)) return "female";
+  if (/\bmale\b|\bmasculine\b|\bhomme\b|ذكر/.test(name)) return "male";
+  if (ANDROID_FEMALE.test(name) || ANDROID_FEMALE.test(uri)) return "female";
+  if (ANDROID_MALE.test(name) || ANDROID_MALE.test(uri)) return "male";
+  const google = name.match(/^google (us english|uk english|australian english|francais)(?: (\d))?/);
+  if (google) {
+    if (!google[2]) return "female"; // "Google US English", "Google français": female voices
+    return GOOGLE_NUMBERED_FEMALE[google[1]].includes(Number(google[2])) ? "female" : "male";
+  }
+  const words = name.replace(/^microsoft /, "").split(/[^a-z]+/).filter(Boolean);
+  if (words.some(w => FEMALE.has(w))) return "female";
+  if (words.some(w => MALE.has(w))) return "male";
+  return "unknown";
+}
+
+/**
+ * A voice's name as people would say it: "Microsoft Fatima Online (Natural) - Arabic (United Arab
+ * Emirates)" becomes "Fatima". Apple and Google names are already short and stay as they are.
+ */
+export function shortVoiceName(v: Pick<SpeechSynthesisVoice, "name">): string {
+  const n = v.name.trim()
+    .replace(/^Microsoft\s+/i, "")
+    .replace(/\s+-\s+[^-]+$/, "")
+    .replace(/\s+Online\s*\(Natural\)/i, "")
+    .trim();
+  return n || v.name;
+}
+
+/** How natural a voice sounds, 0 (robotic) … 3 (natural), from what its name says. */
+export function voiceQuality(v: Pick<SpeechSynthesisVoice, "name" | "voiceURI" | "localService">): number {
+  const n = plain(`${v.name} ${v.voiceURI ?? ""}`);
+  if (/espeak|compact/.test(n)) return 0;
+  if (/natural|neural|multilingual|premium/.test(n)) return 3;
+  if (/enhanced|^google |-network|siri/.test(n)) return 2;
+  return 1;
+}
+
+/** Regional voices preferred for each interview language (Gulf Arabic first, the browser's own English). */
+function regionBonus(v: SpeechSynthesisVoice, lang: "en" | "fr" | "ar"): number {
+  const tag = v.lang.toLowerCase().replace("_", "-");
+  if (lang === "ar") return /-(ae)$/.test(tag) ? 8 : /-(sa)$/.test(tag) ? 7 : /-(qa|kw|bh|om)$/.test(tag) ? 6 : /-(jo|eg|lb|ma)$/.test(tag) ? 4 : 2;
+  if (lang === "fr") return /-fr$/.test(tag) ? 6 : /-(be|ch)$/.test(tag) ? 4 : 2;
+  const nav = typeof navigator !== "undefined" ? navigator.language.toLowerCase() : "";
+  return tag === nav ? 6 : /-(gb|us)$/.test(tag) ? 4 : 2;
+}
+
+/** Voices for a language, most natural first, novelty voices left out. Voices load asynchronously in some browsers. */
 export function voicesFor(lang: "en" | "fr" | "ar"): SpeechSynthesisVoice[] {
   if (!canSpeak()) return [];
   const all = window.speechSynthesis.getVoices();
   return all
-    .filter(v => v.lang.toLowerCase().replace("_", "-").startsWith(lang))
-    .sort((a, b) => Number(b.localService) - Number(a.localService) || Number(b.default) - Number(a.default) || a.name.localeCompare(b.name));
+    .filter(v => v.lang.toLowerCase().replace("_", "-").startsWith(lang) && !NOVELTY.test(plain(v.name)))
+    .sort((a, b) => voiceQuality(b) - voiceQuality(a) || regionBonus(b, lang) - regionBonus(a, lang) || Number(b.localService) - Number(a.localService)
+      || Number(b.default) - Number(a.default) || a.name.localeCompare(b.name));
 }
+
+export interface VoiceChoice {
+  voice: SpeechSynthesisVoice | null;
+  /** "yes" the voice matches the look, "unknown" its name doesn't say, "no" only the other kind of voice exists. */
+  match: "yes" | "unknown" | "no" | "none";
+}
+
+/**
+ * The best voice for a look in a language: one that sounds like the look (female or male), then the
+ * most natural, then the regional one; a voice whose kind is unknown before the other kind.
+ */
+export function chooseVoice(lang: "en" | "fr" | "ar", presentation: Presentation, voices = voicesFor(lang)): VoiceChoice {
+  if (!voices.length) return { voice: null, match: "none" };
+  const score = (v: SpeechSynthesisVoice) => {
+    const g = voiceGender(v);
+    return (g === presentation ? 100 : g === "unknown" ? 45 : 0) + voiceQuality(v) * 10 + regionBonus(v, lang) + (v.localService ? 2 : 0) + (v.default ? 1 : 0);
+  };
+  const best = [...voices].sort((a, b) => score(b) - score(a))[0];
+  return { voice: best, match: matchOf(best, presentation) };
+}
+
+/** How a given voice fits a look. */
+export function matchOf(v: SpeechSynthesisVoice | null, presentation: Presentation): VoiceChoice["match"] {
+  if (!v) return "none";
+  const g = voiceGender(v);
+  return g === presentation ? "yes" : g === "unknown" ? "unknown" : "no";
+}
+
+/** Speaking rate per language: a little slower than the engines' default, which sounds rushed in an interview. */
+export const speechRate = (lang: string): number => (/^ar/i.test(lang) ? 0.9 : /^fr/i.test(lang) ? 0.96 : 0.97);
 
 /** Calls back when the list of voices is (re)loaded; returns an unsubscribe function. */
 export function onVoices(cb: () => void): () => void {
@@ -136,7 +246,7 @@ export class Speaker {
       const u = new SpeechSynthesisUtterance(piece.text);
       if (voice) u.voice = voice;
       u.lang = voice?.lang || lang;
-      u.rate = 1;
+      u.rate = speechRate(u.lang);
       u.pitch = 1;
       let started = 0;
       let finished = false;
@@ -178,7 +288,8 @@ export class Speaker {
         else await silent(piece);
         clock.speaking = false;
         if (!live()) return "stopped" as const;
-        await new Promise(r => window.setTimeout(r, 140));
+        // A breath between sentences, a little longer after a question.
+        await new Promise(r => window.setTimeout(r, /[?؟]\s*$/.test(piece.text) ? 320 : 220));
       }
       clock.speaking = false;
       return live() ? ("done" as const) : ("stopped" as const);
