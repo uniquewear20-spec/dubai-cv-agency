@@ -49,14 +49,17 @@ function open(): Promise<IDBDatabase | null> {
       try {
         if (typeof indexedDB === "undefined") return resolve(null);
         const req = indexedDB.open(DB, VERSION);
+        // Some iPhone browsers never answer the first open: after 2.5 s, use this tab's memory.
+        const late = window.setTimeout(() => resolve(null), 2500);
+        const done = (db: IDBDatabase | null) => { window.clearTimeout(late); resolve(db); };
         req.onupgradeneeded = () => {
           const db = req.result;
           if (!db.objectStoreNames.contains("kv")) db.createObjectStore("kv");
           if (!db.objectStoreNames.contains("apps")) db.createObjectStore("apps", { keyPath: "jobId" });
         };
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => resolve(null);
-        req.onblocked = () => resolve(null);
+        req.onsuccess = () => done(req.result);
+        req.onerror = () => done(null);
+        req.onblocked = () => done(null);
       } catch {
         resolve(null);
       }
@@ -70,15 +73,23 @@ export async function persistent(): Promise<boolean> {
 }
 
 function run<T>(db: IDBDatabase, store: string, mode: IDBTransactionMode, fn: (s: IDBObjectStore) => IDBRequest<T> | void): Promise<T | undefined> {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(store, mode);
-    const s = tx.objectStore(store);
-    const r = fn(s);
-    let value: T | undefined;
-    if (r) r.onsuccess = () => { value = r.result; };
-    tx.oncomplete = () => resolve(value);
-    tx.onerror = () => reject(tx.error);
-    tx.onabort = () => reject(tx.error);
+  return new Promise(resolve => {
+    // A storage call that fails or never answers must not leave the agent loading forever.
+    const late = window.setTimeout(() => resolve(undefined), 4000);
+    const finish = (v: T | undefined) => { window.clearTimeout(late); resolve(v); };
+    try {
+      const tx = db.transaction(store, mode);
+      const s = tx.objectStore(store);
+      const r = fn(s);
+      let value: T | undefined;
+      if (r) r.onsuccess = () => { value = r.result; };
+      tx.oncomplete = () => finish(value);
+      tx.onerror = () => { console.warn("[agent/store]", tx.error?.name); finish(undefined); };
+      tx.onabort = () => finish(undefined);
+    } catch (err) {
+      console.warn("[agent/store]", err instanceof Error ? err.name : err);
+      finish(undefined);
+    }
   });
 }
 

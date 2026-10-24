@@ -326,6 +326,13 @@ const CSS = `
 .pk-secure>span:first-child{font-size:13px;color:var(--z-fg-3);margin-inline-end:4px}
 .pk-badge{display:inline-flex;align-items:center;gap:4px;height:34px;padding:0 12px;border-radius:8px;background:#fff;border:1px solid rgba(0,0,0,.12)}
 .pk-pp{font:italic 800 15px/1 var(--font-sans),Arial,sans-serif;color:#009cde;letter-spacing:-.02em}
+@media (max-width:640px){
+  .pk-secure{flex-wrap:nowrap;justify-content:center;gap:6px}
+  .pk-secure>span:first-child{font-size:11.5px;margin-inline-end:2px;white-space:nowrap}
+  .pk-badge{height:26px;padding:0 7px;border-radius:6px;gap:3px}
+  .pk-badge svg{height:13px;width:auto}
+  .pk-pp{font-size:11.5px}
+}
 .pk-pp i{color:#003087}
 .pk-price{display:flex;align-items:baseline;align-self:end;gap:8px;margin-top:20px;font-family:var(--font-serif),Georgia,serif;color:var(--z-fg)}
 .pk-cur{font-family:var(--font-sans),sans-serif;font-size:14px;font-weight:600;color:var(--z-fg-2)}

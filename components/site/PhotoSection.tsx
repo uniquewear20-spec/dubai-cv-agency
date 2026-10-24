@@ -398,4 +398,13 @@ const CSS = `
 .ph-bars i:nth-child(3){width:74%}
 .ph-fine{margin-top:8px}
 @media (prefers-reduced-motion:reduce){.ph-img{will-change:auto}}
+@media (max-width:899px){
+  .ph[data-mode="pinned"] .ph-end{width:min(86vw,380px)}
+  .ph[data-mode="pinned"] .ph-used{padding:18px}
+  .ph[data-mode="pinned"] .ph-used-h{font-size:22px}
+  .ph[data-mode="pinned"] .ph-used-demo{margin:12px 0 10px;gap:14px}
+  .ph[data-mode="pinned"] .ph-round-l img{width:72px;height:72px}
+  .ph[data-mode="pinned"] .ph-cvhead-sheet{width:170px;padding:10px}
+  .ph[data-mode="pinned"] .ph-fine,.ph[data-mode="pinned"] .ph-used .z-small{font-size:12.5px;line-height:1.5}
+}
 `;
