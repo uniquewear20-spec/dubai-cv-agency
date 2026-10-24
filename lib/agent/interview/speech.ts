@@ -96,7 +96,7 @@ const FEMALE = new Set(("amina laila salma rana sana noura layla iman mouna aysh
 const MALE = new Set(("ismael ali shakir bassel taim fahed rami omar jamal abdullah moaz hamed laith hedi hamdan saleh tarik majed maged naayf " +
   "andrew andrewmultilingual brian brianmultilingual guy eric steffan christopher roger ryan thomas william liam prabhat connor luke sam chilemba mitchell " +
   "abeo james wayne elimu evan nathan tom alex aaron jamie oliver daniel arthur lee gordon aman rishi david mark george richard ravi sean remy " +
-  "remymultilingual henri gerard fabrice antoine jean thierry nicolas paul claude").split(" "));
+  "remymultilingual henri gerard fabrice antoine jean thierry nicolas paul claude jacques").split(" "));
 /** Google's numbered natural voices (Android, ChromeOS): which numbers are female. */
 const GOOGLE_NUMBERED_FEMALE: Record<string, number[]> = { "us english": [1, 2, 5, 7], "uk english": [2, 4, 6], "australian english": [1, 3], "francais": [1, 2, 4] };
 /** Google's Android voice codes ("ar-xa-x-arc-network"). */
@@ -215,7 +215,7 @@ export function chooseVoice(lang: "en" | "fr" | "ar", presentation: Presentation
     const g = voiceGender(v);
     return (g === presentation ? 100 : g === "unknown" ? 45 : 0) + voiceQuality(v) * 10 + regionBonus(v, lang) + (v.localService ? 2 : 0) + (v.default ? 1 : 0);
   };
-  const best = [...voices].sort((a, b) => score(b) - score(a))[0];
+  const best = [...voices].sort((a, b) => score(b) - score(a) || Number(/jacques/i.test(b.name)) - Number(/jacques/i.test(a.name)))[0];
   return { voice: best, match: matchOf(best, presentation) };
 }
 
@@ -237,7 +237,7 @@ export function utteranceLang(voice: Pick<SpeechSynthesisVoice, "lang"> | null |
 }
 
 /** Speaking rate per language: a little slower than the engines' default, which sounds rushed in an interview. */
-export const speechRate = (lang: string): number => (/^ar/i.test(lang) ? 0.9 : /^fr/i.test(lang) ? 0.96 : 0.97);
+export const speechRate = (lang: string): number => (/^ar/i.test(lang) ? 0.9 : /^fr/i.test(lang) ? 0.9 : 0.97);
 
 /** Calls back when the list of voices is (re)loaded; returns an unsubscribe function. */
 export function onVoices(cb: () => void): () => void {

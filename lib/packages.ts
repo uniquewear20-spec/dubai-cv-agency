@@ -55,9 +55,9 @@ const DESIGN_CHOICE: L10n = {
 };
 const COVER_LETTER: L10n = { en: "Tailored cover letter", fr: "Lettre de motivation personnalisée", ar: "خطاب تغطية مخصّص" };
 const PHOTO: L10n = {
-  en: "LinkedIn profile photo enhancement",
-  fr: "Amélioration de votre photo de profil LinkedIn",
-  ar: "تحسين صورة ملفك الشخصي على لينكدإن",
+  en: "AI profile photo enhancement for LinkedIn and your CV",
+  fr: "Amélioration de votre photo de profil par IA, pour LinkedIn et votre CV",
+  ar: "تحسين صورة ملفك الشخصي بالذكاء الاصطناعي للينكدإن وسيرتك الذاتية",
 };
 const COACH: L10n = {
   en: "Interview coach in the Zenith AI job agent: practice interviews out loud, with follow-up questions and a scored report",
@@ -125,10 +125,10 @@ export const PACKAGES: PackageDef[] = [
         ar: "سيرة ذاتية بالإنجليزية والفرنسية والعربية والإسبانية والألمانية",
       },
       COVER_LETTER,
+      PHOTO,
     ],
     alsoIncluded: [
       COACH,
-      PHOTO,
       {
         en: "International career strategy guide",
         fr: "Guide de stratégie de carrière internationale",
@@ -173,11 +173,11 @@ export const PACKAGES: PackageDef[] = [
         fr: "Séance individuelle de coaching entretien de 60 minutes",
         ar: "جلسة تدريب فردية على المقابلات مدتها 60 دقيقة",
       },
+      PHOTO,
     ],
     alsoIncluded: [
       COACH,
       COVER_LETTER,
-      PHOTO,
       { en: "International mobility guide", fr: "Guide de mobilité internationale", ar: "دليل التنقل الدولي" },
       {
         en: "Executive portfolio and elevator pitch",
@@ -223,6 +223,12 @@ export const PACKAGES: PackageDef[] = [
         fr: "30 jours d'accès prioritaire à votre consultant dédié",
         ar: "30 يوماً من الوصول ذي الأولوية إلى مستشارك المخصّص",
       },
+      {
+        en: "Portfolio website, personal or for your brand",
+        fr: "Site portfolio, personnel ou pour votre marque",
+        ar: "موقع تعريفي شخصي أو لعلامتك التجارية",
+      },
+      PHOTO,
     ],
     alsoIncluded: [
       COACH,

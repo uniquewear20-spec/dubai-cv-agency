@@ -247,7 +247,8 @@ function InUse({ lang }: { lang: Lang }) {
 
 export default function PhotoSection({ lang }: { lang: Lang }) {
   const reduced = useMedia(REDUCED_MOTION);
-  const wide = useMedia("(min-width: 900px) and (min-height: 640px)");
+  const wide = useMedia("(min-height: 520px)");
+  const desktop = useMedia("(min-width: 900px)");
   const pinned = wide && !reduced;
   const still = !pinned;
   const dir: 1 | -1 = lang === "ar" ? -1 : 1;
@@ -293,7 +294,7 @@ export default function PhotoSection({ lang }: { lang: Lang }) {
   return (
     <section id="photos" ref={sectionRef} className="z-section ph" data-mode={pinned ? "pinned" : still ? "still" : "swipe"} aria-labelledby={titleId}>
       <style href="zenith-photos" precedence="medium">{CSS}</style>
-      {!pinned && (
+      {!(pinned && desktop) && (
         <div className="z-wrap z-wrap-wide ph-head">
           <Intro lang={lang} id={titleId} />
         </div>
@@ -307,10 +308,10 @@ export default function PhotoSection({ lang }: { lang: Lang }) {
           aria-label={pinned ? undefined : `${t("reel", lang)}. ${t("swipe", lang)}`}
         >
           <motion.div className="ph-track" ref={trackRef} style={pinned ? { x: pinX } : undefined}>
-            {pinned && <div className="ph-intro"><Intro lang={lang} id={titleId} /></div>}
+            {pinned && desktop && <div className="ph-intro"><Intro lang={lang} id={titleId} /></div>}
             <ol className="ph-list" aria-label={t("reel", lang)}>
               {PORTRAITS.map((p, i) => (
-                <ReelCard key={p.id} eager={i < 4} p={p} lang={lang} shift={shift} view={viewRef} dir={dir} enter={enter} still={still} version={version} />
+                <ReelCard key={p.id} eager={i < 4 || !desktop} p={p} lang={lang} shift={shift} view={viewRef} dir={dir} enter={enter} still={still} version={version} />
               ))}
             </ol>
             <div className="ph-end"><InUse lang={lang} /></div>
@@ -358,6 +359,12 @@ const CSS = `
 .ph[data-mode="pinned"] .ph-card{width:calc(min(48svh,460px) * .75)}
 .ph[data-mode="pinned"] .ph-card:nth-child(even){margin-top:64px}
 .ph[data-mode="pinned"] .ph-list{align-items:flex-start}
+@media (max-width:899px){
+  .ph[data-mode="pinned"] .ph-card{width:calc(min(46svh,420px) * .75)}
+  .ph[data-mode="pinned"] .ph-card:nth-child(even){margin-top:36px}
+  .ph[data-mode="pinned"] .ph-end{width:min(84vw,360px)}
+  .ph[data-mode="pinned"] .ph-head{margin-bottom:24px}
+}
 .ph[data-mode="pinned"] .ph-end{width:min(440px,34vw);margin-inline-start:clamp(16px,3vw,48px)}
 .ph-progress{position:absolute;inset:auto max(20px,calc((100vw - 1320px)/2 + 40px)) 26px;height:1px;background:var(--z-rule)}
 .ph-progress span{position:absolute;inset:0;background:var(--z-gold);transform-origin:0 50%}

@@ -168,14 +168,14 @@ check("each interviewer gets a voice that sounds like them, and a mismatch is re
   assert.equal(voiceGender(chooseVoice("en", "male", win).voice!), "male");
 });
 
-check("a Mac's voices: Arabic Majed is spoken with a tag Chrome accepts, French uses Thomas for a man", () => {
+check("a Mac's voices: Arabic Majed is spoken with a tag Chrome accepts, French uses Jacques for a man", () => {
   assert.equal(utteranceLang({ lang: "ar-001" }, "ar-AE"), "ar-AE");
   assert.equal(utteranceLang({ lang: "fr-CA" }, "fr-FR"), "fr-CA");
   assert.equal(utteranceLang(null, "ar-AE"), "ar-AE");
   const mac = [V("Majed", "ar-001")];
   assert.deepEqual([chooseVoice("ar", "male", mac).voice?.name, chooseVoice("ar", "male", mac).match], ["Majed", "yes"]);
   const fr = [V("Amélie", "fr-CA"), V("Jacques", "fr-FR"), V("Thomas", "fr-FR")];
-  assert.equal(chooseVoice("fr", "male", fr).voice?.name, "Thomas");
+  assert.equal(chooseVoice("fr", "male", fr).voice?.name, "Jacques");
   assert.equal(chooseVoice("fr", "female", fr).voice?.name, "Amélie");
 });
 
