@@ -10,6 +10,7 @@ import type { PayPalCapture, PayPalOrder } from "./paypal";
 import { adminAddress, emailConfigured, htmlEmail, sendMail } from "@/lib/email";
 import { SITE_URL, CONTACT_EMAIL, WHATSAPP_NUMBER, pick } from "@/lib/site";
 import { packageByKey } from "@/lib/packages";
+import { firstTime } from "@/lib/agent/limits";
 
 export interface OrderFacts {
   orderId: string;
@@ -184,5 +185,117 @@ export async function sendAdminNotice(subject: string, lines: string[]): Promise
     await sendMail({ to: adminAddress()!, subject, text: lines.join("\n"), html: htmlEmail({ title: subject, lines }) });
   } catch (err) {
     console.error("[orders] notice email failed:", err instanceof Error ? err.message : err);
+  }
+}
+
+// ── Payment status emails (declined, held for review) ─────────────────────────
+// Sent only for an outcome PayPal itself reported to this server (a declined capture, a capture
+// held for review, a denied payment): never for something only the browser saw. Each outcome is
+// emailed once per order. No card details are ever included: PayPal doesn't share them.
+
+const STATUS: Record<Lang, { declined: { subject: (ref: string) => string; title: string; lines: string[] }; pending: { subject: (ref: string) => string; title: string; lines: string[] }; denied: { subject: (ref: string) => string; title: string; lines: string[] }; retry: string; help: string }> = {
+  en: {
+    declined: {
+      subject: ref => `Your payment for order ${ref} was not completed`,
+      title: "Your payment was not completed",
+      lines: ["PayPal told us that this payment was declined, so nothing has been charged and your order is not placed.",
+        "A decline usually comes from the bank that issued the card (for example, not enough available balance or an online payment limit). PayPal doesn't tell us the exact reason; your bank can.",
+        "You can try again with another card or your PayPal balance, or pay by card, Apple Pay or Google Pay through Gumroad."],
+    },
+    pending: {
+      subject: ref => `Your payment for order ${ref} is under review`,
+      title: "Payment received, now under review",
+      lines: ["PayPal is reviewing this payment before it completes. This is routine and usually takes less than 24 hours.",
+        "We will start your order as soon as PayPal confirms the payment. Please don't pay again."],
+    },
+    denied: {
+      subject: ref => `Your payment for order ${ref} was denied`,
+      title: "Your payment was denied",
+      lines: ["PayPal has denied this payment after reviewing it, so nothing has been charged and your order is not placed.",
+        "You can try again with another card or your PayPal balance, or pay by card, Apple Pay or Google Pay through Gumroad."],
+    },
+    retry: "See the packages",
+    help: `Questions? Reply to this email, write to ${CONTACT_EMAIL} or message us on WhatsApp (+${WHATSAPP_NUMBER}).`,
+  },
+  fr: {
+    declined: {
+      subject: ref => `Votre paiement pour la commande ${ref} n'a pas abouti`,
+      title: "Votre paiement n'a pas abouti",
+      lines: ["PayPal nous a indiqué que ce paiement a été refusé : rien n'a été débité et votre commande n'est pas passée.",
+        "Un refus vient en général de la banque qui a émis la carte (solde disponible insuffisant ou plafond de paiement en ligne, par exemple). PayPal ne nous donne pas le motif exact ; votre banque peut vous le donner.",
+        "Vous pouvez réessayer avec une autre carte ou votre solde PayPal, ou payer par carte, Apple Pay ou Google Pay via Gumroad."],
+    },
+    pending: {
+      subject: ref => `Votre paiement pour la commande ${ref} est en cours de vérification`,
+      title: "Paiement reçu, en cours de vérification",
+      lines: ["PayPal vérifie ce paiement avant de le finaliser. C'est une vérification de routine, en général sous 24 heures.",
+        "Nous lancerons votre commande dès que PayPal confirmera le paiement. Merci de ne pas payer une seconde fois."],
+    },
+    denied: {
+      subject: ref => `Votre paiement pour la commande ${ref} a été refusé`,
+      title: "Votre paiement a été refusé",
+      lines: ["Après vérification, PayPal a refusé ce paiement : rien n'a été débité et votre commande n'est pas passée.",
+        "Vous pouvez réessayer avec une autre carte ou votre solde PayPal, ou payer par carte, Apple Pay ou Google Pay via Gumroad."],
+    },
+    retry: "Voir les formules",
+    help: `Une question ? Répondez à cet e-mail, écrivez à ${CONTACT_EMAIL} ou sur WhatsApp (+${WHATSAPP_NUMBER}).`,
+  },
+  ar: {
+    declined: {
+      subject: ref => `لم يكتمل دفعك للطلب ${ref}`,
+      title: "لم يكتمل دفعك",
+      lines: ["أبلغنا PayPal أن هذه الدفعة رُفضت، لذلك لم يُخصم أي مبلغ ولم يُسجَّل طلبك.",
+        "يأتي الرفض عادةً من البنك الذي أصدر البطاقة (مثل عدم كفاية الرصيد المتاح أو حدّ الدفع عبر الإنترنت). لا يخبرنا PayPal بالسبب الدقيق، ويمكن لبنكك إخبارك به.",
+        "يمكنك المحاولة مجدداً ببطاقة أخرى أو برصيد PayPal، أو الدفع بالبطاقة أو Apple Pay أو Google Pay عبر Gumroad."],
+    },
+    pending: {
+      subject: ref => `دفعك للطلب ${ref} قيد المراجعة`,
+      title: "تم استلام الدفع وهو قيد المراجعة",
+      lines: ["يراجع PayPal هذه الدفعة قبل إتمامها. هذا إجراء روتيني يستغرق عادةً أقل من 24 ساعة.",
+        "سنبدأ طلبك فور تأكيد PayPal للدفع. يُرجى عدم الدفع مرة أخرى."],
+    },
+    denied: {
+      subject: ref => `رُفض دفعك للطلب ${ref}`,
+      title: "رُفض دفعك",
+      lines: ["رفض PayPal هذه الدفعة بعد مراجعتها، لذلك لم يُخصم أي مبلغ ولم يُسجَّل طلبك.",
+        "يمكنك المحاولة مجدداً ببطاقة أخرى أو برصيد PayPal، أو الدفع بالبطاقة أو Apple Pay أو Google Pay عبر Gumroad."],
+    },
+    retry: "عرض الباقات",
+    help: `لديك سؤال؟ ردّ على هذا البريد أو راسلنا على ${CONTACT_EMAIL} أو عبر واتساب (+${WHATSAPP_NUMBER}).`,
+  },
+};
+
+/**
+ * Tells the customer (when PayPal shared their email) and Zenith about a payment outcome PayPal
+ * reported: declined at capture, held for review, or denied after review. Once per order and
+ * outcome; never throws.
+ */
+export async function sendPaymentStatusEmails(f: OrderFacts, kind: "declined" | "pending" | "denied", source: string): Promise<void> {
+  try {
+    if (!(await firstTime(`pay-status:${kind}:${f.orderId}`, 60 * 86400))) return;
+  } catch { /* send anyway */ }
+  const amount = f.amountUsd ? `US$${f.amountUsd}${f.amountAed ? ` (AED ${f.amountAed})` : ""}` : "-";
+  const what = kind === "declined" ? "Payment declined" : kind === "pending" ? "Payment held for review" : "Payment denied";
+  await sendAdminNotice(`${what}: ${f.ref}`, [
+    `${what} for ${f.label}, ${amount}.`,
+    `Customer: ${f.payerName ?? "name not shared"} <${f.payerEmail ?? "email not shared"}>.`,
+    kind === "pending" ? "Do not start this order until PayPal completes the payment." : "Nothing was charged. Do not start this order.",
+    `Reported by the ${source}. PayPal order ${f.orderId}.`,
+    f.payerEmail ? "The customer has been emailed about it." : "PayPal didn't share the customer's email, so they were not emailed.",
+  ]);
+  if (!f.payerEmail || !emailConfigured()) return;
+  const c = STATUS[f.lang];
+  const m = c[kind];
+  const packages = `${SITE_URL}/#packages`;
+  try {
+    await sendMail({
+      to: f.payerEmail,
+      replyTo: adminAddress() ?? undefined,
+      subject: m.subject(f.ref),
+      text: [...m.lines, "", `${c.retry}: ${packages}`, "", c.help].join("\n"),
+      html: htmlEmail({ title: m.title, lines: m.lines, rows: [[CUSTOMER[f.lang].rowsRef, f.ref]], cta: kind === "pending" ? undefined : { label: c.retry, href: packages }, footer: c.help, rtl: f.lang === "ar" }),
+    });
+  } catch (err) {
+    console.error(`[orders] ${f.ref}: ${kind} email failed:`, err instanceof Error ? err.message : err);
   }
 }

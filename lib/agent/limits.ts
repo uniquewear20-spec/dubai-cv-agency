@@ -124,3 +124,39 @@ export function allow(bucket: string, ip: string, max: number, windowMs: number)
 export function clientIp(headers: Headers): string {
   return headers.get("x-real-ip") || headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 }
+
+// ── Once-only markers (payment emails, webhook events) ───────────────────────
+
+const seen = new Map<string, number>();
+
+/**
+ * Whether `key` is new: marks it and returns true the first time, false afterwards (for `ttl`
+ * seconds). Shared across server instances when Redis is connected; per instance otherwise.
+ */
+export async function firstTime(key: string, ttl: number): Promise<boolean> {
+  if (redisConfig()) {
+    try {
+      const out = await redis([["SET", `zonce:${key}`, "1", "EX", ttl, "NX"]]);
+      return out[0] === "OK";
+    } catch (err) {
+      console.error("[limits] once-only marker failed, using this instance's memory:", err instanceof Error ? err.message : err);
+    }
+  }
+  const now = Date.now();
+  for (const [k, exp] of seen) if (exp < now) seen.delete(k);
+  if (seen.has(key)) return false;
+  seen.set(key, now + ttl * 1000);
+  return true;
+}
+
+/** Whether `key` was marked by firstTime (without marking it). */
+export async function wasMarked(key: string): Promise<boolean> {
+  if (redisConfig()) {
+    try {
+      const out = await redis([["EXISTS", `zonce:${key}`]]);
+      return Number(out[0]) === 1;
+    } catch { /* fall back to memory */ }
+  }
+  const exp = seen.get(key);
+  return exp !== undefined && exp > Date.now();
+}

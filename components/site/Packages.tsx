@@ -83,6 +83,11 @@ const T: Record<string, L10n> = {
     fr: "Le paiement est assuré par PayPal : solde PayPal, ou carte de débit ou de crédit lorsque PayPal propose le paiement par carte. Les montants sont débités en dollars US au taux officiel du dirham.",
     ar: "تتم عملية الدفع عبر PayPal: برصيدك في PayPal أو ببطاقة خصم أو ائتمان حيث يتيح PayPal الدفع بالبطاقة. تُخصم المبالغ بالدولار الأمريكي وفق السعر الرسمي للدرهم.",
   },
+  payDeclined: {
+    en: "If a card, Apple Pay or Google Pay payment is declined, no money is taken and no order is created. Gumroad shows the message on its checkout (when the bank gives one) and emails a receipt only for completed payments, so Zenith isn't told about a declined attempt. Whether you get an SMS is up to your bank. Message us on WhatsApp if a payment keeps failing.",
+    fr: "Si un paiement par carte, Apple Pay ou Google Pay est refusé, rien n'est débité et aucune commande n'est créée. Gumroad affiche le message sur sa page de paiement (quand la banque en donne un) et n'envoie un reçu que pour les paiements aboutis : Zenith n'est donc pas informé d'une tentative refusée. L'envoi d'un SMS dépend de votre banque. Écrivez-nous sur WhatsApp si un paiement échoue à plusieurs reprises.",
+    ar: "إذا رُفض الدفع بالبطاقة أو Apple Pay أو Google Pay فلا يُخصم أي مبلغ ولا يُنشأ أي طلب. يعرض Gumroad الرسالة في صفحة الدفع لديه (حين يقدّمها البنك) ولا يرسل إيصالاً إلا للدفعات المكتملة، لذلك لا تُبلَّغ Zenith بالمحاولة المرفوضة. أما إرسال رسالة نصية فيعود إلى بنكك. راسلنا عبر واتساب إذا تكرر فشل الدفع.",
+  },
   payGumroad: {
     en: "Prefer a card, Apple Pay or Google Pay? Use the Gumroad checkout under each package, at the same US dollar price. Gumroad takes major cards, and shows Apple Pay or Google Pay on devices and browsers that support them. Gumroad may add sales tax or VAT where it applies.",
     fr: "Vous préférez une carte, Apple Pay ou Google Pay ? Utilisez le paiement Gumroad sous chaque formule, au même prix en dollars US. Gumroad accepte les principales cartes et affiche Apple Pay ou Google Pay sur les appareils et navigateurs compatibles. Gumroad peut ajouter la TVA lorsqu'elle s'applique.",
@@ -248,6 +253,7 @@ export default function Packages({
             <h3 className="pk-info-h">{t("payHead", lang)}</h3>
             <p className="z-small">{t("payPaypal", lang)}</p>
             {anyGumroad && <p className="z-small" style={{ marginTop: 10 }}>{t("payGumroad", lang)}</p>}
+            {anyGumroad && <p className="z-small" style={{ marginTop: 10 }}>{t("payDeclined", lang)}</p>}
             <p className="z-small" style={{ marginTop: 10 }}>
               {t("refund", lang)} <a className="z-link" href="/refund/">{t("refundLink", lang)}</a>
             </p>

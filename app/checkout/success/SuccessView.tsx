@@ -13,6 +13,9 @@ export type OrderResult =
   | { status: "refunded"; lang: Lang; ref: string }
   | { status: "unfinished"; lang: Lang }
   | { status: "declined"; lang: Lang }
+  | { status: "cancelled"; lang: Lang }
+  | { status: "action"; lang: Lang; url: string }
+  | { status: "error"; lang: Lang }
   | { status: "invalid" };
 
 const T: Record<string, L10n> = {
@@ -68,6 +71,31 @@ const T: Record<string, L10n> = {
     fr: "Votre banque ou PayPal a refusé ce paiement : rien n'a été débité. Essayez une autre carte ou votre solde PayPal, ou écrivez-nous.",
     ar: "رفض البنك أو PayPal هذه الدفعة، لذلك لم يُخصم أي مبلغ. جرّب بطاقة أخرى أو رصيد PayPal، أو راسلنا لنساعدك.",
   },
+  cancH1: { en: "Payment not completed.", fr: "Paiement non finalisé.", ar: "لم يكتمل الدفع." },
+  cancBody: {
+    en: "You came back from PayPal before the payment went through, so nothing has been charged. If PayPal refused your card, the reason comes from your bank (for example, not enough available balance); PayPal doesn't share it with us. You can try again with another card or your PayPal balance, or pay by card, Apple Pay or Google Pay through Gumroad.",
+    fr: "Vous êtes revenu de PayPal avant que le paiement aboutisse : rien n'a été débité. Si PayPal a refusé votre carte, le motif vient de votre banque (solde disponible insuffisant, par exemple) ; PayPal ne nous le communique pas. Vous pouvez réessayer avec une autre carte ou votre solde PayPal, ou payer par carte, Apple Pay ou Google Pay via Gumroad.",
+    ar: "عدت من PayPal قبل إتمام الدفع، لذلك لم يُخصم أي مبلغ. إذا رفض PayPal بطاقتك فالسبب يأتي من بنكك (مثل عدم كفاية الرصيد المتاح)، ولا يشاركه PayPal معنا. يمكنك المحاولة مجدداً ببطاقة أخرى أو برصيد PayPal، أو الدفع بالبطاقة أو Apple Pay أو Google Pay عبر Gumroad.",
+  },
+  actH1: { en: "One more step on PayPal.", fr: "Encore une étape sur PayPal.", ar: "خطوة أخيرة على PayPal." },
+  actBody: {
+    en: "PayPal needs you to confirm this payment, for example with your bank's security check. Nothing has been charged yet.",
+    fr: "PayPal vous demande de confirmer ce paiement, par exemple avec la vérification de sécurité de votre banque. Rien n'a encore été débité.",
+    ar: "يطلب منك PayPal تأكيد هذه الدفعة، مثلاً عبر التحقق الأمني من بنكك. لم يُخصم أي مبلغ بعد.",
+  },
+  actBtn: { en: "Continue on PayPal", fr: "Continuer sur PayPal", ar: "المتابعة على PayPal" },
+  errH1: { en: "We couldn't confirm this payment yet.", fr: "Nous n'avons pas encore pu confirmer ce paiement.", ar: "لم نتمكن من تأكيد هذه الدفعة بعد." },
+  errBody: {
+    en: "PayPal didn't answer in time, so we can't tell yet whether the payment went through. Please don't pay again: refresh this page in a minute. If it still can't confirm, message us and we'll check it in PayPal.",
+    fr: "PayPal n'a pas répondu à temps : nous ne savons pas encore si le paiement a abouti. Ne payez pas une seconde fois : actualisez cette page dans une minute. Si la confirmation échoue encore, écrivez-nous et nous vérifierons dans PayPal.",
+    ar: "لم يستجب PayPal في الوقت المحدد، لذلك لا نعرف بعد إن كانت الدفعة قد تمت. يُرجى عدم الدفع مجدداً: حدّث هذه الصفحة بعد دقيقة، وإن تعذّر التأكيد راسلنا وسنتحقق منها في PayPal.",
+  },
+  refresh: { en: "Refresh", fr: "Actualiser", ar: "تحديث" },
+  declMail: {
+    en: "If PayPal shared your email address with us, we've sent you this message by email too.",
+    fr: "Si PayPal nous a transmis votre adresse e-mail, nous vous avons aussi envoyé ce message par e-mail.",
+    ar: "إذا شارك PayPal بريدك الإلكتروني معنا فقد أرسلنا إليك هذه الرسالة بالبريد أيضاً.",
+  },
   invH1: { en: "We couldn't find that order.", fr: "Commande introuvable.", ar: "لم نعثر على هذا الطلب." },
   invBody: {
     en: "This confirmation link is incomplete or has expired. If you paid, your payment is safe: message us with the email you paid with and we'll confirm it.",
@@ -103,6 +131,9 @@ export default function SuccessView({ order }: { order: OrderResult }) {
     pending: { Icon: Clock, h1: "pendH1", body: "pendBody" },
     unfinished: { Icon: AlertCircle, h1: "unfinH1", body: "unfinBody" },
     declined: { Icon: XCircle, h1: "declH1", body: "declBody" },
+    cancelled: { Icon: AlertCircle, h1: "cancH1", body: "cancBody" },
+    action: { Icon: Clock, h1: "actH1", body: "actBody" },
+    error: { Icon: AlertCircle, h1: "errH1", body: "errBody" },
     refunded: { Icon: AlertCircle, h1: "refH1", body: "refBody" },
     invalid: { Icon: AlertCircle, h1: "invH1", body: "invBody" },
   }[order.status];
@@ -131,6 +162,7 @@ export default function SuccessView({ order }: { order: OrderResult }) {
         <span className="ok-icon" data-status={order.status}><Icon size={22} strokeWidth={1.75} aria-hidden="true" /></span>
         <h1 className="z-h2">{t(view.h1, lang)}</h1>
         <p className="z-lede" style={{ marginTop: 14 }}>{t(view.body, lang)}</p>
+        {order.status === "declined" && <p className="z-small" style={{ marginTop: 10 }}>{t("declMail", lang)}</p>}
 
         {(paid || ref) && (
           <dl className="ok-rows">
@@ -156,7 +188,9 @@ export default function SuccessView({ order }: { order: OrderResult }) {
 
         {!paid && (
           <div className="ok-actions">
-            {(order.status === "unfinished" || order.status === "declined") && <Link className="z-btn z-btn-primary" href="/#packages">{t("back", lang)}</Link>}
+            {order.status === "action" && <a className="z-btn z-btn-primary" href={order.url}>{t("actBtn", lang)}</a>}
+            {order.status === "error" && <a className="z-btn z-btn-primary" href="">{t("refresh", lang)}</a>}
+            {(order.status === "unfinished" || order.status === "declined" || order.status === "cancelled") && <Link className="z-btn z-btn-primary" href="/#packages">{t("back", lang)}</Link>}
             <a className="z-btn z-btn-quiet" href={wa} target="_blank" rel="noopener noreferrer">{t("whatsapp", lang)}</a>
           </div>
         )}
@@ -178,7 +212,7 @@ html[data-theme="light"] .ok-logo{filter:brightness(0) saturate(0)}
 .hd-lang button[aria-pressed="true"]{background:var(--z-fg);color:var(--z-bg)}
 .ok-main{max-width:680px;padding-block:48px 96px}
 .ok-icon{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:1px solid var(--z-rule-strong);color:var(--z-gold-text);margin-bottom:22px}
-.ok-icon[data-status="declined"],.ok-icon[data-status="invalid"],.ok-icon[data-status="unfinished"]{color:var(--z-error)}
+.ok-icon[data-status="declined"],.ok-icon[data-status="invalid"],.ok-icon[data-status="unfinished"],.ok-icon[data-status="cancelled"],.ok-icon[data-status="error"]{color:var(--z-error)}
 .ok-rows{margin:28px 0 0;border-top:1px solid var(--z-rule)}
 .ok-rows div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--z-rule);font-size:15px}
 .ok-rows dt{color:var(--z-fg-2)}

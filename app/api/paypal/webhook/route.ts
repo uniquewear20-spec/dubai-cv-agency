@@ -10,15 +10,17 @@
 // PAYMENT.CAPTURE.REFUNDED and PAYMENT.CAPTURE.REVERSED. Then put the webhook's id in Vercel as
 // PAYPAL_WEBHOOK_ID. Until it is set, this endpoint refuses every call.
 //
-// Every event's signature is checked with PayPal before anything happens. Captures are
-// race-safe: PayPal captures an order once, so if the confirmation page got there first this
-// handler gets ORDER_ALREADY_CAPTURED and sends nothing.
+// Every event's signature is checked with PayPal before anything happens. Each event id is
+// handled once. Captures are race-safe: PayPal captures an order once, so if the confirmation
+// page got there first this handler gets ORDER_ALREADY_CAPTURED and sends nothing. Declined,
+// held and denied payments are emailed to the customer once per order (lib/checkout/orders.ts).
 
 import { randomBytes } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { decodeOrderMeta } from "@/lib/checkout/catalog";
 import { PayPalError, capturePayPalOrder, getPayPalConfig, getPayPalOrder, isPayPalOrderId, verifyWebhookSignature, type PayPalCapture } from "@/lib/checkout/paypal";
-import { orderFacts, sendAdminNotice, sendPaidOrderEmails } from "@/lib/checkout/orders";
+import { orderFacts, sendAdminNotice, sendPaidOrderEmails, sendPaymentStatusEmails } from "@/lib/checkout/orders";
+import { firstTime, wasMarked } from "@/lib/agent/limits";
 
 interface WebhookEvent {
   id?: string;
@@ -55,21 +57,34 @@ export async function POST(req: NextRequest) {
 
   const type = event.event_type ?? "";
   const resource = event.resource ?? {};
+  // PayPal delivers an event again until it gets a 2xx, and sometimes twice anyway: each event id
+  // is handled once (marked only after it was handled, so a failure is retried).
+  const eventKey = `pp-event:${event.id ?? ""}`;
+  if (event.id && await wasMarked(eventKey).catch(() => false)) return NextResponse.json({ ok: true, ignored: "already handled" });
+  const handled = async (body: Record<string, unknown>) => {
+    if (event.id) await firstTime(eventKey, 30 * 86400).catch(() => true);
+    return NextResponse.json(body);
+  };
 
   try {
     if (type === "CHECKOUT.ORDER.APPROVED") {
       const orderId = String(resource.id ?? "");
-      if (!isPayPalOrderId(orderId)) return NextResponse.json({ ok: true, ignored: "no order id" });
+      if (!isPayPalOrderId(orderId)) return handled({ ok: true, ignored: "no order id" });
       const current = await getPayPalOrder(paypal, orderId);
-      if (current.status !== "APPROVED") return NextResponse.json({ ok: true, ignored: `order ${current.status}` });
+      if (current.status !== "APPROVED") return handled({ ok: true, ignored: `order ${current.status}` });
       try {
         const order = await capturePayPalOrder(paypal, orderId, `capture-hook-${orderId}-${randomBytes(6).toString("hex")}`);
         const f = orderFacts(order);
         if (order.status === "COMPLETED" && f.captureStatus === "COMPLETED") await sendPaidOrderEmails(f, "PayPal webhook");
-        else if (f.captureStatus === "PENDING") await sendAdminNotice(`Payment held by PayPal: ${f.ref}`, [`${f.label}, US$${f.amountUsd}. PayPal is reviewing this payment. Do not start work until it completes.`, `PayPal order: ${orderId}`]);
-        return NextResponse.json({ ok: true, captured: true });
+        else if (f.captureStatus === "PENDING") await sendPaymentStatusEmails(f, "pending", "PayPal webhook");
+        else if (f.captureStatus === "DECLINED" || f.captureStatus === "FAILED") await sendPaymentStatusEmails(f, "declined", "PayPal webhook");
+        return handled({ ok: true, captured: true });
       } catch (err) {
-        if (err instanceof PayPalError && err.issue === "ORDER_ALREADY_CAPTURED") return NextResponse.json({ ok: true, ignored: "already captured" });
+        if (err instanceof PayPalError && err.issue === "ORDER_ALREADY_CAPTURED") return handled({ ok: true, ignored: "already captured" });
+        if (err instanceof PayPalError && err.issue === "INSTRUMENT_DECLINED") {
+          await sendPaymentStatusEmails(orderFacts(current), "declined", "PayPal webhook");
+          return handled({ ok: true, declined: true });
+        }
         throw err;
       }
     }
@@ -86,7 +101,18 @@ export async function POST(req: NextRequest) {
           `Reference ${meta?.ref ?? c.invoice_id ?? "-"}, capture ${c.id}. You can start this order.`,
         ]);
       }
-      return NextResponse.json({ ok: true });
+      return handled({ ok: true });
+    }
+
+    if (type === "PAYMENT.CAPTURE.DENIED") {
+      // A payment PayPal held for review, then denied: the customer is told too (their email comes from the order).
+      const c = resource as unknown as PayPalCapture & { supplementary_data?: { related_ids?: { order_id?: string } } };
+      const orderId = c.supplementary_data?.related_ids?.order_id;
+      if (orderId && isPayPalOrderId(orderId)) {
+        const order = await getPayPalOrder(paypal, orderId);
+        await sendPaymentStatusEmails(orderFacts(order), "denied", "PayPal webhook");
+        return handled({ ok: true });
+      }
     }
 
     if (type === "PAYMENT.CAPTURE.DENIED" || type === "PAYMENT.CAPTURE.REFUNDED" || type === "PAYMENT.CAPTURE.REVERSED") {
@@ -98,10 +124,10 @@ export async function POST(req: NextRequest) {
         `Reference ${meta?.ref ?? c.invoice_id ?? "-"}, PayPal id ${c.id}.`,
         type === "PAYMENT.CAPTURE.DENIED" ? "Do not start this order." : "Check PayPal → Activity for details.",
       ]);
-      return NextResponse.json({ ok: true });
+      return handled({ ok: true });
     }
 
-    return NextResponse.json({ ok: true, ignored: type });
+    return handled({ ok: true, ignored: type });
   } catch (err) {
     console.error(`[paypal/webhook] ${type} failed:`, err instanceof Error ? err.message : err);
     return NextResponse.json({ error: "Processing failed." }, { status: 500 }); // PayPal retries later

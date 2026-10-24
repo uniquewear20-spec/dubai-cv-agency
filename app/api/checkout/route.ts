@@ -86,7 +86,9 @@ export async function POST(req: NextRequest) {
       invoiceId: ref,
       // PayPal adds ?token=<order id>&PayerID=… to this address after approval.
       returnUrl: `${origin}/checkout/success/`,
-      cancelUrl: `${origin}/#investment`,
+      // Leaving PayPal without paying (or after the card was refused on PayPal's page) comes back to
+      // a page that says so, instead of the homepage with no message. PayPal adds &token=<order id>.
+      cancelUrl: `${origin}/checkout/success/?cancelled=1`,
       locale: PAYPAL_LOCALE[lang],
     });
     return NextResponse.json({ url: approveUrl }, { status: 200 });
