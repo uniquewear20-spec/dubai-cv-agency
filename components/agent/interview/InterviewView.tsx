@@ -18,7 +18,7 @@ import { IV_COPY } from "@/lib/agent/interview/copy";
 import { delKV, getKV, setKV } from "@/lib/agent/store";
 import { IvError, MAX_RECORDS, candidateOf, defaultPrefs, historyOf, isRecord, ivStart } from "@/lib/agent/interview/client";
 import { Speaker, newClock, speechLang } from "@/lib/agent/interview/speech";
-import { LOOK_IDS, type LookId } from "@/lib/agent/interview/looks";
+import { LOOKS, LOOK_IDS, type LookId } from "@/lib/agent/interview/looks";
 import { VoiceNote, useLookVoice } from "./voice";
 import type { IvActive, IvPrefs, IvRecord, IvSetup } from "@/lib/agent/interview/types";
 import ShareButton from "../ShareButton";
@@ -44,7 +44,7 @@ function Locked() {
     const sp = speaker.current ?? (speaker.current = new Speaker(clock));
     if (speaking) { stop(); return; }
     setSpeaking(true);
-    await sp.say(c.locked.previewLine, lv.voice, speechLang(lang));
+    await sp.say(c.locked.previewLine, lv.voice, speechLang(lang), undefined, LOOKS[look].presentation);
     setSpeaking(false);
   };
   const pick = (l: LookId) => { stop(); setLook(l); };

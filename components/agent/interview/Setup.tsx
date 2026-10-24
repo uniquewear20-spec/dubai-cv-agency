@@ -10,7 +10,7 @@ import { Notice, fmtDate } from "../parts";
 import Interviewer from "./Interviewer";
 import { useReducedMotion } from "./Room";
 import { IV_COPY } from "@/lib/agent/interview/copy";
-import { LOOK_IDS, type LookId } from "@/lib/agent/interview/looks";
+import { LOOKS, LOOK_IDS, type LookId } from "@/lib/agent/interview/looks";
 import { Speaker, canListen, canSpeak, installOnDevice, newClock, onDeviceStatus, speechLang } from "@/lib/agent/interview/speech";
 import { VoiceNote, useLookVoice, voiceKey, voiceLabel, voiceOptions } from "./voice";
 import { suggestType } from "@/lib/agent/interview/client";
@@ -95,7 +95,7 @@ export default function Setup({ prefs, onPrefs, preset, onStart, records, onHist
     if (testing) { sp.stop(); setTesting(false); return; }
     const v = lv.voice;
     setTesting(true);
-    await sp.say(IV_COPY[ivLang].locked.previewLine, v, tag);
+    await sp.say(IV_COPY[ivLang].locked.previewLine, v, tag, undefined, LOOKS[p.look].presentation);
     setTesting(false);
   };
 

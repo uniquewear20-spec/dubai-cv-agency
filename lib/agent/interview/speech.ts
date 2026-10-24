@@ -237,7 +237,7 @@ export function utteranceLang(voice: Pick<SpeechSynthesisVoice, "lang"> | null |
 }
 
 /** Speaking rate per language: a little slower than the engines' default, which sounds rushed in an interview. */
-export const speechRate = (lang: string): number => (/^ar/i.test(lang) ? 0.9 : /^fr/i.test(lang) ? 0.9 : 0.97);
+export const speechRate = (lang: string): number => (/^ar/i.test(lang) ? 1.08 : /^fr/i.test(lang) ? 0.9 : 0.97);
 
 /** Calls back when the list of voices is (re)loaded; returns an unsubscribe function. */
 export function onVoices(cb: () => void): () => void {
@@ -264,7 +264,7 @@ export class Speaker {
    * Says `text` with `voice` (or silently at the measured pace when there is no voice, so the
    * captions and the mouth still follow). Resolves when finished or interrupted.
    */
-  say(text: string, voice: SpeechSynthesisVoice | null, lang: string, onPiece?: (index: number) => void): Promise<"done" | "stopped"> {
+  say(text: string, voice: SpeechSynthesisVoice | null, lang: string, onPiece?: (index: number) => void, presentation?: Presentation): Promise<"done" | "stopped"> {
     this.stop();
     const token = ++this.token;
     const clock = this.clock;
@@ -289,7 +289,9 @@ export class Speaker {
       if (voice) u.voice = voice;
       u.lang = utteranceLang(voice, lang);
       u.rate = speechRate(u.lang);
-      u.pitch = 1;
+      // A woman interviewer with only a man's voice on the device (an Arabic Mac has only Majed):
+      // a higher pitch is the closest the free voices allow.
+      u.pitch = presentation === "female" && voice && voiceGender(voice) !== "female" ? 1.45 : 1;
       let started = 0;
       let finished = false;
       const done = () => { if (finished) return; finished = true; window.clearTimeout(guard); resolve(); };

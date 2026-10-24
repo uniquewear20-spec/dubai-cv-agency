@@ -173,7 +173,7 @@ export default function Room({ active, onSave, onFinish, onDiscard }: {
     setPiece(0);
     setPhase("speaking");
     const sp = speaker.current ?? (speaker.current = new Speaker(clock));
-    const outcome = await sp.say(text, voice(), tag, i => setPiece(i));
+    const outcome = await sp.say(text, voice(), tag, i => setPiece(i), LOOKS[active.look].presentation);
     if (outcome === "done" && alive.current) afterSpeaking.current();
   }, [clock, stopListening, tag, voice]);
 
