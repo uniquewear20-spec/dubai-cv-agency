@@ -1,6 +1,7 @@
 // components/site/ContactFooter.tsx — closing contact band and footer.
 import React from "react";
 import { CONTACT_EMAIL, SOCIAL_LINKS, pick, waLink, type L10n, type Lang } from "@/lib/site";
+import { SOCIAL_ICONS } from "./socialIcons";
 
 const T: Record<string, L10n> = {
   h2: { en: "Not sure which package fits?", fr: "Vous hésitez entre deux formules ?", ar: "لست متأكداً أي باقة تناسبك؟" },
@@ -23,6 +24,9 @@ const T: Record<string, L10n> = {
   terms: { en: "Terms of service", fr: "Conditions d'utilisation", ar: "شروط الخدمة" },
   refund: { en: "Refund policy", fr: "Politique de remboursement", ar: "سياسة الاسترداد" },
   follow: { en: "Follow", fr: "Suivre", ar: "تابعنا" },
+  signature: { en: "Zenith Dubai, wherever you follow", fr: "Zenith Dubai, là où vous suivez", ar: "زينيث دبي حيث تتابع" },
+  on: { en: "Zenith Dubai on", fr: "Zenith Dubai sur", ar: "زينيث دبي على" },
+  newTab: { en: "(opens in a new tab)", fr: "(nouvel onglet)", ar: "(في علامة تبويب جديدة)" },
   designs: { en: "CV designs", fr: "CV", ar: "تصاميم السير" },
   packages: { en: "Packages", fr: "Formules", ar: "الباقات" },
   process: { en: "How it works", fr: "Déroulement", ar: "طريقة العمل" },
@@ -43,8 +47,36 @@ export function ContactSection({ lang, onEnquire }: { lang: Lang; onEnquire: () 
           <a className="z-btn z-btn-primary" href={waLink("Hello Zenith Dubai CV. I'd like help choosing a package.")} target="_blank" rel="noopener noreferrer">{t("whatsapp", lang)}</a>
           <button type="button" className="z-btn z-btn-quiet" onClick={onEnquire}>{t("email", lang)}</button>
         </div>
+        <Signature lang={lang} />
       </div>
     </section>
+  );
+}
+
+/**
+ * The brand signature: the accounts Zenith Dubai runs, set on a shallow arc under the closing
+ * call to action. Each mark is the platform's own, in one colour; each links to the account
+ * listed in lib/site.ts (SOCIAL_LINKS) and nowhere else.
+ */
+function Signature({ lang }: { lang: Lang }) {
+  const n = SOCIAL_LINKS.length;
+  return (
+    <nav className="sg" aria-label={t("follow", lang)}>
+      <p className="sg-line z-serif">{t("signature", lang)}</p>
+      <ul className="sg-arc">
+        {SOCIAL_LINKS.map((s, i) => {
+          const k = (i - (n - 1) / 2) / ((n - 1) / 2); // −1 … 1 across the arc
+          return (
+            <li key={s.id} style={{ "--lift": `${Math.round((1 - k * k) * 14)}px` } as React.CSSProperties}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" className="sg-link" aria-label={`${t("on", lang)} ${s.name} ${t("newTab", lang)}`}>
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d={SOCIAL_ICONS[s.id]} fill="currentColor" /></svg>
+                <span className="sg-name" aria-hidden="true">{s.name}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }
 
@@ -78,10 +110,6 @@ export default function SiteFooter({ lang }: { lang: Lang }) {
             <h3 className="ft-h">{t("contact", lang)}</h3>
             <a href={`mailto:${CONTACT_EMAIL}`} dir="ltr">{CONTACT_EMAIL}</a>
             <a href={waLink("Hello Zenith Dubai CV.")} target="_blank" rel="noopener noreferrer">WhatsApp</a>
-            <h3 className="ft-h" style={{ marginTop: 18 }}>{t("follow", lang)}</h3>
-            <div className="ft-social">
-              {SOCIAL_LINKS.map(s => <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer">{s.name}</a>)}
-            </div>
           </div>
         </div>
         <div className="z-wrap z-wrap-wide ft-base">
@@ -111,7 +139,20 @@ html[data-theme="light"] .ft-brand img{filter:brightness(0) saturate(0)}
 .ft-h{font-size:14px;font-weight:600;color:var(--z-fg);margin-bottom:4px}
 .ft a{font-size:14px;color:var(--z-fg-2);text-decoration:none;width:fit-content}
 .ft a:hover{color:var(--z-gold-text);text-decoration:underline;text-underline-offset:3px}
-.ft-social{display:flex;flex-wrap:wrap;gap:8px 14px}
+.sg{margin-top:clamp(56px,7vw,88px);display:flex;flex-direction:column;align-items:center;gap:22px}
+.sg-line{font-size:clamp(18px,1.6vw,21px);font-style:italic;font-weight:350;color:var(--z-fg-2);display:flex;align-items:center;gap:16px}
+.sg-line::before,.sg-line::after{content:"";width:clamp(28px,6vw,64px);height:1px;background:linear-gradient(90deg,transparent,var(--z-gold))}
+.sg-line::after{background:linear-gradient(270deg,transparent,var(--z-gold))}
+[dir="rtl"] .sg-line{font-style:normal}
+.sg-arc{list-style:none;margin:0;padding:0 0 26px;display:flex;align-items:flex-start;gap:clamp(10px,2.4vw,22px)}
+.sg-arc li{transform:translateY(calc(14px - var(--lift)))}
+.sg-link{position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;border:1px solid var(--z-rule-strong);color:var(--z-fg);text-decoration:none;transition:border-color .25s,background-color .25s,transform .25s cubic-bezier(.22,1,.36,1)}
+.sg-link:hover{border-color:var(--z-gold);background:var(--z-gold-wash);transform:translateY(-3px)}
+.sg-link:focus-visible{outline:2px solid var(--z-focus);outline-offset:3px}
+.sg-name{position:absolute;top:calc(100% + 8px);left:50%;transform:translate(-50%,-4px);font-size:12px;line-height:1;white-space:nowrap;color:var(--z-gold-text);opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
+.sg-link:hover .sg-name,.sg-link:focus-visible .sg-name{opacity:1;transform:translate(-50%,0)}
+@media (max-width:420px){.sg-link{width:44px;height:44px}.sg-arc{gap:8px}}
+@media (prefers-reduced-motion:reduce){.sg-link,.sg-name{transition:none}.sg-link:hover{transform:none}}
 .ft-base{margin-top:40px;padding-top:20px;border-top:1px solid var(--z-rule)}
 .ft-wa{position:fixed;bottom:20px;inset-inline-end:20px;z-index:40;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#1f9d55;box-shadow:0 10px 26px -8px rgba(0,0,0,.5)}
 .ft-wa:hover{background:#1a8a4a}
