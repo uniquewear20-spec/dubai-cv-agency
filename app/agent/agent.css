@@ -400,3 +400,12 @@
 @media (prefers-reduced-motion: reduce) {
   .za * { transition: none !important; }
 }
+
+/* Share */
+.za-share { position: relative; display: inline-flex; align-items: center; }
+.za-share .z-btn { gap: 8px; }
+.za-share-msg { position: absolute; top: calc(100% + 8px); inset-inline-end: 0; z-index: 30; font-size: 13px; color: var(--z-fg-2); white-space: nowrap; }
+.za-share-msg:empty { display: none; }
+.za-share-msg:not(:empty) { padding: 8px 12px; border: 1px solid var(--z-rule-strong); border-radius: 10px; background: var(--z-surface); box-shadow: 0 12px 30px -16px rgba(0,0,0,.6); }
+.za-share-url { display: block; margin-top: 6px; min-width: 260px; font-size: 13px; }
+.za-iv-head-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }

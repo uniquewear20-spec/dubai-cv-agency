@@ -21,6 +21,7 @@ import { Speaker, newClock, speechLang } from "@/lib/agent/interview/speech";
 import { LOOK_IDS, type LookId } from "@/lib/agent/interview/looks";
 import { VoiceNote, useLookVoice } from "./voice";
 import type { IvActive, IvPrefs, IvRecord, IvSetup } from "@/lib/agent/interview/types";
+import ShareButton from "../ShareButton";
 
 type Screen = { kind: "setup"; preset?: { role?: string; jobId?: string | null } } | { kind: "room" } | { kind: "report"; id: string; from?: "history" } | { kind: "history" };
 
@@ -49,9 +50,12 @@ function Locked() {
   const pick = (l: LookId) => { stop(); setLook(l); };
   return (
     <div className="za-stack">
-      <header>
-        <h1 className="za-h1">{c.locked.h}</h1>
-        <p className="za-lede">{c.locked.body(pkg.coach)}</p>
+      <header className="za-iv-head">
+        <div>
+          <h1 className="za-h1">{c.locked.h}</h1>
+          <p className="za-lede">{c.locked.body(pkg.coach)}</p>
+        </div>
+        <ShareButton page="coach" lang={lang} />
       </header>
       <section className="za-iv-preview">
         <div className="za-iv-stage za-iv-stage-sm">

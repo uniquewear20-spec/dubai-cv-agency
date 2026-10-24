@@ -20,6 +20,7 @@ import AppsView from "./AppsView";
 import Workspace from "./Workspace";
 import DataView from "./DataView";
 import InterviewView from "./interview/InterviewView";
+import ShareButton from "./ShareButton";
 
 export const EMPTY_PROFILE: Profile = {
   name: "", email: "", phone: "", headline: "", roles: [], countries: [], remoteOk: true, onsiteOk: true,
@@ -303,6 +304,7 @@ export default function AgentApp() {
               <span>{t.app.title.replace(/^Zenith\s*/, "")}</span>
             </Link>
             <div className="za-tools">
+              <ShareButton page={view === "interview" && !openApp ? "coach" : "agent"} lang={lang} compact />
               <div className="za-seg" role="group" aria-label={t.app.language}>
                 {(["en", "fr", "ar"] as Lang[]).map(l => (
                   <button key={l} type="button" aria-pressed={lang === l} onClick={() => setLang(l)} lang={l}>

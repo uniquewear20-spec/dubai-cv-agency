@@ -16,6 +16,7 @@ import { VoiceNote, useLookVoice, voiceKey, voiceLabel, voiceOptions } from "./v
 import { suggestType } from "@/lib/agent/interview/client";
 import { IV_DIFFICULTIES, IV_TYPES } from "@/lib/agent/interview/types";
 import type { IvActive, IvLang, IvPrefs, IvSetup } from "@/lib/agent/interview/types";
+import ShareButton from "../ShareButton";
 
 type SpeechNote = "cloud" | "local" | "downloadable" | "downloading" | "none" | "denied";
 
@@ -147,9 +148,12 @@ export default function Setup({ prefs, onPrefs, preset, onStart, records, onHist
           <h1 className="za-h1">{c.h}</h1>
           <p className="za-lede">{c.lede}</p>
         </div>
-        {records > 0 && (
-          <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={onHistory}><History size={15} aria-hidden /> {c.setup.progressLink(records)}</button>
-        )}
+        <div className="za-iv-head-tools">
+          {records > 0 && (
+            <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={onHistory}><History size={15} aria-hidden /> {c.setup.progressLink(records)}</button>
+          )}
+          <ShareButton page="coach" lang={lang} />
+        </div>
       </header>
 
       {active && (

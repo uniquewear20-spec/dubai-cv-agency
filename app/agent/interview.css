@@ -241,3 +241,4 @@
   .za-iv-overall, .za-iv-criteria, .za-panel, .za-iv-answer-card { break-inside: avoid; background: #fff !important; border-color: #ccc !important; }
   .za-iv-big { color: #7d5f22 !important; }
 }
+.za-iv-head > .za-iv-head-tools { flex: 0 0 auto; }
