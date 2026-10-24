@@ -86,9 +86,9 @@ export const PACKAGES: PackageDef[] = [
         ar: "إعادة كتابة سيرتك الذاتية للوظيفة المستهدفة، متوافقة مع الفرز الآلي أو بتصميم تنفيذي",
       },
       {
-        en: "CV in English, French, Arabic, Spanish and German",
-        fr: "CV en anglais, français, arabe, espagnol et allemand",
-        ar: "سيرة ذاتية بالإنجليزية والفرنسية والعربية والإسبانية والألمانية",
+        en: "CV in any language",
+        fr: "CV dans la langue de votre choix",
+        ar: "سيرة ذاتية بأي لغة",
       },
       COVER_LETTER,
       PHOTO,
@@ -120,9 +120,9 @@ export const PACKAGES: PackageDef[] = [
         ar: "50 طلب توظيف يقدّمها لك وكيل الوظائف Zenith AI",
       },
       {
-        en: "CV in English, French, Arabic, Spanish and German",
-        fr: "CV en anglais, français, arabe, espagnol et allemand",
-        ar: "سيرة ذاتية بالإنجليزية والفرنسية والعربية والإسبانية والألمانية",
+        en: "CV in any language",
+        fr: "CV dans la langue de votre choix",
+        ar: "سيرة ذاتية بأي لغة",
       },
       COVER_LETTER,
       PHOTO,
@@ -159,9 +159,9 @@ export const PACKAGES: PackageDef[] = [
         ar: "100 طلب توظيف يقدّمها لك وكيل الوظائف Zenith AI",
       },
       {
-        en: "CV in two formats, in English, French, Arabic, Spanish and German",
-        fr: "CV en deux formats, en anglais, français, arabe, espagnol et allemand",
-        ar: "سيرة ذاتية بنسختين، بالإنجليزية والفرنسية والعربية والإسبانية والألمانية",
+        en: "CV in two formats, in any language",
+        fr: "CV en deux formats, dans la langue de votre choix",
+        ar: "سيرة ذاتية بنسختين، بأي لغة",
       },
       {
         en: "Full LinkedIn transformation and personal branding",
@@ -209,9 +209,9 @@ export const PACKAGES: PackageDef[] = [
         ar: "طلبات توظيف غير محدودة لمدة 30 يوماً يقدّمها لك وكيل الوظائف Zenith AI",
       },
       {
-        en: "CV in English, French, Arabic, Spanish and German",
-        fr: "CV en anglais, français, arabe, espagnol et allemand",
-        ar: "سيرة ذاتية بالإنجليزية والفرنسية والعربية والإسبانية والألمانية",
+        en: "CV in any language",
+        fr: "CV dans la langue de votre choix",
+        ar: "سيرة ذاتية بأي لغة",
       },
       {
         en: "Personal career-narrative strategy session",

@@ -108,8 +108,16 @@ async function verifyPayPal(orderId: string): Promise<Purchase> {
   if (capture === "REFUNDED" || capture === "PARTIALLY_REFUNDED") throw new AccessError("refunded");
   if (capture === "PENDING") throw new AccessError("pending");
   if (order.status !== "COMPLETED" || capture !== "COMPLETED") throw new AccessError("not-paid");
-  if (!f.tier) throw new AccessError("not-eligible");
-  return { tier: f.tier, ref: f.ref, key: keyOf("paypal", orderId), test: cfg.env === "sandbox" };
+  const test = cfg.env === "sandbox";
+  if (f.tier) return { tier: f.tier, ref: f.ref, key: keyOf("paypal", orderId), test };
+  // Individual services: the AI interview coach for 30 days, or Pro (with the coach) for 10 days,
+  // counted from the day of the order.
+  const paidAt = Date.parse((order as { create_time?: string }).create_time ?? "");
+  const days = Number.isFinite(paidAt) ? (Date.now() - paidAt) / 86_400_000 : Infinity;
+  const items = f.items ?? [];
+  if (items.includes("pro-10") && days <= 10) return { tier: "executive", ref: f.ref, key: keyOf("paypal", orderId), test };
+  if (items.includes("coach-30") && days <= 30) return { tier: "growth", ref: f.ref, key: keyOf("paypal", orderId), test };
+  throw new AccessError("not-eligible");
 }
 
 interface GumroadVerify {

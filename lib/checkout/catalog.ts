@@ -59,7 +59,8 @@ export const SERVICES: Service[] = [
   { id: "apps-5",       name: "Job Applications (5)",              labelKey: "svcApps5",    price: 79,  category: "applications", noteKey: "noteTailored" },
   { id: "apps-10",      name: "Job Applications (10)",             labelKey: "svcApps10",   price: 119, category: "applications", noteKey: "notePopular" },
   { id: "apps-30",      name: "Job Applications (30)",             labelKey: "svcApps30",   price: 199, category: "applications", noteKey: "noteCampaign" },
-  { id: "coaching",     name: "Interview Coaching (60 min)",       labelKey: "svcCoaching", price: 199, category: "coaching" },
+  { id: "coach-30",     name: "AI Interview Coach (30 days)",      labelKey: "svcCoach30",  price: 199, category: "coaching" },
+  { id: "pro-10",       name: "Zenith AI Job Agent Pro (10 days)", labelKey: "svcPro10",    price: 180, category: "applications" },
   { id: "strategy",     name: "Career Strategy Session",           labelKey: "svcStrategy", price: 149, category: "coaching" },
   { id: "branding",     name: "Portfolio / Personal Branding Kit", labelKey: "svcBranding", price: 300, category: "digital" },
 ];

@@ -18,7 +18,8 @@ const NAMES: Record<string, L10n> = {
   "apps-5": { en: "5 job applications submitted for you", fr: "5 candidatures envoyées pour vous", ar: "5 طلبات توظيف نقدّمها نيابةً عنك" },
   "apps-10": { en: "10 job applications submitted for you", fr: "10 candidatures envoyées pour vous", ar: "10 طلبات توظيف نقدّمها نيابةً عنك" },
   "apps-30": { en: "30 job applications submitted for you", fr: "30 candidatures envoyées pour vous", ar: "30 طلب توظيف نقدّمها نيابةً عنك" },
-  coaching: { en: "Interview coaching, 60 minutes", fr: "Coaching entretien, 60 minutes", ar: "تدريب على المقابلات، 60 دقيقة" },
+  "coach-30": { en: "AI interview coach, 30 days", fr: "Coach d'entretien IA, 30 jours", ar: "مدرّب المقابلات بالذكاء الاصطناعي، 30 يوماً" },
+  "pro-10": { en: "Zenith AI job agent Pro, 10 days", fr: "Agent emploi Zenith AI Pro, 10 jours", ar: "وكيل الوظائف Zenith AI Pro لمدة 10 أيام" },
   strategy: { en: "Career strategy session", fr: "Séance de stratégie de carrière", ar: "جلسة استراتيجية مهنية" },
   branding: { en: "Portfolio and personal branding kit", fr: "Kit portfolio et personal branding", ar: "مجموعة الملف التعريفي والعلامة الشخصية" },
 };

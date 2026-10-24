@@ -15,9 +15,10 @@ import Faq from "@/components/site/Faq";
 import SiteFooter, { ContactSection } from "@/components/site/ContactFooter";
 import EnquiryModal from "@/components/site/EnquiryModal";
 import PhotoSection from "@/components/site/PhotoSection";
+import CvGallery from "@/components/site/CvGallery";
 import PortfolioShowcase from "@/components/sections/portfolio-showcase";
 import { CURRENCIES, FALLBACK_RATES, isCurrency, type Currency, type Rates } from "@/lib/currency";
-import { isLang, type Lang } from "@/lib/site";
+import { type Lang } from "@/lib/site";
 
 // Below the fold, so it ships in its own bundle (still rendered on the server).
 const AgentSection = dynamic(() => import("@/components/site/AgentSection"));
@@ -38,8 +39,6 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setDark(document.documentElement.dataset.theme !== "light");
     try {
-      const saved = localStorage.getItem("z-lang");
-      if (isLang(saved)) setLangState(saved);
       const cur = localStorage.getItem("z-currency");
       if (isCurrency(cur)) setCurrency(cur);
     } catch { /* storage blocked: keep defaults */ }
@@ -96,6 +95,7 @@ export default function Home() {
           <div id="top" />
           <Hero lang={lang} />
           <CvShowcase lang={lang} />
+          <CvGallery lang={lang} />
           <Packages lang={lang} currency={currency} rates={rates} onCurrency={chooseCurrency} />
           <Process lang={lang} />
           <PhotoSection lang={lang} />
