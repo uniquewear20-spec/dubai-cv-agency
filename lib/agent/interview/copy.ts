@@ -349,6 +349,8 @@ const EN: IvCopy = {
   star: { S: "Situation", T: "Task", A: "Action", R: "Result" },
   looks: { amal: "Amal", karim: "Karim", lina: "Lina" },
   errors: {
+    "trial-used": "The free interview has already been used on this connection. The coach is included in Career Advantage, Career Automation and Executive Career Suite.",
+    "trial-ended": "Your free interview session has ended. The coach is included in Career Advantage, Career Automation and Executive Career Suite.",
     invalid: "Something in the setup isn't valid. Check it and try again.",
     "not-eligible": "This purchase doesn't include the interview coach.",
     "not-found": "That purchase wasn't found. Check your proof of purchase in the panel below.",
@@ -626,6 +628,8 @@ const FR: IvCopy = {
   star: { S: "Situation", T: "Tâche", A: "Action", R: "Résultat" },
   looks: { amal: "Amal", karim: "Karim", lina: "Lina" },
   errors: {
+    "trial-used": "L'entretien gratuit a déjà été utilisé sur cette connexion. Le coach est inclus dans Avantage Carrière, Carrière Automatisée et Suite Carrière Exécutive.",
+    "trial-ended": "Votre entretien gratuit est terminé. Le coach est inclus dans Avantage Carrière, Carrière Automatisée et Suite Carrière Exécutive.",
     invalid: "Un élément de la préparation n'est pas valide. Vérifiez et réessayez.",
     "not-eligible": "Cet achat n'inclut pas le coach d'entretien.",
     "not-found": "Cet achat est introuvable. Vérifiez votre preuve d'achat ci-dessous.",
@@ -903,6 +907,8 @@ const AR: IvCopy = {
   star: { S: "الموقف", T: "المهمة", A: "الإجراء", R: "النتيجة" },
   looks: { amal: "أمل", karim: "كريم", lina: "لينا" },
   errors: {
+    "trial-used": "استُخدمت المقابلة المجانية من هذا الاتصال من قبل. المدرّب مشمول في الميزة المهنية وأتمتة المسار المهني والباقة التنفيذية المتكاملة.",
+    "trial-ended": "انتهت مقابلتك المجانية. المدرّب مشمول في الميزة المهنية وأتمتة المسار المهني والباقة التنفيذية المتكاملة.",
     invalid: "هناك عنصر غير صالح في الإعداد. تحقق منه وحاول مجدداً.",
     "not-eligible": "لا تشمل عملية الشراء هذه مدرّب المقابلات.",
     "not-found": "لم يُعثر على عملية الشراء. تحقق من إثبات الشراء في الأسفل.",

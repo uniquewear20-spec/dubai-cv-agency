@@ -7,7 +7,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Play, Square } from "lucide-react";
-import { useAgent } from "../context";
+import { AgentContext, useAgent } from "../context";
+import type { Access } from "@/lib/agent/types";
 import AccessPanel from "../AccessPanel";
 import Interviewer from "./Interviewer";
 import Room, { useReducedMotion } from "./Room";
@@ -89,7 +90,22 @@ function Locked() {
   );
 }
 
+const TRIAL: Record<string, { btn: string; note: string }> = {
+  en: { btn: "Try a free 15-minute interview", note: "One free interview with the animated interviewer, about your role. No purchase needed." },
+  fr: { btn: "Essayer un entretien gratuit de 15 minutes", note: "Un entretien gratuit avec le recruteur animé, sur votre poste. Sans achat." },
+  ar: { btn: "جرّب مقابلة مجانية لمدة 15 دقيقة", note: "مقابلة مجانية واحدة مع المحاوِر المتحرك حول وظيفتك، دون شراء." },
+};
+
 export default function InterviewView({ jobId }: { jobId: string | null }) {
+  const agent = useAgent();
+  const [trial, setTrial] = useState<Access | null>(null);
+  if (trial && !agent.access) {
+    return <AgentContext.Provider value={{ ...agent, access: trial }}><CoachScreens jobId={jobId} /></AgentContext.Provider>;
+  }
+  return <CoachScreens jobId={jobId} onTrial={() => setTrial({ kind: "trial", proof: crypto.randomUUID(), plan: null, coach: true } as Access)} />;
+}
+
+function CoachScreens({ jobId, onTrial }: { jobId: string | null; onTrial?: () => void }) {
   const { lang, access, profile } = useAgent();
   const c = IV_COPY[lang];
   const coach = Boolean(access?.coach || access?.plan);
@@ -184,6 +200,12 @@ export default function InterviewView({ jobId }: { jobId: string | null }) {
     return (
       <>
         <Locked />
+        {onTrial && (
+          <div className="za-panel za-iv-trial">
+            <p>{(TRIAL[lang] ?? TRIAL.en).note}</p>
+            <button type="button" className="z-btn z-btn-primary" onClick={onTrial}>{(TRIAL[lang] ?? TRIAL.en).btn}</button>
+          </div>
+        )}
         {records.length > 0 && (
           <p className="za-iv-past"><button type="button" className="za-textlink" onClick={() => setScreen({ kind: "history" })}>{c.setup.progressLink(records.length)}</button></p>
         )}

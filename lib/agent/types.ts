@@ -212,8 +212,8 @@ export type Plan = "career-automation" | "executive-suite";
 export type PackageKey = "foundation" | "growth" | "executive" | "apex";
 
 export interface Access {
-  kind: "paypal" | "gumroad";
-  /** PayPal order id or Gumroad license key. Kept only in this browser. */
+  kind: "paypal" | "gumroad" | "trial";
+  /** PayPal order id or Gumroad license key (or a free trial's session id). Kept only in this browser. */
   proof: string;
   /** Pro plan (AI drafting and sending), or null when the package doesn't include it. */
   plan: Plan | null;

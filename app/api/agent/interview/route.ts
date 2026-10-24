@@ -11,7 +11,7 @@
 import type { NextRequest } from "next/server";
 import { randomUUID } from "node:crypto";
 import { AccessError, verifyCoach } from "@/lib/agent/access";
-import { allow, clientIp } from "@/lib/agent/limits";
+import { allow, clientIp, firstTime, wasMarked } from "@/lib/agent/limits";
 import { fail, ok, readJson } from "@/lib/agent/http";
 import { answerTurn, endEarly, startInterview } from "@/lib/agent/interview/engine";
 import { buildReport } from "@/lib/agent/interview/report";
@@ -33,16 +33,26 @@ export async function POST(req: NextRequest) {
   if (!body || !action) return fail("invalid");
   if (!allow(`iv-${action}`, clientIp(req.headers), LIMITS[action], 10 * 60_000)) return fail("Too many requests. Wait a few minutes and try again.", 429);
 
-  const kind = body.access?.kind === "paypal" || body.access?.kind === "gumroad" ? body.access.kind : null;
+  const kind = body.access?.kind === "paypal" || body.access?.kind === "gumroad" || body.access?.kind === "trial" ? body.access.kind : null;
   const proof = typeof body.access?.proof === "string" ? body.access.proof.trim().slice(0, 64) : "";
   if (!kind || !proof) return fail("not-eligible");
 
-  try {
-    await verifyCoach({ kind, proof });
-  } catch (err) {
-    if (err instanceof AccessError) return fail(err.code);
-    console.error("[agent/interview] access check failed:", err instanceof Error ? err.message : "unknown");
-    return fail("unavailable");
+  if (kind === "trial") {
+    // The free trial: one interview per connection every 30 days, its session open for 20 minutes.
+    if (!/^[a-z0-9-]{16,64}$/i.test(proof)) return fail("invalid");
+    if (action === "start") {
+      if (body.setup && typeof body.setup === "object") (body.setup as { length?: number }).length = 5;
+      if (!(await firstTime(`iv-trial-ip:${clientIp(req.headers)}`, 30 * 86400))) return fail("trial-used");
+      await firstTime(`iv-trial:${proof}`, 20 * 60);
+    } else if (!(await wasMarked(`iv-trial:${proof}`))) return fail("trial-ended");
+  } else {
+    try {
+      await verifyCoach({ kind, proof });
+    } catch (err) {
+      if (err instanceof AccessError) return fail(err.code);
+      console.error("[agent/interview] access check failed:", err instanceof Error ? err.message : "unknown");
+      return fail("unavailable");
+    }
   }
 
   if (action === "start") {

@@ -237,7 +237,7 @@ export function utteranceLang(voice: Pick<SpeechSynthesisVoice, "lang"> | null |
 }
 
 /** Speaking rate per language: a little slower than the engines' default, which sounds rushed in an interview. */
-export const speechRate = (lang: string): number => (/^ar/i.test(lang) ? 1.08 : /^fr/i.test(lang) ? 0.9 : 0.97);
+export const speechRate = (lang: string): number => (/^ar/i.test(lang) ? 1.25 : /^fr/i.test(lang) ? 0.9 : 0.97);
 
 /** Calls back when the list of voices is (re)loaded; returns an unsubscribe function. */
 export function onVoices(cb: () => void): () => void {
