@@ -180,7 +180,7 @@ export const ENQUIRY_CSS = `
 .eq-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px}
 .eq-form{display:grid;gap:8px}
 .eq-form label{font-size:14px;font-weight:500;color:var(--z-fg);margin-top:8px}
-.eq-form input[type=email],.eq-form select,.eq-form textarea{width:100%;min-height:46px;padding:10px 14px;border-radius:12px;border:1px solid var(--z-rule-strong);background:var(--z-bg);color:var(--z-fg);font:inherit;font-size:15px}
+.eq-form input[type=email],.eq-form input[type=text],.eq-form input[type=tel],.eq-form input[type=url],.eq-form select,.eq-form textarea{width:100%;min-height:46px;padding:10px 14px;border-radius:12px;border:1px solid var(--z-rule-strong);background:var(--z-bg);color:var(--z-fg);font:inherit;font-size:15px}
 .eq-form textarea{resize:vertical;min-height:120px;line-height:1.55}
 .eq-form input[type=file]{font-size:14px;color:var(--z-fg-2)}
 .eq-form input:focus,.eq-form select:focus,.eq-form textarea:focus{outline:2px solid var(--z-focus);outline-offset:1px}
