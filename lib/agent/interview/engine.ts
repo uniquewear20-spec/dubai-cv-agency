@@ -13,7 +13,7 @@ import type { BankQ, Track } from "./bank";
 import { CORE } from "./bank-core";
 import { SHIFTS } from "./bank-hospitality";
 import {
-  ACK, WEAK_ACK, CALLBACK, CLOSING, CLOSING_COVERS, CV_Q, END, FOLLOW, GENERIC_KEYS, INTRO, JOB_Q, NEXT, QUOTE, REPEAT, START, TONE,
+  ACK, WEAK_ACK, NOT_ANSWER, CALLBACK, CLOSING, CLOSING_COVERS, CV_Q, END, FOLLOW, GENERIC_KEYS, INTRO, JOB_Q, NEXT, QUOTE, REPEAT, START, TONE,
 } from "./phrases";
 import { bankQuestion, detectTrack, trackById } from "./tracks";
 import type { Competency, FollowReason, IvAnswerInput, IvCandidate, IvHistory, IvLang, IvQuestion, IvSetup, IvState, IvTurn, IvType } from "./types";
@@ -346,6 +346,10 @@ export function chooseFollow(s: IvState): { why: FollowReason; text: string } | 
     const text = pick(options.length ? options : FOLLOW[lang][key], r).replace("{quote}", quote ? QUOTE[lang](quote) : "");
     return { why, text };
   };
+
+  // An answer made of numbers or stray letters isn't an answer: the interviewer says so and asks again.
+  const realWords = (latest.match(/\p{L}{3,}/gu) ?? []).filter(w => /[aeiouyاوي]/iu.test(w)).length;
+  if (realWords < 4 && !asked.has("short")) return { why: "short", text: `${NOT_ANSWER[lang]} ${questionText(q, lang, r)}` };
 
   const candidates: (() => { why: FollowReason; text: string } | null)[] = [];
   const shortLimit = friendly ? 12 : q.kind === "opener" ? 25 : 20;

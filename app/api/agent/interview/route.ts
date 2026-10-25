@@ -13,7 +13,7 @@ import { createHmac, randomUUID } from "node:crypto";
 
 // The free interview's ticket is signed, so every server instance can check it without shared storage.
 const trialSign = (s: string) => createHmac("sha256", process.env.TRIAL_SECRET || process.env.PAYPAL_CLIENT_SECRET || process.env.SMTP_PASS || "").update(`iv-trial:${s}`).digest("base64url").slice(0, 32);
-const TRIAL_MS = 31 * 60_000;
+const TRIAL_MS = 16 * 60_000;
 import { AccessError, verifyCoach } from "@/lib/agent/access";
 import { allow, clientIp, firstTime } from "@/lib/agent/limits";
 import { fail, ok, readJson } from "@/lib/agent/http";

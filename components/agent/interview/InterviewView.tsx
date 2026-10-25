@@ -16,6 +16,7 @@ import Setup, { type StartOptions } from "./Setup";
 import Report from "./Report";
 import HistoryView from "./History";
 import { IV_COPY } from "@/lib/agent/interview/copy";
+import { familyOfTitle } from "@/lib/agent/titles";
 import { delKV, getKV, setKV } from "@/lib/agent/store";
 import { IvError, MAX_RECORDS, candidateOf, defaultPrefs, historyOf, isRecord, ivStart } from "@/lib/agent/interview/client";
 import { Speaker, newClock, speechLang } from "@/lib/agent/interview/speech";
@@ -91,18 +92,18 @@ function Locked() {
 }
 
 const TRIAL: Record<string, { btn: string; note: string; left: (m: string) => string; ready: string; over: string }> = {
-  en: { btn: "Try a free 30-minute interview", note: "One free interview with the animated interviewer, about your role. No purchase needed. The 30 minutes start with the interview and keep running if you pause or visit other pages.", left: m => `Free interview: ${m} left`, ready: "Free interview: 30 minutes, starting with your first question", over: "Your free 30 minutes are over." },
-  fr: { btn: "Essayer un entretien gratuit de 30 minutes", note: "Un entretien gratuit avec le recruteur animé, sur votre poste. Sans achat. Les 30 minutes commencent avec l'entretien et continuent si vous faites une pause ou visitez d'autres pages.", left: m => `Entretien gratuit : il reste ${m}`, ready: "Entretien gratuit : 30 minutes, à partir de la première question", over: "Vos 30 minutes gratuites sont écoulées." },
-  ar: { btn: "جرّب مقابلة مجانية لمدة 30 دقيقة", note: "مقابلة مجانية واحدة مع المحاوِر المتحرك حول وظيفتك، دون شراء. تبدأ الدقائق الثلاثون مع بدء المقابلة وتستمر حتى لو توقفت مؤقتاً أو انتقلت إلى صفحات أخرى.", left: m => `المقابلة المجانية: متبقٍ ${m}`, ready: "المقابلة المجانية: 30 دقيقة تبدأ مع أول سؤال", over: "انتهت دقائقك الثلاثون المجانية." },
+  en: { btn: "Try a free 15-minute interview", note: "One free interview with the animated interviewer, about your role. No purchase needed. The 15 minutes start with the interview and keep running if you pause or visit other pages.", left: m => `Free interview: ${m} left`, ready: "Free interview: 15 minutes, starting with your first question", over: "Your free 15 minutes are over." },
+  fr: { btn: "Essayer un entretien gratuit de 15 minutes", note: "Un entretien gratuit avec le recruteur animé, sur votre poste. Sans achat. Les 15 minutes commencent avec l'entretien et continuent si vous faites une pause ou visitez d'autres pages.", left: m => `Entretien gratuit : il reste ${m}`, ready: "Entretien gratuit : 15 minutes, à partir de la première question", over: "Vos 15 minutes gratuites sont écoulées." },
+  ar: { btn: "جرّب مقابلة مجانية لمدة 15 دقيقة", note: "مقابلة مجانية واحدة مع المحاوِر المتحرك حول وظيفتك، دون شراء. تبدأ الدقائق الخمس عشرة مع بدء المقابلة وتستمر حتى لو توقفت مؤقتاً أو انتقلت إلى صفحات أخرى.", left: m => `المقابلة المجانية: متبقٍ ${m}`, ready: "المقابلة المجانية: 15 دقيقة تبدأ مع أول سؤال", over: "انتهت دقائقك الخمس عشرة المجانية." },
 };
 const TRIAL_KEY = "z-iv-trial";
-const TRIAL_MS = 30 * 60_000;
+const TRIAL_MS = 15 * 60_000;
 interface TrialSave { proof: string; startedAt: number | null }
 function readTrial(): TrialSave | null {
   try {
     const t = JSON.parse(localStorage.getItem(TRIAL_KEY) || "null") as TrialSave | null;
     if (!t?.proof) return null;
-    // A started trial needs its signed ticket and its 30 minutes; otherwise it is over.
+    // A started trial needs its signed ticket and its 15 minutes; otherwise it is over.
     if (t.startedAt && (!t.proof.includes(".") || Date.now() - t.startedAt > TRIAL_MS)) { localStorage.removeItem(TRIAL_KEY); return null; }
     return t;
   } catch { return null; }
@@ -193,7 +194,13 @@ function CoachScreens({ jobId, onTrial }: { jobId: string | null; onTrial?: () =
   const start = useCallback(async (setup: IvSetup, o: StartOptions): Promise<string | null> => {
     if (!access) return c.errors["not-eligible"];
     try {
-      const { state, trial } = await ivStart(access, setup, candidateOf(profile), historyOf(records, setup));
+      // The CV's own facts (and the questions built on them) only when the practised role is the same
+      // kind of job: a model's interview never asks about the candidate's restaurant experience.
+      const fam = familyOfTitle(setup.role)?.id;
+      const own = [...profile.roles, ...(profile.experience ?? []).map(e => e.title)].map(t => familyOfTitle(t)?.id);
+      const related = Boolean(fam && own.includes(fam));
+      const facts = related ? profile : { ...profile, headline: "", skills: [], experience: [], certifications: [], yearsExperience: null };
+      const { state, trial } = await ivStart(access, setup, candidateOf(facts), historyOf(records, setup));
       if (access?.kind === "trial") markTrialStart(trial);
       await saveActive({ state, look: o.look, voiceURI: o.voiceURI, mode: o.mode, camera: o.camera, local: o.local, savedAt: new Date().toISOString() });
       setScreen({ kind: "room" });

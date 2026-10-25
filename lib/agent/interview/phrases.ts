@@ -48,6 +48,13 @@ export const ACK: Record<IvLang, string[]> = {
   ar: ["شكراً لك.", "حسناً، شكراً.", "مفهوم.", "شكراً على إجابتك.", "حسناً."],
 };
 
+/** When the "answer" is only numbers or random letters. */
+export const NOT_ANSWER: Record<IvLang, string> = {
+  en: "I'm sorry, that doesn't answer my question. In an interview, answer in full sentences: what you did, how, and what happened. Let me ask again.",
+  fr: "Désolé, cela ne répond pas à ma question. En entretien, répondez par des phrases complètes : ce que vous avez fait, comment, et le résultat. Je repose la question.",
+  ar: "عذراً، هذا لا يجيب عن سؤالي. في المقابلة، أجب بجمل كاملة: ماذا فعلت وكيف وما النتيجة. سأعيد السؤال.",
+};
+
 /** When the answer stayed short or general: the interviewer says so, as a real one would. */
 export const WEAK_ACK: Record<IvLang, string[]> = {
   en: [
