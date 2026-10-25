@@ -15,6 +15,7 @@ import Faq from "@/components/site/Faq";
 import SiteFooter, { ContactSection } from "@/components/site/ContactFooter";
 import EnquiryModal from "@/components/site/EnquiryModal";
 import PhotoSection from "@/components/site/PhotoSection";
+import WebsiteService from "@/components/site/WebsiteService";
 import CvGallery from "@/components/site/CvGallery";
 import PortfolioShowcase from "@/components/sections/portfolio-showcase";
 import { CURRENCIES, FALLBACK_RATES, isCurrency, type Currency, type Rates } from "@/lib/currency";
@@ -102,6 +103,7 @@ export default function Home() {
           <React.Fragment key={lang}>
             <PortfolioShowcase dark={dark} lang={lang} />
           </React.Fragment>
+          <WebsiteService lang={lang} onEnquire={openEnquiry} />
           <AgentSection lang={lang} />
           <Faq lang={lang} />
           <ContactSection lang={lang} onEnquire={openEnquiry} />
