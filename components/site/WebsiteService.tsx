@@ -1,6 +1,8 @@
 // components/site/WebsiteService.tsx — business websites (from AED 1,000), next to the portfolio
 // websites (from AED 300): the kinds of site we build, and a way to send the project's details.
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import WebsiteBrief from "./WebsiteBrief";
 import { Mail, MessageCircle } from "lucide-react";
 import { pick, waLink, type L10n, type Lang } from "@/lib/site";
 
@@ -11,7 +13,7 @@ const T: Record<string, L10n> = {
     fr: "Au-delà des portfolios personnels (dès 300 AED), nous concevons et réalisons des sites complets pour les entreprises et les marques. Choisissez votre secteur, envoyez-nous les détails : nous répondons avec un devis et un délai.",
     ar: "إلى جانب المواقع التعريفية الشخصية (ابتداءً من 300 درهم)، نصمم وننفّذ مواقع متكاملة للشركات والعلامات التجارية. اختر مجالك وأرسل لنا التفاصيل، وسنرد بعرض سعر وجدول زمني.",
   },
-  pick: { en: "Tap your field to send it on WhatsApp", fr: "Touchez votre secteur pour l'envoyer sur WhatsApp", ar: "اضغط على مجالك لإرساله عبر واتساب" },
+  pick: { en: "Choose your field to fill in the brief", fr: "Choisissez votre secteur pour remplir le brief", ar: "اختر مجالك لتعبئة الملخص" },
   send: { en: "Send your website details", fr: "Envoyer les détails de votre site", ar: "أرسل تفاصيل موقعك" },
   wa: { en: "Discuss on WhatsApp", fr: "En parler sur WhatsApp", ar: "تحدّث معنا عبر واتساب" },
   from: { en: "From AED 1,000", fr: "Dès 1 000 AED", ar: "ابتداءً من 1,000 درهم" },
@@ -32,7 +34,8 @@ const KINDS: L10n[] = [
 ];
 const t = (k: string, l: Lang) => pick(T[k], l);
 
-export default function WebsiteService({ lang, onEnquire }: { lang: Lang; onEnquire: () => void }) {
+export default function WebsiteService({ lang }: { lang: Lang; onEnquire?: () => void }) {
+  const [brief, setBrief] = useState<string | null>(null);
   return (
     <section className="ws" aria-labelledby="ws-title">
       <style href="zenith-websites-service" precedence="medium">{CSS}</style>
@@ -45,7 +48,7 @@ export default function WebsiteService({ lang, onEnquire }: { lang: Lang; onEnqu
               <p className="z-small ws-body">{t("body", lang)}</p>
             </div>
             <div className="ws-ctas">
-              <button type="button" className="z-btn z-btn-primary" onClick={onEnquire}><Mail size={16} aria-hidden="true" /> {t("send", lang)}</button>
+              <button type="button" className="z-btn z-btn-primary" onClick={() => setBrief("Other")}><Mail size={16} aria-hidden="true" /> {t("send", lang)}</button>
               <a className="z-btn z-btn-quiet" href={waLink("Hello Zenith Dubai CV, I'd like a website for my business.")} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden="true" /> {t("wa", lang)}</a>
             </div>
           </div>
@@ -53,12 +56,13 @@ export default function WebsiteService({ lang, onEnquire }: { lang: Lang; onEnqu
           <ul className="ws-kinds">
             {KINDS.map(k => (
               <li key={k.en}>
-                <a href={waLink(`Hello Zenith Dubai CV, I'd like a ${k.en.toLowerCase()} website. Here are my details:`)} target="_blank" rel="noopener noreferrer">{pick(k, lang)}</a>
+                <button type="button" onClick={() => setBrief(k.en)}>{pick(k, lang)}</button>
               </li>
             ))}
           </ul>
         </div>
       </div>
+      <WebsiteBrief key={brief ?? "closed"} open={brief !== null} preset={brief ?? undefined} onClose={() => setBrief(null)} lang={lang} />
     </section>
   );
 }
@@ -75,6 +79,6 @@ const CSS = `
 .ws-ctas .z-btn{gap:8px}
 .ws-pick{margin-top:22px}
 .ws-kinds{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.ws-kinds a{display:inline-block;padding:8px 14px;border:1px solid var(--z-rule-strong);border-radius:999px;font-size:14px;color:var(--z-fg);text-decoration:none;transition:border-color .2s,color .2s}
-.ws-kinds a:hover,.ws-kinds a:focus-visible{border-color:var(--z-gold);color:var(--z-gold-text)}
+.ws-kinds button{font:inherit;background:none;cursor:pointer;display:inline-block;padding:8px 14px;border:1px solid var(--z-rule-strong);border-radius:999px;font-size:14px;color:var(--z-fg);text-decoration:none;transition:border-color .2s,color .2s}
+.ws-kinds button:hover,.ws-kinds button:focus-visible{border-color:var(--z-gold);color:var(--z-gold-text)}
 `;

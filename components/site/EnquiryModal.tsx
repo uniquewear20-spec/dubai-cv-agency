@@ -109,7 +109,7 @@ export default function EnquiryModal({ open, onClose, lang, initialSubject = 0 }
 
   return (
     <div className="eq" role="dialog" aria-modal="true" aria-labelledby={`${uid}-t`} dir={lang === "ar" ? "rtl" : "ltr"}>
-      <style href="zenith-enquiry" precedence="medium">{CSS}</style>
+      <style href="zenith-enquiry" precedence="medium">{ENQUIRY_CSS}</style>
       <div className="eq-backdrop" onClick={onClose} aria-hidden="true" />
       <div className="eq-panel" ref={dialogRef}>
         <div className="eq-head">
@@ -173,7 +173,7 @@ export default function EnquiryModal({ open, onClose, lang, initialSubject = 0 }
   );
 }
 
-const CSS = `
+export const ENQUIRY_CSS = `
 .eq{position:fixed;inset:0;z-index:90;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:5vh 16px}
 .eq-backdrop{position:fixed;inset:0;background:rgba(6,5,4,.78);backdrop-filter:blur(10px)}
 .eq-panel{position:relative;width:100%;max-width:480px;background:var(--z-surface);color:var(--z-fg);border:1px solid var(--z-rule);border-radius:20px;padding:24px;box-shadow:0 40px 100px -30px rgba(0,0,0,.8)}
