@@ -18,6 +18,7 @@ const T = {
   current: L("Current website, if any", "Site actuel, s'il existe", "موقعك الحالي إن وجد"),
   pages: L("Pages you need", "Pages nécessaires", "الصفحات المطلوبة"),
   features: L("Features", "Fonctionnalités", "الخصائص"),
+  styles: L("Style and effects", "Style et effets", "الأسلوب والمؤثرات"),
   langs: L("Website languages", "Langues du site", "لغات الموقع"),
   likes: L("Websites you like, and why", "Sites que vous aimez, et pourquoi", "مواقع تعجبك، ولماذا"),
   budget: L("Budget", "Budget", "الميزانية"),
@@ -39,17 +40,19 @@ const TYPES = ["Real estate", "Beauty & salon", "Restaurant & café", "Hotel & t
 const PAGES = ["Home", "About", "Services", "Gallery / portfolio", "Prices", "Booking", "Shop", "Blog / news", "FAQ", "Contact"];
 const FEATURES = ["Online booking", "Online payments", "WhatsApp button", "Contact form", "Google Maps", "Property or product listings", "Customer accounts", "Newsletter sign-up", "Reviews"];
 const LANGS = ["English", "Arabic", "French", "Other"];
+export const STYLES = ["3D & interactive", "Scroll animations", "Luxury minimal", "Bold & editorial", "Video background", "Dark & elegant", "Arabic & English (RTL)", "E-commerce with payments", "AI chat assistant", "Custom illustrations"];
 const BUDGETS = ["AED 1,000 – 2,000", "AED 2,000 – 5,000", "AED 5,000 – 10,000", "AED 10,000 +", "Not sure yet"];
 const WHEN = ["Within 2 weeks", "Within a month", "In 1 – 3 months", "Flexible"];
 const DOMAINS = ["I have a domain", "I need a domain", "Not sure"];
 
-export default function WebsiteBrief({ open, onClose, lang, preset }: { open: boolean; onClose: () => void; lang: Lang; preset?: string }) {
+export default function WebsiteBrief({ open, onClose, lang, preset, style }: { open: boolean; onClose: () => void; lang: Lang; preset?: string; style?: string }) {
   const uid = useId();
   const t = (k: keyof typeof T) => pick(T[k], lang);
   const [f, setF] = useState({ email: "", business: "", phone: "", type: preset ?? TYPES[0], current: "", likes: "", budget: BUDGETS[0], when: WHEN[3], domain: DOMAINS[2], about: "" });
   const [pages, setPages] = useState<string[]>(["Home", "About", "Services", "Contact"]);
   const [features, setFeatures] = useState<string[]>(["WhatsApp button", "Contact form"]);
   const [langs, setLangs] = useState<string[]>(["English"]);
+  const [styles, setStyles] = useState<string[]>(style ? [style] : []);
   const [logo, setLogo] = useState<File | null>(null);
   const [doc, setDoc] = useState<File | null>(null);
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -75,7 +78,7 @@ export default function WebsiteBrief({ open, onClose, lang, preset }: { open: bo
     setState("sending");
     const message = [
       `Business: ${f.business || "-"}`, `WhatsApp: ${f.phone || "-"}`, `Type of website: ${f.type}`, `Current website: ${f.current || "-"}`,
-      `Pages: ${pages.join(", ") || "-"}`, `Features: ${features.join(", ") || "-"}`, `Languages: ${langs.join(", ") || "-"}`,
+      `Pages: ${pages.join(", ") || "-"}`, `Features: ${features.join(", ") || "-"}`, `Style and effects: ${styles.join(", ") || "-"}`, `Languages: ${langs.join(", ") || "-"}`,
       `Websites they like: ${f.likes || "-"}`, `Budget: ${f.budget}`, `Timing: ${f.when}`, `Domain: ${f.domain}`, "", `About the project:`, f.about || "-",
     ].join("\n").slice(0, 4900);
     const fd = new FormData();
@@ -136,6 +139,7 @@ export default function WebsiteBrief({ open, onClose, lang, preset }: { open: bo
             <input id={`${uid}-c`} type="url" dir="ltr" placeholder="https://" maxLength={200} {...field("current")} />
             <p className="wb-l">{t("pages")}</p><Checks items={PAGES} value={pages} set={setPages} />
             <p className="wb-l">{t("features")}</p><Checks items={FEATURES} value={features} set={setFeatures} />
+            <p className="wb-l">{t("styles")}</p><Checks items={STYLES} value={styles} set={setStyles} />
             <p className="wb-l">{t("langs")}</p><Checks items={LANGS} value={langs} set={setLangs} />
             <label htmlFor={`${uid}-li`}>{t("likes")}</label>
             <textarea id={`${uid}-li`} rows={2} maxLength={600} {...field("likes")} />

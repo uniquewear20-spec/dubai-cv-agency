@@ -2,7 +2,7 @@
 // websites (from AED 300): the kinds of site we build, and a way to send the project's details.
 "use client";
 import React, { useState } from "react";
-import WebsiteBrief from "./WebsiteBrief";
+import WebsiteBrief, { STYLES } from "./WebsiteBrief";
 import { Mail, MessageCircle } from "lucide-react";
 import { pick, waLink, type L10n, type Lang } from "@/lib/site";
 
@@ -17,6 +17,7 @@ const T: Record<string, L10n> = {
   send: { en: "Send your website details", fr: "Envoyer les détails de votre site", ar: "أرسل تفاصيل موقعك" },
   wa: { en: "Discuss on WhatsApp", fr: "En parler sur WhatsApp", ar: "تحدّث معنا عبر واتساب" },
   from: { en: "From AED 1,000", fr: "Dès 1 000 AED", ar: "ابتداءً من 1,000 درهم" },
+  adv: { en: "Advanced styles: 3D, motion and more", fr: "Styles avancés : 3D, animation et plus", ar: "أساليب متقدمة: ثلاثي الأبعاد والحركة والمزيد" },
 };
 const KINDS: L10n[] = [
   { en: "Real estate", fr: "Immobilier", ar: "العقارات" },
@@ -36,6 +37,7 @@ const t = (k: string, l: Lang) => pick(T[k], l);
 
 export default function WebsiteService({ lang }: { lang: Lang; onEnquire?: () => void }) {
   const [brief, setBrief] = useState<string | null>(null);
+  const [style, setStyle] = useState<string | undefined>(undefined);
   return (
     <section className="ws" aria-labelledby="ws-title">
       <style href="zenith-websites-service" precedence="medium">{CSS}</style>
@@ -56,13 +58,19 @@ export default function WebsiteService({ lang }: { lang: Lang; onEnquire?: () =>
           <ul className="ws-kinds">
             {KINDS.map(k => (
               <li key={k.en}>
-                <button type="button" onClick={() => setBrief(k.en)}>{pick(k, lang)}</button>
+                <button type="button" onClick={() => { setStyle(undefined); setBrief(k.en); }}>{pick(k, lang)}</button>
               </li>
+            ))}
+          </ul>
+          <p className="z-micro ws-pick">{t("adv", lang)}</p>
+          <ul className="ws-kinds ws-adv">
+            {STYLES.map(s => (
+              <li key={s}><button type="button" onClick={() => { setStyle(s); setBrief("Other"); }}>{s}</button></li>
             ))}
           </ul>
         </div>
       </div>
-      <WebsiteBrief key={brief ?? "closed"} open={brief !== null} preset={brief ?? undefined} onClose={() => setBrief(null)} lang={lang} />
+      <WebsiteBrief key={`${brief ?? "closed"}-${style ?? ""}`} open={brief !== null} preset={brief ?? undefined} style={style} onClose={() => setBrief(null)} lang={lang} />
     </section>
   );
 }
@@ -79,6 +87,7 @@ const CSS = `
 .ws-ctas .z-btn{gap:8px}
 .ws-pick{margin-top:22px}
 .ws-kinds{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ws-adv button{border-style:dashed}
 .ws-kinds button{font:inherit;background:none;cursor:pointer;display:inline-block;padding:8px 14px;border:1px solid var(--z-rule-strong);border-radius:999px;font-size:14px;color:var(--z-fg);text-decoration:none;transition:border-color .2s,color .2s}
 .ws-kinds button:hover,.ws-kinds button:focus-visible{border-color:var(--z-gold);color:var(--z-gold-text)}
 `;
