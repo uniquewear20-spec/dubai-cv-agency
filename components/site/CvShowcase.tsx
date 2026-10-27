@@ -11,20 +11,45 @@ import { CV_CONCEPTS, CV_FILTERS, FIELD_LABELS, type CvConcept, type CvField } f
 import { pick, type L10n, type Lang } from "@/lib/site";
 import { A4_H, A4_W, CvPage, ScaledCv } from "./CvDocument";
 
-type Filter = "all" | CvField | "languages";
+type Filter = "all" | "design" | "ats" | CvField | "languages";
+
+// Every design in one showcase: the written concepts (HTML pages) mixed with the sample sheets
+// (images). Sheets 1, 5, 9, 26 and 27 are the ATS-friendly layouts.
+const ATS_SHEETS = [1, 5, 9, 26, 27];
+type Item =
+  | { id: string; kind: "concept"; concept: CvConcept }
+  | { id: string; kind: "sheet"; n: number; ats: boolean };
+const SHEETS: Item[] = Array.from({ length: 33 }, (_, i) => i + 1).map(n => ({ id: `sheet-${n}`, kind: "sheet" as const, n, ats: ATS_SHEETS.includes(n) }));
+const ITEMS: Item[] = (() => {
+  const out: Item[] = [];
+  let ci = 0;
+  const concept = () => { const c = CV_CONCEPTS[ci++]; out.push({ id: c.id, kind: "concept", concept: c }); };
+  concept();
+  SHEETS.forEach((sh, i) => { out.push(sh); if ((i + 1) % 3 === 0 && ci < CV_CONCEPTS.length) concept(); });
+  while (ci < CV_CONCEPTS.length) concept();
+  return out;
+})();
+const FILTERS: Filter[] = ["all", "design", "ats", ...CV_FILTERS.filter(f => f !== "all")];
+const itemName = (it: Item, l: Lang) => (it.kind === "concept" ? it.concept.styleName : `${t("sample", l)} ${it.n}`);
+const itemField = (it: Item, l: Lang) => (it.kind === "concept" ? pick(FIELD_LABELS[it.concept.field], l) : it.ats ? t("ats", l) : t("design", l));
 
 const T: Record<string, L10n> = {
   h2: { en: "A CV designed around the role you want.", fr: "Un CV conçu pour le poste que vous visez.", ar: "سيرة ذاتية مصمّمة حول الوظيفة التي تريدها." },
   lede: {
-    en: "Nine examples show how we shape structure, typography and wording for different fields and career stages. Your CV is written from your own experience, in the design that suits it.",
-    fr: "Neuf exemples montrent comment nous adaptons la structure, la typographie et le ton à chaque secteur et à chaque étape de carrière. Votre CV est rédigé à partir de votre propre parcours, dans le design qui lui convient.",
-    ar: "تسعة أمثلة توضّح كيف نصوغ البنية والخط والأسلوب لكل مجال ومرحلة مهنية. تُكتب سيرتك من خبرتك الفعلية، بالتصميم الذي يناسبها.",
+    en: "Design CVs and ATS-friendly CVs in one place. A design CV stands out when a person reads it; an ATS-friendly CV is read cleanly by online application systems. Your CV is written from your own experience, in the layout your applications need.",
+    fr: "CV design et CV compatibles ATS au même endroit. Un CV design se remarque à la lecture ; un CV compatible ATS est lu sans erreur par les logiciels de candidature. Votre CV est rédigé à partir de votre parcours, dans la mise en page dont vos candidatures ont besoin.",
+    ar: "سير ذاتية بتصميم مميز وأخرى متوافقة مع أنظمة الفرز في مكان واحد. السيرة المصمّمة تلفت انتباه القارئ، والمتوافقة مع أنظمة الفرز تُقرأ بدقة في التقديم الإلكتروني. تُكتب سيرتك من خبرتك الفعلية، بالتخطيط الذي تحتاجه طلباتك.",
   },
   fictional: {
-    en: "Fictional examples: the people, employers and figures are invented.",
-    fr: "Exemples fictifs : les personnes, employeurs et chiffres sont inventés.",
-    ar: "أمثلة افتراضية: الأشخاص وجهات العمل والأرقام غير حقيقية.",
+    en: "Sample layouts: the people, employers and figures are placeholders or invented.",
+    fr: "Modèles de mise en page : les personnes, employeurs et chiffres sont fictifs.",
+    ar: "نماذج تصميم: الأشخاص وجهات العمل والأرقام افتراضية أو غير حقيقية.",
   },
+  design: { en: "Design CVs", fr: "CV design", ar: "سير بتصميم مميز" },
+  ats: { en: "ATS-friendly CVs", fr: "CV compatibles ATS", ar: "سير متوافقة مع أنظمة الفرز" },
+  sample: { en: "Sample CV", fr: "Modèle de CV", ar: "نموذج سيرة" },
+  sheetDesign: { en: "A design layout that stands out when a person reads it: typography, colour and structure chosen to be remembered.", fr: "Une mise en page design qui se remarque à la lecture : typographie, couleur et structure pensées pour marquer.", ar: "تخطيط مصمّم يلفت انتباه القارئ: خطوط وألوان وبنية تُترك أثراً." },
+  sheetAts: { en: "A clean single-flow layout that online application systems read without errors: standard headings, no tables or graphics that confuse them.", fr: "Une mise en page sobre que les logiciels de candidature lisent sans erreur : titres standards, ni tableaux ni éléments graphiques qui les perturbent.", ar: "تخطيط بسيط تقرؤه أنظمة التقديم الإلكتروني بدقة: عناوين معتادة بلا جداول أو رسومات تربكها." },
   filterLabel: { en: "Filter by field", fr: "Filtrer par secteur", ar: "التصفية حسب المجال" },
   all: { en: "All", fr: "Tous", ar: "الكل" },
   languages: { en: "French and Arabic", fr: "Français et arabe", ar: "بالفرنسية والعربية" },
@@ -53,21 +78,32 @@ const t = (k: string, l: Lang) => pick(T[k], l);
 
 function filterLabel(f: Filter, l: Lang): string {
   if (f === "all") return t("all", l);
+  if (f === "design") return t("design", l);
+  if (f === "ats") return t("ats", l);
   if (f === "languages") return t("languages", l);
   return pick(FIELD_LABELS[f], l);
 }
 
-function matches(c: CvConcept, f: Filter): boolean {
+function matches(it: Item, f: Filter): boolean {
   if (f === "all") return true;
-  if (f === "languages") return c.docLang !== "en";
-  return c.field === f;
+  if (f === "design") return it.kind === "concept" || !it.ats;
+  if (f === "ats") return it.kind === "sheet" && it.ats;
+  if (it.kind !== "concept") return false;
+  if (f === "languages") return it.concept.docLang !== "en";
+  return it.concept.field === f;
 }
+
+/** A sheet's image, at the size the stage or the reader needs. */
+const Sheet = ({ n, size, className }: { n: number; size: 600 | 1400; className?: string }) => (
+  // eslint-disable-next-line @next/next/no-img-element
+  <img className={className} src={`/cv-samples/cv${n}-${size}.webp`} alt="" width={size} height={size === 600 ? 849 : 1981} loading={size === 600 ? "lazy" : undefined} decoding="async" draggable={false} style={{ display: "block", width: "100%", height: "auto" }} />
+);
 
 export default function CvShowcase({ lang }: { lang: Lang }) {
   const reduce = useReducedMotion();
   const [filter, setFilter] = useState<Filter>("all");
-  const list = useMemo(() => CV_CONCEPTS.filter(c => matches(c, filter)), [filter]);
-  const [activeId, setActiveId] = useState(CV_CONCEPTS[0].id);
+  const list = useMemo(() => ITEMS.filter(c => matches(c, filter)), [filter]);
+  const [activeId, setActiveId] = useState(ITEMS[0].id);
   const [direction, setDirection] = useState(1);
   const [reader, setReader] = useState(false);
   const stripRef = useRef<HTMLDivElement>(null);
@@ -130,10 +166,10 @@ export default function CvShowcase({ lang }: { lang: Lang }) {
         </div>
 
         <div className="cvs-filters" role="group" aria-label={t("filterLabel", lang)}>
-          {CV_FILTERS.map(f => (
+          {FILTERS.map(f => (
             <button key={f} type="button" className="z-chip" aria-pressed={filter === f} onClick={() => setFilter(f)}>
               {filterLabel(f, lang)}
-              <span className="cvs-count" aria-hidden="true">{CV_CONCEPTS.filter(c => matches(c, f)).length}</span>
+              <span className="cvs-count" aria-hidden="true">{ITEMS.filter(c => matches(c, f)).length}</span>
             </button>
           ))}
         </div>
@@ -165,11 +201,11 @@ export default function CvShowcase({ lang }: { lang: Lang }) {
                   }}
                   style={{ touchAction: "pan-y" }}
                 >
-                  <ScaledCv concept={active} decorative maxScale={0.95} />
+                  {active.kind === "concept" ? <ScaledCv concept={active.concept} decorative maxScale={0.95} /> : <Sheet n={active.n} size={1400} />}
                   <button
                     type="button"
                     className="cvs-open"
-                    aria-label={`${t("read", lang)}: ${active.styleName}`}
+                    aria-label={`${t("read", lang)}: ${itemName(active, lang)}`}
                     onClick={() => { if (!dragged.current) setReader(true); }}
                   >
                     <span className="cvs-open-icon"><Maximize2 size={16} strokeWidth={1.75} aria-hidden="true" /></span>
@@ -182,7 +218,7 @@ export default function CvShowcase({ lang }: { lang: Lang }) {
                 {isAr ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
               </button>
               <p className="z-small" aria-live="polite">
-                <span className="z-sr">{active.styleName}, </span>
+                <span className="z-sr">{itemName(active, lang)}, </span>
                 {index + 1} {t("of", lang)} {list.length}
               </p>
               <button type="button" className="cvs-arrow" onClick={() => go(1)} aria-label={t("next", lang)} disabled={list.length < 2}>
@@ -202,16 +238,28 @@ export default function CvShowcase({ lang }: { lang: Lang }) {
               transition={{ duration: 0.28 }}
             >
               <div className="cvs-tags">
-                <span className="z-tag z-tag-gold">{pick(FIELD_LABELS[active.field], lang)}</span>
-                <span className="z-tag">{pick(active.level, lang)}</span>
-                {active.docLang !== "en" && <span className="z-tag">{t("docLang", lang)}: {pick(DOC_LANG[active.docLang], lang)}</span>}
+                <span className="z-tag z-tag-gold">{itemField(active, lang)}</span>
+                {active.kind === "concept" ? (
+                  <>
+                    <span className="z-tag">{pick(active.concept.level, lang)}</span>
+                    {active.concept.docLang !== "en" && <span className="z-tag">{t("docLang", lang)}: {pick(DOC_LANG[active.concept.docLang], lang)}</span>}
+                  </>
+                ) : (
+                  <span className="z-tag">{t("sample", lang)}</span>
+                )}
               </div>
-              <h3 className="cvs-style z-serif">{active.styleName}</h3>
-              <dl className="cvs-dl">
-                <div><dt>{t("approach", lang)}</dt><dd>{pick(active.approach, lang)}</dd></div>
-                <div><dt>{t("bestFor", lang)}</dt><dd>{pick(active.positioning, lang)}</dd></div>
-                <div><dt>{t("online", lang)}</dt><dd>{pick(active.ats, lang)}</dd></div>
-              </dl>
+              <h3 className="cvs-style z-serif">{itemName(active, lang)}</h3>
+              {active.kind === "concept" ? (
+                <dl className="cvs-dl">
+                  <div><dt>{t("approach", lang)}</dt><dd>{pick(active.concept.approach, lang)}</dd></div>
+                  <div><dt>{t("bestFor", lang)}</dt><dd>{pick(active.concept.positioning, lang)}</dd></div>
+                  <div><dt>{t("online", lang)}</dt><dd>{pick(active.concept.ats, lang)}</dd></div>
+                </dl>
+              ) : (
+                <dl className="cvs-dl">
+                  <div><dt>{active.ats ? t("ats", lang) : t("design", lang)}</dt><dd>{t(active.ats ? "sheetAts" : "sheetDesign", lang)}</dd></div>
+                </dl>
+              )}
               <div className="cvs-actions">
                 <button type="button" className="z-btn z-btn-quiet" onClick={() => setReader(true)}>{t("read", lang)}</button>
                 <a href="#packages" className="z-btn z-btn-primary">{t("packages", lang)}</a>
@@ -226,7 +274,7 @@ export default function CvShowcase({ lang }: { lang: Lang }) {
             const on = c.id === active.id;
             return (
               <div key={c.id} className="cvs-thumb" data-on={on || undefined}>
-                <div className="cvs-thumb-page"><ScaledCv concept={c} decorative /></div>
+                <div className="cvs-thumb-page">{c.kind === "concept" ? <ScaledCv concept={c.concept} decorative /> : <Sheet n={c.n} size={600} />}</div>
                 <button
                   type="button"
                   data-id={c.id}
@@ -235,8 +283,8 @@ export default function CvShowcase({ lang }: { lang: Lang }) {
                   tabIndex={on ? 0 : -1}
                   onClick={() => choose(c.id)}
                 >
-                  <span className="cvs-thumb-name">{c.styleName}</span>
-                  <span className="cvs-thumb-field">{pick(FIELD_LABELS[c.field], lang)}</span>
+                  <span className="cvs-thumb-name">{itemName(c, lang)}</span>
+                  <span className="cvs-thumb-field">{itemField(c, lang)}</span>
                 </button>
               </div>
             );
@@ -244,13 +292,13 @@ export default function CvShowcase({ lang }: { lang: Lang }) {
         </div>
       </div>
 
-      {reader && <Reader concept={active} lang={lang} onClose={() => setReader(false)} onStep={go} canStep={list.length > 1} />}
+      {reader && <Reader item={active} lang={lang} onClose={() => setReader(false)} onStep={go} canStep={list.length > 1} />}
     </section>
   );
 }
 
 // ── Full-page reader ─────────────────────────────────────────────────────────
-function Reader({ concept, lang, onClose, onStep, canStep }: { concept: CvConcept; lang: Lang; onClose: () => void; onStep: (d: number) => void; canStep: boolean }) {
+function Reader({ item, lang, onClose, onStep, canStep }: { item: Item; lang: Lang; onClose: () => void; onStep: (d: number) => void; canStep: boolean }) {
   const [actual, setActual] = useState(false);
   const [fit, setFit] = useState(1);
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -298,8 +346,8 @@ function Reader({ concept, lang, onClose, onStep, canStep }: { concept: CvConcep
     <div className="cvr" role="dialog" aria-modal="true" aria-labelledby="cvr-title" ref={dialogRef} dir={isAr ? "rtl" : "ltr"}>
       <div className="cvr-bar">
         <div className="cvr-title">
-          <h3 id="cvr-title" className="z-serif">{concept.styleName}</h3>
-          <span className="z-micro">{pick(FIELD_LABELS[concept.field], lang)} · {pick(concept.level, lang)}</span>
+          <h3 id="cvr-title" className="z-serif">{itemName(item, lang)}</h3>
+          <span className="z-micro">{itemField(item, lang)}{item.kind === "concept" ? ` · ${pick(item.concept.level, lang)}` : ""}</span>
         </div>
         <div className="cvr-tools">
           {canStep && (
@@ -316,9 +364,13 @@ function Reader({ concept, lang, onClose, onStep, canStep }: { concept: CvConcep
       </div>
       <div className="cvr-view" ref={viewport}>
         <div className="cvr-page" style={{ width: A4_W * scale, height: A4_H * scale }}>
-          <div style={{ width: A4_W, height: A4_H, transform: `scale(${scale})`, transformOrigin: "top left" }}>
-            <CvPage concept={concept} id="cvr-doc" />
-          </div>
+          {item.kind === "concept" ? (
+            <div style={{ width: A4_W, height: A4_H, transform: `scale(${scale})`, transformOrigin: "top left" }}>
+              <CvPage concept={item.concept} id="cvr-doc" />
+            </div>
+          ) : (
+            <Sheet n={item.n} size={1400} />
+          )}
         </div>
         <p className="z-micro cvr-note">{t("fictional", lang)}</p>
       </div>

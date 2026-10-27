@@ -16,7 +16,6 @@ import SiteFooter, { ContactSection } from "@/components/site/ContactFooter";
 import EnquiryModal from "@/components/site/EnquiryModal";
 import PhotoSection from "@/components/site/PhotoSection";
 import WebsiteService from "@/components/site/WebsiteService";
-import CvGallery from "@/components/site/CvGallery";
 import PortfolioShowcase from "@/components/sections/portfolio-showcase";
 import { CURRENCIES, FALLBACK_RATES, isCurrency, type Currency, type Rates } from "@/lib/currency";
 import { type Lang } from "@/lib/site";
@@ -96,7 +95,6 @@ export default function Home() {
           <div id="top" />
           <Hero lang={lang} />
           <CvShowcase lang={lang} />
-          <CvGallery lang={lang} />
           <Packages lang={lang} currency={currency} rates={rates} onCurrency={chooseCurrency} />
           <Process lang={lang} />
           <PhotoSection lang={lang} />
