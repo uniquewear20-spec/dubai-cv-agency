@@ -17,6 +17,8 @@ const NAMES: Record<string, L10n> = {
   linkedin: { en: "LinkedIn profile makeover", fr: "Refonte du profil LinkedIn", ar: "تجديد ملف لينكدإن" },
   "coach-30": { en: "AI interview coach, 30 days", fr: "Coach d'entretien IA, 30 jours", ar: "مدرّب المقابلات بالذكاء الاصطناعي، 30 يوماً" },
   "pro-30": { en: "Zenith AI job agent Pro, one month", fr: "Agent emploi Zenith AI Pro, un mois", ar: "وكيل الوظائف Zenith AI Pro لمدة شهر" },
+  "linkedin-full": { en: "Full LinkedIn transformation and personal branding", fr: "Transformation complète de LinkedIn et personal branding", ar: "تحويل كامل للينكدإن وبناء العلامة الشخصية" },
+  narrative: { en: "Personal career-narrative strategy session", fr: "Séance de stratégie sur votre récit de carrière", ar: "جلسة استراتيجية شخصية لسرد مسيرتك المهنية" },
   photo: { en: "AI profile photo enhancement for LinkedIn and your CV", fr: "Amélioration de photo de profil par IA pour LinkedIn et votre CV", ar: "تحسين صورة الملف الشخصي بالذكاء الاصطناعي للينكدإن وسيرتك" },
   ebook: { en: "The Global Horizon: The Executive Playbook (ebook)", fr: "The Global Horizon : The Executive Playbook (ebook)", ar: "The Global Horizon: The Executive Playbook (كتاب إلكتروني)" },
   strategy: { en: "Career strategy session", fr: "Séance de stratégie de carrière", ar: "جلسة استراتيجية مهنية" },
