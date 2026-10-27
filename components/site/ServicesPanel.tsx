@@ -53,11 +53,11 @@ const T: Record<string, L10n> = {
 };
 const t = (k: string, l: Lang) => pick(T[k], l);
 
-function money(aed: number, currency: Currency, rates: Rates, lang: Lang): string {
+function money(aed: number, currency: Currency, rates: Rates, lang: Lang, short = false): string {
   if (currency === "AED") return `AED ${formatAmount(aed)}`;
   if (currency === "USD") return `US$${aedToUsd(aed)}`;
   const sym = CURRENCIES.find(c => c.code === currency)?.symbol ?? currency;
-  return `${t("approx", lang)} ${sym} ${formatAmount(convertAed(aed, currency, rates))}`;
+  return `${short ? "≈" : t("approx", lang)} ${sym} ${formatAmount(convertAed(aed, currency, rates))}`;
 }
 
 export default function ServicesPanel({ lang, currency, rates }: { lang: Lang; currency: Currency; rates: Rates }) {
@@ -108,7 +108,7 @@ export default function ServicesPanel({ lang, currency, rates }: { lang: Lang; c
                   <label key={s.id} className="sv-item">
                     <input type="checkbox" checked={selected.includes(s.id)} onChange={() => toggle(s.id)} />
                     <span className="sv-name">{pick(NAMES[s.id] ?? { en: s.name, fr: s.name, ar: s.name }, lang)}</span>
-                    <span className="sv-price" dir="ltr">AED {s.price}</span>
+                    <span className="sv-price" dir="ltr">{money(s.price, currency, rates, lang, true)}</span>
                   </label>
                 ))}
               </fieldset>
@@ -119,8 +119,8 @@ export default function ServicesPanel({ lang, currency, rates }: { lang: Lang; c
               <p className="z-small">{t("none", lang)}</p>
             ) : (
               <dl>
-                <div><dt>{t("subtotal", lang)}</dt><dd dir="ltr">AED {formatAmount(quote.subtotal)}</dd></div>
-                {discount > 0 && <div><dt>{t("discount", lang)} ({Math.round(discount * 100)}%)</dt><dd dir="ltr">− AED {formatAmount(quote.savings)}</dd></div>}
+                <div><dt>{t("subtotal", lang)}</dt><dd dir="ltr">{money(quote.subtotal, currency, rates, lang)}</dd></div>
+                {discount > 0 && <div><dt>{t("discount", lang)} ({Math.round(discount * 100)}%)</dt><dd dir="ltr">− {money(quote.savings, currency, rates, lang)}</dd></div>}
                 <div className="sv-grand"><dt>{t("total", lang)}</dt><dd dir="ltr">{money(quote.total, currency, rates, lang)}</dd></div>
                 <div><dt className="z-micro">{t("charged", lang)}<span dir="ltr">{aedToUsd(quote.total)}</span></dt></div>
               </dl>
