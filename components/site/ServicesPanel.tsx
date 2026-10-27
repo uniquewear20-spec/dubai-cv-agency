@@ -25,10 +25,10 @@ const NAMES: Record<string, L10n> = {
   branding: { en: "Portfolio and personal branding kit", fr: "Kit portfolio et personal branding", ar: "مجموعة الملف التعريفي والعلامة الشخصية" },
 };
 const CATS: Record<Service["category"], L10n> = {
-  document: { en: "Documents", fr: "Documents", ar: "الوثائق" },
+  document: { en: "Documents and portfolio", fr: "Documents et portfolio", ar: "الوثائق والملف التعريفي" },
   digital: { en: "Online presence", fr: "Présence en ligne", ar: "الحضور الرقمي" },
-  applications: { en: "Applications", fr: "Candidatures", ar: "طلبات التوظيف" },
-  coaching: { en: "Coaching", fr: "Coaching", ar: "التدريب" },
+  applications: { en: "AI tools", fr: "Outils IA", ar: "أدوات الذكاء الاصطناعي" },
+  coaching: { en: "Coaching and guidance", fr: "Coaching et conseils", ar: "التدريب والإرشاد" },
 };
 const T: Record<string, L10n> = {
   toggle: { en: "Need just one service? Build your own selection", fr: "Besoin d'un seul service ? Composez votre sélection", ar: "تحتاج خدمة واحدة فقط؟ اختر ما يناسبك" },
