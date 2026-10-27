@@ -93,7 +93,7 @@ export default function Home() {
         <SiteHeader lang={lang} setLang={setLang} dark={dark} toggleTheme={toggleTheme} />
         <main id="main" tabIndex={-1}>
           <div id="top" />
-          <Hero lang={lang} />
+          <Hero lang={lang} currency={currency} rates={rates} />
           <CvShowcase lang={lang} />
           <Packages lang={lang} currency={currency} rates={rates} onCurrency={chooseCurrency} />
           <Process lang={lang} />
@@ -101,7 +101,7 @@ export default function Home() {
           <React.Fragment key={lang}>
             <PortfolioShowcase dark={dark} lang={lang} />
           </React.Fragment>
-          <WebsiteService lang={lang} onEnquire={openEnquiry} />
+          <WebsiteService lang={lang} onEnquire={openEnquiry} currency={currency} rates={rates} />
           <AgentSection lang={lang} />
           <Faq lang={lang} />
           <ContactSection lang={lang} onEnquire={openEnquiry} />

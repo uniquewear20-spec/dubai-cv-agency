@@ -42,3 +42,10 @@ export const formatAmount = (n: number): string => n.toLocaleString("en-US");
 export function priceIn(aed: number, currency: Currency, rates: Rates): { value: string; symbol: string } {
   return { value: formatAmount(convertAed(aed, currency, rates)), symbol: currencySymbol(currency) };
 }
+
+/** A price for running text in the chosen currency, e.g. "AED 1,000", "US$272" or "approx. € 920". */
+export function priceText(aed: number, currency: Currency, rates: Rates, approx = "approx."): string {
+  if (currency === "AED") return `AED ${formatAmount(aed)}`;
+  if (currency === "USD") return `US$${formatAmount(Math.round(aed / 3.6725))}`;
+  return `${approx} ${currencySymbol(currency)} ${formatAmount(convertAed(aed, currency, rates))}`;
+}

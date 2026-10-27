@@ -2,6 +2,7 @@
 // components/site/WebsiteBrief.tsx — the brief for a business website: what the site is for, its
 // pages and features, languages, examples, budget and timing, plus the logo and a brand document.
 // Sent through the site's contact form (/api/contact), so it reaches info@zenithdubaicv.com.
+import { FALLBACK_RATES, priceText, type Currency, type Rates } from "@/lib/currency";
 import React, { useEffect, useId, useState } from "react";
 import { AlertCircle, CheckCircle, Loader2, X } from "lucide-react";
 import { CONTACT_EMAIL, pick, type L10n, type Lang } from "@/lib/site";
@@ -41,11 +42,18 @@ const PAGES = ["Home", "About", "Services", "Gallery / portfolio", "Prices", "Bo
 const FEATURES = ["Online booking", "Online payments", "WhatsApp button", "Contact form", "Google Maps", "Property or product listings", "Customer accounts", "Newsletter sign-up", "Reviews"];
 const LANGS = ["English", "Arabic", "French", "Other"];
 export const STYLES = ["3D & interactive", "Scroll animations", "Luxury minimal", "Bold & editorial", "Video background", "Dark & elegant", "Arabic & English (RTL)", "E-commerce with payments", "AI chat assistant", "Custom illustrations"];
+const RANGES: [number, number][] = [[1000, 2000], [2000, 5000], [5000, 10000], [10000, 0]];
 const BUDGETS = ["AED 1,000 – 2,000", "AED 2,000 – 5,000", "AED 5,000 – 10,000", "AED 10,000 +", "Not sure yet"];
 const WHEN = ["Within 2 weeks", "Within a month", "In 1 – 3 months", "Flexible"];
 const DOMAINS = ["I have a domain", "I need a domain", "Not sure"];
 
-export default function WebsiteBrief({ open, onClose, lang, preset, style }: { open: boolean; onClose: () => void; lang: Lang; preset?: string; style?: string }) {
+export default function WebsiteBrief({ open, onClose, lang, preset, style, currency = "AED", rates = FALLBACK_RATES }: { open: boolean; onClose: () => void; lang: Lang; preset?: string; style?: string; currency?: Currency; rates?: Rates }) {
+  const approx = lang === "fr" ? "env." : lang === "ar" ? "تقريباً" : "approx.";
+  const budgetLabel = (x: string, i: number) => {
+    const r = RANGES[i];
+    if (!r || currency === "AED") return x;
+    return r[1] ? `${priceText(r[0], currency, rates, approx)} – ${priceText(r[1], currency, rates, "").trim()}` : `${priceText(r[0], currency, rates, approx)} +`;
+  };
   const uid = useId();
   const t = (k: keyof typeof T) => pick(T[k], lang);
   const [f, setF] = useState({ email: "", business: "", phone: "", type: preset ?? TYPES[0], current: "", likes: "", budget: BUDGETS[0], when: WHEN[3], domain: DOMAINS[2], about: "" });
@@ -144,7 +152,7 @@ export default function WebsiteBrief({ open, onClose, lang, preset, style }: { o
             <label htmlFor={`${uid}-li`}>{t("likes")}</label>
             <textarea id={`${uid}-li`} rows={2} maxLength={600} {...field("likes")} />
             <div className="wb-row">
-              <div><label htmlFor={`${uid}-bu`}>{t("budget")}</label><select id={`${uid}-bu`} {...field("budget")}>{BUDGETS.map(x => <option key={x}>{x}</option>)}</select></div>
+              <div><label htmlFor={`${uid}-bu`}>{t("budget")}</label><select id={`${uid}-bu`} {...field("budget")}>{BUDGETS.map((x, i) => <option key={x} value={x}>{budgetLabel(x, i)}</option>)}</select></div>
               <div><label htmlFor={`${uid}-w`}>{t("when")}</label><select id={`${uid}-w`} {...field("when")}>{WHEN.map(x => <option key={x}>{x}</option>)}</select></div>
             </div>
             <label htmlFor={`${uid}-d`}>{t("domain")}</label>

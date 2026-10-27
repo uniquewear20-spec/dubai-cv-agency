@@ -5,18 +5,21 @@ import React, { useState } from "react";
 import WebsiteBrief, { STYLES } from "./WebsiteBrief";
 import { Mail, MessageCircle } from "lucide-react";
 import { pick, waLink, type L10n, type Lang } from "@/lib/site";
+import { FALLBACK_RATES, priceText, type Currency, type Rates } from "@/lib/currency";
+
+const APPROX: Record<Lang, string> = { en: "approx.", fr: "env.", ar: "تقريباً" };
 
 const T: Record<string, L10n> = {
-  h: { en: "Websites for your business, from AED 1,000", fr: "Des sites pour votre entreprise, dès 1 000 AED", ar: "مواقع لأعمالك، ابتداءً من 1,000 درهم" },
+  h: { en: "Websites for your business, from {a}", fr: "Des sites pour votre entreprise, dès {a}", ar: "مواقع لأعمالك، ابتداءً من {a}" },
   body: {
-    en: "Beyond personal portfolios (from AED 300), we design and build complete websites for companies and brands. Choose your field, send us the details and we reply with a quote and a timeline.",
-    fr: "Au-delà des portfolios personnels (dès 300 AED), nous concevons et réalisons des sites complets pour les entreprises et les marques. Choisissez votre secteur, envoyez-nous les détails : nous répondons avec un devis et un délai.",
-    ar: "إلى جانب المواقع التعريفية الشخصية (ابتداءً من 300 درهم)، نصمم وننفّذ مواقع متكاملة للشركات والعلامات التجارية. اختر مجالك وأرسل لنا التفاصيل، وسنرد بعرض سعر وجدول زمني.",
+    en: "Beyond personal portfolios (from {b}), we design and build complete websites for companies and brands. Choose your field, send us the details and we reply with a quote and a timeline.",
+    fr: "Au-delà des portfolios personnels (dès {b}), nous concevons et réalisons des sites complets pour les entreprises et les marques. Choisissez votre secteur, envoyez-nous les détails : nous répondons avec un devis et un délai.",
+    ar: "إلى جانب المواقع التعريفية الشخصية (ابتداءً من {b})، نصمم وننفّذ مواقع متكاملة للشركات والعلامات التجارية. اختر مجالك وأرسل لنا التفاصيل، وسنرد بعرض سعر وجدول زمني.",
   },
   pick: { en: "Choose your field to fill in the brief", fr: "Choisissez votre secteur pour remplir le brief", ar: "اختر مجالك لتعبئة الملخص" },
   send: { en: "Send your website details", fr: "Envoyer les détails de votre site", ar: "أرسل تفاصيل موقعك" },
   wa: { en: "Discuss on WhatsApp", fr: "En parler sur WhatsApp", ar: "تحدّث معنا عبر واتساب" },
-  from: { en: "From AED 1,000", fr: "Dès 1 000 AED", ar: "ابتداءً من 1,000 درهم" },
+  from: { en: "From {a}", fr: "Dès {a}", ar: "ابتداءً من {a}" },
   adv: { en: "Advanced styles: 3D, motion and more", fr: "Styles avancés : 3D, animation et plus", ar: "أساليب متقدمة: ثلاثي الأبعاد والحركة والمزيد" },
 };
 const KINDS: L10n[] = [
@@ -33,9 +36,11 @@ const KINDS: L10n[] = [
   { en: "Landing page", fr: "Page d'atterrissage", ar: "صفحة هبوط" },
   { en: "Booking website", fr: "Site de réservation", ar: "موقع حجوزات" },
 ];
-const t = (k: string, l: Lang) => pick(T[k], l);
+const t0 = (k: string, l: Lang) => pick(T[k], l);
 
-export default function WebsiteService({ lang }: { lang: Lang; onEnquire?: () => void }) {
+export default function WebsiteService({ lang, currency = "AED", rates }: { lang: Lang; onEnquire?: () => void; currency?: Currency; rates?: Rates }) {
+  const r = rates ?? FALLBACK_RATES;
+  const t = (k: string, l: Lang) => t0(k, l).replace("{a}", priceText(1000, currency, r, APPROX[l])).replace("{b}", priceText(300, currency, r, APPROX[l]));
   const [brief, setBrief] = useState<string | null>(null);
   const [style, setStyle] = useState<string | undefined>(undefined);
   return (
@@ -70,7 +75,7 @@ export default function WebsiteService({ lang }: { lang: Lang; onEnquire?: () =>
           </ul>
         </div>
       </div>
-      <WebsiteBrief key={`${brief ?? "closed"}-${style ?? ""}`} open={brief !== null} preset={brief ?? undefined} style={style} onClose={() => setBrief(null)} lang={lang} />
+      <WebsiteBrief key={`${brief ?? "closed"}-${style ?? ""}`} open={brief !== null} preset={brief ?? undefined} style={style} onClose={() => setBrief(null)} lang={lang} currency={currency} rates={r} />
     </section>
   );
 }

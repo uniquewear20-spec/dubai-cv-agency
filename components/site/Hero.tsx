@@ -6,6 +6,7 @@
 // CV — then the stage rests on Sofia's sheet again. Visitors can choose a profile or pause.
 // The edits play in CSS; with reduced motion the finished edits are shown and nothing moves.
 
+import { FALLBACK_RATES, priceText, type Currency, type Rates } from "@/lib/currency";
 import React, { useEffect, useId, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Pause, Play } from "lucide-react";
@@ -24,7 +25,7 @@ const T: Record<string, L10n> = {
   secondary: { en: "Explore CV designs", fr: "Découvrir les CV", ar: "استعرض تصاميم السير" },
   f1: { en: "First draft within 48 hours of your brief", fr: "Premier jet sous 48 heures après votre brief", ar: "المسودة الأولى خلال 48 ساعة من استلام معلوماتك" },
   f2: { en: "Unlimited revisions for 30 days", fr: "Révisions illimitées pendant 30 jours", ar: "تعديلات غير محدودة لمدة 30 يوماً" },
-  f3: { en: "From AED 179, paid once", fr: "Dès 179 AED, en un seul paiement", ar: "ابتداءً من 179 درهماً، بدفعة واحدة" },
+  f3: { en: "From {p}, paid once", fr: "Dès {p}, en un seul paiement", ar: "ابتداءً من {p}، بدفعة واحدة" },
   n1: { en: "Lead with scope: outlets, team, revenue.", fr: "Commencer par l'envergure : points de vente, équipe, chiffre d'affaires.", ar: "ابدأ بحجم المسؤولية: المنافذ والفريق والإيرادات." },
   n2: { en: "Replace effort with a result you can measure.", fr: "Remplacer l'effort par un résultat mesurable.", ar: "استبدل الجهد بنتيجة يمكن قياسها." },
   n3: { en: "Keywords taken from the roles she is targeting.", fr: "Des mots-clés tirés des postes qu'elle vise.", ar: "كلمات مفتاحية مأخوذة من الوظائف التي تستهدفها." },
@@ -199,7 +200,7 @@ function CvSheet({ sheet, lang, state, labelledBy, panelId }: { sheet: Sheet; la
   );
 }
 
-export default function Hero({ lang }: { lang: Lang }) {
+export default function Hero({ lang, currency = "AED", rates = FALLBACK_RATES }: { lang: Lang; currency?: Currency; rates?: Rates }) {
   const reduce = useMedia(REDUCED_MOTION);
   const uid = useId();
   const heroRef = useRef<HTMLElement>(null);
@@ -286,7 +287,7 @@ export default function Hero({ lang }: { lang: Lang }) {
           <ul className="hero-facts">
             <li>{t("f1", lang)}</li>
             <li>{t("f2", lang)}</li>
-            <li>{t("f3", lang)}</li>
+            <li>{t("f3", lang).replace("{p}", priceText(179, currency, rates, lang === "fr" ? "env." : lang === "ar" ? "تقريباً" : "approx."))}</li>
           </ul>
         </div>
 
