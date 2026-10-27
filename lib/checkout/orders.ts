@@ -55,7 +55,7 @@ export function orderFacts(order: PayPalOrder): OrderFacts {
     captureStatus: capture?.status ?? null,
     payerEmail: order.payer?.email_address ?? order.payment_source?.paypal?.email_address ?? null,
     payerName: `${given} ${surname}`.trim() || null,
-    ebook: tier ? EBOOK_TIERS.includes(tier) : false,
+    ebook: tier ? EBOOK_TIERS.includes(tier) : items.includes("ebook"),
     ai: tier ? AI_TIERS.includes(tier) : false,
   };
 }

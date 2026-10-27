@@ -56,13 +56,12 @@ export const SERVICES: Service[] = [
   { id: "cv-design",    name: "Executive CV Design",               labelKey: "svcCvDesign", price: 99,  category: "document" },
   { id: "cover-letter", name: "Cover Letter",                      labelKey: "svcCover",    price: 79,  category: "document" },
   { id: "linkedin",     name: "LinkedIn Makeover",                 labelKey: "svcLinkedin", price: 149, category: "digital" },
-  { id: "apps-5",       name: "Job Applications (5)",              labelKey: "svcApps5",    price: 79,  category: "applications", noteKey: "noteTailored" },
-  { id: "apps-10",      name: "Job Applications (10)",             labelKey: "svcApps10",   price: 119, category: "applications", noteKey: "notePopular" },
-  { id: "apps-30",      name: "Job Applications (30)",             labelKey: "svcApps30",   price: 199, category: "applications", noteKey: "noteCampaign" },
-  { id: "coach-30",     name: "AI Interview Coach (30 days)",      labelKey: "svcCoach30",  price: 199, category: "coaching" },
-  { id: "pro-10",       name: "Zenith AI Job Agent Pro (10 days)", labelKey: "svcPro10",    price: 180, category: "applications" },
-  { id: "strategy",     name: "Career Strategy Session",           labelKey: "svcStrategy", price: 149, category: "coaching" },
+  { id: "photo",        name: "AI Profile Photo Enhancement",      labelKey: "svcPhoto",    price: 115, category: "digital" },
   { id: "branding",     name: "Portfolio / Personal Branding Kit", labelKey: "svcBranding", price: 300, category: "digital" },
+  { id: "pro-30",       name: "Zenith AI Job Agent Pro (1 month)", labelKey: "svcPro30",    price: 200, category: "applications" },
+  { id: "coach-30",     name: "AI Interview Coach (30 days)",      labelKey: "svcCoach30",  price: 199, category: "coaching" },
+  { id: "strategy",     name: "Career Strategy Session",           labelKey: "svcStrategy", price: 149, category: "coaching" },
+  { id: "ebook",        name: "The Global Horizon: The Executive Playbook (ebook)", labelKey: "svcEbook", price: 90, category: "coaching" },
 ];
 
 // ── Quick bundles ────────────────────────────────────────────────────────────
@@ -75,9 +74,9 @@ export interface Preset {
 }
 
 export const PRESETS: Preset[] = [
-  { id: "job-hunter",     name: "Job Hunter",     labelKey: "preJobHunter", tagKey: "preJobTag",     ids: ["cv-ats", "cover-letter", "apps-10"] },
+  { id: "job-hunter",     name: "Job Hunter",     labelKey: "preJobHunter", tagKey: "preJobTag",     ids: ["cv-ats", "cover-letter", "pro-30"] },
   { id: "international",  name: "International",  labelKey: "preIntl",      tagKey: "preIntlTag",    ids: ["cv-ats", "linkedin", "cv-design"] },
-  { id: "career-upgrade", name: "Career Upgrade", labelKey: "preUpgrade",   tagKey: "preUpgradeTag", ids: ["cv-ats", "linkedin", "coaching"] },
+  { id: "career-upgrade", name: "Career Upgrade", labelKey: "preUpgrade",   tagKey: "preUpgradeTag", ids: ["cv-ats", "linkedin", "coach-30"] },
 ];
 
 // ── Bundle discounts ─────────────────────────────────────────────────────────
