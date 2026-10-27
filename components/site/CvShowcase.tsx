@@ -36,14 +36,14 @@ const itemField = (it: Item, l: Lang) => (it.kind === "concept" ? pick(FIELD_LAB
 const T: Record<string, L10n> = {
   h2: { en: "A CV designed around the role you want.", fr: "Un CV conçu pour le poste que vous visez.", ar: "سيرة ذاتية مصمّمة حول الوظيفة التي تريدها." },
   lede: {
-    en: "Design CVs and ATS-friendly CVs in one place. A design CV stands out when a person reads it; an ATS-friendly CV is read cleanly by online application systems. Your CV is written from your own experience, in the layout your applications need.",
-    fr: "CV design et CV compatibles ATS au même endroit. Un CV design se remarque à la lecture ; un CV compatible ATS est lu sans erreur par les logiciels de candidature. Votre CV est rédigé à partir de votre parcours, dans la mise en page dont vos candidatures ont besoin.",
-    ar: "سير ذاتية بتصميم مميز وأخرى متوافقة مع أنظمة الفرز في مكان واحد. السيرة المصمّمة تلفت انتباه القارئ، والمتوافقة مع أنظمة الفرز تُقرأ بدقة في التقديم الإلكتروني. تُكتب سيرتك من خبرتك الفعلية، بالتخطيط الذي تحتاجه طلباتك.",
+    en: "Forty-two examples show how we shape structure, typography and wording for different fields and career stages, in design and ATS-friendly layouts. Your CV is written from your own experience, in the design that suits it.",
+    fr: "Quarante-deux exemples montrent comment nous adaptons la structure, la typographie et le ton à chaque secteur et à chaque étape de carrière, en design comme en version compatible ATS. Votre CV est rédigé à partir de votre propre parcours, dans le design qui lui convient.",
+    ar: "اثنان وأربعون مثالاً توضّح كيف نصوغ البنية والخط والأسلوب لكل مجال ومرحلة مهنية، بتصاميم مميزة وأخرى متوافقة مع أنظمة الفرز. تُكتب سيرتك من خبرتك الفعلية، بالتصميم الذي يناسبها.",
   },
   fictional: {
-    en: "Sample layouts: the people, employers and figures are placeholders or invented.",
-    fr: "Modèles de mise en page : les personnes, employeurs et chiffres sont fictifs.",
-    ar: "نماذج تصميم: الأشخاص وجهات العمل والأرقام افتراضية أو غير حقيقية.",
+    en: "Fictional examples: the people, employers and figures are invented.",
+    fr: "Exemples fictifs : les personnes, employeurs et chiffres sont inventés.",
+    ar: "أمثلة افتراضية: الأشخاص وجهات العمل والأرقام غير حقيقية.",
   },
   design: { en: "Design CVs", fr: "CV design", ar: "سير بتصميم مميز" },
   ats: { en: "ATS-friendly CVs", fr: "CV compatibles ATS", ar: "سير متوافقة مع أنظمة الفرز" },
