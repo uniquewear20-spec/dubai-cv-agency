@@ -59,7 +59,7 @@ export const SERVICES: Service[] = [
   { id: "linkedin",     name: "LinkedIn Makeover",                 labelKey: "svcLinkedin", price: 149, category: "digital" },
   { id: "linkedin-full", name: "Full LinkedIn Transformation and Personal Branding", labelKey: "svcLinkedinFull", price: 199, category: "digital" },
   { id: "photo",        name: "AI Profile Photo Enhancement",      labelKey: "svcPhoto",    price: 115, category: "digital" },
-  { id: "pro-30",       name: "Zenith AI Job Agent Pro (1 month)", labelKey: "svcPro30",    price: 200, category: "applications" },
+  { id: "pro-30",       name: "Zenith AI Job Agent Pro (30 days)", labelKey: "svcPro30",    price: 200, category: "applications" },
   { id: "coach-30",     name: "AI Interview Coach (30 days)",      labelKey: "svcCoach30",  price: 199, category: "applications" },
   { id: "strategy",     name: "Career Strategy Session",           labelKey: "svcStrategy", price: 149, category: "coaching" },
   { id: "narrative",    name: "Personal Career-Narrative Strategy Session", labelKey: "svcNarrative", price: 230, category: "coaching" },
