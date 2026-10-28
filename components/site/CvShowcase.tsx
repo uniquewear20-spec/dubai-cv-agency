@@ -156,7 +156,7 @@ export default function CvShowcase({ lang }: { lang: Lang }) {
   return (
     <section id="cv-designs" className="z-section" aria-labelledby="cvd-title">
       <style href="zenith-cv-showcase" precedence="medium">{CSS}</style>
-      <div className="z-wrap z-wrap-wide">
+      <div className="z-wrap z-wrap-wide cvs-wrap">
         <div className="cvs-head">
           <div>
             <h2 id="cvd-title" className="z-h2">{t("h2", lang)}</h2>
@@ -387,7 +387,16 @@ const CSS = `
 .cvs-filters::-webkit-scrollbar{display:none}
 .cvs-count{font-size:12px;opacity:.6;font-variant-numeric:tabular-nums}
 .cvs-main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
-@media (max-width:1023px){.cvs-main{grid-template-columns:1fr}}
+@media (max-width:1023px){
+  .cvs-main{grid-template-columns:1fr}
+  /* Stacked layout: the picker strip sits right under the big CV, the notes come after it. */
+  .cvs-wrap{display:flex;flex-direction:column}
+  .cvs-main{display:contents}
+  .cvs-stage-wrap{order:1}
+  .cvs-strip{order:2;margin-top:22px;padding-top:20px}
+  .cvs-notes{order:3;padding-top:26px}
+}
+@media (max-width:640px){.z-section#cv-designs{padding-top:clamp(28px,8vw,44px)}}
 .cvs-stage-wrap{display:flex;flex-direction:column;align-items:center}
 .cvs-stage{position:relative;width:min(100%,560px);padding:18px 0 10px}
 .cvs-sheet-shadow{position:absolute;inset:18px 0 10px;border-radius:4px;background:var(--z-surface-2);border:1px solid var(--z-rule)}
