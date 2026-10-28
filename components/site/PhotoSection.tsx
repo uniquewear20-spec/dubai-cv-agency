@@ -1,19 +1,18 @@
 "use client";
 // components/site/PhotoSection.tsx — LinkedIn profile photo enhancement (included in every package).
 //
-// A reel of example portraits that moves with the page, in the manner of the Awa Ndiaye portfolio:
-// on wide screens the reel is held on screen while scrolling down carries it sideways; each
-// portrait opens like an aperture as it arrives, settles from a slight zoom with a little parallax,
-// and its note rises beside it. On phones the reel is swiped, with the same settle, and opens as
-// the section comes into view. With reduced motion it is a plain strip that scrolls sideways.
+// An elastic gallery of every example portrait: the row is split like an accordion, the portrait
+// you point at opens and the others fold into slim strips, so all of them can be seen without the
+// page being held or scrolled sideways. About 80% of the section is the gallery; the rest shows the
+// open portrait where it is used (a round profile picture and a CV header). The row opens one
+// portrait after another until the visitor takes over; with reduced motion it stays still.
 //
 // The portraits were made with third-party AI image tools as examples; they are not clients, and
 // the section says so. No before-and-after pairs are shown because none exist with permission.
 
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { pick, type L10n, type Lang } from "@/lib/site";
-import { REDUCED_MOTION, useMedia } from "./useMedia";
 
 const T: Record<string, L10n> = {
   h2: { en: "A profile photo that matches the CV.", fr: "Une photo de profil à la hauteur de votre CV.", ar: "صورة شخصية بمستوى سيرتك الذاتية." },
@@ -115,296 +114,183 @@ PORTRAITS.splice(2, 0, ...[
   { id: "20", big: 800, alt: EXAMPLE_ALT }
 ]);
 
-const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
-
-/**
- * One portrait. `shift` is how far the reel has travelled (px, screen direction); the card works
- * out where it is relative to the middle of the view and opens, settles and fades accordingly.
- * `enter` (0 → 1) opens the cards as the section comes into view on phones.
- */
-function ReelCard({ p, lang, shift, view, dir, enter, still, version, eager }: {
-  p: Portrait; lang: Lang; eager: boolean; shift: MotionValue<number>; view: React.RefObject<HTMLElement | null>; dir: 1 | -1;
-  enter: MotionValue<number>; still: boolean; version: number;
-}) {
-  const ref = useRef<HTMLLIElement>(null);
-  const c0 = useMotionValue(0); // the card's centre on screen when the reel has not moved
-  const vc = useMotionValue(0); // the view's centre
-  const vw = useMotionValue(1); // the view's width
-
-  useEffect(() => {
-    const measure = () => {
-      const el = ref.current, v = view.current;
-      if (!el || !v) return;
-      const r = el.getBoundingClientRect(), vr = v.getBoundingClientRect();
-      c0.set(r.left + r.width / 2 - shift.get());
-      vc.set(vr.left + vr.width / 2);
-      vw.set(Math.max(1, vr.width));
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [c0, vc, vw, shift, view, version]);
-
-  // n: −0.5 … 0 … +0.5 from the left edge to the middle to the right edge. e > 0: still to come.
-  const e = useTransform([shift, c0, vc, vw, enter], ([s, c, m, w, en]: number[]) => {
-    const n = (c + s - m) / w;
-    const ahead = dir * n;
-    // Before the section is in view (phones), every card waits as if it were still to come.
-    return Math.max(ahead, (1 - en) * 0.6);
-  });
-  const scale = useTransform(e, v => 1 + 0.12 * clamp01(Math.abs(v) / 0.6));
-  const imgX = useTransform([shift, c0, vc, vw], ([s, c, m, w]: number[]) => `${(-(c + s - m) / w) * 8}%`);
-  const clip = useTransform(e, v => `inset(${(10 * clamp01((v - 0.12) / 0.38)).toFixed(2)}% 0 round 12px)`);
-  const fade = useTransform(e, v => (v < -0.3 ? 1 - 0.6 * clamp01((-v - 0.3) / 0.3) : 1));
-  const noteO = useTransform(e, v => 1 - clamp01((v - 0.06) / 0.24));
-  const noteY = useTransform(e, v => 18 * clamp01((v - 0.06) / 0.24));
-
-  const src = `/photos/portrait-${p.id}`;
-  const img = (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={`${src}-640.webp`}
-      srcSet={`${src}-640.webp 640w, ${src}-1000.webp ${p.big}w`}
-      sizes="(max-width: 899px) 52vw, 36vh"
-      alt={pick(p.alt, lang)}
-      width={640}
-      height={853}
-      loading={eager ? "eager" : "lazy"}
-      decoding="async"
-    />
-  );
-  if (still) {
-    return (
-      <li className="ph-card" ref={ref}>
-        <figure>
-          <div className="ph-frame">{img}</div>
-          {p.note && <figcaption className="ph-cap" dir="auto">{pick(p.note, lang)}</figcaption>}
-        </figure>
-      </li>
-    );
-  }
-  return (
-    <motion.li className="ph-card" ref={ref} style={{ opacity: fade }}>
-      <figure>
-        <motion.div className="ph-frame" style={{ clipPath: clip }}>
-          <motion.div className="ph-img" style={{ scale, x: imgX }}>{img}</motion.div>
-        </motion.div>
-        {p.note && <motion.figcaption className="ph-cap" dir="auto" style={{ opacity: noteO, y: noteY }}>{pick(p.note, lang)}</motion.figcaption>}
-      </figure>
-    </motion.li>
-  );
-}
-
-function Intro({ lang, id }: { lang: Lang; id: string }) {
-  return (
-    <div className="ph-intro-in">
-      <h2 id={id} className="z-h2">{t("h2", lang)}</h2>
-      <p className="z-lede ph-body">{t("body", lang)}</p>
-      <h3 className="ph-what">{t("what", lang)}</h3>
-      <dl className="ph-aspects">
-        {ASPECTS.map(a => (
-          <div key={a.term.en}>
-            <dt>{pick(a.term, lang)}</dt>
-            <dd>{pick(a.desc, lang)}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-  );
-}
-
-function InUse({ lang }: { lang: Lang }) {
-  return (
-    <div className="ph-used">
-      <h3 className="ph-used-h z-serif">{t("usedH", lang)}</h3>
-      <p className="z-small">{t("usedBody", lang)}</p>
-      <div className="ph-used-demo">
-        <figure className="ph-round">
-          <span className="ph-round-l">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/photos/portrait-08-face.webp" alt="" width={160} height={160} loading="lazy" decoding="async" />
-          </span>
-          <span className="ph-round-s" aria-hidden="true">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/photos/portrait-08-face.webp" alt="" width={44} height={44} loading="lazy" decoding="async" />
-          </span>
-          <figcaption className="z-micro">{t("round", lang)}</figcaption>
-        </figure>
-        <figure className="ph-cvhead">
-          <div className="ph-cvhead-sheet" aria-hidden="true">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/photos/portrait-08-640.webp" alt="" width={72} height={96} loading="lazy" decoding="async" />
-            <span className="ph-bars"><i /><i /><i /></span>
-          </div>
-          <figcaption className="z-micro">{t("header", lang)}</figcaption>
-        </figure>
-      </div>
-      <p className="z-micro ph-fine">{t("examples", lang)}</p>
-      <p className="z-micro ph-fine">{t("honest", lang)}</p>
-    </div>
-  );
-}
+const PAD = (n: number) => String(n).padStart(2, "0");
 
 export default function PhotoSection({ lang }: { lang: Lang }) {
-  const reduced = useMedia(REDUCED_MOTION);
-  const wide = useMedia("(min-height: 520px)");
-  const desktop = useMedia("(min-width: 900px)");
-  const pinned = wide && !reduced;
-  const still = !pinned;
-  const dir: 1 | -1 = lang === "ar" ? -1 : 1;
+  const [active, setActive] = useState(0);
+  const auto = useRef(true);
+  const [inView, setInView] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
+  const row = useRef<HTMLDivElement>(null);
+  const isAr = lang === "ar";
+  const cur = PORTRAITS[active];
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const runwayRef = useRef<HTMLDivElement>(null);
-  const viewRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [dist, setDist] = useState(0);
-  const [version, setVersion] = useState(0);
-  const distMV = useMotionValue(0);
-
-  // How far the reel travels: the track's width beyond the view.
   useEffect(() => {
-    const track = trackRef.current, view = viewRef.current;
-    if (!track || !view) return;
-    const measure = () => {
-      const d = Math.max(0, Math.round(track.scrollWidth - view.clientWidth));
-      setDist(d);
-      distMV.set(d);
-      setVersion(v => v + 1);
-    };
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(track);
-    ro.observe(view);
-    return () => ro.disconnect();
-  }, [pinned, lang, distMV]);
+    const el = root.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.35 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
-  // Wide screens: scrolling down the held section carries the reel sideways.
-  const { scrollYProgress } = useScroll({ target: runwayRef, offset: ["start 69px", "end end"] });
-  const pinX = useTransform([scrollYProgress, distMV], ([p, d]: number[]) => -dir * p * d);
-  // Phones: the reel is swiped; its own scroll position moves the cards.
-  const { scrollX } = useScroll({ container: viewRef });
-  const swipeX = useTransform(scrollX, v => -v);
-  // Phones: the cards open as the reel comes up the screen.
-  const { scrollYProgress: enterP } = useScroll({ target: viewRef, offset: ["start end", "start 40%"] });
-  const one = useMotionValue(1);
-  const shift = pinned ? pinX : swipeX;
-  const enter = pinned || still ? one : enterP;
+  // Open one portrait after another until the visitor takes over.
+  useEffect(() => {
+    if (!inView || !auto.current) return;
+    let reduce = false;
+    try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { /* ignore */ }
+    if (reduce) return;
+    const id = window.setInterval(() => { if (auto.current) setActive(a => (a + 1) % PORTRAITS.length); }, 2600);
+    return () => window.clearInterval(id);
+  }, [inView]);
 
-  const titleId = "ph-title";
+  // Keep the open portrait in view when the row scrolls (phones).
+  useEffect(() => {
+    const r = row.current, el = r?.children[active] as HTMLElement | undefined;
+    if (!r || !el || r.scrollWidth <= r.clientWidth + 2) return;
+    r.scrollTo({ left: el.offsetLeft - r.clientWidth / 2 + el.clientWidth / 2, behavior: "smooth" });
+  }, [active]);
+
+  const choose = (i: number) => { auto.current = false; setActive(i); };
+  const onKey = (e: React.KeyboardEvent) => {
+    const fwd = isAr ? "ArrowLeft" : "ArrowRight", back = isAr ? "ArrowRight" : "ArrowLeft";
+    if (e.key !== fwd && e.key !== back) return;
+    e.preventDefault();
+    const n = (active + (e.key === fwd ? 1 : -1) + PORTRAITS.length) % PORTRAITS.length;
+    choose(n);
+    requestAnimationFrame(() => (row.current?.children[n] as HTMLElement | undefined)?.focus());
+  };
+
   return (
-    <section id="photos" ref={sectionRef} className="z-section ph" data-mode={pinned ? "pinned" : still ? "still" : "swipe"} aria-labelledby={titleId}>
-      <style href="zenith-photos" precedence="medium">{CSS}</style>
-      {!(pinned && desktop) && (
-        <div className="z-wrap z-wrap-wide ph-head">
-          <Intro lang={lang} id={titleId} />
+    <section className="z-section ph" aria-labelledby="ph-title" ref={root}>
+      <style href="zenith-photo-gallery" precedence="medium">{CSS}</style>
+      <div className="z-wrap z-wrap-wide">
+        <div className="ph-top">
+          <div>
+            <h2 id="ph-title" className="z-h2">{t("h2", lang)}</h2>
+            <p className="z-lede" style={{ marginTop: 16 }}>{t("body", lang)}</p>
+          </div>
+          <dl className="ph-aspects" aria-label={t("what", lang)}>
+            {ASPECTS.map(a => (
+              <div key={a.term.en}><dt className="z-serif">{pick(a.term, lang)}</dt><dd>{pick(a.desc, lang)}</dd></div>
+            ))}
+          </dl>
         </div>
-      )}
-      <div className="ph-runway" ref={runwayRef} style={pinned ? { height: `calc(100svh - 69px + ${dist}px)` } : undefined}>
-        <div
-          className="ph-view"
-          ref={viewRef}
-          tabIndex={pinned ? undefined : 0}
-          role={pinned ? undefined : "region"}
-          aria-label={pinned ? undefined : `${t("reel", lang)}. ${t("swipe", lang)}`}
-        >
-          <motion.div className="ph-track" ref={trackRef} style={pinned ? { x: pinX } : undefined}>
-            {pinned && desktop && <div className="ph-intro"><Intro lang={lang} id={titleId} /></div>}
-            <ol className="ph-list" aria-label={t("reel", lang)}>
-              {PORTRAITS.map((p, i) => (
-                <ReelCard key={p.id} eager={i < 4 || !desktop} p={p} lang={lang} shift={shift} view={viewRef} dir={dir} enter={enter} still={still} version={version} />
-              ))}
-            </ol>
-            <div className="ph-end"><InUse lang={lang} /></div>
-          </motion.div>
-          {pinned && (
-            <div className="ph-progress" aria-hidden="true"><motion.span style={{ scaleX: scrollYProgress }} /></div>
-          )}
+
+        <div className="ph-split">
+          <div className="ph-gallery">
+            <div className="ph-row" ref={row} role="group" aria-label={t("reel", lang)} onKeyDown={onKey}>
+              {PORTRAITS.map((p, i) => {
+                const on = i === active;
+                return (
+                  <button
+                    key={p.id}
+                    type="button"
+                    className="ph-item"
+                    data-on={on || undefined}
+                    aria-pressed={on}
+                    aria-label={`${t("reel", lang)} ${i + 1} / ${PORTRAITS.length}`}
+                    onMouseEnter={() => choose(i)}
+                    onFocus={() => choose(i)}
+                    onClick={() => choose(i)}
+                  >
+                    
+                    <img
+                      src={`/photos/portrait-${p.id}-${on ? 1000 : 640}.webp`}
+                      alt={on ? pick(p.alt, lang) : ""}
+                      width={750}
+                      height={1000}
+                      loading={i < 2 ? "eager" : "lazy"}
+                      decoding="async"
+                      draggable={false}
+                    />
+                    <span className="ph-shade" aria-hidden="true" />
+                    <span className="ph-no" aria-hidden="true">{PAD(i + 1)}</span>
+                    {on && (
+                      <span className="ph-cap">
+                        <span className="ph-cap-n">{PAD(i + 1)} / {PAD(PORTRAITS.length)}</span>
+                        {p.note && <span className="ph-cap-t">{pick(p.note, lang)}</span>}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <aside className="ph-used" aria-labelledby="ph-used-h">
+            <h3 id="ph-used-h" className="ph-used-h z-serif">{t("usedH", lang)}</h3>
+            <p className="z-small">{t("usedBody", lang)}</p>
+            <div className="ph-used-row">
+              <figure className="ph-fig">
+                <span className="ph-round-l"><img src={`/photos/portrait-${cur.id}-640.webp`} alt="" width={160} height={213} decoding="async" /></span>
+                <span className="ph-round-s" aria-hidden="true"><img src={`/photos/portrait-${cur.id}-640.webp`} alt="" width={44} height={59} decoding="async" /></span>
+                <figcaption className="z-micro">{t("round", lang)}</figcaption>
+              </figure>
+              <figure className="ph-fig">
+                <div className="ph-cvhead-sheet" aria-hidden="true">
+                  
+                  <img src={`/photos/portrait-${cur.id}-640.webp`} alt="" width={64} height={85} decoding="async" />
+                  <span className="ph-bars"><i /><i /><i /></span>
+                </div>
+                <figcaption className="z-micro">{t("header", lang)}</figcaption>
+              </figure>
+            </div>
+          </aside>
+        </div>
+
+        <div className="ph-notes">
+          <p className="z-micro">{t("examples", lang)}</p>
+          <p className="z-micro">{t("honest", lang)}</p>
         </div>
       </div>
-      {!pinned && <p className="z-wrap z-wrap-wide z-micro ph-hint">{t("swipe", lang)}</p>}
     </section>
   );
 }
 
 const CSS = `
-.ph{position:relative}
-.ph[data-mode="pinned"]{padding-bottom:0}
-.ph-head{margin-bottom:34px}
-.ph-intro-in .z-h2{max-width:16ch}
-.ph-body{margin-top:18px;max-width:46ch}
-.ph-what{margin-top:30px;font-size:14px;font-weight:600;color:var(--z-gold-text)}
-.ph-aspects{margin:10px 0 0;display:grid;max-width:520px}
-.ph-aspects div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:14px;padding:11px 0;border-top:1px solid var(--z-rule)}
-.ph-aspects div:last-child{border-bottom:1px solid var(--z-rule)}
-.ph-aspects dt{font-family:var(--font-serif),Georgia,serif;font-size:18px;line-height:1.35;color:var(--z-fg)}
-[dir="rtl"] .ph-aspects dt{font-family:var(--font-arabic-serif),var(--font-arabic),serif;font-size:17px}
-.ph-aspects dd{margin:0;font-size:14.5px;line-height:1.55;color:var(--z-fg-2)}
-
-/* The reel */
-.ph-view{position:relative}
-.ph-track{display:flex;align-items:center;gap:clamp(16px,2.4vw,36px);width:max-content;padding:0 max(20px,calc((100vw - 1320px)/2 + 40px))}
-.ph-list{list-style:none;margin:0;padding:0;display:flex;align-items:flex-start;gap:clamp(16px,2.4vw,36px)}
-.ph-card{flex:none}
-.ph-card figure{margin:0}
-.ph-frame{position:relative;overflow:hidden;border-radius:12px;background:var(--z-surface-2);aspect-ratio:3/4;box-shadow:0 30px 60px -36px rgba(0,0,0,.8)}
-.ph-img{position:absolute;inset:0;will-change:transform}
-.ph-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
-.ph-cap{margin-top:14px;font-size:14px;line-height:1.5;color:var(--z-fg-2);max-width:30ch}
-.ph-end{flex:none}
-
-/* Wide screens: held while the reel travels */
-.ph[data-mode="pinned"] .ph-view{position:sticky;top:69px;height:calc(100svh - 69px);overflow:hidden;display:flex;align-items:center}
-.ph[data-mode="pinned"] .ph-track{height:100%;will-change:transform}
-.ph[data-mode="pinned"] .ph-intro{flex:none;width:min(500px,36vw);margin-inline-end:clamp(24px,4vw,72px);align-self:center}
-.ph[data-mode="pinned"] .ph-card{width:calc(min(48svh,460px) * .75)}
-.ph[data-mode="pinned"] .ph-card:nth-child(even){margin-top:64px}
-.ph[data-mode="pinned"] .ph-list{align-items:flex-start}
-@media (max-width:899px){
-  .ph[data-mode="pinned"] .ph-card{width:calc(min(46svh,420px) * .75)}
-  .ph[data-mode="pinned"] .ph-card:nth-child(even){margin-top:36px}
-  .ph[data-mode="pinned"] .ph-end{width:min(84vw,360px)}
-  .ph[data-mode="pinned"] .ph-head{margin-bottom:24px}
-}
-.ph[data-mode="pinned"] .ph-end{width:min(440px,34vw);margin-inline-start:clamp(16px,3vw,48px)}
-.ph-progress{position:absolute;inset:auto max(20px,calc((100vw - 1320px)/2 + 40px)) 26px;height:1px;background:var(--z-rule)}
-.ph-progress span{position:absolute;inset:0;background:var(--z-gold);transform-origin:0 50%}
-[dir="rtl"] .ph-progress span{transform-origin:100% 50%}
-
-/* Phones (and short screens): swiped */
-.ph[data-mode="swipe"] .ph-view,.ph[data-mode="still"] .ph-view{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:6px}
-.ph[data-mode="swipe"] .ph-view::-webkit-scrollbar{display:none}
-.ph[data-mode="still"] .ph-view{scrollbar-width:thin}
-.ph[data-mode="swipe"] .ph-card,.ph[data-mode="still"] .ph-card{width:min(52vw,240px);scroll-snap-align:start}
-.ph[data-mode="still"] .ph-card:nth-child(even){margin-top:28px}
-.ph[data-mode="swipe"] .ph-end,.ph[data-mode="still"] .ph-end{width:min(84vw,400px);scroll-snap-align:center;align-self:stretch;display:flex;align-items:center}
-.ph-view:focus-visible{outline:2px solid var(--z-focus);outline-offset:4px}
-.ph-hint{margin-top:14px}
-
-/* Where the photo is used */
-.ph-used{padding:28px;border:1px solid var(--z-rule);border-radius:16px;background:var(--z-surface)}
-.ph-used-h{font-size:clamp(24px,2.2vw,30px);line-height:1.15;margin-bottom:10px}
-.ph-used-demo{display:flex;align-items:flex-end;gap:22px;margin:22px 0 18px;flex-wrap:wrap}
-.ph-used figure{margin:0;display:flex;flex-direction:column;gap:10px}
-.ph-round{flex-direction:row!important;align-items:flex-end;gap:12px!important;flex-wrap:wrap}
-.ph-round figcaption{flex-basis:100%}
-.ph-round-l img{display:block;width:112px;height:112px;border-radius:50%;box-shadow:0 0 0 3px var(--z-surface),0 0 0 4px var(--z-rule-strong)}
-.ph-round-s img{display:block;width:40px;height:40px;border-radius:50%}
-.ph-cvhead-sheet{display:flex;gap:12px;align-items:flex-start;width:200px;padding:14px;border-radius:6px;background:var(--z-sheet);box-shadow:0 14px 30px -20px rgba(0,0,0,.6)}
-.ph-cvhead-sheet img{width:54px;height:72px;object-fit:cover;object-position:50% 14%;border-radius:3px;display:block}
-.ph-bars{flex:1;display:flex;flex-direction:column;gap:7px;padding-top:4px}
+.ph-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:34px}
+.ph-top .z-lede{max-width:56ch}
+.ph-aspects{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.ph-aspects div{padding:11px 0;border-top:1px solid var(--z-rule)}
+.ph-aspects dt{font-size:17px;margin-bottom:2px}
+.ph-aspects dd{margin:0;font-size:14px;line-height:1.5;color:var(--z-fg-2)}
+@media (max-width:900px){.ph-top{grid-template-columns:1fr;align-items:start}}
+@media (max-width:560px){.ph-aspects{grid-template-columns:1fr}}
+.ph-split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,1fr);gap:clamp(16px,2vw,28px);align-items:stretch}
+@media (max-width:1100px){.ph-split{grid-template-columns:1fr}}
+.ph-gallery{min-width:0}
+.ph-row{display:flex;gap:6px;height:clamp(420px,46vw,580px);overflow-x:auto;scrollbar-width:none;scroll-snap-type:none}
+.ph-row::-webkit-scrollbar{display:none}
+.ph-item{position:relative;flex:1 1 0;min-width:0;padding:0;border:0;border-radius:12px;overflow:hidden;background:var(--z-surface-2);cursor:pointer;color:#fff;transition:flex-grow .7s cubic-bezier(.25,1,.5,1),filter .5s,box-shadow .4s;filter:brightness(.55)}
+.ph-item:hover{filter:brightness(.8)}
+.ph-item[data-on]{flex-grow:11;filter:none;box-shadow:0 30px 60px -34px rgba(0,0,0,.9),0 0 0 1px var(--z-gold)}
+.ph-item:focus-visible{outline:2px solid var(--z-focus);outline-offset:2px}
+.ph-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;transform:scale(1.12);transition:transform 1s cubic-bezier(.25,1,.5,1)}
+.ph-item[data-on] img{transform:none}
+.ph-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.05) 50%,transparent);opacity:0;transition:opacity .5s}
+.ph-item[data-on] .ph-shade{opacity:1}
+.ph-no{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:600;letter-spacing:.04em;font-variant-numeric:tabular-nums;transition:opacity .3s}
+.ph-item[data-on] .ph-no{opacity:0}
+.ph-cap{position:absolute;inset:auto 0 0 0;display:flex;flex-direction:column;gap:6px;padding:18px 20px;text-align:start;animation:phIn .5s .25s both}
+.ph-cap-n{font-size:13px;font-weight:600;color:var(--z-gold-text);font-variant-numeric:tabular-nums}
+.ph-cap-t{font-size:15px;line-height:1.45;color:#f3eee7;max-width:34ch}
+@keyframes phIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (max-width:1100px){.ph-row{height:440px}.ph-item{flex:0 0 52px}.ph-item[data-on]{flex:0 0 min(78vw,320px)}}
+.ph-used{display:flex;flex-direction:column;gap:14px;padding:22px 20px;border:1px solid var(--z-rule);border-radius:16px;background:var(--z-surface)}
+.ph-used-h{font-size:22px;font-weight:500;line-height:1.15}
+.ph-used-row{display:flex;flex-direction:column;gap:20px;margin-top:6px}
+.ph-fig{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:0}
+.ph-fig figcaption{flex-basis:100%;color:var(--z-fg-3)}
+.ph-round-l img{display:block;width:96px;height:96px;object-fit:cover;object-position:50% 14%;border-radius:50%;box-shadow:0 0 0 3px var(--z-surface),0 0 0 4px var(--z-rule-strong);transition:opacity .3s}
+.ph-round-s img{display:block;width:38px;height:38px;object-fit:cover;object-position:50% 14%;border-radius:50%}
+.ph-cvhead-sheet{display:flex;gap:10px;align-items:flex-start;width:100%;max-width:210px;padding:12px;border-radius:6px;background:var(--z-sheet);box-shadow:0 14px 30px -20px rgba(0,0,0,.6)}
+.ph-cvhead-sheet img{display:block;width:54px;height:72px;object-fit:cover;object-position:50% 14%;border-radius:2px}
+.ph-bars{display:grid;gap:6px;flex:1;padding-top:6px}
 .ph-bars i{display:block;height:7px;border-radius:2px;background:#d9cfc2}
 .ph-bars i:first-child{height:11px;width:86%;background:#3b2d22}
 .ph-bars i:nth-child(2){width:62%;background:#b08a57}
-.ph-bars i:nth-child(3){width:74%}
-.ph-fine{margin-top:8px}
-@media (prefers-reduced-motion:reduce){.ph-img{will-change:auto}}
-@media (max-width:899px){
-  .ph[data-mode="pinned"] .ph-end{width:min(86vw,380px)}
-  .ph[data-mode="pinned"] .ph-used{padding:18px}
-  .ph[data-mode="pinned"] .ph-used-h{font-size:22px}
-  .ph[data-mode="pinned"] .ph-used-demo{margin:12px 0 10px;gap:14px}
-  .ph[data-mode="pinned"] .ph-round-l img{width:72px;height:72px}
-  .ph[data-mode="pinned"] .ph-cvhead-sheet{width:170px;padding:10px}
-  .ph[data-mode="pinned"] .ph-fine,.ph[data-mode="pinned"] .ph-used .z-small{font-size:12.5px;line-height:1.5}
-}
+@media (max-width:1100px){.ph-used-row{flex-direction:row;flex-wrap:wrap;gap:28px}}
+.ph-notes{display:grid;gap:6px;margin-top:22px;max-width:78ch}
+.ph-notes .z-micro{color:var(--z-fg-3)}
+@media (prefers-reduced-motion:reduce){.ph-item,.ph-item img{transition:none}.ph-cap{animation:none}}
 `;
