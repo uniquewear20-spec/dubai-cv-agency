@@ -514,5 +514,22 @@ html[data-theme="light"] .hx-deck::after{background:radial-gradient(closest-side
 .hx-fontwarm{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
 .hx-fontwarm span{font-family:var(--font-arabic),Tahoma,sans-serif}
 .hx-fontwarm b{font-family:var(--font-arabic-serif),serif}
+/* Phones: a smaller sheet, so the example does not fill the screen. */
+@media (max-width:560px){
+  .hero-sheet{padding:20px 18px 18px;font-size:12.5px}
+  .hs-name{font-size:24px}
+  .hero-sheet[lang="ar"] .hs-name{font-size:22px}
+  .hs-role{margin-top:4px;font-size:12px}
+  .hs-rule{margin:10px 0 10px}
+  .hs-job{font-size:13px}
+  .hs-org{margin-bottom:6px}
+  .hs-edit{margin-top:8px;padding-inline-start:10px}
+  .hs-old{font-size:12px}
+  .hs-new{font-size:13px}
+  .hs-note{margin-top:4px;font-size:11.5px}
+  .hs-job-2{margin-top:10px}
+  .hero-cap{margin-top:18px}
+  .hx-index{margin-top:22px}
+}
 @media (prefers-reduced-motion:reduce){.hero-sheet{animation:none}.hx-fill,.hx-pause{display:none}}
 `;

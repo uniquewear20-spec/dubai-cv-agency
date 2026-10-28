@@ -392,8 +392,13 @@ const CSS = `
   /* Stacked layout: the picker strip sits right under the big CV, the notes come after it. */
   .cvs-wrap{display:flex;flex-direction:column}
   .cvs-main{display:contents}
+  .cvs-head{order:-3}
+  .cvs-filters{order:-2;margin-bottom:6px}
+  .cvs-strip{order:-1;margin-top:0;padding:14px 4px 18px;border-top:0;gap:12px}
+  .cvs-thumb{flex-basis:92px}
+  .cvs-thumb-name{font-size:12.5px}
+  .cvs-thumb-field{font-size:11.5px}
   .cvs-stage-wrap{order:1}
-  .cvs-strip{order:2;margin-top:22px;padding-top:20px}
   .cvs-notes{order:3;padding-top:26px}
 }
 @media (max-width:640px){.z-section#cv-designs{padding-top:clamp(28px,8vw,44px)}}
