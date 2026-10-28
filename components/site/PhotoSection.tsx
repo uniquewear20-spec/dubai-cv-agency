@@ -67,11 +67,6 @@ const PORTRAITS: Portrait[] = [
     alt: { en: "Example portrait: a man with a grey beard in a navy jacket, dark blue backdrop", fr: "Exemple de portrait : un homme à la barbe grise en veste marine, fond bleu nuit", ar: "صورة توضيحية: رجل بلحية رمادية وسترة كحلية على خلفية زرقاء داكنة" },
   },
   {
-    id: "14", big: 1000,
-    note: { en: "A warm backdrop that flatters without distracting.", fr: "Un fond chaleureux qui valorise sans distraire.", ar: "خلفية دافئة تُجمّل الصورة دون أن تشتت الانتباه." },
-    alt: { en: "Example portrait: a woman with long dark hair in a white shirt, tan backdrop", fr: "Exemple de portrait : une femme aux longs cheveux bruns en chemise blanche, fond camel", ar: "صورة توضيحية: امرأة بشعر داكن طويل وقميص أبيض على خلفية بنية فاتحة" },
-  },
-  {
     id: "11", big: 1000,
     note: { en: "National dress, crisp and bright.", fr: "Tenue nationale, nette et lumineuse.", ar: "زي وطني أنيق وناصع." },
     alt: { en: "Example portrait: a man in a white kandura and ghutra, tan backdrop", fr: "Exemple de portrait : un homme en kandura blanche et ghutra, fond camel", ar: "صورة توضيحية: رجل بكندورة بيضاء وغترة على خلفية بنية فاتحة" },
@@ -115,33 +110,15 @@ PORTRAITS.splice(2, 0, ...[
 ]);
 
 const PAD = (n: number) => String(n).padStart(2, "0");
+const HALF = Math.ceil(PORTRAITS.length / 2);
+const ROWS: Portrait[][] = [PORTRAITS.slice(0, HALF), PORTRAITS.slice(HALF)];
 
-export default function PhotoSection({ lang }: { lang: Lang }) {
-  const [active, setActive] = useState(0);
-  const auto = useRef(true);
-  const [inView, setInView] = useState(false);
-  const root = useRef<HTMLDivElement>(null);
+/** One elastic row: the portrait pointed at opens, the others fold into strips. */
+function GalleryRow({ items, offset, active, onPick, lang, label }: {
+  items: Portrait[]; offset: number; active: number; onPick: (i: number) => void; lang: Lang; label: string;
+}) {
   const row = useRef<HTMLDivElement>(null);
   const isAr = lang === "ar";
-  const cur = PORTRAITS[active];
-
-  useEffect(() => {
-    const el = root.current;
-    if (!el || typeof IntersectionObserver === "undefined") return;
-    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.35 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  // Open one portrait after another until the visitor takes over.
-  useEffect(() => {
-    if (!inView || !auto.current) return;
-    let reduce = false;
-    try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { /* ignore */ }
-    if (reduce) return;
-    const id = window.setInterval(() => { if (auto.current) setActive(a => (a + 1) % PORTRAITS.length); }, 2600);
-    return () => window.clearInterval(id);
-  }, [inView]);
 
   // Keep the open portrait in view when the row scrolls (phones).
   useEffect(() => {
@@ -150,15 +127,96 @@ export default function PhotoSection({ lang }: { lang: Lang }) {
     r.scrollTo({ left: el.offsetLeft - r.clientWidth / 2 + el.clientWidth / 2, behavior: "smooth" });
   }, [active]);
 
-  const choose = (i: number) => { auto.current = false; setActive(i); };
   const onKey = (e: React.KeyboardEvent) => {
     const fwd = isAr ? "ArrowLeft" : "ArrowRight", back = isAr ? "ArrowRight" : "ArrowLeft";
     if (e.key !== fwd && e.key !== back) return;
     e.preventDefault();
-    const n = (active + (e.key === fwd ? 1 : -1) + PORTRAITS.length) % PORTRAITS.length;
-    choose(n);
+    const n = (active + (e.key === fwd ? 1 : -1) + items.length) % items.length;
+    onPick(n);
     requestAnimationFrame(() => (row.current?.children[n] as HTMLElement | undefined)?.focus());
   };
+
+  return (
+    <div className="ph-row" ref={row} role="group" aria-label={label} onKeyDown={onKey}>
+      {items.map((p, i) => {
+        const on = i === active;
+        return (
+          <button
+            key={p.id}
+            type="button"
+            className="ph-item"
+            data-on={on || undefined}
+            aria-pressed={on}
+            aria-label={`${label} ${offset + i + 1} / ${PORTRAITS.length}`}
+            onMouseEnter={() => onPick(i)}
+            onFocus={() => onPick(i)}
+            onClick={() => onPick(i)}
+          >
+            <img
+              src={`/photos/portrait-${p.id}-${on ? 1000 : 640}.webp`}
+              alt={on ? pick(p.alt, lang) : ""}
+              width={750}
+              height={1000}
+              loading={offset + i < 2 ? "eager" : "lazy"}
+              decoding="async"
+              draggable={false}
+            />
+            <span className="ph-shade" aria-hidden="true" />
+            <span className="ph-no" aria-hidden="true">{PAD(offset + i + 1)}</span>
+            {on && p.note && (
+              <span className="ph-cap">
+                <span className="ph-cap-t">{pick(p.note, lang)}</span>
+              </span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+export default function PhotoSection({ lang }: { lang: Lang }) {
+  const [act, setAct] = useState<[number, number]>([0, 0]);
+  const [last, setLast] = useState<Portrait>(ROWS[0][0]);
+  const auto = useRef(true);
+  const [inView, setInView] = useState(false);
+  const root = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Open one portrait after another, the two rows taking turns, until the visitor takes over.
+  useEffect(() => {
+    if (!inView || !auto.current) return;
+    let reduce = false;
+    try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { /* ignore */ }
+    if (reduce) return;
+    let turn = 0;
+    const id = window.setInterval(() => {
+      if (!auto.current) return;
+      const r = turn % 2;
+      turn += 1;
+      setAct(a => {
+        const n: [number, number] = [a[0], a[1]];
+        n[r] = (a[r] + 1) % ROWS[r].length;
+        setLast(ROWS[r][n[r]]);
+        return n;
+      });
+    }, 1900);
+    return () => window.clearInterval(id);
+  }, [inView]);
+
+  const pick2 = (r: number) => (i: number) => {
+    auto.current = false;
+    setAct(a => (r === 0 ? [i, a[1]] : [a[0], i]));
+    setLast(ROWS[r][i]);
+  };
+  const cur = last;
 
   return (
     <section className="z-section ph" aria-labelledby="ph-title" ref={root}>
@@ -178,43 +236,9 @@ export default function PhotoSection({ lang }: { lang: Lang }) {
 
         <div className="ph-split">
           <div className="ph-gallery">
-            <div className="ph-row" ref={row} role="group" aria-label={t("reel", lang)} onKeyDown={onKey}>
-              {PORTRAITS.map((p, i) => {
-                const on = i === active;
-                return (
-                  <button
-                    key={p.id}
-                    type="button"
-                    className="ph-item"
-                    data-on={on || undefined}
-                    aria-pressed={on}
-                    aria-label={`${t("reel", lang)} ${i + 1} / ${PORTRAITS.length}`}
-                    onMouseEnter={() => choose(i)}
-                    onFocus={() => choose(i)}
-                    onClick={() => choose(i)}
-                  >
-                    
-                    <img
-                      src={`/photos/portrait-${p.id}-${on ? 1000 : 640}.webp`}
-                      alt={on ? pick(p.alt, lang) : ""}
-                      width={750}
-                      height={1000}
-                      loading={i < 2 ? "eager" : "lazy"}
-                      decoding="async"
-                      draggable={false}
-                    />
-                    <span className="ph-shade" aria-hidden="true" />
-                    <span className="ph-no" aria-hidden="true">{PAD(i + 1)}</span>
-                    {on && (
-                      <span className="ph-cap">
-                        <span className="ph-cap-n">{PAD(i + 1)} / {PAD(PORTRAITS.length)}</span>
-                        {p.note && <span className="ph-cap-t">{pick(p.note, lang)}</span>}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+            {ROWS.map((items, r) => (
+              <GalleryRow key={r} items={items} offset={r === 0 ? 0 : HALF} active={act[r]} onPick={pick2(r)} lang={lang} label={t("reel", lang)} />
+            ))}
           </div>
 
           <aside className="ph-used" aria-labelledby="ph-used-h">
@@ -228,7 +252,6 @@ export default function PhotoSection({ lang }: { lang: Lang }) {
               </figure>
               <figure className="ph-fig">
                 <div className="ph-cvhead-sheet" aria-hidden="true">
-                  
                   <img src={`/photos/portrait-${cur.id}-640.webp`} alt="" width={64} height={85} decoding="async" />
                   <span className="ph-bars"><i /><i /><i /></span>
                 </div>
@@ -258,24 +281,24 @@ const CSS = `
 @media (max-width:560px){.ph-aspects{grid-template-columns:1fr}}
 .ph-split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,1fr);gap:clamp(16px,2vw,28px);align-items:stretch}
 @media (max-width:1100px){.ph-split{grid-template-columns:1fr}}
-.ph-gallery{min-width:0}
-.ph-row{display:flex;gap:6px;height:clamp(420px,46vw,580px);overflow-x:auto;scrollbar-width:none;scroll-snap-type:none}
+.ph-gallery{min-width:0;display:flex;flex-direction:column;gap:8px}
+.ph-row{display:flex;gap:6px;height:clamp(250px,24vw,330px);overflow-x:auto;scrollbar-width:none;scroll-snap-type:none}
 .ph-row::-webkit-scrollbar{display:none}
 .ph-item{position:relative;flex:1 1 0;min-width:0;padding:0;border:0;border-radius:12px;overflow:hidden;background:var(--z-surface-2);cursor:pointer;color:#fff;transition:flex-grow .7s cubic-bezier(.25,1,.5,1),filter .5s,box-shadow .4s;filter:brightness(.55)}
 .ph-item:hover{filter:brightness(.8)}
-.ph-item[data-on]{flex-grow:11;filter:none;box-shadow:0 30px 60px -34px rgba(0,0,0,.9),0 0 0 1px var(--z-gold)}
+.ph-item[data-on]{flex-grow:5;filter:none;box-shadow:0 30px 60px -34px rgba(0,0,0,.9),0 0 0 1px var(--z-gold)}
 .ph-item:focus-visible{outline:2px solid var(--z-focus);outline-offset:2px}
-.ph-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;transform:scale(1.12);transition:transform 1s cubic-bezier(.25,1,.5,1)}
+.ph-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 16%;transform:scale(1.12);transition:transform 1s cubic-bezier(.25,1,.5,1)}
 .ph-item[data-on] img{transform:none}
 .ph-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.05) 50%,transparent);opacity:0;transition:opacity .5s}
 .ph-item[data-on] .ph-shade{opacity:1}
 .ph-no{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:600;letter-spacing:.04em;font-variant-numeric:tabular-nums;transition:opacity .3s}
 .ph-item[data-on] .ph-no{opacity:0}
-.ph-cap{position:absolute;inset:auto 0 0 0;display:flex;flex-direction:column;gap:6px;padding:18px 20px;text-align:start;animation:phIn .5s .25s both}
+.ph-cap{position:absolute;inset:auto 0 0 0;display:flex;flex-direction:column;gap:6px;padding:14px 16px;text-align:start;animation:phIn .5s .25s both}
 .ph-cap-n{font-size:13px;font-weight:600;color:var(--z-gold-text);font-variant-numeric:tabular-nums}
-.ph-cap-t{font-size:15px;line-height:1.45;color:#f3eee7;max-width:34ch}
+.ph-cap-t{font-size:14px;line-height:1.45;color:#f3eee7;max-width:34ch}
 @keyframes phIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@media (max-width:1100px){.ph-row{height:440px}.ph-item{flex:0 0 52px}.ph-item[data-on]{flex:0 0 min(78vw,320px)}}
+@media (max-width:1100px){.ph-row{height:300px}.ph-item{flex:0 0 64px}.ph-item[data-on]{flex:0 0 min(60vw,240px)}}
 .ph-used{display:flex;flex-direction:column;gap:14px;padding:22px 20px;border:1px solid var(--z-rule);border-radius:16px;background:var(--z-surface)}
 .ph-used-h{font-size:22px;font-weight:500;line-height:1.15}
 .ph-used-row{display:flex;flex-direction:column;gap:20px;margin-top:6px}
