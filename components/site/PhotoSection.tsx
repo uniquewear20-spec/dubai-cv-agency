@@ -1,9 +1,8 @@
 "use client";
 // components/site/PhotoSection.tsx — LinkedIn profile photo enhancement (included in every package).
 //
-// An elastic gallery of every example portrait: the row is split like an accordion, the portrait
-// you point at opens and the others fold into slim strips, so all of them can be seen without the
-// page being held or scrolled sideways. About 80% of the section is the gallery; the rest shows the
+// A portrait slider: one large example portrait with its note, arrows, a counter and a strip of every
+// portrait to pick from, so all of them can be seen without the page being held or scrolled sideways. About 80% of the section is the gallery; the rest shows the
 // open portrait where it is used (a round profile picture and a CV header). The row opens one
 // portrait after another until the visitor takes over; with reduced motion it stays still.
 //
@@ -12,6 +11,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { pick, type L10n, type Lang } from "@/lib/site";
 
 const T: Record<string, L10n> = {
@@ -41,6 +41,8 @@ const T: Record<string, L10n> = {
     ar: "بتأطير الرأس والكتفين، تصلح الصورة نفسها صورةً دائرية للملف الشخصي وفي ترويسة السيرة الذاتية.",
   },
   round: { en: "Round profile picture", fr: "Photo de profil ronde", ar: "صورة دائرية للملف الشخصي" },
+  prevP: { en: "Previous portrait", fr: "Portrait précédent", ar: "الصورة السابقة" },
+  nextP: { en: "Next portrait", fr: "Portrait suivant", ar: "الصورة التالية" },
   header: { en: "CV header", fr: "En-tête de CV", ar: "ترويسة السيرة الذاتية" },
 };
 const t = (k: string, l: Lang) => pick(T[k], l);
@@ -93,6 +95,7 @@ const PORTRAITS: Portrait[] = [
   },
 ];
 
+const EXAMPLE_NOTE: L10n = { en: "Framed head and shoulders, ready for a round crop.", fr: "Cadrage tête et épaules, prêt pour un recadrage rond.", ar: "تأطير للرأس والكتفين جاهز للقص الدائري." };
 const EXAMPLE_ALT: L10n = { en: "Example portrait made with AI image tools", fr: "Exemple de portrait réalisé avec des outils d'IA", ar: "صورة توضيحية أُنشئت بأدوات الذكاء الاصطناعي" };
 // The rest of the example portraits, between the ones with notes.
 PORTRAITS.splice(2, 0, ...[
@@ -110,77 +113,16 @@ PORTRAITS.splice(2, 0, ...[
 ]);
 
 const PAD = (n: number) => String(n).padStart(2, "0");
-const HALF = Math.ceil(PORTRAITS.length / 2);
-const ROWS: Portrait[][] = [PORTRAITS.slice(0, HALF), PORTRAITS.slice(HALF)];
-
-/** One elastic row: the portrait pointed at opens, the others fold into strips. */
-function GalleryRow({ items, offset, active, onPick, lang, label }: {
-  items: Portrait[]; offset: number; active: number; onPick: (i: number) => void; lang: Lang; label: string;
-}) {
-  const row = useRef<HTMLDivElement>(null);
-  const isAr = lang === "ar";
-
-  // Keep the open portrait in view when the row scrolls (phones).
-  useEffect(() => {
-    const r = row.current, el = r?.children[active] as HTMLElement | undefined;
-    if (!r || !el || r.scrollWidth <= r.clientWidth + 2) return;
-    r.scrollTo({ left: el.offsetLeft - r.clientWidth / 2 + el.clientWidth / 2, behavior: "smooth" });
-  }, [active]);
-
-  const onKey = (e: React.KeyboardEvent) => {
-    const fwd = isAr ? "ArrowLeft" : "ArrowRight", back = isAr ? "ArrowRight" : "ArrowLeft";
-    if (e.key !== fwd && e.key !== back) return;
-    e.preventDefault();
-    const n = (active + (e.key === fwd ? 1 : -1) + items.length) % items.length;
-    onPick(n);
-    requestAnimationFrame(() => (row.current?.children[n] as HTMLElement | undefined)?.focus());
-  };
-
-  return (
-    <div className="ph-row" ref={row} role="group" aria-label={label} onKeyDown={onKey}>
-      {items.map((p, i) => {
-        const on = i === active;
-        return (
-          <button
-            key={p.id}
-            type="button"
-            className="ph-item"
-            data-on={on || undefined}
-            aria-pressed={on}
-            aria-label={`${label} ${offset + i + 1} / ${PORTRAITS.length}`}
-            onMouseEnter={() => onPick(i)}
-            onFocus={() => onPick(i)}
-            onClick={() => onPick(i)}
-          >
-            <img
-              src={`/photos/portrait-${p.id}-${on ? 1000 : 640}.webp`}
-              alt={on ? pick(p.alt, lang) : ""}
-              width={750}
-              height={1000}
-              loading={offset + i < 2 ? "eager" : "lazy"}
-              decoding="async"
-              draggable={false}
-            />
-            <span className="ph-shade" aria-hidden="true" />
-            <span className="ph-no" aria-hidden="true">{PAD(offset + i + 1)}</span>
-            {on && p.note && (
-              <span className="ph-cap">
-                <span className="ph-cap-t">{pick(p.note, lang)}</span>
-              </span>
-            )}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
 
 export default function PhotoSection({ lang }: { lang: Lang }) {
-  const [act, setAct] = useState<[number, number]>([0, 0]);
-  const [last, setLast] = useState<Portrait>(ROWS[0][0]);
+  const [i, setI] = useState(0);
   const auto = useRef(true);
   const [inView, setInView] = useState(false);
   const root = useRef<HTMLElement>(null);
+  const thumbs = useRef<HTMLDivElement>(null);
+  const isAr = lang === "ar";
+  const n = PORTRAITS.length;
+  const cur = PORTRAITS[i];
 
   useEffect(() => {
     const el = root.current;
@@ -190,33 +132,31 @@ export default function PhotoSection({ lang }: { lang: Lang }) {
     return () => io.disconnect();
   }, []);
 
-  // Open one portrait after another, the two rows taking turns, until the visitor takes over.
+  // Move on by itself until the visitor takes over (not with reduced motion).
   useEffect(() => {
     if (!inView || !auto.current) return;
     let reduce = false;
     try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { /* ignore */ }
     if (reduce) return;
-    let turn = 0;
-    const id = window.setInterval(() => {
-      if (!auto.current) return;
-      const r = turn % 2;
-      turn += 1;
-      setAct(a => {
-        const n: [number, number] = [a[0], a[1]];
-        n[r] = (a[r] + 1) % ROWS[r].length;
-        setLast(ROWS[r][n[r]]);
-        return n;
-      });
-    }, 1900);
+    const id = window.setInterval(() => { if (auto.current) setI(x => (x + 1) % n); }, 3400);
     return () => window.clearInterval(id);
-  }, [inView]);
+  }, [inView, n]);
 
-  const pick2 = (r: number) => (i: number) => {
-    auto.current = false;
-    setAct(a => (r === 0 ? [i, a[1]] : [a[0], i]));
-    setLast(ROWS[r][i]);
+  // Keep the chosen thumbnail in view in the strip.
+  useEffect(() => {
+    const r = thumbs.current, el = r?.children[i] as HTMLElement | undefined;
+    if (!r || !el || r.scrollWidth <= r.clientWidth + 2) return;
+    r.scrollTo({ left: el.offsetLeft - r.clientWidth / 2 + el.clientWidth / 2, behavior: "smooth" });
+  }, [i]);
+
+  const go = (d: number) => { auto.current = false; setI(x => (x + d + n) % n); };
+  const choose = (k: number) => { auto.current = false; setI(k); };
+  const onKey = (e: React.KeyboardEvent) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    e.preventDefault();
+    go((e.key === "ArrowRight") !== isAr ? 1 : -1);
   };
-  const cur = last;
+  const next = PORTRAITS[(i + 1) % n];
 
   return (
     <section className="z-section ph" aria-labelledby="ph-title" ref={root}>
@@ -235,10 +175,38 @@ export default function PhotoSection({ lang }: { lang: Lang }) {
         </div>
 
         <div className="ph-split">
-          <div className="ph-gallery">
-            {ROWS.map((items, r) => (
-              <GalleryRow key={r} items={items} offset={r === 0 ? 0 : HALF} active={act[r]} onPick={pick2(r)} lang={lang} label={t("reel", lang)} />
-            ))}
+          <div className="ph-stage" role="group" aria-roledescription="carousel" aria-label={t("reel", lang)} onKeyDown={onKey}>
+            <div className="ph-meta">
+              <span className="ph-count" aria-live="polite">{PAD(i + 1)} / {PAD(n)}</span>
+              <span className="ph-vert" aria-hidden="true">{t("reel", lang)}</span>
+            </div>
+
+            <div className="ph-main">
+              <div className="ph-frame">
+                { }
+                <img key={cur.id} className="ph-big" src={`/photos/portrait-${cur.id}-1000.webp`} alt={pick(cur.alt, lang)} width={750} height={1000} decoding="async" />
+              </div>
+              {/* the next portrait is fetched ahead so the change is instant */}
+              { }
+              <img src={`/photos/portrait-${next.id}-1000.webp`} alt="" width={1} height={1} style={{ position: "absolute", width: 1, height: 1, opacity: 0, pointerEvents: "none" }} aria-hidden="true" />
+            </div>
+
+            <div className="ph-side">
+              <p className="ph-quote z-serif" key={cur.id}>{cur.note ? pick(cur.note, lang) : pick(EXAMPLE_NOTE, lang)}</p>
+              <div className="ph-arrows">
+                <button type="button" className="ph-arrow" onClick={() => go(-1)} aria-label={t("prevP", lang)}>{isAr ? <ArrowRight size={20} /> : <ArrowLeft size={20} />}</button>
+                <button type="button" className="ph-arrow ph-arrow-solid" onClick={() => go(1)} aria-label={t("nextP", lang)}>{isAr ? <ArrowLeft size={20} /> : <ArrowRight size={20} />}</button>
+              </div>
+            </div>
+
+            <div className="ph-thumbs" ref={thumbs}>
+              {PORTRAITS.map((p, k) => (
+                <button key={p.id} type="button" className="ph-thumb" data-on={k === i || undefined} aria-pressed={k === i} aria-label={`${t("reel", lang)} ${k + 1} / ${n}`} onClick={() => choose(k)}>
+                  { }
+                  <img src={`/photos/portrait-${p.id}-640.webp`} alt="" width={96} height={128} loading={k < 8 ? "eager" : "lazy"} decoding="async" draggable={false} />
+                </button>
+              ))}
+            </div>
           </div>
 
           <aside className="ph-used" aria-labelledby="ph-used-h">
@@ -281,30 +249,42 @@ const CSS = `
 @media (max-width:560px){.ph-aspects{grid-template-columns:1fr}}
 .ph-split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,1fr);gap:clamp(16px,2vw,28px);align-items:stretch}
 @media (max-width:1100px){.ph-split{grid-template-columns:1fr}}
-.ph-gallery{min-width:0;display:flex;flex-direction:column;gap:8px}
-.ph-row{display:flex;gap:6px;height:clamp(250px,24vw,330px);overflow-x:auto;scrollbar-width:none;scroll-snap-type:none}
-.ph-row::-webkit-scrollbar{display:none}
-.ph-item{position:relative;flex:1 1 0;min-width:0;padding:0;border:0;border-radius:12px;overflow:hidden;background:var(--z-surface-2);cursor:pointer;color:#fff;transition:flex-grow .7s cubic-bezier(.25,1,.5,1),filter .5s,box-shadow .4s;filter:brightness(.55)}
-.ph-item:hover{filter:brightness(.8)}
-.ph-item[data-on]{flex-grow:5;filter:none;box-shadow:0 30px 60px -34px rgba(0,0,0,.9),0 0 0 1px var(--z-gold)}
-.ph-item:focus-visible{outline:2px solid var(--z-focus);outline-offset:2px}
-.ph-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 16%;transform:scale(1.12);transition:transform 1s cubic-bezier(.25,1,.5,1)}
-.ph-item[data-on] img{transform:none}
-.ph-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.05) 50%,transparent);opacity:0;transition:opacity .5s}
-.ph-item[data-on] .ph-shade{opacity:1}
-.ph-no{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:600;letter-spacing:.04em;font-variant-numeric:tabular-nums;transition:opacity .3s}
-.ph-item[data-on] .ph-no{opacity:0}
-.ph-cap{position:absolute;inset:auto 0 0 0;display:flex;flex-direction:column;gap:6px;padding:14px 16px;text-align:start;animation:phIn .5s .25s both}
-.ph-cap-n{font-size:13px;font-weight:600;color:var(--z-gold-text);font-variant-numeric:tabular-nums}
-.ph-cap-t{font-size:14px;line-height:1.45;color:#f3eee7;max-width:34ch}
-@keyframes phIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@media (max-width:1100px){.ph-row{height:300px}.ph-item{flex:0 0 64px}.ph-item[data-on]{flex:0 0 min(60vw,240px)}}
+.ph-stage{display:grid;grid-template-columns:76px minmax(0,auto) minmax(0,1fr);grid-template-areas:"meta main side" "thumbs thumbs thumbs";column-gap:clamp(18px,3vw,44px);row-gap:22px;padding:clamp(18px,2.4vw,30px);border:1px solid var(--z-rule);border-radius:20px;background:var(--z-surface);min-width:0}
+.ph-meta{grid-area:meta;display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+.ph-count{font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:.06em;color:var(--z-fg-2);white-space:nowrap}
+.ph-vert{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--z-gold-text)}
+.ph-main{grid-area:main;position:relative}
+.ph-frame{position:relative;height:clamp(340px,34vw,470px);aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--z-surface-2);box-shadow:0 30px 60px -36px rgba(0,0,0,.85)}
+.ph-big{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 16%;animation:phFade .7s cubic-bezier(.25,1,.5,1) both}
+@keyframes phFade{from{opacity:0;transform:scale(1.05)}to{opacity:1;transform:none}}
+.ph-side{grid-area:side;display:flex;flex-direction:column;justify-content:space-between;gap:20px;min-width:0}
+.ph-quote{margin:clamp(0px,3vw,36px) 0 0;font-size:clamp(20px,2.2vw,30px);line-height:1.3;font-weight:400;letter-spacing:-.01em;color:var(--z-fg);animation:phFade .6s .1s both;max-width:22ch}
+.ph-arrows{display:flex;gap:12px}
+.ph-arrow{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:1px solid var(--z-rule-strong);background:transparent;color:var(--z-fg);cursor:pointer;transition:border-color .2s,background .2s,color .2s}
+.ph-arrow:hover{border-color:var(--z-gold);color:var(--z-gold-text)}
+.ph-arrow-solid{background:var(--z-fg);color:var(--z-bg,#0a0907);border-color:var(--z-fg)}
+.ph-arrow-solid:hover{background:var(--z-gold);border-color:var(--z-gold);color:#14110c}
+.ph-arrow:focus-visible,.ph-thumb:focus-visible{outline:2px solid var(--z-focus);outline-offset:3px}
+.ph-thumbs{grid-area:thumbs;display:flex;gap:8px;overflow-x:auto;padding:4px 2px 6px;scrollbar-width:none}
+.ph-thumbs::-webkit-scrollbar{display:none}
+.ph-thumb{flex:1 1 0;min-width:34px;max-width:60px;aspect-ratio:3/4;padding:0;border:0;border-radius:8px;overflow:hidden;background:var(--z-surface-2);cursor:pointer;opacity:.5;transition:opacity .3s,transform .3s,box-shadow .3s}
+.ph-thumb:hover{opacity:.85}
+.ph-thumb[data-on]{opacity:1;transform:translateY(-3px);box-shadow:0 0 0 2px var(--z-gold)}
+.ph-thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 16%}
+@media (max-width:760px){
+  .ph-stage{grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "side" "thumbs" "meta";justify-items:stretch}
+  .ph-meta{flex-direction:row;align-items:center}
+  .ph-vert{writing-mode:horizontal-tb;transform:none}
+  .ph-frame{height:auto;width:100%;max-width:340px;margin:0 auto}
+  .ph-quote{max-width:none;margin:0}
+  .ph-side{flex-direction:row;align-items:center;justify-content:space-between}
+}
 .ph-used{display:flex;flex-direction:column;gap:14px;padding:22px 20px;border:1px solid var(--z-rule);border-radius:16px;background:var(--z-surface)}
 .ph-used-h{font-size:22px;font-weight:500;line-height:1.15}
 .ph-used-row{display:flex;flex-direction:column;gap:20px;margin-top:6px}
 .ph-fig{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:0}
 .ph-fig figcaption{flex-basis:100%;color:var(--z-fg-3)}
-.ph-round-l img{display:block;width:96px;height:96px;object-fit:cover;object-position:50% 14%;border-radius:50%;box-shadow:0 0 0 3px var(--z-surface),0 0 0 4px var(--z-rule-strong);transition:opacity .3s}
+.ph-round-l img{display:block;width:96px;height:96px;object-fit:cover;object-position:50% 14%;border-radius:50%;box-shadow:0 0 0 3px var(--z-surface),0 0 0 4px var(--z-rule-strong)}
 .ph-round-s img{display:block;width:38px;height:38px;object-fit:cover;object-position:50% 14%;border-radius:50%}
 .ph-cvhead-sheet{display:flex;gap:10px;align-items:flex-start;width:100%;max-width:210px;padding:12px;border-radius:6px;background:var(--z-sheet);box-shadow:0 14px 30px -20px rgba(0,0,0,.6)}
 .ph-cvhead-sheet img{display:block;width:54px;height:72px;object-fit:cover;object-position:50% 14%;border-radius:2px}
@@ -315,5 +295,5 @@ const CSS = `
 @media (max-width:1100px){.ph-used-row{flex-direction:row;flex-wrap:wrap;gap:28px}}
 .ph-notes{display:grid;gap:6px;margin-top:22px;max-width:78ch}
 .ph-notes .z-micro{color:var(--z-fg-3)}
-@media (prefers-reduced-motion:reduce){.ph-item,.ph-item img{transition:none}.ph-cap{animation:none}}
+@media (prefers-reduced-motion:reduce){.ph-big,.ph-quote{animation:none}.ph-thumb{transition:none}}
 `;
