@@ -42,6 +42,27 @@ const PAGES = ["Home", "About", "Services", "Gallery / portfolio", "Prices", "Bo
 const FEATURES = ["Online booking", "Online payments", "WhatsApp button", "Contact form", "Google Maps", "Property or product listings", "Customer accounts", "Newsletter sign-up", "Reviews"];
 const LANGS = ["English", "Arabic", "French", "Other"];
 export const STYLES = ["3D & interactive", "Scroll animations", "Luxury minimal", "Bold & editorial", "Video background", "Dark & elegant", "Arabic & English (RTL)", "E-commerce with payments", "AI chat assistant", "Custom illustrations"];
+
+/** French and Arabic labels for the option lists. The English text stays the value that is sent to us. */
+const OPT: Record<string, [string, string]> = {
+  "Real estate": ["Immobilier", "العقارات"], "Beauty & salon": ["Beauté et salon", "التجميل والصالونات"], "Restaurant & café": ["Restaurant et café", "المطاعم والمقاهي"],
+  "Hotel & travel": ["Hôtel et voyage", "الفنادق والسفر"], "Clinic & healthcare": ["Clinique et santé", "العيادات والصحة"], "Online store": ["Boutique en ligne", "متجر إلكتروني"],
+  "Law & consulting": ["Droit et conseil", "المحاماة والاستشارات"], "Fitness & wellness": ["Sport et bien-être", "اللياقة والعافية"], "Construction & interiors": ["Construction et intérieur", "البناء والتصميم الداخلي"],
+  "Events & weddings": ["Événements et mariages", "الفعاليات والأعراس"], "Landing page": ["Page d'atterrissage", "صفحة هبوط"], "Booking website": ["Site de réservation", "موقع حجوزات"], "Other": ["Autre", "أخرى"],
+  "Home": ["Accueil", "الرئيسية"], "About": ["À propos", "من نحن"], "Services": ["Services", "الخدمات"], "Gallery / portfolio": ["Galerie / portfolio", "المعرض / الأعمال"], "Prices": ["Tarifs", "الأسعار"],
+  "Booking": ["Réservation", "الحجز"], "Shop": ["Boutique", "المتجر"], "Blog / news": ["Blog / actualités", "المدونة / الأخبار"], "FAQ": ["FAQ", "الأسئلة الشائعة"], "Contact": ["Contact", "تواصل معنا"],
+  "Online booking": ["Réservation en ligne", "الحجز عبر الإنترنت"], "Online payments": ["Paiement en ligne", "الدفع عبر الإنترنت"], "WhatsApp button": ["Bouton WhatsApp", "زر واتساب"], "Contact form": ["Formulaire de contact", "نموذج تواصل"],
+  "Google Maps": ["Google Maps", "خرائط Google"], "Property or product listings": ["Annonces de biens ou de produits", "قوائم العقارات أو المنتجات"], "Customer accounts": ["Comptes clients", "حسابات العملاء"],
+  "Newsletter sign-up": ["Inscription à la newsletter", "الاشتراك في النشرة البريدية"], "Reviews": ["Avis", "التقييمات"],
+  "English": ["Anglais", "الإنجليزية"], "Arabic": ["Arabe", "العربية"], "French": ["Français", "الفرنسية"],
+  "3D & interactive": ["3D et interactif", "ثلاثي الأبعاد وتفاعلي"], "Scroll animations": ["Animations au défilement", "حركات أثناء التمرير"], "Luxury minimal": ["Minimalisme luxe", "تصميم بسيط فاخر"],
+  "Bold & editorial": ["Audacieux et éditorial", "جريء بأسلوب مجلات"], "Video background": ["Vidéo en arrière-plan", "فيديو في الخلفية"], "Dark & elegant": ["Sombre et élégant", "داكن وأنيق"],
+  "Arabic & English (RTL)": ["Arabe et anglais (RTL)", "عربي وإنجليزي (من اليمين لليسار)"], "E-commerce with payments": ["E-commerce avec paiement", "متجر إلكتروني مع الدفع"],
+  "AI chat assistant": ["Assistant de chat IA", "مساعد محادثة بالذكاء الاصطناعي"], "Custom illustrations": ["Illustrations sur mesure", "رسومات مخصصة"],
+  "Not sure yet": ["Pas encore sûr", "لم أقرر بعد"], "Within 2 weeks": ["Sous 2 semaines", "خلال أسبوعين"], "Within a month": ["Sous un mois", "خلال شهر"], "In 1 – 3 months": ["Dans 1 à 3 mois", "خلال 1 – 3 أشهر"],
+  "Flexible": ["Flexible", "مرن"], "I have a domain": ["J'ai un nom de domaine", "لدي نطاق"], "I need a domain": ["J'ai besoin d'un nom de domaine", "أحتاج إلى نطاق"], "Not sure": ["Pas sûr", "لست متأكداً"],
+};
+export const optLabel = (x: string, lang: Lang): string => (lang === "en" ? x : OPT[x]?.[lang === "fr" ? 0 : 1] ?? x);
 const RANGES: [number, number][] = [[1000, 2000], [2000, 5000], [5000, 10000], [10000, 0]];
 const BUDGETS = ["AED 1,000 – 2,000", "AED 2,000 – 5,000", "AED 5,000 – 10,000", "AED 10,000 +", "Not sure yet"];
 const WHEN = ["Within 2 weeks", "Within a month", "In 1 – 3 months", "Flexible"];
@@ -51,7 +72,8 @@ export default function WebsiteBrief({ open, onClose, lang, preset, style, curre
   const approx = lang === "fr" ? "env." : lang === "ar" ? "تقريباً" : "approx.";
   const budgetLabel = (x: string, i: number) => {
     const r = RANGES[i];
-    if (!r || currency === "AED") return x;
+    if (!r) return optLabel(x, lang);
+    if (currency === "AED") return x;
     return r[1] ? `${priceText(r[0], currency, rates, approx)} – ${priceText(r[1], currency, rates, "").trim()}` : `${priceText(r[0], currency, rates, approx)} +`;
   };
   const uid = useId();
@@ -108,7 +130,7 @@ export default function WebsiteBrief({ open, onClose, lang, preset, style, curre
 
   const Checks = ({ items, value, set }: { items: string[]; value: string[]; set: (v: string[]) => void }) => (
     <div className="wb-checks">{items.map(i => (
-      <label key={i} className="wb-check"><input type="checkbox" checked={value.includes(i)} onChange={() => toggle(value, set, i)} disabled={busy} /> {i}</label>
+      <label key={i} className="wb-check"><input type="checkbox" checked={value.includes(i)} onChange={() => toggle(value, set, i)} disabled={busy} /> {optLabel(i, lang)}</label>
     ))}</div>
   );
   const field = (k: keyof typeof f) => ({ value: f[k], onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => setF({ ...f, [k]: e.target.value }), disabled: busy });
@@ -142,7 +164,7 @@ export default function WebsiteBrief({ open, onClose, lang, preset, style, curre
             <label htmlFor={`${uid}-p`}>{t("phone")}</label>
             <input id={`${uid}-p`} type="tel" dir="ltr" maxLength={30} {...field("phone")} />
             <label htmlFor={`${uid}-ty`}>{t("type")}</label>
-            <select id={`${uid}-ty`} {...field("type")}>{TYPES.map(x => <option key={x}>{x}</option>)}</select>
+            <select id={`${uid}-ty`} {...field("type")}>{TYPES.map(x => <option key={x} value={x}>{optLabel(x, lang)}</option>)}</select>
             <label htmlFor={`${uid}-c`}>{t("current")}</label>
             <input id={`${uid}-c`} type="url" dir="ltr" placeholder="https://" maxLength={200} {...field("current")} />
             <p className="wb-l">{t("pages")}</p><Checks items={PAGES} value={pages} set={setPages} />
@@ -153,10 +175,10 @@ export default function WebsiteBrief({ open, onClose, lang, preset, style, curre
             <textarea id={`${uid}-li`} rows={2} maxLength={600} {...field("likes")} />
             <div className="wb-row">
               <div><label htmlFor={`${uid}-bu`}>{t("budget")}</label><select id={`${uid}-bu`} {...field("budget")}>{BUDGETS.map((x, i) => <option key={x} value={x}>{budgetLabel(x, i)}</option>)}</select></div>
-              <div><label htmlFor={`${uid}-w`}>{t("when")}</label><select id={`${uid}-w`} {...field("when")}>{WHEN.map(x => <option key={x}>{x}</option>)}</select></div>
+              <div><label htmlFor={`${uid}-w`}>{t("when")}</label><select id={`${uid}-w`} {...field("when")}>{WHEN.map(x => <option key={x} value={x}>{optLabel(x, lang)}</option>)}</select></div>
             </div>
             <label htmlFor={`${uid}-d`}>{t("domain")}</label>
-            <select id={`${uid}-d`} {...field("domain")}>{DOMAINS.map(x => <option key={x}>{x}</option>)}</select>
+            <select id={`${uid}-d`} {...field("domain")}>{DOMAINS.map(x => <option key={x} value={x}>{optLabel(x, lang)}</option>)}</select>
             <label htmlFor={`${uid}-a`}>{t("about")}</label>
             <textarea id={`${uid}-a`} rows={4} maxLength={2500} {...field("about")} />
             <label htmlFor={`${uid}-lo`}>{t("logo")}</label>

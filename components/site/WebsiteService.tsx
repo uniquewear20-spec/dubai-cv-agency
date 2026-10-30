@@ -2,7 +2,7 @@
 // websites (from AED 300): the kinds of site we build, and a way to send the project's details.
 "use client";
 import React, { useState } from "react";
-import WebsiteBrief, { STYLES } from "./WebsiteBrief";
+import WebsiteBrief, { STYLES, optLabel } from "./WebsiteBrief";
 import { Mail, MessageCircle } from "lucide-react";
 import { pick, waLink, type L10n, type Lang } from "@/lib/site";
 import { FALLBACK_RATES, priceText, type Currency, type Rates } from "@/lib/currency";
@@ -70,7 +70,7 @@ export default function WebsiteService({ lang, currency = "AED", rates }: { lang
           <p className="z-micro ws-pick">{t("adv", lang)}</p>
           <ul className="ws-kinds ws-adv">
             {STYLES.map(s => (
-              <li key={s}><button type="button" onClick={() => { setStyle(s); setBrief("Other"); }}>{s}</button></li>
+              <li key={s}><button type="button" onClick={() => { setStyle(s); setBrief("Other"); }}>{optLabel(s, lang)}</button></li>
             ))}
           </ul>
         </div>
