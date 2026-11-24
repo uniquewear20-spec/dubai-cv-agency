@@ -23,6 +23,7 @@ const T: Record<string, L10n> = {
   },
   primary: { en: "See the packages", fr: "Voir les formules", ar: "عرض الباقات" },
   secondary: { en: "Explore CV designs", fr: "Découvrir les CV", ar: "استعرض تصاميم السير" },
+  xray: { en: "Free CV X-Ray: see what screening software reads in your CV", fr: "Radiographie de CV gratuite : voyez ce que lit un logiciel de tri", ar: "فحص مجاني لسيرتك: شاهد ما يقرؤه نظام الفرز الآلي" },
   f1: { en: "First draft within 48 hours of your brief", fr: "Premier jet sous 48 heures après votre brief", ar: "المسودة الأولى خلال 48 ساعة من استلام معلوماتك" },
   f2: { en: "Unlimited revisions for 30 days", fr: "Révisions illimitées pendant 30 jours", ar: "تعديلات غير محدودة لمدة 30 يوماً" },
   f3: { en: "From {p}, paid once", fr: "Dès {p}, en un seul paiement", ar: "ابتداءً من {p}، بدفعة واحدة" },
@@ -284,6 +285,7 @@ export default function Hero({ lang, currency = "AED", rates = FALLBACK_RATES }:
             <a className="z-btn z-btn-primary" href="#packages">{t("primary", lang)}</a>
             <a className="z-btn z-btn-quiet" href="#cv-designs">{t("secondary", lang)}</a>
           </div>
+          <a className="hero-xray" href="/x-ray/"><span className="hero-xray-dot" aria-hidden />{t("xray", lang)}<span aria-hidden className="hero-xray-arrow">→</span></a>
           <ul className="hero-facts">
             <li>{t("f1", lang)}</li>
             <li>{t("f2", lang)}</li>
@@ -386,6 +388,10 @@ const CSS = `
 .hero-lede{margin-top:30px;max-width:52ch}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
 @media (max-width:560px){.hero-ctas .z-btn{flex:1 1 100%}}
+.hero-xray{display:inline-flex;align-items:center;gap:10px;margin-top:18px;font-size:15px;color:var(--z-gold-text);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+.hero-xray:hover{border-bottom-color:currentColor}
+.hero-xray-dot{width:7px;height:7px;border-radius:50%;background:var(--z-gold);box-shadow:0 0 0 4px var(--z-gold-wash);flex:none}
+[dir="rtl"] .hero-xray-arrow{transform:scaleX(-1)}
 .hero-facts{list-style:none;margin:44px 0 0;padding:0;border-top:1px solid var(--z-rule);display:grid;grid-template-columns:repeat(3,minmax(0,auto));justify-content:start}
 .hero-facts li{padding:18px 26px 0 0;font-size:14px;line-height:1.5;color:var(--z-fg-2);max-width:22ch}
 .hero-facts li+li{padding-inline-start:26px;border-inline-start:1px solid var(--z-rule)}
