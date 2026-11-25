@@ -10,7 +10,7 @@ export interface LegalDoc { title: string; updated: string; intro: string; highl
 export const PRIVACY: Record<Lang, LegalDoc> = {
   "en": {
     "title": "Privacy Policy",
-    "updated": "Last updated: 23 October 2026",
+    "updated": "Last updated: 25 November 2026",
     "intro": "This policy explains what Zenith Dubai CV (“Zenith”, “we”) collects when you use zenithdubaicv.com, our services and the Zenith AI job agent, why we collect it, who processes it for us, and how to have it corrected or deleted.",
     "sections": [
       {
@@ -29,7 +29,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "body": [
           "Your agent profile, CV text and the CV file you upload, saved jobs, drafts, applications and notes are stored in your own browser (IndexedDB), not on our servers. Your CV is read on your device: the details the agent finds in it (contacts, work history, education, languages) are shown to you to check and are only added to your profile when you choose. You can export or delete all of this at any time in the agent's “Your data” section.",
           "When you search, your browser sends our server only your target roles, countries and work type. Our server asks the job sources and returns the listings; it does not store your search.",
-          "When you ask for an AI draft (Pro), your CV text with email addresses and phone numbers removed, your name, headline, target roles, languages, listed skills and the job listing are sent through our server to Anthropic, which writes the draft. Zenith does not store them. Anthropic deletes API inputs and outputs within 30 days, unless it must keep them longer to enforce its usage policy or to comply with the law, and does not use them to train its models.",
+          "When you ask for an AI draft (Pro), your CV text with email addresses and phone numbers removed and your name and web links replaced by placeholders, your headline, target roles, languages, listed skills and the job listing are sent through our server to Cloudflare Workers AI, which runs an open-source model to write the draft. Zenith does not store them. Cloudflare does not use them to train AI models.",
           "When you ask Zenith to email an application (Pro), the message and the CV file you attach pass through our mailbox's mail server to the employer, with a copy to you. Zenith does not keep a copy.",
           "If you enter a PayPal order number or a Gumroad license key, it is kept in your browser and checked with PayPal or Gumroad when you use the interview coach or Pro features. Our server keeps only a count of the AI drafts and emails used, stored against a one-way code derived from it, never the order number or key itself.",
           "The interview coach (packages 2 to 4) keeps your interview reports and progress in your browser. Each answer is sent as text to our server, which chooses the interviewer's next question and scores the interview with fixed rules; the answers are not stored and no AI service receives them. If you answer by speaking, your browser turns your speech into text: in most browsers this is done by the browser maker's speech service (for example Google in Chrome, Microsoft in Edge, Apple in Safari) under its own privacy terms, and Zenith never receives the audio. If you turn on the camera in the coach, the picture is shown only on your screen and is never recorded or sent. The interviewer's voice comes from your device; online voices send the interviewer's lines, not your answers, to the browser maker."
@@ -47,7 +47,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "id": "04",
         "title": "Who processes it for us",
         "body": [
-          "We share personal data only with the services that run this site and your order: Vercel (hosting), GoDaddy (email), PayPal and Gumroad (payments; Gumroad sells digital products as merchant of record and handles their delivery), and Anthropic (AI drafting, only when you use it).",
+          "We share personal data only with the services that run this site and your order: Vercel (hosting), GoDaddy (email), PayPal and Gumroad (payments; Gumroad sells digital products as merchant of record and handles their delivery), and Cloudflare (AI drafting, only when you use it).",
           "Job sources (Workable, Himalayas, Jobicy, Remotive and Arbeitnow, and Jooble or Adzuna if we connect them) receive only search terms from our server, never your CV or contact details. To show prices in other currencies, your browser requests exchange rates from open.er-api.com.",
           "We may disclose your information if required by applicable law or a valid legal process. In such cases, we will notify you to the extent permitted by law."
         ]
@@ -112,7 +112,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
   },
   "fr": {
     "title": "Politique de Confidentialité",
-    "updated": "Dernière mise à jour : 23 octobre 2026",
+    "updated": "Dernière mise à jour : 25 novembre 2026",
     "intro": "Cette politique explique ce que Zenith Dubai CV (« Zenith », « nous ») collecte lorsque vous utilisez zenithdubaicv.com, nos services et l'agent emploi Zenith AI, pourquoi, qui le traite pour nous, et comment le faire corriger ou supprimer.",
     "sections": [
       {
@@ -131,7 +131,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "body": [
           "Votre profil, le texte et le fichier de votre CV, les offres enregistrées, vos brouillons, candidatures et notes sont stockés dans votre propre navigateur (IndexedDB), pas sur nos serveurs. Votre CV est lu sur votre appareil : les informations que l'agent y trouve (coordonnées, parcours, formation, langues) vous sont présentées pour vérification et ne sont ajoutées à votre profil que si vous le choisissez. Vous pouvez exporter ou supprimer tout cela à tout moment dans la section « Vos données » de l'agent.",
           "Lorsque vous lancez une recherche, votre navigateur n'envoie à notre serveur que vos postes visés, vos pays et le type de poste. Notre serveur interroge les sources d'offres et renvoie les annonces ; il ne conserve pas votre recherche.",
-          "Lorsque vous demandez un brouillon IA (Pro), le texte de votre CV sans adresses e-mail ni numéros de téléphone, votre nom, votre accroche, vos postes visés, vos langues, vos compétences et l'offre sont transmis par notre serveur à Anthropic, qui rédige le brouillon. Zenith ne les conserve pas. Anthropic supprime les données envoyées à son API et les réponses sous 30 jours, sauf obligation de les conserver plus longtemps pour faire respecter sa politique d'utilisation ou pour se conformer à la loi, et ne s'en sert pas pour entraîner ses modèles.",
+          "Lorsque vous demandez un brouillon IA (Pro), le texte de votre CV sans adresses e-mail ni numéros de téléphone (votre nom et vos liens remplacés par des repères), votre accroche, vos postes visés, vos langues, vos compétences et l'offre sont transmis par notre serveur à Cloudflare Workers AI, qui fait tourner un modèle open source pour rédiger le brouillon. Zenith ne les conserve pas. Cloudflare ne s'en sert pas pour entraîner des modèles d'IA.",
           "Lorsque vous demandez à Zenith d'envoyer une candidature par e-mail (Pro), le message et le CV joint transitent par le serveur de messagerie de notre boîte jusqu'à l'employeur, avec une copie pour vous. Zenith n'en conserve aucune copie.",
           "Si vous saisissez un numéro de commande PayPal ou une clé de licence Gumroad, il est conservé dans votre navigateur et vérifié auprès de PayPal ou de Gumroad lorsque vous utilisez le coach d'entretien ou les fonctions Pro. Notre serveur ne garde que le nombre de brouillons IA et d'e-mails utilisés, rattaché à un code irréversible dérivé de ce numéro, jamais le numéro ou la clé eux-mêmes.",
           "Le coach d'entretien (formules 2 à 4) conserve vos rapports d'entretien et votre progression dans votre navigateur. Chaque réponse est envoyée sous forme de texte à notre serveur, qui choisit la question suivante du recruteur et note l'entretien selon des règles fixes ; les réponses ne sont pas conservées et aucun service d'IA ne les reçoit. Si vous répondez à l'oral, votre navigateur transforme votre voix en texte : dans la plupart des navigateurs, c'est le service vocal de son éditeur qui s'en charge (par exemple Google dans Chrome, Microsoft dans Edge, Apple dans Safari), selon ses propres conditions de confidentialité, et Zenith ne reçoit jamais l'audio. Si vous activez la caméra dans le coach, l'image s'affiche uniquement sur votre écran et n'est jamais enregistrée ni envoyée. La voix du recruteur provient de votre appareil ; les voix en ligne envoient les phrases du recruteur, et non vos réponses, à l'éditeur du navigateur."
@@ -149,7 +149,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "id": "04",
         "title": "Qui les traite pour nous",
         "body": [
-          "Nous ne partageons des données personnelles qu'avec les services qui font fonctionner ce site et votre commande : Vercel (hébergement), GoDaddy (messagerie), PayPal et Gumroad (paiements ; Gumroad vend les produits numériques en tant que vendeur officiel et en assure la livraison) et Anthropic (rédaction par IA, uniquement lorsque vous l'utilisez).",
+          "Nous ne partageons des données personnelles qu'avec les services qui font fonctionner ce site et votre commande : Vercel (hébergement), GoDaddy (messagerie), PayPal et Gumroad (paiements ; Gumroad vend les produits numériques en tant que vendeur officiel et en assure la livraison) et Cloudflare (rédaction par IA, uniquement lorsque vous l'utilisez).",
           "Les sources d'offres (Workable, Himalayas, Jobicy, Remotive et Arbeitnow, ainsi que Jooble ou Adzuna si nous les connectons) ne reçoivent de notre serveur que des termes de recherche, jamais votre CV ni vos coordonnées. Pour afficher les prix dans d'autres devises, votre navigateur demande les taux de change à open.er-api.com.",
           "Nous pouvons divulguer vos informations si la loi applicable ou une procédure légale valide l'exige. Nous vous en informerons dans la mesure permise par la loi."
         ]
@@ -214,7 +214,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
   },
   "ar": {
     "title": "سياسة الخصوصية",
-    "updated": "آخر تحديث: 23 أكتوبر 2026",
+    "updated": "آخر تحديث: 25 نوفمبر 2026",
     "intro": "توضح هذه السياسة ما تجمعه Zenith Dubai CV («Zenith» أو «نحن») عند استخدامك zenithdubaicv.com وخدماتنا ووكيل الوظائف Zenith AI، ولماذا، ومن يعالجه نيابةً عنا، وكيف تطلب تصحيحه أو حذفه.",
     "sections": [
       {
@@ -233,7 +233,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "body": [
           "يُخزَّن ملفك في الوكيل ونص سيرتك الذاتية وملفها الذي ترفعه والوظائف المحفوظة والمسودات والطلبات والملاحظات في متصفحك أنت (IndexedDB)، لا على خوادمنا. تُقرأ سيرتك الذاتية على جهازك: تُعرض عليك البيانات التي يجدها الوكيل فيها (بيانات التواصل والخبرة والتعليم واللغات) لتراجعها، ولا تُضاف إلى ملفك إلا إذا اخترت ذلك. ويمكنك تصدير ذلك كله أو حذفه في أي وقت من قسم «بياناتك» في الوكيل.",
           "عند البحث، لا يرسل متصفحك إلى خادمنا إلا الوظائف والدول ونوع العمل الذي تستهدفه. يستعلم خادمنا من مصادر الوظائف ويعيد الإعلانات، ولا يحتفظ ببحثك.",
-          "عند طلب مسودة بالذكاء الاصطناعي (Pro)، يُرسل عبر خادمنا إلى Anthropic، التي تكتب المسودة، نص سيرتك الذاتية بعد حذف عناوين البريد وأرقام الهاتف، واسمك وعنوانك التعريفي والوظائف المستهدفة ولغاتك ومهاراتك وإعلان الوظيفة. لا تحتفظ Zenith بها. وتحذف Anthropic مدخلات واجهتها البرمجية ومخرجاتها خلال 30 يوماً، ما لم تضطر إلى الاحتفاظ بها مدة أطول لتطبيق سياسة الاستخدام أو للامتثال للقانون، ولا تستخدمها لتدريب نماذجها.",
+          "عند طلب مسودة بالذكاء الاصطناعي (Pro)، يُرسل عبر خادمنا إلى Cloudflare Workers AI، التي تشغّل نموذجاً مفتوح المصدر لكتابة المسودة، نص سيرتك الذاتية بعد حذف عناوين البريد وأرقام الهاتف واستبدال اسمك وروابطك برموز، وعنوانك التعريفي والوظائف المستهدفة ولغاتك ومهاراتك وإعلان الوظيفة. لا تحتفظ Zenith بها. ولا تستخدمها Cloudflare لتدريب نماذج الذكاء الاصطناعي.",
           "عندما تطلب من Zenith إرسال طلب توظيف بالبريد (Pro)، تمر الرسالة وملف السيرة المرفق عبر خادم بريدنا إلى صاحب العمل، مع نسخة إليك. ولا تحتفظ Zenith بأي نسخة.",
           "إذا أدخلت رقم طلب PayPal أو مفتاح ترخيص Gumroad، فإنه يُحفظ في متصفحك ويُتحقق منه لدى PayPal أو Gumroad عند استخدام مدرّب المقابلات أو ميزات Pro. ولا يحتفظ خادمنا إلا بعدد المسودات والرسائل المستخدمة، مرتبطاً برمز أحادي الاتجاه مشتق منه، لا برقم الطلب أو المفتاح نفسه.",
           "يحفظ مدرّب المقابلات (الباقات من 2 إلى 4) تقارير مقابلاتك وتقدّمك في متصفحك. تُرسل كل إجابة نصاً إلى خادمنا، الذي يختار سؤال المحاوِر التالي ويقيّم المقابلة بقواعد ثابتة؛ ولا تُخزَّن الإجابات ولا تتلقاها أي خدمة ذكاء اصطناعي. إذا أجبت بالصوت، يحوّل متصفحك كلامك إلى نص: في معظم المتصفحات تتولى ذلك خدمة الصوت لدى الشركة المطوّرة للمتصفح (مثل Google في Chrome وMicrosoft في Edge وApple في Safari) وفق شروط الخصوصية الخاصة بها، ولا تتلقى Zenith الصوت أبداً. وإذا شغّلت الكاميرا في المدرّب، تظهر الصورة على شاشتك فقط ولا تُسجَّل ولا تُرسَل. يأتي صوت المحاوِر من جهازك؛ والأصوات عبر الإنترنت ترسل عبارات المحاوِر، لا إجاباتك، إلى الشركة المطوّرة للمتصفح."
@@ -251,7 +251,7 @@ export const PRIVACY: Record<Lang, LegalDoc> = {
         "id": "04",
         "title": "من يعالجها نيابةً عنا",
         "body": [
-          "لا نشارك البيانات الشخصية إلا مع الخدمات التي تشغّل هذا الموقع وطلبك: Vercel (الاستضافة)، وGoDaddy (البريد)، وPayPal وGumroad (المدفوعات؛ إذ يبيع Gumroad المنتجات الرقمية بصفته البائع الرسمي ويتولى تسليمها)، وAnthropic (الكتابة بالذكاء الاصطناعي، عند استخدامك لها فقط).",
+          "لا نشارك البيانات الشخصية إلا مع الخدمات التي تشغّل هذا الموقع وطلبك: Vercel (الاستضافة)، وGoDaddy (البريد)، وPayPal وGumroad (المدفوعات؛ إذ يبيع Gumroad المنتجات الرقمية بصفته البائع الرسمي ويتولى تسليمها)، وCloudflare (الكتابة بالذكاء الاصطناعي، عند استخدامك لها فقط).",
           "لا تتلقى مصادر الوظائف (Workable وHimalayas وJobicy وRemotive وArbeitnow، وJooble أو Adzuna إن ربطناها) من خادمنا سوى كلمات البحث، ولا تتلقى أبداً سيرتك الذاتية أو بيانات تواصلك. ولعرض الأسعار بعملات أخرى، يطلب متصفحك أسعار الصرف من open.er-api.com.",
           "قد نُفصح عن معلوماتك إذا اقتضى القانون المعمول به أو إجراء قانوني صحيح ذلك. في مثل هذه الحالات، سنخطرك بالقدر المسموح به قانوناً."
         ]

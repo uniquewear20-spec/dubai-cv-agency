@@ -170,6 +170,8 @@ export type AppStatus = "saved" | "prepared" | "submitted" | "interview" | "offe
 
 export interface Draft {
   kind: "ai" | "template";
+  /** For AI drafts: the model that wrote it (shown to the customer). */
+  model?: string;
   lang: "en" | "fr" | "ar";
   createdAt: string;
   fitSummary: string;
@@ -236,6 +238,8 @@ export interface AgentStatus {
   ai: boolean;
   /** AI drafting is on but paused by the daily or monthly spending cap. */
   aiPaused?: boolean;
+  /** Which AI service writes drafts: free Cloudflare Workers AI, or Anthropic only if chosen explicitly. */
+  aiProvider?: "workers-ai" | "anthropic" | null;
   model: string | null;
   /** "shared" when usage is counted in a shared store; "per-instance" otherwise. */
   limits: "shared" | "per-instance";

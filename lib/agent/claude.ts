@@ -13,15 +13,36 @@
 // skills, and the job listing. Anthropic deletes API inputs and outputs within 30 days by
 // default and does not train on them. Zenith stores nothing.
 
-import { aiBudgetAllows, recordAiCost } from "./limits";
+import { aiBudgetAllows, firstTime, recordAiCost, wasMarked } from "./limits";
 import { quotedFrom, unsupportedFigures, unsupportedSkills } from "./text";
 import type { Draft, DraftWarning, TailorRequest } from "./types";
 
-export const aiConfigured = (): boolean => Boolean(process.env.ANTHROPIC_API_KEY?.trim());
-export const aiModel = (): string => process.env.ANTHROPIC_MODEL?.trim() || "claude-sonnet-5-5";
+// Providers. Default and free: Cloudflare Workers AI (10,000 Neurons a day at no charge on the
+// Workers Free plan; past that, calls fail until 00:00 UTC, nothing is billed). Needs CF_ACCOUNT_ID
+// and CF_API_TOKEN (a token with Workers AI access). WORKERS_AI_MODELS: comma-separated models to
+// try in order (defaults below, all open models). Anthropic is paid: it is used only when
+// AI_PROVIDER=anthropic is set together with ANTHROPIC_API_KEY.
+export type AiProvider = "workers-ai" | "anthropic";
+const cf = () => ({ account: process.env.CF_ACCOUNT_ID?.trim() ?? "", token: process.env.CF_API_TOKEN?.trim() ?? "" });
+export const aiProvider = (): AiProvider | null => {
+  const c = cf();
+  if (c.account && c.token) return "workers-ai";
+  if (process.env.AI_PROVIDER?.trim() === "anthropic" && process.env.ANTHROPIC_API_KEY?.trim()) return "anthropic";
+  return null;
+};
+export const aiConfigured = (): boolean => aiProvider() !== null;
+const DEFAULT_MODELS = ["@cf/mistralai/mistral-small-3.1-24b-instruct", "@cf/google/gemma-3-12b-it", "@cf/meta/llama-3.1-8b-instruct-fast"];
+const workersModels = (): string[] => {
+  const list = (process.env.WORKERS_AI_MODELS ?? "").split(",").map(m => m.trim()).filter(m => /^@cf\/[\w.-]+\/[\w.-]+$/.test(m));
+  return list.length ? list : DEFAULT_MODELS;
+};
+let workingModel: string | null = null;
+export const aiModel = (): string =>
+  aiProvider() === "workers-ai" ? (workingModel ?? workersModels()[0]) : process.env.ANTHROPIC_MODEL?.trim() || "claude-sonnet-5-5";
 
 // Local tests only: a stub of the Anthropic API. Never active on Vercel.
 const BASE = (!process.env.VERCEL && process.env.ANTHROPIC_BASE_URL_TEST?.trim()) || "https://api.anthropic.com";
+const CF_BASE = (!process.env.VERCEL && process.env.CF_API_BASE_TEST?.trim()) || "https://api.cloudflare.com/client/v4";
 
 const LANGUAGE = { en: "English", fr: "French", ar: "Modern Standard Arabic" } as const;
 
@@ -117,29 +138,8 @@ export async function draftWithRetry(req: TailorRequest): Promise<{ draft: Draft
   }
 }
 
-export async function draftWithClaude(req: TailorRequest, timeoutMs = 55_000): Promise<{ draft: Draft; dropped: number }> {
-  const p = req.profile;
-  const user = [
-    `Write in ${LANGUAGE[req.lang]}.`,
-    "<candidate>",
-    `Name: ${cap(p.name, 120) || "[candidate name]"}`,
-    `Headline: ${cap(p.headline, 200) || "-"}`,
-    `Target roles: ${p.roles.map(r => cap(r, 80)).join("; ") || "-"}`,
-    `Languages: ${p.languages.map(l => cap(l, 40)).join(", ") || "-"}`,
-    `Skills the candidate lists: ${p.skills.map(s => cap(s, 60)).join(", ") || "-"}`,
-    "</candidate>",
-    "<cv>",
-    cap(req.cvText, 16000),
-    "</cv>",
-    "<job>",
-    `Title: ${cap(req.job.title, 200)}`,
-    `Employer: ${cap(req.job.company, 160)}`,
-    `Location: ${cap(req.job.location, 160)}`,
-    "Listing:",
-    cap(req.job.description, 9000),
-    "</job>",
-  ].join("\n");
-
+/** Anthropic (paid, used only when AI_PROVIDER=anthropic): the answer's text. */
+async function anthropicText(user: string, timeoutMs: number): Promise<string> {
   // Never start a call that could take today's or this month's AI spending past its cap.
   if (!(await aiBudgetAllows(maxCallCost(SYSTEM.length + user.length + JSON.stringify(SCHEMA).length)))) throw new AiBudgetError();
 
@@ -184,10 +184,105 @@ export async function draftWithClaude(req: TailorRequest, timeoutMs = 55_000): P
   }
   if (data?.stop_reason === "refusal") throw new AiError("The AI declined to write this draft.");
   if (data?.stop_reason === "max_tokens") throw new AiError("The draft came back incomplete. Try again.", true);
+  return data?.content?.find(b => b.type === "text")?.text ?? "";
+}
+
+/** Open models need the answer's shape spelled out when JSON mode isn't available. */
+const JSON_ONLY = "\n\nAnswer with one JSON object only, with exactly these keys: fit_summary (string), tailored_summary (string), highlights (array of objects with text, evidence and why), cover_letter (string), gaps (array of strings), keywords (array of strings). No other text.";
+
+/** Reads the model's JSON, tolerating code fences and reasoning blocks around it. */
+function parseModelJson(text: string): ModelDraft {
+  const t = text.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
+  const start = t.indexOf("{"), end = t.lastIndexOf("}");
+  if (start < 0 || end <= start) throw new Error("no JSON");
+  return JSON.parse(t.slice(start, end + 1)) as ModelDraft;
+}
+
+const exhaustedKey = () => `ai-free-exhausted:${new Date().toISOString().slice(0, 10)}`;
+/** Today's free Workers AI allocation is used up (it resets at 00:00 UTC). */
+export const aiFreeExhausted = (): Promise<boolean> => wasMarked(exhaustedKey()).catch(() => false);
+
+/**
+ * Cloudflare Workers AI (free allocation). Tries the configured models in order: a model the Free plan
+ * doesn't allow (403, code 5035) or one that rejects the JSON schema is skipped. When the daily free
+ * allocation is used (429, code 3036) AI drafting pauses until 00:00 UTC for every server.
+ */
+async function workersAi(user: string, timeoutMs: number): Promise<{ text: string; model: string }> {
+  if (await aiFreeExhausted()) throw new AiBudgetError();
+  const { account, token } = cf();
+  const models = workingModel ? [workingModel, ...workersModels().filter(m => m !== workingModel)] : workersModels();
+  let last: AiError = new AiError("No free AI model is available right now. Try again later.");
+  for (const model of models) {
+    for (const schema of [true, false]) {
+      let res: Response;
+      try {
+        res = await fetch(`${CF_BASE}/accounts/${encodeURIComponent(account)}/ai/run/${model}`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            messages: [{ role: "system", content: SYSTEM }, { role: "user", content: user }],
+            max_tokens: 2048,
+            temperature: 0.3,
+            ...(schema ? { response_format: { type: "json_schema", json_schema: SCHEMA } } : {}),
+          }),
+          cache: "no-store",
+          signal: AbortSignal.timeout(Math.max(5_000, timeoutMs)),
+        });
+      } catch (err) {
+        throw new AiError(err instanceof Error && err.name === "TimeoutError" ? "The AI took too long to answer." : "The AI service could not be reached.", true);
+      }
+      const data = (await res.json().catch(() => null)) as
+        | { success?: boolean; result?: { response?: unknown; usage?: { prompt_tokens?: number; completion_tokens?: number } }; errors?: { code?: number }[] }
+        | null;
+      const code = data?.errors?.[0]?.code;
+      if (res.ok && data?.success !== false && data?.result) {
+        workingModel = model;
+        const r = data.result.response;
+        // Counts only, never the CV or the draft. The free allocation costs nothing.
+        console.info(`[agent/ai] workers-ai ${model} in=${data.result.usage?.prompt_tokens ?? 0} out=${data.result.usage?.completion_tokens ?? 0} (free allocation)`);
+        return { text: typeof r === "string" ? r : JSON.stringify(r ?? ""), model };
+      }
+      console.error(`[agent/ai] workers-ai ${model}: HTTP ${res.status}, code ${code ?? "none"}`);
+      if (res.status === 429 && code === 3036) { await firstTime(exhaustedKey(), 86_400).catch(() => true); throw new AiBudgetError(); }
+      if (res.status === 429 || res.status >= 500) throw new AiError("The AI service is busy. Try again in a minute.", true);
+      if (res.status === 400 && schema) continue; // the model may not take a JSON schema: ask in words
+      last = new AiError("The AI service refused the request.");
+      break; // next model
+    }
+  }
+  throw last;
+}
+
+export async function draftWithClaude(req: TailorRequest, timeoutMs = 55_000): Promise<{ draft: Draft; dropped: number }> {
+  const p = req.profile;
+  const user = [
+    `Write in ${LANGUAGE[req.lang]}.`,
+    "<candidate>",
+    `Name: ${cap(p.name, 120) || "[candidate name]"}`,
+    `Headline: ${cap(p.headline, 200) || "-"}`,
+    `Target roles: ${p.roles.map(r => cap(r, 80)).join("; ") || "-"}`,
+    `Languages: ${p.languages.map(l => cap(l, 40)).join(", ") || "-"}`,
+    `Skills the candidate lists: ${p.skills.map(s => cap(s, 60)).join(", ") || "-"}`,
+    "</candidate>",
+    "<cv>",
+    cap(req.cvText, 16000),
+    "</cv>",
+    "<job>",
+    `Title: ${cap(req.job.title, 200)}`,
+    `Employer: ${cap(req.job.company, 160)}`,
+    `Location: ${cap(req.job.location, 160)}`,
+    "Listing:",
+    cap(req.job.description, 9000),
+    "</job>",
+  ].join("\n");
+
+  const raw = aiProvider() === "workers-ai"
+    ? await workersAi(user + JSON_ONLY, timeoutMs)
+    : { text: await anthropicText(user, timeoutMs), model: aiModel() };
 
   let parsed: ModelDraft;
   try {
-    parsed = JSON.parse(data?.content?.find(b => b.type === "text")?.text ?? "") as ModelDraft;
+    parsed = parseModelJson(raw.text);
   } catch {
     throw new AiError("The AI answer could not be read. Try again.", true);
   }
@@ -201,6 +296,7 @@ export async function draftWithClaude(req: TailorRequest, timeoutMs = 55_000): P
 
   const draft: Draft = {
     kind: "ai",
+    model: raw.model,
     lang: req.lang,
     createdAt: new Date().toISOString(),
     fitSummary: cap(parsed.fit_summary, 800),

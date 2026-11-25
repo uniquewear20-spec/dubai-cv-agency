@@ -189,7 +189,7 @@ function DraftPanel({ app, onSaved }: { app: Application; onSaved: (d: Draft) =>
 
       {draft && (
         <div className="za-draft-body" lang={draft.lang} dir={draft.lang === "ar" ? "rtl" : "ltr"}>
-          <p className="z-tag z-tag-gold">{draft.kind === "ai" ? t.ws.kindAi : t.ws.kindTemplate} · {fmtDate(draft.createdAt, lang)}</p>
+          <p className="z-tag z-tag-gold">{draft.kind === "ai" ? t.ws.kindAi : t.ws.kindTemplate}{draft.kind === "ai" && draft.model ? ` · ${draft.model.split("/").pop()}` : ""} · {fmtDate(draft.createdAt, lang)}</p>
 
           {draft.warnings.map(w => (
             <Notice key={w.kind} tone="warn">

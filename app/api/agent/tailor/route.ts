@@ -1,6 +1,6 @@
 // app/api/agent/tailor/route.ts — AI-tailored CV highlights and cover letter for one job.
 // Only for Career Automation and Executive Career Suite customers, checked with PayPal or
-// Gumroad on every call. The CV is sent to Anthropic for this one draft (contact details removed,
+// Gumroad on every call. The CV is sent to the AI provider (Cloudflare Workers AI, free) for this one draft (contact details removed,
 // and the candidate's name and web links replaced by placeholders, first) and is not stored by Zenith. The draft is checked before it is returned:
 // highlights must quote the CV, and unsupported figures or skills are flagged.
 

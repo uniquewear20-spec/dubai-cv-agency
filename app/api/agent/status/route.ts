@@ -1,7 +1,7 @@
 // app/api/agent/status/route.ts — what the agent can do on this server right now. No secrets:
 // only whether each dependency is configured, so the interface never offers what isn't live.
 
-import { aiConfigured, aiModel, maxCallCost } from "@/lib/agent/claude";
+import { aiConfigured, aiFreeExhausted, aiModel, aiProvider, maxCallCost } from "@/lib/agent/claude";
 import { aiBudgetAllows, planLimits, sharedLimits } from "@/lib/agent/limits";
 import { SOURCE_META, sourceConfigured } from "@/lib/agent/sources";
 import { checkEmail, emailConfigured } from "@/lib/email";
@@ -17,7 +17,8 @@ export async function GET(req: Request) {
   const status: AgentStatus = {
     ai: aiConfigured(),
     // On, but today's or this month's spending cap is reached: AI drafts wait, templates still work.
-    aiPaused: aiConfigured() ? !(await aiBudgetAllows(maxCallCost(40_000)).catch(() => true)) : false,
+    aiPaused: aiConfigured() ? !(await aiBudgetAllows(maxCallCost(40_000)).catch(() => true)) || (await aiFreeExhausted()) : false,
+    aiProvider: aiProvider(),
     model: aiConfigured() ? aiModel() : null,
     limits: sharedLimits() ? "shared" : "per-instance",
     email: emailConfigured(),
