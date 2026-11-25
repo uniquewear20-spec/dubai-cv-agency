@@ -4,11 +4,16 @@
 // Environment variables (Vercel → Settings → Environment Variables):
 //   ANTHROPIC_API_KEY   from console.anthropic.com → API keys (store as a secret; never in code)
 //   ANTHROPIC_MODEL     optional, default claude-sonnet-5-5
+//   AGENT_AI_PRICE_IN_PER_MTOK / AGENT_AI_PRICE_OUT_PER_MTOK   the model's prices in US$ per million
+//                       input / output tokens, for the spending caps (defaults 2 and 10: Sonnet 5.5).
+//                       Set both if you change the model; a higher price only makes the caps stricter.
+//   Spending caps: AGENT_AI_DAILY_BUDGET_USD and AGENT_AI_MONTHLY_BUDGET_USD (lib/agent/limits.ts).
 //
 // What is sent: the candidate's CV text, name, headline, target roles, languages and listed
 // skills, and the job listing. Anthropic deletes API inputs and outputs within 30 days by
 // default and does not train on them. Zenith stores nothing.
 
+import { aiBudgetAllows, recordAiCost } from "./limits";
 import { quotedFrom, unsupportedFigures, unsupportedSkills } from "./text";
 import type { Draft, DraftWarning, TailorRequest } from "./types";
 
@@ -19,6 +24,23 @@ export const aiModel = (): string => process.env.ANTHROPIC_MODEL?.trim() || "cla
 const BASE = (!process.env.VERCEL && process.env.ANTHROPIC_BASE_URL_TEST?.trim()) || "https://api.anthropic.com";
 
 const LANGUAGE = { en: "English", fr: "French", ar: "Modern Standard Arabic" } as const;
+
+const MAX_TOKENS = 4096;
+const price = (name: string, fallback: number) => {
+  const v = Number(process.env[name]);
+  return Number.isFinite(v) && v > 0 ? v : fallback;
+};
+/** US dollars for a number of input and output tokens. */
+export const costOf = (inputTokens: number, outputTokens: number): number =>
+  (inputTokens * price("AGENT_AI_PRICE_IN_PER_MTOK", 2) + outputTokens * price("AGENT_AI_PRICE_OUT_PER_MTOK", 10)) / 1e6;
+/** The most one call can cost: the prompt counted at one token per two characters (more than any
+ *  script needs) and an answer of full length. */
+export const maxCallCost = (promptChars: number): number => costOf(Math.ceil(promptChars / 2), MAX_TOKENS);
+
+/** AI drafting is paused: today's or this month's spending cap would be passed. */
+export class AiBudgetError extends Error {
+  constructor() { super("ai-budget"); this.name = "AiBudgetError"; }
+}
 
 const SYSTEM = `You prepare job-application drafts for one candidate. You only use facts the candidate has given.
 
@@ -116,6 +138,9 @@ export async function draftWithClaude(req: TailorRequest, timeoutMs = 55_000): P
     "</job>",
   ].join("\n");
 
+  // Never start a call that could take today's or this month's AI spending past its cap.
+  if (!(await aiBudgetAllows(maxCallCost(SYSTEM.length + user.length + JSON.stringify(SCHEMA).length)))) throw new AiBudgetError();
+
   let res: Response;
   try {
     res = await fetch(`${BASE}/v1/messages`, {
@@ -127,7 +152,7 @@ export async function draftWithClaude(req: TailorRequest, timeoutMs = 55_000): P
       },
       body: JSON.stringify({
         model: aiModel(),
-        max_tokens: 4096,
+        max_tokens: MAX_TOKENS,
         system: SYSTEM,
         messages: [{ role: "user", content: user }],
         output_config: { format: { type: "json_schema", schema: SCHEMA } },
@@ -140,8 +165,16 @@ export async function draftWithClaude(req: TailorRequest, timeoutMs = 55_000): P
   }
 
   const data = (await res.json().catch(() => null)) as
-    | { content?: { type: string; text?: string }[]; stop_reason?: string; error?: { type?: string; message?: string } }
+    | { content?: { type: string; text?: string }[]; stop_reason?: string; error?: { type?: string; message?: string }; usage?: { input_tokens?: number; output_tokens?: number } }
     | null;
+  // Every answer Anthropic bills is counted, even one we then reject (cut short, refused, unreadable).
+  if (data?.usage) {
+    const inTok = data.usage.input_tokens ?? 0, outTok = data.usage.output_tokens ?? 0, cost = costOf(inTok, outTok);
+    const after = await recordAiCost(cost).catch(() => null);
+    // Counts and dollars only: never the CV, the listing or the draft.
+    console.info(`[agent/ai] ${aiModel()} in=${inTok} out=${outTok} cost=$${cost.toFixed(4)}` +
+      (after ? ` today=$${after.dayUsd.toFixed(2)}/$${after.dayCapUsd} month=$${after.monthUsd.toFixed(2)}/$${after.monthCapUsd}` : ""));
+  }
   if (!res.ok) {
     // Never log the request (it holds the CV); the error type is enough.
     console.error(`[agent/tailor] Anthropic ${res.status}: ${data?.error?.type ?? "unknown"}`);

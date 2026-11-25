@@ -103,7 +103,7 @@ function DraftPanel({ app, onSaved }: { app: Application; onSaved: (d: Draft) =>
   const [saved, setSaved] = useState(Boolean(app.draft));
   const id = useId();
   const hasCv = profile.cvText.trim().length >= 200;
-  const aiReady = Boolean(status?.ai && access && hasCv);
+  const aiReady = Boolean(status?.ai && !status.aiPaused && access && hasCv);
 
   const update = (d: Draft) => { setDraft(d); setSaved(false); };
 
@@ -181,6 +181,7 @@ function DraftPanel({ app, onSaved }: { app: Application; onSaved: (d: Draft) =>
         </div>
       )}
       {hasCv && !status?.ai && status && <p className="za-hint">{t.ws.aiOff}</p>}
+      {hasCv && status?.ai && status.aiPaused && <p className="za-hint">{t.ws.aiPaused}</p>}
       {hasCv && status?.ai && !access && <p className="za-hint">{t.ws.aiLocked(pkg.pro)} <button type="button" className="za-textlink" onClick={() => go("overview")}>{t.access.check}</button></p>}
       {busy && <p className="za-muted" role="status">{t.ws.writing}</p>}
       {error && <Notice tone="error">{error}</Notice>}

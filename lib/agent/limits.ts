@@ -111,6 +111,43 @@ export async function giveBackSiteDraft(): Promise<void> {
   await incr(siteKey(), -1, 2 * 86400).catch(() => undefined);
 }
 
+// ── AI spending caps, in US dollars ─────────────────────────────────────────
+//   AGENT_AI_DAILY_BUDGET_USD     most the site may spend on AI per UTC day        (default 2; 0 = AI paused)
+//   AGENT_AI_MONTHLY_BUDGET_USD   most it may spend per calendar month (UTC)       (default 20; 0 = AI paused)
+// Spending is counted from the token counts Anthropic returns with every answer, at the prices set
+// in lib/agent/claude.ts, in millionths of a dollar. A call is refused before it is made when the
+// most it could cost would take today's or this month's total past its cap. With Redis these totals
+// are shared by every server; without it each server instance counts alone, so the monthly spend
+// limit set in the Anthropic Console stays the hard backstop.
+
+const dollars = (name: string, fallback: number) => {
+  const v = Number(process.env[name]);
+  return process.env[name]?.trim() && Number.isFinite(v) && v >= 0 ? v : fallback;
+};
+const dayCostKey = () => `zagent:ai-micros:day:${new Date().toISOString().slice(0, 10)}`;
+const monthCostKey = () => `zagent:ai-micros:month:${new Date().toISOString().slice(0, 7)}`;
+
+export interface AiSpend { dayUsd: number; monthUsd: number; dayCapUsd: number; monthCapUsd: number }
+
+/** What AI drafting has cost today and this month, and the caps. */
+export async function aiSpend(): Promise<AiSpend> {
+  const [day, month] = await Promise.all([incr(dayCostKey(), 0, 2 * 86400), incr(monthCostKey(), 0, 40 * 86400)]);
+  return { dayUsd: day / 1e6, monthUsd: month / 1e6, dayCapUsd: dollars("AGENT_AI_DAILY_BUDGET_USD", 2), monthCapUsd: dollars("AGENT_AI_MONTHLY_BUDGET_USD", 20) };
+}
+
+/** Whether a call that could cost up to `maxUsd` still fits under both caps. */
+export async function aiBudgetAllows(maxUsd: number): Promise<boolean> {
+  const s = await aiSpend();
+  return s.dayCapUsd > 0 && s.monthCapUsd > 0 && s.dayUsd + maxUsd <= s.dayCapUsd && s.monthUsd + maxUsd <= s.monthCapUsd;
+}
+
+/** Adds what one AI answer cost to today's and this month's totals; returns the new totals. */
+export async function recordAiCost(usd: number): Promise<AiSpend> {
+  const micros = Math.max(0, Math.ceil(usd * 1e6));
+  await Promise.all([incr(dayCostKey(), micros, 2 * 86400), incr(monthCostKey(), micros, 40 * 86400)]);
+  return aiSpend();
+}
+
 /** Gives a unit back, for example when the AI call failed after the unit was taken. */
 export async function giveBack(counter: Counter, key: string, plan: Plan): Promise<void> {
   const lim = planLimits(plan);

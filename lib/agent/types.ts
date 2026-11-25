@@ -234,6 +234,8 @@ export interface Usage {
 
 export interface AgentStatus {
   ai: boolean;
+  /** AI drafting is on but paused by the daily or monthly spending cap. */
+  aiPaused?: boolean;
   model: string | null;
   /** "shared" when usage is counted in a shared store; "per-instance" otherwise. */
   limits: "shared" | "per-instance";
@@ -259,4 +261,4 @@ export interface TailorResponse {
 
 export type AccessErrorCode =
   | "not-found" | "not-paid" | "pending" | "not-eligible" | "refunded"
-  | "unavailable" | "not-configured" | "limit" | "ai-off" | "invalid";
+  | "unavailable" | "not-configured" | "limit" | "ai-off" | "ai-budget" | "invalid";

@@ -6,9 +6,9 @@
 
 import type { NextRequest } from "next/server";
 import { AccessError, verifyAccess } from "@/lib/agent/access";
-import { AiError, aiConfigured, draftWithRetry } from "@/lib/agent/claude";
+import { AiBudgetError, AiError, aiConfigured, draftWithRetry, maxCallCost } from "@/lib/agent/claude";
 import { pseudonymise } from "@/lib/agent/privacy";
-import { allow, clientIp, giveBack, giveBackSiteDraft, take, takeSiteDraft } from "@/lib/agent/limits";
+import { aiBudgetAllows, allow, clientIp, giveBack, giveBackSiteDraft, take, takeSiteDraft } from "@/lib/agent/limits";
 import { fail, ok, readJson, strings, text } from "@/lib/agent/http";
 import { redactContacts } from "@/lib/agent/text";
 import type { TailorRequest } from "@/lib/agent/types";
@@ -47,7 +47,11 @@ export async function POST(req: NextRequest) {
     return fail("unavailable");
   }
 
-  // Today's site-wide ceiling first, so a customer's own allowance is never spent when it is reached.
+  // The dollar caps, then today's site-wide ceiling, before the customer's own allowance is touched.
+  const budgetOk = await aiBudgetAllows(maxCallCost(40_000)).catch(() => null);
+  if (budgetOk === null) return fail("unavailable");
+  if (!budgetOk) return fail("ai-budget");
+
   const siteOk = await takeSiteDraft().catch(() => null);
   if (siteOk === null) return fail("unavailable");
   if (!siteOk) return fail("site-limit", 429);
@@ -66,6 +70,7 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     await giveBack("drafts", v.key, v.plan);
     await giveBackSiteDraft();
+    if (err instanceof AiBudgetError) return fail("ai-budget");
     const message = err instanceof AiError ? err.message : "The draft could not be written. Try again.";
     if (!(err instanceof AiError)) console.error("[agent/tailor] failed:", err instanceof Error ? err.message : err);
     return fail(message, 502);

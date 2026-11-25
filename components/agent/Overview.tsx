@@ -47,7 +47,7 @@ export default function Overview() {
 
       <section className="za-live" aria-label={t.status.live}>
         <p><span className="za-dot" data-on="true" aria-hidden /> <strong>{t.status.live}:</strong> {t.status.liveList}{liveSources ? ` ${t.status.sources(liveSources)}.` : ""}</p>
-        {status && <p><span className="za-dot" data-on={status.ai} aria-hidden /> {status.ai ? t.status.aiOn(pkg.pro) : t.status.aiOff}</p>}
+        {status && <p><span className="za-dot" data-on={status.ai} aria-hidden /> {status.ai ? (status.aiPaused ? t.status.aiPaused : t.status.aiOn(pkg.pro)) : t.status.aiOff}</p>}
       </section>
 
       {!hasProfile && (

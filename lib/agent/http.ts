@@ -5,7 +5,7 @@ import type { AccessErrorCode } from "./types";
 
 const STATUS: Record<AccessErrorCode, number> = {
   invalid: 400, "not-found": 404, "not-paid": 402, pending: 402, "not-eligible": 403, refunded: 403,
-  "not-configured": 503, unavailable: 502, limit: 429, "ai-off": 503,
+  "not-configured": 503, unavailable: 502, limit: 429, "ai-off": 503, "ai-budget": 503,
 };
 
 export const fail = (error: AccessErrorCode | string, status?: number, extra: Record<string, unknown> = {}) =>
