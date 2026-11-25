@@ -257,3 +257,7 @@ body {
   text-decoration: none;
 }
 .z-skip:focus { top: 12px; }
+
+/* Paper chapter: any section inside renders on warm paper with ink text (scoped light tokens). */
+.zs-paper{--z-bg:#F5F1EB;--z-surface:#FFFDF9;--z-surface-2:#ECE4D8;--z-fg:#1A1410;--z-fg-2:#4C4037;--z-fg-3:#6B5D52;--z-rule:rgba(26,20,16,.14);--z-rule-strong:rgba(26,20,16,.26);--z-gold-text:#7D5F22;--z-gold-wash:rgba(200,169,110,.16);--z-on-gold:#1A1410;--z-sheet:#FFFFFF;--z-shadow:0 30px 70px -34px rgba(60,40,20,.35);--z-focus:#7D5F22;background:var(--z-bg);color:var(--z-fg)}
+html[data-theme="light"] .zs-paper{--z-bg:#ECE4D8}
