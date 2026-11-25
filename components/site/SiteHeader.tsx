@@ -8,11 +8,10 @@ import { CONTACT_EMAIL, LANGS, pick, waLink, type L10n, type Lang } from "@/lib/
 
 const NAV: { href: string; label: L10n }[] = [
   { href: "/x-ray/", label: { en: "CV X-Ray", fr: "Radio CV", ar: "فحص السيرة" } },
-  { href: "#cv-designs", label: { en: "CV designs", fr: "CV", ar: "تصاميم السير" } },
   { href: "#packages", label: { en: "Packages", fr: "Formules", ar: "الباقات" } },
-  { href: "#process", label: { en: "How it works", fr: "Déroulement", ar: "طريقة العمل" } },
   { href: "#websites", label: { en: "Websites", fr: "Sites", ar: "المواقع" } },
   { href: "#zenith-ai", label: { en: "AI job agent", fr: "Agent emploi IA", ar: "وكيل الوظائف" } },
+  { href: "/about/", label: { en: "About", fr: "À propos", ar: "من نحن" } },
   { href: "#faq", label: { en: "FAQ", fr: "FAQ", ar: "الأسئلة الشائعة" } },
   { href: "#contact", label: { en: "Contact us", fr: "Contact", ar: "تواصل معنا" } },
 ];
@@ -43,10 +42,15 @@ function LangSwitch({ lang, setLang, idSuffix }: { lang: Lang; setLang: (l: Lang
 }
 
 export default function SiteHeader({
-  lang, setLang, dark, toggleTheme,
+  lang, setLang, dark, toggleTheme, onHome = true, current,
 }: {
   lang: Lang; setLang: (l: Lang) => void; dark: boolean; toggleTheme: () => void;
+  /** False on pages other than the homepage: section links then point back to the homepage. */
+  onHome?: boolean;
+  /** The path of the page being shown, marked as the current page in the navigation. */
+  current?: string;
 }) {
+  const to = (href: string) => (href.startsWith("#") && !onHome ? `/${href}` : href);
   const [open, setOpen] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -75,19 +79,19 @@ export default function SiteHeader({
     <header className="hd">
       <style href="zenith-header" precedence="medium">{CSS}</style>
       <div className="z-wrap z-wrap-wide hd-row">
-        <a href="#top" className="hd-logo" aria-label={t("home", lang)}>
+        <a href={onHome ? "#top" : "/"} className="hd-logo" aria-label={t("home", lang)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/logo.png" alt="" width={96} height={54} />
         </a>
         <nav className="hd-nav" aria-label={t("main", lang)}>
-          {NAV.map(n => <a key={n.href} href={n.href}>{pick(n.label, lang)}</a>)}
+          {NAV.map(n => <a key={n.href} href={to(n.href)} aria-current={current === n.href ? "page" : undefined}>{pick(n.label, lang)}</a>)}
         </nav>
         <div className="hd-tools">
           <LangSwitch lang={lang} setLang={setLang} idSuffix="bar" />
           <button type="button" className="hd-icon" onClick={toggleTheme} aria-label={dark ? t("toLight", lang) : t("toDark", lang)}>
             {dark ? <Sun size={17} strokeWidth={1.75} /> : <Moon size={17} strokeWidth={1.75} />}
           </button>
-          <a href="#packages" className="z-btn z-btn-primary z-btn-small hd-cta">{t("cta", lang)}</a>
+          <a href={to("#packages")} className="z-btn z-btn-primary z-btn-small hd-cta">{t("cta", lang)}</a>
           <button
             ref={buttonRef}
             type="button"
@@ -106,12 +110,12 @@ export default function SiteHeader({
         <div className="hd-sheet" id="hd-sheet" ref={sheetRef} role="dialog" aria-modal="true" aria-label={t("menu", lang)}>
           <nav aria-label={t("main", lang)}>
             {NAV.map(n => (
-              <a key={n.href} href={n.href} className="z-serif" onClick={() => setOpen(false)}>{pick(n.label, lang)}</a>
+              <a key={n.href} href={to(n.href)} className="z-serif" aria-current={current === n.href ? "page" : undefined} onClick={() => setOpen(false)}>{pick(n.label, lang)}</a>
             ))}
           </nav>
           <div className="hd-sheet-tools">
             <LangSwitch lang={lang} setLang={setLang} idSuffix="sheet" />
-            <a href="#packages" className="z-btn z-btn-primary z-btn-block" onClick={() => setOpen(false)}>{t("cta", lang)}</a>
+            <a href={to("#packages")} className="z-btn z-btn-primary z-btn-block" onClick={() => setOpen(false)}>{t("cta", lang)}</a>
             <a href={waLink("Hello Zenith Dubai CV. I have a question.")} target="_blank" rel="noopener noreferrer" className="z-btn z-btn-quiet z-btn-block">{t("whatsapp", lang)}</a>
             <a href={`mailto:${CONTACT_EMAIL}`} className="z-link hd-mail" dir="ltr">{CONTACT_EMAIL}</a>
           </div>
@@ -129,6 +133,7 @@ const CSS = `
 html[data-theme="light"] .hd-logo img{filter:brightness(0) saturate(0)}
 .hd-nav{display:flex;align-items:center;gap:clamp(14px,2vw,28px);margin-inline-start:auto}
 .hd-nav a{font-size:14.5px;font-weight:500;color:var(--z-fg-2);text-decoration:none;padding:8px 0;white-space:nowrap;transition:color .2s}
+.hd-nav a[aria-current="page"]{color:var(--z-fg);text-decoration:underline;text-decoration-color:var(--z-gold);text-decoration-thickness:1px;text-underline-offset:9px}
 .hd-nav a:hover{color:var(--z-fg)}
 .hd-tools{display:flex;align-items:center;gap:10px;margin-inline-start:24px}
 .hd-lang{display:flex;padding:3px;border:1px solid var(--z-rule-strong);border-radius:999px}

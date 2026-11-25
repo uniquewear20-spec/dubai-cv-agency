@@ -34,6 +34,8 @@ const T: Record<string, L10n> = {
   websites: { en: "Portfolio websites", fr: "Sites portfolio", ar: "المواقع التعريفية" },
   agent: { en: "AI job agent", fr: "Agent emploi IA", ar: "وكيل الوظائف" },
   faq: { en: "FAQ", fr: "FAQ", ar: "الأسئلة الشائعة" },
+  about: { en: "About Zenith", fr: "À propos de Zenith", ar: "عن Zenith" },
+  review: { en: "Share your experience", fr: "Partager votre expérience", ar: "شارك تجربتك" },
 };
 const t = (k: string, l: Lang) => pick(T[k], l);
 
@@ -82,7 +84,8 @@ function Signature({ lang }: { lang: Lang }) {
   );
 }
 
-export default function SiteFooter({ lang }: { lang: Lang }) {
+export default function SiteFooter({ lang, onHome = true }: { lang: Lang; onHome?: boolean }) {
+  const to = (hash: string) => (onHome ? hash : `/${hash}`);
   return (
     <>
       <style href="zenith-footer" precedence="medium">{CSS}</style>
@@ -95,12 +98,14 @@ export default function SiteFooter({ lang }: { lang: Lang }) {
           </div>
           <nav aria-label={t("explore", lang)}>
             <h3 className="ft-h">{t("explore", lang)}</h3>
-            <a href="#cv-designs">{t("designs", lang)}</a>
-            <a href="#packages">{t("packages", lang)}</a>
-            <a href="#process">{t("process", lang)}</a>
-            <a href="#websites">{t("websites", lang)}</a>
+            <a href={to("#cv-designs")}>{t("designs", lang)}</a>
+            <a href={to("#packages")}>{t("packages", lang)}</a>
+            <a href={to("#process")}>{t("process", lang)}</a>
+            <a href={to("#websites")}>{t("websites", lang)}</a>
             <a href="/agent/">{t("agent", lang)}</a>
-            <a href="#faq">{t("faq", lang)}</a>
+            <a href={to("#faq")}>{t("faq", lang)}</a>
+            <a href="/about/">{t("about", lang)}</a>
+            <a href="/review/">{t("review", lang)}</a>
           </nav>
           <nav aria-label={t("legal", lang)}>
             <h3 className="ft-h">{t("legal", lang)}</h3>
