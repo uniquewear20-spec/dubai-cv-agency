@@ -403,3 +403,24 @@ export function parseCv(text: string, now = new Date()): CvFacts {
 
 /** Canonical language names the parser knows, for the review screen. */
 export const KNOWN_LANGUAGES = LANGUAGES.map(l => l.name);
+
+// ── Outline (for the CV X-Ray) ───────────────────────────────────────────────
+
+export type CvSection = Section;
+
+/** One line of the CV as the parser sees it: the heading it is, if any, and the section it sits under. */
+export interface OutlineLine { text: string; heading: CvSection | null; section: CvSection | null }
+
+/** Every non-empty line of a CV's text, with the headings the parser recognises (same rules as parseCv). */
+export function cvOutline(text: string): OutlineLine[] {
+  const out: OutlineLine[] = [];
+  let section: Section | null = null;
+  for (const raw of text.split("\n")) {
+    const t = raw.replace(/\s+/g, " ").trim();
+    if (!t) continue;
+    const h = headingOf(t);
+    if (h) section = h;
+    out.push({ text: t, heading: h, section: h ? null : section });
+  }
+  return out;
+}

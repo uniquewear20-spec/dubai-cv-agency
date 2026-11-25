@@ -175,7 +175,8 @@ export interface Draft {
   fitSummary: string;
   tailoredSummary: string;
   /** Each highlight carries the CV sentence it comes from. */
-  highlights: { text: string; evidence: string }[];
+  /** "why": how the highlight answers the listing (AI drafts only). */
+  highlights: { text: string; evidence: string; why?: string }[];
   coverLetter: string;
   /** Requirements of the job that the CV doesn't show. */
   gaps: string[];

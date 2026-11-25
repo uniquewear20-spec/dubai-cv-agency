@@ -1,6 +1,6 @@
 "use client";
 // app/page.tsx — Zenith Dubai CV homepage.
-// Order: what we do (hero) → proof of craft (CV designs) → the four packages → how it works →
+// Order: what we do (hero) → the five-stage journey (scroll story) → proof of craft (CV designs) → the four packages → how it works →
 // profile photos → portfolio websites → Zenith AI job agent → questions → contact.
 
 import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import { MotionConfig } from "framer-motion";
 import SiteHeader from "@/components/site/SiteHeader";
 import Hero from "@/components/site/Hero";
+import JourneyStory from "@/components/site/JourneyStory";
 import CvShowcase from "@/components/site/CvShowcase";
 import Packages from "@/components/site/Packages";
 import Process from "@/components/site/Process";
@@ -18,7 +19,7 @@ import PhotoSection from "@/components/site/PhotoSection";
 import WebsiteService from "@/components/site/WebsiteService";
 import PortfolioShowcase from "@/components/sections/portfolio-showcase";
 import { CURRENCIES, FALLBACK_RATES, isCurrency, type Currency, type Rates } from "@/lib/currency";
-import { type Lang } from "@/lib/site";
+import { isLang, type Lang } from "@/lib/site";
 
 // Below the fold, so it ships in its own bundle (still rendered on the server).
 const AgentSection = dynamic(() => import("@/components/site/AgentSection"));
@@ -38,7 +39,13 @@ export default function Home() {
     // Browser-only preferences, read after hydration so the server and client render the same first.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setDark(document.documentElement.dataset.theme !== "light");
+    // Language: a ?lang=fr or ?lang=ar link (from a French or Arabic post, for example) wins and is
+    // remembered; otherwise the language chosen earlier on any Zenith page.
+    const fromLink = new URLSearchParams(window.location.search).get("lang");
+    if (isLang(fromLink)) setLangState(fromLink);
     try {
+      if (isLang(fromLink)) localStorage.setItem("z-lang", fromLink);
+      else { const saved = localStorage.getItem("z-lang"); if (isLang(saved)) setLangState(saved); }
       const cur = localStorage.getItem("z-currency");
       if (isCurrency(cur)) setCurrency(cur);
     } catch { /* storage blocked: keep defaults */ }
@@ -94,6 +101,7 @@ export default function Home() {
         <main id="main" tabIndex={-1}>
           <div id="top" />
           <Hero lang={lang} currency={currency} rates={rates} />
+          <JourneyStory lang={lang} />
           <CvShowcase lang={lang} />
           <Packages lang={lang} currency={currency} rates={rates} onCurrency={chooseCurrency} />
           <Process lang={lang} />

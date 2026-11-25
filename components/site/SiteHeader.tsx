@@ -1,5 +1,5 @@
 "use client";
-// components/site/SiteHeader.tsx — sticky header. Inline navigation from 1120px; below that a
+// components/site/SiteHeader.tsx — sticky header. Inline navigation from 1240px; below that a
 // menu button opens a sheet. Language and theme stay one tap away at every width.
 
 import React, { useEffect, useRef, useState } from "react";
@@ -7,6 +7,7 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { CONTACT_EMAIL, LANGS, pick, waLink, type L10n, type Lang } from "@/lib/site";
 
 const NAV: { href: string; label: L10n }[] = [
+  { href: "/x-ray/", label: { en: "CV X-Ray", fr: "Radio CV", ar: "فحص السيرة" } },
   { href: "#cv-designs", label: { en: "CV designs", fr: "CV", ar: "تصاميم السير" } },
   { href: "#packages", label: { en: "Packages", fr: "Formules", ar: "الباقات" } },
   { href: "#process", label: { en: "How it works", fr: "Déroulement", ar: "طريقة العمل" } },
@@ -65,7 +66,7 @@ export default function SiteHeader({
       }
     };
     document.addEventListener("keydown", onKey);
-    const onResize = () => { if (window.innerWidth >= 1120) setOpen(false); };
+    const onResize = () => { if (window.innerWidth >= 1240) setOpen(false); };
     window.addEventListener("resize", onResize);
     return () => { document.body.style.overflow = prev; document.removeEventListener("keydown", onKey); window.removeEventListener("resize", onResize); };
   }, [open]);
@@ -137,7 +138,7 @@ html[data-theme="light"] .hd-logo img{filter:brightness(0) saturate(0)}
 .hd-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--z-rule-strong);background:transparent;color:var(--z-fg);cursor:pointer}
 .hd-icon:hover{border-color:var(--z-gold)}
 .hd-menu{display:none}
-@media (max-width:1119px){
+@media (max-width:1239px){
   .hd-nav{display:none}
   .hd-tools{margin-inline-start:auto}
   .hd-menu{display:grid}

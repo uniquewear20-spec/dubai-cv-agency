@@ -1,13 +1,14 @@
 // app/api/agent/tailor/route.ts — AI-tailored CV highlights and cover letter for one job.
 // Only for Career Automation and Executive Career Suite customers, checked with PayPal or
-// Gumroad on every call. The CV is sent to Anthropic for this one draft (contact details
-// removed first) and is not stored by Zenith. The draft is checked before it is returned:
+// Gumroad on every call. The CV is sent to Anthropic for this one draft (contact details removed,
+// and the candidate's name and web links replaced by placeholders, first) and is not stored by Zenith. The draft is checked before it is returned:
 // highlights must quote the CV, and unsupported figures or skills are flagged.
 
 import type { NextRequest } from "next/server";
 import { AccessError, verifyAccess } from "@/lib/agent/access";
-import { AiError, aiConfigured, draftWithClaude } from "@/lib/agent/claude";
-import { allow, clientIp, giveBack, take } from "@/lib/agent/limits";
+import { AiError, aiConfigured, draftWithRetry } from "@/lib/agent/claude";
+import { pseudonymise } from "@/lib/agent/privacy";
+import { allow, clientIp, giveBack, giveBackSiteDraft, take, takeSiteDraft } from "@/lib/agent/limits";
 import { fail, ok, readJson, strings, text } from "@/lib/agent/http";
 import { redactContacts } from "@/lib/agent/text";
 import type { TailorRequest } from "@/lib/agent/types";
@@ -46,15 +47,25 @@ export async function POST(req: NextRequest) {
     return fail("unavailable");
   }
 
+  // Today's site-wide ceiling first, so a customer's own allowance is never spent when it is reached.
+  const siteOk = await takeSiteDraft().catch(() => null);
+  if (siteOk === null) return fail("unavailable");
+  if (!siteOk) return fail("site-limit", 429);
+
   const credit = await take("drafts", v.key, v.plan).catch(() => null);
-  if (!credit) return fail("unavailable");
-  if (!credit.ok) return fail("limit", 429, { usage: credit.usage });
+  if (!credit) { await giveBackSiteDraft(); return fail("unavailable"); }
+  if (!credit.ok) { await giveBackSiteDraft(); return fail("limit", 429, { usage: credit.usage }); }
+
+  // The AI never sees who the candidate is: name and links become placeholders, restored in the draft.
+  const pseudo = pseudonymise(request.cvText, request.profile.name);
+  const sent: TailorRequest = { ...request, cvText: pseudo.text, profile: { ...request.profile, name: pseudo.name } };
 
   try {
-    const { draft, dropped } = await draftWithClaude(request);
-    return ok({ draft, usage: credit.usage, dropped });
+    const { draft, dropped } = await draftWithRetry(sent);
+    return ok({ draft: pseudo.restore(draft), usage: credit.usage, dropped });
   } catch (err) {
     await giveBack("drafts", v.key, v.plan);
+    await giveBackSiteDraft();
     const message = err instanceof AiError ? err.message : "The draft could not be written. Try again.";
     if (!(err instanceof AiError)) console.error("[agent/tailor] failed:", err instanceof Error ? err.message : err);
     return fail(message, 502);
