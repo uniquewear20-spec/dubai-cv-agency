@@ -1,17 +1,16 @@
 "use client";
 // app/page.tsx — Zenith Dubai CV homepage.
-// Order: what we do (hero) → the five-stage journey (scroll story) → proof of craft (CV designs) → the four packages → how it works →
-// profile photos → portfolio websites → Zenith AI job agent → the Zenith Standard (trust) → questions → contact.
+// Order: the drawing (hero) → the five-stage method (scroll story) → proof of craft (CV designs, on paper) → packages →
+// the AI job agent → profile photos → portfolio websites → the Zenith Standard (trust) → questions → contact.
 
-import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useLayoutEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { MotionConfig } from "framer-motion";
 import SiteHeader from "@/components/site/SiteHeader";
-import Hero from "@/components/site/Hero";
+import HeroDrawing from "@/components/site/HeroDrawing";
 import JourneyStory from "@/components/site/JourneyStory";
 import CvShowcase from "@/components/site/CvShowcase";
 import Packages from "@/components/site/Packages";
-import Process from "@/components/site/Process";
 import Faq from "@/components/site/Faq";
 import ZenithStandard from "@/components/site/ZenithStandard";
 import SiteFooter, { ContactSection } from "@/components/site/ContactFooter";
@@ -101,17 +100,21 @@ export default function Home() {
         <SiteHeader lang={lang} setLang={setLang} dark={dark} toggleTheme={toggleTheme} />
         <main id="main" tabIndex={-1}>
           <div id="top" />
-          <Hero lang={lang} currency={currency} rates={rates} />
+          <HeroDrawing lang={lang} />
           <JourneyStory lang={lang} />
-          <CvShowcase lang={lang} />
+          <div className="zs-paper">
+            <CvShowcase lang={lang} />
+          </div>
           <Packages lang={lang} currency={currency} rates={rates} onCurrency={chooseCurrency} />
-          <Process lang={lang} />
+          {/* Its own boundary: the lazy bundle hydrates on its own and never holds up the rest of the page. */}
+          <Suspense fallback={null}>
+            <AgentSection lang={lang} />
+          </Suspense>
           <PhotoSection lang={lang} />
           <React.Fragment key={lang}>
             <PortfolioShowcase dark={dark} lang={lang} />
           </React.Fragment>
           <WebsiteService lang={lang} onEnquire={openEnquiry} currency={currency} rates={rates} />
-          <AgentSection lang={lang} />
           <ZenithStandard lang={lang} withFounder />
           <Faq lang={lang} />
           <ContactSection lang={lang} onEnquire={openEnquiry} />
