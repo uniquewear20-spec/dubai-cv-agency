@@ -8,11 +8,11 @@ import React, { useCallback, useEffect, useId, useLayoutEffect, useRef, useState
 import Link from "next/link";
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { ArrowRight, Check, CircleAlert, FileText, Moon, Printer, RotateCcw, Sun, Upload, X } from "lucide-react";
-import { isLang, waLink, type Lang } from "@/lib/site";
+import { isLang, type Lang } from "@/lib/site";
 import { readCv, type ReadFailure } from "@/lib/xray/read";
 import { analyzeCv, type Report } from "@/lib/xray/analyze";
 import { UI } from "@/lib/xray/copy";
-import { STATUS_ICON, XrayCta, XrayReport } from "./Report";
+import { STATUS_ICON, XrayNext, XrayReport, reviewLink } from "./Report";
 
 type Phase = "idle" | "reading" | "done";
 type Outcome = { kind: "report"; report: Report } | { kind: "scanned" } | { kind: "error"; reason: Exclude<ReadFailure, "scanned"> };
@@ -108,7 +108,7 @@ export default function XrayApp() {
     window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   };
 
-  const wa = waLink(ui.waMessage(role.trim().slice(0, 80), ref));
+  const wa = reviewLink(null, lang, role.trim().slice(0, 80), ref);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -228,11 +228,11 @@ export default function XrayApp() {
                       <h3 className="z-h3">{ui.scanned.title}</h3>
                       <p className="z-body">{ui.scanned.body}</p>
                       <p className="z-body xr-fix">{ui.scanned.fix}</p>
-                      <XrayCta lang={lang} wa={wa} serviceKey="foundation" reason={ui.reasons.rebuild} />
+                      <XrayNext lang={lang} wa={wa} serviceKey="foundation" reason={ui.reasons.rebuild} />
                     </div>
                   )}
 
-                  {outcome.kind === "report" && <XrayReport report={outcome.report} lang={lang} wa={wa} />}
+                  {outcome.kind === "report" && <XrayReport report={outcome.report} lang={lang} role={role.trim().slice(0, 80)} refCode={ref} />}
 
                   <p className="z-micro xr-disclaimer">{ui.disclaimer}</p>
                 </div>

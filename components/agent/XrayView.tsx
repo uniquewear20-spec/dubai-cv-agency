@@ -5,11 +5,10 @@
 
 import React, { useEffect, useId, useState } from "react";
 import { ArrowRight, ScanSearch } from "lucide-react";
-import { waLink } from "@/lib/site";
 import { readCv, type Layout, type ReadFailure } from "@/lib/xray/read";
 import { analyzeCv, type Report } from "@/lib/xray/analyze";
 import { UI } from "@/lib/xray/copy";
-import { XrayCta, XrayReport } from "@/components/xray/Report";
+import { XrayNext, XrayReport, reviewLink } from "@/components/xray/Report";
 import { useAgent } from "./context";
 
 const TEXT_LAYOUT: Layout = { kind: "txt", pages: null, columns: false, tables: 0, textBoxes: 0, images: 0, headerOnlyContact: false, headerEmail: false, headerPhone: false, oddChars: 0 };
@@ -58,7 +57,7 @@ export default function XrayView() {
     window.requestAnimationFrame(() => document.getElementById(`${id}-res`)?.scrollIntoView({ behavior: "smooth", block: "start" }));
   };
 
-  const wa = waLink(ui.waMessage(role.trim().slice(0, 80), "AGENT"));
+  const wa = reviewLink(null, lang, role.trim().slice(0, 80), "AGENT");
 
   return (
     <div className="xr za-xray">
@@ -105,10 +104,10 @@ export default function XrayView() {
             <h3 className="z-h3">{ui.scanned.title}</h3>
             <p className="z-body">{ui.scanned.body}</p>
             <p className="z-body xr-fix">{ui.scanned.fix}</p>
-            <XrayCta lang={lang} wa={wa} serviceKey="foundation" reason={ui.reasons.rebuild} />
+            <XrayNext lang={lang} wa={wa} serviceKey="foundation" reason={ui.reasons.rebuild} />
           </div>
         )}
-        {outcome?.kind === "report" && <XrayReport report={outcome.report} lang={lang} wa={wa} />}
+        {outcome?.kind === "report" && <XrayReport report={outcome.report} lang={lang} role={role.trim().slice(0, 80)} refCode={"AGENT"} />}
         {outcome && <p className="z-micro xr-disclaimer">{ui.disclaimer}</p>}
       </div>
     </div>

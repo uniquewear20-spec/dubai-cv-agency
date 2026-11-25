@@ -337,6 +337,11 @@ export interface Ui {
   missing: { title: string; none: string; noAd: string; skills: string; languages: string; level: (step: number) => string };
   more: string; layoutNote: string;
   agent: { title: string; intro: string; source: string; saved: string; file: string; job: string; noJob: string; needCv: string; forJob: string; entry: string };
+  next: { title: string; s1t: string; s1d: string; s2t: string; s2d: string; s2note: string; s2cta: string; s3t: string; s3cta: string };
+  verdictShort: Record<Verdict, string>;
+  waSummary: (verdict: string, issues: string[], role: string, ref: string) => string;
+  specialist: { title: string } & Record<"layout" | "structure" | "results" | "positioning" | "keywords" | "linkedin", string>;
+  pattern: { title: string; yours: string; template: string; example: string };
 }
 
 export const UI: Record<Lang, Ui> = {
@@ -408,6 +413,30 @@ export const UI: Record<Lang, Ui> = {
       job: "Compare with a saved job (optional)", noJob: "No job: a general check", needCv: "Add your CV in Profile first, or upload the file here.",
       forJob: "X-Ray my CV for this job", entry: "See how screening software reads your CV, what it misses for a saved job, and what to fix first. Free, in your browser.",
     },
+    next: {
+      title: "Your next steps",
+      s1t: "Fix it yourself", s1d: "Start with the fixes above. They cost nothing.",
+      s2t: "Get a free human review", s2d: "Send your X-Ray summary on WhatsApp, then attach your CV in the chat. A Zenith specialist tells you which changes matter most.",
+      s2note: "The message holds your X-Ray summary, never your CV text.", s2cta: "Send my results on WhatsApp",
+      s3t: "Have it rebuilt for you", s3cta: "See this package",
+    },
+    verdictShort: { strong: "Strong", fair: "Fair", weak: "Needs work" },
+    waSummary: (v, issues, role, ref) => `Hi Zenith, I ran the CV X-Ray on your website. Result: ${v}.${issues.length ? ` Top issues: ${issues.map((x, i) => `${i + 1}) ${x}`).join(" ")}.` : ""}${role ? ` Target role: ${role}.` : ""} I'd like a free human review; I'll attach my CV here. Ref: XRAY${ref ? `-${ref}` : ""}`,
+    specialist: {
+      title: "What a Zenith specialist would change",
+      layout: "Rebuild the file in a clean, one-column layout that screening software reads in the right order.",
+      structure: "Restructure it: standard headings, newest role first, one date style, the right length.",
+      results: "Turn duties into measured results, from the brief you send us about your work.",
+      positioning: "Write a headline and summary that position you for the role you want.",
+      keywords: "Match your CV's wording to the roles you target, using only skills you really have.",
+      linkedin: "Align your LinkedIn profile with your CV (Career Advantage and above).",
+    },
+    pattern: {
+      title: "How to rewrite a duty as a result",
+      yours: "Your line",
+      template: "[Action verb] + [what you did] + [how many or how much] + [the result, with a number]",
+      example: "Example (fictional): Trained 14 new servers in six weeks, cutting the time before they worked alone from four weeks to two.",
+    },
   },
   fr: {
     back: "Retour à Zenith", eyebrow: "Radiographie ATS du CV",
@@ -477,6 +506,30 @@ export const UI: Record<Lang, Ui> = {
       job: "Comparer à une offre enregistrée (facultatif)", noJob: "Aucune offre : vérification générale", needCv: "Ajoutez d'abord votre CV dans Profil, ou déposez le fichier ici.",
       forJob: "Radiographier mon CV pour cette offre", entry: "Voyez comment un logiciel de tri lit votre CV, ce qui lui manque pour une offre enregistrée, et quoi corriger d'abord. Gratuit, dans votre navigateur.",
     },
+    next: {
+      title: "Vos prochaines étapes",
+      s1t: "Corrigez vous-même", s1d: "Commencez par les corrections ci-dessus. Elles ne coûtent rien.",
+      s2t: "Relecture humaine gratuite", s2d: "Envoyez votre résumé de radiographie sur WhatsApp, puis joignez votre CV dans la conversation. Un spécialiste Zenith vous dit quels changements comptent le plus.",
+      s2note: "Le message contient le résumé de la radiographie, jamais le texte de votre CV.", s2cta: "Envoyer mes résultats sur WhatsApp",
+      s3t: "Faites-le reconstruire", s3cta: "Voir cette formule",
+    },
+    verdictShort: { strong: "Solide", fair: "Correct", weak: "À retravailler" },
+    waSummary: (v, issues, role, ref) => `Bonjour Zenith, j'ai lancé la radiographie de CV sur votre site. Résultat : ${v}.${issues.length ? ` Points principaux : ${issues.map((x, i) => `${i + 1}) ${x}`).join(" ")}.` : ""}${role ? ` Poste visé : ${role}.` : ""} J'aimerais une relecture humaine gratuite ; je joins mon CV ici. Réf : XRAY${ref ? `-${ref}` : ""}`,
+    specialist: {
+      title: "Ce qu'un spécialiste Zenith changerait",
+      layout: "Reconstruire le fichier sur une colonne, dans une mise en page que les logiciels de tri lisent dans le bon ordre.",
+      structure: "Le restructurer : titres standard, poste le plus récent en premier, un seul format de date, la bonne longueur.",
+      results: "Transformer les tâches en résultats chiffrés, à partir du questionnaire que vous nous envoyez sur votre travail.",
+      positioning: "Écrire un titre et un profil qui vous positionnent pour le poste visé.",
+      keywords: "Aligner les mots de votre CV sur les postes visés, avec uniquement des compétences que vous avez vraiment.",
+      linkedin: "Aligner votre profil LinkedIn sur votre CV (Avantage Carrière et au-delà).",
+    },
+    pattern: {
+      title: "Réécrire une tâche en résultat",
+      yours: "Votre ligne",
+      template: "[Verbe d'action] + [ce que vous avez fait] + [combien] + [le résultat, chiffré]",
+      example: "Exemple (fictif) : Formé 14 nouveaux serveurs en six semaines, ramenant leur délai d'autonomie de quatre à deux semaines.",
+    },
   },
   ar: {
     back: "العودة إلى Zenith", eyebrow: "أشعة السيرة الذاتية لأنظمة الفرز",
@@ -545,6 +598,30 @@ export const UI: Record<Lang, Ui> = {
       source: "السيرة المراد فحصها", saved: "سيرتي المحفوظة (نص)", file: "ارفع الملف (يضيف فحوص التنسيق)",
       job: "قارن بوظيفة محفوظة (اختياري)", noJob: "بلا وظيفة: فحص عام", needCv: "أضف سيرتك في «ملفك» أولاً، أو ارفع الملف هنا.",
       forJob: "افحص سيرتي لهذه الوظيفة", entry: "شاهد كيف يقرأ نظام الفرز سيرتك، وما ينقصها لوظيفة حفظتها، وما الذي تصلحه أولاً. مجاني، داخل متصفحك.",
+    },
+    next: {
+      title: "خطواتك التالية",
+      s1t: "أصلحها بنفسك", s1d: "ابدأ بالتصحيحات أعلاه. لا تكلّف شيئاً.",
+      s2t: "مراجعة بشرية مجانية", s2d: "أرسل ملخص الفحص عبر واتساب، ثم أرفق سيرتك في المحادثة. يخبرك مختص من Zenith بأهم التغييرات.",
+      s2note: "تحتوي الرسالة على ملخص الفحص فقط، وليس نص سيرتك.", s2cta: "أرسل نتائجي عبر واتساب",
+      s3t: "دعنا نعيد بناءها لك", s3cta: "اطّلع على هذه الباقة",
+    },
+    verdictShort: { strong: "قوية", fair: "مقبولة", weak: "تحتاج إلى عمل" },
+    waSummary: (v, issues, role, ref) => `مرحباً Zenith، استخدمت فحص السيرة الذاتية على موقعكم. النتيجة: ${v}.${issues.length ? ` أهم الملاحظات: ${issues.map((x, i) => `${i + 1}) ${x}`).join(" ")}.` : ""}${role ? ` الوظيفة المستهدفة: ${role}.` : ""} أرغب في مراجعة بشرية مجانية، وسأرفق سيرتي هنا. المرجع: XRAY${ref ? `-${ref}` : ""}`,
+    specialist: {
+      title: "ما الذي سيغيّره مختص Zenith",
+      layout: "إعادة بناء الملف بعمود واحد وتنسيق تقرؤه أنظمة الفرز بالترتيب الصحيح.",
+      structure: "إعادة الهيكلة: عناوين قياسية، الوظيفة الأحدث أولاً، صيغة تاريخ واحدة، والطول المناسب.",
+      results: "تحويل المهام إلى نتائج مقيسة، انطلاقاً من الاستبيان الذي ترسله لنا عن عملك.",
+      positioning: "كتابة عنوان مهني وملخص يقدّمانك للوظيفة التي تريدها.",
+      keywords: "مواءمة كلمات سيرتك مع الوظائف المستهدفة، بمهارات تملكها فعلاً فقط.",
+      linkedin: "مواءمة ملفك في لينكدإن مع سيرتك (باقة الميزة المهنية وما فوقها).",
+    },
+    pattern: {
+      title: "كيف تعيد كتابة مهمة كنتيجة",
+      yours: "سطرك",
+      template: "[فعل إنجاز] + [ما الذي فعلته] + [كم عدداً أو حجماً] + [النتيجة، برقم]",
+      example: "مثال (افتراضي): درّبتُ 14 نادلاً جديداً خلال ستة أسابيع، فانخفض الوقت قبل أن يعملوا باستقلالية من أربعة أسابيع إلى أسبوعين.",
     },
   },
 };

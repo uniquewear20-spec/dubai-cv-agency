@@ -7,10 +7,10 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { AlertTriangle, ArrowRight, Check, CircleAlert, Info, MessageCircle } from "lucide-react";
-import type { Lang } from "@/lib/site";
+import { waLink, type Lang } from "@/lib/site";
 import { TIERS } from "@/lib/checkout/catalog";
 import { packageName } from "@/lib/packages";
-import type { Check as Finding, Report, Status } from "@/lib/xray/analyze";
+import type { Check as Finding, CheckId, Report, Status } from "@/lib/xray/analyze";
 import { say, UI } from "@/lib/xray/copy";
 
 export const STATUS_ICON: Record<Status, React.ReactNode> = {
@@ -23,8 +23,27 @@ export const STATUS_ICON: Record<Status, React.ReactNode> = {
 const FILM_LINES = 40;
 const iso = (s: string) => `⁨${s}⁩`;
 
-export function XrayReport({ report, lang, wa }: { report: Report; lang: Lang; wa: string }) {
+/** The WhatsApp link for a review: the message carries the X-Ray summary (verdict, top issues, role), never CV text. */
+export function reviewLink(report: Report | null, lang: Lang, role: string, ref: string): string {
   const ui = UI[lang];
+  if (!report) return waLink(ui.waMessage(role, ref));
+  const issues = report.fixes.slice(0, 3).map(c => say(c, lang).title.replace(/[\u2068\u2069]/g, ""));
+  return waLink(ui.waSummary(ui.verdictShort[report.overall.verdict], issues, role, ref));
+}
+
+const AREA_OF: Partial<Record<CheckId, "layout" | "structure" | "results" | "positioning" | "keywords" | "linkedin">> = {
+  columns: "layout", tables: "layout", textboxes: "layout", "header-contact": "layout", glyphs: "layout",
+  headings: "structure", length: "structure", contact: "structure", order: "structure", "date-styles": "structure", undated: "structure", dense: "structure",
+  metrics: "results", duties: "results", leadership: "results",
+  summary: "positioning", headline: "positioning", "headline-target": "positioning", "title-fit": "positioning", level: "positioning",
+  "ad-skills": "keywords", "cv-skills": "keywords", languages: "keywords",
+  linkedin: "linkedin",
+};
+
+export function XrayReport({ report, lang, role, refCode }: { report: Report; lang: Lang; role: string; refCode: string }) {
+  const ui = UI[lang];
+  const wa = reviewLink(report, lang, role, refCode);
+  const work = [...new Set([...report.fixes, ...report.improvements].map(c => AREA_OF[c.id]).filter(Boolean))].slice(0, 4) as (keyof typeof ui.specialist)[];
   const [allLines, setAllLines] = useState(false);
   const f = report.facts;
   const facts = [
@@ -148,10 +167,51 @@ export function XrayReport({ report, lang, wa }: { report: Report; lang: Lang; w
             </section>
           )}
 
-          <XrayCta lang={lang} wa={wa} serviceKey={report.service.key} reason={ui.reasons[report.service.reason]} />
+          {work.length > 0 && (
+            <section className="xr-mini xr-specialist" aria-labelledby="xr-spec-title">
+              <h3 id="xr-spec-title" className="xr-mini-title"><span data-status="pass" className="xr-mini-dot" />{ui.specialist.title}</h3>
+              <ul>{work.map(w => <li key={w}>{ui.specialist[w]}</li>)}</ul>
+            </section>
+          )}
+
         </div>
       </div>
+
+      <XrayNext lang={lang} wa={wa} serviceKey={report.service.key} reason={ui.reasons[report.service.reason]} />
     </>
+  );
+}
+
+/** The three ways forward, in order of commitment: fix it yourself, a free human review, a package. */
+export function XrayNext({ lang, wa, serviceKey, reason }: { lang: Lang; wa: string; serviceKey: "foundation" | "growth" | "apex"; reason: string }) {
+  const ui = UI[lang];
+  return (
+    <section className="xr-next" aria-labelledby="xr-next-title">
+      <h3 id="xr-next-title" className="z-h3">{ui.next.title}</h3>
+      <ol className="xr-next-steps">
+        <li>
+          <p className="xr-next-n">1</p>
+          <p className="xr-check-title">{ui.next.s1t}</p>
+          <p className="z-small">{ui.next.s1d}</p>
+          <a className="z-link z-small" href="#xr-fixes-title">{ui.fixes}</a>
+        </li>
+        <li className="xr-next-wa">
+          <p className="xr-next-n">2</p>
+          <p className="xr-check-title">{ui.next.s2t}</p>
+          <p className="z-small">{ui.next.s2d}</p>
+          <a className="z-btn z-btn-primary z-btn-small" href={wa} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden />{ui.next.s2cta}</a>
+          <p className="z-micro">{ui.next.s2note}</p>
+        </li>
+        <li>
+          <p className="xr-next-n">3</p>
+          <p className="xr-check-title">{ui.next.s3t}</p>
+          <p className="xr-pkg-name z-serif">{packageName(serviceKey, lang)}</p>
+          <p className="z-micro">{ui.from} AED {TIERS[serviceKey].price}</p>
+          <p className="z-small">{reason}</p>
+          <Link className="z-btn z-btn-quiet z-btn-small" href={`/#pk-${serviceKey}`}>{ui.next.s3cta}<ArrowRight size={16} aria-hidden className="xr-flip" /></Link>
+        </li>
+      </ol>
+    </section>
   );
 }
 
@@ -165,27 +225,15 @@ function FindingRow({ c, lang }: { c: Finding; lang: Lang }) {
         <p className="xr-check-title">{s.title}</p>
         <p className="z-small">{s.body}</p>
         {s.fix && (c.status === "warn" || c.status === "fail") && <p className="z-small xr-fix">{s.fix}</p>}
+        {c.id === "duties" && Array.isArray(c.data.examples) && c.data.examples[0] && (
+          <div className="xr-pattern">
+            <p className="z-label">{ui.pattern.title}</p>
+            <p className="z-small"><strong>{ui.pattern.yours}:</strong> <span dir="auto">“{c.data.examples[0]}”</span></p>
+            <p className="z-small xr-pattern-t">{ui.pattern.template}</p>
+            <p className="z-micro">{ui.pattern.example}</p>
+          </div>
+        )}
       </div>
     </li>
-  );
-}
-
-export function XrayCta({ lang, wa, serviceKey, reason }: { lang: Lang; wa: string; serviceKey: "foundation" | "growth" | "apex"; reason: string }) {
-  const ui = UI[lang];
-  return (
-    <section className="xr-cta" aria-labelledby="xr-cta-title">
-      <div className="xr-cta-wa">
-        <h3 id="xr-cta-title" className="z-h3">{ui.wa}</h3>
-        <p className="z-small">{ui.waNote}</p>
-        <a className="z-btn z-btn-primary" href={wa} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} aria-hidden />WhatsApp</a>
-      </div>
-      <div className="xr-cta-pkg">
-        <p className="z-label">{ui.fitTitle}</p>
-        <p className="xr-pkg-name z-serif">{packageName(serviceKey, lang)}</p>
-        <p className="z-micro">{ui.from} AED {TIERS[serviceKey].price}</p>
-        <p className="z-small">{reason}</p>
-        <Link className="z-btn z-btn-quiet z-btn-small" href="/#packages">{ui.included}<ArrowRight size={16} aria-hidden className="xr-flip" /></Link>
-      </div>
-    </section>
   );
 }
