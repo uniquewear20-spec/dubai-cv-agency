@@ -89,6 +89,28 @@ export async function take(counter: Counter, key: string, plan: Plan): Promise<{
   return { ok: true, usage: { used, limit, period } };
 }
 
+// ── Site-wide AI ceiling ─────────────────────────────────────────────────────
+//   AGENT_AI_DRAFTS_SITE_PER_DAY   AI drafts per UTC day for the whole site, all customers together
+//                                  (default 150; 0 switches AI drafting off). A hard ceiling on AI
+//                                  spending, on top of each order's own allowance.
+
+const siteKey = () => `zagent:site-drafts:${new Date().toISOString().slice(0, 10)}`;
+
+/** Takes one AI draft from today's site-wide ceiling. False when the ceiling is reached. */
+export async function takeSiteDraft(): Promise<boolean> {
+  const cap = num("AGENT_AI_DRAFTS_SITE_PER_DAY", 150);
+  const used = await incr(siteKey(), 1, 2 * 86400);
+  if (used > cap) {
+    await incr(siteKey(), -1, 2 * 86400);
+    return false;
+  }
+  return true;
+}
+
+export async function giveBackSiteDraft(): Promise<void> {
+  await incr(siteKey(), -1, 2 * 86400).catch(() => undefined);
+}
+
 /** Gives a unit back, for example when the AI call failed after the unit was taken. */
 export async function giveBack(counter: Counter, key: string, plan: Plan): Promise<void> {
   const lim = planLimits(plan);

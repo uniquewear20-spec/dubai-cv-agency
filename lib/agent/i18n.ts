@@ -404,6 +404,7 @@ const EN = {
       "not-configured": "Purchases from this checkout can't be checked here yet. Contact us and we'll sort it out.",
       limit: "You've used this allowance.",
       "ai-off": "AI drafting isn't switched on yet.",
+      "site-limit": "AI drafting has reached today's limit for the site. Your allowance is untouched: use the template draft, or try again tomorrow.",
     } as Record<string, string>,
   },
   data: {
@@ -841,6 +842,7 @@ const FR: Copy = {
       "not-configured": "Les achats faits sur ce paiement ne peuvent pas encore être vérifiés ici. Contactez-nous et nous réglerons cela.",
       limit: "Vous avez utilisé ce quota.",
       "ai-off": "La rédaction par IA n'est pas encore activée.",
+      "site-limit": "La rédaction par IA a atteint la limite du jour pour le site. Votre quota n'est pas entamé : utilisez le brouillon modèle, ou réessayez demain.",
     },
   },
   data: {
@@ -1275,6 +1277,7 @@ const AR: Copy = {
       "not-configured": "لا يمكن التحقق هنا بعد من المشتريات عبر هذا الدفع. تواصل معنا وسنحل الأمر.",
       limit: "استنفدت هذا الرصيد.",
       "ai-off": "الكتابة بالذكاء الاصطناعي غير مفعّلة بعد.",
+      "site-limit": "بلغت الكتابة بالذكاء الاصطناعي حدّ اليوم للموقع. رصيدك لم يُمسّ: استخدم المسودة الجاهزة، أو حاول غداً.",
     },
   },
   data: {
