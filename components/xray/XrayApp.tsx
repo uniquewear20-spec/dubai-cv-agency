@@ -9,6 +9,7 @@ import Link from "next/link";
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { ArrowRight, Check, CircleAlert, FileText, Moon, Printer, RotateCcw, Sun, Upload, X } from "lucide-react";
 import { isLang, type Lang } from "@/lib/site";
+import { currentRef } from "@/components/site/RefTracker";
 import { readCv, type ReadFailure } from "@/lib/xray/read";
 import { analyzeCv, type Report } from "@/lib/xray/analyze";
 import { UI } from "@/lib/xray/copy";
@@ -50,7 +51,7 @@ export default function XrayApp() {
       else { const l = localStorage.getItem("z-lang"); if (isLang(l)) setLang(l); }
     } catch { /* storage blocked */ }
     // Where the visitor came from (?ref=IG from an Instagram bio, for example), passed on to WhatsApp.
-    const r = new URLSearchParams(window.location.search).get("ref")?.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8) ?? "";
+    const r = currentRef();
     setRef(r);
   }, []);
 

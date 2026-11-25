@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./site.css";
 import { fontVariables } from "./fonts";
+import RefTracker from "@/components/site/RefTracker";
 import { SITE_URL, BRAND_NAME, CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/site";
 
 const DESCRIPTION =
@@ -66,7 +67,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <RefTracker />{children}</body>
     </html>
   );
 }

@@ -13,8 +13,8 @@
 //                                                    Remotive, link to the listing, at most 4 calls a day
 //   Arbeitnow  arbeitnow.com/api/job-board-api      jobs in Germany, Austria and Switzerland; link back
 //   Jooble     jooble.org/api/{key}                 on-site jobs worldwide incl. the Gulf; needs JOOBLE_API_KEY
-//   Adzuna     api.adzuna.com/v1/api/jobs           on-site jobs in 19 countries (no Gulf); needs
-//                                                    ADZUNA_APP_ID and ADZUNA_APP_KEY; credit "Jobs by Adzuna"
+//   (Adzuna was removed on 25 Nov 2026: its free tier is for evaluation and commercial use needs a
+//    paid licence, which Zenith's zero-spending rule excludes.)
 //
 // Every target role is planned first (lib/agent/titles.ts): typos fixed, the other titles of the
 // same job (in the market's language too), its neighbours, or a whole field. Sources are asked for
@@ -57,7 +57,6 @@ export const SOURCE_META: SourceMeta[] = [
   { id: "remotive", name: "Remotive", home: "https://remotive.com", attribution: "Remote jobs from Remotive" },
   { id: "arbeitnow", name: "Arbeitnow", home: "https://www.arbeitnow.com", attribution: "Jobs from Arbeitnow" },
   { id: "jooble", name: "Jooble", home: "https://jooble.org", attribution: "Jobs from Jooble", needs: ["JOOBLE_API_KEY"] },
-  { id: "adzuna", name: "Adzuna", home: "https://www.adzuna.com", attribution: "Jobs by Adzuna", needs: ["ADZUNA_APP_ID", "ADZUNA_APP_KEY"] },
 ];
 
 const META = Object.fromEntries(SOURCE_META.map(m => [m.id, m])) as Record<Id, SourceMeta>;
@@ -74,10 +73,10 @@ const envInt = (name: string, fallback: number): number => {
 
 /**
  * Keeps the calls that still fit in the source's allowance for today.
- *   JOOBLE_DAILY_CALLS (default 40), ADZUNA_DAILY_CALLS (default 30): calls per UTC day.
+ *   JOOBLE_DAILY_CALLS (default 40): calls per UTC day.
  */
-async function withinDaily<T>(id: "jooble" | "adzuna", items: T[]): Promise<T[]> {
-  const max = envInt(id === "jooble" ? "JOOBLE_DAILY_CALLS" : "ADZUNA_DAILY_CALLS", id === "jooble" ? 40 : 30);
+async function withinDaily<T>(id: "jooble", items: T[]): Promise<T[]> {
+  const max = envInt("JOOBLE_DAILY_CALLS", 40);
   const kept: T[] = [];
   for (const item of items) if (await takeDaily(id, max).catch(() => true)) kept.push(item);
   return kept;
@@ -771,59 +770,6 @@ const jooble: Adapter = {
   },
 };
 
-// ── Adzuna (keys) ────────────────────────────────────────────────────────────
-
-interface AdzunaJob {
-  id: string; title: string; description: string; created: string; redirect_url: string;
-  company?: { display_name?: string }; location?: { display_name?: string };
-  salary_min?: number; salary_max?: number; salary_is_predicted?: string | number; contract_time?: string; category?: { label?: string };
-}
-
-const ADZUNA_CURRENCY: Record<string, string> = { gb: "GBP", us: "USD", ca: "CAD", au: "AUD", nz: "NZD", in: "INR", sg: "SGD", za: "ZAR", br: "BRL", mx: "MXN", ch: "CHF", pl: "PLN" };
-
-const adzuna: Adapter = {
-  meta: META.adzuna,
-  skip: ({ req, widen }) => (widen ? "Not used to widen a search" : req.countries.some(c => countryByCode(c)?.adzuna) ? null : "Doesn't cover the countries you chose"),
-  run(ctx) {
-    const { req } = ctx;
-    const id = process.env.ADZUNA_APP_ID!.trim();
-    const key = process.env.ADZUNA_APP_KEY!.trim();
-    const markets = req.countries.map(c => ({ code: c, az: countryByCode(c)?.adzuna })).filter(m => m.az);
-    const { terms, planOf } = termsFor(ctx, 2, p => marketTerms(p, req.countries));
-    // ADZUNA_CALLS_PER_SEARCH (default 3) caps the calls of one search; answers are cached for an hour.
-    const pairs = queryPairs(terms, markets, envInt("ADZUNA_CALLS_PER_SEARCH", 3));
-    return withinDaily("adzuna", pairs).then(allowed => {
-      if (pairs.length && !allowed.length) throw new SourceError(ALLOWANCE_USED);
-      return settle("adzuna", allowed.map(([term, m]) => {
-      const qs = new URLSearchParams({ app_id: id, app_key: key, what: term, results_per_page: "20", "content-type": "application/json" });
-      if (req.city) qs.set("where", req.city);
-      return getJson<unknown>(`https://api.adzuna.com/v1/api/jobs/${m.az}/search/1?${qs}`, { next: { revalidate: 3600 } })
-        .then(body => listOf<AdzunaJob>("adzuna", body, "results").map(j => {
-          const predicted = String(j.salary_is_predicted ?? "0") === "1";
-          const r = predicted ? null : range(j.salary_min, j.salary_max, ADZUNA_CURRENCY[m.az!] ?? "EUR", "year");
-          return {
-            plan: planOf.get(term) ?? null,
-            job: job({
-              id: `adzuna:${j.id}`,
-              source: "adzuna",
-              title: clean(htmlToText(j.title)),
-              company: clean(j.company?.display_name) || "-",
-              location: clean(j.location?.display_name) || (countryByCode(m.code)?.en ?? ""),
-              remote: /remote|home[- ]based|télétravail/i.test(`${j.title} ${j.description}`),
-              url: j.redirect_url,
-              description: htmlToText(j.description ?? ""),
-              postedAt: iso(j.created),
-              salary: salaryText(r),
-              salaryRange: r,
-              tags: [j.category?.label ?? "", j.contract_time ?? ""].filter(Boolean),
-            }, [j.contract_time]),
-          };
-        }));
-    }));
-    });
-  },
-};
-
 // ── All sources ──────────────────────────────────────────────────────────────
 
 const cityOf = (location: string) => norm(location.split(/[,(/]/)[0] ?? "");
@@ -831,7 +777,7 @@ const countryOf = (location: string) => norm(location.split(",").pop() ?? "");
 /** The same job at the same employer in the same country (another city is the same posting for another branch). */
 const sameJobKey = (j: Job) => `${norm(j.title)}|${norm(j.company)}|${countryOf(j.location)}`;
 
-const ADAPTERS: Adapter[] = [workable, himalayas, jobicy, remotive, arbeitnow, jooble, adzuna];
+const ADAPTERS: Adapter[] = [workable, himalayas, jobicy, remotive, arbeitnow, jooble];
 
 /** Why a source isn't asked for this search, or null when it is. */
 function skipReason(a: Adapter, ctx: Ctx): string | null {
