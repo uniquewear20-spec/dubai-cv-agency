@@ -44,8 +44,9 @@ const SCHEMA = {
         properties: {
           text: { type: "string", description: "The achievement, reworded for this job without adding facts." },
           evidence: { type: "string", description: "The CV sentence or bullet it comes from, copied exactly." },
+          why: { type: "string", description: "One sentence: which requirement of the listing this answers, and how." },
         },
-        required: ["text", "evidence"],
+        required: ["text", "evidence", "why"],
         additionalProperties: false,
       },
     },
@@ -60,7 +61,7 @@ const SCHEMA = {
 interface ModelDraft {
   fit_summary: string;
   tailored_summary: string;
-  highlights: { text: string; evidence: string }[];
+  highlights: { text: string; evidence: string; why?: string }[];
   cover_letter: string;
   gaps: string[];
   keywords: string[];
@@ -75,7 +76,24 @@ export class AiError extends Error {
 
 const cap = (s: unknown, n: number) => (typeof s === "string" ? s.trim().slice(0, n) : "");
 
-export async function draftWithClaude(req: TailorRequest): Promise<{ draft: Draft; dropped: number }> {
+/**
+ * draftWithClaude, tried a second time when the first attempt fails quickly for a reason worth retrying
+ * (the service busy or overloaded, a dropped connection). A slow failure is not retried: the route has
+ * 60 seconds in all.
+ */
+export async function draftWithRetry(req: TailorRequest): Promise<{ draft: Draft; dropped: number }> {
+  const started = Date.now();
+  try {
+    return await draftWithClaude(req);
+  } catch (err) {
+    const spent = Date.now() - started;
+    if (!(err instanceof AiError) || !err.retryable || spent > 15_000) throw err;
+    await new Promise(r => setTimeout(r, 1500));
+    return draftWithClaude(req, 55_000 - spent - 1500);
+  }
+}
+
+export async function draftWithClaude(req: TailorRequest, timeoutMs = 55_000): Promise<{ draft: Draft; dropped: number }> {
   const p = req.profile;
   const user = [
     `Write in ${LANGUAGE[req.lang]}.`,
@@ -115,7 +133,7 @@ export async function draftWithClaude(req: TailorRequest): Promise<{ draft: Draf
         output_config: { format: { type: "json_schema", schema: SCHEMA } },
       }),
       cache: "no-store",
-      signal: AbortSignal.timeout(55_000),
+      signal: AbortSignal.timeout(Math.max(5_000, timeoutMs)),
     });
   } catch (err) {
     throw new AiError(err instanceof Error && err.name === "TimeoutError" ? "The AI took too long to answer." : "The AI service could not be reached.", true);
@@ -142,7 +160,7 @@ export async function draftWithClaude(req: TailorRequest): Promise<{ draft: Draf
   // Keep only highlights whose quoted evidence really is in the CV.
   const all = Array.isArray(parsed.highlights) ? parsed.highlights : [];
   const highlights = all
-    .map(h => ({ text: cap(h?.text, 400), evidence: cap(h?.evidence, 600) }))
+    .map(h => ({ text: cap(h?.text, 400), evidence: cap(h?.evidence, 600), why: cap(h?.why, 300) }))
     .filter(h => h.text && quotedFrom(h.evidence, req.cvText))
     .slice(0, 6);
 

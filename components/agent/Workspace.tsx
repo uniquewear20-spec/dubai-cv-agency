@@ -3,7 +3,8 @@
 // template), applying with explicit approval, and tracking to the outcome.
 
 import { useId, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, CalendarPlus, Copy, Download, ExternalLink, Mail, Mic, Send, Trash2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CalendarPlus, Copy, Download, ExternalLink, Mail, Mic, ScanSearch, Send, Trash2 } from "lucide-react";
+import { UI as XRAY_UI } from "@/lib/xray/copy";
 import { IV_COPY } from "@/lib/agent/interview/copy";
 import { useAgent, type Lang } from "./context";
 import { Modal, Notice, ReasonList, ScoreMeter, fmtDate } from "./parts";
@@ -55,6 +56,7 @@ export default function Workspace({ app }: { app: Application }) {
           <div className="za-actions za-ws-links">
             <a className="z-btn z-btn-quiet z-btn-small" href={job.url} target="_blank" rel="noopener noreferrer">{t.ws.viewListing} <ExternalLink size={14} aria-hidden /></a>
             <button type="button" className="z-btn z-btn-quiet z-btn-small" onClick={() => practise(app.jobId)}><Mic size={14} aria-hidden /> {IV_COPY[lang].entry.forJob}</button>
+            <a className="z-btn z-btn-quiet z-btn-small" href={`#xray=${encodeURIComponent(app.jobId)}`}><ScanSearch size={14} aria-hidden /> {XRAY_UI[lang].agent.forJob}</a>
           </div>
         </div>
         <ScoreMeter match={match} label={t.jobs.label(match.score)} />
@@ -208,6 +210,7 @@ function DraftPanel({ app, onSaved }: { app: Application; onSaved: (d: Draft) =>
               {draft.highlights.map((h, i) => (
                 <li key={i}>
                   <p>{h.text}</p>
+                  {h.why && <p className="za-evidence"><span>{t.ws.why}</span> {h.why}</p>}
                   {h.evidence !== h.text && <p className="za-evidence"><span>{t.ws.fromCv}</span> “{h.evidence}”</p>}
                 </li>
               ))}
