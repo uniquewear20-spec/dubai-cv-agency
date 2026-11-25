@@ -3,7 +3,8 @@
 // follow-ups that are due, and the best matches from the last search.
 
 import { useEffect, useState } from "react";
-import { CalendarPlus, Check, Mic } from "lucide-react";
+import { CalendarPlus, Check, Mic, ScanSearch } from "lucide-react";
+import { UI as XRAY_UI } from "@/lib/xray/copy";
 import { useAgent } from "./context";
 import { ScoreMeter, fmtDate } from "./parts";
 import AccessPanel from "./AccessPanel";
@@ -70,6 +71,14 @@ export default function Overview() {
             </div>
           ))}
         </dl>
+      </section>
+
+      <section className="za-panel za-iv-entry">
+        <div>
+          <h2 className="za-h2">{XRAY_UI[lang].agent.title}</h2>
+          <p className="za-body-text">{XRAY_UI[lang].agent.entry}</p>
+        </div>
+        <button type="button" className="z-btn z-btn-quiet" onClick={() => go("xray")}><ScanSearch size={16} aria-hidden /> {XRAY_UI[lang].run}</button>
       </section>
 
       <section className="za-panel za-iv-entry">

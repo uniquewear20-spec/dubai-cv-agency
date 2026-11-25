@@ -7,25 +7,16 @@
 import React, { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
-import { AlertTriangle, ArrowRight, Check, CircleAlert, FileText, Info, MessageCircle, Moon, Printer, RotateCcw, Sun, Upload, X } from "lucide-react";
+import { ArrowRight, Check, CircleAlert, FileText, Moon, Printer, RotateCcw, Sun, Upload, X } from "lucide-react";
 import { isLang, waLink, type Lang } from "@/lib/site";
-import { TIERS } from "@/lib/checkout/catalog";
-import { packageName } from "@/lib/packages";
 import { readCv, type ReadFailure } from "@/lib/xray/read";
-import { analyzeCv, type Check as Finding, type Report, type Status } from "@/lib/xray/analyze";
-import { say, UI } from "@/lib/xray/copy";
+import { analyzeCv, type Report } from "@/lib/xray/analyze";
+import { UI } from "@/lib/xray/copy";
+import { STATUS_ICON, XrayCta, XrayReport } from "./Report";
 
 type Phase = "idle" | "reading" | "done";
 type Outcome = { kind: "report"; report: Report } | { kind: "scanned" } | { kind: "error"; reason: Exclude<ReadFailure, "scanned"> };
 
-const STATUS_ICON: Record<Status, React.ReactNode> = {
-  pass: <Check size={15} aria-hidden />,
-  warn: <AlertTriangle size={15} aria-hidden />,
-  fail: <CircleAlert size={15} aria-hidden />,
-  info: <Info size={15} aria-hidden />,
-};
-
-const FILM_LINES = 40;
 const ACCEPT = ".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain";
 
 function formatSize(bytes: number): string {
@@ -42,7 +33,6 @@ export default function XrayApp() {
   const [step, setStep] = useState(0);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [over, setOver] = useState(false);
-  const [allLines, setAllLines] = useState(false);
   const [ref, setRef] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLHeadingElement>(null);
@@ -90,7 +80,6 @@ export default function XrayApp() {
     if (!file || phase === "reading") return;
     setPhase("reading");
     setOutcome(null);
-    setAllLines(false);
     setStep(0);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const ticker = reduce ? null : window.setInterval(() => setStep(s => Math.min(s + 1, 3)), 380);
@@ -239,11 +228,11 @@ export default function XrayApp() {
                       <h3 className="z-h3">{ui.scanned.title}</h3>
                       <p className="z-body">{ui.scanned.body}</p>
                       <p className="z-body xr-fix">{ui.scanned.fix}</p>
-                      <Cta lang={lang} wa={wa} serviceKey="foundation" reason={ui.reasons.rebuild} />
+                      <XrayCta lang={lang} wa={wa} serviceKey="foundation" reason={ui.reasons.rebuild} />
                     </div>
                   )}
 
-                  {outcome.kind === "report" && <Results report={outcome.report} lang={lang} wa={wa} allLines={allLines} setAllLines={setAllLines} />}
+                  {outcome.kind === "report" && <XrayReport report={outcome.report} lang={lang} wa={wa} />}
 
                   <p className="z-micro xr-disclaimer">{ui.disclaimer}</p>
                 </div>
@@ -266,122 +255,3 @@ export default function XrayApp() {
   );
 }
 
-function Results({ report, lang, wa, allLines, setAllLines }: { report: Report; lang: Lang; wa: string; allLines: boolean; setAllLines: (v: boolean) => void }) {
-  const ui = UI[lang];
-  const f = report.facts;
-  const facts = [
-    ui.facts[f.kind],
-    f.pages ? ui.facts.pages(f.pages) : null,
-    ui.facts.words(f.words),
-    f.years ? ui.facts.years(f.years) : null,
-  ].filter(Boolean) as string[];
-  const lines = allLines ? report.film : report.film.slice(0, FILM_LINES);
-
-  return (
-    <>
-      <div className="xr-summary">
-        <ul className="xr-facts" aria-label="File">{facts.map(x => <li key={x}>{x}</li>)}</ul>
-        <ul className="xr-counts">
-          <li data-status="pass">{STATUS_ICON.pass}{ui.counts.pass(report.counts.pass)}</li>
-          <li data-status="warn">{STATUS_ICON.warn}{ui.counts.warn(report.counts.warn)}</li>
-          <li data-status="fail">{STATUS_ICON.fail}{ui.counts.fail(report.counts.fail)}</li>
-        </ul>
-      </div>
-
-      <div className="xr-layout">
-        <aside className="xr-film" aria-labelledby="xr-film-title">
-          <div className="xr-film-head">
-            <h3 id="xr-film-title" className="xr-film-title">{ui.film}</h3>
-            <p className="z-micro">{ui.filmNote}</p>
-            <ul className="xr-legend">
-              <li data-kind="heading">{ui.legend.heading}</li>
-              <li data-kind="metric">{ui.legend.metric}</li>
-              <li data-kind="duty">{ui.legend.duty}</li>
-              <li data-kind="contact">{ui.legend.contact}</li>
-            </ul>
-          </div>
-          <ol className="xr-film-lines" dir="auto">
-            {lines.map((l, i) => <li key={i} data-kind={l.kind} dir="auto">{l.text}</li>)}
-          </ol>
-          {report.film.length > FILM_LINES && (
-            <button type="button" className="z-link xr-more" onClick={() => setAllLines(!allLines)}>{allLines ? ui.filmLess : ui.filmMore}</button>
-          )}
-        </aside>
-
-        <div className="xr-findings">
-          <section className="xr-fixes" aria-labelledby="xr-fixes-title">
-            <h3 id="xr-fixes-title" className="z-h3">{ui.fixes}</h3>
-            {report.fixes.length === 0 ? <p className="z-body">{ui.fixesNone}</p> : (
-              <ol>
-                {report.fixes.map(c => {
-                  const s = say(c, lang);
-                  return (
-                    <li key={c.id} data-status={c.status}>
-                      <span className="xr-fix-title">{s.title}</span>
-                      {s.fix && <span className="xr-fix-text">{s.fix}</span>}
-                    </li>
-                  );
-                })}
-              </ol>
-            )}
-          </section>
-
-          {report.areas.map((area, ai) => (
-            <motion.section
-              key={area.id}
-              className="xr-area"
-              aria-labelledby={`xr-area-${area.id}`}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.08 * ai, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <h3 id={`xr-area-${area.id}`} className="xr-area-title">
-                <span className="xr-area-n">{String(ai + 1).padStart(2, "0")}</span>{ui.areas[area.id]}
-              </h3>
-              <ul>
-                {area.checks.map(c => <FindingRow key={c.id} c={c} lang={lang} />)}
-              </ul>
-            </motion.section>
-          ))}
-
-          <Cta lang={lang} wa={wa} serviceKey={report.service.key} reason={ui.reasons[report.service.reason]} />
-        </div>
-      </div>
-    </>
-  );
-}
-
-function FindingRow({ c, lang }: { c: Finding; lang: Lang }) {
-  const ui = UI[lang];
-  const s = say(c, lang);
-  return (
-    <li className="xr-check" data-status={c.status}>
-      <span className="xr-badge" data-status={c.status}>{STATUS_ICON[c.status]}{ui.status[c.status]}</span>
-      <div className="xr-check-text">
-        <p className="xr-check-title">{s.title}</p>
-        <p className="z-small">{s.body}</p>
-        {s.fix && (c.status === "warn" || c.status === "fail") && <p className="z-small xr-fix">{s.fix}</p>}
-      </div>
-    </li>
-  );
-}
-
-function Cta({ lang, wa, serviceKey, reason }: { lang: Lang; wa: string; serviceKey: "foundation" | "growth" | "apex"; reason: string }) {
-  const ui = UI[lang];
-  return (
-    <section className="xr-cta" aria-labelledby="xr-cta-title">
-      <div className="xr-cta-wa">
-        <h3 id="xr-cta-title" className="z-h3">{ui.wa}</h3>
-        <p className="z-small">{ui.waNote}</p>
-        <a className="z-btn z-btn-primary" href={wa} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} aria-hidden />WhatsApp</a>
-      </div>
-      <div className="xr-cta-pkg">
-        <p className="z-label">{ui.fitTitle}</p>
-        <p className="xr-pkg-name z-serif">{packageName(serviceKey, lang)}</p>
-        <p className="z-micro">{ui.from} AED {TIERS[serviceKey].price}</p>
-        <p className="z-small">{reason}</p>
-        <Link className="z-btn z-btn-quiet z-btn-small" href="/#packages">{ui.included}<ArrowRight size={16} aria-hidden className="xr-flip" /></Link>
-      </div>
-    </section>
-  );
-}

@@ -25,8 +25,22 @@ export interface Area { id: AreaId; checks: Check[] }
 export type FilmKind = "heading" | "contact" | "metric" | "duty" | "plain";
 export interface FilmLine { text: string; kind: FilmKind }
 
+export type Verdict = "strong" | "fair" | "weak";
+
 export interface Report {
   facts: { kind: Layout["kind"]; pages: number | null; words: number; years: number | null; latestTitle: string | null };
+  /**
+   * The overall assessment, in words, from the findings: "weak" with two problems or more (or one problem
+   * and three points to improve), "fair" with one problem or three points to improve, "strong" otherwise.
+   * Strongest and weakest areas rank the seven areas by their findings (a problem counts twice).
+   */
+  overall: { verdict: Verdict; strongest: AreaId[]; weakest: AreaId[] };
+  /** What the job ad (or the target role) asks for that the CV doesn't show. Null with neither. */
+  missing: { skills: string[]; languages: string[]; levelStep: number; role: string } | null;
+  /** Every other finding worth acting on, after the five in fixes. */
+  improvements: Check[];
+  /** True when the layout of the file itself was checked (false for pasted or saved text). */
+  layoutChecked: boolean;
   areas: Area[];
   counts: { pass: number; warn: number; fail: number };
   /** The most useful fixes first (problems, then warnings), at most five. */
@@ -98,8 +112,8 @@ export function analyzeCv({ text, layout, role = "", ad = "", now = new Date() }
   // ── Structure ──────────────────────────────────────────────────────────
   const structure: Check[] = [];
   const core: CvSection[] = ["experience", "education", "skills"];
-  const missing = core.filter(s => !found.has(s));
-  structure.push({ id: "headings", status: missing.length === 0 ? "pass" : missing.includes("experience") ? "fail" : "warn", data: { missing, found: core.filter(s => found.has(s)) } });
+  const missingHeadings = core.filter(s => !found.has(s));
+  structure.push({ id: "headings", status: missingHeadings.length === 0 ? "pass" : missingHeadings.includes("experience") ? "fail" : "warn", data: { missing: missingHeadings, found: core.filter(s => found.has(s)) } });
 
   const pages = layout.pages;
   let lengthStatus: Status = "pass";
@@ -220,10 +234,33 @@ export function analyzeCv({ text, layout, role = "", ad = "", now = new Date() }
     fail: all.filter(c => c.status === "fail").length,
   };
   const rank = (c: Check) => (c.status === "fail" ? 0 : 1) * 100 + PRIORITY.indexOf(c.id);
-  const fixes = all.filter(c => c.status === "fail" || c.status === "warn").sort((a, b) => rank(a) - rank(b)).slice(0, 5);
+  const actionable = all.filter(c => c.status === "fail" || c.status === "warn").sort((a, b) => rank(a) - rank(b));
+  const fixes = actionable.slice(0, 5);
+
+  const weight = (a: Area) => a.checks.reduce((n, c) => n + (c.status === "fail" ? 2 : c.status === "warn" ? 1 : 0), 0);
+  const passes = (a: Area) => a.checks.filter(c => c.status === "pass").length;
+  const strongest = areas.filter(a => weight(a) === 0 && passes(a) >= 2).sort((a, b) => passes(b) - passes(a)).slice(0, 2).map(a => a.id);
+  const weakest = areas.filter(a => weight(a) > 0).sort((a, b) => weight(b) - weight(a)).slice(0, 2).map(a => a.id);
+  const verdict: Verdict = counts.fail >= 2 || (counts.fail >= 1 && counts.warn >= 3) ? "weak" : counts.fail >= 1 || counts.warn >= 3 ? "fair" : "strong";
+
+  const adCheck = all.find(c => c.id === "ad-skills");
+  const langCheck = all.find(c => c.id === "languages");
+  const levelCheck = all.find(c => c.id === "level");
+  const missing = adText.length >= 80 || plan
+    ? {
+        skills: adCheck ? (adCheck.data.lack as string[]) ?? [] : [],
+        languages: langCheck ? (langCheck.data.gaps as string[]) ?? [] : [],
+        levelStep: levelCheck && levelCheck.status !== "pass" ? Number(levelCheck.data.step) || 0 : 0,
+        role: roleText,
+      }
+    : null;
 
   return {
     facts: { kind: layout.kind, pages: layout.pages, words, years, latestTitle: titles[0] ?? null },
+    overall: { verdict, strongest, weakest },
+    missing,
+    improvements: actionable.slice(5),
+    layoutChecked: layout.kind !== "txt",
     areas,
     counts,
     fixes,

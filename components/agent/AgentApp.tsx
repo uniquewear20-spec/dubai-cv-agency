@@ -12,6 +12,7 @@ import { allApps, delApp, delKV, getKV, persistent as hasStorage, putApp, setKV,
 import { candidateSkills, scoreJob } from "@/lib/agent/score";
 import { countriesIn, countryName } from "@/lib/agent/countries";
 import type { Access, AgentStatus, Application, PackageKey, Profile, SearchQuery, SearchRequest, SearchResponse, Usage } from "@/lib/agent/types";
+import XrayView from "./XrayView";
 import { AgentContext, queryFromProfile, type AgentState, type Lang, type Scored, type View } from "./context";
 import Overview from "./Overview";
 import ProfileView from "./ProfileView";
@@ -28,7 +29,7 @@ export const EMPTY_PROFILE: Profile = {
   cvText: "", cvFileName: null, updatedAt: null,
 };
 
-const VIEWS: View[] = ["overview", "profile", "jobs", "apps", "interview", "data"];
+const VIEWS: View[] = ["overview", "profile", "xray", "jobs", "apps", "interview", "data"];
 const isLang = (v: unknown): v is Lang => v === "en" || v === "fr" || v === "ar";
 const PAYPAL_ID = /^[A-Z0-9]{8,32}$/;
 const LICENSE = /^[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{8}$/i;
@@ -37,6 +38,7 @@ function parseHash(): { view: View; appId: string | null; ivJob: string | null }
   const h = decodeURIComponent(window.location.hash.slice(1));
   if (h.startsWith("app=")) return { view: "apps", appId: h.slice(4) || null, ivJob: null };
   if (h.startsWith("interview=")) return { view: "interview", appId: null, ivJob: h.slice(10) || null };
+  if (h.startsWith("xray=")) return { view: "xray", appId: null, ivJob: null };
   return { view: (VIEWS as string[]).includes(h) ? (h as View) : "overview", appId: null, ivJob: null };
 }
 
@@ -337,6 +339,8 @@ export default function AgentApp() {
               <Workspace key={openApp.jobId} app={openApp} />
             ) : view === "profile" ? (
               <ProfileView key={profile.updatedAt ?? "new"} />
+            ) : view === "xray" ? (
+              <XrayView key={typeof window === "undefined" ? "xray" : window.location.hash} />
             ) : view === "jobs" ? (
               <JobsView />
             ) : view === "apps" ? (

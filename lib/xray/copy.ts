@@ -3,7 +3,7 @@
 // promise an outcome.
 
 import type { Lang } from "@/lib/site";
-import type { AreaId, Check, CheckId, Data } from "./analyze";
+import type { AreaId, Check, CheckId, Data, Verdict } from "./analyze";
 import type { ReadFailure } from "./read";
 
 export interface Said { title: string; body: string; fix?: string }
@@ -332,6 +332,11 @@ export interface Ui {
   errors: Record<Exclude<ReadFailure, "scanned">, string>;
   scanned: { title: string; body: string; fix: string };
   theme: [string, string]; skip: string; language: string; live: { reading: string; done: string };
+  overall: { title: string; verdict: Record<Verdict, string>; detail: (checks: number, fail: number, warn: number) => string };
+  strongest: string; weakest: string; noneYet: string;
+  missing: { title: string; none: string; noAd: string; skills: string; languages: string; level: (step: number) => string };
+  more: string; layoutNote: string;
+  agent: { title: string; intro: string; source: string; saved: string; file: string; job: string; noJob: string; needCv: string; forJob: string; entry: string };
 }
 
 export const UI: Record<Lang, Ui> = {
@@ -378,6 +383,31 @@ export const UI: Record<Lang, Ui> = {
     },
     theme: ["Switch to light theme", "Switch to dark theme"], skip: "Skip to content", language: "Language",
     live: { reading: "Reading your CV", done: "X-Ray ready" },
+    overall: {
+      title: "Overall assessment",
+      verdict: {
+        strong: "Strong: a screening system can read this CV, and it presents you well.",
+        fair: "Fair: it reads, but some points hold it back.",
+        weak: "Needs work: some problems can stop this CV in a screening system.",
+      },
+      detail: (n, f, w) => `From ${n} checks: ${f} ${f === 1 ? "problem" : "problems"}, ${w} to improve. Each finding below says why.`,
+    },
+    strongest: "Strongest areas", weakest: "Weakest areas", noneYet: "None stands out.",
+    missing: {
+      title: "Missing requirements",
+      none: "Nothing the ad asks for is missing, as far as these checks can tell.",
+      noAd: "Paste the job ad to see the requirements your CV doesn't show.",
+      skills: "Skills", languages: "Languages",
+      level: n => `The role is ${n} ${n === 1 ? "level" : "levels"} above your latest title.`,
+    },
+    more: "Also worth improving",
+    layoutNote: "Checked from your saved CV text. Upload the file to add the layout checks (columns, tables, text boxes).",
+    agent: {
+      title: "CV X-Ray", intro: "See how screening software reads your CV, and check it against a job you saved.",
+      source: "CV to check", saved: "My saved CV (text)", file: "Upload the file (adds layout checks)",
+      job: "Compare with a saved job (optional)", noJob: "No job: a general check", needCv: "Add your CV in Profile first, or upload the file here.",
+      forJob: "X-Ray my CV for this job", entry: "See how screening software reads your CV, what it misses for a saved job, and what to fix first. Free, in your browser.",
+    },
   },
   fr: {
     back: "Retour à Zenith", eyebrow: "Radiographie ATS du CV",
@@ -422,6 +452,31 @@ export const UI: Record<Lang, Ui> = {
     },
     theme: ["Passer au thème clair", "Passer au thème sombre"], skip: "Aller au contenu", language: "Langue",
     live: { reading: "Lecture de votre CV", done: "Radiographie prête" },
+    overall: {
+      title: "Évaluation d'ensemble",
+      verdict: {
+        strong: "Solide : un logiciel de tri peut lire ce CV, et il vous présente bien.",
+        fair: "Correct : il se lit, mais certains points le freinent.",
+        weak: "À retravailler : certains problèmes peuvent arrêter ce CV dans un logiciel de tri.",
+      },
+      detail: (n, f, w) => `Sur ${n} vérifications : ${f} problème${f > 1 ? "s" : ""}, ${w} à améliorer. Chaque constat ci-dessous dit pourquoi.`,
+    },
+    strongest: "Points forts", weakest: "Points faibles", noneYet: "Aucun ne ressort.",
+    missing: {
+      title: "Exigences manquantes",
+      none: "Rien de ce que demande l'annonce ne manque, d'après ces vérifications.",
+      noAd: "Collez l'offre pour voir les exigences que votre CV ne montre pas.",
+      skills: "Compétences", languages: "Langues",
+      level: n => `Le poste est ${n} niveau${n > 1 ? "x" : ""} au-dessus de votre dernier intitulé.`,
+    },
+    more: "À améliorer aussi",
+    layoutNote: "Vérifié à partir du texte de votre CV enregistré. Ajoutez le fichier pour inclure la mise en page (colonnes, tableaux, zones de texte).",
+    agent: {
+      title: "Radiographie du CV", intro: "Voyez comment un logiciel de tri lit votre CV, et comparez-le à une offre enregistrée.",
+      source: "CV à vérifier", saved: "Mon CV enregistré (texte)", file: "Ajouter le fichier (inclut la mise en page)",
+      job: "Comparer à une offre enregistrée (facultatif)", noJob: "Aucune offre : vérification générale", needCv: "Ajoutez d'abord votre CV dans Profil, ou déposez le fichier ici.",
+      forJob: "Radiographier mon CV pour cette offre", entry: "Voyez comment un logiciel de tri lit votre CV, ce qui lui manque pour une offre enregistrée, et quoi corriger d'abord. Gratuit, dans votre navigateur.",
+    },
   },
   ar: {
     back: "العودة إلى Zenith", eyebrow: "أشعة السيرة الذاتية لأنظمة الفرز",
@@ -466,6 +521,31 @@ export const UI: Record<Lang, Ui> = {
     },
     theme: ["التبديل إلى المظهر الفاتح", "التبديل إلى المظهر الداكن"], skip: "انتقل إلى المحتوى", language: "اللغة",
     live: { reading: "نقرأ سيرتك", done: "الفحص جاهز" },
+    overall: {
+      title: "التقييم العام",
+      verdict: {
+        strong: "قوية: يستطيع نظام الفرز قراءة هذه السيرة، وهي تقدّمك جيداً.",
+        fair: "مقبولة: تُقرأ، لكن بعض النقاط تعيقها.",
+        weak: "تحتاج إلى عمل: بعض المشكلات قد توقف هذه السيرة في نظام الفرز.",
+      },
+      detail: (n, f, w) => `عدد الفحوصات: ${n}. مشكلات: ${f}، للتحسين: ${w}. كل ملاحظة أدناه تشرح السبب.`,
+    },
+    strongest: "أقوى الجوانب", weakest: "أضعف الجوانب", noneYet: "لا شيء بارز.",
+    missing: {
+      title: "متطلبات غير موجودة",
+      none: "لا ينقص شيء مما يطلبه الإعلان، بحسب هذه الفحوصات.",
+      noAd: "الصق إعلان الوظيفة لترى المتطلبات التي لا تُظهرها سيرتك.",
+      skills: "المهارات", languages: "اللغات",
+      level: n => `الوظيفة أعلى من مسمّاك الأخير (عدد المستويات: ${n}).`,
+    },
+    more: "تحسينات أخرى",
+    layoutNote: "تم الفحص من نص سيرتك المحفوظ. ارفع الملف لإضافة فحوص التنسيق (الأعمدة والجداول ومربعات النص).",
+    agent: {
+      title: "فحص السيرة الذاتية", intro: "شاهد كيف يقرأ نظام الفرز سيرتك، وقارنها بوظيفة حفظتها.",
+      source: "السيرة المراد فحصها", saved: "سيرتي المحفوظة (نص)", file: "ارفع الملف (يضيف فحوص التنسيق)",
+      job: "قارن بوظيفة محفوظة (اختياري)", noJob: "بلا وظيفة: فحص عام", needCv: "أضف سيرتك في «ملفك» أولاً، أو ارفع الملف هنا.",
+      forJob: "افحص سيرتي لهذه الوظيفة", entry: "شاهد كيف يقرأ نظام الفرز سيرتك، وما ينقصها لوظيفة حفظتها، وما الذي تصلحه أولاً. مجاني، داخل متصفحك.",
+    },
   },
 };
 

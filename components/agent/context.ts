@@ -7,7 +7,7 @@ import type { Access, AgentStatus, Application, Job, PackageKey, Profile, Search
 import type { SavedSearch } from "@/lib/agent/store";
 import type { Match } from "@/lib/agent/score";
 
-export type View = "overview" | "profile" | "jobs" | "apps" | "interview" | "data";
+export type View = "overview" | "profile" | "xray" | "jobs" | "apps" | "interview" | "data";
 export type Lang = "en" | "fr" | "ar";
 
 export interface Scored { job: Job; match: Match }
