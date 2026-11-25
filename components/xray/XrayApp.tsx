@@ -43,7 +43,12 @@ export default function XrayApp() {
     // Browser-only preferences, read after hydration so the server and client render the same first.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setDark(document.documentElement.dataset.theme !== "light");
-    try { const l = localStorage.getItem("z-lang"); if (isLang(l)) setLang(l); } catch { /* storage blocked */ }
+    const fromLink = new URLSearchParams(window.location.search).get("lang");
+    if (isLang(fromLink)) setLang(fromLink);
+    try {
+      if (isLang(fromLink)) localStorage.setItem("z-lang", fromLink);
+      else { const l = localStorage.getItem("z-lang"); if (isLang(l)) setLang(l); }
+    } catch { /* storage blocked */ }
     // Where the visitor came from (?ref=IG from an Instagram bio, for example), passed on to WhatsApp.
     const r = new URLSearchParams(window.location.search).get("ref")?.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8) ?? "";
     setRef(r);
