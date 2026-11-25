@@ -103,7 +103,7 @@ const STAGES: Stage[] = [
   },
 ];
 
-const H2: L10n = { en: "We don't just write CVs. We engineer careers.", fr: "Nous ne faisons pas qu'écrire des CV. Nous concevons des carrières.", ar: "لا نكتب سيراً ذاتية فحسب. نحن نهندس المسارات المهنية." };
+const H2: L10n = { en: "How we engineer your career", fr: "Comment nous concevons votre carrière", ar: "كيف نهندس مسارك المهني" };
 const LEDE: L10n = {
   en: "Five stages, one system. Start free, and go as far as your search needs.",
   fr: "Cinq étapes, un seul système. Commencez gratuitement, allez aussi loin que votre recherche l'exige.",
