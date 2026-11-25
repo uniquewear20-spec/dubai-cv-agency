@@ -219,3 +219,17 @@ export async function wasMarked(key: string): Promise<boolean> {
   const exp = seen.get(key);
   return exp !== undefined && exp > Date.now();
 }
+
+// ── Daily call allowances for keyed job sources ──────────────────────────────
+// Free API keys (Jooble, Adzuna) have small quotas. Each call takes one unit of today's allowance
+// for that source; when it is used up the source rests until midnight UTC. Shared across servers
+// with Redis, per server instance without it.
+
+/** Takes one call from today's allowance named `name`. False when `max` calls were already made today. */
+export async function takeDaily(name: string, max: number): Promise<boolean> {
+  const k = `zagent:calls:${name}:${new Date().toISOString().slice(0, 10)}`;
+  const used = await incr(k, 1, 2 * 86400);
+  if (used > max) { await incr(k, -1, 2 * 86400); return false; }
+  return true;
+}
+

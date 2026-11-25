@@ -32,6 +32,7 @@ import { unstable_cache } from "next/cache";
 import { FRENCH_MARKETS, GERMAN_MARKETS, cityVerdict, countriesIn, countryByCode, placeVerdict } from "./countries";
 import { bare, findApplyEmail, htmlToText, norm } from "./text";
 import { parseSalary } from "./salary";
+import { takeDaily } from "./limits";
 import {
   SECTOR_SEARCHES, employmentOf, familyById, familyLabel, genericTitle, industriesOf, industryById, levelOfListing, mentionsJob, planRole,
   titleFit, widenTerms, wordsFitTitle, type Family, type Industry, type RolePlan,
@@ -64,6 +65,24 @@ const META = Object.fromEntries(SOURCE_META.map(m => [m.id, m])) as Record<Id, S
 export const sourceConfigured = (m: SourceMeta): boolean => (m.needs ?? []).every(k => Boolean(process.env[k]?.trim()));
 
 class SourceError extends Error {}
+
+/** A whole number from the environment, or the fallback. */
+const envInt = (name: string, fallback: number): number => {
+  const v = Number(process.env[name]);
+  return process.env[name]?.trim() && Number.isFinite(v) && v >= 0 ? Math.floor(v) : fallback;
+};
+
+/**
+ * Keeps the calls that still fit in the source's allowance for today.
+ *   JOOBLE_DAILY_CALLS (default 40), ADZUNA_DAILY_CALLS (default 30): calls per UTC day.
+ */
+async function withinDaily<T>(id: "jooble" | "adzuna", items: T[]): Promise<T[]> {
+  const max = envInt(id === "jooble" ? "JOOBLE_DAILY_CALLS" : "ADZUNA_DAILY_CALLS", id === "jooble" ? 40 : 30);
+  const kept: T[] = [];
+  for (const item of items) if (await takeDaily(id, max).catch(() => true)) kept.push(item);
+  return kept;
+}
+const ALLOWANCE_USED = "Today's allowance for this source is used; it resets at midnight UTC";
 
 type CacheInit = RequestInit & { next?: { revalidate?: number } };
 
@@ -711,13 +730,20 @@ const jooble: Adapter = {
     const key = process.env.JOOBLE_API_KEY!.trim();
     const places = req.city ? [req.city] : req.countries.length ? req.countries.map(c => countryByCode(c)?.en ?? c) : [""];
     const { terms, planOf } = termsFor(ctx, 2, p => marketTerms(p, req.countries));
-    // Each call counts against the key's allowance: at most 6 a search (every term and country once).
-    return settle("jooble", queryPairs(terms, places, 6).map(([term, place]) => {
+    // JOOBLE_API_HOST: the host Jooble issued the key for (default jooble.org; a country site such as
+    // ae.jooble.org if the key was issued there). JOOBLE_CALLS_PER_SEARCH (default 3) caps the calls of
+    // one search; answers are remembered for 6 hours so repeated searches cost nothing.
+    const host = /^([a-z]{2,3}\.)?jooble\.org$/.test(process.env.JOOBLE_API_HOST?.trim() ?? "") ? process.env.JOOBLE_API_HOST!.trim() : "jooble.org";
+    const pairs = queryPairs(terms, places, envInt("JOOBLE_CALLS_PER_SEARCH", 3));
+    const fresh = pairs.filter(([term, place]) => { const hit = joobleMemo.get(`${norm(term)}|${place}`); return !(hit && Date.now() - hit.at < 6 * 3600_000); });
+    return withinDaily("jooble", fresh).then(allowed => {
+      if (fresh.length === pairs.length && pairs.length && !allowed.length) throw new SourceError(ALLOWANCE_USED);
+      return settle("jooble", pairs.filter(p => !fresh.includes(p) || allowed.includes(p)).map(([term, place]) => {
       const plan = planOf.get(term) ?? null;
       const memoKey = `${norm(term)}|${place}`;
       const hit = joobleMemo.get(memoKey);
-      if (hit && Date.now() - hit.at < 30 * 60_000) return Promise.resolve(hit.jobs.map(j => ({ job: { ...j }, plan })));
-      return getJson<unknown>(`https://jooble.org/api/${encodeURIComponent(key)}`, {
+      if (hit && Date.now() - hit.at < 6 * 3600_000) return Promise.resolve(hit.jobs.map(j => ({ job: { ...j }, plan })));
+      return getJson<unknown>(`https://${host}/api/${encodeURIComponent(key)}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ keywords: term, location: place, page: "1" }),
@@ -741,6 +767,7 @@ const jooble: Adapter = {
         return jobs.map(j => ({ job: j, plan }));
       });
     }));
+    });
   },
 };
 
@@ -763,8 +790,11 @@ const adzuna: Adapter = {
     const key = process.env.ADZUNA_APP_KEY!.trim();
     const markets = req.countries.map(c => ({ code: c, az: countryByCode(c)?.adzuna })).filter(m => m.az);
     const { terms, planOf } = termsFor(ctx, 2, p => marketTerms(p, req.countries));
-    // Each call counts against the key's allowance: at most 6 a search (every term and country once).
-    return settle("adzuna", queryPairs(terms, markets, 6).map(([term, m]) => {
+    // ADZUNA_CALLS_PER_SEARCH (default 3) caps the calls of one search; answers are cached for an hour.
+    const pairs = queryPairs(terms, markets, envInt("ADZUNA_CALLS_PER_SEARCH", 3));
+    return withinDaily("adzuna", pairs).then(allowed => {
+      if (pairs.length && !allowed.length) throw new SourceError(ALLOWANCE_USED);
+      return settle("adzuna", allowed.map(([term, m]) => {
       const qs = new URLSearchParams({ app_id: id, app_key: key, what: term, results_per_page: "20", "content-type": "application/json" });
       if (req.city) qs.set("where", req.city);
       return getJson<unknown>(`https://api.adzuna.com/v1/api/jobs/${m.az}/search/1?${qs}`, { next: { revalidate: 3600 } })
@@ -790,6 +820,7 @@ const adzuna: Adapter = {
           };
         }));
     }));
+    });
   },
 };
 
