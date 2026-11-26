@@ -7,7 +7,7 @@ export const tfDisplay = localFont({
   src: [{ path: "../../../node_modules/@fontsource/italiana/files/italiana-latin-400-normal.woff2", weight: "400", style: "normal" }],
   variable: "--tf-display",
   display: "swap",
-  fallback: ["Didot", "Bodoni 72", "Georgia", "serif"],
+  fallback: ["Didot", "Georgia", "serif"],
 });
 
 export const tfText = localFont({

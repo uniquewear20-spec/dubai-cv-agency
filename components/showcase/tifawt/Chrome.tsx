@@ -47,14 +47,32 @@ export function Img({
   );
 }
 
-/** The mark: a horseshoe arch with the sun rising inside it, the brand's own name drawn. */
-export function Mark({ size = 30 }: { size?: number }) {
+/** The emblem: the first light of day (tifawt) rising inside a carved horseshoe arch, with an
+ *  eight-pointed khatam star at the keystone and the sun's reflection below the horizon. */
+export function Mark({ size = 30, id = "m" }: { size?: number; id?: string }) {
+  const rays = [30, 50, 70, 90, 110, 130, 150].map((a) => {
+    const r = (a * Math.PI) / 180;
+    return `M${(24 + 8.4 * Math.cos(r)).toFixed(2)} ${(44 - 8.4 * Math.sin(r)).toFixed(2)}L${(24 + 12.6 * Math.cos(r)).toFixed(2)} ${(44 - 12.6 * Math.sin(r)).toFixed(2)}`;
+  });
   return (
-    <svg width={size} height={size * 1.2} viewBox="0 0 40 48" fill="none" aria-hidden className="tf-mark">
-      <path d="M9 47V26.5A15 15 0 1 1 31 26.5V47" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M13.5 37a6.5 6.5 0 0 1 13 0" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M6 37h28" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M20 26.6v4M14.2 28.9l1.9 2.6M25.8 28.9l-1.9 2.6" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+    <svg width={size} height={size * 1.25} viewBox="0 0 48 60" fill="none" aria-hidden className="tf-mark">
+      <defs>
+        <linearGradient id={`tf-gold-${id}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="var(--g1)" />
+          <stop offset="0.45" stopColor="var(--g2)" />
+          <stop offset="0.7" stopColor="var(--g3)" />
+          <stop offset="1" stopColor="var(--g4)" />
+        </linearGradient>
+      </defs>
+      <g stroke={`url(#tf-gold-${id})`} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8 59.2V30C8 26.5 6.2 24.3 5.8 21.5C4.6 10.5 13.5 3 24 3S43.4 10.5 42.2 21.5C41.8 24.3 40 26.5 40 30V59.2" strokeWidth="1.35" />
+        <path d="M11.4 59.2V30.5C11.4 27.6 9.9 25.6 9.6 23.4C8.8 13.8 15.8 6.5 24 6.5S39.2 13.8 38.4 23.4C38.1 25.6 36.6 27.6 36.6 30.5V59.2" strokeWidth="0.7" />
+        <path d="M11.4 44H36.6" strokeWidth="1" />
+        <path d="M18 44A6 6 0 0 1 30 44" strokeWidth="1.2" />
+        <path d={rays.join("")} strokeWidth="0.8" />
+        <path d="M15.5 48.5H32.5M18.5 52.5H29.5M21.5 56.5H26.5" strokeWidth="0.7" />
+        <path d="M24 11.2l1.1 1.6 1.9-.4-.4 1.9 1.6 1.1-1.6 1.1.4 1.9-1.9-.4-1.1 1.6-1.1-1.6-1.9.4.4-1.9-1.6-1.1 1.6-1.1-.4-1.9 1.9.4z" strokeWidth="0.7" />
+      </g>
     </svg>
   );
 }
@@ -62,11 +80,13 @@ export function Mark({ size = 30 }: { size?: number }) {
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <span className={`tf-logo${compact ? " is-compact" : ""}`}>
-      <Mark size={compact ? 22 : 26} />
+      <Mark size={compact ? 22 : 30} id={compact ? "c" : "l"} />
       <span className="tf-logo-word">TIFAWT</span>
       {!compact && (
         <span className="tf-logo-tif" lang="tzm">
+          <i aria-hidden />
           ⵜⵉⴼⴰⵡⵜ
+          <i aria-hidden />
         </span>
       )}
     </span>
