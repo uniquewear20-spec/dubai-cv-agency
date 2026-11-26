@@ -56,4 +56,21 @@ export const CONCEPTS: Concept[] = [
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_001957_11af7275-f38e-44b7-95e1-c0ac392e3b20_min.webp",
     focus: "50% 55%",
   },
+  {
+    slug: "tifawt",
+    name: "TIFAWT",
+    category: "beauty",
+    line: {
+      en: "A Moroccan argan beauty house where every product is a sculpted object, from a horseshoe-arch flask to a tajine jar.",
+      fr: "Une maison de beauté marocaine à l'argan où chaque produit est un objet sculpté, du flacon en arc outrepassé au pot en tajine.",
+      ar: "دار تجميل مغربية بالأركان، كل منتج فيها قطعة منحوتة، من قارورة القوس إلى برطمان الطاجين.",
+    },
+    feature: {
+      en: "A split-screen opening you scroll through, then a full shop: bag, rituals, a product finder and nine product pages",
+      fr: "Une ouverture en écran partagé pilotée au défilement, puis une boutique complète : panier, rituels, diagnostic et neuf fiches produit",
+      ar: "افتتاحية بشاشة مقسومة تتنقل فيها بالتمرير، ثم متجر كامل: سلة وطقوس ومساعد اختيار وتسع صفحات منتجات",
+    },
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_051546_454b796d-6f42-466e-980a-a04c8ec37468_min.webp",
+    focus: "50% 45%",
+  },
 ];
