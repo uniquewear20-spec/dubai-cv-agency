@@ -124,4 +124,21 @@ export const CONCEPTS: Concept[] = [
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_153253_673f7f5e-f3ca-47b3-ab4b-ab8b209aa248_min.webp",
     focus: "60% 55%",
   },
+  {
+    slug: "oriel-88",
+    name: "ORIEL 88",
+    category: "real-estate",
+    line: {
+      en: "Eighty-eight floors of residences in a bronze-finned tower on the Dubai Water Canal.",
+      fr: "Quatre-vingt-huit étages de résidences dans une tour aux ailettes de bronze, sur le Dubai Water Canal.",
+      ar: "ثمانية وثمانون طابقاً من المساكن في برج بزعانف برونزية على قناة دبي المائية.",
+    },
+    feature: {
+      en: "Pick a floor on the tower's elevation to see its homes, prices and the view from that height",
+      fr: "Choisissez un étage sur la façade de la tour pour voir ses logements, leurs prix et la vue depuis cette hauteur",
+      ar: "اختر طابقاً على واجهة البرج لترى منازله وأسعارها والمنظر من ذلك الارتفاع",
+    },
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_160324_6edfd8c4-6034-4e45-8a9e-9d185965814f_min.webp",
+    focus: "50% 50%",
+  },
 ];
