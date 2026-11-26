@@ -47,32 +47,32 @@ export function Img({
   );
 }
 
-/** The emblem: a solid gold horseshoe arch, the doorway of a Moroccan house, with the first light
- *  of day (tifawt) cut out of it: the sun rising on the horizon, its reflection below and an
- *  eight-pointed khatam star at the keystone. */
+/** The argan tree at first light (tifawt): its crown opens like the rising sun, thirteen leaves
+ *  fanned over a twisted trunk, and at its heart a single drop of oil. */
+const LEAVES =
+  "M39.53 25.94Q48.32 27.13 56.45 23.56Q47.65 22.38 39.53 25.94ZM39.05 24.15Q47.27 23.96 53.32 18.39Q45.10 18.58 39.05 24.15ZM38.15 22.53Q45.18 21.01 48.81 14.79Q41.77 16.31 38.15 22.53ZM36.89 21.18Q42.72 18.74 44.11 12.57Q38.28 15.01 36.89 21.18ZM35.33 20.17Q40.10 17.00 39.66 11.29Q34.89 14.46 35.33 20.17ZM33.58 19.57Q37.36 15.72 35.47 10.66Q31.69 14.51 33.58 19.57ZM32.00 19.40Q34.90 14.95 32.00 10.50Q29.10 14.95 32.00 19.40ZM30.42 19.57Q32.31 14.51 28.53 10.66Q26.64 15.72 30.42 19.57ZM28.67 20.17Q29.11 14.46 24.34 11.29Q23.90 17.00 28.67 20.17ZM27.11 21.18Q25.72 15.01 19.89 12.57Q21.28 18.74 27.11 21.18ZM25.85 22.53Q22.23 16.31 15.19 14.79Q18.82 21.01 25.85 22.53ZM24.95 24.15Q18.90 18.58 10.68 18.39Q16.73 23.96 24.95 24.15ZM24.47 25.94Q16.35 22.38 7.55 23.56Q15.68 27.13 24.47 25.94Z";
+const TRUNK = "M30.4 28.6C31 31.6 29.2 33.8 29.6 37C29.9 39.4 28.6 41.6 26.4 43.4L37.6 43.4C35.4 41.6 34.1 39.4 34.4 37C34.8 33.8 33 31.6 33.6 28.6Z";
+const DROP = "M32 18.6C33.5 20.9 35 22.4 35 24.2A3 3 0 0 1 29 24.2C29 22.4 30.5 20.9 32 18.6Z";
+
 export function Mark({ size = 30 }: { size?: number }) {
-  const uid = useId().replace(/:/g, "");
+  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, "");
+  const g = `tg${uid}`;
   return (
-    <svg width={(size * 40) / 52} height={size} viewBox="0 0 40 52" aria-hidden className="tf-mark">
+    <svg width={(size * 64) / 48} height={size} viewBox="0 0 64 48" aria-hidden className="tf-mark">
       <defs>
-        <linearGradient id={`g${uid}`} x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id={g} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="var(--g1)" />
           <stop offset="0.32" stopColor="var(--g2)" />
           <stop offset="0.52" stopColor="var(--g3)" />
           <stop offset="0.74" stopColor="var(--g4)" />
           <stop offset="1" stopColor="var(--g5)" />
         </linearGradient>
-        <mask id={`m${uid}`} maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="52">
-          <path d="M4 51V24C4 21 2.6 19 2.3 16.5C1.4 7.5 9.6 1 20 1S38.6 7.5 37.7 16.5C37.4 19 36 21 36 24V51Z" fill="#fff" />
-          <path d="M12.6 34A7.4 7.4 0 0 1 27.4 34Z" fill="#000" />
-          <rect x="7.5" y="35.4" width="25" height="1.3" fill="#000" />
-          <rect x="11" y="39.2" width="18" height="1.1" fill="#000" />
-          <rect x="14.5" y="42.6" width="11" height="1.1" fill="#000" />
-          <path d="M20 23.2V19.6M14.3 25.4L12.2 23.2M25.7 25.4L27.8 23.2M11.4 30.3L8.6 29.3M28.6 30.3L31.4 29.3" stroke="#000" strokeWidth="1.25" strokeLinecap="round" />
-          <path d="M20 6.2l1 1.5 1.8-.4-.4 1.8 1.5 1-1.5 1 .4 1.8-1.8-.4-1 1.5-1-1.5-1.8.4.4-1.8-1.5-1 1.5-1-.4-1.8 1.8.4z" fill="#000" />
-        </mask>
       </defs>
-      <rect width="40" height="52" fill={`url(#g${uid})`} mask={`url(#m${uid})`} />
+      <g fill={`url(#${g})`}>
+        <path d={LEAVES} />
+        <path d={TRUNK} />
+        <path d={DROP} />
+      </g>
     </svg>
   );
 }
@@ -80,7 +80,7 @@ export function Mark({ size = 30 }: { size?: number }) {
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <span className={`tf-logo${compact ? " is-compact" : ""}`}>
-      <Mark size={compact ? 30 : 40} />
+      <Mark size={compact ? 36 : 48} />
       <span className="tf-logo-word">TIFAWT</span>
       {!compact && (
         <span className="tf-logo-sub">

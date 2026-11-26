@@ -157,6 +157,7 @@ export const PRODUCTS: Product[] = [
     tone: "#c9a27e",
     pack: hf("hf_20261126_051546_454b796d-6f42-466e-980a-a04c8ec37468"),
     env: "",
+    video: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/bb36660e-dab0-4d37-b8fc-7993dad83b36.mp4",
     tex: { src: "texA", cell: 0 },
     tagline: { en: "One cold-pressed drop of Souss argan, nothing added.", ar: "قطرة واحدة من أركان سوس معصورة على البارد، دون أي إضافة." },
     desc: {
@@ -195,6 +196,7 @@ export const PRODUCTS: Product[] = [
     tone: "#d4b59a",
     pack: hf("hf_20261126_051552_139e4156-0a0c-4e19-b326-de3570a272ee"),
     env: "",
+    video: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/478e8a4b-cabd-4b6c-9d9a-8d61b4f21d71.mp4",
     tex: { src: "texA", cell: 1 },
     tagline: { en: "A rich cream that melts like an oil and leaves skin lit from within.", ar: "كريم غني يذوب كالزيت ويترك البشرة مضيئة من الداخل." },
     desc: {
@@ -233,6 +235,7 @@ export const PRODUCTS: Product[] = [
     tone: "#d7b47a",
     pack: hf("hf_20261126_052014_9dae3052-74dd-417c-a6bb-b3149f0bdf79"),
     env: "",
+    video: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/1d069c5b-c46b-4108-9ba8-00ca4b578ac1.mp4",
     tex: { src: "texA", cell: 2 },
     tagline: { en: "A weightless veil for Gulf light, with a drop of argan.", ar: "غلالة خفيفة لضوء الخليج، مع قطرة من الأركان." },
     desc: {
