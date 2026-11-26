@@ -120,14 +120,16 @@ export const SCENES: Scene[] = [
   },
   {
     id: "terrace",
-    still: seedream("hf_20261126_002747_0b08622e-e2ed-4f85-9d07-d41292fc7e24"), clip: none, focus: { x: 45, y: 60 },
+    still: seedream("hf_20261126_002747_0b08622e-e2ed-4f85-9d07-d41292fc7e24"),
+    clip: minimax("hf_20261126_003913_34b8026a-2e60-4a51-a4e4-8b6e0e072b70"), focus: { x: 45, y: 60 },
     kicker: { en: "Terrace", ar: "التراس" },
     title: { en: "A 14-metre pool that runs toward the lake", ar: "مسبح بطول 14 مترًا يمتد نحو البحيرة" },
     body: { en: "Facing west, so the evening sun sets over the water.", ar: "يواجه الغرب، فتغيب شمس المساء فوق الماء." },
   },
   {
     id: "dusk",
-    still: seedream("hf_20261126_002403_153c7719-9940-4157-9d58-30930bcff11f"), clip: none, focus: { x: 50, y: 52 },
+    still: seedream("hf_20261126_002403_153c7719-9940-4157-9d58-30930bcff11f"),
+    clip: minimax("hf_20261126_003913_81ba5b59-f251-4143-b277-ff484a2e4872"), focus: { x: 50, y: 52 },
     kicker: { en: "From the garden", ar: "من الحديقة" },
     title: { en: "The house, looking back at dusk", ar: "البيت عند الغسق، من الحديقة" },
     body: { en: "Every distance below is illustrative until the location is final.", ar: "كل المسافات أدناه توضيحية حتى يتحدد الموقع." },
@@ -206,8 +208,8 @@ export const MATERIALS = [
 /** Close-ups for the materials section. Until one exists, the page draws the material in CSS. */
 export const MATERIAL_ASSETS: Record<string, Asset> = {
   travertine: seedream("hf_20261126_003207_717b1761-9dd6-4ad0-aa50-90ef10275351"),
-  oak: none,
-  brass: none,
+  oak: seedream("hf_20261126_004110_3cc95b3b-9284-4871-b912-784e85fac850"),
+  brass: seedream("hf_20261126_004112_0710daec-8fc8-4ed1-9d70-86f8a04153fe"),
   glass: none,
 };
 

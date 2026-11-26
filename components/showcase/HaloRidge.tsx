@@ -148,9 +148,11 @@ export default function HaloRidge() {
         shown = i;
         setActive(i);
       }
+      // Clips are heavy, so the next one starts loading only once the visitor has begun to scroll,
+      // and only pictures are fetched two scenes ahead.
       load(i);
-      load(i + 1);
-      load(i + 2);
+      if (p > 0.002) load(i + 1);
+      if (!(media.current[i + 2] instanceof HTMLVideoElement)) load(i + 2);
     };
 
     const frame = () => {
@@ -222,7 +224,8 @@ export default function HaloRidge() {
           <div className="hr-stage">
             {SCENES.map((s, j) => {
               const pos = `${s.focus.x}% ${s.focus.y}%`;
-              const eager = j < 2;
+              // The first clip and the first two pictures load with the page; the rest follow the scroll.
+              const eager = s.clip.url ? j === 0 : j < 2;
               return (
                 <div key={s.id} className={j === 0 ? "hr-shot is-first" : "hr-shot"} ref={(el) => { shots.current[j] = el; }}>
                   {s.clip.url ? (

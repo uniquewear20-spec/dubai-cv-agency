@@ -268,11 +268,13 @@
       "route": "connector",
       "model": "MiniMax H3, 2K, 5 s, 16:9",
       "credits": 10,
-      "job": null,
+      "job": "34b8026a-2e60-4a51-a4e4-8b6e0e072b70",
       "start": "still-terrace",
       "end": "still-dusk",
-      "status": "queued",
-      "prompt": "One continuous, slow camera move with no cuts. From the terrace beside the infinity pool at sunset, the camera drifts out over the lawn toward the lake and turns around to look back at the villa, as the sky deepens to dusk and the house's interior lights glow warmer and the pool lights come on. Smooth, cinematic, no people, no text."
+      "status": "done",
+      "prompt": "One continuous, slow camera move with no cuts. From the terrace beside the infinity pool at sunset, the camera drifts out over the lawn toward the lake and turns around to look back at the villa, as the sky deepens to dusk and the house's interior lights glow warmer and the pool lights come on. Smooth, cinematic, no people, no text.",
+      "file": "hf_20261126_003913_34b8026a-2e60-4a51-a4e4-8b6e0e072b70",
+      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked"
     },
     {
       "id": "clip-dusk",
@@ -281,11 +283,48 @@
       "route": "connector",
       "model": "MiniMax H3, 2K, 5 s, 16:9",
       "credits": 10,
-      "job": null,
+      "job": "81ba5b59-f251-4143-b277-ff484a2e4872",
       "start": "still-dusk",
       "end": "still-rise",
-      "status": "queued",
-      "prompt": "One continuous drone shot with no cuts. From the lakeside garden looking at the lit villa at dusk, the camera rises steadily into the sky and pulls back, revealing the whole crescent of glowing villas wrapped around the lake on the edge of the desert at blue hour, with the city lights on the horizon. Smooth constant ascent, no people, no text."
+      "status": "done",
+      "prompt": "One continuous drone shot with no cuts. From the lakeside garden looking at the lit villa at dusk, the camera rises steadily into the sky and pulls back, revealing the whole crescent of glowing villas wrapped around the lake on the edge of the desert at blue hour, with the city lights on the horizon. Smooth constant ascent, no people, no text.",
+      "file": "hf_20261126_003913_81ba5b59-f251-4143-b277-ff484a2e4872",
+      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked"
+    },
+    {
+      "id": "still-oak",
+      "section": "materials",
+      "kind": "still",
+      "route": "website",
+      "model": "Seedream 5.0 Pro",
+      "credits": 0,
+      "file": "hf_20261126_004110_3cc95b3b-9284-4871-b912-784e85fac850",
+      "reference": null,
+      "prompt": "Close-up material photograph of oiled European oak: the thick end of a floating stair tread and a row of vertical oak screen slats behind it, fine straight grain, soft satin oil finish, never glossy, warm afternoon light grazing across the wood, a honed travertine wall softly out of focus behind. Calm, tactile, architectural detail photography, natural colours, very high detail, shallow depth of field. No text, no logos, no watermark."
+    },
+    {
+      "id": "still-brass",
+      "section": "materials",
+      "kind": "still",
+      "route": "website",
+      "model": "Seedream 5.0 Pro",
+      "credits": 0,
+      "file": "hf_20261126_004112_0710daec-8fc8-4ed1-9d70-86f8a04153fe",
+      "reference": null,
+      "prompt": "Close-up material photograph of a solid brushed-brass pull handle mounted on a tall oiled oak pivot door, the brass softly darkened at the edges where hands have held it, fine brushed texture catching warm low sunlight, gentle reflections, the oak grain visible around it. Calm, tactile, architectural detail photography, natural colours, very high detail, shallow depth of field. No text, no logos, no watermark."
+    },
+    {
+      "id": "still-glass",
+      "section": "materials",
+      "kind": "still",
+      "route": "website",
+      "model": "Seedream 5.0 Pro",
+      "credits": 0,
+      "file": null,
+      "status": "generating",
+      "reference": null,
+      "prompt": "Close-up material photograph of the edge of a tall low-iron glass sliding door with a slim dark-bronze frame, the glass perfectly clear with no green tint, a calm lake and olive trees softly out of focus beyond it, a faint warm reflection of sunset light on the glass surface, a honed travertine floor at the threshold. Calm, precise architectural detail photography, natural colours, very high detail, shallow depth of field. No text, no logos, no watermark."
     }
-  ]
+  ],
+  "credits_used": 90
 }
