@@ -5,9 +5,9 @@
 .sg[dir="rtl"]{font-family:var(--font-arabic),var(--font-sans),sans-serif}
 .sg h1,.sg h2{font-family:var(--font-serif),Georgia,serif;font-weight:400;margin:0;letter-spacing:-.01em}
 .sg[dir="rtl"] h1,.sg[dir="rtl"] h2{font-family:var(--font-arabic-serif),var(--font-arabic),serif;letter-spacing:0;line-height:1.35}
-.sg p{margin:0}
-.sg a{color:inherit}
-.sg button{font:inherit;color:inherit}
+:where(.sg) p{margin:0}
+:where(.sg) a{color:inherit}
+:where(.sg) button{font:inherit;color:inherit}
 .sg :focus-visible{outline:2px solid var(--sg-gold);outline-offset:3px}
 
 .sg-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(20px,5vw,72px);border-bottom:1px solid var(--sg-line)}

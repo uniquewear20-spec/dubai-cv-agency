@@ -176,13 +176,22 @@ export default function HaloRidge() {
       v.addEventListener("loadedmetadata", kick);
     });
     images.forEach((m) => m.addEventListener("load", kick));
+    // Renders the exact scroll position at once, without easing. Used by tests and screenshots,
+    // where a background tab may run animation frames slowly.
+    const snap = () => {
+      measure();
+      cur = target;
+      render(cur);
+    };
     window.addEventListener("scroll", kick, { passive: true });
     window.addEventListener("resize", kick);
+    window.addEventListener("hr:snap", snap);
     kick();
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", kick);
       window.removeEventListener("resize", kick);
+      window.removeEventListener("hr:snap", snap);
       videos.forEach((v) => {
         v.removeEventListener("seeked", kick);
         v.removeEventListener("loadedmetadata", kick);

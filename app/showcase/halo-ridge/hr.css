@@ -6,9 +6,9 @@
 .hr[dir="rtl"]{font-family:var(--font-arabic),var(--hr-text),system-ui,sans-serif}
 .hr h1,.hr h2,.hr h3{font-family:var(--hr-display),Georgia,serif;font-weight:400;letter-spacing:.01em;line-height:1.08;margin:0}
 .hr[dir="rtl"] h1,.hr[dir="rtl"] h2,.hr[dir="rtl"] h3{font-family:var(--font-arabic),sans-serif;font-weight:500;letter-spacing:0;line-height:1.35}
-.hr p{margin:0}
-.hr a{color:inherit}
-.hr button{font:inherit;color:inherit}
+:where(.hr) p{margin:0}
+:where(.hr) a{color:inherit}
+:where(.hr) button{font:inherit;color:inherit}
 .hr :focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 
 /* Skip link, first in the tab order */
@@ -74,7 +74,7 @@
 .hr-in{max-width:1180px;margin:0 auto}
 .hr-sec h2{font-size:clamp(32px,4vw,56px);max-width:18ch;margin-bottom:clamp(28px,4vw,52px);text-wrap:balance}
 .hr-lead{max-width:56ch;color:var(--ink-2);margin:-12px 0 36px}
-.hr-small{font-size:14px;color:var(--ink-3);margin-top:14px}
+.hr-small{font-size:14px;color:var(--ink-3);margin-top:20px}
 .hr-num{font-variant-numeric:tabular-nums;font-size:20px}
 .hr-num small{display:block;font-size:12.5px;color:var(--ink-3)}
 
@@ -95,8 +95,8 @@
 .hr-room[aria-pressed="true"]{background:rgba(36,80,74,.16);box-shadow:inset 0 0 0 2px var(--lake);font-weight:600}
 .hr-panel{border-top:1px solid var(--rule);padding-top:20px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 .hr-panel h3{font-size:30px}
-.hr-btn{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:600;padding:12px 20px;border-radius:999px;border:1px solid var(--ink);background:var(--ink);color:var(--stone);cursor:pointer;text-decoration:none}
-.hr-btn:disabled{opacity:.5;cursor:default}
+.hr .hr-btn{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:600;padding:12px 20px;border-radius:999px;border:1px solid var(--ink);background:var(--ink);color:var(--stone);cursor:pointer;text-decoration:none}
+.hr .hr-btn:disabled{opacity:.5;cursor:default}
 @media (max-width:860px){.hr-plan{grid-template-columns:1fr}}
 
 .hr-amen{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
