@@ -192,4 +192,21 @@ export const CONCEPTS: Concept[] = [
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_172908_062cde89-7357-495e-aca2-fe370a4ae34e_min.webp",
     focus: "50% 50%",
   },
+  {
+    slug: "shoreline-9",
+    name: "SHORELINE NO. 9",
+    category: "real-estate",
+    line: {
+      en: "One beachfront house for sale on Palm Jumeirah: forty-six metres of private beach and seven bedrooms.",
+      fr: "Une seule maison en front de mer à vendre sur Palm Jumeirah : quarante-six mètres de plage privée et sept chambres.",
+      ar: "منزل واحد على الشاطئ للبيع في نخلة جميرا: ستة وأربعون متراً من الشاطئ الخاص وسبع غرف نوم.",
+    },
+    feature: {
+      en: "Walk the plan room by room across three levels, pan the terrace view, then request a private viewing",
+      fr: "Parcourez le plan pièce par pièce sur trois niveaux, faites défiler la vue de la terrasse, puis demandez une visite privée",
+      ar: "تجوّل في المخطط غرفة غرفة على ثلاثة مستويات، ومرّر منظر الشرفة، ثم اطلب معاينة خاصة",
+    },
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_191823_ae8207fa-3da4-48cf-bea6-8f8315c0a940_min.webp",
+    focus: "50% 55%",
+  },
 ];

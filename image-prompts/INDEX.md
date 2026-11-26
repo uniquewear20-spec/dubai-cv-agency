@@ -23,7 +23,7 @@ Names are working names: each one gets a final web check before its site is buil
 | 007 | built | KHAYYAL | Automotive | 10 | 19 | Ready | Generated (Abdell, 26 Nov) | [007-khayyal](./007-khayyal/prompts.md) |
 | 008 | built | MUSKANA | Online shops | 9 | 21 | Ready | Generated (Abdell, 26 Nov) | [008-muskana](./008-muskana/prompts.md) |
 | 009 | built | THE ENAMEL ROOM | Healthcare | 9 | 18 | Ready | Generated (Abdell, 26 Nov) | [009-the-enamel-room](./009-the-enamel-room/prompts.md) |
-| 010 | 2 | SHORELINE NO. 9 | Real estate | 10 | 22 | Ready | Generated (Abdell, 26 Nov) | [010-shoreline-9](./010-shoreline-9/prompts.md) |
+| 010 | built | SHORELINE NO. 9 | Real estate | 10 | 22 | Ready | Generated (Abdell, 26 Nov) | [010-shoreline-9](./010-shoreline-9/prompts.md) |
 | 011 | 2 | AQRAB | Automotive | 18 | 30 | Ready | New concept (26 Nov): generate these; the old green hypercar set is not used | [011-aqrab](./011-aqrab/prompts.md) |
 | 012 | 2 | THAHAB | Hotels | 12 | 27 | Ready | Generated (Abdell, 26 Nov) | [012-thahab](./012-thahab/prompts.md) |
 | 013 | 2 | KAI 8 | Restaurants | 9 | 21 | Ready | Not generated yet | [013-kai-8](./013-kai-8/prompts.md) |
