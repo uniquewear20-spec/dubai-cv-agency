@@ -211,81 +211,74 @@ html.tf-locked body {
 
 /* ───────── logo ───────── */
 .tf {
-  --g1: #f6e7c1;
-  --g2: #d2ad66;
-  --g3: #fcf0d2;
-  --g4: #b38c4b;
+  /* champagne gold, for photographs and dark grounds */
+  --g1: #7d5f27;
+  --g2: #e9d095;
+  --g3: #b38b3c;
+  --g4: #f6e7bb;
+  --g5: #86672b;
+}
+.tf-corners[data-top="dark"] .tf-c-logo,
+.tf-modal-box,
+.tf-drawer-panel {
+  /* antique bronze, for light grounds */
+  --g1: #4f3815;
+  --g2: #a9843f;
+  --g3: #6f5222;
+  --g4: #b8954d;
+  --g5: #4f3815;
 }
 .tf-logo {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   line-height: 1;
 }
 .tf-mark {
+  display: block;
   overflow: visible;
-  filter: drop-shadow(0 1px 6px rgba(20, 14, 10, 0.18));
+}
+.tf-corners[data-top="light"] .tf-c-logo .tf-mark,
+.tf-corners[data-top="light"] .tf-c-logo .tf-logo-word {
+  filter: drop-shadow(0 1px 10px rgba(16, 10, 6, 0.38));
 }
 .tf-logo-word {
-  font-family: var(--tf-display), serif;
-  font-size: 24px;
-  letter-spacing: 0.52em;
-  margin-inline-start: 0.52em;
-  background: linear-gradient(100deg, var(--g4) 0%, var(--g1) 28%, var(--g2) 52%, var(--g3) 72%, var(--g4) 100%);
-  background-size: 220% 100%;
+  font-family: var(--tf-logo), var(--tf-display), serif;
+  font-weight: 560;
+  font-size: 27px;
+  letter-spacing: 0.2em;
+  margin-inline-start: 0.2em;
+  background: linear-gradient(115deg, var(--g1) 0%, var(--g2) 30%, var(--g3) 50%, var(--g4) 70%, var(--g5) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   text-shadow: none;
-  animation: tf-sheen 9s ease-in-out infinite;
 }
-@keyframes tf-sheen {
-  0%,
-  100% {
-    background-position: 0% 0;
-  }
-  50% {
-    background-position: 100% 0;
-  }
-}
-.tf-logo-tif {
+.tf-logo-sub {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  font-family: var(--tf-tifinagh), sans-serif;
-  font-size: 9.5px;
+  gap: 10px;
+  font-family: var(--tf-text), sans-serif;
+  font-size: 8.5px;
+  font-weight: 500;
   letter-spacing: 0.55em;
   margin-inline-start: 0.55em;
+  text-transform: uppercase;
   color: var(--g2);
 }
-.tf-logo-tif i {
-  width: 16px;
+.tf-corners[data-top="dark"] .tf-logo-sub {
+  color: var(--g3);
+}
+.tf-logo-sub i {
+  display: block;
+  width: 20px;
   height: 1px;
   background: currentColor;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 .tf-logo.is-compact .tf-logo-word {
-  font-size: 18px;
-}
-.tf-corners[data-top="dark"] .tf-c-logo,
-.tf-footer,
-.tf-modal-box,
-.tf-pdp-why {
-  --g1: #a07a3c;
-  --g2: #6a4d24;
-  --g3: #b08d4e;
-  --g4: #4e381a;
-}
-.tf-footer,
-.tf-pdp-why {
-  --g1: #f2deb0;
-  --g2: #c9a35c;
-  --g3: #f8e9c4;
-  --g4: #a98444;
-}
-.tf-corners[data-top="light"] .tf-c-logo {
-  text-shadow: none;
+  font-size: 20px;
 }
 /* ───────── corners ───────── */
 .tf-corners {
@@ -353,6 +346,11 @@ html.tf-locked body {
 .tf-c-link {
   position: relative;
   padding: 6px 0;
+}
+.tf-corners button {
+  text-transform: inherit;
+  letter-spacing: inherit;
+  font-weight: inherit;
 }
 .tf-c-link::after {
   content: "";
@@ -1123,6 +1121,7 @@ html.tf-has-cursor .tf button {
   stroke-width: 1;
 }
 .tf-sc-word {
+  z-index: 0;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -1133,7 +1132,7 @@ html.tf-has-cursor .tf button {
   font-size: clamp(120px, 19vw, 330px);
   line-height: 1;
   white-space: nowrap;
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.16);
   pointer-events: none;
   will-change: transform;
 }
@@ -2213,7 +2212,8 @@ html.tf-has-cursor .tf button {
 }
 .tf-footer-word {
   margin-top: 10vh;
-  font-family: var(--tf-display), serif;
+  font-family: var(--tf-logo), var(--tf-display), serif;
+  font-weight: 500;
   font-size: clamp(80px, 19vw, 330px);
   line-height: 0.8;
   letter-spacing: 0.06em;
@@ -2870,7 +2870,7 @@ html.tf-has-cursor .tf button {
   .tf-c-logo .tf-logo {
     align-items: flex-start;
   }
-  .tf-logo-tif {
+  .tf-logo-sub {
     display: none;
   }
   .tf-c-bl .tf-c-link {

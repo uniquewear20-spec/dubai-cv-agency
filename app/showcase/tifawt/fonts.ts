@@ -26,3 +26,11 @@ export const tfTifinagh = localFont({
   display: "swap",
   fallback: ["sans-serif"],
 });
+
+// The wordmark: Bodoni Moda, a high-contrast Didone, drawn in gold.
+export const tfLogo = localFont({
+  src: [{ path: "../../../node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-normal.woff2", weight: "400 900", style: "normal" }],
+  variable: "--tf-logo",
+  display: "swap",
+  fallback: ["Didot", "Georgia", "serif"],
+});

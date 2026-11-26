@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductPage from "@/components/showcase/tifawt/ProductPage";
 import { PRODUCTS, bySlug, sized } from "@/lib/showcase/tifawt";
-import { tfDisplay, tfText, tfTifinagh } from "../fonts";
+import { tfDisplay, tfLogo, tfText, tfTifinagh } from "../fonts";
 import "../tf.css";
 
 export const dynamicParams = false;
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const { slug } = await params;
   if (!bySlug(slug)) notFound();
   return (
-    <div className={`${tfDisplay.variable} ${tfText.variable} ${tfTifinagh.variable}`}>
+    <div className={`${tfDisplay.variable} ${tfText.variable} ${tfTifinagh.variable} ${tfLogo.variable}`}>
       <ProductPage slug={slug} />
     </div>
   );

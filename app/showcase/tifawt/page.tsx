@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Home from "@/components/showcase/tifawt/Home";
 import { PRODUCTS, sized } from "@/lib/showcase/tifawt";
-import { tfDisplay, tfText, tfTifinagh } from "./fonts";
+import { tfDisplay, tfLogo, tfText, tfTifinagh } from "./fonts";
 import "./tf.css";
 
 // A concept site: kept out of search results so nobody mistakes the fictional brand for a real shop.
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className={`${tfDisplay.variable} ${tfText.variable} ${tfTifinagh.variable}`}>
+    <div className={`${tfDisplay.variable} ${tfText.variable} ${tfTifinagh.variable} ${tfLogo.variable}`}>
       <Home />
     </div>
   );
