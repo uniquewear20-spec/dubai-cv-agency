@@ -1,0 +1,101 @@
+{
+ "site": "MARROQUIN 1920",
+ "slug": "marroquin-1920",
+ "category": "Online shops",
+ "concept": "Moroccan leather goods; bag builder and shop.",
+ "look": "warm craft photography, 50mm",
+ "palette": "cognac, saffron, indigo, cream",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "marroquin-1920__01-hero.png",
+   "title": "Campaign hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Editorial, 50mm, cinematic light",
+   "prompt": "Campaign photograph: the bag on a riad bench under orange trees, featuring a structured cognac leather handbag with brass hardware. Editorial, cinematic light, space for a headline. Original design, no logos. Overall look: warm craft photography, 50mm; colour palette of cognac, saffron, indigo, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "marroquin-1920__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Product, 85mm",
+   "prompt": "Vertical product photograph of a structured cognac leather handbag with brass hardware on a sculpted plinth against a soft gradient in the brand palette, dramatic light. Original design, no logos. Overall look: warm craft photography, 50mm; colour palette of cognac, saffron, indigo, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "marroquin-1920__03-grid-products-a.png",
+   "title": "Products I",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: A tote. Top-right: A crossbody. Bottom-left: A wallet. Bottom-right: A duffel. Original designs, no logos, no text. Overall look: warm craft photography, 50mm; colour palette of cognac, saffron, indigo, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "marroquin-1920__04-grid-products-b.png",
+   "title": "Products II",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: Babouche slippers. Top-right: A belt. Bottom-left: A card holder. Bottom-right: A leather pouf. Original designs, no logos, no text. Overall look: warm craft photography, 50mm; colour palette of cognac, saffron, indigo, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "marroquin-1920__05-grid-details.png",
+   "title": "Details",
+   "section": "Product page zoom details",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, 100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro details. Top-left: Saddle stitching. Top-right: Leather grain. Bottom-left: A brass buckle. Bottom-right: An embossed edge. No logos. Overall look: warm craft photography, 50mm; colour palette of cognac, saffron, indigo, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "marroquin-1920__06-grid-atelier.png",
+   "title": "Atelier",
+   "section": "Craft section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Documentary craft, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The workshop behind the brand, documentary craft photography. Top-left: Tanning vats seen from above. Top-right: Hand stitching. Bottom-left: Cutting leather. Bottom-right: Burnishing edges. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: warm craft photography, 50mm; colour palette of cognac, saffron, indigo, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "marroquin-1920__07-model.png",
+   "title": "Editorial",
+   "section": "Lookbook section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Fashion, 85mm, natural light",
+   "prompt": "Fashion editorial: a woman carrying the bag through a medina alley, seen from behind, with a structured cognac leather handbag with brass hardware, natural light. One person only. Overall look: warm craft photography, 50mm; colour palette of cognac, saffron, indigo, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "marroquin-1920__08-store.png",
+   "title": "Boutique",
+   "section": "Stores section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a workshop shop with bags hanging, displays lit, nobody present, no signage text. Overall look: warm craft photography, 50mm; colour palette of cognac, saffron, indigo, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "marroquin-1920__09-packaging.png",
+   "title": "Packaging",
+   "section": "Gifting and delivery section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Still life, soft light",
+   "prompt": "Still life of a cotton dust bag and box, an unboxing moment, soft light. No text. Overall look: warm craft photography, 50mm; colour palette of cognac, saffron, indigo, cream. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

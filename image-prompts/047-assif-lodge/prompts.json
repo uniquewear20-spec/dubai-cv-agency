@@ -1,0 +1,131 @@
+{
+ "site": "ASSIF LODGE",
+ "slug": "assif-lodge",
+ "category": "Hotels",
+ "concept": "A High Atlas mountain lodge; rooms and treks.",
+ "look": "rugged mountain photography, crisp air, 24-50mm",
+ "palette": "stone grey, walnut, snow white, sky blue",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "assif-lodge__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm, eye level",
+   "prompt": "Luxury travel photograph of a stone lodge on a terraced hillside above a river valley in the High Atlas near Imlil at golden hour, the whole property in its landscape, calm and timeless, open sky for a headline. No people. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "assif-lodge__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Framed view through an opening, 28mm",
+   "prompt": "Vertical travel photograph at a stone lodge on a terraced hillside above a river valley: a framed view through a doorway or arch toward the landscape of the High Atlas near Imlil, morning light, one strong leading line. No people. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "assif-lodge__03-aerial.png",
+   "title": "Aerial",
+   "section": "The place section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Drone, 50-degree angle",
+   "prompt": "Drone photograph of a stone lodge on a terraced hillside above a river valley in the High Atlas near Imlil, the layout of buildings, pools and paths readable, the landscape around it, soft morning light, true colours. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "assif-lodge__04-night.png",
+   "title": "Night",
+   "section": "Evening section and footer",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Tripod, 24mm, blue hour",
+   "prompt": "Blue-hour photograph of a stone lodge on a terraced hillside above a river valley in the High Atlas near Imlil: warm light in windows and lanterns along paths, deep blue sky, reflections, quiet and inviting. No people. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "assif-lodge__05-room-a.png",
+   "title": "Signature room",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm, from the doorway",
+   "prompt": "Interior photograph of a room with stone walls, wool blankets and a fireplace at a stone lodge on a terraced hillside above a river valley, bed made with crisp linen, the view through the window or doors, soft morning light, no clutter, nobody present. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "assif-lodge__06-room-b.png",
+   "title": "Second room type",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a terrace suite with a mountain view at a stone lodge on a terraced hillside above a river valley, styled for arrival, late-afternoon light, nobody present. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "assif-lodge__07-grid-rooms.png",
+   "title": "Room details",
+   "section": "Room pages gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior details, 35 and 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Details of a room with stone walls, wool blankets and a fireplace at a stone lodge on a terraced hillside above a river valley, nobody present. Top-left: the bathroom with stone and folded towels. Top-right: the private terrace at sunset. Bottom-left: the bedside with a lamp and a book. Bottom-right: the view from the bed through open doors. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "assif-lodge__08-grid-dining.png",
+   "title": "Dining",
+   "section": "Dining section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Food, overhead and 45 degrees, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Food and dining at a stone lodge on a terraced hillside above a river valley, warm editorial food photography. Top-left: A tagine by the fire. Top-right: Bread from a clay oven. Bottom-left: Walnuts and honey. Bottom-right: Breakfast on the terrace. No faces. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "assif-lodge__09-grid-spa.png",
+   "title": "Spa",
+   "section": "Spa section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm interiors and details, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The spa at a stone lodge on a terraced hillside above a river valley, calm, steam and soft light. Top-left: A hammam. Top-right: A wood-fired hot tub. Bottom-left: A massage. Bottom-right: Herbal tea. No faces. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "assif-lodge__10-grid-experiences.png",
+   "title": "Experiences",
+   "section": "Experiences or a-day-here section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Cinematic travel, 24-50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Experiences around a stone lodge on a terraced hillside above a river valley in the High Atlas near Imlil, cinematic travel photography. Top-left: A mule trek. Top-right: A summit hike. Bottom-left: A village visit. Bottom-right: A river picnic. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 11,
+   "file": "assif-lodge__11-grid-details.png",
+   "title": "Details",
+   "section": "Materials band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up material details of a stone lodge on a terraced hillside above a river valley, raking light. Top-left: Wool weaves. Top-right: Walnut wood. Bottom-left: A copper teapot. Bottom-right: A stone wall. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 12,
+   "file": "assif-lodge__12-arrival.png",
+   "title": "Arrival",
+   "section": "Getting here section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cinematic, 35mm",
+   "prompt": "Travel photograph of arriving at a stone lodge on a terraced hillside above a river valley: a mule carrying luggage up a path. Cinematic, warm, a sense of journey. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: rugged mountain photography, crisp air, 24-50mm; colour palette of stone grey, walnut, snow white, sky blue. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

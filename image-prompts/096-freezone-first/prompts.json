@@ -1,0 +1,91 @@
+{
+ "site": "FREEZONE FIRST",
+ "slug": "freezone-first",
+ "category": "Finance, law and consulting",
+ "concept": "Company formation consultancy; setup cost calculator and enquiry.",
+ "look": "optimistic bright corporate photography, 35mm",
+ "palette": "white, sky blue, sand, black",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "freezone-first__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Architectural, 24mm",
+   "prompt": "Architectural photograph of a business centre with a shaded plaza in Dubai, confident and clean, morning light, space for a headline. No people, no readable signage. Overall look: optimistic bright corporate photography, 35mm; colour palette of white, sky blue, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "freezone-first__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Looking up, 20mm",
+   "prompt": "Vertical photograph looking up at a business centre with a shaded plaza, lines converging into the sky. No signage. Overall look: optimistic bright corporate photography, 35mm; colour palette of white, sky blue, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "freezone-first__03-office.png",
+   "title": "Office",
+   "section": "About section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a client lounge with a welcome desk and screens of abstract maps, calm and premium, daylight, nobody present. Overall look: optimistic bright corporate photography, 35mm; colour palette of white, sky blue, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "freezone-first__04-meeting.png",
+   "title": "Meeting",
+   "section": "How we work section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: a consultant handing a folder to a new founder across a desk. Natural light; documents and screens show no readable text. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: optimistic bright corporate photography, 35mm; colour palette of white, sky blue, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "freezone-first__05-grid-spaces.png",
+   "title": "Spaces",
+   "section": "The firm section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interiors, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Spaces of the firm, nobody present. Top-left: A welcome lounge. Top-right: A document centre. Bottom-left: A private meeting room. Bottom-right: A coworking floor. Overall look: optimistic bright corporate photography, 35mm; colour palette of white, sky blue, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "freezone-first__06-grid-objects.png",
+   "title": "Objects",
+   "section": "Services cards",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Still life, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Still-life objects on a desk, soft light. Top-left: A document folder. Top-right: A company stamp. Bottom-left: Keys on a desk. Bottom-right: A laptop. No readable text. Overall look: optimistic bright corporate photography, 35mm; colour palette of white, sky blue, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "freezone-first__07-abstract.png",
+   "title": "Abstract band",
+   "section": "Full-width band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Abstract, 85mm",
+   "prompt": "Abstract photograph: blueprint lines on glass. Minimal, elegant, wide negative space. Overall look: optimistic bright corporate photography, 35mm; colour palette of white, sky blue, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "freezone-first__08-city.png",
+   "title": "City",
+   "section": "Contact section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cityscape, 35mm",
+   "prompt": "Photograph of a port with cranes at sunrise, atmospheric. Overall look: optimistic bright corporate photography, 35mm; colour palette of white, sky blue, sand, black. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

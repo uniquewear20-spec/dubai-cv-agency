@@ -1,0 +1,101 @@
+{
+ "site": "KURSI",
+ "slug": "kursi",
+ "category": "Architecture and interiors",
+ "concept": "A furniture design brand; chair configurator and shop.",
+ "look": "product and editorial photography, clean, 50mm",
+ "palette": "oak, walnut, cream wool, black steel",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "kursi__01-hero.png",
+   "title": "Hero project",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "24mm tilt-shift, corrected verticals",
+   "prompt": "Architectural photograph of a sculptural lounge chair of original design in oak and cream boucle in a sunlit room in a design district, strong light and shadow, corrected verticals, monumental yet calm, open sky. No people. Overall look: product and editorial photography, clean, 50mm; colour palette of oak, walnut, cream wool, black steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "kursi__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Vertical detail, 50mm",
+   "prompt": "Vertical architectural photograph of a tall slice of a sculptural lounge chair of original design in oak and cream boucle in a sunlit room, its facade and shadows, graphic and minimal. No people. Overall look: product and editorial photography, clean, 50mm; colour palette of oak, walnut, cream wool, black steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "kursi__03-interior.png",
+   "title": "Interior",
+   "section": "Project page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior architectural photograph of a sculptural lounge chair of original design in oak and cream boucle in a sunlit room: rooms furnished with the collection, daylight, nobody present. Overall look: product and editorial photography, clean, 50mm; colour palette of oak, walnut, cream wool, black steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "kursi__04-grid-interiors.png",
+   "title": "Interiors",
+   "section": "Project page gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior, 24-35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Interiors of a sculptural lounge chair of original design in oak and cream boucle in a sunlit room, rooms furnished with the collection, one consistent daylight, nobody present. Top-left: the main living space. Top-right: a stair or circulation space. Bottom-left: the kitchen. Bottom-right: a private room. Overall look: product and editorial photography, clean, 50mm; colour palette of oak, walnut, cream wool, black steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "kursi__05-grid-projects.png",
+   "title": "Other projects",
+   "section": "Projects index",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Editorial architecture, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Four other projects by the same studio, consistent editorial architecture photography. Top-left: A dining set. Top-right: A desk. Bottom-left: A bench. Bottom-right: A shelving unit. No people. Overall look: product and editorial photography, clean, 50mm; colour palette of oak, walnut, cream wool, black steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "kursi__06-grid-materials.png",
+   "title": "Materials",
+   "section": "Materials section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Material close-ups, raking light. Top-left: Oak. Top-right: Walnut. Bottom-left: Boucle. Bottom-right: Leather. Overall look: product and editorial photography, clean, 50mm; colour palette of oak, walnut, cream wool, black steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "kursi__07-grid-process.png",
+   "title": "Process",
+   "section": "How we work section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Documentary, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The design process in the studio and on site. Top-left: Sanding oak. Top-right: Fitting joinery. Bottom-left: Upholstering. Bottom-right: The finished chair in the workshop. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: product and editorial photography, clean, 50mm; colour palette of oak, walnut, cream wool, black steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "kursi__08-grid-details.png",
+   "title": "Details",
+   "section": "Details band",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Architectural detail, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Architectural details, minimal compositions. Top-left: A dovetail joint. Top-right: A curved armrest. Bottom-left: A stitched seam. Bottom-right: A brass foot. Overall look: product and editorial photography, clean, 50mm; colour palette of oak, walnut, cream wool, black steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "kursi__09-studio.png",
+   "title": "The studio",
+   "section": "About and contact section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of the workshop with stacked timber, models and drawings on tables, daylight, calm, no readable text. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: product and editorial photography, clean, 50mm; colour palette of oak, walnut, cream wool, black steel. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

@@ -1,0 +1,111 @@
+{
+ "site": "SAHRA STABLES ESTATE",
+ "slug": "sahra-stables",
+ "category": "Real estate",
+ "concept": "An equestrian estate at the desert edge; estate tour and enquiry.",
+ "look": "warm country-estate photography, 35mm",
+ "palette": "sand, chestnut, olive, white",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "sahra-stables__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen behind the headline",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Eye-level three-quarter view, 24mm tilt-shift, corrected verticals",
+   "prompt": "Architectural photograph of a long low villa with stables and paddocks in Al Marmoom at the desert edge. Golden-hour sun rakes across the facade, verticals perfectly straight, landscaped foreground, clear sky with open space above for a headline. It must feel built and lived-in, not rendered. No people. Overall look: warm country-estate photography, 35mm; colour palette of sand, chestnut, olive, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "sahra-stables__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Low angle looking up, 20mm",
+   "prompt": "Vertical architectural photograph looking up along a long low villa with stables and paddocks in Al Marmoom at the desert edge, facade lines converging into a clear sky, sunlight catching the main materials, strong graphic composition. No people. Overall look: warm country-estate photography, 35mm; colour palette of sand, chestnut, olive, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "sahra-stables__03-aerial.png",
+   "title": "Aerial",
+   "section": "Location section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Drone, 120 m, 45-degree angle",
+   "prompt": "Drone photograph of a long low villa with stables and paddocks in Al Marmoom at the desert edge, seen from about 120 metres at a 45-degree angle: the building, plot, access, landscaping and any nearby water clearly readable. Soft morning light, true colours, light haze on the horizon. No people visible. Overall look: warm country-estate photography, 35mm; colour palette of sand, chestnut, olive, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "sahra-stables__04-twilight.png",
+   "title": "Blue hour",
+   "section": "Night band between sections",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Eye level, 35mm, tripod long exposure",
+   "prompt": "Blue-hour photograph of a long low villa with stables and paddocks in Al Marmoom at the desert edge: interiors glowing warm behind the glass, exterior lighting on, deep blue sky with a last band of light on the horizon, reflections on water or wet paving. No people. Overall look: warm country-estate photography, 35mm; colour palette of sand, chestnut, olive, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "sahra-stables__05-grid-interiors.png",
+   "title": "Interiors",
+   "section": "Interiors gallery and unit pages",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interior, 24mm, eye level, one window light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Interior photographs inside a long low villa with stables and paddocks, finished in rustic luxury with leather, oak and stone, staged and uncluttered, one soft daylight, nobody present. Top-left: the main living room with its view. Top-right: the kitchen and dining area. Bottom-left: the principal bedroom. Bottom-right: the principal bathroom. Overall look: warm country-estate photography, 35mm; colour palette of sand, chestnut, olive, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "sahra-stables__06-grid-amenities.png",
+   "title": "Amenities",
+   "section": "Amenities section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Architectural, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The shared spaces of a long low villa with stables and paddocks, daylight, nobody present. Top-left: an indoor riding arena. Top-right: the residents' gym with a view. Bottom-left: the arrival lobby with a concierge desk. Bottom-right: the landscaped garden or roof terrace. Overall look: warm country-estate photography, 35mm; colour palette of sand, chestnut, olive, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "sahra-stables__07-view.png",
+   "title": "The view",
+   "section": "View section, full width",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Panoramic, 35mm, from the terrace",
+   "prompt": "Panoramic photograph from the main terrace of a long low villa with stables and paddocks: paddocks with Arabian horses at sunset. The edge of a lounge chair and a planter frame the foreground, late-afternoon haze, the view is the subject. No people. Overall look: warm country-estate photography, 35mm; colour palette of sand, chestnut, olive, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "sahra-stables__08-grid-details.png",
+   "title": "Materials",
+   "section": "Materials and specification section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, 100mm, raking side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up photographs of the materials of a long low villa with stables and paddocks, raking side light, shallow depth of field. Top-left: Saddle leather. Top-right: Oak. Bottom-left: Iron. Bottom-right: Stone. Overall look: warm country-estate photography, 35mm; colour palette of sand, chestnut, olive, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "sahra-stables__09-lifestyle.png",
+   "title": "Lifestyle",
+   "section": "Living there section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm, natural light",
+   "prompt": "Editorial lifestyle photograph at a long low villa with stables and paddocks in Al Marmoom at the desert edge: a rider grooming an Arabian horse. Candid, natural light, believable and calm. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: warm country-estate photography, 35mm; colour palette of sand, chestnut, olive, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "sahra-stables__10-grid-area.png",
+   "title": "Neighbourhood",
+   "section": "Neighbourhood section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Documentary, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Documentary photographs of the neighbourhood around Al Marmoom at the desert edge, morning light. Top-left: A desert trail. Top-right: A lake. Bottom-left: A camel track. Bottom-right: A farm shop. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: warm country-estate photography, 35mm; colour palette of sand, chestnut, olive, white. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

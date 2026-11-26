@@ -1,0 +1,101 @@
+{
+ "site": "SADA COFFEE",
+ "slug": "sada-coffee",
+ "category": "Restaurants",
+ "concept": "A specialty coffee roastery; bean shop and subscription.",
+ "look": "cosy coffee photography, daylight, 50mm",
+ "palette": "espresso brown, cream, copper, sage",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "sada-coffee__01-hero.png",
+   "title": "Hero, the room",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm, evening practical light",
+   "prompt": "Restaurant interior photograph of a cafe with a roaster and a long bar in an arts district in Dubai during evening service, tables set, warm practical lighting, atmospheric and inviting, nobody in focus. Overall look: cosy coffee photography, daylight, 50mm; colour palette of espresso brown, cream, copper, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "sada-coffee__02-hero-mobile.png",
+   "title": "Signature dish",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "45 degrees, 85mm, shallow depth of field",
+   "prompt": "Vertical food photograph of a latte with latte art, the signature of a specialty coffee kitchen, on a handmade plate, single side light, shallow depth of field, dark background. Overall look: cosy coffee photography, daylight, 50mm; colour palette of espresso brown, cream, copper, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "sada-coffee__03-hands.png",
+   "title": "In the kitchen",
+   "section": "Kitchen or chef section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Close, 50mm, motion",
+   "prompt": "Editorial photograph of a cook's hands preparing a latte with latte art at a cafe with a roaster and a long bar, steam and motion, warm light, face out of frame. Overall look: cosy coffee photography, daylight, 50mm; colour palette of espresso brown, cream, copper, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "sada-coffee__04-grid-dishes-a.png",
+   "title": "Dishes I",
+   "section": "Menu section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Overhead, same table surface, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Overhead food photographs of specialty coffee dishes on handmade ceramics on the same table surface, one side light. Top-left: A croissant. Top-right: Banana bread. Bottom-left: Toast. Bottom-right: A cookie. No hands, no faces. Overall look: cosy coffee photography, daylight, 50mm; colour palette of espresso brown, cream, copper, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "sada-coffee__05-grid-dishes-b.png",
+   "title": "Dishes II",
+   "section": "Menu section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Overhead, same table surface, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Overhead food photographs of specialty coffee dishes on handmade ceramics on the same table surface, one side light. Top-left: A pour-over. Top-right: An espresso. Bottom-left: A cold brew. Bottom-right: A cortado. No hands, no faces. Overall look: cosy coffee photography, daylight, 50mm; colour palette of espresso brown, cream, copper, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "sada-coffee__06-grid-drinks.png",
+   "title": "Drinks",
+   "section": "Drinks section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Backlit, 85mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Drinks at a cafe with a roaster and a long bar, moody bar photography with backlight and condensation. Top-left: Beans in a bag. Top-right: A cupping table. Bottom-left: A V60. Bottom-right: A glass carafe brewer. No labels, no faces. Overall look: cosy coffee photography, daylight, 50mm; colour palette of espresso brown, cream, copper, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "sada-coffee__07-grid-details.png",
+   "title": "Details",
+   "section": "Room and craft details",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Macro, 50-100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up details of a cafe with a roaster and a long bar. Top-left: Roasting beans. Top-right: A grinder. Bottom-left: A scale. Bottom-right: Steam. Overall look: cosy coffee photography, daylight, 50mm; colour palette of espresso brown, cream, copper, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "sada-coffee__08-exterior.png",
+   "title": "Entrance",
+   "section": "Visit section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Street level, 35mm, early evening",
+   "prompt": "Photograph of the cafe front for a cafe with a roaster and a long bar in an arts district in Dubai, early evening, warm light spilling out, inviting. No readable text, no people. Overall look: cosy coffee photography, daylight, 50mm; colour palette of espresso brown, cream, copper, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "sada-coffee__09-table.png",
+   "title": "The table",
+   "section": "Reservation section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "High three-quarter angle, 35mm",
+   "prompt": "Photograph of a table set for an evening at a cafe with a roaster and a long bar: several specialty coffee dishes to share, glasses and lamps, high three-quarter angle, hands of different diners reaching in, no faces. Overall look: cosy coffee photography, daylight, 50mm; colour palette of espresso brown, cream, copper, sage. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

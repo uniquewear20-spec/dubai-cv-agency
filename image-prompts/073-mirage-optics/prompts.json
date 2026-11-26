@@ -1,0 +1,101 @@
+{
+ "site": "MIRAGE OPTICS",
+ "slug": "mirage-optics",
+ "category": "Online shops",
+ "concept": "Luxury eyewear; frame finder and shop.",
+ "look": "crisp product and fashion photography, sun flare, 85mm",
+ "palette": "tortoiseshell, gold, sand, sky blue",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "mirage-optics__01-hero.png",
+   "title": "Campaign hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Editorial, 50mm, cinematic light",
+   "prompt": "Campaign photograph: sunglasses on a dune reflecting the sky, featuring tortoiseshell sunglasses with gold temples of original design. Editorial, cinematic light, space for a headline. Original design, no logos. Overall look: crisp product and fashion photography, sun flare, 85mm; colour palette of tortoiseshell, gold, sand, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "mirage-optics__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Product, 85mm",
+   "prompt": "Vertical product photograph of tortoiseshell sunglasses with gold temples of original design on a sculpted plinth against a soft gradient in the brand palette, dramatic light. Original design, no logos. Overall look: crisp product and fashion photography, sun flare, 85mm; colour palette of tortoiseshell, gold, sand, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "mirage-optics__03-grid-products-a.png",
+   "title": "Products I",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: Round frames. Top-right: Aviators. Bottom-left: Cat-eye frames. Bottom-right: Clip-ons. Original designs, no logos, no text. Overall look: crisp product and fashion photography, sun flare, 85mm; colour palette of tortoiseshell, gold, sand, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "mirage-optics__04-grid-products-b.png",
+   "title": "Products II",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: A case. Top-right: A cleaning cloth. Bottom-left: A chain. Bottom-right: A stand. Original designs, no logos, no text. Overall look: crisp product and fashion photography, sun flare, 85mm; colour palette of tortoiseshell, gold, sand, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "mirage-optics__05-grid-details.png",
+   "title": "Details",
+   "section": "Product page zoom details",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, 100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro details. Top-left: A hinge. Top-right: Tortoise pattern. Bottom-left: A lens reflection. Bottom-right: A gold temple tip. No logos. Overall look: crisp product and fashion photography, sun flare, 85mm; colour palette of tortoiseshell, gold, sand, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "mirage-optics__06-grid-atelier.png",
+   "title": "Atelier",
+   "section": "Craft section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Documentary craft, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The workshop behind the brand, documentary craft photography. Top-left: Cutting acetate. Top-right: Polishing. Bottom-left: Assembling hinges. Bottom-right: Fitting lenses. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: crisp product and fashion photography, sun flare, 85mm; colour palette of tortoiseshell, gold, sand, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "mirage-optics__07-model.png",
+   "title": "Editorial",
+   "section": "Lookbook section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Fashion, 85mm, natural light",
+   "prompt": "Fashion editorial: a woman in her twenties wearing sunglasses in desert sun, with tortoiseshell sunglasses with gold temples of original design, natural light. One person only. Overall look: crisp product and fashion photography, sun flare, 85mm; colour palette of tortoiseshell, gold, sand, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "mirage-optics__08-store.png",
+   "title": "Boutique",
+   "section": "Stores section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a store with lit shelves, displays lit, nobody present, no signage text. Overall look: crisp product and fashion photography, sun flare, 85mm; colour palette of tortoiseshell, gold, sand, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "mirage-optics__09-packaging.png",
+   "title": "Packaging",
+   "section": "Gifting and delivery section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Still life, soft light",
+   "prompt": "Still life of a leather case, an unboxing moment, soft light. No text. Overall look: crisp product and fashion photography, sun flare, 85mm; colour palette of tortoiseshell, gold, sand, sky blue. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

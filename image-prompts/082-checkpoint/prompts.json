@@ -1,0 +1,101 @@
+{
+ "site": "CHECKPOINT",
+ "slug": "checkpoint",
+ "category": "Healthcare",
+ "concept": "Executive health screening; package builder and booking.",
+ "look": "confident corporate-wellness photography, crisp daylight, 35mm",
+ "palette": "navy, white, oak, fresh green",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "checkpoint__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm, natural light",
+   "prompt": "Interior photograph of a health-screening lounge with oak panels and a view of towers in DIFC, Dubai, calm, clean and welcoming, natural light, a sense of privacy and care, nobody present. Overall look: confident corporate-wellness photography, crisp daylight, 35mm; colour palette of navy, white, oak, fresh green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "checkpoint__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Interior detail, 35mm",
+   "prompt": "Vertical interior detail of a health-screening lounge with oak panels and a view of towers: a corridor or reception corner with soft light and plants, nobody present. Overall look: confident corporate-wellness photography, crisp daylight, 35mm; colour palette of navy, white, oak, fresh green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "checkpoint__03-treatment.png",
+   "title": "Treatment room",
+   "section": "Treatments section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 28mm",
+   "prompt": "Photograph of a cardio screening room with a treadmill and monitors of abstract lines, spotless and calm, soft daylight. Equipment of original design, no brand names. Overall look: confident corporate-wellness photography, crisp daylight, 35mm; colour palette of navy, white, oak, fresh green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "checkpoint__04-consult.png",
+   "title": "Consultation",
+   "section": "Your first visit section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: a physician in a white coat reviewing results on a tablet with a client in a suit. Natural light, respectful and reassuring. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: confident corporate-wellness photography, crisp daylight, 35mm; colour palette of navy, white, oak, fresh green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "checkpoint__05-grid-spaces.png",
+   "title": "Spaces",
+   "section": "The clinic section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interiors, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Spaces of the clinic, consistent architectural photography, nobody present. Top-left: A private lounge. Top-right: A blood-test room. Bottom-left: An imaging room. Bottom-right: A results room. Overall look: confident corporate-wellness photography, crisp daylight, 35mm; colour palette of navy, white, oak, fresh green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "checkpoint__06-grid-details.png",
+   "title": "Details",
+   "section": "Treatment pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50-100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Clean, calm close-ups. Top-left: A blood-pressure cuff. Top-right: Test tubes with coloured caps. Bottom-left: A healthy breakfast tray. Bottom-right: A blank clipboard. No labels, no text. Overall look: confident corporate-wellness photography, crisp daylight, 35mm; colour palette of navy, white, oak, fresh green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "checkpoint__07-grid-care.png",
+   "title": "Care",
+   "section": "Care and aftercare section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Care moments, hands-led and respectful, soft light. Top-left: A nurse taking blood pressure. Top-right: A client on a treadmill with sensors. Bottom-left: Hands holding a tablet with graphs. Bottom-right: A glass of water. No faces. Overall look: confident corporate-wellness photography, crisp daylight, 35mm; colour palette of navy, white, oak, fresh green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "checkpoint__08-exterior.png",
+   "title": "Entrance",
+   "section": "Visit section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Street level, 35mm",
+   "prompt": "Photograph of a podium entrance with a canopy and plants in DIFC, Dubai, morning light, inviting, no readable signage. Overall look: confident corporate-wellness photography, crisp daylight, 35mm; colour palette of navy, white, oak, fresh green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "checkpoint__09-calm.png",
+   "title": "Calm band",
+   "section": "Full-width calm band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Minimal, 85mm",
+   "prompt": "Calm photograph: a green wall of ferns in soft light. Soft, minimal, plenty of negative space. Overall look: confident corporate-wellness photography, crisp daylight, 35mm; colour palette of navy, white, oak, fresh green. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

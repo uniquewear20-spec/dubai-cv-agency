@@ -1,0 +1,111 @@
+{
+ "site": "ARCH STUDIO",
+ "slug": "arch-studio",
+ "category": "Beauty",
+ "concept": "A brow and lash studio; treatment menu and booking.",
+ "look": "clean beauty close-up, soft light, macro",
+ "palette": "white, taupe, black, soft pink",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "arch-studio__01-hero.png",
+   "title": "Hero still life",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Still life, 85mm, directional light",
+   "prompt": "Luxury beauty still life of a brow gel tube of original design with a brow mapping string, on a sculpted stone plinth, soft directional light and long shadows, negative space on one side for a headline. Original packaging, no text on it. Overall look: clean beauty close-up, soft light, macro; colour palette of white, taupe, black, soft pink. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "arch-studio__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Top light, 100mm",
+   "prompt": "Vertical beauty still life: a brow gel tube of original design standing in shallow clear water with a brow mapping string around it, light ripples, top light. Original packaging, no text. Overall look: clean beauty close-up, soft light, macro; colour palette of white, taupe, black, soft pink. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "arch-studio__03-grid-packshots.png",
+   "title": "Product packshots",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and light in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Packshots on a seamless backdrop in the brand palette, same lighting, angle and scale in every cell. Top-left: A brow pencil. Top-right: A lash serum. Bottom-left: Tweezers. Bottom-right: A spoolie. Original packaging designs, no text. Overall look: clean beauty close-up, soft light, macro; colour palette of white, taupe, black, soft pink. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "arch-studio__04-ingredient.png",
+   "title": "Hero ingredient",
+   "section": "Ingredients section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Macro, 100mm",
+   "prompt": "Macro photograph of a brow mapping string, dew and texture, shallow depth of field, natural light. Overall look: clean beauty close-up, soft light, macro; colour palette of white, taupe, black, soft pink. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "arch-studio__05-origin.png",
+   "title": "Origin",
+   "section": "Origin story section, full width",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Landscape, 35mm, early morning",
+   "prompt": "Landscape photograph of a treatment bed in soft light, early morning light, cinematic and real. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: clean beauty close-up, soft light, macro; colour palette of white, taupe, black, soft pink. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "arch-studio__06-grid-textures.png",
+   "title": "Textures",
+   "section": "Product page texture swatches",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, top light on glass",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro texture photographs, top light on glass. Top-left: Brow hairs. Top-right: A lash curl. Bottom-left: Tint. Bottom-right: Gel. No packaging, no text. Overall look: clean beauty close-up, soft light, macro; colour palette of white, taupe, black, soft pink. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "arch-studio__07-model.png",
+   "title": "Editorial portrait",
+   "section": "Brand story section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Portrait, 85mm, window light",
+   "prompt": "Beauty editorial portrait of a close-up of a woman's eye with lifted lashes, natural skin texture, soft window light, minimal makeup, calm expression. One person only. Overall look: clean beauty close-up, soft light, macro; colour palette of white, taupe, black, soft pink. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "arch-studio__08-grid-ritual.png",
+   "title": "Ritual",
+   "section": "How to use section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Hands-only ritual photographs, soft light. Top-left: Brow mapping. Top-right: A lash lift. Bottom-left: Tinting. Bottom-right: Threading. Faces out of frame. Overall look: clean beauty close-up, soft light, macro; colour palette of white, taupe, black, soft pink. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "arch-studio__09-space.png",
+   "title": "Boutique or atelier",
+   "section": "Visit section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a minimal studio with treatment beds, warm and inviting, nobody present. Overall look: clean beauty close-up, soft light, macro; colour palette of white, taupe, black, soft pink. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "arch-studio__10-gift.png",
+   "title": "Gift set",
+   "section": "Gifts section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Overhead, soft light",
+   "prompt": "Still life of a brow kit, overhead, soft light, ribbon and paper. No text. Overall look: clean beauty close-up, soft light, macro; colour palette of white, taupe, black, soft pink. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

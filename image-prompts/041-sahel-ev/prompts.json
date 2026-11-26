@@ -1,0 +1,111 @@
+{
+ "site": "SAHEL EV",
+ "slug": "sahel-ev",
+ "category": "Automotive",
+ "concept": "An electric desert SUV brand; range calculator and reservation.",
+ "look": "clean daylight product photography, crisp and airy",
+ "palette": "sand white, sage, charcoal, sky blue",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "sahel-ev__01-hero.png",
+   "title": "Hero, studio",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Low three-quarter front, 50mm, camera at headlight height",
+   "prompt": "Studio automotive photograph of a boxy electric SUV of original design with flush glass, a light-bar face and all-terrain tyres, finished in matte sand-white paint, three-quarter front view in a vast dark studio. One long overhead softbox draws a continuous highlight along the bonnet, shoulder line and roof; polished dark concrete floor with a soft reflection under the car; negative space on the left for a headline. Original vehicle design, unbadged. Overall look: clean daylight product photography, crisp and airy; colour palette of sand white, sage, charcoal, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "sahel-ev__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Low head-on angle, 35mm",
+   "prompt": "Vertical automotive photograph of a boxy electric SUV of original design with flush glass, a light-bar face and all-terrain tyres in matte sand-white paint, head-on from a low angle so the face and lights fill the lower two thirds of the frame, dark studio, thin strips of light along the body, faint haze. Original vehicle design, unbadged. Overall look: clean daylight product photography, crisp and airy; colour palette of sand white, sage, charcoal, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "sahel-ev__03-profile.png",
+   "title": "Side profile",
+   "section": "Configurator base view",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Exact side elevation, 85mm, camera at axle height",
+   "prompt": "Clean side-profile studio photograph of a boxy electric SUV of original design with flush glass, a light-bar face and all-terrain tyres in matte sand-white paint, perfectly parallel to the camera on a seamless mid-grey background with a soft floor shadow, the whole silhouette readable, wheels straight, no perspective distortion. Original vehicle design, unbadged. Overall look: clean daylight product photography, crisp and airy; colour palette of sand white, sage, charcoal, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "sahel-ev__04-drive.png",
+   "title": "On the road",
+   "section": "Driving section",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Tracking shot from a camera car, 35mm, slow shutter",
+   "prompt": "Cinematic tracking photograph of a boxy electric SUV of original design with flush glass, a light-bar face and all-terrain tyres in matte sand-white paint driving on a gravel track through red dunes and acacia trees, the car sharp, background streaked with motion blur, wheels spinning, low golden sun and long shadows. Original vehicle design, unbadged. Overall look: clean daylight product photography, crisp and airy; colour palette of sand white, sage, charcoal, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "sahel-ev__05-night.png",
+   "title": "At night",
+   "section": "Night or performance section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Rolling shot, 24mm, long exposure",
+   "prompt": "Night photograph of a boxy electric SUV of original design with flush glass, a light-bar face and all-terrain tyres in matte sand-white paint moving through a solar charging canopy beside a desert highway, light trails and reflections running along the bodywork, wet tarmac mirroring the lights, the car sharp and the city soft. Original vehicle design, unbadged. Overall look: clean daylight product photography, crisp and airy; colour palette of sand white, sage, charcoal, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "sahel-ev__06-grid-paint.png",
+   "title": "Paint colours",
+   "section": "Configurator colour swatches",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Identical three-quarter front pose and light in all four cells, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The same car in the same three-quarter front pose and identical studio lighting in every cell, only the paint changes: a boxy electric SUV of original design with flush glass, a light-bar face and all-terrain tyres. Top-left: matte sand-white paint. Top-right: deep gloss black. Bottom-left: pale silver-white pearl. Bottom-right: a saturated signature colour that suits the design. Dark seamless studio. Original vehicle design, unbadged. Overall look: clean daylight product photography, crisp and airy; colour palette of sand white, sage, charcoal, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "sahel-ev__07-grid-exterior.png",
+   "title": "Exterior details",
+   "section": "Design details section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, 100mm, shallow depth of field",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-ups of a boxy electric SUV of original design with flush glass, a light-bar face and all-terrain tyres in matte sand-white paint, one consistent studio light. Top-left: the headlight signature lit. Top-right: a forged wheel with the brake caliper behind the spokes. Bottom-left: the rear light bar glowing. Bottom-right: the sculpted shoulder line with one highlight along it. Unbadged. Overall look: clean daylight product photography, crisp and airy; colour palette of sand white, sage, charcoal, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "sahel-ev__08-grid-interior.png",
+   "title": "Interior",
+   "section": "Interior section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interior, 28 and 50mm, soft window light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Inside a boxy electric SUV of original design with flush glass, a light-bar face and all-terrain tyres, trimmed in recycled light-grey textiles, oak trim and a panoramic glass roof. Top-left: the steering wheel and instrument display from the driver's seat. Top-right: the front seats seen from the rear door. Bottom-left: the centre console and controls in close-up. Bottom-right: stitching and materials on the door panel. Screens show abstract graphics only. Unbadged. Overall look: clean daylight product photography, crisp and airy; colour palette of sand white, sage, charcoal, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "sahel-ev__09-lifestyle.png",
+   "title": "Lifestyle",
+   "section": "Brand story or ownership section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Editorial, 35mm, natural light",
+   "prompt": "Editorial lifestyle photograph: a camp beside the car under the stars, tailgate open with a small kitchen, with a boxy electric SUV of original design with flush glass, a light-bar face and all-terrain tyres in matte sand-white paint in the scene. Natural and unposed. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Unbadged. Overall look: clean daylight product photography, crisp and airy; colour palette of sand white, sage, charcoal, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "sahel-ev__10-garage.png",
+   "title": "Showroom",
+   "section": "Visit or test-drive section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Architectural, 24mm, symmetrical",
+   "prompt": "Architectural interior photograph of a bright minimal store with white walls and plants, with a boxy electric SUV of original design with flush glass, a light-bar face and all-terrain tyres in matte sand-white paint displayed under linear ceiling light, symmetrical, calm and gallery-like, nobody present. Unbadged. Overall look: clean daylight product photography, crisp and airy; colour palette of sand white, sage, charcoal, sky blue. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

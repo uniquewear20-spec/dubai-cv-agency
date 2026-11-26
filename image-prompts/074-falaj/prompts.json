@@ -1,0 +1,101 @@
+{
+ "site": "FALAJ",
+ "slug": "falaj",
+ "category": "Architecture and interiors",
+ "concept": "Landscape architecture for desert gardens; garden builder and enquiry.",
+ "look": "lush garden photography, dappled light, 35mm",
+ "palette": "olive green, sand, water blue, terracotta",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "falaj__01-hero.png",
+   "title": "Hero project",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "24mm tilt-shift, corrected verticals",
+   "prompt": "Architectural photograph of a desert villa garden with a stone water channel, olive trees and native grasses in Al Ain, strong light and shadow, corrected verticals, monumental yet calm, open sky. No people. Overall look: lush garden photography, dappled light, 35mm; colour palette of olive green, sand, water blue, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "falaj__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Vertical detail, 50mm",
+   "prompt": "Vertical architectural photograph of a tall slice of a desert villa garden with a stone water channel, olive trees and native grasses, its facade and shadows, graphic and minimal. No people. Overall look: lush garden photography, dappled light, 35mm; colour palette of olive green, sand, water blue, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "falaj__03-interior.png",
+   "title": "Interior",
+   "section": "Project page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior architectural photograph of a desert villa garden with a stone water channel, olive trees and native grasses: outdoor rooms with shade and water, daylight, nobody present. Overall look: lush garden photography, dappled light, 35mm; colour palette of olive green, sand, water blue, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "falaj__04-grid-interiors.png",
+   "title": "Interiors",
+   "section": "Project page gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior, 24-35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Interiors of a desert villa garden with a stone water channel, olive trees and native grasses, outdoor rooms with shade and water, one consistent daylight, nobody present. Top-left: the main living space. Top-right: a stair or circulation space. Bottom-left: the kitchen. Bottom-right: a private room. Overall look: lush garden photography, dappled light, 35mm; colour palette of olive green, sand, water blue, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "falaj__05-grid-projects.png",
+   "title": "Other projects",
+   "section": "Projects index",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Editorial architecture, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Four other projects by the same studio, consistent editorial architecture photography. Top-left: A courtyard garden. Top-right: A roof garden. Bottom-left: A hotel landscape. Bottom-right: A desert trail. No people. Overall look: lush garden photography, dappled light, 35mm; colour palette of olive green, sand, water blue, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "falaj__06-grid-materials.png",
+   "title": "Materials",
+   "section": "Materials section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Material close-ups, raking light. Top-left: Native grasses. Top-right: Desert stone. Bottom-left: Drip irrigation. Bottom-right: A young tree. Overall look: lush garden photography, dappled light, 35mm; colour palette of olive green, sand, water blue, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "falaj__07-grid-process.png",
+   "title": "Process",
+   "section": "How we work section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Documentary, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The design process in the studio and on site. Top-left: A planting plan. Top-right: Soil testing. Bottom-left: Planting trees. Bottom-right: Building a water channel. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: lush garden photography, dappled light, 35mm; colour palette of olive green, sand, water blue, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "falaj__08-grid-details.png",
+   "title": "Details",
+   "section": "Details band",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Architectural detail, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Architectural details, minimal compositions. Top-left: Water in a stone channel. Top-right: A palm trunk. Bottom-left: Desert flowers. Bottom-right: Gravel. Overall look: lush garden photography, dappled light, 35mm; colour palette of olive green, sand, water blue, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "falaj__09-studio.png",
+   "title": "The studio",
+   "section": "About and contact section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a nursery greenhouse, models and drawings on tables, daylight, calm, no readable text. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: lush garden photography, dappled light, 35mm; colour palette of olive green, sand, water blue, terracotta. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

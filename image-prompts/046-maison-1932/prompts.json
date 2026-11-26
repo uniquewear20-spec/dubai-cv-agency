@@ -1,0 +1,131 @@
+{
+ "site": "MAISON 1932",
+ "slug": "maison-1932",
+ "category": "Hotels",
+ "concept": "An art deco hotel in Casablanca; rooms and dining.",
+ "look": "elegant art deco photography, golden tungsten and daylight, 35mm",
+ "palette": "ivory, black, gold, emerald",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "maison-1932__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm, eye level",
+   "prompt": "Luxury travel photograph of a restored white art deco building with curved balconies on a boulevard in central Casablanca at golden hour, the whole property in its landscape, calm and timeless, open sky for a headline. No people. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "maison-1932__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Framed view through an opening, 28mm",
+   "prompt": "Vertical travel photograph at a restored white art deco building with curved balconies on a boulevard: a framed view through a doorway or arch toward the landscape of central Casablanca, morning light, one strong leading line. No people. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "maison-1932__03-aerial.png",
+   "title": "Aerial",
+   "section": "The place section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Drone, 50-degree angle",
+   "prompt": "Drone photograph of a restored white art deco building with curved balconies on a boulevard in central Casablanca, the layout of buildings, pools and paths readable, the landscape around it, soft morning light, true colours. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "maison-1932__04-night.png",
+   "title": "Night",
+   "section": "Evening section and footer",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Tripod, 24mm, blue hour",
+   "prompt": "Blue-hour photograph of a restored white art deco building with curved balconies on a boulevard in central Casablanca: warm light in windows and lanterns along paths, deep blue sky, reflections, quiet and inviting. No people. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "maison-1932__05-room-a.png",
+   "title": "Signature room",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm, from the doorway",
+   "prompt": "Interior photograph of a deco room with a curved headboard, brass and emerald velvet at a restored white art deco building with curved balconies on a boulevard, bed made with crisp linen, the view through the window or doors, soft morning light, no clutter, nobody present. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "maison-1932__06-room-b.png",
+   "title": "Second room type",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a corner suite with a round balcony at a restored white art deco building with curved balconies on a boulevard, styled for arrival, late-afternoon light, nobody present. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "maison-1932__07-grid-rooms.png",
+   "title": "Room details",
+   "section": "Room pages gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior details, 35 and 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Details of a deco room with a curved headboard, brass and emerald velvet at a restored white art deco building with curved balconies on a boulevard, nobody present. Top-left: the bathroom with stone and folded towels. Top-right: the private terrace at sunset. Bottom-left: the bedside with a lamp and a book. Bottom-right: the view from the bed through open doors. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "maison-1932__08-grid-dining.png",
+   "title": "Dining",
+   "section": "Dining section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Food, overhead and 45 degrees, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Food and dining at a restored white art deco building with curved balconies on a boulevard, warm editorial food photography. Top-left: A brasserie with black and white tiles. Top-right: A pastry trolley. Bottom-left: Mocktails at the bar. Bottom-right: Oysters on ice. No faces. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "maison-1932__09-grid-spa.png",
+   "title": "Spa",
+   "section": "Spa section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm interiors and details, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The spa at a restored white art deco building with curved balconies on a boulevard, calm, steam and soft light. Top-left: A marble bath. Top-right: A rooftop pool. Bottom-left: A steam room. Bottom-right: Robes. No faces. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "maison-1932__10-grid-experiences.png",
+   "title": "Experiences",
+   "section": "Experiences or a-day-here section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Cinematic travel, 24-50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Experiences around a restored white art deco building with curved balconies on a boulevard in central Casablanca, cinematic travel photography. Top-left: A deco architecture walk. Top-right: The corniche at sunset. Bottom-left: A jazz evening. Bottom-right: A market visit. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 11,
+   "file": "maison-1932__11-grid-details.png",
+   "title": "Details",
+   "section": "Materials band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up material details of a restored white art deco building with curved balconies on a boulevard, raking light. Top-left: Deco ironwork. Top-right: A terrazzo floor. Bottom-left: A brass lift. Bottom-right: A mosaic. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 12,
+   "file": "maison-1932__12-arrival.png",
+   "title": "Arrival",
+   "section": "Getting here section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cinematic, 35mm",
+   "prompt": "Travel photograph of arriving at a restored white art deco building with curved balconies on a boulevard: a vintage car at the entrance canopy. Cinematic, warm, a sense of journey. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: elegant art deco photography, golden tungsten and daylight, 35mm; colour palette of ivory, black, gold, emerald. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

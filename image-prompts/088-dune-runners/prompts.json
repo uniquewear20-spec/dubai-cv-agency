@@ -1,0 +1,101 @@
+{
+ "site": "DUNE RUNNERS",
+ "slug": "dune-runners",
+ "category": "Fitness",
+ "concept": "A desert running club; routes, events and membership.",
+ "look": "epic outdoor sports photography, warm dawn, 24mm",
+ "palette": "red sand, sky blue, white, black",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "dune-runners__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Sports, 35mm, dramatic light",
+   "prompt": "Sports photograph of a woman in her forties during desert running, the peak moment of effort, dramatic light, sweat and texture, space for a headline. One person. Overall look: epic outdoor sports photography, warm dawn, 24mm; colour palette of red sand, sky blue, white, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "dune-runners__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Portrait, 50mm, side light",
+   "prompt": "Vertical sports portrait of a woman in her forties resting after desert running, breathing hard, strong side light. One person. Overall look: epic outdoor sports photography, warm dawn, 24mm; colour palette of red sand, sky blue, white, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "dune-runners__03-space.png",
+   "title": "The space",
+   "section": "The studio section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a club base camp at the dune edge with a flag line and water station, ready for a class, light streaming in, nobody present. Overall look: epic outdoor sports photography, warm dawn, 24mm; colour palette of red sand, sky blue, white, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "dune-runners__04-class.png",
+   "title": "Class",
+   "section": "Classes section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 28mm",
+   "prompt": "Photograph of a group run climbing a dune ridge in a line, energetic, natural light. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: epic outdoor sports photography, warm dawn, 24mm; colour palette of red sand, sky blue, white, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "dune-runners__05-grid-gear.png",
+   "title": "Gear",
+   "section": "Equipment or shop section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Equipment close-ups. Top-left: Trail shoes full of sand. Top-right: A hydration vest. Bottom-left: A headlamp. Bottom-right: Gaiters. No logos. Overall look: epic outdoor sports photography, warm dawn, 24mm; colour palette of red sand, sky blue, white, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "dune-runners__06-grid-moves.png",
+   "title": "Moves",
+   "section": "Programme section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Same athlete, same light, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The same person in all four cells, a woman in her forties, consistent light. Top-left: Descending a dune. Top-right: Running a dry wadi. Bottom-left: Drinking from a flask. Bottom-right: Finishing at camp. Overall look: epic outdoor sports photography, warm dawn, 24mm; colour palette of red sand, sky blue, white, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "dune-runners__07-grid-recovery.png",
+   "title": "Recovery",
+   "section": "Recovery section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Recovery moments. Top-left: Feet in a cool basin. Top-right: Stretching on a rug. Bottom-left: Dates and water. Bottom-right: A massage tent. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: epic outdoor sports photography, warm dawn, 24mm; colour palette of red sand, sky blue, white, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "dune-runners__08-outdoor.png",
+   "title": "Outdoors",
+   "section": "Community or events section",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Wide, 24mm",
+   "prompt": "Cinematic wide photograph of a night run with headlamps under the stars. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: epic outdoor sports photography, warm dawn, 24mm; colour palette of red sand, sky blue, white, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "dune-runners__09-detail.png",
+   "title": "Detail",
+   "section": "Membership section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Macro, 100mm",
+   "prompt": "Macro photograph: footprints along a dune crest. Overall look: epic outdoor sports photography, warm dawn, 24mm; colour palette of red sand, sky blue, white, black. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

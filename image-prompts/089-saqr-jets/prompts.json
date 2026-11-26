@@ -1,0 +1,101 @@
+{
+ "site": "SAQR JETS",
+ "slug": "saqr-jets",
+ "category": "Travel",
+ "concept": "Private jet charter; trip builder and quote.",
+ "look": "premium aviation photography, clean golden light, 35mm",
+ "palette": "white, champagne, navy, sky blue",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "saqr-jets__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full width",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Wide, 24mm, golden light",
+   "prompt": "Cinematic travel photograph: a private jet of original design climbing over the desert at sunset in Dubai, wide, golden light, epic scale, space for a headline. Overall look: premium aviation photography, clean golden light, 35mm; colour palette of white, champagne, navy, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "saqr-jets__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Vertical, 28mm",
+   "prompt": "Vertical travel photograph: a private jet of original design climbing over the desert at sunset, framed for a phone screen with a strong foreground, golden light. Overall look: premium aviation photography, clean golden light, 35mm; colour palette of white, champagne, navy, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "saqr-jets__03-vehicle.png",
+   "title": "The ride",
+   "section": "Fleet or vessel section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "35mm, clean composition",
+   "prompt": "Photograph of the jet on the apron with the stairs down, polished and real, clean composition. Overall look: premium aviation photography, clean golden light, 35mm; colour palette of white, champagne, navy, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "saqr-jets__04-interior.png",
+   "title": "Inside",
+   "section": "Comfort section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Photograph of a cabin with cream leather seats, walnut tables and a divan, inviting, warm light, nobody present. Overall look: premium aviation photography, clean golden light, 35mm; colour palette of white, champagne, navy, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "saqr-jets__05-grid-experiences.png",
+   "title": "Experiences",
+   "section": "Experiences section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Cinematic travel, 24-50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Experiences, cinematic travel photography. Top-left: A pilot's hands on the throttle. Top-right: Dinner at altitude. Bottom-left: Arriving at a snowy alpine airport. Bottom-right: An island airstrip. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: premium aviation photography, clean golden light, 35mm; colour palette of white, champagne, navy, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "saqr-jets__06-grid-details.png",
+   "title": "Details",
+   "section": "Details band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Travel details in close-up. Top-left: A crystal glass on walnut. Top-right: Seat stitching. Bottom-left: A window with clouds. Bottom-right: A made-up cabin bed. Overall look: premium aviation photography, clean golden light, 35mm; colour palette of white, champagne, navy, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "saqr-jets__07-people.png",
+   "title": "Travellers",
+   "section": "Why us section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial travel photograph: two passengers boarding the stairs seen from behind. Candid and warm. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: premium aviation photography, clean golden light, 35mm; colour palette of white, champagne, navy, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "saqr-jets__08-landscape.png",
+   "title": "Landscape",
+   "section": "Destinations section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Landscape, 35mm",
+   "prompt": "Landscape photograph of the Alps seen from a jet window, atmospheric. Overall look: premium aviation photography, clean golden light, 35mm; colour palette of white, champagne, navy, sky blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "saqr-jets__09-night.png",
+   "title": "Night",
+   "section": "Evening band",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Long exposure, 24mm",
+   "prompt": "Night photograph: the jet on a wet apron under floodlights, long exposure. Overall look: premium aviation photography, clean golden light, 35mm; colour palette of white, champagne, navy, sky blue. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

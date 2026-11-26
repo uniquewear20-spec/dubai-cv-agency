@@ -1,0 +1,101 @@
+{
+ "site": "MAISON AMLOU",
+ "slug": "maison-amlou",
+ "category": "Restaurants",
+ "concept": "A Franco-Moroccan patisserie; shop, pre-order and cafe.",
+ "look": "bright pastry photography, daylight, 50mm",
+ "palette": "pistachio green, cream, rose, gold",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "maison-amlou__01-hero.png",
+   "title": "Hero, the room",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm, evening practical light",
+   "prompt": "Restaurant interior photograph of a patisserie with marble counters and glass domes in Jumeirah during evening service, tables set, warm practical lighting, atmospheric and inviting, nobody in focus. Overall look: bright pastry photography, daylight, 50mm; colour palette of pistachio green, cream, rose, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "maison-amlou__02-hero-mobile.png",
+   "title": "Signature dish",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "45 degrees, 85mm, shallow depth of field",
+   "prompt": "Vertical food photograph of a croissant filled with amlou, the signature of a French-Moroccan pastry kitchen, on a handmade plate, single side light, shallow depth of field, dark background. Overall look: bright pastry photography, daylight, 50mm; colour palette of pistachio green, cream, rose, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "maison-amlou__03-hands.png",
+   "title": "In the kitchen",
+   "section": "Kitchen or chef section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Close, 50mm, motion",
+   "prompt": "Editorial photograph of a cook's hands preparing a croissant filled with amlou at a patisserie with marble counters and glass domes, steam and motion, warm light, face out of frame. Overall look: bright pastry photography, daylight, 50mm; colour palette of pistachio green, cream, rose, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "maison-amlou__04-grid-dishes-a.png",
+   "title": "Dishes I",
+   "section": "Menu section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Overhead, same table surface, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Overhead food photographs of French-Moroccan pastry dishes on handmade ceramics on the same table surface, one side light. Top-left: A pastilla tart. Top-right: Chebakia. Bottom-left: Macarons. Bottom-right: A mille-feuille. No hands, no faces. Overall look: bright pastry photography, daylight, 50mm; colour palette of pistachio green, cream, rose, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "maison-amlou__05-grid-dishes-b.png",
+   "title": "Dishes II",
+   "section": "Menu section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Overhead, same table surface, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Overhead food photographs of French-Moroccan pastry dishes on handmade ceramics on the same table surface, one side light. Top-left: Gazelle horns. Top-right: A layer cake. Bottom-left: A fruit tart. Bottom-right: Brioche. No hands, no faces. Overall look: bright pastry photography, daylight, 50mm; colour palette of pistachio green, cream, rose, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "maison-amlou__06-grid-drinks.png",
+   "title": "Drinks",
+   "section": "Drinks section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Backlit, 85mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Drinks at a patisserie with marble counters and glass domes, moody bar photography with backlight and condensation. Top-left: Mint tea. Top-right: Coffee. Bottom-left: Fresh juice. Bottom-right: Hot chocolate. No labels, no faces. Overall look: bright pastry photography, daylight, 50mm; colour palette of pistachio green, cream, rose, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "maison-amlou__07-grid-details.png",
+   "title": "Details",
+   "section": "Room and craft details",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Macro, 50-100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up details of a patisserie with marble counters and glass domes. Top-left: A whisk. Top-right: Flour. Bottom-left: A piping bag. Bottom-right: Gold leaf. Overall look: bright pastry photography, daylight, 50mm; colour palette of pistachio green, cream, rose, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "maison-amlou__08-exterior.png",
+   "title": "Entrance",
+   "section": "Visit section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Street level, 35mm, early evening",
+   "prompt": "Photograph of a shop front with a striped awning for a patisserie with marble counters and glass domes in Jumeirah, early evening, warm light spilling out, inviting. No readable text, no people. Overall look: bright pastry photography, daylight, 50mm; colour palette of pistachio green, cream, rose, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "maison-amlou__09-table.png",
+   "title": "The table",
+   "section": "Reservation section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "High three-quarter angle, 35mm",
+   "prompt": "Photograph of a table set for an evening at a patisserie with marble counters and glass domes: several French-Moroccan pastry dishes to share, glasses and lamps, high three-quarter angle, hands of different diners reaching in, no faces. Overall look: bright pastry photography, daylight, 50mm; colour palette of pistachio green, cream, rose, gold. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

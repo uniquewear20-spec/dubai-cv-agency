@@ -1,0 +1,101 @@
+{
+ "site": "QUIET ROOM",
+ "slug": "quiet-room",
+ "category": "Healthcare",
+ "concept": "A therapy and counselling practice; therapist matching and booking.",
+ "look": "gentle warm intimate photography, window light, 50mm",
+ "palette": "oat, terracotta, olive, warm grey",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "quiet-room__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm, natural light",
+   "prompt": "Interior photograph of a therapy room with two armchairs, plants, a rug and a side table in a villa in Umm Suqeim, Dubai, calm, clean and welcoming, natural light, a sense of privacy and care, nobody present. Overall look: gentle warm intimate photography, window light, 50mm; colour palette of oat, terracotta, olive, warm grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "quiet-room__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Interior detail, 35mm",
+   "prompt": "Vertical interior detail of a therapy room with two armchairs, plants, a rug and a side table: a corridor or reception corner with soft light and plants, nobody present. Overall look: gentle warm intimate photography, window light, 50mm; colour palette of oat, terracotta, olive, warm grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "quiet-room__03-treatment.png",
+   "title": "Treatment room",
+   "section": "Treatments section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 28mm",
+   "prompt": "Photograph of a quiet group room with floor cushions and natural light, spotless and calm, soft daylight. Equipment of original design, no brand names. Overall look: gentle warm intimate photography, window light, 50mm; colour palette of oat, terracotta, olive, warm grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "quiet-room__04-consult.png",
+   "title": "Consultation",
+   "section": "Your first visit section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: two people talking in armchairs, seen from behind one chair, the other softly blurred. Natural light, respectful and reassuring. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: gentle warm intimate photography, window light, 50mm; colour palette of oat, terracotta, olive, warm grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "quiet-room__05-grid-spaces.png",
+   "title": "Spaces",
+   "section": "The clinic section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interiors, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Spaces of the clinic, consistent architectural photography, nobody present. Top-left: An entrance garden. Top-right: A waiting room with books. Bottom-left: An art table. Bottom-right: A calm room with dim light. Overall look: gentle warm intimate photography, window light, 50mm; colour palette of oat, terracotta, olive, warm grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "quiet-room__06-grid-details.png",
+   "title": "Details",
+   "section": "Treatment pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50-100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Clean, calm close-ups. Top-left: A cup of tea. Top-right: A notebook and pencil. Bottom-left: A sand tray. Bottom-right: A linen lamp. No labels, no text. Overall look: gentle warm intimate photography, window light, 50mm; colour palette of oat, terracotta, olive, warm grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "quiet-room__07-grid-care.png",
+   "title": "Care",
+   "section": "Care and aftercare section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Care moments, hands-led and respectful, soft light. Top-left: Hands holding a warm mug. Top-right: Hands drawing with pastels. Bottom-left: A hand on a shoulder. Bottom-right: Hands holding a smooth stone. No faces. Overall look: gentle warm intimate photography, window light, 50mm; colour palette of oat, terracotta, olive, warm grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "quiet-room__08-exterior.png",
+   "title": "Entrance",
+   "section": "Visit section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Street level, 35mm",
+   "prompt": "Photograph of a white villa with a green door and bougainvillea in a villa in Umm Suqeim, Dubai, morning light, inviting, no readable signage. Overall look: gentle warm intimate photography, window light, 50mm; colour palette of oat, terracotta, olive, warm grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "quiet-room__09-calm.png",
+   "title": "Calm band",
+   "section": "Full-width calm band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Minimal, 85mm",
+   "prompt": "Calm photograph: late afternoon sun on a wall with leaf shadows. Soft, minimal, plenty of negative space. Overall look: gentle warm intimate photography, window light, 50mm; colour palette of oat, terracotta, olive, warm grey. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

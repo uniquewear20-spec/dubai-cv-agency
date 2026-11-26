@@ -1,0 +1,101 @@
+{
+ "site": "THE ENAMEL ROOM",
+ "slug": "the-enamel-room",
+ "category": "Healthcare",
+ "concept": "A dental and smile clinic; a treatment finder and consultation booking.",
+ "look": "calm clinical-luxury photography, soft daylight, 35mm, clean and warm",
+ "palette": "porcelain white, soft mint, pale oak, brushed steel",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "the-enamel-room__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm, natural light",
+   "prompt": "Interior photograph of a minimalist dental clinic reception with curved pale-oak walls, a terrazzo floor and a garden window in Jumeirah, Dubai, calm, clean and welcoming, natural light, a sense of privacy and care, nobody present. Overall look: calm clinical-luxury photography, soft daylight, 35mm, clean and warm; colour palette of porcelain white, soft mint, pale oak, brushed steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "the-enamel-room__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Interior detail, 35mm",
+   "prompt": "Vertical interior detail of a minimalist dental clinic reception with curved pale-oak walls, a terrazzo floor and a garden window: a corridor or reception corner with soft light and plants, nobody present. Overall look: calm clinical-luxury photography, soft daylight, 35mm, clean and warm; colour palette of porcelain white, soft mint, pale oak, brushed steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "the-enamel-room__03-treatment.png",
+   "title": "Treatment room",
+   "section": "Treatments section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 28mm",
+   "prompt": "Photograph of a treatment room with a modern dental chair of original design, an overhead light and a window onto olive trees, spotless and calm, soft daylight. Equipment of original design, no brand names. Overall look: calm clinical-luxury photography, soft daylight, 35mm, clean and warm; colour palette of porcelain white, soft mint, pale oak, brushed steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "the-enamel-room__04-consult.png",
+   "title": "Consultation",
+   "section": "Your first visit section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: a dentist in a mint uniform showing a seated patient an abstract 3D tooth model on a tablet. Natural light, respectful and reassuring. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: calm clinical-luxury photography, soft daylight, 35mm, clean and warm; colour palette of porcelain white, soft mint, pale oak, brushed steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "the-enamel-room__05-grid-spaces.png",
+   "title": "Spaces",
+   "section": "The clinic section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interiors, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Spaces of the clinic, consistent architectural photography, nobody present. Top-left: The waiting lounge with soft armchairs. Top-right: A sterilisation room behind glass. Bottom-left: A corridor with indirect light. Bottom-right: A quiet recovery nook. Overall look: calm clinical-luxury photography, soft daylight, 35mm, clean and warm; colour palette of porcelain white, soft mint, pale oak, brushed steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "the-enamel-room__06-grid-details.png",
+   "title": "Details",
+   "section": "Treatment pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50-100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Clean, calm close-ups. Top-left: A tray of polished instruments. Top-right: A porcelain shade guide. Bottom-left: A glass of water and a folded towel. Bottom-right: An orchid on a stone counter. No labels, no text. Overall look: calm clinical-luxury photography, soft daylight, 35mm, clean and warm; colour palette of porcelain white, soft mint, pale oak, brushed steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "the-enamel-room__07-grid-care.png",
+   "title": "Care",
+   "section": "Care and aftercare section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Care moments, hands-led and respectful, soft light. Top-left: Hands adjusting the dental light. Top-right: A patient's hand resting on the armrest. Bottom-left: A hygienist preparing a tray. Bottom-right: A toothbrush kit in a linen pouch. No faces. Overall look: calm clinical-luxury photography, soft daylight, 35mm, clean and warm; colour palette of porcelain white, soft mint, pale oak, brushed steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "the-enamel-room__08-exterior.png",
+   "title": "Entrance",
+   "section": "Visit section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Street level, 35mm",
+   "prompt": "Photograph of a single-storey clinic with a white facade and olive trees in Jumeirah, Dubai, morning light, inviting, no readable signage. Overall look: calm clinical-luxury photography, soft daylight, 35mm, clean and warm; colour palette of porcelain white, soft mint, pale oak, brushed steel. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "the-enamel-room__09-calm.png",
+   "title": "Calm band",
+   "section": "Full-width calm band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Minimal, 85mm",
+   "prompt": "Calm photograph: olive leaves moving against a pale wall in soft light. Soft, minimal, plenty of negative space. Overall look: calm clinical-luxury photography, soft daylight, 35mm, clean and warm; colour palette of porcelain white, soft mint, pale oak, brushed steel. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

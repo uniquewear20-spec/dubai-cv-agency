@@ -1,0 +1,91 @@
+{
+ "site": "COMPASS ROSE ADVISORY",
+ "slug": "compass-rose",
+ "category": "Finance, law and consulting",
+ "concept": "Management consulting; diagnostic tool and enquiry.",
+ "look": "bright modern business photography, 35mm",
+ "palette": "white, coral, slate blue, light oak",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "compass-rose__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Architectural, 24mm",
+   "prompt": "Architectural photograph of a tower with a garden atrium in Dubai Internet City, confident and clean, morning light, space for a headline. No people, no readable signage. Overall look: bright modern business photography, 35mm; colour palette of white, coral, slate blue, light oak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "compass-rose__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Looking up, 20mm",
+   "prompt": "Vertical photograph looking up at a tower with a garden atrium, lines converging into the sky. No signage. Overall look: bright modern business photography, 35mm; colour palette of white, coral, slate blue, light oak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "compass-rose__03-office.png",
+   "title": "Office",
+   "section": "About section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of an open studio with whiteboards and sticky notes, calm and premium, daylight, nobody present. Overall look: bright modern business photography, 35mm; colour palette of white, coral, slate blue, light oak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "compass-rose__04-meeting.png",
+   "title": "Meeting",
+   "section": "How we work section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: a workshop around a table covered in sticky notes, seen from behind. Natural light; documents and screens show no readable text. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: bright modern business photography, 35mm; colour palette of white, coral, slate blue, light oak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "compass-rose__05-grid-spaces.png",
+   "title": "Spaces",
+   "section": "The firm section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interiors, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Spaces of the firm, nobody present. Top-left: A project room. Top-right: A phone booth. Bottom-left: A cafe corner. Bottom-right: A presentation room. Overall look: bright modern business photography, 35mm; colour palette of white, coral, slate blue, light oak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "compass-rose__06-grid-objects.png",
+   "title": "Objects",
+   "section": "Services cards",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Still life, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Still-life objects on a desk, soft light. Top-left: A brass compass. Top-right: Sticky notes on glass. Bottom-left: A laptop with abstract charts. Bottom-right: A coffee cup. No readable text. Overall look: bright modern business photography, 35mm; colour palette of white, coral, slate blue, light oak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "compass-rose__07-abstract.png",
+   "title": "Abstract band",
+   "section": "Full-width band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Abstract, 85mm",
+   "prompt": "Abstract photograph: a compass rose drawn in light on a wall. Minimal, elegant, wide negative space. Overall look: bright modern business photography, 35mm; colour palette of white, coral, slate blue, light oak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "compass-rose__08-city.png",
+   "title": "City",
+   "section": "Contact section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cityscape, 35mm",
+   "prompt": "Photograph of the business district at sunset from a terrace, atmospheric. Overall look: bright modern business photography, 35mm; colour palette of white, coral, slate blue, light oak. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

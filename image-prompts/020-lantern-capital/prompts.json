@@ -1,0 +1,91 @@
+{
+ "site": "LANTERN CAPITAL",
+ "slug": "lantern-capital",
+ "category": "Finance, law and consulting",
+ "concept": "A family office and wealth manager; risk-profile quiz and meeting request.",
+ "look": "quiet-luxury corporate photography, warm daylight, 35mm",
+ "palette": "deep green, brass, walnut, cream",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "lantern-capital__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Architectural, 24mm",
+   "prompt": "Architectural photograph of a modern glass tower with a dark green stone base in DIFC, Dubai, confident and clean, morning light, space for a headline. No people, no readable signage. Overall look: quiet-luxury corporate photography, warm daylight, 35mm; colour palette of deep green, brass, walnut, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "lantern-capital__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Looking up, 20mm",
+   "prompt": "Vertical photograph looking up at a modern glass tower with a dark green stone base, lines converging into the sky. No signage. Overall look: quiet-luxury corporate photography, warm daylight, 35mm; colour palette of deep green, brass, walnut, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "lantern-capital__03-office.png",
+   "title": "Office",
+   "section": "About section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a private office with walnut panelling, a green leather chair and a view of towers, calm and premium, daylight, nobody present. Overall look: quiet-luxury corporate photography, warm daylight, 35mm; colour palette of deep green, brass, walnut, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "lantern-capital__04-meeting.png",
+   "title": "Meeting",
+   "section": "How we work section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: four people at a meeting table seen from behind, papers and coffee. Natural light; documents and screens show no readable text. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: quiet-luxury corporate photography, warm daylight, 35mm; colour palette of deep green, brass, walnut, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "lantern-capital__05-grid-spaces.png",
+   "title": "Spaces",
+   "section": "The firm section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interiors, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Spaces of the firm, nobody present. Top-left: The reception with a brass lantern. Top-right: A library. Bottom-left: A boardroom. Bottom-right: A terrace lounge. Overall look: quiet-luxury corporate photography, warm daylight, 35mm; colour palette of deep green, brass, walnut, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "lantern-capital__06-grid-objects.png",
+   "title": "Objects",
+   "section": "Services cards",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Still life, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Still-life objects on a desk, soft light. Top-left: A fountain pen on paper. Top-right: A brass desk lamp. Bottom-left: A leather folio. Bottom-right: An hourglass. No readable text. Overall look: quiet-luxury corporate photography, warm daylight, 35mm; colour palette of deep green, brass, walnut, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "lantern-capital__07-abstract.png",
+   "title": "Abstract band",
+   "section": "Full-width band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Abstract, 85mm",
+   "prompt": "Abstract photograph: golden light through wooden slats on a stone wall. Minimal, elegant, wide negative space. Overall look: quiet-luxury corporate photography, warm daylight, 35mm; colour palette of deep green, brass, walnut, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "lantern-capital__08-city.png",
+   "title": "City",
+   "section": "Contact section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cityscape, 35mm",
+   "prompt": "Photograph of the skyline at dawn from a high floor, atmospheric. Overall look: quiet-luxury corporate photography, warm daylight, 35mm; colour palette of deep green, brass, walnut, cream. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

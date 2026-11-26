@@ -1,0 +1,101 @@
+{
+ "site": "MUSKANA",
+ "slug": "muskana",
+ "category": "Online shops",
+ "concept": "An oud and fragrance house; a scent-layering builder and shop.",
+ "look": "dark luxury still-life photography, smoke, warm rim light, 85mm",
+ "palette": "oud brown, amber, black, gold",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "muskana__01-hero.png",
+   "title": "Campaign hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Editorial, 50mm, cinematic light",
+   "prompt": "Campaign photograph: the bottle on black stone with smoke curling from smouldering oud chips, featuring a faceted crystal perfume bottle with a heavy gold cap of original design. Editorial, cinematic light, space for a headline. Original design, no logos. Overall look: dark luxury still-life photography, smoke, warm rim light, 85mm; colour palette of oud brown, amber, black, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "muskana__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Product, 85mm",
+   "prompt": "Vertical product photograph of a faceted crystal perfume bottle with a heavy gold cap of original design on a sculpted plinth against a soft gradient in the brand palette, dramatic light. Original design, no logos. Overall look: dark luxury still-life photography, smoke, warm rim light, 85mm; colour palette of oud brown, amber, black, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "muskana__03-grid-products-a.png",
+   "title": "Products I",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: A small vial of oud oil. Top-right: An amber glass bottle. Bottom-left: A rose attar flask. Bottom-right: A slim musk spray. Original designs, no logos, no text. Overall look: dark luxury still-life photography, smoke, warm rim light, 85mm; colour palette of oud brown, amber, black, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "muskana__04-grid-products-b.png",
+   "title": "Products II",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: Bakhoor chips in a gold dish. Top-right: A carved wooden incense burner. Bottom-left: A travel atomiser. Bottom-right: A gift box set. Original designs, no logos, no text. Overall look: dark luxury still-life photography, smoke, warm rim light, 85mm; colour palette of oud brown, amber, black, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "muskana__05-grid-details.png",
+   "title": "Details",
+   "section": "Product page zoom details",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, 100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro details. Top-left: Agarwood grain. Top-right: Drops of oil. Bottom-left: A curl of smoke. Bottom-right: The gold cap. No logos. Overall look: dark luxury still-life photography, smoke, warm rim light, 85mm; colour palette of oud brown, amber, black, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "muskana__06-grid-atelier.png",
+   "title": "Atelier",
+   "section": "Craft section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Documentary craft, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The workshop behind the brand, documentary craft photography. Top-left: A perfumer's organ of small bottles. Top-right: Agarwood being shaved. Bottom-left: A copper distillation still. Bottom-right: Oils weighed on a scale. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: dark luxury still-life photography, smoke, warm rim light, 85mm; colour palette of oud brown, amber, black, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "muskana__07-model.png",
+   "title": "Editorial",
+   "section": "Lookbook section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Fashion, 85mm, natural light",
+   "prompt": "Fashion editorial: a man in a white kandura holding a bottle near his wrist, face out of frame, with a faceted crystal perfume bottle with a heavy gold cap of original design, natural light. One person only. Overall look: dark luxury still-life photography, smoke, warm rim light, 85mm; colour palette of oud brown, amber, black, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "muskana__08-store.png",
+   "title": "Boutique",
+   "section": "Stores section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a boutique with dark wood shelves and warm gold light, displays lit, nobody present, no signage text. Overall look: dark luxury still-life photography, smoke, warm rim light, 85mm; colour palette of oud brown, amber, black, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "muskana__09-packaging.png",
+   "title": "Packaging",
+   "section": "Gifting and delivery section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Still life, soft light",
+   "prompt": "Still life of a black lacquered box with gold lining, an unboxing moment, soft light. No text. Overall look: dark luxury still-life photography, smoke, warm rim light, 85mm; colour palette of oud brown, amber, black, gold. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

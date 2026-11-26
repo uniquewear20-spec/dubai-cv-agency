@@ -1,0 +1,91 @@
+{
+ "site": "NEGATIVE SPACE STUDIO",
+ "slug": "negative-space",
+ "category": "Events, education and creative",
+ "concept": "A photography and film studio; hire booking.",
+ "look": "clean studio photography, strong light shapes, 50mm",
+ "palette": "white cyclorama, black, grey, one red accent",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "negative-space__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm",
+   "prompt": "Event photograph: a photo shoot on a white cyclorama with lights, atmospheric light, wide composition, space for a headline. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: clean studio photography, strong light shapes, 50mm; colour palette of white cyclorama, black, grey, one red accent. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "negative-space__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Close, 50mm",
+   "prompt": "Vertical close and intimate event photograph: a photo shoot on a white cyclorama with lights. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: clean studio photography, strong light shapes, 50mm; colour palette of white cyclorama, black, grey, one red accent. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "negative-space__03-venue.png",
+   "title": "Venue",
+   "section": "Venue section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior or site, 24mm",
+   "prompt": "Photograph of the studio with a cyclorama, blackout curtains and gear racks, set and ready, nobody present. Overall look: clean studio photography, strong light shapes, 50mm; colour palette of white cyclorama, black, grey, one red accent. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "negative-space__04-grid-moments.png",
+   "title": "Moments",
+   "section": "Gallery section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Documentary, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Documentary moments. Top-left: A photographer shooting a model. Top-right: A film crew with a slider. Bottom-left: A product shoot. Bottom-right: An editing suite. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: clean studio photography, strong light shapes, 50mm; colour palette of white cyclorama, black, grey, one red accent. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "negative-space__05-grid-details.png",
+   "title": "Details",
+   "section": "Details band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up details. Top-left: A lens on a table. Top-right: Light stands. Bottom-left: A colour chart. Bottom-right: A coiled cable. No readable text. Overall look: clean studio photography, strong light shapes, 50mm; colour palette of white cyclorama, black, grey, one red accent. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "negative-space__06-people.png",
+   "title": "People",
+   "section": "About section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: a crew discussing a shot. Candid. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: clean studio photography, strong light shapes, 50mm; colour palette of white cyclorama, black, grey, one red accent. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "negative-space__07-setup.png",
+   "title": "Behind the scenes",
+   "section": "How it works section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Documentary, 28mm",
+   "prompt": "Behind the scenes: lights being rigged. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: clean studio photography, strong light shapes, 50mm; colour palette of white cyclorama, black, grey, one red accent. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "negative-space__08-night.png",
+   "title": "Night",
+   "section": "Closing band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Night, 24mm",
+   "prompt": "Night photograph: the studio exterior at night, cinematic. Overall look: clean studio photography, strong light shapes, 50mm; colour palette of white cyclorama, black, grey, one red accent. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

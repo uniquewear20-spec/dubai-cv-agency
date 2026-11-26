@@ -1,0 +1,91 @@
+{
+ "site": "ZAFFA WEDDINGS",
+ "slug": "zaffa",
+ "category": "Events, education and creative",
+ "concept": "A wedding planner; style finder, budget planner and enquiry.",
+ "look": "romantic luminous wedding photography, 50mm, soft light",
+ "palette": "ivory, gold, blush, deep green",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "zaffa__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm",
+   "prompt": "Event photograph: a wedding stage with an arch of white flowers and candles in a ballroom, atmospheric light, wide composition, space for a headline. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: romantic luminous wedding photography, 50mm, soft light; colour palette of ivory, gold, blush, deep green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "zaffa__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Close, 50mm",
+   "prompt": "Vertical close and intimate event photograph: a wedding stage with an arch of white flowers and candles in a ballroom. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: romantic luminous wedding photography, 50mm, soft light; colour palette of ivory, gold, blush, deep green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "zaffa__03-venue.png",
+   "title": "Venue",
+   "section": "Venue section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior or site, 24mm",
+   "prompt": "Photograph of an outdoor desert venue with a long table under lanterns, set and ready, nobody present. Overall look: romantic luminous wedding photography, 50mm, soft light; colour palette of ivory, gold, blush, deep green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "zaffa__04-grid-moments.png",
+   "title": "Moments",
+   "section": "Gallery section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Documentary, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Documentary moments. Top-left: The bride's hands with henna. Top-right: A drum procession seen from behind. Bottom-left: A first dance in silhouette. Bottom-right: Hands cutting the cake. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: romantic luminous wedding photography, 50mm, soft light; colour palette of ivory, gold, blush, deep green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "zaffa__05-grid-details.png",
+   "title": "Details",
+   "section": "Details band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up details. Top-left: A place setting with gold cutlery. Top-right: Blank invitation cards. Bottom-left: A bouquet. Bottom-right: Rings on a velvet tray. No readable text. Overall look: romantic luminous wedding photography, 50mm, soft light; colour palette of ivory, gold, blush, deep green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "zaffa__06-people.png",
+   "title": "People",
+   "section": "About section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: guests at a long table raising glasses of juice. Candid. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: romantic luminous wedding photography, 50mm, soft light; colour palette of ivory, gold, blush, deep green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "zaffa__07-setup.png",
+   "title": "Behind the scenes",
+   "section": "How it works section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Documentary, 28mm",
+   "prompt": "Behind the scenes: the team setting floral arches in an empty ballroom. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: romantic luminous wedding photography, 50mm, soft light; colour palette of ivory, gold, blush, deep green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "zaffa__08-night.png",
+   "title": "Night",
+   "section": "Closing band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Night, 24mm",
+   "prompt": "Night photograph: sparklers at the venue exit, cinematic. Overall look: romantic luminous wedding photography, 50mm, soft light; colour palette of ivory, gold, blush, deep green. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

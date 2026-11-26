@@ -1,0 +1,91 @@
+{
+ "site": "GALLERY NOON",
+ "slug": "gallery-noon",
+ "category": "Events, education and creative",
+ "concept": "A contemporary art gallery; exhibitions and viewing room.",
+ "look": "white-cube gallery photography, even light, 24mm",
+ "palette": "white, concrete, black, one accent colour from the art",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "gallery-noon__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm",
+   "prompt": "Event photograph: an opening night in a white gallery hung with original abstract paintings, atmospheric light, wide composition, space for a headline. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: white-cube gallery photography, even light, 24mm; colour palette of white, concrete, black, one accent colour from the art. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "gallery-noon__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Close, 50mm",
+   "prompt": "Vertical close and intimate event photograph: an opening night in a white gallery hung with original abstract paintings. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: white-cube gallery photography, even light, 24mm; colour palette of white, concrete, black, one accent colour from the art. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "gallery-noon__03-venue.png",
+   "title": "Venue",
+   "section": "Venue section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior or site, 24mm",
+   "prompt": "Photograph of a warehouse gallery with high ceilings and polished concrete, set and ready, nobody present. Overall look: white-cube gallery photography, even light, 24mm; colour palette of white, concrete, black, one accent colour from the art. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "gallery-noon__04-grid-moments.png",
+   "title": "Moments",
+   "section": "Gallery section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Documentary, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Documentary moments. Top-left: A visitor looking at a painting. Top-right: An artist's studio wall. Bottom-left: A sculpture in a courtyard. Bottom-right: A catalogue on a bench. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: white-cube gallery photography, even light, 24mm; colour palette of white, concrete, black, one accent colour from the art. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "gallery-noon__05-grid-details.png",
+   "title": "Details",
+   "section": "Details band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up details. Top-left: A brushstroke macro. Top-right: A ceramic on a plinth. Bottom-left: A lighting track. Bottom-right: A catalogue spine. No readable text. Overall look: white-cube gallery photography, even light, 24mm; colour palette of white, concrete, black, one accent colour from the art. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "gallery-noon__06-people.png",
+   "title": "People",
+   "section": "About section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: visitors in conversation at the opening. Candid. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: white-cube gallery photography, even light, 24mm; colour palette of white, concrete, black, one accent colour from the art. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "gallery-noon__07-setup.png",
+   "title": "Behind the scenes",
+   "section": "How it works section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Documentary, 28mm",
+   "prompt": "Behind the scenes: art handlers installing a large canvas. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: white-cube gallery photography, even light, 24mm; colour palette of white, concrete, black, one accent colour from the art. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "gallery-noon__08-night.png",
+   "title": "Night",
+   "section": "Closing band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Night, 24mm",
+   "prompt": "Night photograph: the gallery facade glowing at night, cinematic. Overall look: white-cube gallery photography, even light, 24mm; colour palette of white, concrete, black, one accent colour from the art. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

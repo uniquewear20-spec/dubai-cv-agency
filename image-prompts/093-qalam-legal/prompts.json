@@ -1,0 +1,91 @@
+{
+ "site": "QALAM LEGAL",
+ "slug": "qalam-legal",
+ "category": "Finance, law and consulting",
+ "concept": "A corporate law firm; practice areas and consultation request.",
+ "look": "serious crisp editorial photography, cool daylight, 50mm",
+ "palette": "ink black, white marble, navy, brass",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "qalam-legal__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Architectural, 24mm",
+   "prompt": "Architectural photograph of a stone and glass office building with tall columns in Abu Dhabi, confident and clean, morning light, space for a headline. No people, no readable signage. Overall look: serious crisp editorial photography, cool daylight, 50mm; colour palette of ink black, white marble, navy, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "qalam-legal__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Looking up, 20mm",
+   "prompt": "Vertical photograph looking up at a stone and glass office building with tall columns, lines converging into the sky. No signage. Overall look: serious crisp editorial photography, cool daylight, 50mm; colour palette of ink black, white marble, navy, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "qalam-legal__03-office.png",
+   "title": "Office",
+   "section": "About section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a partner's office with a long desk, marble and law books, calm and premium, daylight, nobody present. Overall look: serious crisp editorial photography, cool daylight, 50mm; colour palette of ink black, white marble, navy, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "qalam-legal__04-meeting.png",
+   "title": "Meeting",
+   "section": "How we work section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: two lawyers reviewing a contract with a client, hands and papers in focus. Natural light; documents and screens show no readable text. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: serious crisp editorial photography, cool daylight, 50mm; colour palette of ink black, white marble, navy, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "qalam-legal__05-grid-spaces.png",
+   "title": "Spaces",
+   "section": "The firm section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interiors, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Spaces of the firm, nobody present. Top-left: The reception. Top-right: A law library. Bottom-left: A mediation room. Bottom-right: A document archive. Overall look: serious crisp editorial photography, cool daylight, 50mm; colour palette of ink black, white marble, navy, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "qalam-legal__06-grid-objects.png",
+   "title": "Objects",
+   "section": "Services cards",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Still life, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Still-life objects on a desk, soft light. Top-left: A reed pen and ink. Top-right: A wax seal. Bottom-left: Files tied with ribbon. Bottom-right: A brass scale sculpture. No readable text. Overall look: serious crisp editorial photography, cool daylight, 50mm; colour palette of ink black, white marble, navy, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "qalam-legal__07-abstract.png",
+   "title": "Abstract band",
+   "section": "Full-width band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Abstract, 85mm",
+   "prompt": "Abstract photograph: ink spreading in water. Minimal, elegant, wide negative space. Overall look: serious crisp editorial photography, cool daylight, 50mm; colour palette of ink black, white marble, navy, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "qalam-legal__08-city.png",
+   "title": "City",
+   "section": "Contact section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cityscape, 35mm",
+   "prompt": "Photograph of the waterfront at blue hour, atmospheric. Overall look: serious crisp editorial photography, cool daylight, 50mm; colour palette of ink black, white marble, navy, brass. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

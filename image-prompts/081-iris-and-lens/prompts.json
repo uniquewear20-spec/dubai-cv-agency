@@ -1,0 +1,101 @@
+{
+ "site": "IRIS & LENS",
+ "slug": "iris-and-lens",
+ "category": "Healthcare",
+ "concept": "An eye clinic; vision journey and booking.",
+ "look": "precise bright photography with circular motifs, 50mm",
+ "palette": "white, deep blue, silver, soft grey",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "iris-and-lens__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm, natural light",
+   "prompt": "Interior photograph of an eye clinic waiting area with circular skylights and blue seats in Business Bay, Dubai, calm, clean and welcoming, natural light, a sense of privacy and care, nobody present. Overall look: precise bright photography with circular motifs, 50mm; colour palette of white, deep blue, silver, soft grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "iris-and-lens__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Interior detail, 35mm",
+   "prompt": "Vertical interior detail of an eye clinic waiting area with circular skylights and blue seats: a corridor or reception corner with soft light and plants, nobody present. Overall look: precise bright photography with circular motifs, 50mm; colour palette of white, deep blue, silver, soft grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "iris-and-lens__03-treatment.png",
+   "title": "Treatment room",
+   "section": "Treatments section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 28mm",
+   "prompt": "Photograph of an examination room with a slit lamp and a phoropter in dim blue light, spotless and calm, soft daylight. Equipment of original design, no brand names. Overall look: precise bright photography with circular motifs, 50mm; colour palette of white, deep blue, silver, soft grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "iris-and-lens__04-consult.png",
+   "title": "Consultation",
+   "section": "Your first visit section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: an optometrist and a patient looking at a chart of abstract symbols. Natural light, respectful and reassuring. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: precise bright photography with circular motifs, 50mm; colour palette of white, deep blue, silver, soft grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "iris-and-lens__05-grid-spaces.png",
+   "title": "Spaces",
+   "section": "The clinic section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interiors, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Spaces of the clinic, consistent architectural photography, nobody present. Top-left: An eyewear wall. Top-right: A diagnostic room. Bottom-left: A surgery corridor. Bottom-right: A recovery lounge. Overall look: precise bright photography with circular motifs, 50mm; colour palette of white, deep blue, silver, soft grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "iris-and-lens__06-grid-details.png",
+   "title": "Details",
+   "section": "Treatment pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50-100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Clean, calm close-ups. Top-left: A macro of a human iris. Top-right: Trial lenses in a case. Bottom-left: Unlabeled eye drops. Bottom-right: Frames on a stand. No labels, no text. Overall look: precise bright photography with circular motifs, 50mm; colour palette of white, deep blue, silver, soft grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "iris-and-lens__07-grid-care.png",
+   "title": "Care",
+   "section": "Care and aftercare section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Care moments, hands-led and respectful, soft light. Top-left: Hands adjusting a phoropter. Top-right: A patient resting with eye shields. Bottom-left: A contact lens on a fingertip. Bottom-right: Fitting glasses. No faces. Overall look: precise bright photography with circular motifs, 50mm; colour palette of white, deep blue, silver, soft grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "iris-and-lens__08-exterior.png",
+   "title": "Entrance",
+   "section": "Visit section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Street level, 35mm",
+   "prompt": "Photograph of a glass corner building at dusk in Business Bay, Dubai, morning light, inviting, no readable signage. Overall look: precise bright photography with circular motifs, 50mm; colour palette of white, deep blue, silver, soft grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "iris-and-lens__09-calm.png",
+   "title": "Calm band",
+   "section": "Full-width calm band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Minimal, 85mm",
+   "prompt": "Calm photograph: concentric ripples on water in morning light. Soft, minimal, plenty of negative space. Overall look: precise bright photography with circular motifs, 50mm; colour palette of white, deep blue, silver, soft grey. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

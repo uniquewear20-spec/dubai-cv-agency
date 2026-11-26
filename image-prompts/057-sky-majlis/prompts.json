@@ -1,0 +1,101 @@
+{
+ "site": "SKY MAJLIS",
+ "slug": "sky-majlis",
+ "category": "Restaurants",
+ "concept": "A rooftop lounge with mocktails and Arabic coffee; table booking.",
+ "look": "glamorous rooftop photography, blue hour, 24mm",
+ "palette": "midnight blue, gold, cream, rose",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "sky-majlis__01-hero.png",
+   "title": "Hero, the room",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm, evening practical light",
+   "prompt": "Restaurant interior photograph of a rooftop majlis with low seating, lanterns and a skyline view in Downtown Dubai during evening service, tables set, warm practical lighting, atmospheric and inviting, nobody in focus. Overall look: glamorous rooftop photography, blue hour, 24mm; colour palette of midnight blue, gold, cream, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "sky-majlis__02-hero-mobile.png",
+   "title": "Signature dish",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "45 degrees, 85mm, shallow depth of field",
+   "prompt": "Vertical food photograph of a mocktail with rose and saffron, the signature of a mezze and mocktails kitchen, on a handmade plate, single side light, shallow depth of field, dark background. Overall look: glamorous rooftop photography, blue hour, 24mm; colour palette of midnight blue, gold, cream, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "sky-majlis__03-hands.png",
+   "title": "In the kitchen",
+   "section": "Kitchen or chef section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Close, 50mm, motion",
+   "prompt": "Editorial photograph of a cook's hands preparing a mocktail with rose and saffron at a rooftop majlis with low seating, lanterns and a skyline view, steam and motion, warm light, face out of frame. Overall look: glamorous rooftop photography, blue hour, 24mm; colour palette of midnight blue, gold, cream, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "sky-majlis__04-grid-dishes-a.png",
+   "title": "Dishes I",
+   "section": "Menu section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Overhead, same table surface, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Overhead food photographs of mezze and mocktails dishes on handmade ceramics on the same table surface, one side light. Top-left: Mezze. Top-right: Dates. Bottom-left: Grilled skewers. Bottom-right: Desserts. No hands, no faces. Overall look: glamorous rooftop photography, blue hour, 24mm; colour palette of midnight blue, gold, cream, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "sky-majlis__05-grid-dishes-b.png",
+   "title": "Dishes II",
+   "section": "Menu section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Overhead, same table surface, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Overhead food photographs of mezze and mocktails dishes on handmade ceramics on the same table surface, one side light. Top-left: Sushi. Top-right: Sliders. Bottom-left: Salads. Bottom-right: Fruit. No hands, no faces. Overall look: glamorous rooftop photography, blue hour, 24mm; colour palette of midnight blue, gold, cream, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "sky-majlis__06-grid-drinks.png",
+   "title": "Drinks",
+   "section": "Drinks section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Backlit, 85mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Drinks at a rooftop majlis with low seating, lanterns and a skyline view, moody bar photography with backlight and condensation. Top-left: A rose mocktail. Top-right: Arabic coffee. Bottom-left: Tea. Bottom-right: Juice. No labels, no faces. Overall look: glamorous rooftop photography, blue hour, 24mm; colour palette of midnight blue, gold, cream, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "sky-majlis__07-grid-details.png",
+   "title": "Details",
+   "section": "Room and craft details",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Macro, 50-100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up details of a rooftop majlis with low seating, lanterns and a skyline view. Top-left: Lanterns. Top-right: Cushions. Bottom-left: A dallah. Bottom-right: The view. Overall look: glamorous rooftop photography, blue hour, 24mm; colour palette of midnight blue, gold, cream, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "sky-majlis__08-exterior.png",
+   "title": "Entrance",
+   "section": "Visit section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Street level, 35mm, early evening",
+   "prompt": "Photograph of the tower at night for a rooftop majlis with low seating, lanterns and a skyline view in Downtown Dubai, early evening, warm light spilling out, inviting. No readable text, no people. Overall look: glamorous rooftop photography, blue hour, 24mm; colour palette of midnight blue, gold, cream, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "sky-majlis__09-table.png",
+   "title": "The table",
+   "section": "Reservation section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "High three-quarter angle, 35mm",
+   "prompt": "Photograph of a table set for an evening at a rooftop majlis with low seating, lanterns and a skyline view: several mezze and mocktails dishes to share, glasses and lamps, high three-quarter angle, hands of different diners reaching in, no faces. Overall look: glamorous rooftop photography, blue hour, 24mm; colour palette of midnight blue, gold, cream, rose. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

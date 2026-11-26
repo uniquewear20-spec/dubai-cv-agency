@@ -1,0 +1,101 @@
+{
+ "site": "BENI WEAVE",
+ "slug": "beni-weave",
+ "category": "Online shops",
+ "concept": "Berber rugs and textiles; rug finder and shop.",
+ "look": "warm interior and craft photography, daylight, 35mm",
+ "palette": "cream wool, charcoal, saffron, rose",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "beni-weave__01-hero.png",
+   "title": "Campaign hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Editorial, 50mm, cinematic light",
+   "prompt": "Campaign photograph: rugs layered in a riad, featuring a cream Beni Ourain rug with charcoal lines in a sunlit room. Editorial, cinematic light, space for a headline. Original design, no logos. Overall look: warm interior and craft photography, daylight, 35mm; colour palette of cream wool, charcoal, saffron, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "beni-weave__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Product, 85mm",
+   "prompt": "Vertical product photograph of a cream Beni Ourain rug with charcoal lines in a sunlit room on a sculpted plinth against a soft gradient in the brand palette, dramatic light. Original design, no logos. Overall look: warm interior and craft photography, daylight, 35mm; colour palette of cream wool, charcoal, saffron, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "beni-weave__03-grid-products-a.png",
+   "title": "Products I",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: A kilim. Top-right: A boucherouite. Bottom-left: A wedding blanket. Bottom-right: A pouf. Original designs, no logos, no text. Overall look: warm interior and craft photography, daylight, 35mm; colour palette of cream wool, charcoal, saffron, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "beni-weave__04-grid-products-b.png",
+   "title": "Products II",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: Cushions. Top-right: A throw. Bottom-left: A basket. Bottom-right: A runner. Original designs, no logos, no text. Overall look: warm interior and craft photography, daylight, 35mm; colour palette of cream wool, charcoal, saffron, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "beni-weave__05-grid-details.png",
+   "title": "Details",
+   "section": "Product page zoom details",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, 100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro details. Top-left: Wool pile. Top-right: Knots. Bottom-left: Fringe. Bottom-right: Pattern. No logos. Overall look: warm interior and craft photography, daylight, 35mm; colour palette of cream wool, charcoal, saffron, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "beni-weave__06-grid-atelier.png",
+   "title": "Atelier",
+   "section": "Craft section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Documentary craft, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The workshop behind the brand, documentary craft photography. Top-left: A weaver's hands at the loom. Top-right: Dyeing wool. Bottom-left: Washing rugs. Bottom-right: Drying rugs on a hill. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: warm interior and craft photography, daylight, 35mm; colour palette of cream wool, charcoal, saffron, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "beni-weave__07-model.png",
+   "title": "Editorial",
+   "section": "Lookbook section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Fashion, 85mm, natural light",
+   "prompt": "Fashion editorial: a woman in her fifties weaving, hands and loom in focus, with a cream Beni Ourain rug with charcoal lines in a sunlit room, natural light. One person only. Overall look: warm interior and craft photography, daylight, 35mm; colour palette of cream wool, charcoal, saffron, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "beni-weave__08-store.png",
+   "title": "Boutique",
+   "section": "Stores section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a showroom with stacked rugs, displays lit, nobody present, no signage text. Overall look: warm interior and craft photography, daylight, 35mm; colour palette of cream wool, charcoal, saffron, rose. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "beni-weave__09-packaging.png",
+   "title": "Packaging",
+   "section": "Gifting and delivery section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Still life, soft light",
+   "prompt": "Still life of a rolled rug tied with cord, an unboxing moment, soft light. No text. Overall look: warm interior and craft photography, daylight, 35mm; colour palette of cream wool, charcoal, saffron, rose. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

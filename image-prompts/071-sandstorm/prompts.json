@@ -1,0 +1,101 @@
+{
+ "site": "SANDSTORM KICKS",
+ "slug": "sandstorm",
+ "category": "Online shops",
+ "concept": "A sneaker and streetwear label; drops, size finder and bag.",
+ "look": "bold streetwear photography, hard flash, 35mm",
+ "palette": "sand, black, safety orange, concrete grey",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "sandstorm__01-hero.png",
+   "title": "Campaign hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Editorial, 50mm, cinematic light",
+   "prompt": "Campaign photograph: sneakers floating against sand blowing in the wind, featuring a chunky sneaker of original design in sand suede with orange accents. Editorial, cinematic light, space for a headline. Original design, no logos. Overall look: bold streetwear photography, hard flash, 35mm; colour palette of sand, black, safety orange, concrete grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "sandstorm__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Product, 85mm",
+   "prompt": "Vertical product photograph of a chunky sneaker of original design in sand suede with orange accents on a sculpted plinth against a soft gradient in the brand palette, dramatic light. Original design, no logos. Overall look: bold streetwear photography, hard flash, 35mm; colour palette of sand, black, safety orange, concrete grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "sandstorm__03-grid-products-a.png",
+   "title": "Products I",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: A black runner. Top-right: A white low-top. Bottom-left: A high-top. Bottom-right: A slide. Original designs, no logos, no text. Overall look: bold streetwear photography, hard flash, 35mm; colour palette of sand, black, safety orange, concrete grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "sandstorm__04-grid-products-b.png",
+   "title": "Products II",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: A hoodie. Top-right: Cargo pants. Bottom-left: A cap. Bottom-right: A backpack. Original designs, no logos, no text. Overall look: bold streetwear photography, hard flash, 35mm; colour palette of sand, black, safety orange, concrete grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "sandstorm__05-grid-details.png",
+   "title": "Details",
+   "section": "Product page zoom details",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, 100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro details. Top-left: Suede texture. Top-right: Laces. Bottom-left: The sole tread. Bottom-right: A stitched tab. No logos. Overall look: bold streetwear photography, hard flash, 35mm; colour palette of sand, black, safety orange, concrete grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "sandstorm__06-grid-atelier.png",
+   "title": "Atelier",
+   "section": "Craft section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Documentary craft, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The workshop behind the brand, documentary craft photography. Top-left: A designer sketching. Top-right: A sample room. Bottom-left: A sole being moulded. Bottom-right: Stitching. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: bold streetwear photography, hard flash, 35mm; colour palette of sand, black, safety orange, concrete grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "sandstorm__07-model.png",
+   "title": "Editorial",
+   "section": "Lookbook section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Fashion, 85mm, natural light",
+   "prompt": "Fashion editorial: a skater in his twenties mid-trick in a concrete park, with a chunky sneaker of original design in sand suede with orange accents, natural light. One person only. Overall look: bold streetwear photography, hard flash, 35mm; colour palette of sand, black, safety orange, concrete grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "sandstorm__08-store.png",
+   "title": "Boutique",
+   "section": "Stores section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a concrete store with a sneaker wall, displays lit, nobody present, no signage text. Overall look: bold streetwear photography, hard flash, 35mm; colour palette of sand, black, safety orange, concrete grey. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "sandstorm__09-packaging.png",
+   "title": "Packaging",
+   "section": "Gifting and delivery section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Still life, soft light",
+   "prompt": "Still life of a sand-coloured box, an unboxing moment, soft light. No text. Overall look: bold streetwear photography, hard flash, 35mm; colour palette of sand, black, safety orange, concrete grey. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

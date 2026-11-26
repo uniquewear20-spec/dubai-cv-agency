@@ -1,0 +1,101 @@
+{
+ "site": "RED DUNE EXPEDITIONS",
+ "slug": "red-dune",
+ "category": "Travel",
+ "concept": "Luxury desert safaris; experience builder and booking.",
+ "look": "epic cinematic desert photography, warm low sun, 24-50mm",
+ "palette": "red sand, burnt orange, indigo night, brass",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "red-dune__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full width",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Wide, 24mm, golden light",
+   "prompt": "Cinematic travel photograph: a convoy of three 4x4s cresting a red dune at sunset in the Empty Quarter near Liwa, wide, golden light, epic scale, space for a headline. Overall look: epic cinematic desert photography, warm low sun, 24-50mm; colour palette of red sand, burnt orange, indigo night, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "red-dune__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Vertical, 28mm",
+   "prompt": "Vertical travel photograph: a convoy of three 4x4s cresting a red dune at sunset, framed for a phone screen with a strong foreground, golden light. Overall look: epic cinematic desert photography, warm low sun, 24-50mm; colour palette of red sand, burnt orange, indigo night, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "red-dune__03-vehicle.png",
+   "title": "The ride",
+   "section": "Fleet or vessel section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "35mm, clean composition",
+   "prompt": "Photograph of an expedition 4x4 of original design with a roof rack and lights, polished and real, clean composition. Overall look: epic cinematic desert photography, warm low sun, 24-50mm; colour palette of red sand, burnt orange, indigo night, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "red-dune__04-interior.png",
+   "title": "Inside",
+   "section": "Comfort section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Photograph of a luxury camp tent with rugs, brass lanterns and low cushions, inviting, warm light, nobody present. Overall look: epic cinematic desert photography, warm low sun, 24-50mm; colour palette of red sand, burnt orange, indigo night, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "red-dune__05-grid-experiences.png",
+   "title": "Experiences",
+   "section": "Experiences section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Cinematic travel, 24-50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Experiences, cinematic travel photography. Top-left: Sandboarding. Top-right: A camel caravan at dawn. Bottom-left: Dinner under the stars. Bottom-right: Falconry. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: epic cinematic desert photography, warm low sun, 24-50mm; colour palette of red sand, burnt orange, indigo night, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "red-dune__06-grid-details.png",
+   "title": "Details",
+   "section": "Details band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Travel details in close-up. Top-left: Lanterns in the sand. Top-right: A coffee pot on embers. Bottom-left: A camel saddle. Bottom-right: Tyre tracks. Overall look: epic cinematic desert photography, warm low sun, 24-50mm; colour palette of red sand, burnt orange, indigo night, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "red-dune__07-people.png",
+   "title": "Travellers",
+   "section": "Why us section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial travel photograph: a guide in a white kandura pointing at the horizon with guests. Candid and warm. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: epic cinematic desert photography, warm low sun, 24-50mm; colour palette of red sand, burnt orange, indigo night, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "red-dune__08-landscape.png",
+   "title": "Landscape",
+   "section": "Destinations section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Landscape, 35mm",
+   "prompt": "Landscape photograph of a dune sea from above at golden hour, atmospheric. Overall look: epic cinematic desert photography, warm low sun, 24-50mm; colour palette of red sand, burnt orange, indigo night, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "red-dune__09-night.png",
+   "title": "Night",
+   "section": "Evening band",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Long exposure, 24mm",
+   "prompt": "Night photograph: the Milky Way over the camp, long exposure. Overall look: epic cinematic desert photography, warm low sun, 24-50mm; colour palette of red sand, burnt orange, indigo night, brass. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

@@ -1,0 +1,131 @@
+{
+ "site": "ZILL",
+ "slug": "zill",
+ "category": "Architecture and interiors",
+ "concept": "An architecture studio for hot climates; a courtyard house that assembles floor by floor on scroll, a sun study and a brief builder.",
+ "look": "monumental minimal architecture photography, hard sun and deep shade",
+ "palette": "lime white, sand, ochre earth, olive, shadow blue",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "zill__01-hero-house.png",
+   "title": "Hero house",
+   "section": "Home hero",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "As described in the prompt",
+   "prompt": "Architectural photograph at golden hour of a contemporary courtyard house in the desert outskirts of Dubai: thick sand-coloured lime-rendered walls with very few deep-set openings, a tall perforated screen of terracotta blocks casting a lace of shadows, a slender wind tower, one date palm rising from the hidden courtyard, long raking shadows on the ground, clear pale sky. Minimal, monumental, editorial architecture photography, no people, no text."
+  },
+  {
+   "n": 2,
+   "file": "zill__02-courtyard.png",
+   "title": "Courtyard",
+   "section": "Hero on phones and the courtyard",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "As described in the prompt",
+   "prompt": "Architectural photograph inside the shaded central courtyard of a contemporary desert house: a long narrow reflecting pool of dark water, a single olive tree, sand-coloured lime-plaster walls, a perforated screen projecting a precise pattern of sunlight dots onto the wall and the stone floor, a deep colonnade in shadow. Calm, cool, minimal, editorial, no people, no text."
+  },
+  {
+   "n": 3,
+   "file": "zill__03-shadow.png",
+   "title": "Shadow",
+   "section": "Sun study band",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "As described in the prompt",
+   "prompt": "Abstract architectural photograph of hard sunlight passing through a geometric perforated screen and casting a crisp pattern of light and shadow across a smooth warm-white lime-plaster wall and floor corner. Minimal, high contrast, warm tones, no people, no text."
+  },
+  {
+   "n": 4,
+   "file": "zill__04-wind-guesthouse.png",
+   "title": "Wind guesthouse",
+   "section": "Project: mountain guesthouse",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "As described in the prompt",
+   "prompt": "Architectural photograph of a small contemporary guesthouse of local stone in rugged desert mountains at dawn: three rooms under flat roofs, each with a square wind tower, deep shaded terraces, a dry riverbed of pale stones in front, soft pink light on the mountains. Minimal, editorial architecture photography, no people, no text."
+  },
+  {
+   "n": 5,
+   "file": "zill__05-earth-villa.png",
+   "title": "Earth villa",
+   "section": "Project: rammed-earth villa",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "As described in the prompt",
+   "prompt": "Architectural photograph of a contemporary rammed-earth villa on a hillside above the Atlantic in southern Morocco: long horizontal walls with visible layered strata in ochre and pink earth, a deep roof overhang, a terrace with a long bench, argan trees and dry hills, late afternoon light. Minimal, warm, editorial, no people, no text."
+  },
+  {
+   "n": 6,
+   "file": "zill__06-cafe.png",
+   "title": "Cafe",
+   "section": "Project: arcade cafe",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "As described in the prompt",
+   "prompt": "Interior architectural photograph of a contemporary café under a deep shaded arcade of slender plaster arches: terrazzo floor, a long counter of oak and pale stone, rattan chairs, sunlight falling in sharp stripes through a timber screen, potted olive trees. Calm, minimal, editorial, no people, no text, no logos."
+  },
+  {
+   "n": 7,
+   "file": "zill__07-pavilion.png",
+   "title": "Pavilion",
+   "section": "Project: desert pavilion",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "As described in the prompt",
+   "prompt": "Architectural night photograph of a small circular desert observation pavilion of pale concrete on the sand dunes: an open oculus in the roof framing the stars, a ring bench inside lit by a soft warm glow, the Milky Way above, sand ripples in the foreground. Minimal, serene, editorial, no people, no text."
+  },
+  {
+   "n": 8,
+   "file": "zill__08-model.png",
+   "title": "Model",
+   "section": "The exploded model section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "As described in the prompt",
+   "prompt": "Studio photograph of an architectural physical model of a courtyard house made of white card and pale basswood, shown as an exploded model: the roof, the upper floor and the ground floor lifted apart on thin rods above the plinth, a small desk lamp casting a long hard shadow as a sun study, a dark grey backdrop. Precise, minimal, no people, no text."
+  },
+  {
+   "n": 9,
+   "file": "zill__09-grid-materials.png",
+   "title": "Grid materials",
+   "section": "Materials",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "As described in the prompt",
+   "prompt": "A 2x2 grid of four separate close-up material photographs separated by thin white gutters, one consistent warm natural-light style. Top-left: rammed earth wall with fine horizontal layers in ochre, rose and sand. Top-right: smooth hand-trowelled lime plaster in warm white with soft shadows. Bottom-left: a perforated screen of terracotta blocks with light behind it. Bottom-right: oiled oak joinery with a brass hinge. No text."
+  },
+  {
+   "n": 10,
+   "file": "zill__10-grid-process.png",
+   "title": "Grid process",
+   "section": "How we work",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "As described in the prompt",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, one consistent calm architecture-studio style on a pale wooden table in daylight. Top-left: a soft pencil sketch of a courtyard house section on yellow tracing paper, no readable words. Top-right: a white card model of a courtyard house with a lamp casting long shadows. Bottom-left: a sample board of rammed earth, lime plaster, terracotta and oak samples. Bottom-right: hands holding a small earth sample block, face not visible. No readable text, no logos."
+  },
+  {
+   "n": 11,
+   "file": "zill__11-grid-interiors.png",
+   "title": "Grid interiors",
+   "section": "Courtyard House interiors",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "As described in the prompt",
+   "prompt": "A 2x2 grid of four separate interior architectural photographs separated by thin white gutters, one consistent calm style in a contemporary courtyard house with lime-plaster walls, oak and stone. Top-left: a double-height living room with a tall window onto the courtyard and an olive tree. Top-right: a stair of solid stone treads rising along a plaster wall in a shaft of light. Bottom-left: a kitchen with a long stone counter and deep-set window. Bottom-right: a bedroom with a low oak bed facing a small screened window throwing dotted light. No people, no text."
+  },
+  {
+   "n": 12,
+   "file": "zill__12-grid-details.png",
+   "title": "Grid details",
+   "section": "Details band",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "As described in the prompt",
+   "prompt": "A 2x2 grid of four separate architectural detail photographs separated by thin white gutters, one consistent warm minimal style. Top-left: the top of a square wind tower against a blue sky. Top-right: a deep window reveal in a thick earth wall with a timber shutter half open. Bottom-left: a stone water channel running through a courtyard. Bottom-right: a curved plaster bench in a shaded corner with dappled light. No people, no text."
+  }
+ ]
+}

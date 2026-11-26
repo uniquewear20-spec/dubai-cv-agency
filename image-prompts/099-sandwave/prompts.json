@@ -1,0 +1,91 @@
+{
+ "site": "SANDWAVE FESTIVAL",
+ "slug": "sandwave",
+ "category": "Events, education and creative",
+ "concept": "A desert music festival; line-up, tickets and camping.",
+ "look": "vibrant festival photography, golden hour and neon night, 24mm",
+ "palette": "sunset orange, electric violet, sand, black",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "sandwave__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm",
+   "prompt": "Event photograph: a main stage in the dunes with light beams at dusk, atmospheric light, wide composition, space for a headline. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: vibrant festival photography, golden hour and neon night, 24mm; colour palette of sunset orange, electric violet, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "sandwave__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Close, 50mm",
+   "prompt": "Vertical close and intimate event photograph: a main stage in the dunes with light beams at dusk. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: vibrant festival photography, golden hour and neon night, 24mm; colour palette of sunset orange, electric violet, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "sandwave__03-venue.png",
+   "title": "Venue",
+   "section": "Venue section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior or site, 24mm",
+   "prompt": "Photograph of the festival site with tents and art installations, set and ready, nobody present. Overall look: vibrant festival photography, golden hour and neon night, 24mm; colour palette of sunset orange, electric violet, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "sandwave__04-grid-moments.png",
+   "title": "Moments",
+   "section": "Gallery section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Documentary, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Documentary moments. Top-left: A crowd with hands up at sunset. Top-right: A DJ booth seen from behind. Bottom-left: A giant light sculpture. Bottom-right: Dancers in the sand. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: vibrant festival photography, golden hour and neon night, 24mm; colour palette of sunset orange, electric violet, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "sandwave__05-grid-details.png",
+   "title": "Details",
+   "section": "Details band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up details. Top-left: Wristbands. Top-right: A glowing tent. Bottom-left: A water station. Bottom-right: A blank map board. No readable text. Overall look: vibrant festival photography, golden hour and neon night, 24mm; colour palette of sunset orange, electric violet, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "sandwave__06-people.png",
+   "title": "People",
+   "section": "About section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: friends dancing. Candid. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: vibrant festival photography, golden hour and neon night, 24mm; colour palette of sunset orange, electric violet, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "sandwave__07-setup.png",
+   "title": "Behind the scenes",
+   "section": "How it works section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Documentary, 28mm",
+   "prompt": "Behind the scenes: the crew building the stage in daylight. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: vibrant festival photography, golden hour and neon night, 24mm; colour palette of sunset orange, electric violet, sand, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "sandwave__08-night.png",
+   "title": "Night",
+   "section": "Closing band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Night, 24mm",
+   "prompt": "Night photograph: lasers over the dunes, cinematic. Overall look: vibrant festival photography, golden hour and neon night, 24mm; colour palette of sunset orange, electric violet, sand, black. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

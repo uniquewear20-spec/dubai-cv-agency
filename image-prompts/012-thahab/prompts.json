@@ -1,0 +1,131 @@
+{
+ "site": "THAHAB",
+ "slug": "thahab",
+ "category": "Hotels",
+ "concept": "A luxury desert camp in the Empty Quarter; tent booking and experiences.",
+ "look": "epic warm desert photography, golden and blue hour, 24-50mm",
+ "palette": "gold sand, indigo night, brass, cream canvas",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "thahab__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm, eye level",
+   "prompt": "Luxury travel photograph of twelve canvas tented suites along a dune ridge around a central majlis tent in the Empty Quarter dunes at golden hour, the whole property in its landscape, calm and timeless, open sky for a headline. No people. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "thahab__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Framed view through an opening, 28mm",
+   "prompt": "Vertical travel photograph at twelve canvas tented suites along a dune ridge around a central majlis tent: a framed view through a doorway or arch toward the landscape of the Empty Quarter dunes, morning light, one strong leading line. No people. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "thahab__03-aerial.png",
+   "title": "Aerial",
+   "section": "The place section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Drone, 50-degree angle",
+   "prompt": "Drone photograph of twelve canvas tented suites along a dune ridge around a central majlis tent in the Empty Quarter dunes, the layout of buildings, pools and paths readable, the landscape around it, soft morning light, true colours. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "thahab__04-night.png",
+   "title": "Night",
+   "section": "Evening section and footer",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Tripod, 24mm, blue hour",
+   "prompt": "Blue-hour photograph of twelve canvas tented suites along a dune ridge around a central majlis tent in the Empty Quarter dunes: warm light in windows and lanterns along paths, deep blue sky, reflections, quiet and inviting. No people. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "thahab__05-room-a.png",
+   "title": "Signature room",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm, from the doorway",
+   "prompt": "Interior photograph of a tented suite with a four-poster bed, wool rugs and brass lanterns at twelve canvas tented suites along a dune ridge around a central majlis tent, bed made with crisp linen, the view through the window or doors, soft morning light, no clutter, nobody present. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "thahab__06-room-b.png",
+   "title": "Second room type",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a family tent with two bedrooms and a deck facing the dunes at twelve canvas tented suites along a dune ridge around a central majlis tent, styled for arrival, late-afternoon light, nobody present. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "thahab__07-grid-rooms.png",
+   "title": "Room details",
+   "section": "Room pages gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior details, 35 and 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Details of a tented suite with a four-poster bed, wool rugs and brass lanterns at twelve canvas tented suites along a dune ridge around a central majlis tent, nobody present. Top-left: the bathroom with stone and folded towels. Top-right: the private terrace at sunset. Bottom-left: the bedside with a lamp and a book. Bottom-right: the view from the bed through open doors. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "thahab__08-grid-dining.png",
+   "title": "Dining",
+   "section": "Dining section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Food, overhead and 45 degrees, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Food and dining at twelve canvas tented suites along a dune ridge around a central majlis tent, warm editorial food photography. Top-left: Lamb grilled over fire. Top-right: Dates and Arabic coffee. Bottom-left: Dinner on rugs under lanterns. Bottom-right: Breakfast on the deck. No faces. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "thahab__09-grid-spa.png",
+   "title": "Spa",
+   "section": "Spa section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm interiors and details, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The spa at twelve canvas tented suites along a dune ridge around a central majlis tent, calm, steam and soft light. Top-left: A massage tent. Top-right: An outdoor copper bath. Bottom-left: Warm oils and stones. Bottom-right: A towel and slippers. No faces. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "thahab__10-grid-experiences.png",
+   "title": "Experiences",
+   "section": "Experiences or a-day-here section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Cinematic travel, 24-50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Experiences around twelve canvas tented suites along a dune ridge around a central majlis tent in the Empty Quarter dunes, cinematic travel photography. Top-left: A camel trek at dawn. Top-right: Sandboarding down a dune. Bottom-left: Stargazing with a telescope. Bottom-right: A falconry demonstration. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 11,
+   "file": "thahab__11-grid-details.png",
+   "title": "Details",
+   "section": "Materials band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up material details of twelve canvas tented suites along a dune ridge around a central majlis tent, raking light. Top-left: Brass lanterns. Top-right: Woven rugs. Bottom-left: Canvas and rope. Bottom-right: A coffee pot on embers. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 12,
+   "file": "thahab__12-arrival.png",
+   "title": "Arrival",
+   "section": "Getting here section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cinematic, 35mm",
+   "prompt": "Travel photograph of arriving at twelve canvas tented suites along a dune ridge around a central majlis tent: a 4x4 cresting the dunes at sunset toward the camp. Cinematic, warm, a sense of journey. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: epic warm desert photography, golden and blue hour, 24-50mm; colour palette of gold sand, indigo night, brass, cream canvas. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

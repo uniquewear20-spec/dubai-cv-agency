@@ -1,0 +1,131 @@
+{
+ "site": "KHOR NINE",
+ "slug": "khor-nine",
+ "category": "Hotels",
+ "concept": "An eco-lodge in the Musandam fjords; villas and boat trips.",
+ "look": "dramatic fjord photography, turquoise and rock, 24mm",
+ "palette": "rock ochre, turquoise, white, teak",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "khor-nine__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm, eye level",
+   "prompt": "Luxury travel photograph of nine stone villas at the edge of a fjord below cliffs in the Musandam fjords at golden hour, the whole property in its landscape, calm and timeless, open sky for a headline. No people. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "khor-nine__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Framed view through an opening, 28mm",
+   "prompt": "Vertical travel photograph at nine stone villas at the edge of a fjord below cliffs: a framed view through a doorway or arch toward the landscape of the Musandam fjords, morning light, one strong leading line. No people. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "khor-nine__03-aerial.png",
+   "title": "Aerial",
+   "section": "The place section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Drone, 50-degree angle",
+   "prompt": "Drone photograph of nine stone villas at the edge of a fjord below cliffs in the Musandam fjords, the layout of buildings, pools and paths readable, the landscape around it, soft morning light, true colours. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "khor-nine__04-night.png",
+   "title": "Night",
+   "section": "Evening section and footer",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Tripod, 24mm, blue hour",
+   "prompt": "Blue-hour photograph of nine stone villas at the edge of a fjord below cliffs in the Musandam fjords: warm light in windows and lanterns along paths, deep blue sky, reflections, quiet and inviting. No people. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "khor-nine__05-room-a.png",
+   "title": "Signature room",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm, from the doorway",
+   "prompt": "Interior photograph of a villa with a glass wall facing the water at nine stone villas at the edge of a fjord below cliffs, bed made with crisp linen, the view through the window or doors, soft morning light, no clutter, nobody present. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "khor-nine__06-room-b.png",
+   "title": "Second room type",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a cliff villa with a plunge pool at nine stone villas at the edge of a fjord below cliffs, styled for arrival, late-afternoon light, nobody present. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "khor-nine__07-grid-rooms.png",
+   "title": "Room details",
+   "section": "Room pages gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior details, 35 and 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Details of a villa with a glass wall facing the water at nine stone villas at the edge of a fjord below cliffs, nobody present. Top-left: the bathroom with stone and folded towels. Top-right: the private terrace at sunset. Bottom-left: the bedside with a lamp and a book. Bottom-right: the view from the bed through open doors. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "khor-nine__08-grid-dining.png",
+   "title": "Dining",
+   "section": "Dining section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Food, overhead and 45 degrees, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Food and dining at nine stone villas at the edge of a fjord below cliffs, warm editorial food photography. Top-left: Grilled fish. Top-right: Lunch on a dhow. Bottom-left: Dates and coffee. Bottom-right: Dinner on the jetty. No faces. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "khor-nine__09-grid-spa.png",
+   "title": "Spa",
+   "section": "Spa section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm interiors and details, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The spa at nine stone villas at the edge of a fjord below cliffs, calm, steam and soft light. Top-left: A treatment room in the rock. Top-right: An outdoor shower. Bottom-left: A salt scrub. Bottom-right: A hammock. No faces. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "khor-nine__10-grid-experiences.png",
+   "title": "Experiences",
+   "section": "Experiences or a-day-here section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Cinematic travel, 24-50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Experiences around nine stone villas at the edge of a fjord below cliffs in the Musandam fjords, cinematic travel photography. Top-left: Snorkelling. Top-right: A dhow cruise. Bottom-left: Kayaking. Bottom-right: A mountain drive. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 11,
+   "file": "khor-nine__11-grid-details.png",
+   "title": "Details",
+   "section": "Materials band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up material details of nine stone villas at the edge of a fjord below cliffs, raking light. Top-left: Rock textures. Top-right: Rope. Bottom-left: Teak. Bottom-right: Lanterns. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 12,
+   "file": "khor-nine__12-arrival.png",
+   "title": "Arrival",
+   "section": "Getting here section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cinematic, 35mm",
+   "prompt": "Travel photograph of arriving at nine stone villas at the edge of a fjord below cliffs: a speedboat arriving at the jetty. Cinematic, warm, a sense of journey. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: dramatic fjord photography, turquoise and rock, 24mm; colour palette of rock ochre, turquoise, white, teak. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

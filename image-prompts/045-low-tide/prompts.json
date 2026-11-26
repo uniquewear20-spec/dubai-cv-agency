@@ -1,0 +1,131 @@
+{
+ "site": "LOW TIDE",
+ "slug": "low-tide",
+ "category": "Hotels",
+ "concept": "A Dubai beach club; day-bed booking and events.",
+ "look": "sunny beach-club photography, 24-35mm",
+ "palette": "white, sand, turquoise, coral",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "low-tide__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm, eye level",
+   "prompt": "Luxury travel photograph of a beach club with white day beds, umbrellas, a pool and a bar on the sand in a Dubai beach with the skyline far away at golden hour, the whole property in its landscape, calm and timeless, open sky for a headline. No people. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "low-tide__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Framed view through an opening, 28mm",
+   "prompt": "Vertical travel photograph at a beach club with white day beds, umbrellas, a pool and a bar on the sand: a framed view through a doorway or arch toward the landscape of a Dubai beach with the skyline far away, morning light, one strong leading line. No people. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "low-tide__03-aerial.png",
+   "title": "Aerial",
+   "section": "The place section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Drone, 50-degree angle",
+   "prompt": "Drone photograph of a beach club with white day beds, umbrellas, a pool and a bar on the sand in a Dubai beach with the skyline far away, the layout of buildings, pools and paths readable, the landscape around it, soft morning light, true colours. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "low-tide__04-night.png",
+   "title": "Night",
+   "section": "Evening section and footer",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Tripod, 24mm, blue hour",
+   "prompt": "Blue-hour photograph of a beach club with white day beds, umbrellas, a pool and a bar on the sand in a Dubai beach with the skyline far away: warm light in windows and lanterns along paths, deep blue sky, reflections, quiet and inviting. No people. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "low-tide__05-room-a.png",
+   "title": "Signature room",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm, from the doorway",
+   "prompt": "Interior photograph of a cabana with a day bed and curtains at a beach club with white day beds, umbrellas, a pool and a bar on the sand, bed made with crisp linen, the view through the window or doors, soft morning light, no clutter, nobody present. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "low-tide__06-room-b.png",
+   "title": "Second room type",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a VIP pool deck with loungers at a beach club with white day beds, umbrellas, a pool and a bar on the sand, styled for arrival, late-afternoon light, nobody present. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "low-tide__07-grid-rooms.png",
+   "title": "Room details",
+   "section": "Room pages gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior details, 35 and 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Details of a cabana with a day bed and curtains at a beach club with white day beds, umbrellas, a pool and a bar on the sand, nobody present. Top-left: the bathroom with stone and folded towels. Top-right: the private terrace at sunset. Bottom-left: the bedside with a lamp and a book. Bottom-right: the view from the bed through open doors. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "low-tide__08-grid-dining.png",
+   "title": "Dining",
+   "section": "Dining section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Food, overhead and 45 degrees, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Food and dining at a beach club with white day beds, umbrellas, a pool and a bar on the sand, warm editorial food photography. Top-left: A seafood platter. Top-right: Mocktails. Bottom-left: A wood-oven pizza. Bottom-right: A fruit platter. No faces. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "low-tide__09-grid-spa.png",
+   "title": "Spa",
+   "section": "Spa section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm interiors and details, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The spa at a beach club with white day beds, umbrellas, a pool and a bar on the sand, calm, steam and soft light. Top-left: A beach massage cabana. Top-right: A cold towel. Bottom-left: Sunscreen. Bottom-right: A hammock. No faces. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "low-tide__10-grid-experiences.png",
+   "title": "Experiences",
+   "section": "Experiences or a-day-here section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Cinematic travel, 24-50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Experiences around a beach club with white day beds, umbrellas, a pool and a bar on the sand in a Dubai beach with the skyline far away, cinematic travel photography. Top-left: Paddleboarding. Top-right: A DJ at sunset. Bottom-left: Beach volleyball. Bottom-right: A pool afternoon. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 11,
+   "file": "low-tide__11-grid-details.png",
+   "title": "Details",
+   "section": "Materials band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up material details of a beach club with white day beds, umbrellas, a pool and a bar on the sand, raking light. Top-left: A striped towel. Top-right: A straw hat. Bottom-left: Ice in a glass. Bottom-right: A parasol. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 12,
+   "file": "low-tide__12-arrival.png",
+   "title": "Arrival",
+   "section": "Getting here section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cinematic, 35mm",
+   "prompt": "Travel photograph of arriving at a beach club with white day beds, umbrellas, a pool and a bar on the sand: a boardwalk entrance lined with palms. Cinematic, warm, a sense of journey. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: sunny beach-club photography, 24-35mm; colour palette of white, sand, turquoise, coral. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

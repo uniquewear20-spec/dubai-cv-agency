@@ -1,0 +1,111 @@
+{
+ "site": "HENDIYA",
+ "slug": "hendiya",
+ "category": "Beauty",
+ "concept": "Prickly pear seed oil serum; product and origin story.",
+ "look": "sunlit desert still life, crisp shadows, 85mm",
+ "palette": "cactus green, fuchsia, sand, gold",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "hendiya__01-hero.png",
+   "title": "Hero still life",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Still life, 85mm, directional light",
+   "prompt": "Luxury beauty still life of a green glass serum bottle with a gold dropper with prickly pear fruits cut open with their seeds, on a sculpted stone plinth, soft directional light and long shadows, negative space on one side for a headline. Original packaging, no text on it. Overall look: sunlit desert still life, crisp shadows, 85mm; colour palette of cactus green, fuchsia, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "hendiya__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Top light, 100mm",
+   "prompt": "Vertical beauty still life: a green glass serum bottle with a gold dropper standing in shallow clear water with prickly pear fruits cut open with their seeds around it, light ripples, top light. Original packaging, no text. Overall look: sunlit desert still life, crisp shadows, 85mm; colour palette of cactus green, fuchsia, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "hendiya__03-grid-packshots.png",
+   "title": "Product packshots",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and light in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Packshots on a seamless backdrop in the brand palette, same lighting, angle and scale in every cell. Top-left: A seed oil. Top-right: An eye serum. Bottom-left: A body oil. Bottom-right: A lip balm. Original packaging designs, no text. Overall look: sunlit desert still life, crisp shadows, 85mm; colour palette of cactus green, fuchsia, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "hendiya__04-ingredient.png",
+   "title": "Hero ingredient",
+   "section": "Ingredients section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Macro, 100mm",
+   "prompt": "Macro photograph of prickly pear fruits cut open with their seeds, dew and texture, shallow depth of field, natural light. Overall look: sunlit desert still life, crisp shadows, 85mm; colour palette of cactus green, fuchsia, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "hendiya__05-origin.png",
+   "title": "Origin",
+   "section": "Origin story section, full width",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Landscape, 35mm, early morning",
+   "prompt": "Landscape photograph of cactus hedges on the hills of Sidi Ifni, early morning light, cinematic and real. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: sunlit desert still life, crisp shadows, 85mm; colour palette of cactus green, fuchsia, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "hendiya__06-grid-textures.png",
+   "title": "Textures",
+   "section": "Product page texture swatches",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, top light on glass",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro texture photographs, top light on glass. Top-left: A golden oil drop. Top-right: Fruit flesh. Bottom-left: Seeds. Bottom-right: Serum. No packaging, no text. Overall look: sunlit desert still life, crisp shadows, 85mm; colour palette of cactus green, fuchsia, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "hendiya__07-model.png",
+   "title": "Editorial portrait",
+   "section": "Brand story section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Portrait, 85mm, window light",
+   "prompt": "Beauty editorial portrait of a woman in her thirties with sun on her face in a cactus garden, natural skin texture, soft window light, minimal makeup, calm expression. One person only. Overall look: sunlit desert still life, crisp shadows, 85mm; colour palette of cactus green, fuchsia, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "hendiya__08-grid-ritual.png",
+   "title": "Ritual",
+   "section": "How to use section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Hands-only ritual photographs, soft light. Top-left: A drop on a fingertip. Top-right: Pressing into skin. Bottom-left: Pressing seeds. Bottom-right: A jar of fruit. Faces out of frame. Overall look: sunlit desert still life, crisp shadows, 85mm; colour palette of cactus green, fuchsia, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "hendiya__09-space.png",
+   "title": "Boutique or atelier",
+   "section": "Visit section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a small oil-pressing workshop, warm and inviting, nobody present. Overall look: sunlit desert still life, crisp shadows, 85mm; colour palette of cactus green, fuchsia, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "hendiya__10-gift.png",
+   "title": "Gift set",
+   "section": "Gifts section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Overhead, soft light",
+   "prompt": "Still life of a gift box with cactus motif, overhead, soft light, ribbon and paper. No text. Overall look: sunlit desert still life, crisp shadows, 85mm; colour palette of cactus green, fuchsia, sand, gold. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

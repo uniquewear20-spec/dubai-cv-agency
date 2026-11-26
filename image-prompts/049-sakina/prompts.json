@@ -1,0 +1,131 @@
+{
+ "site": "SAKINA",
+ "slug": "sakina",
+ "category": "Hotels",
+ "concept": "A wellness retreat in Ras Al Khaimah; programme builder and booking.",
+ "look": "calm wellness photography, soft light, 35mm",
+ "palette": "sage, sand, white, terracotta",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "sakina__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm, eye level",
+   "prompt": "Luxury travel photograph of a low wellness retreat among palms with a central pool in Ras Al Khaimah at golden hour, the whole property in its landscape, calm and timeless, open sky for a headline. No people. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "sakina__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Framed view through an opening, 28mm",
+   "prompt": "Vertical travel photograph at a low wellness retreat among palms with a central pool: a framed view through a doorway or arch toward the landscape of Ras Al Khaimah, morning light, one strong leading line. No people. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "sakina__03-aerial.png",
+   "title": "Aerial",
+   "section": "The place section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Drone, 50-degree angle",
+   "prompt": "Drone photograph of a low wellness retreat among palms with a central pool in Ras Al Khaimah, the layout of buildings, pools and paths readable, the landscape around it, soft morning light, true colours. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "sakina__04-night.png",
+   "title": "Night",
+   "section": "Evening section and footer",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Tripod, 24mm, blue hour",
+   "prompt": "Blue-hour photograph of a low wellness retreat among palms with a central pool in Ras Al Khaimah: warm light in windows and lanterns along paths, deep blue sky, reflections, quiet and inviting. No people. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "sakina__05-room-a.png",
+   "title": "Signature room",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm, from the doorway",
+   "prompt": "Interior photograph of a room with linen, a daybed and a garden view at a low wellness retreat among palms with a central pool, bed made with crisp linen, the view through the window or doors, soft morning light, no clutter, nobody present. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "sakina__06-room-b.png",
+   "title": "Second room type",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a pool villa at a low wellness retreat among palms with a central pool, styled for arrival, late-afternoon light, nobody present. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "sakina__07-grid-rooms.png",
+   "title": "Room details",
+   "section": "Room pages gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior details, 35 and 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Details of a room with linen, a daybed and a garden view at a low wellness retreat among palms with a central pool, nobody present. Top-left: the bathroom with stone and folded towels. Top-right: the private terrace at sunset. Bottom-left: the bedside with a lamp and a book. Bottom-right: the view from the bed through open doors. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "sakina__08-grid-dining.png",
+   "title": "Dining",
+   "section": "Dining section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Food, overhead and 45 degrees, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Food and dining at a low wellness retreat among palms with a central pool, warm editorial food photography. Top-left: A plant-based bowl. Top-right: Fresh juices. Bottom-left: Herbal tea. Bottom-right: Breakfast. No faces. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "sakina__09-grid-spa.png",
+   "title": "Spa",
+   "section": "Spa section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm interiors and details, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The spa at a low wellness retreat among palms with a central pool, calm, steam and soft light. Top-left: A massage. Top-right: A sound bath. Bottom-left: A float pool. Bottom-right: A sauna. No faces. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "sakina__10-grid-experiences.png",
+   "title": "Experiences",
+   "section": "Experiences or a-day-here section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Cinematic travel, 24-50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Experiences around a low wellness retreat among palms with a central pool in Ras Al Khaimah, cinematic travel photography. Top-left: Yoga at dawn. Top-right: A mountain walk. Bottom-left: A cooking class. Bottom-right: Meditation. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 11,
+   "file": "sakina__11-grid-details.png",
+   "title": "Details",
+   "section": "Materials band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up material details of a low wellness retreat among palms with a central pool, raking light. Top-left: Linen. Top-right: Clay cups. Bottom-left: Herbs. Bottom-right: Stones. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 12,
+   "file": "sakina__12-arrival.png",
+   "title": "Arrival",
+   "section": "Getting here section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cinematic, 35mm",
+   "prompt": "Travel photograph of arriving at a low wellness retreat among palms with a central pool: a path lined with palms. Cinematic, warm, a sense of journey. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: calm wellness photography, soft light, 35mm; colour palette of sage, sand, white, terracotta. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

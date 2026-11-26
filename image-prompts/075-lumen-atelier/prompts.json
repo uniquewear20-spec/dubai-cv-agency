@@ -1,0 +1,101 @@
+{
+ "site": "LUMEN ATELIER",
+ "slug": "lumen-atelier",
+ "category": "Architecture and interiors",
+ "concept": "A lighting design studio; lighting scene simulator and enquiry.",
+ "look": "moody architectural photography with dramatic light, 35mm",
+ "palette": "black, warm white light, brass, deep blue",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "lumen-atelier__01-hero.png",
+   "title": "Hero project",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "24mm tilt-shift, corrected verticals",
+   "prompt": "Architectural photograph of a villa facade lit at night with grazing light and glowing windows in Emirates Hills, strong light and shadow, corrected verticals, monumental yet calm, open sky. No people. Overall look: moody architectural photography with dramatic light, 35mm; colour palette of black, warm white light, brass, deep blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "lumen-atelier__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Vertical detail, 50mm",
+   "prompt": "Vertical architectural photograph of a tall slice of a villa facade lit at night with grazing light and glowing windows, its facade and shadows, graphic and minimal. No people. Overall look: moody architectural photography with dramatic light, 35mm; colour palette of black, warm white light, brass, deep blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "lumen-atelier__03-interior.png",
+   "title": "Interior",
+   "section": "Project page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior architectural photograph of a villa facade lit at night with grazing light and glowing windows: rooms shaped by light, daylight, nobody present. Overall look: moody architectural photography with dramatic light, 35mm; colour palette of black, warm white light, brass, deep blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "lumen-atelier__04-grid-interiors.png",
+   "title": "Interiors",
+   "section": "Project page gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior, 24-35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Interiors of a villa facade lit at night with grazing light and glowing windows, rooms shaped by light, one consistent daylight, nobody present. Top-left: the main living space. Top-right: a stair or circulation space. Bottom-left: the kitchen. Bottom-right: a private room. Overall look: moody architectural photography with dramatic light, 35mm; colour palette of black, warm white light, brass, deep blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "lumen-atelier__05-grid-projects.png",
+   "title": "Other projects",
+   "section": "Projects index",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Editorial architecture, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Four other projects by the same studio, consistent editorial architecture photography. Top-left: A lit staircase. Top-right: A restaurant with pendant clusters. Bottom-left: A garden at night. Bottom-right: A gallery wall. No people. Overall look: moody architectural photography with dramatic light, 35mm; colour palette of black, warm white light, brass, deep blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "lumen-atelier__06-grid-materials.png",
+   "title": "Materials",
+   "section": "Materials section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Material close-ups, raking light. Top-left: A brass lamp. Top-right: Opal glass. Bottom-left: An LED cove. Bottom-right: A dimmer. Overall look: moody architectural photography with dramatic light, 35mm; colour palette of black, warm white light, brass, deep blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "lumen-atelier__07-grid-process.png",
+   "title": "Process",
+   "section": "How we work section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Documentary, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The design process in the studio and on site. Top-left: A light study with a model. Top-right: An on-site mock-up. Bottom-left: Focusing a spotlight. Bottom-right: A lighting plan. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: moody architectural photography with dramatic light, 35mm; colour palette of black, warm white light, brass, deep blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "lumen-atelier__08-grid-details.png",
+   "title": "Details",
+   "section": "Details band",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Architectural detail, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Architectural details, minimal compositions. Top-left: A glowing pendant. Top-right: A wall grazer. Bottom-left: A shadow pattern. Bottom-right: Candlelight. Overall look: moody architectural photography with dramatic light, 35mm; colour palette of black, warm white light, brass, deep blue. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "lumen-atelier__09-studio.png",
+   "title": "The studio",
+   "section": "About and contact section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a showroom of lamps, models and drawings on tables, daylight, calm, no readable text. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: moody architectural photography with dramatic light, 35mm; colour palette of black, warm white light, brass, deep blue. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

@@ -1,0 +1,101 @@
+{
+ "site": "SOUTHPAW CLUB",
+ "slug": "southpaw-club",
+ "category": "Fitness",
+ "concept": "A boutique boxing gym; timetable and membership.",
+ "look": "gritty high-contrast sports photography, hard light, 35mm",
+ "palette": "black, red, bone white, concrete",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "southpaw-club__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Sports, 35mm, dramatic light",
+   "prompt": "Sports photograph of a female boxer in her thirties with braided hair during boxing, the peak moment of effort, dramatic light, sweat and texture, space for a headline. One person. Overall look: gritty high-contrast sports photography, hard light, 35mm; colour palette of black, red, bone white, concrete. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "southpaw-club__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Portrait, 50mm, side light",
+   "prompt": "Vertical sports portrait of a female boxer in her thirties with braided hair resting after boxing, breathing hard, strong side light. One person. Overall look: gritty high-contrast sports photography, hard light, 35mm; colour palette of black, red, bone white, concrete. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "southpaw-club__03-space.png",
+   "title": "The space",
+   "section": "The studio section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a boxing gym with a raised ring, rows of heavy bags and bare concrete, ready for a class, light streaming in, nobody present. Overall look: gritty high-contrast sports photography, hard light, 35mm; colour palette of black, red, bone white, concrete. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "southpaw-club__04-class.png",
+   "title": "Class",
+   "section": "Classes section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 28mm",
+   "prompt": "Photograph of a boxing class working on heavy bags, energetic, natural light. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: gritty high-contrast sports photography, hard light, 35mm; colour palette of black, red, bone white, concrete. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "southpaw-club__05-grid-gear.png",
+   "title": "Gear",
+   "section": "Equipment or shop section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Equipment close-ups. Top-left: Worn red gloves. Top-right: Hand wraps. Bottom-left: A coiled jump rope. Bottom-right: A round timer. No logos. Overall look: gritty high-contrast sports photography, hard light, 35mm; colour palette of black, red, bone white, concrete. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "southpaw-club__06-grid-moves.png",
+   "title": "Moves",
+   "section": "Programme section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Same athlete, same light, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The same person in all four cells, a female boxer in her thirties with braided hair, consistent light. Top-left: A jab at the pads. Top-right: Ducking under a rope. Bottom-left: Skipping. Bottom-right: Resting on the ropes. Overall look: gritty high-contrast sports photography, hard light, 35mm; colour palette of black, red, bone white, concrete. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "southpaw-club__07-grid-recovery.png",
+   "title": "Recovery",
+   "section": "Recovery section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Recovery moments. Top-left: An ice bath. Top-right: Stretching on a mat. Bottom-left: Taping hands. Bottom-right: Drinking water on a bench. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: gritty high-contrast sports photography, hard light, 35mm; colour palette of black, red, bone white, concrete. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "southpaw-club__08-outdoor.png",
+   "title": "Outdoors",
+   "section": "Community or events section",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Wide, 24mm",
+   "prompt": "Cinematic wide photograph of a sunrise run along a beach promenade. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: gritty high-contrast sports photography, hard light, 35mm; colour palette of black, red, bone white, concrete. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "southpaw-club__09-detail.png",
+   "title": "Detail",
+   "section": "Membership section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Macro, 100mm",
+   "prompt": "Macro photograph: a taped fist with chalk dust in the light. Overall look: gritty high-contrast sports photography, hard light, 35mm; colour palette of black, red, bone white, concrete. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

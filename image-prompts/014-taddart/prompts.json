@@ -1,0 +1,111 @@
+{
+ "site": "TADDART",
+ "slug": "taddart",
+ "category": "Beauty",
+ "concept": "An argan oil women's cooperative; traceability map, wholesale and shop.",
+ "look": "documentary craft photography, warm Souss light, 35mm",
+ "palette": "argan gold, earth, indigo, olive",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "taddart__01-hero.png",
+   "title": "Hero still life",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Still life, 85mm, directional light",
+   "prompt": "Luxury beauty still life of an amber glass bottle of pure argan oil with a cork stopper with argan nuts and kernels, on a sculpted stone plinth, soft directional light and long shadows, negative space on one side for a headline. Original packaging, no text on it. Overall look: documentary craft photography, warm Souss light, 35mm; colour palette of argan gold, earth, indigo, olive. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "taddart__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Top light, 100mm",
+   "prompt": "Vertical beauty still life: an amber glass bottle of pure argan oil with a cork stopper standing in shallow clear water with argan nuts and kernels around it, light ripples, top light. Original packaging, no text. Overall look: documentary craft photography, warm Souss light, 35mm; colour palette of argan gold, earth, indigo, olive. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "taddart__03-grid-packshots.png",
+   "title": "Product packshots",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and light in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Packshots on a seamless backdrop in the brand palette, same lighting, angle and scale in every cell. Top-left: Culinary argan oil. Top-right: Cosmetic argan oil. Bottom-left: A jar of amlou. Bottom-right: Argan soap. Original packaging designs, no text. Overall look: documentary craft photography, warm Souss light, 35mm; colour palette of argan gold, earth, indigo, olive. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "taddart__04-ingredient.png",
+   "title": "Hero ingredient",
+   "section": "Ingredients section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Macro, 100mm",
+   "prompt": "Macro photograph of argan nuts and kernels, dew and texture, shallow depth of field, natural light. Overall look: documentary craft photography, warm Souss light, 35mm; colour palette of argan gold, earth, indigo, olive. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "taddart__05-origin.png",
+   "title": "Origin",
+   "section": "Origin story section, full width",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Landscape, 35mm, early morning",
+   "prompt": "Landscape photograph of argan trees with goats in the branches in the Souss valley, early morning light, cinematic and real. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: documentary craft photography, warm Souss light, 35mm; colour palette of argan gold, earth, indigo, olive. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "taddart__06-grid-textures.png",
+   "title": "Textures",
+   "section": "Product page texture swatches",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, top light on glass",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro texture photographs, top light on glass. Top-left: Oil pouring. Top-right: Kernels. Bottom-left: Amlou paste. Bottom-right: Soap. No packaging, no text. Overall look: documentary craft photography, warm Souss light, 35mm; colour palette of argan gold, earth, indigo, olive. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "taddart__07-model.png",
+   "title": "Editorial portrait",
+   "section": "Brand story section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Portrait, 85mm, window light",
+   "prompt": "Beauty editorial portrait of a woman in her sixties in a colourful scarf cracking argan nuts, natural skin texture, soft window light, minimal makeup, calm expression. One person only. Overall look: documentary craft photography, warm Souss light, 35mm; colour palette of argan gold, earth, indigo, olive. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "taddart__08-grid-ritual.png",
+   "title": "Ritual",
+   "section": "How to use section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Hands-only ritual photographs, soft light. Top-left: Cracking nuts with stones. Top-right: Grinding on a stone mill. Bottom-left: Kneading paste. Bottom-right: Filling bottles. Faces out of frame. Overall look: documentary craft photography, warm Souss light, 35mm; colour palette of argan gold, earth, indigo, olive. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "taddart__09-space.png",
+   "title": "Boutique or atelier",
+   "section": "Visit section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a cooperative workshop with women working at low tables, warm and inviting, nobody present. Overall look: documentary craft photography, warm Souss light, 35mm; colour palette of argan gold, earth, indigo, olive. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "taddart__10-gift.png",
+   "title": "Gift set",
+   "section": "Gifts section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Overhead, soft light",
+   "prompt": "Still life of a wooden crate of bottles, overhead, soft light, ribbon and paper. No text. Overall look: documentary craft photography, warm Souss light, 35mm; colour palette of argan gold, earth, indigo, olive. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

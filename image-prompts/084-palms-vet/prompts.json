@@ -1,0 +1,101 @@
+{
+ "site": "PALMS VET",
+ "slug": "palms-vet",
+ "category": "Healthcare",
+ "concept": "A veterinary clinic; symptom checker and booking.",
+ "look": "warm friendly bright photography, 35mm",
+ "palette": "white, warm yellow, teal, light wood",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "palms-vet__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm, natural light",
+   "prompt": "Interior photograph of a vet clinic reception with wooden benches, a dog water station and teal accents in Al Barsha, Dubai, calm, clean and welcoming, natural light, a sense of privacy and care, nobody present. Overall look: warm friendly bright photography, 35mm; colour palette of white, warm yellow, teal, light wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "palms-vet__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Interior detail, 35mm",
+   "prompt": "Vertical interior detail of a vet clinic reception with wooden benches, a dog water station and teal accents: a corridor or reception corner with soft light and plants, nobody present. Overall look: warm friendly bright photography, 35mm; colour palette of white, warm yellow, teal, light wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "palms-vet__03-treatment.png",
+   "title": "Treatment room",
+   "section": "Treatments section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 28mm",
+   "prompt": "Photograph of an examination room with a vet checking a calm golden retriever, spotless and calm, soft daylight. Equipment of original design, no brand names. Overall look: warm friendly bright photography, 35mm; colour palette of white, warm yellow, teal, light wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "palms-vet__04-consult.png",
+   "title": "Consultation",
+   "section": "Your first visit section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: a vet explaining an x-ray of a cat's paw to an owner. Natural light, respectful and reassuring. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: warm friendly bright photography, 35mm; colour palette of white, warm yellow, teal, light wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "palms-vet__05-grid-spaces.png",
+   "title": "Spaces",
+   "section": "The clinic section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interiors, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Spaces of the clinic, consistent architectural photography, nobody present. Top-left: A cat-only waiting room. Top-right: A surgery theatre. Bottom-left: Recovery kennels with blankets. Bottom-right: A grooming room. Overall look: warm friendly bright photography, 35mm; colour palette of white, warm yellow, teal, light wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "palms-vet__06-grid-details.png",
+   "title": "Details",
+   "section": "Treatment pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50-100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Clean, calm close-ups. Top-left: A stethoscope on a dog's chest. Top-right: A cat in a carrier. Bottom-left: A jar of treats. Bottom-right: A bandaged paw. No labels, no text. Overall look: warm friendly bright photography, 35mm; colour palette of white, warm yellow, teal, light wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "palms-vet__07-grid-care.png",
+   "title": "Care",
+   "section": "Care and aftercare section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Care moments, hands-led and respectful, soft light. Top-left: Hands stroking a cat. Top-right: A puppy on a scale. Bottom-left: A vet listening to a rabbit. Bottom-right: A dog's paw in a hand. No faces. Overall look: warm friendly bright photography, 35mm; colour palette of white, warm yellow, teal, light wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "palms-vet__08-exterior.png",
+   "title": "Entrance",
+   "section": "Visit section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Street level, 35mm",
+   "prompt": "Photograph of a single-storey clinic with a pet garden in Al Barsha, Dubai, morning light, inviting, no readable signage. Overall look: warm friendly bright photography, 35mm; colour palette of white, warm yellow, teal, light wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "palms-vet__09-calm.png",
+   "title": "Calm band",
+   "section": "Full-width calm band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Minimal, 85mm",
+   "prompt": "Calm photograph: a cat asleep in a sunbeam. Soft, minimal, plenty of negative space. Overall look: warm friendly bright photography, 35mm; colour palette of white, warm yellow, teal, light wood. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

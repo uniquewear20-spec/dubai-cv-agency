@@ -1,0 +1,111 @@
+{
+ "site": "SALON HALA",
+ "slug": "salon-hala",
+ "category": "Beauty",
+ "concept": "A hair salon; service menu and stylist booking.",
+ "look": "glamorous hair photography, studio light, 85mm",
+ "palette": "champagne, black, warm brown, white",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "salon-hala__01-hero.png",
+   "title": "Hero still life",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Still life, 85mm, directional light",
+   "prompt": "Luxury beauty still life of hair oil and shampoo bottles of original design with argan and camellia oils, on a sculpted stone plinth, soft directional light and long shadows, negative space on one side for a headline. Original packaging, no text on it. Overall look: glamorous hair photography, studio light, 85mm; colour palette of champagne, black, warm brown, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "salon-hala__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Top light, 100mm",
+   "prompt": "Vertical beauty still life: hair oil and shampoo bottles of original design standing in shallow clear water with argan and camellia oils around it, light ripples, top light. Original packaging, no text. Overall look: glamorous hair photography, studio light, 85mm; colour palette of champagne, black, warm brown, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "salon-hala__03-grid-packshots.png",
+   "title": "Product packshots",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and light in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Packshots on a seamless backdrop in the brand palette, same lighting, angle and scale in every cell. Top-left: Shampoo. Top-right: Conditioner. Bottom-left: A hair mask. Bottom-right: A heat protector. Original packaging designs, no text. Overall look: glamorous hair photography, studio light, 85mm; colour palette of champagne, black, warm brown, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "salon-hala__04-ingredient.png",
+   "title": "Hero ingredient",
+   "section": "Ingredients section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Macro, 100mm",
+   "prompt": "Macro photograph of argan and camellia oils, dew and texture, shallow depth of field, natural light. Overall look: glamorous hair photography, studio light, 85mm; colour palette of champagne, black, warm brown, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "salon-hala__05-origin.png",
+   "title": "Origin",
+   "section": "Origin story section, full width",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Landscape, 35mm, early morning",
+   "prompt": "Landscape photograph of a salon station with brushes, early morning light, cinematic and real. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: glamorous hair photography, studio light, 85mm; colour palette of champagne, black, warm brown, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "salon-hala__06-grid-textures.png",
+   "title": "Textures",
+   "section": "Product page texture swatches",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, top light on glass",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro texture photographs, top light on glass. Top-left: Hair shine. Top-right: Foam. Bottom-left: Oil. Bottom-right: Curls. No packaging, no text. Overall look: glamorous hair photography, studio light, 85mm; colour palette of champagne, black, warm brown, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "salon-hala__07-model.png",
+   "title": "Editorial portrait",
+   "section": "Brand story section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Portrait, 85mm, window light",
+   "prompt": "Beauty editorial portrait of a woman in her twenties with glossy long black hair in motion, natural skin texture, soft window light, minimal makeup, calm expression. One person only. Overall look: glamorous hair photography, studio light, 85mm; colour palette of champagne, black, warm brown, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "salon-hala__08-grid-ritual.png",
+   "title": "Ritual",
+   "section": "How to use section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Hands-only ritual photographs, soft light. Top-left: A blow-dry. Top-right: Colouring. Bottom-left: Braiding. Bottom-right: A scalp treatment. Faces out of frame. Overall look: glamorous hair photography, studio light, 85mm; colour palette of champagne, black, warm brown, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "salon-hala__09-space.png",
+   "title": "Boutique or atelier",
+   "section": "Visit section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a salon with arched mirrors, warm and inviting, nobody present. Overall look: glamorous hair photography, studio light, 85mm; colour palette of champagne, black, warm brown, white. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "salon-hala__10-gift.png",
+   "title": "Gift set",
+   "section": "Gifts section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Overhead, soft light",
+   "prompt": "Still life of a hair care set, overhead, soft light, ribbon and paper. No text. Overall look: glamorous hair photography, studio light, 85mm; colour palette of champagne, black, warm brown, white. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

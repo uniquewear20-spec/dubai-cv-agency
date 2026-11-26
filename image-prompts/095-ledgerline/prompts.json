@@ -1,0 +1,91 @@
+{
+ "site": "LEDGERLINE",
+ "slug": "ledgerline",
+ "category": "Finance, law and consulting",
+ "concept": "Accounting and tax for small businesses; VAT calculator and booking.",
+ "look": "friendly clean professional photography, daylight, 35mm",
+ "palette": "white, emerald, warm grey, black",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "ledgerline__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Architectural, 24mm",
+   "prompt": "Architectural photograph of a low-rise office pavilion with a green roof in Dubai Silicon Oasis, confident and clean, morning light, space for a headline. No people, no readable signage. Overall look: friendly clean professional photography, daylight, 35mm; colour palette of white, emerald, warm grey, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "ledgerline__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Looking up, 20mm",
+   "prompt": "Vertical photograph looking up at a low-rise office pavilion with a green roof, lines converging into the sky. No signage. Overall look: friendly clean professional photography, daylight, 35mm; colour palette of white, emerald, warm grey, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "ledgerline__03-office.png",
+   "title": "Office",
+   "section": "About section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a bright office with desks, plants and screens of abstract charts, calm and premium, daylight, nobody present. Overall look: friendly clean professional photography, daylight, 35mm; colour palette of white, emerald, warm grey, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "ledgerline__04-meeting.png",
+   "title": "Meeting",
+   "section": "How we work section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: an accountant explaining a chart to a cafe owner, both seated. Natural light; documents and screens show no readable text. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: friendly clean professional photography, daylight, 35mm; colour palette of white, emerald, warm grey, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "ledgerline__05-grid-spaces.png",
+   "title": "Spaces",
+   "section": "The firm section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interiors, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Spaces of the firm, nobody present. Top-left: The reception. Top-right: A meeting pod. Bottom-left: A focus room. Bottom-right: An archive. Overall look: friendly clean professional photography, daylight, 35mm; colour palette of white, emerald, warm grey, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "ledgerline__06-grid-objects.png",
+   "title": "Objects",
+   "section": "Services cards",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Still life, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Still-life objects on a desk, soft light. Top-left: A calculator. Top-right: Receipts in a tray. Bottom-left: A ledger book. Bottom-right: A pen and glasses. No readable text. Overall look: friendly clean professional photography, daylight, 35mm; colour palette of white, emerald, warm grey, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "ledgerline__07-abstract.png",
+   "title": "Abstract band",
+   "section": "Full-width band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Abstract, 85mm",
+   "prompt": "Abstract photograph: rows of paper folders in perspective. Minimal, elegant, wide negative space. Overall look: friendly clean professional photography, daylight, 35mm; colour palette of white, emerald, warm grey, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "ledgerline__08-city.png",
+   "title": "City",
+   "section": "Contact section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cityscape, 35mm",
+   "prompt": "Photograph of a neighbourhood shopping street in the morning, atmospheric. Overall look: friendly clean professional photography, daylight, 35mm; colour palette of white, emerald, warm grey, black. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

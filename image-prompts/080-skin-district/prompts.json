@@ -1,0 +1,101 @@
+{
+ "site": "SKIN DISTRICT",
+ "slug": "skin-district",
+ "category": "Healthcare",
+ "concept": "A dermatology clinic; condition guide and booking.",
+ "look": "soft editorial clinical photography, diffused light, 50mm",
+ "palette": "blush, warm white, travertine, sage",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "skin-district__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm, natural light",
+   "prompt": "Interior photograph of a dermatology clinic lobby in travertine and blush plaster in Dubai Healthcare City, calm, clean and welcoming, natural light, a sense of privacy and care, nobody present. Overall look: soft editorial clinical photography, diffused light, 50mm; colour palette of blush, warm white, travertine, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "skin-district__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Interior detail, 35mm",
+   "prompt": "Vertical interior detail of a dermatology clinic lobby in travertine and blush plaster: a corridor or reception corner with soft light and plants, nobody present. Overall look: soft editorial clinical photography, diffused light, 50mm; colour palette of blush, warm white, travertine, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "skin-district__03-treatment.png",
+   "title": "Treatment room",
+   "section": "Treatments section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 28mm",
+   "prompt": "Photograph of a treatment room with an adjustable bed and a magnifying lamp, spotless and calm, soft daylight. Equipment of original design, no brand names. Overall look: soft editorial clinical photography, diffused light, 50mm; colour palette of blush, warm white, travertine, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "skin-district__04-consult.png",
+   "title": "Consultation",
+   "section": "Your first visit section",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "Editorial, 35mm",
+   "prompt": "Editorial photograph: a dermatologist examining a patient's cheek with a dermatoscope. Natural light, respectful and reassuring. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: soft editorial clinical photography, diffused light, 50mm; colour palette of blush, warm white, travertine, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "skin-district__05-grid-spaces.png",
+   "title": "Spaces",
+   "section": "The clinic section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interiors, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Spaces of the clinic, consistent architectural photography, nobody present. Top-left: A consultation room. Top-right: A laser suite with dimmed light. Bottom-left: A shelf of unlabeled bottles. Bottom-right: A private waiting room. Overall look: soft editorial clinical photography, diffused light, 50mm; colour palette of blush, warm white, travertine, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "skin-district__06-grid-details.png",
+   "title": "Details",
+   "section": "Treatment pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50-100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Clean, calm close-ups. Top-left: A screen with abstract skin maps. Top-right: Unlabeled serum bottles. Bottom-left: Gloves on a tray. Bottom-right: A water carafe. No labels, no text. Overall look: soft editorial clinical photography, diffused light, 50mm; colour palette of blush, warm white, travertine, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "skin-district__07-grid-care.png",
+   "title": "Care",
+   "section": "Care and aftercare section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Care moments, hands-led and respectful, soft light. Top-left: Hands applying cream to a forearm. Top-right: A cotton pad on a cheek. Bottom-left: A cool compress. Bottom-right: A tube without labels. No faces. Overall look: soft editorial clinical photography, diffused light, 50mm; colour palette of blush, warm white, travertine, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "skin-district__08-exterior.png",
+   "title": "Entrance",
+   "section": "Visit section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Street level, 35mm",
+   "prompt": "Photograph of a contemporary clinic building with vertical fins in Dubai Healthcare City, morning light, inviting, no readable signage. Overall look: soft editorial clinical photography, diffused light, 50mm; colour palette of blush, warm white, travertine, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "skin-district__09-calm.png",
+   "title": "Calm band",
+   "section": "Full-width calm band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Minimal, 85mm",
+   "prompt": "Calm photograph: light through a linen curtain on a travertine wall. Soft, minimal, plenty of negative space. Overall look: soft editorial clinical photography, diffused light, 50mm; colour palette of blush, warm white, travertine, sage. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

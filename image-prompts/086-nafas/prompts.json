@@ -1,0 +1,101 @@
+{
+ "site": "NAFAS",
+ "slug": "nafas",
+ "category": "Fitness",
+ "concept": "A yoga and breathwork studio with retreats.",
+ "look": "serene warm cinematic wellness photography, golden light, 50mm",
+ "palette": "terracotta, cream, olive, warm wood",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "nafas__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Sports, 35mm, dramatic light",
+   "prompt": "Sports photograph of a man in his forties during yoga, the peak moment of effort, dramatic light, sweat and texture, space for a headline. One person. Overall look: serene warm cinematic wellness photography, golden light, 50mm; colour palette of terracotta, cream, olive, warm wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "nafas__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Portrait, 50mm, side light",
+   "prompt": "Vertical sports portrait of a man in his forties resting after yoga, breathing hard, strong side light. One person. Overall look: serene warm cinematic wellness photography, golden light, 50mm; colour palette of terracotta, cream, olive, warm wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "nafas__03-space.png",
+   "title": "The space",
+   "section": "The studio section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a yoga shala with a timber floor, a vaulted ceiling and doors open to palms, ready for a class, light streaming in, nobody present. Overall look: serene warm cinematic wellness photography, golden light, 50mm; colour palette of terracotta, cream, olive, warm wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "nafas__04-class.png",
+   "title": "Class",
+   "section": "Classes section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 28mm",
+   "prompt": "Photograph of a breathwork circle lying on mats with blankets, energetic, natural light. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: serene warm cinematic wellness photography, golden light, 50mm; colour palette of terracotta, cream, olive, warm wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "nafas__05-grid-gear.png",
+   "title": "Gear",
+   "section": "Equipment or shop section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Equipment close-ups. Top-left: Rolled mats. Top-right: Wooden blocks. Bottom-left: A singing bowl. Bottom-right: A woven bolster. No logos. Overall look: serene warm cinematic wellness photography, golden light, 50mm; colour palette of terracotta, cream, olive, warm wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "nafas__06-grid-moves.png",
+   "title": "Moves",
+   "section": "Programme section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Same athlete, same light, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The same person in all four cells, a man in his forties, consistent light. Top-left: Tree pose. Top-right: Downward dog. Bottom-left: Seated meditation. Bottom-right: A supported back bend. Overall look: serene warm cinematic wellness photography, golden light, 50mm; colour palette of terracotta, cream, olive, warm wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "nafas__07-grid-recovery.png",
+   "title": "Recovery",
+   "section": "Recovery section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Recovery moments. Top-left: Herbal tea. Top-right: A sound bath. Bottom-left: A cold plunge. Bottom-right: A rest under a blanket. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: serene warm cinematic wellness photography, golden light, 50mm; colour palette of terracotta, cream, olive, warm wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "nafas__08-outdoor.png",
+   "title": "Outdoors",
+   "section": "Community or events section",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Wide, 24mm",
+   "prompt": "Cinematic wide photograph of a sunrise yoga session on a dune. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: serene warm cinematic wellness photography, golden light, 50mm; colour palette of terracotta, cream, olive, warm wood. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "nafas__09-detail.png",
+   "title": "Detail",
+   "section": "Membership section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Macro, 100mm",
+   "prompt": "Macro photograph: hands in a mudra resting on a knee. Overall look: serene warm cinematic wellness photography, golden light, 50mm; colour palette of terracotta, cream, olive, warm wood. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

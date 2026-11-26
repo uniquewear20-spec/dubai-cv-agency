@@ -1,0 +1,101 @@
+{
+ "site": "MERIDIAN 55",
+ "slug": "meridian-55",
+ "category": "Online shops",
+ "concept": "A watch brand; configurator and shop.",
+ "look": "precise watch photography, black background, 100mm macro",
+ "palette": "steel, midnight blue, sand, gold",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "meridian-55__01-hero.png",
+   "title": "Campaign hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Editorial, 50mm, cinematic light",
+   "prompt": "Campaign photograph: the watch on desert rock at dusk, featuring a 40mm steel dive watch of original design with a midnight-blue dial and gold hands. Editorial, cinematic light, space for a headline. Original design, no logos. Overall look: precise watch photography, black background, 100mm macro; colour palette of steel, midnight blue, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "meridian-55__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Product, 85mm",
+   "prompt": "Vertical product photograph of a 40mm steel dive watch of original design with a midnight-blue dial and gold hands on a sculpted plinth against a soft gradient in the brand palette, dramatic light. Original design, no logos. Overall look: precise watch photography, black background, 100mm macro; colour palette of steel, midnight blue, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "meridian-55__03-grid-products-a.png",
+   "title": "Products I",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: A steel dress watch. Top-right: A gold chronograph. Bottom-left: A GMT. Bottom-right: A skeleton watch. Original designs, no logos, no text. Overall look: precise watch photography, black background, 100mm macro; colour palette of steel, midnight blue, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "meridian-55__04-grid-products-b.png",
+   "title": "Products II",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: A strap collection. Top-right: A watch roll. Bottom-left: A winder. Bottom-right: A travel case. Original designs, no logos, no text. Overall look: precise watch photography, black background, 100mm macro; colour palette of steel, midnight blue, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "meridian-55__05-grid-details.png",
+   "title": "Details",
+   "section": "Product page zoom details",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, 100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro details. Top-left: The movement. Top-right: The crown. Bottom-left: Lume in the dark. Bottom-right: The clasp. No logos. Overall look: precise watch photography, black background, 100mm macro; colour palette of steel, midnight blue, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "meridian-55__06-grid-atelier.png",
+   "title": "Atelier",
+   "section": "Craft section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Documentary craft, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The workshop behind the brand, documentary craft photography. Top-left: A watchmaker with a loupe. Top-right: Assembling a movement. Bottom-left: Polishing a case. Bottom-right: Dial printing. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: precise watch photography, black background, 100mm macro; colour palette of steel, midnight blue, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "meridian-55__07-model.png",
+   "title": "Editorial",
+   "section": "Lookbook section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Fashion, 85mm, natural light",
+   "prompt": "Fashion editorial: a wrist wearing the watch at a sailboat helm, with a 40mm steel dive watch of original design with a midnight-blue dial and gold hands, natural light. One person only. Overall look: precise watch photography, black background, 100mm macro; colour palette of steel, midnight blue, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "meridian-55__08-store.png",
+   "title": "Boutique",
+   "section": "Stores section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a boutique with glass cabinets, displays lit, nobody present, no signage text. Overall look: precise watch photography, black background, 100mm macro; colour palette of steel, midnight blue, sand, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "meridian-55__09-packaging.png",
+   "title": "Packaging",
+   "section": "Gifting and delivery section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Still life, soft light",
+   "prompt": "Still life of a wooden box, an unboxing moment, soft light. No text. Overall look: precise watch photography, black background, 100mm macro; colour palette of steel, midnight blue, sand, gold. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

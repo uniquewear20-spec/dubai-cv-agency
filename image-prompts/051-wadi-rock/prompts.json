@@ -1,0 +1,131 @@
+{
+ "site": "WADI ROCK",
+ "slug": "wadi-rock",
+ "category": "Hotels",
+ "concept": "A canyon hotel among sandstone rocks; rooms and excursions.",
+ "look": "dramatic desert canyon photography, 24mm",
+ "palette": "sandstone, ochre, sky blue, black",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "wadi-rock__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm, eye level",
+   "prompt": "Luxury travel photograph of villas built among sandstone rock formations in a desert canyon in north-west Arabia at golden hour, the whole property in its landscape, calm and timeless, open sky for a headline. No people. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "wadi-rock__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Framed view through an opening, 28mm",
+   "prompt": "Vertical travel photograph at villas built among sandstone rock formations: a framed view through a doorway or arch toward the landscape of a desert canyon in north-west Arabia, morning light, one strong leading line. No people. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "wadi-rock__03-aerial.png",
+   "title": "Aerial",
+   "section": "The place section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Drone, 50-degree angle",
+   "prompt": "Drone photograph of villas built among sandstone rock formations in a desert canyon in north-west Arabia, the layout of buildings, pools and paths readable, the landscape around it, soft morning light, true colours. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "wadi-rock__04-night.png",
+   "title": "Night",
+   "section": "Evening section and footer",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Tripod, 24mm, blue hour",
+   "prompt": "Blue-hour photograph of villas built among sandstone rock formations in a desert canyon in north-west Arabia: warm light in windows and lanterns along paths, deep blue sky, reflections, quiet and inviting. No people. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "wadi-rock__05-room-a.png",
+   "title": "Signature room",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm, from the doorway",
+   "prompt": "Interior photograph of a villa with a rock wall inside and a pool at villas built among sandstone rock formations, bed made with crisp linen, the view through the window or doors, soft morning light, no clutter, nobody present. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "wadi-rock__06-room-b.png",
+   "title": "Second room type",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a canyon tent at villas built among sandstone rock formations, styled for arrival, late-afternoon light, nobody present. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "wadi-rock__07-grid-rooms.png",
+   "title": "Room details",
+   "section": "Room pages gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior details, 35 and 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Details of a villa with a rock wall inside and a pool at villas built among sandstone rock formations, nobody present. Top-left: the bathroom with stone and folded towels. Top-right: the private terrace at sunset. Bottom-left: the bedside with a lamp and a book. Bottom-right: the view from the bed through open doors. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "wadi-rock__08-grid-dining.png",
+   "title": "Dining",
+   "section": "Dining section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Food, overhead and 45 degrees, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Food and dining at villas built among sandstone rock formations, warm editorial food photography. Top-left: Dinner in the canyon. Top-right: Breakfast. Bottom-left: Dates. Bottom-right: Coffee. No faces. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "wadi-rock__09-grid-spa.png",
+   "title": "Spa",
+   "section": "Spa section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm interiors and details, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The spa at villas built among sandstone rock formations, calm, steam and soft light. Top-left: A spa carved into rock. Top-right: An outdoor bath. Bottom-left: A massage. Bottom-right: A pool. No faces. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "wadi-rock__10-grid-experiences.png",
+   "title": "Experiences",
+   "section": "Experiences or a-day-here section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Cinematic travel, 24-50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Experiences around villas built among sandstone rock formations in a desert canyon in north-west Arabia, cinematic travel photography. Top-left: A hike to rock art. Top-right: A balloon flight. Bottom-left: Stargazing. Bottom-right: A 4x4 tour. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 11,
+   "file": "wadi-rock__11-grid-details.png",
+   "title": "Details",
+   "section": "Materials band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up material details of villas built among sandstone rock formations, raking light. Top-left: Rock textures. Top-right: Brass. Bottom-left: Linen. Bottom-right: Lanterns. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 12,
+   "file": "wadi-rock__12-arrival.png",
+   "title": "Arrival",
+   "section": "Getting here section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cinematic, 35mm",
+   "prompt": "Travel photograph of arriving at villas built among sandstone rock formations: a road between rock towers. Cinematic, warm, a sense of journey. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: dramatic desert canyon photography, 24mm; colour palette of sandstone, ochre, sky blue, black. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

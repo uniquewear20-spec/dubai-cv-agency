@@ -1,0 +1,101 @@
+{
+ "site": "CRUMB & KHUBZ",
+ "slug": "crumb-and-khubz",
+ "category": "Restaurants",
+ "concept": "A sourdough bakery; daily bake and pre-order.",
+ "look": "rustic bakery photography, warm light, 35mm",
+ "palette": "crust brown, flour white, black, wheat",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "crumb-and-khubz__01-hero.png",
+   "title": "Hero, the room",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm, evening practical light",
+   "prompt": "Restaurant interior photograph of a bakery with a wood-fired oven in Al Barsha during evening service, tables set, warm practical lighting, atmospheric and inviting, nobody in focus. Overall look: rustic bakery photography, warm light, 35mm; colour palette of crust brown, flour white, black, wheat. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "crumb-and-khubz__02-hero-mobile.png",
+   "title": "Signature dish",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "45 degrees, 85mm, shallow depth of field",
+   "prompt": "Vertical food photograph of a sourdough loaf cut open, the signature of a bread kitchen, on a handmade plate, single side light, shallow depth of field, dark background. Overall look: rustic bakery photography, warm light, 35mm; colour palette of crust brown, flour white, black, wheat. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "crumb-and-khubz__03-hands.png",
+   "title": "In the kitchen",
+   "section": "Kitchen or chef section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Close, 50mm, motion",
+   "prompt": "Editorial photograph of a cook's hands preparing a sourdough loaf cut open at a bakery with a wood-fired oven, steam and motion, warm light, face out of frame. Overall look: rustic bakery photography, warm light, 35mm; colour palette of crust brown, flour white, black, wheat. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "crumb-and-khubz__04-grid-dishes-a.png",
+   "title": "Dishes I",
+   "section": "Menu section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Overhead, same table surface, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Overhead food photographs of bread dishes on handmade ceramics on the same table surface, one side light. Top-left: Baguettes. Top-right: Khubz. Bottom-left: Focaccia. Bottom-right: Rye. No hands, no faces. Overall look: rustic bakery photography, warm light, 35mm; colour palette of crust brown, flour white, black, wheat. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "crumb-and-khubz__05-grid-dishes-b.png",
+   "title": "Dishes II",
+   "section": "Menu section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Overhead, same table surface, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Overhead food photographs of bread dishes on handmade ceramics on the same table surface, one side light. Top-left: Cinnamon buns. Top-right: Croissants. Bottom-left: A sandwich. Bottom-right: Toast. No hands, no faces. Overall look: rustic bakery photography, warm light, 35mm; colour palette of crust brown, flour white, black, wheat. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "crumb-and-khubz__06-grid-drinks.png",
+   "title": "Drinks",
+   "section": "Drinks section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Backlit, 85mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Drinks at a bakery with a wood-fired oven, moody bar photography with backlight and condensation. Top-left: Coffee. Top-right: Tea. Bottom-left: Juice. Bottom-right: Milk. No labels, no faces. Overall look: rustic bakery photography, warm light, 35mm; colour palette of crust brown, flour white, black, wheat. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "crumb-and-khubz__07-grid-details.png",
+   "title": "Details",
+   "section": "Room and craft details",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Macro, 50-100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up details of a bakery with a wood-fired oven. Top-left: Flour. Top-right: Dough. Bottom-left: A peel. Bottom-right: A scoring blade. Overall look: rustic bakery photography, warm light, 35mm; colour palette of crust brown, flour white, black, wheat. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "crumb-and-khubz__08-exterior.png",
+   "title": "Entrance",
+   "section": "Visit section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Street level, 35mm, early evening",
+   "prompt": "Photograph of a shop front with bread in the window for a bakery with a wood-fired oven in Al Barsha, early evening, warm light spilling out, inviting. No readable text, no people. Overall look: rustic bakery photography, warm light, 35mm; colour palette of crust brown, flour white, black, wheat. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "crumb-and-khubz__09-table.png",
+   "title": "The table",
+   "section": "Reservation section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "High three-quarter angle, 35mm",
+   "prompt": "Photograph of a table set for an evening at a bakery with a wood-fired oven: several bread dishes to share, glasses and lamps, high three-quarter angle, hands of different diners reaching in, no faces. Overall look: rustic bakery photography, warm light, 35mm; colour palette of crust brown, flour white, black, wheat. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

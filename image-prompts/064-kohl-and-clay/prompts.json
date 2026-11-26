@@ -1,0 +1,111 @@
+{
+ "site": "KOHL & CLAY",
+ "slug": "kohl-and-clay",
+ "category": "Beauty",
+ "concept": "Clean makeup; shade finder and shop.",
+ "look": "bold beauty editorial, studio, 85mm",
+ "palette": "kohl black, terracotta, nude, gold",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "kohl-and-clay__01-hero.png",
+   "title": "Hero still life",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Still life, 85mm, directional light",
+   "prompt": "Luxury beauty still life of a lipstick of original design in a terracotta case with pigment powders in bowls, on a sculpted stone plinth, soft directional light and long shadows, negative space on one side for a headline. Original packaging, no text on it. Overall look: bold beauty editorial, studio, 85mm; colour palette of kohl black, terracotta, nude, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "kohl-and-clay__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Top light, 100mm",
+   "prompt": "Vertical beauty still life: a lipstick of original design in a terracotta case standing in shallow clear water with pigment powders in bowls around it, light ripples, top light. Original packaging, no text. Overall look: bold beauty editorial, studio, 85mm; colour palette of kohl black, terracotta, nude, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "kohl-and-clay__03-grid-packshots.png",
+   "title": "Product packshots",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and light in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Packshots on a seamless backdrop in the brand palette, same lighting, angle and scale in every cell. Top-left: A kohl pencil. Top-right: A blush. Bottom-left: An eyeshadow palette. Bottom-right: A lip gloss. Original packaging designs, no text. Overall look: bold beauty editorial, studio, 85mm; colour palette of kohl black, terracotta, nude, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "kohl-and-clay__04-ingredient.png",
+   "title": "Hero ingredient",
+   "section": "Ingredients section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Macro, 100mm",
+   "prompt": "Macro photograph of pigment powders in bowls, dew and texture, shallow depth of field, natural light. Overall look: bold beauty editorial, studio, 85mm; colour palette of kohl black, terracotta, nude, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "kohl-and-clay__05-origin.png",
+   "title": "Origin",
+   "section": "Origin story section, full width",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Landscape, 35mm, early morning",
+   "prompt": "Landscape photograph of a mineral landscape of red rocks, early morning light, cinematic and real. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: bold beauty editorial, studio, 85mm; colour palette of kohl black, terracotta, nude, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "kohl-and-clay__06-grid-textures.png",
+   "title": "Textures",
+   "section": "Product page texture swatches",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, top light on glass",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro texture photographs, top light on glass. Top-left: A lipstick smear. Top-right: Powder. Bottom-left: Gloss. Bottom-right: A kohl line. No packaging, no text. Overall look: bold beauty editorial, studio, 85mm; colour palette of kohl black, terracotta, nude, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "kohl-and-clay__07-model.png",
+   "title": "Editorial portrait",
+   "section": "Brand story section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Portrait, 85mm, window light",
+   "prompt": "Beauty editorial portrait of a woman in her twenties with deep brown skin and bold kohl eyes, natural skin texture, soft window light, minimal makeup, calm expression. One person only. Overall look: bold beauty editorial, studio, 85mm; colour palette of kohl black, terracotta, nude, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "kohl-and-clay__08-grid-ritual.png",
+   "title": "Ritual",
+   "section": "How to use section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Hands-only ritual photographs, soft light. Top-left: Applying kohl. Top-right: Blending blush. Bottom-left: Lip liner. Bottom-right: Brushes. Faces out of frame. Overall look: bold beauty editorial, studio, 85mm; colour palette of kohl black, terracotta, nude, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "kohl-and-clay__09-space.png",
+   "title": "Boutique or atelier",
+   "section": "Visit section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a makeup counter with mirrors, warm and inviting, nobody present. Overall look: bold beauty editorial, studio, 85mm; colour palette of kohl black, terracotta, nude, gold. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "kohl-and-clay__10-gift.png",
+   "title": "Gift set",
+   "section": "Gifts section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Overhead, soft light",
+   "prompt": "Still life of a makeup kit, overhead, soft light, ribbon and paper. No text. Overall look: bold beauty editorial, studio, 85mm; colour palette of kohl black, terracotta, nude, gold. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

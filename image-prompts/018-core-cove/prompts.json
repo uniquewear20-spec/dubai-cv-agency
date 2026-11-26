@@ -1,0 +1,101 @@
+{
+ "site": "CORE & COVE",
+ "slug": "core-cove",
+ "category": "Fitness",
+ "concept": "A reformer pilates studio; class finder, packs and booking.",
+ "look": "soft airy wellness photography, morning light, 50mm",
+ "palette": "sand, blush, white oak, sage",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "core-cove__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Sports, 35mm, dramatic light",
+   "prompt": "Sports photograph of a woman in her thirties in a sage long-sleeve set during reformer pilates, the peak moment of effort, dramatic light, sweat and texture, space for a headline. One person. Overall look: soft airy wellness photography, morning light, 50mm; colour palette of sand, blush, white oak, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "core-cove__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Portrait, 50mm, side light",
+   "prompt": "Vertical sports portrait of a woman in her thirties in a sage long-sleeve set resting after reformer pilates, breathing hard, strong side light. One person. Overall look: soft airy wellness photography, morning light, 50mm; colour palette of sand, blush, white oak, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "core-cove__03-space.png",
+   "title": "The space",
+   "section": "The studio section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a pilates studio with eight reformers in a row, arched windows and limewash walls, ready for a class, light streaming in, nobody present. Overall look: soft airy wellness photography, morning light, 50mm; colour palette of sand, blush, white oak, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "core-cove__04-class.png",
+   "title": "Class",
+   "section": "Classes section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 28mm",
+   "prompt": "Photograph of a reformer class following an instructor, energetic, natural light. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: soft airy wellness photography, morning light, 50mm; colour palette of sand, blush, white oak, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "core-cove__05-grid-gear.png",
+   "title": "Gear",
+   "section": "Equipment or shop section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Close-ups, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Equipment close-ups. Top-left: The reformer springs. Top-right: A pilates ring. Bottom-left: Grip socks. Bottom-right: A towel and water bottle. No logos. Overall look: soft airy wellness photography, morning light, 50mm; colour palette of sand, blush, white oak, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "core-cove__06-grid-moves.png",
+   "title": "Moves",
+   "section": "Programme section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Same athlete, same light, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The same person in all four cells, a woman in her thirties in a sage long-sleeve set, consistent light. Top-left: Footwork on the reformer. Top-right: A long stretch. Bottom-left: Teaser on the mat. Bottom-right: Arm work with straps. Overall look: soft airy wellness photography, morning light, 50mm; colour palette of sand, blush, white oak, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "core-cove__07-grid-recovery.png",
+   "title": "Recovery",
+   "section": "Recovery section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Recovery moments. Top-left: A stretch on a mat. Top-right: A smoothie on a counter. Bottom-left: Herbal tea. Bottom-right: A foam roller. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: soft airy wellness photography, morning light, 50mm; colour palette of sand, blush, white oak, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "core-cove__08-outdoor.png",
+   "title": "Outdoors",
+   "section": "Community or events section",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Wide, 24mm",
+   "prompt": "Cinematic wide photograph of a rooftop mat class at sunrise above the sea. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: soft airy wellness photography, morning light, 50mm; colour palette of sand, blush, white oak, sage. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "core-cove__09-detail.png",
+   "title": "Detail",
+   "section": "Membership section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Macro, 100mm",
+   "prompt": "Macro photograph: a hand on a reformer strap in soft light. Overall look: soft airy wellness photography, morning light, 50mm; colour palette of sand, blush, white oak, sage. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

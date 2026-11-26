@@ -1,0 +1,131 @@
+{
+ "site": "RIAD ANAMIR",
+ "slug": "riad-anamir",
+ "category": "Hotels",
+ "concept": "A Marrakech riad hotel; rooms and medina guide.",
+ "look": "rich warm riad photography, soft courtyard light, 24-35mm",
+ "palette": "terracotta, emerald, zellige blue, brass",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "riad-anamir__01-hero.png",
+   "title": "Hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm, eye level",
+   "prompt": "Luxury travel photograph of a riad with a courtyard pool, orange trees and carved cedar balconies in the Marrakech medina at golden hour, the whole property in its landscape, calm and timeless, open sky for a headline. No people. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "riad-anamir__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Framed view through an opening, 28mm",
+   "prompt": "Vertical travel photograph at a riad with a courtyard pool, orange trees and carved cedar balconies: a framed view through a doorway or arch toward the landscape of the Marrakech medina, morning light, one strong leading line. No people. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "riad-anamir__03-aerial.png",
+   "title": "Aerial",
+   "section": "The place section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Drone, 50-degree angle",
+   "prompt": "Drone photograph of a riad with a courtyard pool, orange trees and carved cedar balconies in the Marrakech medina, the layout of buildings, pools and paths readable, the landscape around it, soft morning light, true colours. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "riad-anamir__04-night.png",
+   "title": "Night",
+   "section": "Evening section and footer",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Tripod, 24mm, blue hour",
+   "prompt": "Blue-hour photograph of a riad with a courtyard pool, orange trees and carved cedar balconies in the Marrakech medina: warm light in windows and lanterns along paths, deep blue sky, reflections, quiet and inviting. No people. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "riad-anamir__05-room-a.png",
+   "title": "Signature room",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm, from the doorway",
+   "prompt": "Interior photograph of a suite with tadelakt walls, a carved cedar ceiling and a canopy bed at a riad with a courtyard pool, orange trees and carved cedar balconies, bed made with crisp linen, the view through the window or doors, soft morning light, no clutter, nobody present. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "riad-anamir__06-room-b.png",
+   "title": "Second room type",
+   "section": "Rooms section and room page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a rooftop suite with a terrace and Atlas view at a riad with a courtyard pool, orange trees and carved cedar balconies, styled for arrival, late-afternoon light, nobody present. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "riad-anamir__07-grid-rooms.png",
+   "title": "Room details",
+   "section": "Room pages gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior details, 35 and 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Details of a suite with tadelakt walls, a carved cedar ceiling and a canopy bed at a riad with a courtyard pool, orange trees and carved cedar balconies, nobody present. Top-left: the bathroom with stone and folded towels. Top-right: the private terrace at sunset. Bottom-left: the bedside with a lamp and a book. Bottom-right: the view from the bed through open doors. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "riad-anamir__08-grid-dining.png",
+   "title": "Dining",
+   "section": "Dining section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Food, overhead and 45 degrees, side light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Food and dining at a riad with a courtyard pool, orange trees and carved cedar balconies, warm editorial food photography. Top-left: A tagine on the terrace. Top-right: Breakfast with msemen. Bottom-left: Mint tea poured from height. Bottom-right: Dinner by candlelight. No faces. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "riad-anamir__09-grid-spa.png",
+   "title": "Spa",
+   "section": "Spa section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Calm interiors and details, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The spa at a riad with a courtyard pool, orange trees and carved cedar balconies, calm, steam and soft light. Top-left: A hammam. Top-right: A massage room. Bottom-left: Argan oil. Bottom-right: Rose petals. No faces. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "riad-anamir__10-grid-experiences.png",
+   "title": "Experiences",
+   "section": "Experiences or a-day-here section",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Cinematic travel, 24-50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Experiences around a riad with a courtyard pool, orange trees and carved cedar balconies in the Marrakech medina, cinematic travel photography. Top-left: A souk walk. Top-right: A cooking class. Bottom-left: A day in the Atlas. Bottom-right: A calligraphy lesson. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 11,
+   "file": "riad-anamir__11-grid-details.png",
+   "title": "Details",
+   "section": "Materials band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up material details of a riad with a courtyard pool, orange trees and carved cedar balconies, raking light. Top-left: Zellige. Top-right: Carved plaster. Bottom-left: A brass lantern. Bottom-right: A cedar door. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 12,
+   "file": "riad-anamir__12-arrival.png",
+   "title": "Arrival",
+   "section": "Getting here section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Cinematic, 35mm",
+   "prompt": "Travel photograph of arriving at a riad with a courtyard pool, orange trees and carved cedar balconies: a porter with a handcart in a medina alley leading to a carved door. Cinematic, warm, a sense of journey. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: rich warm riad photography, soft courtyard light, 24-35mm; colour palette of terracotta, emerald, zellige blue, brass. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

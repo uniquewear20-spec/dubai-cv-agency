@@ -1,0 +1,101 @@
+{
+ "site": "SHELL & CORE",
+ "slug": "shell-and-core",
+ "category": "Architecture and interiors",
+ "concept": "Office fit-out and design-build; space planner and enquiry.",
+ "look": "bright commercial interior photography, 24mm",
+ "palette": "white, birch, charcoal, signal yellow",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "shell-and-core__01-hero.png",
+   "title": "Hero project",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "24mm tilt-shift, corrected verticals",
+   "prompt": "Architectural photograph of a modern open office with birch slats and meeting pods in Dubai Design District, strong light and shadow, corrected verticals, monumental yet calm, open sky. No people. Overall look: bright commercial interior photography, 24mm; colour palette of white, birch, charcoal, signal yellow. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "shell-and-core__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Vertical detail, 50mm",
+   "prompt": "Vertical architectural photograph of a tall slice of a modern open office with birch slats and meeting pods, its facade and shadows, graphic and minimal. No people. Overall look: bright commercial interior photography, 24mm; colour palette of white, birch, charcoal, signal yellow. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "shell-and-core__03-interior.png",
+   "title": "Interior",
+   "section": "Project page",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior architectural photograph of a modern open office with birch slats and meeting pods: flexible offices, daylight, nobody present. Overall look: bright commercial interior photography, 24mm; colour palette of white, birch, charcoal, signal yellow. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "shell-and-core__04-grid-interiors.png",
+   "title": "Interiors",
+   "section": "Project page gallery",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Interior, 24-35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Interiors of a modern open office with birch slats and meeting pods, flexible offices, one consistent daylight, nobody present. Top-left: the main living space. Top-right: a stair or circulation space. Bottom-left: the kitchen. Bottom-right: a private room. Overall look: bright commercial interior photography, 24mm; colour palette of white, birch, charcoal, signal yellow. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "shell-and-core__05-grid-projects.png",
+   "title": "Other projects",
+   "section": "Projects index",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Editorial architecture, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Four other projects by the same studio, consistent editorial architecture photography. Top-left: A fintech office. Top-right: A law office. Bottom-left: A showroom. Bottom-right: A clinic. No people. Overall look: bright commercial interior photography, 24mm; colour palette of white, birch, charcoal, signal yellow. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "shell-and-core__06-grid-materials.png",
+   "title": "Materials",
+   "section": "Materials section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Material close-ups, raking light. Top-left: Birch plywood. Top-right: Acoustic felt. Bottom-left: Polished concrete. Bottom-right: Glass partitions. Overall look: bright commercial interior photography, 24mm; colour palette of white, birch, charcoal, signal yellow. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "shell-and-core__07-grid-process.png",
+   "title": "Process",
+   "section": "How we work section",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Documentary, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The design process in the studio and on site. Top-left: A bare shell floor. Top-right: Drywall going up. Bottom-left: The ceiling grid. Bottom-right: Handover day. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: bright commercial interior photography, 24mm; colour palette of white, birch, charcoal, signal yellow. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "shell-and-core__08-grid-details.png",
+   "title": "Details",
+   "section": "Details band",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Architectural detail, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Architectural details, minimal compositions. Top-left: An acoustic panel. Top-right: A cable tray. Bottom-left: A phone booth door. Bottom-right: A blank sign. Overall look: bright commercial interior photography, 24mm; colour palette of white, birch, charcoal, signal yellow. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "shell-and-core__09-studio.png",
+   "title": "The studio",
+   "section": "About and contact section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of the design-build studio, models and drawings on tables, daylight, calm, no readable text. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: bright commercial interior photography, 24mm; colour palette of white, birch, charcoal, signal yellow. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

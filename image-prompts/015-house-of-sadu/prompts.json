@@ -1,0 +1,101 @@
+{
+ "site": "HOUSE OF SADU",
+ "slug": "house-of-sadu",
+ "category": "Online shops",
+ "concept": "A modern abaya house; collection, size guide and bag.",
+ "look": "fashion editorial photography, soft desert light, 85mm",
+ "palette": "black, sand, rust red, cream",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "house-of-sadu__01-hero.png",
+   "title": "Campaign hero",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Editorial, 50mm, cinematic light",
+   "prompt": "Campaign photograph: two models of different ages in abayas crossing a salt flat, featuring a flowing black abaya with a woven Sadu-pattern trim. Editorial, cinematic light, space for a headline. Original design, no logos. Overall look: fashion editorial photography, soft desert light, 85mm; colour palette of black, sand, rust red, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "house-of-sadu__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Product, 85mm",
+   "prompt": "Vertical product photograph of a flowing black abaya with a woven Sadu-pattern trim on a sculpted plinth against a soft gradient in the brand palette, dramatic light. Original design, no logos. Overall look: fashion editorial photography, soft desert light, 85mm; colour palette of black, sand, rust red, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "house-of-sadu__03-grid-products-a.png",
+   "title": "Products I",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: A sand abaya. Top-right: A cream kimono abaya. Bottom-left: A black embroidered abaya. Bottom-right: A rust linen abaya. Original designs, no logos, no text. Overall look: fashion editorial photography, soft desert light, 85mm; colour palette of black, sand, rust red, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "house-of-sadu__04-grid-products-b.png",
+   "title": "Products II",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and scale in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. E-commerce packshots on a seamless backdrop, same lighting, angle and scale in every cell. Top-left: A silk scarf. Top-right: A leather clutch. Bottom-left: A woven belt. Bottom-right: A matching shayla. Original designs, no logos, no text. Overall look: fashion editorial photography, soft desert light, 85mm; colour palette of black, sand, rust red, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "house-of-sadu__05-grid-details.png",
+   "title": "Details",
+   "section": "Product page zoom details",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, 100mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro details. Top-left: Sadu weave. Top-right: Silk drape. Bottom-left: A button. Bottom-right: Embroidery. No logos. Overall look: fashion editorial photography, soft desert light, 85mm; colour palette of black, sand, rust red, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "house-of-sadu__06-grid-atelier.png",
+   "title": "Atelier",
+   "section": "Craft section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Documentary craft, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The workshop behind the brand, documentary craft photography. Top-left: A weaver at a Sadu loom. Top-right: Cutting patterns. Bottom-left: Hand embroidery. Bottom-right: A final fitting. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: fashion editorial photography, soft desert light, 85mm; colour palette of black, sand, rust red, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "house-of-sadu__07-model.png",
+   "title": "Editorial",
+   "section": "Lookbook section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Fashion, 85mm, natural light",
+   "prompt": "Fashion editorial: a woman in her thirties in a black abaya walking in the dunes, wind in the fabric, with a flowing black abaya with a woven Sadu-pattern trim, natural light. One person only. Overall look: fashion editorial photography, soft desert light, 85mm; colour palette of black, sand, rust red, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "house-of-sadu__08-store.png",
+   "title": "Boutique",
+   "section": "Stores section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a minimal boutique with sand walls and rails, displays lit, nobody present, no signage text. Overall look: fashion editorial photography, soft desert light, 85mm; colour palette of black, sand, rust red, cream. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "house-of-sadu__09-packaging.png",
+   "title": "Packaging",
+   "section": "Gifting and delivery section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Still life, soft light",
+   "prompt": "Still life of a garment bag and a woven box, an unboxing moment, soft light. No text. Overall look: fashion editorial photography, soft desert light, 85mm; colour palette of black, sand, rust red, cream. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}

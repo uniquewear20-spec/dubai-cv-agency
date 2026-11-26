@@ -1,0 +1,111 @@
+{
+ "site": "ZAFRAN NOIR",
+ "slug": "zafran-noir",
+ "category": "Beauty",
+ "concept": "Saffron and gold skincare; regimen builder and shop.",
+ "look": "dark luxury beauty still life, gold highlights, 85mm",
+ "palette": "black, saffron, gold, deep red",
+ "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
+ "shots": [
+  {
+   "n": 1,
+   "file": "zafran-noir__01-hero.png",
+   "title": "Hero still life",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Still life, 85mm, directional light",
+   "prompt": "Luxury beauty still life of a black glass jar with a gold lid with saffron threads and gold leaf on black stone, on a sculpted stone plinth, soft directional light and long shadows, negative space on one side for a headline. Original packaging, no text on it. Overall look: dark luxury beauty still life, gold highlights, 85mm; colour palette of black, saffron, gold, deep red. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 2,
+   "file": "zafran-noir__02-hero-mobile.png",
+   "title": "Hero for phones",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "kind": "single",
+   "camera": "Top light, 100mm",
+   "prompt": "Vertical beauty still life: a black glass jar with a gold lid standing in shallow clear water with saffron threads and gold leaf on black stone around it, light ripples, top light. Original packaging, no text. Overall look: dark luxury beauty still life, gold highlights, 85mm; colour palette of black, saffron, gold, deep red. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 3,
+   "file": "zafran-noir__03-grid-packshots.png",
+   "title": "Product packshots",
+   "section": "Shop grid and product pages",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Packshot, same angle and light in every cell",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Packshots on a seamless backdrop in the brand palette, same lighting, angle and scale in every cell. Top-left: A serum bottle. Top-right: An eye cream. Bottom-left: A face oil. Bottom-right: A cleansing balm. Original packaging designs, no text. Overall look: dark luxury beauty still life, gold highlights, 85mm; colour palette of black, saffron, gold, deep red. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 4,
+   "file": "zafran-noir__04-ingredient.png",
+   "title": "Hero ingredient",
+   "section": "Ingredients section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Macro, 100mm",
+   "prompt": "Macro photograph of saffron threads and gold leaf on black stone, dew and texture, shallow depth of field, natural light. Overall look: dark luxury beauty still life, gold highlights, 85mm; colour palette of black, saffron, gold, deep red. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 5,
+   "file": "zafran-noir__05-origin.png",
+   "title": "Origin",
+   "section": "Origin story section, full width",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Landscape, 35mm, early morning",
+   "prompt": "Landscape photograph of a saffron field of purple crocus flowers at dawn, early morning light, cinematic and real. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: dark luxury beauty still life, gold highlights, 85mm; colour palette of black, saffron, gold, deep red. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 6,
+   "file": "zafran-noir__06-grid-textures.png",
+   "title": "Textures",
+   "section": "Product page texture swatches",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, top light on glass",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Macro texture photographs, top light on glass. Top-left: A golden serum drop. Top-right: Cream with gold flecks. Bottom-left: Saffron infusion. Bottom-right: Balm. No packaging, no text. Overall look: dark luxury beauty still life, gold highlights, 85mm; colour palette of black, saffron, gold, deep red. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 7,
+   "file": "zafran-noir__07-model.png",
+   "title": "Editorial portrait",
+   "section": "Brand story section",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Portrait, 85mm, window light",
+   "prompt": "Beauty editorial portrait of a man in his forties with a beard and deep brown skin, natural skin texture, soft window light, minimal makeup, calm expression. One person only. Overall look: dark luxury beauty still life, gold highlights, 85mm; colour palette of black, saffron, gold, deep red. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 8,
+   "file": "zafran-noir__08-grid-ritual.png",
+   "title": "Ritual",
+   "section": "How to use section",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "Hands, 50mm, soft light",
+   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Hands-only ritual photographs, soft light. Top-left: Pressing serum into skin. Top-right: Applying eye cream. Bottom-left: A facial roller. Bottom-right: A warm towel. Faces out of frame. Overall look: dark luxury beauty still life, gold highlights, 85mm; colour palette of black, saffron, gold, deep red. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 9,
+   "file": "zafran-noir__09-space.png",
+   "title": "Boutique or atelier",
+   "section": "Visit section",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a dark boutique counter with gold light, warm and inviting, nobody present. Overall look: dark luxury beauty still life, gold highlights, 85mm; colour palette of black, saffron, gold, deep red. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 10,
+   "file": "zafran-noir__10-gift.png",
+   "title": "Gift set",
+   "section": "Gifts section",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Overhead, soft light",
+   "prompt": "Still life of a black box with gold lining, overhead, soft light, ribbon and paper. No text. Overall look: dark luxury beauty still life, gold highlights, 85mm; colour palette of black, saffron, gold, deep red. No text, no letters, no logos, no watermarks."
+  }
+ ]
+}
