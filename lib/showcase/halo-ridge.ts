@@ -40,27 +40,30 @@ const seedream = (file: string): Asset => ({
   credits: 0,
 });
 
-/**
- * A resized WebP of a generated image from Higgsfield's image service, until the files are copied to
- * this site. Local paths pass through unchanged.
- */
-export const sized = (url: string, w: number) =>
-  url.includes("cloudfront.net") ? `https://images.higgs.ai/?default=1&output=webp&url=${encodeURIComponent(url)}&w=${w}&q=82` : url;
+/** A scrubbed clip made through the Higgsfield connector: MiniMax H3, start and end frame, 10 credits. */
+const minimax = (file: string): Asset => ({
+  url: `https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/${file}.mp4`,
+  model: "MiniMax H3, 2K, 5 s, start and end frame",
+  route: "connector",
+  job: file.slice(-36),
+  credits: 10,
+});
 
-export const srcSet = (url: string, widths: number[] = [960, 1440, 1920, 2560]) =>
-  url.includes("cloudfront.net") ? widths.map((w) => `${sized(url, w)} ${w}w`).join(", ") : undefined;
+export { sized, srcSet } from "./media";
 
 export const SCENES: Scene[] = [
   {
     id: "arrival",
-    still: seedream("hf_20261126_001957_11af7275-f38e-44b7-95e1-c0ac392e3b20"), clip: none, focus: { x: 50, y: 52 },
+    still: seedream("hf_20261126_001957_11af7275-f38e-44b7-95e1-c0ac392e3b20"),
+    clip: minimax("hf_20261126_002942_1f0f2e0c-a9b3-459f-af12-1fed73fca96e"), focus: { x: 50, y: 52 },
     kicker: { en: "Halo Ridge", ar: "هالو ريدج" },
     title: { en: "A crescent of 64 villas on the edge of the desert", ar: "هلال من 64 فيلا على حافة الصحراء" },
     body: { en: "Scroll to fly in. You land at the door of Villa 17.", ar: "مرّر للأسفل لتطير إلى الداخل. ستهبط عند باب الفيلا 17." },
   },
   {
     id: "avenue",
-    still: seedream("hf_20261126_002156_0940a123-30c7-4806-8435-2df90ea61442"), clip: none, focus: { x: 50, y: 45 },
+    still: seedream("hf_20261126_002156_0940a123-30c7-4806-8435-2df90ea61442"),
+    clip: minimax("hf_20261126_003506_1f4182d7-1d2c-4800-b19f-9d09f24b4762"), focus: { x: 50, y: 45 },
     kicker: { en: "The avenue", ar: "الجادة" },
     title: { en: "Four streets, each opening onto the lake", ar: "أربعة شوارع، كل منها يطل على البحيرة" },
     body: { en: "Every street ends at the water, so every villa is a short walk from the park.", ar: "ينتهي كل شارع عند الماء، فتبقى كل فيلا على بعد خطوات من الحديقة." },
@@ -71,14 +74,16 @@ export const SCENES: Scene[] = [
   },
   {
     id: "street",
-    still: seedream("hf_20261126_002159_967d3be7-a68d-434e-bd66-2132cd39dbc9"), clip: none, focus: { x: 52, y: 52 },
+    still: seedream("hf_20261126_002159_967d3be7-a68d-434e-bd66-2132cd39dbc9"),
+    clip: minimax("hf_20261126_003508_0c3fcf0b-2da4-42c8-a9df-e23d40c4884a"), focus: { x: 52, y: 52 },
     kicker: { en: "Lake Street", ar: "شارع البحيرة" },
     title: { en: "Palms, shade and nothing faster than a bicycle", ar: "نخيل وظل، ولا شيء أسرع من الدراجة" },
     body: { en: "Cars stay at the edge. The street belongs to the people who live on it.", ar: "تبقى السيارات على الأطراف. الشارع لمن يسكنه." },
   },
   {
     id: "villa",
-    still: seedream("hf_20261126_001926_16cea4b9-f4e2-458f-b42f-01e37241980a"), clip: none, focus: { x: 52, y: 55 },
+    still: seedream("hf_20261126_001926_16cea4b9-f4e2-458f-b42f-01e37241980a"),
+    clip: minimax("hf_20261126_003510_25c9087f-289b-4947-a3f6-90dfa44da9d3"), focus: { x: 52, y: 55 },
     kicker: { en: "Villa 17", ar: "الفيلا 17" },
     title: { en: "The Lake Villa", ar: "فيلا البحيرة" },
     body: { en: "Travertine, oak and glass, set back behind a planted courtyard.", ar: "ترافرتين وخشب البلوط والزجاج، خلف فناء مزروع." },
@@ -91,35 +96,38 @@ export const SCENES: Scene[] = [
   },
   {
     id: "entrance",
-    still: none, clip: none, focus: { x: 50, y: 48 },
+    still: seedream("hf_20261126_002357_aaf51ebb-646e-4635-87bc-70a59a3f2d4a"),
+    clip: minimax("hf_20261126_003512_5c38cce6-095e-48d4-bbe9-539dd0e2ba80"), focus: { x: 42, y: 50 },
     kicker: { en: "Arrival court", ar: "فناء الوصول" },
     title: { en: "A pivot door in solid oak, 3.6 metres tall", ar: "باب محوري من البلوط الصلب بارتفاع 3.6 متر" },
     body: { en: "The court is planted with olive and ghaf, and the path is lit from the ground.", ar: "الفناء مزروع بالزيتون والغاف، والممر مضاء من الأرض." },
   },
   {
     id: "hall",
-    still: none, clip: none, focus: { x: 50, y: 40 },
+    still: seedream("hf_20261126_002549_dd388285-9656-46d8-8cdc-41574254a838"),
+    clip: minimax("hf_20261126_003514_4b733c4e-c40f-4dbe-a33e-4cd48e96338b"), focus: { x: 55, y: 45 },
     kicker: { en: "Ground floor", ar: "الطابق الأرضي" },
     title: { en: "A double-height hall under a skylight", ar: "قاعة بارتفاع مزدوج تحت مَنوَر" },
     body: { en: "Light falls 7 metres from the roof to the floor, and the stair seems to float.", ar: "ينزل الضوء سبعة أمتار من السقف إلى الأرض، ويبدو الدرج كأنه معلّق." },
   },
   {
     id: "living",
-    still: none, clip: none, focus: { x: 50, y: 52 },
+    still: seedream("hf_20261126_002600_1e04c179-59aa-456c-b6f0-cea3382b7fb2"),
+    clip: minimax("hf_20261126_003517_a2b769a4-b977-4f8f-a73a-308ce9f45364"), focus: { x: 52, y: 48 },
     kicker: { en: "Living, dining, kitchen", ar: "المعيشة والطعام والمطبخ" },
     title: { en: "One room, 16 metres of glass to the lake", ar: "غرفة واحدة و16 مترًا من الزجاج نحو البحيرة" },
     body: { en: "The kitchen island faces the water, and the glass slides away completely.", ar: "جزيرة المطبخ تواجه الماء، والزجاج ينزلق بالكامل." },
   },
   {
     id: "terrace",
-    still: none, clip: none, focus: { x: 50, y: 60 },
+    still: seedream("hf_20261126_002747_0b08622e-e2ed-4f85-9d07-d41292fc7e24"), clip: none, focus: { x: 45, y: 60 },
     kicker: { en: "Terrace", ar: "التراس" },
     title: { en: "A 14-metre pool that runs toward the lake", ar: "مسبح بطول 14 مترًا يمتد نحو البحيرة" },
     body: { en: "Facing west, so the evening sun sets over the water.", ar: "يواجه الغرب، فتغيب شمس المساء فوق الماء." },
   },
   {
     id: "dusk",
-    still: none, clip: none, focus: { x: 50, y: 45 },
+    still: seedream("hf_20261126_002403_153c7719-9940-4157-9d58-30930bcff11f"), clip: none, focus: { x: 50, y: 52 },
     kicker: { en: "From the garden", ar: "من الحديقة" },
     title: { en: "The house, looking back at dusk", ar: "البيت عند الغسق، من الحديقة" },
     body: { en: "Every distance below is illustrative until the location is final.", ar: "كل المسافات أدناه توضيحية حتى يتحدد الموقع." },
@@ -131,7 +139,7 @@ export const SCENES: Scene[] = [
   },
   {
     id: "rise",
-    still: none, clip: none, focus: { x: 50, y: 55 },
+    still: seedream("hf_20261126_002910_15757aad-b57d-417e-b9f4-6247acac537c"), clip: none, focus: { x: 50, y: 50 },
     kicker: { en: "Halo Ridge", ar: "هالو ريدج" },
     title: { en: "Back to the sky, and the whole crescent", ar: "عودة إلى السماء، والهلال كاملًا" },
     body: { en: "Clubhouse, lagoon pool, 4.2 km of shaded trails. Book a private viewing below.", ar: "النادي ومسبح البحيرة و4.2 كم من الممرات المظللة. احجز معاينة خاصة في الأسفل." },
@@ -196,10 +204,15 @@ export const MATERIALS = [
 ] as const;
 
 /** Close-ups for the materials section. Until one exists, the page draws the material in CSS. */
-export const MATERIAL_ASSETS: Record<string, Asset> = { travertine: none, oak: none, brass: none, glass: none };
+export const MATERIAL_ASSETS: Record<string, Asset> = {
+  travertine: seedream("hf_20261126_003207_717b1761-9dd6-4ad0-aa50-90ef10275351"),
+  oak: none,
+  brass: none,
+  glass: none,
+};
 
 /** The wide picture beside the amenities list (clubhouse and lagoon pool). */
-export const AMENITY_ASSET: Asset = none;
+export const AMENITY_ASSET: Asset = seedream("hf_20261126_003024_598a25a5-e833-4485-bb4b-8ffdae8a7edf");
 
 export const PAYMENT = [
   { share: 10, label: { en: "On booking", ar: "عند الحجز" } },

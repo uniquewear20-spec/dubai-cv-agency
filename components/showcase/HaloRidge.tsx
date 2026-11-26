@@ -30,6 +30,9 @@ const ease = (a: number, b: number, v: number) => {
 const camera = (t: number) => (t < HOLD ? (t / HOLD) * 0.06 : 0.06 + 0.94 * ease(HOLD, 1, t));
 const fmt = (n: number) => n.toLocaleString("en-US");
 const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+/** A clip counts as ready because its poster (the opening still) covers it while it loads. */
+const ready = (m: HTMLImageElement | HTMLVideoElement | null | undefined) =>
+  !m || m instanceof HTMLVideoElement || (m.complete && m.naturalWidth > 0);
 
 type Room = (typeof FLOORS)[number]["rooms"][number];
 type Media = HTMLImageElement | HTMLVideoElement | null;
@@ -100,12 +103,15 @@ export default function HaloRidge() {
       const u = last ? t : camera(t);
       const lead = media.current[i];
       const clipLeads = lead instanceof HTMLVideoElement && !still;
+      // While the current picture is still loading (after a jump), keep the nearest loaded one beneath it.
+      let base = i;
+      while (base > 0 && !ready(media.current[base])) base--;
 
       for (let j = 0; j < N; j++) {
         const shot = shots.current[j];
         if (!shot) continue;
         let o = 0;
-        if (j === i) o = 1;
+        if (j === i || j === base) o = 1;
         else if (j === i + 1) o = ease(clipLeads ? 0.95 : 0.84, 1, t);
         shot.style.opacity = String(o);
         shot.style.visibility = o > 0 ? "visible" : "hidden";
@@ -163,10 +169,12 @@ export default function HaloRidge() {
     };
 
     const videos = media.current.filter((m): m is HTMLVideoElement => m instanceof HTMLVideoElement);
+    const images = media.current.filter((m): m is HTMLImageElement => m instanceof HTMLImageElement);
     videos.forEach((v) => {
       v.addEventListener("seeked", kick);
       v.addEventListener("loadedmetadata", kick);
     });
+    images.forEach((m) => m.addEventListener("load", kick));
     window.addEventListener("scroll", kick, { passive: true });
     window.addEventListener("resize", kick);
     kick();
@@ -178,6 +186,7 @@ export default function HaloRidge() {
         v.removeEventListener("seeked", kick);
         v.removeEventListener("loadedmetadata", kick);
       });
+      images.forEach((m) => m.removeEventListener("load", kick));
     };
   }, []);
 
