@@ -34,9 +34,27 @@ export const CELLS: Record<string, string[]> = {
     `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/63bc1f0c-e2f1-4556-aa51-991b6ba23915.webp`,
     `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/61c7c476-5d2c-449b-9f82-0315b25084d7.webp`,
   ],
-  texB: [],
-  procA: [],
-  procB: [],
+  // amber balm on stone, a rose petal, ghassoul paste, figue oil on slate
+  texB: [
+    `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/dd63afd4-00c8-4377-8a39-5ae462bf4e29.webp`,
+    `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/0053dbb3-5fec-4973-8fea-3ef2f03d1b70.webp`,
+    `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/fbd78c69-8a1d-4a79-b9fe-6af3e0435c39.webp`,
+    `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/2e9bbf11-6091-4590-8002-026add52f3de.webp`,
+  ],
+  // fruit on the ground, peeling the dried fruit, cracking between stones, sorted kernels
+  procA: [
+    `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/b0bc7dd9-4371-433b-aab4-a929a61f3b63.webp`,
+    `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/6f963460-bebc-4b54-8883-1dddf77394f4.webp`,
+    `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/5cee3ab7-dada-473c-aa6c-6f9b0a89d715.webp`,
+    `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/904f5be2-6c63-463e-8246-79c2b9f6477d.webp`,
+  ],
+  // the cold press, bottling in amber glass (the other two quarters are not used)
+  procB: [
+    `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/f73380d3-d464-4f7d-b566-a776bf912fd9.webp`,
+    "",
+    `${M}user_3MQDgHvQJDdXT6IO2Dd583p7SEq/2e4eaf88-88a1-402b-a83f-90b274d35dc3.webp`,
+    "",
+  ],
 };
 
 export const cellSrc = (c: GridCell) => CELLS[c.src]?.[c.cell] ?? "";

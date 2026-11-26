@@ -578,7 +578,7 @@ export const MOSAIC: { img: GridCell; x: number; y: number; w: number; ar: numbe
   { img: { src: "mosaicB", cell: 0 }, x: 72, y: 28, w: 10, ar: 0.8 },
   { img: { src: "mosaicC", cell: 2 }, x: 81, y: 6, w: 11, ar: 1.4 },
   { img: { src: "mosaicB", cell: 2 }, x: 9, y: 78, w: 11, ar: 0.8 },
-  { img: { src: "mosaicA", cell: 3 }, x: 23, y: 63, w: 10, ar: 0.78 },
+  { img: { src: "texA", cell: 0 }, x: 23, y: 63, w: 10, ar: 0.78 },
   { img: { src: "mosaicC", cell: 1 }, x: 46, y: 70, w: 10, ar: 1.35 },
   { img: { src: "mosaicB", cell: 1 }, x: 75, y: 76, w: 10, ar: 0.8 },
   { img: { src: "mosaicB", cell: 3 }, x: 84, y: 58, w: 10, ar: 0.78 },
