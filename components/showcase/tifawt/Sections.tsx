@@ -575,7 +575,20 @@ export function Coffrets() {
           return (
             <article key={c.id} className="tf-co-card" style={{ "--i": i } as CSSProperties}>
               <div className="tf-co-img">
-                <Img src={A.gift} alt="" sizes="(max-width: 900px) 90vw, 33vw" style={{ objectPosition: c.focus }} />
+                {A.gift ? (
+                  <Img src={A.gift} alt="" sizes="(max-width: 900px) 90vw, 33vw" style={{ objectPosition: c.focus }} />
+                ) : (
+                  <div className="tf-co-trio">
+                    {c.items.map((slug, k) => {
+                      const item = bySlug(slug);
+                      return item ? (
+                        <span key={slug} className="tf-co-shot" style={{ "--k": k - 1 } as CSSProperties}>
+                          <Img src={item.pack} alt="" sizes="(max-width: 900px) 45vw, 16vw" widths={[320, 480, 640]} />
+                        </span>
+                      ) : null;
+                    })}
+                  </div>
+                )}
               </div>
               <h3>{c.name}</h3>
               <p>{c.line[lang]}</p>

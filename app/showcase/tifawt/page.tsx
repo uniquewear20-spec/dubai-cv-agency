@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description: "A fictional Moroccan argan beauty house: sculptural packaging, a split-screen hero and a complete shop, designed and built by Zenith Dubai as a concept.",
   alternates: { canonical: "/showcase/tifawt/" },
   robots: { index: false, follow: true },
+  icons: { icon: "/showcase/tifawt/argan-icon.svg" },
   openGraph: {
     title: "TIFAWT, a concept website by Zenith Dubai",
     description: "Argan from the Souss, shaped by Moroccan design. A fictional beauty house built as a concept.",

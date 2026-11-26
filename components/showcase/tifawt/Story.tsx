@@ -68,7 +68,12 @@ export function Maison() {
         </h2>
         <div className="tf-maison-media" ref={media}>
           <div className="tf-maison-back" ref={back}>
-            <Img src={A.lineup} alt={lang === "ar" ? "مجموعة تيفاوت على حجر رملي" : "The TIFAWT collection on Souss sandstone"} sizes="90vw" widths={[960, 1440, 1920]} />
+            <Img
+              src={A.lineup || cellSrc({ src: "mosaicA", cell: 3 })}
+              alt={lang === "ar" ? "غابة الأركان في سوس عند أول الضوء" : "The argan forest of the Souss at first light"}
+              sizes="90vw"
+              widths={[960, 1440, 1600]}
+            />
           </div>
         </div>
         <div className="tf-maison-tiles" aria-hidden>
@@ -154,7 +159,7 @@ export function StoryLine() {
           <span>{l3}</span>
           <span className="tf-story-pill" ref={pill} aria-hidden>
             <span className="tf-story-pill-in">
-              <Img src={A.pill} alt="" sizes="600px" widths={[640, 960, 1280]} />
+              <Img src={A.pill || cellSrc({ src: "mosaicA", cell: 2 })} alt="" sizes="600px" widths={[640, 960, 1280]} />
             </span>
           </span>
           <span>{l4}</span>

@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: `${p.kind.en}. ${p.tagline.en} A fictional product on a concept website by Zenith Dubai.`,
     alternates: { canonical: `/showcase/tifawt/${p.slug}/` },
     robots: { index: false, follow: true },
+    icons: { icon: "/showcase/tifawt/argan-icon.svg" },
     openGraph: {
       title,
       description: p.tagline.en,
