@@ -20,7 +20,7 @@ Names are working names: each one gets a final web check before its site is buil
 | 004 | built | MAWQID | Restaurants | 14 | 32 | Ready | Generated (Abdell, 26 Nov) | [004-mawqid](./004-mawqid/prompts.md) |
 | 005 | built | ZILL | Architecture and interiors | 12 | 24 | Ready | Generated (Abdell, 26 Nov) | [005-zill](./005-zill/prompts.md) |
 | 006 | built | ORIEL 88 | Real estate | 10 | 22 | Ready | Generated (Abdell, 26 Nov) | [006-oriel-88](./006-oriel-88/prompts.md) |
-| 007 | 1 | KHAYYAL | Automotive | 10 | 19 | Ready | Generated (Abdell, 26 Nov) | [007-khayyal](./007-khayyal/prompts.md) |
+| 007 | built | KHAYYAL | Automotive | 10 | 19 | Ready | Generated (Abdell, 26 Nov) | [007-khayyal](./007-khayyal/prompts.md) |
 | 008 | 1 | MUSKANA | Online shops | 9 | 21 | Ready | Generated (Abdell, 26 Nov) | [008-muskana](./008-muskana/prompts.md) |
 | 009 | 1 | THE ENAMEL ROOM | Healthcare | 9 | 18 | Ready | Generated (Abdell, 26 Nov) | [009-the-enamel-room](./009-the-enamel-room/prompts.md) |
 | 010 | 2 | SHORELINE NO. 9 | Real estate | 10 | 22 | Ready | Generated (Abdell, 26 Nov) | [010-shoreline-9](./010-shoreline-9/prompts.md) |

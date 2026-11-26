@@ -141,4 +141,21 @@ export const CONCEPTS: Concept[] = [
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_160324_6edfd8c4-6034-4e45-8a9e-9d185965814f_min.webp",
     focus: "50% 50%",
   },
+  {
+    slug: "khayyal",
+    name: "KHAYYAL",
+    category: "automotive",
+    line: {
+      en: "A Gulf grand-tourer marque: one long, low coupé built by hand, ninety-nine a year.",
+      fr: "Une marque de grand tourisme du Golfe : un seul coupé long et bas, fait main, quatre-vingt-dix-neuf par an.",
+      ar: "علامة سيارات جي تي خليجية: كوبيه واحدة طويلة ومنخفضة تُصنع يدوياً، تسع وتسعون في السنة.",
+    },
+    feature: {
+      en: "Move the studio light along the car, build yours with a live price, then book a test drive",
+      fr: "Déplacez la lumière du studio le long de la voiture, configurez la vôtre avec le prix en direct, puis réservez un essai",
+      ar: "حرّك ضوء الاستوديو على السيارة، وصمّم سيارتك بسعر مباشر، ثم احجز تجربة قيادة",
+    },
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_162629_d523d832-6dcf-4cf8-bdbe-d78602c53839_min.webp",
+    focus: "50% 55%",
+  },
 ];
