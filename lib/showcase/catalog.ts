@@ -90,4 +90,21 @@ export const CONCEPTS: Concept[] = [
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_123629_c59c7157-18d8-4950-b9d4-379fe802c80e_min.webp",
     focus: "40% 55%",
   },
+  {
+    slug: "mawqid",
+    name: "MAWQID",
+    category: "restaurants",
+    line: {
+      en: "Fourteen seats around one open fire in Al Quoz, cooked over oak, olive and date palm.",
+      fr: "Quatorze places autour d'un seul feu à Al Quoz, une cuisine au chêne, à l'olivier et au palmier dattier.",
+      ar: "أربعة عشر مقعداً حول نار واحدة في القوز، والطهي على البلوط والزيتون وسعف النخيل.",
+    },
+    feature: {
+      en: "A tasting menu you scroll at each course's heat, then a reservation where you pick your seat at the counter",
+      fr: "Un menu dégustation qui défile à la chaleur de chaque plat, puis une réservation où l'on choisit sa place au comptoir",
+      ar: "قائمة تذوّق تتنقّل فيها بالتمرير على حرارة كل طبق، ثم حجز تختار فيه مقعدك على الكاونتر",
+    },
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_145705_4cca2547-5048-49bb-bbb3-a648b2f5a4e3_min.webp",
+    focus: "50% 60%",
+  },
 ];

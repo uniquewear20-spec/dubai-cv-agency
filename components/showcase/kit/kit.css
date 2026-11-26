@@ -15,3 +15,25 @@
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* One cell of a 2x2 grid image, cut out by CSS (see Img). The box is sized by the site's CSS like
+   any picture; the image inside covers it, centred on the cell. */
+.kit-crop {
+  position: relative;
+  overflow: hidden;
+  container-type: size;
+}
+.kit-crop > img.kit-crop-img {
+  --s: max(calc(100cqw / var(--cw)), calc(100cqh / var(--ch)));
+  position: absolute !important;
+  inset: auto !important;
+  left: calc(50cqw - var(--s) * var(--cx)) !important;
+  top: calc(50cqh - var(--s) * var(--cy)) !important;
+  width: calc(var(--s) * var(--W)) !important;
+  height: calc(var(--s) * var(--H)) !important;
+  max-width: none !important;
+  aspect-ratio: auto !important;
+  object-fit: fill !important;
+  transform: none !important;
+  border-radius: 0 !important;
+}
