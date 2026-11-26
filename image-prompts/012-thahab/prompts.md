@@ -4,7 +4,7 @@
 **Concept:** A luxury desert camp in the Empty Quarter; tent booking and experiences.  
 **Website:** /showcase/thahab/  
 **Images:** 12 generations, 27 images  
-**Image status:** Not generated yet
+**Image status:** Generated (Abdell, 26 Nov)
 
 ## Visual direction
 

@@ -4,7 +4,7 @@
 **Concept:** An architecture studio for hot climates; a courtyard house that assembles floor by floor on scroll, a sun study and a brief builder.  
 **Website:** /showcase/zill/  
 **Images:** 12 generations, 24 images  
-**Image status:** Not generated yet
+**Image status:** Generated (Abdell, 26 Nov)
 
 ## Visual direction
 

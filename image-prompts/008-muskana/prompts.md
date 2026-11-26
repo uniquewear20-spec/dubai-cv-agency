@@ -4,7 +4,7 @@
 **Concept:** An oud and fragrance house; a scent-layering builder and shop.  
 **Website:** /showcase/muskana/  
 **Images:** 9 generations, 21 images  
-**Image status:** Not generated yet
+**Image status:** Generated (Abdell, 26 Nov)
 
 ## Visual direction
 

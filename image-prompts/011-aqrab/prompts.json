@@ -2,110 +2,190 @@
  "site": "AQRAB",
  "slug": "aqrab",
  "category": "Automotive",
- "concept": "A fictional hypercar, one model and 99 cars; a reservation flow.",
- "look": "aggressive studio and track photography, high contrast, cool rim light",
- "palette": "carbon black, venom green, graphite, white light",
+ "concept": "A fictional next-generation military mobility vehicle from the year 2100, shown as a cinematic 3D website: a night-street reveal controlled by scroll, an explorable command-centre interior and a defence-technology brand story. Replaces the earlier hypercar concept; do not use the green hypercar images.",
+ "look": "cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light",
+ "palette": "void black, gunmetal, cold sodium amber, ultraviolet cyan-green",
  "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
  "shots": [
   {
    "n": 1,
-   "file": "aqrab__01-hero.png",
-   "title": "Hero, studio",
-   "section": "Home hero, full screen",
-   "ar": "16:9",
+   "file": "aqrab__01-street-empty.png",
+   "title": "The empty street",
+   "section": "Final sequence: background plate (no vehicle)",
+   "ar": "21:9",
    "kind": "single",
-   "camera": "Low three-quarter front, 50mm, camera at headlight height",
-   "prompt": "Studio automotive photograph of a mid-engine hypercar with a scorpion-tail rear wing, exposed carbon fibre, butterfly doors and a central fin, finished in satin venom-green over exposed carbon, three-quarter front view in a vast dark studio. One long overhead softbox draws a continuous highlight along the bonnet, shoulder line and roof; polished dark concrete floor with a soft reflection under the car; negative space on the left for a headline. Original vehicle design, unbadged. Overall look: aggressive studio and track photography, high contrast, cool rim light; colour palette of carbon black, venom green, graphite, white light. No text, no letters, no logos, no watermarks."
+   "camera": "Road level, centred vanishing point, 35mm anamorphic",
+   "prompt": "Cinematic night photograph of a deserted city street, camera low at road level looking straight down the middle of the road to a central vanishing point: wet black asphalt with long reflections, glass and concrete buildings with every window dark, one sodium streetlight pooling amber light, a traffic signal blinking amber in the distance, a thin layer of mist above the road, no cars, no people, quiet and tense. No vehicle in the frame. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 2,
-   "file": "aqrab__02-hero-mobile.png",
-   "title": "Hero for phones",
-   "section": "Home hero on phones",
-   "ar": "9:16",
+   "file": "aqrab__02-street-far.png",
+   "title": "Something in the dark",
+   "section": "Final sequence: frame 1",
+   "ar": "21:9",
    "kind": "single",
-   "camera": "Low head-on angle, 35mm",
-   "prompt": "Vertical automotive photograph of a mid-engine hypercar with a scorpion-tail rear wing, exposed carbon fibre, butterfly doors and a central fin in satin venom-green over exposed carbon, head-on from a low angle so the face and lights fill the lower two thirds of the frame, dark studio, thin strips of light along the body, faint haze. Original vehicle design, unbadged. Overall look: aggressive studio and track photography, high contrast, cool rim light; colour palette of carbon black, venom green, graphite, white light. No text, no letters, no logos, no watermarks."
+   "camera": "Road level, centred, 35mm anamorphic",
+   "prompt": "Cinematic night photograph of a deserted city street seen from road level down the middle of the road, wet asphalt, dark buildings, one sodium streetlight, mist. Far away in the darkness at the vanishing point, a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns is approaching: almost invisible, only a few thin cyan-green light lines and a faint reflection on the wet road give it away. Most of the frame is empty street. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 3,
-   "file": "aqrab__03-profile.png",
-   "title": "Side profile",
-   "section": "Configurator base view",
+   "file": "aqrab__03-street-mid.png",
+   "title": "The silhouette",
+   "section": "Final sequence: frame 2",
    "ar": "21:9",
    "kind": "single",
-   "camera": "Exact side elevation, 85mm, camera at axle height",
-   "prompt": "Clean side-profile studio photograph of a mid-engine hypercar with a scorpion-tail rear wing, exposed carbon fibre, butterfly doors and a central fin in satin venom-green over exposed carbon, perfectly parallel to the camera on a seamless mid-grey background with a soft floor shadow, the whole silhouette readable, wheels straight, no perspective distortion. Original vehicle design, unbadged. Overall look: aggressive studio and track photography, high contrast, cool rim light; colour palette of carbon black, venom green, graphite, white light. No text, no letters, no logos, no watermarks."
+   "camera": "Road level, centred, 50mm",
+   "prompt": "Cinematic night photograph of a deserted city street from road level, wet asphalt, dark buildings, mist, one sodium streetlight. a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns is coming toward the camera at mid-distance: its black body is still barely readable, its silhouette outlined by the streetlight on its upper edges, the cyan-green segment lines brighter, the wet road reflecting them. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 4,
-   "file": "aqrab__04-drive.png",
-   "title": "On the road",
-   "section": "Driving section",
-   "ar": "21:9",
+   "file": "aqrab__04-street-close.png",
+   "title": "The reveal",
+   "section": "Final sequence: last frame and hero",
+   "ar": "16:9",
    "kind": "single",
-   "camera": "Tracking shot from a camera car, 35mm, slow shutter",
-   "prompt": "Cinematic tracking photograph of a mid-engine hypercar with a scorpion-tail rear wing, exposed carbon fibre, butterfly doors and a central fin in satin venom-green over exposed carbon driving on a closed racing circuit beside the desert at dusk, the car sharp, background streaked with motion blur, wheels spinning, low golden sun and long shadows. Original vehicle design, unbadged. Overall look: aggressive studio and track photography, high contrast, cool rim light; colour palette of carbon black, venom green, graphite, white light. No text, no letters, no logos, no watermarks."
+   "camera": "Very low, head-on, 24mm, close",
+   "prompt": "Cinematic night photograph, camera very low on the wet street, a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns has stopped a few metres from the camera, head-on: the faceted armoured nose, the two forward sensor pods, two narrow cold-white headlamp slits and the cyan-green segment lines glowing, mist drifting through the light, the sensor mast arching over the roof against the dark buildings. Imposing, precise, silent. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 5,
-   "file": "aqrab__05-night.png",
-   "title": "At night",
-   "section": "Night or performance section",
+   "file": "aqrab__05-grid-approach.png",
+   "title": "Approach storyboard",
+   "section": "Final sequence: matching frames (one environment)",
    "ar": "16:9",
-   "kind": "single",
-   "camera": "Rolling shot, 24mm, long exposure",
-   "prompt": "Night photograph of a mid-engine hypercar with a scorpion-tail rear wing, exposed carbon fibre, butterfly doors and a central fin in satin venom-green over exposed carbon moving through a highway tunnel of LED light, light trails and reflections running along the bodywork, wet tarmac mirroring the lights, the car sharp and the city soft. Original vehicle design, unbadged. Overall look: aggressive studio and track photography, high contrast, cool rim light; colour palette of carbon black, venom green, graphite, white light. No text, no letters, no logos, no watermarks."
+   "kind": "grid",
+   "camera": "Same street, same lens, four moments of one drone shot",
+   "prompt": "A 2x2 grid of four frames from one continuous cinematic drone shot on the same deserted city street at night, identical street, light and weather in all four. Top-left: the empty street, the vehicle invisible in the dark far away, only faint cyan-green lines. Top-right: a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns at mid-distance, silhouette starting to show. Bottom-left: the vehicle close, filling half the frame, lights glowing. Bottom-right: the drone rising as the vehicle passes beneath it, seen from above. Thin dark gutters between frames. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 6,
-   "file": "aqrab__06-grid-paint.png",
-   "title": "Paint colours",
-   "section": "Configurator colour swatches",
-   "ar": "1:1",
-   "kind": "grid",
-   "camera": "Identical three-quarter front pose and light in all four cells, 50mm",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The same car in the same three-quarter front pose and identical studio lighting in every cell, only the paint changes: a mid-engine hypercar with a scorpion-tail rear wing, exposed carbon fibre, butterfly doors and a central fin. Top-left: satin venom-green over exposed carbon. Top-right: deep gloss black. Bottom-left: pale silver-white pearl. Bottom-right: a saturated signature colour that suits the design. Dark seamless studio. Original vehicle design, unbadged. Overall look: aggressive studio and track photography, high contrast, cool rim light; colour palette of carbon black, venom green, graphite, white light. No text, no letters, no logos, no watermarks."
+   "file": "aqrab__06-studio-front.png",
+   "title": "Studio, three-quarter front",
+   "section": "3D showcase: hero studio view",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Low three-quarter front, 50mm, black void studio",
+   "prompt": "Studio photograph of a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns, three-quarter front view in a pitch-black void studio, revealed only by one sweeping rim light that draws its outline and the edges of the armour plates, the cyan-green segment lines glowing softly, a faint reflection on a black glossy floor. Most of the body stays black. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 7,
-   "file": "aqrab__07-grid-exterior.png",
-   "title": "Exterior details",
-   "section": "Design details section",
-   "ar": "1:1",
-   "kind": "grid",
-   "camera": "Macro, 100mm, shallow depth of field",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-ups of a mid-engine hypercar with a scorpion-tail rear wing, exposed carbon fibre, butterfly doors and a central fin in satin venom-green over exposed carbon, one consistent studio light. Top-left: the headlight signature lit. Top-right: a forged wheel with the brake caliper behind the spokes. Bottom-left: the rear light bar glowing. Bottom-right: the sculpted shoulder line with one highlight along it. Unbadged. Overall look: aggressive studio and track photography, high contrast, cool rim light; colour palette of carbon black, venom green, graphite, white light. No text, no letters, no logos, no watermarks."
+   "file": "aqrab__07-studio-profile.png",
+   "title": "Studio, side profile",
+   "section": "Specifications and 3D reference",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Exact side elevation, 85mm, axle height",
+   "prompt": "Clean side-profile studio photograph of a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns, perfectly parallel to the camera on a dark graphite seamless background, a soft top light and a thin rim light so the whole silhouette, wheelbase, suspension and the arched sensor mast are readable, no perspective distortion. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 8,
-   "file": "aqrab__08-grid-interior.png",
-   "title": "Interior",
-   "section": "Interior section",
+   "file": "aqrab__08-studio-rear.png",
+   "title": "Studio, rear three-quarter",
+   "section": "Design section: the tail",
    "ar": "16:9",
-   "kind": "grid",
-   "camera": "Interior, 28 and 50mm, soft window light",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Inside a mid-engine hypercar with a scorpion-tail rear wing, exposed carbon fibre, butterfly doors and a central fin, trimmed in a carbon tub, black Alcantara, green stitching and a yoke steering wheel. Top-left: the steering wheel and instrument display from the driver's seat. Top-right: the front seats seen from the rear door. Bottom-left: the centre console and controls in close-up. Bottom-right: stitching and materials on the door panel. Screens show abstract graphics only. Unbadged. Overall look: aggressive studio and track photography, high contrast, cool rim light; colour palette of carbon black, venom green, graphite, white light. No text, no letters, no logos, no watermarks."
+   "kind": "single",
+   "camera": "High rear three-quarter, 35mm",
+   "prompt": "Studio photograph of a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns from a high rear three-quarter angle, showing the segmented armour along its back and the sensor mast arching forward over the roof like a scorpion's tail, rim light tracing each segment, black void background. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 9,
-   "file": "aqrab__09-lifestyle.png",
-   "title": "Lifestyle",
-   "section": "Brand story or ownership section",
-   "ar": "16:9",
+   "file": "aqrab__09-desert.png",
+   "title": "Desert crossing",
+   "section": "Environments: desert",
+   "ar": "21:9",
    "kind": "single",
-   "camera": "Editorial, 35mm, natural light",
-   "prompt": "Editorial lifestyle photograph: a pit garage before a track session, helmets on a bench and tyre warmers on the wheels, with a mid-engine hypercar with a scorpion-tail rear wing, exposed carbon fibre, butterfly doors and a central fin in satin venom-green over exposed carbon in the scene. Natural and unposed. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Unbadged. Overall look: aggressive studio and track photography, high contrast, cool rim light; colour palette of carbon black, venom green, graphite, white light. No text, no letters, no logos, no watermarks."
+   "camera": "Long lens tracking, 135mm",
+   "prompt": "Cinematic photograph of a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns crossing high sand dunes at first light, a long plume of dust behind it, low sun skimming the dune ridges, the black body absorbing the light so it reads as a moving silhouette, vast empty desert. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 10,
-   "file": "aqrab__10-garage.png",
-   "title": "Showroom",
-   "section": "Visit or test-drive section",
+   "file": "aqrab__10-snow.png",
+   "title": "Mountain storm",
+   "section": "Environments: cold and altitude",
    "ar": "16:9",
    "kind": "single",
-   "camera": "Architectural, 24mm, symmetrical",
-   "prompt": "Architectural interior photograph of a white technical workshop with the car on a raised platform under inspection lights, with a mid-engine hypercar with a scorpion-tail rear wing, exposed carbon fibre, butterfly doors and a central fin in satin venom-green over exposed carbon displayed under linear ceiling light, symmetrical, calm and gallery-like, nobody present. Unbadged. Overall look: aggressive studio and track photography, high contrast, cool rim light; colour palette of carbon black, venom green, graphite, white light. No text, no letters, no logos, no watermarks."
+   "camera": "Wide, 24mm, storm light",
+   "prompt": "Cinematic night photograph of a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns climbing a mountain pass in a snowstorm, snow streaking through the cold-white headlamp beams and the cyan-green segment lines, ice on the armour edges, dark rock walls, harsh and lonely. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 11,
+   "file": "aqrab__11-flood.png",
+   "title": "Through water",
+   "section": "Environments: water and urban",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Low, 35mm, rain",
+   "prompt": "Cinematic night photograph of a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns driving through a flooded concrete underpass in heavy rain, a bow wave of water rising from the airless tyres, sodium lights reflecting in the water, rain streaks, the black body glistening only at its edges. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 12,
+   "file": "aqrab__12-aerial-night.png",
+   "title": "From above",
+   "section": "Technology: autonomy and sensors",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Top-down drone, 90 degrees",
+   "prompt": "Top-down drone photograph at night of a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns alone on an empty highway interchange, its body nearly invisible against the dark asphalt, only the cyan-green segment lines and the headlamp beams drawing its shape, faint lane markings, a geometric composition. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 13,
+   "file": "aqrab__13-interior.png",
+   "title": "The command cabin",
+   "section": "Interior: 3D exploration start view",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Interior wide, 18mm, from behind the seats",
+   "prompt": "Interior photograph of the command cabin of a fictional armoured vehicle from the year 2100: two sculpted front seats with backrests made of segmented black panels like a scorpion's back, a wraparound curved display across the armoured glass slit showing abstract cyan-green terrain lines and a radar ring, an operator station behind with a tilted tactical screen of abstract shapes, an overhead console of tactile switches, dark carbon, black leather and anodised gunmetal, soft cyan ambient light. No readable text, no logos. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 14,
+   "file": "aqrab__14-grid-interior.png",
+   "title": "Interior details",
+   "section": "Interior: hotspots",
+   "ar": "16:9",
+   "kind": "grid",
+   "camera": "Interior details, 35-50mm",
+   "prompt": "A 2x2 grid of four separate interior photographs separated by thin dark gutters, inside the same fictional armoured vehicle from the year 2100, dark carbon, black leather, gunmetal and soft cyan-green light. Top-left: the driver's yoke and a holographic display floating above the dashboard with abstract terrain graphics. Top-right: the segmented black seat backrest with cyan stitching, like a scorpion's back. Bottom-left: the operator station with a curved tactical screen of abstract shapes and a palm-rest controller. Bottom-right: the overhead console of guarded tactile switches lit from below. No readable text, no logos. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 15,
+   "file": "aqrab__15-grid-tech.png",
+   "title": "Technology",
+   "section": "Technology: sensors, drones, protection",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro and detail, 50-100mm",
+   "prompt": "A 2x2 grid of four separate detail photographs separated by thin dark gutters, close-ups of a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns. Top-left: the sensor pod at the tip of the arched mast, a cluster of lenses glowing cyan. Top-right: a flush armoured hatch on the roof half open, a small black quadcopter drone rising from its bay. Bottom-left: the forward sensor pod with a ring of small camera lenses. Bottom-right: a row of flush countermeasure ports along the armour, closed. Black void background. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 16,
+   "file": "aqrab__16-grid-materials.png",
+   "title": "Materials",
+   "section": "Protection: materials",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate macro material photographs separated by thin dark gutters, one consistent raking light on black. Top-left: an ultra-matte light-absorbing black coating with a micro texture that swallows light. Top-right: hexagonal ceramic composite armour tiles. Bottom-left: a titanium honeycomb core cut in section. Bottom-right: an airless tyre's honeycomb structure in black rubber. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 17,
+   "file": "aqrab__17-hangar.png",
+   "title": "The hangar",
+   "section": "Brand story: who builds it",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Wide, 24mm, symmetrical",
+   "prompt": "Cinematic photograph of a fictional armoured all-terrain vehicle from the year 2100: a low, very wide four-wheeled body built from overlapping faceted armour plates like a scorpion's exoskeleton, two armoured sensor pods reaching forward at the front like pincers, a narrow wraparound slit of armoured glass for the cabin, large airless honeycomb tyres on long-travel suspension, and a segmented sensor mast that arches forward over the roof like a scorpion's tail, ending in a compact sensor pod. The body is finished in an ultra-matte, light-absorbing black, so its shape shows only through faint edge reflections and thin lines of cyan-green light that trace the armour segments, like a scorpion glowing under ultraviolet light. Original design, no badges, no visible guns in a vast underground concrete hangar lit by rows of cold linear lights, three engineers in dark technical clothing working around it with tablets, each clearly different in age, build and hair, faces turned away from the camera, a sense of a serious defence-technology company. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
+  },
+  {
+   "n": 18,
+   "file": "aqrab__18-scorpion-uv.png",
+   "title": "The inspiration",
+   "section": "Brand story: why a scorpion",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Macro, 100mm, UV light",
+   "prompt": "Macro photograph at night of a desert scorpion on dark sand glowing cyan-green under ultraviolet light, the segments of its tail and claws outlined in light, everything else black, sharp detail, scientific and beautiful. Overall look: cinematic science-fiction film still, anamorphic 35mm look, deep true blacks, restrained practical lighting, cool haze, thin cyan-green accent light; colour palette of void black, gunmetal, cold sodium amber, ultraviolet cyan-green. No text, no letters, no logos, no watermarks."
   }
  ]
 }

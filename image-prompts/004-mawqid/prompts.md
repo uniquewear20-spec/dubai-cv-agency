@@ -4,7 +4,7 @@
 **Concept:** Fourteen seats around one open fire in Al Quoz, Dubai; a tasting menu you scroll at each course's heat and a reservation where you pick your seat.  
 **Website:** /showcase/mawqid/  
 **Images:** 14 generations, 32 images  
-**Image status:** Not generated yet (site built, waiting for images)
+**Image status:** Generated (Abdell, 26 Nov)
 
 ## Visual direction
 

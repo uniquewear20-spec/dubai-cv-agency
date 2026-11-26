@@ -4,7 +4,7 @@
 **Concept:** A dental and smile clinic; a treatment finder and consultation booking.  
 **Website:** /showcase/the-enamel-room/  
 **Images:** 9 generations, 18 images  
-**Image status:** Not generated yet
+**Image status:** Generated (Abdell, 26 Nov)
 
 ## Visual direction
 

@@ -4,7 +4,7 @@
 **Concept:** An 88-storey branded residences tower on the canal; pick a home on the tower elevation.  
 **Website:** /showcase/oriel-88/  
 **Images:** 10 generations, 22 images  
-**Image status:** Not generated yet
+**Image status:** Generated (Abdell, 26 Nov)
 
 ## Visual direction
 

@@ -1,6 +1,6 @@
 # Image prompt library: the 98 remaining concept websites
 
-Built 26 Nov 2026. 98 websites, 935 generations still to run (1973 images). Sites 001 Halo Ridge and 002 TIFAWT are finished and not listed.
+Built 26 Nov 2026. 98 websites, 857 generations still to run (1799 images). Sites 001 Halo Ridge and 002 TIFAWT are finished and not listed.
 
 ## How to generate
 
@@ -17,15 +17,15 @@ Names are working names: each one gets a final web check before its site is buil
 | # | Wave | Website | Category | Generations | Images | Prompts | Pictures | Folder |
 |---|---|---|---|---|---|---|---|---|
 | 003 | built | HAYRAT | Hotels | 18 | 33 | Ready | Generated (by Claude, 26 Nov) | [003-hayrat](./003-hayrat/prompts.md) |
-| 004 | 1 | MAWQID | Restaurants | 14 | 32 | Ready | Not generated yet (site built, waiting for images) | [004-mawqid](./004-mawqid/prompts.md) |
-| 005 | 1 | ZILL | Architecture and interiors | 12 | 24 | Ready | Not generated yet | [005-zill](./005-zill/prompts.md) |
-| 006 | 1 | ORIEL 88 | Real estate | 10 | 22 | Ready | Not generated yet | [006-oriel-88](./006-oriel-88/prompts.md) |
-| 007 | 1 | KHAYYAL | Automotive | 10 | 19 | Ready | Not generated yet | [007-khayyal](./007-khayyal/prompts.md) |
-| 008 | 1 | MUSKANA | Online shops | 9 | 21 | Ready | Not generated yet | [008-muskana](./008-muskana/prompts.md) |
-| 009 | 1 | THE ENAMEL ROOM | Healthcare | 9 | 18 | Ready | Not generated yet | [009-the-enamel-room](./009-the-enamel-room/prompts.md) |
-| 010 | 2 | SHORELINE NO. 9 | Real estate | 10 | 22 | Ready | Not generated yet | [010-shoreline-9](./010-shoreline-9/prompts.md) |
-| 011 | 2 | AQRAB | Automotive | 10 | 19 | Ready | Not generated yet | [011-aqrab](./011-aqrab/prompts.md) |
-| 012 | 2 | THAHAB | Hotels | 12 | 27 | Ready | Not generated yet | [012-thahab](./012-thahab/prompts.md) |
+| 004 | 1 | MAWQID | Restaurants | 14 | 32 | Ready | Generated (Abdell, 26 Nov) | [004-mawqid](./004-mawqid/prompts.md) |
+| 005 | 1 | ZILL | Architecture and interiors | 12 | 24 | Ready | Generated (Abdell, 26 Nov) | [005-zill](./005-zill/prompts.md) |
+| 006 | 1 | ORIEL 88 | Real estate | 10 | 22 | Ready | Generated (Abdell, 26 Nov) | [006-oriel-88](./006-oriel-88/prompts.md) |
+| 007 | 1 | KHAYYAL | Automotive | 10 | 19 | Ready | Generated (Abdell, 26 Nov) | [007-khayyal](./007-khayyal/prompts.md) |
+| 008 | 1 | MUSKANA | Online shops | 9 | 21 | Ready | Generated (Abdell, 26 Nov) | [008-muskana](./008-muskana/prompts.md) |
+| 009 | 1 | THE ENAMEL ROOM | Healthcare | 9 | 18 | Ready | Generated (Abdell, 26 Nov) | [009-the-enamel-room](./009-the-enamel-room/prompts.md) |
+| 010 | 2 | SHORELINE NO. 9 | Real estate | 10 | 22 | Ready | Generated (Abdell, 26 Nov) | [010-shoreline-9](./010-shoreline-9/prompts.md) |
+| 011 | 2 | AQRAB | Automotive | 18 | 30 | Ready | New concept (26 Nov): generate these; the old green hypercar set is not used | [011-aqrab](./011-aqrab/prompts.md) |
+| 012 | 2 | THAHAB | Hotels | 12 | 27 | Ready | Generated (Abdell, 26 Nov) | [012-thahab](./012-thahab/prompts.md) |
 | 013 | 2 | KAI 8 | Restaurants | 9 | 21 | Ready | Not generated yet | [013-kai-8](./013-kai-8/prompts.md) |
 | 014 | 2 | TADDART | Beauty | 10 | 19 | Ready | Not generated yet | [014-taddart](./014-taddart/prompts.md) |
 | 015 | 2 | HOUSE OF SADU | Online shops | 9 | 21 | Ready | Not generated yet | [015-house-of-sadu](./015-house-of-sadu/prompts.md) |

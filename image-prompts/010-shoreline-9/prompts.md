@@ -4,7 +4,7 @@
 **Concept:** One ultra-prime beachfront mansion for sale; a private viewing request.  
 **Website:** /showcase/shoreline-9/  
 **Images:** 10 generations, 22 images  
-**Image status:** Not generated yet
+**Image status:** Generated (Abdell, 26 Nov)
 
 ## Visual direction
 

@@ -4,7 +4,7 @@
 **Concept:** A fictional Gulf grand-tourer marque; a configurator with a turntable and a test-drive booking.  
 **Website:** /showcase/khayyal/  
 **Images:** 10 generations, 19 images  
-**Image status:** Not generated yet
+**Image status:** Generated (Abdell, 26 Nov)
 
 ## Visual direction
 
