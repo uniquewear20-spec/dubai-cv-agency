@@ -12,6 +12,8 @@ export interface Asset {
   route?: "website" | "connector";
   job?: string;
   credits?: number;
+  /** The untouched original, when the page uses a processed copy. */
+  source?: string;
 }
 
 export interface Scene {
@@ -40,9 +42,14 @@ const seedream = (file: string): Asset => ({
   credits: 0,
 });
 
-/** A scrubbed clip made through the Higgsfield connector: MiniMax H3, start and end frame, 10 credits. */
-const minimax = (file: string): Asset => ({
-  url: `https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/${file}.mp4`,
+/**
+ * A scrubbed clip made through the Higgsfield connector: MiniMax H3, start and end frame, 10 credits.
+ * The page plays a web copy re-encoded in Higgsfield's sandbox (1280 x 720, H.264, a keyframe every
+ * 8 frames, no audio), so a scroll seek takes about 8 ms instead of about 110 ms on the 2K original.
+ */
+const minimax = (file: string, web: string): Asset => ({
+  url: `https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/${web}.mp4`,
+  source: `https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/${file}.mp4`,
   model: "MiniMax H3, 2K, 5 s, start and end frame",
   route: "connector",
   job: file.slice(-36),
@@ -55,7 +62,7 @@ export const SCENES: Scene[] = [
   {
     id: "arrival",
     still: seedream("hf_20261126_001957_11af7275-f38e-44b7-95e1-c0ac392e3b20"),
-    clip: minimax("hf_20261126_002942_1f0f2e0c-a9b3-459f-af12-1fed73fca96e"), focus: { x: 50, y: 52 },
+    clip: minimax("hf_20261126_002942_1f0f2e0c-a9b3-459f-af12-1fed73fca96e", "e812e913-0ecc-4b1a-88c5-a5edf710b613"), focus: { x: 50, y: 52 },
     kicker: { en: "Halo Ridge", ar: "هالو ريدج" },
     title: { en: "A crescent of 64 villas on the edge of the desert", ar: "هلال من 64 فيلا على حافة الصحراء" },
     body: { en: "Scroll to fly in. You land at the door of Villa 17.", ar: "مرّر للأسفل لتطير إلى الداخل. ستهبط عند باب الفيلا 17." },
@@ -63,7 +70,7 @@ export const SCENES: Scene[] = [
   {
     id: "avenue",
     still: seedream("hf_20261126_002156_0940a123-30c7-4806-8435-2df90ea61442"),
-    clip: minimax("hf_20261126_003506_1f4182d7-1d2c-4800-b19f-9d09f24b4762"), focus: { x: 50, y: 45 },
+    clip: minimax("hf_20261126_003506_1f4182d7-1d2c-4800-b19f-9d09f24b4762", "db6e5581-6249-47c5-925c-a28a771f86e3"), focus: { x: 50, y: 45 },
     kicker: { en: "The avenue", ar: "الجادة" },
     title: { en: "Four streets, each opening onto the lake", ar: "أربعة شوارع، كل منها يطل على البحيرة" },
     body: { en: "Every street ends at the water, so every villa is a short walk from the park.", ar: "ينتهي كل شارع عند الماء، فتبقى كل فيلا على بعد خطوات من الحديقة." },
@@ -75,7 +82,7 @@ export const SCENES: Scene[] = [
   {
     id: "street",
     still: seedream("hf_20261126_002159_967d3be7-a68d-434e-bd66-2132cd39dbc9"),
-    clip: minimax("hf_20261126_003508_0c3fcf0b-2da4-42c8-a9df-e23d40c4884a"), focus: { x: 52, y: 52 },
+    clip: minimax("hf_20261126_003508_0c3fcf0b-2da4-42c8-a9df-e23d40c4884a", "59e74a1b-bfbb-456f-81f2-d83e33f2c51c"), focus: { x: 52, y: 52 },
     kicker: { en: "Lake Street", ar: "شارع البحيرة" },
     title: { en: "Palms, shade and nothing faster than a bicycle", ar: "نخيل وظل، ولا شيء أسرع من الدراجة" },
     body: { en: "Cars stay at the edge. The street belongs to the people who live on it.", ar: "تبقى السيارات على الأطراف. الشارع لمن يسكنه." },
@@ -83,7 +90,7 @@ export const SCENES: Scene[] = [
   {
     id: "villa",
     still: seedream("hf_20261126_001926_16cea4b9-f4e2-458f-b42f-01e37241980a"),
-    clip: minimax("hf_20261126_003510_25c9087f-289b-4947-a3f6-90dfa44da9d3"), focus: { x: 52, y: 55 },
+    clip: minimax("hf_20261126_003510_25c9087f-289b-4947-a3f6-90dfa44da9d3", "83afef72-9f01-45ae-91cf-322703afef3c"), focus: { x: 52, y: 55 },
     kicker: { en: "Villa 17", ar: "الفيلا 17" },
     title: { en: "The Lake Villa", ar: "فيلا البحيرة" },
     body: { en: "Travertine, oak and glass, set back behind a planted courtyard.", ar: "ترافرتين وخشب البلوط والزجاج، خلف فناء مزروع." },
@@ -97,7 +104,7 @@ export const SCENES: Scene[] = [
   {
     id: "entrance",
     still: seedream("hf_20261126_002357_aaf51ebb-646e-4635-87bc-70a59a3f2d4a"),
-    clip: minimax("hf_20261126_003512_5c38cce6-095e-48d4-bbe9-539dd0e2ba80"), focus: { x: 42, y: 50 },
+    clip: minimax("hf_20261126_003512_5c38cce6-095e-48d4-bbe9-539dd0e2ba80", "a4d3221e-ba9b-48ed-b8c7-6e1aec11c27e"), focus: { x: 42, y: 50 },
     kicker: { en: "Arrival court", ar: "فناء الوصول" },
     title: { en: "A pivot door in solid oak, 3.6 metres tall", ar: "باب محوري من البلوط الصلب بارتفاع 3.6 متر" },
     body: { en: "The court is planted with olive and ghaf, and the path is lit from the ground.", ar: "الفناء مزروع بالزيتون والغاف، والممر مضاء من الأرض." },
@@ -105,7 +112,7 @@ export const SCENES: Scene[] = [
   {
     id: "hall",
     still: seedream("hf_20261126_002549_dd388285-9656-46d8-8cdc-41574254a838"),
-    clip: minimax("hf_20261126_003514_4b733c4e-c40f-4dbe-a33e-4cd48e96338b"), focus: { x: 55, y: 45 },
+    clip: minimax("hf_20261126_003514_4b733c4e-c40f-4dbe-a33e-4cd48e96338b", "17f8b721-73be-4ebc-8605-8f393d8b214c"), focus: { x: 55, y: 45 },
     kicker: { en: "Ground floor", ar: "الطابق الأرضي" },
     title: { en: "A double-height hall under a skylight", ar: "قاعة بارتفاع مزدوج تحت مَنوَر" },
     body: { en: "Light falls 7 metres from the roof to the floor, and the stair seems to float.", ar: "ينزل الضوء سبعة أمتار من السقف إلى الأرض، ويبدو الدرج كأنه معلّق." },
@@ -113,7 +120,7 @@ export const SCENES: Scene[] = [
   {
     id: "living",
     still: seedream("hf_20261126_002600_1e04c179-59aa-456c-b6f0-cea3382b7fb2"),
-    clip: minimax("hf_20261126_003517_a2b769a4-b977-4f8f-a73a-308ce9f45364"), focus: { x: 52, y: 48 },
+    clip: minimax("hf_20261126_003517_a2b769a4-b977-4f8f-a73a-308ce9f45364", "0afc832d-f7f2-4a17-921c-20bf0227645a"), focus: { x: 52, y: 48 },
     kicker: { en: "Living, dining, kitchen", ar: "المعيشة والطعام والمطبخ" },
     title: { en: "One room, 16 metres of glass to the lake", ar: "غرفة واحدة و16 مترًا من الزجاج نحو البحيرة" },
     body: { en: "The kitchen island faces the water, and the glass slides away completely.", ar: "جزيرة المطبخ تواجه الماء، والزجاج ينزلق بالكامل." },
@@ -121,7 +128,7 @@ export const SCENES: Scene[] = [
   {
     id: "terrace",
     still: seedream("hf_20261126_002747_0b08622e-e2ed-4f85-9d07-d41292fc7e24"),
-    clip: minimax("hf_20261126_003913_34b8026a-2e60-4a51-a4e4-8b6e0e072b70"), focus: { x: 45, y: 60 },
+    clip: minimax("hf_20261126_003913_34b8026a-2e60-4a51-a4e4-8b6e0e072b70", "998cb988-88dc-485c-ac20-ce1e191d47d5"), focus: { x: 45, y: 60 },
     kicker: { en: "Terrace", ar: "التراس" },
     title: { en: "A 14-metre pool that runs toward the lake", ar: "مسبح بطول 14 مترًا يمتد نحو البحيرة" },
     body: { en: "Facing west, so the evening sun sets over the water.", ar: "يواجه الغرب، فتغيب شمس المساء فوق الماء." },
@@ -129,7 +136,7 @@ export const SCENES: Scene[] = [
   {
     id: "dusk",
     still: seedream("hf_20261126_002403_153c7719-9940-4157-9d58-30930bcff11f"),
-    clip: minimax("hf_20261126_003913_81ba5b59-f251-4143-b277-ff484a2e4872"), focus: { x: 50, y: 52 },
+    clip: minimax("hf_20261126_003913_81ba5b59-f251-4143-b277-ff484a2e4872", "039c1e33-b4b5-455f-8d70-f82e83199417"), focus: { x: 50, y: 52 },
     kicker: { en: "From the garden", ar: "من الحديقة" },
     title: { en: "The house, looking back at dusk", ar: "البيت عند الغسق، من الحديقة" },
     body: { en: "Every distance below is illustrative until the location is final.", ar: "كل المسافات أدناه توضيحية حتى يتحدد الموقع." },
@@ -210,7 +217,7 @@ export const MATERIAL_ASSETS: Record<string, Asset> = {
   travertine: seedream("hf_20261126_003207_717b1761-9dd6-4ad0-aa50-90ef10275351"),
   oak: seedream("hf_20261126_004110_3cc95b3b-9284-4871-b912-784e85fac850"),
   brass: seedream("hf_20261126_004112_0710daec-8fc8-4ed1-9d70-86f8a04153fe"),
-  glass: none,
+  glass: seedream("hf_20261126_004425_a6f7c79b-1a09-43da-b181-c34ce1e16ae9"),
 };
 
 /** The wide picture beside the amenities list (clubhouse and lagoon pool). */

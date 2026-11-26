@@ -148,11 +148,10 @@ export default function HaloRidge() {
         shown = i;
         setActive(i);
       }
-      // Clips are heavy, so the next one starts loading only once the visitor has begun to scroll,
-      // and only pictures are fetched two scenes ahead.
+      // The current and next scene always load; the one after only once the visitor is scrolling.
       load(i);
-      if (p > 0.002) load(i + 1);
-      if (!(media.current[i + 2] instanceof HTMLVideoElement)) load(i + 2);
+      load(i + 1);
+      if (p > 0.002) load(i + 2);
     };
 
     const frame = () => {

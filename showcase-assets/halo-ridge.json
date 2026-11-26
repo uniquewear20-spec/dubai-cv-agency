@@ -1,7 +1,7 @@
 {
   "site": "halo-ridge",
   "category": "real-estate",
-  "note": "Every asset for the Halo Ridge concept site. Images: higgsfield.ai website, Seedream 5.0 Pro, 2K, 16:9, Unlimited mode switched on and the Generate button reading UNLIMITED before each run (0 credits). Clips: Higgsfield connector, MiniMax H3, 2K, 5 s, start and end frame, priced with estimate_video_cost before each run. Base URL for files: https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/<file>_min.webp",
+  "note": "Every asset for the Halo Ridge concept site. Images: higgsfield.ai website, Seedream 5.0 Pro, 2K, 16:9, Unlimited mode switched on and the Generate button reading UNLIMITED before each run (0 credits). Clips: Higgsfield connector, MiniMax H3, 2K, 5 s, start and end frame, priced with estimate_video_cost before each run. Base URL for files: https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/<file>_min.webp Clips play from web copies re-encoded in Higgsfield's sandbox (0 credits): 17 MB for all nine instead of 78 MB; scroll seeks measured at 8 ms median against 113 ms on the 2K originals.",
   "budget": {
     "authorized_credits": 200,
     "flagship_cap": 110
@@ -158,7 +158,13 @@
       },
       "prompt": "One continuous, steady drone flight with no cuts. The camera starts high above a crescent of travertine villas wrapped around a calm lake in the desert at golden hour, then descends smoothly and glides forward over the rooftops, turning gently to line up with a palm-lined avenue that runs straight to the water, ending low above the avenue with the lake glittering ahead. Cinematic, smooth, constant speed, natural light, no people, no text.",
       "file": "hf_20261126_002942_1f0f2e0c-a9b3-459f-af12-1fed73fca96e",
-      "check": "2560x1440, 5.167 s; starts on still-arrival, ends on still-avenue; random seeks 28-180 ms"
+      "check": "2560x1440, 5.167 s; starts on still-arrival, ends on still-avenue; random seeks 28-180 ms",
+      "web_copy": {
+        "media_id": "e812e913-0ecc-4b1a-88c5-a5edf710b613",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/e812e913-0ecc-4b1a-88c5-a5edf710b613.mp4",
+        "encode": "Higgsfield sandbox ffmpeg: scale 1280, libx264 veryfast CRF 26, GOP 8, no B-frames, no audio, faststart",
+        "credits": 0
+      }
     },
     {
       "id": "still-travertine",
@@ -184,7 +190,13 @@
       "status": "done",
       "prompt": "One continuous, steady drone shot with no cuts. From about 90 metres above a palm-lined avenue that runs to a calm lake, the camera descends smoothly and keeps flying forward along the avenue until it glides about 8 metres above the street between tall date palms, still looking toward the lake. Golden hour light, long shadows, constant gentle speed, no people, no cars, no text.",
       "file": "hf_20261126_003506_1f4182d7-1d2c-4800-b19f-9d09f24b4762",
-      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still"
+      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still",
+      "web_copy": {
+        "media_id": "db6e5581-6249-47c5-925c-a28a771f86e3",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/db6e5581-6249-47c5-925c-a28a771f86e3.mp4",
+        "encode": "Higgsfield sandbox ffmpeg: scale 1280, libx264 veryfast CRF 26, GOP 8, no B-frames, no audio, faststart",
+        "credits": 0
+      }
     },
     {
       "id": "clip-street",
@@ -199,7 +211,13 @@
       "status": "done",
       "prompt": "One continuous, steady camera move with no cuts. Gliding low along a quiet palm-lined street of travertine villas, the camera slows, lowers to eye level and turns smoothly to face the front of one two-storey travertine villa behind its planted courtyard wall, ending on a calm, centred view of the house. Golden hour light, smooth gimbal motion, no people, no cars, no text.",
       "file": "hf_20261126_003508_0c3fcf0b-2da4-42c8-a9df-e23d40c4884a",
-      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still"
+      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still",
+      "web_copy": {
+        "media_id": "59e74a1b-bfbb-456f-81f2-d83e33f2c51c",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/59e74a1b-bfbb-456f-81f2-d83e33f2c51c.mp4",
+        "encode": "Higgsfield sandbox ffmpeg: scale 1280, libx264 veryfast CRF 26, GOP 8, no B-frames, no audio, faststart",
+        "credits": 0
+      }
     },
     {
       "id": "clip-villa",
@@ -214,7 +232,13 @@
       "status": "done",
       "prompt": "One continuous, steady camera move with no cuts. From the street in front of the travertine villa, the camera walks slowly forward through the opening in the low garden wall and along the stone path between olive trees, toward the tall oak pivot door, ending close to the entrance. Smooth steadicam motion, golden hour light, no people, no text.",
       "file": "hf_20261126_003510_25c9087f-289b-4947-a3f6-90dfa44da9d3",
-      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still"
+      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still",
+      "web_copy": {
+        "media_id": "83afef72-9f01-45ae-91cf-322703afef3c",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/83afef72-9f01-45ae-91cf-322703afef3c.mp4",
+        "encode": "Higgsfield sandbox ffmpeg: scale 1280, libx264 veryfast CRF 26, GOP 8, no B-frames, no audio, faststart",
+        "credits": 0
+      }
     },
     {
       "id": "clip-entrance",
@@ -229,7 +253,13 @@
       "status": "done",
       "prompt": "One continuous, steady camera move with no cuts. The camera glides forward through the open oak pivot door into the villa and rises slightly to reveal a double-height hall under a long skylight, with a floating oak staircase and a travertine floor. Smooth steadicam motion, warm natural light, no people, no text.",
       "file": "hf_20261126_003512_5c38cce6-095e-48d4-bbe9-539dd0e2ba80",
-      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still"
+      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still",
+      "web_copy": {
+        "media_id": "a4d3221e-ba9b-48ed-b8c7-6e1aec11c27e",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/a4d3221e-ba9b-48ed-b8c7-6e1aec11c27e.mp4",
+        "encode": "Higgsfield sandbox ffmpeg: scale 1280, libx264 veryfast CRF 26, GOP 8, no B-frames, no audio, faststart",
+        "credits": 0
+      }
     },
     {
       "id": "clip-hall",
@@ -244,7 +274,13 @@
       "status": "done",
       "prompt": "One continuous, steady camera move with no cuts. From the double-height hall the camera moves forward past the floating oak stair and turns gently into a large open living room with a wall of glass onto a lake and a long travertine kitchen island. Smooth steadicam motion, golden hour light streaming in, no people, no text.",
       "file": "hf_20261126_003514_4b733c4e-c40f-4dbe-a33e-4cd48e96338b",
-      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still"
+      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still",
+      "web_copy": {
+        "media_id": "17f8b721-73be-4ebc-8605-8f393d8b214c",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/17f8b721-73be-4ebc-8605-8f393d8b214c.mp4",
+        "encode": "Higgsfield sandbox ffmpeg: scale 1280, libx264 veryfast CRF 26, GOP 8, no B-frames, no audio, faststart",
+        "credits": 0
+      }
     },
     {
       "id": "clip-living",
@@ -259,7 +295,13 @@
       "status": "done",
       "prompt": "One continuous, steady camera move with no cuts. The camera glides forward across the living room, out through the open glass sliding doors onto the travertine terrace, and turns to follow the infinity pool as it runs toward the lake at sunset. Smooth steadicam motion, warm sunset light, no people, no text.",
       "file": "hf_20261126_003517_a2b769a4-b977-4f8f-a73a-308ce9f45364",
-      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still"
+      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked: continuous move from start still to end still",
+      "web_copy": {
+        "media_id": "0afc832d-f7f2-4a17-921c-20bf0227645a",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/0afc832d-f7f2-4a17-921c-20bf0227645a.mp4",
+        "encode": "Higgsfield sandbox ffmpeg: scale 1280, libx264 veryfast CRF 26, GOP 8, no B-frames, no audio, faststart",
+        "credits": 0
+      }
     },
     {
       "id": "clip-terrace",
@@ -274,7 +316,13 @@
       "status": "done",
       "prompt": "One continuous, slow camera move with no cuts. From the terrace beside the infinity pool at sunset, the camera drifts out over the lawn toward the lake and turns around to look back at the villa, as the sky deepens to dusk and the house's interior lights glow warmer and the pool lights come on. Smooth, cinematic, no people, no text.",
       "file": "hf_20261126_003913_34b8026a-2e60-4a51-a4e4-8b6e0e072b70",
-      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked"
+      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked",
+      "web_copy": {
+        "media_id": "998cb988-88dc-485c-ac20-ce1e191d47d5",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/998cb988-88dc-485c-ac20-ce1e191d47d5.mp4",
+        "encode": "Higgsfield sandbox ffmpeg: scale 1280, libx264 veryfast CRF 26, GOP 8, no B-frames, no audio, faststart",
+        "credits": 0
+      }
     },
     {
       "id": "clip-dusk",
@@ -289,7 +337,13 @@
       "status": "done",
       "prompt": "One continuous drone shot with no cuts. From the lakeside garden looking at the lit villa at dusk, the camera rises steadily into the sky and pulls back, revealing the whole crescent of glowing villas wrapped around the lake on the edge of the desert at blue hour, with the city lights on the horizon. Smooth constant ascent, no people, no text.",
       "file": "hf_20261126_003913_81ba5b59-f251-4143-b277-ff484a2e4872",
-      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked"
+      "check": "2560x1440, 5.167 s; frames at 5/25/50/75/99% checked",
+      "web_copy": {
+        "media_id": "039c1e33-b4b5-455f-8d70-f82e83199417",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/039c1e33-b4b5-455f-8d70-f82e83199417.mp4",
+        "encode": "Higgsfield sandbox ffmpeg: scale 1280, libx264 veryfast CRF 26, GOP 8, no B-frames, no audio, faststart",
+        "credits": 0
+      }
     },
     {
       "id": "still-oak",
@@ -320,8 +374,7 @@
       "route": "website",
       "model": "Seedream 5.0 Pro",
       "credits": 0,
-      "file": null,
-      "status": "generating",
+      "file": "hf_20261126_004425_a6f7c79b-1a09-43da-b181-c34ce1e16ae9",
       "reference": null,
       "prompt": "Close-up material photograph of the edge of a tall low-iron glass sliding door with a slim dark-bronze frame, the glass perfectly clear with no green tint, a calm lake and olive trees softly out of focus beyond it, a faint warm reflection of sunset light on the glass surface, a honed travertine floor at the threshold. Calm, precise architectural detail photography, natural colours, very high detail, shallow depth of field. No text, no logos, no watermark."
     }
