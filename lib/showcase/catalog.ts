@@ -175,4 +175,21 @@ export const CONCEPTS: Concept[] = [
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_165152_2e7cf649-5da6-451b-b851-548c08ff1074_min.webp",
     focus: "50% 50%",
   },
+  {
+    slug: "mabsam",
+    name: "MABSAM",
+    category: "healthcare",
+    line: {
+      en: "A small dental clinic in Jumeirah: four rooms, olive trees at every window, and time.",
+      fr: "Une petite clinique dentaire à Jumeirah : quatre salles, des oliviers à chaque fenêtre, et du temps.",
+      ar: "عيادة أسنان صغيرة في جميرا: أربع غرف، وأشجار زيتون عند كل نافذة، ووقت كافٍ.",
+    },
+    feature: {
+      en: "A calm treatment finder that also asks how you feel about dentists, then a first-visit booking",
+      fr: "Un outil apaisant pour trouver un soin, qui demande aussi ce que vous ressentez chez le dentiste, puis la réservation d'un premier rendez-vous",
+      ar: "أداة هادئة لاختيار العلاج تسألك أيضاً عن شعورك تجاه طبيب الأسنان، ثم حجز زيارة أولى",
+    },
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_172908_062cde89-7357-495e-aca2-fe370a4ae34e_min.webp",
+    focus: "50% 50%",
+  },
 ];
