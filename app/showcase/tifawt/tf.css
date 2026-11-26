@@ -2224,11 +2224,15 @@ html.tf-has-cursor .tf button {
   grid-column: 1 / -1;
   justify-self: start;
 }
+/* Hidden without moving it off-screen: an off-screen box scrolls the page sideways in Arabic. */
 .tf-hp {
   position: absolute;
-  left: -9999px;
   width: 1px;
   height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  opacity: 0;
+  pointer-events: none;
 }
 .tf-err {
   grid-column: 1 / -1;

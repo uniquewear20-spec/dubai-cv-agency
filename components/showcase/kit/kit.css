@@ -1,0 +1,17 @@
+/* Shared by the concept sites. */
+.kit-img-missing {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(127, 127, 127, 0.18), rgba(127, 127, 127, 0.08) 45%, rgba(127, 127, 127, 0.16));
+}
+/* Hidden without moving it off-screen: an off-screen box scrolls the page sideways in RTL. */
+.kit-hp {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
