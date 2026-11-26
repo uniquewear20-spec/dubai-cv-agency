@@ -10,23 +10,48 @@ export const hf = (id: string) => (id ? `${CDN}${id}_min.webp` : "");
 
 /** Every photograph, by role. Filled from the Higgsfield generations in showcase-assets/hayrat-prompts.json. */
 export const IMG = {
-  heroDhow: "",
-  heroJetty: "",
-  aerial: "",
-  night: "",
-  diveSurface: "",
-  diveDiver: "",
-  diveBank: "",
-  pearl: "",
+  heroDhow: hf("hf_20261126_123629_c59c7157-18d8-4950-b9d4-379fe802c80e"),
+  heroJetty: hf("hf_20261126_123716_2eba8659-ab61-466e-9991-9edb1ba4f0c4"),
+  aerial: hf("hf_20261126_124002_a85e6580-46b4-45d2-af73-2b894bdbb5df"),
+  night: hf("hf_20261126_124044_881e2c32-e492-4537-a46b-62f84b8b2c8e"),
+  diveSurface: hf("hf_20261126_125055_cb85211d-4621-4540-bdd3-c5641b771525"),
+  diveDiver: hf("hf_20261126_125401_15b53b04-0c0f-411c-9250-56ef66c98544"),
+  diveBank: hf("hf_20261126_125512_fe5ad520-c8ed-4acc-bd9b-c55dbc3e7ca1"),
+  pearl: hf("hf_20261126_125713_0dccb9f5-aa08-474d-a334-30b3dff36463"),
 };
 
 /** 2x2 grids cut into four files (top-left, top-right, bottom-left, bottom-right). */
 export const GRID: Record<"dining" | "experience" | "spa" | "details" | "rooms", string[]> = {
-  dining: [],
-  experience: [],
-  spa: [],
-  details: [],
-  rooms: [],
+  dining: [
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/2660e638-9dba-4f56-b6ea-453186a16da7.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/15ff7cb7-e9b1-4436-a45e-a8cd9c90f537.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/5305cca1-e206-48cb-8ec3-550e174ea29b.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/40bab4c6-1436-4e12-9c79-1361fd81fed7.webp",
+  ],
+  experience: [
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/ca544d71-ba5e-49f3-93c8-d28ecc3f8abb.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/55f33845-14c8-4deb-9680-821d5fdfcbd7.webp",
+    "",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/72a63438-9528-4ab9-ae06-fe98b4c34af5.webp",
+  ],
+  spa: [
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/78d16dd2-f6fb-4076-b01a-ac5b6021ed07.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/9d8fd27a-9ad5-4f9c-b311-0d303fdee719.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/84196443-97bd-4bae-a1d2-dce183436119.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/b38b9fc8-a014-4a9e-8a46-fecc38f954ab.webp",
+  ],
+  details: [
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/c3e0b309-8fa8-4a65-983d-81b297761a8c.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/9aa0fa6b-f290-435c-becb-cd7e65789f59.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/fcd2b173-d8f7-4bd6-bd89-efc3133cd0b9.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/6bf5bc30-2563-4e43-95e1-0a8590005dc4.webp",
+  ],
+  rooms: [
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/79fb602d-e33e-4921-99bd-3faa46189d72.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/771a04a7-d7ab-4c50-9563-84fa4ef0b18f.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/44192862-aeaf-4902-ab5f-60ea7fbe0982.webp",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/8e11eec1-8436-4213-b08d-9c9c834cecd6.webp",
+  ],
 };
 export const cell = (g: keyof typeof GRID, i: number) => GRID[g][i] ?? "";
 
@@ -69,7 +94,7 @@ export const ROOMS: Room[] = [
     maxChildren: 1,
     view: { en: "Courtyard", ar: "الفناء" },
     base: 1850,
-    img: "",
+    img: hf("hf_20261126_124438_c62ae5e5-8b22-4e14-8211-98ae81c1a07f"),
     details: [1, 2],
     features: [
       { en: "Courtyard with a ghaf tree", ar: "فناء بشجرة غاف" },
@@ -92,7 +117,7 @@ export const ROOMS: Room[] = [
     maxChildren: 1,
     view: { en: "Beach and shallows", ar: "الشاطئ والمياه الضحلة" },
     base: 2600,
-    img: "",
+    img: hf("hf_20261126_124353_3a55c09e-540a-499d-b07e-fd202b4def75"),
     details: [0, 3],
     features: [
       { en: "Doors that fold onto the sand", ar: "أبواب تنطوي على الرمل" },
@@ -116,7 +141,7 @@ export const ROOMS: Room[] = [
     maxChildren: 1,
     view: { en: "Rooftops and the anchorage", ar: "الأسطح والمرسى" },
     base: 3900,
-    img: "",
+    img: hf("hf_20261126_124652_7165b45e-df43-4ec0-aba3-8228559280fc"),
     details: [2, 1],
     features: [
       { en: "60 m² private roof terrace", ar: "سطح خاص بمساحة 60 م²" },
@@ -139,7 +164,7 @@ export const ROOMS: Room[] = [
     maxChildren: 0,
     view: { en: "Lagoon", ar: "البحيرة" },
     base: 5400,
-    img: "",
+    img: hf("hf_20261126_124739_9bedf568-51ce-4649-8cd2-1f2e8a93aaad"),
     details: [3, 0],
     features: [
       { en: "Private plunge pool", ar: "مسبح خاص" },
@@ -163,7 +188,7 @@ export const ROOMS: Room[] = [
     maxChildren: 2,
     view: { en: "Private courtyard and sea", ar: "فناء خاص والبحر" },
     base: 9800,
-    img: "",
+    img: hf("hf_20261126_124954_ce235f8a-2560-414e-8e1a-cb3489ab5087"),
     details: [1, 2],
     features: [
       { en: "Private courtyard and wind tower", ar: "فناء خاص وبرج رياح" },
@@ -366,7 +391,7 @@ export const DAY: { t: string; name: L; body: L; img: { g: keyof typeof GRID; i:
   { t: "12:30", name: { en: "Lunch at the jetty", ar: "الغداء على الرصيف" }, body: { en: "Whatever the boats brought in, grilled over palm wood.", ar: "ما جاءت به القوارب، مشويّاً على خشب النخيل." }, img: { g: "dining", i: 3 } },
   { t: "15:00", name: { en: "The Salt House", ar: "بيت الملح" }, body: { en: "Steam, salt and the long afternoon.", ar: "بخار وملح وعصر طويل." }, img: { g: "spa", i: 0 } },
   { t: "17:30", name: { en: "Under sail", ar: "تحت الشراع" }, body: { en: "The dhow takes the evening wind around the island.", ar: "تأخذ السفينة ريح المساء حول الجزيرة." }, img: { g: "experience", i: 1 } },
-  { t: "19:30", name: { en: "The nahham sings", ar: "يغنّي النهّام" }, body: { en: "The songs the crews sang to keep the divers' rhythm.", ar: "الأغاني التي كانت تضبط إيقاع الغوّاصين." }, img: { g: "experience", i: 2 } },
+  { t: "19:30", name: { en: "The nahham sings", ar: "يغنّي النهّام" }, body: { en: "The songs the crews sang to keep the divers' rhythm.", ar: "الأغاني التي كانت تضبط إيقاع الغوّاصين." }, img: { g: "dining", i: 1 } },
   { t: "21:30", name: { en: "Stars from the roof", ar: "النجوم من السطح" }, body: { en: "No city light for forty minutes in any direction.", ar: "لا ضوء مدينة على مسافة أربعين دقيقة في كل اتجاه." }, img: "night" },
 ];
 

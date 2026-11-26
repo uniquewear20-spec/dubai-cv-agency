@@ -73,4 +73,21 @@ export const CONCEPTS: Concept[] = [
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_051546_454b796d-6f42-466e-980a-a04c8ec37468_min.webp",
     focus: "50% 45%",
   },
+  {
+    slug: "hayrat",
+    name: "HAYRAT",
+    category: "hotels",
+    line: {
+      en: "Eighteen rooms on an old pearl-diving island in the Gulf, forty minutes from shore by dhow.",
+      fr: "Dix-huit chambres sur une ancienne île de pêcheurs de perles du Golfe, à quarante minutes du rivage en boutre.",
+      ar: "ثماني عشرة غرفة على جزيرة قديمة لصيد اللؤلؤ في الخليج، على بُعد أربعين دقيقة من الشاطئ بالسفينة الشراعية.",
+    },
+    feature: {
+      en: "A dive you scroll, from the dhow down to the oyster banks at twelve metres, then a booking engine with live rates",
+      fr: "Une plongée au défilement, du boutre jusqu'aux bancs d'huîtres à douze mètres, puis un moteur de réservation avec tarifs en direct",
+      ar: "غوص بالتمرير من السفينة حتى هيرات المحار على عمق اثني عشر متراً، ثم محرك حجز بأسعار مباشرة",
+    },
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_123629_c59c7157-18d8-4950-b9d4-379fe802c80e_min.webp",
+    focus: "40% 55%",
+  },
 ];
