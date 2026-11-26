@@ -24,7 +24,8 @@
 .hr-note{flex:1;min-width:0;opacity:.86;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .hr-back{white-space:nowrap;text-underline-offset:3px}
 .hr-lang{background:transparent;border:1px solid currentColor;border-radius:999px;padding:7px 14px;cursor:pointer;white-space:nowrap}
-@media (max-width:760px){.hr-note{display:none}.hr-back{margin-inline-start:auto}}
+@media (max-width:760px){.hr-note{display:none}.hr-back{margin-inline-start:auto}.hr-bar{gap:10px;font-size:13px}.hr-mark{font-size:18px}.hr-lang{padding:6px 12px}}
+@media (max-width:440px){.hr-back{display:none}.hr-tag{margin-inline-end:auto}}
 
 /* The flight */
 .hr-journey{position:relative;background:var(--night)}
@@ -63,7 +64,7 @@
   .hr-cap{width:calc(100% - 40px);inset-block-end:100px}
   .hr-cap h1,.hr-cap h2{font-size:clamp(30px,8.4vw,40px)}
   .hr-steps{inset-block-end:28px}
-  .hr-hint{inset-block-end:80px}
+  .hr-hint{inset-block-end:40px}
   .hr-halo{inset-block-start:62px;width:50px;height:50px}
   .hr-facts{gap:10px 22px}
   .hr-facts dd{font-size:16px}

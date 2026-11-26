@@ -65,7 +65,7 @@ export const SCENES: Scene[] = [
     clip: minimax("hf_20261126_002942_1f0f2e0c-a9b3-459f-af12-1fed73fca96e", "e812e913-0ecc-4b1a-88c5-a5edf710b613"), focus: { x: 50, y: 52 },
     kicker: { en: "Halo Ridge", ar: "هالو ريدج" },
     title: { en: "A crescent of 64 villas on the edge of the desert", ar: "هلال من 64 فيلا على حافة الصحراء" },
-    body: { en: "Scroll to fly in. You land at the door of Villa 17.", ar: "مرّر للأسفل لتطير إلى الداخل. ستهبط عند باب الفيلا 17." },
+    body: { en: "A flight from the sky to the front door of Villa 17, at your own pace.", ar: "رحلة من السماء حتى باب الفيلا 17، بالسرعة التي تختارها." },
   },
   {
     id: "avenue",
