@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 const fail = (error: string, status = 400) => NextResponse.json({ ok: false, error }, { status });
 const isEmail = (v: string) => /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(v);
-const SITES = new Set(["halo-ridge", "tifawt", "hayrat", "mawqid", "zill", "oriel-88", "khayyal"]);
+const SITES = new Set(["halo-ridge", "tifawt", "hayrat", "mawqid", "zill", "oriel-88", "khayyal", "muskana"]);
 
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;

@@ -158,4 +158,21 @@ export const CONCEPTS: Concept[] = [
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_162629_d523d832-6dcf-4cf8-bdbe-d78602c53839_min.webp",
     focus: "50% 55%",
   },
+  {
+    slug: "muskana",
+    name: "MUSKANA",
+    category: "ecommerce",
+    line: {
+      en: "An oud house in Dubai: oils, attars and bakhoor, made to be worn one over the other.",
+      fr: "Une maison de oud à Dubaï : huiles, attars et bakhoor, faits pour se porter les uns sur les autres.",
+      ar: "دار عود في دبي: دهون وعطور زيتية وبخور، صُنعت لتُلبس الواحدة فوق الأخرى.",
+    },
+    feature: {
+      en: "Build a layered scent in a bottle that fills as you choose, then shop with a working bag",
+      fr: "Composez un parfum en couches dans un flacon qui se remplit à chaque choix, puis faites vos achats avec un panier qui fonctionne",
+      ar: "اصنع عطراً من طبقات في زجاجة تمتلئ مع كل اختيار، ثم تسوّق بحقيبة تعمل",
+    },
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_165152_2e7cf649-5da6-451b-b851-548c08ff1074_min.webp",
+    focus: "50% 50%",
+  },
 ];
