@@ -107,4 +107,21 @@ export const CONCEPTS: Concept[] = [
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_145705_4cca2547-5048-49bb-bbb3-a648b2f5a4e3_min.webp",
     focus: "50% 60%",
   },
+  {
+    slug: "zill",
+    name: "ZILL",
+    category: "architecture",
+    line: {
+      en: "An architecture and interiors studio for hot climates: courtyards, thick earth walls and wind towers.",
+      fr: "Un studio d'architecture et d'intérieurs pour les climats chauds : patios, murs de terre épais et tours à vent.",
+      ar: "استوديو للعمارة والتصميم الداخلي في المناخات الحارة: أفنية وجدران سميكة من التراب وأبراج رياح.",
+    },
+    feature: {
+      en: "A courtyard house that puts itself together as you scroll, and a sun study that measures its shade hour by hour",
+      fr: "Une maison à patio qui se monte au fil du défilement, et une étude solaire qui mesure son ombre heure par heure",
+      ar: "بيت بفناء يتركّب كلما مرّرت، ودراسة شمس تقيس ظلّه ساعة بساعة",
+    },
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_153253_673f7f5e-f3ca-47b3-ab4b-ab8b209aa248_min.webp",
+    focus: "60% 55%",
+  },
 ];
