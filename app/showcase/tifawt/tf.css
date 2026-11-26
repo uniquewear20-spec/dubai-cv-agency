@@ -288,6 +288,32 @@ html.tf-locked body {
 .tf-logo.is-compact .tf-logo-word {
   font-size: 20px;
 }
+.tf-c-logo .tf-mark,
+.tf-c-logo .tf-logo-word,
+.tf-c-logo .tf-logo-sub {
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.6s var(--ease);
+}
+.tf-corners[data-scrolled="true"] .tf-c-logo .tf-logo-word,
+.tf-corners[data-scrolled="true"] .tf-c-logo .tf-logo-sub {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.tf-corners[data-scrolled="true"] .tf-c-logo {
+  pointer-events: none;
+}
+.tf-corners[data-scrolled="true"] .tf-c-logo .tf-mark {
+  transform: translateY(4px) scale(0.86);
+  pointer-events: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tf-c-logo .tf-mark,
+  .tf-c-logo .tf-logo-word,
+  .tf-c-logo .tf-logo-sub {
+    transition: none;
+  }
+}
 /* ───────── corners ───────── */
 .tf-corners {
   position: fixed;

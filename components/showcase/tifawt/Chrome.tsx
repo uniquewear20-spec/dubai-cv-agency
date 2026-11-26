@@ -137,7 +137,16 @@ export function Corners({ onHome = false }: { onHome?: boolean }) {
   const ink = useInk();
   const [menu, setMenu] = useState(false);
   const [concept, setConcept] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  // Past the first screen the lockup folds down to the tree alone, so it never sits on a headline.
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > window.innerHeight * 0.6);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
 
   useEffect(() => {
     if (!menu) return;
@@ -154,7 +163,7 @@ export function Corners({ onHome = false }: { onHome?: boolean }) {
   }, [menu]);
 
   return (
-    <div className="tf-corners" data-top={ink.top} data-bottom={ink.bottom}>
+    <div className="tf-corners" data-top={ink.top} data-bottom={ink.bottom} data-scrolled={scrolled}>
       <a className="tf-skip" href="#tf-main">
         {lang === "ar" ? "انتقل إلى المحتوى" : "Skip to content"}
       </a>
