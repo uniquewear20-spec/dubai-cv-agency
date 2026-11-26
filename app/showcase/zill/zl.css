@@ -412,6 +412,24 @@ html.zl-locked body {
     clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
   }
 }
+.zl-hero-media::before,
+.zl-hero-media::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.zl-hero-media::before {
+  top: 0;
+  height: 160px;
+  background: linear-gradient(rgba(22, 29, 34, 0.45), rgba(22, 29, 34, 0));
+}
+.zl-hero-media::after {
+  bottom: 0;
+  height: 34%;
+  background: linear-gradient(rgba(22, 29, 34, 0), rgba(22, 29, 34, 0.55));
+}
 .zl-hero-copy {
   align-self: end;
   display: grid;
@@ -1203,6 +1221,7 @@ html.zl-locked body {
 .zl-proj-body {
   overflow-y: auto;
   display: grid;
+  grid-auto-rows: max-content;
   align-content: start;
   gap: 18px;
   padding: clamp(24px, 4vw, 48px);
@@ -1829,7 +1848,8 @@ html.zl-locked body {
     padding-top: 120px;
   }
   .zl-hero-shade {
-    clip-path: polygon(0 52%, 100% 38%, 100% 100%, 0 100%) !important;
+    clip-path: polygon(0 30%, 100% 16%, 100% 100%, 0 100%) !important;
+    background: rgba(22, 29, 34, 0.66);
     animation-name: zl-rise !important;
   }
   @keyframes zl-rise {

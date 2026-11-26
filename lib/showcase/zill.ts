@@ -86,7 +86,7 @@ export const GRID_ALT: Record<keyof typeof GRID, L[]> = {
     { en: "A bedroom with a low oak bed and dotted light from a screen", ar: "غرفة نوم بسرير منخفض من البلوط وضوء منقّط من حاجز" },
   ],
   details: [
-    { en: "The top of a wind tower against the sky", ar: "قمة برج رياح على خلفية السماء" },
+    { en: "Timber beams on top of an earth tower, against the sky", ar: "عوارض خشبية فوق برج من التراب، على خلفية السماء" },
     { en: "A deep window reveal with a timber shutter", ar: "نافذة عميقة في الجدار بمصراع خشبي" },
     { en: "A stone water channel through a courtyard", ar: "قناة ماء حجرية تعبر فناءً" },
     { en: "A curved plaster bench in a shaded corner", ar: "مقعد منحنٍ من الجير في زاوية مظلّلة" },
