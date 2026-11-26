@@ -209,4 +209,21 @@ export const CONCEPTS: Concept[] = [
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_191823_ae8207fa-3da4-48cf-bea6-8f8315c0a940_min.webp",
     focus: "50% 55%",
   },
+  {
+    slug: "thahab",
+    name: "THAHAB",
+    category: "hotels",
+    line: {
+      en: "Twelve canvas tents on a dune ridge in the Empty Quarter, and nights dark enough for the Milky Way.",
+      fr: "Douze tentes de toile sur une crête de dunes dans le Quart Vide, et des nuits assez noires pour la Voie lactée.",
+      ar: "اثنتا عشرة خيمة على قمة كثيب في الربع الخالي، وليالٍ مظلمة بما يكفي لرؤية درب التبانة.",
+    },
+    feature: {
+      en: "Plan your nights by the real phase of the moon, and follow a day in the dunes from first light",
+      fr: "Choisissez vos nuits selon la vraie phase de la lune, et suivez une journée dans les dunes dès l'aube",
+      ar: "اختر لياليك حسب طور القمر الحقيقي، وتابع يوماً في الكثبان من أول الضوء",
+    },
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_204232_82f576cb-b046-4bca-a3d7-7031f74a1ee2_min.webp",
+    focus: "50% 60%",
+  },
 ];
