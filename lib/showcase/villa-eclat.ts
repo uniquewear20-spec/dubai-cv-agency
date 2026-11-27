@@ -77,7 +77,7 @@ export const FILM: Shot[] = [
   { id: "approach", img: "approach", focus: [0.5, 0.56], from: { s: 1 }, to: { s: 1.32 }, out: "zoom", len: 1.25, chapter: "Arrival",
     flare: { from: [0.18, 0.12], to: [0.1, 0.08], k: 0.55 },
     lines: [{ at: [0.08, 0.62], text: "The lawn runs from the sand to a bronze door five metres tall." }] },
-  { id: "door", img: "door", clip: { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/5bb0d469-b4df-4037-ad36-259776b59b41.mp4", dur: 5.04 },
+  { id: "door", img: "door", clip: { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/f5c14e48-9de4-4abd-8fa1-49b560267298.mp4", dur: 5.04 },
     focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1 }, out: "cut", len: 1.6,
     lines: [{ at: [0.06, 0.5], text: "It turns on a single pivot, and stands open all day." }] },
   { id: "hall", img: "hall", focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14, y: -0.03 }, out: "whipUp", len: 1.1, chapter: "The hall",
