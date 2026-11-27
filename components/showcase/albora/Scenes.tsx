@@ -74,8 +74,8 @@ export function Hero() {
         </div>
         <div className="al-door-zoom">
           <div className="al-door-in">
-            <Door variant="land" word={t.name} />
-            <Door variant="port" word={t.name} />
+            <Door variant="land" word="ALBORA" />
+            <Door variant="port" word="ALBORA" />
           </div>
         </div>
         <Branch side="l" />
@@ -84,7 +84,7 @@ export function Hero() {
           {t.name} {t.residences}. {t.left} {t.right}, {t.script}.
         </h1>
         <div className="al-hero-words" aria-hidden>
-          <p className="al-kicker">{t.residences}</p>
+          <p className="al-kicker">{lang === "ar" ? `${t.name} ${t.residences}` : t.residences}</p>
           <p className="al-hero-script">{t.script}</p>
           <p className="al-hero-side al-hero-left">{t.left}</p>
           <p className="al-hero-side al-hero-right">{t.right}</p>
@@ -112,7 +112,7 @@ export function Hero() {
           </button>
         </div>
         <a href="#residences" className="al-hero-cta" aria-label={t.viewHomes}>
-          <Ring text={t.viewRing} id="al-cta-ring" size={132}>
+          <Ring text={lang === "ar" ? "" : t.viewRing} id="al-cta-ring" size={132}>
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden>
               <path d="M12 4v15M6 13l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="1.5" />
             </svg>

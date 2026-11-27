@@ -7,6 +7,7 @@
 import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import { useDialog } from "../kit/hooks";
+import { UI } from "@/lib/showcase/albora";
 import { AlboraProvider, useAlbora } from "./state";
 
 export function Mark({ size = 28 }: { size?: number }) {
@@ -70,7 +71,7 @@ function Top() {
   return (
     <header className={`al-top al-bar${solid ? " is-solid" : ""}`}>
       <a href="#top" className="al-badge" aria-label={`${t.name}, ${t.backTop}`}>
-        <Ring text={t.ring} id="al-badge-ring" size={92}>
+        <Ring text={UI.en.ring} id="al-badge-ring" size={92}>
           <Mark size={30} />
         </Ring>
       </a>

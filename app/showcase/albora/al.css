@@ -28,6 +28,17 @@
   --sans: var(--al-naskh), "Geeza Pro", sans-serif;
   --display: var(--al-naskh), serif;
 }
+/* Arabic letters join; any tracking breaks the joins, so Arabic text is never letter-spaced */
+.al[lang="ar"],
+.al[lang="ar"] * {
+  letter-spacing: 0 !important;
+}
+.al[lang="ar"] .al-scroll {
+  display: none;
+}
+.al[lang="ar"] .al-hero-side {
+  font-weight: 700;
+}
 @media (min-width: 1001px) {
   .al {
     --rail: 64px;
