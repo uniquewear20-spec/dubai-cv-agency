@@ -242,7 +242,15 @@ export function Film() {
     const start = () => { if (!live) { live = true; last = performance.now(); dirty = true; raf = requestAnimationFrame(tick); } };
     const stop = () => { live = false; cancelAnimationFrame(raf); };
     measure();
-    keysOf(FILM[0]).concat(keysOf(FILM[1])).forEach((k) => eng.want(k));
+    // Pictures for the opening shots load at once; the first clip waits until the reader is well
+    // into the hero, so it never competes with the drone shot for the connection.
+    [FILM[0], FILM[1], FILM[2]].forEach((s) => keysOf(s).filter((k) => !k.startsWith("clip:")).forEach((k) => eng.want(k)));
+    const near = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      near.disconnect();
+      keysOf(FILM[1]).forEach((k) => eng.want(k));
+    }, { rootMargin: "260% 0px" });
+    near.observe(el);
     const io = new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), { rootMargin: "100% 0px" });
     io.observe(el);
     const ro = new ResizeObserver(measure);
@@ -253,6 +261,7 @@ export function Film() {
     return () => {
       stop();
       io.disconnect();
+      near.disconnect();
       ro.disconnect();
       removeEventListener("resize", measure);
       canvas.removeEventListener("webglcontextlost", lost);

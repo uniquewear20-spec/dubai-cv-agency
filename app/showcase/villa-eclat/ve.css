@@ -93,6 +93,8 @@
 .ve-logo { display: inline-flex; align-items: center; gap: 12px; color: var(--gold-hi); }
 .ve-logo-em { display: block; width: 44px; height: auto; }
 .ve-logo-name { font-size: 21px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--gold-hi); }
+/* Over the opening the crest carries the name; the header's copy fades in as the crest leaves. */
+.ve-top .ve-logo-name { opacity: var(--name, 0); transform: translate3d(calc((1 - var(--name, 0)) * -8px), 0, 0); }
 .ve-top-nav { display: flex; gap: 10px; }
 .ve-top-btn {
   font: inherit;
@@ -113,8 +115,12 @@
 .ve-hero { position: relative; height: 420svh; }
 .ve-hero-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--ink); }
 .ve-hero-video,
+.ve-hero-poster,
 .ve-hero-still { position: absolute; inset: 0; width: 100%; height: 100%; }
-.ve-hero-video { display: block; object-fit: cover; object-position: 50% 60%; }
+/* The still is the drone shot's first frame; it drifts in with the scroll until a clip is ready. */
+.ve-hero-poster { display: block; object-fit: cover; object-position: 50% 60%; transform: scale(calc(1 + var(--p) * 0.24)) translate3d(0, calc(var(--p) * -1.5%), 0); transform-origin: 50% 58%; }
+.ve-hero-video { display: block; object-fit: cover; object-position: 50% 60%; opacity: 0; transition: opacity 0.7s ease; }
+.ve-hero-video.is-on { opacity: 1; }
 .ve-hero-still { transform: scale(calc(1.04 + var(--p) * 0.3)); transform-origin: 50% 62%; will-change: transform; }
 .ve-hero-still > img,
 .ve-hero-still > span { width: 100%; height: 100%; object-fit: cover; object-position: 50% 56%; }
@@ -126,9 +132,9 @@
 }
 .ve-hero-top {
   position: absolute;
-  inset: clamp(92px, 12vh, 132px) clamp(20px, 5vw, 80px) auto;
+  inset: clamp(96px, 13vh, 136px) clamp(20px, 5vw, 80px) auto;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 40px;
   transform: translate3d(0, calc(var(--p) * -26vh), 0) scale(calc(1 - var(--p) * 0.75));
@@ -136,15 +142,17 @@
   opacity: calc(1 - var(--p) * 3.4);
   will-change: transform, opacity;
 }
-.ve-hero-title { display: grid; justify-items: start; gap: 8px; }
-.ve-hero-em { display: block; width: clamp(76px, 6.4vw, 112px); height: auto; margin-left: -4px; }
-.ve-hero-h1 { display: grid; gap: 2px; margin: 0; font-weight: 400; }
-.ve-hero-villa { font-size: 15px; letter-spacing: 0.66em; text-transform: uppercase; color: var(--ivory); }
+/* The crest: sun emblem, a ruled "Villa", the name in gold, and the address under a hairline. */
+.ve-hero-title { display: grid; justify-items: start; }
+.ve-hero-em { display: block; width: clamp(62px, 4.8vw, 86px); height: auto; margin: 0 0 16px -2px; }
+.ve-hero-h1 { display: grid; justify-items: start; gap: 10px; margin: 0; font-weight: 400; }
+.ve-hero-villa { display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: 0.62em; text-transform: uppercase; color: var(--gold-hi); text-shadow: 0 1px 14px rgba(10, 8, 6, 0.5); }
+.ve-hero-villa::after { content: ""; width: 54px; height: 1px; background: linear-gradient(90deg, var(--gold), rgba(201, 164, 106, 0)); }
 .ve-hero-name {
-  font-size: clamp(72px, 8.8vw, 156px);
-  line-height: 0.92;
-  letter-spacing: 0.16em;
-  margin-right: -0.16em;
+  font-size: clamp(44px, 4.4vw, 80px);
+  line-height: 1;
+  letter-spacing: 0.32em;
+  margin-right: -0.32em;
   text-transform: uppercase;
   color: var(--gold-hi);
   background: linear-gradient(100deg, #f7e9c6 0%, #d9b97a 26%, #a98247 44%, #fff2cf 52%, #c9a46a 70%, #f2dfb3 100%) 100% 0 / 240% 100%;
@@ -154,12 +162,13 @@
   animation: ve-glint 3s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both;
 }
 @keyframes ve-glint { from { background-position: 100% 0; } to { background-position: 0% 0; } }
-.ve-hero-label { margin: 10px 0 0; font-size: 13px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--ivory); }
-.ve-hero-stats { display: flex; gap: clamp(28px, 4vw, 72px); margin: 0; padding-bottom: 4px; }
+/* Width 0 with min-width 100%: the address wraps to the name's width instead of widening the crest. */
+.ve-hero-label { width: 0; min-width: 100%; margin: 18px 0 0; padding-top: 14px; border-top: 1px solid rgba(201, 164, 106, 0.55); font-size: 11px; line-height: 1.8; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(239, 231, 218, 0.9); text-shadow: 0 1px 14px rgba(10, 8, 6, 0.55); }
+.ve-hero-stats { display: flex; gap: clamp(28px, 4vw, 64px); margin: 6px 0 0; text-shadow: 0 1px 18px rgba(10, 8, 6, 0.5); }
 .ve-hero-stats div { display: grid; gap: 10px; }
-.ve-hero-stats dd { margin: 0; font-size: clamp(44px, 4.4vw, 80px); line-height: 0.88; color: var(--ivory); }
-.ve-hero-stats dd small { margin-left: 0.12em; font-size: 0.36em; color: var(--gold-hi); }
-.ve-hero-stats dt { max-width: 15ch; font-size: 12px; line-height: 1.5; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ivory); }
+.ve-hero-stats dd { margin: 0; font-size: clamp(38px, 3.4vw, 60px); line-height: 0.88; color: var(--ivory); }
+.ve-hero-stats dd small { margin-left: 0.12em; font-size: 0.4em; color: var(--gold-hi); }
+.ve-hero-stats dt { max-width: 15ch; font-size: 11px; line-height: 1.6; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ivory); }
 .ve-hero-foot {
   position: absolute;
   inset: auto clamp(20px, 5vw, 80px) clamp(28px, 6vh, 64px);
@@ -499,11 +508,11 @@
   .ve-top-nav { gap: 6px; }
   .ve-top-btn { padding: 8px 9px; font-size: 11px; letter-spacing: 0.12em; }
   .ve-hero-top { flex-direction: column; align-items: flex-start; gap: 22px; inset: 84px 18px auto; }
-  .ve-hero-em { width: 64px; }
-  .ve-hero-name { font-size: 64px; }
-  .ve-hero-villa { font-size: 12px; }
-  .ve-hero-label { font-size: 11px; letter-spacing: 0.2em; }
-  .ve-hero-stats dd { font-size: 44px; }
+  .ve-hero-em { width: 54px; margin-bottom: 12px; }
+  .ve-hero-name { font-size: 40px; }
+  .ve-hero-villa { font-size: 11px; }
+  .ve-hero-label { font-size: 10px; letter-spacing: 0.22em; margin-top: 14px; padding-top: 10px; }
+  .ve-hero-stats dd { font-size: 34px; }
   .ve-hero-stats dt { font-size: 11px; letter-spacing: 0.16em; }
   .ve-hero-foot { inset: auto 18px 26px; gap: 16px; }
   .ve-hero-big { font-size: 26px; max-width: 12ch; }
@@ -528,6 +537,7 @@
   .ve-draw path { animation: none; stroke-dashoffset: 0; }
   .ve-hero-name { animation: none; background-position: 50% 0; }
   .ve-hero-cue i::after { animation: none; }
-  .ve-hero-still { transform: none; }
+  .ve-hero-still,
+  .ve-hero-poster { transform: none; }
   .ve-hero-top { transform: none; }
 }

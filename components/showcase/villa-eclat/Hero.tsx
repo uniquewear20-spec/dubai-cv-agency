@@ -1,16 +1,14 @@
 "use client";
 
 // The opening, built like Son Daven's: a drone shot tied to scroll (the camera climbs and circles
-// over the pool toward the villa). The name sits top left with two figures beside it; as you
+// over the pool toward the villa). The crest sits top left with two figures opposite; as you
 // scroll they fly up and fade, while the line, the facts and the round call to action stay along
-// the bottom until the camera has finished climbing. The clip is fetched whole and played from
-// memory, so scrubbing never waits on the network.
+// the bottom until the camera has finished climbing.
 // The mark: "éclat" is a burst of light, so the emblem is a sun rising inside a triple Art Deco
 // arch, and the name is set in Poiret One (a 1920s face) filled with metallic gold.
 
 import { useEffect, useRef, type CSSProperties } from "react";
 import { HERO, IMG } from "@/lib/showcase/villa-eclat";
-import { Img } from "@/components/showcase/kit/Img";
 import { sized } from "@/lib/showcase/media";
 
 const RAYS = [
@@ -54,33 +52,52 @@ export function Logo({ className, id }: { className?: string; id: string }) {
 
 export function Hero() {
   const sec = useRef<HTMLElement>(null);
-  const vid = useRef<HTMLVideoElement>(null);
+  const lo = useRef<HTMLVideoElement>(null);
+  const hi = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const el = sec.current;
     if (!el) return;
-    let top = 0, vh = innerHeight, p = -1, ps = 0, raf = 0, last = performance.now(), live = false;
+    let top = 0, vh = innerHeight, p = -1, ps = 0, raf = 0, last = performance.now(), live = false, gone = false;
     const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const phone = matchMedia("(max-width: 760px)").matches;
+    const head = document.querySelector<HTMLElement>(".ve-top");
     const measure = () => {
       top = el.getBoundingClientRect().top + scrollY;
       vh = innerHeight;
     };
 
-    // The drone clip (1080p, or a 960 px copy on phones), fetched whole and played from memory.
-    // The newest wanted moment wins, and a seek starts only when the last one is done.
-    const v = vid.current;
-    let want = 0, blob = "", gone = false;
-    const chase = () => {
-      if (!v || v.readyState < 1 || v.seeking || !v.duration) return;
-      const t = want * (v.duration - 0.05);
-      if (Math.abs(v.currentTime - t) > 0.01) v.currentTime = t;
+    // The drone clip comes in two passes: a light 960 px copy first, so the camera moves within
+    // a second or two, then (on larger screens) the 1080p master, which takes over at the same
+    // frame. Until a clip is ready the still behind it drifts in with the scroll, so the opening
+    // never freezes. Each clip is fetched whole and played from memory: seeks never wait.
+    type Deck = { v: HTMLVideoElement; blob: string; on: boolean; off: boolean };
+    const decks: Deck[] = [];
+    let want = 0;
+    const at = (v: HTMLVideoElement) => want * (v.duration - 0.05);
+    const chase = (d: Deck) => {
+      const v = d.v;
+      if (d.off || v.readyState < 1 || v.seeking || !v.duration) return;
+      if (Math.abs(v.currentTime - at(v)) > 0.01) v.currentTime = at(v);
     };
-    if (v) {
-      v.addEventListener("seeked", chase);
-      v.addEventListener("loadedmetadata", chase);
-      const src = matchMedia("(max-width: 760px)").matches ? HERO.videoSmall : HERO.video;
-      const start = (s: string) => {
-        v.src = s;
+    const load = (v: HTMLVideoElement | null, src: string, then?: () => void) => {
+      if (!v || !src) return;
+      const d: Deck = { v, blob: "", on: false, off: false };
+      decks.push(d);
+      const ready = () => {
+        chase(d);
+        // Shown only once its frame matches the scroll, so the hand-over cannot be seen.
+        if (d.on || v.readyState < 2 || Math.abs(v.currentTime - at(v)) > 0.08) return;
+        d.on = true;
+        v.classList.add("is-on");
+        for (const o of decks) if (o !== d && !o.off && decks.indexOf(o) < decks.indexOf(d)) retire(o);
+        then?.();
+      };
+      v.addEventListener("loadeddata", ready);
+      v.addEventListener("seeked", ready);
+      v.addEventListener("loadedmetadata", () => chase(d));
+      const start = (url: string) => {
+        v.src = url;
         // Playing for an instant makes iPhones decode frames for a paused video.
         v.play().then(() => v.pause()).catch(() => {});
       };
@@ -88,11 +105,21 @@ export function Hero() {
         .then((r) => (r.ok ? r.blob() : Promise.reject(r.status)))
         .then((b) => {
           if (gone) return;
-          blob = URL.createObjectURL(b);
-          start(blob);
+          d.blob = URL.createObjectURL(b);
+          start(d.blob);
         })
         .catch(() => { if (!gone) start(src); });
-    }
+    };
+    const retire = (d: Deck) => {
+      d.off = true;
+      setTimeout(() => {
+        d.v.classList.remove("is-on");
+        d.v.removeAttribute("src");
+        d.v.load();
+        if (d.blob) URL.revokeObjectURL(d.blob);
+      }, 900);
+    };
+    load(lo.current, HERO.videoSmall, () => { if (!phone && hi.current && !decks.some((d) => d.v === hi.current)) load(hi.current, HERO.video); });
 
     const tick = (now: number) => {
       raf = requestAnimationFrame(tick);
@@ -101,15 +128,22 @@ export function Hero() {
       const target = Math.min(1, Math.max(0, (scrollY - top) / (el.offsetHeight - vh)));
       ps = calm ? target : ps + (target - ps) * (1 - Math.exp(-dt * 9));
       if (Math.abs(target - ps) < 1e-4) ps = target;
-      if (v) { want = Math.min(1, ps / 0.9); chase(); }
+      want = Math.min(1, ps / 0.9);
+      for (const d of decks) chase(d);
       if (Math.abs(ps - p) < 1e-4) return;
       p = ps;
       el.style.setProperty("--p", p.toFixed(4));
+      // The name in the header appears as the one in the hero flies away.
+      if (head) head.style.setProperty("--name", Math.min(1, Math.max(0, (p - 0.08) * 5)).toFixed(3));
     };
     measure();
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !live) { live = true; last = performance.now(); raf = requestAnimationFrame(tick); }
-      else if (!e.isIntersecting && live) { live = false; cancelAnimationFrame(raf); }
+      if (e.isIntersecting) {
+        if (!live) { live = true; last = performance.now(); raf = requestAnimationFrame(tick); }
+        return;
+      }
+      if (live) { live = false; cancelAnimationFrame(raf); }
+      head?.style.setProperty("--name", "1");
     });
     io.observe(el);
     addEventListener("resize", measure);
@@ -118,22 +152,32 @@ export function Hero() {
       io.disconnect();
       cancelAnimationFrame(raf);
       removeEventListener("resize", measure);
-      v?.removeEventListener("seeked", chase);
-      v?.removeEventListener("loadedmetadata", chase);
-      if (blob) URL.revokeObjectURL(blob);
+      for (const d of decks) if (d.blob) URL.revokeObjectURL(d.blob);
     };
   }, []);
 
+  const poster = IMG.day;
   return (
     <section ref={sec} className="ve-hero" id="top" style={{ "--p": 0 } as CSSProperties}>
       <div className="ve-hero-stage">
+        {poster ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            className="ve-hero-poster"
+            src={sized(poster, 1600)}
+            srcSet={[1200, 1600, 2400].map((w) => `${sized(poster, w)} ${w}w`).join(", ")}
+            sizes="100vw"
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+          />
+        ) : null}
         {HERO.video ? (
-          <video ref={vid} className="ve-hero-video" poster={IMG.day ? sized(IMG.day, 2400) : undefined} muted playsInline preload="auto" aria-hidden />
-        ) : (
-          <div className="ve-hero-still" aria-hidden>
-            <Img src={IMG.day} alt="" sizes="100vw" widths={[960, 1440, 1600]} eager />
-          </div>
-        )}
+          <>
+            <video ref={lo} className="ve-hero-video" muted playsInline preload="auto" aria-hidden />
+            <video ref={hi} className="ve-hero-video" muted playsInline preload="auto" aria-hidden />
+          </>
+        ) : null}
         <div className="ve-hero-shade" aria-hidden />
         <div className="ve-hero-top">
           <div className="ve-hero-title">

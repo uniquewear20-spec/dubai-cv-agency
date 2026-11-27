@@ -74,7 +74,7 @@ export interface Shot {
 }
 
 const CLIP = {
-  door: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/f5c14e48-9de4-4abd-8fa1-49b560267298.mp4",
+  door: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/c24bc1f5-8d39-4886-8168-31bd6c3200c1.mp4", // 1600 px, 4.2 MB
   hallToSalon: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/57462aae-93d0-4131-be24-780ea6322ec6.mp4",
   salonToDining: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/7257573a-5b5e-4f0b-8e0a-a9cfa5bd1950.mp4",
   kitchen: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/936c4998-3777-4407-9ce2-2896f3201651.mp4",
