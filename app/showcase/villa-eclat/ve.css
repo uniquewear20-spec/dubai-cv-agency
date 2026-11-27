@@ -371,6 +371,7 @@
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr;
+  grid-template-columns: minmax(0, 1fr); /* the reel is far wider than the screen; the stage is not */
   padding-top: clamp(86px, 12vh, 124px);
   background: #080706;
 }
@@ -378,7 +379,7 @@
 .ve-reel-head h2 { margin: 0; font-weight: 400; font-size: clamp(40px, 5.6vw, 92px); line-height: 0.95; letter-spacing: 0.035em; text-transform: uppercase; color: var(--gold-hi); }
 .ve-reel-head p { margin: 0; color: var(--smoke); }
 .ve-reel-count { font-size: 15px; letter-spacing: 0.22em; color: var(--gold-hi); font-variant-numeric: tabular-nums; }
-.ve-reel-strip { align-self: center; overflow: visible; }
+.ve-reel-strip { align-self: center; min-width: 0; overflow: visible; }
 .ve-reel-track {
   --h: clamp(240px, 50vh, 600px);
   position: relative;
@@ -390,7 +391,6 @@
   padding: 34px clamp(18px, 5vw, 80px) 30px;
   list-style: none;
   background: #050404;
-  will-change: transform;
 }
 .ve-reel-track::before,
 .ve-reel-track::after {

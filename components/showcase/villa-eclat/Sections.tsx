@@ -183,6 +183,9 @@ function shape(k: ImgKey) {
  * Every room on one strip of film. Scrolling down moves the strip sideways; each picture is shown
  * whole at its own shape, the frames curve gently toward the middle, and any frame opens full screen.
  */
+/** The reel runs faster than the page scrolls, so 22 frames pass in about ten screens. */
+const RUN = 1.7;
+
 export function Sheet() {
   const [open, setOpen] = useState<number | null>(null);
   const opener = useRef<HTMLElement | null>(null);
@@ -201,18 +204,22 @@ export function Sheet() {
     const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const items = [...tr.children] as HTMLElement[];
     let top = 0, span = 0, vh = innerHeight, vw = innerWidth, raf = 0, x = -1, xs = 0, last = performance.now(), live = false, shown = -1;
+    // Frame centres are measured once per resize, never while scrolling: reading layout in the
+    // animation loop would make Safari recompute styles for every frame of the reel.
+    let mids: number[] = [];
     const measure = () => {
       vh = innerHeight;
       vw = innerWidth;
+      mids = items.map((it) => it.offsetLeft + it.offsetWidth / 2);
       span = Math.max(0, tr.scrollWidth - vw);
-      el.style.height = `${span + vh}px`;
+      el.style.height = `${span / RUN + vh}px`;
       top = el.getBoundingClientRect().top + scrollY;
     };
     const tick = (now: number) => {
       raf = requestAnimationFrame(tick);
       const dt = Math.min(0.1, (now - last) / 1000);
       last = now;
-      const target = Math.min(1, Math.max(0, (scrollY - top) / Math.max(1, span))) * span;
+      const target = Math.min(1, Math.max(0, (scrollY - top) / Math.max(1, span / RUN))) * span;
       xs = calm ? target : xs + (target - xs) * (1 - Math.exp(-dt * 9));
       if (Math.abs(target - xs) < 0.3) xs = target;
       if (Math.abs(xs - x) < 0.3) return;
@@ -220,10 +227,14 @@ export function Sheet() {
       tr.style.transform = `translate3d(${-x.toFixed(1)}px, 0, 0)`;
       let best = 0, bestD = Infinity;
       items.forEach((it, i) => {
-        const c = it.offsetLeft + it.offsetWidth / 2 - x - vw / 2;
+        const c = mids[i] - x - vw / 2;
         const d = c / vw;
         if (Math.abs(c) < bestD) { bestD = Math.abs(c); best = i; }
-        if (!calm) it.style.transform = `perspective(1600px) rotateY(${(-d * 16).toFixed(2)}deg) scale(${(1 - Math.min(0.12, Math.abs(d) * 0.1)).toFixed(3)})`;
+        // Only frames on or near the screen turn in 3D; the rest stay flat, so the GPU holds a
+        // few layers instead of twenty-two.
+        if (calm) return;
+        if (Math.abs(d) < 1.4) it.style.transform = `perspective(1600px) rotateY(${(-d * 16).toFixed(2)}deg) scale(${(1 - Math.min(0.12, Math.abs(d) * 0.1)).toFixed(3)})`;
+        else if (it.style.transform) it.style.transform = "";
       });
       if (best !== shown && count.current) {
         shown = best;
@@ -236,7 +247,7 @@ export function Sheet() {
       else if (!e.isIntersecting && live) { live = false; cancelAnimationFrame(raf); }
     });
     io.observe(el);
-    const ro = new ResizeObserver(measure);
+    const ro = new ResizeObserver(() => { measure(); x = -1; });
     ro.observe(tr);
     addEventListener("resize", measure);
     return () => {
