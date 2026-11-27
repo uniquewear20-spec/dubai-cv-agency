@@ -33,7 +33,10 @@ export const IMG: Record<ImgKey, string> = {
   oak: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_151608_2af8a55d-3647-487d-98cd-54059099add8.png#2048,2048,1039,26,983,983",
   marble: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_151608_2af8a55d-3647-487d-98cd-54059099add8.png#2048,2048,26,1038,984,984",
   pull: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_151608_2af8a55d-3647-487d-98cd-54059099add8.png#2048,2048,1039,1038,983,984",
-  guest: "", library: "", gym: "", wine: "",
+  guest: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_152231_d9bf25f0-8a0b-4077-a62f-ccf8e9ea8d40.png#2720,1536,4,4,1340,750",
+  library: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_152231_d9bf25f0-8a0b-4077-a62f-ccf8e9ea8d40.png#2720,1536,1377,4,1339,750",
+  gym: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_152231_d9bf25f0-8a0b-4077-a62f-ccf8e9ea8d40.png#2720,1536,4,783,1340,749",
+  wine: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_152231_d9bf25f0-8a0b-4077-a62f-ccf8e9ea8d40.png#2720,1536,1377,783,1339,749",
 };
 
 /** The hero drone shot as numbered frames in /public. 0 frames: the hero eases over the still instead. */
@@ -90,8 +93,8 @@ export const FILM: Shot[] = [
     lines: [{ at: [0.1, 0.66], text: "Green marble, a brass edge, and the sea at the sink." }] },
   { id: "bar", img: "bar", focus: [0.5, 0.5], from: { s: 1.18 }, to: { s: 1.03 }, out: "white", len: 1.05, chapter: "After dark",
     lines: [{ at: [0.1, 0.66], text: "Black lacquer, brass and mirror, for the late hours." }] },
-  { id: "suite", img: "suite", focus: [0.5, 0.52], framed: true, from: { s: 1.14 }, to: { s: 1.02 }, out: "whip", len: 1.25, chapter: "The suites",
-    lines: [{ at: [0.42, 0.8], text: "The principal suite opens onto its own terrace above the sea." }] },
+  { id: "suite", img: "guest", focus: [0.5, 0.52], framed: true, from: { s: 1.14 }, to: { s: 1.02 }, out: "whip", len: 1.25, chapter: "The suites",
+    lines: [{ at: [0.42, 0.8], text: "Six suites, each opening onto its own terrace." }] },
   { id: "bath", img: "bath", focus: [0.5, 0.5], from: { s: 1.02, y: 0.02 }, to: { s: 1.12, y: -0.02 }, out: "fade", len: 1,
     lines: [{ at: [0.1, 0.66], text: "A bath carved from one block of travertine." }] },
   { id: "spa", img: "spa", focus: [0.5, 0.55], from: { s: 1 }, to: { s: 1.2 }, out: "fade", len: 1.05, chapter: "Spa",
