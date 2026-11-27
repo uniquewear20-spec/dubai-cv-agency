@@ -462,14 +462,15 @@ html.al-locked {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10, 16, 36, 0.5), rgba(10, 16, 36, 0) 34%, rgba(10, 16, 36, 0) 62%, rgba(10, 16, 36, 0.55));
+  background: linear-gradient(180deg, rgba(10, 16, 36, 0.55), rgba(10, 16, 36, 0.12) 48%, rgba(10, 16, 36, 0) 62%, rgba(10, 16, 36, 0.55));
 }
 .al-hero-type {
   position: absolute;
   inset: 0;
   display: grid;
-  place-content: center;
+  align-content: start;
   justify-items: center;
+  padding-top: max(96px, 12vh);
   transform: translateY(calc(var(--p) * -26vh));
   opacity: calc(1 - var(--p) * 1.7);
 }
@@ -520,7 +521,7 @@ html.al-locked {
 }
 .al-hero-side {
   position: absolute;
-  top: 50%;
+  top: calc(max(96px, 12vh) + clamp(100px, 22vw, 380px) * 0.4);
   font-family: var(--display);
   font-size: clamp(15px, 1.6vw, 26px);
   letter-spacing: 0.24em;
@@ -2149,6 +2150,9 @@ html.al-locked {
   .al-hero-script {
     font-size: 15vw;
     top: 66%;
+  }
+  .al-hero-type {
+    padding-top: 17vh;
   }
   .al-hero-side {
     top: auto;
