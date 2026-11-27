@@ -73,6 +73,9 @@ export function Hero() {
     // ── Frames: the first sheet, then the last, then the gaps, two at a time, so the whole climb
     // can be scrubbed early and the nearest loaded frame always stands in for a missing one.
     const sheets: (HTMLImageElement | null)[] = seq.sheets.map(() => null);
+    // A sheet goes to the GPU the first time it is drawn; touching one pixel of it as soon as it
+    // arrives does that while the page is still settling, never in the middle of a scroll.
+    const warm: HTMLImageElement[] = [];
     const order = [0, seq.sheets.length - 1];
     for (let step = seq.sheets.length; order.length < seq.sheets.length; step = Math.ceil(step / 2))
       for (let i = 0; i < seq.sheets.length; i += Math.max(1, step)) if (!order.includes(i)) order.push(i);
@@ -81,7 +84,7 @@ export function Hero() {
       new Promise<void>((done) => {
         const im = new Image();
         im.decoding = "async";
-        im.onload = () => void decoded(im).then(() => { if (!gone) { sheets[i] = im; dirty = true; ready(); } done(); });
+        im.onload = () => void decoded(im).then(() => { if (!gone) { sheets[i] = im; warm.push(im); dirty = true; ready(); } done(); });
         im.onerror = () => done();
         im.src = seq.sheets[i];
       });
@@ -161,6 +164,7 @@ export function Hero() {
     const render = () => {
       const cw = canvas.width, ch = canvas.height;
       ctx.imageSmoothingQuality = "high"; // reset whenever the canvas is resized
+      for (const im of warm.splice(0)) ctx.drawImage(im, 0, 0, 2, 2, 0, 0, 1, 1);
       if (p < SEQ || calm) {
         const f = (calm ? 0 : Math.min(1, p / SEQ)) * (seq.n - 1);
         const k = Math.floor(f), a = f - k, i = nearest(k);
@@ -222,7 +226,7 @@ export function Hero() {
       const target = Math.min(1, Math.max(0, (scrollY - top) / span));
       ps = calm ? target : ps + (target - ps) * (1 - Math.exp(-dt * 8));
       if (Math.abs(target - ps) < 2e-4) ps = target;
-      if (!dirty && Math.abs(ps - p) < 1e-5) return;
+      if (!dirty && !warm.length && Math.abs(ps - p) < 1e-5) return;
       p = ps;
       dirty = false;
       if (p > 0.45) askDoor();
