@@ -1,145 +1,160 @@
 # 023 · CLOUDLINE
 
 **Category:** Real estate  
-**Concept:** Mountain villas above the clouds; plot picker and enquiry.  
+**Concept:** Five mountain villas on a ridge of Jebel Jais, above the clouds; a plot picker and a private viewing.  
 **Website:** /showcase/cloudline/  
-**Images:** 10 generations, 22 images  
-**Image status:** Not generated yet
+**Images:** 10 generations, 19 images  
+**Image status:** New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro
 
-## Visual direction
+## Creative direction
 
-- **Look:** misty mountain architecture photography, 24mm.
-- **Palette:** stone grey, mist white, pine green, warm wood.
-- **Consistency:** every prompt below ends with the same look and palette sentence, so the set matches. Generate the hero first; if it lands, keep the others as written. Grids (2x2) give four images from one generation; Claude cuts them into four files.
-- **People:** any shot with people asks for clearly different individuals, because Seedream repeats one face when people are not described apart. Never add a real person or a brand.
+Living above the weather. Each villa is a pair of dark stone volumes, one cantilevered over the void, and the clouds are the second subject: they fill the valleys at dawn and part to reveal the mountains. The mood shifts from cold blue dawn to warm firelit night, always with silence and space. Wide frames, low horizons, lots of sky and cloud for type to sit on.
+
+## Visual identity
+
+- **Look:** cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic.
+- **Palette:** basalt grey, cloud white, juniper green, smoked oak and ember amber.
+- **Type and layout cues for the website:** thin, widely spaced capitals floating in the sky areas; calm small text; layouts that leave the clouds clear.
+
+## Consistency
+
+Every prompt that shows the villa repeats this description word for word, so Seedream draws the same one each time. Do not edit it:
+
+> a contemporary mountain villa of dark split-face basalt walls and floor-to-ceiling glass, two long flat-roofed volumes stacked at an angle, the upper volume cantilevered six metres over a cliff edge, warm oak soffits, slim black steel window frames, a long rectangular infinity pool on a stone terrace at the cliff edge, on a ridge of the Hajar mountains of Ras Al Khaimah
+
+- Generate 01 first; it fixes the villa. Keep the villa description word for word.
+- Dawn shots share the same cold blue light with a pink edge; night shots the same amber interiors under stars.
+- Every prompt ends with the same look and palette sentence, so the set matches.
+- People are always clearly different individuals, often seen from behind or with faces out of frame, because Seedream repeats one face when people are not described apart. Never a real person, a brand or a logo.
+- Grids (2x2) give four pictures from one generation; Claude cuts them into four files.
 
 ## Settings (Higgsfield website)
 
-Seedream 5.0 Pro · Quality 2K · Count 1/4 (keep it at 1/4 so Unlimited stays on) · Aspect ratio as listed · No reference images.
+Seedream 5.0 Pro · Quality 2K · Count 1/4 (keep it at 1/4 so Unlimited stays on) · Aspect ratio as listed · No reference images. Unlimited runs one picture at a time and queues one more: start the next when one finishes.
 
 ## Shot list
 
 | # | File | Website section | Ratio | Type |
 |---|---|---|---|---|
-| 01 | `cloudline__01-hero.png` | Home hero, full screen behind the headline | 16:9 | single |
+| 01 | `cloudline__01-hero.png` | Home hero, full screen | 16:9 | single |
 | 02 | `cloudline__02-hero-mobile.png` | Home hero on phones | 9:16 | single |
-| 03 | `cloudline__03-aerial.png` | Location section | 16:9 | single |
-| 04 | `cloudline__04-twilight.png` | Night band between sections | 16:9 | single |
-| 05 | `cloudline__05-grid-interiors.png` | Interiors gallery and unit pages | 16:9 | 2x2 grid (4 images) |
-| 06 | `cloudline__06-grid-amenities.png` | Amenities section | 1:1 | 2x2 grid (4 images) |
-| 07 | `cloudline__07-view.png` | View section, full width | 21:9 | single |
-| 08 | `cloudline__08-grid-details.png` | Materials and specification section | 1:1 | 2x2 grid (4 images) |
-| 09 | `cloudline__09-lifestyle.png` | Living there section | 3:2 | single |
-| 10 | `cloudline__10-grid-area.png` | Neighbourhood section | 16:9 | 2x2 grid (4 images) |
+| 03 | `cloudline__03-living.png` | The villa | 16:9 | single |
+| 04 | `cloudline__04-pool.png` | Pool and terrace | 21:9 | single |
+| 05 | `cloudline__05-grid-rooms.png` | Rooms gallery | 16:9 | 2x2 grid (4 images) |
+| 06 | `cloudline__06-night.png` | Evening band | 16:9 | single |
+| 07 | `cloudline__07-terrace-life.png` | Life here | 3:2 | single |
+| 08 | `cloudline__08-ridge.png` | Plot picker | 16:9 | single |
+| 09 | `cloudline__09-grid-details.png` | Materials band | 1:1 | 2x2 grid (4 images) |
+| 10 | `cloudline__10-grid-mountain.png` | Around Jebel Jais | 3:4 | 2x2 grid (4 images) |
 
 ## Prompts
 
-### 01 · Hero
+### 01 · Above the clouds
 
 - **File:** `cloudline__01-hero.png`
-- **Section:** Home hero, full screen behind the headline
+- **Section:** Home hero, full screen
 - **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
-- **Camera:** Eye-level three-quarter view, 24mm tilt-shift, corrected verticals
+- **Camera:** 24mm from the ridge, dawn
 
 ```text
-Architectural photograph of cantilevered stone and glass villas on a ridge above the clouds in the Hajar mountains of Ras Al Khaimah. Golden-hour sun rakes across the facade, verticals perfectly straight, landscaped foreground, clear sky with open space above for a headline. It must feel built and lived-in, not rendered. No people. Overall look: misty mountain architecture photography, 24mm; colour palette of stone grey, mist white, pine green, warm wood. No text, no letters, no logos, no watermarks.
+Architectural photograph of a contemporary mountain villa of dark split-face basalt walls and floor-to-ceiling glass, two long flat-roofed volumes stacked at an angle, the upper volume cantilevered six metres over a cliff edge, warm oak soffits, slim black steel window frames, a long rectangular infinity pool on a stone terrace at the cliff edge, on a ridge of the Hajar mountains of Ras Al Khaimah at dawn, standing above a continuous sea of white clouds that fills the valleys below, the first pink light touching the stone and the glass, the pool reflecting the sky, jagged peaks rising through the clouds in the distance, crisp, silent and breathtaking, nobody present. Overall look: cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic; colour palette of basalt grey, cloud white, juniper green, smoked oak and ember amber. No text, no letters, no logos, no watermarks.
 ```
 
-### 02 · Hero for phones
+### 02 · The cantilever
 
 - **File:** `cloudline__02-hero-mobile.png`
 - **Section:** Home hero on phones
 - **Aspect ratio:** 9:16 (2K ≈ 1536×2720 px)
-- **Camera:** Low angle looking up, 20mm
+- **Camera:** Looking up, 20mm
 
 ```text
-Vertical architectural photograph looking up along cantilevered stone and glass villas on a ridge above the clouds in the Hajar mountains of Ras Al Khaimah, facade lines converging into a clear sky, sunlight catching the main materials, strong graphic composition. No people. Overall look: misty mountain architecture photography, 24mm; colour palette of stone grey, mist white, pine green, warm wood. No text, no letters, no logos, no watermarks.
+Vertical photograph looking up from the rocks beneath the cantilevered upper volume of a contemporary mountain villa of dark split-face basalt walls and floor-to-ceiling glass, two long flat-roofed volumes stacked at an angle, the upper volume cantilevered six metres over a cliff edge, warm oak soffits, slim black steel window frames, a long rectangular infinity pool on a stone terrace at the cliff edge, on a ridge of the Hajar mountains of Ras Al Khaimah: the oak soffit and black steel frame overhead, wisps of cloud drifting underneath the overhang, a deep blue dawn sky above, dramatic and weightless. Overall look: cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic; colour palette of basalt grey, cloud white, juniper green, smoked oak and ember amber. No text, no letters, no logos, no watermarks.
 ```
 
-### 03 · Aerial
+### 03 · The living room
 
-- **File:** `cloudline__03-aerial.png`
-- **Section:** Location section
+- **File:** `cloudline__03-living.png`
+- **Section:** The villa
 - **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
-- **Camera:** Drone, 120 m, 45-degree angle
+- **Camera:** Interior, 24mm
 
 ```text
-Drone photograph of cantilevered stone and glass villas on a ridge above the clouds in the Hajar mountains of Ras Al Khaimah, seen from about 120 metres at a 45-degree angle: the building, plot, access, landscaping and any nearby water clearly readable. Soft morning light, true colours, light haze on the horizon. No people visible. Overall look: misty mountain architecture photography, 24mm; colour palette of stone grey, mist white, pine green, warm wood. No text, no letters, no logos, no watermarks.
+Interior photograph of the living room of a contemporary mountain villa of dark split-face basalt walls and floor-to-ceiling glass, two long flat-roofed volumes stacked at an angle, the upper volume cantilevered six metres over a cliff edge, warm oak soffits, slim black steel window frames, a long rectangular infinity pool on a stone terrace at the cliff edge, on a ridge of the Hajar mountains of Ras Al Khaimah: a long low sofa in oatmeal wool facing a floor-to-ceiling window onto a sea of clouds, a suspended black steel fireplace with a low fire, basalt and oak surfaces, sheepskin and wool throws, a small table with two cups of coffee, soft dawn light mixing with the warm glow of the fire, nobody present. Overall look: cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic; colour palette of basalt grey, cloud white, juniper green, smoked oak and ember amber. No text, no letters, no logos, no watermarks.
 ```
 
-### 04 · Blue hour
+### 04 · The edge
 
-- **File:** `cloudline__04-twilight.png`
-- **Section:** Night band between sections
-- **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
-- **Camera:** Eye level, 35mm, tripod long exposure
-
-```text
-Blue-hour photograph of cantilevered stone and glass villas on a ridge above the clouds in the Hajar mountains of Ras Al Khaimah: interiors glowing warm behind the glass, exterior lighting on, deep blue sky with a last band of light on the horizon, reflections on water or wet paving. No people. Overall look: misty mountain architecture photography, 24mm; colour palette of stone grey, mist white, pine green, warm wood. No text, no letters, no logos, no watermarks.
-```
-
-### 05 · Interiors
-
-- **File:** `cloudline__05-grid-interiors.png` (cut into `cloudline__05-grid-interiors_1.png` to `_4.png`)
-- **Section:** Interiors gallery and unit pages
-- **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
-- **Camera:** Interior, 24mm, eye level, one window light
-
-```text
-A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Interior photographs inside cantilevered stone and glass villas on a ridge above the clouds, finished in stone, oak and fireplaces, staged and uncluttered, one soft daylight, nobody present. Top-left: the main living room with its view. Top-right: the kitchen and dining area. Bottom-left: the principal bedroom. Bottom-right: the principal bathroom. Overall look: misty mountain architecture photography, 24mm; colour palette of stone grey, mist white, pine green, warm wood. No text, no letters, no logos, no watermarks.
-```
-
-### 06 · Amenities
-
-- **File:** `cloudline__06-grid-amenities.png` (cut into `cloudline__06-grid-amenities_1.png` to `_4.png`)
-- **Section:** Amenities section
-- **Aspect ratio:** 1:1 (2K ≈ 2048×2048 px)
-- **Camera:** Architectural, 24mm
-
-```text
-A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The shared spaces of cantilevered stone and glass villas on a ridge above the clouds, daylight, nobody present. Top-left: a cliff-edge infinity pool. Top-right: the residents' gym with a view. Bottom-left: the arrival lobby with a concierge desk. Bottom-right: the landscaped garden or roof terrace. Overall look: misty mountain architecture photography, 24mm; colour palette of stone grey, mist white, pine green, warm wood. No text, no letters, no logos, no watermarks.
-```
-
-### 07 · The view
-
-- **File:** `cloudline__07-view.png`
-- **Section:** View section, full width
+- **File:** `cloudline__04-pool.png`
+- **Section:** Pool and terrace
 - **Aspect ratio:** 21:9 (2K ≈ 3136×1344 px)
-- **Camera:** Panoramic, 35mm, from the terrace
+- **Camera:** Water level, 24mm
 
 ```text
-Panoramic photograph from the main terrace of cantilevered stone and glass villas on a ridge above the clouds: a sea of clouds at dawn. The edge of a lounge chair and a planter frame the foreground, late-afternoon haze, the view is the subject. No people. Overall look: misty mountain architecture photography, 24mm; colour palette of stone grey, mist white, pine green, warm wood. No text, no letters, no logos, no watermarks.
+Panoramic photograph at water level along the infinity pool of a contemporary mountain villa of dark split-face basalt walls and floor-to-ceiling glass, two long flat-roofed volumes stacked at an angle, the upper volume cantilevered six metres over a cliff edge, warm oak soffits, slim black steel window frames, a long rectangular infinity pool on a stone terrace at the cliff edge, on a ridge of the Hajar mountains of Ras Al Khaimah: the still water merging with the sea of clouds below, faint steam rising from the heated pool in the cold dawn air, one teak lounger with a folded towel, the mountains glowing pink on the horizon, nobody present. Overall look: cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic; colour palette of basalt grey, cloud white, juniper green, smoked oak and ember amber. No text, no letters, no logos, no watermarks.
 ```
 
-### 08 · Materials
+### 05 · Rooms
 
-- **File:** `cloudline__08-grid-details.png` (cut into `cloudline__08-grid-details_1.png` to `_4.png`)
-- **Section:** Materials and specification section
-- **Aspect ratio:** 1:1 (2K ≈ 2048×2048 px)
-- **Camera:** Macro, 100mm, raking side light
-
-```text
-A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up photographs of the materials of cantilevered stone and glass villas on a ridge above the clouds, raking side light, shallow depth of field. Top-left: Stone. Top-right: Oak. Bottom-left: Glass. Bottom-right: Wool. Overall look: misty mountain architecture photography, 24mm; colour palette of stone grey, mist white, pine green, warm wood. No text, no letters, no logos, no watermarks.
-```
-
-### 09 · Lifestyle
-
-- **File:** `cloudline__09-lifestyle.png`
-- **Section:** Living there section
-- **Aspect ratio:** 3:2 (2K ≈ 2496×1664 px)
-- **Camera:** Editorial, 35mm, natural light
-
-```text
-Editorial lifestyle photograph at cantilevered stone and glass villas on a ridge above the clouds in the Hajar mountains of Ras Al Khaimah: a couple wrapped in blankets on the terrace with coffee. Candid, natural light, believable and calm. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: misty mountain architecture photography, 24mm; colour palette of stone grey, mist white, pine green, warm wood. No text, no letters, no logos, no watermarks.
-```
-
-### 10 · Neighbourhood
-
-- **File:** `cloudline__10-grid-area.png` (cut into `cloudline__10-grid-area_1.png` to `_4.png`)
-- **Section:** Neighbourhood section
+- **File:** `cloudline__05-grid-rooms.png` (cut into `cloudline__05-grid-rooms_1.png` to `_4.png`)
+- **Section:** Rooms gallery
 - **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
-- **Camera:** Documentary, 35mm
+- **Camera:** Interiors, 28mm
 
 ```text
-A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Documentary photographs of the neighbourhood around the Hajar mountains of Ras Al Khaimah, morning light. Top-left: A hiking trail. Top-right: A zip line. Bottom-left: A mountain cafe. Bottom-right: A viewpoint. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: misty mountain architecture photography, 24mm; colour palette of stone grey, mist white, pine green, warm wood. No text, no letters, no logos, no watermarks.
+A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Interiors of a dark basalt and glass mountain villa with oak, wool and linen, soft dawn light, clouds outside every window, nobody present. Top-left: the principal bedroom with a low bed facing a glass wall onto the clouds. Top-right: a kitchen of smoked oak and honed basalt with a long island. Bottom-left: a bathroom with a freestanding stone bathtub at the window. Bottom-right: a reading nook in a deep window seat with books and a wool blanket. Overall look: cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic; colour palette of basalt grey, cloud white, juniper green, smoked oak and ember amber. No text, no letters, no logos, no watermarks.
+```
+
+### 06 · Night on the ridge
+
+- **File:** `cloudline__06-night.png`
+- **Section:** Evening band
+- **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
+- **Camera:** Long exposure, 24mm
+
+```text
+Night photograph of a contemporary mountain villa of dark split-face basalt walls and floor-to-ceiling glass, two long flat-roofed volumes stacked at an angle, the upper volume cantilevered six metres over a cliff edge, warm oak soffits, slim black steel window frames, a long rectangular infinity pool on a stone terrace at the cliff edge, on a ridge of the Hajar mountains of Ras Al Khaimah glowing amber from within under a sky full of stars, a fire pit burning on the stone terrace, low cloud lit silver by the moon filling the valley below, the cantilever floating over darkness, peaceful and warm, nobody present. Overall look: cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic; colour palette of basalt grey, cloud white, juniper green, smoked oak and ember amber. No text, no letters, no logos, no watermarks.
+```
+
+### 07 · Coffee above the weather
+
+- **File:** `cloudline__07-terrace-life.png`
+- **Section:** Life here
+- **Aspect ratio:** 3:2 (2K ≈ 2496×1664 px)
+- **Camera:** 50mm, from behind
+
+```text
+Photograph from behind of a couple wrapped in thick wool blankets sitting on the stone terrace of a contemporary mountain villa of dark split-face basalt walls and floor-to-ceiling glass, two long flat-roofed volumes stacked at an angle, the upper volume cantilevered six metres over a cliff edge, warm oak soffits, slim black steel window frames, a long rectangular infinity pool on a stone terrace at the cliff edge, on a ridge of the Hajar mountains of Ras Al Khaimah with cups of coffee, looking out over a sea of clouds at sunrise, both faces turned away, steam rising from the cups, intimate and still. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame. Overall look: cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic; colour palette of basalt grey, cloud white, juniper green, smoked oak and ember amber. No text, no letters, no logos, no watermarks.
+```
+
+### 08 · The ridge
+
+- **File:** `cloudline__08-ridge.png`
+- **Section:** Plot picker
+- **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
+- **Camera:** Drone, 300 m
+
+```text
+Aerial drone photograph of a long mountain ridge with five contemporary dark basalt villas spaced far apart along it, each with a turquoise pool at the cliff edge, a single winding road reaching them, clouds pooling in the valleys on both sides, early morning light, rugged and exclusive. Overall look: cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic; colour palette of basalt grey, cloud white, juniper green, smoked oak and ember amber. No text, no letters, no logos, no watermarks.
+```
+
+### 09 · Materials
+
+- **File:** `cloudline__09-grid-details.png` (cut into `cloudline__09-grid-details_1.png` to `_4.png`)
+- **Section:** Materials band
+- **Aspect ratio:** 1:1 (2K ≈ 2048×2048 px)
+- **Camera:** Macro, side light
+
+```text
+A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in cold blue dawn light. Top-left: split-face basalt stone with fine texture. Top-right: the junction of a smoked oak soffit and a black steel frame. Bottom-left: a thick oatmeal wool throw. Bottom-right: frost crystals on a pane of glass with clouds blurred behind. Overall look: cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic; colour palette of basalt grey, cloud white, juniper green, smoked oak and ember amber. No text, no letters, no logos, no watermarks.
+```
+
+### 10 · The mountain
+
+- **File:** `cloudline__10-grid-mountain.png` (cut into `cloudline__10-grid-mountain_1.png` to `_4.png`)
+- **Section:** Around Jebel Jais
+- **Aspect ratio:** 3:4 (2K ≈ 1752×2336 px)
+- **Camera:** Outdoor, 35mm
+
+```text
+A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. The mountains of Ras Al Khaimah at dawn, people small or seen from behind, all different. Top-left: a hiker on a stony trail along a ridge above the clouds. Top-right: a long zip line cable vanishing across a misty canyon. Bottom-left: a small stone mountain cafe with a terrace in the early sun. Bottom-right: a lone viewpoint platform above layers of blue ridges. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame. Overall look: cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic; colour palette of basalt grey, cloud white, juniper green, smoked oak and ember amber. No text, no letters, no logos, no watermarks.
 ```

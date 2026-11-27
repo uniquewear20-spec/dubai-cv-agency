@@ -1,16 +1,18 @@
 # Image prompt library: the 98 remaining concept websites
 
-Built 26 Nov 2026. 98 websites, 857 generations still to run (1799 images). Sites 001 Halo Ridge and 002 TIFAWT are finished and not listed.
+Built 26 Nov 2026. 98 websites, 841 generations still to run (1735 images). Sites 001 Halo Ridge and 002 TIFAWT are finished and not listed.
 
 ## How to generate
 
 1. Higgsfield website → Image → **Seedream 5.0 Pro**, Quality **2K**, Count **1/4** (keep 1/4: other counts switch Unlimited off and cost credits), Unlimited **on**.
-2. Set the aspect ratio shown for the shot, paste the prompt exactly as written (the copy button on each grey block), generate. Two can run at once.
+2. Set the aspect ratio shown for the shot, paste the prompt exactly as written (the copy button on each grey block), generate. Unlimited runs one picture at a time and queues one more, so start the next one when a picture finishes.
 3. Work down this list in order: it follows the build order, so the next site to be built always has its pictures first.
 4. Nothing to download or rename: Claude finds each picture in your Higgsfield library by its prompt. If a picture is wrong (a repeated face, text, a logo, a deformed car), generate it again with the same prompt, or delete the bad one.
 5. Grids (2x2) are four pictures in one generation; Claude cuts them.
 
 Names are working names: each one gets a final web check before its site is built. Prompts never show a name, so a rename changes nothing here.
+
+**Seedream 5.0 Pro until 30 Nov: start with [SEEDREAM-PRIORITY.md](./SEEDREAM-PRIORITY.md)**, the order to generate in while the unlimited access lasts.
 
 ## Websites
 
@@ -26,24 +28,24 @@ Names are working names: each one gets a final web check before its site is buil
 | 010 | built | SHORELINE NO. 9 | Real estate | 10 | 22 | Ready | Generated (Abdell, 26 Nov) | [010-shoreline-9](./010-shoreline-9/prompts.md) |
 | 011 | 2 | AQRAB | Automotive | 18 | 30 | Ready | New concept (26 Nov): generate these; the old green hypercar set is not used | [011-aqrab](./011-aqrab/prompts.md) |
 | 012 | built | THAHAB | Hotels | 12 | 27 | Ready | Generated (Abdell, 26 Nov) | [012-thahab](./012-thahab/prompts.md) |
-| 013 | 2 | KAI 8 | Restaurants | 9 | 21 | Ready | Not generated yet | [013-kai-8](./013-kai-8/prompts.md) |
+| 013 | 2 | KAI 8 | Restaurants | 10 | 22 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [013-kai-8](./013-kai-8/prompts.md) |
 | 014 | 2 | TADDART | Beauty | 10 | 19 | Ready | Not generated yet | [014-taddart](./014-taddart/prompts.md) |
-| 015 | 2 | HOUSE OF SADU | Online shops | 9 | 21 | Ready | Not generated yet | [015-house-of-sadu](./015-house-of-sadu/prompts.md) |
-| 016 | 2 | TERRAZZO & TEAK | Architecture and interiors | 9 | 24 | Ready | Not generated yet | [016-terrazzo-teak](./016-terrazzo-teak/prompts.md) |
+| 015 | 2 | HOUSE OF SADU | Online shops | 9 | 21 | Ready | Generated (Abdell, 26 Nov) | [015-house-of-sadu](./015-house-of-sadu/prompts.md) |
+| 016 | 2 | TERRAZZO & TEAK | Architecture and interiors | 9 | 24 | Ready | Generated (Abdell, 26 Nov) | [016-terrazzo-teak](./016-terrazzo-teak/prompts.md) |
 | 017 | 2 | ALIGN | Healthcare | 9 | 18 | Ready | Not generated yet | [017-align](./017-align/prompts.md) |
 | 018 | 2 | CORE & COVE | Fitness | 9 | 18 | Ready | Not generated yet | [018-core-cove](./018-core-cove/prompts.md) |
 | 019 | 2 | RED DUNE EXPEDITIONS | Travel | 9 | 15 | Ready | Not generated yet | [019-red-dune](./019-red-dune/prompts.md) |
 | 020 | 2 | LANTERN CAPITAL | Finance, law and consulting | 8 | 14 | Ready | Not generated yet | [020-lantern-capital](./020-lantern-capital/prompts.md) |
 | 021 | 2 | ZAFFA WEDDINGS | Events, education and creative | 8 | 14 | Ready | Not generated yet | [021-zaffa](./021-zaffa/prompts.md) |
-| 022 | 3 | SAHRA STABLES ESTATE | Real estate | 10 | 22 | Ready | Not generated yet | [022-sahra-stables](./022-sahra-stables/prompts.md) |
-| 023 | 3 | CLOUDLINE | Real estate | 10 | 22 | Ready | Not generated yet | [023-cloudline](./023-cloudline/prompts.md) |
+| 022 | 3 | SAHRA STABLES ESTATE | Real estate | 11 | 17 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [022-sahra-stables](./022-sahra-stables/prompts.md) |
+| 023 | 3 | CLOUDLINE | Real estate | 10 | 19 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [023-cloudline](./023-cloudline/prompts.md) |
 | 024 | 3 | RIAD SEVEN FOUNTAINS | Real estate | 10 | 22 | Ready | Not generated yet | [024-riad-seven-fountains](./024-riad-seven-fountains/prompts.md) |
 | 025 | 3 | FAIRWAY CRESCENT | Real estate | 10 | 22 | Ready | Not generated yet | [025-fairway-crescent](./025-fairway-crescent/prompts.md) |
 | 026 | 3 | CANAL HOUSE 12 | Real estate | 10 | 22 | Ready | Not generated yet | [026-canal-house-12](./026-canal-house-12/prompts.md) |
-| 027 | 3 | THE LAST FLOOR | Real estate | 10 | 22 | Ready | Not generated yet | [027-the-last-floor](./027-the-last-floor/prompts.md) |
+| 027 | 3 | THE LAST FLOOR | Real estate | 10 | 16 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [027-the-last-floor](./027-the-last-floor/prompts.md) |
 | 028 | 3 | WADI GREEN | Real estate | 10 | 22 | Ready | Not generated yet | [028-wadi-green](./028-wadi-green/prompts.md) |
-| 029 | 3 | SANDBAR ONE | Real estate | 10 | 22 | Ready | Not generated yet | [029-sandbar-one](./029-sandbar-one/prompts.md) |
-| 030 | 3 | KEYS & SAND | Real estate | 10 | 22 | Ready | Not generated yet | [030-keys-and-sand](./030-keys-and-sand/prompts.md) |
+| 029 | 3 | SANDBAR ONE | Real estate | 10 | 16 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [029-sandbar-one](./029-sandbar-one/prompts.md) |
+| 030 | 3 | KEYS & SAND | Real estate | 10 | 22 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [030-keys-and-sand](./030-keys-and-sand/prompts.md) |
 | 031 | 3 | LEDGER TOWER | Real estate | 10 | 22 | Ready | Not generated yet | [031-ledger-tower](./031-ledger-tower/prompts.md) |
 | 032 | 3 | QURUM CLIFF | Real estate | 10 | 22 | Ready | Not generated yet | [032-qurum-cliff](./032-qurum-cliff/prompts.md) |
 | 033 | 3 | CHALET 1870 | Real estate | 10 | 22 | Ready | Not generated yet | [033-chalet-1870](./033-chalet-1870/prompts.md) |

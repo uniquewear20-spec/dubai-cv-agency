@@ -1,0 +1,99 @@
+{
+ "name": "SANDBAR ONE",
+ "premise": "A private island off Abu Dhabi with twelve beach villa plots and a marina; a plot picker, villa designs and an enquiry.",
+ "look": "bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic",
+ "palette": "turquoise, white sand, palm green, sun-bleached teak and soft coral",
+ "direction": "An island you arrive at by boat. Seen first from the air as a white sandbar in gradients of turquoise, then at water level where the shallows are so clear that boats seem to float on air. Architecture is low and white, shaded by palm-thatch pavilions, so the sea always dominates. Bright, clean, effortless luxury; dusk adds the romance.",
+ "type": "light, open sans capitals with plenty of tracking; layouts with big turquoise fields and very little chrome.",
+ "anchor_name": "island",
+ "anchor": "a small low private island of white sand ringed by turquoise shallows, twelve low white villas with flat roofs and palm-thatch shade pavilions spaced along the beach, a crescent-shaped teak marina with a few white motor yachts, a central grove of date palms, a long sandbank trailing off the northern tip, in the Arabian Gulf off Abu Dhabi",
+ "consistency": [
+  "Generate 01 first; keep the island description word for word in every aerial and wide shot.",
+  "Villa shots repeat the same villa: a low white flat-roofed villa with a palm-thatch pavilion and a pool that steps down into the sea."
+ ],
+ "shots": [
+  {
+   "id": "hero",
+   "title": "The island",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "camera": "Drone, 250 m, 45 degrees",
+   "prompt": "Aerial drone photograph of {anchor}, seen at a 45-degree angle in bright late-morning sun: gradients from deep blue to vivid turquoise to pale aqua around the white sand, the villas and palms in neat rhythm, the marina crescent with yachts, a speedboat leaving a white wake, crystal clear and luxurious."
+  },
+  {
+   "id": "hero-mobile",
+   "title": "The sandbank",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "camera": "Drone, straight down",
+   "prompt": "Vertical top-down drone photograph of a long white sandbank curving through clear turquoise water like a brushstroke, ripples and sand patterns visible beneath the surface, the shadow of a small boat on the seabed beside it, minimal and graphic."
+  },
+  {
+   "id": "arrival",
+   "title": "Arriving by water",
+   "section": "Arrival section",
+   "ar": "3:2",
+   "camera": "Water level, 35mm",
+   "prompt": "Photograph at water level of a classic teak motor launch gliding up to a teak jetty on {anchor}, the water so clear that the boat's shadow is visible on the white sand below, palms and a white villa on the beach ahead, bright midday sun, effortless and exclusive."
+  },
+  {
+   "id": "villa",
+   "title": "A beach villa",
+   "section": "Villa designs",
+   "ar": "16:9",
+   "camera": "Architectural, 24mm",
+   "prompt": "Architectural photograph of a low white flat-roofed beach villa on {anchor}: a palm-thatch shade pavilion with linen loungers, a long pool that steps down into the turquoise sea, sun-bleached teak decking, a pair of leaning palms, soft midday light, nobody present."
+  },
+  {
+   "id": "living",
+   "title": "The living room",
+   "section": "Villa interiors",
+   "ar": "16:9",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a beach villa living room with smooth white lime plaster, sun-bleached teak, linen sofas and rattan chairs, wide glass doors fully open onto the sand and the turquoise sea, a coral-coloured cushion, a breeze moving a sheer curtain, bright and airy, nobody present."
+  },
+  {
+   "id": "grid-villa",
+   "title": "The villa",
+   "section": "Villa gallery",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors and courtyards, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. A white beach villa with teak, linen and palm-thatch, bright daylight, nobody present. Top-left: a bedroom with a linen bed facing open doors and the sea. Top-right: an outdoor shower in a walled courtyard of palms and white plaster. Bottom-left: a dining pavilion with a long teak table under palm thatch by the water. Bottom-right: a bathroom with a stone basin and a window onto the shallows."
+  },
+  {
+   "id": "dusk",
+   "title": "Dusk",
+   "section": "Evening band",
+   "ar": "21:9",
+   "camera": "Wide, 24mm, from the water",
+   "prompt": "Panoramic photograph of {anchor} at dusk from the water: the sky in soft coral and violet, the villas glowing warm, the palms silhouetted, the sea glassy and still with reflections, a yacht at anchor with its lights on, serene and romantic."
+  },
+  {
+   "id": "sandbar-walk",
+   "title": "Low tide",
+   "section": "Life on the island",
+   "ar": "3:2",
+   "camera": "50mm, from behind",
+   "prompt": "Photograph from behind of a family of three generations walking barefoot along a wet white sandbank at low tide, all faces turned away, turquoise water on both sides, their reflections in the thin film of water, soft late-afternoon light, carefree. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "grid-sea",
+   "title": "The sea",
+   "section": "Around the island",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Underwater, aerial and water level",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. The sea around a private island in the Arabian Gulf, bright light. Top-left: small reef fish over coral and sea grass in clear water. Top-right: a white seaplane resting on turquoise water. Bottom-left: a paddleboarder seen from above on glassy water, face not visible. Bottom-right: a traditional wooden dhow sailing past with a white sail. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "plot",
+   "title": "An empty plot",
+   "section": "Plot picker",
+   "ar": "4:3",
+   "camera": "Eye level, 35mm",
+   "prompt": "Photograph of a vacant beachfront plot on {anchor}: smooth white sand marked by four small wooden survey stakes with white string between them, two date palms, the turquoise shallows a few steps away, a neighbouring white villa just visible at the edge, clear bright light, full of promise."
+  }
+ ],
+ "status": "New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro"
+}

@@ -1,0 +1,107 @@
+{
+ "name": "SAHRA STABLES ESTATE",
+ "premise": "A private equestrian estate where the paddocks meet the dunes, on the desert edge outside Dubai: an estate tour, the stables and arena, and an enquiry.",
+ "look": "warm country-estate photography at the desert's edge, low golden sun, fine dust glowing in the air, 35mm and 85mm, unhurried and photorealistic",
+ "palette": "sand, chestnut, olive green, bone white and saddle brown",
+ "direction": "An estate told like a country-house monograph moved to the desert. Long, low, earth-coloured architecture sits on the line where white paddock rails meet red dunes; Arabian horses give it life and scale. Light is always low and golden or blue at dawn, with dust in the air. The site moves from the arrival avenue to the house, the stables, the arena and out onto the dunes.",
+ "type": "wide-tracked serif capitals for the estate name, a warm sans for text; long horizontal compositions to match the architecture.",
+ "anchor_name": "estate",
+ "anchor": "a long, low single-storey estate house of rammed earth and sand-coloured lime render with a deep veranda roofed in dark timber on slender bronze columns, a flat roof with a thin bronze edge, tall oak louvred shutters, an inner courtyard of ghaf and olive trees, a matching rammed-earth stable block with tall arched openings and dark oak stable doors, white post-and-rail paddock fences, on the edge of red dunes outside Dubai",
+ "consistency": [
+  "Generate 01 first; keep the estate description exactly as written in every prompt that shows the buildings.",
+  "The horses are always purebred Arabians: one dapple grey, one chestnut, one bay. Keep those colours when they reappear."
+ ],
+ "shots": [
+  {
+   "id": "hero",
+   "title": "The estate at golden hour",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "camera": "From the paddock, 35mm, eye level",
+   "prompt": "Architectural landscape photograph of {anchor}, seen across a paddock at golden hour: a dapple grey and a chestnut Arabian horse grazing in the foreground, white fence rails leading the eye to the long veranda glowing in low sun, warm dust hanging in the air, red dunes rising behind under a pale clear sky, wide, calm and majestic."
+  },
+  {
+   "id": "hero-mobile",
+   "title": "The grey",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "camera": "85mm, shallow depth of field",
+   "prompt": "Vertical portrait photograph of a dapple grey Arabian horse with a fine dished face and a long silver mane standing in profile before the deep veranda of {anchor}, low sun rimming the mane with gold, the architecture softly out of focus, dust glowing in the air, noble and quiet."
+  },
+  {
+   "id": "arrival",
+   "title": "The arrival avenue",
+   "section": "Arrival section",
+   "ar": "3:2",
+   "camera": "Centred, 50mm",
+   "prompt": "Photograph down a long straight gravel avenue lined with old ghaf trees leading to {anchor}, a pair of slim bronze gates open in the foreground, long late-afternoon shadows striping the gravel, the low house glowing at the end of the avenue, symmetrical and serene, nobody present."
+  },
+  {
+   "id": "great-room",
+   "title": "The great room",
+   "section": "The house",
+   "ar": "16:9",
+   "camera": "Interior, 24mm, natural light",
+   "prompt": "Interior photograph of the great room of {anchor}: thick rammed-earth walls, a ceiling of dark oak beams, a long refectory table of oak, deep cognac leather sofas around a stone fireplace, wool rugs in sand and rust, tall shutters folded open to the paddocks, low golden sunlight slanting across the floor, lived-in, warm and quiet, nobody present."
+  },
+  {
+   "id": "stables",
+   "title": "The stable aisle",
+   "section": "The stables",
+   "ar": "4:3",
+   "camera": "Aisle perspective, 35mm",
+   "prompt": "Photograph down the central aisle of the stable block of {anchor}: oak stable doors on both sides with polished bronze fittings, a bay Arabian horse looking out over one half-door, shafts of sunlight falling through high arched openings onto swept sand-coloured stone, dust floating in the beams, saddles on oak racks, peaceful."
+  },
+  {
+   "id": "grid-house",
+   "title": "The house",
+   "section": "Rooms gallery",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors, 28mm, natural light",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Interiors of a rammed-earth desert estate house with oak, bronze, linen and leather, in low warm daylight, nobody present. Top-left: the principal bedroom, a low oak bed with linen and a view through open shutters to the paddocks. Top-right: a kitchen of oak cabinetry, a long sand-coloured stone island and copper pans. Bottom-left: a tack room of saddles and bridles hung on oak pegs. Bottom-right: a bathroom with a carved stone bathtub before a window onto the dunes."
+  },
+  {
+   "id": "arena",
+   "title": "The riding arena",
+   "section": "Arena section",
+   "ar": "21:9",
+   "camera": "Wide, 24mm",
+   "prompt": "Panoramic photograph inside a covered riding arena built of rammed earth with a long-span roof of exposed dark timber trusses: a rider in a white shirt schooling a chestnut Arabian horse at a collected canter across raked sand, sunlight falling through a long clerestory in bright shafts, dust lit gold, the rider's face turned away, grand and calm. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "grid-details",
+   "title": "Materials",
+   "section": "Materials band",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in raking golden light. Top-left: the layered bands of a rammed-earth wall in sand and ochre. Top-right: the hand stitching on a cognac saddle. Bottom-left: a heavy cast bronze door pull on dark oak. Bottom-right: oak grain with a black iron hinge on a stable door."
+  },
+  {
+   "id": "grooming",
+   "title": "Dawn in the courtyard",
+   "section": "Life on the estate",
+   "ar": "3:2",
+   "camera": "50mm, dawn",
+   "prompt": "Photograph in the courtyard of {anchor} at dawn: a groom in a sand-coloured shirt brushing the dapple grey Arabian horse beside a ghaf tree, face turned away, soft blue dawn light with the first warm rays on the walls, a bucket and brushes on the stone, intimate and calm. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "dune-ride",
+   "title": "The ride out",
+   "section": "Beyond the estate",
+   "ar": "21:9",
+   "camera": "Telephoto, 200mm",
+   "prompt": "Cinematic panoramic photograph of two riders on Arabian horses, a grey and a bay, cantering along the crest of a red dune at sunset, small in the frame, long shadows on the rippled sand, a plume of glowing dust behind them, the low lights of {anchor} visible far away at the dune's edge. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "aerial",
+   "title": "The estate from above",
+   "section": "Estate plan section",
+   "ar": "16:9",
+   "camera": "Drone, 120 m, 45 degrees",
+   "prompt": "Drone photograph from about 120 metres at a 45-degree angle of {anchor}: the long house with its courtyard of trees, the stable block, the covered arena, a geometric pattern of white-fenced paddocks with horses, a gravel avenue of ghaf trees, and the red dunes rolling away on one side, warm late light with long shadows."
+  }
+ ],
+ "status": "New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro"
+}

@@ -1,0 +1,99 @@
+{
+ "name": "THE LAST FLOOR",
+ "premise": "One full-floor penthouse at the top of a Downtown Dubai supertall, and nothing else for sale; a penthouse explorer and a private viewing.",
+ "look": "dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic",
+ "palette": "obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue",
+ "direction": "The city is the wallpaper. Everything is shot at blue hour or night from the top floor: black marble that reflects the skyline, smoked bronze fins, deep green velvet and a pool that seems to pour into the lights below. It should feel like the last word in privacy and height: dark, glossy, cinematic, with dawn used once as a quiet counterpoint.",
+ "type": "high-contrast didone capitals in champagne on black; thin rules; very few words per screen.",
+ "anchor_name": "penthouse",
+ "anchor": "a full-floor penthouse at the top of a slender supertall tower in Downtown Dubai: floor-to-ceiling glass on all four sides, black marble floors with white veins, smoked bronze ceiling fins, a sunken living room with curved deep-emerald velvet sofas, a wraparound terrace with frameless glass balustrades and a black-tiled infinity pool, the city lights spread out three hundred metres below",
+ "consistency": [
+  "Generate 01 first; keep the penthouse description word for word.",
+  "Night shots are all at the same blue hour turning to night; only the dawn shot breaks this."
+ ],
+ "shots": [
+  {
+   "id": "hero",
+   "title": "The sunken room at night",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "camera": "Interior, 24mm, long exposure",
+   "prompt": "Cinematic night interior photograph of {anchor}: the sunken living room with curved emerald velvet sofas in the foreground, the glass wall behind showing the glittering grid of city lights far below and the illuminated towers around, the skyline reflected in the black marble floor, warm low lamps and cool blue night outside, opulent and silent, nobody present."
+  },
+  {
+   "id": "hero-mobile",
+   "title": "The pool edge",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "camera": "Water level, 24mm",
+   "prompt": "Vertical night photograph along the black-tiled infinity pool on the terrace of {anchor}: the water edge disappearing into the city lights three hundred metres below, a neighbouring tower's lit spire rising in the frame, the pool lit softly from beneath, a dramatic sense of height."
+  },
+  {
+   "id": "pool",
+   "title": "The terrace pool",
+   "section": "Terrace section",
+   "ar": "21:9",
+   "camera": "Wide, 20mm, blue hour",
+   "prompt": "Panoramic blue-hour photograph across the terrace of {anchor}: the black infinity pool merging with the city lights, frameless glass balustrades, two low loungers, the last band of orange light on the horizon and the towers lighting up one by one, nobody present."
+  },
+  {
+   "id": "tower",
+   "title": "The top of the tower",
+   "section": "The building",
+   "ar": "3:4",
+   "camera": "Telephoto from a distance, 200mm",
+   "prompt": "Telephoto photograph at dusk of the crown of a slender supertall tower of glass and bronze in Downtown Dubai, only the top floor glowing warm gold while the floors below are cooler, thin bronze vertical fins, a deep blue sky with a sliver of moon, elegant and singular."
+  },
+  {
+   "id": "grid-rooms",
+   "title": "Rooms",
+   "section": "Penthouse explorer",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors, 24mm, night",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Night interiors of a full-floor penthouse with black marble, smoked bronze and emerald velvet, the city lights far below through every window, nobody present. Top-left: the principal bedroom with a low bed facing a glass corner onto the skyline. Top-right: a dining room with a long black marble table and a sculptural bronze pendant. Bottom-left: a library bar with bronze shelving and a velvet armchair. Bottom-right: a bathroom with a black marble bathtub against the glass."
+  },
+  {
+   "id": "dawn",
+   "title": "Dawn",
+   "section": "Morning band",
+   "ar": "16:9",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of {anchor} at dawn: soft pink and pale gold light flooding across the black marble, mist lying over the city far below, the towers emerging from haze, the emerald sofas catching the first light, calm and luminous, nobody present."
+  },
+  {
+   "id": "evening",
+   "title": "An evening on the terrace",
+   "section": "Life up here",
+   "ar": "3:2",
+   "camera": "50mm, night",
+   "prompt": "Night photograph on the terrace of {anchor}: a host pouring sparkling juice into glasses for three guests standing by the glass balustrade, all different people dressed for evening, faces turned away or in shadow, the city lights spread below them, candle lanterns on a low table, glamorous and relaxed. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "grid-details",
+   "title": "Materials",
+   "section": "Materials band",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Macro, low light",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in low warm light with city lights blurred behind. Top-left: black marble with fine white veins. Top-right: a smoked bronze fin with soft reflections. Bottom-left: deep emerald velvet upholstery. Bottom-right: a pane of glass reflecting the night skyline."
+  },
+  {
+   "id": "lift",
+   "title": "The private lift",
+   "section": "Arrival section",
+   "ar": "3:4",
+   "camera": "Symmetrical, 35mm",
+   "prompt": "Symmetrical photograph of a private lift lobby: tall smoked bronze lift doors opening onto a black marble hall, a single sculptural bronze bench, a slim line of warm light along the ceiling, and through an open doorway beyond, a glimpse of the night skyline, hushed and exclusive."
+  },
+  {
+   "id": "view",
+   "title": "The view",
+   "section": "Full-width view band",
+   "ar": "21:9",
+   "camera": "Panoramic, 35mm, blue hour",
+   "prompt": "Panoramic blue-hour photograph of the Dubai skyline seen from three hundred metres up, through floor-to-ceiling glass with the faintest reflection of a bronze fin at the edge: illuminated towers, the lit grid of streets and a long boulevard of lights curving away, deep blue sky with a last glow on the horizon."
+  }
+ ],
+ "status": "New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro"
+}

@@ -1,0 +1,101 @@
+{
+ "name": "KEYS & SAND",
+ "premise": "Six design-led holiday apartments by the sea in Dubai, booked direct instead of through the big platforms: stay search, apartment pages and booking.",
+ "look": "bright, sunlit, lived-in holiday interior photography like a design-hotel campaign, natural light, soft shadows, 28-35mm, photorealistic",
+ "palette": "chalk white, sea blue, sand, terracotta and natural rattan",
+ "direction": "The anti-listing. Instead of wide-angle rental photos, every apartment is shot like a design magazine story: morning light, an open book, linen moving in the breeze, the sea always in the frame. Six apartments, each with one signature colour against chalk white. The site should make a guest want to book direct for the feeling, not the price.",
+ "type": "friendly rounded serif headlines, handwritten-feeling numerals for nights and guests; warm off-white backgrounds.",
+ "anchor_name": "building",
+ "anchor": "a low, five-storey whitewashed apartment building right on a sandy beach in Dubai, with deep curved balconies, sea-blue painted shutters, built-in planters of bougainvillea and olive, and a quiet sea-facing courtyard with a small pool",
+ "consistency": [
+  "Generate 01 first; keep the building description word for word in exterior shots.",
+  "Interiors share chalk-white walls, oak floors, linen and rattan; each apartment adds one colour (sea blue, terracotta or sand) as noted."
+ ],
+ "shots": [
+  {
+   "id": "hero",
+   "title": "Morning on the balcony",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "camera": "Interior to balcony, 28mm",
+   "prompt": "Bright photograph from inside a holiday apartment out through open glass doors to a deep curved balcony of {anchor}: two rattan chairs, a small table with coffee and a bowl of figs, sheer linen curtains lifting in the breeze, the turquoise sea and a pale sandy beach beyond, warm morning sun, relaxed and inviting, nobody present."
+  },
+  {
+   "id": "hero-mobile",
+   "title": "The shutters",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "camera": "Vertical, 35mm",
+   "prompt": "Vertical photograph of a tall window with sea-blue painted shutters folded open on a white wall, a branch of bougainvillea across the corner, a slice of turquoise sea and sky through the window, a linen curtain moving, bright morning light, fresh and holiday-like."
+  },
+  {
+   "id": "building",
+   "title": "The building",
+   "section": "About the homes",
+   "ar": "3:2",
+   "camera": "From the beach, 35mm",
+   "prompt": "Architectural photograph from the beach of {anchor}: soft morning light on the white curves, sea-blue shutters half open, bougainvillea spilling from the planters, a few sun loungers and a striped umbrella on the sand in front, calm sea, nobody posing."
+  },
+  {
+   "id": "grid-blue",
+   "title": "The Blue Apartment",
+   "section": "Apartment page: Blue",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. A two-bedroom holiday apartment by the sea with chalk-white walls, oak floors, linen and rattan, accents of deep sea blue, bright natural light, nobody present. Top-left: the living room with a blue linen sofa and the sea through open doors. Top-right: a small kitchen with blue tiles and a bowl of lemons. Bottom-left: a bedroom with white linen and a blue throw facing the sea. Bottom-right: a shower room with blue zellige tiles and a round mirror."
+  },
+  {
+   "id": "grid-terracotta",
+   "title": "The Terracotta Apartment",
+   "section": "Apartment page: Terracotta",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. A one-bedroom holiday apartment by the sea with chalk-white walls, oak floors, linen and rattan, accents of warm terracotta, bright natural light, nobody present. Top-left: a living area with a terracotta armchair and a reading lamp. Top-right: a dining nook with a round oak table and terracotta jugs of dried flowers. Bottom-left: a bedroom with a rattan headboard and terracotta linen. Bottom-right: a bathroom with a terracotta tiled floor and a wooden stool."
+  },
+  {
+   "id": "grid-sand",
+   "title": "The Sand Penthouse",
+   "section": "Apartment page: Penthouse",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors and roof, 24mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. A three-bedroom holiday penthouse by the sea with chalk-white walls, oak, linen and rattan in warm sand tones, bright natural light, nobody present. Top-left: a double-height living room with a curved sand-coloured sofa and the sea beyond. Top-right: a roof terrace with a plunge pool and sun loungers. Bottom-left: a family bedroom with two beds and striped linen. Bottom-right: an outdoor dining table under a white pergola at sunset. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "courtyard",
+   "title": "The courtyard pool",
+   "section": "Shared spaces",
+   "ar": "4:3",
+   "camera": "35mm, afternoon",
+   "prompt": "Photograph of the quiet sea-facing courtyard of {anchor}: a small turquoise pool edged in white stone, olive trees in white planters, a few linen loungers, bougainvillea on the walls, afternoon light and soft shadows, peaceful, nobody present."
+  },
+  {
+   "id": "arrival",
+   "title": "Welcome",
+   "section": "Your stay: arrival",
+   "ar": "3:2",
+   "camera": "50mm, detail",
+   "prompt": "Close photograph of a welcome on an oak console in a holiday apartment: a brass key on a sea-blue tassel, a handwritten welcome card left blank, a bowl of local dates, a small jug of fresh flowers, a folded beach towel tied with string, warm afternoon light."
+  },
+  {
+   "id": "guests",
+   "title": "Holiday life",
+   "section": "Guest moments",
+   "ar": "3:2",
+   "camera": "35mm, candid",
+   "prompt": "Candid photograph of a couple and their young child on the beach in front of {anchor} at golden hour, building a sandcastle, all faces turned away or out of frame, soft warm light, the white building and blue shutters behind them, joyful and natural. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "grid-neighbourhood",
+   "title": "The neighbourhood",
+   "section": "Around you",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Street and beach, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. A seaside neighbourhood in Dubai in bright light, people small or seen from behind, all different. Top-left: a quiet beach at early morning with footprints in the sand. Top-right: a seaside walkway with palm trees and cyclists. Bottom-left: a small cafe counter with pastries and coffee. Bottom-right: a fresh fruit stall with mangoes and pomegranates. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  }
+ ],
+ "status": "New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro"
+}

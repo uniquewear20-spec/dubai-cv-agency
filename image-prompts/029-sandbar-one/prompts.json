@@ -2,110 +2,110 @@
  "site": "SANDBAR ONE",
  "slug": "sandbar-one",
  "category": "Real estate",
- "concept": "Private island plots; plot picker and enquiry.",
- "look": "turquoise aerial photography, 24mm",
- "palette": "turquoise, white sand, green, blue",
+ "concept": "A private island off Abu Dhabi with twelve beach villa plots and a marina; a plot picker, villa designs and an enquiry.",
+ "look": "bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic",
+ "palette": "turquoise, white sand, palm green, sun-bleached teak and soft coral",
  "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
  "shots": [
   {
    "n": 1,
    "file": "sandbar-one__01-hero.png",
-   "title": "Hero",
-   "section": "Home hero, full screen behind the headline",
+   "title": "The island",
+   "section": "Home hero, full screen",
    "ar": "16:9",
    "kind": "single",
-   "camera": "Eye-level three-quarter view, 24mm tilt-shift, corrected verticals",
-   "prompt": "Architectural photograph of a private island with a few villa plots and a small marina in off the coast of Abu Dhabi. Golden-hour sun rakes across the facade, verticals perfectly straight, landscaped foreground, clear sky with open space above for a headline. It must feel built and lived-in, not rendered. No people. Overall look: turquoise aerial photography, 24mm; colour palette of turquoise, white sand, green, blue. No text, no letters, no logos, no watermarks."
+   "camera": "Drone, 250 m, 45 degrees",
+   "prompt": "Aerial drone photograph of a small low private island of white sand ringed by turquoise shallows, twelve low white villas with flat roofs and palm-thatch shade pavilions spaced along the beach, a crescent-shaped teak marina with a few white motor yachts, a central grove of date palms, a long sandbank trailing off the northern tip, in the Arabian Gulf off Abu Dhabi, seen at a 45-degree angle in bright late-morning sun: gradients from deep blue to vivid turquoise to pale aqua around the white sand, the villas and palms in neat rhythm, the marina crescent with yachts, a speedboat leaving a white wake, crystal clear and luxurious. Overall look: bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic; colour palette of turquoise, white sand, palm green, sun-bleached teak and soft coral. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 2,
    "file": "sandbar-one__02-hero-mobile.png",
-   "title": "Hero for phones",
+   "title": "The sandbank",
    "section": "Home hero on phones",
    "ar": "9:16",
    "kind": "single",
-   "camera": "Low angle looking up, 20mm",
-   "prompt": "Vertical architectural photograph looking up along a private island with a few villa plots and a small marina in off the coast of Abu Dhabi, facade lines converging into a clear sky, sunlight catching the main materials, strong graphic composition. No people. Overall look: turquoise aerial photography, 24mm; colour palette of turquoise, white sand, green, blue. No text, no letters, no logos, no watermarks."
+   "camera": "Drone, straight down",
+   "prompt": "Vertical top-down drone photograph of a long white sandbank curving through clear turquoise water like a brushstroke, ripples and sand patterns visible beneath the surface, the shadow of a small boat on the seabed beside it, minimal and graphic. Overall look: bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic; colour palette of turquoise, white sand, palm green, sun-bleached teak and soft coral. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 3,
-   "file": "sandbar-one__03-aerial.png",
-   "title": "Aerial",
-   "section": "Location section",
-   "ar": "16:9",
+   "file": "sandbar-one__03-arrival.png",
+   "title": "Arriving by water",
+   "section": "Arrival section",
+   "ar": "3:2",
    "kind": "single",
-   "camera": "Drone, 120 m, 45-degree angle",
-   "prompt": "Drone photograph of a private island with a few villa plots and a small marina in off the coast of Abu Dhabi, seen from about 120 metres at a 45-degree angle: the building, plot, access, landscaping and any nearby water clearly readable. Soft morning light, true colours, light haze on the horizon. No people visible. Overall look: turquoise aerial photography, 24mm; colour palette of turquoise, white sand, green, blue. No text, no letters, no logos, no watermarks."
+   "camera": "Water level, 35mm",
+   "prompt": "Photograph at water level of a classic teak motor launch gliding up to a teak jetty on a small low private island of white sand ringed by turquoise shallows, twelve low white villas with flat roofs and palm-thatch shade pavilions spaced along the beach, a crescent-shaped teak marina with a few white motor yachts, a central grove of date palms, a long sandbank trailing off the northern tip, in the Arabian Gulf off Abu Dhabi, the water so clear that the boat's shadow is visible on the white sand below, palms and a white villa on the beach ahead, bright midday sun, effortless and exclusive. Overall look: bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic; colour palette of turquoise, white sand, palm green, sun-bleached teak and soft coral. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 4,
-   "file": "sandbar-one__04-twilight.png",
-   "title": "Blue hour",
-   "section": "Night band between sections",
+   "file": "sandbar-one__04-villa.png",
+   "title": "A beach villa",
+   "section": "Villa designs",
    "ar": "16:9",
    "kind": "single",
-   "camera": "Eye level, 35mm, tripod long exposure",
-   "prompt": "Blue-hour photograph of a private island with a few villa plots and a small marina in off the coast of Abu Dhabi: interiors glowing warm behind the glass, exterior lighting on, deep blue sky with a last band of light on the horizon, reflections on water or wet paving. No people. Overall look: turquoise aerial photography, 24mm; colour palette of turquoise, white sand, green, blue. No text, no letters, no logos, no watermarks."
+   "camera": "Architectural, 24mm",
+   "prompt": "Architectural photograph of a low white flat-roofed beach villa on a small low private island of white sand ringed by turquoise shallows, twelve low white villas with flat roofs and palm-thatch shade pavilions spaced along the beach, a crescent-shaped teak marina with a few white motor yachts, a central grove of date palms, a long sandbank trailing off the northern tip, in the Arabian Gulf off Abu Dhabi: a palm-thatch shade pavilion with linen loungers, a long pool that steps down into the turquoise sea, sun-bleached teak decking, a pair of leaning palms, soft midday light, nobody present. Overall look: bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic; colour palette of turquoise, white sand, palm green, sun-bleached teak and soft coral. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 5,
-   "file": "sandbar-one__05-grid-interiors.png",
-   "title": "Interiors",
-   "section": "Interiors gallery and unit pages",
+   "file": "sandbar-one__05-living.png",
+   "title": "The living room",
+   "section": "Villa interiors",
    "ar": "16:9",
-   "kind": "grid",
-   "camera": "Interior, 24mm, eye level, one window light",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Interior photographs inside a private island with a few villa plots and a small marina, finished in island villa interiors in white and wood, staged and uncluttered, one soft daylight, nobody present. Top-left: the main living room with its view. Top-right: the kitchen and dining area. Bottom-left: the principal bedroom. Bottom-right: the principal bathroom. Overall look: turquoise aerial photography, 24mm; colour palette of turquoise, white sand, green, blue. No text, no letters, no logos, no watermarks."
+   "kind": "single",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a beach villa living room with smooth white lime plaster, sun-bleached teak, linen sofas and rattan chairs, wide glass doors fully open onto the sand and the turquoise sea, a coral-coloured cushion, a breeze moving a sheer curtain, bright and airy, nobody present. Overall look: bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic; colour palette of turquoise, white sand, palm green, sun-bleached teak and soft coral. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 6,
-   "file": "sandbar-one__06-grid-amenities.png",
-   "title": "Amenities",
-   "section": "Amenities section",
-   "ar": "1:1",
+   "file": "sandbar-one__06-grid-villa.png",
+   "title": "The villa",
+   "section": "Villa gallery",
+   "ar": "16:9",
    "kind": "grid",
-   "camera": "Architectural, 24mm",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The shared spaces of a private island with a few villa plots and a small marina, daylight, nobody present. Top-left: a private marina. Top-right: the residents' gym with a view. Bottom-left: the arrival lobby with a concierge desk. Bottom-right: the landscaped garden or roof terrace. Overall look: turquoise aerial photography, 24mm; colour palette of turquoise, white sand, green, blue. No text, no letters, no logos, no watermarks."
+   "camera": "Interiors and courtyards, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. A white beach villa with teak, linen and palm-thatch, bright daylight, nobody present. Top-left: a bedroom with a linen bed facing open doors and the sea. Top-right: an outdoor shower in a walled courtyard of palms and white plaster. Bottom-left: a dining pavilion with a long teak table under palm thatch by the water. Bottom-right: a bathroom with a stone basin and a window onto the shallows. Overall look: bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic; colour palette of turquoise, white sand, palm green, sun-bleached teak and soft coral. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 7,
-   "file": "sandbar-one__07-view.png",
-   "title": "The view",
-   "section": "View section, full width",
+   "file": "sandbar-one__07-dusk.png",
+   "title": "Dusk",
+   "section": "Evening band",
    "ar": "21:9",
    "kind": "single",
-   "camera": "Panoramic, 35mm, from the terrace",
-   "prompt": "Panoramic photograph from the main terrace of a private island with a few villa plots and a small marina: the open sea from the island. The edge of a lounge chair and a planter frame the foreground, late-afternoon haze, the view is the subject. No people. Overall look: turquoise aerial photography, 24mm; colour palette of turquoise, white sand, green, blue. No text, no letters, no logos, no watermarks."
+   "camera": "Wide, 24mm, from the water",
+   "prompt": "Panoramic photograph of a small low private island of white sand ringed by turquoise shallows, twelve low white villas with flat roofs and palm-thatch shade pavilions spaced along the beach, a crescent-shaped teak marina with a few white motor yachts, a central grove of date palms, a long sandbank trailing off the northern tip, in the Arabian Gulf off Abu Dhabi at dusk from the water: the sky in soft coral and violet, the villas glowing warm, the palms silhouetted, the sea glassy and still with reflections, a yacht at anchor with its lights on, serene and romantic. Overall look: bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic; colour palette of turquoise, white sand, palm green, sun-bleached teak and soft coral. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 8,
-   "file": "sandbar-one__08-grid-details.png",
-   "title": "Materials",
-   "section": "Materials and specification section",
-   "ar": "1:1",
-   "kind": "grid",
-   "camera": "Macro, 100mm, raking side light",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up photographs of the materials of a private island with a few villa plots and a small marina, raking side light, shallow depth of field. Top-left: Sand. Top-right: Wood. Bottom-left: Rope. Bottom-right: Water. Overall look: turquoise aerial photography, 24mm; colour palette of turquoise, white sand, green, blue. No text, no letters, no logos, no watermarks."
+   "file": "sandbar-one__08-sandbar-walk.png",
+   "title": "Low tide",
+   "section": "Life on the island",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "50mm, from behind",
+   "prompt": "Photograph from behind of a family of three generations walking barefoot along a wet white sandbank at low tide, all faces turned away, turquoise water on both sides, their reflections in the thin film of water, soft late-afternoon light, carefree. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame. Overall look: bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic; colour palette of turquoise, white sand, palm green, sun-bleached teak and soft coral. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 9,
-   "file": "sandbar-one__09-lifestyle.png",
-   "title": "Lifestyle",
-   "section": "Living there section",
-   "ar": "3:2",
-   "kind": "single",
-   "camera": "Editorial, 35mm, natural light",
-   "prompt": "Editorial lifestyle photograph at a private island with a few villa plots and a small marina in off the coast of Abu Dhabi: owners arriving by boat. Candid, natural light, believable and calm. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: turquoise aerial photography, 24mm; colour palette of turquoise, white sand, green, blue. No text, no letters, no logos, no watermarks."
+   "file": "sandbar-one__09-grid-sea.png",
+   "title": "The sea",
+   "section": "Around the island",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Underwater, aerial and water level",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. The sea around a private island in the Arabian Gulf, bright light. Top-left: small reef fish over coral and sea grass in clear water. Top-right: a white seaplane resting on turquoise water. Bottom-left: a paddleboarder seen from above on glassy water, face not visible. Bottom-right: a traditional wooden dhow sailing past with a white sail. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame. Overall look: bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic; colour palette of turquoise, white sand, palm green, sun-bleached teak and soft coral. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 10,
-   "file": "sandbar-one__10-grid-area.png",
-   "title": "Neighbourhood",
-   "section": "Neighbourhood section",
-   "ar": "16:9",
-   "kind": "grid",
-   "camera": "Documentary, 35mm",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Documentary photographs of the neighbourhood around off the coast of Abu Dhabi, morning light. Top-left: A sandbank. Top-right: A reef. Bottom-left: A seaplane. Bottom-right: A beach. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: turquoise aerial photography, 24mm; colour palette of turquoise, white sand, green, blue. No text, no letters, no logos, no watermarks."
+   "file": "sandbar-one__10-plot.png",
+   "title": "An empty plot",
+   "section": "Plot picker",
+   "ar": "4:3",
+   "kind": "single",
+   "camera": "Eye level, 35mm",
+   "prompt": "Photograph of a vacant beachfront plot on a small low private island of white sand ringed by turquoise shallows, twelve low white villas with flat roofs and palm-thatch shade pavilions spaced along the beach, a crescent-shaped teak marina with a few white motor yachts, a central grove of date palms, a long sandbank trailing off the northern tip, in the Arabian Gulf off Abu Dhabi: smooth white sand marked by four small wooden survey stakes with white string between them, two date palms, the turquoise shallows a few steps away, a neighbouring white villa just visible at the edge, clear bright light, full of promise. Overall look: bright aerial and water-level island photography, saturated turquoise shallows, white sand, midday clarity and soft dusk, drone and 24mm, photorealistic; colour palette of turquoise, white sand, palm green, sun-bleached teak and soft coral. No text, no letters, no logos, no watermarks."
   }
  ]
 }

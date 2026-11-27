@@ -4,7 +4,7 @@
 **Concept:** A luxury interior design studio; style quiz and project enquiry.  
 **Website:** /showcase/terrazzo-teak/  
 **Images:** 9 generations, 24 images  
-**Image status:** Not generated yet
+**Image status:** Generated (Abdell, 26 Nov)
 
 ## Visual direction
 
@@ -15,7 +15,7 @@
 
 ## Settings (Higgsfield website)
 
-Seedream 5.0 Pro · Quality 2K · Count 1/4 (keep it at 1/4 so Unlimited stays on) · Aspect ratio as listed · No reference images.
+Seedream 5.0 Pro · Quality 2K · Count 1/4 (keep it at 1/4 so Unlimited stays on) · Aspect ratio as listed · No reference images. Unlimited runs one picture at a time and queues one more: start the next when one finishes.
 
 ## Shot list
 

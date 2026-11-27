@@ -1,0 +1,100 @@
+{
+ "name": "CLOUDLINE",
+ "premise": "Five mountain villas on a ridge of Jebel Jais, above the clouds; a plot picker and a private viewing.",
+ "look": "cool alpine-architecture photography above a sea of clouds, blue dawn and amber firelight, 24mm, mist and silence, photorealistic",
+ "palette": "basalt grey, cloud white, juniper green, smoked oak and ember amber",
+ "direction": "Living above the weather. Each villa is a pair of dark stone volumes, one cantilevered over the void, and the clouds are the second subject: they fill the valleys at dawn and part to reveal the mountains. The mood shifts from cold blue dawn to warm firelit night, always with silence and space. Wide frames, low horizons, lots of sky and cloud for type to sit on.",
+ "type": "thin, widely spaced capitals floating in the sky areas; calm small text; layouts that leave the clouds clear.",
+ "anchor_name": "villa",
+ "anchor": "a contemporary mountain villa of dark split-face basalt walls and floor-to-ceiling glass, two long flat-roofed volumes stacked at an angle, the upper volume cantilevered six metres over a cliff edge, warm oak soffits, slim black steel window frames, a long rectangular infinity pool on a stone terrace at the cliff edge, on a ridge of the Hajar mountains of Ras Al Khaimah",
+ "consistency": [
+  "Generate 01 first; it fixes the villa. Keep the villa description word for word.",
+  "Dawn shots share the same cold blue light with a pink edge; night shots the same amber interiors under stars."
+ ],
+ "shots": [
+  {
+   "id": "hero",
+   "title": "Above the clouds",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "camera": "24mm from the ridge, dawn",
+   "prompt": "Architectural photograph of {anchor} at dawn, standing above a continuous sea of white clouds that fills the valleys below, the first pink light touching the stone and the glass, the pool reflecting the sky, jagged peaks rising through the clouds in the distance, crisp, silent and breathtaking, nobody present."
+  },
+  {
+   "id": "hero-mobile",
+   "title": "The cantilever",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "camera": "Looking up, 20mm",
+   "prompt": "Vertical photograph looking up from the rocks beneath the cantilevered upper volume of {anchor}: the oak soffit and black steel frame overhead, wisps of cloud drifting underneath the overhang, a deep blue dawn sky above, dramatic and weightless."
+  },
+  {
+   "id": "living",
+   "title": "The living room",
+   "section": "The villa",
+   "ar": "16:9",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of the living room of {anchor}: a long low sofa in oatmeal wool facing a floor-to-ceiling window onto a sea of clouds, a suspended black steel fireplace with a low fire, basalt and oak surfaces, sheepskin and wool throws, a small table with two cups of coffee, soft dawn light mixing with the warm glow of the fire, nobody present."
+  },
+  {
+   "id": "pool",
+   "title": "The edge",
+   "section": "Pool and terrace",
+   "ar": "21:9",
+   "camera": "Water level, 24mm",
+   "prompt": "Panoramic photograph at water level along the infinity pool of {anchor}: the still water merging with the sea of clouds below, faint steam rising from the heated pool in the cold dawn air, one teak lounger with a folded towel, the mountains glowing pink on the horizon, nobody present."
+  },
+  {
+   "id": "grid-rooms",
+   "title": "Rooms",
+   "section": "Rooms gallery",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Interiors of a dark basalt and glass mountain villa with oak, wool and linen, soft dawn light, clouds outside every window, nobody present. Top-left: the principal bedroom with a low bed facing a glass wall onto the clouds. Top-right: a kitchen of smoked oak and honed basalt with a long island. Bottom-left: a bathroom with a freestanding stone bathtub at the window. Bottom-right: a reading nook in a deep window seat with books and a wool blanket."
+  },
+  {
+   "id": "night",
+   "title": "Night on the ridge",
+   "section": "Evening band",
+   "ar": "16:9",
+   "camera": "Long exposure, 24mm",
+   "prompt": "Night photograph of {anchor} glowing amber from within under a sky full of stars, a fire pit burning on the stone terrace, low cloud lit silver by the moon filling the valley below, the cantilever floating over darkness, peaceful and warm, nobody present."
+  },
+  {
+   "id": "terrace-life",
+   "title": "Coffee above the weather",
+   "section": "Life here",
+   "ar": "3:2",
+   "camera": "50mm, from behind",
+   "prompt": "Photograph from behind of a couple wrapped in thick wool blankets sitting on the stone terrace of {anchor} with cups of coffee, looking out over a sea of clouds at sunrise, both faces turned away, steam rising from the cups, intimate and still. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "ridge",
+   "title": "The ridge",
+   "section": "Plot picker",
+   "ar": "16:9",
+   "camera": "Drone, 300 m",
+   "prompt": "Aerial drone photograph of a long mountain ridge with five contemporary dark basalt villas spaced far apart along it, each with a turquoise pool at the cliff edge, a single winding road reaching them, clouds pooling in the valleys on both sides, early morning light, rugged and exclusive."
+  },
+  {
+   "id": "grid-details",
+   "title": "Materials",
+   "section": "Materials band",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Macro, side light",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in cold blue dawn light. Top-left: split-face basalt stone with fine texture. Top-right: the junction of a smoked oak soffit and a black steel frame. Bottom-left: a thick oatmeal wool throw. Bottom-right: frost crystals on a pane of glass with clouds blurred behind."
+  },
+  {
+   "id": "grid-mountain",
+   "title": "The mountain",
+   "section": "Around Jebel Jais",
+   "ar": "3:4",
+   "grid": true,
+   "camera": "Outdoor, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. The mountains of Ras Al Khaimah at dawn, people small or seen from behind, all different. Top-left: a hiker on a stony trail along a ridge above the clouds. Top-right: a long zip line cable vanishing across a misty canyon. Bottom-left: a small stone mountain cafe with a terrace in the early sun. Bottom-right: a lone viewpoint platform above layers of blue ridges. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  }
+ ],
+ "status": "New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro"
+}

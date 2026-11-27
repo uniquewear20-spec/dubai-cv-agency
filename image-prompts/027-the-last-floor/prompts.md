@@ -1,145 +1,160 @@
 # 027 · THE LAST FLOOR
 
 **Category:** Real estate  
-**Concept:** Penthouses only; penthouse explorer.  
+**Concept:** One full-floor penthouse at the top of a Downtown Dubai supertall, and nothing else for sale; a penthouse explorer and a private viewing.  
 **Website:** /showcase/the-last-floor/  
-**Images:** 10 generations, 22 images  
-**Image status:** Not generated yet
+**Images:** 10 generations, 16 images  
+**Image status:** New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro
 
-## Visual direction
+## Creative direction
 
-- **Look:** dramatic high-altitude photography, 24mm.
-- **Palette:** black, gold, glass, night blue.
-- **Consistency:** every prompt below ends with the same look and palette sentence, so the set matches. Generate the hero first; if it lands, keep the others as written. Grids (2x2) give four images from one generation; Claude cuts them into four files.
-- **People:** any shot with people asks for clearly different individuals, because Seedream repeats one face when people are not described apart. Never add a real person or a brand.
+The city is the wallpaper. Everything is shot at blue hour or night from the top floor: black marble that reflects the skyline, smoked bronze fins, deep green velvet and a pool that seems to pour into the lights below. It should feel like the last word in privacy and height: dark, glossy, cinematic, with dawn used once as a quiet counterpoint.
+
+## Visual identity
+
+- **Look:** dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic.
+- **Palette:** obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue.
+- **Type and layout cues for the website:** high-contrast didone capitals in champagne on black; thin rules; very few words per screen.
+
+## Consistency
+
+Every prompt that shows the penthouse repeats this description word for word, so Seedream draws the same one each time. Do not edit it:
+
+> a full-floor penthouse at the top of a slender supertall tower in Downtown Dubai: floor-to-ceiling glass on all four sides, black marble floors with white veins, smoked bronze ceiling fins, a sunken living room with curved deep-emerald velvet sofas, a wraparound terrace with frameless glass balustrades and a black-tiled infinity pool, the city lights spread out three hundred metres below
+
+- Generate 01 first; keep the penthouse description word for word.
+- Night shots are all at the same blue hour turning to night; only the dawn shot breaks this.
+- Every prompt ends with the same look and palette sentence, so the set matches.
+- People are always clearly different individuals, often seen from behind or with faces out of frame, because Seedream repeats one face when people are not described apart. Never a real person, a brand or a logo.
+- Grids (2x2) give four pictures from one generation; Claude cuts them into four files.
 
 ## Settings (Higgsfield website)
 
-Seedream 5.0 Pro · Quality 2K · Count 1/4 (keep it at 1/4 so Unlimited stays on) · Aspect ratio as listed · No reference images.
+Seedream 5.0 Pro · Quality 2K · Count 1/4 (keep it at 1/4 so Unlimited stays on) · Aspect ratio as listed · No reference images. Unlimited runs one picture at a time and queues one more: start the next when one finishes.
 
 ## Shot list
 
 | # | File | Website section | Ratio | Type |
 |---|---|---|---|---|
-| 01 | `the-last-floor__01-hero.png` | Home hero, full screen behind the headline | 16:9 | single |
+| 01 | `the-last-floor__01-hero.png` | Home hero, full screen | 16:9 | single |
 | 02 | `the-last-floor__02-hero-mobile.png` | Home hero on phones | 9:16 | single |
-| 03 | `the-last-floor__03-aerial.png` | Location section | 16:9 | single |
-| 04 | `the-last-floor__04-twilight.png` | Night band between sections | 16:9 | single |
-| 05 | `the-last-floor__05-grid-interiors.png` | Interiors gallery and unit pages | 16:9 | 2x2 grid (4 images) |
-| 06 | `the-last-floor__06-grid-amenities.png` | Amenities section | 1:1 | 2x2 grid (4 images) |
-| 07 | `the-last-floor__07-view.png` | View section, full width | 21:9 | single |
-| 08 | `the-last-floor__08-grid-details.png` | Materials and specification section | 1:1 | 2x2 grid (4 images) |
-| 09 | `the-last-floor__09-lifestyle.png` | Living there section | 3:2 | single |
-| 10 | `the-last-floor__10-grid-area.png` | Neighbourhood section | 16:9 | 2x2 grid (4 images) |
+| 03 | `the-last-floor__03-pool.png` | Terrace section | 21:9 | single |
+| 04 | `the-last-floor__04-tower.png` | The building | 3:4 | single |
+| 05 | `the-last-floor__05-grid-rooms.png` | Penthouse explorer | 16:9 | 2x2 grid (4 images) |
+| 06 | `the-last-floor__06-dawn.png` | Morning band | 16:9 | single |
+| 07 | `the-last-floor__07-evening.png` | Life up here | 3:2 | single |
+| 08 | `the-last-floor__08-grid-details.png` | Materials band | 1:1 | 2x2 grid (4 images) |
+| 09 | `the-last-floor__09-lift.png` | Arrival section | 3:4 | single |
+| 10 | `the-last-floor__10-view.png` | Full-width view band | 21:9 | single |
 
 ## Prompts
 
-### 01 · Hero
+### 01 · The sunken room at night
 
 - **File:** `the-last-floor__01-hero.png`
-- **Section:** Home hero, full screen behind the headline
+- **Section:** Home hero, full screen
 - **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
-- **Camera:** Eye-level three-quarter view, 24mm tilt-shift, corrected verticals
+- **Camera:** Interior, 24mm, long exposure
 
 ```text
-Architectural photograph of a penthouse taking the whole top floor of a tower with a glass wrap-around terrace in Downtown Dubai. Golden-hour sun rakes across the facade, verticals perfectly straight, landscaped foreground, clear sky with open space above for a headline. It must feel built and lived-in, not rendered. No people. Overall look: dramatic high-altitude photography, 24mm; colour palette of black, gold, glass, night blue. No text, no letters, no logos, no watermarks.
+Cinematic night interior photograph of a full-floor penthouse at the top of a slender supertall tower in Downtown Dubai: floor-to-ceiling glass on all four sides, black marble floors with white veins, smoked bronze ceiling fins, a sunken living room with curved deep-emerald velvet sofas, a wraparound terrace with frameless glass balustrades and a black-tiled infinity pool, the city lights spread out three hundred metres below: the sunken living room with curved emerald velvet sofas in the foreground, the glass wall behind showing the glittering grid of city lights far below and the illuminated towers around, the skyline reflected in the black marble floor, warm low lamps and cool blue night outside, opulent and silent, nobody present. Overall look: dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic; colour palette of obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue. No text, no letters, no logos, no watermarks.
 ```
 
-### 02 · Hero for phones
+### 02 · The pool edge
 
 - **File:** `the-last-floor__02-hero-mobile.png`
 - **Section:** Home hero on phones
 - **Aspect ratio:** 9:16 (2K ≈ 1536×2720 px)
-- **Camera:** Low angle looking up, 20mm
+- **Camera:** Water level, 24mm
 
 ```text
-Vertical architectural photograph looking up along a penthouse taking the whole top floor of a tower with a glass wrap-around terrace in Downtown Dubai, facade lines converging into a clear sky, sunlight catching the main materials, strong graphic composition. No people. Overall look: dramatic high-altitude photography, 24mm; colour palette of black, gold, glass, night blue. No text, no letters, no logos, no watermarks.
+Vertical night photograph along the black-tiled infinity pool on the terrace of a full-floor penthouse at the top of a slender supertall tower in Downtown Dubai: floor-to-ceiling glass on all four sides, black marble floors with white veins, smoked bronze ceiling fins, a sunken living room with curved deep-emerald velvet sofas, a wraparound terrace with frameless glass balustrades and a black-tiled infinity pool, the city lights spread out three hundred metres below: the water edge disappearing into the city lights three hundred metres below, a neighbouring tower's lit spire rising in the frame, the pool lit softly from beneath, a dramatic sense of height. Overall look: dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic; colour palette of obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue. No text, no letters, no logos, no watermarks.
 ```
 
-### 03 · Aerial
+### 03 · The terrace pool
 
-- **File:** `the-last-floor__03-aerial.png`
-- **Section:** Location section
-- **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
-- **Camera:** Drone, 120 m, 45-degree angle
-
-```text
-Drone photograph of a penthouse taking the whole top floor of a tower with a glass wrap-around terrace in Downtown Dubai, seen from about 120 metres at a 45-degree angle: the building, plot, access, landscaping and any nearby water clearly readable. Soft morning light, true colours, light haze on the horizon. No people visible. Overall look: dramatic high-altitude photography, 24mm; colour palette of black, gold, glass, night blue. No text, no letters, no logos, no watermarks.
-```
-
-### 04 · Blue hour
-
-- **File:** `the-last-floor__04-twilight.png`
-- **Section:** Night band between sections
-- **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
-- **Camera:** Eye level, 35mm, tripod long exposure
-
-```text
-Blue-hour photograph of a penthouse taking the whole top floor of a tower with a glass wrap-around terrace in Downtown Dubai: interiors glowing warm behind the glass, exterior lighting on, deep blue sky with a last band of light on the horizon, reflections on water or wet paving. No people. Overall look: dramatic high-altitude photography, 24mm; colour palette of black, gold, glass, night blue. No text, no letters, no logos, no watermarks.
-```
-
-### 05 · Interiors
-
-- **File:** `the-last-floor__05-grid-interiors.png` (cut into `the-last-floor__05-grid-interiors_1.png` to `_4.png`)
-- **Section:** Interiors gallery and unit pages
-- **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
-- **Camera:** Interior, 24mm, eye level, one window light
-
-```text
-A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Interior photographs inside a penthouse taking the whole top floor of a tower with a glass wrap-around terrace, finished in black marble, gold and velvet, staged and uncluttered, one soft daylight, nobody present. Top-left: the main living room with its view. Top-right: the kitchen and dining area. Bottom-left: the principal bedroom. Bottom-right: the principal bathroom. Overall look: dramatic high-altitude photography, 24mm; colour palette of black, gold, glass, night blue. No text, no letters, no logos, no watermarks.
-```
-
-### 06 · Amenities
-
-- **File:** `the-last-floor__06-grid-amenities.png` (cut into `the-last-floor__06-grid-amenities_1.png` to `_4.png`)
-- **Section:** Amenities section
-- **Aspect ratio:** 1:1 (2K ≈ 2048×2048 px)
-- **Camera:** Architectural, 24mm
-
-```text
-A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The shared spaces of a penthouse taking the whole top floor of a tower with a glass wrap-around terrace, daylight, nobody present. Top-left: a private rooftop pool. Top-right: the residents' gym with a view. Bottom-left: the arrival lobby with a concierge desk. Bottom-right: the landscaped garden or roof terrace. Overall look: dramatic high-altitude photography, 24mm; colour palette of black, gold, glass, night blue. No text, no letters, no logos, no watermarks.
-```
-
-### 07 · The view
-
-- **File:** `the-last-floor__07-view.png`
-- **Section:** View section, full width
+- **File:** `the-last-floor__03-pool.png`
+- **Section:** Terrace section
 - **Aspect ratio:** 21:9 (2K ≈ 3136×1344 px)
-- **Camera:** Panoramic, 35mm, from the terrace
+- **Camera:** Wide, 20mm, blue hour
 
 ```text
-Panoramic photograph from the main terrace of a penthouse taking the whole top floor of a tower with a glass wrap-around terrace: the skyline at night from 300 metres. The edge of a lounge chair and a planter frame the foreground, late-afternoon haze, the view is the subject. No people. Overall look: dramatic high-altitude photography, 24mm; colour palette of black, gold, glass, night blue. No text, no letters, no logos, no watermarks.
+Panoramic blue-hour photograph across the terrace of a full-floor penthouse at the top of a slender supertall tower in Downtown Dubai: floor-to-ceiling glass on all four sides, black marble floors with white veins, smoked bronze ceiling fins, a sunken living room with curved deep-emerald velvet sofas, a wraparound terrace with frameless glass balustrades and a black-tiled infinity pool, the city lights spread out three hundred metres below: the black infinity pool merging with the city lights, frameless glass balustrades, two low loungers, the last band of orange light on the horizon and the towers lighting up one by one, nobody present. Overall look: dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic; colour palette of obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue. No text, no letters, no logos, no watermarks.
+```
+
+### 04 · The top of the tower
+
+- **File:** `the-last-floor__04-tower.png`
+- **Section:** The building
+- **Aspect ratio:** 3:4 (2K ≈ 1752×2336 px)
+- **Camera:** Telephoto from a distance, 200mm
+
+```text
+Telephoto photograph at dusk of the crown of a slender supertall tower of glass and bronze in Downtown Dubai, only the top floor glowing warm gold while the floors below are cooler, thin bronze vertical fins, a deep blue sky with a sliver of moon, elegant and singular. Overall look: dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic; colour palette of obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue. No text, no letters, no logos, no watermarks.
+```
+
+### 05 · Rooms
+
+- **File:** `the-last-floor__05-grid-rooms.png` (cut into `the-last-floor__05-grid-rooms_1.png` to `_4.png`)
+- **Section:** Penthouse explorer
+- **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
+- **Camera:** Interiors, 24mm, night
+
+```text
+A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Night interiors of a full-floor penthouse with black marble, smoked bronze and emerald velvet, the city lights far below through every window, nobody present. Top-left: the principal bedroom with a low bed facing a glass corner onto the skyline. Top-right: a dining room with a long black marble table and a sculptural bronze pendant. Bottom-left: a library bar with bronze shelving and a velvet armchair. Bottom-right: a bathroom with a black marble bathtub against the glass. Overall look: dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic; colour palette of obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue. No text, no letters, no logos, no watermarks.
+```
+
+### 06 · Dawn
+
+- **File:** `the-last-floor__06-dawn.png`
+- **Section:** Morning band
+- **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
+- **Camera:** Interior, 24mm
+
+```text
+Interior photograph of a full-floor penthouse at the top of a slender supertall tower in Downtown Dubai: floor-to-ceiling glass on all four sides, black marble floors with white veins, smoked bronze ceiling fins, a sunken living room with curved deep-emerald velvet sofas, a wraparound terrace with frameless glass balustrades and a black-tiled infinity pool, the city lights spread out three hundred metres below at dawn: soft pink and pale gold light flooding across the black marble, mist lying over the city far below, the towers emerging from haze, the emerald sofas catching the first light, calm and luminous, nobody present. Overall look: dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic; colour palette of obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue. No text, no letters, no logos, no watermarks.
+```
+
+### 07 · An evening on the terrace
+
+- **File:** `the-last-floor__07-evening.png`
+- **Section:** Life up here
+- **Aspect ratio:** 3:2 (2K ≈ 2496×1664 px)
+- **Camera:** 50mm, night
+
+```text
+Night photograph on the terrace of a full-floor penthouse at the top of a slender supertall tower in Downtown Dubai: floor-to-ceiling glass on all four sides, black marble floors with white veins, smoked bronze ceiling fins, a sunken living room with curved deep-emerald velvet sofas, a wraparound terrace with frameless glass balustrades and a black-tiled infinity pool, the city lights spread out three hundred metres below: a host pouring sparkling juice into glasses for three guests standing by the glass balustrade, all different people dressed for evening, faces turned away or in shadow, the city lights spread below them, candle lanterns on a low table, glamorous and relaxed. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame. Overall look: dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic; colour palette of obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue. No text, no letters, no logos, no watermarks.
 ```
 
 ### 08 · Materials
 
 - **File:** `the-last-floor__08-grid-details.png` (cut into `the-last-floor__08-grid-details_1.png` to `_4.png`)
-- **Section:** Materials and specification section
+- **Section:** Materials band
 - **Aspect ratio:** 1:1 (2K ≈ 2048×2048 px)
-- **Camera:** Macro, 100mm, raking side light
+- **Camera:** Macro, low light
 
 ```text
-A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up photographs of the materials of a penthouse taking the whole top floor of a tower with a glass wrap-around terrace, raking side light, shallow depth of field. Top-left: Black marble. Top-right: Gold. Bottom-left: Velvet. Bottom-right: Glass. Overall look: dramatic high-altitude photography, 24mm; colour palette of black, gold, glass, night blue. No text, no letters, no logos, no watermarks.
+A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in low warm light with city lights blurred behind. Top-left: black marble with fine white veins. Top-right: a smoked bronze fin with soft reflections. Bottom-left: deep emerald velvet upholstery. Bottom-right: a pane of glass reflecting the night skyline. Overall look: dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic; colour palette of obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue. No text, no letters, no logos, no watermarks.
 ```
 
-### 09 · Lifestyle
+### 09 · The private lift
 
-- **File:** `the-last-floor__09-lifestyle.png`
-- **Section:** Living there section
-- **Aspect ratio:** 3:2 (2K ≈ 2496×1664 px)
-- **Camera:** Editorial, 35mm, natural light
+- **File:** `the-last-floor__09-lift.png`
+- **Section:** Arrival section
+- **Aspect ratio:** 3:4 (2K ≈ 1752×2336 px)
+- **Camera:** Symmetrical, 35mm
 
 ```text
-Editorial lifestyle photograph at a penthouse taking the whole top floor of a tower with a glass wrap-around terrace in Downtown Dubai: a host pouring juice for guests at a terrace party. Candid, natural light, believable and calm. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: dramatic high-altitude photography, 24mm; colour palette of black, gold, glass, night blue. No text, no letters, no logos, no watermarks.
+Symmetrical photograph of a private lift lobby: tall smoked bronze lift doors opening onto a black marble hall, a single sculptural bronze bench, a slim line of warm light along the ceiling, and through an open doorway beyond, a glimpse of the night skyline, hushed and exclusive. Overall look: dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic; colour palette of obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue. No text, no letters, no logos, no watermarks.
 ```
 
-### 10 · Neighbourhood
+### 10 · The view
 
-- **File:** `the-last-floor__10-grid-area.png` (cut into `the-last-floor__10-grid-area_1.png` to `_4.png`)
-- **Section:** Neighbourhood section
-- **Aspect ratio:** 16:9 (2K ≈ 2720×1536 px)
-- **Camera:** Documentary, 35mm
+- **File:** `the-last-floor__10-view.png`
+- **Section:** Full-width view band
+- **Aspect ratio:** 21:9 (2K ≈ 3136×1344 px)
+- **Camera:** Panoramic, 35mm, blue hour
 
 ```text
-A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Documentary photographs of the neighbourhood around Downtown Dubai, morning light. Top-left: A boulevard. Top-right: An opera house. Bottom-left: A fountain show. Bottom-right: A mall. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: dramatic high-altitude photography, 24mm; colour palette of black, gold, glass, night blue. No text, no letters, no logos, no watermarks.
+Panoramic blue-hour photograph of the Dubai skyline seen from three hundred metres up, through floor-to-ceiling glass with the faintest reflection of a bronze fin at the edge: illuminated towers, the lit grid of streets and a long boulevard of lights curving away, deep blue sky with a last glow on the horizon. Overall look: dramatic night-time luxury interior photography from 300 metres up, city lights and reflections in glass, deep blacks, 24mm long exposure, photorealistic; colour palette of obsidian black, smoked bronze, champagne gold, deep emerald velvet and midnight blue. No text, no letters, no logos, no watermarks.
 ```
