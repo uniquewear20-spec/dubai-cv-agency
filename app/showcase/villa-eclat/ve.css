@@ -435,15 +435,18 @@
 }
 @media (max-width: 760px) {
   .ve { font-size: 18px; }
-  .ve-top-mark { width: 88px; }
-  .ve-top-btn { padding: 9px 11px; font-size: 12px; letter-spacing: 0.16em; }
-  .ve-hero-word { width: 86vw; }
-  .ve-hero-foot { grid-template-columns: 1fr; }
-  .ve-hero-cta { grid-column: 1; grid-row: auto; justify-self: end; width: 112px; height: 142px; font-size: 12px; padding-top: 26px; position: absolute; right: 0; bottom: 0; }
-  .ve-hero-line { max-width: 13ch; padding-right: 120px; font-size: 26px; }
-  .ve-hero-facts { padding-right: 120px; }
-  .ve-hero-facts div { min-width: 0; }
-  .ve-hero-facts dd { font-size: 21px; }
+  .ve-top { padding: 14px 14px; }
+  .ve-top-mark { width: 74px; }
+  .ve-top-nav { gap: 6px; }
+  .ve-top-btn { padding: 8px 9px; font-size: 11px; letter-spacing: 0.12em; }
+  .ve-hero-word { width: 88vw; }
+  .ve-hero-word .ve-mark-line { stroke-width: 3.6; }
+  .ve-hero-word .ve-mark-halo { stroke-width: 11; }
+  .ve-hero-foot { grid-template-columns: 1fr auto; align-items: end; gap: 16px; }
+  .ve-hero-cta { grid-column: 2; grid-row: 1; width: 104px; height: 132px; font-size: 11px; padding-top: 24px; }
+  .ve-hero-line { grid-column: 1; grid-row: 1; max-width: 15ch; font-size: 24px; }
+  .ve-hero-facts,
+  .ve-hero-cue { display: none; }
   .ve-cap { max-width: 15ch; font-size: 27px; }
   .ve-hud { grid-template-columns: auto 1fr auto; gap: 12px; font-size: 11px; letter-spacing: 0.18em; }
   .ve-end .ve-arch { width: 112px; height: 142px; font-size: 12px; padding-top: 26px; }
