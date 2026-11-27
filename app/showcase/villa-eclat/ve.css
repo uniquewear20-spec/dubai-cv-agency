@@ -112,22 +112,20 @@
 
 /* Hero: the drone shot, laid out like a property launch. The name and figures fly up and fade;
    the line, the facts and the ring stay until the camera has finished climbing. */
-.ve-hero { position: relative; height: 420svh; }
+.ve-hero { position: relative; height: 400svh; }
 .ve-hero-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--ink); }
-.ve-hero-video,
 .ve-hero-poster,
-.ve-hero-still { position: absolute; inset: 0; width: 100%; height: 100%; }
-/* The still is the drone shot's first frame; it drifts in with the scroll until a clip is ready. */
-.ve-hero-poster { display: block; object-fit: cover; object-position: 50% 60%; transform: scale(calc(1 + var(--p) * 0.24)) translate3d(0, calc(var(--p) * -1.5%), 0); transform-origin: 50% 58%; }
-.ve-hero-video { display: block; object-fit: cover; object-position: 50% 60%; opacity: 0; transition: opacity 0.7s ease; }
-.ve-hero-video.is-on { opacity: 1; }
-.ve-hero-still { transform: scale(calc(1.04 + var(--p) * 0.3)); transform-origin: 50% 62%; will-change: transform; }
-.ve-hero-still > img,
-.ve-hero-still > span { width: 100%; height: 100%; object-fit: cover; object-position: 50% 56%; }
+.ve-hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* The drone shot's first frame, framed as the canvas frames it, until the canvas has a frame. */
+.ve-hero-poster { object-fit: cover; object-position: 50% 50%; }
+.ve-hero-canvas { opacity: 0; transition: opacity 0.5s ease; }
+.ve-hero-canvas.is-live { opacity: 1; }
 .ve-hero-shade {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(14, 12, 10, 0.66) 0%, rgba(14, 12, 10, 0.22) 30%, rgba(14, 12, 10, 0) 44%, rgba(14, 12, 10, 0) 54%, rgba(14, 12, 10, 0.5) 74%, rgba(14, 12, 10, 0.9) 100%);
+  /* Lifts as the arch opens, so the door arrives in the same light the film shows it in. */
+  opacity: calc(1 - clamp(0, (var(--p) - 0.72) / 0.16, 1));
   pointer-events: none;
 }
 .ve-hero-top {
@@ -137,11 +135,43 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 40px;
-  transform: translate3d(0, calc(var(--p) * -26vh), 0) scale(calc(1 - var(--p) * 0.75));
-  transform-origin: 50% 0;
-  opacity: calc(1 - var(--p) * 3.4);
-  will-change: transform, opacity;
+  /* --x: how far the crest has gone, 0 to 1 over the first fifth of the climb. Like Son Daven's
+     title it rises as the camera lifts; instead of breaking into pixels it breaks into fine
+     vertical reeding, the fluting of the villa's columns, and thins away. */
+  --x: clamp(0, calc(var(--p) / 0.2), 1);
+  transform: translate3d(0, calc(var(--x) * -20vh), 0);
+  -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 calc(6px * (1 - var(--x))), transparent calc(6px * (1 - var(--x))) 6px);
+  mask-image: repeating-linear-gradient(90deg, #000 0 calc(6px * (1 - var(--x))), transparent calc(6px * (1 - var(--x))) 6px);
+  will-change: transform;
 }
+/* The entrance once the veil lifts: the crest and figures rise into place, the name from behind
+   its own baseline. */
+.ve-hero-title > *,
+.ve-hero-villa,
+.ve-hero-stats > div,
+.ve-hero-foot > * { transition: opacity 1s cubic-bezier(0.2, 0.7, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.ve-hero-name { transition: clip-path 1.4s cubic-bezier(0.7, 0, 0.2, 1) 0.2s, transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s; clip-path: inset(-20% -6% -20% -6%); }
+.ve-hero:not(.is-in) .ve-hero-em,
+.ve-hero:not(.is-in) .ve-hero-villa,
+.ve-hero:not(.is-in) .ve-hero-label,
+.ve-hero:not(.is-in) .ve-hero-stats > div,
+.ve-hero:not(.is-in) .ve-hero-foot > * { opacity: 0; transform: translate3d(0, 22px, 0); }
+.ve-hero:not(.is-in) .ve-hero-name { clip-path: inset(-20% -6% 102% -6%); transform: translate3d(0, 0.4em, 0); animation-play-state: paused; }
+.ve-hero:not(.is-in) .ve-hero-title .ve-draw path { animation-play-state: paused; }
+.ve-hero-villa { transition-delay: 0.1s; }
+.ve-hero-label { transition-delay: 0.55s; }
+.ve-hero-stats > div:nth-child(1) { transition-delay: 0.45s; }
+.ve-hero-stats > div:nth-child(2) { transition-delay: 0.58s; }
+.ve-hero-foot > :nth-child(1) { transition-delay: 0.5s; }
+.ve-hero-foot > :nth-child(2) { transition-delay: 0.65s; }
+.ve-hero-foot > :nth-child(3) { transition-delay: 0.8s; }
+/* The veil while the first frames arrive: the emblem draws itself over ink. */
+.ve-hero-veil-in { position: absolute; inset: 0; z-index: 4; display: grid; place-content: center; justify-items: center; gap: 26px; background: var(--ink); transition: opacity 0.9s ease, visibility 0s linear 0.9s; }
+.ve-hero-veil-in.is-done { opacity: 0; visibility: hidden; }
+.ve-hero-veil-em { display: block; width: clamp(96px, 9vw, 140px); height: auto; }
+.ve-hero-veil-in i { position: relative; width: 120px; height: 1px; overflow: hidden; background: rgba(227, 201, 154, 0.18); }
+.ve-hero-veil-in i::after { content: ""; position: absolute; inset: 0; background: var(--gold-hi); transform: translateX(-100%); animation: ve-load 1.6s cubic-bezier(0.6, 0, 0.3, 1) infinite; }
+@keyframes ve-load { to { transform: translateX(100%); } }
 /* The crest: sun emblem, a ruled "Villa", the name in gold, and the address under a hairline. */
 .ve-hero-title { display: grid; justify-items: start; }
 .ve-hero-em { display: block; width: clamp(62px, 4.8vw, 86px); height: auto; margin: 0 0 16px -2px; }
@@ -176,7 +206,10 @@
   grid-template-columns: 1fr auto;
   align-items: end;
   gap: 30px 40px;
-  opacity: calc(1 - (var(--p) - 0.86) * 8);
+  /* The line, the facts and the ring hold while the camera circles, then step aside for the arch. */
+  --y: clamp(0, calc((var(--p) - 0.6) / 0.12), 1);
+  opacity: calc(1 - var(--y));
+  transform: translate3d(0, calc(var(--y) * 28px), 0);
 }
 .ve-hero-big {
   grid-column: 1;
@@ -233,14 +266,16 @@
 .ve-hero-cue i { position: relative; width: 1px; height: 34px; background: rgba(227, 201, 154, 0.3); overflow: hidden; }
 .ve-hero-cue i::after { content: ""; position: absolute; inset: 0; background: var(--gold-hi); transform: translateY(-100%); animation: ve-cue 2.4s cubic-bezier(0.6, 0, 0.3, 1) infinite; }
 @keyframes ve-cue { 60%, 100% { transform: translateY(100%); } }
-.ve-hero-veil { position: absolute; inset: 0; background: var(--ink); opacity: clamp(0, calc((var(--p) - 0.9) * 10), 1); pointer-events: none; }
 
 .ve-draw path { stroke-dasharray: 1 1; stroke-dashoffset: 1; animation: ve-draw 1.5s cubic-bezier(0.65, 0, 0.25, 1) forwards; animation-delay: calc(var(--i) * 55ms + 250ms); }
 @keyframes ve-draw { to { stroke-dashoffset: 0; } }
 
 /* The film */
-.ve-film { position: relative; }
-.ve-film-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--ink); }
+/* The film is pulled up over the hero's last screen, unseen, and appears only once pinned, on the
+   very frame the hero ends on, so the hand-over has no seam. */
+.ve-film { position: relative; z-index: 2; margin-top: -100svh; pointer-events: none; }
+.ve-film-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--ink); visibility: hidden; pointer-events: auto; }
+.ve-film-stage.is-live { visibility: visible; }
 .ve-film-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .ve-film-scrim {
   position: absolute;
@@ -541,7 +576,6 @@
   .ve-draw path { animation: none; stroke-dashoffset: 0; }
   .ve-hero-name { animation: none; background-position: 50% 0; }
   .ve-hero-cue i::after { animation: none; }
-  .ve-hero-still,
-  .ve-hero-poster { transform: none; }
-  .ve-hero-top { transform: none; }
+  .ve-hero-top { transform: none; -webkit-mask-image: none; mask-image: none; opacity: calc(1 - var(--x)); }
+  .ve-hero-veil-in i::after { animation: none; }
 }

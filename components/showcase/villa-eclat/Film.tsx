@@ -44,7 +44,9 @@ const camAt = (s: Shot, t: number) => {
 /** Everything the shader needs for one moment `T` of the film. */
 function compose(T: number, sa: number, gl: FilmGL, calm: boolean): Uniforms {
   const i = shotAt(T), sh = FILM[i], t = clamp((T - STARTS[i]) / sh.len);
-  const u0: Uniforms = { A: null, B: null, mix: 0, blur: [0, 0, 0, 0], frame: null, gate: null, flare: [0, 0, 0], leak: [0, 0], fade: [0, 0, 0, 0], grain: calm ? 0 : 0.012, seed: Math.floor(T * 60) % 113, vig: 0.38 };
+  // The film opens on the hero's last frame, so its grain and vignette come up gently from none.
+  const intro = sstep(0, 0.35, T);
+  const u0: Uniforms = { A: null, B: null, mix: 0, blur: [0, 0, 0, 0], frame: null, gate: null, flare: [0, 0, 0], leak: [0, 0], fade: [0, 0, 0, 0], grain: (calm ? 0 : 0.012) * intro, seed: Math.floor(T * 60) % 113, vig: 0.38 * intro };
   const view = (key: string, focus: [number, number], c: { s: number; x: number; y: number; r: number }, ds = 1, dx = 0, dy = 0): View =>
     frameView(key, gl.aspect(key), sa, focus, c.s * ds, c.x + dx, c.y + dy, calm ? 0 : c.r);
 
@@ -85,7 +87,6 @@ function compose(T: number, sa: number, gl: FilmGL, calm: boolean): Uniforms {
     u.B = u.A;
     u.frame = [0, 0, lerp(0.17 * sa, sa / 2 + 0.03, k) * pop, lerp(0.22, 0.53, k) * pop, lerp(0.045, 0, k)];
   }
-  if (i === 0) u.fade = [0.055, 0.047, 0.04, 1 - sstep(0, 0.1, t)];
 
   const nx = FILM[i + 1];
   const tw = nx ? TW[sh.out ?? "cut"] : 0;
@@ -163,7 +164,8 @@ export function Film() {
   const sec = useRef<HTMLElement>(null);
   const cv = useRef<HTMLCanvasElement>(null);
   const caps = useRef<(HTMLParagraphElement | null)[]>([]);
-  const hud = useRef<{ ch: HTMLSpanElement | null; tc: HTMLSpanElement | null; bar: HTMLSpanElement | null; end: HTMLDivElement | null; scrim: HTMLDivElement | null }>({ ch: null, tc: null, bar: null, end: null, scrim: null });
+  const hud = useRef<{ ch: HTMLSpanElement | null; tc: HTMLSpanElement | null; bar: HTMLSpanElement | null; end: HTMLDivElement | null; scrim: HTMLDivElement | null; box: HTMLDivElement | null }>({ ch: null, tc: null, bar: null, end: null, scrim: null, box: null });
+  const stage = useRef<HTMLDivElement>(null);
   const [flat, setFlat] = useState(false);
 
   useEffect(() => {
@@ -178,7 +180,7 @@ export function Film() {
       queueMicrotask(() => setFlat(true)); // no WebGL: show the shots as plain pictures
       return;
     }
-    let Ts = 0, raf = 0, last = performance.now(), dirty = true, vh = innerHeight, live = false, shown = "", lastCap = -1;
+    let Ts = 0, raf = 0, last = performance.now(), dirty = true, vh = innerHeight, live = false, shown = "", lastCap = -1, shownStage = false;
     const measure = () => {
       filmTop = el.getBoundingClientRect().top + scrollY;
       vh = innerHeight;
@@ -209,7 +211,10 @@ export function Film() {
       // The dark band under the captions steps aside while a picture grows in its frame on ivory.
       const si = shotAt(T), st = (T - STARTS[si]) / FILM[si].len;
       const scrim = FILM[si].framed ? sstep(0.3, 0.42, st) : FILM[si].out === "white" ? 1 - sstep(1 - TW.white, 1 - TW.white * 0.4, st) : 1;
-      if (h.scrim && h.scrim.dataset.o !== scrim.toFixed(2)) { h.scrim.dataset.o = scrim.toFixed(2); h.scrim.style.opacity = scrim.toFixed(2); }
+      const sc = (scrim * sstep(0, 0.18, T)).toFixed(2);
+      if (h.scrim && h.scrim.dataset.o !== sc) { h.scrim.dataset.o = sc; h.scrim.style.opacity = sc; }
+      const hb = sstep(0.02, 0.3, T).toFixed(2);
+      if (h.box && h.box.dataset.o !== hb) { h.box.dataset.o = hb; h.box.style.opacity = hb; }
       const endO = sstep(FILM_LEN - 0.42, FILM_LEN - 0.1, T);
       if (h.end && Math.abs(endO - lastCap) > 0.002) {
         lastCap = endO;
@@ -222,6 +227,9 @@ export function Film() {
       const dt = Math.min(0.1, (now - last) / 1000);
       last = now;
       const target = clamp((scrollY - filmTop) / (vh * UNIT), 0, FILM_LEN - 1e-4);
+      // Hidden while it slides over the hero's last screen; shown the moment it is pinned.
+      const pinned = scrollY >= filmTop - 1;
+      if (pinned !== shownStage) { shownStage = pinned; stage.current?.classList.toggle("is-live", pinned); }
       const prev = Ts;
       if (calm || Math.abs(target - Ts) > 3) Ts = target;
       else Ts += (target - Ts) * (1 - Math.exp(-dt * 7.5));
@@ -286,7 +294,7 @@ export function Film() {
 
   return (
     <section ref={sec} className="ve-film" id="film" aria-label="A walk through the house" style={{ height: `calc(${(FILM_LEN * UNIT * 100).toFixed(1)}svh + 100svh)` }}>
-      <div className="ve-film-stage">
+      <div className="ve-film-stage" ref={stage}>
         <canvas ref={cv} className="ve-film-canvas" aria-hidden />
         <div className="ve-film-scrim" ref={(n) => { hud.current.scrim = n; }} aria-hidden />
         <div className="ve-caps">
@@ -301,7 +309,7 @@ export function Film() {
             <span>Book a private viewing</span>
           </a>
         </div>
-        <div className="ve-hud" aria-hidden>
+        <div className="ve-hud" aria-hidden ref={(n) => { hud.current.box = n; }} style={{ opacity: 0 }}>
           <span className="ve-hud-ch" ref={(n) => { hud.current.ch = n; }} />
           <span className="ve-hud-line">
             <span className="ve-hud-bar" ref={(n) => { hud.current.bar = n; }} />

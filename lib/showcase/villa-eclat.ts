@@ -41,10 +41,30 @@ export const IMG: Record<ImgKey, string> = {
 
 /** The hero drone shot as numbered frames in /public. 0 frames: the hero eases over the still instead. */
 /** The hero drone shot: a short-GOP MP4 scrubbed by scroll (re-encoded so every seek is quick). */
+const UP = "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/";
+/** A shot stored as frame sheets: `n` frames of fw x fh px, laid out cols x rows per sheet. */
+export type Seq = { sheets: string[]; cols: number; rows: number; n: number; fw: number; fh: number };
 export const HERO = {
   video: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/b1ad1217-2d01-4f07-addb-7893f5541973.mp4", // 1920 px master, level 4.1, 7.7 MB
   videoSmall: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/001ee70e-0a03-42f4-a87b-d5ad810258e9.mp4",
-  frames: 0, path: (i: number) => `/showcase/villa-eclat/hero/${String(i).padStart(3, "0")}.webp`, focus: [0.5, 0.56] as [number, number] };
+  /**
+   * The drone climb as frames drawn on a canvas, the way Son Daven draws theirs: every third
+   * frame of the 1080p clip at full size (41 frames, 7 sheets of 6), and on phones every sixth
+   * frame as a sharp portrait crop (21 frames, 3 sheets of 8).
+   */
+  seq: {
+    desk: {
+      sheets: ["9d8518ce-0976-40e3-b977-83cb7b748db1", "05e67805-4d76-4dbc-bc8d-82523ba13284", "9e277294-d9ac-42ac-8172-acde2b7af727", "982f7c12-f261-46a2-b7fd-3463e73f0d22", "d50d334b-cb9b-4738-a192-d7664fd63bdd", "c78e86b8-1551-47e5-9aec-019ffe9114f0", "b772b391-3c2d-4889-bced-d36d636a1674"].map((id) => `${UP}${id}.webp`),
+      cols: 2, rows: 3, n: 41, fw: 1916, fh: 1080,
+    } satisfies Seq,
+    phone: {
+      sheets: ["18e9ad72-0256-4b22-8c02-2276998c883e", "48c4fc01-6b14-4ffe-bf6c-7a4354905b91", "242c60aa-db2d-40d7-86cc-d749f17106de"].map((id) => `${UP}${id}.webp`),
+      cols: 4, rows: 2, n: 21, fw: 608, fh: 1080,
+    } satisfies Seq,
+  },
+  /** Where the arch opens in the last frame: the colonnade at the foot of the house. */
+  door: [0.5, 0.62] as [number, number],
+  focus: [0.5, 0.56] as [number, number] };
 
 // ── The film: one camera walking through the house, driven by scroll ───────────────────────────
 export type Cam = { s?: number; x?: number; y?: number; r?: number }; // zoom, pan (share of view), roll (deg)
