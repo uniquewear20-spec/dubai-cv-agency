@@ -610,8 +610,8 @@ html.al-locked {
 }
 .al-hero-script {
   position: absolute;
-  left: calc(50% + 300 * var(--s));
-  top: calc(50% + (318 - 500) * var(--s));
+  left: calc(50% + 236 * var(--s));
+  top: calc(50% + (338 - 500) * var(--s));
   translate: -50% -50%;
   rotate: -7deg;
   font-family: var(--script);

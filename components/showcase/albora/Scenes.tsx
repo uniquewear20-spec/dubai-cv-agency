@@ -220,11 +220,18 @@ export function Golden() {
 }
 
 /**
- * A layer of cloud, painted once into a small canvas when the scene comes near: fractal value
- * noise turned into soft cumulus with lit tops and grey undersides, faded at its edges. CSS only
- * moves it, so drifting and scrolling cost nothing.
+ * A layer of cloud, painted once into a small canvas while the browser is idle after the page has
+ * loaded, a few rows at a time so it never holds up scrolling: fractal value noise turned into soft
+ * cumulus with lit tops and grey undersides, faded at its edges. CSS only moves the canvas, so
+ * drifting and scrolling cost nothing.
  */
-function paintClouds(c: HTMLCanvasElement, seed: number, th: number) {
+const idle = (fn: () => void) => {
+  const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
+  if (w.requestIdleCallback) w.requestIdleCallback(fn, { timeout: 400 });
+  else setTimeout(fn, 24);
+};
+
+function paintClouds(c: HTMLCanvasElement, seed: number, th: number, alive: () => boolean) {
   const ctx = c.getContext("2d");
   if (!ctx) return;
   const w = c.width;
@@ -254,63 +261,69 @@ function paintClouds(c: HTMLCanvasElement, seed: number, th: number) {
   const N = new Float32Array(w * h);
   const fx = 4.2 / w;
   const fy = 2.6 / h;
-  for (let y = 0; y < h; y++) {
-    for (let x = 0; x < w; x++) {
-      let n = 0;
-      let amp = 0.5;
-      let f = 1;
-      for (let o = 0; o < 5; o++) {
-        n += amp * noise(x * fx * f + o * 17.3, y * fy * f + o * 9.1);
-        f *= 2.03;
-        amp *= 0.5;
+  let row = 0;
+  const finish = () => {
+    const img = ctx.createImageData(w, h);
+    const D = img.data;
+    const sm = (a: number, b: number, t: number) => {
+      const k = Math.min(1, Math.max(0, (t - a) / (b - a)));
+      return k * k * (3 - 2 * k);
+    };
+    for (let y = 0; y < h; y++) {
+      const ty = y / h;
+      const prof = sm(0, 0.32, ty) * (1 - sm(0.58, 1, ty));
+      for (let x = 0; x < w; x++) {
+        const i = y * w + x;
+        const n = N[i];
+        let a = (n - th) * 4.4;
+        a = a < 0 ? 0 : a > 1 ? 1 : a;
+        const up = N[Math.max(0, y - 3) * w + Math.max(0, x - 4)];
+        const shade = Math.min(1, Math.max(0, 0.62 + (n - up) * 7));
+        const lum = 200 + 55 * shade;
+        D[i * 4] = lum - 7;
+        D[i * 4 + 1] = lum - 3;
+        D[i * 4 + 2] = Math.min(255, lum + 2);
+        D[i * 4 + 3] = a * prof * 255;
       }
-      N[y * w + x] = n / 0.96875;
     }
-  }
-  const img = ctx.createImageData(w, h);
-  const D = img.data;
-  const sm = (a: number, b: number, t: number) => {
-    const k = Math.min(1, Math.max(0, (t - a) / (b - a)));
-    return k * k * (3 - 2 * k);
+    ctx.putImageData(img, 0, 0);
   };
-  for (let y = 0; y < h; y++) {
-    const ty = y / h;
-    const prof = sm(0, 0.32, ty) * (1 - sm(0.58, 1, ty));
-    for (let x = 0; x < w; x++) {
-      const i = y * w + x;
-      const n = N[i];
-      let a = (n - th) * 4.4;
-      a = a < 0 ? 0 : a > 1 ? 1 : a;
-      const up = N[Math.max(0, y - 3) * w + Math.max(0, x - 4)];
-      const shade = Math.min(1, Math.max(0, 0.62 + (n - up) * 7));
-      const lum = 200 + 55 * shade;
-      D[i * 4] = lum - 7;
-      D[i * 4 + 1] = lum - 3;
-      D[i * 4 + 2] = Math.min(255, lum + 2);
-      D[i * 4 + 3] = a * prof * 255;
+  const work = () => {
+    if (!alive()) return;
+    const stop = performance.now() + 7;
+    while (row < h && performance.now() < stop) {
+      for (let x = 0; x < w; x++) {
+        let n = 0;
+        let amp = 0.5;
+        let f = 1;
+        for (let o = 0; o < 5; o++) {
+          n += amp * noise(x * fx * f + o * 17.3, row * fy * f + o * 9.1);
+          f *= 2.03;
+          amp *= 0.5;
+        }
+        N[row * w + x] = n / 0.96875;
+      }
+      row++;
     }
-  }
-  ctx.putImageData(img, 0, 0);
+    if (row < h) idle(work);
+    else idle(finish);
+  };
+  idle(work);
 }
 
 function Cloud({ seed, th, className }: { seed: number; th: number; className: string }) {
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const c = ref.current;
-    const scene = c?.closest("section");
-    if (!c || !scene) return;
-    let done = false;
-    const io = new IntersectionObserver(
-      (es) => {
-        if (done || !es.some((e) => e.isIntersecting)) return;
-        done = true;
-        io.disconnect();
-        requestAnimationFrame(() => paintClouds(c, seed, th));
-      },
-      { rootMargin: "120% 0px" },
-    );
-    io.observe(scene);
-    return () => io.disconnect();
+    if (!c) return;
+    let alive = true;
+    const start = () => setTimeout(() => paintClouds(c, seed, th, () => alive), 900);
+    if (document.readyState === "complete") start();
+    else addEventListener("load", start, { once: true });
+    return () => {
+      alive = false;
+      removeEventListener("load", start);
+    };
   }, [seed, th]);
   return (
     <div className={`al-cloud ${className}`}>
