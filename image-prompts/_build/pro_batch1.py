@@ -229,10 +229,11 @@ SITES["keys-and-sand"] = dict(
     ],
 )
 
-for slug, o in SITES.items():
-    o["status"] = STATUS
-    for x in o["shots"]:
-        if PEOPLE.split(" so ")[0] not in x["prompt"] and any(w in x["prompt"] for w in (" couple", " family", " guests", " host ", " rider", " groom ", " hiker", " cyclists", " paddleboarder")):
-            x["prompt"] += " " + PEOPLE
-    json.dump(o, open(os.path.join(OUT, f"{slug}-prompts.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    print(slug, len(o["shots"]), "shots")
+if __name__ == "__main__":
+    for slug, o in SITES.items():
+        o["status"] = STATUS
+        for x in o["shots"]:
+            if PEOPLE.split(" so ")[0] not in x["prompt"] and any(w in x["prompt"] for w in (" couple", " family", " guests", " host ", " rider", " groom ", " hiker", " cyclists", " paddleboarder")):
+                x["prompt"] += " " + PEOPLE
+        json.dump(o, open(os.path.join(OUT, f"{slug}-prompts.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        print(slug, len(o["shots"]), "shots")

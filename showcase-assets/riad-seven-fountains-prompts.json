@@ -1,0 +1,110 @@
+{
+ "name": "RIAD SEVEN FOUNTAINS",
+ "premise": "Seven restored riads for sale behind one unmarked door in the Marrakech medina; the restoration story and a riad picker.",
+ "look": "warm, shadowed courtyard photography in the Marrakech medina, light falling from the open sky into deep shade, saturated terracotta and zellige green, candlelight at night, 24-35mm, photorealistic",
+ "palette": "terracotta, zellige green, carved cedar brown, tadelakt cream and brass",
+ "direction": "Behind one plain door, seven courtyards. The story is a restoration: dust and scaffolding becoming tadelakt, zellige and running water. Photography looks down into courtyards and up to squares of sky, with light falling in shafts and the sound of water implied everywhere. Craftsmen's hands carry the restoration chapter; candlelit dinners carry the life.",
+ "type": "calligraphic-feeling serif headlines, geometric patterns as dividers taken from the zellige; warm cream backgrounds.",
+ "anchor_name": "riad",
+ "anchor": "a restored three-storey riad in the Marrakech medina built around an open-air courtyard: four orange trees in raised beds around a central octagonal fountain of green zellige tiles, carved cedar balconies on all four sides, horseshoe arches framed in finely carved plaster, walls of smooth cream tadelakt, terracotta tile floors, pierced brass lanterns, a rooftop terrace with a plunge pool looking toward the Atlas mountains",
+ "consistency": [
+  "Generate 01 first; keep the riad description word for word in every prompt that shows it.",
+  "Daylight always falls from the open courtyard roof; night shots are lit by lanterns and candles only."
+ ],
+ "shots": [
+  {
+   "id": "hero",
+   "title": "The courtyard",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "camera": "From the first-floor gallery, 24mm",
+   "prompt": "Architectural photograph looking down from the carved cedar gallery into the courtyard of {anchor}: the green zellige fountain at the centre with water spilling over its rim, orange trees heavy with fruit, a shaft of late-morning sun falling through the open roof onto the terracotta floor, cool shade under the arches, rich, serene and timeless, nobody present."
+  },
+  {
+   "id": "hero-mobile",
+   "title": "The sky above",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "camera": "Looking straight up, 16mm",
+   "prompt": "Vertical photograph looking straight up from the courtyard of {anchor}: three storeys of carved cedar balconies and horseshoe arches framing a bright square of deep blue sky, the tops of the orange trees at the edges, warm reflected light on the tadelakt, graphic and mesmerising."
+  },
+  {
+   "id": "door",
+   "title": "One plain door",
+   "section": "Arrival section",
+   "ar": "3:4",
+   "camera": "Alley, 35mm",
+   "prompt": "Photograph of a narrow ochre medina alley with a tall arched cedar door studded with iron nails and a small brass hand-shaped knocker, no sign, a cat asleep on the step, a strip of morning sun across the wall, a glimpse of a green courtyard through a crack in the door, mysterious and inviting."
+  },
+  {
+   "id": "grid-restoration",
+   "title": "The restoration",
+   "section": "Restoration journey",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Documentary, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. The restoration of an old Marrakech riad, documentary photographs in warm dusty light, craftsmen's faces out of frame, all different people. Top-left: a crumbling courtyard full of scaffolding, rubble and dust in a shaft of sunlight. Top-right: hands laying small hand-cut green zellige tiles into a geometric star pattern. Bottom-left: a craftsman carving intricate plaster with a chisel on an arch. Bottom-right: hands polishing smooth cream tadelakt with a flat river stone."
+  },
+  {
+   "id": "salon",
+   "title": "The salon",
+   "section": "Inside the riads",
+   "ar": "16:9",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a long salon opening onto the courtyard of {anchor}: walls of cream tadelakt, a painted cedar ceiling, low sofas with handwoven cushions in terracotta and green, a brass tray table with mint tea glasses, pierced brass lanterns throwing star-shaped shadows, tall carved doors folded open to the fountain, warm and calm, nobody present."
+  },
+  {
+   "id": "grid-rooms",
+   "title": "Rooms",
+   "section": "Riad picker: rooms",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Rooms in a restored Marrakech riad with tadelakt, zellige, cedar and brass, soft daylight, nobody present. Top-left: a bedroom with a carved cedar bed, white linen and a horseshoe-arched window onto the courtyard. Top-right: a bathroom with a sculpted tadelakt bathtub and brass taps. Bottom-left: a vaulted hammam of smooth tadelakt with a marble bench and steam. Bottom-right: a small library with cedar shelves and a reading chair."
+  },
+  {
+   "id": "rooftop",
+   "title": "The roof at sunset",
+   "section": "Rooftop section",
+   "ar": "21:9",
+   "camera": "Wide, 24mm",
+   "prompt": "Panoramic photograph from the rooftop terrace of {anchor} at sunset: a small plunge pool of green zellige, low cushions and lanterns, the flat roofs and minarets of the medina glowing pink and orange, the snow-capped Atlas mountains on the horizon, swallows in the sky, nobody present."
+  },
+  {
+   "id": "grid-fountains",
+   "title": "Seven fountains",
+   "section": "The seven riads",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Detail, 50mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Four different courtyard fountains in restored Marrakech riads, soft daylight. Top-left: an octagonal fountain of green zellige overflowing into a channel. Top-right: a wall fountain with a brass spout pouring into a carved stone basin. Bottom-left: a shallow round basin floating with rose petals. Bottom-right: a small fountain of blue and white zellige in a garden of palms."
+  },
+  {
+   "id": "dinner",
+   "title": "Dinner in the courtyard",
+   "section": "Life in the riad",
+   "ar": "3:2",
+   "camera": "35mm, candlelight",
+   "prompt": "Night photograph of a long candlelit dinner in the courtyard of {anchor}: six friends around a low table with tagines, bread and mint tea, the fountain glinting, dozens of brass lanterns casting star patterns on the walls, faces turned away or softly out of focus, warm and joyful. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "grid-details",
+   "title": "Materials",
+   "section": "Materials band",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Macro, raking light",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in warm raking light. Top-left: hand-cut green zellige in a star pattern. Top-right: deeply carved cedar wood. Bottom-left: smooth cream tadelakt with a soft sheen. Bottom-right: the star-shaped shadow pattern thrown by a pierced brass lantern."
+  },
+  {
+   "id": "grid-medina",
+   "title": "The medina",
+   "section": "Around you",
+   "ar": "3:4",
+   "grid": true,
+   "camera": "Street, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. The Marrakech medina in warm light, people small or seen from behind, all different. Top-left: a covered souk alley with lanterns and slatted light. Top-right: a spice stall with pyramids of saffron, paprika and cumin. Bottom-left: a quiet square with an old fountain and a cafe terrace. Bottom-right: a garden of cacti and palms against a cobalt blue wall."
+  }
+ ],
+ "status": "New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro"
+}

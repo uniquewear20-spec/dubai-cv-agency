@@ -1,6 +1,6 @@
 # Image prompt library: the 98 remaining concept websites
 
-Built 26 Nov 2026. 98 websites, 841 generations still to run (1735 images). Sites 001 Halo Ridge and 002 TIFAWT are finished and not listed.
+Built 26 Nov 2026. 98 websites, 841 generations still to run (1723 images). Sites 001 Halo Ridge and 002 TIFAWT are finished and not listed.
 
 ## How to generate
 
@@ -39,19 +39,19 @@ Names are working names: each one gets a final web check before its site is buil
 | 021 | 2 | ZAFFA WEDDINGS | Events, education and creative | 8 | 14 | Ready | Not generated yet | [021-zaffa](./021-zaffa/prompts.md) |
 | 022 | 3 | SAHRA STABLES ESTATE | Real estate | 11 | 17 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [022-sahra-stables](./022-sahra-stables/prompts.md) |
 | 023 | 3 | CLOUDLINE | Real estate | 10 | 19 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [023-cloudline](./023-cloudline/prompts.md) |
-| 024 | 3 | RIAD SEVEN FOUNTAINS | Real estate | 10 | 22 | Ready | Not generated yet | [024-riad-seven-fountains](./024-riad-seven-fountains/prompts.md) |
+| 024 | 3 | RIAD SEVEN FOUNTAINS | Real estate | 11 | 26 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [024-riad-seven-fountains](./024-riad-seven-fountains/prompts.md) |
 | 025 | 3 | FAIRWAY CRESCENT | Real estate | 10 | 22 | Ready | Not generated yet | [025-fairway-crescent](./025-fairway-crescent/prompts.md) |
-| 026 | 3 | CANAL HOUSE 12 | Real estate | 10 | 22 | Ready | Not generated yet | [026-canal-house-12](./026-canal-house-12/prompts.md) |
+| 026 | 3 | CANAL HOUSE 12 | Real estate | 9 | 18 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [026-canal-house-12](./026-canal-house-12/prompts.md) |
 | 027 | 3 | THE LAST FLOOR | Real estate | 10 | 16 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [027-the-last-floor](./027-the-last-floor/prompts.md) |
 | 028 | 3 | WADI GREEN | Real estate | 10 | 22 | Ready | Not generated yet | [028-wadi-green](./028-wadi-green/prompts.md) |
 | 029 | 3 | SANDBAR ONE | Real estate | 10 | 16 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [029-sandbar-one](./029-sandbar-one/prompts.md) |
 | 030 | 3 | KEYS & SAND | Real estate | 10 | 22 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [030-keys-and-sand](./030-keys-and-sand/prompts.md) |
 | 031 | 3 | LEDGER TOWER | Real estate | 10 | 22 | Ready | Not generated yet | [031-ledger-tower](./031-ledger-tower/prompts.md) |
-| 032 | 3 | QURUM CLIFF | Real estate | 10 | 22 | Ready | Not generated yet | [032-qurum-cliff](./032-qurum-cliff/prompts.md) |
-| 033 | 3 | CHALET 1870 | Real estate | 10 | 22 | Ready | Not generated yet | [033-chalet-1870](./033-chalet-1870/prompts.md) |
-| 034 | 3 | MEWS 22 | Real estate | 10 | 22 | Ready | Not generated yet | [034-mews-22](./034-mews-22/prompts.md) |
+| 032 | 3 | QURUM CLIFF | Real estate | 10 | 19 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [032-qurum-cliff](./032-qurum-cliff/prompts.md) |
+| 033 | 3 | CHALET 1870 | Real estate | 10 | 19 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [033-chalet-1870](./033-chalet-1870/prompts.md) |
+| 034 | 3 | MEWS 22 | Real estate | 10 | 19 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [034-mews-22](./034-mews-22/prompts.md) |
 | 035 | 3 | ORCHARD LANE | Real estate | 10 | 22 | Ready | Not generated yet | [035-orchard-lane](./035-orchard-lane/prompts.md) |
-| 036 | 3 | BERTH 40 | Real estate | 10 | 22 | Ready | Not generated yet | [036-berth-40](./036-berth-40/prompts.md) |
+| 036 | 3 | BERTH 40 | Real estate | 10 | 19 | Ready | New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro | [036-berth-40](./036-berth-40/prompts.md) |
 | 037 | 3 | COMPASS & KEY | Real estate | 10 | 22 | Ready | Not generated yet | [037-compass-and-key](./037-compass-and-key/prompts.md) |
 | 038 | 3 | OLIVE GROVE VILLAS | Real estate | 10 | 22 | Ready | Not generated yet | [038-olive-grove-villas](./038-olive-grove-villas/prompts.md) |
 | 039 | 3 | CHROME & DUNE | Automotive | 10 | 19 | Ready | Not generated yet | [039-chrome-and-dune](./039-chrome-and-dune/prompts.md) |

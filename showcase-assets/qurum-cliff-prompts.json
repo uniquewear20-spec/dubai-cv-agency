@@ -1,0 +1,100 @@
+{
+ "name": "QURUM CLIFF",
+ "premise": "Six white villas stepped down a cliff above the Gulf of Oman in Muscat; a villa picker and an enquiry.",
+ "look": "bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic",
+ "palette": "black basalt rock, plaster white, deep sea blue, date-palm green and copper",
+ "direction": "White cubes on black rock above a deep blue sea, with the jagged mountains of Muscat behind. The photography is graphic and sculptural: hard light, crisp shadows, long views down the white stair to a private cove. Late sun turns the rock copper and the plaster gold. Everything is about descent toward the water.",
+ "type": "heavy geometric sans capitals stacked like the villas; strong black and white layouts with one deep blue.",
+ "anchor_name": "villas",
+ "anchor": "six white plaster villas stepped down a dark rocky cliff above the Gulf of Oman, each villa a cluster of cubic volumes with deep-set windows, shaded roof terraces under timber pergolas and a private pool cantilevered over the rocks, linked by a white stair winding down to a small cove with a wooden jetty, the jagged brown mountains of Muscat behind",
+ "consistency": [
+  "Generate 01 first; keep the villa description word for word.",
+  "Interiors share white plaster, pale oak, linen and brass, always with the sea framed in a deep window."
+ ],
+ "shots": [
+  {
+   "id": "hero",
+   "title": "White on black rock",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "camera": "From the sea, 35mm",
+   "prompt": "Architectural photograph from a boat on the water of {anchor}: the white villas stepping down the black cliff in hard afternoon sun, deep shadows under the pergolas, turquoise pools glinting, the deep blue sea in the foreground, the brown mountains rising behind, bold, graphic and dramatic."
+  },
+  {
+   "id": "hero-mobile",
+   "title": "The stair to the sea",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "camera": "Looking down, 24mm",
+   "prompt": "Vertical photograph looking down the white stair of {anchor} as it winds between white walls and black rock to a tiny cove of turquoise water with a wooden jetty, hard sunlight and crisp shadows, a sense of descent and privacy."
+  },
+  {
+   "id": "pool",
+   "title": "The pool over the rocks",
+   "section": "Villa section",
+   "ar": "21:9",
+   "camera": "Water level, 24mm",
+   "prompt": "Panoramic photograph at water level along the private pool of one of {anchor}: the pool edge cantilevered over black rocks and crashing white foam far below, the deep blue Gulf of Oman stretching to the horizon, a white daybed under a timber pergola, nobody present."
+  },
+  {
+   "id": "living",
+   "title": "The living room",
+   "section": "Inside the villas",
+   "ar": "16:9",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a villa living room with thick white plaster walls, a deep-set window framing the sea like a painting, pale oak floors, a low linen sofa, a brass floor lamp, a woven Omani rug in rust and indigo, cool, calm and full of reflected light, nobody present."
+  },
+  {
+   "id": "grid-rooms",
+   "title": "Rooms",
+   "section": "Villa picker: rooms",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Rooms in a white plaster cliff villa with pale oak, linen and brass, the sea always visible, bright daylight, nobody present. Top-left: a bedroom with a low bed facing a wide window onto the sea. Top-right: a kitchen with a long white plaster island and brass pendants. Bottom-left: a bathroom with a plaster bathtub set into a deep window. Bottom-right: a shaded roof terrace with floor cushions under a timber pergola."
+  },
+  {
+   "id": "sunset",
+   "title": "Copper hour",
+   "section": "Evening band",
+   "ar": "3:2",
+   "camera": "50mm, from behind",
+   "prompt": "Photograph from behind of a couple on the roof terrace of {anchor} watching the sun set over the Gulf of Oman, faces turned away, the rocks glowing copper and the plaster gold, long shadows of the pergola across the floor, calm and warm. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "cove",
+   "title": "The cove",
+   "section": "The private cove",
+   "ar": "4:3",
+   "camera": "35mm, from the jetty",
+   "prompt": "Photograph of the small private cove at the foot of {anchor}: a weathered wooden jetty over clear turquoise water, a white motorboat moored, a sliver of pale sand between black rocks, the white stair climbing the cliff above, bright morning light."
+  },
+  {
+   "id": "aerial",
+   "title": "The cliff from above",
+   "section": "Site plan",
+   "ar": "16:9",
+   "camera": "Drone, 150 m",
+   "prompt": "Aerial drone photograph of {anchor} from above the sea: the white villas and their turquoise pools arranged down the cliff like steps, the winding stair, the cove and jetty at the bottom, white surf on black rock, the city of Muscat and mountains in the hazy distance, clear late-afternoon light."
+  },
+  {
+   "id": "grid-details",
+   "title": "Materials",
+   "section": "Materials band",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Macro, hard light",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in hard sunlight with crisp shadows. Top-left: smooth white plaster with the sharp shadow of a pergola. Top-right: dark volcanic rock wet with sea spray. Bottom-left: a weathered timber pergola beam against blue sky. Bottom-right: a brass door handle on pale oak."
+  },
+  {
+   "id": "grid-muscat",
+   "title": "Muscat",
+   "section": "Around you",
+   "ar": "3:4",
+   "grid": true,
+   "camera": "Travel, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Muscat in warm light, people small or seen from behind, all different. Top-left: wooden dhows moored in a harbour below brown mountains. Top-right: a lantern-lit covered souk with brass and textiles. Bottom-left: a mountain road winding through jagged rock. Bottom-right: a long quiet beach with palms and the sea at dusk."
+  }
+ ],
+ "status": "New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro"
+}

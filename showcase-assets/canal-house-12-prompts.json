@@ -1,0 +1,92 @@
+{
+ "name": "CANAL HOUSE 12",
+ "premise": "A twelve-storey brick and black-steel building of loft apartments on the Dubai Water Canal; a unit finder and viewings.",
+ "look": "warm, textured urban photography: golden light on brick, reflections on the canal, black steel, life on the promenade, 35mm, photorealistic",
+ "palette": "burnt brick red, black steel, canal teal, oak and warm white",
+ "direction": "A brick building in a glass city. The photography leans into texture: hand-laid brick glowing at golden hour, black steel window grids, reflections broken by kayaks on the canal. Interiors are lofts with high ceilings and big steel windows. Life on the promenade gives it energy: walkers, cyclists, a cafe on the ground floor.",
+ "type": "industrial grotesque in heavy weights, unit numbers set large; brick red as the only strong colour.",
+ "anchor_name": "building",
+ "anchor": "a twelve-storey apartment building of hand-laid dark red brick with deep-set black steel windows in a strict grid, a two-storey glazed ground floor with a cafe, a planted rooftop garden with olive trees, standing on the promenade of the Dubai Water Canal with a slim footbridge nearby and glass towers in the background",
+ "consistency": [
+  "Generate 01 first; keep the building description word for word.",
+  "Lofts share exposed brick, oak floors, black steel windows and high white ceilings."
+ ],
+ "shots": [
+  {
+   "id": "hero",
+   "title": "Across the canal",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "camera": "From the opposite bank, 35mm",
+   "prompt": "Architectural photograph from across the canal of {anchor} at golden hour: the brick glowing deep orange, the black window grid sharp, the building and its reflection in the calm canal water, the slim footbridge and glass towers framing it, a kayak drawing a line across the reflection."
+  },
+  {
+   "id": "hero-mobile",
+   "title": "The brick",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "camera": "Looking up, 24mm",
+   "prompt": "Vertical photograph looking straight up the facade of {anchor}: rows of hand-laid red brick and deep black steel windows converging into a clear blue sky, warm low sun raking across the brick texture, strong and graphic."
+  },
+  {
+   "id": "loft",
+   "title": "A loft",
+   "section": "The apartments",
+   "ar": "16:9",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a loft apartment in {anchor}: a double-height living room with an exposed brick wall, wide oak floorboards, a huge black steel window onto the canal, a low leather sofa, a long oak table, plants, warm afternoon light across the brick, nobody present."
+  },
+  {
+   "id": "grid-units",
+   "title": "Unit types",
+   "section": "Unit finder",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Loft apartments with exposed brick, oak floors, black steel windows and warm daylight, canal views, nobody present. Top-left: a compact studio with a bed alcove and a desk at the window. Top-right: a two-bedroom living room with a mezzanine. Bottom-left: a kitchen of black steel and oak with open shelves. Bottom-right: a bedroom with linen and a brick wall."
+  },
+  {
+   "id": "rooftop",
+   "title": "The roof garden",
+   "section": "Rooftop section",
+   "ar": "21:9",
+   "camera": "Wide, 24mm, sunset",
+   "prompt": "Panoramic photograph of the rooftop garden of {anchor} at sunset: olive trees in large planters, timber benches, string lights, the Dubai Water Canal curving below and the towers of the city glowing orange, nobody present."
+  },
+  {
+   "id": "promenade",
+   "title": "The promenade",
+   "section": "Life on the canal",
+   "ar": "3:2",
+   "camera": "35mm, street",
+   "prompt": "Street photograph on the canal promenade in front of {anchor}: people walking, a cyclist passing, a couple with a stroller, tables outside the ground-floor cafe, all small and natural with faces turned or out of focus, warm late-afternoon light on the brick. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "night",
+   "title": "Windows at night",
+   "section": "Evening band",
+   "ar": "16:9",
+   "camera": "Long exposure, 35mm",
+   "prompt": "Night photograph of {anchor} from the footbridge: a grid of warmly lit windows reflected in the dark canal water, the cafe glowing on the ground floor, the city towers lit behind, calm and atmospheric."
+  },
+  {
+   "id": "grid-details",
+   "title": "Materials",
+   "section": "Materials band",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Macro, warm side light",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in warm side light. Top-left: hand-laid dark red brick with lime mortar. Top-right: a black steel window frame with a brass handle. Bottom-left: wide oak floorboards. Bottom-right: canal water rippling with reflections."
+  },
+  {
+   "id": "grid-area",
+   "title": "The canal",
+   "section": "Around you",
+   "ar": "3:4",
+   "grid": true,
+   "camera": "35mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Life along the Dubai Water Canal, people small or seen from behind, all different. Top-left: kayaks at a small floating dock. Top-right: a cafe counter with coffee and pastries. Bottom-left: a slim footbridge over the canal at dusk. Bottom-right: a park lawn with trees beside the water."
+  }
+ ],
+ "status": "New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro"
+}

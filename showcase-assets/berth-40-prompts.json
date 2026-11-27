@@ -1,0 +1,100 @@
+{
+ "name": "BERTH 40",
+ "premise": "Forty waterfront homes, each with its own yacht berth below, in Dubai Harbour; a berth and residence picker and an enquiry.",
+ "look": "glossy nautical architecture photography: white hulls, teak and chrome, sparkling navy water, crisp morning sun and glowing marina nights, 24-50mm, photorealistic",
+ "palette": "hull white, navy, teak, polished chrome and sea-glass green",
+ "direction": "Live where your yacht sleeps. The building is shaped like stacked decks, and the water is part of every picture: hulls below balconies, teak underfoot, chrome catching sunlight. Mornings are crisp and sparkling; nights are mirrored lights on the marina. The site moves from the water up into the home and back down to the berth.",
+ "type": "nautical condensed sans with numbered berths as a graphic system; navy and white with brass rules.",
+ "anchor_name": "building",
+ "anchor": "a slender twelve-storey residential building with long curved white balconies like stacked yacht decks, teak soffits and frameless glass, rising directly from a private marina basin in Dubai Harbour where forty berths of white motor yachts sit right below the homes, a teak boardwalk running along the water",
+ "consistency": [
+  "Generate 01 first; keep the building description word for word.",
+  "Yachts are always white motor yachts of original design with navy accents and no names or logos."
+ ],
+ "shots": [
+  {
+   "id": "hero",
+   "title": "From the water",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "camera": "From a tender, 35mm",
+   "prompt": "Architectural photograph from the water of {anchor} on a crisp bright morning: the white curved balconies stacked above a row of gleaming white motor yachts, the navy water sparkling with sun, reflections of the hulls rippling, the Dubai skyline faint in the haze behind, fresh, glossy and exclusive."
+  },
+  {
+   "id": "hero-mobile",
+   "title": "Your yacht below",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "camera": "Looking down from a balcony, 24mm",
+   "prompt": "Vertical photograph looking straight down from a curved white balcony of {anchor} to the teak deck of a white motor yacht moored in the berth directly below, clear water around the hull, a coiled white rope on the deck, morning sun and crisp shadows, a dizzying and delightful view."
+  },
+  {
+   "id": "boarding",
+   "title": "Stepping aboard",
+   "section": "Your berth",
+   "ar": "3:2",
+   "camera": "50mm, eye level",
+   "prompt": "Photograph on the teak boardwalk of {anchor}: an owner in white linen stepping from the boardwalk onto the stern of a white motor yacht, face turned away, a crew member holding a line, chrome rails glinting, the building rising above, bright morning light. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "living",
+   "title": "The living room",
+   "section": "The residences",
+   "ar": "16:9",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a residence living room in {anchor}: pale teak floors, white curved walls, navy linen sofas, polished chrome details, a wide curved glass wall onto the balcony with yachts and marina below, sea light rippling on the ceiling, nobody present."
+  },
+  {
+   "id": "grid-rooms",
+   "title": "Rooms",
+   "section": "Residence picker: rooms",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Rooms in a waterfront residence with teak, white lacquer, navy linen and chrome, marina views and bright reflected light, nobody present. Top-left: a principal bedroom facing the marina through curved glass. Top-right: a galley-inspired kitchen in white lacquer and teak. Bottom-left: a bathroom with a white stone tub and a porthole-like round window. Bottom-right: a curved balcony with two teak loungers above the yachts."
+  },
+  {
+   "id": "night",
+   "title": "Marina nights",
+   "section": "Evening band",
+   "ar": "21:9",
+   "camera": "Long exposure, 24mm",
+   "prompt": "Panoramic night photograph of {anchor} from across the marina basin: warm light glowing from every balcony, the yachts' deck lights on, long rippling reflections in the still navy water, a blue night sky with the skyline lit beyond, glamorous and calm."
+  },
+  {
+   "id": "breakfast",
+   "title": "Breakfast on deck",
+   "section": "Life here",
+   "ar": "3:2",
+   "camera": "50mm",
+   "prompt": "Photograph of breakfast on a curved balcony of {anchor}: a teak table with fresh fruit, juice and pastries, white linen napkins, two people seated with faces out of frame, the white yachts and sparkling water below, bright morning sun. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "aerial",
+   "title": "The basin from above",
+   "section": "Berth picker",
+   "ar": "16:9",
+   "camera": "Drone, straight down at 45 degrees",
+   "prompt": "Aerial drone photograph of the private marina basin of {anchor}: forty berths in a neat curve, white yachts in a row, the navy water, the teak boardwalk, the curved white building above, the open sea beyond the breakwater, bright clear light."
+  },
+  {
+   "id": "grid-details",
+   "title": "Materials",
+   "section": "Materials band",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Macro, bright",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Nautical material close-ups in bright sunlight. Top-left: oiled teak decking with white caulked seams. Top-right: a polished chrome cleat with a white rope. Bottom-left: navy water sparkling with sun. Bottom-right: frameless glass reflecting a white hull."
+  },
+  {
+   "id": "grid-harbour",
+   "title": "The harbour",
+   "section": "Around you",
+   "ar": "3:4",
+   "grid": true,
+   "camera": "35mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. A modern Dubai harbour in bright light, people small or seen from behind, all different. Top-left: a yacht club terrace with white umbrellas. Top-right: a sailing boat leaving the harbour. Bottom-left: a seafront promenade with palms. Bottom-right: a beach at sunset with the skyline behind."
+  }
+ ],
+ "status": "New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro"
+}

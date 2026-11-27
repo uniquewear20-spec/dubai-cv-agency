@@ -2,110 +2,110 @@
  "site": "QURUM CLIFF",
  "slug": "qurum-cliff",
  "category": "Real estate",
- "concept": "Cliffside villas in Muscat; villa picker.",
- "look": "rugged coastal architecture photography, 24mm",
- "palette": "rock, white, sea blue, palm green",
+ "concept": "Six white villas stepped down a cliff above the Gulf of Oman in Muscat; a villa picker and an enquiry.",
+ "look": "bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic",
+ "palette": "black basalt rock, plaster white, deep sea blue, date-palm green and copper",
  "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
  "shots": [
   {
    "n": 1,
    "file": "qurum-cliff__01-hero.png",
-   "title": "Hero",
-   "section": "Home hero, full screen behind the headline",
+   "title": "White on black rock",
+   "section": "Home hero, full screen",
    "ar": "16:9",
    "kind": "single",
-   "camera": "Eye-level three-quarter view, 24mm tilt-shift, corrected verticals",
-   "prompt": "Architectural photograph of white villas stepped down a cliff above the sea in Muscat, Oman. Golden-hour sun rakes across the facade, verticals perfectly straight, landscaped foreground, clear sky with open space above for a headline. It must feel built and lived-in, not rendered. No people. Overall look: rugged coastal architecture photography, 24mm; colour palette of rock, white, sea blue, palm green. No text, no letters, no logos, no watermarks."
+   "camera": "From the sea, 35mm",
+   "prompt": "Architectural photograph from a boat on the water of six white plaster villas stepped down a dark rocky cliff above the Gulf of Oman, each villa a cluster of cubic volumes with deep-set windows, shaded roof terraces under timber pergolas and a private pool cantilevered over the rocks, linked by a white stair winding down to a small cove with a wooden jetty, the jagged brown mountains of Muscat behind: the white villas stepping down the black cliff in hard afternoon sun, deep shadows under the pergolas, turquoise pools glinting, the deep blue sea in the foreground, the brown mountains rising behind, bold, graphic and dramatic. Overall look: bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic; colour palette of black basalt rock, plaster white, deep sea blue, date-palm green and copper. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 2,
    "file": "qurum-cliff__02-hero-mobile.png",
-   "title": "Hero for phones",
+   "title": "The stair to the sea",
    "section": "Home hero on phones",
    "ar": "9:16",
    "kind": "single",
-   "camera": "Low angle looking up, 20mm",
-   "prompt": "Vertical architectural photograph looking up along white villas stepped down a cliff above the sea in Muscat, Oman, facade lines converging into a clear sky, sunlight catching the main materials, strong graphic composition. No people. Overall look: rugged coastal architecture photography, 24mm; colour palette of rock, white, sea blue, palm green. No text, no letters, no logos, no watermarks."
+   "camera": "Looking down, 24mm",
+   "prompt": "Vertical photograph looking down the white stair of six white plaster villas stepped down a dark rocky cliff above the Gulf of Oman, each villa a cluster of cubic volumes with deep-set windows, shaded roof terraces under timber pergolas and a private pool cantilevered over the rocks, linked by a white stair winding down to a small cove with a wooden jetty, the jagged brown mountains of Muscat behind as it winds between white walls and black rock to a tiny cove of turquoise water with a wooden jetty, hard sunlight and crisp shadows, a sense of descent and privacy. Overall look: bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic; colour palette of black basalt rock, plaster white, deep sea blue, date-palm green and copper. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 3,
-   "file": "qurum-cliff__03-aerial.png",
-   "title": "Aerial",
-   "section": "Location section",
-   "ar": "16:9",
+   "file": "qurum-cliff__03-pool.png",
+   "title": "The pool over the rocks",
+   "section": "Villa section",
+   "ar": "21:9",
    "kind": "single",
-   "camera": "Drone, 120 m, 45-degree angle",
-   "prompt": "Drone photograph of white villas stepped down a cliff above the sea in Muscat, Oman, seen from about 120 metres at a 45-degree angle: the building, plot, access, landscaping and any nearby water clearly readable. Soft morning light, true colours, light haze on the horizon. No people visible. Overall look: rugged coastal architecture photography, 24mm; colour palette of rock, white, sea blue, palm green. No text, no letters, no logos, no watermarks."
+   "camera": "Water level, 24mm",
+   "prompt": "Panoramic photograph at water level along the private pool of one of six white plaster villas stepped down a dark rocky cliff above the Gulf of Oman, each villa a cluster of cubic volumes with deep-set windows, shaded roof terraces under timber pergolas and a private pool cantilevered over the rocks, linked by a white stair winding down to a small cove with a wooden jetty, the jagged brown mountains of Muscat behind: the pool edge cantilevered over black rocks and crashing white foam far below, the deep blue Gulf of Oman stretching to the horizon, a white daybed under a timber pergola, nobody present. Overall look: bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic; colour palette of black basalt rock, plaster white, deep sea blue, date-palm green and copper. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 4,
-   "file": "qurum-cliff__04-twilight.png",
-   "title": "Blue hour",
-   "section": "Night band between sections",
+   "file": "qurum-cliff__04-living.png",
+   "title": "The living room",
+   "section": "Inside the villas",
    "ar": "16:9",
    "kind": "single",
-   "camera": "Eye level, 35mm, tripod long exposure",
-   "prompt": "Blue-hour photograph of white villas stepped down a cliff above the sea in Muscat, Oman: interiors glowing warm behind the glass, exterior lighting on, deep blue sky with a last band of light on the horizon, reflections on water or wet paving. No people. Overall look: rugged coastal architecture photography, 24mm; colour palette of rock, white, sea blue, palm green. No text, no letters, no logos, no watermarks."
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of a villa living room with thick white plaster walls, a deep-set window framing the sea like a painting, pale oak floors, a low linen sofa, a brass floor lamp, a woven Omani rug in rust and indigo, cool, calm and full of reflected light, nobody present. Overall look: bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic; colour palette of black basalt rock, plaster white, deep sea blue, date-palm green and copper. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 5,
-   "file": "qurum-cliff__05-grid-interiors.png",
-   "title": "Interiors",
-   "section": "Interiors gallery and unit pages",
+   "file": "qurum-cliff__05-grid-rooms.png",
+   "title": "Rooms",
+   "section": "Villa picker: rooms",
    "ar": "16:9",
    "kind": "grid",
-   "camera": "Interior, 24mm, eye level, one window light",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Interior photographs inside white villas stepped down a cliff above the sea, finished in white plaster and wood, staged and uncluttered, one soft daylight, nobody present. Top-left: the main living room with its view. Top-right: the kitchen and dining area. Bottom-left: the principal bedroom. Bottom-right: the principal bathroom. Overall look: rugged coastal architecture photography, 24mm; colour palette of rock, white, sea blue, palm green. No text, no letters, no logos, no watermarks."
+   "camera": "Interiors, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Rooms in a white plaster cliff villa with pale oak, linen and brass, the sea always visible, bright daylight, nobody present. Top-left: a bedroom with a low bed facing a wide window onto the sea. Top-right: a kitchen with a long white plaster island and brass pendants. Bottom-left: a bathroom with a plaster bathtub set into a deep window. Bottom-right: a shaded roof terrace with floor cushions under a timber pergola. Overall look: bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic; colour palette of black basalt rock, plaster white, deep sea blue, date-palm green and copper. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 6,
-   "file": "qurum-cliff__06-grid-amenities.png",
-   "title": "Amenities",
-   "section": "Amenities section",
-   "ar": "1:1",
-   "kind": "grid",
-   "camera": "Architectural, 24mm",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The shared spaces of white villas stepped down a cliff above the sea, daylight, nobody present. Top-left: a cliff pool. Top-right: the residents' gym with a view. Bottom-left: the arrival lobby with a concierge desk. Bottom-right: the landscaped garden or roof terrace. Overall look: rugged coastal architecture photography, 24mm; colour palette of rock, white, sea blue, palm green. No text, no letters, no logos, no watermarks."
+   "file": "qurum-cliff__06-sunset.png",
+   "title": "Copper hour",
+   "section": "Evening band",
+   "ar": "3:2",
+   "kind": "single",
+   "camera": "50mm, from behind",
+   "prompt": "Photograph from behind of a couple on the roof terrace of six white plaster villas stepped down a dark rocky cliff above the Gulf of Oman, each villa a cluster of cubic volumes with deep-set windows, shaded roof terraces under timber pergolas and a private pool cantilevered over the rocks, linked by a white stair winding down to a small cove with a wooden jetty, the jagged brown mountains of Muscat behind watching the sun set over the Gulf of Oman, faces turned away, the rocks glowing copper and the plaster gold, long shadows of the pergola across the floor, calm and warm. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame. Overall look: bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic; colour palette of black basalt rock, plaster white, deep sea blue, date-palm green and copper. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 7,
-   "file": "qurum-cliff__07-view.png",
-   "title": "The view",
-   "section": "View section, full width",
-   "ar": "21:9",
+   "file": "qurum-cliff__07-cove.png",
+   "title": "The cove",
+   "section": "The private cove",
+   "ar": "4:3",
    "kind": "single",
-   "camera": "Panoramic, 35mm, from the terrace",
-   "prompt": "Panoramic photograph from the main terrace of white villas stepped down a cliff above the sea: the Gulf of Oman. The edge of a lounge chair and a planter frame the foreground, late-afternoon haze, the view is the subject. No people. Overall look: rugged coastal architecture photography, 24mm; colour palette of rock, white, sea blue, palm green. No text, no letters, no logos, no watermarks."
+   "camera": "35mm, from the jetty",
+   "prompt": "Photograph of the small private cove at the foot of six white plaster villas stepped down a dark rocky cliff above the Gulf of Oman, each villa a cluster of cubic volumes with deep-set windows, shaded roof terraces under timber pergolas and a private pool cantilevered over the rocks, linked by a white stair winding down to a small cove with a wooden jetty, the jagged brown mountains of Muscat behind: a weathered wooden jetty over clear turquoise water, a white motorboat moored, a sliver of pale sand between black rocks, the white stair climbing the cliff above, bright morning light. Overall look: bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic; colour palette of black basalt rock, plaster white, deep sea blue, date-palm green and copper. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 8,
-   "file": "qurum-cliff__08-grid-details.png",
-   "title": "Materials",
-   "section": "Materials and specification section",
-   "ar": "1:1",
-   "kind": "grid",
-   "camera": "Macro, 100mm, raking side light",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up photographs of the materials of white villas stepped down a cliff above the sea, raking side light, shallow depth of field. Top-left: Plaster. Top-right: Wood. Bottom-left: Rock. Bottom-right: Brass. Overall look: rugged coastal architecture photography, 24mm; colour palette of rock, white, sea blue, palm green. No text, no letters, no logos, no watermarks."
+   "file": "qurum-cliff__08-aerial.png",
+   "title": "The cliff from above",
+   "section": "Site plan",
+   "ar": "16:9",
+   "kind": "single",
+   "camera": "Drone, 150 m",
+   "prompt": "Aerial drone photograph of six white plaster villas stepped down a dark rocky cliff above the Gulf of Oman, each villa a cluster of cubic volumes with deep-set windows, shaded roof terraces under timber pergolas and a private pool cantilevered over the rocks, linked by a white stair winding down to a small cove with a wooden jetty, the jagged brown mountains of Muscat behind from above the sea: the white villas and their turquoise pools arranged down the cliff like steps, the winding stair, the cove and jetty at the bottom, white surf on black rock, the city of Muscat and mountains in the hazy distance, clear late-afternoon light. Overall look: bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic; colour palette of black basalt rock, plaster white, deep sea blue, date-palm green and copper. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 9,
-   "file": "qurum-cliff__09-lifestyle.png",
-   "title": "Lifestyle",
-   "section": "Living there section",
-   "ar": "3:2",
-   "kind": "single",
-   "camera": "Editorial, 35mm, natural light",
-   "prompt": "Editorial lifestyle photograph at white villas stepped down a cliff above the sea in Muscat, Oman: a couple watching the sunset. Candid, natural light, believable and calm. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: rugged coastal architecture photography, 24mm; colour palette of rock, white, sea blue, palm green. No text, no letters, no logos, no watermarks."
+   "file": "qurum-cliff__09-grid-details.png",
+   "title": "Materials",
+   "section": "Materials band",
+   "ar": "1:1",
+   "kind": "grid",
+   "camera": "Macro, hard light",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in hard sunlight with crisp shadows. Top-left: smooth white plaster with the sharp shadow of a pergola. Top-right: dark volcanic rock wet with sea spray. Bottom-left: a weathered timber pergola beam against blue sky. Bottom-right: a brass door handle on pale oak. Overall look: bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic; colour palette of black basalt rock, plaster white, deep sea blue, date-palm green and copper. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 10,
-   "file": "qurum-cliff__10-grid-area.png",
-   "title": "Neighbourhood",
-   "section": "Neighbourhood section",
-   "ar": "16:9",
+   "file": "qurum-cliff__10-grid-muscat.png",
+   "title": "Muscat",
+   "section": "Around you",
+   "ar": "3:4",
    "kind": "grid",
-   "camera": "Documentary, 35mm",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Documentary photographs of the neighbourhood around Muscat, Oman, morning light. Top-left: A souk. Top-right: A beach. Bottom-left: Mountains. Bottom-right: A corniche. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: rugged coastal architecture photography, 24mm; colour palette of rock, white, sea blue, palm green. No text, no letters, no logos, no watermarks."
+   "camera": "Travel, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Muscat in warm light, people small or seen from behind, all different. Top-left: wooden dhows moored in a harbour below brown mountains. Top-right: a lantern-lit covered souk with brass and textiles. Bottom-left: a mountain road winding through jagged rock. Bottom-right: a long quiet beach with palms and the sea at dusk. Overall look: bold, graphic coastal architecture photography: hard sunlight, deep shadows, black rock, white plaster and a deep blue sea, copper light at sunset, 24-35mm, photorealistic; colour palette of black basalt rock, plaster white, deep sea blue, date-palm green and copper. No text, no letters, no logos, no watermarks."
   }
  ]
 }

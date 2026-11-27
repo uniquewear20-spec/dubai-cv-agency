@@ -2,110 +2,110 @@
  "site": "MEWS 22",
  "slug": "mews-22",
  "category": "Real estate",
- "concept": "A London mews house for sale.",
- "look": "classic London property photography, 35mm",
- "palette": "cream, black, brick, green",
+ "concept": "One cream mews house on a cobbled lane in Mayfair, London, for sale; a room-by-room tour and a private viewing.",
+ "look": "classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic",
+ "palette": "cream stucco, gloss black, London brick, wisteria lilac and brass",
  "settings": "Seedream 5.0 Pro, 2K, count 1/4, Unlimited on",
  "shots": [
   {
    "n": 1,
    "file": "mews-22__01-hero.png",
-   "title": "Hero",
-   "section": "Home hero, full screen behind the headline",
+   "title": "The mews",
+   "section": "Home hero, full screen",
    "ar": "16:9",
    "kind": "single",
-   "camera": "Eye-level three-quarter view, 24mm tilt-shift, corrected verticals",
-   "prompt": "Architectural photograph of a white mews house with a black door and flower boxes in a cobbled mews in Mayfair, London. Golden-hour sun rakes across the facade, verticals perfectly straight, landscaped foreground, clear sky with open space above for a headline. It must feel built and lived-in, not rendered. No people. Overall look: classic London property photography, 35mm; colour palette of cream, black, brick, green. No text, no letters, no logos, no watermarks."
+   "camera": "From the cobbles, 35mm",
+   "prompt": "Architectural photograph of a two-storey London mews house of cream-painted stucco on a narrow cobbled lane, a glossy black front door with a brass knocker under a semicircular fanlight, black-framed sash windows with window boxes of white flowers, wisteria in full lilac bloom climbing the facade, a glossy black carriage door to the garage, neighbouring mews houses in soft pastel colours in soft early-morning light after rain: the cobbles glistening, the wisteria heavy and lilac, the black door gleaming, the pastel neighbours on either side, calm, elegant and quintessentially London, nobody present. Overall look: classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic; colour palette of cream stucco, gloss black, London brick, wisteria lilac and brass. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 2,
    "file": "mews-22__02-hero-mobile.png",
-   "title": "Hero for phones",
+   "title": "The black door",
    "section": "Home hero on phones",
    "ar": "9:16",
    "kind": "single",
-   "camera": "Low angle looking up, 20mm",
-   "prompt": "Vertical architectural photograph looking up along a white mews house with a black door and flower boxes in a cobbled mews in Mayfair, London, facade lines converging into a clear sky, sunlight catching the main materials, strong graphic composition. No people. Overall look: classic London property photography, 35mm; colour palette of cream, black, brick, green. No text, no letters, no logos, no watermarks."
+   "camera": "50mm",
+   "prompt": "Vertical photograph of the glossy black front door of a two-storey London mews house of cream-painted stucco on a narrow cobbled lane, a glossy black front door with a brass knocker under a semicircular fanlight, black-framed sash windows with window boxes of white flowers, wisteria in full lilac bloom climbing the facade, a glossy black carriage door to the garage, neighbouring mews houses in soft pastel colours with its brass knocker and fanlight, wisteria hanging around it, a small bay tree in a lead planter beside the step, wet cobbles below, soft daylight. Overall look: classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic; colour palette of cream stucco, gloss black, London brick, wisteria lilac and brass. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 3,
-   "file": "mews-22__03-aerial.png",
-   "title": "Aerial",
-   "section": "Location section",
+   "file": "mews-22__03-living.png",
+   "title": "The drawing room",
+   "section": "Inside",
    "ar": "16:9",
    "kind": "single",
-   "camera": "Drone, 120 m, 45-degree angle",
-   "prompt": "Drone photograph of a white mews house with a black door and flower boxes in a cobbled mews in Mayfair, London, seen from about 120 metres at a 45-degree angle: the building, plot, access, landscaping and any nearby water clearly readable. Soft morning light, true colours, light haze on the horizon. No people visible. Overall look: classic London property photography, 35mm; colour palette of cream, black, brick, green. No text, no letters, no logos, no watermarks."
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of the first-floor drawing room of a two-storey London mews house of cream-painted stucco on a narrow cobbled lane, a glossy black front door with a brass knocker under a semicircular fanlight, black-framed sash windows with window boxes of white flowers, wisteria in full lilac bloom climbing the facade, a glossy black carriage door to the garage, neighbouring mews houses in soft pastel colours: tall sash windows with wisteria outside, pale oak floors, plaster cornices, a low linen sofa, a pair of vintage armchairs, a marble fireplace with a large abstract painting above, books and fresh flowers, soft daylight, nobody present. Overall look: classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic; colour palette of cream stucco, gloss black, London brick, wisteria lilac and brass. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 4,
-   "file": "mews-22__04-twilight.png",
-   "title": "Blue hour",
-   "section": "Night band between sections",
-   "ar": "16:9",
+   "file": "mews-22__04-kitchen.png",
+   "title": "The kitchen",
+   "section": "Room by room",
+   "ar": "3:2",
    "kind": "single",
-   "camera": "Eye level, 35mm, tripod long exposure",
-   "prompt": "Blue-hour photograph of a white mews house with a black door and flower boxes in a cobbled mews in Mayfair, London: interiors glowing warm behind the glass, exterior lighting on, deep blue sky with a last band of light on the horizon, reflections on water or wet paving. No people. Overall look: classic London property photography, 35mm; colour palette of cream, black, brick, green. No text, no letters, no logos, no watermarks."
+   "camera": "Interior, 28mm",
+   "prompt": "Interior photograph of the kitchen of a two-storey London mews house of cream-painted stucco on a narrow cobbled lane, a glossy black front door with a brass knocker under a semicircular fanlight, black-framed sash windows with window boxes of white flowers, wisteria in full lilac bloom climbing the facade, a glossy black carriage door to the garage, neighbouring mews houses in soft pastel colours: painted cabinetry in deep green, a marble island with brass taps, open shelves of ceramics, a glass door to a tiny courtyard garden of ferns, morning light, nobody present. Overall look: classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic; colour palette of cream stucco, gloss black, London brick, wisteria lilac and brass. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 5,
-   "file": "mews-22__05-grid-interiors.png",
-   "title": "Interiors",
-   "section": "Interiors gallery and unit pages",
+   "file": "mews-22__05-grid-rooms.png",
+   "title": "Rooms",
+   "section": "Room by room",
    "ar": "16:9",
    "kind": "grid",
-   "camera": "Interior, 24mm, eye level, one window light",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Interior photographs inside a white mews house with a black door and flower boxes, finished in classic and contemporary rooms, staged and uncluttered, one soft daylight, nobody present. Top-left: the main living room with its view. Top-right: the kitchen and dining area. Bottom-left: the principal bedroom. Bottom-right: the principal bathroom. Overall look: classic London property photography, 35mm; colour palette of cream, black, brick, green. No text, no letters, no logos, no watermarks."
+   "camera": "Interiors, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Rooms in a refined London mews house with pale oak, plaster mouldings, linen and brass, soft daylight, nobody present. Top-left: a principal bedroom with a linen headboard and wisteria at the window. Top-right: a marble bathroom with a freestanding tub. Bottom-left: a small study with built-in bookshelves. Bottom-right: a courtyard garden with ferns, a bistro table and climbing roses. Overall look: classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic; colour palette of cream stucco, gloss black, London brick, wisteria lilac and brass. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 6,
-   "file": "mews-22__06-grid-amenities.png",
-   "title": "Amenities",
-   "section": "Amenities section",
-   "ar": "1:1",
-   "kind": "grid",
-   "camera": "Architectural, 24mm",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. The shared spaces of a white mews house with a black door and flower boxes, daylight, nobody present. Top-left: a private garage. Top-right: the residents' gym with a view. Bottom-left: the arrival lobby with a concierge desk. Bottom-right: the landscaped garden or roof terrace. Overall look: classic London property photography, 35mm; colour palette of cream, black, brick, green. No text, no letters, no logos, no watermarks."
+   "file": "mews-22__06-lane.png",
+   "title": "The lane",
+   "section": "Location band",
+   "ar": "21:9",
+   "kind": "single",
+   "camera": "Wide, 35mm",
+   "prompt": "Panoramic photograph down a cobbled Mayfair mews lane: a row of pastel stucco houses with glossy doors, window boxes and wisteria, a two-storey London mews house of cream-painted stucco on a narrow cobbled lane, a glossy black front door with a brass knocker under a semicircular fanlight, black-framed sash windows with window boxes of white flowers, wisteria in full lilac bloom climbing the facade, a glossy black carriage door to the garage, neighbouring mews houses in soft pastel colours in the middle, an old gas-style street lamp, soft overcast light, quiet and charming, nobody present. Overall look: classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic; colour palette of cream stucco, gloss black, London brick, wisteria lilac and brass. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 7,
-   "file": "mews-22__07-view.png",
-   "title": "The view",
-   "section": "View section, full width",
-   "ar": "21:9",
+   "file": "mews-22__07-dog-walk.png",
+   "title": "Morning walk",
+   "section": "Life here",
+   "ar": "3:2",
    "kind": "single",
-   "camera": "Panoramic, 35mm, from the terrace",
-   "prompt": "Panoramic photograph from the main terrace of a white mews house with a black door and flower boxes: the cobbled mews. The edge of a lounge chair and a planter frame the foreground, late-afternoon haze, the view is the subject. No people. Overall look: classic London property photography, 35mm; colour palette of cream, black, brick, green. No text, no letters, no logos, no watermarks."
+   "camera": "50mm, street",
+   "prompt": "Photograph of a resident in a camel coat walking a small dog along the wet cobbles past a two-storey London mews house of cream-painted stucco on a narrow cobbled lane, a glossy black front door with a brass knocker under a semicircular fanlight, black-framed sash windows with window boxes of white flowers, wisteria in full lilac bloom climbing the facade, a glossy black carriage door to the garage, neighbouring mews houses in soft pastel colours in the morning, face turned away, a coffee cup in hand, soft London light, a quiet everyday elegance. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame. Overall look: classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic; colour palette of cream stucco, gloss black, London brick, wisteria lilac and brass. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 8,
    "file": "mews-22__08-grid-details.png",
    "title": "Materials",
-   "section": "Materials and specification section",
+   "section": "Materials band",
    "ar": "1:1",
    "kind": "grid",
-   "camera": "Macro, 100mm, raking side light",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Close-up photographs of the materials of a white mews house with a black door and flower boxes, raking side light, shallow depth of field. Top-left: Brick. Top-right: Brass. Bottom-left: Oak. Bottom-right: Paint. Overall look: classic London property photography, 35mm; colour palette of cream, black, brick, green. No text, no letters, no logos, no watermarks."
+   "camera": "Macro, soft light",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in soft daylight. Top-left: glossy black door paint with a brass knocker. Top-right: wet granite cobbles. Bottom-left: lilac wisteria flowers against cream stucco. Bottom-right: a plaster ceiling moulding. Overall look: classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic; colour palette of cream stucco, gloss black, London brick, wisteria lilac and brass. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 9,
-   "file": "mews-22__09-lifestyle.png",
-   "title": "Lifestyle",
-   "section": "Living there section",
-   "ar": "3:2",
-   "kind": "single",
-   "camera": "Editorial, 35mm, natural light",
-   "prompt": "Editorial lifestyle photograph at a white mews house with a black door and flower boxes in a cobbled mews in Mayfair, London: a resident walking a dog on the cobbles. Candid, natural light, believable and calm. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: classic London property photography, 35mm; colour palette of cream, black, brick, green. No text, no letters, no logos, no watermarks."
+   "file": "mews-22__09-grid-mayfair.png",
+   "title": "Mayfair",
+   "section": "Around you",
+   "ar": "3:4",
+   "kind": "grid",
+   "camera": "City, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Mayfair in London in soft light, people small or seen from behind, all different. Top-left: a path through a royal park with old trees. Top-right: a florist's shopfront overflowing with flowers. Bottom-left: an art gallery window. Bottom-right: a corner cafe with a striped awning. Overall look: classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic; colour palette of cream stucco, gloss black, London brick, wisteria lilac and brass. No text, no letters, no logos, no watermarks."
   },
   {
    "n": 10,
-   "file": "mews-22__10-grid-area.png",
-   "title": "Neighbourhood",
-   "section": "Neighbourhood section",
-   "ar": "16:9",
-   "kind": "grid",
-   "camera": "Documentary, 35mm",
-   "prompt": "A 2x2 grid of four separate photographs separated by thin white gutters, all four in one consistent style and light. Documentary photographs of the neighbourhood around a cobbled mews in Mayfair, London, morning light. Top-left: A park. Top-right: A shop. Bottom-left: A gallery. Bottom-right: A cafe. Every person in the picture is a clearly different individual (age, build, skin tone, hair and clothing all vary) so no face is repeated; faces may be turned away or out of frame. Overall look: classic London property photography, 35mm; colour palette of cream, black, brick, green. No text, no letters, no logos, no watermarks."
+   "file": "mews-22__10-rain-night.png",
+   "title": "A rainy evening",
+   "section": "Evening band",
+   "ar": "3:4",
+   "kind": "single",
+   "camera": "Long exposure, 35mm",
+   "prompt": "Night photograph of a two-storey London mews house of cream-painted stucco on a narrow cobbled lane, a glossy black front door with a brass knocker under a semicircular fanlight, black-framed sash windows with window boxes of white flowers, wisteria in full lilac bloom climbing the facade, a glossy black carriage door to the garage, neighbouring mews houses in soft pastel colours in light rain: warm light glowing from the sash windows, the brass knocker shining, the wet cobbles reflecting the lamp and the windows in long streaks, intimate and cinematic, nobody present. Overall look: classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic; colour palette of cream stucco, gloss black, London brick, wisteria lilac and brass. No text, no letters, no logos, no watermarks."
   }
  ]
 }

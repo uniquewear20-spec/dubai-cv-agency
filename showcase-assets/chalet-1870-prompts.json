@@ -1,0 +1,100 @@
+{
+ "name": "CHALET 1870",
+ "premise": "A chalet built in 1870 above a Swiss alpine village, restored and for sale; a seasonal tour and a viewing request.",
+ "look": "alpine winter photography: blue snow light, warm amber windows, wood smoke and falling snow, 35mm, quiet luxury, photorealistic",
+ "palette": "snow white, sun-blackened larch, granite grey, wool red and amber",
+ "direction": "One house, one hundred and fifty winters. The story moves from blue dusk in deep snow to firelit rooms, steam from a hot tub and skiers coming home; one summer meadow shot shows it is a house for every season. The photography is calm and tactile: wool, blackened timber, stone, snow on a sleeve.",
+ "type": "old-style serif with heavy contrast, set small and precise; a single wool red accent.",
+ "anchor_name": "chalet",
+ "anchor": "a large three-storey alpine chalet built in 1870 with a granite stone ground floor, upper storeys of sun-blackened larch timber, a wide low-pitched roof deep in snow, carved wooden balconies, small square windows glowing amber, a wood-fired hot tub on a stone terrace, standing alone on a snowy slope above a village in the Swiss Alps with a pine forest behind",
+ "consistency": [
+  "Generate 01 first; keep the chalet description word for word.",
+  "Winter shots share blue dusk light and amber windows; the summer shot keeps the same chalet in a meadow."
+ ],
+ "shots": [
+  {
+   "id": "hero",
+   "title": "Blue hour in deep snow",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "camera": "From the slope, 35mm",
+   "prompt": "Photograph at blue hour of {anchor}: every window glowing warm amber against the deep blue snow, a thread of wood smoke rising from the chimney, gentle snow falling, the village lights twinkling in the valley below and dark pines behind, peaceful and magical, nobody present."
+  },
+  {
+   "id": "hero-mobile",
+   "title": "The window",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "camera": "85mm, falling snow",
+   "prompt": "Vertical photograph of one small square window of {anchor} glowing amber in a wall of blackened larch, snow piled on the sill, large snowflakes falling in the foreground slightly out of focus, a glimpse of a fire inside, cosy and intimate."
+  },
+  {
+   "id": "living",
+   "title": "The great room",
+   "section": "Inside",
+   "ar": "16:9",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of the great room of {anchor}: old larch-panelled walls and ceiling beams, a large stone fireplace with a roaring fire, deep sofas in cream wool, red wool blankets, sheepskins, a low wooden table with books and cups of hot chocolate, windows onto snowy peaks, warm and enveloping, nobody present."
+  },
+  {
+   "id": "grid-rooms",
+   "title": "Rooms",
+   "section": "Room by room",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Rooms in a restored 1870 alpine chalet with old larch, stone, wool and linen, warm lamplight and snow outside, nobody present. Top-left: a bedroom under sloping timber beams with a wool-covered bed and a window onto peaks. Top-right: a farmhouse kitchen with a long table and copper pots. Bottom-left: a stone bathroom with a deep tub and a view of the snow. Bottom-right: a boot room with skis, wool coats and boots by a bench."
+  },
+  {
+   "id": "hot-tub",
+   "title": "The hot tub",
+   "section": "Terrace and spa",
+   "ar": "3:2",
+   "camera": "35mm, dusk",
+   "prompt": "Photograph of the wood-fired hot tub on the stone terrace of {anchor} at dusk: steam rising into the cold blue air, snow banked around, a red wool robe on a hook, lanterns glowing, the peaks fading pink in the distance, nobody present."
+  },
+  {
+   "id": "return",
+   "title": "Back from the slopes",
+   "section": "Life here",
+   "ar": "3:2",
+   "camera": "35mm, late afternoon",
+   "prompt": "Photograph of three skiers in colourful jackets carrying skis up the snowy path to {anchor} in late-afternoon sun, faces turned away or hidden by goggles and hats, long blue shadows on the snow, the chalet windows beginning to glow. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "grid-details",
+   "title": "Materials",
+   "section": "Materials band",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Macro, soft light",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in soft winter light. Top-left: sun-blackened larch with deep grain and snow in the cracks. Top-right: granite stone with frost. Bottom-left: a red wool blanket with a fringe. Bottom-right: a hand-forged iron door latch."
+  },
+  {
+   "id": "grid-village",
+   "title": "The village",
+   "section": "Around you",
+   "ar": "3:4",
+   "grid": true,
+   "camera": "Alpine travel, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. A Swiss alpine village in winter, people small or seen from behind, all different. Top-left: a gondola lift rising over snowy pines. Top-right: a narrow village street with wooden houses and warm shop windows. Bottom-left: a mountain hut terrace with deckchairs in the sun. Bottom-right: a frozen lake with skaters under the peaks."
+  },
+  {
+   "id": "summer",
+   "title": "In summer",
+   "section": "Every season",
+   "ar": "16:9",
+   "camera": "From the meadow, 35mm",
+   "prompt": "Photograph of {anchor} in high summer: the same chalet now in a meadow of wildflowers in yellow, white and purple, the roof free of snow, balconies hung with red geraniums, green slopes and grey peaks with small patches of snow behind, bright clear morning light, nobody present."
+  },
+  {
+   "id": "aerial",
+   "title": "The slope",
+   "section": "Location",
+   "ar": "21:9",
+   "camera": "Drone, wide",
+   "prompt": "Panoramic aerial photograph of {anchor} alone on a white slope above a snowy alpine village, ski runs curving down the mountain, pine forests and a wall of jagged peaks under a clear sky, late golden light."
+  }
+ ],
+ "status": "New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro"
+}

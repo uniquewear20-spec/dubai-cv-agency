@@ -1,0 +1,100 @@
+{
+ "name": "MEWS 22",
+ "premise": "One cream mews house on a cobbled lane in Mayfair, London, for sale; a room-by-room tour and a private viewing.",
+ "look": "classic London property photography: soft overcast and early-morning light, glossy paint, wet cobbles, quiet elegance, 35mm, photorealistic",
+ "palette": "cream stucco, gloss black, London brick, wisteria lilac and brass",
+ "direction": "A small house with a big address. The photography is quiet and precise, London-soft: wisteria, a glossy black door, wet cobbles after rain, then calm contemporary rooms inside old proportions. Small human moments (a dog walk, a delivery of flowers) make it feel like a real street.",
+ "type": "classic book serif with small caps; lots of white; a deep black for the door colour as the accent.",
+ "anchor_name": "house",
+ "anchor": "a two-storey London mews house of cream-painted stucco on a narrow cobbled lane, a glossy black front door with a brass knocker under a semicircular fanlight, black-framed sash windows with window boxes of white flowers, wisteria in full lilac bloom climbing the facade, a glossy black carriage door to the garage, neighbouring mews houses in soft pastel colours",
+ "consistency": [
+  "Generate 01 first; keep the house description word for word.",
+  "Interiors share pale oak, plaster mouldings, linen, brass and soft London daylight."
+ ],
+ "shots": [
+  {
+   "id": "hero",
+   "title": "The mews",
+   "section": "Home hero, full screen",
+   "ar": "16:9",
+   "camera": "From the cobbles, 35mm",
+   "prompt": "Architectural photograph of {anchor} in soft early-morning light after rain: the cobbles glistening, the wisteria heavy and lilac, the black door gleaming, the pastel neighbours on either side, calm, elegant and quintessentially London, nobody present."
+  },
+  {
+   "id": "hero-mobile",
+   "title": "The black door",
+   "section": "Home hero on phones",
+   "ar": "9:16",
+   "camera": "50mm",
+   "prompt": "Vertical photograph of the glossy black front door of {anchor} with its brass knocker and fanlight, wisteria hanging around it, a small bay tree in a lead planter beside the step, wet cobbles below, soft daylight."
+  },
+  {
+   "id": "living",
+   "title": "The drawing room",
+   "section": "Inside",
+   "ar": "16:9",
+   "camera": "Interior, 24mm",
+   "prompt": "Interior photograph of the first-floor drawing room of {anchor}: tall sash windows with wisteria outside, pale oak floors, plaster cornices, a low linen sofa, a pair of vintage armchairs, a marble fireplace with a large abstract painting above, books and fresh flowers, soft daylight, nobody present."
+  },
+  {
+   "id": "kitchen",
+   "title": "The kitchen",
+   "section": "Room by room",
+   "ar": "3:2",
+   "camera": "Interior, 28mm",
+   "prompt": "Interior photograph of the kitchen of {anchor}: painted cabinetry in deep green, a marble island with brass taps, open shelves of ceramics, a glass door to a tiny courtyard garden of ferns, morning light, nobody present."
+  },
+  {
+   "id": "grid-rooms",
+   "title": "Rooms",
+   "section": "Room by room",
+   "ar": "16:9",
+   "grid": true,
+   "camera": "Interiors, 28mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Rooms in a refined London mews house with pale oak, plaster mouldings, linen and brass, soft daylight, nobody present. Top-left: a principal bedroom with a linen headboard and wisteria at the window. Top-right: a marble bathroom with a freestanding tub. Bottom-left: a small study with built-in bookshelves. Bottom-right: a courtyard garden with ferns, a bistro table and climbing roses."
+  },
+  {
+   "id": "lane",
+   "title": "The lane",
+   "section": "Location band",
+   "ar": "21:9",
+   "camera": "Wide, 35mm",
+   "prompt": "Panoramic photograph down a cobbled Mayfair mews lane: a row of pastel stucco houses with glossy doors, window boxes and wisteria, {anchor} in the middle, an old gas-style street lamp, soft overcast light, quiet and charming, nobody present."
+  },
+  {
+   "id": "dog-walk",
+   "title": "Morning walk",
+   "section": "Life here",
+   "ar": "3:2",
+   "camera": "50mm, street",
+   "prompt": "Photograph of a resident in a camel coat walking a small dog along the wet cobbles past {anchor} in the morning, face turned away, a coffee cup in hand, soft London light, a quiet everyday elegance. Every person is a clearly different individual (age, build, skin tone, hair and clothing all differ) so no face repeats; faces turned away or out of frame."
+  },
+  {
+   "id": "grid-details",
+   "title": "Materials",
+   "section": "Materials band",
+   "ar": "1:1",
+   "grid": true,
+   "camera": "Macro, soft light",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Material close-ups in soft daylight. Top-left: glossy black door paint with a brass knocker. Top-right: wet granite cobbles. Bottom-left: lilac wisteria flowers against cream stucco. Bottom-right: a plaster ceiling moulding."
+  },
+  {
+   "id": "grid-mayfair",
+   "title": "Mayfair",
+   "section": "Around you",
+   "ar": "3:4",
+   "grid": true,
+   "camera": "City, 35mm",
+   "prompt": "A 2x2 grid of four separate photographs divided by thin white gutters, all four in one consistent style and light. Mayfair in London in soft light, people small or seen from behind, all different. Top-left: a path through a royal park with old trees. Top-right: a florist's shopfront overflowing with flowers. Bottom-left: an art gallery window. Bottom-right: a corner cafe with a striped awning."
+  },
+  {
+   "id": "rain-night",
+   "title": "A rainy evening",
+   "section": "Evening band",
+   "ar": "3:4",
+   "camera": "Long exposure, 35mm",
+   "prompt": "Night photograph of {anchor} in light rain: warm light glowing from the sash windows, the brass knocker shining, the wet cobbles reflecting the lamp and the windows in long streaks, intimate and cinematic, nobody present."
+  }
+ ],
+ "status": "New art-directed prompts (27 Nov): generate these with Seedream 5.0 Pro"
+}
