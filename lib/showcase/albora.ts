@@ -20,7 +20,7 @@ export const IMG = {
   rif: hf("hf_20261127_074133_1c45b3b5-6d31-46b2-90cf-2d2829e587c8"),
   living: hf("hf_20261127_075238_57ffedfa-a193-4f68-8353-af30d5a81226"),
   aerial: hf("hf_20261127_074649_dcf2cea1-f103-491e-9b57-4e87aedad45c"),
-  wellness: hf(""),
+  wellness: hf("hf_20261127_080424_e9ca9f97-d38c-46c3-a98c-784c60796a7f"),
   garden: hf("hf_20261127_075517_b0d0ef85-cd39-44fe-aa4c-a6030c13698a"),
   model: hf(""),
 };
