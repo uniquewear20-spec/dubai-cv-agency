@@ -508,6 +508,10 @@
   .ve-top-nav { gap: 6px; }
   .ve-top-btn { padding: 8px 9px; font-size: 11px; letter-spacing: 0.12em; }
   .ve-hero-top { flex-direction: column; align-items: flex-start; gap: 22px; inset: 84px 18px auto; }
+  /* On a phone the house fills the frame behind the crest, so the sky shade runs deeper and the
+     two figures wait for "The residence" below. */
+  .ve-hero-shade { background: linear-gradient(180deg, rgba(14, 12, 10, 0.84) 0%, rgba(14, 12, 10, 0.62) 34%, rgba(14, 12, 10, 0) 56%, rgba(14, 12, 10, 0) 62%, rgba(14, 12, 10, 0.55) 78%, rgba(14, 12, 10, 0.92) 100%); }
+  .ve-hero-stats { display: none; }
   .ve-hero-em { width: 54px; margin-bottom: 12px; }
   .ve-hero-name { font-size: 40px; }
   .ve-hero-villa { font-size: 11px; }
