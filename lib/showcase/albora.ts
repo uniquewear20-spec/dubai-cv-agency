@@ -27,7 +27,7 @@ export const IMG = {
 /** 2x2 grids, cut in CSS: "crop:<url>#W,H,x,y,w,h". Filled once the grids are generated. */
 const cell = (id: string, W: number, H: number, x: number, y: number, w: number, h: number) => `crop:${hf(id)}#${W},${H},${x},${y},${w},${h}`;
 export const GRID: Record<"interiors" | "materials", string[]> = {
-  interiors: ["", "", "", ""],
+  interiors: [cell("hf_20261127_080329_baff2180-beda-4967-b8cd-8c3006aed326", 2720, 1536, 4, 4, 1341, 750), cell("hf_20261127_080329_baff2180-beda-4967-b8cd-8c3006aed326", 2720, 1536, 1374, 4, 1342, 750), cell("hf_20261127_080329_baff2180-beda-4967-b8cd-8c3006aed326", 2720, 1536, 4, 782, 1342, 750), cell("hf_20261127_080329_baff2180-beda-4967-b8cd-8c3006aed326", 2720, 1536, 1374, 782, 1342, 750)],
   materials: [cell("hf_20261127_074732_848863df-7d04-45bf-bdaa-6138fadbdabf", 2048, 2048, 4, 4, 1006, 1006), cell("hf_20261127_074732_848863df-7d04-45bf-bdaa-6138fadbdabf", 2048, 2048, 1038, 4, 1006, 1006), cell("hf_20261127_074732_848863df-7d04-45bf-bdaa-6138fadbdabf", 2048, 2048, 4, 1038, 1006, 1006), cell("hf_20261127_074732_848863df-7d04-45bf-bdaa-6138fadbdabf", 2048, 2048, 1038, 1037, 1006, 1007)],
 };
 export const ALT: Record<keyof typeof IMG, L> = {
