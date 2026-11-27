@@ -173,7 +173,7 @@ export function Film() {
     const small = matchMedia("(max-width: 760px)").matches;
     let eng: FilmGL;
     try {
-      eng = new FilmGL(canvas, srcOf, small ? 1280 : 2048, small ? 6 : 9);
+      eng = new FilmGL(canvas, srcOf, small ? 1280 : 2048, small ? 7 : 10);
     } catch {
       queueMicrotask(() => setFlat(true)); // no WebGL: show the shots as plain pictures
       return;
@@ -236,7 +236,8 @@ export function Film() {
       // The next clip waits on its first frame, so the cut into it lands cleanly.
       const nx = FILM[i + 1];
       if (nx?.clip) eng.seek(clipKey(nx), 0);
-      for (const j of [i + 1, i + 2]) if (FILM[j]) keysOf(FILM[j]).forEach((k) => eng.want(k));
+      // The current shot too: after a jump from the chapters menu its clip must still load.
+      for (const j of [i, i + 1, i + 2]) if (FILM[j]) keysOf(FILM[j]).forEach((k) => eng.want(k));
       overlay(Ts);
     };
     const start = () => { if (!live) { live = true; last = performance.now(); dirty = true; raf = requestAnimationFrame(tick); } };
