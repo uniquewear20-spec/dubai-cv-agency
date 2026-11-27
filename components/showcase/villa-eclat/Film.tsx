@@ -13,7 +13,7 @@ import { FilmGL, frameView, type Uniforms, type View } from "./gl";
 
 /** Viewport heights of scrolling per unit of film length. */
 export const UNIT = 0.95;
-const TW: Record<string, number> = { zoom: 0.18, whip: 0.15, whipUp: 0.15, fade: 0.24, white: 0.26, glow: 0.28, cut: 0 };
+const TW: Record<string, number> = { zoom: 0.18, whip: 0.15, whipUp: 0.15, whipDown: 0.15, fade: 0.24, white: 0.26, glow: 0.28, cut: 0 };
 const STARTS = FILM.reduce<number[]>((a, _s, i) => (a.push(i ? a[i - 1] + FILM[i - 1].len : 0), a), []);
 export const FILM_LEN = STARTS[STARTS.length - 1] + FILM[FILM.length - 1].len;
 export const CHAPTERS = FILM.flatMap((s, i) => (s.chapter ? [{ name: s.chapter, at: STARTS[i] }] : []));
@@ -33,7 +33,8 @@ const shotAt = (T: number) => {
   return i;
 };
 const clipKey = (s: Shot) => `clip:${s.id}`;
-const keysOf = (s: Shot): string[] => (s.clip ? [clipKey(s)] : [s.img, ...(s.img2 ? [s.img2] : []), ...(s.strip ?? [])]);
+// A clip shot also loads its first picture, which stands in until the clip itself is ready.
+const keysOf = (s: Shot): string[] => [s.img, ...(s.img2 ? [s.img2] : []), ...(s.strip ?? []), ...(s.clip?.src ? [clipKey(s)] : [])];
 const srcOf = (k: string) => (k.startsWith("clip:") ? FILM.find((s) => clipKey(s) === k)?.clip?.src ?? "" : IMG[k as ImgKey] ?? "");
 const camAt = (s: Shot, t: number) => {
   const e = ease(t), f = s.from, g = s.to;
@@ -71,9 +72,12 @@ function compose(T: number, sa: number, gl: FilmGL, calm: boolean): Uniforms {
   }
 
   const focus = sh.focus ?? [0.5, 0.5];
-  const c = camAt(sh, t);
+  // A clip plays once it is on the GPU and carries its own camera; until then its first
+  // picture stands in, with a slow push so the shot still moves.
+  const live = !!sh.clip && gl.ready(clipKey(sh));
+  const c = live ? { s: 1, x: 0, y: 0, r: 0 } : camAt(sh, t);
   const m = sh.img2 && sh.mix ? sstep(sh.mix[0], sh.mix[1], t) : 0;
-  const base = sh.clip ? clipKey(sh) : sh.img;
+  const base = live ? clipKey(sh) : sh.img;
   const u: Uniforms = { ...u0, A: view(base, focus, c), B: sh.img2 ? view(sh.img2, focus, c) : null, mix: m };
 
   if (sh.framed && t < 0.42) {
@@ -93,7 +97,7 @@ function compose(T: number, sa: number, gl: FilmGL, calm: boolean): Uniforms {
   }
   if (w > 0 && nx) {
     const cur = sh.img2 && m > 0.5 ? sh.img2 : base;
-    const nKey = nx.strip ? nx.strip[0] : nx.clip ? clipKey(nx) : nx.img;
+    const nKey = nx.strip ? nx.strip[0] : nx.clip && gl.ready(clipKey(nx)) ? clipKey(nx) : nx.img;
     const nFocus = nx.strip ? ([0.5, 0.5] as [number, number]) : nx.focus ?? [0.5, 0.5];
     const nc = nx.strip ? { s: 1, x: 0, y: 0, r: 0 } : camAt(nx, 0);
     const wave = Math.sin(Math.PI * w);
@@ -114,6 +118,12 @@ function compose(T: number, sa: number, gl: FilmGL, calm: boolean): Uniforms {
       case "whipUp":
         u.A = view(cur, focus, c, 1, 0, calm ? 0 : -0.5 * w * w);
         u.B = view(nKey, nFocus, nc, 1, 0, calm ? 0 : 0.5 * (1 - w) * (1 - w));
+        u.mix = sstep(0.4, 0.62, w);
+        u.blur = [0, calm ? 0 : 0.07 * Math.pow(wave, 2), 0, 1];
+        break;
+      case "whipDown":
+        u.A = view(cur, focus, c, 1, 0, calm ? 0 : 0.5 * w * w);
+        u.B = view(nKey, nFocus, nc, 1, 0, calm ? 0 : -0.5 * (1 - w) * (1 - w));
         u.mix = sstep(0.4, 0.62, w);
         u.blur = [0, calm ? 0 : 0.07 * Math.pow(wave, 2), 0, 1];
         break;
@@ -163,7 +173,7 @@ export function Film() {
     const small = matchMedia("(max-width: 760px)").matches;
     let eng: FilmGL;
     try {
-      eng = new FilmGL(canvas, srcOf, small ? 1600 : 2720, small ? 7 : 10);
+      eng = new FilmGL(canvas, srcOf, small ? 1280 : 2048, small ? 6 : 9);
     } catch {
       queueMicrotask(() => setFlat(true)); // no WebGL: show the shots as plain pictures
       return;
@@ -172,8 +182,8 @@ export function Film() {
     const measure = () => {
       filmTop = el.getBoundingClientRect().top + scrollY;
       vh = innerHeight;
-      // Sharp on Retina: up to 2x, capped near 10 megapixels so big screens stay smooth.
-      const dpr = Math.min(devicePixelRatio || 1, 2, Math.sqrt(10e6 / (innerWidth * vh)));
+      // Sharp but light: up to 1.5x, capped near 6.5 megapixels so Safari stays smooth.
+      const dpr = Math.min(devicePixelRatio || 1, 1.5, Math.sqrt(6.5e6 / (innerWidth * vh)));
       eng.size(Math.round(innerWidth * dpr), Math.round(vh * dpr));
       dirty = true;
     };
@@ -216,12 +226,16 @@ export function Film() {
       if (calm || Math.abs(target - Ts) > 3) Ts = target;
       else Ts += (target - Ts) * (1 - Math.exp(-dt * 7.5));
       if (Math.abs(target - Ts) < 2e-4) Ts = target;
+      if (eng.flush()) dirty = true;
       if (!dirty && Math.abs(Ts - prev) < 1e-5) return;
       dirty = false;
       eng.draw(compose(Ts, innerWidth / vh, eng, calm));
       const i = shotAt(Ts);
       const cs = FILM[i];
       if (cs.clip) eng.seek(clipKey(cs), clamp((Ts - STARTS[i]) / cs.len) * (cs.clip.dur - 0.05));
+      // The next clip waits on its first frame, so the cut into it lands cleanly.
+      const nx = FILM[i + 1];
+      if (nx?.clip) eng.seek(clipKey(nx), 0);
       for (const j of [i + 1, i + 2]) if (FILM[j]) keysOf(FILM[j]).forEach((k) => eng.want(k));
       overlay(Ts);
     };

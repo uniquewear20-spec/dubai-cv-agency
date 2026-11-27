@@ -11,18 +11,17 @@ import { sized } from "@/lib/showcase/media";
 
 /**
  * A large picture that stays sharp on Retina screens: resized copies for small widths and
- * Higgsfield's full-size WebP (2720 px) at the top. Grid cells go through the shared Img.
+ * a 2,400 px copy at the top. Grid cells go through the shared Img.
  */
 function Big({ k, alt, sizes, className, eager }: { k: ImgKey; alt: string; sizes: string; className?: string; eager?: boolean }) {
   const url = IMG[k];
   if (!url || url.startsWith("crop:") || !url.endsWith(".png")) return <Img src={url} alt={alt} sizes={sizes} className={className} widths={[800, 1200, 1600]} eager={eager} />;
-  const full = url.replace(/\.png$/, "_min.webp");
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       className={className}
       src={sized(url, 1600)}
-      srcSet={`${sized(url, 800)} 800w, ${sized(url, 1200)} 1200w, ${sized(url, 1600)} 1600w, ${full} 2720w`}
+      srcSet={`${sized(url, 800)} 800w, ${sized(url, 1200)} 1200w, ${sized(url, 1600)} 1600w, ${sized(url, 2400)} 2400w`}
       sizes={sizes}
       alt={alt}
       loading={eager ? "eager" : "lazy"}
@@ -170,14 +169,84 @@ export function Light() {
   );
 }
 
+/** A picture's true shape (width / height), so nothing in the reel is cropped. */
+function shape(k: ImgKey) {
+  const u = IMG[k];
+  if (u.startsWith("crop:")) {
+    const [, , , , w, h] = u.split("#")[1].split(",").map(Number);
+    return w / h;
+  }
+  return k === "roof" || k === "aerial" ? 21 / 9 : 2720 / 1536;
+}
+
+/**
+ * Every room on one strip of film. Scrolling down moves the strip sideways; each picture is shown
+ * whole at its own shape, the frames curve gently toward the middle, and any frame opens full screen.
+ */
 export function Sheet() {
   const [open, setOpen] = useState<number | null>(null);
   const opener = useRef<HTMLElement | null>(null);
+  const sec = useRef<HTMLElement>(null);
+  const track = useRef<HTMLOListElement>(null);
+  const count = useRef<HTMLSpanElement>(null);
   const close = useCallback(() => {
     setOpen(null);
     opener.current?.focus();
   }, []);
   const step = useCallback((d: number) => setOpen((o) => (o === null ? o : (o + d + SHEET.length) % SHEET.length)), []);
+
+  useEffect(() => {
+    const el = sec.current, tr = track.current;
+    if (!el || !tr) return;
+    const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const items = [...tr.children] as HTMLElement[];
+    let top = 0, span = 0, vh = innerHeight, vw = innerWidth, raf = 0, x = -1, xs = 0, last = performance.now(), live = false, shown = -1;
+    const measure = () => {
+      vh = innerHeight;
+      vw = innerWidth;
+      span = Math.max(0, tr.scrollWidth - vw);
+      el.style.height = `${span + vh}px`;
+      top = el.getBoundingClientRect().top + scrollY;
+    };
+    const tick = (now: number) => {
+      raf = requestAnimationFrame(tick);
+      const dt = Math.min(0.1, (now - last) / 1000);
+      last = now;
+      const target = Math.min(1, Math.max(0, (scrollY - top) / Math.max(1, span))) * span;
+      xs = calm ? target : xs + (target - xs) * (1 - Math.exp(-dt * 9));
+      if (Math.abs(target - xs) < 0.3) xs = target;
+      if (Math.abs(xs - x) < 0.3) return;
+      x = xs;
+      tr.style.transform = `translate3d(${-x.toFixed(1)}px, 0, 0)`;
+      let best = 0, bestD = Infinity;
+      items.forEach((it, i) => {
+        const c = it.offsetLeft + it.offsetWidth / 2 - x - vw / 2;
+        const d = c / vw;
+        if (Math.abs(c) < bestD) { bestD = Math.abs(c); best = i; }
+        if (!calm) it.style.transform = `perspective(1600px) rotateY(${(-d * 16).toFixed(2)}deg) scale(${(1 - Math.min(0.12, Math.abs(d) * 0.1)).toFixed(3)})`;
+      });
+      if (best !== shown && count.current) {
+        shown = best;
+        count.current.textContent = `${String(best + 1).padStart(2, "0")} / ${SHEET.length}`;
+      }
+    };
+    measure();
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !live) { live = true; last = performance.now(); x = -1; raf = requestAnimationFrame(tick); }
+      else if (!e.isIntersecting && live) { live = false; cancelAnimationFrame(raf); }
+    });
+    io.observe(el);
+    const ro = new ResizeObserver(measure);
+    ro.observe(tr);
+    addEventListener("resize", measure);
+    return () => {
+      io.disconnect();
+      ro.disconnect();
+      cancelAnimationFrame(raf);
+      removeEventListener("resize", measure);
+    };
+  }, []);
+
   useEffect(() => {
     if (open === null) return;
     const key = (e: KeyboardEvent) => {
@@ -195,28 +264,35 @@ export function Sheet() {
   }, [open, close, step]);
   const cur = open === null ? null : SHEET[open];
   return (
-    <section className="ve-sec ve-sheet" id="rooms" aria-labelledby="ve-sheet-h">
-      <header className="ve-sec-head">
-        <h2 id="ve-sheet-h">Every room</h2>
-        <p>The contact sheet from the shoot. Open any frame to see it full screen.</p>
-      </header>
-      <ol className="ve-sheet-grid">
-        {SHEET.map((s, i) => (
-          <li key={s.img}>
-            <button
-              className="ve-frame"
-              onClick={(e) => {
-                opener.current = e.currentTarget;
-                setOpen(i);
-              }}
-            >
-              <Img src={IMG[s.img as ImgKey]} alt="" sizes="(max-width: 700px) 46vw, (max-width: 1100px) 30vw, 22vw" widths={[480, 800]} />
-              <span className="ve-frame-n" aria-hidden>{String(i + 1).padStart(2, "0")}</span>
-              <span className="ve-frame-name">{s.name}</span>
-            </button>
-          </li>
-        ))}
-      </ol>
+    <section ref={sec} className="ve-reel" id="rooms" aria-labelledby="ve-sheet-h">
+      <div className="ve-reel-stage">
+        <header className="ve-reel-head">
+          <h2 id="ve-sheet-h">Every room</h2>
+          <p>Keep scrolling to run the reel. Open any frame to see it full screen.</p>
+          <span className="ve-reel-count" ref={count} aria-hidden>01 / {SHEET.length}</span>
+        </header>
+        <div className="ve-reel-strip">
+          <ol className="ve-reel-track" ref={track}>
+            {SHEET.map((s, i) => (
+              <li key={s.img} className="ve-reel-item" style={{ "--a": shape(s.img) } as CSSProperties}>
+                <button
+                  className="ve-reel-frame"
+                  onClick={(e) => {
+                    opener.current = e.currentTarget;
+                    setOpen(i);
+                  }}
+                  aria-label={`Open ${s.name}`}
+                >
+                  <Big k={s.img} alt="" sizes="(max-width: 760px) 90vw, 60vw" />
+                </button>
+                <p className="ve-reel-cap">
+                  <span>{String(i + 1).padStart(2, "0")}</span> {s.name}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
       {cur && open !== null && (
         <div className="ve-box" role="dialog" aria-modal="true" aria-label={cur.name} onClick={(e) => e.target === e.currentTarget && close()}>
           <figure>

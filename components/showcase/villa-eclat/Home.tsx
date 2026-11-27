@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Hero, Wordmark } from "./Hero";
+import { Hero, Logo } from "./Hero";
 import { CHAPTERS, Film, goFilm } from "./Film";
 import { Figures, Light, Plans, Rule, Sheet, Viewing } from "./Sections";
 
@@ -64,7 +64,7 @@ export default function VillaEclat() {
     <div className="ve">
       <header className="ve-top">
         <a className="ve-top-mark" href="#top" aria-label="Villa Éclat, back to the top">
-          <Wordmark hair />
+          <Logo id="ve-em-top" />
         </a>
         <nav className="ve-top-nav" aria-label="Site">
           <button className="ve-top-btn" onClick={() => setMenu(true)} aria-haspopup="dialog">Chapters</button>
@@ -82,7 +82,7 @@ export default function VillaEclat() {
         <Viewing />
       </main>
       <footer className="ve-foot">
-        <Wordmark className="ve-foot-mark" hair />
+        <Logo className="ve-foot-logo" id="ve-em-foot" />
         <p>Villa Éclat is a fictional property. This is a concept website designed and built by Zenith Dubai; the photographs are generated, and nothing here is for sale.</p>
         <a href="/showcase/">See more concept websites</a>
       </footer>

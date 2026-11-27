@@ -48,7 +48,7 @@ export const HERO = {
 
 // ── The film: one camera walking through the house, driven by scroll ───────────────────────────
 export type Cam = { s?: number; x?: number; y?: number; r?: number }; // zoom, pan (share of view), roll (deg)
-export type Out = "cut" | "zoom" | "whip" | "whipUp" | "fade" | "white" | "glow";
+export type Out = "cut" | "zoom" | "whip" | "whipUp" | "whipDown" | "fade" | "white" | "glow";
 export type Line = { at: [number, number]; text: string };
 export interface Shot {
   id: string;
@@ -73,35 +73,42 @@ export interface Shot {
   flare?: { from: [number, number]; to: [number, number]; k: number; with?: "mix" };
 }
 
+const CLIP = {
+  door: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/f5c14e48-9de4-4abd-8fa1-49b560267298.mp4",
+  hallToSalon: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/57462aae-93d0-4131-be24-780ea6322ec6.mp4",
+  salonToDining: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/7257573a-5b5e-4f0b-8e0a-a9cfa5bd1950.mp4",
+  kitchen: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/936c4998-3777-4407-9ce2-2896f3201651.mp4",
+  spa: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/7cb3e38c-a75b-4b92-8fe8-fe9fff0103bb.mp4",
+};
+
 export const FILM: Shot[] = [
-  { id: "approach", img: "approach", focus: [0.5, 0.56], from: { s: 1 }, to: { s: 1.32 }, out: "zoom", len: 1.25, chapter: "Arrival",
+  { id: "approach", img: "approach", focus: [0.5, 0.56], from: { s: 1 }, to: { s: 1.32 }, out: "zoom", len: 1.2, chapter: "Arrival",
     flare: { from: [0.18, 0.12], to: [0.1, 0.08], k: 0.55 },
     lines: [{ at: [0.08, 0.62], text: "The lawn runs from the sand to a bronze door five metres tall." }] },
-  { id: "door", img: "door", clip: { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/f5c14e48-9de4-4abd-8fa1-49b560267298.mp4", dur: 5.04 },
-    focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1 }, out: "cut", len: 1.6,
+  { id: "door", img: "door", clip: { src: CLIP.door, dur: 5.04 }, focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14 }, out: "cut", len: 1.6,
     lines: [{ at: [0.06, 0.5], text: "It turns on a single pivot, and stands open all day." }] },
-  { id: "hall", img: "hall", focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14, y: -0.03 }, out: "whipUp", len: 1.1, chapter: "The hall",
-    lines: [{ at: [0.1, 0.72], text: "A staircase that turns once, under a rain of glass." }] },
-  { id: "up", img: "up", focus: [0.5, 0.5], from: { s: 1.12, r: -38 }, to: { s: 1.3, r: 42 }, out: "whip", len: 1,
+  { id: "hall", img: "hall", focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.06, y: -0.02 }, out: "whipUp", len: 0.75, chapter: "The hall",
+    lines: [{ at: [0.05, 0.95], text: "A staircase that turns once, under a rain of glass." }] },
+  { id: "up", img: "up", focus: [0.5, 0.5], from: { s: 1.12, r: -38 }, to: { s: 1.3, r: 42 }, out: "whipDown", len: 1,
     lines: [{ at: [0.15, 0.7], text: "Look up." }] },
-  { id: "salon", img: "living", img2: "golden", mix: [0.42, 0.74], focus: [0.5, 0.55], from: { s: 1.02, x: -0.04 }, to: { s: 1.12, x: 0.04 }, out: "whip", len: 1.7, chapter: "The salon",
-    flare: { from: [0.86, 0.3], to: [0.78, 0.26], k: 0.85, with: "mix" },
-    lines: [
-      { at: [0.06, 0.38], text: "Two steps down, so the sea sits at eye level from the sofas." },
-      { at: [0.5, 0.8], text: "At five o'clock the sun walks across the room." },
-    ] },
-  { id: "dining", img: "dining", focus: [0.5, 0.5], from: { s: 1.03, x: 0.05 }, to: { s: 1.14, x: -0.03 }, out: "whip", len: 1.1, chapter: "Dining",
-    lines: [{ at: [0.1, 0.72], text: "A table for fourteen, under four hundred glass rods." }] },
-  { id: "kitchen", img: "kitchen", focus: [0.5, 0.52], from: { s: 1.14, r: -3 }, to: { s: 1.02, r: 0 }, out: "fade", len: 1, chapter: "Kitchen",
-    lines: [{ at: [0.1, 0.66], text: "Green marble, a brass edge, and the sea at the sink." }] },
+  { id: "toSalon", img: "hall", clip: { src: CLIP.hallToSalon, dur: 5.04 }, focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14 }, out: "cut", len: 1.5, chapter: "The salon",
+    lines: [{ at: [0.5, 0.96], text: "Two steps down, so the sea sits at eye level from the sofas." }] },
+  { id: "toDining", img: "living", clip: { src: CLIP.salonToDining, dur: 5.04 }, focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14 }, out: "cut", len: 1.5, chapter: "Dining",
+    lines: [{ at: [0.5, 0.96], text: "A table for fourteen, under four hundred glass rods." }] },
+  { id: "dining", img: "dining", focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.08, x: -0.02 }, out: "whip", len: 0.7 },
+  { id: "kitchen", img: "kitchen", clip: { src: CLIP.kitchen, dur: 5.04 }, focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14 }, out: "fade", len: 1.3, chapter: "Kitchen",
+    lines: [{ at: [0.1, 0.8], text: "Green marble, a brass edge, and the sea at the sink." }] },
   { id: "bar", img: "bar", focus: [0.5, 0.5], from: { s: 1.18 }, to: { s: 1.03 }, out: "white", len: 1.05, chapter: "After dark",
     lines: [{ at: [0.1, 0.66], text: "Black lacquer, brass and mirror, for the late hours." }] },
   { id: "suite", img: "suite", focus: [0.5, 0.52], framed: true, from: { s: 1.14 }, to: { s: 1.02 }, out: "whip", len: 1.25, chapter: "The suites",
     lines: [{ at: [0.42, 0.8], text: "The principal suite opens onto its own terrace above the sea." }] },
   { id: "bath", img: "bath", focus: [0.5, 0.5], from: { s: 1.02, y: 0.02 }, to: { s: 1.12, y: -0.02 }, out: "fade", len: 1,
     lines: [{ at: [0.1, 0.66], text: "A bath carved from one block of travertine." }] },
-  { id: "spa", img: "spa", focus: [0.5, 0.55], from: { s: 1 }, to: { s: 1.2 }, out: "fade", len: 1.05, chapter: "Spa",
-    lines: [{ at: [0.1, 0.68], text: "Below ground, a vaulted pool lit by round skylights." }] },
+  { id: "spa", img: "spa", clip: { src: CLIP.spa, dur: 5.04 }, focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14 }, out: "fade", len: 1.3, chapter: "Spa",
+    lines: [{ at: [0.1, 0.8], text: "Below ground, a vaulted pool lit by round skylights." }] },
+  { id: "golden", img: "living", img2: "golden", mix: [0.12, 0.55], focus: [0.5, 0.55], from: { s: 1.02, x: -0.03 }, to: { s: 1.1, x: 0.03 }, out: "fade", len: 1.3, chapter: "Five o'clock",
+    flare: { from: [0.86, 0.3], to: [0.78, 0.26], k: 0.8, with: "mix" },
+    lines: [{ at: [0.3, 0.9], text: "At five o'clock the sun walks across the salon." }] },
   { id: "cinema", img: "cinema", focus: [0.5, 0.42], from: { s: 1 }, to: { s: 1.5 }, out: "glow", len: 1, chapter: "The screen",
     lines: [{ at: [0.08, 0.5], text: "Eight velvet seats, and tonight's programme." }] },
   { id: "reel", img: "aerial", strip: ["aerial", "roof", "poolDay"], from: { s: 1 }, to: { s: 1 }, out: "cut", len: 1.9, chapter: "The views",

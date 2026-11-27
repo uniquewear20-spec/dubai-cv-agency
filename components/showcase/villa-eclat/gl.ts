@@ -101,7 +101,7 @@ void main() {
 }`;
 
 /** A picture as the shader sees it: texture, size, and the cell of a grid it shows. */
-type Tex = { t: WebGLTexture; w: number; h: number; crop: [number, number, number, number]; ready: boolean; used: number; video?: HTMLVideoElement; target?: number };
+type Tex = { t: WebGLTexture; w: number; h: number; crop: [number, number, number, number]; ready: boolean; used: number; video?: HTMLVideoElement; target?: number; blob?: string };
 
 /** Where a picture sits: camera centre in picture uv, zoom, roll in radians. */
 export type View = { key: string; c: [number, number]; s: number; r: number; wh: [number, number] };
@@ -137,6 +137,8 @@ export class FilmGL {
   private loc = {} as Record<(typeof NAMES)[number], WebGLUniformLocation | null>;
   private tex = new Map<string, Tex>();
   private clock = 0;
+  /** Decoded pictures waiting for the GPU: one goes up per frame, so scrolling never stalls. */
+  private queue: (() => void)[] = [];
   onLoad: () => void = () => {};
   constructor(private canvas: HTMLCanvasElement, private srcOf: (key: string) => string, private maxW: number, private keep: number) {
     const gl = canvas.getContext("webgl", { alpha: false, antialias: false, depth: false, stencil: false, premultipliedAlpha: false, powerPreference: "high-performance" });
@@ -183,45 +185,78 @@ export class FilmGL {
     const { url, crop } = parseSrc(src);
     const entry: Tex = { t, w: 16, h: 9, crop, ready: false, used: ++this.clock };
     this.tex.set(key, entry);
-    this.upload(entry, placeholder(key));
+    this.upload(entry, placeholder());
     entry.ready = !url; // a placeholder stands in for a picture not generated yet
     if (url.endsWith(".mp4")) {
-      // A real camera move: a short-GOP clip whose current frame is the texture.
+      // A real camera move. The whole clip is fetched first and played from memory, so every
+      // seek is instant; it is played for a moment so iPhones decode its frames.
       const v = document.createElement("video");
-      v.crossOrigin = "anonymous";
       v.muted = true;
       v.playsInline = true;
+      v.setAttribute("playsinline", "");
       v.preload = "auto";
       const show = () => {
         if (this.tex.get(key) !== entry || v.readyState < 2) return;
-        this.upload(entry, v);
-        entry.ready = true;
+        this.queue.push(() => {
+          if (this.tex.get(key) !== entry) return;
+          this.upload(entry, v);
+          entry.ready = true;
+          this.onLoad();
+        });
         this.onLoad();
         const want = entry.target ?? 0;
         if (Math.abs(v.currentTime - want) > 0.02 && !v.seeking) v.currentTime = want;
       };
       v.addEventListener("loadeddata", show);
       v.addEventListener("seeked", show);
-      v.src = url;
+      const start = (src: string) => {
+        v.src = src;
+        v.play().then(() => v.pause()).catch(() => {});
+      };
+      fetch(url, { mode: "cors" })
+        .then((r) => (r.ok ? r.blob() : Promise.reject(r.status)))
+        .then((b) => {
+          if (this.tex.get(key) !== entry) return;
+          entry.blob = URL.createObjectURL(b);
+          start(entry.blob);
+        })
+        .catch(() => {
+          v.crossOrigin = "anonymous";
+          start(url);
+        });
       entry.video = v;
     } else if (url) {
       const img = new Image();
       img.crossOrigin = "anonymous";
       img.decoding = "async";
       img.onload = () => {
-        if (this.tex.get(key) !== entry) return;
-        this.upload(entry, img);
-        entry.ready = true;
-        this.onLoad();
+        const ready = () => {
+          if (this.tex.get(key) !== entry) return;
+          this.queue.push(() => {
+            if (this.tex.get(key) !== entry) return;
+            this.upload(entry, img);
+            entry.ready = true;
+            this.onLoad();
+          });
+          this.onLoad();
+        };
+        (img.decode ? img.decode() : Promise.resolve()).then(ready, ready);
       };
-      // Large screens get Higgsfield's full-size WebP (2720 px, a few hundred KB); phones a 1,600 px copy.
-      const full = this.maxW > 1600 && url.endsWith(".png");
-      img.onerror = () => {
-        if (full && img.src !== sized(url, 1600)) img.src = sized(url, 1600);
-      };
-      img.src = full ? url.replace(/\.png$/, "_min.webp") : sized(url, 1600);
+      img.src = sized(url, this.maxW);
     }
     this.trim();
+  }
+
+  /** True once a picture or clip is on the GPU. */
+  ready(key: string) {
+    return !!this.tex.get(key)?.ready && !!srcOk(this.srcOf(key));
+  }
+
+  /** Sends at most one decoded picture to the GPU; true if more are waiting. */
+  flush() {
+    const job = this.queue.shift();
+    job?.();
+    return this.queue.length > 0;
   }
 
   /** Moves a clip to a moment (seconds); the newest request wins while a seek is running. */
@@ -302,6 +337,7 @@ export class FilmGL {
       e.video.removeAttribute("src");
       e.video.load();
     }
+    if (e.blob) URL.revokeObjectURL(e.blob);
   }
 
   dispose() {
@@ -311,30 +347,21 @@ export class FilmGL {
   }
 }
 
-/** Until a picture exists: a dark plate with Art Deco lines and the room's name. */
-function placeholder(key: string) {
+/** Until a picture arrives: a quiet dark plate. */
+function placeholder() {
   const c = document.createElement("canvas");
-  c.width = 640;
-  c.height = 360;
+  c.width = 64;
+  c.height = 36;
   const x = c.getContext("2d")!;
-  const g = x.createLinearGradient(0, 0, 640, 360);
-  g.addColorStop(0, "#1b1712");
-  g.addColorStop(1, "#0f0d0a");
+  const g = x.createLinearGradient(0, 0, 64, 36);
+  g.addColorStop(0, "#1a1611");
+  g.addColorStop(1, "#0e0c0a");
   x.fillStyle = g;
-  x.fillRect(0, 0, 640, 360);
-  x.strokeStyle = "rgba(201,164,106,0.35)";
-  x.lineWidth = 1;
-  for (let i = 0; i < 3; i++) {
-    x.beginPath();
-    x.arc(320, 420, 150 + i * 14, Math.PI, 2 * Math.PI);
-    x.stroke();
-  }
-  x.fillStyle = "rgba(227,201,154,0.6)";
-  x.font = "20px serif";
-  x.textAlign = "center";
-  x.fillText(key.toUpperCase(), 320, 190);
+  x.fillRect(0, 0, 64, 36);
   return c;
 }
+
+const srcOk = (src: string) => src.length > 0;
 
 /** Cover framing: the picture's size in screen-height units on a screen of aspect `sa`. */
 export function cover(aspect: number, sa: number): [number, number] {
