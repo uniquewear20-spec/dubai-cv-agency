@@ -4,7 +4,7 @@ import { Call, Contact, Faq } from "./Call";
 import { Shell } from "./Chrome";
 import { Amenities, Gallery, Living, SmartHome, Story, Terraces } from "./Living";
 import { Residences } from "./Residences";
-import { Architecture, Coast, Concept, Gardens, Golden, Hero, Quote, Rif, Wellness } from "./Scenes";
+import { Architecture, Coast, Concept, Gardens, Golden, Hero, Quote, Wellness } from "./Scenes";
 
 export default function AlboraHome() {
   return (
@@ -14,7 +14,6 @@ export default function AlboraHome() {
       <Concept />
       <Golden />
       <Coast />
-      <Rif />
       <Architecture />
       <Gardens />
       <Wellness />

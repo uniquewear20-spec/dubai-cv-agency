@@ -145,65 +145,77 @@ export function Golden() {
   );
 }
 
-export function Coast() {
-  const { t, lang } = useAlbora();
-  const { ref } = useP<HTMLElement>("coast", 0.12);
+/** One cloud layer: fractal noise turned into soft, lit cumulus by an SVG filter, drawn once. */
+function Cloud({ seed, fx, fy, k, b, className }: { seed: number; fx: number; fy: number; k: number; b: number; className: string }) {
+  const id = `al-cloud-f${seed}`;
   return (
-    <section className="al-coast al-pin" id="coast" ref={ref} aria-labelledby="al-coast-h">
-      <div className="al-stage">
-        <p className="al-coast-head" aria-hidden>
-          <span>{t.coastA}</span>
-          <span className="al-script">{t.coastScript}</span>
-          <span>{t.coastB}</span>
-        </p>
-        <svg className="al-map" viewBox="0 0 1000 260" role="img" aria-label={t.coastTitle} direction="ltr">
-          <path d="M0 260 L0 210 C 60 200, 120 170, 170 150 S 250 100, 300 120 S 420 140, 470 150 S 600 120, 700 110 S 860 120, 1000 150 L1000 260 Z" className="al-map-sea" />
-          <path d={COAST_PATH} pathLength={1} className="al-map-line" />
-          {COAST.map((s, i) => (
-            <g key={s.name.en} className={`al-map-stop${s.home ? " is-home" : ""}`} style={v({ "--t": (s.x / 1000).toFixed(3) })} transform={`translate(${s.x} ${s.y})`}>
-              <circle r={s.home ? 9 : 5} />
-              {s.home && <circle r={18} className="al-map-halo" />}
-              <text y={[34, -20, -20, 46, -20, 34, -20][i]} textAnchor="middle">
-                {s.name[lang]}
-              </text>
-            </g>
-          ))}
-          <text x={500} y={240} textAnchor="middle" className="al-map-sea-name">
-            {t.sea}
-          </text>
-        </svg>
-        <div className="al-coast-copy">
-          <h2 id="al-coast-h">{t.coastTitle}</h2>
-          <p>{t.coastBody}</p>
-          <ol className="al-coast-list">
-            {COAST.filter((s) => !s.home).map((s) => (
-              <li key={s.name.en}>
-                <span>{s.name[lang]}</span>
-                <span>
-                  {s.min} {t.minutes}
-                </span>
-              </li>
-            ))}
-          </ol>
-          <p className="al-small">{t.coastNote}</p>
-        </div>
-      </div>
-    </section>
+    <div className={`al-cloud ${className}`}>
+      <svg viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid slice" className="al-cloud-svg">
+        <filter id={id} x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency={`${fx} ${fy}`} numOctaves={5} seed={seed} result="n" />
+          <feColorMatrix in="n" type="matrix" values={`0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 ${k} 0 0 0 ${b}`} result="a" />
+          <feDiffuseLighting in="n" surfaceScale={5} diffuseConstant={1.2} lightingColor="#ffffff" result="l">
+            <feDistantLight azimuth={255} elevation={58} />
+          </feDiffuseLighting>
+          <feComposite in="l" in2="a" operator="in" />
+        </filter>
+        <rect width="1600" height="700" fill="#fff" filter={`url(#${id})`} />
+      </svg>
+    </div>
   );
 }
 
-export function Rif() {
+/** The coast draws itself on the limewash; then the page sinks through the clouds to the Rif. */
+export function Coast() {
   const { t, lang } = useAlbora();
-  const { ref } = useP<HTMLElement>("al-rif");
+  const { ref } = useP<HTMLElement>("coast", 0.1);
   return (
-    <section className="al-rif al-pin" id="al-rif" ref={ref} aria-labelledby="al-rif-h">
+    <section className="al-coast al-pin" id="coast" ref={ref} aria-labelledby="al-coast-h">
       <div className="al-stage">
-        <Img src={IMG.rif} alt={ALT.rif[lang]} sizes="140vw" widths={[1200, 1600, 2400]} className="al-rif-img" />
-        <span className="al-cloud al-cloud-a" aria-hidden />
-        <span className="al-cloud al-cloud-b" aria-hidden />
-        <span className="al-cloud al-cloud-c" aria-hidden />
+        <Img src={IMG.rif} alt={ALT.rif[lang]} sizes="120vw" widths={[1200, 1600, 2400]} className="al-rif-img" />
+        <div className="al-fog" aria-hidden>
+          <div className="al-fog-wash">
+            <Cloud seed={7} fx={0.0018} fy={0.0045} k={3.6} b={-1.6} className="al-cloud-back" />
+            <Cloud seed={11} fx={0.0028} fy={0.007} k={4} b={-1.7} className="al-cloud-mid" />
+            <Cloud seed={3} fx={0.0022} fy={0.0055} k={4.4} b={-1.85} className="al-cloud-front" />
+          </div>
+        </div>
+        <div className="al-coast-content">
+          <p className="al-coast-head" aria-hidden>
+            <span>{t.coastA}</span>
+            <span className="al-script">{t.coastScript}</span>
+            <span>{t.coastB}</span>
+          </p>
+          <svg className="al-map" viewBox="0 0 1000 260" role="img" aria-label={t.coastTitle} direction="ltr">
+            <path d={COAST_PATH} pathLength={1} className="al-map-line" />
+            {COAST.map((s, i) => (
+              <g key={s.name.en} className={`al-map-stop${s.home ? " is-home" : ""}`} style={v({ "--t": (s.x / 1000).toFixed(3) })} transform={`translate(${s.x} ${s.y})`}>
+                <circle r={s.home ? 9 : 5} />
+                {s.home && <circle r={18} className="al-map-halo" />}
+                <text y={[34, -20, -20, 46, -20, 34, -20][i]} textAnchor="middle">
+                  {s.name[lang]}
+                </text>
+              </g>
+            ))}
+          </svg>
+          <div className="al-coast-copy">
+            <h2 id="al-coast-h">{t.coastTitle}</h2>
+            <p>{t.coastBody}</p>
+            <ol className="al-coast-list">
+              {COAST.filter((s) => !s.home).map((s) => (
+                <li key={s.name.en}>
+                  <span>{s.name[lang]}</span>
+                  <span>
+                    {s.min} {t.minutes}
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <p className="al-small">{t.coastNote}</p>
+          </div>
+        </div>
         <div className="al-rif-copy">
-          <h2 id="al-rif-h">{t.rifTitle}</h2>
+          <h2>{t.rifTitle}</h2>
           <p>{t.rifBody}</p>
         </div>
       </div>

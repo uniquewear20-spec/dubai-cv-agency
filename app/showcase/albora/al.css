@@ -812,15 +812,88 @@ html.al-locked {
   white-space: normal;
 }
 
-/* the coast, drawn */
+/* the coast, drawn; then down through the clouds to the Rif */
 .al-coast {
-  height: 250vh;
+  height: 470vh;
+  --d: clamp(0, calc(var(--p) / 0.26), 1);
+  --f: clamp(0, calc((var(--p) - 0.28) / 0.52), 1);
+  background: var(--lime);
 }
-.al-coast .al-stage {
+.al-rif-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(calc(1.16 - var(--f) * 0.16));
+}
+.al-fog {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.al-fog-wash {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 200%;
+  background: linear-gradient(180deg, var(--lime) 0%, var(--lime) 47%, rgba(243, 241, 236, 0.94) 54%, rgba(243, 241, 236, 0.6) 68%, rgba(243, 241, 236, 0.18) 84%, rgba(243, 241, 236, 0) 96%);
+  transform: translate3d(0, calc(var(--f) * -100%), 0);
+  will-change: transform;
+}
+.al-cloud {
+  position: absolute;
+  left: -25%;
+  width: 150%;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 62%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 62%, transparent 100%);
+  will-change: transform;
+}
+.al-cloud-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: al-drift 46s ease-in-out infinite alternate;
+}
+.al-cloud-back {
+  top: 36%;
+  height: 34%;
+  opacity: 0.85;
+  transform: translate3d(calc(var(--f) * 6%), calc(var(--f) * 18%), 0);
+}
+.al-cloud-mid {
+  top: 41%;
+  height: 32%;
+  transform: translate3d(calc(var(--f) * -7%), calc(var(--f) * -10%), 0);
+}
+.al-cloud-mid .al-cloud-svg {
+  animation-duration: 38s;
+  animation-direction: alternate-reverse;
+}
+.al-cloud-front {
+  top: 47%;
+  height: 36%;
+  transform: translate3d(calc(var(--f) * 4%), calc(var(--f) * -34%), 0);
+}
+.al-cloud-front .al-cloud-svg {
+  animation-duration: 30s;
+}
+@keyframes al-drift {
+  from {
+    transform: translateX(-3%);
+  }
+  to {
+    transform: translateX(3%);
+  }
+}
+.al-coast-content {
+  position: absolute;
+  inset: 0;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 2vh;
   padding: 12vh var(--pad) 5vh calc(var(--pad) + var(--rail));
+  transform: translateY(calc(var(--f) * -42vh));
+  opacity: clamp(0, calc(1 - var(--f) * 2.4), 1);
 }
 .al-coast-head {
   display: flex;
@@ -845,20 +918,16 @@ html.al-locked {
   min-height: 0;
   overflow: visible;
 }
-.al-map-sea {
-  fill: var(--blue);
-  opacity: 0.1;
-}
 .al-map-line {
   fill: none;
   stroke: var(--ink);
-  stroke-width: 2.2;
+  stroke-width: 2.4;
   stroke-linecap: round;
   stroke-dasharray: 1;
-  stroke-dashoffset: max(0, calc(1 - var(--p) * 1.35));
+  stroke-dashoffset: calc(1 - var(--d));
 }
 .al-map-stop {
-  opacity: clamp(0, calc((var(--p) * 1.35 - var(--t)) * 8), 1);
+  opacity: clamp(0, calc((var(--d) - var(--t)) * 8), 1);
 }
 .al-map-stop circle {
   fill: var(--ink);
@@ -880,11 +949,6 @@ html.al-locked {
   font-family: var(--display);
   font-size: 30px;
   fill: var(--bloom);
-}
-.al-map-sea-name {
-  fill: var(--blue);
-  font-family: var(--script);
-  font-size: 40px;
 }
 .al-coast-copy {
   display: grid;
@@ -918,56 +982,6 @@ html.al-locked {
   font-variant-numeric: tabular-nums;
   color: var(--blue);
 }
-
-/* the Rif behind the clouds */
-.al-rif {
-  height: 220vh;
-  background: #dfe6ec;
-}
-.al-rif-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(calc(1.24 - var(--p) * 0.24));
-}
-.al-rif .al-stage::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #f4f6f8;
-  opacity: clamp(0, calc(1 - var(--p) * 3.2), 1);
-  pointer-events: none;
-}
-.al-rif-copy {
-  z-index: 1;
-}
-.al-cloud {
-  z-index: 1;
-  position: absolute;
-  width: 95vw;
-  height: 80vh;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, #fff, rgba(255, 255, 255, 0.92) 40%, rgba(255, 255, 255, 0));
-  filter: blur(6px);
-  pointer-events: none;
-}
-.al-cloud-a {
-  top: -6vh;
-  left: -36vw;
-  transform: translateX(calc(var(--p) * -80vw));
-}
-.al-cloud-b {
-  top: 18vh;
-  right: -36vw;
-  transform: translateX(calc(var(--p) * 80vw));
-}
-.al-cloud-c {
-  bottom: -30vh;
-  left: 2vw;
-  transform: translateY(calc(var(--p) * 70vh));
-}
 .al-rif-copy {
   position: absolute;
   inset-inline-start: calc(var(--pad) + var(--rail));
@@ -977,7 +991,8 @@ html.al-locked {
   max-width: 640px;
   color: #fff;
   text-shadow: 0 2px 24px rgba(8, 12, 30, 0.45);
-  opacity: clamp(0, calc((var(--p) - 0.42) * 3.5), 1);
+  opacity: clamp(0, calc((var(--p) - 0.78) * 7), 1);
+  transform: translateY(calc((1 - clamp(0, calc((var(--p) - 0.78) * 7), 1)) * 24px));
 }
 .al-rif-copy h2 {
   font-family: var(--display);
@@ -2207,7 +2222,7 @@ html.al-locked {
   .al-golden-fig {
     width: 64vw;
   }
-  .al-coast .al-stage {
+  .al-coast-content {
     padding-top: 13vh;
   }
   .al-coast-head {
@@ -2217,7 +2232,7 @@ html.al-locked {
     width: 210%;
     max-width: none;
     min-height: 26vh;
-    transform: translateX(calc(var(--p) * -52%));
+    transform: translateX(calc(var(--d) * -52%));
   }
   .al-map-stop text {
     font-size: 24px;
@@ -2309,6 +2324,7 @@ html.al-locked {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .al-cloud-svg,
   .al-ring-svg,
   .al-drawer-box {
     animation: none;
