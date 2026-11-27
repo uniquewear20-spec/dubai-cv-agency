@@ -6,6 +6,7 @@
 
 import { useState, type CSSProperties } from "react";
 import { ALT, COAST, COAST_PATH, FIGURES, IMG, MONTHS, PLANTS, PRINCIPLES, WELLNESS } from "@/lib/showcase/albora";
+import { sized } from "@/lib/showcase/media";
 import { Img } from "../kit/Img";
 import { Ring } from "./Chrome";
 import { useAlbora, useP } from "./state";
@@ -20,7 +21,7 @@ export function Hero() {
   return (
     <section className={`al-hero al-pin${night ? " is-night" : ""}`} id="al-hero" ref={ref} aria-labelledby="al-hero-h">
       <div className="al-stage">
-        <div className="al-hero-media">
+        <div className="al-hero-media" style={IMG.day ? { backgroundImage: `url(${sized(IMG.day, 64)})` } : undefined}>
           <Img src={IMG.day} alt={ALT.day[lang]} eager sizes="100vw" widths={[800, 1200, 1600, 2400]} className="al-hero-day" />
           <Img src={IMG.night} alt={night ? ALT.night[lang] : ""} sizes="100vw" widths={[800, 1200, 1600, 2400]} className="al-hero-night" />
         </div>
@@ -223,9 +224,11 @@ export function Architecture() {
       <figure className="al-arch-aerial">
         <Img src={IMG.aerial} alt={ALT.aerial[lang]} sizes="(max-width: 900px) 100vw, 66vw" />
       </figure>
-      <figure className="al-arch-model">
-        <Img src={IMG.model} alt={ALT.model[lang]} sizes="(max-width: 900px) 70vw, 30vw" />
-      </figure>
+      {IMG.model && (
+        <figure className="al-arch-model">
+          <Img src={IMG.model} alt={ALT.model[lang]} sizes="(max-width: 900px) 70vw, 30vw" />
+        </figure>
+      )}
       <dl className="al-principles">
         {PRINCIPLES.map((p) => (
           <div key={p.t.en}>

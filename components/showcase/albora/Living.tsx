@@ -172,6 +172,12 @@ export function SmartHome() {
         </dl>
       </div>
       <svg className="al-smart-plan" viewBox="0 0 360 300" aria-hidden style={v({ "--l": s.lights, "--s": s.shutters })} data-scene={id}>
+        <defs>
+          <radialGradient id="al-glow">
+            <stop offset="0" stopColor="#ffd27a" stopOpacity="0.85" />
+            <stop offset="1" stopColor="#ffd27a" stopOpacity="0" />
+          </radialGradient>
+        </defs>
         <rect x={20} y={20} width={320} height={200} className="al-sp-wall" />
         <line x1={140} y1={20} x2={140} y2={220} className="al-sp-in" />
         <line x1={230} y1={100} x2={340} y2={100} className="al-sp-in" />
@@ -183,7 +189,7 @@ export function SmartHome() {
         ))}
         {lamps.map(([x, y]) => (
           <g key={`${x}-${y}`} className="al-sp-lamp" transform={`translate(${x} ${y})`}>
-            <circle r={26} className="al-sp-glow" />
+            <circle r={38} className="al-sp-glow" />
             <circle r={4} />
           </g>
         ))}

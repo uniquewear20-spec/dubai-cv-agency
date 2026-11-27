@@ -444,6 +444,10 @@ html.al-locked {
   transform: scale(calc(1.04 + var(--p) * 0.12));
   transform-origin: 50% 70%;
 }
+.al-hero-media {
+  background-size: cover;
+  background-position: center;
+}
 .al-hero-media > * {
   position: absolute;
   inset: 0;
@@ -927,7 +931,19 @@ html.al-locked {
   object-fit: cover;
   transform: scale(calc(1.24 - var(--p) * 0.24));
 }
+.al-rif .al-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f4f6f8;
+  opacity: clamp(0, calc(1 - var(--p) * 3.2), 1);
+  pointer-events: none;
+}
+.al-rif-copy {
+  z-index: 1;
+}
 .al-cloud {
+  z-index: 1;
   position: absolute;
   width: 95vw;
   height: 80vh;
@@ -1739,8 +1755,8 @@ html.al-locked {
   transition: transform 0.7s ease;
 }
 .al-sp-glow {
-  fill: #ffcf7a;
-  opacity: calc(var(--l) * 0.5);
+  fill: url(#al-glow);
+  opacity: calc(var(--l) * 0.95);
   transition: opacity 0.7s;
 }
 .al-sp-lamp circle:last-child {

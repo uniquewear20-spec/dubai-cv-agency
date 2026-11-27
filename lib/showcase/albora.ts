@@ -25,7 +25,11 @@ export const IMG = {
   model: hf(""),
 };
 /** 2x2 grids, cut in CSS: "crop:<url>#W,H,x,y,w,h". Filled once the grids are generated. */
-export const GRID: Record<"interiors" | "materials", string[]> = { interiors: ["", "", "", ""], materials: ["", "", "", ""] };
+const cell = (id: string, W: number, H: number, x: number, y: number, w: number, h: number) => `crop:${hf(id)}#${W},${H},${x},${y},${w},${h}`;
+export const GRID: Record<"interiors" | "materials", string[]> = {
+  interiors: ["", "", "", ""],
+  materials: [cell("hf_20261127_074732_848863df-7d04-45bf-bdaa-6138fadbdabf", 2048, 2048, 4, 4, 1006, 1006), cell("hf_20261127_074732_848863df-7d04-45bf-bdaa-6138fadbdabf", 2048, 2048, 1038, 4, 1006, 1006), cell("hf_20261127_074732_848863df-7d04-45bf-bdaa-6138fadbdabf", 2048, 2048, 4, 1038, 1006, 1006), cell("hf_20261127_074732_848863df-7d04-45bf-bdaa-6138fadbdabf", 2048, 2048, 1038, 1037, 1006, 1007)],
+};
 export const ALT: Record<keyof typeof IMG, L> = {
   day: { en: "White residences stepping down a hillside, bougainvillea pergolas and a long pool under a deep blue sky", ar: "مساكن بيضاء متدرجة على تلة، وعرائش الجهنمية ومسبح طويل تحت سماء زرقاء عميقة" },
   night: { en: "The same residences at blue hour, lanterns lit and the pool glowing", ar: "المساكن نفسها في الساعة الزرقاء، والفوانيس مضاءة والمسبح يتوهّج" },
