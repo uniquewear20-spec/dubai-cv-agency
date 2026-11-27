@@ -7,6 +7,30 @@ import { useCallback, useEffect, useRef, useState, type CSSProperties } from "re
 import { FIGURES, IMG, LEVELS, PAIRS, SHEET, type ImgKey } from "@/lib/showcase/villa-eclat";
 import { Img } from "@/components/showcase/kit/Img";
 import { EnquiryForm } from "@/components/showcase/kit/EnquiryForm";
+import { sized } from "@/lib/showcase/media";
+
+/**
+ * A large picture that stays sharp on Retina screens: resized copies for small widths and
+ * Higgsfield's full-size WebP (2720 px) at the top. Grid cells go through the shared Img.
+ */
+function Big({ k, alt, sizes, className, eager }: { k: ImgKey; alt: string; sizes: string; className?: string; eager?: boolean }) {
+  const url = IMG[k];
+  if (!url || url.startsWith("crop:") || !url.endsWith(".png")) return <Img src={url} alt={alt} sizes={sizes} className={className} widths={[800, 1200, 1600]} eager={eager} />;
+  const full = url.replace(/\.png$/, "_min.webp");
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      className={className}
+      src={sized(url, 1600)}
+      srcSet={`${sized(url, 800)} 800w, ${sized(url, 1200)} 1200w, ${sized(url, 1600)} 1600w, ${full} 2720w`}
+      sizes={sizes}
+      alt={alt}
+      loading={eager ? "eager" : "lazy"}
+      decoding="async"
+      draggable={false}
+    />
+  );
+}
 
 /** Three gold hairlines, the house's Art Deco rule. */
 export const Rule = ({ className }: { className?: string }) => (
@@ -131,9 +155,9 @@ export function Light() {
         ))}
       </div>
       <div className="ve-cmp" style={{ "--x": `${x}%` } as CSSProperties}>
-        <Img className="ve-cmp-a" src={IMG[pair.a]} alt={`${pair.name}, ${pair.aName.toLowerCase()}`} sizes="(max-width: 900px) 100vw, 86vw" widths={[800, 1200, 1600]} />
+        <Big className="ve-cmp-a" k={pair.a} alt={`${pair.name}, ${pair.aName.toLowerCase()}`} sizes="(max-width: 900px) 100vw, 86vw" />
         <div className="ve-cmp-b">
-          <Img src={IMG[pair.b]} alt={`${pair.name}, ${pair.bName.toLowerCase()}`} sizes="(max-width: 900px) 100vw, 86vw" widths={[800, 1200, 1600]} />
+          <Big k={pair.b} alt={`${pair.name}, ${pair.bName.toLowerCase()}`} sizes="(max-width: 900px) 100vw, 86vw" />
         </div>
         <span className="ve-cmp-handle" aria-hidden>
           <i />
@@ -196,7 +220,7 @@ export function Sheet() {
       {cur && open !== null && (
         <div className="ve-box" role="dialog" aria-modal="true" aria-label={cur.name} onClick={(e) => e.target === e.currentTarget && close()}>
           <figure>
-            <Img src={IMG[cur.img]} alt={cur.name} sizes="92vw" widths={[1200, 1600]} eager />
+            <Big k={cur.img} alt={cur.name} sizes="92vw" eager />
             <figcaption>
               <span>{String(open + 1).padStart(2, "0")}</span> {cur.name}
             </figcaption>
@@ -220,7 +244,7 @@ export function Viewing() {
   return (
     <section className="ve-sec ve-view" id="viewing" aria-labelledby="ve-view-h">
       <div className="ve-view-art" aria-hidden>
-        <Img src={IMG.night} alt="" sizes="(max-width: 900px) 100vw, 50vw" widths={[800, 1200]} />
+        <Big k="night" alt="" sizes="(max-width: 900px) 100vw, 50vw" />
       </div>
       <div className="ve-view-body">
         <h2 id="ve-view-h">Private viewings</h2>
