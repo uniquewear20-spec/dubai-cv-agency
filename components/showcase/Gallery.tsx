@@ -109,7 +109,7 @@ export default function Gallery() {
               <Link href={`/showcase/${c.slug}/${lang === "ar" ? "?lang=ar" : ""}`} className="sg-link">
                 <div className="sg-img">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  {c.image && <img
                     src={sized(c.image, 1440)}
                     srcSet={srcSet(c.image, [800, 1280, 1600])}
                     sizes={k === 0 ? "(max-width: 900px) 100vw, 1200px" : "(max-width: 900px) 100vw, 600px"}
@@ -117,7 +117,7 @@ export default function Gallery() {
                     loading={k < 2 ? "eager" : "lazy"}
                     decoding="async"
                     style={{ objectPosition: c.focus ?? "50% 50%" }}
-                  />
+                  />}
                 </div>
                 <div className="sg-meta">
                   <p className="sg-cat">{catName(c.category)}</p>

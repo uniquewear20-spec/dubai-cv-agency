@@ -40,6 +40,23 @@ export interface Concept {
 
 export const CONCEPTS: Concept[] = [
   {
+    slug: "villa-eclat",
+    name: "Villa Éclat",
+    category: "real-estate",
+    line: {
+      en: "One very private villa on the Dubai coast, shown as a film you drive with your scroll.",
+      fr: "Une villa très privée sur la côte de Dubaï, présentée comme un film que l'on pilote au défilement.",
+      ar: "فيلا خاصة جداً على ساحل دبي، تُعرض كفيلم تقوده بالتمرير.",
+    },
+    feature: {
+      en: "Fly in over the lawn and through the front door, whip from room to room, then explore the plans and request a viewing",
+      fr: "Survolez la pelouse et franchissez la porte, passez d'une pièce à l'autre, puis explorez les plans et demandez une visite",
+      ar: "حلّق فوق العشب وعبر الباب الأمامي، وانتقل من غرفة إلى أخرى، ثم استكشف المخططات واطلب زيارة",
+    },
+    image: "",
+    focus: "50% 55%",
+  },
+  {
     slug: "halo-ridge",
     name: "Halo Ridge",
     category: "real-estate",
