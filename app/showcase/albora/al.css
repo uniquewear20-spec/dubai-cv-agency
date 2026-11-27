@@ -836,7 +836,7 @@ html.al-locked {
   position: absolute;
   inset: 0 0 auto;
   height: 200%;
-  background: linear-gradient(180deg, var(--lime) 0%, var(--lime) 47%, rgba(243, 241, 236, 0.94) 54%, rgba(243, 241, 236, 0.6) 68%, rgba(243, 241, 236, 0.18) 84%, rgba(243, 241, 236, 0) 96%);
+  background: linear-gradient(180deg, var(--lime) 0%, var(--lime) 47%, rgba(243, 241, 236, 0.9) 52%, rgba(243, 241, 236, 0.45) 60%, rgba(243, 241, 236, 0.12) 72%, rgba(243, 241, 236, 0) 82%);
   transform: translate3d(0, calc(var(--f) * -100%), 0);
   will-change: transform;
 }

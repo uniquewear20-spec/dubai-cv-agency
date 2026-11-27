@@ -175,9 +175,9 @@ export function Coast() {
         <Img src={IMG.rif} alt={ALT.rif[lang]} sizes="120vw" widths={[1200, 1600, 2400]} className="al-rif-img" />
         <div className="al-fog" aria-hidden>
           <div className="al-fog-wash">
-            <Cloud seed={7} fx={0.0018} fy={0.0045} k={3.6} b={-1.6} className="al-cloud-back" />
-            <Cloud seed={11} fx={0.0028} fy={0.007} k={4} b={-1.7} className="al-cloud-mid" />
-            <Cloud seed={3} fx={0.0022} fy={0.0055} k={4.4} b={-1.85} className="al-cloud-front" />
+            <Cloud seed={7} fx={0.0018} fy={0.0045} k={4.4} b={-1.85} className="al-cloud-back" />
+            <Cloud seed={11} fx={0.0026} fy={0.0065} k={5.2} b={-2.25} className="al-cloud-mid" />
+            <Cloud seed={3} fx={0.0021} fy={0.005} k={5.8} b={-2.5} className="al-cloud-front" />
           </div>
         </div>
         <div className="al-coast-content">

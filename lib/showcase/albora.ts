@@ -18,10 +18,10 @@ export const IMG = {
   bloom: hf("hf_20261127_073527_25d3327e-4453-4127-a17e-ddcbab1c948a"),
   terrace: hf("hf_20261127_074103_87738417-568c-4e40-964d-cd679cf6c773"),
   rif: hf("hf_20261127_074133_1c45b3b5-6d31-46b2-90cf-2d2829e587c8"),
-  living: hf(""),
+  living: hf("hf_20261127_075238_57ffedfa-a193-4f68-8353-af30d5a81226"),
   aerial: hf("hf_20261127_074649_dcf2cea1-f103-491e-9b57-4e87aedad45c"),
   wellness: hf(""),
-  garden: hf(""),
+  garden: hf("hf_20261127_075517_b0d0ef85-cd39-44fe-aa4c-a6030c13698a"),
   model: hf(""),
 };
 /** 2x2 grids, cut in CSS: "crop:<url>#W,H,x,y,w,h". Filled once the grids are generated. */
