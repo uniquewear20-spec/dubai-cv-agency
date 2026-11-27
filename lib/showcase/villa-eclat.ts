@@ -9,7 +9,7 @@ export type ImgKey =
 
 /** Higgsfield stills. Grid cells are written "crop:<url>#W,H,x,y,w,h" (one cell of a 2x2 grid). */
 export const IMG: Record<ImgKey, string> = {
-  day: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_141600_73d0920d-47ee-4d84-9bc3-cef72e01efe2.png", night: "", approach: "", door: "", hall: "", up: "", living: "", golden: "", dining: "",
+  day: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_141600_73d0920d-47ee-4d84-9bc3-cef72e01efe2.png", night: "", approach: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_142250_7fedd1bc-e4db-47b0-be37-9f6998c784ee.png", door: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_142309_16ddccfc-6772-48bd-b21c-e41be34f52a1.png", hall: "", up: "", living: "", golden: "", dining: "",
   kitchen: "", bar: "", suite: "", bath: "", spa: "", poolDay: "", poolDusk: "", roof: "", aerial: "",
   cinema: "", brass: "", oak: "", marble: "", pull: "", guest: "", library: "", gym: "", wine: "",
 };

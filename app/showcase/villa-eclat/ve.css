@@ -121,7 +121,10 @@
 .ve-hero-shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(14, 12, 10, 0.62) 0%, rgba(14, 12, 10, 0) 34%, rgba(14, 12, 10, 0) 52%, rgba(14, 12, 10, 0.8) 100%);
+  background:
+    radial-gradient(ellipse 62% 30% at 50% 22%, rgba(14, 12, 10, 0.55), rgba(14, 12, 10, 0) 100%),
+    linear-gradient(180deg, rgba(14, 12, 10, 0.72) 0%, rgba(14, 12, 10, 0.18) 38%, rgba(14, 12, 10, 0) 50%, rgba(14, 12, 10, 0.35) 64%, rgba(14, 12, 10, 0.9) 100%);
+  opacity: calc(1 - var(--p) * 0.6);
   pointer-events: none;
 }
 .ve-hero-mark {
@@ -136,7 +139,7 @@
 .ve-hero-villa { margin: 0 0 16px; font-size: 15px; letter-spacing: 0.62em; text-transform: uppercase; padding-left: 0.62em; }
 .ve-hero-h1 { margin: 0; font-weight: 400; }
 .ve-hero-word { display: block; width: min(72vw, 940px); height: auto; margin: 0 auto; }
-.ve-hero-kicker { margin: 20px 0 0; font-size: clamp(15px, 1.35vw, 19px); letter-spacing: 0.3em; text-transform: uppercase; color: var(--ivory); padding-left: 0.3em; }
+.ve-hero-kicker { text-shadow: 0 1px 14px rgba(0, 0, 0, 0.6); margin: 20px 0 0; font-size: clamp(15px, 1.35vw, 19px); letter-spacing: 0.3em; text-transform: uppercase; color: var(--ivory); padding-left: 0.3em; }
 .ve-hero-foot {
   position: absolute;
   inset: auto clamp(18px, 4vw, 56px) clamp(26px, 6vh, 58px);
@@ -147,7 +150,7 @@
   transform: translate3d(0, calc(var(--p) * 10vh), 0);
   opacity: calc(1 - var(--p) * 3.2);
 }
-.ve-hero-line { grid-column: 1; margin: 0; max-width: 19ch; font-size: clamp(26px, 3vw, 46px); line-height: 1.12; }
+.ve-hero-line { text-shadow: 0 2px 22px rgba(0, 0, 0, 0.55); grid-column: 1; margin: 0; max-width: 19ch; font-size: clamp(26px, 3vw, 46px); line-height: 1.12; }
 .ve-hero-facts { grid-column: 1; display: flex; flex-wrap: wrap; gap: 14px clamp(22px, 3.4vw, 54px); margin: 0; }
 .ve-hero-facts div { display: grid; gap: 4px; border-top: 1px solid var(--line); padding-top: 10px; min-width: 120px; }
 .ve-hero-facts dt { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold-hi); }

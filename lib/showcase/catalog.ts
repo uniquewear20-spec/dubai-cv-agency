@@ -53,7 +53,7 @@ export const CONCEPTS: Concept[] = [
       fr: "Survolez la pelouse et franchissez la porte, passez d'une pièce à l'autre, puis explorez les plans et demandez une visite",
       ar: "حلّق فوق العشب وعبر الباب الأمامي، وانتقل من غرفة إلى أخرى، ثم استكشف المخططات واطلب زيارة",
     },
-    image: "",
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_141600_73d0920d-47ee-4d84-9bc3-cef72e01efe2.png",
     focus: "50% 55%",
   },
   {
