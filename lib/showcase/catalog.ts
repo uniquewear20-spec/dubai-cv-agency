@@ -226,4 +226,21 @@ export const CONCEPTS: Concept[] = [
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261126_204232_82f576cb-b046-4bca-a3d7-7031f74a1ee2_min.webp",
     focus: "50% 60%",
   },
+  {
+    slug: "albora",
+    name: "ALBORA Residences",
+    category: "real-estate",
+    line: {
+      en: "Twenty-nine white homes in a gated village above Tamuda Bay, on Morocco's Mediterranean coast.",
+      fr: "Vingt-neuf maisons blanches dans un village fermé au-dessus de la baie de Tamuda, sur la côte méditerranéenne du Maroc.",
+      ar: "تسعة وعشرون منزلاً أبيض في قرية مسوّرة فوق خليج تمودة، على ساحل المغرب المتوسطي.",
+    },
+    feature: {
+      en: "Scroll the coast as it draws itself, choose a home on the hill plan, then book a call for a chosen day and time",
+      fr: "Faites défiler la côte qui se dessine, choisissez une maison sur le plan de la colline, puis réservez un appel à la date et l'heure choisies",
+      ar: "مرّر الساحل وهو يرسم نفسه، واختر منزلاً على مخطط التلة، ثم احجز مكالمة في اليوم والوقت الذي تختاره",
+    },
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_072712_085b6447-f8fd-4b1c-99dc-40cabde678d9_min.webp",
+    focus: "50% 55%",
+  },
 ];
