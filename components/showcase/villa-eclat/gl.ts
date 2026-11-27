@@ -101,7 +101,7 @@ void main() {
 }`;
 
 /** A picture as the shader sees it: texture, size, and the cell of a grid it shows. */
-type Tex = { t: WebGLTexture; w: number; h: number; crop: [number, number, number, number]; ready: boolean; used: number; video?: HTMLVideoElement; target?: number; blob?: string };
+type Tex = { t: WebGLTexture; w: number; h: number; crop: [number, number, number, number]; ready: boolean; used: number; video?: HTMLVideoElement; target?: number; blob?: string; tries?: number };
 
 /** Where a picture sits: camera centre in picture uv, zoom, roll in radians. */
 export type View = { key: string; c: [number, number]; s: number; r: number; wh: [number, number] };
@@ -139,6 +139,7 @@ export class FilmGL {
   private clock = 0;
   /** Decoded pictures waiting for the GPU: one goes up per frame, so scrolling never stalls. */
   private queue: (() => void)[] = [];
+  private fb: WebGLFramebuffer | null = null;
   onLoad: () => void = () => {};
   constructor(private canvas: HTMLCanvasElement, private srcOf: (key: string) => string, private maxW: number, private keep: number) {
     const gl = canvas.getContext("webgl", { alpha: false, antialias: false, depth: false, stencil: false, premultipliedAlpha: false, powerPreference: "high-performance" });
@@ -196,11 +197,17 @@ export class FilmGL {
       v.setAttribute("playsinline", "");
       v.preload = "auto";
       const show = () => {
-        if (this.tex.get(key) !== entry || v.readyState < 2) return;
+        // After a dozen empty frames this browser is not giving WebGL the clip: keep the still.
+        if (this.tex.get(key) !== entry || v.readyState < 2 || (!entry.ready && (entry.tries ?? 0) >= 12)) return;
         this.queue.push(() => {
           if (this.tex.get(key) !== entry) return;
-          this.upload(entry, v);
-          entry.ready = true;
+          this.upload(entry, v, true);
+          // Some browsers hand WebGL an empty frame from a paused clip. Until one real frame has
+          // arrived the still keeps standing in, so a clip can never put a black screen up.
+          if (!entry.ready) {
+            if (this.probe(entry)) entry.ready = true;
+            else entry.tries = (entry.tries ?? 0) + 1;
+          }
           this.onLoad();
         });
         this.onLoad();
@@ -268,17 +275,34 @@ export class FilmGL {
     if (v.readyState >= 1 && !v.seeking && Math.abs(v.currentTime - time) > 0.02) v.currentTime = time;
   }
 
-  private upload(e: Tex, src: TexImageSource & { width: number; height: number }) {
+  private upload(e: Tex, src: TexImageSource & { width: number; height: number }, rgba = false) {
     const gl = this.gl;
+    const f = rgba ? gl.RGBA : gl.RGB;
     gl.bindTexture(gl.TEXTURE_2D, e.t);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, src);
+    gl.texImage2D(gl.TEXTURE_2D, 0, f, f, gl.UNSIGNED_BYTE, src);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     e.w = (src as HTMLVideoElement).videoWidth || (src as HTMLImageElement).naturalWidth || src.width;
     e.h = (src as HTMLVideoElement).videoHeight || (src as HTMLImageElement).naturalHeight || src.height;
+  }
+
+  /** True if the texture holds a real frame: a decoded frame is opaque, an empty upload is not. */
+  private probe(e: Tex) {
+    const gl = this.gl;
+    this.fb ??= gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, this.fb);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, e.t, 0);
+    let ok = true; // if the frame cannot be read back, trust it
+    if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE) {
+      const px = new Uint8Array(4);
+      gl.readPixels(e.w >> 1, e.h >> 1, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
+      ok = px[3] > 0;
+    }
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    return ok;
   }
 
   /** Keeps GPU memory bounded: the least recently used pictures are dropped first. */
