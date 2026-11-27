@@ -265,7 +265,7 @@ html.al-locked {
 }
 .al-rail {
   position: fixed;
-  inset-block: 120px 24px;
+  inset-block: 120px 60px;
   inset-inline-start: 0;
   z-index: 40;
   width: 64px;
@@ -602,6 +602,7 @@ html.al-locked {
   border: 1px solid rgba(255, 255, 255, 0.35);
 }
 .al-daynight button {
+  white-space: nowrap;
   min-height: 40px;
   padding: 8px 18px;
   border: 0;
