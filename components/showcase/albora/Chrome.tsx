@@ -5,7 +5,7 @@
 // site sets no cookies and loads no trackers.
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useDialog } from "../kit/hooks";
 import { AlboraProvider, useAlbora } from "./state";
 
@@ -94,31 +94,15 @@ function Top() {
   );
 }
 
+/** The scroll counter; the page's scroll engine writes the number and the bar. */
 function Rail() {
   const { t } = useAlbora();
-  const num = useRef<HTMLSpanElement>(null);
-  const bar = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const on = () => {
-      const max = document.documentElement.scrollHeight - innerHeight;
-      const v = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
-      if (num.current) num.current.textContent = String(Math.round(v * 99)).padStart(2, "0");
-      bar.current?.style.setProperty("--v", v.toFixed(4));
-    };
-    on();
-    addEventListener("scroll", on, { passive: true });
-    addEventListener("resize", on);
-    return () => {
-      removeEventListener("scroll", on);
-      removeEventListener("resize", on);
-    };
-  }, []);
   return (
-    <div className="al-rail" aria-hidden>
-      <span className="al-count" ref={num}>
+    <div className="al-rail" id="al-rail" aria-hidden>
+      <span className="al-count" data-count>
         00
       </span>
-      <span className="al-track" ref={bar}>
+      <span className="al-track">
         <i />
       </span>
       <span className="al-scroll">{t.scroll}</span>

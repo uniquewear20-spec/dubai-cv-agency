@@ -8,7 +8,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ALT, AMENITIES, GALLERY, GRID, IMG, KINDS, SCENES, TIMELINE, type Kind, type SceneId } from "@/lib/showcase/albora";
 import { useDialog } from "../kit/hooks";
 import { Img } from "../kit/Img";
-import { useAlbora } from "./state";
+import { goToScene, sceneProgress, useAlbora, useScene } from "./state";
 
 const v = (o: Record<string, string | number>) => o as CSSProperties;
 
@@ -24,7 +24,9 @@ export function Living() {
   return (
     <section className="al-living" id="living" aria-labelledby="al-living-h">
       <div className="al-living-hero">
-        <Img src={IMG.living} alt={ALT.living[lang]} sizes="100vw" widths={[800, 1200, 1600, 2400]} />
+        <div className="al-px" data-px="0.1">
+          <Img src={IMG.living} alt={ALT.living[lang]} sizes="100vw" widths={[800, 1200, 1600, 2400]} />
+        </div>
         <h2 id="al-living-h" className="al-living-title">
           <span>{t.livingTitle}</span>
           <span className="al-script" aria-hidden>
@@ -80,7 +82,9 @@ export function Terraces() {
   return (
     <section className="al-terraces" id="views" aria-labelledby="al-terr-h">
       <figure className="al-terr-img">
-        <Img src={IMG.terrace} alt={ALT.terrace[lang]} sizes="(max-width: 900px) 100vw, 44vw" />
+        <div className="al-px" data-px="0.12">
+          <Img src={IMG.terrace} alt={ALT.terrace[lang]} sizes="(max-width: 900px) 100vw, 44vw" />
+        </div>
       </figure>
       <div className="al-terr-copy">
         <h2 id="al-terr-h" className="al-display">
@@ -223,47 +227,47 @@ export function Story() {
   );
 }
 
+/** The gallery travels sideways as you scroll down; each photograph drifts inside its frame. */
 export function Gallery() {
   const { t, lang, open, setShot } = useAlbora();
-  const strip = useRef<HTMLUListElement>(null);
-  const nudge = (d: number) => {
-    const el = strip.current;
-    if (!el) return;
-    const dir = lang === "ar" ? -1 : 1;
-    el.scrollBy({ left: d * dir * el.clientWidth * 0.7, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-  };
+  const ref = useScene("pin");
+  const step = (d: number) => goToScene("gallery", sceneProgress("gallery") + d / (GALLERY.length - 1));
   return (
-    <section className="al-gallery" id="gallery" aria-labelledby="al-gal-h">
-      <div className="al-gal-head">
-        <h2 id="al-gal-h" className="al-display">
-          {t.galleryTitle}
-        </h2>
-        <p className="al-small">{t.galleryHint}</p>
-        <div className="al-gal-nav">
-          <button type="button" onClick={() => nudge(-1)} aria-label={t.prev}>
-            ‹
-          </button>
-          <button type="button" onClick={() => nudge(1)} aria-label={t.next}>
-            ›
-          </button>
-        </div>
-      </div>
-      <ul className="al-strip" ref={strip}>
-        {GALLERY.map((k, i) => (
-          <li key={k}>
-            <button
-              type="button"
-              onClick={() => {
-                setShot(i);
-                open("gallery");
-              }}
-              aria-label={`${ALT[k][lang]} (${i + 1} ${t.of} ${GALLERY.length})`}
-            >
-              <Img src={IMG[k]} alt="" sizes="(max-width: 700px) 80vw, 40vw" />
+    <section className="al-gallery al-pin" id="gallery" ref={ref} aria-labelledby="al-gal-h">
+      <div className="al-stage">
+        <div className="al-gal-head">
+          <h2 id="al-gal-h" className="al-display">
+            {t.galleryTitle}
+          </h2>
+          <p className="al-small">{t.galleryHint}</p>
+          <div className="al-gal-nav">
+            <button type="button" onClick={() => step(-1)} aria-label={t.prev}>
+              ‹
             </button>
-          </li>
-        ))}
-      </ul>
+            <button type="button" onClick={() => step(1)} aria-label={t.next}>
+              ›
+            </button>
+          </div>
+        </div>
+        <ul className="al-strip">
+          {GALLERY.map((k, i) => (
+            <li key={k}>
+              <button
+                type="button"
+                onClick={() => {
+                  setShot(i);
+                  open("gallery");
+                }}
+                aria-label={`${ALT[k][lang]} (${i + 1} ${t.of} ${GALLERY.length})`}
+              >
+                <span className="al-gal-px">
+                  <Img src={IMG[k]} alt="" sizes="(max-width: 700px) 90vw, 50vw" />
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
       <Lightbox />
     </section>
   );

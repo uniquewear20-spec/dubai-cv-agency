@@ -1,50 +1,93 @@
 "use client";
 
-// The story before the homes: the hero by day and by night, the village in one sentence, the
-// coast drawn as you scroll, the Rif behind the clouds, the architecture, the gardens through the
-// year and the pool garden. Pinned scenes write their progress to --p and CSS does the motion.
+// The story before the homes. The hero is a limewashed wall with the village's name and a
+// horseshoe doorway cut out of it: the photograph shows through, and scrolling walks you through
+// the door. Then the village in one sentence under swaying bougainvillea, the coast sideways, the
+// coastline drawn and the descent through drifting clouds to the Rif, the architecture, the
+// gardens through the year and the pool garden. Scenes get their progress as --p from the page's
+// scroll engine and CSS does the motion.
 
-import { useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ALT, COAST, COAST_PATH, FIGURES, IMG, MONTHS, PLANTS, PRINCIPLES, WELLNESS } from "@/lib/showcase/albora";
 import { sized } from "@/lib/showcase/media";
 import { Img } from "../kit/Img";
 import { Ring } from "./Chrome";
-import { useAlbora, useP } from "./state";
+import { useAlbora, useScene } from "./state";
 
 const v = (o: Record<string, string | number>) => o as CSSProperties;
+const r1 = (n: number) => Math.round(n * 10) / 10;
+
+/** The wall: a limewash plane with the name and a horseshoe arch cut out of it. */
+function Door({ variant, word }: { variant: "land" | "port"; word: string }) {
+  const land = variant === "land";
+  const W = land ? 1600 : 800;
+  const H = land ? 1000 : 1600;
+  const cx = W / 2;
+  const cy = land ? 610 : 830;
+  const r = land ? 232 : 255;
+  // a horseshoe arch: the circle carries on past its widest point before the jambs drop
+  const arch = (rr: number) => `M${r1(cx - rr * 0.866)} ${H + 60} V${r1(cy + rr * 0.5)} A${rr} ${rr} 0 1 1 ${r1(cx + rr * 0.866)} ${r1(cy + rr * 0.5)} V${H + 60}`;
+  const id = `al-door-m-${variant}`;
+  return (
+    <svg className={`al-door al-door-${variant}`} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden>
+      <defs>
+        <mask id={id} maskUnits="userSpaceOnUse" x={-W} y={-H} width={W * 3} height={H * 3}>
+          <rect x={-W} y={-H} width={W * 3} height={H * 3} fill="#fff" />
+          <path d={`${arch(r)} Z`} fill="#000" />
+          <text x={cx} y={land ? 344 : 432} textAnchor="middle" className="al-door-word" fontSize={land ? 330 : 186} fill="#000">
+            {word}
+          </text>
+        </mask>
+      </defs>
+      <rect x={-W} y={-H} width={W * 3} height={H * 3} className="al-door-wall" mask={`url(#${id})`} />
+      <path d={arch(r + 20)} className="al-door-line" />
+    </svg>
+  );
+}
+
+/** A branch of bougainvillea that swings into place and keeps moving in the breeze. */
+function Branch({ side }: { side: "l" | "r" }) {
+  return (
+    <div className={`al-branch al-branch-${side}`} aria-hidden>
+      <div className="al-branch-sway">
+        <Img src={IMG.bloom} alt="" sizes="(max-width: 700px) 40vw, 30vw" className="al-branch-img" />
+      </div>
+    </div>
+  );
+}
 
 export function Hero() {
   const { t, lang } = useAlbora();
   const [night, setNight] = useState(false);
   const [spot, setSpot] = useState<number | null>(null);
-  const { ref } = useP<HTMLElement>("al-hero");
+  const ref = useScene("pin");
   return (
     <section className={`al-hero al-pin${night ? " is-night" : ""}`} id="al-hero" ref={ref} aria-labelledby="al-hero-h">
       <div className="al-stage">
         <div className="al-hero-media" style={IMG.day ? { backgroundImage: `url(${sized(IMG.day, 64)})` } : undefined}>
-          <Img src={IMG.day} alt={ALT.day[lang]} eager sizes="100vw" widths={[800, 1200, 1600, 2400]} className="al-hero-day" />
-          <Img src={IMG.night} alt={night ? ALT.night[lang] : ""} sizes="100vw" widths={[800, 1200, 1600, 2400]} className="al-hero-night" />
-        </div>
-        <div className="al-hero-type">
-          <p className="al-hero-side al-hero-left" aria-hidden>
-            {t.left}
-          </p>
-          <div className="al-hero-lockup">
-            <h1 id="al-hero-h" className="al-hero-title">
-              <span className="al-hero-name">{t.name}</span>
-              <span className="al-hero-res">{t.residences}</span>
-              <span className="al-sr">
-                {" "}
-                {t.left} {t.right}, {t.script}
-              </span>
-            </h1>
-            <p className="al-hero-script" aria-hidden>
-              {t.script}
-            </p>
+          <div className="al-hero-zoom">
+            <div className="al-hero-kb">
+              <Img src={IMG.day} alt={ALT.day[lang]} eager sizes="100vw" widths={[800, 1200, 1600, 2400]} className="al-hero-day" />
+              <Img src={IMG.night} alt={night ? ALT.night[lang] : ""} sizes="100vw" widths={[800, 1200, 1600, 2400]} className="al-hero-night" />
+            </div>
           </div>
-          <p className="al-hero-side al-hero-right" aria-hidden>
-            {t.right}
-          </p>
+        </div>
+        <div className="al-door-zoom">
+          <div className="al-door-in">
+            <Door variant="land" word={t.name} />
+            <Door variant="port" word={t.name} />
+          </div>
+        </div>
+        <Branch side="l" />
+        <Branch side="r" />
+        <h1 id="al-hero-h" className="al-sr">
+          {t.name} {t.residences}. {t.left} {t.right}, {t.script}.
+        </h1>
+        <div className="al-hero-words" aria-hidden>
+          <p className="al-kicker">{t.residences}</p>
+          <p className="al-hero-script">{t.script}</p>
+          <p className="al-hero-side al-hero-left">{t.left}</p>
+          <p className="al-hero-side al-hero-right">{t.right}</p>
         </div>
         <ul className="al-spots">
           {t.hotspots.map((h, i) => (
@@ -82,12 +125,13 @@ export function Hero() {
 
 export function Quote() {
   const { t, lang } = useAlbora();
-  const { ref } = useP<HTMLElement>("al-quote");
+  const ref = useScene("pin");
   const words = t.quote.split(" ");
   return (
     <section className="al-quote al-pin" id="al-quote" ref={ref} aria-label={t.quote}>
       <div className="al-stage">
         <Img src={IMG.lane} alt={ALT.lane[lang]} sizes="100vw" widths={[800, 1200, 1600, 2400]} className="al-quote-img" />
+        <span className="al-quote-shade" aria-hidden />
         <p className="al-quote-text" style={v({ "--n": words.length })} aria-hidden>
           {words.map((w, i) => (
             <span key={i} style={v({ "--i": i })}>
@@ -100,12 +144,42 @@ export function Quote() {
   );
 }
 
+// bougainvillea bracts drifting down through the village sentence
+const PETALS = [
+  { x: 5, d: 0, t: 15, dx: 90, r: 280, s: 1 },
+  { x: 17, d: 5, t: 18, dx: -50, r: -220, s: 0.8 },
+  { x: 29, d: 9.5, t: 16, dx: 70, r: 320, s: 0.9 },
+  { x: 44, d: 2.5, t: 19, dx: -80, r: 250, s: 0.7 },
+  { x: 58, d: 12, t: 14, dx: 60, r: -300, s: 1.1 },
+  { x: 69, d: 6.5, t: 17, dx: -60, r: 230, s: 0.85 },
+  { x: 81, d: 1.5, t: 15.5, dx: 80, r: -270, s: 1 },
+  { x: 93, d: 8, t: 18.5, dx: -70, r: 210, s: 0.75 },
+];
+
 export function Concept() {
   const { t, lang } = useAlbora();
+  const ref = useScene("pass");
   return (
-    <section className="al-concept-sec" id="village" aria-labelledby="al-village-h">
-      <Img src={IMG.bloom} alt="" sizes="40vw" className="al-bloom al-bloom-a" />
-      <Img src={IMG.bloom} alt="" sizes="30vw" className="al-bloom al-bloom-b" />
+    <section className="al-concept-sec" id="village" ref={ref} aria-labelledby="al-village-h">
+      <div className="al-bloom al-bloom-a" aria-hidden>
+        <div className="al-bloom-sway">
+          <Img src={IMG.bloom} alt="" sizes="40vw" className="al-bloom-img" />
+        </div>
+      </div>
+      <div className="al-bloom al-bloom-b" aria-hidden>
+        <div className="al-bloom-sway">
+          <Img src={IMG.bloom} alt="" sizes="30vw" className="al-bloom-img" />
+        </div>
+      </div>
+      <div className="al-petals" aria-hidden>
+        {PETALS.map((p, i) => (
+          <span key={i} style={v({ "--x": `${p.x}%`, "--d": `${p.d}s`, "--t": `${p.t}s`, "--dx": `${p.dx}px`, "--r": `${p.r}deg`, "--k": p.s })}>
+            <svg viewBox="0 0 20 24">
+              <path d="M10 1C15.5 6 19.5 12.5 16.5 19 14 23 6 23 3.5 19 .5 12.5 4.5 6 10 1z" />
+            </svg>
+          </span>
+        ))}
+      </div>
       <h2 id="al-village-h" className="al-statement">
         {t.conceptTitle}
       </h2>
@@ -124,7 +198,7 @@ export function Concept() {
 
 export function Golden() {
   const { t, lang } = useAlbora();
-  const { ref } = useP<HTMLElement>("al-golden", 0.1);
+  const ref = useScene("pin");
   return (
     <section className="al-golden al-pin" id="al-golden" ref={ref} aria-labelledby="al-golden-h">
       <div className="al-stage">
@@ -133,7 +207,7 @@ export function Golden() {
             <span>{t.golden1}</span> <span>{t.golden2}</span> <span>{t.golden3}</span>
           </h2>
           <figure className="al-golden-fig">
-            <Img src={IMG.terrace} alt={ALT.terrace[lang]} sizes="(max-width: 700px) 80vw, 34vw" />
+            <Img src={IMG.terrace} alt={ALT.terrace[lang]} sizes="(max-width: 700px) 80vw, 40vw" className="al-golden-img" />
           </figure>
           <div className="al-golden-end">
             <p className="al-golden-country">{t.country}</p>
@@ -145,22 +219,102 @@ export function Golden() {
   );
 }
 
-/** One cloud layer: fractal noise turned into soft, lit cumulus by an SVG filter, drawn once. */
-function Cloud({ seed, fx, fy, k, b, className }: { seed: number; fx: number; fy: number; k: number; b: number; className: string }) {
-  const id = `al-cloud-f${seed}`;
+/**
+ * A layer of cloud, painted once into a small canvas when the scene comes near: fractal value
+ * noise turned into soft cumulus with lit tops and grey undersides, faded at its edges. CSS only
+ * moves it, so drifting and scrolling cost nothing.
+ */
+function paintClouds(c: HTMLCanvasElement, seed: number, th: number) {
+  const ctx = c.getContext("2d");
+  if (!ctx) return;
+  const w = c.width;
+  const h = c.height;
+  const G = 64;
+  let s = seed >>> 0;
+  const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
+  const lat = new Float32Array(G * G);
+  for (let i = 0; i < lat.length; i++) lat[i] = rnd();
+  const noise = (x: number, y: number) => {
+    const xi = Math.floor(x);
+    const yi = Math.floor(y);
+    const xf = x - xi;
+    const yf = y - yi;
+    const u = xf * xf * (3 - 2 * xf);
+    const q = yf * yf * (3 - 2 * yf);
+    const x0 = xi & (G - 1);
+    const y0 = yi & (G - 1);
+    const x1 = (x0 + 1) & (G - 1);
+    const y1 = (y0 + 1) & (G - 1);
+    const a = lat[y0 * G + x0];
+    const b = lat[y0 * G + x1];
+    const cc = lat[y1 * G + x0];
+    const d = lat[y1 * G + x1];
+    return a + (b - a) * u + (cc - a) * q + (a - b - cc + d) * u * q;
+  };
+  const N = new Float32Array(w * h);
+  const fx = 4.2 / w;
+  const fy = 2.6 / h;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      let n = 0;
+      let amp = 0.5;
+      let f = 1;
+      for (let o = 0; o < 5; o++) {
+        n += amp * noise(x * fx * f + o * 17.3, y * fy * f + o * 9.1);
+        f *= 2.03;
+        amp *= 0.5;
+      }
+      N[y * w + x] = n / 0.96875;
+    }
+  }
+  const img = ctx.createImageData(w, h);
+  const D = img.data;
+  const sm = (a: number, b: number, t: number) => {
+    const k = Math.min(1, Math.max(0, (t - a) / (b - a)));
+    return k * k * (3 - 2 * k);
+  };
+  for (let y = 0; y < h; y++) {
+    const ty = y / h;
+    const prof = sm(0, 0.32, ty) * (1 - sm(0.58, 1, ty));
+    for (let x = 0; x < w; x++) {
+      const i = y * w + x;
+      const n = N[i];
+      let a = (n - th) * 4.4;
+      a = a < 0 ? 0 : a > 1 ? 1 : a;
+      const up = N[Math.max(0, y - 3) * w + Math.max(0, x - 4)];
+      const shade = Math.min(1, Math.max(0, 0.62 + (n - up) * 7));
+      const lum = 200 + 55 * shade;
+      D[i * 4] = lum - 7;
+      D[i * 4 + 1] = lum - 3;
+      D[i * 4 + 2] = Math.min(255, lum + 2);
+      D[i * 4 + 3] = a * prof * 255;
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+}
+
+function Cloud({ seed, th, className }: { seed: number; th: number; className: string }) {
+  const ref = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const c = ref.current;
+    const scene = c?.closest("section");
+    if (!c || !scene) return;
+    let done = false;
+    const io = new IntersectionObserver(
+      (es) => {
+        if (done || !es.some((e) => e.isIntersecting)) return;
+        done = true;
+        io.disconnect();
+        requestAnimationFrame(() => paintClouds(c, seed, th));
+      },
+      { rootMargin: "120% 0px" },
+    );
+    io.observe(scene);
+    return () => io.disconnect();
+  }, [seed, th]);
   return (
     <div className={`al-cloud ${className}`}>
-      <svg viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid slice" className="al-cloud-svg">
-        <filter id={id} x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency={`${fx} ${fy}`} numOctaves={5} seed={seed} result="n" />
-          <feColorMatrix in="n" type="matrix" values={`0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 ${k} 0 0 0 ${b}`} result="a" />
-          <feDiffuseLighting in="n" surfaceScale={5} diffuseConstant={1.2} lightingColor="#ffffff" result="l">
-            <feDistantLight azimuth={255} elevation={58} />
-          </feDiffuseLighting>
-          <feComposite in="l" in2="a" operator="in" />
-        </filter>
-        <rect width="1600" height="700" fill="#fff" filter={`url(#${id})`} />
-      </svg>
+      <canvas ref={ref} width={720} height={270} />
     </div>
   );
 }
@@ -168,16 +322,18 @@ function Cloud({ seed, fx, fy, k, b, className }: { seed: number; fx: number; fy
 /** The coast draws itself on the limewash; then the page sinks through the clouds to the Rif. */
 export function Coast() {
   const { t, lang } = useAlbora();
-  const { ref } = useP<HTMLElement>("coast", 0.1);
+  const ref = useScene("pin");
   return (
     <section className="al-coast al-pin" id="coast" ref={ref} aria-labelledby="al-coast-h">
       <div className="al-stage">
-        <Img src={IMG.rif} alt={ALT.rif[lang]} sizes="120vw" widths={[1200, 1600, 2400]} className="al-rif-img" />
+        <div className="al-rif-frame">
+          <Img src={IMG.rif} alt={ALT.rif[lang]} sizes="110vw" widths={[1200, 1600, 2400]} className="al-rif-img" />
+        </div>
         <div className="al-fog" aria-hidden>
           <div className="al-fog-wash">
-            <Cloud seed={7} fx={0.0018} fy={0.0045} k={4.4} b={-1.85} className="al-cloud-back" />
-            <Cloud seed={11} fx={0.0026} fy={0.0065} k={5.2} b={-2.25} className="al-cloud-mid" />
-            <Cloud seed={3} fx={0.0021} fy={0.005} k={5.8} b={-2.5} className="al-cloud-front" />
+            <Cloud seed={7} th={0.4} className="al-cloud-back" />
+            <Cloud seed={11} th={0.44} className="al-cloud-mid" />
+            <Cloud seed={3} th={0.42} className="al-cloud-front" />
           </div>
         </div>
         <div className="al-coast-content">
@@ -234,11 +390,15 @@ export function Architecture() {
         <p className="al-lede">{t.archBody}</p>
       </div>
       <figure className="al-arch-aerial">
-        <Img src={IMG.aerial} alt={ALT.aerial[lang]} sizes="(max-width: 900px) 100vw, 66vw" />
+        <div className="al-px" data-px="0.1">
+          <Img src={IMG.aerial} alt={ALT.aerial[lang]} sizes="(max-width: 900px) 100vw, 66vw" />
+        </div>
       </figure>
       {IMG.model && (
         <figure className="al-arch-model">
-          <Img src={IMG.model} alt={ALT.model[lang]} sizes="(max-width: 900px) 70vw, 30vw" />
+          <div className="al-px" data-px="0.12">
+            <Img src={IMG.model} alt={ALT.model[lang]} sizes="(max-width: 900px) 70vw, 30vw" />
+          </div>
         </figure>
       )}
       <dl className="al-principles">
@@ -260,7 +420,9 @@ export function Gardens() {
   return (
     <section className="al-gardens" id="gardens" aria-labelledby="al-gardens-h">
       <figure className="al-gardens-img">
-        <Img src={IMG.garden} alt={ALT.garden[lang]} sizes="(max-width: 900px) 100vw, 50vw" />
+        <div className="al-px" data-px="0.1">
+          <Img src={IMG.garden} alt={ALT.garden[lang]} sizes="(max-width: 900px) 100vw, 50vw" />
+        </div>
       </figure>
       <div className="al-gardens-copy">
         <h2 id="al-gardens-h" className="al-display">
@@ -303,7 +465,11 @@ export function Wellness() {
   const { t, lang } = useAlbora();
   return (
     <section className="al-well" id="wellness" aria-labelledby="al-well-h">
-      <Img src={IMG.wellness} alt={ALT.wellness[lang]} sizes="100vw" widths={[800, 1200, 1600, 2400]} className="al-well-img" />
+      <div className="al-well-bg">
+        <div className="al-px" data-px="0.1">
+          <Img src={IMG.wellness} alt={ALT.wellness[lang]} sizes="100vw" widths={[800, 1200, 1600, 2400]} />
+        </div>
+      </div>
       <div className="al-well-card">
         <h2 id="al-well-h" className="al-display">
           {t.wellTitle}
