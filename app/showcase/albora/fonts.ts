@@ -4,13 +4,10 @@
 import localFont from "next/font/local";
 
 export const alDisplay = localFont({
-  src: [
-    { path: "../../../node_modules/@fontsource/oranienbaum/files/oranienbaum-latin-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "../../../node_modules/@fontsource/oranienbaum/files/oranienbaum-latin-ext-400-normal.woff2", weight: "400", style: "normal" },
-  ],
+  src: [{ path: "../../../node_modules/@fontsource/oranienbaum/files/oranienbaum-latin-400-normal.woff2", weight: "400", style: "normal" }],
   variable: "--al-oran",
   display: "swap",
-  fallback: ["Didot", "Bodoni 72", "serif"],
+  fallback: ["Didot", "serif"],
 });
 export const alScript = localFont({
   src: [{ path: "../../../node_modules/@fontsource/pinyon-script/files/pinyon-script-latin-400-normal.woff2", weight: "400", style: "normal" }],

@@ -502,14 +502,21 @@ html.al-locked {
   letter-spacing: 0;
   margin: 0;
 }
+.al-hero-lockup {
+  position: relative;
+}
 .al-hero-script {
-  margin-top: -0.55em;
+  position: absolute;
+  left: 50%;
+  top: 71%;
   font-family: var(--script);
-  font-size: clamp(54px, 8.6vw, 150px);
+  font-size: clamp(54px, 8.4vw, 150px);
   line-height: 1;
-  color: #fff;
-  transform: rotate(-6deg);
-  text-shadow: 0 4px 30px rgba(8, 12, 30, 0.4);
+  white-space: nowrap;
+  color: #ffc9df;
+  transform: translate(-50%, -50%) rotate(-7deg);
+  text-shadow: 0 4px 30px rgba(8, 12, 30, 0.45);
+  pointer-events: none;
 }
 .al-hero-side {
   position: absolute;
@@ -568,8 +575,8 @@ html.al-locked {
   color: var(--ink);
   font-size: 14px;
   line-height: 1.45;
-  transform: translateX(-50%);
   box-shadow: 0 10px 30px rgba(8, 12, 30, 0.3);
+  transform: translateX(var(--ax, -50%));
 }
 .al-spot-card strong {
   font-family: var(--display);
@@ -639,14 +646,15 @@ html.al-locked {
 }
 .al-quote-text {
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-content: center;
-  padding: 0 max(var(--pad), calc(var(--rail) + 6vw));
+  left: 0;
+  right: 0;
+  top: 50%;
+  padding: 0 max(var(--pad), calc(var(--rail) + 7vw));
   font-family: var(--display);
   font-size: clamp(30px, 4.1vw, 74px);
   line-height: 1.08;
   text-align: center;
+  transform: translateY(-50%);
 }
 .al[lang="ar"] .al-quote-text {
   line-height: 1.5;
@@ -2140,6 +2148,7 @@ html.al-locked {
   }
   .al-hero-script {
     font-size: 15vw;
+    top: 66%;
   }
   .al-hero-side {
     top: auto;
@@ -2184,7 +2193,10 @@ html.al-locked {
     font-size: 11vw;
   }
   .al-map {
-    min-height: 22vh;
+    width: 210%;
+    max-width: none;
+    min-height: 26vh;
+    transform: translateX(calc(var(--p) * -52%));
   }
   .al-map-stop text {
     font-size: 24px;

@@ -28,24 +28,26 @@ export function Hero() {
           <p className="al-hero-side al-hero-left" aria-hidden>
             {t.left}
           </p>
-          <h1 id="al-hero-h" className="al-hero-title">
-            <span className="al-hero-name">{t.name}</span>
-            <span className="al-hero-res">{t.residences}</span>
-            <span className="al-sr">
-              {" "}
-              {t.left} {t.right}, {t.script}
-            </span>
-          </h1>
-          <p className="al-hero-script" aria-hidden>
-            {t.script}
-          </p>
+          <div className="al-hero-lockup">
+            <h1 id="al-hero-h" className="al-hero-title">
+              <span className="al-hero-name">{t.name}</span>
+              <span className="al-hero-res">{t.residences}</span>
+              <span className="al-sr">
+                {" "}
+                {t.left} {t.right}, {t.script}
+              </span>
+            </h1>
+            <p className="al-hero-script" aria-hidden>
+              {t.script}
+            </p>
+          </div>
           <p className="al-hero-side al-hero-right" aria-hidden>
             {t.right}
           </p>
         </div>
         <ul className="al-spots">
           {t.hotspots.map((h, i) => (
-            <li key={h.title} style={v({ "--x": `${h.x}%`, "--y": `${h.y}%` })} className={spot === i ? "is-open" : ""}>
+            <li key={h.title} style={v({ "--x": `${h.x}%`, "--y": `${h.y}%`, "--ax": h.x < 22 ? "-14%" : h.x > 70 ? "-86%" : "-50%" })} className={spot === i ? "is-open" : ""}>
               <button type="button" aria-expanded={spot === i} aria-controls={`al-spot-${i}`} onClick={() => setSpot(spot === i ? null : i)}>
                 <span aria-hidden>+</span>
                 <span className="al-sr">{h.title}</span>
@@ -160,7 +162,7 @@ export function Coast() {
             <g key={s.name.en} className={`al-map-stop${s.home ? " is-home" : ""}`} style={v({ "--t": (s.x / 1000).toFixed(3) })} transform={`translate(${s.x} ${s.y})`}>
               <circle r={s.home ? 9 : 5} />
               {s.home && <circle r={18} className="al-map-halo" />}
-              <text y={i % 2 ? 34 : -20} textAnchor="middle">
+              <text y={[34, -20, -20, 46, -20, 34, -20][i]} textAnchor="middle">
                 {s.name[lang]}
               </text>
             </g>
