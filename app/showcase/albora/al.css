@@ -893,7 +893,13 @@ html.al-locked {
   gap: 2vh;
   padding: 12vh var(--pad) 5vh calc(var(--pad) + var(--rail));
   transform: translateY(calc(var(--f) * -42vh));
-  opacity: clamp(0, calc(1 - var(--f) * 2.4), 1);
+}
+.al-coast-head,
+.al-map {
+  opacity: clamp(0, calc(1 - (var(--f) - 0.12) * 2.4), 1);
+}
+.al-coast-copy {
+  opacity: clamp(0, calc(1 - var(--f) * 5), 1);
 }
 .al-coast-head {
   display: flex;
@@ -984,7 +990,7 @@ html.al-locked {
 }
 .al-rif-copy {
   position: absolute;
-  inset-inline-start: calc(var(--pad) + var(--rail));
+  inset-inline: calc(var(--pad) + var(--rail)) var(--pad);
   bottom: 9vh;
   display: grid;
   gap: 14px;
