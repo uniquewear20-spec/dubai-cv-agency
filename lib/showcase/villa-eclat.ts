@@ -21,7 +21,7 @@ export const IMG: Record<ImgKey, string> = {
   kitchen: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_144305_bfb5eb5d-2506-4d5f-9986-b3c04e7ee3ec.png",
   bar: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_145001_50a83ab7-38d1-4c7b-957f-55f2776f5af4.png",
   bar2: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_145138_27a79bbf-620d-43b1-86ce-7c5419dec0c8.png",
-  suite: "",
+  suite: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_154703_7fef0b9f-b902-4b56-918b-85602391ba4b.png",
   bath: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_145626_b6423671-b2fd-43ab-bae8-eb409165e07b.png",
   spa: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_145803_b0ce6ca4-deef-4869-85f0-d7b6ae742aad.png",
   poolDay: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_150253_454651ae-fa42-484f-a965-98c4af2e7775.png",
@@ -41,7 +41,10 @@ export const IMG: Record<ImgKey, string> = {
 
 /** The hero drone shot as numbered frames in /public. 0 frames: the hero eases over the still instead. */
 /** The hero drone shot: a short-GOP MP4 scrubbed by scroll (re-encoded so every seek is quick). */
-export const HERO = { video: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/35773e69-293a-4137-84bd-6f30c61eaaf4.mp4", frames: 0, path: (i: number) => `/showcase/villa-eclat/hero/${String(i).padStart(3, "0")}.webp`, focus: [0.5, 0.56] as [number, number] };
+export const HERO = {
+  video: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/52474ec5-66ac-4652-a8d7-839429655317.mp4",
+  videoSmall: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/001ee70e-0a03-42f4-a87b-d5ad810258e9.mp4",
+  frames: 0, path: (i: number) => `/showcase/villa-eclat/hero/${String(i).padStart(3, "0")}.webp`, focus: [0.5, 0.56] as [number, number] };
 
 // ── The film: one camera walking through the house, driven by scroll ───────────────────────────
 export type Cam = { s?: number; x?: number; y?: number; r?: number }; // zoom, pan (share of view), roll (deg)
@@ -93,8 +96,8 @@ export const FILM: Shot[] = [
     lines: [{ at: [0.1, 0.66], text: "Green marble, a brass edge, and the sea at the sink." }] },
   { id: "bar", img: "bar", focus: [0.5, 0.5], from: { s: 1.18 }, to: { s: 1.03 }, out: "white", len: 1.05, chapter: "After dark",
     lines: [{ at: [0.1, 0.66], text: "Black lacquer, brass and mirror, for the late hours." }] },
-  { id: "suite", img: "guest", focus: [0.5, 0.52], framed: true, from: { s: 1.14 }, to: { s: 1.02 }, out: "whip", len: 1.25, chapter: "The suites",
-    lines: [{ at: [0.42, 0.8], text: "Six suites, each opening onto its own terrace." }] },
+  { id: "suite", img: "suite", focus: [0.5, 0.52], framed: true, from: { s: 1.14 }, to: { s: 1.02 }, out: "whip", len: 1.25, chapter: "The suites",
+    lines: [{ at: [0.42, 0.8], text: "The principal suite opens onto its own terrace above the sea." }] },
   { id: "bath", img: "bath", focus: [0.5, 0.5], from: { s: 1.02, y: 0.02 }, to: { s: 1.12, y: -0.02 }, out: "fade", len: 1,
     lines: [{ at: [0.1, 0.66], text: "A bath carved from one block of travertine." }] },
   { id: "spa", img: "spa", focus: [0.5, 0.55], from: { s: 1 }, to: { s: 1.2 }, out: "fade", len: 1.05, chapter: "Spa",

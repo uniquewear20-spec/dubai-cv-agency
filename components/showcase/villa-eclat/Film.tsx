@@ -13,7 +13,7 @@ import { FilmGL, frameView, type Uniforms, type View } from "./gl";
 
 /** Viewport heights of scrolling per unit of film length. */
 export const UNIT = 0.95;
-const TW: Record<string, number> = { zoom: 0.24, whip: 0.22, whipUp: 0.22, fade: 0.3, white: 0.3, glow: 0.32, cut: 0 };
+const TW: Record<string, number> = { zoom: 0.18, whip: 0.15, whipUp: 0.15, fade: 0.24, white: 0.26, glow: 0.28, cut: 0 };
 const STARTS = FILM.reduce<number[]>((a, _s, i) => (a.push(i ? a[i - 1] + FILM[i - 1].len : 0), a), []);
 export const FILM_LEN = STARTS[STARTS.length - 1] + FILM[FILM.length - 1].len;
 export const CHAPTERS = FILM.flatMap((s, i) => (s.chapter ? [{ name: s.chapter, at: STARTS[i] }] : []));
@@ -41,9 +41,9 @@ const camAt = (s: Shot, t: number) => {
 };
 
 /** Everything the shader needs for one moment `T` of the film. */
-function compose(T: number, sa: number, gl: FilmGL, calm: boolean, speed: number): Uniforms {
+function compose(T: number, sa: number, gl: FilmGL, calm: boolean): Uniforms {
   const i = shotAt(T), sh = FILM[i], t = clamp((T - STARTS[i]) / sh.len);
-  const u0: Uniforms = { A: null, B: null, mix: 0, blur: [0, 0, 0, 0], frame: null, gate: null, flare: [0, 0, 0], leak: [0, 0], fade: [0, 0, 0, 0], grain: calm ? 0 : 0.032, seed: Math.floor(T * 60) % 113, vig: 0.38 };
+  const u0: Uniforms = { A: null, B: null, mix: 0, blur: [0, 0, 0, 0], frame: null, gate: null, flare: [0, 0, 0], leak: [0, 0], fade: [0, 0, 0, 0], grain: calm ? 0 : 0.012, seed: Math.floor(T * 60) % 113, vig: 0.38 };
   const view = (key: string, focus: [number, number], c: { s: number; x: number; y: number; r: number }, ds = 1, dx = 0, dy = 0): View =>
     frameView(key, gl.aspect(key), sa, focus, c.s * ds, c.x + dx, c.y + dy, calm ? 0 : c.r);
 
@@ -64,7 +64,7 @@ function compose(T: number, sa: number, gl: FilmGL, calm: boolean, speed: number
       A: view(sh.strip[k], [0.5, 0.5], still),
       B: view(sh.strip[Math.min(n - 1, k + 1)], [0.5, 0.5], still),
       gate: [g, fh, 0.05 * clamp((1 - fh) / 0.24)],
-      blur: [0, calm ? 0 : 0.05 * move, 1, 0],
+      blur: [0, calm ? 0 : 0.022 * move, 1, 0],
       leak: calm ? [0, 0] : [lerp(-0.95, 0.95, g) * sa, 0.12 + 0.82 * move],
       fade: [1, 0.97, 0.92, 1 - sstep(0, 0.1, t)],
     };
@@ -103,19 +103,19 @@ function compose(T: number, sa: number, gl: FilmGL, calm: boolean, speed: number
       case "zoom":
         u.A = view(cur, focus, c, 1 + (calm ? 0.25 : 3.2) * w * w);
         u.mix = sstep(0.5, 0.9, w);
-        u.blur = [calm ? 0 : 0.42 * Math.pow(wave, 1.2), 0, 0, 0];
+        u.blur = [calm ? 0 : 0.2 * Math.pow(wave, 2), 0, 0, 0];
         break;
       case "whip":
         u.A = view(cur, focus, c, 1, calm ? 0 : 0.55 * w * w);
         u.B = view(nKey, nFocus, nc, 1, calm ? 0 : -0.55 * (1 - w) * (1 - w));
         u.mix = sstep(0.4, 0.62, w);
-        u.blur = [0, calm ? 0 : 0.16 * wave, 1, 0];
+        u.blur = [0, calm ? 0 : 0.07 * Math.pow(wave, 2), 1, 0];
         break;
       case "whipUp":
         u.A = view(cur, focus, c, 1, 0, calm ? 0 : -0.5 * w * w);
         u.B = view(nKey, nFocus, nc, 1, 0, calm ? 0 : 0.5 * (1 - w) * (1 - w));
         u.mix = sstep(0.4, 0.62, w);
-        u.blur = [0, calm ? 0 : 0.16 * wave, 0, 1];
+        u.blur = [0, calm ? 0 : 0.07 * Math.pow(wave, 2), 0, 1];
         break;
       case "fade":
         u.A = view(cur, focus, c);
@@ -130,12 +130,11 @@ function compose(T: number, sa: number, gl: FilmGL, calm: boolean, speed: number
       case "glow":
         u.A = view(cur, focus, c, 1 + (calm ? 0.2 : 1.6) * w * w);
         u.B = null;
-        u.blur = [calm ? 0 : 0.18 * w, 0, 0, 0];
+        u.blur = [calm ? 0 : 0.08 * w * w, 0, 0, 0];
         u.fade = [1, 0.97, 0.92, sstep(0.25, 1, w)];
         break;
     }
   }
-  if (!calm) u.blur[0] = Math.max(u.blur[0], Math.min(0.07, speed * 0.05));
   return u;
 }
 
@@ -164,7 +163,7 @@ export function Film() {
     const small = matchMedia("(max-width: 760px)").matches;
     let eng: FilmGL;
     try {
-      eng = new FilmGL(canvas, srcOf, small ? 1024 : 1600, small ? 8 : 16);
+      eng = new FilmGL(canvas, srcOf, small ? 1600 : 2720, small ? 7 : 10);
     } catch {
       queueMicrotask(() => setFlat(true)); // no WebGL: show the shots as plain pictures
       return;
@@ -173,7 +172,8 @@ export function Film() {
     const measure = () => {
       filmTop = el.getBoundingClientRect().top + scrollY;
       vh = innerHeight;
-      const dpr = Math.min(devicePixelRatio || 1, 1.5);
+      // Sharp on Retina: up to 2x, capped near 10 megapixels so big screens stay smooth.
+      const dpr = Math.min(devicePixelRatio || 1, 2, Math.sqrt(10e6 / (innerWidth * vh)));
       eng.size(Math.round(innerWidth * dpr), Math.round(vh * dpr));
       dirty = true;
     };
@@ -218,7 +218,7 @@ export function Film() {
       if (Math.abs(target - Ts) < 2e-4) Ts = target;
       if (!dirty && Math.abs(Ts - prev) < 1e-5) return;
       dirty = false;
-      eng.draw(compose(Ts, innerWidth / vh, eng, calm, Math.abs(Ts - prev) / Math.max(dt, 1e-3)));
+      eng.draw(compose(Ts, innerWidth / vh, eng, calm));
       const i = shotAt(Ts);
       const cs = FILM[i];
       if (cs.clip) eng.seek(clipKey(cs), clamp((Ts - STARTS[i]) / cs.len) * (cs.clip.dur - 0.05));

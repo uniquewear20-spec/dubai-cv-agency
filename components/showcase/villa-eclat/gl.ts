@@ -214,7 +214,12 @@ export class FilmGL {
         entry.ready = true;
         this.onLoad();
       };
-      img.src = sized(url, crop[2] < 1 ? 1600 : this.maxW);
+      // Large screens get Higgsfield's full-size WebP (2720 px, a few hundred KB); phones a 1,600 px copy.
+      const full = this.maxW > 1600 && url.endsWith(".png");
+      img.onerror = () => {
+        if (full && img.src !== sized(url, 1600)) img.src = sized(url, 1600);
+      };
+      img.src = full ? url.replace(/\.png$/, "_min.webp") : sized(url, 1600);
     }
     this.trim();
   }
