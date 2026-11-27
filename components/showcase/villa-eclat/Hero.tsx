@@ -7,6 +7,7 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 import { HERO, IMG } from "@/lib/showcase/villa-eclat";
 import { Img } from "@/components/showcase/kit/Img";
+import { sized } from "@/lib/showcase/media";
 
 /** ÉCLAT in thin gold lines, each letter with one triple-line flourish, like a 1920s marquee. */
 const MARK = [
@@ -32,6 +33,7 @@ export function Wordmark({ className, draw, hair }: { className?: string; draw?:
 export function Hero() {
   const sec = useRef<HTMLElement>(null);
   const cv = useRef<HTMLCanvasElement>(null);
+  const vid = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const el = sec.current;
@@ -92,6 +94,20 @@ export function Hero() {
       for (let j = 0; j < 4; j++) next();
     }
 
+    // The drone clip: the newest wanted moment wins; a seek starts only when the last one is done.
+    const v = vid.current;
+    let want = 0;
+    const chase = () => {
+      if (!v || v.readyState < 1 || v.seeking || !v.duration) return;
+      const t = want * (v.duration - 0.05);
+      if (Math.abs(v.currentTime - t) > 0.02) v.currentTime = t;
+    };
+    v?.addEventListener("seeked", chase);
+    v?.addEventListener("loadedmetadata", chase);
+    // iOS paints a paused video's new frames only after it has played once.
+    const wake = () => { v?.play().then(() => v.pause()).catch(() => {}); };
+    addEventListener("touchstart", wake, { once: true, passive: true });
+
     const tick = (now: number) => {
       raf = requestAnimationFrame(tick);
       const dt = Math.min(0.1, (now - last) / 1000);
@@ -100,6 +116,7 @@ export function Hero() {
       ps = calm ? target : ps + (target - ps) * (1 - Math.exp(-dt * 8));
       if (Math.abs(target - ps) < 1e-4) ps = target;
       if (n) draw(Math.round(ps * (n - 1)));
+      if (v) { want = Math.min(1, ps / 0.9); chase(); }
       if (Math.abs(ps - p) < 1e-4) return;
       p = ps;
       el.style.setProperty("--p", p.toFixed(4));
@@ -115,13 +132,18 @@ export function Hero() {
       io.disconnect();
       cancelAnimationFrame(raf);
       removeEventListener("resize", measure);
+      removeEventListener("touchstart", wake);
+      v?.removeEventListener("seeked", chase);
+      v?.removeEventListener("loadedmetadata", chase);
     };
   }, []);
 
   return (
     <section ref={sec} className="ve-hero" id="top" style={{ "--p": 0 } as CSSProperties}>
       <div className="ve-hero-stage">
-        {HERO.frames ? (
+        {HERO.video ? (
+          <video ref={vid} className="ve-hero-video" src={HERO.video} poster={IMG.day ? sized(IMG.day, 1600) : undefined} muted playsInline preload="auto" aria-hidden />
+        ) : HERO.frames ? (
           <canvas ref={cv} className="ve-hero-canvas" aria-hidden />
         ) : (
           <div className="ve-hero-still" aria-hidden>

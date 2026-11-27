@@ -32,7 +32,9 @@ const shotAt = (T: number) => {
   while (i < FILM.length - 1 && T >= STARTS[i + 1]) i++;
   return i;
 };
-const keysOf = (s: Shot): string[] => [s.img, ...(s.img2 ? [s.img2] : []), ...(s.strip ?? [])];
+const clipKey = (s: Shot) => `clip:${s.id}`;
+const keysOf = (s: Shot): string[] => (s.clip ? [clipKey(s)] : [s.img, ...(s.img2 ? [s.img2] : []), ...(s.strip ?? [])]);
+const srcOf = (k: string) => (k.startsWith("clip:") ? FILM.find((s) => clipKey(s) === k)?.clip?.src ?? "" : IMG[k as ImgKey] ?? "");
 const camAt = (s: Shot, t: number) => {
   const e = ease(t), f = s.from, g = s.to;
   return { s: lerp(f.s ?? 1, g.s ?? 1, e), x: lerp(f.x ?? 0, g.x ?? 0, e), y: lerp(f.y ?? 0, g.y ?? 0, e), r: lerp(f.r ?? 0, g.r ?? 0, e) };
@@ -71,7 +73,8 @@ function compose(T: number, sa: number, gl: FilmGL, calm: boolean, speed: number
   const focus = sh.focus ?? [0.5, 0.5];
   const c = camAt(sh, t);
   const m = sh.img2 && sh.mix ? sstep(sh.mix[0], sh.mix[1], t) : 0;
-  const u: Uniforms = { ...u0, A: view(sh.img, focus, c), B: sh.img2 ? view(sh.img2, focus, c) : null, mix: m };
+  const base = sh.clip ? clipKey(sh) : sh.img;
+  const u: Uniforms = { ...u0, A: view(base, focus, c), B: sh.img2 ? view(sh.img2, focus, c) : null, mix: m };
 
   if (sh.framed && t < 0.42) {
     const k = ease((t - 0.03) / 0.39), pop = sstep(0, 0.05, t);
@@ -89,8 +92,8 @@ function compose(T: number, sa: number, gl: FilmGL, calm: boolean, speed: number
     u.flare = [(lerp(f.from[0], f.to[0], ft) - 0.5) * sa, 0.5 - lerp(f.from[1], f.to[1], ft), k];
   }
   if (w > 0 && nx) {
-    const cur = sh.img2 && m > 0.5 ? sh.img2 : sh.img;
-    const nKey = nx.strip ? nx.strip[0] : nx.img;
+    const cur = sh.img2 && m > 0.5 ? sh.img2 : base;
+    const nKey = nx.strip ? nx.strip[0] : nx.clip ? clipKey(nx) : nx.img;
     const nFocus = nx.strip ? ([0.5, 0.5] as [number, number]) : nx.focus ?? [0.5, 0.5];
     const nc = nx.strip ? { s: 1, x: 0, y: 0, r: 0 } : camAt(nx, 0);
     const wave = Math.sin(Math.PI * w);
@@ -161,7 +164,7 @@ export function Film() {
     const small = matchMedia("(max-width: 760px)").matches;
     let eng: FilmGL;
     try {
-      eng = new FilmGL(canvas, (k) => IMG[k as ImgKey] ?? "", small ? 1024 : 1600, small ? 8 : 16);
+      eng = new FilmGL(canvas, srcOf, small ? 1024 : 1600, small ? 8 : 16);
     } catch {
       queueMicrotask(() => setFlat(true)); // no WebGL: show the shots as plain pictures
       return;
@@ -213,6 +216,8 @@ export function Film() {
       dirty = false;
       eng.draw(compose(Ts, innerWidth / vh, eng, calm, Math.abs(Ts - prev) / Math.max(dt, 1e-3)));
       const i = shotAt(Ts);
+      const cs = FILM[i];
+      if (cs.clip) eng.seek(clipKey(cs), clamp((Ts - STARTS[i]) / cs.len) * (cs.clip.dur - 0.05));
       for (const j of [i + 1, i + 2]) if (FILM[j]) keysOf(FILM[j]).forEach((k) => eng.want(k));
       overlay(Ts);
     };

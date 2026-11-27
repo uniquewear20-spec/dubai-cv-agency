@@ -4,18 +4,41 @@
 
 export type ImgKey =
   | "day" | "night" | "approach" | "door" | "hall" | "up" | "living" | "golden" | "dining" | "kitchen"
-  | "bar" | "suite" | "bath" | "spa" | "poolDay" | "poolDusk" | "roof" | "aerial" | "cinema"
+  | "bar" | "bar2" | "suite" | "bath" | "spa" | "poolDay" | "poolDusk" | "roof" | "aerial" | "cinema"
   | "brass" | "oak" | "marble" | "pull" | "guest" | "library" | "gym" | "wine";
 
 /** Higgsfield stills. Grid cells are written "crop:<url>#W,H,x,y,w,h" (one cell of a 2x2 grid). */
 export const IMG: Record<ImgKey, string> = {
-  day: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_141600_73d0920d-47ee-4d84-9bc3-cef72e01efe2.png", night: "", approach: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_142250_7fedd1bc-e4db-47b0-be37-9f6998c784ee.png", door: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_142309_16ddccfc-6772-48bd-b21c-e41be34f52a1.png", hall: "", up: "", living: "", golden: "", dining: "",
-  kitchen: "", bar: "", suite: "", bath: "", spa: "", poolDay: "", poolDusk: "", roof: "", aerial: "",
-  cinema: "", brass: "", oak: "", marble: "", pull: "", guest: "", library: "", gym: "", wine: "",
+  day: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_141600_73d0920d-47ee-4d84-9bc3-cef72e01efe2.png",
+  night: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_152619_13467498-628f-4e2c-8309-cb809df8124e.png",
+  approach: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_142250_7fedd1bc-e4db-47b0-be37-9f6998c784ee.png",
+  door: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_142309_16ddccfc-6772-48bd-b21c-e41be34f52a1.png",
+  hall: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_142922_3274a0e2-af39-4965-b7f0-59821a1f2cfc.png",
+  up: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_142944_ddd5cbdd-8322-4853-adde-7574e4673f14.png",
+  living: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_143636_2556c607-e0b5-4078-aa46-4f9a3c189c5c.png",
+  golden: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_152625_a9e94580-f064-407b-833a-9f78a60c3ddc.png",
+  dining: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_143650_5f91da9b-e88f-4642-ae0c-3f72d39e2ced.png",
+  kitchen: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_144305_bfb5eb5d-2506-4d5f-9986-b3c04e7ee3ec.png",
+  bar: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_145001_50a83ab7-38d1-4c7b-957f-55f2776f5af4.png",
+  bar2: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_145138_27a79bbf-620d-43b1-86ce-7c5419dec0c8.png",
+  suite: "",
+  bath: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_145626_b6423671-b2fd-43ab-bae8-eb409165e07b.png",
+  spa: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_145803_b0ce6ca4-deef-4869-85f0-d7b6ae742aad.png",
+  poolDay: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_150253_454651ae-fa42-484f-a965-98c4af2e7775.png",
+  poolDusk: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_152629_620e4182-de3d-41ef-b3f6-0728dfaf6b0e.png",
+  roof: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_150836_6364f1bf-2e08-4643-bbb5-b66d21516073.png",
+  aerial: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_150913_b9ee2fc8-77a4-4d43-a449-407100944248.png",
+  cinema: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_151455_bd985c1f-f5f1-4b90-9c77-bbbe945916d7.png",
+  brass: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_151608_2af8a55d-3647-487d-98cd-54059099add8.png#2048,2048,26,26,983,983",
+  oak: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_151608_2af8a55d-3647-487d-98cd-54059099add8.png#2048,2048,1039,26,983,983",
+  marble: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_151608_2af8a55d-3647-487d-98cd-54059099add8.png#2048,2048,26,1038,984,984",
+  pull: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_151608_2af8a55d-3647-487d-98cd-54059099add8.png#2048,2048,1039,1038,983,984",
+  guest: "", library: "", gym: "", wine: "",
 };
 
 /** The hero drone shot as numbered frames in /public. 0 frames: the hero eases over the still instead. */
-export const HERO = { frames: 0, path: (i: number) => `/showcase/villa-eclat/hero/${String(i).padStart(3, "0")}.webp`, focus: [0.5, 0.56] as [number, number] };
+/** The hero drone shot: a short-GOP MP4 scrubbed by scroll (re-encoded so every seek is quick). */
+export const HERO = { video: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/35773e69-293a-4137-84bd-6f30c61eaaf4.mp4", frames: 0, path: (i: number) => `/showcase/villa-eclat/hero/${String(i).padStart(3, "0")}.webp`, focus: [0.5, 0.56] as [number, number] };
 
 // ── The film: one camera walking through the house, driven by scroll ───────────────────────────
 export type Cam = { s?: number; x?: number; y?: number; r?: number }; // zoom, pan (share of view), roll (deg)
@@ -33,6 +56,8 @@ export interface Shot {
   out?: Out;
   /** The shot arrives in a rounded frame on ivory that grows to full screen. */
   framed?: boolean;
+  /** A real camera move: a short video scrubbed by scroll instead of a still. */
+  clip?: { src: string; dur: number };
   /** Film-strip shot: these pictures pass as frames of film; the last one hands over to the next shot. */
   strip?: ImgKey[];
   len: number;
@@ -46,9 +71,10 @@ export const FILM: Shot[] = [
   { id: "approach", img: "approach", focus: [0.5, 0.56], from: { s: 1 }, to: { s: 1.32 }, out: "zoom", len: 1.25, chapter: "Arrival",
     flare: { from: [0.18, 0.12], to: [0.1, 0.08], k: 0.55 },
     lines: [{ at: [0.08, 0.62], text: "The lawn runs from the sand to a bronze door five metres tall." }] },
-  { id: "door", img: "door", focus: [0.5, 0.5], from: { s: 1.02 }, to: { s: 1.3 }, out: "zoom", len: 1,
-    lines: [{ at: [0.1, 0.64], text: "It turns on a single pivot, and stands open all day." }] },
-  { id: "hall", img: "hall", focus: [0.5, 0.48], from: { s: 1.04, y: 0.02 }, to: { s: 1.16, y: -0.03 }, out: "whipUp", len: 1.1, chapter: "The hall",
+  { id: "door", img: "door", clip: { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/5bb0d469-b4df-4037-ad36-259776b59b41.mp4", dur: 5.04 },
+    focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1 }, out: "cut", len: 1.6,
+    lines: [{ at: [0.06, 0.5], text: "It turns on a single pivot, and stands open all day." }] },
+  { id: "hall", img: "hall", focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14, y: -0.03 }, out: "whipUp", len: 1.1, chapter: "The hall",
     lines: [{ at: [0.1, 0.72], text: "A staircase that turns once, under a rain of glass." }] },
   { id: "up", img: "up", focus: [0.5, 0.5], from: { s: 1.12, r: -38 }, to: { s: 1.3, r: 42 }, out: "whip", len: 1,
     lines: [{ at: [0.15, 0.7], text: "Look up." }] },
@@ -129,7 +155,7 @@ export const LEVELS: { id: string; name: string; rooms: Room[] }[] = [
 /** The rooms index (contact sheet). */
 export const SHEET: { img: ImgKey; name: string }[] = [
   { img: "hall", name: "Entrance hall" }, { img: "living", name: "Salon" }, { img: "golden", name: "Salon at five" },
-  { img: "dining", name: "Dining room" }, { img: "kitchen", name: "Kitchen" }, { img: "bar", name: "Bar" },
+  { img: "dining", name: "Dining room" }, { img: "kitchen", name: "Kitchen" }, { img: "bar", name: "Bar" }, { img: "bar2", name: "Bar, from the lounge" },
   { img: "cinema", name: "Cinema" }, { img: "suite", name: "Principal suite" }, { img: "bath", name: "Principal bath" },
   { img: "guest", name: "Suite two" }, { img: "library", name: "Library" }, { img: "spa", name: "Spa pool" },
   { img: "gym", name: "Gym" }, { img: "wine", name: "Wine room" }, { img: "roof", name: "Roof terrace" },

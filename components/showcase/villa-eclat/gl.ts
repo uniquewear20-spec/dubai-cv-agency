@@ -101,7 +101,7 @@ void main() {
 }`;
 
 /** A picture as the shader sees it: texture, size, and the cell of a grid it shows. */
-type Tex = { t: WebGLTexture; w: number; h: number; crop: [number, number, number, number]; ready: boolean; used: number };
+type Tex = { t: WebGLTexture; w: number; h: number; crop: [number, number, number, number]; ready: boolean; used: number; video?: HTMLVideoElement; target?: number };
 
 /** Where a picture sits: camera centre in picture uv, zoom, roll in radians. */
 export type View = { key: string; c: [number, number]; s: number; r: number; wh: [number, number] };
@@ -185,7 +185,26 @@ export class FilmGL {
     this.tex.set(key, entry);
     this.upload(entry, placeholder(key));
     entry.ready = !url; // a placeholder stands in for a picture not generated yet
-    if (url) {
+    if (url.endsWith(".mp4")) {
+      // A real camera move: a short-GOP clip whose current frame is the texture.
+      const v = document.createElement("video");
+      v.crossOrigin = "anonymous";
+      v.muted = true;
+      v.playsInline = true;
+      v.preload = "auto";
+      const show = () => {
+        if (this.tex.get(key) !== entry || v.readyState < 2) return;
+        this.upload(entry, v);
+        entry.ready = true;
+        this.onLoad();
+        const want = entry.target ?? 0;
+        if (Math.abs(v.currentTime - want) > 0.02 && !v.seeking) v.currentTime = want;
+      };
+      v.addEventListener("loadeddata", show);
+      v.addEventListener("seeked", show);
+      v.src = url;
+      entry.video = v;
+    } else if (url) {
       const img = new Image();
       img.crossOrigin = "anonymous";
       img.decoding = "async";
@@ -200,6 +219,15 @@ export class FilmGL {
     this.trim();
   }
 
+  /** Moves a clip to a moment (seconds); the newest request wins while a seek is running. */
+  seek(key: string, time: number) {
+    const e = this.tex.get(key);
+    if (!e?.video) return;
+    e.target = time;
+    const v = e.video;
+    if (v.readyState >= 1 && !v.seeking && Math.abs(v.currentTime - time) > 0.02) v.currentTime = time;
+  }
+
   private upload(e: Tex, src: TexImageSource & { width: number; height: number }) {
     const gl = this.gl;
     gl.bindTexture(gl.TEXTURE_2D, e.t);
@@ -209,8 +237,8 @@ export class FilmGL {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    e.w = (src as HTMLImageElement).naturalWidth || src.width;
-    e.h = (src as HTMLImageElement).naturalHeight || src.height;
+    e.w = (src as HTMLVideoElement).videoWidth || (src as HTMLImageElement).naturalWidth || src.width;
+    e.h = (src as HTMLVideoElement).videoHeight || (src as HTMLImageElement).naturalHeight || src.height;
   }
 
   /** Keeps GPU memory bounded: the least recently used pictures are dropped first. */
@@ -218,7 +246,7 @@ export class FilmGL {
     if (this.tex.size <= this.keep) return;
     const old = [...this.tex.entries()].sort((a, b) => a[1].used - b[1].used);
     for (const [k, e] of old.slice(0, this.tex.size - this.keep)) {
-      this.gl.deleteTexture(e.t);
+      this.drop(e);
       this.tex.delete(k);
     }
   }
@@ -263,8 +291,16 @@ export class FilmGL {
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
 
+  private drop(e: Tex) {
+    this.gl.deleteTexture(e.t);
+    if (e.video) {
+      e.video.removeAttribute("src");
+      e.video.load();
+    }
+  }
+
   dispose() {
-    for (const e of this.tex.values()) this.gl.deleteTexture(e.t);
+    for (const e of this.tex.values()) this.drop(e);
     this.tex.clear();
     this.gl.getExtension("WEBGL_lose_context")?.loseContext();
   }

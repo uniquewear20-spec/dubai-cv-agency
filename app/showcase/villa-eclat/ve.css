@@ -110,7 +110,9 @@
 .ve-hero { position: relative; height: 400svh; }
 .ve-hero-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--ink); }
 .ve-hero-canvas,
+.ve-hero-video,
 .ve-hero-still { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ve-hero-video { object-fit: cover; object-position: 50% 56%; display: block; }
 .ve-hero-still {
   transform: translate3d(0, calc(var(--p) * -3%), 0) scale(calc(1.05 + var(--p) * 0.34));
   transform-origin: 50% 62%;
