@@ -20,7 +20,15 @@ const MARK = [
 
 export function Wordmark({ className, draw, hair }: { className?: string; draw?: boolean; hair?: boolean }) {
   return (
-    <svg className={className} viewBox="-4 -2 500 126" aria-hidden focusable="false">
+    <svg className={className} viewBox="-6 -4 504 130" aria-hidden focusable="false">
+      {!hair && (
+        // A soft dark line under each gold line keeps the mark legible over white plaster and sky.
+        <g fill="none" stroke="rgba(10, 8, 6, 0.42)" strokeWidth={7} strokeLinecap="round" className={draw ? "ve-draw" : undefined}>
+          {MARK.map((d, i) => (
+            <path key={i} d={d} pathLength={1} style={{ "--i": i } as CSSProperties} />
+          ))}
+        </g>
+      )}
       <g fill="none" stroke="currentColor" strokeWidth={hair ? 1.15 : 2.1} strokeLinecap="square" className={draw ? "ve-draw" : undefined}>
         {MARK.map((d, i) => (
           <path key={i} d={d} pathLength={1} vectorEffect={hair ? "non-scaling-stroke" : undefined} style={{ "--i": i } as CSSProperties} />

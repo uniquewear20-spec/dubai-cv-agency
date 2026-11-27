@@ -154,7 +154,7 @@ export function Film() {
   const sec = useRef<HTMLElement>(null);
   const cv = useRef<HTMLCanvasElement>(null);
   const caps = useRef<(HTMLParagraphElement | null)[]>([]);
-  const hud = useRef<{ ch: HTMLSpanElement | null; tc: HTMLSpanElement | null; bar: HTMLSpanElement | null; end: HTMLDivElement | null }>({ ch: null, tc: null, bar: null, end: null });
+  const hud = useRef<{ ch: HTMLSpanElement | null; tc: HTMLSpanElement | null; bar: HTMLSpanElement | null; end: HTMLDivElement | null; scrim: HTMLDivElement | null }>({ ch: null, tc: null, bar: null, end: null, scrim: null });
   const [flat, setFlat] = useState(false);
 
   useEffect(() => {
@@ -196,6 +196,10 @@ export function Film() {
       if (h.ch && ch !== shown) { h.ch.textContent = ch; shown = ch; }
       if (h.tc) h.tc.textContent = timecode(T);
       if (h.bar) h.bar.style.transform = `scaleX(${(T / FILM_LEN).toFixed(4)})`;
+      // The dark band under the captions steps aside while a picture grows in its frame on ivory.
+      const si = shotAt(T), st = (T - STARTS[si]) / FILM[si].len;
+      const scrim = FILM[si].framed ? sstep(0.3, 0.42, st) : FILM[si].out === "white" ? 1 - sstep(1 - TW.white, 1 - TW.white * 0.4, st) : 1;
+      if (h.scrim && h.scrim.dataset.o !== scrim.toFixed(2)) { h.scrim.dataset.o = scrim.toFixed(2); h.scrim.style.opacity = scrim.toFixed(2); }
       const endO = sstep(FILM_LEN - 0.42, FILM_LEN - 0.1, T);
       if (h.end && Math.abs(endO - lastCap) > 0.002) {
         lastCap = endO;
@@ -260,6 +264,7 @@ export function Film() {
     <section ref={sec} className="ve-film" id="film" aria-label="A walk through the house" style={{ height: `calc(${(FILM_LEN * UNIT * 100).toFixed(1)}svh + 100svh)` }}>
       <div className="ve-film-stage">
         <canvas ref={cv} className="ve-film-canvas" aria-hidden />
+        <div className="ve-film-scrim" ref={(n) => { hud.current.scrim = n; }} aria-hidden />
         <div className="ve-caps">
           {CAPS.map((c, k) => (
             <p key={k} ref={(n) => { caps.current[k] = n; }} className="ve-cap" style={{ opacity: 0, visibility: "hidden" }}>
