@@ -42,7 +42,7 @@ export const IMG: Record<ImgKey, string> = {
 /** The hero drone shot as numbered frames in /public. 0 frames: the hero eases over the still instead. */
 /** The hero drone shot: a short-GOP MP4 scrubbed by scroll (re-encoded so every seek is quick). */
 export const HERO = {
-  video: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/52474ec5-66ac-4652-a8d7-839429655317.mp4",
+  video: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/b1ad1217-2d01-4f07-addb-7893f5541973.mp4", // 1920 px master, level 4.1, 7.7 MB
   videoSmall: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/001ee70e-0a03-42f4-a87b-d5ad810258e9.mp4",
   frames: 0, path: (i: number) => `/showcase/villa-eclat/hero/${String(i).padStart(3, "0")}.webp`, focus: [0.5, 0.56] as [number, number] };
 
