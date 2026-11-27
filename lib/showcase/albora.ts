@@ -22,7 +22,7 @@ export const IMG = {
   aerial: hf("hf_20261127_074649_dcf2cea1-f103-491e-9b57-4e87aedad45c"),
   wellness: hf("hf_20261127_080424_e9ca9f97-d38c-46c3-a98c-784c60796a7f"),
   garden: hf("hf_20261127_075517_b0d0ef85-cd39-44fe-aa4c-a6030c13698a"),
-  model: hf(""),
+  model: hf("hf_20261127_081028_5104bcf9-195c-4d16-bc47-31a7c7ba995b"),
 };
 /** 2x2 grids, cut in CSS: "crop:<url>#W,H,x,y,w,h". Filled once the grids are generated. */
 const cell = (id: string, W: number, H: number, x: number, y: number, w: number, h: number) => `crop:${hf(id)}#${W},${H},${x},${y},${w},${h}`;
