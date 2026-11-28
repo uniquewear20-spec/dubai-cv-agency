@@ -110,9 +110,11 @@
 }
 .ve-top-cta { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 
-/* Hero: the drone shot, laid out like a property launch. The name and figures fly up and fade;
-   the line, the facts and the ring stay until the camera has finished climbing. */
-.ve-hero { position: relative; height: 400svh; }
+/* Hero: the drone shot, laid out like a property launch, and then the walk through the house.
+   The name and figures fly up and fade; the line, the facts and the ring stay until the camera
+   dives for the door. Its scroll positions arrive from the script as --x (the crest leaving),
+   --y (the foot leaving), --s (the sky shade lifting) and --w (the walk's captions and clock). */
+.ve-hero { position: relative; height: 1100svh; }
 .ve-hero-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--ink); }
 .ve-hero-poster,
 .ve-hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
@@ -124,10 +126,11 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(14, 12, 10, 0.66) 0%, rgba(14, 12, 10, 0.22) 30%, rgba(14, 12, 10, 0) 44%, rgba(14, 12, 10, 0) 54%, rgba(14, 12, 10, 0.5) 74%, rgba(14, 12, 10, 0.9) 100%);
-  /* Lifts as the arch opens, so the door arrives in the same light the film shows it in. */
-  opacity: calc(1 - clamp(0, (var(--p) - 0.72) / 0.16, 1));
+  /* Lifts as the camera dives, handing over to the walk's own band under the captions. */
+  opacity: calc(1 - var(--s, 0));
   pointer-events: none;
 }
+.ve-walk-fade { opacity: var(--w, 0); }
 .ve-hero-top {
   position: absolute;
   inset: clamp(96px, 13vh, 136px) clamp(20px, 5vw, 80px) auto;
@@ -138,8 +141,7 @@
   /* --x: how far the crest has gone, 0 to 1 over the first fifth of the climb. Like Son Daven's
      title it rises as the camera lifts; instead of breaking into pixels it breaks into fine
      vertical reeding, the fluting of the villa's columns, and thins away. */
-  --x: clamp(0, calc(var(--p) / 0.2), 1);
-  transform: translate3d(0, calc(var(--x) * -20vh), 0);
+  transform: translate3d(0, calc(var(--x, 0) * -20vh), 0);
   -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 calc(6px * (1 - var(--x))), transparent calc(6px * (1 - var(--x))) 6px);
   mask-image: repeating-linear-gradient(90deg, #000 0 calc(6px * (1 - var(--x))), transparent calc(6px * (1 - var(--x))) 6px);
   will-change: transform;
@@ -206,10 +208,10 @@
   grid-template-columns: 1fr auto;
   align-items: end;
   gap: 30px 40px;
-  /* The line, the facts and the ring hold while the camera circles, then step aside for the arch. */
-  --y: clamp(0, calc((var(--p) - 0.6) / 0.12), 1);
-  opacity: calc(1 - var(--y));
-  transform: translate3d(0, calc(var(--y) * 28px), 0);
+  /* The line, the facts and the ring hold while the camera circles, then step aside for the dive. */
+  opacity: calc(1 - var(--y, 0));
+  transform: translate3d(0, calc(var(--y, 0) * 28px), 0);
+  visibility: var(--foot, visible);
 }
 .ve-hero-big {
   grid-column: 1;

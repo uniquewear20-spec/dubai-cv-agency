@@ -10,13 +10,9 @@ import { useEffect, useRef, useState } from "react";
 import { FILM, IMG, type ImgKey, type Shot } from "@/lib/showcase/villa-eclat";
 import { Img } from "@/components/showcase/kit/Img";
 import { FilmGL, frameView, type Uniforms, type View } from "./gl";
+import { CHAPTERS, FILM_AT as STARTS, FILM_LEN, TOTAL, UNIT, WALK_LEN, chapterAt, placeFilm, timecode } from "./timeline";
 
-/** Viewport heights of scrolling per unit of film length. */
-export const UNIT = 0.95;
 const TW: Record<string, number> = { zoom: 0.18, whip: 0.15, whipUp: 0.15, whipDown: 0.15, fade: 0.24, white: 0.26, glow: 0.28, cut: 0 };
-const STARTS = FILM.reduce<number[]>((a, _s, i) => (a.push(i ? a[i - 1] + FILM[i - 1].len : 0), a), []);
-export const FILM_LEN = STARTS[STARTS.length - 1] + FILM[FILM.length - 1].len;
-export const CHAPTERS = FILM.flatMap((s, i) => (s.chapter ? [{ name: s.chapter, at: STARTS[i] }] : []));
 const CAPS = FILM.flatMap((s, i) => (s.lines ?? []).map((l) => ({ a: STARTS[i] + l.at[0] * s.len, b: STARTS[i] + l.at[1] * s.len, text: l.text })));
 const IVORY: [number, number, number] = [0.937, 0.906, 0.855];
 
@@ -149,22 +145,11 @@ function compose(T: number, sa: number, gl: FilmGL, calm: boolean): Uniforms {
   return u;
 }
 
-const timecode = (T: number) => {
-  const sec = T * 2.6, f = Math.floor((sec % 1) * 24), s = Math.floor(sec) % 60, m = Math.floor(sec / 60);
-  return `00:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}:${String(f).padStart(2, "0")}`;
-};
-
-let filmTop = 0;
-/** Scrolls the page to a moment of the film. */
-export function goFilm(T: number) {
-  window.scrollTo({ top: filmTop + T * innerHeight * UNIT + 2, behavior: "auto" });
-}
-
 export function Film() {
   const sec = useRef<HTMLElement>(null);
   const cv = useRef<HTMLCanvasElement>(null);
   const caps = useRef<(HTMLParagraphElement | null)[]>([]);
-  const hud = useRef<{ ch: HTMLSpanElement | null; tc: HTMLSpanElement | null; bar: HTMLSpanElement | null; end: HTMLDivElement | null; scrim: HTMLDivElement | null; box: HTMLDivElement | null }>({ ch: null, tc: null, bar: null, end: null, scrim: null, box: null });
+  const hud = useRef<{ ch: HTMLSpanElement | null; tc: HTMLSpanElement | null; bar: HTMLSpanElement | null; end: HTMLDivElement | null; scrim: HTMLDivElement | null }>({ ch: null, tc: null, bar: null, end: null, scrim: null });
   const stage = useRef<HTMLDivElement>(null);
   const [flat, setFlat] = useState(false);
 
@@ -175,14 +160,16 @@ export function Film() {
     const small = matchMedia("(max-width: 760px)").matches;
     let eng: FilmGL;
     try {
-      eng = new FilmGL(canvas, srcOf, small ? 1280 : 2048, small ? 7 : 10);
+      // On a phone the kitchen's last frame is the same tall crop the opening ends on, at full sharpness.
+      eng = new FilmGL(canvas, small ? (k) => srcOf(k === "kitchenEnd" ? "kitchenEndTall" : k) : srcOf, small ? 1280 : 2048, small ? 7 : 10);
     } catch {
       queueMicrotask(() => setFlat(true)); // no WebGL: show the shots as plain pictures
       return;
     }
-    let Ts = 0, raf = 0, last = performance.now(), dirty = true, vh = innerHeight, live = false, shown = "", lastCap = -1, shownStage = false;
+    let Ts = 0, raf = 0, last = performance.now(), dirty = true, vh = innerHeight, live = false, shown = "", lastCap = -1, shownStage = false, filmTop = 0;
     const measure = () => {
       filmTop = el.getBoundingClientRect().top + scrollY;
+      placeFilm(filmTop);
       vh = innerHeight;
       // Sharp but light: up to 1.5x, capped near 6.5 megapixels so Safari stays smooth.
       const dpr = Math.min(devicePixelRatio || 1, 1.5, Math.sqrt(6.5e6 / (innerWidth * vh)));
@@ -202,19 +189,16 @@ export function Film() {
         node.style.transform = `translate3d(0, ${((1 - o) * 14).toFixed(1)}px, 0)`;
         node.style.visibility = o > 0.001 ? "visible" : "hidden";
       });
-      const h = hud.current;
-      let ch = "";
-      for (const c of CHAPTERS) if (T >= c.at - 0.001) ch = c.name;
+      // The clock carries on from the opening's: same chapter, same timecode, same line.
+      const h = hud.current, g = WALK_LEN + T, ch = chapterAt(g);
       if (h.ch && ch !== shown) { h.ch.textContent = ch; shown = ch; }
-      if (h.tc) h.tc.textContent = timecode(T);
-      if (h.bar) h.bar.style.transform = `scaleX(${(T / FILM_LEN).toFixed(4)})`;
+      if (h.tc) h.tc.textContent = timecode(g);
+      if (h.bar) h.bar.style.transform = `scaleX(${(g / TOTAL).toFixed(4)})`;
       // The dark band under the captions steps aside while a picture grows in its frame on ivory.
       const si = shotAt(T), st = (T - STARTS[si]) / FILM[si].len;
       const scrim = FILM[si].framed ? sstep(0.3, 0.42, st) : FILM[si].out === "white" ? 1 - sstep(1 - TW.white, 1 - TW.white * 0.4, st) : 1;
-      const sc = (scrim * sstep(0, 0.18, T)).toFixed(2);
+      const sc = scrim.toFixed(2);
       if (h.scrim && h.scrim.dataset.o !== sc) { h.scrim.dataset.o = sc; h.scrim.style.opacity = sc; }
-      const hb = sstep(0.02, 0.3, T).toFixed(2);
-      if (h.box && h.box.dataset.o !== hb) { h.box.dataset.o = hb; h.box.style.opacity = hb; }
       const endO = sstep(FILM_LEN - 0.42, FILM_LEN - 0.1, T);
       if (h.end && Math.abs(endO - lastCap) > 0.002) {
         lastCap = endO;
@@ -251,15 +235,8 @@ export function Film() {
     const start = () => { if (!live) { live = true; last = performance.now(); dirty = true; raf = requestAnimationFrame(tick); } };
     const stop = () => { live = false; cancelAnimationFrame(raf); };
     measure();
-    // Pictures for the opening shots load at once; the first clip waits until the reader is well
-    // into the hero, so it never competes with the drone shot for the connection.
+    // The pictures of the first shots load at once, so the hand-over from the opening finds them ready.
     [FILM[0], FILM[1], FILM[2]].forEach((s) => keysOf(s).filter((k) => !k.startsWith("clip:")).forEach((k) => eng.want(k)));
-    const near = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      near.disconnect();
-      keysOf(FILM[1]).forEach((k) => eng.want(k));
-    }, { rootMargin: "260% 0px" });
-    near.observe(el);
     const io = new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), { rootMargin: "100% 0px" });
     io.observe(el);
     const ro = new ResizeObserver(measure);
@@ -270,7 +247,6 @@ export function Film() {
     return () => {
       stop();
       io.disconnect();
-      near.disconnect();
       ro.disconnect();
       removeEventListener("resize", measure);
       canvas.removeEventListener("webglcontextlost", lost);
@@ -309,15 +285,15 @@ export function Film() {
             <span>Book a private viewing</span>
           </a>
         </div>
-        <div className="ve-hud" aria-hidden ref={(n) => { hud.current.box = n; }} style={{ opacity: 0 }}>
-          <span className="ve-hud-ch" ref={(n) => { hud.current.ch = n; }} />
+        <div className="ve-hud" aria-hidden>
+          <span className="ve-hud-ch" ref={(n) => { hud.current.ch = n; }}>{chapterAt(WALK_LEN)}</span>
           <span className="ve-hud-line">
-            <span className="ve-hud-bar" ref={(n) => { hud.current.bar = n; }} />
+            <span className="ve-hud-bar" ref={(n) => { hud.current.bar = n; }} style={{ transform: `scaleX(${(WALK_LEN / TOTAL).toFixed(4)})` }} />
             {CHAPTERS.map((c) => (
-              <i key={c.name} style={{ left: `${(c.at / FILM_LEN) * 100}%` }} />
+              <i key={c.name} style={{ left: `${(c.at / TOTAL) * 100}%` }} />
             ))}
           </span>
-          <span className="ve-hud-tc" ref={(n) => { hud.current.tc = n; }}>00:00:00:00</span>
+          <span className="ve-hud-tc" ref={(n) => { hud.current.tc = n; }}>{timecode(WALK_LEN)}</span>
         </div>
       </div>
     </section>

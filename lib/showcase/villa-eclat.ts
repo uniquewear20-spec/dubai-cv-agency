@@ -4,6 +4,7 @@
 
 export type ImgKey =
   | "day" | "night" | "approach" | "door" | "hall" | "up" | "living" | "golden" | "dining" | "kitchen"
+  | "kitchenEnd" | "kitchenEndTall"
   | "bar" | "bar2" | "suite" | "bath" | "spa" | "poolDay" | "poolDusk" | "roof" | "aerial" | "cinema"
   | "brass" | "oak" | "marble" | "pull" | "guest" | "library" | "gym" | "wine";
 
@@ -19,6 +20,9 @@ export const IMG: Record<ImgKey, string> = {
   golden: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_152625_a9e94580-f064-407b-833a-9f78a60c3ddc.png",
   dining: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_143650_5f91da9b-e88f-4642-ae0c-3f72d39e2ced.png",
   kitchen: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_144305_bfb5eb5d-2506-4d5f-9986-b3c04e7ee3ec.png",
+  // The kitchen walk's last frame, exactly as the opening leaves it, so the film picks up on it.
+  kitchenEnd: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/4aaa33cf-5e74-4cbf-84ec-b5de495b00e5.jpg",
+  kitchenEndTall: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/f5f69b66-bb85-4489-b985-4a9d4b1ef7e1.jpg",
   bar: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_145001_50a83ab7-38d1-4c7b-957f-55f2776f5af4.png",
   bar2: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_145138_27a79bbf-620d-43b1-86ce-7c5419dec0c8.png",
   suite: "https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_154703_7fef0b9f-b902-4b56-918b-85602391ba4b.png",
@@ -39,14 +43,20 @@ export const IMG: Record<ImgKey, string> = {
   wine: "crop:https://d8j0ntlcm91z4.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/hf_20261127_152231_d9bf25f0-8a0b-4077-a62f-ccf8e9ea8d40.png#2720,1536,1377,783,1339,749",
 };
 
-/** The hero drone shot as numbered frames in /public. 0 frames: the hero eases over the still instead. */
-/** The hero drone shot: a short-GOP MP4 scrubbed by scroll (re-encoded so every seek is quick). */
 const UP = "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/";
+const webp = (ids: string[]) => ids.map((id) => `${UP}${id}.webp`);
 /** A shot stored as frame sheets: `n` frames of fw x fh px, laid out cols x rows per sheet. */
 export type Seq = { sheets: string[]; cols: number; rows: number; n: number; fw: number; fh: number };
+/**
+ * One real camera move (a Kling clip) as frame sheets for wide and for tall screens.
+ * `warp`: where each frame falls along the move's share of the scroll (0 to 1), measured from the
+ * clip's optical flow, so the camera keeps an even pace instead of lurching with the clip's own
+ * accelerations, and its speed carries straight across the join into the next room.
+ * `track`: on screens narrower than the frame, where to look (frame index, share of the width).
+ */
+export type Clip = { desk: Seq; phone: Seq; warp?: number[]; track?: [number, number][] };
+
 export const HERO = {
-  video: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/b1ad1217-2d01-4f07-addb-7893f5541973.mp4", // 1920 px master, level 4.1, 7.7 MB
-  videoSmall: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/001ee70e-0a03-42f4-a87b-d5ad810258e9.mp4",
   /**
    * The drone climb as frames drawn on a canvas, the way Son Daven draws theirs: every third
    * frame of the 1080p clip at full size (41 frames, 7 sheets of 6), and on phones every sixth
@@ -54,17 +64,86 @@ export const HERO = {
    */
   seq: {
     desk: {
-      sheets: ["9d8518ce-0976-40e3-b977-83cb7b748db1", "05e67805-4d76-4dbc-bc8d-82523ba13284", "9e277294-d9ac-42ac-8172-acde2b7af727", "982f7c12-f261-46a2-b7fd-3463e73f0d22", "d50d334b-cb9b-4738-a192-d7664fd63bdd", "c78e86b8-1551-47e5-9aec-019ffe9114f0", "b772b391-3c2d-4889-bced-d36d636a1674"].map((id) => `${UP}${id}.webp`),
+      sheets: webp(["9d8518ce-0976-40e3-b977-83cb7b748db1", "05e67805-4d76-4dbc-bc8d-82523ba13284", "9e277294-d9ac-42ac-8172-acde2b7af727", "982f7c12-f261-46a2-b7fd-3463e73f0d22", "d50d334b-cb9b-4738-a192-d7664fd63bdd", "c78e86b8-1551-47e5-9aec-019ffe9114f0", "b772b391-3c2d-4889-bced-d36d636a1674"]),
       cols: 2, rows: 3, n: 41, fw: 1916, fh: 1080,
     } satisfies Seq,
     phone: {
-      sheets: ["18e9ad72-0256-4b22-8c02-2276998c883e", "48c4fc01-6b14-4ffe-bf6c-7a4354905b91", "242c60aa-db2d-40d7-86cc-d749f17106de"].map((id) => `${UP}${id}.webp`),
+      sheets: webp(["18e9ad72-0256-4b22-8c02-2276998c883e", "48c4fc01-6b14-4ffe-bf6c-7a4354905b91", "242c60aa-db2d-40d7-86cc-d749f17106de"]),
       cols: 4, rows: 2, n: 21, fw: 608, fh: 1080,
     } satisfies Seq,
   },
-  /** Where the arch opens in the last frame: the colonnade at the foot of the house. */
-  door: [0.5, 0.62] as [number, number],
-  focus: [0.5, 0.56] as [number, number] };
+};
+
+// ── The walk: the drone's camera carries on into the house without a cut ─────────────────────────
+// Every second frame of each 5-second clip (61 frames; the slow kitchen drift every fourth), 1600 px
+// wide in sheets of 3 x 3, and for phones the same frames as 608 x 1080 portrait crops in sheets of 4 x 2.
+const wide = (ids: string[], n: number): Seq => ({ sheets: webp(ids), cols: 3, rows: 3, n, fw: 1600, fh: 900 });
+const tall = (ids: string[], n: number): Seq => ({ sheets: webp(ids), cols: 4, rows: 2, n, fw: 608, fh: 1080 });
+export const CLIPS = {
+  door: {
+    desk: wide(["b4157272-b128-423e-b36d-af118625091a", "2492addf-9713-4a9e-8758-2392ac7a18f1", "7c6a18f9-a2d3-4047-bbb2-c63942c94cf9", "8d7d0ff7-add8-4f00-bd56-116b84e5563d", "ec0dd00a-2739-4fc4-9b29-60579f1ecf24", "47b5932d-799e-44cd-90e7-c542e8356dd7", "d4d7161c-567e-4651-ad27-d0573aec313c"], 61),
+    phone: tall(["ee2894de-9484-4a82-ba2e-48c29e3d92ac", "28f088f5-f424-463f-92c6-2efd08e2ae33", "68707c13-e61e-4191-b00e-800105da788f", "2808292c-6124-4af6-9119-d5eb7831e966", "fea10ec3-7c1b-4914-93f1-acf0fe8c3abf", "6d33a9e9-3e24-414a-9180-268cea323910", "d37de7e3-850b-4b7e-89b9-321081905fc0", "9901045f-e8e2-4bba-a30c-e00c4596b006"], 61),
+    warp: [0, 0.004, 0.008, 0.016, 0.029, 0.043, 0.059, 0.075, 0.093, 0.111, 0.13, 0.148, 0.165, 0.18, 0.194, 0.208, 0.223, 0.238, 0.257, 0.277, 0.299, 0.323, 0.346, 0.368, 0.391, 0.412, 0.431, 0.449, 0.466, 0.48, 0.497, 0.514, 0.532, 0.55, 0.567, 0.585, 0.605, 0.623, 0.64, 0.658, 0.676, 0.695, 0.715, 0.736, 0.757, 0.776, 0.792, 0.807, 0.823, 0.839, 0.855, 0.87, 0.886, 0.903, 0.92, 0.937, 0.954, 0.969, 0.982, 0.992, 1],
+  },
+  hs: {
+    desk: wide(["a4268352-bd7d-47c0-a2a1-fc3a7f74c381", "2c8db5aa-8f0f-4905-af03-3425e483f78a", "b48d71a2-1a59-484e-a62b-0301b7a17fe2", "95986f33-a9f9-4a76-81f4-8399f3fa246e", "2d4b5258-7db2-456c-9740-b37d7eda64cc", "f0916117-56c6-4505-b1f4-2d9103a906e9", "a08ffbb6-c858-4789-bbce-5cf46eeb1fb2"], 61),
+    phone: tall(["1e12d0ce-2b18-4fb7-9bed-5e3cf401034c", "5ef7cd91-ec93-4a5b-bbb7-1e8ac07a0530", "9fbbe9e4-0070-4cbe-bd50-0288b9f6eb1f", "c3b174db-51ce-4911-afd5-a15182eec64d", "0834d518-aca7-460b-97c9-611ec09f6f53", "60811ff2-7e2f-4bfc-be5d-a6fb81a3646e", "db2655fc-e889-4bc1-a8ad-fc1437249b53", "6ff4b4b9-3aa2-43ec-a454-a0b4161670e0"], 61),
+    warp: [0, 0.009, 0.021, 0.035, 0.051, 0.067, 0.085, 0.101, 0.117, 0.133, 0.15, 0.166, 0.183, 0.199, 0.215, 0.231, 0.248, 0.265, 0.281, 0.298, 0.316, 0.332, 0.349, 0.366, 0.383, 0.4, 0.42, 0.441, 0.462, 0.484, 0.503, 0.52, 0.537, 0.555, 0.571, 0.583, 0.593, 0.602, 0.611, 0.622, 0.64, 0.659, 0.68, 0.7, 0.722, 0.744, 0.764, 0.782, 0.799, 0.815, 0.828, 0.843, 0.859, 0.876, 0.894, 0.912, 0.931, 0.948, 0.966, 0.984, 1],
+    // Under the stair the camera turns right into the salon; a tall screen follows the arch.
+    track: [[0, 0.5], [18, 0.5], [20, 0.56], [24, 0.66], [28, 0.76], [30, 0.8], [34, 0.8], [36, 0.76], [38, 0.66], [40, 0.58], [42, 0.52], [44, 0.5], [60, 0.5]],
+  },
+  sd: {
+    desk: wide(["9f3ef9e8-e2a6-4555-9a90-492b4b0f2226", "99b20e69-11ad-41ab-bae6-40adb98da12d", "3e7a6d20-2108-4e22-bc98-0597fa853a56", "8217952a-ccc5-46b6-875c-da624b7edde3", "e5f169f1-cbdc-45f6-824e-493baf853974", "c1f5751e-a880-4e49-a809-50115877449b", "d02a8408-7db2-40f4-bdd7-0e550c7c4eb7"], 61),
+    phone: tall(["edebf2d9-c80a-423a-8025-408f333d9bc6", "de15fcd1-b18c-4eab-9d18-1ee41464461b", "8fe6c4ce-a0a1-4502-be12-76c41bacd2c1", "7c75f1fc-29d2-4757-ac69-998be78e27d3", "05bb7c49-6cd3-4476-a3f4-a384a7bfbb42", "3dfeefad-29b2-4b26-8120-9f1973e8e41e", "00377519-049a-4ecc-b5b3-7a0761da8f45", "599c3f71-cc9b-4e45-a234-0f932ac0f18d"], 61),
+    warp: [0, 0.004, 0.01, 0.018, 0.029, 0.042, 0.057, 0.074, 0.092, 0.112, 0.131, 0.15, 0.17, 0.188, 0.208, 0.228, 0.248, 0.268, 0.288, 0.306, 0.325, 0.345, 0.364, 0.384, 0.403, 0.421, 0.439, 0.459, 0.48, 0.5, 0.518, 0.537, 0.557, 0.578, 0.598, 0.619, 0.642, 0.664, 0.689, 0.712, 0.735, 0.755, 0.773, 0.791, 0.816, 0.835, 0.852, 0.867, 0.881, 0.896, 0.911, 0.926, 0.941, 0.955, 0.966, 0.975, 0.982, 0.988, 0.992, 0.996, 1],
+  },
+  kit: {
+    desk: wide(["1f33e745-94de-43a7-b292-723d38695e3c", "b6c22c4d-3603-4540-8331-3a62249003e7", "a0d2720c-7092-4a17-87f8-94a396773bbc", "1e313e05-354d-4309-9e5c-d2f43cbb1cc5"], 31),
+    phone: tall(["09c08f18-e113-42c3-87e4-af9db035e1de", "c6b051de-e758-4094-9044-ca13682a8855", "fbeb9612-68ee-41d2-b710-e086d4842815", "ff1664e5-ab25-4bc4-bae2-6fb10fa0c89f"], 31),
+    warp: [0, 0.015, 0.041, 0.06, 0.087, 0.115, 0.146, 0.179, 0.213, 0.25, 0.285, 0.322, 0.357, 0.395, 0.432, 0.467, 0.502, 0.538, 0.573, 0.607, 0.643, 0.677, 0.714, 0.75, 0.786, 0.823, 0.859, 0.894, 0.929, 0.963, 1],
+  },
+} satisfies Record<string, Clip>;
+export type ClipKey = keyof typeof CLIPS;
+
+/**
+ * The opening, in film units (one unit = 0.95 of a screen of scrolling, as in the film). The drone
+ * circles the house; the camera dives through the colonnade to the bronze door, goes through it into
+ * the hall, looks up, passes under the stair into the salon, through the bronze arch to the dining
+ * room, and on through its far arch into the kitchen, where the film below takes over.
+ * A push carries the camera through an opening: `at` is where it aims in the last frame (wide and
+ * tall), `into` where it lands in the first frame of the next room.
+ */
+export type Scene =
+  | { id: string; kind: "drone"; len: number }
+  | { id: string; kind: "clip"; clip: ClipKey; len: number }
+  | { id: string; kind: "look"; clip: ClipKey; len: number }
+  | { id: string; kind: "push"; from: ClipKey | "drone"; to: ClipKey; len: number; at: { desk: [number, number]; phone: [number, number] }; into: [number, number] };
+export const OPENING: Scene[] = [
+  { id: "drone", kind: "drone", len: 2.4 },
+  { id: "dive", kind: "push", from: "drone", to: "door", len: 0.8, at: { desk: [0.42, 0.79], phone: [0.53, 0.79] }, into: [0.5, 0.52] },
+  { id: "door", kind: "clip", clip: "door", len: 1.6 },
+  { id: "look", kind: "look", clip: "hs", len: 0.45 },
+  { id: "hs", kind: "clip", clip: "hs", len: 1.85 },
+  { id: "sd", kind: "clip", clip: "sd", len: 1.6 },
+  { id: "through", kind: "push", from: "sd", to: "kit", len: 0.6, at: { desk: [0.29, 0.5], phone: [0.3, 0.5] }, into: [0.38, 0.5] },
+  { id: "kit", kind: "clip", clip: "kit", len: 1.2 },
+];
+/** Chapters and captions of the walk, timed from the start of the dive (film units). */
+export const WALK_CHAPTERS: { name: string; at: number }[] = [
+  { name: "Arrival", at: 0 },
+  { name: "The hall", at: 2.15 },
+  { name: "The salon", at: 4.05 },
+  { name: "Dining", at: 5.75 },
+  { name: "Kitchen", at: 6.55 },
+];
+export const WALK_LINES: Line[] = [
+  { at: [0.05, 0.95], text: "Through the colonnade, to a bronze door five metres tall." },
+  { at: [1.1, 1.95], text: "It turns on a single pivot, and stands open all day." },
+  { at: [2.2, 3.2], text: "A staircase that turns once, under a rain of glass." },
+  { at: [4.1, 5.05], text: "Two steps down, so the sea sits at eye level from the sofas." },
+  { at: [5.8, 6.5], text: "A table for fourteen, under four hundred glass rods." },
+  { at: [6.95, 7.95], text: "Green marble, a brass edge, and the sea at the sink." },
+];
 
 // ── The film: one camera walking through the house, driven by scroll ───────────────────────────
 export type Cam = { s?: number; x?: number; y?: number; r?: number }; // zoom, pan (share of view), roll (deg)
@@ -94,30 +173,13 @@ export interface Shot {
 }
 
 const CLIP = {
-  door: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/c24bc1f5-8d39-4886-8168-31bd6c3200c1.mp4", // 1600 px, 4.2 MB
-  hallToSalon: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/57462aae-93d0-4131-be24-780ea6322ec6.mp4",
-  salonToDining: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/7257573a-5b5e-4f0b-8e0a-a9cfa5bd1950.mp4",
-  kitchen: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/936c4998-3777-4407-9ce2-2896f3201651.mp4",
   spa: "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/7cb3e38c-a75b-4b92-8fe8-fe9fff0103bb.mp4",
 };
 
+// The film starts where the opening's walk leaves off: on the kitchen's last frame, which it holds
+// for a breath before the first dissolve. Its chapters and timecode continue the opening's.
 export const FILM: Shot[] = [
-  { id: "approach", img: "approach", focus: [0.5, 0.56], from: { s: 1 }, to: { s: 1.32 }, out: "zoom", len: 1.2, chapter: "Arrival",
-    flare: { from: [0.18, 0.12], to: [0.1, 0.08], k: 0.55 },
-    lines: [{ at: [0.08, 0.62], text: "The lawn runs from the sand to a bronze door five metres tall." }] },
-  { id: "door", img: "door", clip: { src: CLIP.door, dur: 5.04 }, focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14 }, out: "cut", len: 1.6,
-    lines: [{ at: [0.06, 0.5], text: "It turns on a single pivot, and stands open all day." }] },
-  { id: "hall", img: "hall", focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.06, y: -0.02 }, out: "whipUp", len: 0.75, chapter: "The hall",
-    lines: [{ at: [0.05, 0.95], text: "A staircase that turns once, under a rain of glass." }] },
-  { id: "up", img: "up", focus: [0.5, 0.5], from: { s: 1.12, r: -38 }, to: { s: 1.3, r: 42 }, out: "whipDown", len: 1,
-    lines: [{ at: [0.15, 0.7], text: "Look up." }] },
-  { id: "toSalon", img: "hall", clip: { src: CLIP.hallToSalon, dur: 5.04 }, focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14 }, out: "cut", len: 1.5, chapter: "The salon",
-    lines: [{ at: [0.5, 0.96], text: "Two steps down, so the sea sits at eye level from the sofas." }] },
-  { id: "toDining", img: "living", clip: { src: CLIP.salonToDining, dur: 5.04 }, focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14 }, out: "cut", len: 1.5, chapter: "Dining",
-    lines: [{ at: [0.5, 0.96], text: "A table for fourteen, under four hundred glass rods." }] },
-  { id: "dining", img: "dining", focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.08, x: -0.02 }, out: "whip", len: 0.7 },
-  { id: "kitchen", img: "kitchen", clip: { src: CLIP.kitchen, dur: 5.04 }, focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.14 }, out: "fade", len: 1.3, chapter: "Kitchen",
-    lines: [{ at: [0.1, 0.8], text: "Green marble, a brass edge, and the sea at the sink." }] },
+  { id: "kitchenEnd", img: "kitchenEnd", focus: [0.5, 0.5], from: { s: 1 }, to: { s: 1.03 }, out: "fade", len: 0.5 },
   { id: "bar", img: "bar", focus: [0.5, 0.5], from: { s: 1.18 }, to: { s: 1.03 }, out: "white", len: 1.05, chapter: "After dark",
     lines: [{ at: [0.1, 0.66], text: "Black lacquer, brass and mirror, for the late hours." }] },
   { id: "suite", img: "suite", focus: [0.5, 0.52], framed: true, from: { s: 1.14 }, to: { s: 1.02 }, out: "whip", len: 1.25, chapter: "The suites",

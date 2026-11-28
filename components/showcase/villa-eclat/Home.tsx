@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Hero, Logo } from "./Hero";
-import { CHAPTERS, Film, goFilm } from "./Film";
+import { Film } from "./Film";
+import { CHAPTERS, goTo } from "./timeline";
 import { Figures, Light, Plans, Rule, Sheet, Viewing } from "./Sections";
 
 const PAGES = [
@@ -33,7 +34,7 @@ function Menu({ onClose }: { onClose: () => void }) {
                 <button
                   onClick={() => {
                     onClose();
-                    goFilm(c.at + 0.02);
+                    goTo(c.at + 0.02);
                   }}
                 >
                   {c.name}
