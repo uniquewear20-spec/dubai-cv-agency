@@ -45,8 +45,14 @@ export const IMG: Record<ImgKey, string> = {
 
 const UP = "https://d2ol7oe51mr4n9.cloudfront.net/user_3MQDgHvQJDdXT6IO2Dd583p7SEq/";
 const webp = (ids: string[]) => ids.map((id) => `${UP}${id}.webp`);
-/** A shot stored as frame sheets: `n` frames of fw x fh px, laid out cols x rows per sheet. */
-export type Seq = { sheets: string[]; cols: number; rows: number; n: number; fw: number; fh: number };
+/**
+ * A shot stored as frame sheets: `n` frames of fw x fh px, laid out cols x rows per sheet. `proxy`:
+ * every second frame, small and soft, all in one sheet that loads first; it stands in for any frame
+ * not yet loaded and gives the zoom blur its soft layers.
+ */
+export type Seq = { sheets: string[]; cols: number; rows: number; n: number; fw: number; fh: number; proxy?: { url: string; cols: number; fw: number; fh: number } };
+const pxWide = (id: string) => ({ url: `${UP}${id}.webp`, cols: 6, fw: 384, fh: 216 });
+const pxTall = (id: string) => ({ url: `${UP}${id}.webp`, cols: 8, fw: 152, fh: 270 });
 /**
  * One real camera move (a Kling clip) as frame sheets for wide and for tall screens.
  * `warp`: where each frame falls along the move's share of the scroll (0 to 1), measured from the
@@ -65,11 +71,11 @@ export const HERO = {
   seq: {
     desk: {
       sheets: webp(["9d8518ce-0976-40e3-b977-83cb7b748db1", "05e67805-4d76-4dbc-bc8d-82523ba13284", "9e277294-d9ac-42ac-8172-acde2b7af727", "982f7c12-f261-46a2-b7fd-3463e73f0d22", "d50d334b-cb9b-4738-a192-d7664fd63bdd", "c78e86b8-1551-47e5-9aec-019ffe9114f0", "b772b391-3c2d-4889-bced-d36d636a1674"]),
-      cols: 2, rows: 3, n: 41, fw: 1916, fh: 1080,
+      cols: 2, rows: 3, n: 41, fw: 1916, fh: 1080, proxy: pxWide("be90ec67-0246-4d4a-aa85-dd8f9a1db4ef"),
     } satisfies Seq,
     phone: {
       sheets: webp(["18e9ad72-0256-4b22-8c02-2276998c883e", "48c4fc01-6b14-4ffe-bf6c-7a4354905b91", "242c60aa-db2d-40d7-86cc-d749f17106de"]),
-      cols: 4, rows: 2, n: 21, fw: 608, fh: 1080,
+      cols: 4, rows: 2, n: 21, fw: 608, fh: 1080, proxy: pxTall("eed74d22-ab49-4f36-95c4-de8a57f46f44"),
     } satisfies Seq,
   },
 };
@@ -77,29 +83,29 @@ export const HERO = {
 // ── The walk: the drone's camera carries on into the house without a cut ─────────────────────────
 // Every second frame of each 5-second clip (61 frames; the slow kitchen drift every fourth), 1600 px
 // wide in sheets of 3 x 3, and for phones the same frames as 608 x 1080 portrait crops in sheets of 4 x 2.
-const wide = (ids: string[], n: number): Seq => ({ sheets: webp(ids), cols: 3, rows: 3, n, fw: 1600, fh: 900 });
-const tall = (ids: string[], n: number): Seq => ({ sheets: webp(ids), cols: 4, rows: 2, n, fw: 608, fh: 1080 });
+const wide = (ids: string[], n: number, proxy: string): Seq => ({ sheets: webp(ids), cols: 3, rows: 3, n, fw: 1600, fh: 900, proxy: pxWide(proxy) });
+const tall = (ids: string[], n: number, proxy: string): Seq => ({ sheets: webp(ids), cols: 4, rows: 2, n, fw: 608, fh: 1080, proxy: pxTall(proxy) });
 export const CLIPS = {
   door: {
-    desk: wide(["b4157272-b128-423e-b36d-af118625091a", "2492addf-9713-4a9e-8758-2392ac7a18f1", "7c6a18f9-a2d3-4047-bbb2-c63942c94cf9", "8d7d0ff7-add8-4f00-bd56-116b84e5563d", "ec0dd00a-2739-4fc4-9b29-60579f1ecf24", "47b5932d-799e-44cd-90e7-c542e8356dd7", "d4d7161c-567e-4651-ad27-d0573aec313c"], 61),
-    phone: tall(["ee2894de-9484-4a82-ba2e-48c29e3d92ac", "28f088f5-f424-463f-92c6-2efd08e2ae33", "68707c13-e61e-4191-b00e-800105da788f", "2808292c-6124-4af6-9119-d5eb7831e966", "fea10ec3-7c1b-4914-93f1-acf0fe8c3abf", "6d33a9e9-3e24-414a-9180-268cea323910", "d37de7e3-850b-4b7e-89b9-321081905fc0", "9901045f-e8e2-4bba-a30c-e00c4596b006"], 61),
+    desk: wide(["b4157272-b128-423e-b36d-af118625091a", "2492addf-9713-4a9e-8758-2392ac7a18f1", "7c6a18f9-a2d3-4047-bbb2-c63942c94cf9", "8d7d0ff7-add8-4f00-bd56-116b84e5563d", "ec0dd00a-2739-4fc4-9b29-60579f1ecf24", "47b5932d-799e-44cd-90e7-c542e8356dd7", "d4d7161c-567e-4651-ad27-d0573aec313c"], 61, "0b5a9643-bc2c-4e71-886f-53485dc06628"),
+    phone: tall(["ee2894de-9484-4a82-ba2e-48c29e3d92ac", "28f088f5-f424-463f-92c6-2efd08e2ae33", "68707c13-e61e-4191-b00e-800105da788f", "2808292c-6124-4af6-9119-d5eb7831e966", "fea10ec3-7c1b-4914-93f1-acf0fe8c3abf", "6d33a9e9-3e24-414a-9180-268cea323910", "d37de7e3-850b-4b7e-89b9-321081905fc0", "9901045f-e8e2-4bba-a30c-e00c4596b006"], 61, "40f486b7-ff1e-40f5-9579-23f32ed01510"),
     warp: [0, 0.004, 0.008, 0.016, 0.029, 0.043, 0.059, 0.075, 0.093, 0.111, 0.13, 0.148, 0.165, 0.18, 0.194, 0.208, 0.223, 0.238, 0.257, 0.277, 0.299, 0.323, 0.346, 0.368, 0.391, 0.412, 0.431, 0.449, 0.466, 0.48, 0.497, 0.514, 0.532, 0.55, 0.567, 0.585, 0.605, 0.623, 0.64, 0.658, 0.676, 0.695, 0.715, 0.736, 0.757, 0.776, 0.792, 0.807, 0.823, 0.839, 0.855, 0.87, 0.886, 0.903, 0.92, 0.937, 0.954, 0.969, 0.982, 0.992, 1],
   },
   hs: {
-    desk: wide(["a4268352-bd7d-47c0-a2a1-fc3a7f74c381", "2c8db5aa-8f0f-4905-af03-3425e483f78a", "b48d71a2-1a59-484e-a62b-0301b7a17fe2", "95986f33-a9f9-4a76-81f4-8399f3fa246e", "2d4b5258-7db2-456c-9740-b37d7eda64cc", "f0916117-56c6-4505-b1f4-2d9103a906e9", "a08ffbb6-c858-4789-bbce-5cf46eeb1fb2"], 61),
-    phone: tall(["1e12d0ce-2b18-4fb7-9bed-5e3cf401034c", "5ef7cd91-ec93-4a5b-bbb7-1e8ac07a0530", "9fbbe9e4-0070-4cbe-bd50-0288b9f6eb1f", "c3b174db-51ce-4911-afd5-a15182eec64d", "0834d518-aca7-460b-97c9-611ec09f6f53", "60811ff2-7e2f-4bfc-be5d-a6fb81a3646e", "db2655fc-e889-4bc1-a8ad-fc1437249b53", "6ff4b4b9-3aa2-43ec-a454-a0b4161670e0"], 61),
+    desk: wide(["a4268352-bd7d-47c0-a2a1-fc3a7f74c381", "2c8db5aa-8f0f-4905-af03-3425e483f78a", "b48d71a2-1a59-484e-a62b-0301b7a17fe2", "95986f33-a9f9-4a76-81f4-8399f3fa246e", "2d4b5258-7db2-456c-9740-b37d7eda64cc", "f0916117-56c6-4505-b1f4-2d9103a906e9", "a08ffbb6-c858-4789-bbce-5cf46eeb1fb2"], 61, "fe271846-089b-4cb7-b87a-a9b074aa5a73"),
+    phone: tall(["1e12d0ce-2b18-4fb7-9bed-5e3cf401034c", "5ef7cd91-ec93-4a5b-bbb7-1e8ac07a0530", "9fbbe9e4-0070-4cbe-bd50-0288b9f6eb1f", "c3b174db-51ce-4911-afd5-a15182eec64d", "0834d518-aca7-460b-97c9-611ec09f6f53", "60811ff2-7e2f-4bfc-be5d-a6fb81a3646e", "db2655fc-e889-4bc1-a8ad-fc1437249b53", "6ff4b4b9-3aa2-43ec-a454-a0b4161670e0"], 61, "c0229fb3-b978-4332-afd9-bc0bf572894a"),
     warp: [0, 0.009, 0.021, 0.035, 0.051, 0.067, 0.085, 0.101, 0.117, 0.133, 0.15, 0.166, 0.183, 0.199, 0.215, 0.231, 0.248, 0.265, 0.281, 0.298, 0.316, 0.332, 0.349, 0.366, 0.383, 0.4, 0.42, 0.441, 0.462, 0.484, 0.503, 0.52, 0.537, 0.555, 0.571, 0.583, 0.593, 0.602, 0.611, 0.622, 0.64, 0.659, 0.68, 0.7, 0.722, 0.744, 0.764, 0.782, 0.799, 0.815, 0.828, 0.843, 0.859, 0.876, 0.894, 0.912, 0.931, 0.948, 0.966, 0.984, 1],
     // Under the stair the camera turns right into the salon; a tall screen follows the arch.
     track: [[0, 0.5], [18, 0.5], [20, 0.56], [24, 0.66], [28, 0.76], [30, 0.8], [34, 0.8], [36, 0.76], [38, 0.66], [40, 0.58], [42, 0.52], [44, 0.5], [60, 0.5]],
   },
   sd: {
-    desk: wide(["9f3ef9e8-e2a6-4555-9a90-492b4b0f2226", "99b20e69-11ad-41ab-bae6-40adb98da12d", "3e7a6d20-2108-4e22-bc98-0597fa853a56", "8217952a-ccc5-46b6-875c-da624b7edde3", "e5f169f1-cbdc-45f6-824e-493baf853974", "c1f5751e-a880-4e49-a809-50115877449b", "d02a8408-7db2-40f4-bdd7-0e550c7c4eb7"], 61),
-    phone: tall(["edebf2d9-c80a-423a-8025-408f333d9bc6", "de15fcd1-b18c-4eab-9d18-1ee41464461b", "8fe6c4ce-a0a1-4502-be12-76c41bacd2c1", "7c75f1fc-29d2-4757-ac69-998be78e27d3", "05bb7c49-6cd3-4476-a3f4-a384a7bfbb42", "3dfeefad-29b2-4b26-8120-9f1973e8e41e", "00377519-049a-4ecc-b5b3-7a0761da8f45", "599c3f71-cc9b-4e45-a234-0f932ac0f18d"], 61),
+    desk: wide(["9f3ef9e8-e2a6-4555-9a90-492b4b0f2226", "99b20e69-11ad-41ab-bae6-40adb98da12d", "3e7a6d20-2108-4e22-bc98-0597fa853a56", "8217952a-ccc5-46b6-875c-da624b7edde3", "e5f169f1-cbdc-45f6-824e-493baf853974", "c1f5751e-a880-4e49-a809-50115877449b", "d02a8408-7db2-40f4-bdd7-0e550c7c4eb7"], 61, "1991fffe-dd6f-431b-ad72-8ff3d65b3a84"),
+    phone: tall(["edebf2d9-c80a-423a-8025-408f333d9bc6", "de15fcd1-b18c-4eab-9d18-1ee41464461b", "8fe6c4ce-a0a1-4502-be12-76c41bacd2c1", "7c75f1fc-29d2-4757-ac69-998be78e27d3", "05bb7c49-6cd3-4476-a3f4-a384a7bfbb42", "3dfeefad-29b2-4b26-8120-9f1973e8e41e", "00377519-049a-4ecc-b5b3-7a0761da8f45", "599c3f71-cc9b-4e45-a234-0f932ac0f18d"], 61, "04bde03a-9ecc-47b4-b401-fb76278d7a92"),
     warp: [0, 0.004, 0.01, 0.018, 0.029, 0.042, 0.057, 0.074, 0.092, 0.112, 0.131, 0.15, 0.17, 0.188, 0.208, 0.228, 0.248, 0.268, 0.288, 0.306, 0.325, 0.345, 0.364, 0.384, 0.403, 0.421, 0.439, 0.459, 0.48, 0.5, 0.518, 0.537, 0.557, 0.578, 0.598, 0.619, 0.642, 0.664, 0.689, 0.712, 0.735, 0.755, 0.773, 0.791, 0.816, 0.835, 0.852, 0.867, 0.881, 0.896, 0.911, 0.926, 0.941, 0.955, 0.966, 0.975, 0.982, 0.988, 0.992, 0.996, 1],
   },
   kit: {
-    desk: wide(["1f33e745-94de-43a7-b292-723d38695e3c", "b6c22c4d-3603-4540-8331-3a62249003e7", "a0d2720c-7092-4a17-87f8-94a396773bbc", "1e313e05-354d-4309-9e5c-d2f43cbb1cc5"], 31),
-    phone: tall(["09c08f18-e113-42c3-87e4-af9db035e1de", "c6b051de-e758-4094-9044-ca13682a8855", "fbeb9612-68ee-41d2-b710-e086d4842815", "ff1664e5-ab25-4bc4-bae2-6fb10fa0c89f"], 31),
+    desk: wide(["1f33e745-94de-43a7-b292-723d38695e3c", "b6c22c4d-3603-4540-8331-3a62249003e7", "a0d2720c-7092-4a17-87f8-94a396773bbc", "1e313e05-354d-4309-9e5c-d2f43cbb1cc5"], 31, "b08b19b9-3b8d-4bfa-9855-0fd68262b0be"),
+    phone: tall(["09c08f18-e113-42c3-87e4-af9db035e1de", "c6b051de-e758-4094-9044-ca13682a8855", "fbeb9612-68ee-41d2-b710-e086d4842815", "ff1664e5-ab25-4bc4-bae2-6fb10fa0c89f"], 31, "316d8578-1991-4ed7-ad6e-046a08ab7480"),
     warp: [0, 0.015, 0.041, 0.06, 0.087, 0.115, 0.146, 0.179, 0.213, 0.25, 0.285, 0.322, 0.357, 0.395, 0.432, 0.467, 0.502, 0.538, 0.573, 0.607, 0.643, 0.677, 0.714, 0.75, 0.786, 0.823, 0.859, 0.894, 0.929, 0.963, 1],
   },
 } satisfies Record<string, Clip>;

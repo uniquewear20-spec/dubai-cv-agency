@@ -68,7 +68,7 @@ const sceneAt = (h: number) => {
 };
 
 type Sheet = { url: string; bytes: number; img: HTMLImageElement | null; busy: boolean; fails: number; t0: number; t1: number };
-type Track = { seq: Seq; per: number; warp?: number[]; look?: [number, number][]; sheets: Sheet[] };
+type Track = { seq: Seq; per: number; warp?: number[]; look?: [number, number][]; sheets: Sheet[]; px: Sheet | null };
 
 export function Hero() {
   const sec = useRef<HTMLElement>(null);
@@ -91,14 +91,13 @@ export function Hero() {
     let top = 0, span = 1, p = -1, ps = 0, shown = false;
 
     // ── The tracks: the drone shot and the four walks, as sheets of frames.
+    const sheet = (url: string, bytes: number): Sheet => ({ url, bytes, img: null, busy: false, fails: 0, t0: Infinity, t1: -Infinity });
     const track = (seq: Seq, warp?: number[], look?: [number, number][]): Track => {
       const per = seq.cols * seq.rows;
       return {
         seq, per, warp, look: phone ? undefined : look, // phone frames are already cropped along the turn
-        sheets: seq.sheets.map((url, j) => {
-          const rows = Math.ceil(Math.min(per, seq.n - j * per) / seq.cols);
-          return { url, bytes: seq.cols * seq.fw * rows * seq.fh * 4, img: null, busy: false, fails: 0, t0: Infinity, t1: -Infinity };
-        }),
+        sheets: seq.sheets.map((url, j) => sheet(url, seq.cols * seq.fw * Math.ceil(Math.min(per, seq.n - j * per) / seq.cols) * seq.fh * 4)),
+        px: seq.proxy ? sheet(seq.proxy.url, 0) : null,
       };
     };
     const T = { drone: track(phone ? HERO.seq.phone : HERO.seq.desk) } as Record<ClipKey | "drone", Track>;
@@ -144,6 +143,7 @@ export function Hero() {
       }
     });
     const sheets = Object.values(T).flatMap((t) => t.sheets).filter((s) => s.t1 >= s.t0);
+    const proxies = Object.values(T).flatMap((t) => (t.px ? [t.px] : []));
 
     // ── Loading: the sheets nearest the camera first (those ahead of it in the direction of travel
     // count as nearer), two at a time, within the memory budget.
@@ -189,9 +189,11 @@ export function Hero() {
         room -= s.bytes;
       }
       for (const s of sheets) if (s.img && !want.has(s)) drop(s);
-      for (const s of order) {
+      // What is on screen now, then the small previews of every move, then the rest in order.
+      const queue = [...order.filter((s) => !away(s)), ...proxies, ...order.filter((s) => away(s) && want.has(s))];
+      for (const s of queue) {
         if (inflight >= 2) break;
-        if (want.has(s) && !s.img && !s.busy && s.fails < 3) fetchSheet(s);
+        if (!s.img && !s.busy && s.fails < 3) fetchSheet(s);
       }
     };
 
@@ -229,13 +231,32 @@ export function Hero() {
       ctx.drawImage(im, x, y, vw, vh, 0, 0, cw, ch);
     };
     const has = (tk: Track, i: number) => !!tk.sheets[Math.floor(i / tk.per)]?.img;
+    let sharp = false; // whether this render drew a full frame (the canvas replaces the poster only then)
     const frame = (tk: Track, i: number, z: number, fx: number, fy: number) => {
       const q = tk.seq, c = i % tk.per;
       cover(tk.sheets[Math.floor(i / tk.per)].img!, (c % q.cols) * q.fw, Math.floor(c / q.cols) * q.fh, q.fw, q.fh, z, fx, fy);
+      sharp = true;
+    };
+    /** The small soft preview of frame i (every second frame is in it); false if not loaded yet. */
+    const soft = (tk: Track, i: number, z: number, fx: number, fy: number) => {
+      const g = tk.seq.proxy, im = tk.px?.img;
+      if (!g || !im) return false;
+      const k = Math.min(Math.ceil(tk.seq.n / 2) - 1, Math.max(0, Math.round(i / 2)));
+      cover(im, (k % g.cols) * g.fw, Math.floor(k / g.cols) * g.fh, g.fw, g.fh, z, fx, fy);
+      return true;
     };
     const nearest = (tk: Track, i: number) => {
       for (let d = 0; d < tk.seq.n; d++) for (const j of [i - d, i + d]) if (j >= 0 && j < tk.seq.n && has(tk, j)) return j;
       return -1;
+    };
+    /** Frame i, else its soft preview, else the nearest loaded frame; false if nothing at all. */
+    const pic = (tk: Track, i: number, z: number, fx: number, fy: number) => {
+      if (has(tk, i)) { frame(tk, i, z, fx, fy); return true; }
+      if (soft(tk, i, z, fx, fy)) return true;
+      const j = nearest(tk, i);
+      if (j < 0) return false;
+      frame(tk, j, z, fx, fy);
+      return true;
     };
     const lookAt = (tk: Track, f: number) => {
       const l = tk.look;
@@ -243,32 +264,44 @@ export function Hero() {
       for (let k = 1; k < l.length; k++) if (f <= l[k][0]) return lerp(l[k - 1][1], l[k][1], (f - l[k - 1][0]) / (l[k][0] - l[k - 1][0]));
       return l[l.length - 1][1];
     };
-    /** Frame position f of a track, blending the two frames either side; false if none is loaded. */
+    /** Frame position f of a track, blending the two frames either side. A frame not yet loaded is
+     *  stood in for by its soft preview, so a fast jump shows the right room at once, then sharpens. */
     const shot = (tk: Track, f: number, z = 1, fy = 0.5, alpha = 1, fx?: number) => {
       const n = tk.seq.n;
       f = clamp(f, 0, n - 1);
-      const k = Math.floor(f), a = f - k, i = nearest(tk, k);
-      if (i < 0) return false;
-      const x = fx ?? lookAt(tk, f);
+      const k = Math.floor(f), a = f - k, x = fx ?? lookAt(tk, f);
       ctx.globalAlpha = alpha;
-      frame(tk, i, z, x, fy);
-      if (alpha === 1 && a > 0.004 && i === k && k + 1 < n && has(tk, k + 1)) {
+      if (!has(tk, k)) {
+        const i = nearest(tk, k);
+        let ok = true;
+        if (i >= 0 && Math.abs(i - k) <= 1) frame(tk, i, z, x, fy);
+        else if (!soft(tk, k + Math.round(a), z, x, fy)) {
+          if (i >= 0) frame(tk, i, z, x, fy);
+          else ok = false;
+        }
+        ctx.globalAlpha = 1;
+        return ok;
+      }
+      frame(tk, k, z, x, fy);
+      if (alpha === 1 && a > 0.004 && k + 1 < n && has(tk, k + 1)) {
         ctx.globalAlpha = a;
         frame(tk, k + 1, z, x, fy);
       }
       ctx.globalAlpha = 1;
       return true;
     };
-    /** One frame smeared outwards from (fx, fy) by `smear` (a share of z): an even average of a few
-     *  zooms, laid at `alpha` over what is already drawn. The camera's own motion blur, rushing in. */
+    /** One frame rushing past: an even average of the frame and several softer, larger copies of it
+     *  around (fx, fy), spread by `smear` (a share of z), laid at `alpha` over what is drawn. */
     const rush = (tk: Track, i: number, z: number, fx: number, fy: number, smear: number, alpha: number) => {
-      const N = smear < 0.004 ? 1 : phone ? 4 : 6;
+      const N = smear < 0.004 ? 1 : phone ? 6 : 9;
       for (let j = 0; j < N; j++) {
         ctx.globalAlpha = alpha / N / (1 - ((N - 1 - j) * alpha) / N);
-        frame(tk, i, z * (1 + (smear * j) / Math.max(1, N - 1)), fx, fy);
+        const zz = z * (1 + (smear * j) / Math.max(1, N - 1));
+        if (!(j && soft(tk, i, zz, fx, fy))) pic(tk, i, zz, fx, fy);
       }
       ctx.globalAlpha = 1;
     };
+    const can = (tk: Track, i: number) => has(tk, i) || !!tk.px?.img || nearest(tk, i) >= 0;
     const light = (k: number) => {
       if (k < 0.01) return;
       ctx.globalCompositeOperation = "screen";
@@ -287,19 +320,19 @@ export function Hero() {
     };
     /** With reduced motion each move is two stills, crossfaded halfway. */
     const still = (tk: Track, u: number) => {
-      const a = nearest(tk, 0), b = nearest(tk, tk.seq.n - 1);
-      if (a < 0) return false;
-      frame(tk, a, 1, lookAt(tk, a), 0.5);
+      const b = tk.seq.n - 1;
+      if (!pic(tk, 0, 1, lookAt(tk, 0), 0.5)) return false;
       const m = sstep(0.4, 0.6, u);
-      if (m > 0 && b >= 0) {
+      if (m > 0) {
         ctx.globalAlpha = m;
-        frame(tk, b, 1, lookAt(tk, b), 0.5);
+        pic(tk, b, 1, lookAt(tk, b), 0.5);
         ctx.globalAlpha = 1;
       }
       return true;
     };
 
     const render = (h: number) => {
+      sharp = false;
       ctx.imageSmoothingQuality = "high"; // reset whenever the canvas is resized
       for (const im of warm.splice(0)) ctx.drawImage(im, 0, 0, 2, 2, 0, 0, 1, 1);
       const i = sceneAt(h), sc = OPENING[i], u = clamp((h - SCENE_AT[i]) / sc.len);
@@ -324,9 +357,8 @@ export function Hero() {
         const f = frameAt(tk, u), prev = OPENING[i - 1];
         // Where two clips meet they share a frame; a short dissolve hides the last few pixels of difference.
         if (prev?.kind === "clip" && u < 0.05) {
-          const P = T[prev.clip], j = nearest(P, P.seq.n - 1);
-          if (j >= 0) {
-            frame(P, j, 1, lookAt(P, j), 0.5);
+          const P = T[prev.clip], j = P.seq.n - 1;
+          if (pic(P, j, 1, lookAt(P, j), 0.5)) {
             shot(tk, f, 1, 0.5, sstep(0, 0.05, u));
             return true;
           }
@@ -336,27 +368,26 @@ export function Hero() {
 
       // A push: the camera keeps travelling through an opening, rushing out of one picture and into
       // the next, which arrives still blurred and settles into the next move's first frame.
-      const A = T[sc.from], B = T[sc.to];
-      const ia = nearest(A, A.seq.n - 1), ib = nearest(B, 0);
-      if (ia < 0 && ib < 0) return false;
+      const A = T[sc.from], B = T[sc.to], ia = A.seq.n - 1, okA = can(A, ia), okB = can(B, 0);
+      if (!okA && !okB) return false;
       const aim = sc.at[phone ? "phone" : "desk"];
       if (calm) {
-        if (ia >= 0) frame(A, ia, 1, 0.5, 0.5);
-        if (ib >= 0) {
-          ctx.globalAlpha = ia >= 0 ? sstep(0.3, 0.7, u) : 1;
-          frame(B, ib, 1, 0.5, 0.5);
+        if (okA) pic(A, ia, 1, 0.5, 0.5);
+        if (okB) {
+          ctx.globalAlpha = okA ? sstep(0.3, 0.7, u) : 1;
+          pic(B, 0, 1, 0.5, 0.5);
           ctx.globalAlpha = 1;
         }
         return true;
       }
       // The drone has already turned towards its mark; a clip turns from wherever it was looking.
       const z0 = sc.from === "drone" ? 1.07 : 1, turn = sc.from === "drone" ? 1 : sstep(0, 0.35, u);
-      const ax = lerp(lookAt(A, A.seq.n - 1), aim[0], turn), ay = lerp(0.5, aim[1], turn);
-      const mix = ia < 0 ? 1 : sstep(0.42, 0.68, u);
-      if (ia >= 0 && mix < 1) rush(A, ia, z0 * (1 + 2.8 * u * u), ax, ay, 0.17 * sstep(0.04, 0.55, u), 1);
-      if (ib >= 0 && mix > 0) {
+      const ax = lerp(lookAt(A, ia), aim[0], turn), ay = lerp(0.5, aim[1], turn);
+      const mix = okA ? sstep(0.42, 0.68, u) : 1;
+      if (okA && mix < 1) rush(A, ia, z0 * (1 + 2.8 * u * u), ax, ay, 0.2 * sstep(0.04, 0.55, u), 1);
+      if (okB && mix > 0) {
         const s = 1 - sstep(0.42, 1, u);
-        rush(B, ib, 1 + 0.24 * s * s, lerp(lookAt(B, 0), sc.into[0], s), lerp(0.5, sc.into[1], s), 0.15 * (1 - sstep(0.45, 0.9, u)), mix);
+        rush(B, 0, 1 + 0.24 * s * s, lerp(lookAt(B, 0), sc.into[0], s), lerp(0.5, sc.into[1], s), 0.17 * (1 - sstep(0.45, 0.9, u)), mix);
       }
       const peak = Math.exp(-(((u - 0.55) / 0.17) ** 2));
       edges(0.9 * peak);
@@ -439,7 +470,7 @@ export function Hero() {
       p = shownH;
       dirty = false;
       overlay(p);
-      if (render(p) && !shown) { shown = true; canvas.classList.add("is-live"); }
+      if (render(p) && sharp && !shown) { shown = true; canvas.classList.add("is-live"); }
     };
     const start = () => { if (!live) { live = true; last = performance.now(); dirty = true; raf = requestAnimationFrame(tick); } };
     const stop = () => {
@@ -463,7 +494,7 @@ export function Hero() {
     return () => {
       gone = true;
       stop();
-      for (const s of sheets) drop(s);
+      for (const s of [...sheets, ...proxies]) drop(s);
       io.disconnect();
       ro.disconnect();
       removeEventListener("resize", measure);
