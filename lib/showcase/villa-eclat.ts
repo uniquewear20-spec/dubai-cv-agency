@@ -140,7 +140,7 @@ export const WALK_CHAPTERS: { name: string; at: number }[] = [
   { name: "The hall", at: 2.15 },
   { name: "The salon", at: 4.05 },
   { name: "Dining", at: 5.75 },
-  { name: "Kitchen", at: 6.55 },
+  { name: "Kitchen", at: 6.9 },
 ];
 export const WALK_LINES: Line[] = [
   { at: [0.05, 0.95], text: "Through the colonnade, to a bronze door five metres tall." },
